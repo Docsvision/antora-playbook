@@ -1,0 +1,590 @@
+= Разработка расширения для программы DVWebTool
+
+Дополнительным компонентом модуля «Web-клиент» является программа DVWebTool, которая предоставляет функциям Web-клиента доступ к устройствам и программному обеспечению, установленному на компьютере пользователя Модуля. Программа DVWebTool также может быть использована для обработки произвольных задач на пользовательском компьютере.
+
+Программа DVWebTool является приложением для рабочего стола с возможностью расширения функциональности. Расширение DVWebTool представляет собой DLL-файл содержащий ожидаемый класс с веб-методами. Данные методы могут вызываться клиентскими компонентами Web-клиента (есть стандартный метод JSAPI для вызова) или другими способами.
+
+В качестве примера будет разработано расширение, реализующее функцию добавления водяных знаков в PDF-файлы карточки Документ. 
+
+Алгоритм работы расширения:
+
+. При вызове функции расширения Клиент передаёт идентификаторы PDF файлов карточки Документ (идентификаторы карточек Файл с версиями, а не идентификаторы собственно файлов) и идентификатор самой карточки Документ.
+
+. Расширение DVWebTool загружает PDF-файлы на компьютер пользователя с помощью функций, предоставляемых Web-клиентом.
+
+. Расширение DVWebTool добавляет в полученные PDF файлы водяные знаки используя функции сторонней библиотеки для работы с PDF.
+
+. Расширение DVWebTool прикрепляет полученные файлы с водяными знаками с помощью функций, предоставляемых Web-клиентом.
+
+Расширение не должно изменять существующие файлы карточки: полученные PDF файлы с водяными знаками должны быть добавлены в карточку качестве дополнительных.
+
+Для реализации функций, указанных в пп. 2 и 4, потребуется разработать расширение Web-клиента с соответствующей функциональностью.
+
+Также для примера необходимо разработать клиентское расширение, которое будет вызывать функции расширения DVWebTool с передачей им идентификаторов PDF-файлов Документа, в которые нужно добавить водяные знаки.
+
+____
+
+Полный код примера доступен в репозитории на GitHub.
+
+____
+
+== Расширение Web-клиента
+
+Для работы расширения DVWebTool необходимо, чтобы Web-клиент по запросу возвращал файл из карточки Файл с версиями с переданным идентификатором, а также мог прикреплять переданные файлы к карточке Документ.
+
+Требуемая функциональность может быть реализована с помощью расширения Web-клиента. 
+
+Ниже приведена часть исходного кода контроллера, реализованного в серверном расширении.
+
+[source,csharp]
+----
+// Файл Others\Watermark\WatermarkServerExtension\Controllers\FileOperationsController.cs
+
+public class FileOperationsController : ApiController
+{	
+    // Отдельный сервис для работы с файлами карточек Документ
+    // Реализация приведена ниже
+    IFileService fileService;
+
+    public FileOperationsController(IFileService fileService)
+    {
+        this.fileService = fileService;
+    }
+
+    // Возвращает файл из карточки файла с версиями с идентификатором fileCardID 
+    [HttpGet]
+    public HttpResponseMessage GetFile(Guid fileCardID)
+    {
+        // Метод GetFileReader получает файл из карточки файла с версиями с ИД fileCardID
+        //  и передаёт указатель для его чтения
+        FileReader fileReader = fileService.GetFileReader(fileCardID);
+
+        if (fileReader.FileID == Guid.Empty)
+            return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+        // Метод CreateResponseForFile создаёт HTTP-ответ, в который включает данные файла
+        HttpResponseMessage response = CreateResponseForFile(fileReader);
+        return response;
+    }
+
+    // Добавляет в карточку файлы из запроса
+    // Данные добавляемых файлов и идентификатор карточки поступают в теле запроса
+    [HttpPost]
+    public async Task<HttpResponseMessage> AddFile()
+    {
+
+        // Проверяется формат входных данных - ожидается составной тип
+        if (!Request.Content.IsMimeMultipartContent())
+        {
+            return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "Ошибка в формате входных данных");
+        }
+
+        // Создаётся временный каталог для оперативного сохранения файлов из запроса
+        string rootPath = CreateAndGetTempFolder();
+
+        // Инициализация доступа к входным данным
+        MultipartFormDataStreamProvider provider;
+
+        try
+        {
+            provider = new MultipartFormDataStreamProvider(rootPath);
+        }
+        catch (Exception ex)
+        {
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, $"Ошибка при работе с временными данными: {ex.Message}");
+        }
+
+        try
+        {
+            // Загружаются данные из запроса
+            await Request.Content.ReadAsMultipartAsync(provider);
+
+            // Если в запросе нет файлов, возвращается ошибка
+            if (provider.FileData.Count < 1)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "В запросе не переданы файлы для получения");
+            }
+
+            // Считывается идентификатор карточки
+            Guid cardId = GetCardIdFromResponse(provider.FormData);
+
+            // Полученные файлы сохраняются в файловую систему сервера
+            List<string> files = await SaveFilesFromResponse(provider.FileData);
+
+            // Полученные файлы прикрепляются к карточке с ИД cardId
+            await fileService.AddFilesToCard(cardId, files);
+            return Request.CreateResponse(HttpStatusCode.OK);
+
+        }
+        catch (Exception e)
+        {
+            return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+        }
+    }
+
+}
+
+----
+
+В контроллере используется сервис `IFileService`, реализация которого приведена ниже. Код дополнительных методов смотрите в полном примере на GitHub.
+
+[source,csharp]
+----
+// Файл Others\Watermark\WatermarkServerExtension\Services\FileService.cs
+
+public class FileService : IFileService
+{
+    private readonly ICurrentObjectContextProvider currentObjectContextProvider;
+    private Guid DOCUMENT_CARD_ID = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794");
+
+    public FileService(ICurrentObjectContextProvider currentObjectContextProvider) {
+        this.currentObjectContextProvider = currentObjectContextProvider;
+    }
+
+    // Добавляет файлы с ФС в карточку cardID
+    public async System.Threading.Tasks.Task<IEnumerable<Guid>> AddFilesToCard(Guid cardID, List<string> files)
+    {
+        // Получает карточку, к которой прикрепляются файлы
+        var document = GetDocumentCard(cardID);
+
+        ILockService lockService = GetLockService();
+
+        if (lockService.IsObjectLockedByAnotherUser(document)) {
+            throw new Exception($"Карточка {cardID} заблокирована другим пользователем");
+        }
+
+        if (lockService.LockObjectBase(document) == false) {
+            throw new Exception($"Не удалось заблокировать карточку {cardID}");
+        }
+
+        IDocumentService documentService = GetDocumentService();
+
+        return await System.Threading.Tasks.Task.Run(() =>
+                                                     {
+                                                         IEnumerable<Guid> documentFileIds;
+                                                         try
+                                                         {
+                                                             IEnumerable<DocumentFile> documentsFiles = documentService.AddAdditionalFiles(document, files);
+                                                             documentFileIds = documentsFiles.Select(t => t.FileId);
+                                                         }
+                                                         catch (Exception ex)
+                                                         {
+                                                             throw new Exception($"Ошибка при добавлении файлов в карточку {cardID}\n {ex.Message}");
+                                                         }
+                                                         finally {
+                                                             lockService.UnlockObject(document);
+                                                         }
+
+                                                         // Возвращает идентификаторы добавленных файлов с версиями
+                                                         return documentFileIds;
+                                                     });
+    }
+
+    // Получает указатель для чтения файла из карточки файла с версиями fileCardID
+    public FileReader GetFileReader(Guid fileCardID)
+    {
+        IVersionedFileCardService versionedFileCardService = GetVersionedFileCardService();
+
+        // Получение файла карточки с версиями
+        VersionedFileCard fileCard = versionedFileCardService.OpenCard(fileCardID);
+
+        // Получение идентификатора файла из последней версии
+        Guid fileID = fileCard.CurrentVersion.Id;
+
+        UserSession userSession = GetUserSession();
+
+        // Если файла нет, возвращается пустой указатель
+        if (userSession.FileManager.FileExists(fileID) == false) 
+            return new FileReader();
+
+        // Запрашивается файл текущей версии
+        var file = userSession.FileManager.GetFile(fileID);
+
+        // Возвращается указатель для чтения файла
+        return new FileReader() {
+            FileID = fileID,
+            FileName = file.Name,
+            Stream = file.OpenReadStream()
+        };
+    }
+    
+    // Код вспомогательных функций приведён в полном примере.
+}
+
+----
+
+== Расширение программы DVWebTool
+
+После того, как реализовано расширение Web-клиента, предоставляющее и записывающее файлы карточек, может быть реализовано расширение DVWebTool, использующее данные функции.
+
+Расширение DVWebTool представляет собой сборку, в которой реализован интерфейс `DocsVision.DVWebTool.WebServices.IServiceManager`. Данный интерфейс определяет метод `Register`, который регистрирует контроллеры с необходимыми функциями во внутреннем веб-сервере DVWebTool, и поле `DisplayName` с названием расширения.
+
+Ниже приведён код класса, реализующего интерфейс `IServiceManager` в данном примере.
+
+[source,csharp]
+----
+// Файл Others\Watermark\WatermarkWebToolExtension\WatermarkManager.cs
+
+public class WatermarkManager : IServiceManager
+{
+    // Название расширения для информации в окне «О программе»
+    public string DisplayName => "Watermark to PDF";
+
+    // Регистрация контроллера расширения
+    public void Register(WebSocketServer server)
+    {
+        // Регистрация контроллера PDFWatermarkController для маршрута Watermark
+        server.AddWebSocketService<WatermarkController>("/Watermark");
+    }
+}
+
+----
+
+В данном примере выполняется регистрация контроллера `WatermarkController` для обработки запросов, поступающих по пути «/Watermark».
+
+Контроллер, передаваемый в `AddWebSocketService`, должен быть производным типа `DocsVision.DVWebTool.WebServices.BaseService`. При его реализации необходимо зарегистрировать в `BaseService.actions` веб-методы, с помощью которых будут вызываться функции DVWebTool, предоставляемые расширением. Данные методы будут доступны для вызова по протоколу WebSocket по адресу `ws://localhost:/{Адрес контроллера}/{Название метода}`.
+
+Ниже приведена часть реализации контроллера `WatermarkController`, содержащего методы обработки входящих запросов на добавление водяного знака. 
+
+[source,csharp]
+----
+// Файл Others\Watermark\WatermarkWebToolExtension\WatermarkController.cs
+
+// Реализация контроллера PDFWatermarkController
+public class WatermarkController : BaseService
+{
+    private readonly ServiceProvider serviceProvider;
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+    // Текст водяного знака
+    private string WATERMARK = "Секретно";
+
+    public WatermarkController()
+    {
+        serviceProvider = new ServiceProvider();
+        Init();
+    }
+
+    // Регистрация методов контроллера PDFWatermarkController
+    // Название метода - регистрозависимое 
+    private void Init()
+    {
+        actions.Add(nameof(AddWatermarkToFiles), AddWatermarkToFiles);
+    }
+
+    // Веб-метод добавления водяного знака
+    // Метод должен принимать два параметра: WebServiceRequest и JObject
+    // Данные передаются в data
+    private async Task<WebServiceResponse> AddWatermarkToFiles(WebServiceRequest webServiceRequest, JObject data)
+    {
+        Logger.Info("Получено задание на добавление водяного знака");
+
+        if (data == null)
+        {
+            return CreateBadResponse("С клиента не переданы данные для работы");
+        }
+
+        // Загружаем данные из полученного запроса в модель AddWatermarkRequest
+        AddWatermarkRequest request;
+        try
+        {
+            request = data.ToObject<AddWatermarkRequest>();
+        }
+        catch
+        {
+            Logger.Error($"Ошибка преобразования полученного сообщения: {data}");
+            return CreateBadResponse("Поступивший запрос не соответствует ожидаемому формату");
+        }
+
+        string doneInfo;
+
+        try
+        {
+            doneInfo = await HandleRequest(request);
+        }
+        catch (Exception ex)
+        {
+            return CreateBadResponse(ex.Message);
+        }
+
+        return CreateEndProcessResponse(request.CardID, $"Водяные знаки добавлены в файлы:<p/>{doneInfo}");
+    }
+
+    // Обработчик запроса на добавление водяного знака
+    //  Получает данные запроса
+    // Возвращает строку с названиями файлов, в которые добавлены запросы
+    private async Task<string> HandleRequest(AddWatermarkRequest request)
+    {
+        var connectionService = new ConnectionToWebClient(request.ServerAddress);
+
+        try
+        {
+            await connectionService.Authentificate();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex.Message);
+            throw new Exception("Не удалось подключиться к серверу Web-клиента");
+        }
+
+        List<string> files = new List<string>();
+
+        // Загружаем с Web-клиента файлы, идентификаторы которых переданы в запросе
+        foreach (var fileId in request.FileIDs)
+        {
+            try
+            {
+                string pathToFile = await connectionService.PullFile(fileId);
+                files.Add(pathToFile);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+                throw new Exception($"Не удалось получить из карточки файл с идентификатором {fileId}");
+            }
+        }
+
+        // Сервис для работы с водяными знаками
+        var watermarkService = new WatermarkService();
+
+        // Добавление водяных знаков в файлы из списка files
+
+        List<Task<string>> processes = new List<Task<string>>();
+        string doneInfo = "";
+
+        foreach (var file in files)
+        {
+            try
+            {
+                processes.Add(watermarkService.AddWatermark(file, WATERMARK));
+                doneInfo += $" {Path.GetFileName(file)}<p/>";
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+                throw new Exception($"Не удалось добавить водяной знак в файл {Path.GetFileName(file)}");
+            }
+        }
+
+        var filesWithWatermark = await Task.WhenAll(processes);
+
+        try
+        {
+            // Отправка запроса на прикрепление файлов filesWithWatermark к карточке request.CardID
+            await connectionService.PushFiles(request.CardID, filesWithWatermark);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex.Message);
+            throw new Exception($"Не удалось сохранить файлы в карточке");
+        }
+        return doneInfo;
+    }
+        
+    // Код вспомогательных функций приведён в полном примере.
+}
+
+----
+
+Контроллер `WatermarkController` использует функции двух сервисов:
+
+* `ConnectionToWebClient` – для получения файлов из карточек Файл с версиями и загрузки файлов в карточки Документ. Данный сервис использует функции, реализованного серверного расширения Web-клиента.
+* `WatermarkService` – для добавления водяных знаков в PDF файлы.
+
+Реализации данных сервисов смотрите в исходных кодах примера на GitHub.
+
+После публикации расширения DVwebTool, зарегистрированный в расширении метод «AddWatermarkToFiles» контроллера «Watermark» может быть вызван из клиентского расширения Web-клиента с помощью сервиса `DVWebToolConnection`.
+
+== Клиентское расширение
+
+В качестве примера использования функций расширения «Watermark to PDF» программы DVWebTool было разработано клиентское расширение, которое выполняет две задачи:
+
+* получает из текущей открытой карточки Документа идентификаторы основных файлов формата PDF;
+* отправляет идентификаторы файлов расширению «Watermark to PDF».
+
+Общие требования к реализации клиентских расширений приведены в пункте link:ClientExtensions.md[Расширение возможностей клиентской части Web-клиента].
+
+Прежде всего реализуем сервис, который будет получать список идентификаторов файлов, в которые нужно добавить водяной знак и передавать его в метод `AddWatermarkToFiles` расширения «Watermark to PDF». Ниже приведён исходный код данного сервиса.
+
+[source,typescript]
+----
+// Файл Others\Watermark\WatermarkWebExtension\src\WatermarkService.tsx
+
+// Клиентский сервис, предоставляющий доступ к методу добавления водяных знаков, предоставляемому расширением DVWebTool
+export class WatermarkService {
+
+    constructor(private services: $RequestManager & $WebServices & $ApplicationSettings & $MessageBox & $SiteUrl & $CurrentEmployeeId) {
+    }
+
+    // Метод принимает ИД карточки и ИД её конвертируемых файлов
+    AddWatermarkToFiles(cardID: string, fileIDs: string[]): Promise<IWebServicesResponse<any>> {
+
+        // В данных нужно также передать:
+        // адрес сервера Web-клиента (DVWebTool должен подключиться к Web-клиенту для получения и сохранения файлов карточки) и 
+        // ИД пользователя (для отправки оповещения о завершении процесс)
+        const data: any = {
+            data: {
+                cardID: cardID,
+                fileIDs: fileIDs,
+                userID: this.services.currentEmployeeId,
+                serverAddress: this.services.siteUrl
+            },
+            action: 'AddWatermarkToFiles', // Название метода, вызываемого из расширения DVWebTool
+            locale: this.services.applicationSettings.culture.twoLetterISOLanguageName // Обязательное для передачи название локали
+        };
+
+        // Вызываем метод AddWatermarkToFiles из контроллера Watermark расширения DVWebTool
+        // Тип DVWebToolConnection предоставляет методы для работы с DVWebTool
+        return DVWebToolConnection.trySendData("Watermark", data, this.services);
+    }
+}
+
+// Регистрируем сервис WatermarkService
+export type $WatermarkService = { watermarkService: WatermarkService };
+export const $WatermarkService = serviceName((s: $WatermarkService) => s.watermarkService);
+----
+
+Сервис `$WatermarkService` предоставляет единственный метод `AddWatermarkToFiles`, который вызывает функцию программы DVWebTool с помощью метода `DVWebToolConnection.trySendData`. При вызове данного метода нужно передать название контроллера и данные, в которых должно быть название вызываемого метода контроллера – в поле action передаваемых данных.
+
+В качестве метода, использующего сервис `$WatermarkService` реализуем обработчик нажатия кнопки разметки карточки Документ, который будет получать идентификаторы основных PDF-файлов карточки, вызывать метод `$WatermarkService.AddWatermarkToFiles` и после завершения его работы обновлять содержимое элемента управления Список файлов, или отображать ошибку.
+
+[source,typescript]
+----
+// Файл Others\Watermark\WatermarkWebExtension\src\EventHandlers.tsx
+
+// Обработчик для события нажатия иконки добавления водяных знаков
+export async function addWatermark(sender: LayoutControl) {
+   showNotify("Запущен процесс добавления водяных знаков");
+
+   // Получаем ИД текущей карточки и список файлов из элемента FileList
+   let cardId = sender.layout.getService($CardId);
+   let files = sender.layout.getService($FileService).getFiles();
+
+   let fileIDs = new Array();
+
+   // Получаем из модели files только идентификаторы файлов
+   files.forEach((item) => {
+      // Обрабатываем только основные файлы с расширением PDF
+      if (item.data.isMain && item.data.name.toLowerCase().endsWith(".pdf")) {
+         fileIDs.push(item.data.fileId);
+      }
+   })
+
+   // Получаем реализованный сервис для работы с водяными знаками
+   let watermarkService = sender.layout.getService($WatermarkService);
+
+   // Вызываем функцию добавления водяных знаков для файлов с ИД из списка fileIDs
+   let response = await watermarkService.AddWatermarkToFiles(cardId, fileIDs);
+
+   if (response.success == false) {
+      showError(response.errorMessage);
+   } else {
+      showNotify(response.data.message);
+
+      if (layoutManager.cardLayout == null)
+         return;
+
+      let currentCardId = sender.layout.getService($CardId);
+      if (currentCardId == cardId) {
+         // Обновляем список файлов, если есть (возможно уже открыта другая карточка, но в данном случае это не существенно)
+         let fileList = layoutManager.cardLayout.controls.get<FileListControl>("fileList");
+         await fileList.reloadFromServer();
+      }
+   }
+}
+----
+
+== Сборка проекта
+
+. Сборка серверного расширения Web-клиента и расширения DVWebTool.
+
+. Откройте решение Samples.sln.
+
+. Соберите проект Other &gt; Watermark &gt; WatermarkServerExtension.
+. Соберите проект Other &gt; Watermark &gt; WatermarkWebToolExtension.
+. Сборка клиентской части.
+
+. Откройте в командной строке папку Others &gt; Watermark &gt; WatermarkWebExtension.
+
+. Выполните команды:
+
+`
+  npm install
+  npm update
+  npm run build:prod
+`
+
+. Публикация компонентов на сервере Web-клиент.
+
+. Остановите IIS.
+
+. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `&lt;Каталог установки Web-клиента&gt;\Site\Content\Modules`.
+. Скопируйте папку `SamplesOutput\Site\Content\Tools\DVWebTool\Application Files\` в `&lt;Каталог установки Web-клиента&gt;\Site\Content\Tools\DVWebTool\`.
+. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `&lt;Каталог установки Web-клиента&gt;\Site\Extensions`.
+. Запустите IIS.
+. Регистрация расширения DvWebTool на сервере Web-клиент.
+
+. Запустите программу `&lt;Каталог установки Web-клиента&gt;\Tools\mageui.exe`.
+
+. Обновите манифест программы:
+.. Нажмите *File* → *Open* и выберите файл `&lt;Каталог установки Web-клиента&gt;\Site\Content\Tools\DVWebTool\Application     Files\DocsVision.DVWebTool.exe.manifest`.
+
+.. Перейдите в раздел Name и в поле Version увеличьте номер сборки. Например, «5.5.5531.0» до «5.5.5531.1». Не изменяйте мажорную и минорную версии, и версию исправления.
+
+.. Перейдите в раздел Files.
+
+.. Нажмите кнопку *Populate*. В манифест будут добавлены файлы разработанного расширения DVWebTool.
+
+.. Нажмите *File* → *Save*. Будет предложено подписать манифест.
+
+.. Нажмите *…* в поле File, выберите файл сертификата `&lt;Каталог установки Web-клиента&gt;/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания манифеста (пароль указывать не нужно). Файл манифеста будет подписан сертификатом _DVWebTool.pfx_.
+
+. Обновите файл развертывания программы:
+.. Нажмите *File* → *Open* и выберите файл `&lt;Каталог установки Web-клиента&gt;\Site\Content\Tools\DVWebTool\DocsVision.DVWebTool.application`.
+.. Перейдите в раздел Name и в поле Version увеличьте номер сборки. Например, «5.5.5531.0» до «5.5.5531.1». Не изменяйте мажорную и минорную версии, и версию исправления.
+.. Перейдите в раздел Update option и в поле Version введите номер версии, который был получен в разделе Name. Например, «5.5.5531.1».
+.. Перейдите в раздел Application Reference, нажмите кнопку *Select Manifest* и выберите файл `&lt;Каталог установки Web-клиента&gt;\Content\Tools\DVWebTool\Application Files\DocsVision.DVWebTool.exe.manifest`. В поле Version будет указана версия , полученная при обновлении файла манифеста.
+.. Нажмите *File* → *Save*. Будет предложено подписать файл развёртывания.
+.. Нажмите *…* в поле File, выберите файл сертификата `&lt;Каталог установки Web-клиента&gt;/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания (пароль указывать не нужно). Файл развертывания будет подписан сертификатом _DVWebTool.pfx_.
+. Закройте программу mageui.exe.
+. Рекомендуется перезапустить IIS.
+
+== Проверка примера
+
+. Настройте разметку:
+
+. В Конструкторе web-разметок добавьте элемент *Кнопка* в любую разметку просмотра карточки Документ.
+
+. Укажите для события «При щелчке» обработчик «addWatermark».
+. Сохраните разметку.
+. Установите или обновите программу DvWebTool. Cм. пункт «Установка и запуск программы «DVWebTool» руководства пользователя Web-клиент.
+
+. Запустите программу DvWebTool. Убедитесь, что программа DvWebTool и Web-клиент будут запущены от имени одного пользователя.
+
+. Убедитесь, что все расширения установлены:
+
+. В Web-клиенте перейдите в раздел «О программе». 
+
+В разделе «Подключенные расширения» должны быть указаны расширения:
+
+. Откройте панель «About» из меню Docsvision DVWebTool.
+
+В списке установленных расширений должно быть расширение «Watermark to PDF &lt;версия&gt;».
+
+. Откройте для просмотра любую карточку с разметкой, настроенной в п. 1.
+
+. Добавьте один или несколько основных файлов с расширение PDF.
+
+. Нажмите на добавленную кнопку с обработчиком «addWatermark».
+
+Появится сообщение «Запущен процесс добавления водяных знаков» – начнётся процесс добавления водяных знаков.
+
+После завершения процедуры появится сообщение «Водяные знаки добавлены в файлы: &lt;список PDF-файлов, в которые добавлены водяные знаки&gt;».
+
+В карточку будут добавлены дополнительные файлы с постфиксом «_marked», являющиеся копиями оригинальных файлов с добавленным водяным знаком: слово «Секретно». 
+
+== Особенности обновления
+
+При обновлении версии Web-клиента регистрация расширения в программе DvWebTool будет отменена (конфигурационные файлы программы перезаписываются).
+
+После установки новой версии Web-клиента необходимо повторно зарегистрировать расширения DvWebTool на сервере Web-клиент (пп. «Сборка проекта»).

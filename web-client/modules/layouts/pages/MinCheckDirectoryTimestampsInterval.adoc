@@ -1,0 +1,24 @@
+
+== Изменение времени обновления кэша представлений
+
+Web-клиент кэширует представления в серверном кэше и обновляет его с периодичностью в одну минуту.
+
+На сервере Web-клиента, предназначенном для тестирования, период обновления может быть уменьшен (для своевременного получения изменений разметок на клиенте), например, до одной секунды.
+
+Для изменения периода обновления кэша:
+
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
+. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="System"]*#.
+. Измените значение параметра `MinCheckDirectoryTimestampsInterval`. Время ожидания задается в миллисекундах.
++
+[source,pre,codeblock]
+----
+<SettingGroup Name="System">
+    <Setting Name="MinCheckDirectoryTimestampsInterval" Value="1000" /> 
+</SettingGroup>
+----
++
+Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+. Сохраните изменения конфигурационного файла.
+
+*Parent topic:* xref:../topics/CacheConf.html[Настройки кэширования]

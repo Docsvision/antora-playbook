@@ -1,0 +1,23 @@
+= Отображение сообщений, запросов, предупреждений
+
+JS API предоставляет методы для отображения стандартных запросов и оповещений:
+
+* `MessageBox.ShowInfo(content, customCaptionText)` – информационное сообщение;
+* `MessageBox.ShowWarning(content, customCaptionText)` – предупреждающее сообщение;
+* `MessageBox.ShowError(content, customCaptionText)` – сообщение об ошибке;
+* `MessageBox.ShowConfirmation(content, customCaptionText)` – запрос с кнопками подтверждения и отмены.
+
+Следующий код демонстрирует пример использования метода `ShowConfirmation` для получения от пользователя подтверждения на выполнение операции.
+
+[source,tsx]
+----
+export function confirmationHandler(sender: CustomButton, e: IEventArgs) {
+    MessageBox.ShowConfirmation("Вы действительно хотите удалить файл?")
+        .then(() => { console.log("Пользователь подтвердил действие"); })
+        .catch(() => { console.log("Пользователь отклонил действие"); });
+}
+----
+
+При вызове обработчика `confirmationHandler` будет отображено диалоговое окно подтверждения действия:
+
+image:img/messageBox.png[Диалоговое окно подтверждения]

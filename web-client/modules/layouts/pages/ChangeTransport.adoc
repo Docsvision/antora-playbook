@@ -1,0 +1,22 @@
+
+== Изменение типа транспорта для работы с сервером Docsvision
+
+Web-клиент по умолчанию работает с сервером Docsvision с использованием HTTP REST, если установлен модуль «Docsvision 5. Платформа» версии 5.5.2 или выше. Если установлен модуль «Docsvision 5. Платформа» версии 5.5.1, по умолчанию будет использоваться SOAP.
+
+Если для работы с сервером Docsvision предполагается использовать тип транспорта, отличный от автоматически выбранного, измените конфигурационный файл Web-клиента:
+
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
+. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*Server* > [.ph .uicontrol]*SessionManagerConnection*#.
+. В параметре Transport укажите значение «COM».
+. В параметре ConnectionAddress укажите полный адрес подключения к серверу Docsvision, например:
++
+[source,pre,codeblock]
+----
+http://company.com/StorageServer/StorageServerService.svc
+----
+. Сохраните изменения конфигурационного файла.
+. Запустите «Панель управления Web-клиента».
+. Перейдите в раздел xref:ControlPanel_databases.html[Базы данных]. В поле [.ph .uicontrol]*Адрес сервера* должен быть указан адрес, который был введён в конфигурационном файле.
+. Нажмите на кнопку image:Buttons/bt_save.png[image]. Новый адрес сервере будет также записан в конфигурационный файл Конструктора web-разметок.
+
+*Parent topic:* xref:../topics/Administrator_functions.html[Функции администратора]

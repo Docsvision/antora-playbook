@@ -1,0 +1,28 @@
+
+== Настройка обновления Web-клиента без импорта решений
+
+При обновлении Web-клиента происходит проверка параметра `<LoadLayouts></LoadLayouts>` конфигурационного файла панели управления Web-клиента ([.ph .filepath]`WebClientAdminConsole.config`), расположенного по адресу [.ph .filepath]`%LocalAppData%\DocsVision\WebClientAdminConsole.config`.
+
+Если файл отсутствует или значение `<LoadLayouts>true</LoadLayouts>`, Web-клиент будет обновлён в стандартном режиме с импортом решений в базу данных.
+
+Если значение `<LoadLayouts>false</LoadLayouts>`, при обновлении Web-клиента решения не будут автоматически загружены в базу данных, и администратор должен будет сделать это самостоятельно позднее.
+
+Для включения режима обновления без импорта решений:
+
+. [.ph .cmd]#На сервере с установленной системой DocsVision с модулем [.dfn .term]_Web-клиент_ перейдите по адресу [.ph .filepath]`%LocalAppData%\DocsVision`.#
+. [.ph .cmd]#Создайте в папке документ формата [.dfn .term]_.config_ при помощи любого текстового редактора.#
+. [.ph .cmd]#Добавьте в файл следующие строки, при необходимости заменив `true` на `false`:#
++
+[source,pre,codeblock,language-xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<WebAdminConsoleSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <LoadLayouts>false</LoadLayouts>
+</WebAdminConsoleSettings>
+----
+. [.ph .cmd]#Закройте файл с сохранением изменений.#
+
+[[CreateUpdateConfig__result_kd4_pyb_v4b]]
+Обновление Web-клиента будет происходить без автоматической загрузки решений в базу данных.
+
+*На уровень выше:* xref:../topics/Administrator_functions.html[Функции администратора]

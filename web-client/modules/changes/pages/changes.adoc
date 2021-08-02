@@ -1,0 +1,359 @@
+= Изменения
+
+== Изменения в Web-клиенте версии 16
+
+*Создание, изменение и удаление папок*::
+В Web-клиенте реализована возможность создания, изменения настроек и удаления папок пользователями.
++
+Новые функции предоставляются в меню пользовательских (подключенных) и известных папок, а также папок рабочей группы.
++
+image:image-20210118131547128.png[image-20210118131547128]
++
+Новые папки создаются с предустановленными настройками типа папки (выбирается пользователем) из Справочника типов папок.
+
+*Настройка прав доступа к объектам*::
+В новой версии Web-клиента реализована возможность настройки дискреционных прав доступа к папкам (через меню папки).
++
+Теперь пользователи могут самостоятельно (при наличии прав) устанавливать права доступа к объектам с использованием диалога настройки прав:
++
+image:image-20210115082632690.png[image-20210115082632690]
++
+Возможность настройки прав доступа предусматривает: предоставление прав доступа субъектам из Справочника сотрудников, изменение и удаление существующих прав доступа, включение и выключение наследования прав от родительского объекта.
++
+Обратите внимание: права можно назначать только субъектам, выбранным из Справочника сотрудников. Возможность назначения прав доступа учётным записям Active Directory в Web-клиенте не предоставляется. При этом поддерживается отображение и изменение существующих прав доступа для учётных записей Active Directory.
+
+*Загрузка файлов с электронной подписью*::
++
+Для основных файлов карточек Документов реализована возможность загрузки отсоединённой электронной подписи.
++
+В «Журнал подписей» добавлено новое поле «Вид подписи», в котором отображается способ формирования подписи: «Подпись документа» (при обычном подписании) или «Импортированная подпись» (если загружена отсоединённая подпись).
++
+image:image-20210114130002544.png[image-20210114130002544]
+
+*Выгрузка файлов с электронной подписью*::
+Реализована функция выгрузки подписанных основных файлов вместе с их действительными электронными подписями. Электронные подписи по умолчанию выгружаются в виде P7S файлов – отсоединённая электронная подпись. На выбор доступны также форматы SIG, SGN, SIGN. 
++
+image:image-20210118113438487.png[image-20210118113438487]
++
+Функция реализуется новым элементом управления *Экспорт подписей*, выбор формата экспортируемой подписи также доступен в свойствах элемента указанного управления.
+
+*Индикация штампов времени подписи*::
+ В журнале подписей теперь фиксируется дата наложения подписи — штамп времени. При наличии сервиса перештамповки подписей становится доступной расширенная информация о штампе времени. За подробной информацией см. руковдство пользователя Web-клиент пункт «Журнал электронно-цифровых подписей».
+
+*Перемещение, копирование и удаление карточек*::
+Реализованы три новых групповых операции: перемещения, копирования и удаления ярлыков карточек.
+
+*Исходная версия консолидатора*::
+Изменено название исходной версии, предоставляемой консолидатору согласования: пункт «Исходная версия» теперь называется «Исходная версия цикла». Исходная версия цикла – версия, поступившая в текущий цикл согласования.
+
+*Фильтрация данных в представлении*::
+ Поддержана возможность фильтрации представлений при работе с БД PostgreSQL – требуется версия модуля «Docsvision 5. Платформа» 5.5.3 или выше.
++
+Теперь фильтрация доступна для всех представлений, кроме Дайджест.
+
+*Разметка управление документами*::
+В разметках «Управление документами»: Документ, Задание, Группа заданий элементы управления Сотрудник и Сотрудники заменены на элемент управления Записи справочника сотрудников.
+
+*Работа со справочниками*::
+Реализована работа со справочником сотрудников из интерфейса Web-клиента. Справочник позволяет работать с организациями, подразделениями, сотрудниками, группами сотрудников и должностями.
++
+Реализована возможность работы со справочником номенклатуры дел. Справочник позволяет создавать иерархическую структуру разделов для хранения дел, в которые могут быть списаны документы. Справочник доступен только при установке компонентов модуля «Управление архивом».
++
+Для работы со справочниками необходимо добавить ссылки в основное меню. Инструкция приведена в руководстве пользователя программы «Конструктор web-разметок», пункты _Добавление ссылки на справочник номенклатуры дел_ и _Добавление ссылки на справочник сотрудников_.
+
+*Работа с заданиями*::
+Теперь в элементах управления «Дерево исполнения заданий» и «Таблица исполнения заданий» отображается сотрудник, завершивший задание.
+
+*Дополнительная информация в сообщении об ошибке*::
+В окне сообщения об ошибке теперь будет указано текущее время и имя сервера Web-клиента.
+
+*Документация*::
+В руководстве администратора указана особенность выбора корневого вида заданий КС.
++
+В пункте «Особенности настройки кластера Web-клиент» руководстве администратора исправлена фраза о необходимости экспорта приватного ключа.
++
+В документации отмечено, что для печати файлов из компонента предпросмотра в браузерах Microsoft Internet Explorer и Microsoft Edge (не на базе Chromium) рекомендуется воспользоваться более современным браузером (из списка совместимых с Web-клиентом) или распечатывать документ из внешнего приложения. В противном случае печать может происходить с ошибкой.
+
+*Обновление Web-клиента*::
+При запуске мастера настройки Web-клиента происходит проверка значения параметра LoadLayouts в файле конфигурации по адресу`%LocalAppData%\DocsVision\WebClientAdminConsole.config`. В зависимости от значения true или false разметки будут автоматически загружены в базу данных или администратору необходимо будет импортировать их вручную позднее.
+
+*Редактирование профиля пользователя*::
+Закрыта возможность редактирования некоторых полей данных сотрудника в профиле сотрудника. Теперь для изменения доступны только поля: текущее состояние, состояние в период отсутствия, период отсутствия, заместители. Остальные данные сотрудника могут быть изменены из справочника сотрудников.
+
+*Поддержка мультитенантности*::
+Поддержана одновременная работа с несколькими БД. Текущей активной считается БД, псевдоним которой указан в адресной строке до первой точки, например: `http://DocsVisionDB.company/DocsvisionWebClient/#/Dashboard`.
+ Настройка работы Конструктора web-разметок в мультитенантном режиме производится согласно пункту «Особенности работы в мультитенантном режиме» руководства пользователя программы «Конструктор web-разметок».
+
+*Обозначены элементы управления, обязательные к заполнению*::
+Раньше обязательные к заполнению ЭУ обозначались только при попытке сохранить карточку. Теперь, помимо проверки при сохранении, ЭУ дополнительно обозначаются визуально. Для всех обязательных ЭУ в режиме редактирования и редактирования по месту перед меткой и заполнителем добавлен значок « * ». При редактировании незаполненные обязательные поля также выделяются рамкой и меняют цвет.
+
+*Изменена работа пользовательской сессии*::
+Если неавторизованный пользователь переходит на вкладку или окно с открытым Web-клиентом, появится сообщение "Необходимо войти в систему". При нажатии кнопки *ОК* в сообщении пользователь будет перенаправлен на страницу входа систему. После успешной авторизации пользователь будет перенаправлен обратно на страницу до ошибки авторизации.
+
+*Прочее*::
+* Компонент Aspose.Words (используется при предварительном просмотре файлов) обновлён до версии 20.10.
++
+* При предварительном просмотре файлов TXT теперь отображаются только первые 100 000 символов.
++
+* В пакеты установки серверного расширения и Web-клиента включены компоненты Управления архивом. Компоненты обязательны для установки, если планируется работа с модулем «Управление архивом».
+
+== Изменения в Конструкторе web-разметок
+
+*Возможность настройки разметки основного окна Web-клиента*::
+С включенной экспериментальной функцией «Возможность редактирования разметки WebFrame» предоставляется возможность настраивать разметки основного окна Web-клиента: определять размещение основного меню, строки поиска и других элементов.
+
+== Изменения в библиотеке элементов управления
+
+*Разметка*::
+В корневой элемент разметки – Layout – добавлено событие «Подготовка к сохранению карточки». Новое событие вызывается до события «Перед сохранением карточки» и может использоваться, когда нужно изменить значение элемента управления при сохранении карточки.
+
+*Список файлов*::
+В список настроек элемента Список файлов добавлена новая настройка «Операция редактирования для добавления подписи», которая определяет операцию, которая должна быть доступна пользователю для разрешения загрузки в карточку отсоединённой электронной подписи.
+
+*Записи справочника сотрудников*::
+В список настроек элемента Записи справочника сотрудников добавлена новая настройка «Сотрудник по умолчанию», которая устанавливает режим выбора текущего сотрудника по умолчанию.
+
+*Известная папка*, *Групповые папки*, *Пользовательские папки*::
+Добавлена новая настройка «Управление папками», которая активирует для данной папки меню с командами создания подпапок, удаления и настройки папки.
+
+*Переместить ярлык*, *Копировать ярлык*, *Удалить ярлык*::
+В библиотеку элементов добавлены три новых элемента управления «Групповые операции / Переместить ярлык», «Групповые операции / Копировать ярлык» и «Групповые операции / Удалить ярлык». Элементы управления реализуют групповые операции перемещения, копирования и удаления ярлыков карточек.
+
+*Экспорт подписей*::
+В библиотеку элементов добавлен новый элемент управления «Экспорт подписей», который добавляет в элемент *Список файлов* кнопку выгрузки подписанных файлов вместе с электронными подписями. Выбор формата для экспортируемой подписи доступен в свойствах элемента управления. Доступные форматы: P7S (по умолчанию), SIG, SGN, SIGN.
+
+*Дело*::
+В библиотеку элементов добавлен новый элемент управления «Дело», который позволяет списать документ в дело справочника номенклатуры дел.
+
+*Отображение документов*::
+В библиотеку элементов добавлен новый элемент управления «Отображение документов», отображающий списанные в дело документы. Элемент управления доступен только для карточки Архивное дело и только при установке модуля Управление архивом.
+
+*Номенклатура дел*::
+В библиотеку элементов добавлен новый элемент управления «Справочник номенклатуры дел». Справочник открывает возможности создания иерархической структуры разделов для создания и списания дел, просмотра документов, списанных в дело.
+
+*Таблица исполнения*::
+В настройку «Видимые колонки таблицы» добавлена новая колонка для отображения: «Комментарий / Отчет». В данной колонке будет выводиться комментарий к завершению задания или последний комментарий, если задание не завершено.
+
+*Справочник сотрудников*::
+Справочник представляет собой иерархическую структуру узлов - организаций и подразделений, групп и доступен из возможность работы с группами сотрудников, отдельными сотрудниками и должностями.
+
+*Комментарии*::
+При использовании экспериментальной функции «Комментарии с HTML-редактором» у элемента управления комментарии появляется новое свойство «Использовать HTML редактор», при активации которого становится возможным упоминать сотрудников в комментариях через символ @ и форматировать текст в процессе ввода с использованием HTML-редактора.
+
+*Отправка на ознакомление*::
+Свойства элемента управления в блоке «События» переименованы следующим образом: «При закрытии» переименовано в «Перед закрытием», «При открытии» переименовано в «Перед открытием». Другие изменения в свойствах, кроме изменения наименования событий, отсутствуют.
+
+*Строка конструктора справочников*::
+Добавлено новое свойство «Использовать описание» в раздел «Внешний вид». Новое свойство влияет на отображение описания значения из строки.
+
+*Дата/время*::
+Добавлено новое свойство «Отображать диалог выбора времени», позволяющее отключить или включить отображение диалога выбора времени для элемента управления.
+
+*Поиск по справочнику*::
+В разметку WebFrame добавлен новый элемент управления - *Панель поиска по справочнику*. Элемент управления заменяет стандартную панель поиска Web-клиента специальной панелью поиска для справочников.
+
+== Разработка
+
+*Изменение объектной модели*::
+* В возвращаемый методом `IDocumentSignatureService.GetStampSignatureModel` тип StampSignatureModel добавлено новое свойство SignerId, в котором передаётся идентификатор сотрудника, подписавшего документ.
++
+* Был разработан новый сервис API, описываемый интерфейсом `IApplicationTimestampService`, который предоставляет метод обновления штампа времени, по которому определяется необходимость обновления скриптов в кэше браузера.
++
+Web-клиент содержит стандартную реализацию сервиса (см. Руководство программиста), которая при необходимости может быть переопределена.
+
+*Метод принудительного обновления кэша скриптов*::
+В новой версии Web-клиента был добавлен веб-метод `GET http://{Адрес Web-клиента}/WebClient/Navigator/ResetClientCache`, вызывающий обновление штампа времени приложения с последующим принудительным обновлением кэша пользовательских браузеров.
++
+Данный метод может быть использован для перезагрузки клиентских скриптов после их изменения без необходимости перезапуска IIS и ручной очистки кэша браузеров.
++
+NOTE: Требование по перезапуску IIS после добавления новых скриптов сохраняется.
+
+*Обновлены библиотеки React*::
+Библиотеки React.js обновлены до версии 17.0.2.
+
+*Удалены неиспользуемые компоненты*::
+Из дистрибутива Web-клиента удалены неиспользуемые компоненты:
++
+* серверные: Ionic.Zip.dll, Microsoft.AspNet.SignalR.SystemWeb.dll, Microsoft.IdentityModel.Extensions.dll, System.Web.Helpers.dll, WebGrease.dll, CoreHtmlToImage.dll;
+* клиентские: chai-as-promised, react-file-drop, rifm, class-names, eslint-plugin-react-hooks, vinyl-fs, tsconfig-paths, rollup-stream, rollup-plugin-re, event-stream, gulp-append-prepend, gulp-changed, gulp-clean, gulp-filter, gulp-filter-by, gulp-include-ext, gulp-rimraf, gulp-simple-rename, gulp-string-replace, gulp-transform, gulp-uglify.
++
+Если при разработке собственного Решения были задействованы данные компоненты, необходимо включить их непосредственно в Решение при переходе на новую версию версию Web-клиента.
+
+*Библиотека sammy.js больше не используется*::
+Библиотека sammy.js была предназначена для внутреннего пользования, и, в частности, применялась в механизме маршрутизации в сервисах `$Router` и `$RouterNavigation`. Теперь используется navigo.js.
+
+*Класс RowWrapper удалён*::
+Внутренний класс `RowWrapper` был предназначен для внутреннего использования, но потребность в нём отпала.
+
+*Удалено устаревшее свойство GenModels.GridViewModel.sessionId*::
+Серверное свойство `GenModels.GridViewModel.sessionId` отмечено устаревшим и было удалено. В качестве замены следует использовать клиентское свойство `GenModels.GridViewModel.FullTextSearchSessionId`.
+
+*Удалён обработчик onCardSaving_cleanDeputyTableEmptyRows*::
+Обработчик `onCardSaving_cleanDeputyTableEmptyRows` ранее использовался в разметке Диалога профиля пользователя. Вместо обработчика теперь используется функция `cleanDeputyTableEmptyRows`.
+
+*Недоступность идентификатора элемента в HTML*::
+В HTML больше недоступны идентификаторы (ID) элементов: nav-bar, nav-bar-nav-buttons, search-mobile-container, tabs-mobile-container, search-panel, search-button, search-input, search-text-input, search-clear-btn, search-dropdown, search-context-option, barcode-search-panel, barcode-search-button, barcode-search-input, barcode-search-text-input, barcode-search-clear-btn,company-logo, user-menu-button, user-menu, header-folder-name.
++
+Если в скриптах Решения были использованы функции, обращающиеся к элементу по его идентификатору, необходимо изменить данную реализацию (например, обращаться по классам элементов).
+
+*Новые примеры на GitHub*::
+Добавлен пример интеграции с системой Контур.Фокус. Интеграция с системой Контур.Фокус позволяет заполнить отчёт о контрагенте по указанному ИНН контрагента. Также открывается возможность получить отчёт о контрагенте в карточке Договора и прикрепить его к карточке Договора.
+
+*Инсталляция примеров из репозитория GitHub*::
+Была реализована возможность установки примеров из репозитория на GitHub. При установке файлы примеров будут собраны и помещены в соответствующие каталоги.
+
+*Метод API, задающий журналирование*::
+Реализован метод /api/Log/SetLogLevel, принимающий аргументом параметр журналирования minLevel (int): Trace = 0, Debug = 1, Info = 2, Warn =3, Error = 4 (любое другое значение будет принято как Error). Если пользователь, который вызывает метод, состоит в группе Docsvision Administrators, то минимальный уровень для журнала DefaultLogFileAsync будет изменён на указанное значение.
+
+*Описание API с использованием Swagger*::
+В новой версии Web-клиента описание веб-API формируется с помощью Swagger. Данное описание доступно на странице `http://{Адрес Web-клиента}/DocsvisionWebClient/swagger/`.
+
+*API для отображения простых подписей*::
+В модель, возвращаемую методом `DocumentSignatureService.GetStampSignatureModel`, добавлено свойство SignerId, содержащее идентификатор сотрудника, подписавшего документ.
+
+*Исправления в API элементов управления Tab и Table*::
+Для элемента управления Tab: :::
+* Исправлена работа метода loadTabPage. При вызове await loadTabPage(), resolve promise выполнялся слишком рано.
+* Добавлен метод API loadAllTabPages, который последовательно загружает все незагруженные вкладки элемента управления Tab.
++
+Для элемента управления Table: :::
+ * добавлен метод clear(), который удаляет все строки из таблицы.
+
+*Переименованные члены API*::
+`IFileConvertationService` был переименован в `IFileConversationService`.
+
+*Устаревшие члены API*::
+Из API были удалены члены, помеченные устаревшими:
+
+Серверные: :::
+* `AdvancedDataCacheService`, `IAdvancedDataCacheService` и `IDataCacheService`, в качестве замены необходимо использовать `ICacheService`.
+* ApprovalCardController:
+** `GetInfoModel(Guid approvalCardId, Guid taskCardId)`,
+** `ApprovalFilePanelFromTaskCard(Guid taskId)`,
+** `RemoveFileVersion(Guid approvalCardId, Guid taskId, Guid fileCardId, Guid versionCardId, long timestamp)`,
+** `GetAsCurrentVersion(Guid fileCardId, Guid versionId, Guid agreementCardId, Guid taskId, long timestamp)`;
+* TaskCardExtController: `MakeDecision(ApprovalTaskDecisionCreateModel model)`;
+* CommentService:
+** `AddComment(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel,Guid cardId, string text)`,
+** `RestoreComment(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel, Guid cardId, string text, DateTime? date, Guid employeeId)`,
+** `UpdateComment(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel, Guid cardId, Guid commentId, string text)`,
+** `GetComment(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel, Guid cardId, Guid commentId)`,
+** `DeleteComment(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel, Guid cardId, Guid commentId)`,
+** `GetCommentsSection(SessionContext sessionContext, CommentsDataSourceModel commentsDataSourceModel, Guid cardId)`;
+* TaskCardModel: `ChildTasks`, `ChildGroupTasks`;
+* SessionContext: `ResetRolesCache(ObjectBase item)`;
+* AdvancedCardManager: `RefreshCard(Guid cardId)`, `UpdateDigest(Guid cardId)`;
+* UserFolderService:
+** `GetUserFolders(int? fetchSubFoldersLevel = null)`,
+** `GetUserFolderIds(),`
+** `AddUserFolders(List folderIds)`,
+** `RemoveUserFolder(List folderIds)`;
+* FulltextSearchSettingsProvider: `GetFulltextSearchInfo(UserSession session)`;
+* IUnreadCounterService: `RefreshFolder(UnreadCountersFolderInfo folder, string realtimeSessionId, Guid employeeId)`;
+* IFilePreviewService: `GetFilePreview(SessionContext sessionContext, PreviewedFileInfo fileInfo)`;
+* PropertyDescription: `CheckAvailablity`
+* PropertyPasteArguments: `SourceTypeId`, `SourceKindId`, `TargetTypeId`, `TargetKindId`;
+* Options: `GetOptionForName(string option)`;
+* IAgreementService: `CreateAndStartReconciliation(SessionContext sessionContext, Guid documentId, Guid creationSettingId, List stageChanges)`;
+* IApprovalCreationService: `CreateReconciliation(SessionContext sessionContext, Guid documentId, Guid creationSettingId, List stageChanges)`;
+* WebClientExtension: `ServiceProvider`;
+* GridViewModel: `SessionId`;
+* LayoutFileController: `LockTaskFile(Guid ownerCardId, Guid fileCardId)`, `UnlockTaskFile(Guid ownerCardId, Guid fileCardId)`;
+* LocalizationController: `Get()`;
+* ServiceHelper: `FileUploadPathProvider`;
+* GridSettings: `GridSettings(GridViewModel gridModel, IQueryResultReader queryResultReader, IList queryResultItems, GridViewRequest gridViewRequest, FolderModel folder)`;
+* GridSettingsFactory:
+** `GetGridSettings(GridViewModel gridModel, IQueryResultReader queryResultReader, IList queryResultItems, GridViewRequest gridViewRequest, FolderModel folder)`
+* GridSettingsForDigestView: `GridSettingsForDigestView(GridViewModel gridModel, IQueryResultReader queryResultReader, IList queryResultItems, GridViewRequest gridViewRequest, FolderModel folder)`;
+* GridSettingsForView: `GridSettingsForView(GridViewModel gridModel, IQueryResultReader queryResultReader, IList queryResultItems, GridViewRequest gridViewRequest, FolderModel folder)`;
+* GridSettingsService:
+** `SetGridSettings(GridViewModel gridModel, IQueryResultReader queryResultReader, List queryResultItems, GridViewRequest gridViewRequest, FolderModel folder)`,
+** `PrepareQueryResultItems(List queryResultItems, IQueryResultReader queryResultReader, GridViewRequest gridViewRequest, Guid viewId, FolderModel folder)`;
+* CreateKindDataModel: `LayoutAvailable`;
+* LinksDataModel: `Initialize(List allowedLinkCardTypes, SimpleBindingInfo simpleBindingInfo)`;
+* ICardService: `DeleteCard(SessionContext sessionContext, Guid cardId)`;
+* ILayoutFileService `LockFileSimple(Guid documentCardId, Guid fileCardId)`, `UnlockFileSimple(Guid documentCardId, Guid fileCardId)`;
+* ILayoutLinksService:
+** `UnlockFileSimple(Guid documentCardId, Guid fileCardId)`,
+** `GetLinks(SessionContext sessionContext, Guid cardId, SimpleBindingInfo bindingInfo, Guid? fileKindId = null, List showFilesForLinksTypesIds = null, List allowedLinkTypes = null)`;
+* ILayoutLocalizationService: `GetLocalization()`;
+* LayoutService:
+** `SetBindingResults(SessionContext sessionContext, Options options, List writeRequests)`,
+** `TrySetBindingResults(SessionContext sessionContext, Options options, List writeRequests, out List validationResults)`;
+* LayoutContextHelper:
+** `TryGetRowId(LayoutContext layoutContext, out Guid rowId)`,
+** `TryGetSectionId(LayoutContext layoutContext, out Guid rowId)`,
+** `TryGetValue(LayoutContext layoutContext, string parameterName, out T value);`
+* Сервис `ILifeCycleService` устарел, но не был удалён для сохранения обратной совместимости. Вместо `ILifeCycleService` рекомендуется использовать `ILifeCycleServiceEx()`. `ILifeCycleServiceEx()` получать всю информацию о контексте создания/сохранения карточки в методах `lifecycle()`.
+* AdvancedLayoutService: `GetLayout(Guid cardTypeId, Guid cardKindId, Guid layoutId)`;
+* ISettingsService:
+* `AddNewGridUserSetting(Guid employeeId, Guid folderId, Guid? viewId)`,
+** `GetGridUserSetting(Guid employeeId, Guid folderId, Guid? viewId)`;
+* ControlContext: `CardId`;
+
+* LayoutContext: `CardId`, `CardTypeId`;
+
+Клиентские: :::
+* Application: `CurrentFolderUri()`, `LastSearchRequest`, `lastSearchRequest()`, `lastSearchRequest(val)`, `UserMenu()`, `Sidebar()`, `FolderViews()`, `SearchPanel()`, `NavBar()`, `FullTextSearchEnabled()`, `SammyHelper()`, `Folders()`, `UnreadCounters()`, `DeviceType()`, `DefaultDeviceType()`, `InstalledCSP()`, `ApplicationTimestamp()`, `Localization()`, `SiteUrl()`, `LayoutManager()`, `RealtimeCommunicationService()`, `CurrentEmployeeId()`;
+* IApprovingPathEventArgs: `agreementTemplateId`, `agreementTemplateDisplayName`;
+* FileListControlImpl: `get isLeftFilesLoading()`;
+* FileListControlLogic: `public getFilePreviewUrl(fileItem: FileListItem, action, version?: GenModels.VersionedFileModel, pageIndex?: number)`;
+* ILinkInfoPopoverState: `commentEditInput?`;
+* INewCardLinkDialogState: `root?`;
+* Utils: `ShowFilePreview(url)`, `ShowFilePreviewEx()`, `WhenAll(deferreds: Promise[])`, `promiseToDeferred(promise: Promise)`, `ResourcesHelper`;
+* Legacymodels: `IBasicEmployeeInfo`, `IDelegationRecord`, `IDocumentTreeNodeModel extends TreeNodeModel`, `ITaskCurrentPerformer`, `ITaskGroupSelectedPerformer`, `ITaskGroupTreeNodeHelpModel extends ITreeNodeHelpModel`, `ITaskGroupTreeNodeHintModel extends ITreeNodeHintModel`, `ITaskGroupTreeNodeModel extends ITreeNodeModel`, `ITasksTreeModel`, `ITasksTreeNodeHelpRequestModel`, `ITasksTreeRequestModel`, `ITaskTreeEdge`, `ITaskTreeNodeHelpModel extends ITreeNodeHelpModel`, `ITaskTreeNodeHintModel extends ITreeNodeHintModel`, `ITaskTreeNodeModel extends ITreeNodeModel`, `ITreeNodeHelpModel`, `ITreeNodeHintModel`, `ITreeNodeModel`, `SearchContextOption`, `TaskExecutionType`, `FolderStyles`, `DeviceType`, `ExecutionType`, `PerformerGender`, `Priority`, `TaskGroupStateCategory`, `TaskGroupWithOneTaskDisplayMode`, `TaskStateCategory`, `TasksTreeDisplayMode`, `ITaskCreateInfo`, `ITaskListItem`, `ITasksDataModel`, `TaskGroupStateType`, `TasksMode`, `TaskStateType`, `ILayoutTableBindingModel`, `ILayoutTableColumnInfo`, `IOperationData`, `IStateDataModel`, `RadioGroupLabelPlacement`, `FolderNodeStyle`, `LinkKind`, `IEmployeeData extends IBasicEmployeeInfo`, `IFindEmployeeResultItem`, `IMultipleEmployeeData`, `EmployeeTooltipMode`, `EmployeeViewMode`, `DepartmentDialogMode`, `DateTimePickerMode`, `ICardLinkData`, `ICardKindDataModel`, `AgreementManagementButtonModel`, `AgreementOperationKind`, `IApproverInfo`, `StageInfo`, `AgreementSidebar`, `ApprovalHistoryCycleModel`, `ApprovalHistorySimpleCycleModel`, `ApprovalHistorySimpleFileModel`, `ApprovalHistoryStageModel`, `ApprovalHistoryViewModel`, `CardCommandButtonsHelper`, `ElementDataModel`, `ElementsDataModel`, `HistoryRequest`, `HistoryResponse`, `StageChangeModel`, `AgreementStageModel`, `HistoryRecord`, `IApproverInfo`, `IBasicEmployeeInfo`, `IDepartmentInfo`, `IDirectoryDesignerRowInfo`, `StageInfo`, `ApprovalHistoryStageItemModel`;
+* ILegacyRouter: `goToRoute(context)`, `goToDashboard(context)`;
+* CardLinkImpl: `export type CardLinkImplState = CardLinkState`, `export type ControlImplProps = CardLinkState`;
+* CompleteTaskConsitionImpl: `renderLabel()`,
+* FolderCountersRouteHandler: `AwokenMessageType()`, `DisposedMessageType()`, `CreatedMessageType()`;
+* BaseControl: `registerControl(child: BaseControl&lt;BaseControlParams, BaseControlState&gt;)`, `unregisterControl(child: BaseControl&lt;BaseControlParams, BaseControlState&gt;)`;
+* Router: `goToRoute(context)`, `goToDashboard(context)`;
+* $LayoutManager: `back()`, `show(root: HTMLElement | string, name, model: GenModels.LayoutViewModel)`, `deleteCard(cardId)`, `disablePageLeaveConfirmation()`;
+* LayoutManager: `RootHtmlElement()`, `IsCardSaved()`, `show(root: HTMLElement | string, name, model: GenModels.LayoutViewModel)`, `deleteCard(cardId?, permanent?: boolean, parentCardId?, relatedCreatorCardInfo?: GenModels.RelatedCreatorCardInfo)`, `disablePageLeaveConfirmation()`, `back()`, `LayoutUnloading()`.
+
+NOTE: Указанные изменения API необходимо учитывать при подготовке и выполнении обновления Web-клиента, если для Web-клиента были разработаны собственные компоненты (клиентские или серверные).
+
+== Настройки в web.config
+
+*DeletePermanently*::
+Настройка DeletePermanently, которая определяла способ удаления карточек (в корзину или окончательное удаление), теперь также устанавливает способ удаления папок (для которых поддерживается удаление). 
+
+== Системные требования
+
+*Версии модулей Docsvision*::
+Повышены требования к базовым модулям Docsvision (см. Руководство администратора).
+
+*Обязательные компоненты*::
+Теперь для работы Web-клиента требуется компонент IIS: «Инициализация приложений» / «Application Initialization».
++
+Компонент IIS «HTTP Activation» больше не является обязательным для установки.
+
+*Версия Internet Explorer 11*::
+Повышены требования к версии браузера Internet Explorer 11 (см. Руководство администратора).
+
+== Экспериментальные функции
+
+*Новый грид*::
+В находящийся в разработке компонент «Новый грид» (предоставляет переработанный макет отображения содержимого папок) добавлены новые функции:
+
+*Отложенная загрузка списка карточек.*:::
+Карточки загружаются порциями по мере пролистывания списка карточек.
+
+*Новая полоса прокрутки*:::
+Стандартная полоса прокрутки веб-браузера заменена на собственную, в которой показывается диапазон порядковых номером отображаемых карточек.
++
+image:image-20201223082812195.png[image-20201223082812195]
+
+*Зафиксированный заголовок списка карточек*:::
+При прокрутке списка карточек заголовок списка будет всегда доступен.
+
+*Кнопки навигации «Вверх/вниз»*:::
+Позволяют переходить к началу и к концу списка.
++
+image:image-20201221132949721.png[image-20201221132949721]
+
+*Возможность редактирования разметки WebFrame*::
+Новая экспериментальная функция «Возможность редактирования разметки WebFrame» включает возможность изменения разметки локации «Корень WebFrame» (общая компоновка страницы Web-клиента).
+
+*Комментарии с HTML-редактором*::
+ Новая экспериментальная функция «Использовать html редактор» открывает возможность расширенного форматирования текста при помощи HTML редактора и упоминания сотрудников через символ @.

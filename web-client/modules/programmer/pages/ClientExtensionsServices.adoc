@@ -1,0 +1,104 @@
+= Разработка расширения с клиентским сервисом
+
+Данный тип расширений предназначен для добавления новых сервисов клиентского уровня. Сервисы предоставляют публичные методы, которые могут быть вызваны (с помощью функции получения сервиса) из клиентских расширений (скриптов, компонентов элементов управления). Программист может реализовать сервисы различного назначения.
+
+*Важное ограничение*: разрабатываемый сервис и его «потребители» должны находиться в одном клиентском расширении.
+
+Чтобы создать расширение, добавляющее новые сервисы, выполните приведенную далее инструкцию.
+
+. Создайте link:ClientExtensionsNew.md[проект клиентского расширения] *без публикации*.
+
+. Создайте в папке `src` файл TypeScript (ts, tsx) со следующим содержимым:
+
+[source,tsx]
+----
+   import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+   import { urlStore } from "@docsvision/webclient/System/UrlStore";
+   import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
+
+   export class CardService {
+       constructor(private services: $RequestManager) {
+       }
+
+       // Функция exists проверяет существование карточки 
+       // Проверка выполняется с помощью серверной функции Exists контроллера CardService
+       exists(cardId: string): Promise<boolean> {
+           let url = urlStore.urlResolver.resolveApiUrl("Exists", "CardService");
+           url = url + "?cardId=" + cardId;
+           return this.services.requestManager.get<boolean>(url);
+       }
+   }
+
+   // Следующие две строки – объявление сервиса $CardService
+   export type $CardService = { cardService: CardService };
+   export const $CardService = serviceName((s: $CardService) => s.cardService);
+   ```
+
+   В данном коде реализован сервис `CardService`, содержащий единственную функцию exists, возвращающую признак существования карточки в системе Docsvision.
+
+   При реализации собственного сервиса, используйте его объявление, по аналогии с приведенным примером, заменив `CardService` на название собственного сервиса.
+
+3. Измените содержимое файла `Index.ts`.
+
+   ```tsx
+   // 1. Добавьте строку импорта тип/константы $CardService и класса CardService из добавленного в 2 файла (в примере – WebService)
+   import { $CardService, CardService } from "./WebService";
+   import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+   import { Service } from "@docsvision/webclient/System/Service";
+   import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+
+   // 2. Добавьте в registerExtension поле layoutServices, в значении которого должна быть специальная конструкция
+   //  Service.fromFactory(<Тип сервиса>, (services: $RequestManager) => new <Класс реализации сервиса>(services)) 
+   extensionManager.registerExtension({
+       name: "Client extension with service",
+       version: "1.0",
+       layoutServices: [
+            Service.fromFactory($CardService, (services: $RequestManager) => new CardService(services)) 
+        ]
+   })
+   ```
+
+4. Соберите проект клиентского расширения командой `npm run build`.
+
+5. Скопируйте полученный файл `<Каталог сборки>\extension.js` на сервер Web-клиента в папку `<Каталог установки Web-клиент>\5.5\Site\Content\Modules\\<Каталог Решения>`.
+
+   > Обратитесь к разделу [Создание и публикация клиентского расширения](ClientExtensionsNew.md), чтобы получить больше информации, связанной со сборкой проекта.
+
+Получить разработанный сервис в клиентском расширении можно с помощью метода `getService`. Дополнительная информация по использованию функции getService приведена в пункте [Получение сервиса клиентского уровня](ClientExtensionsScriptGetService.md).
+
+----
+
+let cardService = layout.getService($CardService); // Получение сервиса $CardService
+```
+
+Для проверки работы сервиса CardService:
+
+. Добавьте в данное расширение link:ClientExtensionsScript.md[обработчик событий], вызывающий функцию `$CardService.exists`.
+
+В следующем коде в метод exists сервиса `$CardService` передается идентификатор карточки, введенный в строку `cardId`. Результат проверки отображается на экране. Реализованный метод `onMyButtonClick` должен быть назначен обработчиком события нажатия *Кнопки*.
+
+```tsx
+ export async function onMyButtonClick(sender: CustomButton, e: IEventArgs) {
+
+----
+   let cardId = sender.layout.controls.get<TextBox>("cardId").value;
+   let result = await sender.layout.getService($CardService).exists(cardId);
+
+   if (result)
+       MessageBox.ShowInfo('Карточка существует');
+   else
+       MessageBox.ShowInfo('Карточка не существует');
+----
+
+}
+ ```
+
+. Разработайте серверное расширение, предоставляющее функцию `Exists`. Инструкция по разработке такого расширения приведена в разделе link:ServerExtensionWebApi.md[Разработка расширения с методами WebApi].
+
+. Опубликуйте клиентское и серверное расширения на сервере Web-клиента.
+
+. Перезапустите сервер Web-клиента.
+
+. Настройте разметку карточки, указав для любой *Кнопки* обработчик `onMyButtonClick`. Добавьте в разметку *Строку* с названием «cardId».
+
+. Откройте карточку с настроенной разметкой. Введите идентификатор существующей карточки в *Строку* и нажмите *Кнопку*. На экране отобразится сообщение: «Карточка существует».

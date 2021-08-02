@@ -1,0 +1,107 @@
+= Нестандартные встроенные редакторы свойств
+
+. Редактор локализуемых текстовых свойств.
+
+image:img/textEditorWithLocalization.png[Редактор локализуемых текстовых свойств]
+
+Пример использования в коде:
+
+`csharp
+   private PropertyDescription GetLocalizableMessagePropertyDescription () {
+       var propertyDescription = new PropertyDescription {
+           Type = typeof (string),
+           Name = &quot;LocalizableMessage&quot;,
+           Category = DocsVision.Platform.Tools.LayoutEditor.Infrostructure. PropertyCategoryConstants.DataCategory,
+           DisplayName = &quot;Localizable message&quot;,
+           Localized = true,
+           Editor = typeof (DocsVision.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor)
+       };
+       return propertyDescription;
+   }
+`
+
+Для использования редактора нужно:
+
+. Установить свойство Type в string.
+. Установить свойство Localized в true.
+. Установить свойство Editor в DocsVision.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor.
+. Редактор перечислений.
+
+image:img/enumEditor.png[Редактор перечислений]
+
+Пример использования в коде:
+
+```csharp
+ enum MessageBoxType {
+ Error = 0,
+ Warning = 1,
+ Info = 2
+ }
+
+// 1. Класс, содержащий данные списка. Должен быть унаследован от IItemsSource
+ class MessageBoxTypeSource : Xceed.Wpf.Toolkit.PropertyGrid.Attributes.IItemsSource {
+ private readonly System.IServiceProvider serviceProvider;
+
+----
+   public MessageBoxTypeSource (System.IServiceProvider serviceProvider) {
+       this.serviceProvider = serviceProvider;
+   }
+
+   // Метод GetValues должен вернуть значения. Тип значений ItemCollection
+   public Xceed.Wpf.Toolkit.PropertyGrid.Attributes.ItemCollection GetValues () {
+       var itemCollection = new Xceed.Wpf.Toolkit.PropertyGrid.Attributes.ItemCollection ();
+
+       itemCollection.Add ((int) MessageBoxType.Error, MessageBoxType.Error.ToString ());
+       itemCollection.Add ((int) MessageBoxType.Warning, MessageBoxType.Warning.ToString ());
+       itemCollection.Add ((int) MessageBoxType.Info, MessageBoxType.Info.ToString ());
+
+       return itemCollection;
+   }
+----
+
+}
+
+// 2. Класс редактора значения свойства должен содержать значения
+ class MessageBoxTypeEditor : Xceed.Wpf.Toolkit.PropertyGrid.Editors.ITypeEditor {
+ public FrameworkElement ResolveEditor (PropertyItem propertyItem) {
+
+----
+       // Редактор значения свойства создается из класса ItemsSourceEditor,
+       // в который передается класс с данными списка
+       var editor = new ItemsSourceEditor (typeof (MessageBoxTypeSource));
+       return editor.ResolveEditor (propertyItem);
+   }
+----
+
+}
+
+// 3. Свойство для выбора значения из списка
+ var propertyDescription = new PropertyDescription {
+ Type = typeof (int),
+ Name = "MessageBoxType",
+ Category = PropertyCategoryConstants.BehaviorCategory,
+ DisplayName = Resources.Property_MessageBoxType_DisplayName,
+ DefaultValue = 0,
+ Editor = typeof (MessageBoxTypeEditor) // Разработанный редактор значения свойства
+ };
+ ```
+
+. Редактор устройствозависимых свойств.
+
+Значение свойств данного вида зависят от типа устройства, на котором открыт Web-клиент.
+
+Пример использования в коде:
+
+`csharp
+   private PropertyDescription GetDeviceDependentPropertyDescription () {
+       var propertyDescription = new PropertyDescription {
+           Type = typeof (int),
+           Name = &quot;DeviceDependent&quot;,
+           Category = PropertyCategoryConstants.DataCategory,
+           DisplayName = &quot;Device Dependent&quot;,
+           DeviceDependent = true,
+           DefaultValue = DeviceDependentHelper.GetDeviceDependentDefaultValue(1)
+       };
+       return propertyDescription;
+   }
+`

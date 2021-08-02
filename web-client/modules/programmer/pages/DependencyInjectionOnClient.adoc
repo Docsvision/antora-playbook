@@ -1,0 +1,119 @@
+= Механизм внедрения зависимостей на клиенте
+
+В данном разделе рассмотрены особенности передачи клиентских сервисов с использованием механизма внедрения зависимостей.
+
+В Web-клиенте внедрение зависимостей связано с таким понятием, как «контейнер сервисов», упрощенная реализация которого приведена ниже.
+
+[source,typescript]
+----
+var serviceContainer = {
+   urlStore: new UrlStroe(),
+   requestManager: new ReqeustManager(),
+   router: new Router()
+}
+
+----
+
+Данный контейнер содержит три сервиса, которые могут быть переданы в метод при его вызове:
+
+[source,typescript]
+----
+sendToAcquaintance(serviceContainer);
+
+----
+
+Полноценная реализация такого контейнера в Web-клиенте определена в классе `ServiceContainer`, экземпляр которого доступен из статического свойства `WebClient.App.Instance` и глобальной переменной `WebClient.app`.
+
+Данный контейнер содержит все стандартные сервисы Web-клиента (приведены в JSDoc API).
+
+Отличительной особенностью реализации контейнера `ServiceContainer` является то, что каждое свойство в нем имеет get-функцию, в которой динамически вычисляется искомое значение. В частности, для каждого сервиса в данном контейнере создается объект `ServiceDescriptor`, содержащий информацию о том, как должно вычисляться его значение.
+
+Класс `ServiceContainer` предоставляет функции для создание и регистрация дескрипторов, которые в `WebClient.App.Instance` представлены в виде статически методов, пример использования которых приведён ниже.
+
+[source,typescript]
+----
+// Регистрация с передачей имени свойства и значения
+WebClient.App.registerService("urlStore", new UrlStore());
+
+// Вариант регистрации с передачей объекта
+WebClient.App.addService<$UrlStore>({ urlStore: new UrlStore()});
+
+// Регистрация фабрики сервиса с передачей имени.
+// Фабрика будет вызвана при первом обращении к сервису, после чего значение закешируется.
+// Функция принимает объект контейнера, актуального на момент ее вызова.
+WebClient.App.registerServiceFactory("urlStore", (services) => new UrlStore());
+
+// Вариант регистрации фабрики сервиса с передачей объекта
+WebClient.App.addServiceFactory<$UrlStore>({ urlStore: (services) => new UrlStore()});
+
+// Регистрация динамически вычисляемого значения
+// Функция будет вызываться при каждом обращении к сервису. Можно также передать set-функцию.
+WebClient.App.registerServiceAccessors("now", () => new Date());
+
+// Передача дескриптора сервиса созданного вручную
+let serviceDescriptor = {
+    name: "urlStore",
+    instance: new UrlStore()
+};
+WebClient.App.registerServiceDesciptor(serviceDescriptor);
+  
+// Использование зарегистрированного сервиса
+var myUrlStore = WebClient.app.with<$UrlStore>().urlStore;
+
+----
+
+== Сервисы в разметке
+
+Некоторые сервисы, такие как `RequestManager`, должны быть созданы для каждой разметки заново. Такие сервисы регистрируются специальным образом, с передачей дополнительных метаданных:
+
+[source,typescript]
+----
+// Сервис специфичный для разметки - передаем дополнительным параметром метаданные - объект WebClient.LAYOUT_SERVICE
+WebClient.App.addServiceFactory<$RequestManager>(
+    { requestManager:  (services: $Layout) => new RequestManager(services) },
+    WebClient.LAYOUT_SERVICE
+);
+
+----
+
+При открытии разметки, будет создана копия контейнера `WebClient.App.Instance`, в этой копии все сервисы зарегистрированные как фабрики с передачей `WebClient.LAYOUT_SERVICE` будут пересозданы. То есть, фабричная функция будет вызвана для получения нового экземпляра, специфичного для данной разметки. Для доступа к контейнеру сервисов разметки можно либо напрямую обратиться к параметру `services` в элементе Layout, либо объявить параметр `services` в своем элементе управления (см. пункт link:GetServiceOnClient.md[Получение сервисов в клиентском компоненте]).
+
+[source,typescript]
+----
+export class AcquaintancePanelParams extends PanelParams {
+    @rw sendButtonText: string;
+    @r standardCssClass?: string = "acquaintance-panel";
+  
+    // Объявляем, что контролу необходимы сервисы UrlStore и RequestManager
+    @rw services?: $UrlStore & $RequestManager;
+}
+
+----
+
+После этого, можно обращаться к этим сервисам через `this.state.services`:
+
+[source,typescript]
+----
+sendToAcquaintance() {
+    var url = this.state.services.urlStore.urlResolver.resolveUrl("SendToAcquaintance", "LayoutBusinessProcess");
+    var data = { ...  };
+    return this.state.services.requestManager.post(url, JSON.stringify(data)); 
+}
+
+----
+
+Т.к. `services` является обычным параметром, его можно передать элементу управления и при этом , если требуется, переопределить сервисы, с которыми работает элемент управления:
+
+[source,typescript]
+----
+let layout = layoutManager.cardLayout;
+let myServices = layout.params.services.clone();
+myServices.requestManager = new MyRequestManager();
+layout.controls.acquaintancePanel1.params.services = myServices;
+----
+
+____
+
+Не следует модифицировать существующий контейнер для подмены сервисов, т.к. это приведёт к изменению сервисов на уровне всего приложения.
+
+____

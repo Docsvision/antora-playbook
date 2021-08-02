@@ -1,0 +1,55 @@
+= Пример. Элемент управления «SuperControl»
+
+В данном примере будут разработаны компоненты элемента управления «SuperControl»: текстовый описатель элемента управления и клиентский компонент.
+
+Элемент управления SuperControl является ссылкой, адрес которой указывается в Конструкторе web-разметок. Для элемента управления доступна настройка Видимость и событие При щелчке.
+
+. Формируем текстовый описатель элемента управления.
+
+. Создаем новый файл `SuperControl.xml` со следующим содержимым:
+
+```tsx
+ &lt;?xml version="1.0" encoding="utf-8" ?&gt;
+ <Controls>
+ <Control Name="SuperControl" DisplayName="Супер элемент управления">
+ <Properties>
+ <Property Type="Name" /><!-- Название -->
+ <Property Type="Visibility" /><!-- Видимость -->
+
+. Файл `SuperControl.xml` копируем в папку `C:\Program Files (x86)\Docsvision\WebClient\5.5\Plugins\`.
+
+. Формируем клиентское расширение с клиентским компонентом элемента управления.
+
+. link:ClientExtensionsNew.md[Создаем новое клиентское расширение].
+
+. Добавляем в папку расширения файл `src/Controls/SuperControl.tsx` со следующим содержимым:
+
+```tsx
+ // Импорт используемых модулей
+ import { BaseControlParams, BaseControlState, BaseControl } from "@docsvision/webclient/System/BaseControl";
+ import { r } from "@docsvision/webclient/System/Readonly";
+ import { apiEvent } from "@docsvision/webclient/System/Event";
+ import { BasicApiEvent } from "@docsvision/webclient/System/ApiEvent";
+ import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
+ import { BaseControlImpl } from "@docsvision/webclient/System/BaseControlImpl";
+ import { SimpleEvent } from "@docsvision/webclient/System/SimpleEvent";
+ import React from "react";
+
+. Настраиваем клиентское расширение в файле `src/Index.tsx`.
+
+```tsx
+ import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+ import { SuperControl } from "./Controls/SuperControl";
+
+. Собираем клиентское расширение с помощью команды `npm run build`.
+
+. Полученный файл `Site\Content\Modules\...\extension.js` копируем в папку `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Modules\SuperControlExtension\` на сервере Web-клиента.
+
+После выполнения всех действий нужно:
+
+. Перезапустить сервер Web-клиента (IIS), чтобы загрузились скрипты с элементом управления.
+. Открыть Конструктор web-разметок и настроить разметку с использованием «Супер элемента управления».
+
+При настройке элемента управления должны быть доступны свойства Url и Видимость, а также событие При щелчке, для которого можно настроить обработчик.
+
+В веб-браузере «Супер элемент управления» представляет собой ссылку (тег «a»), при нажатии на которую будет выполнен переход по адресу, указанному в Url, а также вызван обработчик, указанный в событии При щелчке.

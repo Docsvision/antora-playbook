@@ -1,0 +1,50 @@
+= Изменение основного шрифта Web-клиента
+
+Основным шрифтом Web-клиента является «Roboto». По умолчанию поддерживаются два уровня жирности шрифта: стандартный (400) и жирный (700).
+
+Если требуется, можно изменить настройки шрифта по умолчанию:
+
+. Добавьте новые шрифты или шрифт «Roboto» с требуемой жирностью в подпапку своего Решения в `{Каталог установки Web-клиент}\Site\Content`.
+
+. Откройте для редактирования файл `{Каталог установки Web-клиент}\Site\Content\fonts.html`.
+
+```html
+ <link rel="preload" href="Content/App/Assets/Fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin>
+ <style type="text/css" media="screen, print">
+ @font-face {
+ font-family: "Roboto";
+ src: url("Content/App/Assets/Fonts/Roboto-Regular.ttf") format("truetype"),
+ url('Content/App/Assets/Fonts/Roboto-Bold.ttf') format("truetype");
+ }
+
+----
+   body {
+       font-family: "Roboto";
+       font-style: normal;
+       font-weight: 400;
+       font-display: swap;  /* IE11 */ 
+   }
+----
+
+</style>
+ ```
+
+. Измените настройки шрифта:
+* Если нужно добавить шрифты «Roboto» с новой жирностью – укажите их в `@font-face`:
+
+`css
+ @font-face {
+ 		font-family: &quot;Roboto&quot;;
+         src: url(&quot;Content/App/Assets/Fonts/Roboto-Regular.ttf&quot;) format(&quot;truetype&quot;),
+             url(&#39;Content/App/Assets/Fonts/Roboto-Bold.ttf&#39;) format(&quot;truetype&quot;),
+             url(&#39;Content/Modules/SomeSolution/Fonts/Roboto-Black.ttf&#39;) format(&quot;truetype&quot;);
+     }
+`
+
+* Если нужно изменить шрифт по умолчанию:
+
+.. Добавьте новое правило `@font-face` со своим шрифтом аналогично правилу для шрифта «Roboto».
+.. Укажите название шрифта в разделе «body».
+. Перезагрузите IIS.
+
+*Обратите внимание*: при обновлении Web-клиента файл `fonts.html` будет перезаписан – после обновления нужно повторить изменения.

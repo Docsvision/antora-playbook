@@ -1,0 +1,17 @@
+= Использование вложенных элементов управления
+
+Стандартные и разработанные элементы управления Web-клиента можно использовать для формирования виртуального DOM другого элемента управления.
+
+Следующий код демонстрирует пример использования стандартного элемента управления "Дата/время" в функции отрисовки элемента управления.
+
+[source,csharp]
+----
+renderControl() {
+    return (
+        <div>
+            <DateTimePicker name="someControlNestedControl" editMode={EditMode.Edit}
+                    required={true} placeHolder={resources.AcquaintancePanel_ConsiderationDatePlaceholder} />
+        </div>
+    );
+}
+----

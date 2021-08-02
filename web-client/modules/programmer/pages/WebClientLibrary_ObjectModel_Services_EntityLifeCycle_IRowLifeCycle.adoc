@@ -1,0 +1,26 @@
+= IRowLifeCycle - интерфейс
+
+Интерфейс IRowLifeCycle определяет методы для работы со строками секций из разметок.
+
+*Пространство имен*: `DocsVision.WebClientLibrary.ObjectModel.Services.EntityLifeCycle`
+
+*Сборка*: `DocsVision.WebClientLibrary.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IRowLifeCycle
+----
+
+== Методы
+
+|===
+|Имя |Описание 
+
+|Create(SessionContext, Guid, Guid?, Guid?) |Создает новую строку в секции и возвращает её идентификатор. Тип: Guid. Параметры: sessionContext - контекст сессии; cardId – идентификатор карточки, в которой создается строка; parentRowId – идентификатор родительской строки; parentTreeRowId – идентификатор родительской строки дерева в иерархической секции. 
+|Validate(SessionContext, Guid, Guid, out List`&lt;`ValidationResult`&gt;`) |Проверяет данные строки перед сохранением изменений. Возвращает true, если ошибки не обнаружены, иначе – false. Тип: Boolean. Параметры: sessionContext - контекст сессии; cardId – идентификатор проверяемой карточки; validationResults – массив для формирования сообщения о результатах проверки. 
+|OnSave(SessionContext, Guid, Guid) |Обрабатывает событие сохранения строки секции. Параметры: sessionContext - контекст сессии; cardId – идентификатор карточки; rowId – идентификатор строки. 
+|CanDelete(SessionContext, Guid, Guid, out String) |Проверяет возможность удаления строки из секции. Возвращает true, если удаление возможно, иначе – false. Тип: Boolean. Параметры: sessionContext - контекст сессии; cardId – идентификатор карточки; rowId – идентификатор проверяемой строки; message – сообщение о невозможности удаления. 
+|OnDelete(SessionContext, Guid, Guid) |Обрабатывает событие удаления строки из секции. Параметры: sessionContext - контекст сессии; cardId – идентификатор карточки; rowId – идентификатор удаляемой строки. 
+|===

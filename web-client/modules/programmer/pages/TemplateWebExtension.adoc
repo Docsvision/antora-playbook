@@ -1,0 +1,110 @@
+= Описание проекта TemplateWebExtension
+
+Проект «TemplateWebExtension» является частью репозитория link:DocsvisionRepOnGitHub.md[WebClient-Samples]. Данный проект предназначен для разработки и сборки клиентских расширений и скриптов.
+
+Папка TemplateWebExtension содержит файлы:
+
+* `copy-path.js` – содержит константы с названием расширения и параметрами сборки; в данном файле указывается каталог, в который выгружаются файлы при сборке;
+* `gulpfile.js` – файл конфигурации https://www.npmjs.com/package/gulp[Gulp] (используется для сборки стилей);
+* `package.json` – файл конфигурации https://www.npmjs.com/[NPM] с командами сборки и списком зависимостей;
+* `package-lock.json` – служебный файл NPM;
+* `rollup.config.js` – файл конфигурации https://www.npmjs.com/package/rollup[Rollup] (используется для сборки скриптов в один файл – «бандл»);
+* `tsconfig.json` – файл конфигурации https://ru.wikipedia.org/wiki/TypeScript[TypeScript];
+* `node_modules` – служебная папка NPM, в которую при выполнении команды npm install загружаются npm-зависимости;
+* `src` – папка для размещения исходных файлы расширения.
+
+Папка src содержит файлы:
+
+* `EventHandlers.tsx` – пример файла с обработчиком события,
+* `Index.ts`– файл с обязательной функцией регистрации клиентского расширения,
+* `Template.scss` – пример файла стилей.
+
+== Описание файла Index.ts
+
+Содержимое файла `Index.ts`:
+
+[source,ts]
+----
+import * as EventHandlers from "./EventHandlers";
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+
+// Регистрация расширения позволяет корректно установить все
+// обработчики событий, сервисы и прочие сущности веб-приложения.
+extensionManager.registerExtension({
+    name: "Template web extension",
+    version: "1.0",
+    globalEventHandlers: [ EventHandlers ]
+})
+
+----
+
+Команда `import * as EventHandlers from &quot;./EventHandlers&quot;` импортирует все публичные сущности (с «export») из файла EventHandlers (.tsx). Чтобы импортировать функции из другого файла, необходимо добавить новую команду импорта, указав относительный путь к файлу:
+
+[source,tsx]
+----
+import * as EventHandlers from "./EventHandlers";
+import * as NewEventHandlers from "./Scripts/NewEventHandlers"; // Добавлена строчка импорта из файла /Scripts/NewEventHandlers
+
+----
+
+Команда `import { extensionManager } from &quot;@docsvision/webclient/System/ExtensionManager&quot;` импортирует из модуля «@docsvision/webclient/System/ExtensionManager» сущность extensionManager (менеджер расширений).
+
+Команда `extensionManager.registerExtension({ … })` регистрирует клиентское расширение с названием «Template web extension», которое предоставляет глобальные обработчики (globalEventHandlers).
+
+Чтобы добавить в расширение обработчики из нового файла, добавьте их в массив globalEventHandlers:
+
+[source,tsx]
+----
+globalEventHandlers: [ EventHandlers, NewEventHandlers] // Добавлены обработчики из NewEventHandlers
+
+----
+
+== Описание файла EventHandlers.tsx
+
+Содержимое файла:
+
+[source,tsx]
+----
+import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
+import { Layout } from "@docsvision/webclient/System/Layout";
+
+// Все функции, классы и переменные, используемые за пределами модуля (т.е. файла),
+// должны экспортироваться (содержать ключевое слово export в объявлении).
+export function someHandler(sender: Layout, e: IEventArgs) {
+    // Some code
+}
+
+----
+
+Команды `import` в начале файла выполняют загрузку из модулей Web-клиента сущностей, используемых в коде обработчика.
+
+Функция someHandler является примером обработчика события разметки (тип sender – Layout). Ключевое слово export указывает, что данная функция доступна для импорта. Чтобы экспортировать другую функцию, необходимо также указывать ключевое слово export:
+
+[source,tsx]
+----
+export function someHandler(sender: Layout, e: IEventArgs) {
+
+}
+
+export function newHandler(sender: Employee, e: IEventArgs) { // Добавлена новая функция для обработки события в ЭУ с типом Employee
+
+}
+
+----
+
+Для создания клиентского скрипта достаточно добавить функции-обработчики в файл `EventHandlers.tsx`. Например, следующий код, вызванный при изменении значения элемента управления Сотрудник, отобразит информационное окно с ФИО выбранного сотрудника:
+
+[source,tsx]
+----
+/* Импорт необходимых сущностей из модулей Web-клиента */ 
+import { Employee } from "@docsvision/webclient/BackOffice/Employee"; 
+import { IEventArgs } from "@docsvision/webclient/System/IEventArgs"; 
+import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox"; 
+
+// Реализация функции-обработчика 
+export function changeEmployeeHandler(sender: Employee, e: IEventArgs) { 
+  MessageBox.ShowInfo(sender.params.value.displayName); 
+}
+----
+
+Обратите внимание, что функции-обработчики должны экспортироваться – сопровождаться ключевым словом «export».

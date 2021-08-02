@@ -1,0 +1,22 @@
+
+== Запуск программы
+
+Запустите Конструктор web-разметок от имени администратора Docsvision из меню [.ph .uicontrol]*Пуск*: [.ph .menucascade]#[.ph .uicontrol]*Docsvision 5* > [.ph .uicontrol]*Конструктор Web-разметок*#. Будет открыто главное окно программы.
+
+image::dl_main_empty.png[[.fig--title-label]##Figure 1. ##Главное окно программы «Конструктор web-разметок»]
+
+При подключении Конструктора web-разметок к серверу Docsvision используются следующие параметры:
+
+* подключение осуществляется к серверу Docsvision, который был указан при настройке Web-клиента;
+* подключение осуществляется к базе данных, которая была выбрана БД по умолчанию при настройке Web-клиента.
+
+Если необходимо подключаться к другому серверу или БД:
+
+. Откройте конфигурационный файл C:\Program Files (x86)\Docsvision\WebClient\5.5\WebLayoutsDesigner.exe.config.
+. Измените значение атрибутов параметра [.ph .filepath]`Docsvision > WebClient > Server > SessionManagerConnection`:
+* ConnectionAddress – укажите строку подключения к требуемому серверу Docsvision;
+* BaseName – укажите псевдоним требуемой БД.
+
+На сервере Docsvision, который указан в ConnectionAddress, пользователь Конструктора web-разметок должен являться администратором Docsvision.
+
+*Parent topic:* xref:../topics/Preparationfor_work.html[Подготовка к работе]

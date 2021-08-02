@@ -1,0 +1,31 @@
+
+== Ограничение размера прикладываемых файлов
+
+В Web-клиенте по умолчанию действует несколько ограничений, влияющих на возможность прикладывания «тяжелых» файлов:
+
+. Максимальный размер файла, прикладываемого при создании карточки. Значение по умолчанию: 50 МБ.
+. Максимальный размер всех прикладываемых файлов одной карточки. Значение по умолчанию: 128 МБ.
+
+Администратор системы может изменить действующее ограничение. Для этого:
+
+. [.ph .cmd]#Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.#
+. [.ph .cmd]#Чтобы изменить ограничение для максимального размера единичного файл:#
+[loweralpha]
+.. [.ph .cmd]#Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*Setting [Name="MaxUploadFileItemSize"]*#.#
+.. [.ph .cmd]#Укажите новое ограничение в параметре `Value`. Значение в байтах.#
+. [.ph .cmd]#Чтобы изменить ограничение для максимального общего размера всех добавляемых файл карточки:#
+[loweralpha]
+.. [.ph .cmd]#Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*system.webServer* > [.ph .uicontrol]*security* > [.ph .uicontrol]*requestFiltering* > [.ph .uicontrol]*requestLimits*#.#
+.. [.ph .cmd]#Укажите новое ограничение в параметре `maxAllowedContentLength`. Значение в байтах.#
+.. [.ph .cmd]#Установите аналогичное значение в параметре `maxRequestLength` в элементах:#
++
+* [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*location[path="api/DocumentCardApi"]* > [.ph .uicontrol]*system.web* > [.ph .uicontrol]*httpRuntime*#;
+* [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*location[path="api/LayoutFileApi"]* > [.ph .uicontrol]*system.web* > [.ph .uicontrol]*httpRuntime*#.
++
+Обратите внимание:
+
+* Указанные параметры ограничивают общий размер файлов только для элемента управления [.ph .uicontrol]*Список файлов*. Для элемента управления [.ph .uicontrol]*Файл* данные ограничения действуют на единичный файл.
+* Значения указанных параметров должны быть не меньше, чем значение параметра «MaxUploadFileItemSize» (см. выше).
+. [#task_z3l_lzr_3k__step_fhk_dyz_zy]#[.ph .cmd]#Сохраните изменения конфигурационного файла.##
+
+*На уровень выше:* xref:../topics/CardsConf.html[Работа с карточками]

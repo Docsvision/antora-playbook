@@ -1,0 +1,15 @@
+
+== Настройка очистки данных пользовательских сессий
+
+Сервер Web-клиента удаляет из своего кэша данные пользовательских сессий, которые были закрыты.
+
+Для отключения функции очистки кэша закрытых сессий:
+
+. [.ph .cmd]#Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.#
+. [.ph .cmd]#Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.#
+. [.ph .cmd]#Измените значение параметра `DisableClearSession` с [.keyword]*false* на [.keyword]*true*.#
++
+Обратите внимание: при отключении функции очистки кэша также будет отключен механизм автоматического закрытия неиспользуемых сессий (xref:task_CloseSession_configuration.html[Настройка автоматического закрытия неактивных пользовательских сессий]).
+. [.ph .cmd]#Сохраните изменения конфигурационного файла.#
+
+*Parent topic:* xref:../topics/CacheConf.html[Настройки кэширования]

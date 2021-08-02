@@ -1,0 +1,70 @@
+= IRealtimeCommunicationService - интерфейс
+
+Интерфейс `IRealtimeCommunicationService` определяет методы для работы с подсистемой оповещений Web-клиента.
+
+*Пространство имен*: `DocsVision.Platform.WebClient.Services`
+
+*Сборка*: `DocsVision.Platform.WebClient.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IRealtimeCommunicationService
+
+----
+
+== Методы
+
+|===
+|Имя |Описание 
+
+|`GetCurrentSessionId` |Возвращает идентификатор текущей сессии в ASP NET. Тип: String. 
+|`Send&lt;T&gt;(String, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором сессии sessionId в ASP NET. 
+|`Send&lt;T&gt;(Guid, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором employeeId в Справочнике сотрудников. 
+|`SendAll&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` всем подключенным пользователям (с активной и неактивной сессией) Web-клиента. 
+|`SendToCurrentSession&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` текущему пользователю. 
+|===
+
+== События
+
+|===
+|Имя |Описание 
+
+|`Connected` |Вызывается при подключении пользователя. Тип: `EventHandler&lt;RealtimeConnectionEventArgs&gt;`. 
+|`Disconnected` |Вызывается при отключении пользователя. Тип: `EventHandler&lt;RealtimeConnectionEventArgs&gt;`. 
+|`MessageReceived` |Вызывается при получении оповещения. Тип: `EventHandler&lt;RealtimeMessageEventArgs&gt;`. 
+|`MessageSent` |Вызывается при отправке оповещения. Тип: `EventHandler&lt;RealtimeCommunicationMessage&gt;`. 
+|===
+
+== Примечание
+
+Подсистема оповещений основана на библиотеке функций реального времени «SignalR».
+
+Отправленное сообщение будет показано в правом нижнем углу. Цветовое оформление сообщения зависит от типа сообщения, указанного в RealtimeCommunicationMessage.
+
+В Web-клиент 15 реализован единственный тип сообщения, передаваемого с помощью SignalR, - NotificationRealtimeMessage.
+
+На клиентской стороне аналогичную сервису `IRealtimeCommunicationService` функциональность предоставляет клиентский сервис `$RealtimeCommunicationService`.
+
+== Примеры
+
+Следующий код демонстрирует пример реализации в серверном расширении функции отправки сообщений всем пользователям.
+
+[source,csharp]
+----
+public void SendAll()
+{
+    // Создаём объект-оповещение. Тип содержимого оповещения - NotificationRealtimeMessage (текстовое оповещение) 
+    var commMessage = new RealtimeCommunicationMessage<NotificationRealtimeMessage>();
+    var messageData = new NotificationRealtimeMessage()
+    {
+        NotificationType = NotificationType.Info,
+        Message = message
+    };
+    commMessage.Initialize(NotificationRealtimeMessage.MessageType, messageData);
+    communicationService.SendAll(commMessage);
+}
+----
+
+Возможные типы оповещений перечислены в описании перечисления link:Platform_WebClient_Models_RealTimeCommunication_NotificationMessage_NotificationType.md[NotificationType].

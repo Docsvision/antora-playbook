@@ -1,0 +1,41 @@
+= Редактор для выбора поля карточки
+
+Для выбора поля карточки, с которым связаны данные элемента управления, может использоваться стандартный редактор – `DocsVision.BackOffice.WebLayoutsDesigner.Editors.FieldMetadataEditor`. Данный редактор предоставляет возможность установки фильтра для ограничения доступных для выбора полей.
+
+Следующий пример демонстрирует редактор, предоставляющий возможность выбирать только поля булева типа.
+
+[source,csharp]
+----
+class BooleanMetadataEditor : ITypeEditor
+{
+    public FrameworkElement ResolveEditor(PropertyItem propertyItem)
+    {
+        var editor = new FieldMetadataEditor();
+        
+        // Устанавливаем ограничением для отображаемых типов. Текущее обрабатываемое поле передаётся в field
+        editor.FieldFilter = (field) => { return field.FieldType == FieldType.Bool; };
+        return editor.ResolveEditor(propertyItem);
+    }
+}
+
+----
+
+Использование возможностей фильтра FieldFilter позволяет установить более точные критерии для отображения списка полей в редакторе. Например, в следующем коде поля ограничиваются по типу и связанной карточки и секции, с которой должно быть связано поле (для полей ссылающихся на справочники).
+
+[source,csharp]
+----
+public FrameworkElement ResolveEditor(PropertyItem propertyItem)
+{
+    var editor = new FieldMetadataEditor();
+    
+    // Устанавливаем фильтр
+    // field.LinkedCardTypeId - поле должно быть связано с карточкой Конструктор справочников
+    // field.LinkedSectionId - с секцией Строка справочника
+    editor.FieldFilter = (field) => {
+        return (field.FieldType == FieldType.RefId || field.FieldType == FieldType.UniqueId) && 
+            field.LinkedCardTypeId == RefBaseUniversal.ID && 
+            field.LinkedSectionId == RefBaseUniversal.Items.ID; };
+
+    return editor.ResolveEditor(propertyItem);
+}
+----

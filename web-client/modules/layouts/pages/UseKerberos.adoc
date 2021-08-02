@@ -1,0 +1,47 @@
+
+== Настройка аутентификации Kerberos
+
+. Настройте Service Principal Names для учетной записи пула приложений Web-клиента. Для этого от имени администратора домена выполните команды:
++
+[source,pre,codeblock]
+----
+Setspn /s HTTP/webc company\webuser
+Setspn /s HTTP/webc.company.com company\webuser
+----
++
+Здесь: «webc» и «webc.company.com» нужно заменить на имя и полное сетевое имя сервера Web-клиента, «company\webuser» – заменить на имя учётной записи, под которой работает пул приложений Web-клиента. Учетная запись пула должна быть доменной учётной записью, входить в группу локальных администраторов на сервере Web-клиента, и в группу администраторов Docsvision.
+. Включите аутентификацию Kerberos в конфигурационном файле Web-клиента:
+[loweralpha]
+.. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`# в режиме редактирования.
+.. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*location[path="Account/LoginWindows"]*#.
+.. Измените секцию на:
++
+[source,pre,codeblock,language-xml]
+----
+<location path="Account/LoginWindows">
+    <system.web>
+      <authorization>
+        <deny users="?" />
+        <allow users="*" />
+      </authorization>
+    </system.web>
+    <system.webServer>
+      <security>
+        <authentication>
+          <anonymousAuthentication enabled="false" />
+          <windowsAuthentication enabled="true" useKernelMode="false" useAppPoolCredentials="true">
+            <providers>
+              <clear />
+              <add value="Negotiate:Kerberos" />
+            </providers>            
+          </windowsAuthentication>
+          <basicAuthentication enabled="false" />
+        </authentication>
+      </security>
+    </system.webServer>
+</location>
+----
+.. Сохраните изменения.
+. Очистите кэш браузеров пользователей.
+
+*Parent topic:* xref:../topics/Administrator_functions.html[Функции администратора]

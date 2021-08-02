@@ -1,0 +1,83 @@
+= Добавление нового типа свойств в текстовом описателе
+
+Новый тип свойств можно добавить с помощью серверного расширения (см. link:LayoutDesignerExtensionWithProperty.md[Добавление нового свойства элементов управления]) или описать непосредственно в текстовом описателе элемента управления.
+
+Для добавления нового типа свойств:
+
+. Добавьте дочерний элемент Property в секцию Properties текстового описателя.
+. Добавьте в элемент Property аргументы:
+* Name – название нового типа свойств;
+* DataType – тип значения свойств. В DataType может быть указан только стандартный тип – должно быть указано полное название типа (например, System.Boolean);
+* ResourceKey – название локализованного ресурса для отображаемого названия;
+* Category – категория свойства. Может иметь значения: «GeneralCategory», «DataCategory», «BehaviorCategory», «AppearanceCategory», «EventsCategory», «DefaultValueCategory»;
+* Editor – имя редактора значения, которое указано при его регистрации в методе GetEditors расширения Конструктора web-разметок;
+* BindingConverter – имя конвертера в серверном расширении для свойства Type="Binding";
+* BindingResolver – имя резолвера биндинга в серверном расширении для свойства Type="Binding";
+* ItemsSource – варианты значений свойства, которые будут отображаться в виде раскрывающегося списка. В значении атрибута должно быть указано полное имя типа класса, реализующего интерфейс IItemsSource (см. ниже);
+* DefaultValue – значение по умолчанию;
+* DeviceDependent – флаг, указывающий на то, что значение свойства зависит от типа клиентского устройства;
+* Localized – флаг, указывающий на то, что свойство является локализуемым.
+
+При объявлении свойств можно указывать одновременно Type и другие параметры. Свойство, указанное в Type, станет основой для нового, которое может быть дополнительно настроено. Следующий пример демонстрирует объявление свойства superBinding, основанного на стандартном свойстве «Binding», с переопределенным конвертером (BindingConverter):
+
+[source,xml]
+----
+<Property Type="Binding" Name="superBinding" BindingConverter="SuperConverter" />
+----
+
+Примеры объявления свойств:
+
+* Свойство, получающее значения из источника значений (ItemsSource):
+
+```xml
+ <Property Name="SuperMode" DisplayName="Супер свойство с вариантами"
+      Category="AppearanceCategory" DataType="System.Int32" DefaultValue="0"
+      ItemsSource="SuperExtension.SuperVariantsSource"/>
+
+```
+
+Пример реализации класса SuperExtension.SuperVariantsSource, предоставляющего значения для свойства:
+
+`csharp
+  namespace SuperExtension
+  {
+      public class SuperVariantsSource : IItemsSource
+      {
+          public ItemCollection GetValues()
+          {
+              ItemCollection values = new ItemCollection();
+              values.Add(0, &quot;Вариант 1&quot;); // При выборе этого варианта, значение свойства будет 0
+              values.Add(1, &quot;Вариант 2&quot;); // При этом варианте, значение 1
+              values.Add(2, Resource.LocalizedVariant3); // Имя варианта можно объявить в ресурсах с целью локализации
+              return values;
+          }
+      }
+  }
+`
+
+* Свойство логического типа, зависящее от устройства (DeviceDependent), с категорией «Внешний вид» («AppearanceCategory») и значением по умолчанию «false»:
+
+`xml
+  &lt;Property Name=&quot;ShowPreview&quot; ResourceKey=&quot;History_ShowPreview&quot;
+          Category=&quot;AppearanceCategory&quot; DataType=&quot;System.Boolean&quot; DefaultValue=&quot;false&quot; DeviceDependent=&quot;true&quot; /&gt;
+`
+
+* Свойство числового типа с категорией «Поведение»(«BehaviorCategory») и значением по умолчанию «20»:
+
+`xml
+  &lt;Property Name=&quot;RecordsOnPage&quot; Editor=&quot;PositiveIntegerEditor&quot;
+          Category=&quot;BehaviorCategory&quot; DataType=&quot;System.Int32&quot; DefaultValue=&quot;20&quot;/&gt;
+`
+
+* Свойство строкового типа:
+
+`xml
+  &lt;Property Name=&quot;DurationControlName&quot; Category=&quot;BehaviorCategory&quot; DataType=&quot;System.String&quot;/&gt;
+`
+
+* Локализованное свойство (Localized) строкового типа со стандартным редактором (Editor) «LocalizedPropertyEditor»:
+
+`xml
+  &lt;Property Name=&quot;ButtonText&quot; Editor=&quot;LocalizedPropertyEditor&quot; Localized=&quot;true&quot;
+          Category=&quot;AppearanceCategory&quot; DataType=&quot;System.String&quot;/&gt;
+`

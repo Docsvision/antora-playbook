@@ -1,0 +1,35 @@
+
+== Изменение порта подключения к программе «DVWebTool»
+
+Веб-браузер пользователя подключается к программе «DVWebTool» на локальный адрес (localhost) на порт 5413. Администратор может изменить стандартный порт подключения.
+
+. [.ph .cmd]#Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.#
+. [.ph .cmd]#Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="System"]*#.#
+. [.ph .cmd]#Измените значение параметра `WebServicesPort`. Укажите новый номер порта подключения к программе «DVWebTool».#
++
+[source,pre,codeblock]
+----
+<SettingGroup Name="System">
+    <Setting Name="WebServicesPort" Value="5413" /> 
+</SettingGroup>
+----
+
+Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+. [.ph .cmd]#Сохраните изменения конфигурационного файла.#
+
+Укажите аналогичный номер порта в настройках программы «DVWebTool» на всех компьютерах пользователей.
+
+[start=5]
+. [.ph .cmd]#Откройте конфигурационный файл [.ph .filepath]`[Каталог установки DVWebTool]\DocsVision.DVWebTool.exe.config`.#
+. [.ph .cmd]#Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*appSettings*#.#
+. [.ph .cmd]#Измените значение параметра `Port`. Укажите новый номер прослушиваемого порта.#
++
+[source,pre,codeblock]
+----
+<appSettings>
+  <add key="Port" value="5413"/>
+</appSettings>
+----
+. [.ph .cmd]#Сохраните изменения конфигурационного файла и перезапустите программу «DVWebTool».#
+
+*Parent topic:* xref:../topics/Administrator_functions.html[Функции администратора]

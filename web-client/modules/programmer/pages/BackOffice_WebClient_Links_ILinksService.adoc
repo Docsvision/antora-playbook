@@ -1,0 +1,32 @@
+= ILinksService - интерфейс
+
+Интерфейс ILinksService определяет методы сервиса для работы со ссылками карточек – сервиса ссылок.
+
+*Пространство имен*: `DocsVision.BackOffice.WebClient.Links`
+
+*Сборка*: `DocsVision.BackOffice.WebClient.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ILinksService
+----
+
+== Методы
+
+|===
+|Имя |Описание 
+
+|AddReference(SessionContext, Guid, Guid, Guid, Boolean) |Добавляет ссылку на карточку referencedCardId с типом ссылки linkTypeId в список ссылок referenceListCardId. Если hardLink в значении true, будет добавлена жесткая ссылка. 
+|AddUrlReference(SessionContext, Guid, String, Guid) |Добавляет ссылку на адрес url в список ссылок referenceListCardId. В linkTypeId может быть указан тип ссылки. 
+|GetAllowedCreateLinkKinds(SessionContext ) |Возвращает модели видов карточек, на которые можно создать ссылки. 
+|GetAllowedLinkCardTypes |Возвращает идентификаторы типов карточек, на которые можно создать ссылки. 
+|GetLinkModels(SessionContext, Guid, Guid?, LinksDescriptionColumnViewMode, String) |Возвращает модели ссылок для списка ссылок referenceListCardId. В параметре descriptionColumnViewMode указывается способ формирования описания ссылок, а в descriptionColumnMethodKey название метода формирования описания ссылок. 
+|GetLinkTypes(SessionContext) |Возвращает модели типов ссылок. 
+|GetOrCreateReferenceListCardId(SessionContext , Guid, Guid, String) |Возвращает или создаёт список ссылок карточки cardId. Идентификатор карточки Список ссылок может быть получен из поля fieldAlias секции sectionId. 
+|GetReferenceListCardId(SessionContext, Guid, Guid, String) |Возвращает идентификатор карточки Список ссылок карточки cardId. Идентификатор карточки Список ссылок может быть получен из поля fieldAlias секции sectionId. 
+|RegisterDescriptionColumnGenerator(String, DescriptionColumnGeneratorDelegate) |Регистрирует метод генерации описаний ссылок. В key должно быть указано название метода, по которому он может быть запрошен элементом Ссылки, в delegateFunction – делегат на метод генерации описания ссылки. 
+|RemoveReference(SessionContext, Guid, Guid, Guid) |Удаляет ссылку referenceId из списка ссылок referenceListCardId карточки cardId. Возвращает true, если ссылка была удалена, иначе – false. 
+|UpdateReferenceDescription(SessionContext, Guid, String) |Изменяет описание ссылки referenceId на description. 
+|===

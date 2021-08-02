@@ -1,0 +1,91 @@
+= Реализация методов для работы с карточками из разметок
+
+Программисту предоставляется возможность добавить новую функциональность в механизмы создания и работы с карточками из разметок. Данная возможность реализуется с помощью специального класса с интерфейсом ICardLifeCycle:
+
+[source,csharp]
+----
+public interface ICardLifeCycle
+{     
+    Guid Create(SessionContext sessionContext, Guid? cardKindId, Guid? parentCardId);
+    Guid CreateFromTemplate(SessionContext sessionContext, Guid templateId, Guid? parentCardId);
+    string GetDigest(SessionContext sessionContext, Guid cardId);
+    bool Validate(SessionContext sessionContext, Guid cardId, out List<ValidationResult> validationResults);     
+    void OnSave(SessionContext sessionContext, Guid cardId);
+    bool CanDelete(SessionContext sessionContext, Guid cardId, out string message);
+    void OnDelete(SessionContext sessionContext, Guid cardId);
+}
+
+----
+
+Интерфейс `ICardLifeCycle` предоставляет методы, которые вызываются на различных этапах работы с карточкой:
+
+* `Create` – при получении разметки создания карточки;
+* `CreateFromTemplate` – при получении разметки создания карточки по шаблону;
+* `Validate` – перед сохранением изменений карточки в БД, с возможностью прервать сохранение;
+* `GetDigest` – при получении дайджеста карточки при её сохранении – позволяет добавить собственную логику формирования дайджеста; метод `GetDigest` используется только, когда способ формирования дайджеста не настроен в Docsvision и карточка сохраняется из пользовательского интерфейса (при нажатии кнопки Сохранить, сохранении по месту или скриптом);
+* `OnSave` – при сохранении изменений карточки – позволяет добавить дополнительную логику в сохранение карточки, но без возможности прервать сохранение;
+* `CanDelete` – перед удалением карточки – позволяет прервать удаление;
+* `OnDelete` – при удалении карточки – позволяет добавить дополнительную логику в удаление карточки, но без возможности прервать удаление.
+
+Указанные методы используются *исключительно* при выполнении стандартных операций со строками из разметок или с использованием JS WebAPI разметок. В других случаях методы интерфейса `ICardLifeCycle` не вызываются и не влияют на работу сервера Web-клиента с карточками.
+
+Следующий код демонстрирует пример реализации класса, в котором определены собственные функции создания и сохранения карточки.
+
+[source,csharp]
+----
+public class DocumentCardLifeCycle : BaseCardLifeCycle
+{
+    public override Guid Create(SessionContext sessionContext, Guid? cardKindId, Guid? parentCardId)
+    {
+        if (!cardKindId.HasValue)
+            throw new ArgumentNullException(nameof(cardKindId));
+
+        var objectContext = sessionContext.ObjectContext;
+        var kindsCardKind = objectContext.GetObject<KindsCardKind>(cardKindId);
+        var documentService = objectContext.GetService<IDocumentService>();
+        var document = documentService.CreateDocument(null, kindsCardKind);
+        document.Description = document.SystemInfo.CardKind.Name;
+        document.MainInfo.Name = "Наименование документа";
+
+        objectContext.AcceptChanges();
+        return document.GetObjectId();
+    }
+
+    public override Guid CreateFromTemplate(SessionContext sessionContext, Guid templateId, Guid? parentCardId)
+    {
+        var objectContext = sessionContext.ObjectContext;
+        var documentService = objectContext.GetService<IDocumentService>();
+        var document = documentService.CreateDocumentFromTemplate(templateId);
+
+        objectContext.AcceptChanges();
+        return document.GetObjectId();
+    }
+
+    public override void Save(SessionContext sessionContext, Guid cardId)
+    {
+        base.Save(sessionContext, cardId);
+        var objectContext = sessionContext.ObjectContext;
+        var document = objectContext.GetObject<DocsVision.BackOffice.ObjectModel.Document>(cardId);
+        document.MainInfo.Name = "Принудительно установленное наименование документа";
+        
+        objectContext.AcceptChanges();
+    }
+}
+----
+
+В приведенном коде класс `DocumentCardLifeCycle` наследуется от базовой реализации интерфейса `ICardLifeCycle` – класса `BaseCardLifeCycle` с абстрактными методами. Помимо класса `BaseCardLifeCycle` с базовой реализацией, API включает реализующий интерфейс `ICardLifeCycle` класс `DefaultCardLifeCycle` с реализацией по умолчанию методов Create`и`CreateFromTemplate.
+
+Метод Create в приведенном выше коде создает новую карточку Документ с предустановленным названием (document.MainInfo.Name). Метод CreateFromTemplate создает карточку Документа по шаблону. Метод Save изменяет значение поля document.MainInfo.Name при сохранении карточки.
+
+Тип с интерфейсом `ICardLifeCycle` нужно добавить в IoC-контейнер в ядре расширения:
+
+[source,csharp]
+----
+public override void InitializeContainer(ContainerBuilder containerBuilder) {
+    // Идентификатор типа карточек
+    var cardTypeID = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794");
+    containerBuilder.RegisterType<DocumentCardLifeCycle>().Keyed<ICardLifeCycle>(cardTypeID).SingleInstance();
+}
+----
+
+Серверное расширение должно быть опубликовано стандартным образом.

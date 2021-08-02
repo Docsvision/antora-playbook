@@ -1,0 +1,27 @@
+
+== Изменения режима закрепления основного меню
+
+По умолчанию Основное меню Web-клиента (с деревом папок) закрепляется/открепляется с помощью кнопок image:Buttons/pinMenu.png[image]/image:Buttons/unpinMenu.png[image]. Администратор может переключить режим закрепления основного меню: основное меню будет закрепляться/открепляться при нажатии кнопки image:Buttons/openMenu.png[image]. При этом кнопки открепления/закрепления Основного меню будут скрыты.
+
+Для изменения режима закрепления основного меню:
+
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
+. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.
+. Измените значение параметра `UXMainMenuBehavior`.
++
+[source,pre,codeblock]
+----
+<SettingGroup Name="WebClient">
+   <Setting Name="UXMainMenuBehavior" Value="0" /> 
+</SettingGroup>
+----
++
+В «Value» укажите:
+
+* 0 – для использования режима переключения кнопками image:Buttons/pinMenu.png[image]/image:Buttons/unpinMenu.png[image];
+* 1 – для использования режима переключения кнопкой image:Buttons/openMenu.png[image].
++
+Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+. Сохраните изменения конфигурационного файла.
+
+*Parent topic:* xref:../topics/CommonConf.html[Общие настройки]

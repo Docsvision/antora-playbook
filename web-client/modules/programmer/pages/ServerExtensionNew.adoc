@@ -1,0 +1,77 @@
+= Создание и публикация серверного расширения
+
+Серверное расширение представляет собой библиотеку DLL, разработанную на платформе .NET.
+
+Чтобы создать серверное расширение:
+
+. Создайте в Visual Studio новый проект с типом TemplateServerExtension.
+
+. Обновите в проекте ссылки на зависимости.
+
+Версии подключаемых компонентов должны соответствовать версиям компонентов, используемых сервером Web-клиента, для которого разрабатывается расширение. При обновлении Web-клиента необходимо перекомпилировать расширение с новыми версиями компонентов.
+
+. Реализуйте в проекте функции серверного расширения.
+
+Примеры кода серверных расширений приведены в следующих пунктах раздела, а также в link:DocsvisionRepOnGitHub.md[репозитории ДоксВижн].
+
+. Настройте ядро серверного расширения.
+
+Ядром серверного расширения называется файл `TemplateServerExtension.cs` в проекте расширения. Ядро является производным от `WebClientExtension` классом, содержащим ссылки на реализуемые функции расширения.
+
+```csharp
+ public class TemplateServerExtension : WebClientExtension
+ {
+ public TemplateServerExtension(IServiceProvider serviceProvider)
+ : base(serviceProvider)
+ {
+ }
+
+----
+   // Название расширения
+   public override string ExtensionName
+   {
+    get { 
+           return Assembly.GetAssembly(typeof(TemplateServerExtension)).GetName().Name;
+       }
+   }
+
+   // Версия расширения
+   public override Version ExtensionVersion
+   {
+       get { 
+           return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+       }
+   }
+
+   // Метод регистрации добавляемых расширением сервисов, преобразователей, конвертеров и т.п. в IoC контейнере
+   public override void InitializeContainer(ContainerBuilder containerBuilder) {
+
+       // Примеры регистрации
+       // containerBuilder.RegisterType<YourService>().As<IYourService>().SingleInstance();
+       // containerBuilder.RegisterOrderedType<YourBindingConverterType, IBindingConverter>();
+       // containerBuilder.RegisterOrderedType<YourBindingResolverType, IBindingResolver>();
+       // containerBuilder.RegisterOrderedType<YourControlResolverType, IControlResolver>();
+       // containerBuilder.RegisterOrderedType<YourPropertyResolverType, IPropertyResolver>(); 
+       // containerBuilder.RegisterType<YourCardLifeCycle>().Keyed<ICardLifeCycle>(CardTypeID).SingleInstance();
+       // containerBuilder.RegisterType<YourRowLifeCycle>().Keyed<IRowLifeCycle>(SectionID).SingleInstance(); 
+   }
+
+   // Далее идут функции, возвращающие реализованные функции серверного расширения
+----
+
+}
+ ```
+
+Описание изменений, которые необходимо выполнить в ядре расширения, приведено в описании примеров расширений, добавляющих обработчики событий и локализованные ресурсы.
+
+В серверном расширении Web-клиента используется IoC контейнер, реализованный с использованием библиотеки Autofac. Описание данной библиотеки и её возможностей см. на сайте [](https://autofac.org/).
+
+. Скомпилируйте проект.
+
+В результате будет получен файл DLL с ядром серверного расширения и реализуемыми функциями, а также файлы DLL с локализованными ресурсами.
+
+. Скопируйте файл расширения на сервер Web-клиента в папку `&lt;Каталог установки Web-клиента&gt;\Site\Extensions\\&lt;Каталог Решения&gt;`. Каталог Решения необходимо создать самостоятельно.
+
+Ресурсные сборки нужно скопировать в папки `&lt;Каталог установки Web-клиента&gt;\Site\Extensions\ru\` (для русской локализации), `&lt;Каталог установки Web-клиента&gt;\Site\Extensions\uk\` (для английской локализации) и т. д.
+
+. Перезапустите сервер IIS.

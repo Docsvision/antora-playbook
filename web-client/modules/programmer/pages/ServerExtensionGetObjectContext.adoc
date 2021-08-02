@@ -1,0 +1,43 @@
+= Получение контекста объектов в серверном расширении
+
+Программист может использовать в серверном расширении контекст объектов Docsvision для доступа к данным системы.
+
+Разработчику доступны два контекста объектов:
+
+. Пользовательский – создается для каждого пользователя при его входе в Web-клиент. Права на работу с объектами соответствуют правам данного пользователя в системе Docsvision.
+. Серверный – создается для сервера Docsvision. Права на работу с объектами соответствуют правам учетной записи пула приложений с Web-клиентом в системе Docsvision.
+
+Получить контекст объектов можно используя функции сервиса `ICurrentObjectContextProvider`:
+
+* `GetOrCreateCurrentSessionContext` – возвращает контекст объектов текущего пользователя;
+* `GetOrCreateApplicationPoolSessionContext` – возвращает серверный контекст объектов.
+
+Сервис `ICurrentObjectContextProvider` может быть получен двумя способами:
+
+[source,csharp]
+----
+// 1. Указать сервис в качестве аргумента конструктора класса контроллера
+public class LayoutController : ApiController
+{
+    public LayoutController(ICurrentObjectContextProvider currentObjectContextProvider) {
+        // Получение контекста пользователя
+        var context = currentObjectContextProvider.GetOrCreateCurrentSessionContext().ObjectContext
+        
+       
+// 2. Получить сервис из передаваемого в конструктор поставщика сервисов serviceProvider
+    public LayoutController(IServiceProvider serviceProvider) {
+            var serviceHelper = new ServiceHelper(serviceProvider);
+            // Получение контекста пользователя
+            var context = serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext().ObjectContext;
+
+----
+
+Web-клиент периодически закрывает неиспользуемые пользовательские сессии, из-за чего контекст объектов, сохраненный в статический объект класса (серверного расширения или контроллера), спустя время станет недействительным. *Всегда получайте контекст объектов заново* (с помощью функции `GetOrCreateCurrentSessionContext`).
+
+Примеры работы с контекстом объектов рассмотрены в документе «Docsvision 5. Руководство программиста». Следующий код демонстрирует пример получения объектной модели карточки Документ.
+
+[source,csharp]
+----
+// В метод GetObject передаются тип объекта (Document) и идентификатор объекта (ID карточки)
+Document document = objectContext.GetObject<Document>(Guid.Parse("9E11083F-D0EC-4F9F-8981-285498280BD9"));
+----

@@ -1,0 +1,50 @@
+= Добавление сервисов и поддержки новых типов карточек в контекст объектов
+
+По умолчанию в контекст объектов, предоставляемый в серверном расширении, загружаются сервисы и преобразователи данных (см. документ «Docsvision 5. Руководство программиста»), позволяющие работать с карточками библиотек «Базовые объекты» и «Конструктор согласований», системными карточками и карточками приложения «Управление документами»: SystemCardsMapperFactory, BackOfficeMapperFactory, ApprovalDesignerMapperFactory, SystemCardsServiceFactory, BackOfficeServiceFactory, DocumentsManagementServiceFactory и ApprovalDesignerServiceFactory.
+
+Если требуется поддержать собственные типы карточек в объектной модели Docsvision, программист должен добавить в контекст объектов преобразователи данных для этих типов, и сервисы для работы с данными карточками. Инструкция по разработке фабрик сервисов и фабрик преобразователей данных приведена в документе «Docsvision 5. Руководство программиста».
+
+Выполните указанные ниже действия для добавления сервисов и преобразователей данных в контекст объектов. Все действия выполняются в проекте серверного расширения (нового или существующего).
+
+. Подключите к проекту сборки, в которых реализованы классы разработанных фабрик сервисов и преобразователей данных.
+
+. Откройте файл ядра расширения.
+
+. Переопределите метод `OnObjectContextCreate`, вызываемый при создании контекста объектов, добавив в него код регистрации фабрик сервисов и преобразователей данных.
+
+Следующий код демонстрирует пример добавления в контекст объектов фабрики сервисов `CustomLibraryServiceFactory` и фабрики преобразователей данных `CustomLibraryMapperFactory`.
+
+```csharp
+ public override void OnObjectContextCreate(ObjectContext objectContext)
+ {
+ base.OnObjectContextCreate(objectContext);
+
+----
+// Далее следует стандартный код добавления фабрик в контекст объектов (см. документ "Docsvision 5. Руководство разработчика")
+
+// Получаем из существующего контекста объектов сервис регистрации фабрик преобразователей данных
+IObjectMapperFactoryRegistry mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>();
+
+// Регистрируем фабрику преобразователей данных, реализованную в классе CustomLibraryMapperFactory
+mapperFactoryRegistry.RegisterFactory(typeof(CustomLibraryMapperFactory));
+
+// Получаем из существующего контекста объектов сервис регистрации фабрик сервисов
+IServiceFactoryRegistry serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>();
+
+// Регистрируем фабрику сервисов, реализованную в классе CustomLibraryServiceFactory
+serviceFactoryRegistry.RegisterFactory(typeof(CustomLibraryServiceFactory));          
+----
+
+}
+
+```
+
+Добавленный в контекст объектов сервис можно получить стандартным образом:
+
+`csharp
+   ISomeService someService = objectContext.GetService&lt;ISomeService&gt;();
+`
+
+. Опубликуйте серверное расширение.
+
+Сборки, содержащие классы фабрик сервисов и преобразователей данных, нужно скопировать в каталог со сборкой данного серверного расширения.

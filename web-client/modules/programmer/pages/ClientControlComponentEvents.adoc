@@ -1,0 +1,60 @@
+= Объявление событий элемента управления в клиентском компоненте
+
+Чтобы корректно объявить обрабатываемое событие в клиентском компоненте элемента управления, нужно выполнить два условия:
+
+. Генерируемые элементом управления события должны быть проинициализированы.
+
+Для примера рассмотрим инициализацию события onShowed, поддерживаемого элементом управления:
+
+```tsx
+ // Класс параметров с объявлением события onShowed
+ export class SuperControlParams extends BaseControlParams {
+ @apiEvent onShowed?: BasicApiEvent<IEventArgs>;
+ }
+
+```
+
+Для инициализации события onShowed, нужно добавить в конструктор класса реализации следующий код:
+
+```tsx
+ this.state.onShowed = SimpleEvent.Create<IEventArgs>(this.state.wrapper);
+
+```
+
+Событие onShowed является непрерываемым (имеет тип BasicApiEvent). Для прерываемого события, инициализация будет выглядеть следующим образом:
+
+```tsx
+ this.state.onShowing = CancelableEvent.Create<IEventArgs>(this.state.wrapper);
+
+```
+
+Таким образом конструктор класса реализации может выглядеть так:
+
+```tsx
+ construct() {
+ super.construct();
+
+----
+   this.state.onShowed = SimpleEvent.Create<IEventArgs>(this.state.wrapper);
+   this.state.onShowing = CancelableEvent.Create<IEventArgs>(this.state.wrapper);
+----
+
+}
+ ```
+
+. Обработчики событий, используемые в классе реализации, должны быть связаны с контекстом.
+
+Связывание обработчика с контекстом выполняется в конструктор класса реализации, что демонстрируется в следующем коде, в котором выполняется связывание с контекстом обработчика события onClick.
+
+```tsx
+ construct() {
+ super.construct();
+
+----
+   this.clickHandler = this.clickHandler.bind(this);
+----
+
+}
+ ```
+
+Метод clickHandler является внутренним обработчиком события onClick.

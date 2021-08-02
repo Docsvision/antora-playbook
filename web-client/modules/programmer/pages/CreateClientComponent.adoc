@@ -1,0 +1,94 @@
+= Разработка и публикация клиентского компонента элемента управления
+
+Клиентский компонент элемента управления – программный компонент, обеспечивающий загрузку и функционирование элемента управления на стороне клиента. Клиентский компонент предоставляет графический интерфейс элемента управления.
+
+Клиентский компонент элемента управления является вариантом клиентского расширения.
+
+Чтобы создать клиентский компонент элемента управления, выполните приведенную далее инструкцию.
+
+. link:ClientExtensionsNew.md[Создайте проект клиентского расширения]. Не публикуйте его.
+
+. Создайте в папке `src`файл TypeScript (ts, tsx) с кодом клиентского компонента.
+
+Клиентский компонент состоит из трех блоков кода:
+
+. Класс параметров:
+
+```tsx
+ export class SuperControlParams extends BaseControlParams {
+ @r firstProperty?: string;
+ @rw secondProperty?: boolean;
+
+. Интерфейс состояния:
+
+```tsx
+ export interface SuperControlState extends SuperControlParams, BaseControlState {
+ internalFirstState: boolean;
+ }
+
+. Класс реализации:
+
+```tsx
+ export class SuperControlImpl extends BaseControlImpl&lt;SuperControlParams, SuperControlState&gt; {
+ // Инициализация компонента
+ construct() {
+ super.construct();
+
+. Интерфейсный класс:
+
+```tsx
+ export class SuperControl extends BaseControl&lt;SuperControlParams, SuperControlState&gt; {
+ // Инициализация параметров
+ protected createParams() {
+ return new SuperControlParams();
+ }
+
+В случае простого элемента управления, лишенного сложной внутренней логики, реализация элемента управления может быть помещена в интерфейсный класс.
+
+```tsx
+ export class SuperSimpleControl extends BaseControl&lt;SuperControlParams, SuperControlState&gt; {
+ protected createParams() {
+ return new SuperControlParams();
+ }
+
+----
+   // Метод createImpl в данном случае возвращает экземпляр стандартного типа ControlImpl, 
+   //  в которые передана функция, возвращающая VirtualDOM элемента управления
+   protected createImpl() {
+       return new ControlImpl(this.props, this.state, this.renderControl.bind(this));
+   }
+
+   // Метод может иметь любое название, кроме «render»
+   renderControl() {
+       return (
+           <div />
+       );
+   }
+----
+
+}
+ ```
+
+. Измените содержимое файла `Index.ts`.
+
+```tsx
+ import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+
+// 1. Добавьте строку импорта элемента управления
+ import { SuperControl } from "./Controls/SuperControl";
+
+// 2. Добавьте в registerExtension поле controls, в значении которого укажите описание элемента управления:
+ // controlTypeName – название типа элемента управления, которое указано в описателе элемента управления
+ // constructor – интерфейсный класс элемента управления
+ extensionManager.registerExtension({
+ name: "Client extension with controls",
+ version: "1.0",
+ controls: [{ controlTypeName: "SuperControl", constructor: SuperControl }]
+ })
+ ```
+
+. Соберите проект клиентского расширения командой `npm run build`.
+
+. Скопируйте полученный файл `&lt;Каталог сборки&gt;\extension.js` на сервер Web-клиента в папку `&lt;Каталог установки Web-клиент&gt;\5.5\Site\Content\Modules\\&lt;Каталог Решения&gt;`.
+
+После завершения отладки, соберите и опубликуйте на сервере Web-клиента «релизную версию» клиентского расширения. «Релизная версия» собирается командой `npm run build:prod`.

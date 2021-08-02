@@ -1,0 +1,40 @@
+
+== Настройка утилиты DVWebTool для работы в кластере
+
+Следующие действия необходимо выполнить, если Web-клиент работает в кластере и сервера Web-клиента недоступны пользователям напрямую.
+
+Инструкция выполняется после установки и настройки кластера Web-клиент, а также после обновления версии Web-клиента на узлах кластера.
+
+Все действия выполняются на одном из узлов кластера Web-клиент.
+
+. Запустите программу [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Tools\mageui.exe` от имени администратора. Будет открыто окно [.ph .uicontrol]*Mage*.
++
+image::mageui.png[[.fig--title-label]##Figure 1. ##Главное окно программы Microsoft .NET Framework Mage]
+. Нажмите [.ph .menucascade]#[.ph .uicontrol]*File* > [.ph .uicontrol]*Open*# и выберите файл [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\DocsVision.DVWebTool.application`. Будут загружены данные из манифеста развертывания программы DVWebTool.
+. Откройте раздел параметров [.ph .uicontrol]*Deployment Options*.
++
+image::mageui_1.png[[.fig--title-label]##Figure 2. ##Deployment Options]
+. В строке [.ph .uicontrol]*Start Location* измените адрес сервера Web-клиент, на адрес балансировщика нагрузки или иного промежуточного устройства. Например: [.ph .filepath]`http://dv1.company.com/DocsvisionWebClient/Content/Tools/DVWebTool/DocsVision.DVWebTool.application` на [.ph .filepath]`http://webclient.company.com/DocsvisionWebClient/Content/Tools/DVWebTool/DocsVision.DVWebTool.application`.
+. Нажмите [.ph .menucascade]#[.ph .uicontrol]*File* > [.ph .uicontrol]*Save*#. Будет предложено подписать манифест.
+. Выберите файл [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\DVWebTool.pfx` и нажмите [.ph .uicontrol]*OK*.
+. Закройте программу [.ph .uicontrol]*Mage*.
+. Скопируйте папку [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\` на все узлы кластера.
+
+=== Использование собственного сертификата для подписания DVWebTool
+
+Файл [.ph .filepath]`DVWebTool.pfx` содержит сгенерированный Docsvision сертификат. При необходимости для подписания можно использовать собственный сертификат с назначением «Code Signing» или «All». При этом потребуется подписать два манифеста.
+
+. Запустите программу [.ph .filepath]`mageui.exe`.
+. Откройте файл [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Application Files\DocsVision.DVWebTool.exe.manifest`.
+. Не вносите изменений в файл. Нажмите [.ph .menucascade]#[.ph .uicontrol]*File* > [.ph .uicontrol]*Save*#. При запросе сертификата выберите собственный сертификат для подписания.
+. Откройте файл [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\DocsVision.DVWebTool.application`.
+. Измените [.ph .uicontrol]*Start Location*, как указано выше.
+. Откройте раздел параметров [.ph .uicontrol]*Application Reference*.
++
+image::mageui_2.png[[.fig--title-label]##Figure 3. ##Application Reference]
+. Нажмите кнопку [.ph .uicontrol]*Select Manifest* и выберите файл [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Application Files\DocsVision.DVWebTool.exe.manifest`.
+. Нажмите [.ph .menucascade]#[.ph .uicontrol]*File* > [.ph .uicontrol]*Save*#. При запросе сертификата выберите собственный сертификат для подписания.
+. Закройте программу [.ph .uicontrol]*Mage*.
+. Скопируйте папку [.ph .filepath]`C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\` на все узлы кластера.
+
+*Parent topic:* xref:../topics/Cluster_create.html[Особенности настройки кластера Web-клиент]

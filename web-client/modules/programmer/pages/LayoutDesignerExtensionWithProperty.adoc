@@ -1,0 +1,100 @@
+= Добавление нового свойства элементов управления
+
+Элементы управления обладают набором свойств, которые определяют их поведение в веб-браузере пользователя: внешний вид, получение данных (для разметки карточки), обработка событий. 
+
+При формировании списка свойств нового типа элементов управления программист может ссылаться только на существующие стандартные свойства (link:StandartPropertiesOfControls.md[Стандартные свойства и события элементов управления]). Если стандартные свойства не позволяют описать все особенности элемента управления, программист может сформировать новое свойство.
+
+Добавить новое свойство элементов управления в Конструктор web-разметок можно с помощью _Расширения_.
+
+Чтобы создать расширение, добавляющее новый тип свойств элементов управления, выполните приведенную далее инструкцию.
+
+. link:LayoutDesignerExtensionNew.md[Создайте проект расширения Конструктора web-разметок].
+
+. Добавьте в ядро расширения (файл `TemplateDesignerExtension.cs`) функцию, предоставляющую _описатель свойства_ элемента управления.
+
+`csharp
+   PropertyDescription GetSuperPropertyDescription()
+   {
+     var propertyDescription = new PropertyDescription();
+     propertyDescription.Name = &quot;SuperProperty&quot;;
+     propertyDescription.DisplayName = &quot;Супер свойство&quot;;
+     propertyDescription.Type = typeof(string); // Строковый тип свойства
+     propertyDescription.Category = PropertyCategoryConstants.DataCategory; // Указывает категорию свойства (DataCategory - Данные)
+     return propertyDescription;
+   }
+`
+
+Описатель свойства элемента управления – это объект с типом `PropertyDescription`, содержащий информацию о свойстве: название свойства, тип, категория, редактор, который должен использоваться для изменения значения, возможность локализации и настройки значения для определенного типа устройств.
+
+При составлении описания элемента необходимо:
+
+. Указать название свойства в Name.
+
+`csharp
+     propertyDescription.Name = &quot;SuperProperty&quot;;
+`
+
+. Указать отображаемое название свойства в DisplayName. С данным названием свойство отображается в списке свойств элемента управления в Конструктора web-разметок.
+
+`csharp
+     propertyDescription.DisplayName = &quot;Супер свойство&quot;;
+`
+
+. Указать тип значения свойства в Type.
+
+`csharp
+     propertyDescription.Type = typeof(string); // Строковый тип свойства
+`
+
+. Указать категорию свойства в Category. Категория используется для группировки свойств в настройках элемента управления в Конструкторе web-разметок. Категория выбирается из перечня в классе `PropertyCategoryConstants`.
+
+`csharp
+     propertyDescription.Category = PropertyCategoryConstants.DataCategory; // Указывает категорию свойства (DataCategory - Данные)
+`
+
+Обратитесь к описанию класса PropertyDescription, чтобы получить полный перечень возможностей описателя свойства элементов управления. 
+
+. Переопределите метод GetPropertyDescriptions базового класса, чтобы он возвращал коллекцию с парой: ключ – имя, по которому можно получить описатель данного свойства – используйте имя, указанное в propertyDescription.Name; значение – метод, предоставляющий описатель свойства:
+
+`csharp
+   protected override Dictionary&lt;string, PropertyDescription&gt; GetPropertyDescriptions()
+   {
+       return new Dictionary&lt;string, PropertyDescription&gt;
+       {
+            { &quot;SuperProperty&quot;, GetSuperPropertyDescription() }    
+       };
+   }
+`
+
+. Скомпилируйте проект и скопируйте полученную сборку на сервер Web-клиента в папку `&lt;Каталог установки Web-клиента&gt;\Plugins\\&lt;Каталог Решения&gt;`. Ресурсные сборки скопируйте в папки `&lt;Каталог установки Web-клиента&gt;\ru\` (для русской локализации), `&lt;Каталог установки Web-клиента&gt;\uk\` (для английской локализации) и т.д.
+
+. Перезапустите Конструктор web-разметок.
+
+Для проверки примера:
+
+. link:LayoutDesignerExtensionWithControlType.md[Создайте новый тип элемента управления].
+
+. Добавьте Супер свойство в список свойств элемента управления (в PropertyDescriptions).
+
+Для получения описателя свойства используйте метод PropertyFactory.Create, передав в него имя свойства, указанное при его регистрации в методе GetPropertyDescriptions.
+
+```csharp
+ PropertyDescriptions = {
+ PropertyFactory.GetNameProperty(),
+ PropertyFactory.GetVisibilityProperty(),
+ PropertyFactory.Create("SuperProperty"), // Получаем описатель свойства «SuperProperty»
+
+----
+     PropertyFactory.GetClickEvent() // Событие «При щелчке»
+  }
+----
+
+```
+
+. Опубликуйте расширение с элементом управления на сервере Web-клиента.
+
+. Откройте для настройки любую разметку карточки.
+
+. Добавьте в разметку элемент управления с новым свойством. В его настройках будет _Супер свойство_.
+
+image:img/controlsProperty.png[Свойство элемента управления из расширения в редакторе разметок]

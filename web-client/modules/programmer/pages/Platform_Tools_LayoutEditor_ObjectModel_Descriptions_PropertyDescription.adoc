@@ -1,0 +1,117 @@
+= PropertyDescription - класс
+
+Класс PropertyDescription содержит описание свойства элемента управления в расширении Конструктора web-разметок.
+
+*Пространство имен*: `Docsvision.Platform.Tools.LayoutEditor.ObjectModel.Descriptions`
+
+*Сборка*: `Docsvision.LayoutEditor.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PropertyDescription : ICloneable
+
+----
+
+== Конструкторы
+
+|===
+|Имя |Описание 
+
+|PropertyDescription(String) |Инициализирует новый экземпляр класса PropertyDescription. 
+|===
+
+== Свойства
+
+|===
+|Имя |Описание 
+
+|BindingResolverType |Зарезервировано. 
+|Category |Задает или возвращает категорию свойства. 
+|ChangeLocalizaionKeys |Задает или возвращает функцию обновления ключей локализации при копировании свойства с сериализованным значением. 
+|CheckAvailablity |Задает или возвращает функцию проверки доступности свойства для настройки в текущем контексте (к примеру, в текущем типе разметки). 
+|CollectLocalizationKeys |Задает или возвращает функцию получения нужных ключей локализации при копировании свойства с сериализованным значением. 
+|DefaultValue |Задает или возвращает значение по умолчанию. 
+|DeviceDependent |Задает или возвращает флаг, указывающий, зависит ли значение свойства от типа клиентского устройства. 
+|DisplayName |Задает или возвращает строковый ресурс, предоставляющий локализованное название элемента управления. 
+|Editor |Задает или возвращает тип компонента редактирования (редактора) значения свойства. Редактор является компонентом UserControl с реализованным интерфейсом `Xceed.Wpf.Toolkit.PropertyGrid.Editors. ITypeEditor` (сборка `Xceed.Wpf.Toolkit.Fixed.dll`). 
+|ExcludeFromIL |Задает или возвращает флаг, указывающий, будет ли данное свойство исключено из пакета свойств элемента управления, передаваемых в клиентскую часть Web-клиента. Свойство с установленным флагом ExcludeFromIL остается настраиваемым в Конструкторе web-разметок. 
+|GenerateDefaultValue |Задает или возвращает метод, генерирующий для свойства значение по умолчанию. 
+|GenerateValueOnPaste |Задает или возвращает метод, генерирующий значение свойства при копировании элемента управления, содержащего данное свойство. 
+|GetBindingLoader |Задает или возвращает функцию, реализующую механизм получения и сохранения значения свойства. 
+|Hidden |Задает или возвращает флаг, определяющий, является ли свойство скрытым. Скрытое свойство не отображается при настройке элемента управления. 
+|IsTemporarilyReadOnly |Задает или возвращает функцию, проверяющую является ли элемент управления доступным только на чтение. 
+|ItemsSource |Задает или возвращает тип компонента, который предоставляет список готовых значений свойства, из которого значение свойства выбирается. 
+|Localized |Задает или возвращает флаг, указывающий, является ли свойство локализуемым. Свойство должно быть строкового типа. Для редактирования значения локализуемого свойства в Editor должен быть указан тип редактора LocalizedPropertyEditor. 
+|Name |Задает или возвращает уникальное название свойства. 
+|Priority |Задает или возвращает порядок отображения свойства в текущей категории свойств. Чем выше порядок, тем выше будет отображено свойство. 
+|PropertyResolverType |Задает или возвращает название компонента, предоставляющего дополнительную возможность настройки свойства: DeviceDependent (зависящего от типа устройства), Localized (зависящего от локализации). Рекомендуется использовать вместо PropertyResolverType флаги Localized и DeviceDependent класса PropertyDescription. 
+|ReadOnly |Задает или возвращает флаг, указывающий, является ли значение элемента управления доступным только на чтение. 
+|RefreshProperties |Задает или возвращает флаг, указывающий, требуется ли обновлять отображаемое значение свойства при изменении значения. В true следует устанавливать, если для изменения свойства используется отдельное окно редактирования. 
+|Type |Задает или возвращает тип значения свойства. 
+|Validate |Задает или возвращает функцию валидации значения свойства. 
+|===
+
+== Примеры
+
+Следующий код демонстрирует пример свойства Slider, добавляемого в категорию Данные. Для свойства назначается специализированный редактор значения - SliderEditor.
+
+[source,csharp]
+----
+private PropertyDescription GetSliderPropertyDescription()
+{
+ // Создаем экземпляр класса описания свойства 
+ return new PropertyDescription
+ {
+  Type = typeof(string), // Определяем строковый тип данного свойства ЭУ. Реальное значение сериализуемое
+  Name = Constants.SampleImage.Slider, // Указывается уникальное название
+  Category = PropertyCategoryConstants.DataCategory, // Категория для размещения свойства Данные
+  DisplayName = Resources.ControlTypes_SliderProperty, // Отображаемое название свойства
+  DefaultValue = String.Empty, // Пустое значение по умолчанию
+  ExcludeFromIL = true, // Свойство не должно передаваться на клиентскую сторону Web-клиента
+  Editor = typeof(SliderEditor), // Указываем специфический редактор значения свойства
+  
+  // Определяем метод, который будет вызываться при копировании свойства
+  // Метод получает ключи локализации DescriptionLocalizationKey из объекта свойства args.PropertyDescription.Name
+  //  и заполняет ими коллекцию args.LocalizationKeys
+  CollectLocalizationKeys = args =>
+  {
+   // Получаем значение требуемого свойства
+   var value = (string)args.ControlInfo.GetProperty(args.PropertyDescription.Name);
+   // Десериализуем значение свойства в нужный класс
+   var items = SliderModeHelper.StringToItems(value);
+   // Получаем из параметров (передается в args) элемента управления текущей разметки 
+   //  массив ключей локализация
+   var keys = args.LocalizationKeys;
+   // Заполняем keys ключами из описания свойства
+   foreach (var item in items)
+   {
+    if (!string.IsNullOrEmpty(item.DescriptionLocalizationKey))
+     keys.Add(item.DescriptionLocalizationKey);
+   }
+  },
+  // Определяем метод, который будет вызываться при копировании элемента управления и, соответственно, его свойств.
+  ChangeLocalizaionKeys = args =>
+  {
+   // 
+   var value = (string)args.ControlInfo.GetProperty(args.PropertyDescription.Name);
+   
+   var items = SliderModeHelper.StringToItems(value);
+   var mapping = args.LocalizationMapping;
+   foreach (var item in items)
+   {
+    if (!string.IsNullOrEmpty(item.DescriptionLocalizationKey))
+    {
+     string newKey;
+     // Создаем связь 
+     if (mapping.TryGetValue(item.DescriptionLocalizationKey, out newKey))
+      item.DescriptionLocalizationKey = newKey;
+     }
+    }
+    // Сериализуем значение свойства
+    return SliderModeHelper.ItemsToString(items);
+  }
+ };
+}
+----
