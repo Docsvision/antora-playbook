@@ -10,8 +10,8 @@
 
 [source,tsx]
 ----
-   // Импортируем необходимые сущности из модуля @docsvision/webclient/System/ILocalizationsMap
-   import { ILocalizationsMap } from "@docsvision/webclient/System/ILocalizationsMap";
+   // Импортируем необходимые сущности из модуля @{dv}/webclient/System/ILocalizationsMap
+   import { ILocalizationsMap } from "@{dv}/webclient/System/ILocalizationsMap";
    
    export function getLocalizedResources(): ILocalizationsMap {
        let cultureMap: ILocalizationsMap = {};
@@ -43,8 +43,8 @@
    ```tsx
    // 1. Добавьте строку импорта функции getLocalizedResources из добавленного в 2 файла (в примере – LocalizedResource)
    import { getLocalizedResources } from "./LocalizedResource";
-   import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
-   import { ILocalizationsMap } from "@docsvision/webclient/System/ILocalizationsMap";
+   import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
+   import { ILocalizationsMap } from "@{dv}/webclient/System/ILocalizationsMap";
    
    // 2. Добавьте в registerExtension функцию getLocalizations, которая должна вызывать импортированную в 1 функцию 
    extensionManager.registerExtension({
@@ -58,7 +58,7 @@
 
 4. Соберите проект клиентского расширения командой `npm run build`.
 
-5. Скопируйте полученный файл `<Каталог сборки>\extension.js` на сервер Web-клиента в папку `<Каталог установки Web-клиент>\5.5\Site\Content\Modules\\<Каталог Решения>`.
+5. Скопируйте полученный файл `<Каталог сборки>\extension.js` на сервер {wc}а в папку `<Каталог установки {wc}>\5.5\Site\Content\Modules\\<Каталог Решения>`.
 
    > Обратитесь к разделу [Создание и публикация клиентского расширения](ClientExtensionsNew.md), чтобы получить больше информации, связанной со сборкой проекта.
 
@@ -71,4 +71,4 @@ resources.Resource_One
 
 Проверить работоспособность расширения можно обратившись к `resources.Resource_One` из консоли отладки веб-браузера. Должно быть получено значение "Пример".
 
-После завершения отладки соберите и опубликуйте на сервере Web-клиента «релизную версию» клиентского расширения. «Релизная версия» собирается командой `npm run build:prod`.
+После завершения отладки соберите и опубликуйте на сервере {wc}а «релизную версию» клиентского расширения. «Релизная версия» собирается командой `npm run build:prod`.

@@ -1,10 +1,10 @@
 = IRealtimeCommunicationService - интерфейс
 
-Интерфейс `IRealtimeCommunicationService` определяет методы для работы с подсистемой оповещений Web-клиента.
+Интерфейс `IRealtimeCommunicationService` определяет методы для работы с подсистемой оповещений {wc}а.
 
-*Пространство имен*: `DocsVision.Platform.WebClient.Services`
+*Пространство имен*: `{dv}.Platform.WebClient.Services`
 
-*Сборка*: `DocsVision.Platform.WebClient.dll`
+*Сборка*: `{dv}.Platform.WebClient.dll`
 
 == Синтаксис
 
@@ -22,7 +22,7 @@ public interface IRealtimeCommunicationService
 |`GetCurrentSessionId` |Возвращает идентификатор текущей сессии в ASP NET. Тип: String. 
 |`Send&lt;T&gt;(String, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором сессии sessionId в ASP NET. 
 |`Send&lt;T&gt;(Guid, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором employeeId в Справочнике сотрудников. 
-|`SendAll&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` всем подключенным пользователям (с активной и неактивной сессией) Web-клиента. 
+|`SendAll&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` всем подключенным пользователям (с активной и неактивной сессией) {wc}а.
 |`SendToCurrentSession&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` текущему пользователю. 
 |===
 
@@ -43,7 +43,7 @@ public interface IRealtimeCommunicationService
 
 Отправленное сообщение будет показано в правом нижнем углу. Цветовое оформление сообщения зависит от типа сообщения, указанного в RealtimeCommunicationMessage.
 
-В Web-клиент 15 реализован единственный тип сообщения, передаваемого с помощью SignalR, - NotificationRealtimeMessage.
+В {wc} 15 реализован единственный тип сообщения, передаваемого с помощью SignalR, - NotificationRealtimeMessage.
 
 На клиентской стороне аналогичную сервису `IRealtimeCommunicationService` функциональность предоставляет клиентский сервис `$RealtimeCommunicationService`.
 

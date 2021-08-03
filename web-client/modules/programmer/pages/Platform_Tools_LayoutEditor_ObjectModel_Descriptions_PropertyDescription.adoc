@@ -2,9 +2,9 @@
 
 Класс PropertyDescription содержит описание свойства элемента управления в расширении Конструктора web-разметок.
 
-*Пространство имен*: `Docsvision.Platform.Tools.LayoutEditor.ObjectModel.Descriptions`
+*Пространство имен*: `{dv}.Platform.Tools.LayoutEditor.ObjectModel.Descriptions`
 
-*Сборка*: `Docsvision.LayoutEditor.ObjectModel.dll`
+*Сборка*: `{dv}.LayoutEditor.ObjectModel.dll`
 
 == Синтаксис
 
@@ -36,7 +36,7 @@ public class PropertyDescription : ICloneable
 |DeviceDependent |Задает или возвращает флаг, указывающий, зависит ли значение свойства от типа клиентского устройства. 
 |DisplayName |Задает или возвращает строковый ресурс, предоставляющий локализованное название элемента управления. 
 |Editor |Задает или возвращает тип компонента редактирования (редактора) значения свойства. Редактор является компонентом UserControl с реализованным интерфейсом `Xceed.Wpf.Toolkit.PropertyGrid.Editors. ITypeEditor` (сборка `Xceed.Wpf.Toolkit.Fixed.dll`). 
-|ExcludeFromIL |Задает или возвращает флаг, указывающий, будет ли данное свойство исключено из пакета свойств элемента управления, передаваемых в клиентскую часть Web-клиента. Свойство с установленным флагом ExcludeFromIL остается настраиваемым в Конструкторе web-разметок. 
+|ExcludeFromIL |Задает или возвращает флаг, указывающий, будет ли данное свойство исключено из пакета свойств элемента управления, передаваемых в клиентскую часть {wc}а. Свойство с установленным флагом ExcludeFromIL остается настраиваемым в Конструкторе web-разметок.
 |GenerateDefaultValue |Задает или возвращает метод, генерирующий для свойства значение по умолчанию. 
 |GenerateValueOnPaste |Задает или возвращает метод, генерирующий значение свойства при копировании элемента управления, содержащего данное свойство. 
 |GetBindingLoader |Задает или возвращает функцию, реализующую механизм получения и сохранения значения свойства. 
@@ -69,7 +69,7 @@ private PropertyDescription GetSliderPropertyDescription()
   Category = PropertyCategoryConstants.DataCategory, // Категория для размещения свойства Данные
   DisplayName = Resources.ControlTypes_SliderProperty, // Отображаемое название свойства
   DefaultValue = String.Empty, // Пустое значение по умолчанию
-  ExcludeFromIL = true, // Свойство не должно передаваться на клиентскую сторону Web-клиента
+  ExcludeFromIL = true, // Свойство не должно передаваться на клиентскую сторону {wc}а
   Editor = typeof(SliderEditor), // Указываем специфический редактор значения свойства
   
   // Определяем метод, который будет вызываться при копировании свойства

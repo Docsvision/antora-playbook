@@ -1,7 +1,7 @@
 
 == Предпросмотр файла
 
-Элемент управления [.ph .uicontrol]*Предпросмотр файла* предназначен для отображения содержимого файла, выбранного в элементе xref:Control_filelist.html[Список файлов], xref:Control_taskCardFilePanel.html[Файловая панель], xref:Control_approvalFilePanel.html[Файловая панель согласования].
+Элемент управления [.ph .uicontrol]*Предпросмотр файла* предназначен для отображения содержимого файла, выбранного в элементе xref:Control_filelist.adoc[Список файлов], xref:Control_taskCardFilePanel.adoc[Файловая панель], xref:Control_approvalFilePanel.adoc[Файловая панель согласования].
 
 image::controls_filepreview_sample.png[[.fig--title-label]##Figure 1. ##Пример элемента управления «Предпросмотр файла» в разметке карточки]
 
@@ -15,7 +15,7 @@ image::controls_filepreview_sample.png[[.fig--title-label]##Figure 1. ##Прим
 *Важные особенности использования элемента «Предпросмотр файла»:*
 
 * В разметку можно добавить только один элемент «Предпросмотр файла».
-* Элемент управления «Предпросмотр файла» должен быть добавлен в отдельный элемент xref:Control_block.html[Блок], в котором не должно быть других элементов кроме элемента «Предпросмотр файла».
+* Элемент управления «Предпросмотр файла» должен быть добавлен в отдельный элемент xref:Control_block.adoc[Блок], в котором не должно быть других элементов кроме элемента «Предпросмотр файла».
 * Родительский блок элемента «Предпросмотр файла» должен размещаться в блоке, содержащем только два дочерних элемента (см. рисунок ниже): блок с элементом «Предпросмотр файла» и блок с остальными элементами разметки.
 +
 image::filePreviewRecommendation.png[[.fig--title-label]##Figure 2. ##Пример структуры разметки, соответствующей требованиям]
@@ -25,11 +25,11 @@ image::filePreviewRecommendation.png[[.fig--title-label]##Figure 2. ##Приме
 * «pdf»;
 * офисные: «.docx», «.odt», «.doc», «.rtf», «.dot», «.dotx», «.xlt», «.xls», «.xltx», «.xlsx», «.ods»;
 * изображения: «.jpg», «.jpeg», «.gif», «.png», «.bmp», «.tiff», «.tif», «.emf», «.wmf»;
-* прочие: «.htm», «.html», «.js», «.xslt», «.xsl», «.xml», «.asmx», «.ascx», «.aspx», «.cpp», «.h», «.css», «.idl», «.ini», «.java», «.rc», «.rc2», «.shtm», «.shtml», «.txt», «.log», «.cs», «.sql», «.csv».
+* прочие: «.htm», «.adoc», «.js», «.xslt», «.xsl», «.xml», «.asmx», «.ascx», «.aspx», «.cpp», «.h», «.css», «.idl», «.ini», «.java», «.rc», «.rc2», «.shtm», «.shtml», «.txt», «.log», «.cs», «.sql», «.csv».
 
 [NOTE]
 ====
-[.note__title]#Note:# Особенности реализации: файлы с поддержкой предпросмотра транслируются в формат PDF на сервере Web-клиент, и отображаются на клиенте с использованием компонента https://mozilla.github.io/pdf.js/getting_started/[PDF.JS], который предоставляет пользователям следующие функции:
+[.note__title]#Note:# Особенности реализации: файлы с поддержкой предпросмотра транслируются в формат PDF на сервере {wc}, и отображаются на клиенте с использованием компонента https://mozilla.github.io/pdf.js/getting_started/[PDF.JS], который предоставляет пользователям следующие функции:
 
 * переход между страницами,
 * выбор масштаба,
@@ -93,4 +93,4 @@ image::filePreviewRecommendation.png[[.fig--title-label]##Figure 2. ##Приме
   При щелчке;;
     Вызывается при щелчке мыши по любой области элемента управления.
 
-*Parent topic:* xref:../topics/SpecialControls.html[Специальные]
+*Parent topic:* xref:SpecialControls.adoc[Специальные]

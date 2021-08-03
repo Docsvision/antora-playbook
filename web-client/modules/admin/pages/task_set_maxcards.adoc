@@ -10,8 +10,8 @@
 
 По умолчанию в Модуле используется собственное ограничение, которое устанавливает максимальное количество в 15 карточек на страницу представления. Чтобы изменить максимальное количество:
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
-. Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="DefaultPageSize"]*#.
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки {wc}а]\5.5\Site\web.config`#.
+. Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="DefaultPageSize"]*#.
 +
 Если данного элемента нет, его нужно создать самостоятельно:
 
@@ -26,8 +26,8 @@
 
 Чтобы переключить Модуль на использование ограничений, установленных в свойствах папок (параметр `Ограничение количества выводимых записей`):
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
-. Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="UseFolderPropertyRestrictionPageSize"]*#.
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки {wc}а]\5.5\Site\web.config`#.
+. Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="UseFolderPropertyRestrictionPageSize"]*#.
 +
 Если данного элемента нет, создайте его самостоятельно следующим образом:
 
@@ -38,7 +38,7 @@
 </SettingGroup>
 ----
 . Измените значение настройки `UseFolderPropertyRestrictionPageSize`:
-* [.keyword]*true* – использовать ограничение, которое установлено в Docsvision;
+* [.keyword]*true* – использовать ограничение, которое установлено в {dv};
 +
 [NOTE]
 ====
@@ -47,4 +47,4 @@
 * [.keyword]*false* (по умолчанию) – использовать собственное ограничение Модуля (настройка `DefaultPageSize`).
 . Сохраните изменения конфигурационного файла.
 
-*Parent topic:* xref:../topics/CardsConf.html[Работа с карточками]
+*Parent topic:* xref:CardsConf.adoc[Работа с карточками]

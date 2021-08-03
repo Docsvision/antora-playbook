@@ -1,4 +1,4 @@
-= Создание серверного расширения Web-клиента
+= Создание серверного расширения {wc}а
 
 В link:SampleOfficeWorkDescriptor.md[описателе элемента управления] был объявлен конвертер для значения элемента – «RefCasesConverter» (свойство «Binding»), который должен приводить настоящее значение (идентификатор строки Дела в _Справочнике номенклатуры дел 5_) к виду, удобному для пользователя – в данном примере к строка вида: «Год. Название разделов. Название дела».
 
@@ -45,9 +45,9 @@ namespace RefCasesServerExtension.Services
 ----
 // Файл RefCasesServerExtension\Services\RefCasesService.cs
 
-using DocsVision.Platform.ObjectManager;
-using DocsVision.Platform.WebClient;
-using DocsVision.Platform.WebClient.Managers;
+using {dv}.Platform.ObjectManager;
+using {dv}.Platform.WebClient;
+using {dv}.Platform.WebClient.Managers;
 using RefCasesServerExtension.Models;
 using System;
 using System.Collections.Generic;
@@ -238,7 +238,7 @@ namespace RefCasesServerExtension.Services
 
 Как уже было сказано ранее, конвертер нужен для формирования отображаемого значения элемента управления, показываемого при инициализации элемента – иначе в элементе будет показан идентификатор выбранного дела.
 
-Для разрабатываемого элемента управления название конвертера («RefCasesConverter») было объявлено в описателе элемента управления. Теперь его нужно реализовать и зарегистрировать в серверном расширении Web-клиента.
+Для разрабатываемого элемента управления название конвертера («RefCasesConverter») было объявлено в описателе элемента управления. Теперь его нужно реализовать и зарегистрировать в серверном расширении {wc}а.
 
 В данном пример конвертер использует метод `IRefCasesService.GetCaseTitle` для получения отображаемого названия Дела.
 
@@ -246,10 +246,10 @@ namespace RefCasesServerExtension.Services
 ----
 // Файл RefCasesServerExtension\BindingConverters\RefCasesConverter.cs
 
-using DocsVision.WebClientLibrary.Layout.IL;
-using DocsVision.WebClientLibrary.ObjectModel;
-using DocsVision.WebClientLibrary.ObjectModel.Services.BindingConverters;
-using DocsVision.WebClientLibrary.ObjectModel.Services.LayoutModel;
+using {dv}.WebClientLibrary.Layout.IL;
+using {dv}.WebClientLibrary.ObjectModel;
+using {dv}.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using {dv}.WebClientLibrary.ObjectModel.Services.LayoutModel;
 using RefCasesServerExtension.Models;
 using RefCasesServerExtension.Services;
 using System;
@@ -376,9 +376,9 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 using Autofac;
-using DocsVision.WebClient.Extensibility;
-using DocsVision.WebClient.Helpers;
-using DocsVision.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using {dv}.WebClient.Extensibility;
+using {dv}.WebClient.Helpers;
+using {dv}.WebClientLibrary.ObjectModel.Services.BindingConverters;
 using RefCasesServerExtension.BindingConverters;
 using RefCasesServerExtension.Services;
 

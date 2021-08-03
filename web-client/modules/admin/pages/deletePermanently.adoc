@@ -1,15 +1,15 @@
 
 == Изменение способа удаления карточек и папок
 
-По умолчанию карточки и папки из Web-клиента удаляются в корзину. Администратор может включить режим удаления без возможности восстановления.
+По умолчанию карточки и папки из {wc}а удаляются в корзину. Администратор может включить режим удаления без возможности восстановления.
 
 [NOTE]
 ====
 [.note__title]#Note:# Восстановить удаленные карточки и папки можно только в Windows-клиенте.
 ====
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки Web-клиента]\5.5\Site\web.config`#.
-. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*Docsvision* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.
+. Откройте конфигурационный файл [.ph]#[.ph .filepath]`[Каталог установки {wc}а]\5.5\Site\web.config`#.
+. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.
 . Измените значение параметра `DeletePermanently`: true – отключает использование корзины; false (по умолчанию) – удалённые карточки и папки помещаются в корзину.
 +
 [source,pre,codeblock]
@@ -20,4 +20,4 @@
 Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
 . Сохраните изменения конфигурационного файла.
 
-*Parent topic:* xref:../topics/CommonConf.html[Общие настройки]
+*Parent topic:* xref:CommonConf.adoc[Общие настройки]

@@ -1,6 +1,6 @@
 = Создание клиентского расширения с реализацией элемента управления
 
-Непосредственно элемент управления для Web-клиента реализуется в клиентском расширении, и состоит из нескольких частей (см. пункт link:CreateClientComponent.md[Разработка и публикация клиентского компонента элемента управления]): класс параметров, интерфейс состояния, интерфейсный класс и класс реализации.
+Непосредственно элемент управления для {wc}а реализуется в клиентском расширении, и состоит из нескольких частей (см. пункт link:CreateClientComponent.md[Разработка и публикация клиентского компонента элемента управления]): класс параметров, интерфейс состояния, интерфейсный класс и класс реализации.
 
 С точки зрения пользовательского интерфейса реализуемый элемент управления будет представлять собой поле для ввода текста, в котором по умолчанию будет отображаться значение из поля карточки, связанного со строкой Дела Справочника номенклатуры дел 5. Особенностью элемента управления является необходимость реализации дополнительного графического компонента, в котором будут отображаться данные для выбора значения из Справочника номенклатуры дел 5, а также возможность быстрого поиска дел по справочнику.
 
@@ -14,10 +14,10 @@
 ----
 // Файл RefCasesWebExtension\src\Services\RefCasesServices.ts
 
-import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
-import { urlStore } from "@docsvision/webclient/System/UrlStore";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { urlStore } from "@{dv}/webclient/System/UrlStore";
 import { Models } from "../Controls/RefCases/Data/CaseModel";
-import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
+import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
 
 export class RefCasesService  {
     constructor(private services: $RequestManager) {

@@ -1,6 +1,6 @@
 = Описание проекта TemplateWebExtension
 
-Проект «TemplateWebExtension» является частью репозитория link:DocsvisionRepOnGitHub.md[WebClient-Samples]. Данный проект предназначен для разработки и сборки клиентских расширений и скриптов.
+Проект «TemplateWebExtension» является частью репозитория link:{dv}RepOnGitHub.md[WebClient-Samples]. Данный проект предназначен для разработки и сборки клиентских расширений и скриптов.
 
 Папка TemplateWebExtension содержит файлы:
 
@@ -26,7 +26,7 @@
 [source,ts]
 ----
 import * as EventHandlers from "./EventHandlers";
-import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
 
 // Регистрация расширения позволяет корректно установить все
 // обработчики событий, сервисы и прочие сущности веб-приложения.
@@ -47,7 +47,7 @@ import * as NewEventHandlers from "./Scripts/NewEventHandlers"; // Добавл�
 
 ----
 
-Команда `import { extensionManager } from &quot;@docsvision/webclient/System/ExtensionManager&quot;` импортирует из модуля «@docsvision/webclient/System/ExtensionManager» сущность extensionManager (менеджер расширений).
+Команда `import { extensionManager } from &quot;@{dv}/webclient/System/ExtensionManager&quot;` импортирует из модуля «@{dv}/webclient/System/ExtensionManager» сущность extensionManager (менеджер расширений).
 
 Команда `extensionManager.registerExtension({ … })` регистрирует клиентское расширение с названием «Template web extension», которое предоставляет глобальные обработчики (globalEventHandlers).
 
@@ -65,8 +65,8 @@ globalEventHandlers: [ EventHandlers, NewEventHandlers] // Добавлены о
 
 [source,tsx]
 ----
-import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
-import { Layout } from "@docsvision/webclient/System/Layout";
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { Layout } from "@{dv}/webclient/System/Layout";
 
 // Все функции, классы и переменные, используемые за пределами модуля (т.е. файла),
 // должны экспортироваться (содержать ключевое слово export в объявлении).
@@ -76,7 +76,7 @@ export function someHandler(sender: Layout, e: IEventArgs) {
 
 ----
 
-Команды `import` в начале файла выполняют загрузку из модулей Web-клиента сущностей, используемых в коде обработчика.
+Команды `import` в начале файла выполняют загрузку из модулей {wc}а сущностей, используемых в коде обработчика.
 
 Функция someHandler является примером обработчика события разметки (тип sender – Layout). Ключевое слово export указывает, что данная функция доступна для импорта. Чтобы экспортировать другую функцию, необходимо также указывать ключевое слово export:
 
@@ -96,10 +96,10 @@ export function newHandler(sender: Employee, e: IEventArgs) { // Добавле�
 
 [source,tsx]
 ----
-/* Импорт необходимых сущностей из модулей Web-клиента */ 
-import { Employee } from "@docsvision/webclient/BackOffice/Employee"; 
-import { IEventArgs } from "@docsvision/webclient/System/IEventArgs"; 
-import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox"; 
+/* Импорт необходимых сущностей из модулей {wc}а */
+import { Employee } from "@{dv}/webclient/BackOffice/Employee";
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { MessageBox } from "@{dv}/webclient/Helpers/MessageBox/MessageBox";
 
 // Реализация функции-обработчика 
 export function changeEmployeeHandler(sender: Employee, e: IEventArgs) { 

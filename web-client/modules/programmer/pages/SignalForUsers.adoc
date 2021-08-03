@@ -1,16 +1,16 @@
 = Отправка оповещений пользователям
 
-Для отправки оповещений пользователям Web-клиента могут быть использованы функции SignalR, реализованные в сервисе link:Platform_WebClient_Services_IRealtimeCommunicationService.md[IRealtimeCommunicationService]. Данный сервис позволяет отправлять оповещения всем пользователям или определённому пользователю.
+Для отправки оповещений пользователям {wc}а могут быть использованы функции SignalR, реализованные в сервисе link:Platform_WebClient_Services_IRealtimeCommunicationService.md[IRealtimeCommunicationService]. Данный сервис позволяет отправлять оповещения всем пользователям или определённому пользователю.
 
 Не следует путать оповещение с функцией отображения диалоговых окон (пункт link:ClientExtensionsScriptShowInfoDialog.md["Отображение сообщений, запросов, предупреждений"]).
 
-Текстовые оповещения отображаются в правом нижнем углу окна Web-клиента.
+Текстовые оповещения отображаются в правом нижнем углу окна {wc}а.
 
 image:img/realtimeMessage.png[Пример оповещения]
 
 ____
 
-На стороне клиента также предоставляется доступ к механизму оповещения, позволяющий передавать сообщения между вкладками браузера и на сервер Web-клиента. Данная функциональность реализована в клиентском сервисе `$RealtimeCommunicationService` (см. описание в link:HowUseDocJsApi.md[JsDocApi]).
+На стороне клиента также предоставляется доступ к механизму оповещения, позволяющий передавать сообщения между вкладками браузера и на сервер {wc}а. Данная функциональность реализована в клиентском сервисе `$RealtimeCommunicationService` (см. описание в link:HowUseDocJsApi.md[JsDocApi]).
 
 ____
 
@@ -28,9 +28,9 @@ ____
 ----
 // Файл Controllers\ServiceController.cs
 
-using DocsVision.Platform.WebClient.Models.RealTimeCommunication;
-using DocsVision.Platform.WebClient.Models.RealTimeCommunication.NotificationMessage;
-using DocsVision.Platform.WebClient.Services;
+using {dv}.Platform.WebClient.Models.RealTimeCommunication;
+using {dv}.Platform.WebClient.Models.RealTimeCommunication.NotificationMessage;
+using {dv}.Platform.WebClient.Services;
 using System;
 using System.Web.Http;
 
@@ -73,9 +73,9 @@ namespace SignalForUsersExtension
 ----
 // Файл src\MessageService.tsx
 
-import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
-import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
-import { urlStore } from "@docsvision/webclient/System/UrlStore";
+import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { urlStore } from "@{dv}/webclient/System/UrlStore";
 
 // Клиентский сервис, предоставляющий доступ к серверным методам работы с подсистемой оповещений
 export class MessageService {
@@ -115,15 +115,15 @@ export enum MessageType {
 ----
 // Файл src\EventHandlers.tsx
 
-import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
-import { Layout } from "@docsvision/webclient/System/Layout";
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { Layout } from "@{dv}/webclient/System/Layout";
 import { $MessageService, MessageType, MessageService } from "./MessageService";
-import { layoutManager } from "@docsvision/webclient/System/LayoutManager";
+import { layoutManager } from "@{dv}/webclient/System/LayoutManager";
 
 // Функция использует сервис $MessageService (проект) для отправки оповещения всем пользователям
 export function sendMessage(sender: Layout, e: IEventArgs) {
    let messageService = layoutManager.cardLayout.getService<MessageService>($MessageService);
-   return messageService.sendAll("В 12:00 планируется перезагрузка Web-клиента. Сохраните данные.", MessageType.Warning);
+   return messageService.sendAll("В 12:00 планируется перезагрузка {wc}а. Сохраните данные.", MessageType.Warning);
 }
 
 ----

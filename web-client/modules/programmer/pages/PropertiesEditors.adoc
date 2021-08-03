@@ -11,10 +11,10 @@ image:img/textEditorWithLocalization.png[Редактор локализуемы
        var propertyDescription = new PropertyDescription {
            Type = typeof (string),
            Name = &quot;LocalizableMessage&quot;,
-           Category = DocsVision.Platform.Tools.LayoutEditor.Infrostructure. PropertyCategoryConstants.DataCategory,
+           Category = {dv}.Platform.Tools.LayoutEditor.Infrostructure. PropertyCategoryConstants.DataCategory,
            DisplayName = &quot;Localizable message&quot;,
            Localized = true,
-           Editor = typeof (DocsVision.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor)
+           Editor = typeof ({dv}.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor)
        };
        return propertyDescription;
    }
@@ -24,7 +24,7 @@ image:img/textEditorWithLocalization.png[Редактор локализуемы
 
 . Установить свойство Type в string.
 . Установить свойство Localized в true.
-. Установить свойство Editor в DocsVision.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor.
+. Установить свойство Editor в {dv}.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor.
 . Редактор перечислений.
 
 image:img/enumEditor.png[Редактор перечислений]
@@ -88,7 +88,7 @@ image:img/enumEditor.png[Редактор перечислений]
 
 . Редактор устройствозависимых свойств.
 
-Значение свойств данного вида зависят от типа устройства, на котором открыт Web-клиент.
+Значение свойств данного вида зависят от типа устройства, на котором открыт {wc}.
 
 Пример использования в коде:
 

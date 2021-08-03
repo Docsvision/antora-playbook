@@ -64,19 +64,19 @@
 
 * EditOperation – выбор операции редактирования.
 
-Новое свойство «RootSection» обеспечивает заявленную возможность выбора разделе _Справочника номенклатуры дел 5_, из которого пользователю будет разрешено выбирать дела. Значение свойства будет устанавливаться с помощью специального редактора «RefCasesSectionEditor» (будет разработан далее в серверном расширение Web-клиента).
+Новое свойство «RootSection» обеспечивает заявленную возможность выбора разделе _Справочника номенклатуры дел 5_, из которого пользователю будет разрешено выбирать дела. Значение свойства будет устанавливаться с помощью специального редактора «RefCasesSectionEditor» (будет разработан далее в серверном расширение {wc}а).
 
 Также для элемента управления определены события: При наведении курсора, При отведении курсора, При смене данных.
 
 == Расширение Конструктора web-разметок
 
-В описателе элемента управления определено несколько нестандартных редакторов, а также ресурсы с текстовыми значениями. Данные сущности нужно добавить в Конструктор web-разметок с помощью расширения, код которого приведён ниже.
+В описателе элемента управления определено несколько нестандартных редакторов, а также ресурсы с текстовыми значениями. Данные сущности нужно добавить в {kvr} с помощью расширения, код которого приведён ниже.
 
 [source,csharp]
 ----
 // Файл RefCategoriesDesignerExtension\Extension\RefCasesDesignerExtension.cs
 
-using DocsVision.Platform.Tools.LayoutEditor.Extensibility;
+using {dv}.Platform.Tools.LayoutEditor.Extensibility;
 using RefCasesDesignerExtension.Editors;
 using System;
 using System.Collections.Generic;
@@ -119,14 +119,14 @@ namespace RefCasesDesignerExtension.Extension
 
 == Редактор RefCasesFieldMetadataEditor
 
-Редактор RefCasesFieldMetadataEditor является стандартным редактором link:DesignerExtensionWithFieldEditor.md[редактором для выбора поля карточки], реализованном в классе `DocsVision.BackOffice.WebLayoutsDesigner.Editors.FieldMetadataEditor`. 
+Редактор RefCasesFieldMetadataEditor является стандартным редактором link:DesignerExtensionWithFieldEditor.md[редактором для выбора поля карточки], реализованном в классе `{dv}.BackOffice.WebLayoutsDesigner.Editors.FieldMetadataEditor`.
 
 [source,csharp]
 ----
 // Файл RefCategoriesDesignerExtension\Editors\RefCasesFieldMetadataEditor.cs
 
-using DocsVision.BackOffice.WebLayoutsDesigner.Editors;
-using DocsVision.Platform.Data.Metadata.CardModel;
+using {dv}.BackOffice.WebLayoutsDesigner.Editors;
+using {dv}.Platform.Data.Metadata.CardModel;
 using System;
 using System.Windows;
 using Xceed.Wpf.Toolkit.PropertyGrid;
@@ -162,7 +162,7 @@ namespace RefCasesDesignerExtension.Editors
 
 Ограничение возможности выбора полей карточки включено с помощью фильтра `FieldFilter`, в котором проверяется тип поля (`field.FieldType`), которое должно быть ссылочным полем (`FieldType.RefId`), ссылающимся на секцию Дела (`field.LinkedSectionId == sectionCasesID`) _Справочника номенклатуры дел 5_ (`field.LinkedCardTypeId == refCasesID`).
 
-В стандартной реализации приложения _Делопроизводство 5_ поле карточки, используемое для хранения ссылки на Дело, не является ссылочным, поэтому для него не подходит фильтр, использованный в данном примере – при настройке разметки данное поле будет недоступно для выбора. Если в Web-клиенте нужно повторить настройки разметки Windows-клиента, фильтр нужно изменить следующим образом:
+В стандартной реализации приложения _Делопроизводство 5_ поле карточки, используемое для хранения ссылки на Дело, не является ссылочным, поэтому для него не подходит фильтр, использованный в данном примере – при настройке разметки данное поле будет недоступно для выбора. Если в {wc}е нужно повторить настройки разметки Windows-клиента, фильтр нужно изменить следующим образом:
 
 [source,csharp]
 ----
@@ -201,9 +201,9 @@ ____
 
 [source,csharp]
 ----
-using DocsVision.Platform.Tools.LayoutEditor;
-using DocsVision.Platform.Tools.LayoutEditor.PropertiesEditor;
-using DocsVision.Platform.WebClient;
+using {dv}.Platform.Tools.LayoutEditor;
+using {dv}.Platform.Tools.LayoutEditor.PropertiesEditor;
+using {dv}.Platform.WebClient;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -318,7 +318,7 @@ public string GetSectionTitle(Guid sectionId)
 }
 ----
 
-здесь: `cardManager` – Менеджер карточек (базовое API Docsvision), `refCasesId` – идентификатор _Справочника номенклатуры дел 5_, `sectionsSectionID` – идентификатор секции «Разделы» справочника.
+здесь: `cardManager` – Менеджер карточек (базовое API {dv}), `refCasesId` – идентификатор _Справочника номенклатуры дел 5_, `sectionsSectionID` – идентификатор секции «Разделы» справочника.
 
 Далее приведён код компонента дерева Разделов без графической составляющей (см. полный исходный код примера).
 
@@ -326,7 +326,7 @@ public string GetSectionTitle(Guid sectionId)
 ----
 // Файл RefCategoriesDesignerExtension\Editors\SectionsTree.xaml.cs
 
-using DocsVision.Platform.WebClient;
+using {dv}.Platform.WebClient;
 using System;
 using System.Windows;
 

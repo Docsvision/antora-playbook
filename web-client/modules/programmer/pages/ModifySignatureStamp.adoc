@@ -1,6 +1,6 @@
 # Реализация собственного штампа электронной подписи
 
-Web-клиент предоставляет возможность печати основных файлов карточки Документ со штампом электронной подписи (ЭП), если для подписания использовался сертификат.
+{wc} предоставляет возможность печати основных файлов карточки Документ со штампом электронной подписи (ЭП), если для подписания использовался сертификат.
 
 При печати файла со штампом создаётся его PDF версия, в которую отдельным блоком добавляется изображение штампа ЭП.
 
@@ -58,7 +58,7 @@ public class SimpleImageGenerator : IImageGenerator
             // В собственной релизации могут использоваться любые другие способы генерации 
             //  изображений из текста
             var html = String.Format(Resources.StampHtml, Resources.Css, certificateNumber, owner, notBefore);
-            var htmlToImageConv = new NReco.ImageGenerator.HtmlToImageConverter();
+            var htmlToImageConv = new NReco.ImageGenerator.adocToImageConverter();
             htmlToImageConv.Width = imageWidth;
 
             using (var pngStream = new MemoryStream())
@@ -89,7 +89,7 @@ ____
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Docsvision mail client email</title>
+		<title>{dv} mail client email</title>
 		<style type="text/css" media="all">
             {0}
 		</style>
@@ -170,4 +170,4 @@ public override void InitializeContainer(ContainerBuilder containerBuilder)
 }
 ----
 
-Обратите внимание: если в Web-клиенте зарегистрировано несколько реализаций `IImageGenerator` с поддержкой `ImageGeneratorType.ElectronicSignature`, будет использоваться реализация из последнего загруженного серверного расширения.
+Обратите внимание: если в {wc}е зарегистрировано несколько реализаций `IImageGenerator` с поддержкой `ImageGeneratorType.ElectronicSignature`, будет использоваться реализация из последнего загруженного серверного расширения.

@@ -1,6 +1,6 @@
 = Переопределение сервиса отрисовки элемента «Ход согласования»
 
-Элемент управления «Ход согласования» представляет собой таблицу, в которой отображаются события заданий согласования (выполнение, делегирование и др.). Описание данного элемента приведено в руководстве пользователя программы «Конструктор web-разметок».
+Элемент управления «Ход согласования» представляет собой таблицу, в которой отображаются события заданий согласования (выполнение, делегирование и др.). Описание данного элемента приведено в руководстве пользователя программы «{kvr}».
 
 Программист может переопределить функцию отрисовки всей таблицы и отдельных элементов: заголовков и ячеек определённых столбцов. Для этого нужно передать в поле `stageRenderer` класса элемента управления «Ход согласования» (тип `AgreementHistory`) сервис с интерфейсом `IAgreementHistoryStageRenderer`:
 
@@ -40,13 +40,13 @@ interface IAgreementHistoryStageRenderer {
 ----
 // Импорт зависимостей
 
-import { IAgreementHistoryStageRenderer } from "@docsvision/webclient/Approval/$AgreementHistoryStageRenderer";
-import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
-import { IApprovalStageItemRowProps } from "@docsvision/webclient/Approval/IApprovalStageItemRowProps";
-import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
-import { AgreementHistory } from "@docsvision/webclient/Approval/AgreementHistory";
-import { Tab } from "@docsvision/webclient/Platform/Tab";
-import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+import { IAgreementHistoryStageRenderer } from "@{dv}/webclient/Approval/$AgreementHistoryStageRenderer";
+import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { IApprovalStageItemRowProps } from "@{dv}/webclient/Approval/IApprovalStageItemRowProps";
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { AgreementHistory } from "@{dv}/webclient/Approval/AgreementHistory";
+import { Tab } from "@{dv}/webclient/Platform/Tab";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
 
 import * as React from 'react' 
 
@@ -105,9 +105,9 @@ ____
 ----
 import * as EventHandlers from "./EventHandlers";
 import { $AgreementHistoryRenderService, AgreementHistoryRenderService } from "./EventHandlers";
-import { Service } from "@docsvision/webclient/System/Service";
-import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
-import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+import { Service } from "@{dv}/webclient/System/Service";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
 
 extensionManager.registerExtension({
     name: "Template web extension",
@@ -119,7 +119,7 @@ extensionManager.registerExtension({
 })
 ----
 
-После загрузки клиентского расширения на сервер Web-клиента нужно указать обработчик для переключения страниц элемента «Вкладки» карточки Документ:
+После загрузки клиентского расширения на сервер {wc}а нужно указать обработчик для переключения страниц элемента «Вкладки» карточки Документ:
 
 . Откройте Конструкторе web-разметок и перейдите к разметке просмотра карточки ДокументУД/Исходящий.
 . Перейдите к свойствам элемента «contentTab».
@@ -130,6 +130,6 @@ extensionManager.registerExtension({
 
 ____
 
-Для получения других примеров, включая пример получения списка файлов для отображения столбца «Правки», обратитесь к исходным кодам элемента управления «Ход согласования», размещаемым в каталоге установки Web-клиента: `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\App\Approval\Controls\AgreementHistory`.
+Для получения других примеров, включая пример получения списка файлов для отображения столбца «Правки», обратитесь к исходным кодам элемента управления «Ход согласования», размещаемым в каталоге установки {wc}а: `C:\Program Files (x86)\{dv}\WebClient\5.5\Site\Content\App\Approval\Controls\AgreementHistory`.
 
 ____
