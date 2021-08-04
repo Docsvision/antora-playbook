@@ -1,7 +1,7 @@
 
 == Настройка обновления {wc}а без импорта решений
 
-При обновлении {wc}а происходит проверка параметра `<LoadLayouts></LoadLayouts>` конфигурационного файла панели управления {wc}а ([.ph .filepath]`WebClientAdminConsole.config`), расположенного по адресу [.ph .filepath]`%LocalAppData%\{dv}\WebClientAdminConsole.config`.
+При обновлении {wc}а происходит проверка параметра `<LoadLayouts></LoadLayouts>` конфигурационного файла панели управления {wc}а ([.ph .filepath]`WebClientAdminConsole.config`), расположенного по адресу [.ph .filepath]`%LocalAppData%Docsvision\WebClientAdminConsole.config`.
 
 Если файл отсутствует или значение `<LoadLayouts>true</LoadLayouts>`, {wc} будет обновлён в стандартном режиме с импортом решений в базу данных.
 
@@ -9,7 +9,7 @@
 
 Для включения режима обновления без импорта решений:
 
-. [.ph .cmd]#На сервере с установленной системой {dv} с модулем [.dfn .term]_{wc}_ перейдите по адресу [.ph .filepath]`%LocalAppData%\{dv}`.#
+. [.ph .cmd]#На сервере с установленной системой {dv} с модулем [.dfn .term]_{wc}_ перейдите по адресу [.ph .filepath]`%LocalAppData%Docsvision`.#
 . [.ph .cmd]#Создайте в папке документ формата [.dfn .term]_.config_ при помощи любого текстового редактора.#
 . [.ph .cmd]#Добавьте в файл следующие строки, при необходимости заменив `true` на `false`:#
 +
@@ -25,4 +25,4 @@
 [[CreateUpdateConfig__result_kd4_pyb_v4b]]
 Обновление {wc}а будет происходить без автоматической загрузки решений в базу данных.
 
-*На уровень выше:* xref:Administrator_functions.adoc[Функции администратора]
+*На уровень выше:* xref:administratorFunctions.adoc[Функции администратора]
