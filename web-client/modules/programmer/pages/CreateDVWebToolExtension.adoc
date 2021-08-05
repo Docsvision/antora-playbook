@@ -307,7 +307,7 @@ public class WatermarkController : BaseService
             return CreateBadResponse(ex.Message);
         }
 
-        return CreateEndProcessResponse(request.CardID, $"Водяные знаки добавлены в файлы:<p/>{doneInfo}");
+        return CreateEndProcessResponse(request.CardID, $"Водяные знаки добавлены в файлы:<p />{doneInfo}");
     }
 
     // Обработчик запроса на добавление водяного знака
@@ -357,7 +357,7 @@ public class WatermarkController : BaseService
             try
             {
                 processes.Add(watermarkService.AddWatermark(file, WATERMARK));
-                doneInfo += $" {Path.GetFileName(file)}<p/>";
+                doneInfo += $" {Path.GetFileName(file)}<p />";
             }
             catch (Exception ex)
             {
