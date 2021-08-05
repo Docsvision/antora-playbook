@@ -25,11 +25,11 @@ image::task_Post_install.png[[.fig--title-label]##Рис. 2. ##Настройк�
 .. Перезагрузите IIS для применения изменений.
 * добавить команду удаления компонента «WebDAV» в конфигурационный файл Модуля:
 [loweralpha]
-.. Откройте конфигурационный файл [.ph .filepath]`{wcd}\5.5\Site\web.config` .
+.. Откройте конфигурационный файл [.ph .filepath]`{webconfig}` .
 .. Перейдите к разделу [.ph .menucascade]#[.ph .uicontrol]*system.webServer* > [.ph .uicontrol]*modules*#.
 .. Добавьте строку «<remove name="WebDAVModule" />»:
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <system.webServer>
  <modules>

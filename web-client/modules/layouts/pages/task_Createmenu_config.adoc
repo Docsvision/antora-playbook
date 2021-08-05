@@ -5,13 +5,13 @@
 
 Чтобы внести изменение в меню создания карточек:
 
-. [.ph .cmd]#Откройте конфигурационный файл [.ph]#[.ph .filepath]`{wcd}\5.5\Site\web.config`#.#
+. [.ph .cmd]#Откройте конфигурационный файл `{webconfig}`.
 . [.ph .cmd]#Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*CardTypes*#.#
 . [.ph .cmd]#Измените конфигурацию:#
 * для изменения порядка отображения кнопок создания типов карточек, измените порядок следования строк в `CardTypes`;
 * для добавления нового типа карточек, добавьте в секцию `CardTypes` строку формата:
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <CardType CardTypeId="<Идентификатор типа карточек>" />
 ----
@@ -24,7 +24,7 @@
 ====
 * для того, чтобы новые карточки выбранного типа сохранялись в текущей открытой папке, добавьте в элемент [.keyword]*CardType* параметр `SaveInFolder` со значением "true":
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <CardType CardTypeId="b9f7bfd7-7429-455e-a3f1-94ffb569c794" SaveInFolder="true" />
 ----
@@ -32,14 +32,14 @@
 Если `SaveInFolder` имеет значение false (или отсутствует), то ярлыки карточек не будут добавляться в текущую папку.
 * для изменения цвета строки типа карточки в меню создания карточек, добавьте в элемент [.keyword]*CardType* параметр `CssClass` с названием класса CSS в значении:
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <CardType CardTypeId="b9f7bfd7-7429-455e-a3f1-94ffb569c794" CssClass="document" />
 ----
 +
 Чтобы данная функциональность работала, к Модулю должен быть подключен файл стилей с CSS-классом `{Значение атрибута                         CssClass}-color`:
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 .document-color {
     background-color: #639;

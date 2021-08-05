@@ -8,11 +8,11 @@
 [.note__title]#Note:# Восстановить удаленные карточки и папки можно только в Windows-клиенте.
 ====
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`{wcd}\5.5\Site\web.config`#.
+. Откройте конфигурационный файл `{webconfig}`.
 . Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.
 . Измените значение параметра `DeletePermanently`: true – отключает использование корзины; false (по умолчанию) – удалённые карточки и папки помещаются в корзину.
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <Setting Name="DeletePermanently" Value="false"/>
 ----

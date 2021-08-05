@@ -3,11 +3,11 @@
 
 Администратор может изменить максимальное время ожидания ответа от сервера {dv}. Время ожидания устанавливается в миллисекундах.
 
-. [.ph .cmd]#Откройте конфигурационный файл [.ph]#[.ph .filepath]`{wcd}\5.5\Site\web.config`#.#
+. [.ph .cmd]#Откройте конфигурационный файл `{webconfig}`.
 . [.ph .cmd]#Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="System"]*#.#
 . [.ph .cmd]#Измените значение параметра `ConnectionTimeout`. Время ожидания задается в миллисекундах.#
 +
-[source,pre,codeblock]
+[source,,l]
 ----
 <SettingGroup Name="System">
     <Setting Name="ConnectionTimeout" Value="3600000" /> 

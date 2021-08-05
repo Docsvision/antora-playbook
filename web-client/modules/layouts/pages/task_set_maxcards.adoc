@@ -10,12 +10,12 @@
 
 По умолчанию в Модуле используется собственное ограничение, которое устанавливает максимальное количество в 15 карточек на страницу представления. Чтобы изменить максимальное количество:
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`{wcd}\5.5\Site\web.config`#.
+. Откройте конфигурационный файл `{webconfig}`.
 . Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="DefaultPageSize"]*#.
 +
 Если данного элемента нет, его нужно создать самостоятельно:
 
-[source,pre,codeblock]
+[source,,l]
 ----
 <SettingGroup Name="Views">
    <Setting Name="DefaultPageSize" Value="15" />
@@ -26,12 +26,12 @@
 
 Чтобы переключить Модуль на использование ограничений, установленных в свойствах папок (параметр `Ограничение количества выводимых записей`):
 
-. Откройте конфигурационный файл [.ph]#[.ph .filepath]`{wcd}\5.5\Site\web.config`#.
+. Откройте конфигурационный файл `{webconfig}`.
 . Перейдите к элементу [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="Views"]* > [.ph .uicontrol]*Setting[Name="UseFolderPropertyRestrictionPageSize"]*#.
 +
 Если данного элемента нет, создайте его самостоятельно следующим образом:
 
-[source,pre,codeblock]
+[source,,l]
 ----
 <SettingGroup Name="Views">
    <Setting Name="UseFolderPropertyRestrictionPageSize" Value="false" />

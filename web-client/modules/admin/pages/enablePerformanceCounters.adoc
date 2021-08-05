@@ -1,0 +1,35 @@
+
+== Включение счетчиков производительности
+
+{wc} предоставляет администратору возможность анализировать параметры работы Модуля с помощью счетчиков производительности – встроенного механизма ОС Windows.
+
+Модуль предоставляет следующие группы счетчиков:
+
+* «{dv} WebClient AdvancedLayouts opening» – счетчики, позволяющие оценить время формирования разметки карточек;
+* «{dv} WebClient Grid first opening» – счетчики, позволяющие оценить время формирования представления папки;
+* «{dv} WebClient Grid paging» – счетчики, позволяющие оценить время формирования страницы представления папки;
+* «{dv} WebClient ExtendedLayouts first opening» – счетчики, позволяющие оценить время формирования разметки дерева папок и дашборда;
+* «{dv} WebClient summary» – счетчик учета количества открытых пользовательских сессий.
+
+По умолчанию счетчики производительности выключены. Чтобы включить счетчики выполните следующие действия:
+
+. [.ph .cmd]#Откройте конфигурационный файл `{webconfig}`.
+. [.ph .cmd]#Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*{dv}* > [.ph .uicontrol]*WebClient* > [.ph .uicontrol]*SettingGroups* > [.ph .uicontrol]*SettingGroup[Name="WebClient"]*#.#
+. [.ph .cmd]#Измените в [.keyword]*True* значение параметра `EnablePerformanceCounters`:#
++
+[source,,l]
+----
+<SettingGroup Name="WebClient">
+ <Setting Name="EnablePerformanceCounters" Value="True" />
+</SettingGroup>
+----
++
+Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+. [.ph .cmd]#Сохраните изменения конфигурационного файла.#
+
+Чтобы сбросить счетчики производительности:
+
+. xref:controlPanelOpen.adoc[Откройте Панель управления].
+. Нажмите на кнопку [.ph .uicontrol]*Reset perf. counters* на начальной странице.
+
+*Parent topic:* xref:administratorFunctions.adoc[Функции администратора]
