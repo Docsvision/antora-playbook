@@ -1,21 +1,24 @@
+= Включить аутентификацию Kerberos
 
-== Настройка аутентификации Kerberos
-
-. Настройте Service Principal Names для учетной записи пула приложений {wc}а. Для этого от имени администратора домена выполните команды:
+. Настройте _Service Principal Names_ для учетной записи пула приложений {wc}а. Для этого от имени администратора домена выполните команды:
 +
 [source,,l]
 ----
-Setspn /s HTTP/webc company\webuser
-Setspn /s HTTP/webc.company.com company\webuser
+Setspn /s HTTP/webc company\webuser <.>
+Setspn /s HTTP/webc.company.com company\webuser <.>
 ----
 +
-Здесь: «webc» и «webc.company.com» нужно заменить на имя и полное сетевое имя сервера {wc}а, «company\webuser» – заменить на имя учётной записи, под которой работает пул приложений {wc}а. Учетная запись пула должна быть доменной учётной записью, входить в группу локальных администраторов на сервере {wc}а, и в группу администраторов {dv}.
-. Включите аутентификацию Kerberos в конфигурационном файле {wc}а:
-[loweralpha]
-.. Откройте конфигурационный файл [.ph]#[.ph .filepath]`{webconfig}`# в режиме редактирования.
-.. Перейдите к секции [.ph .menucascade]#[.ph .uicontrol]*configuration* > [.ph .uicontrol]*location[path="Account/LoginWindows"]*#.
-.. Измените секцию на:
+<.> webc -- имя и полное сетевое имя сервера {wc}а.
+<.> company\webuser -- имя учётной записи, под которой работает пул приложений {wc}а.
 +
+IMPORTANT: Учетная запись пула должна быть доменной учётной записью, входить в группу локальных администраторов на сервере {wc}а и в группу _Администраторы {dv}_.
++
+. Включите аутентификацию Kerberos в конфигурационном файле {wc}а:
+.. Откройте конфигурационный файл `{webconfig}` в режиме редактирования.
+.. Перейдите к секции menu:configuration[location[path="Account/LoginWindows"\]].
+.. Измените секцию следующим образом:
++
+====
 [source,,l,language-xml]
 ----
 <location path="Account/LoginWindows">
@@ -41,6 +44,7 @@ Setspn /s HTTP/webc.company.com company\webuser
     </system.webServer>
 </location>
 ----
+====
 .. Сохраните изменения.
-. Очистите кэш браузеров пользователей.
+. Очистите кэш браузера пользователей.
 
