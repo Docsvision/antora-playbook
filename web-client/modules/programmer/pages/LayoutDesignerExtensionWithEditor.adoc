@@ -8,7 +8,7 @@
 
 Добавить новый редактор в {kvr} можно с помощью Расширения.
 
-. link:LayoutDesignerExtensionNew.md[Создайте проект расширения Конструктора web-разметок].
+. link:LayoutDesignerExtensionNew.md[Создайте проект расширения программы {kvr}].
 
 . Добавьте в проект компонент с типом UserControl (WPF) и реализуйте в нем программный интерфейс https://xceed.com/wp-content/documentation/xceed-toolkit-plus-for-wpf/Xceed.Wpf.Toolkit~Xceed.Wpf.Toolkit.PropertyGrid.Editors.ITypeEditor.adoc[ITypeEditor].
 
@@ -88,7 +88,7 @@
 
 Значение свойства можно получить из переменной `propertyItem.Value`. При изменении значения, его нужно сохранить в `propertyItem.Value`. 
 
-. Переопределите метод GetEditors базового класса расширения, чтобы он возвращал коллекцию с парой: ключ – имя, по которому можно получить данный редактор; значение – тип редактора:
+. Переопределите метод GetEditors базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя, по которому можно получить данный редактор; значение -- тип редактора:
 
 `csharp
    protected override Dictionary&lt;string, Type&gt; GetEditors()

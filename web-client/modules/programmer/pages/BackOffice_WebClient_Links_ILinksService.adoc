@@ -1,6 +1,6 @@
 = ILinksService - интерфейс
 
-Интерфейс ILinksService определяет методы сервиса для работы со ссылками карточек – сервиса ссылок.
+Интерфейс ILinksService определяет методы сервиса для работы со ссылками карточек -- сервиса ссылок.
 
 *Пространство имен*: `{dv}.BackOffice.WebClient.Links`
 
@@ -26,7 +26,7 @@ public interface ILinksService
 |GetLinkTypes(SessionContext) |Возвращает модели типов ссылок. 
 |GetOrCreateReferenceListCardId(SessionContext , Guid, Guid, String) |Возвращает или создаёт список ссылок карточки cardId. Идентификатор карточки Список ссылок может быть получен из поля fieldAlias секции sectionId. 
 |GetReferenceListCardId(SessionContext, Guid, Guid, String) |Возвращает идентификатор карточки Список ссылок карточки cardId. Идентификатор карточки Список ссылок может быть получен из поля fieldAlias секции sectionId. 
-|RegisterDescriptionColumnGenerator(String, DescriptionColumnGeneratorDelegate) |Регистрирует метод генерации описаний ссылок. В key должно быть указано название метода, по которому он может быть запрошен элементом Ссылки, в delegateFunction – делегат на метод генерации описания ссылки. 
-|RemoveReference(SessionContext, Guid, Guid, Guid) |Удаляет ссылку referenceId из списка ссылок referenceListCardId карточки cardId. Возвращает true, если ссылка была удалена, иначе – false. 
+|RegisterDescriptionColumnGenerator(String, DescriptionColumnGeneratorDelegate) |Регистрирует метод генерации описаний ссылок. В key должно быть указано название метода, по которому он может быть запрошен элементом Ссылки, в delegateFunction -- делегат на метод генерации описания ссылки.
+|RemoveReference(SessionContext, Guid, Guid, Guid) |Удаляет ссылку referenceId из списка ссылок referenceListCardId карточки cardId. Возвращает true, если ссылка была удалена, иначе -- false.
 |UpdateReferenceDescription(SessionContext, Guid, String) |Изменяет описание ссылки referenceId на description. 
 |===

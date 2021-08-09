@@ -29,7 +29,7 @@
        }
    }
 
-   // Следующие две строки – объявление сервиса $CardService
+   // Следующие две строки -- объявление сервиса $CardService
    export type $CardService = { cardService: CardService };
    export const $CardService = serviceName((s: $CardService) => s.cardService);
    ```
@@ -41,7 +41,7 @@
 3. Измените содержимое файла `Index.ts`.
 
    ```tsx
-   // 1. Добавьте строку импорта тип/константы $CardService и класса CardService из добавленного в 2 файла (в примере – WebService)
+   // 1. Добавьте строку импорта тип/константы $CardService и класса CardService из добавленного в 2 файла (в примере -- WebService)
    import { $CardService, CardService } from "./WebService";
    import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
    import { Service } from "@{dv}/webclient/System/Service";
