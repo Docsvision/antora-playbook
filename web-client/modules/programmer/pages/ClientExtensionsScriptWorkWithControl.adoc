@@ -14,7 +14,7 @@ let layoutControls = someLayout.controls; // someLayout -- разметка
 
 [source,tsx]
 ----
-// Получаем элемент управления Сотрудник (Employee) с названием «registrar» из разметки карточки (layoutManager.cardLayout)
+// Получаем элемент управления Сотрудник (Employee) с названием "registrar" из разметки карточки (layoutManager.cardLayout)
 let registrar = layoutManager.cardLayout.controls.get<Employee>("registrar");
 
 ----
@@ -36,7 +36,7 @@ registrar.params.visibility = false;
 * для простых типов (string, bool, int и пр.) значение изменяется напрямую:
 
 ```tsx
- // Получаем из разметки карточки элемент управления Флажок (CheckBox) с названием «onControl»
+ // Получаем из разметки карточки элемент управления Флажок (CheckBox) с названием "onControl"
  let onControl = layoutManager.cardLayout.controls.get<CheckBox>("onControl");
 
 // Изменяем значения элемента управления на true (флажок будет установлен)
@@ -46,7 +46,7 @@ registrar.params.visibility = false;
 * для элемента управления Дата/время значение должно быть предварительно сформировано:
 
 ```tsx
- // Получаем из разметки карточки элемент управления Дата/время (DateTimePicker) с названием «endDate»
+ // Получаем из разметки карточки элемент управления Дата/время (DateTimePicker) с названием "endDate"
  let endDate = layoutManager.cardLayout.controls.get<DateTimePicker>("endDate");
 
 // Изменяем значения элемента управления на дату 01.03.2019 и время 12:00:00
@@ -66,7 +66,7 @@ registrar.params.visibility = false;
   // Получаем модель объекта для подразделения с идентификатором "67E331F0-EF31-4E2C-A1F6-D527606EC8CA" 
   let departmentModel = await departmentControllerService.getStaffDepartment("67E331F0-EF31-4E2C-A1F6-D527606EC8CA");
 
-  // Получаем из разметки карточки элемент управления Подразделение (Department) с названием «department»
+  // Получаем из разметки карточки элемент управления Подразделение (Department) с названием "department"
   let department = sender.layout.controls.get<Department>("department");
 
   // Сохраняем в значение элемента управления полученную ранее модель (в элементе управления будет выбрано подразделение

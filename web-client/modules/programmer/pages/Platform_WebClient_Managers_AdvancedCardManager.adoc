@@ -28,7 +28,7 @@ public class AdvancedCardManager
 |`CreateCard(Guid)` |Создаёт карточку по шаблону templateId. Возвращает идентификатор новой карточки. 
 |`DeleteCard(Guid, Boolean)` |Удаляет карточку cardId и все её дочерние карточки. Для удаления в корзину параметр permanently должен быть false. 
 |`DeleteRow(Guid, Guid, Guid)` |Удаляет строку rowId из секции sectionId карточки cardId. 
-|`DisableReadOnlyDictionary(Guid)` |Добавляет справочник cardTypeId в список справочников, для которых запрещен режим открытия «только для чтения». Проверка осуществляется методом `IsReadonlyDictionaryEnabled`. 
+|`DisableReadOnlyDictionary(Guid)` |Добавляет справочник cardTypeId в список справочников, для которых запрещен режим открытия "только для чтения". Проверка осуществляется методом `IsReadonlyDictionaryEnabled`.
 |`GetCard&lt;T&gt;(Guid, Boolean)` |Возвращает карточку cardId в формате объекта T. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
 |`GetCardCreateDate(Guid)` |Возвращает дату создания карточки cardId. 
 |`GetCardData(Guid, Boolean)` |Возвращает данные карточки cardId. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
@@ -49,9 +49,9 @@ public class AdvancedCardManager
 |`GetRowTimestamp(Guid, Guid)` |Возвращает штамп времени для строки rowId секции sectionId. 
 |`GetSection(Guid, Guid)` |Возвращает данные секции sectionId карточки cardId. 
 |`IsOperationAllowed(Guid, BuiltInOperation)` |Проверяет возможность выполнения операции builtInOperation для карточки cardId. 
-|`MarkAsRead(Guid)` |Устанавливает на карточку cardId признак «прочитана». 
+|`MarkAsRead(Guid)` |Устанавливает на карточку cardId признак "прочитана".
 |`SetFieldValue(Guid, Guid, String, Object)` |Устанавливает для поля fieldAlias секции sectionId карточки cardId значение value. 
-|`SetWasRead(Guid, Boolean)` |Устанавливает на карточку cardId признак «прочитана»/«не прочитана» (setRead). 
+|`SetWasRead(Guid, Boolean)` |Устанавливает на карточку cardId признак "прочитана"/"не прочитана" (setRead).
 |`TryGetCardSystemInfo(Guid)` |Возвращает данные системной секции карточки cardId. 
 |`UpdateDigest(Guid, String)` |Обновляет дайджест карточки. Для карточек Базовые объекты и производных дайджест формируется в соответствии с настройками формирования дайджеста в Конструкторе разметок или устанавливает значение по умолчанию defaultDigest. Для других типов карточек в дайджест записывается название типа карточки. 
 |===
