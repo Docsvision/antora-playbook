@@ -8,13 +8,14 @@
 
 Добавить новый редактор в {kvr} можно с помощью Расширения.
 
-. link:LayoutDesignerExtensionNew.md[Создайте проект расширения программы {kvr}].
+. link:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
 
 . Добавьте в проект компонент с типом UserControl (WPF) и реализуйте в нем программный интерфейс https://xceed.com/wp-content/documentation/xceed-toolkit-plus-for-wpf/Xceed.Wpf.Toolkit~Xceed.Wpf.Toolkit.PropertyGrid.Editors.ITypeEditor.adoc[ITypeEditor].
 
 Следующий код демонстрирует пример класса редактора.
 
-```csharp
+[source,csharp,l]
+====
  public partial class SuperEditor : UserControl, ITypeEditor
  {
  // Переменные для хранения текущего значения свойства и его программного компонента (PropertyItem)
@@ -59,30 +60,31 @@
 ----
 
 }
+====
 
-```
 
 В данном случае редактор представляет собой кнопку *ChangeLines*, при нажатии которой открывается диалоговое окно *DialogEditor* для ввода текстового значения, а также нередактируемый блок текста *Placeholder* для отображения статичного значения "{lines …}". Ниже приведен код графической части редактора.
 
-```xml
- &lt;UserControl x:Class="TemplateDesignerExtension1.Editors.SuperEditor"
+[source,xml,l]
+====
+ <UserControl x:Class="TemplateDesignerExtension1.Editors.SuperEditor"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
  xmlns:local="clr-namespace:TemplateDesignerExtension1.Editors"
  mc:Ignorable="d"
- d:DesignHeight="20" d:DesignWidth="200"&gt;
+ d:DesignHeight="20" d:DesignWidth="200">
  <Grid>
- &lt;TextBlock x:Name="ValueString" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Stretch" Width="164"/&gt;
- &lt;Button x:Name="ChangeLines" Content="…" HorizontalAlignment="Right" Margin="1" VerticalAlignment="Top" Width="22" Click="ChangeLines_Click" /&gt;
+ <TextBlock x:Name="ValueString" HorizontalAlignment="Left" Margin="1" VerticalAlignment="Stretch" Width="164"/>
+ <Button x:Name="ChangeLines" Content="…" HorizontalAlignment="Right" Margin="1" VerticalAlignment="Top" Width="22" Click="ChangeLines_Click" />;
 
 ----
    </Grid>
 ----
 
 </UserControl>
- ```
+====
 
 Собственная реализация редактора может включать любые элементы управления и использоваться для отображения любых значений (с учетом рекомендуемых значений элемента управления).
 
@@ -91,26 +93,27 @@
 . Переопределите метод GetEditors базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя, по которому можно получить данный редактор; значение -- тип редактора:
 
 `csharp
-   protected override Dictionary&lt;string, Type&gt; GetEditors()
+   protected override Dictionary<string, Type> GetEditors()
    {
-       return new Dictionary&lt;string, Type&gt;
+       return new Dictionary<string, Type>
        {
-           { &quot;SuperEditor&quot;, typeof(Editors.SuperEditor) }
+           { "SuperEditor", typeof(Editors.SuperEditor) }
        };
    }
 `
 
-. Скомпилируйте проект и скопируйте полученную сборку на сервер {wc}а в папку `&lt;Каталог установки {wc}а&gt;\Plugins\\&lt;Каталог Решения&gt;`. Ресурсные сборки скопируйте в папки `&lt;Каталог установки {wc}а&gt;\ru\` (для русской локализации), `&lt;Каталог установки {wc}а&gt;\uk\` (для английской локализации) и т.д.
+. Скомпилируйте проект и скопируйте полученную сборку на сервер {wc}а в папку `<Каталог установки {wc}а>\Plugins\\<Каталог Решения>`. Ресурсные сборки скопируйте в папки `<Каталог установки {wc}а>\ru\` (для русской локализации), `<Каталог установки {wc}а>\uk\` (для английской локализации) и т.д.
 
 . Перезапустите {kvr}.
 
 == Проверка примера
 
-. link:LayoutDesignerExtensionWithProperty.md[Создайте новое свойство] элемента управления в расширении с _Супер редактором_.
+. link:LayoutDesignerExtensionWithProperty.adoc[Создайте новое свойство] элемента управления в расширении с _Супер редактором_.
 
 . Укажите _Супер редактор_ в качестве редактора свойства в параметре *Editor*.
 
-```csharp
+[source,csharp,l]
+====
  PropertyDescription GetSuperPropertyDescription()
  {
  var propertyDescription = new PropertyDescription();
@@ -125,9 +128,9 @@
 ----
 
 }
- ```
+====
 
-. Добавьте свойство с редактором _Супер редактор_ в описатель элемента управления. См. пример в пункте link:LayoutDesignerExtensionWithProperty.md[Добавление нового свойства элементов управления].
+. Добавьте свойство с редактором _Супер редактор_ в описатель элемента управления. См. пример в пункте link:LayoutDesignerExtensionWithProperty.adoc[Добавление нового свойства элементов управления].
 
 . Опубликуйте расширение с элементом управления на сервере {wc}а.
 
@@ -135,8 +138,8 @@
 
 . Добавьте в разметку элемент управления, содержащий свойство с редактором. Для изменения значения свойства будет использован "Супер редактор".
 
-image:img/propertyEditor.png["Супер свойство с собственным редактором"]
+image:propertyEditor.png["Супер свойство с собственным редактором"]
 
 Изменение значения свойства осуществляется в диалоговом окне, открываемом при нажатии кнопки *…*.
 
-image:img/propertyEditorForm.png[Диалоговое окно изменения значения свойства]
+image:propertyEditorForm.png[Диалоговое окно изменения значения свойства]

@@ -6,7 +6,7 @@
 
 Чтобы создать расширение, добавляющее функцию проверки, выполните приведенную далее инструкцию.
 
-. link:LayoutDesignerExtensionNew.md[Создайте проект расширения программы {kvr}].
+. link:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
 
 . Добавьте в ядро расширения (файл TemplateDesignerExtension.cs) функцию проверки следующего вида:
 
@@ -23,7 +23,7 @@
 }
  ```
 
-Функция проверки должна вернуть набор флагов link:Platform_Tools_LayoutEditor_ObjectModel_Descriptions_AllowedOperationsFlag.md[AllowedOperationsFlag].
+Функция проверки должна вернуть набор флагов link:Platform_Tools_LayoutEditor_ObjectModel_Descriptions_AllowedOperationsFlag.adoc[AllowedOperationsFlag].
 
 . Добавьте в код функции проверки алгоритм, добавляющий нужные ограничения.
 
@@ -51,7 +51,7 @@
 }
  ```
 
-В примере информация о контексте использования элемента управления предоставляется сервисом link:Platform_Tools_LayoutEditor_Infrostructure_ISelectedLayoutService.md[ISelectedLayoutService].
+В примере информация о контексте использования элемента управления предоставляется сервисом link:Platform_Tools_LayoutEditor_Infrostructure_ISelectedLayoutService.adoc[ISelectedLayoutService].
 
 . Переопределите метод GetAllowedOperations базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя, по которому можно получить данную функцию проверки; значение -- функция проверки:
 
@@ -72,7 +72,7 @@
 
 == Проверка примера
 
-. link:LayoutDesignerExtensionWithControlType.md[Создайте проект нового элемента управления].
+. link:LayoutDesignerExtensionWithControlType.adoc[Создайте проект нового элемента управления].
 
 . В поле GetAllowedOperations (функция проверки) описателя элемента управления укажите функцию GetPossibleOperation.
 
