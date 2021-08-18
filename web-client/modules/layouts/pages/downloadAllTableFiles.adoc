@@ -1,0 +1,60 @@
+
+== Таблица / Скачать все
+
+Элемент управления *Таблица / Скачать все* вызывает операцию скачивания всех файлов, отображаемых в элементе управления xref:table.adoc[Таблица]. Операцию предполагается использовать, если работа с файлами в Таблице осуществляется с помощью элемента управления xref:ctrl/standard/filePicker.adoc[Файл].
+
+ЭУ следует добавлять в список операций *TableOperationsNode* элемента управления Таблица.
+
+image::ct_downloadAllTableFiles.png[Операция "Скачать все" в списке операций элемента управления "Таблица"]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=hint]
+
+=== Данные
+
+
+==== Операция редактирования
+
+Определяет операцию редактирования, которая должна быть доступна пользователю для возможности использования данной команды. Если операция не выбрана, команда будет доступна.
++
+Если значение `*Операции редактирования*` наследуется от родительского Блока, название свойства меняется на `*Операция редактирования (наследовано)*`.
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+Перед началом скачивания файлов:::
+Вызывается перед скачиванием всех файлов.
+Перед скачиванием файла:::
+Вызывается перед скачиванием каждого файла из группы скачиваемых файлов.
+После скачивания всех файлов:::
+Вызывается после скачивания всех файлов.
+После скачивания файла:::
+Вызывается после скачивания каждого файла из группы скачиваемых файлов.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=onClick]

@@ -1,0 +1,116 @@
+= Подразделение контрагента
+
+Элемент управления `_Подразделение контрагента_` предназначен для выбора организации или подразделения из _Справочника контрагентов_ и изменения данных справочника.
+
+image::ct_partnersdepartment_opened_list_sample.png[Справочник контрагентов]
+
+Вариант отображения ЭУ зависит от свойства `*Режим редактирования*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+ЭУ в данном режиме поддерживает быстрый поиск и выбор из _Справочника контрагентов_.
+Быстрый поиск осуществляется по названию контрагента, а в режиме выбора из справочника - по названию, полному названию и ИНН.
++
+.Элемент управления "Подразделение контрагента" в режиме редактирования
+image::ct_partnersdepartment_editmode.png[Элемент управления "Подразделение контрагента" в режиме редактирования]
++
+include::partial$editModes.adoc[tags=editInPlace]
++
+Выбор и изменение контрагента осуществляется при нажатии на ссылку в ЭУ. Поиск и выбор осуществляется аналогично поиску и выбору для режима *_Редактирование_*.
++
+.Элемент управления "Подразделение контрагента" в режиме редактирования по месту
+image::ct_partnersdepartment_placemode.png[Элемент управления "Подразделение контрагента" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+include::partial$partnersDeleteSpecial.adoc[]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=filler]
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+include::partial$properties.adoc[tags=dataSource]
+
+==== Поле данных
+
+Поле карточки, содержащее ссылку на организацию/подразделение _Справочника контрагентов_.
+
+==== Выбирать из
+
+Ограничивает возможность поиска и добавления организаций. Пользователь сможет искать и добавлять организации или подразделения только в выбранную организацию. Если значение не установлено, область поиска или добавления не ограничивается.
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=selectCompanyOrDepartment]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=editDirectory]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=beforeSearchResultsLoaded]
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeDirectoryWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+include::partial$properties.adoc[tags=beforeDirectoryWindowOpened]
+
+include::partial$properties.adoc[tags=searchResultsLoaded]
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterDirectoryWindowClosed]
+
+include::partial$properties.adoc[tags=afterCurrentFilterChanged]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+include::partial$properties.adoc[tags=directoryWindowOpened]
+
+include::partial$properties.adoc[tags=filterChange]
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]

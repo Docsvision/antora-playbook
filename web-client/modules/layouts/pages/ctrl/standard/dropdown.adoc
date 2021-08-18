@@ -1,0 +1,118 @@
+= Раскрывающийся список
+
+Элемент управления `_Раскрывающийся список_` предназначен для выбора и отображения значения из списка значений.
+
+include::partial$cardFieldLink.adoc[]
+
+Вариант отображения ЭУ зависит от свойства `*Режим редактирования*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+.Элемент управления "Раскрывающийся список" в режиме редактирования
+image::cs_droplist_editmode.png[Элемент управления "Раскрывающийся список" в режиме редактирования]
++
+include::partial$editModes.adoc[tags=editInPlace]
++
+Изменение значения осуществляется при нажатии на ссылку в ЭУ.
++
+.Элемент управления "Раскрывающийся список" в режиме редактирования по месту
+image::cs_droplist_placemode.png[Элемент управления "Раскрывающийся список" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+include::partial$identicalCopy.adoc[]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=filler]
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+include::partial$properties.adoc[tags=dataSource]
+
+include::partial$properties.adoc[tags=enumBool]
+
+include::partial$properties.adoc[tags=editOperation]
+
+==== Список элементов
+
+Настройка списка элементов, отображаемых в элементе управления.
+
+Список значений задается в форме, открываемой при нажатии кнопки image:buttons/bt_dots.png[Три точки]:
+
+.Настройка списка элементов элемента управления "Раскрывающийся список", связанного с полем типа "enum"
+image::cs_droplist_items.png[Настройка списка элементов элемента управления "Раскрывающийся список", связанного с полем типа "enum"]
+
+Возможность создания собственного набора значений доступна только для ЭУ, связанного с полем типа *_int_*. При сохранении карточки в связанное поле будет записано соответствующее целочисленное значение.
+
+Локализация элементов списка выполняется при нажатии кнопки image:buttons/bt_dots.png[Три точки] в строке значения. Настройки локализации сохраняются после нажатия кнопки *ОК* в окне _Локализация элементов_.
+
+include::partial$properties.adoc[tags=elementByDefault]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+==== Перед сворачиванием раскрывающегося списка
+
+Вызывается перед закрытием списка элементов при выборе значения.
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+==== После открытия раскрывающегося списка
+
+Вызывается после открытия списка элементов при выборе значения.
+
+==== После сворачивания раскрывающегося списка
+
+Вызывается после закрытия списка элементов при выборе значения.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+==== При открытии раскрывающегося списка
+
+Вызывается перед открытием списка элементов при выборе значения.
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]

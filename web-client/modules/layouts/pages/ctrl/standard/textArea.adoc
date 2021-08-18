@@ -1,0 +1,131 @@
+= Текст
+
+Элемент управления `_Текст_` предназначен для ввода и отображения строковых и форматированных текстовых данных карточки.
+
+Вариант отображения ЭУ зависит от свойств `*Режим редактирования*` и `*Использовать HTML редактор*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+.Элемент управления "Текст" в режиме редактирования
+image::ct_text_editmode.png[Элемент управления "Текст" в режиме редактирования]
++
+include::partial$editModes.adoc[tags=editInPlace]
++
+Изменение текста осуществляется при нажатии на ссылку в ЭУ.
++
+.Элемент управления "Текст" в режиме редактирования по месту
+image::ct_text_placemode.png[Элемент управления "Текст" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+При работе в режиме HTML редактора, ЭУ предоставляет дополнительные возможности форматирования:
+
+* Настраивать стиль текста: Нормальный, Заголовок 1, Заголовок 2 и пр.; начертания: жирный, курсив; шрифта, размера шрифта и фоновой заливки текста.
+* Использовать маркированные и нумерованные списков.
+* Настраивать выравнивание текста.
+* Добавлять таблицы, ссылки, рисунки и видео с внешних ресурсов.
+* Перетаскивать окно редактора в режиме редактирования *_По месту_*.
+
+.Элемент управления "Текст" в режиме HTML редактора
+image::controlTextHTMLMode.png[Элемент управления "Текст" в режиме HTML редактора]
+
+.Пример отображения содержимого ЭУ "Текст"
+image::controlTextHTMLModeInCard.png[Карточка с элементом управления "Текст" с расширенным содержимым]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=filler]
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+include::partial$properties.adoc[tags=dataSource]
+
+==== Поле данных
+
+Текстовое поле карточки с данными элемента управления.
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+==== Высота HTML редактора
+
+Высота элемента управления при использовании HTML редактора. Значение указывается в пикселях. Значение по умолчанию -- `200px`.
+
+`*Адаптивный*`
+
+include::partial$properties.adoc[tags=addCss]
+
+==== Значение по умолчанию
+
+Значение элемента управления, присваиваемое при создании новой карточки.
+
+==== Использовать HTML редактор
+
+Переключает элемент управления в режим с возможностью форматирования текста и добавления мультимедийных элементов.
+
+==== Лимит синхронной загрузки (КБ)
+
+Определяет максимальный размер данных, загружаемых синхронно с элементом управления. Значение указывается в килобайтах.
+
+Если размер данных больше указанного значения, используется асинхронная загрузка (для всего объема данных).
+
+==== Максимальный размер изображения (КБ)
+
+Максимальный размер для загружаемых изображений. Значение указывается в килобайтах.
+
+Если размер загружаемого пользователем изображения больше указанного значения, будет выдана ошибка и изображение не будет загружено.
+
+include::partial$properties.adoc[tags=clipSpaces]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+==== Ширина HTML редактора
+
+Относительная ширина окна HTML редактора (если включено свойство `*Использовать HTML редактор*`), устанавливаемое для режима редактирования "По месту".
+
+=== События
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]

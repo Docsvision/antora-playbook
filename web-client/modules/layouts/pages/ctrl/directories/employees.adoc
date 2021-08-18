@@ -1,0 +1,135 @@
+= Сотрудники
+
+Элемент управления `_Сотрудники_` предназначен для выбора нескольких сотрудников из _Справочника сотрудников_, а также отображения выбранных сотрудников.
+
+Вариант отображения ЭУ зависит от свойства `*Режим редактирования*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+В режиме `Редактирование` поддерживается быстрый поиск и выбор сотрудника из _Справочника сотрудников_. Быстрый поиск и поиск при выборе из справочника осуществляется по фамилии, имени и отчеству сотрудника.
++
+.Элемент управления "Сотрудники" в режиме редактирования
+image::ct_employees_editmode.png[Элемент управления "Сотрудники" в режиме редактирования]
++
+include::partial$editModes.adoc[tags=editInPlace]
++
+Выбор и изменение выбранного сотрудника осуществляется при нажатии на ссылку в ЭУ. Поиск и выбор осуществляется аналогично поиску и выбору для режима *_Редактирование_*.
++
+.Элемент управления "Сотрудники" в режиме редактирования по месту
+image::ct_employees_placemode.png[Элемент управления "Сотрудники" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+==== Заполнитель
+
+Текст, отображаемый в элементе управления, когда значение не выбрано.
+
+.Заполнитель
+image::controls_employees_sample_empty.png[Заполнитель]
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+==== Подсказка к значению
+
+Содержимое всплывающей подсказки, отображаемой при наведении курсора на строку сотрудника. Возможные варианты:
+
+* *_ФИО_*.
+* *_ФИО+Должность_*.
+* *_Не используется_*. Во всплывающей подсказке отображается текст из поля `*Подсказка*`.
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+==== Источник данных
+
+Коллекционная секция карточки, содержащая данные для элемента управления.
+
+==== Поле данных
+
+Поле карточки, содержащее ссылку на сотрудника _Справочника сотрудников_
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+==== Вертикальная ориентация
+
+Определяет вариант отображения выбранных сотрудников. Когда флаг установлен, сотрудники отображаются вертикально. Когда флаг не установлен, сотрудники отображаются горизонтально (в одну линию).
+
+Свойство доступно, если в свойстве `*Режим редактирования*` выбран режим *_Без редактирования_* или *_По месту_*.
+
+`*Адаптивный*`
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+==== Значение по умолчанию
+
+Значение, которое будет присвоено при создании новой карточки. Возможны значения: *_Не задан_* и *_Текущий пользователь_*.
+
+include::partial$properties.adoc[tags=useEmployees]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=lastSelected]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+==== Перед добавлением сотрудника
+
+Вызывается перед добавлением сотрудника.
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+==== Перед удалением сотрудника
+
+Вызывается перед удалением сотрудника.
+
+==== После добавления сотрудника
+
+Вызывается после добавления сотрудника.
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+==== После удаления сотрудника
+
+Вызывается после удаления сотрудника.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=onClick]

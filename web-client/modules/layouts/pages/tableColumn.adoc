@@ -1,0 +1,56 @@
+= Столбец таблицы
+
+Элемент разметки `_Столбец таблицы_` предоставляет доступ к данным поля табличной секции карточки, являющейся источником данных для родительского _ЭР_ xref:table.adoc["Таблица"].
+
+[IMPORTANT]
+====
+ЭР *Столбец таблицы* может быть встроен только в _ЭР_ *Таблица*.
+====
+
+.Пример элемента разметки "Столбец таблицы" в таблице
+image::controls_table_collumn_sample.png[Пример элемента разметки "Столбец таблицы" в таблице]
+
+`_Столбец таблицы_` не связывается непосредственно с полем секции карточки, а выступает контейнером для размещения другого ЭУ, который и будет связан с данным полем. Тип встраиваемого ЭУ должен соответствовать типу отображаемых или редактируемых данных.
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+==== Заголовок
+
+Текст, отображаемый в заголовке данного столбца.
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=hint]
+
+==== Ширина
+
+Ширина столбца. Значение может быть задано в пикселях, процентах или масштабируемых единицах, зависящих от размера шрифта (например: 2em). Если значение не указано, то ширина столбца определяется автоматически.
+
+[IMPORTANT]
+====
+Единица, в которой определяется ширина столбца, должна быть явно указана вместе со значением, например: 20%, 30px или 4em.
+====
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=minWidth]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]

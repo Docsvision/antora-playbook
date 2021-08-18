@@ -1,0 +1,108 @@
+= Сотрудник
+
+Элемент управления `_Сотрудник_` предназначен для просмотра и выбора сотрудника из _Справочника сотрудников_.
+
+Вариант отображения ЭУ зависит от свойства `*Режим редактирования*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+В режиме `Редактирование` поддерживается быстрый поиск и выбор сотрудника из _Справочника сотрудников_. Быстрый поиск и поиск при выборе из справочника осуществляется по фамилии, имени и отчеству сотрудника.
++
+.Элемент управления "Сотрудник" в режиме редактирования
+image::ct_employee_editmode.png[Элемент управления "Сотрудник" в режиме редактирования]
++
+include::partial$editModes.adoc[tags=editInPlace]
++
+Выбор и изменение выбранного сотрудника осуществляется при нажатии на ссылку в ЭУ. Поиск и выбор осуществляется аналогично поиску и выбору для режима `Редактирование`.
+
+.Элемент управления "Сотрудник" в режиме редактирования по месту
+image::ct_employee_placemode.png[Элемент управления "Сотрудник" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+==== Заполнитель
+
+Текст, отображаемый в элементе управления, пока не выбран сотрудник.
+
+.Заполнитель
+image::controls_employee_sample_empty.png[Заполнитель]
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+include::partial$properties.adoc[tags=hintForDefinition]
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+==== Источник данных
+
+Секция карточки, содержащая данные для элемента управления. Если выбрана коллекционная секция, то в качестве источника данных будет выбрана первая строка.
+
+==== Поле данных
+
+Поле карточки, содержащее ссылку на сотрудника _Справочника сотрудников_
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=disabled]
+
+==== Значение по умолчанию
+
+Значение, которое будет присвоено при создании новой карточки.
+
+Возможны значения: `*Не задан*` и `*Текущий пользователь*`.
+
+include::partial$properties.adoc[tags=useEmployees]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=lastSelected]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]

@@ -1,0 +1,152 @@
+= Партнер
+
+Элемент управления `_Партнер_` предназначен для выбора сотрудника из _Справочника контрагентов_ и изменения данных справочника.
+
+.Справочник контрагентов
+image::ct_partner_selector_sample.png[Справочник контрагентов]
+
+Вариант отображения ЭУ зависит от свойства `*Режим редактирования*`:
+
+include::partial$editModes.adoc[tags=edit]
++
+В режиме `Редактирование` поддерживается быстрый поиск и выбор сотрудника из _Справочника контрагентов_. Быстрый поиск и поиск при выборе из справочника осуществляется по фамилии, имени и отчеству сотрудника.
++
+.Элемент управления "Партнер" в режиме редактирования
+image::ct_partner_editmode.png[Элемент управления "Партнер" в режиме редактирования]
++
+Быстрый поиск осуществляется по названию организации, подразделения контрагента и ФИО сотрудника контрагента, а в режиме выбора из справочника также возможен поиск организации по ИНН.
++
+* *_По месту_*. Выбор и изменение выбранного сотрудника контрагента осуществляется при нажатии на ссылку в ЭУ. Поиск и выбор осуществляется аналогично поиску и выбору для режима *_Редактирование_*.
++
+Данный вариант подходит как для разметки режима редактирования, так и для разметки режима просмотра карточки.
++
+.Элемент управления "Партнер" в режиме редактирования по месту
+image::ct_partner_placemode.png[Элемент управления "Партнер" в режиме редактирования по месту]
++
+include::partial$editModes.adoc[tags=noEdit]
+
+include::partial$partnersDeleteSpecial.adoc[]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+==== Заполнитель
+
+Текст, отображаемый в элементе управления, если сотрудник не выбран.
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+==== Подсказка к значению
+
+Содержимое всплывающей подсказки, отображаемой если сотрудник выбран. Возможные варианты:
+
+* *_ФИО_*.
+* *_ФИО+Должность_*.
+* *_Не используется_*. Во всплывающей подсказке отображается текст из поля `*Подсказка*`.
+
+`*Локализуемый*`
+
+include::partial$properties.adoc[tags=labelText]
+
+==== Формат отображения
+
+Определяет формат отображения данных сотрудника в ЭУ:
+
+* *_Фамилия И.О._*.
+* *_Строка отображения_*. Используется формат отображения, настроенный в _Справочнике контрагентов_.
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+include::partial$properties.adoc[tags=dataSource]
+
+==== Поле данных
+
+Поле карточки, содержащее ссылку на сотрудника из _Справочника контрагентов_.
+
+==== Выбирать из
+
+Ограничивает возможность поиска/добавления сотрудников. Пользователь сможет искать и добавлять сотрудников только в выбранную организацию или в подчиненные организации и подразделения.
+
+Если значение не установлено, область поиска/добавления не ограничивается.
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+==== Задержка поиска (мс)
+
+Определяет время задержки (в мс) от ввода последнего символа в строку поиска до выполнения быстрого поиска по справочнику.
+
+==== Обязательное
+
+Определяет требование к заполнению значения ЭУ до сохранения карточки:
+
+* Когда флаг установлен, значение ЭУ должно быть присвоено, иначе карточка не будет сохранена. При этом ЭУ помечается предупреждающим сообщением.
+* Когда флаг не установлен, присваивать значение необязательно.
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=editDirectory]
+
+include::partial$properties.adoc[tags=editMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+==== Перед загрузкой результатов поиска
+
+Вызывается перед отправкой запроса на получение данных Справочника контрагентов с сервера.
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeDirectoryWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+include::partial$properties.adoc[tags=beforeDirectoryWindowOpened]
+
+==== После загрузки результатов поиска
+
+Вызывается после получения данных Справочника контрагентов с сервера.
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterDirectoryWindowClosed]
+
+==== После изменения текущего фильтра
+
+Вызывается после изменения пользователем фильтра данных Справочника контрагентов.
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+include::partial$properties.adoc[tags=directoryWindowOpened]
+
+==== При изменении текущего фильтра
+
+Вызывается при изменении пользователем фильтра данных Справочника контрагентов.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]
