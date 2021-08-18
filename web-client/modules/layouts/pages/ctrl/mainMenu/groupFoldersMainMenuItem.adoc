@@ -10,17 +10,11 @@ include::partial$properties.adoc[tags=general]
 
 === Внешний вид
 
-==== CSS класс иконки
+include::partial$properties.adoc[tags=iconCss]
 
-Название CSS класса с иконкой папки.
+include::partial$properties.adoc[tags=compactMode]
 
-==== Компактный режим
-
-Включает или выключает минимизацию пространства, необходимого для отображения данной папки.
-
-==== Папки в компактном режиме
-
-Включает или выключает минимизацию пространства, необходимого для отображения папок группы.
+include::partial$properties.adoc[tags=compactFolders]
 
 ==== Показывать иконки
 
@@ -38,13 +32,9 @@ include::partial$properties.adoc[tags=general]
 
 Текст, отображаемый в строке папки.
 
-==== Управление папками
+include::partial$properties.adoc[tags=folderManagement]
 
-Включает/отключает меню папки, позволяющее создавать подпапки, настраивать и удалять данную папку.
-
-==== Уровень предзагрузки дочерних папок
-
-Определяет уровень вложенности папок данного каталога, до которого подпапки будут загружены без дополнительных запросов. Данные подпапок с более высоким уровнем вложенности загружаются через отдельные клиент-серверные запросы. Должно быть указано целое число.
+include::partial$properties.adoc[tags=subfolders]
 
 === Поведение
 
@@ -52,37 +42,23 @@ include::partial$properties.adoc[tags=visibility]
 
 include::partial$properties.adoc[tags=addCss]
 
-==== Настраиваемый
-
-Включает или выключает режим, при котором пользователь может скрыть ЭУ. ЭУ должен находиться внутри контейнера xref:ctrl/mainMenu/configurableMainMenuContainer.adoc[Настраиваемая область].
+include::partial$properties.adoc[tags=setupable]
 
 include::partial$properties.adoc[tags=stdCss]
 
-==== Уровень автоматического раскрытия дочерних элементов
-
-Указывает уровень вложенности папок, до которого вложенные в ЭУ папки будут раскрыты по умолчанию. При значении 0 автоматическое раскрытие папок не выполняется.
+include::partial$properties.adoc[tags=childElements]
 
 === События
 
-==== Перед выбором
+include::partial$properties.adoc[tags=beforeSelect]
 
-Вызывается перед изменением свойства `*isSelected*`.
+include::partial$properties.adoc[tags=beforeExpandOrCollapse]
 
-==== Перед сворачиванием/разворачиванием элемента
+include::partial$properties.adoc[tags=afterCollapseOrExpand]
 
-Вызывается перед сворачиванием/разворачиванием элемента управления.
+include::partial$properties.adoc[tags=afterSelect]
 
-==== После сворачивания/разворачивания элемента
-
-Вызывается после сворачивания/разворачивания элемента управления.
-
-==== После выбора
-
-Вызывается после изменения свойства `*isSelected*`.
-
-==== После изменения настройки видимости пункта
-
-Вызывается после изменения пользователем признака видимости элемента в дереве папок.
+include::partial$properties.adoc[tags=afterVisibilityChanged]
 
 include::partial$properties.adoc[tags=mouseOver]
 
