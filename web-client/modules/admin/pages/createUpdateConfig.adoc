@@ -1,6 +1,6 @@
 = Обновление {wc}а без импорта решений
 
-При обновлении {wc}а происходит проверка параметра *_LoadLayouts_* конфигурационного файла панели управления {wc}а, расположенного по адресу `/%LocalAppData%\Docsvision\WebClientAdminConsole.config`.
+При обновлении {wc}а происходит проверка параметра *_LoadLayouts_* конфигурационного файла панели управления {wc}а, расположенного по адресу `/%LocalAppData%/Docsvision/WebClientAdminConsole.config`.
 
 Если файл отсутствует или значение *_LoadLayouts_* *_true_*, {wc} будет обновлён в стандартном режиме с импортом решений в базу данных.
 
@@ -12,7 +12,7 @@
 . Добавьте в файл следующие строки, при необходимости заменив `true` на `false`:
 +
 ====
-[source,,l,language-xml]
+[source,xml]
 ----
 <?xml version="1.0" encoding="utf-8"?>
 <WebAdminConsoleSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">

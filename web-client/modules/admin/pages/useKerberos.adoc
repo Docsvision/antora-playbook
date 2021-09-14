@@ -2,14 +2,15 @@
 
 . Настройте _Service Principal Names_ для учетной записи пула приложений {wc}а. Для этого от имени администратора домена выполните команды:
 +
-[source,]
+[source]
 ----
-Setspn /s HTTP/webc company\webuser <.>
-Setspn /s HTTP/webc.company.com company\webuser <.>
+Setspn /s HTTP/webc company\webuser <.> <2>
+Setspn /s HTTP/webc.company.com company\webuser <3> <2>
 ----
-+
-<.> webc -- имя и полное сетевое имя сервера {wc}а.
-<.> company\webuser -- имя учётной записи, под которой работает пул приложений {wc}а.
+Замените:
+<.> _webc_ -- имя сервера {wc}а.
+<.> _company\webuser_ -- имя учётной записи, под которой работает пул приложений {wc}а.
+<.> _webc.company.com_ -- полное сетевое имя сервера {wc}а.
 +
 IMPORTANT: Учетная запись пула должна быть доменной учётной записью, входить в группу локальных администраторов на сервере {wc}а и в группу _Администраторы {dv}_.
 +
@@ -18,8 +19,9 @@ IMPORTANT: Учетная запись пула должна быть домен
 .. Перейдите к секции menu:configuration[location[path="Account/LoginWindows"\]].
 .. Измените секцию следующим образом:
 +
+.Включение аутентификации Kerberos
 ====
-[source,,l,language-xml]
+[source,xml]
 ----
 <location path="Account/LoginWindows">
     <system.web>

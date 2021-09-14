@@ -2,7 +2,7 @@
 
 Следующий код сохраняет все изменения карточки:
 
-[source,tsx]
+[source,typescript]
 ----
 export async function saveCard(sender: CustomButton, e: IEventArgs) {
     await MessageBox.ShowConfirmation("Сохранить карточку?");
@@ -15,7 +15,7 @@ export async function saveCard(sender: CustomButton, e: IEventArgs) {
 
 Чтобы сохранить изменения определенного элемента управления, используйте его метод save:
 
-[source,tsx]
+[source,typescript]
 ----
 export function saveDescription(sender: CustomButton, e: IEventArgs) {
     // Получаем элемент управления Description, данные которого сохраняются
@@ -31,7 +31,7 @@ export function saveDescription(sender: CustomButton, e: IEventArgs) {
 
 Чтобы обойти данную ошибку, приостановите обработку основного события до сохранения карточки, а сохранение сделайте асинхронным. Следующий код демонстрируется данный способ:
 
-[source,tsx]
+[source,typescript]
 ----
 export async function onChangeState(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>) {
         let description = sender.controls.get<TextArea>("Description");

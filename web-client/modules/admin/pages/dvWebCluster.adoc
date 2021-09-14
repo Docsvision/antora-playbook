@@ -6,6 +6,8 @@
 
 Все действия выполняются на одном из узлов кластера {wc}.
 
+== Настройка узлов кластера
+
 . Запустите программу `C:\Program Files (x86)Docsvision\WebClient\5.5\Tools\mageui.exe` от имени администратора. Будет открыто окно *Mage*.
 +
 .Главное окно программы Microsoft .NET Framework Mage
@@ -15,8 +17,8 @@ image::mageui.png[Главное окно программы Microsoft .NET Fram
 +
 .Mage Deployment Options
 image::mageui_1.png[Deployment Options]
-[#start-loc]
-. В строке *Start Location* измените адрес сервера {wc}, на адрес балансировщика нагрузки или иного промежуточного устройства. Например: `http://dv1.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application` на `http://webclient.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application`.
+[#startLocation]
+. В строке _Start Location_ измените адрес сервера {wc}, на адрес балансировщика нагрузки или иного промежуточного устройства. Например: `\http://dv1.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application` на `\http://webclient.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application`.
 . Нажмите menu:File[Save]. Будет предложено подписать манифест.
 . Выберите файл `C:\Program Files (x86)Docsvision\WebClient\5.5\DVWebTool.pfx` и нажмите *OK*.
 . Закройте программу *Mage*.
@@ -30,8 +32,8 @@ image::mageui_1.png[Deployment Options]
 . Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
 . Не вносите изменений в файл. Нажмите menu:File[Save]. При запросе сертификата выберите собственный сертификат для подписания.
 . Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Docsvision.DVWebTool.application`.
-. Измените *Start Location*, <<start-loc, как указано выше>>.
-. Откройте раздел параметров *Application Reference*.
+. Измените _Start Location_, <<startLocation, как указано выше>>.
+. Откройте раздел параметров _Application Reference_.
 +
 .Mage Application Reference
 image::mageui_2.png[Application Reference]

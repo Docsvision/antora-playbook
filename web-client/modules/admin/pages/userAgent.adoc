@@ -3,7 +3,7 @@
 Пользовательский интерфейс {wc}а адаптируется под тип клиентского устройства, который определяется по https://ru.wikipedia.org/wiki/User_Agent[User Agent], передаваемому веб-браузером клиента. Если User Agent не сопоставляется или некорректно сопоставляется с типом устройства, нужно изменить шаблон, по которому выполняется сопоставление:
 
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к элементу menu:configuration [{dv} > WebClient > SettingGroups > SettingGroup [Name="WebClient"\]].
+. Перейдите к элементу menu:configuration[{dv} > WebClient > SettingGroups > SettingGroup [Name="WebClient"\]].
 . Измените значение параметра:
 +
 include::partial$table.adoc[]
@@ -19,14 +19,15 @@ include::partial$table.adoc[]
 +
 В значении параметра через символ `|` нужно указать User Agent соответствующего устройства.
 +
+.Определять устройство с User Agent _NEWPAD_ как планшет
++
 ====
-Следующий пример демонстрирует пример шаблона, по которому устройство с User Agent _NEWPAD_ будет определяться как планшет.
-
-[source,]
+[source]
 ----
 <Setting Name="TabletRegExpString" Value=" … |SM-T355|MediaPad|NEWPAD" />
 ----
 ====
++
 . Сохраните изменения конфигурационного файла.
 
-Адаптивные свойства разметок могут быть xref:layouts:layoutsAdaptive.adoc[настроены] в программе {kvr}.
+NOTE: Адаптивные свойства разметок могут быть xref:layouts:layoutsAdaptive.adoc[настроены] в программе {kvr}.

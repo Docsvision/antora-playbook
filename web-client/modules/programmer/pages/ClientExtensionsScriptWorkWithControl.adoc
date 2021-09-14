@@ -4,7 +4,7 @@
 
 Элементы управления являются частью разметки. Ссылка на коллекцию элементов управления разметки содержится в её поле `controls`:
 
-[source,tsx]
+[source,typescript]
 ----
 let layoutControls = someLayout.controls; // someLayout -- разметка
 
@@ -12,7 +12,7 @@ let layoutControls = someLayout.controls; // someLayout -- разметка
 
 Доступ к элементу управления осуществляется по названию, которое ему присвоено в программе {kvr}:
 
-[source,tsx]
+[source,typescript]
 ----
 // Получаем элемент управления Сотрудник (Employee) с названием "registrar" из разметки карточки (layoutManager.cardLayout)
 let registrar = layoutManager.cardLayout.controls.get<Employee>("registrar");
@@ -21,7 +21,7 @@ let registrar = layoutManager.cardLayout.controls.get<Employee>("registrar");
 
 Доступ к свойствам и значению элемента управления осуществляется через его поле `params`:
 
-[source,tsx]
+[source,typescript]
 ----
 // Получаем значение элемента управления registrar (params.value), из которого получаем отображаемое имя сотрудника (displayName)
 let registrarName = registrar.params.value.displayName;
@@ -85,7 +85,7 @@ ____
 
 Управление блокировкой элемента управления от изменений осуществляется с помощью параметра _disabled_:
 
-[source,tsx]
+[source,typescript]
 ----
 // получение элемента управления superControl
 let control = layoutManager.cardLayout.controls.superControl;

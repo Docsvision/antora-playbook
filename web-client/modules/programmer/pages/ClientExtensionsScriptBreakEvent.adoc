@@ -4,7 +4,7 @@
 
 Следующий код демонстрирует пример обработчика события сохранения карточки, прерывающего сохранение, если в названии карточки (cardName) содержится слово "договор".
 
-[source,tsx]
+[source,typescript]
 ----
 // Метод onCardSaving настроен в качестве обработчика события, вызываемого перед сохранением карточки
 // Список параметров метода соответствует аргументам события cardSaving класса LayoutParams 
@@ -27,7 +27,7 @@ export function onCardSaving(sender: Layout, e: ICancelableEventArgs<ISaveContro
 
 Другой пример демонстрирует использование метода `wait`, который позволяет отложить решение до момента выполнения асинхронной операции (например, запроса к серверу или показа диалога подтверждения).
 
-[source,tsx]
+[source,typescript]
 ----
 export async function onCardSaving(sender: Layout, e: ICancelableEventArgs<ISaveControlData>) {
 

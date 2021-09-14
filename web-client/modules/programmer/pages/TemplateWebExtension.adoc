@@ -40,7 +40,7 @@ extensionManager.registerExtension({
 
 Команда `import * as EventHandlers from &quot;./EventHandlers&quot;` импортирует все публичные сущности (с "export") из файла EventHandlers (.tsx). Чтобы импортировать функции из другого файла, необходимо добавить новую команду импорта, указав относительный путь к файлу:
 
-[source,tsx]
+[source,typescript]
 ----
 import * as EventHandlers from "./EventHandlers";
 import * as NewEventHandlers from "./Scripts/NewEventHandlers"; // Добавлена строчка импорта из файла /Scripts/NewEventHandlers
@@ -53,7 +53,7 @@ import * as NewEventHandlers from "./Scripts/NewEventHandlers"; // Добавл�
 
 Чтобы добавить в расширение обработчики из нового файла, добавьте их в массив globalEventHandlers:
 
-[source,tsx]
+[source,typescript]
 ----
 globalEventHandlers: [ EventHandlers, NewEventHandlers] // Добавлены обработчики из NewEventHandlers
 
@@ -63,7 +63,7 @@ globalEventHandlers: [ EventHandlers, NewEventHandlers] // Добавлены о
 
 Содержимое файла:
 
-[source,tsx]
+[source,typescript]
 ----
 import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
 import { Layout } from "@{dv}/webclient/System/Layout";
@@ -80,7 +80,7 @@ export function someHandler(sender: Layout, e: IEventArgs) {
 
 Функция someHandler является примером обработчика события разметки (тип sender -- Layout). Ключевое слово export указывает, что данная функция доступна для импорта. Чтобы экспортировать другую функцию, необходимо также указывать ключевое слово export:
 
-[source,tsx]
+[source,typescript]
 ----
 export function someHandler(sender: Layout, e: IEventArgs) {
 
@@ -94,7 +94,7 @@ export function newHandler(sender: Employee, e: IEventArgs) { // Добавле�
 
 Для создания клиентского скрипта достаточно добавить функции-обработчики в файл `EventHandlers.tsx`. Например, следующий код, вызванный при изменении значения элемента управления Сотрудник, отобразит информационное окно с ФИО выбранного сотрудника:
 
-[source,tsx]
+[source,typescript]
 ----
 /* Импорт необходимых сущностей из модулей {wc}а */
 import { Employee } from "@{dv}/webclient/BackOffice/Employee";
