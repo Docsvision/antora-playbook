@@ -1,0 +1,23 @@
+= Получение номера в нумераторе
+
+Следующий код демонстрирует пример получения номера в нумераторе перед изменением состояния карточки. Предполагается, что функция будет указана в качестве обработчика для события изменения состояния карточки.
+
+[source,typescript]
+----
+export async function onStateChanging(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>) {
+    <.>
+    let regNumber = sender.controls.get<Numerator>("regNumber");
+    
+    if (!regNumber.hasValue()) {
+        e.wait(); <.>
+        await regNumber.generateNewNumber() <.>
+            .then(() => { console.log("Присвоен регистрационный номер"); })
+            .catch(() => MessageBox.ShowError("Ошибка при получении регистрационного номера"))
+   }
+   e.accept(); <.>
+}
+----
+<.> Получаем элемент Нумератор из разметки.
+<.> Приостанавливаем изменения состояние карточки.
+<.> Используем метод generateNewNumber для получения нового номера. При этом будет выполнено сохранение карточки. Метод generateNewNumber нужно вызывать асинхронно.
+<.> Продолжаем обработку изменения состояния.

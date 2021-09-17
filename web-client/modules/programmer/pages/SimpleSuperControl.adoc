@@ -8,7 +8,8 @@
 
 . Создаем новый файл `SuperControl.xml` со следующим содержимым:
 
-```tsx
+[source,typescript]
+----
  &lt;?xml version="1.0" encoding="utf-8" ?&gt;
  <Controls>
  <Control Name="SuperControl" DisplayName="Супер элемент управления">
@@ -20,11 +21,12 @@
 
 . Формируем клиентское расширение с клиентским компонентом элемента управления.
 
-. link:ClientExtensionsNew.adoc[Создаем новое клиентское расширение].
+. xref:ClientExtensionsNew.adoc[Создаем новое клиентское расширение].
 
 . Добавляем в папку расширения файл `src/Controls/SuperControl.tsx` со следующим содержимым:
 
-```tsx
+[source,typescript]
+----
  // Импорт используемых модулей
  import { BaseControlParams, BaseControlState, BaseControl } from "@{dv}/webclient/System/BaseControl";
  import { r } from "@{dv}/webclient/System/Readonly";
@@ -37,7 +39,8 @@
 
 . Настраиваем клиентское расширение в файле `src/Index.tsx`.
 
-```tsx
+[source,typescript]
+----
  import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
  import { SuperControl } from "./Controls/SuperControl";
 

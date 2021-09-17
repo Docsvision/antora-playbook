@@ -6,11 +6,12 @@
 
 Чтобы создать расширение, добавляющее функцию проверки, выполните приведенную далее инструкцию.
 
-. link:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
+. xref:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
 
 . Добавьте в ядро расширения (файл TemplateDesignerExtension.cs) функцию проверки следующего вида:
 
-```csharp
+[source,csharp]
+----
  public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider serviceProvider)
  {
  // По умолчанию доступны все операции
@@ -23,13 +24,14 @@
 }
  ```
 
-Функция проверки должна вернуть набор флагов link:Platform_Tools_LayoutEditor_ObjectModel_Descriptions_AllowedOperationsFlag.adoc[AllowedOperationsFlag].
+Функция проверки должна вернуть набор флагов xref:Platform_Tools_LayoutEditor_ObjectModel_Descriptions_AllowedOperationsFlag.adoc[AllowedOperationsFlag].
 
 . Добавьте в код функции проверки алгоритм, добавляющий нужные ограничения.
 
 Следующий код демонстрирует пример функции проверки, запрещающей добавление элемента управления в разметку карточки, если тип карточки не Документ.
 
-```csharp
+[source,csharp]
+----
  public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider serviceProvider)
  {
  // По умолчанию доступны все операции
@@ -51,7 +53,7 @@
 }
  ```
 
-В примере информация о контексте использования элемента управления предоставляется сервисом link:Platform_Tools_LayoutEditor_Infrostructure_ISelectedLayoutService.adoc[ISelectedLayoutService].
+В примере информация о контексте использования элемента управления предоставляется сервисом xref:Platform_Tools_LayoutEditor_Infrostructure_ISelectedLayoutService.adoc[ISelectedLayoutService].
 
 . Переопределите метод GetAllowedOperations базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя, по которому можно получить данную функцию проверки; значение -- функция проверки:
 
@@ -66,17 +68,18 @@
    }
 `
 
-. Скомпилируйте проект и скопируйте полученную сборку на сервер {wc}а в папку `&lt;Каталог установки {wc}а&gt;\Plugins\\&lt;Каталог Решения&gt;`. Ресурсные сборки скопируйте в папки `&lt;Каталог установки {wc}а&gt;\ru\` (для русской локализации), `&lt;Каталог установки {wc}а&gt;\uk\` (для английской локализации) и т.д.
+. Скомпилируйте проект и скопируйте полученную сборку на сервер {wc}а в папку `{wcd}\Plugins\%Каталог Решения%`. Ресурсные сборки скопируйте в папки `{wcd}\ru\` (для русской локализации), `{wcd}\uk\` (для английской локализации) и т.д.
 
 . Перезапустите {kvr}.
 
 == Проверка примера
 
-. link:LayoutDesignerExtensionWithControlType.adoc[Создайте проект нового элемента управления].
+. xref:LayoutDesignerExtensionWithControlType.adoc[Создайте проект нового элемента управления].
 
 . В поле GetAllowedOperations (функция проверки) описателя элемента управления укажите функцию GetPossibleOperation.
 
-```csharp
+[source,csharp]
+----
  ControlTypeDescription GetSuperControlTypeDescription()
  {
  var controlTypeDescription = new ControlTypeDescription("SuperControl")
@@ -101,7 +104,8 @@
 
 Функция проверки также может быть получена по имени из хранилища функций проверки:
 
-```csharp
+[source,csharp]
+----
  GetAllowedOperations = AllowedOperationsStorage.GetAllowedOperations("GetPossibleOperation")
 
 ```

@@ -32,13 +32,15 @@
 
 . Проинициализируйте прерываемое событие с помощью метода CancelableEvent.Create:
 
-```tsx
+[source,typescript]
+----
  construct() {
  super.construct();
 
 . Во внутреннем обработчике события, вызываемого перед выполнением операции, добавьте код, который будет выполняться при прерывании события внешними обработчиками, и код для продолжения обработки события:
 
-```tsx
+[source,typescript]
+----
  protected internalEventHandler = async () =&gt; {
  try {
  await CancelableEvent.cast(this.state.someEventing).trigger().deferred;

@@ -23,7 +23,8 @@
 
    - Бинарный описатель:
 
-     ```csharp
+     [source,csharp]
+----
      …
          PropertyDescriptions =
          {
@@ -39,7 +40,8 @@
 
    Пример:
 
-   ```tsx
+   [source,typescript]
+----
    export class SomeControlParams extends BaseControlParams {
         @rw value?: string;
    }
@@ -49,7 +51,8 @@
 
    Пример:
 
-   ```tsx
+   [source,typescript]
+----
    export interface SomeControlState extends SomeControlParams, BaseControlState {
         binding: IBindingResult<string>;
    }
@@ -61,7 +64,8 @@
 
    Пример:
 
-   ```tsx
+   [source,typescript]
+----
    @handler("binding")
    private set binding(binding: IBindingResult<string>) {
        this.state.value =  binding && binding.value;
@@ -73,7 +77,8 @@
 
    Пример:
 
-   ```tsx
+   [source,typescript]
+----
    protected getBindings() {
     // "Биндинг" формируется методом getBindingResult, в который нужно передать:
     //  - текущий "биндинг" (из свойства класса, в которое "биндинг" был сохранен при получении с сервера (п. 3))
@@ -95,7 +100,8 @@
 
    Пример:
 
-   ```tsx
+   [source,typescript]
+----
    changedHandler = (event) => {
     this.state.value = event.target.value;
     this.forceUpdate();
@@ -121,7 +127,8 @@
 
 2. Добавить код проверки операции редактирования в функцию загрузки значения элемента управления (binding):
 
-   ```tsx
+   [source,typescript]
+----
    @handler("binding")
    protected set binding(binding: IBindingResult<boolean>) {
        this.state.canEdit = !binding || editOperations.available(binding.editOperation);
@@ -171,4 +178,4 @@
    }
 `
 
-В приведенном коде проверка доступности операции осуществляется с помощью клиентского сервиса `$EditOperationStore`. Подробности в пункте link:GetServiceOnClient.adoc[Получение сервисов в клиентском компоненте].
+В приведенном коде проверка доступности операции осуществляется с помощью клиентского сервиса `$EditOperationStore`. Подробности в пункте xref:GetServiceOnClient.adoc[Получение сервисов в клиентском компоненте].

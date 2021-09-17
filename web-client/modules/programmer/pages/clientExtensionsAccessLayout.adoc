@@ -1,0 +1,42 @@
+= Получение доступа к разметке
+
+Прежде чем работать с элементами управления разметки, необходимо в скрипте получить доступ к данной разметке. Это можно сделать несколькими способами:
+
+== Получение разметки, из которой вызван обработчик события
+
+[source,typescript]
+----
+export function someHandler(sender: Employee, e: IEventArgs) {
+    let currentLayout = sender.layout;
+  }
+----
+
+== Получение разметки по имени локации
+
+[source,typescript]
+----
+let someLayout = layoutManager.getLayout("DV.MainMenu");
+----
+
+В метод getLayout нужно передать название локации с разметкой:
+
+- _DV.Dashboard_ -- главная странице (страница "дашборд").
+- _DV.MainMenu_ -- основное меню (с деревом папок).
+- _DV.GridFilter_ -- панель фильтра папки.
+- _DV.SearchParameters_ -- панель поисковых параметров.
+- _DV.UserProfile_ -- диалоговое окно профиля пользователя.
+
+Локация, разметка которой получается, должна быть на текущей странице {wc}а.
+
+== Получение разметки открытой карточки:
+
+[source,typescript]
+----
+let cardLayout = layoutManager.cardLayout;
+----
+
+В примерах кода используются функции объекта `layoutManager` (менеджер разметок). Для импорта объекта добавьте в скрипт следующий код:
+
+----
+import { layoutManager } from "@{dv}/webclient/System/LayoutManager";
+----

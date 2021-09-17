@@ -402,7 +402,7 @@ public class WatermarkController : BaseService
 * получает из текущей открытой карточки Документа идентификаторы основных файлов формата PDF;
 * отправляет идентификаторы файлов расширению "Watermark to PDF".
 
-Общие требования к реализации клиентских расширений приведены в пункте link:ClientExtensions.adoc[Расширение возможностей клиентской части {wc}а].
+Общие требования к реализации клиентских расширений приведены в пункте xref:clientExtensions.adoc[Расширение возможностей клиентской части {wc}а].
 
 Прежде всего реализуем сервис, который будет получать список идентификаторов файлов, в которые нужно добавить водяной знак и передавать его в метод `AddWatermarkToFiles` расширения "Watermark to PDF". Ниже приведён исходный код данного сервиса.
 
@@ -518,16 +518,16 @@ export async function addWatermark(sender: LayoutControl) {
 
 . Остановите IIS.
 
-. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `&lt;Каталог установки {wc}а&gt;\Site\Content\Modules`.
-. Скопируйте папку `SamplesOutput\Site\Content\Tools\_DVWebTool_\Application Files\` в `&lt;Каталог установки {wc}а&gt;\Site\Content\Tools\_DVWebTool_\`.
-. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `&lt;Каталог установки {wc}а&gt;\Site\Extensions`.
+. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `{wcd}\Site\Content\Modules`.
+. Скопируйте папку `SamplesOutput\Site\Content\Tools\_DVWebTool_\Application Files\` в `{wcd}\Site\Content\Tools\_DVWebTool_\`.
+. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `{wcd}\Site\Extensions`.
 . Запустите IIS.
 . Регистрация расширения _DVWebTool_ на сервере {wc}.
 
-. Запустите программу `&lt;Каталог установки {wc}а&gt;\Tools\mageui.exe`.
+. Запустите программу `{wcd}\Tools\mageui.exe`.
 
 . Обновите манифест программы:
-.. Нажмите *File* → *Open* и выберите файл `&lt;Каталог установки {wc}а&gt;\Site\Content\Tools\_DVWebTool_\Application     FilesDocsvision._DVWebTool_.exe.manifest`.
+.. Нажмите *File* → *Open* и выберите файл `{wcd}\Site\Content\Tools\_DVWebTool_\Application     FilesDocsvision._DVWebTool_.exe.manifest`.
 
 .. Перейдите в раздел Name и в поле Version увеличьте номер сборки. Например, "5.5.5531.0" до "5.5.5531.1". Не изменяйте мажорную и минорную версии, и версию исправления.
 
@@ -537,15 +537,15 @@ export async function addWatermark(sender: LayoutControl) {
 
 .. Нажмите *File* → *Save*. Будет предложено подписать манифест.
 
-.. Нажмите *…* в поле File, выберите файл сертификата `&lt;Каталог установки {wc}а&gt;/_DVWebTool_.pfx`, затем нажмите *OK* в основном окне подписания манифеста (пароль указывать не нужно). Файл манифеста будет подписан сертификатом __DVWebTool_.pfx_.
+.. Нажмите *…* в поле File, выберите файл сертификата `{wcd}/_DVWebTool_.pfx`, затем нажмите *OK* в основном окне подписания манифеста (пароль указывать не нужно). Файл манифеста будет подписан сертификатом __DVWebTool_.pfx_.
 
 . Обновите файл развертывания программы:
-.. Нажмите *File* → *Open* и выберите файл `&lt;Каталог установки {wc}а&gt;\Site\Content\Tools\_DVWebTool_Docsvision._DVWebTool_.application`.
+.. Нажмите *File* → *Open* и выберите файл `{wcd}\Site\Content\Tools\_DVWebTool_Docsvision._DVWebTool_.application`.
 .. Перейдите в раздел Name и в поле Version увеличьте номер сборки. Например, "5.5.5531.0" до "5.5.5531.1". Не изменяйте мажорную и минорную версии, и версию исправления.
 .. Перейдите в раздел Update option и в поле Version введите номер версии, который был получен в разделе Name. Например, "5.5.5531.1".
-.. Перейдите в раздел Application Reference, нажмите кнопку *Select Manifest* и выберите файл `&lt;Каталог установки {wc}а&gt;\Content\Tools\_DVWebTool_\Application FilesDocsvision._DVWebTool_.exe.manifest`. В поле Version будет указана версия , полученная при обновлении файла манифеста.
+.. Перейдите в раздел Application Reference, нажмите кнопку *Select Manifest* и выберите файл `{wcd}\Content\Tools\_DVWebTool_\Application FilesDocsvision._DVWebTool_.exe.manifest`. В поле Version будет указана версия , полученная при обновлении файла манифеста.
 .. Нажмите *File* → *Save*. Будет предложено подписать файл развёртывания.
-.. Нажмите *…* в поле File, выберите файл сертификата `&lt;Каталог установки {wc}а&gt;/_DVWebTool_.pfx`, затем нажмите *OK* в основном окне подписания (пароль указывать не нужно). Файл развертывания будет подписан сертификатом __DVWebTool_.pfx_.
+.. Нажмите *…* в поле File, выберите файл сертификата `{wcd}/_DVWebTool_.pfx`, затем нажмите *OK* в основном окне подписания (пароль указывать не нужно). Файл развертывания будет подписан сертификатом __DVWebTool_.pfx_.
 . Закройте программу mageui.exe.
 . Рекомендуется перезапустить IIS.
 

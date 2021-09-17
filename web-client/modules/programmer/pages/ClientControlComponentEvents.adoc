@@ -6,7 +6,8 @@
 
 Для примера рассмотрим инициализацию события onShowed, поддерживаемого элементом управления:
 
-```tsx
+[source,typescript]
+----
  // Класс параметров с объявлением события onShowed
  export class SuperControlParams extends BaseControlParams {
  @apiEvent onShowed?: BasicApiEvent<IEventArgs>;
@@ -16,21 +17,24 @@
 
 Для инициализации события onShowed, нужно добавить в конструктор класса реализации следующий код:
 
-```tsx
+[source,typescript]
+----
  this.state.onShowed = SimpleEvent.Create<IEventArgs>(this.state.wrapper);
 
 ```
 
 Событие onShowed является непрерываемым (имеет тип BasicApiEvent). Для прерываемого события, инициализация будет выглядеть следующим образом:
 
-```tsx
+[source,typescript]
+----
  this.state.onShowing = CancelableEvent.Create<IEventArgs>(this.state.wrapper);
 
 ```
 
 Таким образом конструктор класса реализации может выглядеть так:
 
-```tsx
+[source,typescript]
+----
  construct() {
  super.construct();
 
@@ -46,7 +50,8 @@
 
 Связывание обработчика с контекстом выполняется в конструктор класса реализации, что демонстрируется в следующем коде, в котором выполняется связывание с контекстом обработчика события onClick.
 
-```tsx
+[source,typescript]
+----
  construct() {
  super.construct();
 

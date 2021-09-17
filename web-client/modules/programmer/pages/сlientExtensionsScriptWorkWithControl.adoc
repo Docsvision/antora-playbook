@@ -1,0 +1,92 @@
+= Работа с элементами управления
+
+CAUTION: Следующая информация относится только к элементам управления, которые работают с моделями объектов.
+
+Элементы управления являются частью разметки. Ссылка на коллекцию элементов управления разметки содержится в её поле `controls`:
+
+[source,typescript]
+----
+let layoutControls = someLayout.controls; <.>
+----
+<.> someLayout -- разметка.
+
+.Доступ к элементу управления осуществляется по названию, которое ему присвоено в программе {kvr}:
+[source,typescript]
+----
+let registrar = layoutManager.cardLayout.controls.get<Employee>("registrar"); <.>
+----
+<.> Получаем элемент управления Сотрудник (Employee) с названием "registrar" из разметки карточки (layoutManager.cardLayout).
+
+.Доступ к свойствам и значению элемента управления осуществляется через его поле `params`:
+[source,typescript]
+----
+let registrarName = registrar.params.value.displayName; <.>
+
+registrar.params.visibility = false; <.>
+----
+<.> Получаем значение элемента управления registrar (params.value), из которого получаем отображаемое имя сотрудника (displayName).
+<.> Изменяем значения свойства Видимость на "false" (элемент управления будет скрыт).
+
+Изменение значения элемента управления осуществляется через свойство *params.value*.
+
+Способ изменения зависит от типа значения:
+
+.Для простых типов (string, bool, int и пр.) значение изменяется напрямую:
+
+[source,typescript]
+----
+ let onControl = layoutManager.cardLayout.controls.get<CheckBox>("onControl"); <.>
+
+ onControl.params.value = true; <.>
+----
+<.> Получаем из разметки карточки элемент управления Флажок (CheckBox) с названием "onControl".
+<.> Изменяем значения элемента управления на true (флажок будет установлен).
+
+.Для элемента управления Дата/время значение должно быть предварительно сформировано:
+[source,typescript]
+----
+ let endDate = layoutManager.cardLayout.controls.get<DateTimePicker>("endDate"); <.>
+
+ endDate.value = new Date("2019-03-01T12:00:00"); <.>
+----
+<.> Получаем из разметки карточки элемент управления Дата/время (DateTimePicker) с названием "endDate".
+<.> Изменяем значения элемента управления на дату 01.03.2019 и время 12:00:00.
+
+.Для элементов управления, работающих с моделями объектов, значение должно быть предварительно сформировано:
+[source,typescript]
+----
+export async function someHandler(sender: CustomButton, e: IEventArgs) { <.>
+
+    let departmentControllerService = sender.layout.getService($DepartmentController); <.>
+
+    let departmentModel = await departmentControllerService.getStaffDepartment("67E331F0-EF31-4E2C-A1F6-D527606EC8CA"); <.>
+
+    let department = sender.layout.controls.get<Department>("department"); <.>
+
+    department.params.value = await departmentModel; <.>
+}
+----
+<.> Функция является асинхронной.
+<.> Получаем сервис, загружающий модель объекта для элемента управления Подразделение и Подразделение контрагента.
+<.> Получаем модель объекта для подразделения с идентификатором "67E331F0-EF31-4E2C-A1F6-D527606EC8CA".
+<.> Получаем из разметки карточки элемент управления Подразделение (Department) с названием "department".
+<.> Сохраняем в значение элемента управления полученную ранее модель. В элементе управления будет выбрано подразделение с идентификатором "67E331F0-EF31-4E2C-A1F6-D527606EC8CA".
+
+NOTE: Список сервисов генерации моделей объектов приведен в пункте xref:ExtraGenModelServices.adoc[Сервисы генерации моделей объектов].
+
+.Управление блокировкой элемента управления от изменений осуществляется с помощью параметра _disabled_:
+[source,typescript]
+----
+let control = layoutManager.cardLayout.controls.superControl; <.>
+
+control.params.disabled = true <.>
+----
+<.> Получение элемента управления superControl.
+<.> Блокировка элемента управления.
++
+Параметр _disabled_ работает совместно с параметром _editOperation_:
++
+* если _disabled_ равен false и _editOperation_ разрешен -- редактирование ЭУ разрешено;
+* иначе -- редактирование ЭУ запрещено.
+
+Для отрисовки заблокированного элемента управления вызывается метод `BaseControlImpl.renderDisabledControl`, который может быть переопределён, если требуется собственная реализация отрисовки заблокированного элемента управления.
