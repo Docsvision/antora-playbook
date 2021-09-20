@@ -4,7 +4,7 @@
 
 Чтобы создать расширение, добавляющее новые локализованные ресурсы, выполните приведенную далее инструкцию.
 
-. xref:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
+. xref:layoutDesignerExtensionsCreatePublish.adoc[Создайте проект расширения программы {kvr}].
 
 . Добавьте в проект расширения ресурсные файлы (для английского, русского и др. языков), содержащие требуемые локализованные ресурсы. 
 
@@ -12,10 +12,11 @@
 
 . Переопределите метод GetResourceManagers базового класса расширения, чтобы он предоставлял менеджер ресурсов для добавленных ресурсных файлов:
 
-`csharp
-   protected override List&lt;ResourceManager&gt; GetResourceManagers()
+[source,charp]
+----
+   protected override List<ResourceManager> GetResourceManagers()
    {
-       return new List&lt;ResourceManager&gt;
+       return new List<ResourceManager>
        {
            Resources.ResourceManager
        };

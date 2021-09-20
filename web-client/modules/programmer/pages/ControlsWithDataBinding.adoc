@@ -143,7 +143,7 @@
 
 ----
 
-&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+<?xml version="1.0" encoding="utf-8" ?>
 <Controls>
  <Control Name="Somecontrol" DisplayName="Somecontrol">
  <Properties>
@@ -171,8 +171,8 @@
 . В "интерфейсном классе" в методе, отвечающем за загрузку биндинга, организовать проверку операции редактирования:
 
 `tsx
-   @handler(&quot;binding&quot;)
-   protected set binding(binding: IBindingResult&lt;boolean&gt;) {
+   @handler("binding")
+   protected set binding(binding: IBindingResult<boolean>) {
        // Сохраняем результат проверки доступности операции в поле canEdit
        this.state.canEdit = !binding || this.props.services.editOperations.available(binding.editOperation)
    }

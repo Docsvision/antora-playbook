@@ -7,24 +7,24 @@
 . Добавьте событие в описатель элемента управления:
 
 `xml
-   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-   &lt;Controls&gt;
-     &lt;Control Name=&quot;SomeControl&quot; DisplayName=&quot;Пример элемента управления&quot;&gt;
-       &lt;Properties&gt;
-         &lt;Property Type=&quot;Name&quot; /&gt;
-       &lt;/Properties&gt;
-       &lt;Events&gt;
-         &lt;Event Name=&quot;someEventing&quot; DisplayName=&quot;Перед выполнение операции&quot;/&gt; &lt;!--- Прерываемое событие --&gt;
-       &lt;/Events&gt;
-     &lt;/Control&gt;
-   &lt;/Controls&gt;
+   <?xml version="1.0" encoding="utf-8" ?>
+   <Controls>
+     <Control Name="SomeControl" DisplayName="Пример элемента управления">
+       <Properties>
+         <Property Type="Name" />
+       </Properties>
+       <Events>
+         <Event Name="someEventing" DisplayName="Перед выполнение операции"/> <!--- Прерываемое событие -->
+       </Events>
+     </Control>
+   </Controls>
 `
 
 . В клиентском компоненте элемента управления в классе параметров для события укажите тип CancelableApiEvent:
 
 `
    export class SomeControlParams extends BaseControlParams {
-       @apiEvent someEventing?: CancelableApiEvent&lt;IEventArgs&gt;;
+       @apiEvent someEventing?: CancelableApiEvent<IEventArgs>;
    }
 `
 
@@ -41,6 +41,6 @@
 
 [source,typescript]
 ----
- protected internalEventHandler = async () =&gt; {
+ protected internalEventHandler = async () => {
  try {
  await CancelableEvent.cast(this.state.someEventing).trigger().deferred;

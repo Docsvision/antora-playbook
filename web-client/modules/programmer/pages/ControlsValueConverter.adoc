@@ -8,16 +8,17 @@
 * в текстовом описателе -- в атрибуте BindingConverter:
 
 `xml
- &lt;Property Type=&quot;Binding&quot; BindingConverter=&quot;SuperConverter&quot; /&gt;
+ <Property Type="Binding" BindingConverter="SuperConverter" />
 `
 
 * в бинарном описателе -- в методе GetBindingLoader:
 
-`csharp
+[source,charp]
+----
  var bindingProperty = PropertyFactory.GetBindingProperty();
- bindingProperty.GetBindingLoader = (() =&gt; new SimpleBindingLoader
+ bindingProperty.GetBindingLoader = (() => new SimpleBindingLoader
  {
-     ConverterType = &quot;SuperConverter&quot;
+     ConverterType = "SuperConverter"
  });
 `
 
@@ -61,7 +62,8 @@
 
 Пример:
 
-`csharp
+[source,charp]
+----
    public override BindingResult ConvertForDisplay(ControlContext controlContext, Binding binding, BindingResult bindingResult)
    {
       CardKindModel model = null;
@@ -75,9 +77,10 @@
 
 Конвертер нужно добавить в IoC-контейнер в ядре серверного расширения:
 
-`csharp
+[source,charp]
+----
    public override void InitializeContainer(ContainerBuilder containerBuilder) {
-       containerBuilder.RegisterOrderedType&lt;SuperConverter, IBindingConverter&gt;();
+       containerBuilder.RegisterOrderedType<SuperConverter, IBindingConverter>();
    }
 `
 

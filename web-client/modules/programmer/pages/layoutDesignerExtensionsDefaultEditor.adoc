@@ -12,30 +12,32 @@ class BooleanMetadataEditor : ITypeEditor
     {
         var editor = new FieldMetadataEditor();
         
-        // Устанавливаем ограничением для отображаемых типов. Текущее обрабатываемое поле передаётся в field
-        editor.FieldFilter = (field) => { return field.FieldType == FieldType.Bool; };
+        //
+        editor.FieldFilter = (field) => { return field.FieldType == FieldType.Bool; }; <.>
         return editor.ResolveEditor(propertyItem);
     }
 }
-
 ----
+<.> Устанавливаем ограничением для отображаемых типов. Текущее обрабатываемое поле передаётся в `field`.
 
-Использование возможностей фильтра FieldFilter позволяет установить более точные критерии для отображения списка полей в редакторе. Например, в следующем коде поля ограничиваются по типу и связанной карточки и секции, с которой должно быть связано поле (для полей ссылающихся на справочники).
+Использование возможностей фильтра `FieldFilter` позволяет установить более точные критерии для отображения списка полей в редакторе.
+
+Например, в следующем коде поля ограничиваются по типу и связанной карточки и секции, с которой должно быть связано поле (для полей ссылающихся на справочники).
 
 [source,csharp]
 ----
 public FrameworkElement ResolveEditor(PropertyItem propertyItem)
 {
     var editor = new FieldMetadataEditor();
-    
-    // Устанавливаем фильтр
-    // field.LinkedCardTypeId - поле должно быть связано с карточкой Конструктор справочников
-    // field.LinkedSectionId - с секцией Строка справочника
-    editor.FieldFilter = (field) => {
+
+    editor.FieldFilter = (field) => { <.>
         return (field.FieldType == FieldType.RefId || field.FieldType == FieldType.UniqueId) && 
-            field.LinkedCardTypeId == RefBaseUniversal.ID && 
-            field.LinkedSectionId == RefBaseUniversal.Items.ID; };
+            field.LinkedCardTypeId == RefBaseUniversal.ID && <.>
+            field.LinkedSectionId == RefBaseUniversal.Items.ID; }; <.>
 
     return editor.ResolveEditor(propertyItem);
 }
 ----
+<.> Устанавливаем фильтр.
+<.> Поле должно быть связано с карточкой Конструктор справочников
+<.> Поле должно быть связано с секцией _Строка справочника_

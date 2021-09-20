@@ -29,19 +29,19 @@ public class AdvancedCardManager
 |`DeleteCard(Guid, Boolean)` |Удаляет карточку cardId и все её дочерние карточки. Для удаления в корзину параметр permanently должен быть false. 
 |`DeleteRow(Guid, Guid, Guid)` |Удаляет строку rowId из секции sectionId карточки cardId. 
 |`DisableReadOnlyDictionary(Guid)` |Добавляет справочник cardTypeId в список справочников, для которых запрещен режим открытия "только для чтения". Проверка осуществляется методом `IsReadonlyDictionaryEnabled`.
-|`GetCard&lt;T&gt;(Guid, Boolean)` |Возвращает карточку cardId в формате объекта T. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
+|`GetCard<T>(Guid, Boolean)` |Возвращает карточку cardId в формате объекта T. При установленном флаге refresh обновляет кэш для получения актуальных данных.
 |`GetCardCreateDate(Guid)` |Возвращает дату создания карточки cardId. 
 |`GetCardData(Guid, Boolean)` |Возвращает данные карточки cardId. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
 |`GetCardTimestamp(Guid, Boolean)` |Возвращает штамп времени карточки cardId. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
 |`GetCardTimestampModel(Guid, Boolean)` |Возвращает штамп времени карточки cardId в формате модели CommonResponseTimestamp. При установленном флаге refresh обновляет кэш для получения актуальных данных. 
 |`GetCardTypeId(Guid)` |Возвращает тип карточки cardId. 
-|`GetDictionary&lt;T&gt;(Guid, Boolean)` |Возвращает справочник cardTypeId в формате объекта T. 
-|`GetDictionaryAsReadonly&lt;T&gt;(Guid, Boolean)` |Возвращает справочник cardTypeId в формате объекта T и режим чтения. Если данные справочника будут изменяться, получайте его методом `GetDictionary`. 
+|`GetDictionary<T>(Guid, Boolean)` |Возвращает справочник cardTypeId в формате объекта T.
+|`GetDictionaryAsReadonly<T>(Guid, Boolean)` |Возвращает справочник cardTypeId в формате объекта T и режим чтения. Если данные справочника будут изменяться, получайте его методом `GetDictionary`.
 |`GetDictionaryData(Guid, Boolean)` |Возвращает данные справочника cardTypeId. 
 |`GetDictionaryDataAsReadonly(Guid, Boolean)` |Возвращает данные справочника cardTypeId в формате объекта T и режим чтения. Если данные справочника будут изменяться, получайте их методом `GetDictionaryData`. 
 |`GetFieldDescription(Guid, Guid, String)` |Возвращает отображаемое локализованное название поля fieldAlias секции sectionId карточки cardTypeId. 
 |`GetFieldValue(Guid, Guid, String)` |Возвращает значение поля fieldAlias секции sectionId карточки cardTypeId. 
-|`GetFieldValue&lt;T&gt;(Guid, Guid, String)` |Возвращает значение поля fieldAlias секции sectionId карточки cardTypeId в формате объекта T. 
+|`GetFieldValue<T>(Guid, Guid, String)` |Возвращает значение поля fieldAlias секции sectionId карточки cardTypeId в формате объекта T.
 |`GetFieldValue(CardData, Guid, String)` |Возвращает значение поля fieldAlias секции sectionId из данных карточки cardData. 
 |`GetOperations(Guid)` |Возвращает список операций (разрешенных и запрещённых) карточки в формате OperationModel. 
 |`GetRow(Guid, Guid, Guid)` |Возвращает данные строки rowId секции sectionId карточки cardId. 

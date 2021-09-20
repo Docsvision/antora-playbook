@@ -1,6 +1,6 @@
 = Добавление нового типа свойств в текстовом описателе
 
-Новый тип свойств можно добавить с помощью серверного расширения (см. xref:LayoutDesignerExtensionWithProperty.adoc[Добавление нового свойства элементов управления]) или описать непосредственно в текстовом описателе элемента управления.
+Новый тип свойств можно добавить с помощью серверного расширения (см. xref:layoutDesignerExtensionsAddNewProperty.adoc[Добавление нового свойства элементов управления]) или описать непосредственно в текстовом описателе элемента управления.
 
 Для добавления нового типа свойств:
 
@@ -38,7 +38,8 @@
 
 Пример реализации класса SuperExtension.SuperVariantsSource, предоставляющего значения для свойства:
 
-`csharp
+[source,charp]
+----
   namespace SuperExtension
   {
       public class SuperVariantsSource : IItemsSource
@@ -46,8 +47,8 @@
           public ItemCollection GetValues()
           {
               ItemCollection values = new ItemCollection();
-              values.Add(0, &quot;Вариант 1&quot;); // При выборе этого варианта, значение свойства будет 0
-              values.Add(1, &quot;Вариант 2&quot;); // При этом варианте, значение 1
+              values.Add(0, "Вариант 1"); // При выборе этого варианта, значение свойства будет 0
+              values.Add(1, "Вариант 2"); // При этом варианте, значение 1
               values.Add(2, Resource.LocalizedVariant3); // Имя варианта можно объявить в ресурсах с целью локализации
               return values;
           }
@@ -58,26 +59,26 @@
 * Свойство логического типа, зависящее от устройства (DeviceDependent), с категорией "Внешний вид" ("AppearanceCategory") и значением по умолчанию "false":
 
 `xml
-  &lt;Property Name=&quot;ShowPreview&quot; ResourceKey=&quot;History_ShowPreview&quot;
-          Category=&quot;AppearanceCategory&quot; DataType=&quot;System.Boolean&quot; DefaultValue=&quot;false&quot; DeviceDependent=&quot;true&quot; /&gt;
+  <Property Name="ShowPreview" ResourceKey="History_ShowPreview"
+          Category="AppearanceCategory" DataType="System.Boolean" DefaultValue="false" DeviceDependent="true" />
 `
 
 * Свойство числового типа с категорией "Поведение"("BehaviorCategory") и значением по умолчанию "20":
 
 `xml
-  &lt;Property Name=&quot;RecordsOnPage&quot; Editor=&quot;PositiveIntegerEditor&quot;
-          Category=&quot;BehaviorCategory&quot; DataType=&quot;System.Int32&quot; DefaultValue=&quot;20&quot;/&gt;
+  <Property Name="RecordsOnPage" Editor="PositiveIntegerEditor"
+          Category="BehaviorCategory" DataType="System.Int32" DefaultValue="20"/>
 `
 
 * Свойство строкового типа:
 
 `xml
-  &lt;Property Name=&quot;DurationControlName&quot; Category=&quot;BehaviorCategory&quot; DataType=&quot;System.String&quot;/&gt;
+  <Property Name="DurationControlName" Category="BehaviorCategory" DataType="System.String"/>
 `
 
 * Локализованное свойство (Localized) строкового типа со стандартным редактором (Editor) "LocalizedPropertyEditor":
 
 `xml
-  &lt;Property Name=&quot;ButtonText&quot; Editor=&quot;LocalizedPropertyEditor&quot; Localized=&quot;true&quot;
-          Category=&quot;AppearanceCategory&quot; DataType=&quot;System.String&quot;/&gt;
+  <Property Name="ButtonText" Editor="LocalizedPropertyEditor" Localized="true"
+          Category="AppearanceCategory" DataType="System.String"/>
 `

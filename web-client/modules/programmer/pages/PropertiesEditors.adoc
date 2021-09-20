@@ -6,13 +6,14 @@ image::textEditorWithLocalization.png[Редактор локализуемых 
 
 Пример использования в коде:
 
-`csharp
+[source,charp]
+----
    private PropertyDescription GetLocalizableMessagePropertyDescription () {
        var propertyDescription = new PropertyDescription {
            Type = typeof (string),
-           Name = &quot;LocalizableMessage&quot;,
+           Name = "LocalizableMessage",
            Category = {dv}.Platform.Tools.LayoutEditor.Infrostructure. PropertyCategoryConstants.DataCategory,
-           DisplayName = &quot;Localizable message&quot;,
+           DisplayName = "Localizable message",
            Localized = true,
            Editor = typeof ({dv}.Platform.Tools.LayoutEditor.Editors.LocalizedPropertyEditor)
        };
@@ -93,13 +94,14 @@ image::enumEditor.png[Редактор перечислений]
 
 Пример использования в коде:
 
-`csharp
+[source,charp]
+----
    private PropertyDescription GetDeviceDependentPropertyDescription () {
        var propertyDescription = new PropertyDescription {
            Type = typeof (int),
-           Name = &quot;DeviceDependent&quot;,
+           Name = "DeviceDependent",
            Category = PropertyCategoryConstants.DataCategory,
-           DisplayName = &quot;Device Dependent&quot;,
+           DisplayName = "Device Dependent",
            DeviceDependent = true,
            DefaultValue = DeviceDependentHelper.GetDeviceDependentDefaultValue(1)
        };

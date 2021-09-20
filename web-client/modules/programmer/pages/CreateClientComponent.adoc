@@ -32,7 +32,7 @@
 
 [source,typescript]
 ----
- export class SuperControlImpl extends BaseControlImpl&lt;SuperControlParams, SuperControlState&gt; {
+ export class SuperControlImpl extends BaseControlImpl<SuperControlParams, SuperControlState> {
  // Инициализация компонента
  construct() {
  super.construct();
@@ -41,7 +41,7 @@
 
 [source,typescript]
 ----
- export class SuperControl extends BaseControl&lt;SuperControlParams, SuperControlState&gt; {
+ export class SuperControl extends BaseControl<SuperControlParams, SuperControlState> {
  // Инициализация параметров
  protected createParams() {
  return new SuperControlParams();
@@ -51,7 +51,7 @@
 
 [source,typescript]
 ----
- export class SuperSimpleControl extends BaseControl&lt;SuperControlParams, SuperControlState&gt; {
+ export class SuperSimpleControl extends BaseControl<SuperControlParams, SuperControlState> {
  protected createParams() {
  return new SuperControlParams();
  }

@@ -6,7 +6,7 @@
 
 Чтобы создать расширение, добавляющее функцию проверки, выполните приведенную далее инструкцию.
 
-. xref:LayoutDesignerExtensionNew.adoc[Создайте проект расширения программы {kvr}].
+. xref:layoutDesignerExtensionsCreatePublish.adoc[Создайте проект расширения программы {kvr}].
 
 . Добавьте в ядро расширения (файл TemplateDesignerExtension.cs) функцию проверки следующего вида:
 
@@ -57,13 +57,14 @@
 
 . Переопределите метод GetAllowedOperations базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя, по которому можно получить данную функцию проверки; значение -- функция проверки:
 
-`csharp
-   protected override Dictionary&lt;string, Func&lt;AllowedOperationsFlag&gt;&gt; GetAllowedOperations()
+[source,charp]
+----
+   protected override Dictionary<string, Func<AllowedOperationsFlag>> GetAllowedOperations()
    {
-       return new Dictionary&lt;string, Func&lt;AllowedOperationsFlag&gt;&gt;
+       return new Dictionary<string, Func<AllowedOperationsFlag>>
        {
            // Обратите внимание, что в функцию передается сервис-провайдер расширения
-           {&quot;GetPossibleOperation&quot;, () =&gt; GetPossibleOperation(this.serviceProvider) }
+           {"GetPossibleOperation", () => GetPossibleOperation(this.serviceProvider) }
        };
    }
 `
@@ -74,7 +75,7 @@
 
 == Проверка примера
 
-. xref:LayoutDesignerExtensionWithControlType.adoc[Создайте проект нового элемента управления].
+. xref:layoutDesignerExtensionsAddNewControl.adoc[Создайте проект нового элемента управления].
 
 . В поле GetAllowedOperations (функция проверки) описателя элемента управления укажите функцию GetPossibleOperation.
 
@@ -91,7 +92,7 @@
  PropertyFactory.GetVisibilityProperty (),
  PropertyFactory.GetClickEvent ()
  },
- GetAllowedOperations = () =&gt; GetPossibleOperation(serviceProvider) // Передаем функцию проверки
+ GetAllowedOperations = () => GetPossibleOperation(serviceProvider) // Передаем функцию проверки
  };
 
 ----
@@ -112,13 +113,14 @@
 
 Код получения хранилища функций проверки:
 
-`csharp
+[source,charp]
+----
    IAllowedOperationsStorage allowedOperationsStorage;
    protected IAllowedOperationsStorage AllowedOperationsStorage
    {
        get
        {
-           return this.allowedOperationsStorage ?? (this.allowedOperationsStorage = ServiceUtil.GetService&lt;IAllowedOperationsStorage&gt;(serviceProvider));
+           return this.allowedOperationsStorage ?? (this.allowedOperationsStorage = ServiceUtil.GetService<IAllowedOperationsStorage>(serviceProvider));
        }
    }
 `

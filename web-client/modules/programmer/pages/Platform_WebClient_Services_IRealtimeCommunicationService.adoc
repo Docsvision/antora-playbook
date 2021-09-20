@@ -20,10 +20,10 @@ public interface IRealtimeCommunicationService
 |Имя |Описание 
 
 |`GetCurrentSessionId` |Возвращает идентификатор текущей сессии в ASP NET. Тип: String. 
-|`Send&lt;T&gt;(String, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором сессии sessionId в ASP NET. 
-|`Send&lt;T&gt;(Guid, RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет сообщение пользователю с идентификатором employeeId в Справочнике сотрудников. 
-|`SendAll&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` всем подключенным пользователям (с активной и неактивной сессией) {wc}а.
-|`SendToCurrentSession&lt;T&gt;(RealtimeCommunicationMessage&lt;T&gt;)` |Отправляет оповещение `message` текущему пользователю. 
+|`Send<T>(String, RealtimeCommunicationMessage<T>)` |Отправляет сообщение пользователю с идентификатором сессии sessionId в ASP NET.
+|`Send<T>(Guid, RealtimeCommunicationMessage<T>)` |Отправляет сообщение пользователю с идентификатором employeeId в Справочнике сотрудников.
+|`SendAll<T>(RealtimeCommunicationMessage<T>)` |Отправляет оповещение `message` всем подключенным пользователям (с активной и неактивной сессией) {wc}а.
+|`SendToCurrentSession<T>(RealtimeCommunicationMessage<T>)` |Отправляет оповещение `message` текущему пользователю.
 |===
 
 == События
@@ -31,10 +31,10 @@ public interface IRealtimeCommunicationService
 |===
 |Имя |Описание 
 
-|`Connected` |Вызывается при подключении пользователя. Тип: `EventHandler&lt;RealtimeConnectionEventArgs&gt;`. 
-|`Disconnected` |Вызывается при отключении пользователя. Тип: `EventHandler&lt;RealtimeConnectionEventArgs&gt;`. 
-|`MessageReceived` |Вызывается при получении оповещения. Тип: `EventHandler&lt;RealtimeMessageEventArgs&gt;`. 
-|`MessageSent` |Вызывается при отправке оповещения. Тип: `EventHandler&lt;RealtimeCommunicationMessage&gt;`. 
+|`Connected` |Вызывается при подключении пользователя. Тип: `EventHandler<RealtimeConnectionEventArgs>`.
+|`Disconnected` |Вызывается при отключении пользователя. Тип: `EventHandler<RealtimeConnectionEventArgs>`.
+|`MessageReceived` |Вызывается при получении оповещения. Тип: `EventHandler<RealtimeMessageEventArgs>`.
+|`MessageSent` |Вызывается при отправке оповещения. Тип: `EventHandler<RealtimeCommunicationMessage>`.
 |===
 
 == Примечание
