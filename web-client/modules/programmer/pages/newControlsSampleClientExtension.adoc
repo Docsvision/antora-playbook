@@ -1,0 +1,493 @@
+= Создание клиентского расширения с реализацией элемента управления
+
+Непосредственно элемент управления для {wc}а реализуется в клиентском расширении, и состоит из нескольких частей (см. пункт xref:newControlsCreatePublishClientComponent.adoc[Разработка и публикация клиентского компонента элемента управления]): класс параметров, интерфейс состояния, интерфейсный класс и класс реализации.
+
+С точки зрения пользовательского интерфейса реализуемый элемент управления будет представлять собой поле для ввода текста, в котором по умолчанию будет отображаться значение из поля карточки, связанного со строкой _Дела_ _Справочника номенклатуры дел 5_. Особенностью элемента управления является необходимость реализации дополнительного графического компонента, в котором будут отображаться данные для выбора значения из _Справочника номенклатуры дел 5_, а также возможность быстрого поиска дел по справочнику.
+
+== Клиентский сервис для работы со "Справочником номенклатуры дел 5"
+
+Реализуемому элементу управления потребуется доступ к _Справочнику номенклатуры дел 5_, который предоставляют веб-методы, разработанные в xref:newControlsSampleServerExtension.adoc[серверном расширении]. Взаимодействовать с веб-методами можно вызывая их напрямую в основном коде элемента или используя отдельный клиентский сервис.
+
+Ниже представлен код такого сервиса, который будет использоваться далее.
+
+.Файл `_RefCasesWebExtension\src\Services\RefCasesServices.ts_`
+[source,typescript]
+----
+import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+import { urlStore } from "@docsvision/webclient/System/UrlStore";
+import { Models } from "../Controls/RefCases/Data/CaseModel";
+import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
+
+export class RefCasesService  {
+    constructor(private services: $RequestManager) {
+    }
+
+    getYears(rootSectionID?: string): Promise<Models.RefCasesYearModel[]> { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("GetYears", "RefCasesOperation");
+        url = url + "?rootSectionID=" + rootSectionID;
+        
+        return this.services.requestManager.post<Models.RefCasesYearModel[]>(url, "");
+    }
+
+    getSections(yearID?: string, rootSectionID?: string): Promise<Models.RefCasesSectionModel[]> { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("GetSections", "RefCasesOperation");
+        url = url + "?yearID=" + yearID + "&rootSectionID=" + rootSectionID;
+        
+        return this.services.requestManager.post<Models.RefCasesSectionModel[]>(url, "");
+    }
+
+    getCases(sectionID?: string): Promise<Models.RefCasesCaseModel[]> { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("GetCases", "RefCasesOperation");
+        url = url + "?sectionID=" + sectionID;
+        
+        return this.services.requestManager.post<Models.RefCasesCaseModel[]>(url, "");
+    }
+
+    getCaseTitleName(caseID?: string): Promise<string> { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("GetCaseDisplayName", "RefCasesOperation");
+        url = url + "?caseID=" + caseID;
+        
+        return this.services.requestManager.post<string>(url, "");
+    }
+
+    searchCase(caseName: string, skipCount: number, maxCount: number, rootSectionID?: string): Promise<Models.CaseSearchResult> { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("SearchCase", "RefCasesOperation");
+        url = url + "?caseName=" + caseName + "&skipCount=" + skipCount + "&maxCount=" + maxCount + "&rootSectionID=" + rootSectionID;
+
+        return this.services.requestManager.post<Models.CaseSearchResult>(url, "");
+    }
+}
+
+export type $RefCasesService = { refCasesService: RefCasesService };
+export const $RefCasesService = serviceName((s: $RefCasesService) => s.refCasesService);
+----
+<.> Возвращает модель списка лет.
+<.> Возвращает модель списка (дерева) разделов.
+<.> Возвращает модель списка дел.
+<.> Возвращает отображаемое название дела.
+<.> Возвращает результат поиска дела по названию. В `skipCount` и `maxCount` будут передаваться ограничения для количества результатов, возвращаемых сервером.
+
+== Класс параметров
+
+В классе параметров объявляются свойства и события элемента управления, указанные в его описателе.
+
+Данный элемент управления представляет собой поле для ввода текста, основанный на элементе `InputBasedControl`, в котором уже объявлены стандартные свойства подобного элемента. Единственным новым свойством является свойство `RootSection`, содержащее идентификатор корневого раздела справочника.
+
+Ниже приведён код класса параметров, наследующий основной набор свойств от `InputBasedControlParams` -- класса параметров элемента `InputBasedControl`. Значение элемента управления описывается моделью `Models.RefCasesCaseDisplayModel`.
+
+.Файл `_RefCasesWebExtension\src\Controls\RefCases\RefCases.tsx_`
+[source,typescript]
+----
+export class RefCasesParams extends InputBasedControlParams<Models.RefCasesCaseDisplayModel> {
+
+    @r standardCssClass?: string = "ref-cases"; <.>
+
+    @rw rootSection?: string; <.>
+
+    @rw services?: $LayoutDirectoryDesignerController & $EditOperationStore & $LayoutInfo & $RefCasesService; <.>
+}
+----
+<.> Стандартный CSS класс со стилями элемента управления
+Необходимо переопределить с собственным названием CSS класса.
+<.> Секция справочника, из которой разрешено выбирать дела.
++
+Настраивается в программе {kvr}. Может быть пустым (ограничение отсутствует).
++
+<.> Клиентские сервисы. `$RefCasesService` - собственный сервис для работы с данными _Справочника номенклатуры дел 5_.
+
+== Интерфейс состояния
+
+В интерфейсе состояния нужно объявить свойства, описывающие внутреннее состояние элемента управления. В частности во внутреннем состоянии будет храниться "биндинг" элемента управления.
+
+.Файл `_RefCasesWebExtension\src\Controls\RefCases\RefCasesImpl.tsx_`
+[source,typescript]
+----
+<.>
+export interface RefCasesState extends RefCasesParams, InputBasedControlState<Models.RefCasesCaseDisplayModel> {
+    binding: IBindingResult<Models.RefCasesCaseDisplayModel>;  <.>
+    
+    dialog: ModalWindow; <.>
+
+    requestHelper: RequestHelper; <.>
+    
+    inputKeyDown: SimpleEvent<React.KeyboardEvent<any>>; <.>
+}
+----
+<.> @internal.
+<.> Используется для хранения биндинга.
+<.> Диалоговое окно выбора _Дела_ из справочника.
+<.> Вспомогательный компонент, предоставляющий метод для обработки длительных операций (будет использоваться при получении данных из справочника).
+<.> Событие ввода значения в поле элемента управления.
+
+== Интерфейсный класс
+
+В интерфейсном классе необходимо создать экземпляр реализации элемента управления, загрузить "биндинг", а также реализовать метод getBindings, возвращающий "биндинг" с текущим значением.
+
+.Файл `_RefCasesWebExtension\src\Controls\RefCases\RefCases.tsx_`
+[source,typescript]
+----
+export class RefCases extends InputBasedControl<Models.RefCasesCaseDisplayModel, RefCasesParams, RefCasesState>
+{
+    protected getServices(): $LayoutInfo {
+        return this.state.services;
+    }
+    
+    protected createParams(): RefCasesParams { <.>
+        return new RefCasesParams();
+    }
+    
+    @handler("binding") <.>
+    protected set binding(binding: IBindingResult<Models.RefCasesCaseDisplayModel>) {
+        this.value = binding && binding.value;
+        this.state.canEdit = editOperationAvailable(this.state.services, binding);
+        this.state.binding = binding;
+    }
+
+    protected getBindings() { <.>
+        let binding = cloneObject(this.state.binding);
+        return [getBindingResult(binding, this.params.value && this.params.value.id || null, () => at(RefCasesParams).labelText)];
+    }
+
+    protected createImpl() { <.>
+        return new RefCasesImpl(this.props, this.state);
+    }
+}
+----
+<.> Инициализация параметров элемента управления.
+<.> Загружаем биндинг при инициализации элемента управления.
+<.> Возвращаем биндинги.
+<.> Предоставляем экземпляр реализации элемента управления Справочник номенклатуры дел 5.
+
+== Класс реализации
+
+В данном примере элемент управления представляет собой поле для ввода текста, дополненное функцией быстрого поиска, реализуемой с использованием компонента Typeahead.
+
+Реализация класса в данном примере является достаточно большой: здесь код будет приведён частично.
+
+.Файл `_RefCasesWebExtension\src\Controls\RefCases\RefCasesImpl.tsx_`
+[source,typescript]
+----
+<.>
+export class RefCasesImpl extends InputBasedControlImpl<Models.RefCasesCaseDisplayModel, RefCasesParams, RefCasesState>
+{
+    constructor(props: RefCasesParams, state: RefCasesState) {
+        super(props, state);
+
+        this.state.requestHelper = new RequestHelper(() => this.forceUpdate()); <.>
+
+        this.state.inputKeyDown = new SimpleEvent<React.KeyboardEvent<any>>(this);
+
+        this.findItems = this.findItems.bind(this);
+        this.showDictionary = this.showDictionary.bind(this);
+        this.onSelected = this.onSelected.bind(this);
+        this.attachTypeahead = this.attachTypeahead.bind(this); <.>
+    }
+
+
+    protected renderInputWithPlaceholder(): React.ReactNode { <.>
+
+        let buttons: IBoxWithButtonsButtonInfo[] = [ <.>
+            {
+                onClick: this.showDictionary,
+                name: "open-dictionary",
+                iconClassName: "open-dictionary-button-icon dv-ico dv-ico-dictionary",
+                visible: this.editAvailable,
+                title: resources.RefCases_SelectFromDirectory,
+                disabled: !this.editAvailable,
+                tabIndex: this.getTabIndex(),
+            }
+        ];
+
+        return ( <.>
+            <Typeahead className={"universal-directory-box"} extraButtons={buttons}
+                findItems={this.findItems}
+                clearButton={this.hasValue()}
+                searchText={this.state.inputText}
+                afterOpenCallback={() => this.afterOpenCallback()}
+                popoverClassName={this.state.standardCssClass}
+                popoverAttributes={{ "data-control-name": this.state.name }}
+                inputKeyDown={this.state.inputKeyDown}
+                onSelected={this.onSelected}
+                disabled={!this.editAvailable}
+                ref={this.attachTypeahead}>
+                {super.renderInputWithPlaceholder()}
+            </Typeahead>
+        );
+    }
+
+    async showDictionary() { <.>
+        if (this.state.dialog && this.state.dialog.IsOpened) {
+            return;
+        }
+
+        let controlInModal: RefCasesSelectDialog; <.>
+
+        let params = new ModalWindowParams(); <.>
+        params.headerText = resources.RefCases_SelectFromDirectory;
+        params.content = "";
+        params.buttonOkShow = true;
+        params.buttonOkText = resources.Navigator_ButtonSelect;
+
+        let okFunction = () => { <.>
+            let selectedCase = cloneObject(controlInModal.selectedCase);
+
+            if (selectedCase) { <.>
+                this.state.services.refCasesService.getCaseTitleName(selectedCase.uniqueId).then((title) => {
+
+                    let displayValue = {
+                        id: selectedCase.uniqueId,
+                        name: title
+                    } as Models.RefCasesCaseDisplayModel;
+
+                    this.setValue(displayValue, true);
+                });
+
+                if (this.state.dialog) {
+                    this.state.dialog.Hide();
+                    this.state.dialog = null;
+                }
+            }
+        };
+
+        params.buttonOkFunction = okFunction; <.>
+
+        const value = this.getValue(); <.>
+        this.state.dialog = new ModalWindow(params);
+
+        renderModalContent(this.state.dialog, ( <.>
+            <RefCasesSelectDialog key={this.state.name + "_Modal"} ref={(el) => controlInModal = el}
+                rootSectionId={this.state.rootSection}
+                services={this.state.services}
+
+                nodeSelected={(node) => { <.>
+                    if (this.state.dialog) {
+                        if (node) this.state.dialog.OkButtonElement.classList.remove("disabled");
+                        else this.state.dialog.OkButtonElement.classList.add("disabled");
+                    }
+                }}
+
+                nodeAccepted={okFunction} /> <.>
+        ));
+
+        this.state.dialog.Show();
+        this.state.dialog.OkButtonElement.classList.add("disabled");
+    }
+
+    protected findItems(typeaheadQuery: ITypeaheadSearchQuery): Promise<ITypeaheadSearchResult> { <.>
+        return new Promise<ITypeaheadSearchResult>((resolve, reject) => {
+            this.state.services.refCasesService.searchCase(typeaheadQuery.searchText, typeaheadQuery.skipCount, typeaheadQuery.maxCount, this.state.rootSection).then(response => {
+                let result = {
+                    items: response.items.map(item => new CaseTypeaheadVariant(item)), <.>
+
+                    hasMore: response.hasMore <.>
+                } as ITypeaheadSearchResult;
+                resolve(result);
+            }).catch(reject);
+        });
+    }
+}
+----
+<.> @internal.
+<.> Инициализация компонента для выполнения длительных операций.
+<.> Связывание обработчиков с контекстом.
+<.> Отрисовка основного элемента управления: поле для ввода текста, к которому добавляется стандартная кнопка выбора значения из справочника.
+<.> Кнопка открытия справочника. Отключается, если нет прав на операцию редактирования.
+<.> Формируем элемент с быстрым поиском.
+<.> Метод, отображающий диалоговое окно выбора _Дела_ из справочника (реализовано в отдельном компоненте).
+<.> Компонент диалогового окна выбора из справочника.
+<.> Устанавливаем параметры диалогового окна.
+<.> Обработчик нажатия кнопки *ОК* в диалоговом окне.
+<.> Если выбрано _Дело_, его модель (`RefCasesCaseDisplayModel`) устанавливается в значение элемента управления.
+<.> Устанавливается обработчик нажатия кнопки *ОК*.
+<.> Получаем текущее значение элемента управления.
+<.> Формируем диалоговое окно.
+<.> Кнопка *ОК* включается при выборе _Дела_.
+<.> Обработчик для двойного щелчка по делу - аналогично нажатию кнопки *ОК*.
+<.> Обработчик события быстрого поиска по справочнику. Результаты поиска отображаются в списке, выводимом под окном поля ввода.
+<.> Результаты поиска, должны быть приведены к `ITypeaheadSearchResult`.
+<.> Флаг, сообщающий о наличии результатов, не включенных в данный ответ.
+
+.В данном компоненте три ключевых функции:
+* `renderInputWithPlaceholder` -- формирует поле для ввода текста с возможностью быстрого поиска, которая реализована в компоненте `Typeahead`.
+* `showDictionary` -- открывает диалоговое окно с элементами для выбора дела из справочника.
+* `findItems` -- реализует функцию получения результатов поиска дел по справочнику.
+
+Компонент `Typeahead` умеет ограничивать кол-во результатов, получаемых за один раз. Данные ограничения регулируются с помощью его параметров:
+
+* `firstPageSize` -- максимальное кол-во результатов при первом запросе, по умолчанию -- 8.
+* `nextPageSize` -- максимальное кол-во результатов при следующих запросах, по умолчанию -- 15.
+
+При выполнении первого запроса в функцию `findItems` передаётся аргумент `ITypeaheadSearchQuery` со значениями `skipCount = 0` и `maxCount = firstPageSize`. При следующем запросе -- при нажатии пользователем кнопки *Показать еще*, в `findItems` передаются значения `skipCount = firstPageSize` и `maxCount = nextPageSize`. Таким образом клиент может запросить у сервера недостающие данные, если после первого запроса сервер вернул флаг `hasMore = true`.
+
+== Компонент диалогового окна выбора дела из справочника
+
+Диалоговое окно выбора дела из _Справочника номенклатуры дел_ представляет собой панель с тремя элементами управления:
+
+- Раскрывающийся список для выбора года,
+- Дерево разделов,
+- Дерево дел.
+
+****
+В модуле _Делопроизводство 5_ секция дел является древовидной, функция вложенных дел не используется. Тем не менее в данном примере для совместимости используется элемент, поддерживающий древовидную структуру данных.
+
+С целью уменьшения количества исходного кода в данном примере умышленно не используется функция выбора текущего значения элемента управления в окне выбора Дела. Данная возможность может быть реализована самостоятельно.
+****
+
+В приведённом далее коде пропущены участки с классом параметров и интерфейсом состояния диалогового окна. Полный исходный код доступен на GitHub.
+
+.Файл `_RefCasesWebExtension\src\Controls\RefCases\RefCasesSelectDialog\RefCasesSelectDialog.tsx_`
+[source,typescript]
+----
+export class RefCasesSelectDialog extends React.Component<IRefCasesSelectDialogProps, IRefCasesSelectDialogState> {
+
+    <.>
+    state: IRefCasesSelectDialogState;
+
+    constructor(props: IRefCasesSelectDialogProps) {
+        super(props);
+
+        this.state = {} as IRefCasesSelectDialogState;
+        this.state.requestHelper = new RequestHelper(() => this.forceUpdate());
+
+
+        this.collectYearsList = this.collectYearsList.bind(this);
+        this.loadSectionsTree = this.loadSectionsTree.bind(this);
+        this.loadCasesTree = this.loadCasesTree.bind(this);
+
+        this.onSectionNodeSelected = this.onSectionNodeSelected.bind(this);
+        this.onCaseNodeSelected = this.onCaseNodeSelected.bind(this);
+        this.onCaseNodeAccepted = this.onCaseNodeAccepted.bind(this); <.>
+
+        this.collectYearsList(); <.>
+    }
+
+    protected collectYearsList() { <.>
+        this.props.services.refCasesService.getYears(this.props.rootSectionId).then((items) => { <.>
+            this.state.years = items.map(x => ({
+                id: x.id,
+                title: x.displayValue
+            } as IComboBoxElement));
+
+            this.setState({ showYearsList: true }); <.>
+        });
+    }
+
+    protected loadSectionsTree(): Promise<IDynamicTreeNodeData[]> { <.>
+        return new Promise<IDynamicTreeNodeData[]>((resolve, reject) => {
+            this.state.requestHelper.send(
+                () => this.props.services.refCasesService.getSections(this.state.selectedYearID, this.props.rootSectionId),
+                items => {
+                    let nodes = RefCasesSectionTreeNode.Create(items);
+                    resolve(nodes);
+                },
+                reject);
+        });
+    }
+
+    protected loadCasesTree(): Promise<IDynamicTreeNodeData[]> { <.>
+        return new Promise<IDynamicTreeNodeData[]>((resolve, reject) => {
+            this.state.requestHelper.send(
+                () => this.props.services.refCasesService.getCases(this.state.selectedSectionID),
+                items => {
+                    let nodes = RefCasesCaseTreeNode.Create(items);
+                    resolve(nodes);
+                },
+                reject);
+        });
+    }
+
+    protected onSectionNodeSelected(node: TreeNode) { <.>
+        this.state.selectedSectionID = node.uniqueId;
+
+        this.state.selectedCaseNode = null;
+        this.props.nodeSelected && this.props.nodeSelected(null);
+
+        this.setState({ showCasesTree: false }, () => this.setState({ showCasesTree: true }));
+    }
+
+    protected onCaseNodeSelected(node: TreeNode) { <.>
+        this.state.selectedCaseNode = node.data as RefCasesCaseTreeNode;
+        this.props.nodeSelected && this.props.nodeSelected(node.data as RefCasesCaseTreeNode);
+    }
+
+    protected onCaseNodeAccepted(node: TreeNode) { <.>
+        this.state.selectedCaseNode = node.data as RefCasesCaseTreeNode;
+        this.props.nodeAccepted && this.props.nodeAccepted(node.data as RefCasesCaseTreeNode);
+    }
+
+    render(): React.ReactNode { <.>
+
+        let yearsList = <div>{resources.RefCases_Years} <.>
+            <CommonComboBox elements={this.state.years} selectedID={this.state.selectedYearID}
+            onChange={(selectedElement: IComboBoxElement) => { <.>
+                this.setState({ selectedYearID: selectedElement.id });
+                this.setState({ showSectionsTree: false }, () => this.setState({ showSectionsTree: true })); <.>
+                this.setState({ showCasesTree: false });
+                this.forceUpdate();
+            }}
+
+            renderElementList={(elements, expanded) =>
+                <PopoverComboBoxBodyContent mode={PopoverMode.BottomDropdown} isOpen={expanded} className="combobox-helper">
+                    {elements}
+                </PopoverComboBoxBodyContent>
+            } />
+            </div>;
+
+        let sectionsTree = <div className={"ref-cases-dialog__tree"}> <.>
+            <div className="tree-block">{resources.RefCases_Sections}
+                <DynamicTree loadNodes={this.loadSectionsTree} treeHeight={300}
+                nodeSelected={this.onSectionNodeSelected} > <.>
+                </DynamicTree>
+            </div>
+        </div>;
+
+        let casesTree = <div className={"ref-cases-dialog__tree"}> <.>
+            <div className="tree-block">{resources.RefCases_Cases}
+                <DynamicTree loadNodes={this.loadCasesTree} treeHeight={300}
+                nodeSelected={this.onCaseNodeSelected} nodeAccepted={this.onCaseNodeAccepted} > <.>
+                </DynamicTree>
+            </div>
+        </div>;
+
+        return (
+            <div>
+                {this.state.showYearsList && yearsList}
+                {this.state.showSectionsTree && sectionsTree}
+                {this.state.showCasesTree && casesTree}
+            </div>
+        );
+    }
+}
+----
+<.> @internal
+<.> Связываем функции и обработчиков событий с контекстом.
+<.> Загружаем список лет из справочника.
+<.> Загружаем из _Справочника номенклатуры дел 5_ список лет в `state.years`, который является источником данных для элемента управления `CommonComboBox`.
+<.> Если установлен раздел, из которого возможен выбор _Дел_ - `rootSectionId`, будет возвращен только год с данным разделом.
+<.> Показываем элемент со списком лет.
+<.> Возвращает  список разделов из Справочника номенклатуры дел 5.
+<.> Загружает список дел после выбора раздела.
+<.> Сохраняет _Дело_ в `selectedNode` после его выбора в списке дел.
+<.> Сохраняет _Дело_ в `selectedNode` после его выбора в списке дел и нажатия кнопки *Выбрать*.
+<.> Сохраняет _Дело_ в `selectedNode` после его выбора в списке дел.
+<.> Инициализация интерфейса.
+<.> Список лет.
+<.> При выборе года из списка инициализируем дерево разделов.
+<.> Элемент для выбора _Раздела_ перемонтируется, элемент для выбора _Дела_ отмонтируется.
+<.> Дерево _Разделов_.
+<.> При выборе _Раздела_ из дерева разделов вызываем метод, загружающий дерево _Дел_.
+<.> Список дел.
+<.> При выборе _Дела_, сохраняем значение узла, а при двойном щелчке вызываем обрабочик `onCaseNodeAccepted`.
+
+== Пример стиля для дерева дел и дерева разделов
+
+.Файл `_RefCasesWebExtension/src/Controls/RefCases/RefCasesSelectDialog/RefCasesSelectDialog.scss_`
+[source,scss]
+----
+.ref-cases-dialog__tree {
+    border-bottom: 1px solid lightgray;
+    padding-top: 10px;
+    display: inline-block;
+    width: 50%;
+}
+----

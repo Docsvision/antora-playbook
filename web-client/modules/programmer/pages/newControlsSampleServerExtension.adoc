@@ -1,0 +1,427 @@
+= Создание серверного расширения {wc}а
+
+В xref:newControlsSampleOfficeWorkDescriptor.adoc[описателе элемента управления] был объявлен конвертер для значения элемента -- `RefCasesConverter` (свойство `Binding`), который должен приводить настоящее значение (идентификатор строки _Дела_ в _Справочнике номенклатуры дел 5_) к виду, удобному для пользователя -- в данном примере к строке вида: `Год. Название разделов. Название дела`.
+
+Также для работы клиентской части понадобятся методы, предоставляющие список лет, дерево разделов и список дел из _Справочника номенклатуры дел 5_, а также функцию для поиска дела по названию (если нужно реализовать функцию поиска на клиенте).
+
+== Сервис для работы со Справочником номенклатуры дел 5
+
+Прежде всего необходимо реализовать сервис для работы со _Справочником номенклатуры дел 5_, методы которого должны:
+
+* Возвращать список лет.
+* Возвращать год для определённой секции -- нужно, если в программе {kvr} был выбран раздел, из которого выбираются дела.
+* Возвращать все разделы для определённого года, а если требуется, только разделы из корневого раздела, выбранного в программе {kvr}.
+* Возвращать все дела из определённого раздела.
+* Возвращать отображаемое название дела -- для конвертера значений `RefCasesConverter`.
+* Возвращать список дел с искомым названием, а если требуется, только дела из корневого раздела, выбранного в программе {kvr}.
+
+Ниже представлен интерфейс сервиса, описывающего установленные требования. Первые два условия для сервиса объединены в один метод `GetYears`.
+
+.Файл `_RefCasesServerExtension\Services\IRefCasesService.cs_`
+[source,csharp]
+----
+using RefCasesServerExtension.Models;
+using System;
+using System.Collections.Generic;
+
+namespace RefCasesServerExtension.Services
+{
+    public interface IRefCasesService
+    {
+        List<Year> GetYears(Guid? rootSection = null);
+        List<Section> GetSections(Guid yearID, Guid? rootSection = null);
+        List<Case> GetCases(Guid sectionID);
+        string GetCaseTitle(Guid caseID);
+        List<CaseClientModel> SearchCases(string caseName, Guid? rootSection = null);
+    }
+}
+----
+
+И реализация сервиса `IRefCasesService`:
+
+.Файл `_RefCasesServerExtension\Services\RefCasesService.cs_`
+[source,csharp]
+----
+using {dv}.Platform.ObjectManager;
+using {dv}.Platform.WebClient;
+using {dv}.Platform.WebClient.Managers;
+using RefCasesServerExtension.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace RefCasesServerExtension.Services
+{
+    public class RefCasesService : IRefCasesService
+    {
+        
+        private Guid refCasesId = new Guid("246197EA-846A-44DA-9EA3-0BCAE5500388"); <.>
+        private Guid yearsSectionId = new Guid("BD44C786-6E41-450E-BD60-66919657E51B"); <.>
+        private Guid sectionsSectionID = new Guid("319E425D-543C-45DB-BD51-955B58476EDB"); <.>
+        private Guid caseSectionID = new Guid("56af8231-b918-42d4-ac15-90ec2e9a0725"); <.>
+
+        <.>
+        private const string Year = "Year";
+        private const string DisplayIndex = "DisplayIndex";
+        private const string Case_Name = "Case_Name";
+        private const string Case_Index = "Case_Index";
+        private const string Case_SectionDisplayIndex = "Case_SectionDisplayIndex";
+        private const string Name = "Name";
+
+        ICurrentObjectContextProvider objectContextProvider;
+        private AdvancedCardManager cardManager => objectContextProvider.GetOrCreateCurrentSessionContext().AdvancedCardManager;
+
+        public RefCasesService(ICurrentObjectContextProvider objectContextProvider) => this.objectContextProvider = objectContextProvider;
+
+        public List<Year> GetYears(Guid? rootSection) <.>
+        {
+            CardData refCasesData = cardManager.GetDictionaryData(refCasesId);
+            SectionData yearSection = refCasesData.Sections[yearsSectionId];
+
+            if (rootSection.HasValue && refCasesData.Sections[sectionsSectionID].RowExists(rootSection.Value)) <.>
+            {
+                var sectionRow = refCasesData.Sections[sectionsSectionID].GetRow(rootSection.Value);
+                var yearRow = sectionRow.SubSection.ParentRow;
+
+                return new List<Year>() {
+                    new Year() { ID = yearRow.Id, DisplayValue = yearRow[Year].ToString() }
+                };
+            }
+
+            return yearSection.Rows.Select<RowData, Year>(row => new Year() <.>
+            {
+                ID = row.Id,
+                DisplayValue = row[Year].ToString()
+            }).ToList();
+        }
+
+        public List<Section> GetSections(Guid yearID, Guid? rootSection) <.>
+        {
+            CardData refCasesData = cardManager.GetDictionaryData(refCasesId);
+            SectionData sectionsSection = refCasesData.Sections[sectionsSectionID];
+
+            if (rootSection.HasValue && sectionsSection.RowExists(rootSection.Value)) <.>
+            {
+                RowData row = sectionsSection.GetRow(rootSection.Value);
+                return GetSectionsFromRows(new List<RowData>() { row });
+            }
+
+            SectionData yearSection = refCasesData.Sections[yearsSectionId];
+
+            if (yearSection.RowExists(yearID)) <.>
+            {
+                RowDataCollection sectionRows = yearSection.GetRow(yearID).ChildSections[sectionsSectionID].Rows;
+                return GetSectionsFromRows(sectionRows);
+            }
+
+            return new List<Section>();
+        }
+
+        public List<Case> GetCases(Guid sectionID) <.>
+        {
+            CardData refCasesData = cardManager.GetDictionaryData(refCasesId);
+            SectionData sectionsSection = refCasesData.Sections[sectionsSectionID];
+
+            if (sectionsSection.RowExists(sectionID))
+            {
+                RowDataCollection sectionRows = sectionsSection.GetRow(sectionID).ChildSections[caseSectionID].Rows;
+                return GetCasesFromRows(sectionRows);
+            }
+
+            return new List<Case>();
+        }
+
+        public string GetCaseTitle(Guid caseID) <.>
+        {
+            CardData refCasesData = cardManager.GetDictionaryData(refCasesId);
+            SectionData section = refCasesData.Sections[caseSectionID];
+
+            if (section.RowExists(caseID))
+            {
+                RowData caseRow = section.GetRow(caseID); <.>
+                var sectionRow = caseRow.SubSection.ParentRow;
+                var yearRow = sectionRow.SubSection.ParentRow;
+
+                return string.Format("{0}, {1}, {2}", yearRow[Year], sectionRow[DisplayIndex], caseRow[Case_Name]);
+            }
+
+            return "Ошибка!";
+        }
+
+        public List<CaseClientModel> SearchCases(string caseName, Guid? rootSection = null) <.>
+        {
+            CardData refCasesData = cardManager.GetDictionaryData(refCasesId);
+
+            RowDataCollection allRows;
+
+            if (rootSection.HasValue && refCasesData.Sections[sectionsSectionID].RowExists(rootSection.Value)) <.>
+                allRows = refCasesData.Sections[caseSectionID].GetAllRows(rootSection.Value, true);
+            else
+                allRows = refCasesData.Sections[caseSectionID].GetAllRows();
+
+            var results = new List<CaseClientModel>();
+
+            foreach (var caseRow in allRows)
+            {
+                if (caseRow[Case_Name].ToString().IndexOf(caseName, StringComparison.InvariantCultureIgnoreCase) > -1 ||
+                    (caseRow[Case_SectionDisplayIndex].ToString() + "-" + caseRow[Case_Index].ToString()).IndexOf(caseName, StringComparison.InvariantCultureIgnoreCase) > -1) <.>
+                {
+                    var sectionRow = caseRow.SubSection.ParentRow;
+                    var yearRow = sectionRow.SubSection.ParentRow;
+
+                    results.Add(new CaseClientModel()
+                    {
+                        Id = caseRow.Id,
+
+                        Name = string.Format("{0}, {1}, {2}", yearRow[Year], sectionRow[DisplayIndex], caseRow[Case_Name]) <.>
+                    });
+                }
+            }
+
+            return results;
+        }
+
+  
+        List<Section> GetSectionsFromRows(IEnumerable<RowData> rows) <.>
+        {
+            var nodes = new List<Section>();
+
+            foreach (var row in rows)
+            {
+                var node = new Section() { ID = row.Id, DisplayValue = row[Name].ToString() };
+                if (row.HasChildRows)
+                    node.Sections = GetSectionsFromRows(row.ChildRows);
+
+                nodes.Add(node);
+            }
+            return nodes;
+        }
+
+        List<Case> GetCasesFromRows(RowDataCollection rows) <.>
+        {
+            var nodes = new List<Case>();
+
+            foreach (var row in rows)
+            {
+                var node = new Case() { ID = row.Id, DisplayValue = row[Case_Name].ToString() };
+                if (row.HasChildRows)
+                    node.Cases = GetCasesFromRows(row.ChildRows);
+
+                nodes.Add(node);
+            }
+            return nodes;
+        }
+    }
+}
+----
+<.> Справочник номенклатуры дел 5.
+<.> Секция _Года_ справочника.
+<.> Секция _Разделы_ справочника.
+<.> Секция _Дела_ справочника.
+<.> Названия полей.
+<.> Возвращает список лет из _Справочника номенклатуры дел 5_.
+<.> Если выбран корневой раздел, нужно вернуть только его _Год_.
+<.> Иначе возвращаем все _Года_.
+<.> Возвращает дерево разделов указанного _Года_ из _Справочника номенклатуры дел 5_.
+<.> Если выбран корневой раздел, вернуть только его подразделы.
+<.> Иначе вернуть все разделы указанного _Года_.
+<.> Вернуть все дела указанного _Раздела_.
+<.> Вернуть отображаемое название _Дела_.
+<.> Получаем для дела родительские строки раздела и _Года_.
+<.> Поиск дела по названию и по идентификатору _Дела_.
+<.> Если указан коневой _Раздел_, поиск только в нём, иначе - во всех _Разделах_.
+<.> Проверяем название _Раздела_ - поле `Case_Name`.
+<.> Возвращаем сразу отображаемое название.
+<.> Возвращаем список _Разделов_ для строк секции справочника.
+<.> Возвращаем список _Дел_ для строк справочника.
+
+== Конвертер "RefCasesConverter"
+
+Как уже было сказано ранее, конвертер нужен для формирования отображаемого значения элемента управления, показываемого при инициализации элемента. Иначе в элементе будет показан идентификатор выбранного дела.
+
+Для разрабатываемого элемента управления название конвертера (`RefCasesConverter`) было объявлено в описателе элемента управления. Теперь его нужно реализовать и зарегистрировать в серверном расширении {wc}а.
+
+В данном пример конвертер использует метод `IRefCasesService.GetCaseTitle` для получения отображаемого названия Дела.
+
+.Файл `_RefCasesServerExtension\BindingConverters\RefCasesConverter.cs_`
+[source,csharp]
+----
+using {dv}.WebClientLibrary.Layout.IL;
+using {dv}.WebClientLibrary.ObjectModel;
+using {dv}.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using {dv}.WebClientLibrary.ObjectModel.Services.LayoutModel;
+using RefCasesServerExtension.Models;
+using RefCasesServerExtension.Services;
+using System;
+
+namespace RefCasesServerExtension.BindingConverters
+{
+    public class RefCasesConverter : BaseBindingConverter <.>
+    {
+        private IRefCasesService refCasesService;
+
+        public RefCasesConverter(IServiceProvider serviceProvider, IRefCasesService refCasesService) : base(serviceProvider, "RefCasesConverter") <.>
+        {
+            this.refCasesService = refCasesService; <.>
+        }
+
+        public override BindingResult ConvertForDisplay(ControlContext controlContext, LayoutBinding binding, BindingResult bindingResult) <.>
+        {
+            var itemId = bindingResult.Value != null ? (Guid)bindingResult.Value : Guid.Empty;
+            var name = itemId == Guid.Empty ? "" : refCasesService.GetCaseTitle(itemId);
+
+            var model = new CaseClientModel() { Id = itemId, Name = name }; <.>
+
+            return bindingResult.Clone(model);
+        }
+    }
+}
+----
+<.> Класс конвертера может быть производным от `BaseBindingConverter` или полностью реализовывать интерфейс `IBindingConverter`.
+<.> В базовый класс нужно передать название конвертера, указанного в описателе `RefCasesConverter`.
+<.> Получаем реализованный ранее сервис для работы со _Справочником номенклатуры дел 5_.
+<.> Основной метод, возвращающий отображаемое значение (а точнее модель) для значения элемента управления - `bindingResult.Value`.
+<.> Клиент ожидает модель, включающую идентификатор и название _Дела_.
+
+== Веб-методы серверного расширения
+
+Клиентской части элемента управления нужны данные из _Справочника номенклатуры дел 5_: для показа списка лет, разделов, а также дел. Предоставить доступ к данным можно с помощью веб-методов серверного расширения.
+
+Далее приведён код контроллера, предоставляющего такие веб-методы.
+
+.Файл `_RefCasesServerExtension\Controllers\RefCasesOperationController.cs_`
+[source,csharp]
+----
+using RefCasesServerExtension.Models;
+using RefCasesServerExtension.Services;
+using System;
+using System.Web.Http;
+using System.Linq;
+
+namespace RefCasesServerExtension.Controllers
+{
+    public class RefCasesOperationController : ApiController
+    {
+        private readonly IRefCasesService refCasesService;
+
+        public RefCasesOperationController(IRefCasesService refCasesService) <.>
+        {
+            this.refCasesService = refCasesService;
+        }
+
+        [HttpPost]
+        public Year[] GetYears([FromUri]Guid? rootSectionID) <.>
+        {
+            return refCasesService.GetYears(rootSectionID).ToArray();
+        }
+
+        [HttpPost]
+        public Section[] GetSections([FromUri]Guid yearID, [FromUri]Guid? rootSectionID) { <.>
+            return refCasesService.GetSections(yearID, rootSectionID).ToArray();
+        }
+
+        [HttpPost]
+        public Case[] GetCases([FromUri]Guid sectionID) <.>
+        {
+            return refCasesService.GetCases(sectionID).ToArray();
+        }
+
+        [HttpPost]
+        public string GetCaseDisplayName([FromUri]Guid caseID) <.>
+        {
+            return refCasesService.GetCaseTitle(caseID);
+        }
+
+        [HttpPost]
+        public CaseSearchResult SearchCase([FromUri]string caseName, [FromUri]int skipCount, [FromUri]int maxCount, [FromUri]Guid? rootSectionID) <.>
+        {
+            var rows = refCasesService.SearchCases(caseName, rootSectionID); <.>
+
+            var result = new CaseSearchResult
+            {
+                Items = rows.Skip(skipCount).Take(maxCount).ToArray(), <.> <.>
+
+                HasMore = rows.Count > skipCount + maxCount
+            }; <.>
+
+            return result;
+        }
+    }
+}
+----
+<.> В конструкторе контроллера получаем ссылку на реализованный сервис для работы со Справочником номенклатуры дел 5.
+<.> Возвращает список лет.
+<.> Возвращает список разделов.
+<.> Возвращает список дел.
+<.> Возвращает отображаемое название дела.
+<.> Поиск дела по имени.
+<.> Получаем все подходящие дела.
+<.> Оставляем только количество запрошенных клиентом.
+<.> Т. к. количество результатов поискового запроса `SearchCase` может быть достаточно большим, клиенту предоставлена возможность ограничивать его с помощью параметров `skipCount` (количество пропускаемых результатов) и `maxCount` (максимальное количество результатов, принимаемых клиентом за один раз).
+<.> Устанавливаем флаг наличия дополнительных результатов.
+
+== Ядро серверного расширения
+
+Реализованные сущности необходимо зарегистрировать в серверном расширении.
+
+.Файл `_RefCasesServerExtension\RefCasesServerExtension.cs_`
+[source,csharp]
+----
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Resources;
+using Autofac;
+using {dv}.WebClient.Extensibility;
+using {dv}.WebClient.Helpers;
+using {dv}.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using RefCasesServerExtension.BindingConverters;
+using RefCasesServerExtension.Services;
+
+namespace RefCasesServerExtension
+{
+    public class RefCasesServerExtension : WebClientExtension
+    {
+        public RefCasesServerExtension(IServiceProvider serviceProvider)
+            : base(serviceProvider)
+        {
+        }
+
+        public override string ExtensionName
+        {
+            get { return Assembly.GetAssembly(typeof(RefCasesServerExtension)).GetName().Name; }
+        }
+
+        public override Version ExtensionVersion
+        {
+            get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
+        }
+
+        #region WebClientExtension Overrides
+
+        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
+        {
+            containerBuilder.RegisterOrderedType<RefCasesConverter, IBindingConverter>(); <.>
+            
+            containerBuilder.RegisterType<RefCasesService>().As<IRefCasesService>().SingleInstance(); <.>
+        }
+
+        protected override List<ResourceManager> GetLayoutExtensionResourceManagers() <.>
+        {
+            return new List<ResourceManager>
+            {
+                { Resources.ResourceManager}
+            };
+        }
+
+        #endregion
+    }
+}
+----
+<.> Регистрация компонентов, реализованных в расширении.
+<.> Регистрируем конвертер.
+<.> Регистрируем сервисы
+<.> Также для примера добавлено несколько локализованных текстовых ресурсов, которые будут использоваться в клиентском расширении.
+
+TIP: Контроллеры регистрировать не требуется.

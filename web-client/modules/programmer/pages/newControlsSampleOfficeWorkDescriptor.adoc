@@ -1,0 +1,434 @@
+= Создание описателя элемента управления и расширения программы {kvr}
+
+Прежде всего определим перечень настроек разрабатываемого элемента управления, которые должны быть доступны пользователю программы {kvr}:
+
+* Стандартный набор свойств: текст метки, подсказка, обязательные и пр..
+* Свойства для выбора источника данных.
+* Специальное свойство для ограничения области выбора дел.
+* Стандартный набор событий (при наведении/отведении курсора и при смене данных).
+
+== Описатель элемента управления
+
+Для описание данного элемента управления сформируем xref:newControlsCreateTextDescriptor.adoc[текстовый описатель] со следующим содержимым:
+
+.Файл `_RefCategoriesDesignerExtension\xml\RefCasesControlDescription.xml_`
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8" ?>
+<Controls>
+  <Control Name="RefCases" ControlGroupResourceKey="ControlGroup_Directories"  ResourceKey="Control_RefCases">
+    <Properties>
+    <.>
+      <Property Type="Name" /> <.>
+      <Property Type="PlaceHolder" /> <.>
+      <Property Type="Tip" /> <.>
+      <Property Type="LabelText" />
+      <Property Type="ShowEmptyLabel" />
+      <Property Type="Visibility" />
+      <Property Type="StandardCssClass" DefaultValue="ref-cases" />
+      <Property Type="CustomCssClasses" />
+      <Property Type="TabStop" DefaultValue="True" />
+      <Property Type="Required" />
+
+    <.>
+      <Property Type="ExtendedDataSource" /> <.>
+      <Property Type="DataSource" /> <.>
+      <Property Type="DataField" Editor="RefCasesFieldMetadataEditor" />
+      <Property Type="Binding" BindingConverter="RefCasesConverter" /> <.>
+      <Property Type="EditOperation" /> <.>
+
+      <Property Name="RootSection" ResourceKey="Control_RefCases_Section"
+                Category="BehaviorCategory" DataType="System.Guid"
+                Editor="RefCasesSectionEditor" /> <.>
+    </Properties>
+    <Events> <.>
+      <Event Name="Click" ResourceKey="ControlTypes_ClickEventProperty" />
+      <Event Name="MouseOver" ResourceKey="ControlTypes_MouseOverEventProperty" /> <.>
+      <Event Name="MouseOut" ResourceKey="ControlTypes_MouseOutEventProperty" /> <.>
+      <Event Name="DataChanged" ResourceKey="ControlTypes_DataChangedEventProperty" /> <.>
+    </Events>
+  </Control>
+</Controls>
+----
+<.> Стандартный набор свойств:
+<.> `*Название*`;
+<.> `*Заполнитель*`;
+<.> `*Подсказка*`.
+<.> Свойства для настройки источника данных и операции редактирования:
+<.> `ExtendedDataSource` -- выбор расширенного источника данных;
+<.> `DataSource`, `DataField` -- выбор секции и поля с данными элемента управления. Редактор `RefCasesFieldMetadataEditor` (будет разработан далее) реализует заявленную функциональность ограничения полей карточки, доступных для выбора;
+<.> Binding -- системное свойство, с которым на клиент передаётся связь с источником данных.
++
+Значение элемента управления -- идентификатор строки дела, выбранного в _Справочнике номенклатуры дел 5_. Пользователю предпочтительно показывать название дела из справочника, а не идентификатор.
++
+Такое преобразование данных осуществляется с помощью конвертера, название которого указывается в атрибуте `BindingConverter`. В данном примере название конвертера `RefCasesConverter` (будет разработан далее);
++
+<.> `EditOperation` -- выбор операции редактирования.
+<.> Новое свойство `RootSection` обеспечивает заявленную возможность выбора разделе _Справочника номенклатуры дел 5_, из которого пользователю будет разрешено выбирать дела.
++
+Значение свойства будет устанавливаться с помощью специального редактора `RefCasesSectionEditor` (будет разработан далее в серверном расширение {wc}а).
+<.> Также для элемента управления определены события:
+<.> При наведении курсора;
+<.> При отведении курсора;
+<.> При смене данных.
+
+== Расширение программы {kvr}
+
+В описателе элемента управления определено несколько нестандартных редакторов, а также ресурсы с текстовыми значениями. Данные сущности нужно добавить в {kvr} с помощью расширения, код которого приведён ниже.
+
+.Файл `_RefCategoriesDesignerExtension\Extension\RefCasesDesignerExtension.cs_`
+[source,csharp]
+----
+using DocsVision.Platform.Tools.LayoutEditor.Extensibility;
+using RefCasesDesignerExtension.Editors;
+using System;
+using System.Collections.Generic;
+using System.Resources;
+
+<.>
+namespace RefCasesDesignerExtension.Extension
+{
+    class RefCasesDesignerExtension : WebLayoutsDesignerExtension
+    {
+        public RefCasesDesignerExtension(IServiceProvider provider)
+            : base(provider)
+        {
+        }
+
+        protected override Dictionary<string, Type> GetEditors()
+        {
+            return new Dictionary<string, Type>
+            {
+                { "RefCasesFieldMetadataEditor", typeof(RefCasesFieldMetadataEditor)}, <.>
+                { "RefCasesSectionEditor", typeof(RefCasesSectionEditor)} <.>
+            };
+        }
+
+        protected override List<ResourceManager> GetResourceManagers()
+        {
+            return new List<ResourceManager>
+            {
+                Resources.ResourceManager
+            };
+        }
+    }
+}
+----
+<.> В данном расширении регистрируется два редактора, которые указаны в текстовом описателе:
+<.> `RefCasesFieldMetadataEditor` -- редактор для выбора поля карточки, содержащего значение элемента управления;
+<.> `RefCasesSectionEditor` -- редактор для выбора раздела _Справочника номенклатуры дел 5_, из которого пользователям будет разрешено выбирать дела.
+
+== Редактор "RefCasesFieldMetadataEditor"
+
+Редактор `RefCasesFieldMetadataEditor` является стандартным редактором xref:layoutDesignerExtensionsDefaultEditor.adoc[редактором для выбора поля карточки], реализованном в классе `{dv}.BackOffice.WebLayoutsDesigner.Editors.FieldMetadataEditor`.
+
+.Файл `_RefCategoriesDesignerExtension\Editors\RefCasesFieldMetadataEditor.cs_`
+[source,csharp]
+----
+using DocsVision.BackOffice.WebLayoutsDesigner.Editors;
+using DocsVision.Platform.Data.Metadata.CardModel;
+using System;
+using System.Windows;
+using Xceed.Wpf.Toolkit.PropertyGrid;
+using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
+
+namespace RefCasesDesignerExtension.Editors
+{
+    public class RefCasesFieldMetadataEditor : ITypeEditor <.>
+    {
+        public FrameworkElement ResolveEditor(PropertyItem propertyItem)
+        {
+            var refCasesID = new Guid("246197EA-846A-44DA-9EA3-0BCAE5500388");
+            var sectionCasesID = new Guid("56AF8231-B918-42D4-AC15-90EC2E9A0725");
+
+            var editor = new FieldMetadataEditor
+            {
+                FieldFilter = (field) => <.>
+                {
+                    return field.FieldType == FieldType.RefId 
+                    && field.LinkedCardTypeId == refCasesID 
+                    && field.LinkedSectionId == sectionCasesID;
+                }
+            };
+
+            return editor.ResolveEditor(propertyItem);
+        }
+
+    }
+}
+----
+<.> Редактор для выбора поля карточки, ссылающегося на Дело в Справочника номенклатуры дел 5.
+<.> Устанавливаем фильтр для выбора полей только из справочника.
+
+Ограничение возможности выбора полей карточки включено с помощью фильтра `FieldFilter`, в котором проверяется тип поля (`field.FieldType`), которое должно быть ссылочным полем (`FieldType.RefId`), ссылающимся на секцию _Дела_ (`field.LinkedSectionId == sectionCasesID`) _Справочника номенклатуры дел 5_ (`field.LinkedCardTypeId == refCasesID`).
+
+В стандартной реализации приложения _Делопроизводство 5_ поле карточки, используемое для хранения ссылки на _Дело_, не является ссылочным, поэтому для него не подходит фильтр, использованный в данном примере, при настройке разметки данное поле будет недоступно для выбора. Если в {wc}е нужно повторить настройки разметки Windows-клиента, фильтр нужно изменить следующим образом:
+
+[source,csharp]
+----
+var editor = new FieldMetadataEditor
+{
+    FieldFilter = (field) =>
+    {
+        return field.FieldType == FieldType.UniqueId; <.>
+    }
+};
+----
+<.> `FieldType.UniqueId` позволяет выбирать любые поля с идентификатором.
+
+== Редактор "RefCasesSectionEditor"
+
+Редактор `RefCasesSectionEditor` имеет более сложную реализацию (по сравнению с `RefCasesFieldMetadataEditor`), из-за необходимости отображения дерева _Разделов_ _Справочника номенклатуры дел 5_.
+
+.У данного редактора есть две составляющие:
+* Графическая -- предоставляет форму для выбора Разделов.
+* Функциональная -- предоставляет функции, загружающие дерево Разделов и выполняющие сопутствующие операции.
+
+[TIP]
+====
+В простейшем случае можно обойтись без сложного редактора, и предоставить возможность непосредственно вводить идентификатор требуемого _Раздела_ справочника в значение настройки элемента управления, или отказаться от данной настройки.
+====
+
+Графическая и функциональные составляющие также распределяются между двумя компонентами:
+
+* Основной компонент редактора с реализацией интерфейса `ITypeEditor`.
+* Форма с деревом Разделов.
+
+Далее приведён код основного компонента редактора без графической составляющей (см. полный исходный код примера  на GitHub).
+
+[source,csharp]
+----
+using DocsVision.Platform.Tools.LayoutEditor;
+using DocsVision.Platform.Tools.LayoutEditor.PropertiesEditor;
+using DocsVision.Platform.WebClient;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
+
+namespace RefCasesDesignerExtension.Editors
+{
+    public partial class RefCasesSectionEditor : UserControl, ITypeEditor
+    {
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(Guid), typeof(RefCasesSectionEditor),<.>
+        new FrameworkPropertyMetadata(Guid.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(RefCasesSectionEditor), new FrameworkPropertyMetadata(string.Empty));
+
+        public Guid Value <.>
+        {
+            get { return (Guid)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
+        }
+
+        public string Text <.>
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { 
+                SetValue(TextProperty, value);
+                Clear.Visibility = value != ""? Visibility.Visible: Visibility.Collapsed; <.>
+            }
+        }
+
+        private IServiceProvider serviceProvider;
+        private SessionContext sessionContext;
+
+        public RefCasesSectionEditor()
+        {
+            InitializeComponent();
+        }
+
+        public FrameworkElement ResolveEditor(Xceed.Wpf.Toolkit.PropertyGrid.PropertyItem propertyItem) <.>
+        {
+            var bindingObject = (IControlPropertiesObject)propertyItem.Instance;
+            
+            this.serviceProvider = bindingObject.ServiceProvider; <.>
+            var currentObjectContextProvider = ServiceUtil.GetService<ICurrentObjectContextProvider>(this.serviceProvider);
+            this.sessionContext = currentObjectContextProvider.GetOrCreateCurrentSessionContext();
+
+            Binding binding = new Binding("Value"); <.>
+            binding.Source = propertyItem;
+            binding.Mode = propertyItem.IsReadOnly ? BindingMode.OneWay : BindingMode.TwoWay;
+            BindingOperations.SetBinding(this, RefCasesSectionEditor.ValueProperty, binding);
+
+            if (this.Value != Guid.Empty) <.>
+                this.Text = new RefCasesUtils(sessionContext).GetSectionTitle(this.Value);
+
+            return this;
+        }
+
+        private void ShowSections_Click(object sender, RoutedEventArgs e) <.>
+        {
+            var sectionTree = new SectionsTree(sessionContext);
+            if (sectionTree.ShowDialog() == true)
+            {
+                this.Value = sectionTree.SelectedNodeID;
+                this.Text = sectionTree.SelectedNodeText;
+            }
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e) <.>
+        {
+            this.Value = Guid.Empty;
+            this.Text = "";
+        }
+    }
+}
+----
+<.> Объявляем свойства зависимости для связывания со значением настройки (идентификатор _Раздела_) и отображаемым значением.
+<.> Идентификатор выбранного _Раздела_ справочника - является значение настройки.
+<.> Название выбранного _Раздела_ справочника, отображаемое в строке настройки.
+<.> Кнопка очистки значения.
+<.> Реализация метода `ITypeEditor.ResolveEditor`.
+<.> Получаем поставщика сервисов из элемента управления.
+<.> Связываем значение компонента с `ValueProperty`.
+<.> Получаем отображаемое значение выбранного _Раздела_ при загрузке элемента.
+<.> Открываем форму для выбора _Раздела_.
+<.> Очищаем значение настройки.
+
+Основные функции прокомментированы в коде. При реализации нового редактора (в данном случае не используются готовые реализации, как в редакторе `RefCasesFieldMetadataEditor`) особое внимание следует обратить на необходимость связывания значение настройки -- `Value` -- со свойством зависимости (в данном примере -- `ValueProperty`).
+
+Метод `ShowSections_Click` вызывается при нажатии кнопки выбора значения свойства. Данный метод открывает форму `SectionsTree` с деревом Разделов _Справочника номенклатуры дел 5_ (будет разработан далее).
+
+Метод `Clear_Click` вызывается при нажатии кнопки очистки значения настройки.
+
+Код вспомогательного метода `RefCasesUtils.GetSectionTitle`, возвращающего текстовое описание для Раздела справочника, идентификатор которого передан в метод:
+
+.Файл `_RefCategoriesDesignerExtension\Editors\RefCasesUtils.cs_`
+[source,csharp]
+----
+public string GetSectionTitle(Guid sectionId)
+{
+    SectionData sectionSesction = cardManager.GetDictionaryData(refCasesId).Sections[sectionsSectionID]; <.> <.> <.>
+
+    if (sectionSesction.RowExists(sectionId) == false) <.>
+        return "Ошибка!";
+
+    RowData sectionRow = sectionSesction.GetRow(sectionId);
+    RowData yearRow = sectionRow.SubSection.ParentRow;
+
+    if (yearRow != null)
+        return string.Format("{0}. {1}", yearRow["Year"], sectionRow["Name"].ToString());
+
+    return "Ошибка!";
+}
+----
+<.> `cardManager` -- Менеджер карточек (базовое API {dv}).
+<.> `refCasesId` -- идентификатор _Справочника номенклатуры дел 5_.
+<.> Возможно раздел был удалён.
+<.> `sectionsSectionID` -- идентификатор секции "Разделы" справочника.
+
+Далее приведён код компонента дерева _Разделов_ без графической составляющей (см. полный исходный код примера на GitHub).
+
+.Файл `_RefCategoriesDesignerExtension\Editors\SectionsTree.xaml.cs_`
+[source,csharp]
+----
+using {dv}.Platform.WebClient;
+using System;
+using System.Windows;
+
+namespace RefCasesDesignerExtension.Editors
+{
+
+    public partial class SectionsTree : Window
+    {
+        public string SelectedNodeText = "";
+        public Guid SelectedNodeID = Guid.Empty;
+        private RefCasesUtils refCasesUtils;
+
+        public SectionsTree(SessionContext sessionContext)
+        { <.>
+            InitializeComponent();
+            refCasesUtils = new RefCasesUtils(sessionContext);
+
+            Years.ItemsSource = refCasesUtils.GetYears(); <.>
+        }
+
+        // При выборе Года формируем дерево Разделов для данного года
+        private void Years_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) <.>
+        {
+            if (Years.SelectedIndex == -1 || !(Years.SelectedItem is Year))
+                return;
+
+            Year selectedYear = Years.SelectedItem as Year;
+
+            // Получаем список Разделов из Справочника номенклатуры дел 5
+            Sections.ItemsSource = refCasesUtils.GetSections(selectedYear.ID); <.>
+        }
+
+        // Обработка нажатия кнопки сохранения выбора
+        private void Accept_Click(object sender, RoutedEventArgs e) <.>
+        {
+            if (Sections.SelectedItem == null)
+                return;
+            var selectedNode = Sections.SelectedItem as Node;
+            var selectedYear = Years.SelectedItem as Year;
+
+            this.SelectedNodeText = string.Format("{0}. {1}", selectedYear.Value, selectedNode.Name);
+            this.SelectedNodeID = selectedNode.ID;
+
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        // Обработка нажатия отмены
+        private void Cancel_Click(object sender, RoutedEventArgs e) <.>
+        {
+            this.Close();
+        }
+    }
+}
+----
+<.> Для формирования дерева _Разделов_ нужно получить данные из _Справочника номенклатуры дел 5_. Для этого объявляем необходимость передачи контекста сессии в конструкторе класса.
+<.> Получаем список лет из Справочника номенклатуры дел 5.
+
+Основная "работа" здесь выполняется методами `RefCasesUtils.GetYears`, `RefCasesUtils.GetSections`.
+
+Метод `RefCasesUtils.GetYears` получает все строки из секции Года _Справочника номенклатуры дел 5_:
+
+.Файл `_RefCategoriesDesignerExtension\Editors\RefCasesUtils.cs_`
+[source,csharp]
+----
+public IEnumerable<Year> GetYears()
+{
+    refCasesData = cardManager.GetDictionaryData(refCasesId);
+    SectionData yearSection = refCasesData.Sections[yearsSectionId];
+
+    return yearSection.Rows.Select<RowData, Year>(row => new Year() { ID = row.Id, Value = row["Year"].ToString() });
+}
+----
+
+Метод `RefCasesUtils.GetSections` получает дерево строк для секции Разделы _Справочника номенклатуры дел 5_.
+
+.Файл `_RefCategoriesDesignerExtension\Editors\RefCasesUtils.cs_`
+[source,csharp]
+----
+public List<Node> GetSections(Guid yearID)
+{
+    var yearSection = refCasesData.Sections[yearsSectionId];
+
+    if (yearSection.RowExists(yearID)) {
+        RowDataCollection sectionRows = yearSection.GetRow(yearID).ChildSections[sectionsSectionID].Rows;
+
+        return GetNodesFromRows(sectionRows);
+    }
+
+    return new List<Node>();
+}
+
+List<Node> GetNodesFromRows(RowDataCollection rows) <.>
+{
+    var nodes = new List<Node>();
+
+    foreach (var row in rows)
+    {
+        var node = new Node() { ID = row.Id, Name = row["Name"].ToString() };
+        if (row.HasChildRows)
+            node.Nodes = GetNodesFromRows(row.ChildRows);
+
+        nodes.Add(node);
+    }
+    return nodes;
+}
+----
+.Возвращает список Разделов для строк секции справочника

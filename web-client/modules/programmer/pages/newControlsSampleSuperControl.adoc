@@ -1,0 +1,136 @@
+= Пример. Элемент управления "SuperControl"
+
+В данном примере будут разработаны компоненты элемента управления `_SuperControl_`: текстовый описатель элемента управления и клиентский компонент.
+
+Элемент управления `_SuperControl_` является ссылкой, адрес которой указывается в программе {kvr}. Для элемента управления доступно свойство `*Видимость*` и событие `*При щелчке*`.
+
+. Формируем текстовый описатель элемента управления.
++
+[lowerroman]
+.. Создаем новый файл `SuperControl.xml` со следующим содержимым:
++
+[source,typescript]
+----
+<?xml version="1.0" encoding="utf-8" ?>
+<Controls>
+    <Control Name="SuperControl" DisplayName="Супер элемент управления">
+        <Properties>
+            <Property Type="Name" /> <.>
+            <Property Type="Visibility" /> <.>
+
+            <Property Name="Url" Category="BehaviorCategory" DataType="System.String" /> <.>
+        </Properties>
+        <Events>
+            <Event Name="Click" ResourceKey="ControlTypes_ClickEventProperty"/>  <.>
+        </Events>
+    </Control>
+</Controls>
+----
+<.> Название.
+<.> Видимость.
+<.> Свойство строкового типа для указания адреса ссылки.
+<.> Событие `*При щелчке*`.
++
+.. Файл `SuperControl.xml` копируем в папку `C:\Program Files (x86)Docsvision\WebClient\5.5\Plugins\`.
++
+. Формируем клиентское расширение с клиентским компонентом элемента управления.
++
+[lowerroman]
+.. xref:clientExtensionsCreatePublish.adoc[Создаем новое клиентское расширение].
++
+.. Добавляем в папку расширения файл `src/Controls/SuperControl.tsx` со следующим содержимым:
++
+[source,typescript]
+----
+import { BaseControlParams, BaseControlState, BaseControl } from "@docsvision/webclient/System/BaseControl";
+import { r } from "@docsvision/webclient/System/Readonly";
+import { apiEvent } from "@docsvision/webclient/System/Event";
+import { BasicApiEvent } from "@docsvision/webclient/System/ApiEvent";
+import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
+import { BaseControlImpl } from "@docsvision/webclient/System/BaseControlImpl";
+import { SimpleEvent } from "@docsvision/webclient/System/SimpleEvent";
+import React from "react"; <.>
+
+export class SuperControlParams extends BaseControlParams { <.>
+    @r url?: string; <.>
+    @apiEvent onClick?: BasicApiEvent<IEventArgs>;
+}
+
+export interface SuperControlState extends SuperControlParams, BaseControlState { <.>
+}
+
+export class SuperControlImpl extends BaseControlImpl<SuperControlParams, SuperControlState> { <.>
+    construct() {
+        super.construct();
+
+        this.state.onClick = SimpleEvent.Create<IEventArgs>(this.state.wrapper); <.>
+
+        this.clickHandler = this.clickHandler.bind(this); <.>
+    }
+
+    clickHandler() { <.>
+        SimpleEvent.cast(this.state.onClick).trigger(); <.>
+        window.open(this.props.url, "_blank");
+    }
+
+    renderControl() { <.>
+
+        if (this.props.visibility) { <.>
+            return (
+                <a onClick={this.clickHandler}>{this.props.url}</a> <.>
+            );
+        }
+    }
+}
+
+export class SuperControl extends BaseControl<SuperControlParams, SuperControlState> {
+    protected createParams() { <.>
+        return new SuperControlParams();
+    }
+
+    protected createImpl() {
+        return new SuperControlImpl(this.props, this.state);
+    }
+}
+----
+<.> Импорт используемых модулей.
+<.> Класс параметров. Объявляем отсутствующее в `BaseControlParams` свойство `url` и непрерываемое событие `onClick`.
+<.> Название свойства `url` здесь должно быть с маленькой буквы!
+<.> Интерфейс состояния. Внутренние состояния не используются.
+<.> Класс реализации.
+<.> Инициализируем событие `onClick`.
+<.> Связываем внутренний обработчик с событием `clickHandler`.
+<.> При нажатии ссылки будет выполнен переход по ней, а также вызван обработчик события `onClick`.
+<.> Вызываем обработчик события `onClick`, который указан в Конструкторе web-разметок.
+<.> Возвращаем VirtualDOM элемента управления.
+<.> Если элемент управления невидим (`Visibility` в значении `*FALSE*`), то ничего не возвращаем.
+<.> При нажатии ссылки вызываем внутренний обработчик `clickHandler`
+<.> Интерфейсный класс.
++
+. Настраиваем клиентское расширение в файле `src/Index.tsx`.
++
+[source,typescript]
+----
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+import { SuperControl } from "./Controls/SuperControl";
+
+extensionManager.registerExtension({
+    name: "Client extension with SuperControl",
+    version: "1.0",
+    controls: [{ controlTypeName: "SuperControl", constructor: SuperControl }]
+})
+----
++
+. Собираем клиентское расширение с помощью команды `npm run build`.
++
+. Полученный файл `Site\Content\Modules\...\extension.js` копируем в папку `C:\Program Files (x86)Docsvision\WebClient\5.5\Site\Content\Modules\SuperControlExtension\` на сервере {wc}а.
++
+. Следующие действия выполняются после выполнения всех действий:
++
+[lowerroman]
+.. Перезапустить сервер {wc}а (IIS), чтобы загрузились скрипты с элементом управления.
+.. Открыть {kvr} и настроить разметку с использованием `_Супер элемента управления_`.
+
+При настройке элемента управления должны быть доступны свойства `*Url*` и `*Видимость*`, а также событие `*При щелчке*`, для которого можно настроить обработчик.
+
+В веб-браузере `_Супер элемент управления_` представляет собой ссылку (тег `a`), при нажатии на которую будет выполнен переход по адресу, указанному в `*Url*`, а также вызван обработчик, указанный в событии `*При щелчке*`.

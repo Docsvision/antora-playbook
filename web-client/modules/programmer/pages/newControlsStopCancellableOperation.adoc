@@ -1,0 +1,63 @@
+= Остановка выполнения операции с помощью прерываемого события элемента управления
+
+События, генерируемые элементом управления, могут быть стандартными (непрерываемые) и прерываемыми, с помощью которых обработчик может остановить выполнение операции (например, сохранение карточки).
+
+.Чтобы создать прерываемое событие:
+. Добавьте событие в описатель элемента управления:
++
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8" ?>
+<Controls>
+  <Control Name="SomeControl" DisplayName="Пример элемента управления">
+    <Properties>
+      <Property Type="Name" />
+    </Properties>
+    <Events>
+      <Event Name="someEventing" DisplayName="Перед выполнение операции"/> <.>
+    </Events>
+  </Control>
+</Controls>
+----
+<.> Прерываемое событие.
++
+. В клиентском компоненте элемента управления в классе параметров для события укажите тип CancelableApiEvent:
++
+[source,typescript]
+----
+export class SomeControlParams extends BaseControlParams {
+    @apiEvent someEventing?: CancelableApiEvent<IEventArgs>;
+}
+----
++
+. В клиентском компоненте элемента управления в классе реализации:
++
+[lowerroman]
+.. Проинициализируйте прерываемое событие с помощью метода `CancelableEvent.Create`:
++
+[source,typescript]
+----
+construct() {
+    super.construct();
+
+    this.state.someEventing = CancelableEvent.Create<IEventArgs>(this.state.wrapper);
+}
+----
++
+.. Во внутреннем обработчике события, вызываемого перед выполнением операции, добавьте код, который будет выполняться при прерывании события внешними обработчиками, и код для продолжения обработки события:
++
+[source,typescript]
+----
+protected internalEventHandler = async () => {
+    try {
+        await CancelableEvent.cast(this.state.someEventing).trigger().deferred;
+
+        console.log("Выполнение операции ..."); <.>
+    } catch {
+
+        console.log("Выполнение операции прервано ..."); <.>
+    }
+}
+----
+<.> Код, вызываемый при продолжении операции.
+<.> Код, вызываемый при отмене операции.
