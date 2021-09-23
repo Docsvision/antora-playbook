@@ -1,0 +1,37 @@
+= DescriptionColumnGeneratorDelegate - делегат
+
+Делегат `DescriptionColumnGeneratorDelegate` представляет метод получения описания ссылки для элемента управления `_Ссылки_`.
+
+*Пространство имен*: `{dv}.BackOffice.WebClient.Links`
+
+*Сборка*: `{dv}.BackOffice.WebClient.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public delegate string DescriptionColumnGeneratorDelegate(SessionContext sessionContext, ReferenceListReference reference, List<ReferenceListReference> allowedReferences, ref object cache)
+----
+
+== Аргументы
+
+|===
+|Имя |Описание 
+
+|`sessionContext` |Контекст сессии.
+
+*Тип:* xref:classLib/SessionContext.adoc[SessionContext].
+|`reference` |Ссылка, для которой должно быть сформировано описание.
+
+*Тип:* https://www.{dv}.com/docs/DeveloperManual/index.adoc#DV_Class_libary/{dv}/BackOffice/ObjectModel/ReferenceListReference_CL.adoc[ReferenceListReference].
+|`allowedReferences` |Список всех ссылок элемента "Ссылки".
+|`cache` |Кэш описаний ссылок. Кэш представляет собой объект `ConcurrentDictionary<Guid, string>`, где:
+
+*ключ* -- идентификатор карточки, на которую указывает ссылка,
+
+*значение* -- описание ссылки.
+|===
+
+== Информация
+
+Пример метода для делегата `DescriptionColumnGeneratorDelegate` приведён в пункте xref:serverExtensionsLinksDescriptionGenerator.adoc[Разработка расширения для формирования описаний ссылок].

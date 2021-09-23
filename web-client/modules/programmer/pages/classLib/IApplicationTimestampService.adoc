@@ -1,0 +1,52 @@
+= IApplicationTimestampService - интерфейс
+
+Интерфейс `IApplicationTimestampService` определяет методы сервиса для работы со штампами времени приложения.
+
+*Пространство имен*: `{dv}.WebClient.Services`
+
+*Сборка*: `{dv}.BackOffice.WebClient.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IApplicationTimestampService
+
+----
+
+== Свойства
+
+|===
+|Имя |Описание 
+
+|`ApplicationTimestamp` |Возвращает текущий штамп времени.
+|===
+
+== Методы
+
+|===
+|Имя |Описание 
+
+|`UpdateApplicationTimeStamp` |Обновляет штамп времени, вызывающий обновление пользовательского кэша приложения.
+|===
+
+== Примечание
+
+Реализация метода `UpdateApplicationTimeStamp` используется при вызове веб-метода `GET http://Адрес-сервера-{wc}а/WebClient/Navigator/ResetClientCache`. Если требуется, стандартная реализация сервиса может быть переопределена собственной.
+
+.Стандартная реализация
+[source,csharp]
+----
+public class ApplicationTimestampService : IApplicationTimestampService
+{
+    private string applicationTimestamp;
+
+    public string ApplicationTimestamp =>
+        applicationTimestamp ?? (applicationTimestamp = WebClientApplication.ApplicationStartTimestamp);
+
+    public void UpdateApplicationTimeStamp()
+    {
+        applicationTimestamp = DateTime.Now.Ticks.ToString();
+    }
+}
+----

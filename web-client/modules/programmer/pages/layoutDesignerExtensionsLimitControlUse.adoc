@@ -23,7 +23,7 @@ public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider servic
 ----
 <.> По умолчанию доступны все операции
 +
-Функция проверки должна вернуть набор флагов xref:Platform_Tools_LayoutEditor_ObjectModel_Descriptions_AllowedOperationsFlag.adoc[AllowedOperationsFlag].
+Функция проверки должна вернуть набор флагов xref:classLib/AllowedOperationsFlag.adoc[AllowedOperationsFlag].
 +
 . Добавьте в код функции проверки алгоритм, добавляющий нужные ограничения.
 +
@@ -48,7 +48,7 @@ public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider servic
 <.> Из сервиса получаем идентификатор типа карточек, для которых настраивается разметка.
 <.> Если тип карточки не документ (CardDocument.ID) из возможных операций удаляется флаг Create. Что фактически приводит к невозможности добавить элемент управления в разметку
 +
-В примере информация о контексте использования элемента управления предоставляется сервисом xref:Platform_Tools_LayoutEditor_Infrostructure_ISelectedLayoutService.adoc[ISelectedLayoutService].
+В примере информация о контексте использования элемента управления предоставляется сервисом xref:classLib/ISelectedLayoutService.adoc[ISelectedLayoutService].
 +
 . Переопределите метод `GetAllowedOperations` базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя. Метод позволяет получить функцию проверки. Значение представлено функцией проверки:
 +
