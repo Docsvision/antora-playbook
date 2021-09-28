@@ -3,25 +3,9 @@
 == Сценарий работы с входящей корреспонденцией
 
 .Обработка входящей корреспонденции
-[plantuml, target=diagram-classes, format=svg]
+[plantuml, target=diagram-classes, svg]
 ....
-@startuml
-skinparam rectangleBorderThickness 1
-
-|#orange|Регистратор|
-#lightgray:**Ввод документа в систему**;
-:Регистрация документа;
-if (Требуется работа по документу?) then (ДА)
-repeat
-    :Обработка входящей корреспонденции;
-    |#green|Исполнитель задания|
-    :**Исполнение заданий по документу**;
-repeat while (Завершено?) is (Нет) not (Да)
-|#orange|Регистратор|
-else (НЕТ)
-#lightgray:**Перевод документа в архив**;
-end
-@enduml
+include::example$incoming.puml
 ....
 
 == Сценарий работы с исходящей корреспонденцией
