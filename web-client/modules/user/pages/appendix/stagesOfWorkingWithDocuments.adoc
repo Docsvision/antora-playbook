@@ -1,24 +1,5 @@
 = Приложение А. Основные сценарии работы с документами
 
-@startuml
-skinparam rectangleBorderThickness 1
-|#orange|Registrar|
-#lightgray:**Introduce document to the system**;
-:Register Document;
-if (Work on the document is required?) then (No)
-#lightgray:**Archive document**;
-end
-else (Yes)
-repeat
-:Work on incoming documents;
-|#green|Performer|
-:**Perform tasks for the document**;
-repeat while (Completed?) is (No) not (Yes)
-|#orange|Registrar|
-#lightgray:**Archive document**;
-end
-@enduml
-
 == Сценарий работы с входящей корреспонденцией
 
 .Обработка входящей корреспонденции
