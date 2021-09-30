@@ -10,7 +10,7 @@ public class ComponentExt : IThreadedRuntimeComponent, ISettings
 
 ----
 
-Описание данных интерфейсов приведено в пункте link:ObjectTypes.md[Типы объектов].
+Описание данных интерфейсов приведено в пункте xref:ObjectTypes.adoc[Типы объектов].
 
 В общем случае класс расширения должен содержать:
 
@@ -23,7 +23,7 @@ public class ComponentExt : IThreadedRuntimeComponent, ISettings
 
 *Обратите внимание*: после вызова метода `IThreadedRuntimeComponent.Stop` значение `Stopped` должно быть изменено на TRUE (после фактического завершения работы функций _Компонента_) – РП не завершит свою работу, если хотя бы у одного из его _Компонентов_ `Stopped` в значении FALSE.
 
-Если для выполнения функций _Компонента_ нужен доступ к link:Services.md[сервисам API Службы], в классе расширения нужно реализовать интерфейс `IInitializeWithServiceProvider`. См. link:GetServiceProvider.md[Получение поставщика сервисов в расширении].
+Если для выполнения функций _Компонента_ нужен доступ к xref:Services.adoc[сервисам API Службы], в классе расширения нужно реализовать интерфейс `IInitializeWithServiceProvider`. См. xref:GetServiceProvider.adoc[Получение поставщика сервисов в расширении].
 
 == Базовый класс ThreadedRuntimeComponent
 
@@ -77,7 +77,7 @@ public class BestComponent : IThreadedRuntimeComponent, ISettings
 
 Все следующие действия выполняются на сервере Службы.
 
-. link:ExtensionRegistration.md[Зарегистрируйте разработанное расширения на сервере Службы].
+. xref:ExtensionRegistration.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
 
 . Добавьте расширение `SomeComponent` в конфигурацию Службы:
 
