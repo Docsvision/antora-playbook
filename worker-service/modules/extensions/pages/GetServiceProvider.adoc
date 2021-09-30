@@ -1,0 +1,16 @@
+= Получение поставщика сервисов в расширении
+
+В методах расширений может получить доступ к публичным функциям API службы, реализованным в виде link:Services.md[сервисов].
+
+Для доступа к службам API из расширения, класс расширения должен реализовывать интерфейс `Docsvision.WorkerService.Interfaces.IInitializeWithServiceProvider`. 
+
+Интерфейс `IInitializeWithServiceProvider` определяет единственный метод:
+
+* `Initialize(IServiceProvider)` – метод принимает _Поставщика сервисов_ (`IServiceProvider`).
+
+Следующий код демонстрирует способ получения сервиса link:Services.md[IConnectionPool] (пул подключений):
+
+[source,csharp]
+----
+var connectionPool = (IConnectionPool)ServiceProvider.GetService(typeof(IConnectionPool));
+----

@@ -1,0 +1,41 @@
+= Создание Задачи без Сообщения
+
+Типичный сценарий использования Службы рабочих процессов предполагает, что Служба будет обрабатывать Сообщения, формируемые внешними системами. Но это не исключает возможности создавать _Задач_ без _Сообщений_.
+
+API Службы предоставляет сервис _Очередь задач_ с методом постановки _Задачи_ на исполнение: `WorkerTaskQueue.Enqueue`.
+
+Ниже приведен код _Компонента_, в котором в _Очередь задач_ добавляется _Задача_ `DocumentWasSent`. Код класса `DocumentWasSent` приведен в пункте link:WorkerTaskFactory.md[Фабрика задач].
+
+[source,csharp]
+----
+public class BestComponent : IThreadedRuntimeComponent, IInitializeWithServiceProvider, ISettings
+{
+    private IServiceProvider serviceProvider;
+
+    public bool Stopped { get; private set; }
+
+    public string Data { get; set; }
+
+    public void Initialize(IServiceProvider serviceProvider)
+    {
+        this.serviceProvider = serviceProvider;
+    }
+
+    public void Start()
+    {
+        Stopped = false;
+        // Идентификатор карточки получен из конфигурации Компонента
+        var documentCardId = new Guid(Data);
+        var documentWasSent = new DocumentWasSent(serviceProvider, documentCardId);
+        
+        // Получение сервиса Очередь задач и добавление задачи documentWasSent в очередь
+        var workerTaskQueue = (WorkerTaskQueue)serviceProvider.GetService(typeof(WorkerTaskQueue));
+        workerTaskQueue.Enqueue(documentWasSent);
+    }
+
+    public void Stop()
+    {
+        Stopped = true;
+    }
+}
+----
