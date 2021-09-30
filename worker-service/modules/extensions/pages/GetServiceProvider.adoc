@@ -2,11 +2,11 @@
 
 В методах расширений может получить доступ к публичным функциям API службы, реализованным в виде xref:Services.adoc[сервисов].
 
-Для доступа к службам API из расширения, класс расширения должен реализовывать интерфейс `Docsvision.WorkerService.Interfaces.IInitializeWithServiceProvider`. 
+Для доступа к службам API из расширения, класс расширения должен реализовывать интерфейс `{dv}.WorkerService.Interfaces.IInitializeWithServiceProvider`.
 
 Интерфейс `IInitializeWithServiceProvider` определяет единственный метод:
 
-* `Initialize(IServiceProvider)` – метод принимает _Поставщика сервисов_ (`IServiceProvider`).
+* `Initialize(IServiceProvider)` -- метод принимает _Поставщика сервисов_ (`IServiceProvider`).
 
 Следующий код демонстрирует способ получения сервиса xref:Services.adoc[IConnectionPool] (пул подключений):
 

@@ -1,131 +1,131 @@
 = Сервисы API
 
-API Службы рабочих процессов предоставляет сервисы, позволяющие получить доступ к различным функциям контекста выполнения Рабочего процесса.
+API Службы {ws} предоставляет сервисы, позволяющие получить доступ к различным функциям контекста выполнения Рабочего процесса.
 
 Далее приведено описание функций предоставляемых сервисов. Инструкция по получению сервисов в коде расширений приведена в пункте 
 
 == IBasicConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IBasicConfigurationProvider` определяет функции провайдера к базовой конфигурации.
+Интерфейс `{dv}.WorkerService.Interfaces.IBasicConfigurationProvider` определяет функции провайдера к базовой конфигурации.
 
 Интерфейс определяет единственный метод:
 
-* `GetBasicConfiguration()` – возвращает экземпляр объекта `BasicConfiguration` (базовая конфигурация).
+* `GetBasicConfiguration()` -- возвращает экземпляр объекта `BasicConfiguration` (базовая конфигурация).
 
 == IComponentConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IComponentConfigurationProvider` определяет функции провайдера к конфигурации _Компонентов_.
+Интерфейс `{dv}.WorkerService.Interfaces.IComponentConfigurationProvider` определяет функции провайдера к конфигурации _Компонентов_.
 
 Интерфейс определяет единственный метод:
 
-* `GetConfiguration()` – возвращает коллекцию объектов типа `ComponentTypeConfiguration` (конфигурация _Компонента_).
+* `GetConfiguration()` -- возвращает коллекцию объектов типа `ComponentTypeConfiguration` (конфигурация _Компонента_).
 
 == IConnectionPool
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IConnectionPool` определяет методы пула подключений к внешним системам.
+Интерфейс `{dv}.WorkerService.Interfaces.IConnectionPool` определяет методы пула подключений к внешним системам.
 
 Интерфейс определяет следующие методы:
 
-* `GetConnection&lt;T&gt;()` – возвращает _Подключение_ указанного типа. Строка соединения (для создания подключения) будет получена из первой по списку конфигурации данного Подключения.
-* `GetConnection&lt;T&gt;(String)` – возвращает _Подключение_ указанного типа. Строка соединения будет получена из конфигурации с названием `connectionName`.
-* `GetConnection&lt;T&gt;(String, String)` – возвращает подключение указанного типа. При создании подключения будет использована строка соединения `connectionSettings`.
-* `ReleaseConnection&lt;T&gt;(T)` – освобождает подключение указанного типа. _Метод зарезервирован (не используется)_.
+* `GetConnection&lt;T&gt;()` -- возвращает _Подключение_ указанного типа. Строка соединения (для создания подключения) будет получена из первой по списку конфигурации данного Подключения.
+* `GetConnection&lt;T&gt;(String)` -- возвращает _Подключение_ указанного типа. Строка соединения будет получена из конфигурации с названием `connectionName`.
+* `GetConnection&lt;T&gt;(String, String)` -- возвращает подключение указанного типа. При создании подключения будет использована строка соединения `connectionSettings`.
+* `ReleaseConnection&lt;T&gt;(T)` -- освобождает подключение указанного типа. _Метод зарезервирован (не используется)_.
 
 == IConnectionsConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IConnectionsConfigurationProvider` определяет функции провайдера к конфигурации _Подключений_.
+Интерфейс `{dv}.WorkerService.Interfaces.IConnectionsConfigurationProvider` определяет функции провайдера к конфигурации _Подключений_.
 
 Интерфейс определяет единственный метод:
 
-* `GetConfiguration()` – возвращает коллекцию объектов типа `ConnectionTypeConfiguration` (конфигурация _Подключения_).
+* `GetConfiguration()` -- возвращает коллекцию объектов типа `ConnectionTypeConfiguration` (конфигурация _Подключения_).
 
 == IExtendedConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IExtendedConfigurationProvider` определяет функции провайдера к расширенной конфигурации.
+Интерфейс `{dv}.WorkerService.Interfaces.IExtendedConfigurationProvider` определяет функции провайдера к расширенной конфигурации.
 
 Интерфейс определяет единственный метод:
 
-* `GetExtendedConfigurationServices()` – возвращает коллекцию провайдеров к конфигурациям.
+* `GetExtendedConfigurationServices()` -- возвращает коллекцию провайдеров к конфигурациям.
 
-В стандартной реализации `GetExtendedConfigurationServices` возвращает провайдеры к конфигурациям Службы рабочих процессов, _Компонентов_, _Подключений_, _Очереди сообщений_, _Ролей_, _Фабрики задач_. 
+В стандартной реализации `GetExtendedConfigurationServices` возвращает провайдеры к конфигурациям Службы {ws}, _Компонентов_, _Подключений_, _Очереди сообщений_, _Ролей_, _Фабрики задач_.
 
 == IQueuesConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IQueuesConfigurationProvider` определяет методы получения конфигурации _Очереди сообщений_.
+Интерфейс `{dv}.WorkerService.Interfaces.IQueuesConfigurationProvider` определяет методы получения конфигурации _Очереди сообщений_.
 
 Интерфейс определяет единственный метод:
 
-* `GetConfiguration()` – возвращает коллекцию объектов типа `QueueTypeConfiguration` (конфигурация _Очереди сообщений_).
+* `GetConfiguration()` -- возвращает коллекцию объектов типа `QueueTypeConfiguration` (конфигурация _Очереди сообщений_).
 
 == IRolesConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IRolesConfigurationProvider` определяет методы получения конфигурации _Ролей_.
+Интерфейс `{dv}.WorkerService.Interfaces.IRolesConfigurationProvider` определяет методы получения конфигурации _Ролей_.
 
 Интерфейс определяет единственный метод:
 
-* `GetConfiguration()` – возвращает коллекцию объектов типа `RoleConfiguration` (конфигурация _Роли_).
+* `GetConfiguration()` -- возвращает коллекцию объектов типа `RoleConfiguration` (конфигурация _Роли_).
 
 == IWorkerProcessRuntimeConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IWorkerProcessRuntimeConfigurationProvider` определяет методы получения конфигурации рабочих процессов.
+Интерфейс `{dv}.WorkerService.Interfaces.IWorkerProcessRuntimeConfigurationProvider` определяет методы получения конфигурации {ws}.
 
 Интерфейс определяет следующие свойства:
 
-* `Roles` – должен возвращать список названий Ролей.
-* `Components` – должен возвращать список названий Компонентов.
-* `Connections` – должен возвращать список названий Соединений.
-* `Queues` – должен возвращать список названий Очередей.
-* `Tasks` – должен возвращать список названий Фабрик задач.
-* `ShutdownTimeout` – должен возвращать время ожидания завершения работы _Задач_ и _Компонентов_ при завершении работы рабочего процесса. По умолчанию – одна минута.
+* `Roles` -- должен возвращать список названий Ролей.
+* `Components` -- должен возвращать список названий Компонентов.
+* `Connections` -- должен возвращать список названий Соединений.
+* `Queues` -- должен возвращать список названий Очередей.
+* `Tasks` -- должен возвращать список названий Фабрик задач.
+* `ShutdownTimeout` -- должен возвращать время ожидания завершения работы _Задач_ и _Компонентов_ при завершении работы рабочего процесса. По умолчанию -- одна минута.
 
 == IWorkerServiceConfigurationManager
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IWorkerServiceConfigurationManager` определяет методы работы с конфигурацией Службы рабочих процессов.
+Интерфейс `{dv}.WorkerService.Interfaces.IWorkerServiceConfigurationManager` определяет методы работы с конфигурацией Службы {ws}.
 
 Интерфейс определяет следующие свойства:
 
-* `ReadServiceConfiguration()` – возвращает конфигурацию Службы.
-* `SaveServiceConfiguration(WorkerServiceConfiguration)` – сохраняет переданную конфигурацию Службы.
-* `ReadProcessConfiguration(String)` – возвращает конфигурацию _Рабочего процесса_
+* `ReadServiceConfiguration()` -- возвращает конфигурацию Службы.
+* `SaveServiceConfiguration(WorkerServiceConfiguration)` -- сохраняет переданную конфигурацию Службы.
+* `ReadProcessConfiguration(String)` -- возвращает конфигурацию _Рабочего процесса_
 * `SaveProcessConfiguration(WorkerProcessConfiguration)`
 
 == IWorkerTaskFactoriesConfigurationProvider
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IWorkerTaskFactoriesConfigurationProvider` определяет методы получения конфигурации _Фабрики задач_.
+Интерфейс `{dv}.WorkerService.Interfaces.IWorkerTaskFactoriesConfigurationProvider` определяет методы получения конфигурации _Фабрики задач_.
 
 Интерфейс определяет единственный метод:
 
-* `GetConfiguration()` – возвращает коллекцию объектов типа `WorkerTaskFactoryTypeConfiguration` (конфигурация _Фабрики задач_).
+* `GetConfiguration()` -- возвращает коллекцию объектов типа `WorkerTaskFactoryTypeConfiguration` (конфигурация _Фабрики задач_).
 
 == IWorkerTaskFactoryService
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IWorkerTaskFactoryService` определяет метод получения _Фабрики задач_.
+Интерфейс `{dv}.WorkerService.Interfaces.IWorkerTaskFactoryService` определяет метод получения _Фабрики задач_.
 
 Интерфейс определяет следующие методы:
 
-* `RegisterFactory(IWorkerTaskFactory)` – регистрирует переданную _Фабрику задач_ в собственном хранилище.
-* `GetWorkerTaskFactory(IMessage)` – возвращает _Фабрику задач_ поддерживающую создание _Задачи_ из сообщения типа `IMessage.TypeId`.
+* `RegisterFactory(IWorkerTaskFactory)` -- регистрирует переданную _Фабрику задач_ в собственном хранилище.
+* `GetWorkerTaskFactory(IMessage)` -- возвращает _Фабрику задач_ поддерживающую создание _Задачи_ из сообщения типа `IMessage.TypeId`.
 
 == IWorkerTaskQueue
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IWorkerTaskQueue` определяет методы для работы с _Очередью задач_.
+Интерфейс `{dv}.WorkerService.Interfaces.IWorkerTaskQueue` определяет методы для работы с _Очередью задач_.
 
 Интерфейс определяет следующие методы и свойства:
 
-* `Enqueue(IWorkerTask)` – добавляет _Задачу_ в _Очередь задач_.
-* `TryDequeue(out IWorkerTask)` – удаляет и возвращает первую _Задачу_ из _Очереди задач_. Если метод выполнен успешно возвращает TRUE, иначе – FALSE.
-* `TryPeek(out IWorkerTask)` – возвращает первую _Задачу_ из _Очереди задач_. Если метод выполнен успешно возвращает TRUE, иначе – FALSE.
-* `IsEmpty` – возвращает TRUE, если _Очередь задач_ пуста.
-* `NewItemInQueueSignal` – предоставляет событие синхронизации потока. Ожидающий поток блокируется до добавления новой _Задачи_.
+* `Enqueue(IWorkerTask)` -- добавляет _Задачу_ в _Очередь задач_.
+* `TryDequeue(out IWorkerTask)` -- удаляет и возвращает первую _Задачу_ из _Очереди задач_. Если метод выполнен успешно возвращает TRUE, иначе -- FALSE.
+* `TryPeek(out IWorkerTask)` -- возвращает первую _Задачу_ из _Очереди задач_. Если метод выполнен успешно возвращает TRUE, иначе -- FALSE.
+* `IsEmpty` -- возвращает TRUE, если _Очередь задач_ пуста.
+* `NewItemInQueueSignal` -- предоставляет событие синхронизации потока. Ожидающий поток блокируется до добавления новой _Задачи_.
 
 *Данный сервис нужно получать по названию класса реализации интерфейса, а не по названию интерфейса.* Название класса реализации интерфейса: `WorkerTaskQueue`. См. пример в пункте xref:CreateTaskWithoutMessage.adoc[Создание Задачи без Сообщения].
 
 == IProcessShutdownNotificator
 
-Интерфейс `Docsvision.WorkerService.Interfaces.IProcessShutdownNotificator` определяет методы сервиса остановки _Рабочего процесса_.
+Интерфейс `{dv}.WorkerService.Interfaces.IProcessShutdownNotificator` определяет методы сервиса остановки _Рабочего процесса_.
 
 Интерфейс определяет следующие методы и свойства:
 
-* `Shutdown()` – останавливает _Рабочий процесс_, в котором выполняется текущая задача или компонент.
-* `Signal` – предоставляет событие синхронизации потока. Событие должно проверяться при реализации `Компонента`, не наследующего от `Docsvision.WorkerService.Runtime.ThreadedRuntimeComponent`.
-* `IsShuttingdown` – возвращает статус остановки _Рабочего процесса_.
+* `Shutdown()` -- останавливает _Рабочий процесс_, в котором выполняется текущая задача или компонент.
+* `Signal` -- предоставляет событие синхронизации потока. Событие должно проверяться при реализации `Компонента`, не наследующего от `{dv}.WorkerService.Runtime.ThreadedRuntimeComponent`.
+* `IsShuttingdown` -- возвращает статус остановки _Рабочего процесса_.
