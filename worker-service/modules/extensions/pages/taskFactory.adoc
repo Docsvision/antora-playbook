@@ -1,0 +1,184 @@
+:value: RoleWithSTask
+
+= Фабрика задач
+
+_Фабрика задач_ -- расширения Службы {ws}, которое предоставляет функцию создания _Задач_ по определенному типу (или типам) _Сообщений_.
+
+Класс расширения _Фабрика задач_ должен реализовывать интерфейс: `IWorkerTaskFactory`.
+
+[source,csharp]
+----
+public class TaskFactoryExt : IWorkerTaskFactory
+----
+
+Описание интерфейса приведено в пункте xref:objects.adoc#IWorkerTaskFactory[Типы объектов].
+
+.В общем случае класс расширения должен содержать следующие методы и поля:
+* `CreateWorkerTask(IMessage)` -- должен создавать _Задачу_ по переданному _Сообщению_.
+* `CreateWorkerTask(IMessage, IWorkerTask)` -- должен создавать _Задачу_ по переданному _Сообщению_, если требуется, с учетом последнего выполненного _Задания_ из группы текущего _Задания_.
+* `Id` -- должно возвращать уникальный идентификатор данной _Фабрики задач_.
+* `MessageTypes` -- должно возвращать идентификаторы типов _Сообщений_, по которым данная _Фабрика задач_ может создавать _Задачи_.
+
+== Тип Задачи
+
+Тип _Задач_, создаваемых _Фабрикой задач_ должен реализовывать интерфейс `IWorkerTask`, определяющий единственный метод `Work`.
+
+В методе `Work` должен быть реализован алгоритм выполнения `Задачи`, поступившей из внешней системы с _Сообщением_. Если для выполнения _Задачи_ нужна информация из _Сообщения_, её можно сохранить в произвольные поля объекта _Задачи_ при создании _Фабрикой задач_.
+
+Следующий код демонстрирует пример создания _Задачи_, которая будет устанавливать в карточке _Документа_ (в {dv}) признак отправки документа получателям (поле `MainInfo→WasSent` в `*TRUE*`). Для простоты реализации -- без ожидания разблокировки карточки.
+
+[#DocumentWasSent]
+[source,csharp]
+----
+public class DocumentWasSent : IWorkerTask
+{
+    private IServiceProvider serviceProvider;
+    private Guid cardId;
+    private Guid mainSectionId = new Guid("30EB9B87-822B-4753-9A50-A1825DCA1B74");
+
+    public DocumentWasSent(IServiceProvider serviceProvider, Guid cardId)
+    {
+        this.serviceProvider = serviceProvider;
+        this.cardId = cardId;
+    }
+
+    public void Work()
+    {
+        var connectionPool = (IConnectionPool)serviceProvider.GetService(typeof(IConnectionPool)); <.>
+        var session = connectionPool.GetConnection<UserSession>();
+
+        CardData card = session.CardManager.GetCardData(cardId); <.>
+        RowData mainSection = card.Sections[mainSectionId].FirstRow;
+        mainSection["WasSent"] = true;
+    }
+}
+----
+<.> Получения пользовательской сессии {dv}. РП должно быть доступно _Подключение_ с типом `UserSession`.
+<.> Получение и изменение карточки.
+
+Конструктор класса `DocumentWasSent` принимает объект Поставщик сервисов и идентификатор карточки, в которой меняется значение поля `WasSent`.
+
+_Фабрика задач_ должна передать в _Задачу_ `serviceProvider` и `cardId`.
+
+В `Work` используется Подключение `UserSession` -- сессия к {dv}. Пример _Фабрики подключений_, предоставляющей `UserSession` приведен в пункте xref:connectionFactory.adoc[Фабрика подключений]. У пользователя, от имени которого будет выполняться подключение должны быть права на работу с карточкой с идентификатором `cardId`.
+
+Задачи могут создаваться не только _Фабрикой задач_, но и напрямую в коде. Например, таким образом можно xref:CreateTaskWithoutMessage.adoc[создавать Задачи из Компонентов].
+
+NOTE: Данные _Задачи_ не основаны на _Сообщениях_, т. е. им не может быть передана сущность _Сообщение_. Данный факт следует учитывать при реализации класса _Задачи_: _Задача_ не должна зависеть от _Сообщения_.
+
+== Пример реализации Фабрики задач
+
+Следующий код демонстрирует пример _Фабрики задач_ для формирования _Задач_ типа, приведенного <<DocumentWasSent,выше>>.
+
+[source,csharp]
+----
+public class SomeTaskFactory : IWorkerTaskFactory, IInitializeWithServiceProvider <.>
+{
+    private IServiceProvider serviceProvider;
+
+    public Guid Id => new Guid("9C55B542-9AD3-4963-8A80-4538958C73D6"); <.>
+
+    public Guid[] MessageTypes => new Guid[] { new Guid("C75F0218-0925-4D60-B702-A55BC761672B") }; <.>
+
+    public void Initialize(IServiceProvider serviceProvider)
+    {
+        this.serviceProvider = serviceProvider;
+    }
+
+    public IWorkerTask CreateWorkerTask(IMessage message)
+    {
+        return CreateWorkerTask(message, null);
+    }
+
+    public IWorkerTask CreateWorkerTask(IMessage message, IWorkerTask previousTask)
+    {
+        var task = new DocumentWasSent(serviceProvider, message.TargetId); <.>
+        return task;
+    }
+<.>
+}
+----
+<.> В класс `SomeTaskFactory` добавлен интерфейс `IInitializeWithServiceProvider`, позволяющий передавать xref:GetServiceProvider.adoc[Поставщика сервисов] в создаваемые _Задания_. Поставщик сервисов используется в Задаче для получения Подключения к {dv}.
+<.> Для `Id` выбран произвольный Guid.
+<.> `MessageTypes` возвращает массив с идентификатором типа _Сообщения_.
++
+Одна _Фабрика задач_ может работать с несколькими типами _Сообщений_. Чтобы разделить логику, в `CreateWorkerTask` можно добавить ветвление в зависимости от идентификатора типа _Сообщения_ `IMessage.TypeId`.
++
+<.> Предполагается, что `IMessage.TargetId` содержит идентификатор карточки, для работы с которой формируется _Задача_. Данная работа может выполняться _Фабрикой сообщений_.
+<.> Логику создании _Задачи_ можно дополнить, основываясь на данных ранее выполненной _Задачи_ -- `previousTask`.
+
+== Подключение расширения к Службе
+
+Все следующие действия выполняются на сервере Службы.
+
+. xref:ExtensionRegistration.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
++
+. Добавьте расширение `SomeTaskFactory` в конфигурацию Службы:
++
+[#STask]
+.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Tasks\STask`.
++
+.. В созданном разделе укажите полное имя класса `SomeTaskFactory` в параметре по умолчанию.
++
+.Значение "SomeTaskFactory" в созданном разделе
+image::taskRegistry.png[Значение "SomeTaskFactory" в созданном разделе]
++
+. Создайте `Роль рабочего процесса`, через которую РП будет получать расширение `SomeTaskFactory`:
++
+.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithSTask`.
++
+.. В разделе создайте строковый параметр `Tasks` со значением `STask` -- названием раздела с типом расширения, созданным <<STask,ранее>>.
++
+.Добавление нового параметра
+image::taskRoleRegistry.png[Добавление нового параметра]
++
+. Зарегистрируйте экземпляр РП с _Ролью_ `RoleWithSTask`.
++
+.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpSTask`.
++
+include::partial$moreChunks.adoc[tags=parameters]
++
+.Добавленные параметры
+image::taskWpRegistry.png[Добавленные параметры]
+
+== Пример реализации Фабрики задач для сообщений FSMessage
+
+Ниже приведен код примера _Фабрики задач_ для создания _Задач_ по _Сообщениям_ типа `FSMessage` из пункта xref:queueFactory.adoc[Фабрика очередей сообщений]. Задача `FSWriteTask`, выполняемая по _Сообщению_, записывает содержимое поступившего сообщения типа `Constants.FSMessageTypeID` в файл `c:\temp\fswork.log`.
+
+[source,csharp]
+----
+public class FSTaskFactory : IWorkerTaskFactory
+{
+    public Guid Id => Constants.FSTaskFactory;
+    public Guid[] MessageTypes => new Guid[] { Constants.FSMessageTypeID };
+
+    public IWorkerTask CreateWorkerTask(IMessage message)
+    {
+        return CreateWorkerTask(message, null);
+    }
+
+    public IWorkerTask CreateWorkerTask(IMessage message, IWorkerTask previousTask)
+    {
+        FSMessage fsMessage = (FSMessage)message;
+        FSWriteTask task = new FSWriteTask(fsMessage.FileName, (string)fsMessage.Data);
+        return task;
+    }
+}
+
+public class FSWriteTask : IWorkerTask
+{
+    private readonly string file;
+    private readonly string data;
+
+    public FSWriteTask(string file, string data)
+    {
+        this.file = file;
+        this.data = data;
+    }
+
+    public void Work()
+    {
+        File.AppendAllText(@"c:\temp\fswork.log", $"Обработан файл {file}. Содержимое: {data}");
+    }
+}
+----

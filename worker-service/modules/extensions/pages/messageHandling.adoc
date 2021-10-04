@@ -12,48 +12,67 @@ skinparam rectangleBorderThickness 1
 skinparam defaultTextAlignment center
 skinparam lifelineStrategy solid
 
-State "Схема работы Службы рабочих процессов" as diag {
 State "Внешние системы" as ext {
+
 State "Система A" as sysA
-State "Хранилище событий" as store
+State "Хранилище \nсобытий" as store
 State "Система B" as sysB
+
+}
+
+State "Служба рабочих процессов" as serv {
+
+
+State "Фабрика очередей" as queuesFactory #lightgreen
+State "Очередь \nгрупп сообщений" as msgGroupQueue
+msgGroupQueue : Сообщение 1 \nСообщение 2 \nСообщение N
+
+State "Фабрика задач" as tasksFactory #lightgreen
+State "Компонент" as comp #lightgreen
+
+State "Фабрика \nподключений" as connectionsFactory #lightgreen
+State "Подключение A" as conA
+
+State "Менеджер задач" as mngr {
+
+State "Задачи \nпо сообщениям" as msgTasks
+State "Очередь задач" as tasksQueue
+
+}
+
+}
+
 sysA -> store : Создание сообщения
 sysA -[hidden]-> store
 store -[hidden]-> sysB
-}
-||
-'store -> msgGroupQueue : Загрузка сообщений
-State "Служба рабочих процессов" as serv {
-State "Фабрика очередей" as queuesFactory
-State "Очередь групп сообщений" as msgGroupQueue
-msgGroupQueue : Сообщение 1 \n Сообщение 2 \n Сообщение N
-State "Фабрика задач" as tasksFactory
-State "Компонент" as comp
-State "Менеджер задач" as mngr {
-State "Задачи по сообщениям" as msgTasks
-State "Очередь задач" as tasksQueue
-queuesFactory -[hidden]-> msgGroupQueue
-tasksFactory -[hidden]-> msgGroupQueue
-queuesFactory -> msgGroupQueue : Инициализация
-msgTasks : Задача 1\n Задача 2 \n Задача N
-tasksQueue : Задача 1\n Задача 2 \n Задача N
-msgGroupQueue -> tasksFactory
-comp -> tasksQueue : Создание задач
+sysA -[hidden]-> sysB
+
 tasksFactory -> tasksQueue : Создание задач
 comp -[hidden]-> mngr
 tasksFactory -[hidden]-> mngr
+queuesFactory -[hidden]-> msgGroupQueue
+tasksFactory -[hidden]-> msgGroupQueue
 
-comp -> msgTasks
-tasksFactory -> tasksQueue
-comp -[hidden]-> mngr
-mngr -[hidden]-> mngr
-}
-}
-}
+
+queuesFactory -> msgGroupQueue : Инициализация
+msgTasks : Задача 1\n Задача 2 \nЗадача N
+tasksQueue : Задача 1\n Задача 2 \nЗадача N
+msgGroupQueue -> tasksFactory : Обработка сообщений
+comp -> msgTasks : Создание задач
+
+connectionsFactory -[hidden]-> conA
+msgGroupQueue -[hidden]-> connectionsFactory
+connectionsFactory -> conA : Создание подключения
+mngr -> conA : Использование подключения
+
+conA -> sysB
+store -> msgGroupQueue : Загрузка сообщений
+queuesFactory -[hidden]-> connectionsFactory
+queuesFactory -[hidden]-> msgGroupQueue
+queuesFactory -[hidden]-> conA
 
 @enduml
 ....
-
 
 . Внешняя система создаёт сообщение в _Хранилище сообщений_.
 +

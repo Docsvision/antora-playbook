@@ -1,0 +1,137 @@
+= Фабрика подключений
+
+_Фабрика подключений_ -- расширения Службы {ws}, которое по запросу предоставляет _Подключение_ к внешнему ресурсу.
+
+Класс расширения _Фабрика подключений_ должен реализовывать интерфейс: `IConnectionFactory`.
+
+[source,csharp]
+----
+public class ConnectionExt : IConnectionFactory
+----
+
+Описание интерфейса приведено в пункте xref:objects.adoc#IConnectionFactory[Типы объектов].
+
+.В общем случае класс расширения должен содержать:
+* Метод `CreateConnection` -- должен вернуть экземпляр класса _Подключения_. В метод `CreateConnection` будет передана строка настроек.
+* Поле `SupportedTypes` -- должно возвращать типы _Подключений_, предоставляемых данной _Фабрикой подключений_.
+
+_Фабрика подключений_ позволяет создавать несколько типов _Подключений_ -- соединений с различными ресурсами. Тип подключения указывается в `SupportedTypes`, тип запрашиваемого подключения проверяется в `CreateConnection`.
+
+Программист не обязан использовать _Подключения_ для работы с соединениями -- соединение можно создавать непосредственно при выполнении _Задачи_ или функции _Компонента_. _Подключение_ позволяет использовать единую точку для получения соединений, а также получения настроек соединений из конфигурации Службы.
+
+Если для создания _Подключения_ нужен доступ к xref:services.adoc[сервисам API Службы], в классе расширения нужно реализовать интерфейс `IInitializeWithServiceProvider`. См. xref:GetServiceProvider.adoc[Получение поставщика сервисов в расширении].
+
+== Тип Подключения
+
+API Службы не предъявляет специальных требований к типу объекта _Подключения_, возвращаемого _Фабрикой подключений_: _Подключение_ может быть представлено объектом любого типа, например: `UserSession` (пользовательская сессия к серверу {dv}).
+
+== Пул подключений
+
+Для получения подключения, предоставляемого какой-либо _Фабрикой подключений_, необходимо обращаться к xref:services.adoc[сервису] _Пул подключений_ (тип `IConnectionPool`):
+
+[source,csharp]
+----
+var connectionPool = (IConnectionPool)serviceProvider.GetService(typeof(IConnectionPool));
+var connection = connectionPool.GetConnection<ConnectionType>();
+----
+
+При запросе _Подключения_ (метод `GetConnection`) _Пул подключений_ вызывает метод `IConnectionFactory.CreateConnection` _Фабрики подключений_, поддерживающей данный тип _Подключений_ (проверяется `IConnectionFactory.SupportedTypes`).
+
+Метод `IConnectionPool.GetConnection`, имеет три сигнатуры, в зависимости от которых _Фабрика подключений_ получит определенную строку конфигурации. Полученную строку можно использовать для создания _Подключения_:
+
+* `GetConnection<T>()` -- _Фабрике подключений_ будет передана первая (не обязательно по порядку) строка настроек _Фабрики подключений_ из конфигурации Службы (см. далее <<connectExtension,Подключение расширения к Службе>>).
+* `GetConnection<T>(string connectionName)` -- _Фабрике подключений_ будет передана строка настроек _Фабрики подключений_ с именем `connectionName` из конфигурации Службы.
+* `GetConnection<T>(string connectionName, string connectionSettings)` -- _Фабрике подключений_ будет передана строка, переданная во втором параметре.
+
+== Пример реализации Фабрики подключений
+
+Следующий код демонстрирует пример _Фабрики подключений_, предоставляющей подключение к SMTP-серверу. Подключение представляет собой объект типа `System.Net.Mail.SmtpClient`, в конструктор которого передаётся адрес сервера.
+
+[source,csharp]
+----
+public class SmtpConnectFactory : IConnectionFactory
+{
+    public Type[] SupportedTypes => new Type[] { typeof(SmtpClient) };
+
+    public T CreateConnection<T>(string settings)
+    {
+        var smtpClient = new SmtpClient(settings);
+        return (T)(object)smtpClient;
+    }
+}
+----
+
+Запросить подключения `SmtpClient` можно следующим образом:
+
+[source,csharp]
+----
+var connectionPool = (IConnectionPool)serviceProvider.GetService(typeof(IConnectionPool)); <.>
+
+var connection = connectionPool.GetConnection<SmtpClient>(null, "smtp.com.org"); <.>
+----
+<.> При вызове метода `IConnectionPool.GetConnection`
+<.> В _Фабрику подключений_ в метод `CreateConnection` будет передана строка `smtp.com.org` с адресом сервера для подключения.
+
+Также строку настроек можно получать непосредственно из конфигурации Службы. Для этого конфигурация _Фабрики подключений_ `SmtpConnectFactory` в конфигурации Службы должна содержать строку настроек. Например, если конфигурация содержит строку настроек с названием `SmtpClientSetting` (см. <<connectExtension,Подключение расширения к Службе>>), получить _Подключение_ с использованием данной настройки можно следующим образом:
+
+[source,csharp]
+----
+var connection = connectionPool.GetConnection<SmtpClient>("SmtpClientSetting");
+----
+
+WARNING: Из-за наличия ошибки в версии 5.5.1 не следует использовать метод с сигнатурой `GetConnection<T>(String)`.
+
+[#connectExtension]
+== Подключение расширения к Службе
+
+Все следующие действия выполняются на сервере Службы.
+
+. xref:ExtensionRegistration.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
++
+[#SmtpConnectFactory]
+. Добавьте расширение `SmtpConnectFactory` в конфигурацию Службы:
++
+. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Connections\SmtpConnect`.
++
+.. В созданном разделе укажите полное имя класса `SmtpConnectFactory` в параметре по умолчанию.
+.. Создайте строковый параметр с произвольным именем, например `SmtpClientSetting`. В значении укажите строку настроек -- `smtp.com.org`.
++
+Строка может передаваться в `IConnectionFactory.CreateConnection`, если _Подключение_ запрашивается с указанием имени строки настроек.
++
+. Создайте `Роль рабочего процесса`, через которую РП будет получать расширение `SmtpConnectFactory`:
++
+.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithSmtpConnect`.
++
+.. В созданном разделе создайте строковый параметр `Connections` со значением `SmtpClientSetting` -- название строки с параметрами `SmtpConnectFactory`, которая была создана <<SmtpConnectFactory,ранее>>.
++
+.Строковый параметр со значением SmtpClientSetting
+image::connectionRoleRegistry.png[]
++
+. Зарегистрируйте экземпляр РП с _Ролью_ `RoleWithSmtpConnect`.
++
+. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpSmtpConnect`.
++
+include::partial$moreChunks.adoc[tags=parameters]
++
+.Добавленные параметры
+image:connectionWpRegistry.png[Добавленные параметры]
+
+== Пример реализации Фабрики подключений для работы с системой {dv}
+
+Ниже приведен код примера _Фабрики подключений_, предоставляющей _Подключение_ к серверу {dv} (`UserSession`):
+
+[source,csharp]
+----
+public class UserSessionFactory : IConnectionFactory
+{
+    public Type[] SupportedTypes => new Type[] { typeof(UserSession) };
+
+    public T CreateConnection<T>(string settings)
+    {
+        SessionManager sessionManager = SessionManager.CreateInstance(settings);
+        return (T)(object)sessionManager.CreateSession();
+    }
+}
+----
+
+Для работы с данным типом _Подключений_ к проекту расширения должна быть подключена сборка `{dv}.Platform.ObjectManager.dll`. В `settings` должна передаваться строка подключения к серверу {dv}.

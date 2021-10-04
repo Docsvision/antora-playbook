@@ -1,0 +1,270 @@
+:value: RoleWithFSQueue
+
+= Фабрика очередей сообщений
+
+_Фабрика очередей сообщений_ -- расширения Службы {ws}, которое предоставляет функцию создания _Очереди групп сообщений_ или _Очереди сообщений_.
+
+Класс расширения _Фабрика очередей сообщений_ должен реализовывать интерфейс: `IQueueFactory`.
+
+[source,csharp]
+----
+public class QueueFactoryExt : IQueueFactory
+----
+
+Описание интерфейса приведено в пункте xref:objects.adoc#IQueueFactory[Типы объектов].
+
+В общем случае класс расширения должен содержать метод `CreateQueue`, предоставляющий экземпляр _Очередь групп сообщений_.
+
+== Очередь сообщений
+
+_Очередь групп сообщений_ -- объект, предоставлявший функцию получения _Сообщений_ из _Хранилища сообщений_. _Очередь групп сообщений_ должна уметь подключаться к _Хранилищу сообщений_, получать из него исходные данные _Сообщения_ и формировать по ним объект типа `IMessageGroup`.
+
+_Очередь групп сообщений_, создаваемая _Фабрикой очередей сообщений_, должна реализовывать интерфейс `IMessageGroupQueue`.
+
+.Интерфейс определяет следующие методы:
+[%collapsible]
+====
+* `TryDequeue` -- данный метод должен возвращать следующую необработанную _Группу сообщений_. Сообщения группы должны быть заблокированы от возможности повторной обработки (в т. ч. другими экземплярами РП).
++
+Блокировка может быть реализована удалением записи из хранилища, блокировкой карточек {dv} или иным способом.
++
+* `TryPeek` -- данный метод должен возвращать следующую необработанную _Группу сообщений_ без блокировки.
++
+Метод используется только для проверки наличия необработанных _Сообщений_, поэтому не должен изменять _Хранилище сообщений_.
++
+* `OnMessageGroupProcessingStart` -- данный метод может обрабатывать событие начала обработки _Сообщений_ из _Группы сообщений_.
++
+Метод вызывается перед созданием _Задач_ по _Сообщениям_ группы.
++
+* `OnMessageGroupProcessingFinish` -- данный метод может обрабатывать событие завершения обработки _Сообщений_ из _Группы сообщений_.
++
+Метод вызывается после выполнения _Задач_, созданных по _Сообщениям_ группы.
++
+* `OnMessageProcessingStart` -- _Метод зарезервирован (не используется)_.
+* `OnMessageProcessingFinish` -- данный метод может обрабатывать событие завершения обработки _Сообщения_ из _Группы сообщений_.
++
+Метод вызывается после выполнения _Задачи_, созданной по _Сообщению_ группы.
++
+* Поле `Id` -- должно возвращать уникальный идентификатор данной _Очереди сообщений_.
+
+IMPORTANT: Реализация метода `TryDequeue` должна гарантировать защиту от повторной обработки Сообщения, загруженного _Очередью сообщений_.
+====
+
+В полной реализации _Очереди сообщений_ нужно разработать три класса: _Очереди сообщений_, _Группы сообщений_, _Сообщения_.
+
+Следующий код демонстрирует пример _Очереди групп сообщений_, получающей _Сообщения_ из файлов на диске.
+
+. Класс _Сообщения_.
++
+[source,csharp]
+----
+public class FSMessage : IMessage
+{
+    public Guid Id => Guid.NewGuid();
+    public Guid TypeId => Constants.FSMessageTypeID;
+    public Guid SubTypeId => Constants.FSMessageSubTypeID;
+    public Guid TargetId { get; private set; }
+    public Guid SourceId { get; private set; }
+    public object Data { get; private set; }
+    public string FileName { get; private set; }
+
+    public FSMessage(string file, Guid sourceId) <.> <.>
+    {
+        SourceId = SourceId;
+        FileName = file;
+
+        try
+        {
+            Data = File.ReadAllText(file); <.>
+        }
+        catch
+        {
+            Data = $"Данные файл {file} не прочитаны";
+        }
+    }
+}
+----
+<.> `file` - файл сообщения.
+<.> `sourceId` - будем передавать идентификатор _Очереди сообщений_.
+<.> В данные сообщения сохраняем содержимое файла.
++
+. Класс _Группы сообщений_.
++
+[source,csharp]
+----
+ public class FSMessageGroup : IMessageGroup
+{
+    public Guid Id => Guid.NewGuid();
+    public Guid SourceId { get; private set; }
+    public IEnumerable<IMessage> Messages { get; private set; }
+
+    public FSMessageGroup(Guid sourceId, IEnumerable<IMessage> messages) <.>
+    {
+        SourceId = sourceId;
+        Messages = messages;
+    }
+}
+----
+<.> `sourceId` - будем передавать идентификатор Очереди сообщений.
++
+. Класс _Очереди сообщений_.
++
+[source,csharp]
+----
+public class FSQueue : IMessageGroupQueue
+{
+    private readonly string messagesFolder;
+    private readonly string processedMessagesFolder;
+    private readonly int maxCountMessagesInGroup = 10;
+
+    public Guid Id => Constants.FSMessageGroupQueueId;
+
+    public FSQueue(string baseFolder)
+    {
+        messagesFolder = baseFolder; <.>
+        processedMessagesFolder = Path.Combine(baseFolder, "ProcessedMessages");
+    }
+
+    public bool TryDequeue(out IMessageGroup result)
+    {
+        IEnumerable<string> msgFiles = GetMessages(); <.>
+        result = CreateMessageGroup(msgFiles, Id);
+
+        return result.Messages.Any();
+    }
+
+    public bool TryPeek(out IMessageGroup result) <6>
+    {
+        IEnumerable<string> msgFiles = GetMessagesWithoutLock();
+        result = CreateMessageGroup(msgFiles, Id);
+
+        return result.Messages.Any();
+    }
+
+    public void OnMessageGroupProcessingFinish(IMessageGroup message)
+    {
+    }
+    public void OnMessageGroupProcessingStart(IMessageGroup message)
+    {
+    }
+    public void OnMessageProcessingFinish(IMessage message, MessageState state, object details)
+    {
+    }
+    public void OnMessageProcessingStart(IMessage message)
+    {
+    }
+
+    private IEnumerable<string> GetMessages()
+    {
+        List<string> files = new List<string>();
+        FileInfo[] fileInfos = new DirectoryInfo(messagesFolder).GetFiles();
+
+        foreach (FileInfo file in fileInfos)
+        {
+            if (file == null || files.Count >= maxCountMessagesInGroup) <.>
+            {
+                break;
+            }
+
+            string newFilePath = Path.Combine(processedMessagesFolder, file.Name); <.>
+            try
+            {
+                file.MoveTo(newFilePath);
+                files.Add(newFilePath);
+            }
+            catch { }
+        }
+
+        return files;
+    }
+
+    private IEnumerable<string> GetMessagesWithoutLock()
+    {
+        IEnumerable<FileInfo> fileInfos = new DirectoryInfo(messagesFolder).GetFiles().Take(10);
+
+        return fileInfos.Select(t => t.FullName);
+    }
+
+    private IMessageGroup CreateMessageGroup(IEnumerable<string> files, Guid sourceId) <.>
+    {
+        IEnumerable<FSMessage> messages = files.Select(t => new FSMessage(t, sourceId));
+        FSMessageGroup messageGroup = new FSMessageGroup(messages, sourceId);
+
+        return messageGroup;
+    }
+}
+----
+<.> Внешняя система создаёт файлы с содержимым _Сообщения_ в папке `messagesFolder`.
+<.> Для блокирующей функции `TryDequeue` файлы для обработки предоставляются методом `GetMessages`.
+<.> Метод выбирает до 10 сообщений (`maxCountMessagesInGroup`) из папки `messagesFolder`
+<.> И для исключения их возможной повторной обработки перемещает обработанные файлы в подпапку `processedMessagesFolder`.
+<.> Из предоставленных методом `GetMessages` файлов формируется _Группа сообщений_ -- используется функция `CreateMessageGroup`.
+<6> Для неблокирующей функции `TryPeek` последовательность обработки аналогична, но файлы не перемещаются.
+
+== Пример реализации Фабрики очередей сообщений
+
+Следующий код демонстрирует пример _Фабрики очередей сообщений_, предоставляющей _Очередь групп сообщений_ приведенного выше типа `FSQueue`.
+
+[source,csharp]
+----
+public class FSQueueFactory : IQueueFactory
+{
+    public object CreateQueue(string settings)
+    {
+        FSQueue messageGroupQueue = new FSQueue(settings);
+        return messageGroupQueue;
+    }
+}
+----
+
+Метод `CreateQueue` принимает настройки _Фабрики очередей сообщений_ из конфигурации Службы (см. далее). В данном примере в `settings` будет передаваться путь к папке с сообщениями.
+
+== Подключение расширения к Службе
+
+Все следующие действия выполняются на сервере Службы.
+
+. xref:ExtensionRegistration.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
++
+. Добавьте расширение `FSQueueFactory` в конфигурацию Службы:
++
+.. Создайте раздел с произвольным наименованием в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Queues\FSQueue`.
++
+.. В созданном разделе укажите полное имя класса `FSQueueFactory` в параметре по умолчанию.
++
+[#FSQueueSettings]
+.. Создайте строковый параметр с произвольным именем, например `FSQueueSettings`. В значении параметра укажите строку настроек `C:\Messages\`, которая будет передаваться в `IQueueFactory.CreateQueue`.
++
+.Настройки реестра
+image::queueRegistry.png[Настройки реестра]
++
+. Создайте `Роль рабочего процесса`, через которую РП будет получать расширение `FSQueueFactory`:
++
+. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithFSQueue`.
++
+. В разделе создайте строковый параметр `Queues` со значением `FSQueueSettings` -- название строки с параметрами `FSQueueFactory`, которая была создана <<FSQueueSettings,ранее>>.
++
+.Добавление строкового параметра
+image::queueRoleRegistry.png[Добавление строкового параметра]
++
+. Зарегистрируйте экземпляр РП с _Ролью_ `RoleWithFSQueue`.
++
+. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpFSQueue`.
++
+include::partial$moreChunks.adoc[tags=parameters]
++
+.Добавленные параметры
+image::queueWpRegistry.png[Добавленные параметры]
+
+== Проверка примера
+
+. Создайте на компьютере папки:
++
+* `C:\Messages`.
+* `C:\Messages\ProcessedMessages`.
++
+. Перезапустите службу _WorkerService_.
++
+. Создайте в папке `C:\Messages` тестовый файл с произвольным содержимым.
+. Через какое-то время файл будет перемещен в папку `C:\Messages\ProcessedMessages`.
+
+В данном случае только обрабатывается _Сообщение_, _Задача_ не создаётся. Чтобы по _Сообщению_ создавалась _Задача_, нужно реализовать расширение xref:taskFactory.adoc[Фабрика задач], у которой в списке поддерживаемых типов _Сообщений_ (`IWorkerTaskFactory.MessageTypes`) должен быть идентификатор типа _Сообщения_ `FSMessage` (`IMessage.TypeId`).
