@@ -2,12 +2,11 @@
 
 На следующей схеме представлен упрощенный процесс работы Службы {ws} и взаимодействия её компонентов. Зеленым обозначены расширения Службы, которые могут быть реализованы программистом.
 
-image:diagram.png[Диаграмма работы службы]
-
 .Обработка входящей корреспонденции
 [plantuml, svg]
 ....
 @startuml
+'!pragma layout elk
 skinparam rectangleBorderThickness 1
 skinparam defaultTextAlignment center
 skinparam lifelineStrategy solid
@@ -21,7 +20,6 @@ State "Система B" as sysB
 }
 
 State "Служба рабочих процессов" as serv {
-
 
 State "Фабрика очередей" as queuesFactory #lightgreen
 State "Очередь \nгрупп сообщений" as msgGroupQueue
@@ -42,35 +40,24 @@ State "Очередь задач" as tasksQueue
 
 }
 
-sysA -> store : Создание сообщения
-sysA -[hidden]-> store
-store -[hidden]-> sysB
-sysA -[hidden]-> sysB
+ext -[hidden]> serv
+sysA --> store : Создание сообщения
+store ---[hidden]> sysB
+store -> msgGroupQueue : Загрузка\nсообщений
+msgGroupQueue -u> tasksFactory : Обработка\nсообщений
+msgGroupQueue -[hidden]d-> connectionsFactory
 
-tasksFactory -> tasksQueue : Создание задач
-comp -[hidden]-> mngr
-tasksFactory -[hidden]-> mngr
-queuesFactory -[hidden]-> msgGroupQueue
-tasksFactory -[hidden]-> msgGroupQueue
+tasksFactory ---> msgTasks : Создание задач
+queuesFactory --> msgGroupQueue : Инициализация
+tasksFactory -[hidden]> comp
+msgTasks : Задача 1\nЗадача 2 \nЗадача N
+tasksQueue : Задача 1\nЗадача 2 \nЗадача N
+comp --> tasksQueue : Создание задач
 
+connectionsFactory ---> conA : Создание подключения
+msgTasks -l> conA : Использование\nподключения
 
-queuesFactory -> msgGroupQueue : Инициализация
-msgTasks : Задача 1\n Задача 2 \nЗадача N
-tasksQueue : Задача 1\n Задача 2 \nЗадача N
-msgGroupQueue -> tasksFactory : Обработка сообщений
-comp -> msgTasks : Создание задач
-
-connectionsFactory -[hidden]-> conA
-msgGroupQueue -[hidden]-> connectionsFactory
-connectionsFactory -> conA : Создание подключения
-mngr -> conA : Использование подключения
-
-conA -> sysB
-store -> msgGroupQueue : Загрузка сообщений
-queuesFactory -[hidden]-> connectionsFactory
-queuesFactory -[hidden]-> msgGroupQueue
-queuesFactory -[hidden]-> conA
-
+conA -> sysB : Подключение
 @enduml
 ....
 

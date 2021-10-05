@@ -1,6 +1,6 @@
 = Создание Задачи без Сообщения
 
-Типичный сценарий использования Службы {ws} предполагает, что Служба будет обрабатывать Сообщения, формируемые внешними системами. Но это не исключает возможности создавать _Задач_ без _Сообщений_.
+Типичный сценарий использования Службы {ws} предполагает, что Служба будет обрабатывать _Сообщения_, формируемые внешними системами. Но это не исключает возможности создавать _Задачи_ без _Сообщений_.
 
 API Службы предоставляет сервис _Очередь задач_ с методом постановки _Задачи_ на исполнение: `WorkerTaskQueue.Enqueue`.
 
@@ -24,12 +24,10 @@ public class BestComponent : IThreadedRuntimeComponent, IInitializeWithServicePr
     public void Start()
     {
         Stopped = false;
-        // Идентификатор карточки получен из конфигурации Компонента
-        var documentCardId = new Guid(Data);
+        var documentCardId = new Guid(Data); <.>
         var documentWasSent = new DocumentWasSent(serviceProvider, documentCardId);
         
-        // Получение сервиса Очередь задач и добавление задачи documentWasSent в очередь
-        var workerTaskQueue = (WorkerTaskQueue)serviceProvider.GetService(typeof(WorkerTaskQueue));
+        var workerTaskQueue = (WorkerTaskQueue)serviceProvider.GetService(typeof(WorkerTaskQueue)); <.>
         workerTaskQueue.Enqueue(documentWasSent);
     }
 
@@ -39,3 +37,5 @@ public class BestComponent : IThreadedRuntimeComponent, IInitializeWithServicePr
     }
 }
 ----
+<.> Идентификатор карточки получен из конфигурации _Компонента_.
+<.> Получение сервиса _Очередь задач_ и добавление задачи `documentWasSent` в очередь.

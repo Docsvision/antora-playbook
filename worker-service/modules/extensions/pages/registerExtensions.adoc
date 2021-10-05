@@ -1,0 +1,28 @@
+= Регистрация расширения на сервере Службы
+
+Полученную сборку расширения нужно зарегистрировать на сервере Службы {ws}.
+
+.Чтобы зарегистрировать сборку:
+. Скопируйте сборку в любой собственный подкаталог в каталоге установки Службы (например, в `C:\Program Files (x86)\{dv}\WorkerService\5.5\SomeExtension`).
++
+. Укажите название каталога со сборкой в конфигурационных файлах РП: `WorkerProcess.exe.config` и `WorkerProcess32.exe.config`.
++
+. Создайте в конфигурационном файле элемент menu:configuration[runtime > assemblyBinding > probing].
++
+. Добавьте в элемент `probing` параметр `privatePath`. В значении параметра укажите название папки из п.1.
++
+.Полный пример конфигурационного файла:
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <probing privatePath="SomeExtension" />
+    </assemblyBinding>
+  </runtime>
+</configuration>
+----
