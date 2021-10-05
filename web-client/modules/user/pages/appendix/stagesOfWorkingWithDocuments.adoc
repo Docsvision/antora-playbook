@@ -13,16 +13,20 @@ skinparam rectangleBorderThickness 1
 #lightgray:**Ввод документа в систему**;
 :Регистрация документа;
 if (Требуется работа по документу?) then (НЕТ)
-|#orange|Регистратор|
-#lightgray:**Перевод документа в архив**;
-detach
+  label spacer
+  '#lightgray:**Archive document**;
+  'end
 else (ДА)
-repeat
-:Обработка входящей корреспонденции;
-|#lightgreen|Исполнитель задания|
-:**Исполнение заданий по документу**;
-repeat while (Завершено?) is (Нет)
-detach
+  repeat
+  :Обработка входящей корреспонденции;
+  |#lightgreen|Исполнитель задания|
+  :**Исполнение заданий по документу**;
+  repeat while (Завершено?) is (НЕТ) not (ДА)
+  |#orange|Регистратор|
+  '#lightgray:**Перевод документа в архив**;
+endif
+#lightgray:**Перевод документа в архив**;
+end
 @enduml
 ....
 
