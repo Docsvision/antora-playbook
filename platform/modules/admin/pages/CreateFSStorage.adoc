@@ -1,0 +1,53 @@
+[[ariaid-title1]]
+== Пример. Настройка хранилища файлов в файловой системе
+
+Далее приведен пример настройки хранилища файлов Docsvision в файловой системе сервера Docsvision.
+
+. [.ph .cmd]#Откройте страницу настроек «Внешние хранилища»:#
+[loweralpha]
+.. [.ph .cmd]#Откройте Консоль настройки Docsvision.#
+.. [.ph .cmd]#Перейдите в раздел настроек [.ph .menucascade]#[.ph .uicontrol]*Настройки сервера* > [.ph .uicontrol]*Базы данных*#.#
+.. [.ph .cmd]#Выберите настраиваемую базу данных и нажмите на кнопку [.ph .uicontrol]*Настройки*. Будет открыто окно [.keyword .wintitle]*Свойства и управление базой данных*.#
+.. [.ph .cmd]#Откройте вкладку [.keyword .wintitle]*Внешние хранилища*.#
+. [.ph .cmd]#Подключите к Docsvision хранилище в файловой системе, следуя xref:SetupStorage.adoc[инструкции]. Параметры подключения настройте следующим образом:#
+[loweralpha]
+.. [.ph .cmd]#В поле [.kbd .ph .userinput]`Название` введите «StorageInFileSystem» или любое другое название.#
+.. [.ph .cmd]#В списке [.kbd .ph .userinput]`Тип` выберите значение «Хранилище на диске».#
+.. [.ph .cmd]#В списке [.kbd .ph .userinput]`Состояние` выберите значение «Online».#
+.. [.ph .cmd]#В поле [.kbd .ph .userinput]`Макс. размер` оставьте значение по умолчанию (0).#
++
+После того, как хранилище физически закончится, попытка добавления файла в него завершится ошибкой. Чтобы избежать этого, ограничьте размер хранилища:
+
+[lowerroman]
+... В поле [.kbd .ph .userinput]`Макс. размер` укажите примерный объем свободного места на диске, которое может быть использовано для хранения файлов.
+... В списке [.kbd .ph .userinput]`Состояние` выберите значение «Auto».
+.. [.ph .cmd]#Флаги в блоке [.kbd .ph .userinput]`Разделы` установите по собственному усмотрению.#
+.. [.ph .cmd]#В поле [.kbd .ph .userinput]`Путь` введите полный путь к каталогу для хранения бинарных данных файлов на сервере Docsvision.#
++
+image::img/StorageFileSystemConfiguration.png[[.fig--title-label]##Figure 1. ##Пример настройки хранилища на файловой системе]
+. [.ph .cmd]#Создайте группу хранилищ следуя xref:SetupStorageGroup.adoc[инструкции]. Параметры группы настройте следующим образом:#
+[loweralpha]
+.. [.ph .cmd]#В поле [.kbd .ph .userinput]`Название` введите «FileSystemGroup» или любое другое название.#
+.. [.ph .cmd]#В списке [.kbd .ph .userinput]`Режим выбора` оставьте значение по умолчанию.#
++
+image::img/StorageFileSystemGroup.png[[.fig--title-label]##Figure 2. ##Пример настройки группы хранилищ]
+
+Хранилище можно включить в существующую группу, тогда создавать новую не требуется.
+. [.ph .cmd]#Включите хранилище «StorageInFileSystem» в группу «FileSystemGroup» следуя xref:AddStorageToStoragesGroup.adoc[инструкции].#
+. [.ph .cmd]#Настройте правила помещения файлов в группу хранилищ «FileSystemGroup» следуя xref:SetupStorageRule.adoc[инструкции]. Параметры правила настройте следующим образом:#
+[loweralpha]
+.. [.ph .cmd]#В поле [.kbd .ph .userinput]`Название` введите «RuleForFileSystemStorage» или любое другое название.#
+.. [.ph .cmd]#В списке [.kbd .ph .userinput]`Группа` выберите значение «FileSystemGroup».#
+.. [.ph .cmd]#В списке [.kbd .ph .userinput]`Тип` оставьте значение «Все файлы» или конкретизируйте параметры файлов (см. рисунок ниже), которые будут размещаться в хранилище.#
++
+image::img/RuleForStorageInFileSystem.png[[.fig--title-label]##Figure 3. ##Пример настройки правила для группы хранилищ «FileSystemGroup»]
+. [.ph .cmd]#Повысьте приоритет использования правила «RuleForFileSystemStorage».#
+[loweralpha]
+.. [.ph .cmd]#Выберите правило «RuleForFileSystemStorage» в списке правил.#
+.. [.ph .cmd]#Нажимайте на кнопку image:img/Buttons/ArrowUp.png[image] пока правило «RuleForFileSystemStorage» не поднимется в верх списка.#
++
+image::img/StorageInFileSystem.png[[.fig--title-label]##Figure 4. ##Пример настройки хранилища файлов в файловой системе]
+
+При закрытии настроек БД согласитесь с перезапуском сервисов. Новая конфигурация файловых хранилищ применяется в течение 10 минут (по умолчанию).
+
+*Parent topic:* xref:../topics/External_Data_Storage.adoc[Настройка внешних хранилищ Docsvision]

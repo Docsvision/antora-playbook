@@ -1,0 +1,24 @@
+[[ariaid-title1]]
+== Включение поддержки AlwaysOn в Docsvision
+
+. [.ph .cmd]#Откройте Консоль настройки Docsvision#
+. [.ph .cmd]#Перейдите в раздел [.ph .menucascade]#[.ph .uicontrol]*Настройки сервера* > [.ph .uicontrol]*Базы данных*#.#
+. [.ph .cmd]#Выберите настраиваемую базу данных, для которой необходимо включить режим AlwaysOn, и нажмите на кнопку [.ph .uicontrol]*Настройки*. Будет открыто окно [.keyword .wintitle]*Свойства и управление базой данных*.#
++
+БД должна быть включена в группу доступности AlwaysOn с ролью Primary.
+. [.ph .cmd]#Перейдите на вкладку [.ph .uicontrol]*AlwaysOn*.#
+. [.ph .cmd]#Установите флаг [.ph .uicontrol]*Использовать AlwaysOn*.#
++
+image::img/ServerConsol_DataBases_alwayson.png[[.fig--title-label]##Рис. 1. ##Настройки AlwaysOn в Консоли настройки Docsvision]
+. [.ph .cmd]#Из списка доступных реплик, выберите реплики, которые могут использоваться сервером Docsvision.#
++
+Основной сервер в списке не отображается.
+. [.ph .cmd]#Нажмите на кнопку [.ph .uicontrol]*OK*.#
+
+После сохранения настроек выбранные реплики появятся в СУБД Microsoft SQL в таблице «dvsys_replica_servers».
+
+Для проверки настроек репликации можно использовать стандартное представление сервера Microsoft SQL «sys.dm_hadr_database_replica_states».
+
+*Обратите внимание: при отказе primary-сервера Microsoft SQL и переназначении роли secondary-сервера Microsoft SQL на primary в группе доступности, необходимо самостоятельно переподключить Docsvision на работу с новым primary-сервером Microsoft SQL (автоматический переход не осуществляется).*
+
+*На уровень выше:* xref:../topics/AlwaysOn.adoc[Размещение БД Docsvision в группе доступности Microsoft SQL Server AlwaysOn]

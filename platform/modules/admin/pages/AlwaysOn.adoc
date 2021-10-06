@@ -1,0 +1,30 @@
+[[ariaid-title1]]
+== Размещение БД Docsvision в группе доступности Microsoft SQL Server AlwaysOn
+
+AlwaysOn – предоставляемое Microsoft SQL Server решение для создания групп доступности с целью обеспечения высокой доступности и аварийного восстановления.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Дополнительная информация по группам доступности AlwaysOn приведена на странице https://docs.microsoft.com/ru-ru/sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server
+====
+
+В системе Docsvision группа доступности AlwaysOn используется для снижения нагрузки на сервера баз данных, за счет переадресации некоторых операций чтения к репликам. Docsvision самостоятельно выбирает наиболее «свежую» реплику для работы, а если такой нет – получает данные с мастера.
+
+[NOTE]
+====
+[.note__title]#Важное замечание:# Для использования функции AlwaysOn в Docsvision требуется лицензия (опция «Docsvision Кластер AlwaysOn»). Использования функции без лицензии приведёт к ошибке.
+====
+
+Реплики используются в операциях получения данных карточек, выполнения отчета с признаком «Только чтение», выполнения поисковых запросов и получения представлений.
+
+Для использования данных возможностей нужно:
+
+. Настроить AlwaysOn в Microsoft SQL Server.
+. Включить поддержку AlwaysOn в системе Docsvision.
+
+Настройка группы доступности выполняется после создания БД Docsvision (её нужно будет выбрать при настройке).
+
+* *xref:../topics/EnableAlwaysOnInSQLServer.adoc[Настройка группы доступности AlwaysOn]* +
+* *xref:../topics/EnableAlwaysOnInDocsvision.adoc[Включение поддержки AlwaysOn в Docsvision]* +
+
+*На уровень выше:* xref:../topics/Administrator_functions.adoc[Функции администратора]

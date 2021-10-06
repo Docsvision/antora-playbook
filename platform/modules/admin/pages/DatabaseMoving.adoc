@@ -1,0 +1,43 @@
+[[ariaid-title1]]
+== Перенос БД Docsvision между серверами Docsvision
+
+Перенос базы данных между серверами Docsvision может потребоваться, если необходимо подключить БД к другому серверу Docsvision, но в лицензии Docsvision отсутствует опция «Docsvision Concurrent Servers», которая позволяет работать с одной БД нескольким серверам Docsvision. При попытке подключить БД ко второму серверу Docsvision возникнет предупреждение:
+
+image::img/Database_Wizard_Parallel_Servers.png[[.fig--title-label]##Рис. 1. ##Диалоговое окно "Внимание: параллельные серверы"]
+
+[NOTE]
+====
+[.note__title]#Прим.:# Перенесенная БД не будет доступна на сервере Docsvision, с которого она была перемещена.
+====
+
+Перед переносом необходимо определить, является ли она единственной на сервере Docsvision, с которого БД перемещается:
+
+* База данных не является единственной базой данных на сервере Docsvision – отключите БД от сервера Docsvision, следуя инструкции по xref:DetachDatabase.adoc[отключению БД].
+* База данных является единственной базой данных на этом сервере Docsvision – непосредственное отключение базы данных невозможно. Выполните следующие действия, чтобы подготовить БД к переносу:
+. Убедитесь, что пользователи не работают с перемещаемой БД.
+. Остановите все сервисы Docsvision, работающие на этом сервере:
+** Docsvision 5.5 StorageServer;
+** Docsvision 5.5 Full-Text Indexing Service;
+** Docsvision 5.5 WorkflowServer.
+. Остановите IIS.
+. Очистите (в SQL Server Management Studio) сервисные таблицы сессий и серверов Workflow командой:
++
+[source,pre,codeblock]
+----
+DELETE [dbo].[dvsys_sessions]
+DELETE [dbo].[dvsys_workflow_services]
+----
++
+Если команды вызвали ошибку `The ALTER TABLE statement conflicted with the                   FOREIGN KEY constraint "fk_SessionID_dvsys_search_results". The conflict occurred                   in database "...", table "dbo.dvsys_sessions", column 'SessionID'`, удалите записи из ссылающихся таблиц, у которых нет внешнего ключа с каскадным удалением. Узнать имена ссылающихся таблиц можно с помощью запроса:
+
+[source,pre,codeblock]
+----
+select OBJECT_NAME(tColumns.parent_object_id) ReferencingTable, OBJECT_NAME(tColumns.constraint_object_id) 
+ReferencingKey, tKeys.delete_referential_action_desc [OnDeleteAction] from sys.foreign_key_columns tColumns 
+join sys.foreign_keys tKeys ON tColumns.constraint_object_id = tKeys.[object_id] 
+where tColumns.referenced_object_id = OBJECT_ID('[dbo].[dvsys_sessions]') 
+----
+
+После отключения БД от одного сервера, её можно подключить к другому серверу, следуя инструкции xref:AttachDatabase.adoc[Подключение к серверу Docsvision существующей базы данных].
+
+*На уровень выше:* xref:../topics/Database.adoc[Управление базами данных]

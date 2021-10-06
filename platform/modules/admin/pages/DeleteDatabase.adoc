@@ -1,0 +1,48 @@
+[[ariaid-title1]]
+== Удаление базы данных Docsvision
+
+Если база данных Docsvision больше не используется, она может быть удалена из системы управления базами данных.
+
+Удаление базы данных рекомендуется осуществлять в следующей последовательности:
+
+. Убедитесь, что удаляемая база данных Docsvision действительно не используется.
+. Отключите базу данных от сервера Docsvision по инструкции xref:DetachDatabase.adoc[Отключение БД от сервера Docsvision].
++
+Рекомендуется отключать базу данных перед её физическим удалением. т. к. отсутствие базы данных в СУБД может привести к существенным задержкам (до 15 секунд) при выполнении операций в Консоли настройки Docsvision.
+. Удалите базу данных из СУБД стандартным образом. Например, для БД Microsoft SQL воспользуйтесь SQL Server Management Studio, для PostgreSQL – dbForge Studio for PostgreSQL или аналогичной программой.
+. Также удалите из СУБД задания, связанные с удалённой базой данных.
++
+Для удаления заданий из Microsoft SQL Server можно воспользоваться следующим скриптом (*Обратите внимание на комментарий в коде!*):
+
+[source,pre,codeblock]
+----
+/* Для СУБД Microsoft SQL Server */
+/* Внимание! DBName в тексте скрипта нужно заменить на название БД Docsvision, 
+   которая была удалена */
+                            
+   USE [msdb]
+                            
+   SET NOCOUNT ON
+                            
+   DECLARE @Job TABLE (JobName SYSNAME)
+   DECLARE @JobName AS SYSNAME
+   DECLARE @Sql AS NVARCHAR(MAX)
+                            
+   SET @JobName = ''
+                            
+   INSERT INTO @Job (JobName)
+   SELECT j.name 
+   FROM dbo.sysjobs AS j
+   JOIN dbo.sysjobsteps AS js ON (js.job_id = j.job_id)
+   WHERE js.database_name = 'DBName'
+                            
+   WHILE EXISTS(SELECT TOP 1 * FROM @Job)
+   BEGIN
+    SELECT TOP 1 @JobName = JobName FROM @Job
+    SET @Sql = 'EXEC msdb.dbo.sp_delete_job @job_name = ' + '''' + @JobName + '''' + ';'
+    exec sp_executesql @Sql;
+    DELETE @Job WHERE JobName = @JobName
+   END
+----
+
+*Parent topic:* xref:../topics/Administrator_functions.adoc[Функции администратора]
