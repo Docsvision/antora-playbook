@@ -1,50 +1,49 @@
-[[ariaid-title1]]
-== Установка системы полнотекстового поиска Elasticsearch
+= Установка системы полнотекстового поиска Elasticsearch
 
 Систему полнотекстового поиска Elasticsearch нужно устанавливать, если: планируется использовать функцию полнотекстового поиска по содержимому карточек и будет использоваться СУБД PostgreSQL. Если планируется использоваться СУБД Microsoft SQL, можно также использовать Elasticsearch или встроенную функцию полнотекстового поиска Microsoft SQL.
 
 Elasticsearch может быть установлен на любой компьютер организации, который удовлетворяет требованиям данной системы полнотекстового поиска.
 
-. [.ph .cmd]#Установите на компьютер систему Elasticsearch. При установке не изменяйте настройки по умолчанию.#
+. Установите на компьютер систему Elasticsearch. При установке не изменяйте настройки по умолчанию.
 +
 Рекомендуемая версия Elasticsearch: 7.9.
 
 Ссылка для загрузки: https://www.elastic.co/downloads/past-releases/elasticsearch-7-9-0.
-. [.ph .cmd]#Загрузите на компьютер компонент «Ingest Attachment Processor» (для индексации файлов карточек).#
+. Загрузите на компьютер компонент "Ingest Attachment Processor" (для индексации файлов карточек).
 +
 Ссылка для загрузки: https://artifacts.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-7.9.3.zip (для Elasticsearch версии 7.9).
-. [.ph .cmd]#Загрузите на компьютер компонент «_ICU Analysis Plugin_» (для индексации с учетом морфологии).#
+. Загрузите на компьютер компонент "_ICU Analysis Plugin_" (для индексации с учетом морфологии).
 +
 Ссылка для загрузки: https://www.elastic.co/guide/en/elasticsearch/plugins/7.9/analysis-icu.html (для Elasticsearch версии 7.9).
-. [.ph .cmd]#Загрузите на компьютер словари Hunspell для Elasticsearch (для индексации с учетом морфологии).#
+. Загрузите на компьютер словари Hunspell для Elasticsearch (для индексации с учетом морфологии).
 +
 Переместите папку [.ph .filepath]`hunspell`, содержащую папки [.ph .filepath]`en_US` и [.ph .filepath]`ru-RU` в директорию [.ph .filepath]`C:\ProgramData\Elastic\Elasticsearch\config` . Папка [.ph .filepath]`hunspell` должна находиться строго по указанному пути и должна содержать два подкаталога для двух языков.
 
 Ссылка для загрузки: https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ (для Elasticsearch версии 7.9).
-. [.ph .cmd]#Перезапустите Elasticsearch.#
+. Перезапустите Elasticsearch.
 +
 Установка выполняется с правами администратора.
 [loweralpha]
-.. [.ph .cmd]#Выполните [.ph .filepath]`"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install file:///C:/elasticplugins/elasticsearch-analysis-icu-7.9.0.zip` ([.ph .filepath]`C:/elasticplugins/` заменить на путь загрузки компонента).#
-.. [.ph .cmd]#Выполните [.ph .filepath]`"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install file:///C:/elasticplugins/ingest-attachment-7.9.0.zip` ([.ph .filepath]`C:/elasticplugins/` заменить на путь загрузки компонента).#
-. [.ph .cmd]#Если система Elasticsearch установлена отдельно от сервера Docsvision, настройте прослушивание публичного адреса.#
+.. Выполните [.ph .filepath]`"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install file:///C:/elasticplugins/elasticsearch-analysis-icu-7.9.0.zip` ([.ph .filepath]`C:/elasticplugins/` заменить на путь загрузки компонента).
+.. Выполните [.ph .filepath]`"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install file:///C:/elasticplugins/ingest-attachment-7.9.0.zip` ([.ph .filepath]`C:/elasticplugins/` заменить на путь загрузки компонента).
+. Если система Elasticsearch установлена отдельно от сервера {dv}, настройте прослушивание публичного адреса.
 +
-По умолчанию Elasticsearch прослушивает только локальный адрес (localhost), делая невозможным подключение сервиса полнотекстового индексирования Docsvision. Чтобы настроить прослушивание публичного адреса, выполните следующие действия:
+По умолчанию Elasticsearch прослушивает только локальный адрес (localhost), делая невозможным подключение сервиса полнотекстового индексирования {dv}. Чтобы настроить прослушивание публичного адреса, выполните следующие действия:
 [loweralpha]
-.. [.ph .cmd]#Откройте конфигурационный файл Elasticsearch:#
+.. Откройте конфигурационный файл Elasticsearch:#
 +
 [.ph .filepath]`C:\ProgramData\Elastic\Elasticsearch\config\elasticsearch.yml` (в ОС Windows).
-.. [.ph .cmd]#Добавьте в конец файла строку:#
+.. Добавьте в конец файла строку:#
 +
 [source,pre,codeblock]
 ----
 network.host: ${HOSTNAME}
 ----
-.. [.ph .cmd]#Сохраните изменения.#
+.. Сохраните изменения.
 +
-[.ph .uicontrol]*Обратите внимание*: без дополнительных ограничительных мер, данные полнотекстового индексирования станут публичными.
-. [.ph .cmd]#Перезапустите службу Elasticsearch.#
-. [.ph .cmd]#Проверьте доступность системы Elasticsearch.#
+*Обратите внимание*: без дополнительных ограничительных мер, данные полнотекстового индексирования станут публичными.
+. Перезапустите службу Elasticsearch.
+. Проверьте доступность системы Elasticsearch.
 +
 Откройте в веб-браузере (на компьютере с Elasticsearch, если прослушивается только локальный адрес, или на любом другом компьютере, если прослушивается публичный адрес) страницу [.ph .filepath]`[Адрес Elasticsearch]:9200`. Должна отобразиться информация о системе Elasticsearch:
 
@@ -70,7 +69,6 @@ network.host: ${HOSTNAME}
 [[InstallElasticsearch__postreq_ej3_thg_3nb]]
 [NOTE]
 ====
-[.note__title]#Note:# Включение функции полнотекстового поиска в Docsvision рассмотрено в пункте xref:Preparing_to_Work_Configure_FullText_Search.adoc[Настройка полнотекстового поиска].
+Включение функции полнотекстового поиска в {dv} рассмотрено в пункте xref:Preparing_to_Work_Configure_FullText_Search.adoc[Настройка полнотекстового поиска].
 ====
 
-*Parent topic:* xref:../topics/Install_and_configuration.adoc[Установка и настройка Модуля]

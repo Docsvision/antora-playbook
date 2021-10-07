@@ -1,5 +1,4 @@
-[[ariaid-title1]]
-== Установка службы PgAgent
+= Установка службы PgAgent
 
 Службу PgAgent предпочтительно устанавливать на сервер с СУБД PostgreSQL, но также, согласно официальной документации (https://www.pgadmin.org/docs/pgadmin4/4.x/pgagent_install.html), она может быть установлено отдельно.
 
@@ -10,7 +9,7 @@
 Далее установите PgAgent на компьютер с ОС Windows согласно https://www.pgadmin.org/docs/pgadmin4/latest/pgagent_install.html[инструкции]. Установка выполняется после завершения установки PostgreSQL. Затем выполните следующие шаги:
 
 [[Configuring_PgAgent__section_vrl_ydp_thb]]
-. Откройте файл [.ph .filepath]`C:\Users\<Пользователь, под которым запущена служба «PostgreSQL Scheduling Agent - pgAgent>\AppData\Roaming\postgresql\pgpass.conf`.
+. Откройте файл [.ph .filepath]`C:\Users\<Пользователь, под которым запущена служба "PostgreSQL Scheduling Agent - pgAgent>\AppData\Roaming\postgresql\pgpass.conf`.
 . Добавьте в файл [.ph .filepath]`pgpass.conf` строку:
 +
 [source,pre,codeblock]
@@ -18,7 +17,6 @@
 <адрес сервера PG>:<порт>:<имя базы>:<имя пользователя>:<пароль пользователя>
 ----
 +
-В строке нужно указать свои значения для адреса сервера PostgreSQL, порта подключения, имени БД (можно заменить на «*» – все БД), имени и пароля пользователя, под которым выполняется подключение к серверу PostgreSQL.
-. Запустите/перезапустите службу «PostgreSQL Scheduling Agent - pgAgent».
+В строке нужно указать свои значения для адреса сервера PostgreSQL, порта подключения, имени БД (можно заменить на "*" – все БД), имени и пароля пользователя, под которым выполняется подключение к серверу PostgreSQL.
+. Запустите/перезапустите службу "PostgreSQL Scheduling Agent - pgAgent".
 
-*Parent topic:* xref:../topics/Configuring_Software_for_PostgreSQL.adoc[Настройка СУБД PostgreSQL]

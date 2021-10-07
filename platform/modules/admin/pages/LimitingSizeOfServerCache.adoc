@@ -1,7 +1,6 @@
-[[ariaid-title1]]
-== Ограничение размера файлового кэша
+= Ограничение размера файлового кэша
 
-Сервер Docsvision кэширует файлы запрашиваемые клиентами в папку [.ph .filepath]`C:\Windows\TEMP\<Название БД>\FileCache`.
+Сервер {dv} кэширует файлы запрашиваемые клиентами в папку [.ph .filepath]`C:\Windows\TEMP\<Название БД>\FileCache`.
 
 Разрастание кэша ограничивается двумя параметрами:
 
@@ -12,16 +11,15 @@
 
 Администратор может изменить установленные ограничения:
 
-. Откройте реестр ОС на сервере Docsvision.
+. Откройте реестр ОС на сервере {dv}.
 . Перейдите в раздел [.ph .filepath]`HKLM\SOFTWARE\DocsVision\Platform\5.5\Server`.
 . Измените значение параметров `FileCacheSize` и/или `FileCacheMaxFilesCount`.
 +
 Если параметр(ы) отсутствует – создайте:
 
 * тип параметра: DWORD;
-* название: «FileCacheSize» или «FileCacheMaxFilesCount»;
+* название: "FileCacheSize" или "FileCacheMaxFilesCount";
 * значение:
 ** для FileCacheSize – от 0 до 100;
 ** для FileCacheMaxFilesCount – от 0.
 
-*Parent topic:* xref:../topics/Administrator_functions.adoc[Функции администратора]

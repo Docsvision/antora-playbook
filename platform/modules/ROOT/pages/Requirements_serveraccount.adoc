@@ -1,6 +1,6 @@
-= Требования учетной записи сервера Docsvision
+= Требования учетной записи сервера {dv}
 
-Перечисленные права должны быть предоставлены учетной записи пула приложений IIS (пул по умолчанию – «DefaultAppPool»), в котором работает веб-приложение сервера Docsvision, а также учетной записи службы «Docsvision 5.5 Storage Server».
+Перечисленные права должны быть предоставлены учетной записи пула приложений IIS (пул по умолчанию – "DefaultAppPool"), в котором работает веб-приложение сервера {dv}, а также учетной записи службы "{dv} 5.5 Storage Server".
 
 [NOTE]
 ====
@@ -12,7 +12,7 @@
 .. Членство в группе "Perfomance Monitor Users";
 .. Полные права на системную папку для временных файлов (по умолчанию, папка [.ph .filepath]`c:\Windows\Temp`);
 .. Права на чтение веток реестра ОС:
-* [.ph .filepath]`HKLM\Software\Docsvision\Platform`,
+* [.ph .filepath]`HKLM\Software\{dv}\Platform`,
 * [.ph .filepath]`HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Security`.
 .. Права на редактирование веток реестра ОС:
 * [.ph .filepath]`HKLM\SYSTEM\CurrentControlSet\Services\EventLog\Application`.
@@ -29,35 +29,34 @@
 +
 [NOTE]
 ====
-[.note__title]#Прим.:# Указанные разрешения выдаются в оснастке «Локальные политики безопасности» ([.ph .menucascade]#[.ph .uicontrol]*Control Panel* > [.ph .uicontrol]*Administrative Tools* > [.ph .uicontrol]*Local security policy* > [.ph .uicontrol]*User Right Assigment*#).
+[.note__title]#Прим.:# Указанные разрешения выдаются в оснастке "Локальные политики безопасности" (*Control Panel* > *Administrative Tools* > *Local security policy* > *User Right Assigment*#).
 ====
 .. Права на запись в файл журнала (если он ведется).
 . Требования на уровне СУБД (см. важное условие ниже):
 * для СУБД Microsoft SQL Server:
 [loweralpha]
 .. VIEW, CREATE TABLE, CREATE PROCEDURE, CREATE FUNCTION и ALTER SERVER STATE на уровне базы данных, ALTER DATABASE, а также ALTER для схемы dbo.
-.. На системную базу данных [.dfn .term]_master_:
+.. На системную базу данных _master_:
 [lowerroman]
 ... Разрешение EXECUTE для процедуры sp_configure.
 ... Разрешение EXECUTE на расширенной хранимой процедуре xp_cmdshell.
 ... Разрешение EXECUTE для всех пользовательских хранимых процедур и функций.
 ... Роли: db_ddladmin, db_datareader.
-.. На системную базу данных [.dfn .term]_msdb_: роли db_datareader и SQLAgentOperatorRole.
-.. На системную базу данных [.dfn .term]_tempdb_: роль db_owner.
-.. На все базы данных Docsvision:
+.. На системную базу данных _msdb_: роли db_datareader и SQLAgentOperatorRole.
+.. На системную базу данных _tempdb_: роль db_owner.
+.. На все базы данных {dv}:
 [lowerroman]
 ... Роль db_owner.
 ... EXECUTE для хранимых процедур, которые начинаются с префиксов dvsys_, dvsp_ и dvreport_ (используются для обработки данных).
 ... SELECT, INSERT, UPDATE, DELETE для таблиц dvsys_sessions, dvsys_card_group, dvsys_file_group (используются для создания сессии, групповой обработки карточек и файлов).
 ... SELECT на всех таблицах базы данных, которые начинаются с префиксов dvsys_ и dvtable_ (необходимо для подсистемы поиска и представлений).
 .. Необходимые привилегии на работу с другими БД, если доступ к ним осуществляется из разработанных серверных расширений или иными способами.
-.. Полный доступ к папке FileStream, если подключено хранилище «FileStream хранилище во внешней базе данных MS SQL Server» или «Filestream хранилище в базе данных Docsvision».
+.. Полный доступ к папке FileStream, если подключено хранилище "FileStream хранилище во внешней базе данных MS SQL Server" или "Filestream хранилище в базе данных {dv}".
 * для СУБД PostgreSQL:
 [loweralpha]
-.. Права пользователя «postgres».
+.. Права пользователя "postgres".
 +
-*Обратите внимание:* требования, перечисленные в п. 2, предъявляются к учетной записи, с которой сервер Docsvision обращается к БД Docsvision:
-* если БД подключена с использованием SQL-аутентификации, то данные требования предъявляются к учетной записи, которая указана при подключении БД к Docsvision;
-* если БД подключена с использованием аутентификации Windows, то данные требования предъявляются к учетной записи, от имени которой запущен пул приложений «DefaultAppPool» и служба «Docsvision 5.5 Storage Server».
+*Обратите внимание:* требования, перечисленные в п. 2, предъявляются к учетной записи, с которой сервер {dv} обращается к БД {dv}:
+* если БД подключена с использованием SQL-аутентификации, то данные требования предъявляются к учетной записи, которая указана при подключении БД к {dv};
+* если БД подключена с использованием аутентификации Windows, то данные требования предъявляются к учетной записи, от имени которой запущен пул приложений "DefaultAppPool" и служба "{dv} 5.5 Storage Server".
 
-*На уровень выше:* xref:../topics/Appendix_B.adoc[Приложение B. Требования сервисов Docsvision]
