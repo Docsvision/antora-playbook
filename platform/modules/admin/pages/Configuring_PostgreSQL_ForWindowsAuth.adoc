@@ -10,14 +10,14 @@
 [loweralpha]
 .. С сохранением оригинального регистра в имени, а именно: Sidorov.G.
 .. С использованием букв только нижнего регистра, а именно: sidorov.g.
-. В файл [.ph .filepath]`pg_hba.conf` добавьте строки:
+. В файл `pg_hba.conf` добавьте строки:
 +
 [source,pre,codeblock]
 ----
 host all all all sspi map=mymap
 host all all all md5
 ----
-. В файл [.ph .filepath]`pg_ident.conf` добавьте строки сопоставления пользователей Windows с пользователями СУБД, созданными на шаге 1:
+. В файл `pg_ident.conf` добавьте строки сопоставления пользователей Windows с пользователями СУБД, созданными на шаге 1:
 +
 [source,pre,codeblock]
 ----

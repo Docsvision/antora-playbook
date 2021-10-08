@@ -104,5 +104,5 @@ image::AddDbToFulltextIndexingElasticEnable.png[Общие настройки и
 . Если в Elasticsearch специальным образом настроена безопасность, предоставьте учетной записи сервиса полнотекстового индексирования полный доступ к Elasticsearch.
 . Перезапустите сервер {dv} (пул приложений "DocsVision" или IIS) и сервис полнотекстового индексирования (службу "{dv} 5.5 Full-text indexing Service").
 
-Чтобы убедиться, что индексирование с Elasticsearch работает, перейдите (подождать 5 минут после выполнения шага 12) по адресу [.ph .filepath]`http://elastic.company.com:9200/_search?filter_path=hits.total`. В поле `total` должно отображаться число больше нуля.
+Чтобы убедиться, что индексирование с Elasticsearch работает, перейдите (подождать 5 минут после выполнения шага 12) по адресу `http://elastic.company.com:9200/_search?filter_path=hits.total`. В поле `total` должно отображаться число больше нуля.
 

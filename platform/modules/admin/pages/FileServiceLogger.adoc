@@ -3,17 +3,17 @@
 Работа файлового сервиса {dv} (служба FileService) протоколируется со следующими параметрами по умолчанию:
 
 * если для сервера {dv} включено протоколирование работы:
-** файл журнала: [.ph .filepath]`<Папка для журналов сервера {dv}>\FileService.log`;
-** уровень логирования: [.ph .filepath]`<уровень логирования сервера>`;
+** файл журнала: `<Папка для журналов сервера {dv}>\FileService.log`;
+** уровень логирования: `<уровень логирования сервера>`;
 * если для сервера {dv} НЕ включено протоколирование работы:
-** файл журнала: [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\FileService.log`.
+** файл журнала: `C:\Program Files (x86)\{dv}\Platform\5.5\FileService.log`.
 ** уровень логирования: только ошибки.
 
 Для изменения настроек:
 
 . Добавьте в реестр ОС сервера {dv} параметры:
-* [.ph .filepath]`HKLM\SOFTWARE\DocsVision\Platform\5.5\Server\FileServiceLogFile` – полный путь с именем файла журнала; тип параметра – строковый;
-* [.ph .filepath]`HKLM\SOFTWARE\DocsVision\Platform\5.5\Server\FileServiceTraceLevel` – уровень логирования; тип параметра – DWORD32. Возможные уровни логирования:
+* `HKLM\SOFTWARE\DocsVision\Platform\5.5\Server\FileServiceLogFile` – полный путь с именем файла журнала; тип параметра – строковый;
+* `HKLM\SOFTWARE\DocsVision\Platform\5.5\Server\FileServiceTraceLevel` – уровень логирования; тип параметра – DWORD32. Возможные уровни логирования:
 ** 1 – только ошибки;
 ** 3 – ошибки и информационные сообщения.
 . Перезапустите файловый сервис {dv}.

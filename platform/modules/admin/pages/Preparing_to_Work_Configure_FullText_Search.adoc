@@ -25,13 +25,13 @@
 * Результаты поиска в Elasticsearch могут содержать записи, не полностью совпадающие со словами поисковой фразы (менее жесткий поиск, чем в SQL Server). Например, при поиске по фразе "исходящ ном2", результат может содержать записи "Исходящий номер1", "Исходящий номер2" и т.п.
 * В некоторых вариантах поисковой фразы Elasticsearch может не возвращать результаты.
 . Полнотекстовый поиск по содержимому файлов карточек поддерживается только для файлов:
-* при использовании встроенной в Microsoft SQL Server система поискаlink:#fntarg_1[^1^]: PDF и файлы Microsoft Office;
+* при использовании встроенной в Microsoft SQL Server система поискаxref:#fntarg_1[^1^]: PDF и файлы Microsoft Office;
 * при использовании системы полнотекстового поиска "Elasticsearch"xref:#fntarg_2[^2^]: PDF, файлы Microsoft Office (DOCX, DOC, XLSX, XLS, PPTX, PPT, RTF), HTML и TXT.
 . При настройке любой системы полнотекстового поиска, выбирайте для индексации не поля _Регистрационный номер_, _Исходящий номер_ в секции _Основная информация_, а секцию _Номера_, когда необходимо проиндексировать номер документа.
 +
 В прочих карточках необходимо следовать схожей логике: проверять наличие похожей секции и при необходимости выбирать её.
 
-* *link:../topics/ConfigureFulltextSQLServer.adoc[Подключение полнотекстового поиска Microsoft SQL Server]* +
+* *xref:../topics/ConfigureFulltextSQLServer.adoc[Подключение полнотекстового поиска Microsoft SQL Server]* +
 * xref:ConfigureFulltextElastic.adoc[Подключение полнотекстового поиска Elasticsearch]* +
 * xref:FullText_Search_Service_Edit_Settings.adoc[Изменение настроек полнотекстового поиска]* +
 * xref:DetachDbFromFulltextService.adoc[Отключение полнотекстового индексирования]* +
@@ -40,6 +40,6 @@
 * xref:FulltextLogConfiguration.adoc[Протоколирование работы сервиса полнотекстового индексирования]* +
 
 
-link:#fnsrc_1[^1^] Должен быть установлены компоненты Microsoft Office 2010 Filter Packs и Adobe PDF IFilter 11.0.1.
+xref:#fnsrc_1[^1^] Должен быть установлены компоненты Microsoft Office 2010 Filter Packs и Adobe PDF IFilter 11.0.1.
 
-link:#fnsrc_2[^2^] Должно быть установлено расширение "Ingest Attachment Processor" для Elasticsearch
+xref:#fnsrc_2[^2^] Должно быть установлено расширение "Ingest Attachment Processor" для Elasticsearch

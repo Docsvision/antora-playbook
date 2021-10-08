@@ -1,8 +1,59 @@
 = Установка серверной части модуля
 
+== Подготовка к установке
+
+. Проверьте, включены ли следующие роли и компоненты при помощи _Мастера добавления ролей и компонентов_:
++
+Роли:
+* Storage Services / Службы хранилища;
+* Default Document / Документ по умолчанию;
+* Directory Browsing / Просмотр каталога;
+* HTTP Errors / Ошибки HTTP;
+* Static Content / Статическое содержимое;
+* HTTP Redirection / Перенаправление HTTP;
+* HTTP Logging / Ведение журнала HTTP;
+* Static Content Compression / Сжатие статического содержимого;
+* Request Filtering / Фильтрация запросов;
+* Windows Authentication / Проверка подлинности Windows;
+* Basic Authentication / Обычная проверка подлинности;
+* .NET Extensibility 3.5;
+* .NET Extensibility 4.6 (или выше);
+* ASP.NET 4.6 (или выше);
+* ISAPI Extensions / Расширения ISAPI;
+* ISAPI Filters / Фильтры ISAPI;
+* IIS Management Console / Консоль управления IIS;
+* IIS 6 Metabase Compatibility / Совместимость конфигурации метабазы;
+* IIS 6 Management Console / Консоль управления IIS 6.
++
+Компоненты:
+* .NET Framework 3.5;
+* .NET Framework 4.7footnote:[Microsoft .NET Framework 4.6.1, если не требуется поддержка СУБД PostgreSQL] (или выше);
+* ASP.NET 4.6 (или выше);
+* HTTP Activation / Активация по HTTP;
+* TCP Port Sharing / Совместное использование портов TCP.
++
+Подробная инструкция по добавлению ролей и компонентов доступна в интернете:
+* https://docs.microsoft.com/ru-ru/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features#see-also[Для Windows Server.]
+* https://www.windowscentral.com/how-manage-optional-features-windows-10[Для других версий Windows.]
+. Убедитесь, что в Windows существует группа безопасности *IIS_IUSRS* (создается при установке IIS). Если такой группы нет, создайте её самостоятельно и добавьте в неё пользователей: NETWORK SERVICE, SERVICE, SYSTEM, IUSR.
+. Отключите контроль учетных записей (UAC) следующим образом:
+[loweralpha]
+.. Откройте приложение *Редактор реестра* от имени администратора.
+.. Откройте раздел `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\system`.
+.. Измените значение параметра *EnableLUA* с "1" на "0".
+.. Перезагрузите компьютер.
+. Убедитесь, что у учетной записи, под которой исполняется процесс IIS (по умолчанию, учетная запись *Network Service*), есть права на чтение следующих папок:
+* системной папки Windows для временных файлов (по умолчанию, папка `Windows\Temp`);
+* временной папки IIS `\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\`.
++
+Для восстановления прав на временные папки в ОС Windows Server 2012 (R2) выполните от имени локального администратора команду `dism.exe /Online /Enable-Feature /all /FeatureName:IIS-ASPNET45`.
+. Для Microsoft Windows Server 2016 и выше: переключите схему управления электропитанием в положение "Высокая производительность".
+
+== Установка серверной части
+
 Пользователь, выполняющий установку, должен обладать правами локального администратора.
 
-. Запустите пакет установки [.ph .filepath]`{dv} 5 Platform server.msi`.
+. Запустите пакет установки `{dv} 5 Platform server.msi`.
 +
 image::Install_s_1.png[Мастер установки серверной части модуля {pl}]
 
