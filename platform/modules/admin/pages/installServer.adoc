@@ -4,32 +4,32 @@
 
 . Проверьте, включены ли следующие роли и компоненты при помощи _Мастера добавления ролей и компонентов_:
 +
-Роли:
-* Storage Services / Службы хранилища;
-* Default Document / Документ по умолчанию;
-* Directory Browsing / Просмотр каталога;
-* HTTP Errors / Ошибки HTTP;
-* Static Content / Статическое содержимое;
-* HTTP Redirection / Перенаправление HTTP;
-* HTTP Logging / Ведение журнала HTTP;
-* Static Content Compression / Сжатие статического содержимого;
-* Request Filtering / Фильтрация запросов;
-* Windows Authentication / Проверка подлинности Windows;
-* Basic Authentication / Обычная проверка подлинности;
-* .NET Extensibility 3.5;
-* .NET Extensibility 4.6 (или выше);
-* ASP.NET 4.6 (или выше);
-* ISAPI Extensions / Расширения ISAPI;
-* ISAPI Filters / Фильтры ISAPI;
-* IIS Management Console / Консоль управления IIS;
-* IIS 6 Metabase Compatibility / Совместимость конфигурации метабазы;
+.Роли:
+* Storage Services / Службы хранилища.
+* Default Document / Документ по умолчанию.
+* Directory Browsing / Просмотр каталога.
+* HTTP Errors / Ошибки HTTP.
+* Static Content / Статическое содержимое.
+* HTTP Redirection / Перенаправление HTTP.
+* HTTP Logging / Ведение журнала HTTP.
+* Static Content Compression / Сжатие статического содержимого.
+* Request Filtering / Фильтрация запросов.
+* Windows Authentication / Проверка подлинности Windows.
+* Basic Authentication / Обычная проверка подлинности.
+* .NET Extensibility 3.5.
+* .NET Extensibility 4.6 (или выше).
+* ASP.NET 4.6 (или выше).
+* ISAPI Extensions / Расширения ISAPI.
+* ISAPI Filters / Фильтры ISAPI.
+* IIS Management Console / Консоль управления IIS.
+* IIS 6 Metabase Compatibility / Совместимость конфигурации метабазы.
 * IIS 6 Management Console / Консоль управления IIS 6.
 +
-Компоненты:
-* .NET Framework 3.5;
-* .NET Framework 4.7footnote:[Microsoft .NET Framework 4.6.1, если не требуется поддержка СУБД PostgreSQL] (или выше);
-* ASP.NET 4.6 (или выше);
-* HTTP Activation / Активация по HTTP;
+.Компоненты:
+* .NET Framework {net-v2}.
+* .NET Framework {net-v1} (или выше).
+* ASP.NET 4.6 (или выше).
+* HTTP Activation / Активация по HTTP.
 * TCP Port Sharing / Совместное использование портов TCP.
 +
 Подробная инструкция по добавлению ролей и компонентов доступна в интернете:
@@ -43,7 +43,7 @@
 .. Измените значение параметра *EnableLUA* с "1" на "0".
 .. Перезагрузите компьютер.
 . Убедитесь, что у учетной записи, под которой исполняется процесс IIS (по умолчанию, учетная запись *Network Service*), есть права на чтение следующих папок:
-* системной папки Windows для временных файлов (по умолчанию, папка `Windows\Temp`);
+* системной папки Windows для временных файлов (по умолчанию, папка `Windows\Temp`).
 * временной папки IIS `\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\`.
 +
 Для восстановления прав на временные папки в ОС Windows Server 2012 (R2) выполните от имени локального администратора команду `dism.exe /Online /Enable-Feature /all /FeatureName:IIS-ASPNET45`.
@@ -76,8 +76,8 @@ image::Install_s_3.png[Каталог установки серверных ко
 +
 image::Install_s_4.png[Устанавливаемые компоненты модуля {pl}]
 +
-* "Сервер приложений" – устанавливает сервер {dv}, предоставляющий точку подключения клиентам {dv}, системные карточки, программу "Консоль настройки {dv}";
-* "Сервис полнотекстового поиска" – устанавливает службу и компоненты полнотекстового поиска;
+* "Сервер приложений" – устанавливает сервер {dv}, предоставляющий точку подключения клиентам {dv}, системные карточки, программу "Консоль настройки {dv}".
+* "Сервис полнотекстового поиска" – устанавливает службу и компоненты полнотекстового поиска.
 * "Набор клиентских компонентов сервера" – устанавливает библиотеки DLL, которые необходимы базовым и дополнительным модулям и Приложениям для взаимодействия с сервером {dv}.
 
 [NOTE]
