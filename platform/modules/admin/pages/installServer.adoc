@@ -1,3 +1,5 @@
+:asp: ASP.NET 4.6
+
 = Установка серверной части модуля
 
 == Подготовка к установке
@@ -18,7 +20,8 @@
 * Basic Authentication / Обычная проверка подлинности.
 * .NET Extensibility 3.5.
 * .NET Extensibility 4.6 (или выше).
-* ASP.NET 4.6 (или выше).
+ifdef::asp[* {asp}]
+(или выше).
 * ISAPI Extensions / Расширения ISAPI.
 * ISAPI Filters / Фильтры ISAPI.
 * IIS Management Console / Консоль управления IIS.
@@ -28,13 +31,8 @@
 .Компоненты:
 * .NET Framework {net-v2}.
 * .NET Framework {net-v1} (или выше).
-
-nothing {asp}
-
-:asp: ASP.NET 4.6
-ifdef::asp[something {asp}]
-
-* ASP.NET 4.6 (или выше).
+ifdef::asp[* {asp}]
+(или выше).
 * HTTP Activation / Активация по HTTP.
 * TCP Port Sharing / Совместное использование портов TCP.
 +
