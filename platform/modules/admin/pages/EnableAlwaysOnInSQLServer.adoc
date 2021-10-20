@@ -2,8 +2,8 @@
 
 Требования для использования AlwaysOn:
 
-* Отказоустойчивый кластер Windows (https://docs.microsoft.com/ru-ru/sql/sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server[WSFC]) – MS SQL Server AlwayOn настраивается в кластере Windows, при этом экземпляры SQL Server могут быть без кластеризации;
-* Microsoft SQL Server 2014 или выше *с редакцией Enterprise Edition* – должен быть установлен на каждом узле кластера.
+* Отказоустойчивый кластер Windows (https://docs.microsoft.com/ru-ru/sql/sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server[WSFC]) -- MS SQL Server AlwayOn настраивается в кластере Windows, при этом экземпляры SQL Server могут быть без кластеризации;
+* Microsoft SQL Server 2014 или выше *с редакцией Enterprise Edition* -- должен быть установлен на каждом узле кластера.
 * Наличие Active Directory.
 
 [NOTE]
@@ -32,7 +32,7 @@
 .. В настройках Microsoft SQL Server включите использование протоколов Shared Memory, Named Pipes и TCP/IP.
 +
 image::sqlserverconfmanager.png[Настройки протоколов в конфигурации Microsoft SQL Server]
-.. Убедитесь, что в настройках службы SQL Server (в SQL Server Configuration Manager), в т.ч. и на основном сервере, указана (одна – рекомендуется) *доменная учётная запись* для запуска службы. Если указана локальная учетная запись – измените. Учётная запись должна быть включена в локальную группу безопасности "Администраторы". У учётных записей должен быть доступ к SQL Server других узлов – обычно обеспечивается использованием общей доменной записи для всех экземпляров SQL Server.
+.. Убедитесь, что в настройках службы SQL Server (в SQL Server Configuration Manager), в т.ч. и на основном сервере, указана (одна -- рекомендуется) *доменная учётная запись* для запуска службы. Если указана локальная учетная запись -- измените. Учётная запись должна быть включена в локальную группу безопасности "Администраторы". У учётных записей должен быть доступ к SQL Server других узлов -- обычно обеспечивается использованием общей доменной записи для всех экземпляров SQL Server.
 +
 image::sqlserverconfmanagerlogon.png[Настройки службы SQL Server]
 . На всех узлах в настройках службы Microsoft SQL Server (в SQL Server Configuration Manager) включите поддержку AlwaysOn.

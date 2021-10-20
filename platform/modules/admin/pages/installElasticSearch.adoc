@@ -1,0 +1,101 @@
+= Установка системы полнотекстового поиска Elasticsearch
+
+Систему полнотекстового поиска Elasticsearch нужно устанавливать, если: планируется использовать функцию полнотекстового поиска по содержимому карточек и будет использоваться СУБД PostgreSQL. Если планируется использоваться СУБД Microsoft SQL, можно также использовать Elasticsearch или встроенную функцию полнотекстового поиска Microsoft SQL.
+
+Elasticsearch может быть установлен на любой компьютер организации, который удовлетворяет требованиям данной системы полнотекстового поиска.
+
+. Загрузите систему Elasticsearch по https://www.elastic.co/downloads/past-releases/elasticsearch-7-9-0[ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
++
+Рекомендуемая версия: Elasticsearch 7.9.
++
+. Создайте папку `hunspell` с подпапками
+`en_US` и `ru-RU` в директории
+`C:\ProgramData\Elastic\Elasticsearch\config`.
+. Сохраните словари Hunspell для Elasticsearch версии 7.9 в папки на компьютере, созданные на предыдущем шаге.
++
+Словари необходимы для индексации с учетом морфологии.
++
+.. Откройте указанные ниже файлы в браузере:
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff]
+.. Вызовите контекстное меню в окне браузера и выберите пункт _Сохранить как..._
++
+.Сохранить как для файла "ru_RU.aff"
+image::saveAs.png[Сохранить как для файла]
++
+.. В открывшемся окне проводника проверьте путь до папки и имя файла, затем нажмите *Сохранить*.
++
+.Путь до папки:
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru-RU` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\en-US` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff].
++
+[WARNING]
+====
+Расширение файлов должно быть `.dic` и
+`.aff`, тип файла должен быть _Все
+файлы_.
+
+Не выбирайте тип файла _Текстовый
+документ_ и не указывайте в имени файла расширение
+`.txt`.
+====
++
+.Сохранение файла "ru_RU.dic"
+image::savingAs.png[Сохранение файла]
++
+. Перезапустите Elasticsearch .
++
+От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install file:///%%path-to-ingest-attachment-7.9.0.zip%%`.
++
+`%%path-to-ingest-attachment-7.9.0.zip%%` необходимо заменить на путь загрузки компонента.
++
+. Если система Elasticsearch установлена отдельно от сервера {dv}, настройте прослушивание публичного адреса.
++
+По умолчанию Elasticsearch прослушивает только локальный адрес `localhost`, делая невозможным подключение сервиса полнотекстового индексирования {dv}.
++
+.Чтобы настроить прослушивание публичного адреса, выполните следующие действия:
++
+.. Откройте конфигурационный файл Elasticsearch: `C:\ProgramData\Elastic\Elasticsearch\config\elasticsearch.yml`.
+.. Добавьте в конец файла строку:
++
+[source,yaml]
+----
+network.host: ${HOSTNAME}
+----
++
+.. Сохраните изменения.
++
+CAUTION: Если не установлены дополнительные меры ограничения, данные полнотекстового индексирования станут публичными.
++
+. Перезапустите службу Elasticsearch.
+. Проверьте доступность системы Elasticsearch.
++
+Откройте в веб-браузере (на компьютере с Elasticsearch, если прослушивается только локальный адрес, или на любом другом компьютере, если прослушивается публичный адрес) страницу `http://Elasticsearch-address:9200`.
++
+Должна отобразиться информация о системе Elasticsearch:
++
+[source,json]
+----
+{
+  "name" : "elastic.company.com",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "H9LHsBYIQMeEZsCytXOIbQ",
+  "version" : {
+    "number" : "5.5.0",
+    "build_hash" : "260387d",
+    "build_date" : "2017-06-30T23:16:05.735Z",
+    "build_snapshot" : false,
+    "lucene_version" : "6.6.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+----
++
+Журнал работы системы располагается в папке `C:\ProgramData\Elastic\Elasticsearch\logs`.
++
+[NOTE]
+====
+Включение функции полнотекстового поиска в {dv} рассмотрено в пункте xref:Preparing_to_Work_Configure_FullText_Search.adoc[Настройка полнотекстового поиска].
+====

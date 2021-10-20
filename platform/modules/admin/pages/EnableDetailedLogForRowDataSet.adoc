@@ -8,7 +8,7 @@
 
 . Выполните в БД {dv} запрос:
 +
-[source,pre,codeblock]
+[source]
 ----
 declare @val bit = 1;
 exec dvsys_setting_set N'RowSetDataDetailedLogEnabled', @val;
@@ -18,7 +18,7 @@ go
 
 Для отключения сервера выполните скрипт, изменив значение `bit` на 0, и перезапустите сервер {dv}:
 
-[source,pre,codeblock]
+[source]
 ----
 declare @val bit = 0;
 exec dvsys_setting_set N'RowSetDataDetailedLogEnabled', @val;
