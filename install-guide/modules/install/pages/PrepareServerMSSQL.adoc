@@ -1,0 +1,18 @@
+[[ariaid-title1]]
+== Настройка СУБД Microsoft SQL Server
+
+См. Сервер Microsoft SQL Server, на котором будет размещаться база данных Docsvision, должен быть настроен специальным образом.
+
+. [.ph .cmd]#Переключите режим аутентификации (Authentication) СУБД в положение [.keyword .parmname]_SQL Server and Windows_ или [.keyword .parmname]_Windows_.#
+. [.ph .cmd]#Отключите опцию «Case sensitive collation».#
+. [.ph .cmd]#Убедитесь, что на компьютере с СУБД и на компьютере, на который устанавливается серверная часть Модуля, синхронизированы время и часовой пояс.#
+. [.ph .cmd]#В настройках Microsoft SQL Server установите параметры [.keyword .parmname]_remote access_ и [.keyword .parmname]_remote admin connections_ в значение «1».#
++
+[NOTE]
+====
+[.note__title]#Note:# Проверить текущие настройки можно, выполнив процедуру [.keyword]*sp_configure*.
+====
+. [.ph .cmd]#Включите параметр конфигурации сервера [.keyword .parmname]_xp_cmdshell_. Инструкция на странице http://msdn.microsoft.com/ru-ru/library/ms190693.aspx.#
+. [.ph .cmd]#Убедитесь, что на сервере с Microsoft SQL Server открыт порт [.keyword]*1433* для подключения к СУБД.#
+
+*Parent topic:* xref:../topics/PrepareServer.adoc[Предварительная настройка]

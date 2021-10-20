@@ -1,0 +1,17 @@
+[[ariaid-title1]]
+== Отключение клиентского кэширования на сервере Docsvision
+
+Рекомендуется отключить кэширование карточек и файлов на компьютере с сервером Docsvision, для избежания переполнения клиентского кэша из-за работы СУБП, следствием чего может стать замедление обработки БП.
+
+. [.ph .cmd]#Откройте [.dfn .term]_Редактор реестра_.#
+. [.ph .cmd]#Перейдите к ветке [.ph .filepath]`HKLM\SOFTWARE\DocsVision\Platform\5.5\ObjectManager`.#
++
+Если раздел ObjectManager отсутствует, создайте его самостоятельно.
+. [.ph .cmd]#Создайте или измените параметр `CacheMode`:#
++
+* Тип: [.keyword]*DWORD*
+* Значение: [.keyword]*4*
+. [.ph .cmd]#Повторите шаги 2-3 для ветки [.ph .filepath]`HKLM\SOFTWARE\Wow6432Node\DocsVision\Platform\5.5\ObjectManager`.#
+. [.ph .cmd]#Перезапустите службу «Docsvision 5.5 Workflow Server».#
+
+*Parent topic:* xref:../topics/InstallandConfigServer.adoc[Установка и настройка сервера Docsvision]

@@ -1,0 +1,15 @@
+[[ariaid-title1]]
+== Настройка СУБД PostgreSQL
+
+. [.ph .cmd]#Установите часовой пояс в настройках PostgreSQL:#
+[loweralpha]
+.. [.ph .cmd]#Откройте конфигурационный файл [.ph .filepath]`C:\Program Files\PostgresPro\12\data\postgresql.conf` (используйте свой путь установки PostgreSQL).#
+.. [.ph .cmd]#Измените значение параметров:#
++
+* «timezone» на «Europe/Moscow»,
+* «lc_messages» на «en_US.UTF-8».
+.. [.ph .cmd]#Сохраните изменения.#
+. [.ph .cmd]#Установите службу PgAgent. Пример установки службы приведён в руководстве администратора модуля «Docsvision 5. Платформа», пункт «Установка службы PgAgent».#
+. [.ph .cmd]#Если для подключения к PostgreSQL планируется использовать аутентификацию Windows, необходима дополнительная настройка СУБД. Обратитесь к руководству администратора модуля «Docsvision5. Платформа».#
+
+*Parent topic:* xref:../topics/PrepareServer.adoc[Предварительная настройка]
