@@ -1,28 +1,24 @@
-[[ariaid-title1]]
-== Установка и настройка системы Docsvision
+= Установка и настройка системы {dv}
 
-Для установки системы Docsvision, следуйте пунктам, приведённым в данном разделе. Обратите внимание, что здесь приведена обобщенная инструкция по установке модулей системы Docsvision. За более подробной инструкцией обратитесь к руководству администратора соответствующего устанавливаемого модуля.
+Для установки системы {dv}, следуйте пунктам, приведённым в данном разделе. Обратите внимание, что здесь приведена обобщенная инструкция по установке модулей системы {dv}. За более подробной инструкцией обратитесь к руководству администратора соответствующего устанавливаемого модуля.
 
-. Выполните xref:InstallSetupDV.adoc[предварительную настройку] среды установки сервера Docsvision: xref:PrepareServerOS.adoc[операционной системы], xref:PrepareServerIIS.adoc[IIS] и СУБД (xref:PrepareServerMSSQL.adoc[Microsoft SQL Server] или xref:PrepareServerPostgreSQL.adoc[PostgreSQL]).
-. Установите серверные компоненты базовых модулей Docsvision в следующем порядке:
+. Выполните xref:InstallSetupDV.adoc[предварительную настройку] среды установки сервера {dv}: xref:PrepareServerOS.adoc[операционной системы], xref:PrepareServerIIS.adoc[IIS] и СУБД (xref:PrepareServerMSSQL.adoc[Microsoft SQL Server] или xref:PrepareServerPostgreSQL.adoc[PostgreSQL]).
+. Установите серверные компоненты базовых модулей {dv} в следующем порядке:
 [loweralpha]
-.. xref:InstallServerPlatform.adoc[«Платформа»] (*должен быть установлен первым*),
-.. xref:InstallServerBackoffice.adoc[«Базовые Объекты»],
-.. «Управление процессами»,
-.. «Управление Документами»,
-.. «Конструктор Согласований»,
-.. «Делопроизводство 4.5»,
-.. «Windows-клиент».
-. xref:FirstConfigServer.adoc[Настройте сервер Docsvision].
-. xref:ConfDocsvisionSite.adoc[Измените настройки сайта] с веб-приложением сервера Docsvision и xref:DisableClientCache.adoc[отключите кэширование].
-. xref:ConfigServiceAccounts.adoc[Предоставьте права учётным записям] сервисов Docsvision.
+.. xref:InstallServerPlatform.adoc["Платформа"] (*должен быть установлен первым*),
+.. xref:InstallServerBackoffice.adoc["Базовые Объекты"],
+.. "Управление процессами",
+.. "Управление Документами",
+.. "Конструктор Согласований",
+.. "Делопроизводство 4.5",
+.. "Windows-клиент".
+. xref:firstLaunch.adoc[Настройте сервер {dv}].
+. xref:Conf{dv}Site.adoc[Измените настройки сайта] с веб-приложением сервера {dv} и xref:DisableClientCache.adoc[отключите кэширование].
+. xref:ConfigServiceAccounts.adoc[Предоставьте права учётным записям] сервисов {dv}.
 . Для установки Windows-клиента, установите xref:InstallWinClient.adoc[клиентские компоненты модулей]. Компоненты могут быть установлены в автоматическом или ручном режиме. В последнем случае важна последовательность установкиlink:#fntarg_1[^1^]:
 [loweralpha]
 .. Платформа
 .. Windows-клиент.
 
-* *xref:../topics/PrepareServer.adoc[Предварительная настройка]* +
-* *xref:../topics/InstallandConfigServer.adoc[Установка и настройка сервера Docsvision]* +
-* *xref:../topics/InstallWinClient.adoc[Установка Windows-клиента]* +
-
+* xref:../topics/PrepareServer.adoc[Предварительная настройка].* xref:../topics/InstallandConfigServer.adoc[Установка и настройка сервера {dv}].* xref:../topics/InstallWinClient.adoc[Установка Windows-клиента].
 link:#fnsrc_1[^1^] Остальные модули будут установлены автоматически в случае запуска Windows-клиента.
