@@ -2,7 +2,7 @@
 
 . Отключите контроль учетных записей (UAC) следующим образом:#
 [loweralpha]
-.. В Редакторе реестра измените значение параметра [.ph .filepath]`HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA` на "0".
+.. В Редакторе реестра измените значение параметра `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\EnableLUA` на "0".
 .. Перезагрузите компьютер.
 . Проверьте, включены ли следующие роли и компоненты при помощи _Мастера добавления ролей и компонентов_:#
 +
@@ -42,6 +42,6 @@
 . Убедитесь, что в списке локальных пользователей и групп Windows существует группа пользователей [.keyword]*IIS_IUSRS* (создается при установке IIS). Если данная группа не существует, создайте её самостоятельно и добавьте в неё пользователей: NETWORK SERVICE, SERVICE, SYSTEM, IUSR.
 . IIS по умолчанию исполняется с правами учетной записи [.keyword]*Network Service*. Данная учётная запись должна иметь права на чтение и запись для следующих папок (задаётся через свойства папки):#
 +
-* системная папка Windows для временных файлов (по умолчанию, папка [.ph .filepath]`Windows\Temp`);
-* временная папка IIS [.ph .filepath]`\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\`.
+* системная папка Windows для временных файлов (по умолчанию, папка `Windows\Temp`);
+* временная папка IIS `\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\`.
 . Для Microsoft Windows Server 2016 и выше: переключите схему управления электропитанием в положение "Высокая производительность".

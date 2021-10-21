@@ -3,13 +3,13 @@
 Рекомендуется отключить кэширование карточек и файлов на компьютере с сервером {dv}, для избежания переполнения клиентского кэша из-за работы СУБП, следствием чего может стать замедление обработки БП.
 
 . Откройте _Редактор реестра_.
-. Перейдите к ветке [.ph .filepath]`HKLM\SOFTWARE\{dv}\Platform\5.5\ObjectManager`.
+. Перейдите к ветке `HKLM\SOFTWARE\{dv}\Platform\5.5\ObjectManager`.
 +
 Если раздел ObjectManager отсутствует, создайте его самостоятельно.
 . Создайте или измените параметр `CacheMode`:#
 +
 * Тип: [.keyword]*DWORD*
 * Значение: [.keyword]*4*
-. Повторите шаги 2-3 для ветки [.ph .filepath]`HKLM\SOFTWARE\Wow6432Node\{dv}\Platform\5.5\ObjectManager`.
+. Повторите шаги 2-3 для ветки `HKLM\SOFTWARE\Wow6432Node\{dv}\Platform\5.5\ObjectManager`.
 . Перезапустите службу "{dv} 5.5 Workflow Server".
 
