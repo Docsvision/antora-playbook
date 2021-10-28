@@ -53,7 +53,7 @@ public class DocumentWasSent : IWorkerTask
     }
 }
 ----
-<.> Получения пользовательской сессии {dv}. РП должно быть доступно _Подключение_ с типом `UserSession`.
+<.> Получения пользовательской сессии {dv}. _Подключение_ с типом `UserSession` должно быть доступно {of-ws}.
 <.> Получение и изменение карточки.
 
 Конструктор класса `DocumentWasSent` принимает объект Поставщик сервисов и идентификатор карточки, в которой меняется значение поля `WasSent`.
@@ -123,7 +123,7 @@ public class SomeTaskFactory : IWorkerTaskFactory, IInitializeWithServiceProvide
 .Значение "SomeTaskFactory" в созданном разделе
 image::taskRegistry.png[Значение "SomeTaskFactory" в созданном разделе]
 +
-. Создайте `Роль рабочего процесса`, через которую РП будет получать расширение `SomeTaskFactory`:
+. Создайте `Роль {of-ws}`, через которую is-ws} будет получать расширение `SomeTaskFactory`:
 +
 .. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithSTask`.
 +
@@ -132,7 +132,7 @@ image::taskRegistry.png[Значение "SomeTaskFactory" в созданном
 .Добавление нового параметра
 image::taskRoleRegistry.png[Добавление нового параметра]
 +
-. Зарегистрируйте экземпляр РП с _Ролью_ `RoleWithSTask`.
+. Зарегистрируйте экземпляр {of-ws} с _Ролью_ `RoleWithSTask`.
 +
 .. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpSTask`.
 +
