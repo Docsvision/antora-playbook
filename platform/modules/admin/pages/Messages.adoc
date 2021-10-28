@@ -8,7 +8,6 @@
 |Текст сообщения |Описание сообщения |Возможные действия
 |Не удалось разобрать SOAP сообщение, полученное от сервера. |Может возникать при создании, обновлении базы данных. При этом сайт и пул работают. |Перерегистрируйте ASP.NET командой: `dism.exe /Online /Enable-Feature /all /FeatureName:IIS-ASPNET45` (для Windows Server 2012 (R2)).
 
-
 |Процедура работы с данными ссылается на несуществующую таблицу или объект.
 
 Invalid object name 'tempdb.dbo. dvsys_session_objects'. Could not use view or function 'dbo.dvview_cursors' because of binding errors.
@@ -20,17 +19,14 @@ Invalid object name 'tempdb.dbo. dvsys_session_objects'. Could not use view or f
 |There are no free activations for specified license. |Данная ошибка может возникать при активации лицензии {dv}, если превышено максимальное количество активаций (по умолчанию -- одна). |Обратитесь в коммерческий отдел {dv} для увеличения допустимого количества активаций. Адрес электронной почты коммерческого отдела: sales@docsvision.com.
 |Execution Timeout Expired. |Может возникать при работе в "Консоли настройки {dv}" после изменения настроек хранения служебных таблиц, если установленное время применения изменений было превышено. |См. блок доп. информации в пункте xref:DBTempTables.adoc[Настройка размещения служебных таблиц].
 
-
 |It was not possible to connect to the redis server(s).
 
 No connection is available to service this operation.
 
 
-
 |Может фиксироваться в журнале сервера, если невозможно подключиться к кэш-серверу Redis.
 
 Также фиксируются при плановом перезапуске Redis, если сервера {dv} включены.
-
 
 
 |Проверьте, что сервер Redis доступен с сервера {dv} (воспользуйтесь функцией "Тест" на странице xref:serverConsoleDataBaseConfiguration.adoc#caching[Настройки кэширования]).
