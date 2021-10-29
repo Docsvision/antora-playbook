@@ -18,7 +18,7 @@ image::configMasterLicense.png[Мастер настройки {dv}]
 ====
 Подробнее про активацию можно прочитать xref:platform:admin:activation.adoc[здесь].
 
-В случае отсутствия интернет-подключения воспользуйтесь xref:platform:admin:activation.adoc#offlineActivation[офлайн-активацией].
+В случае отсутствия интернет-подключения воспользуйтесь xref:platform:admin:manageLicenses.adoc#offlineActivation[офлайн-активацией].
 ====
 +
 . На странице _Требования к системе_ ознакомьтесь с результатами проверки требований {dv} к системе.
@@ -52,14 +52,14 @@ image::configMasterRequirements.png[Проверка основных требо
 .Подключение базы данных
 image::configMasterSql.png[Подключение базы данных]
 +
-* Создайте новую БД: xref:platform:admin:CreateDatabase.adoc[Создание новой базы данных {dv}].
+* Создайте новую БД: xref:platform:admin:dataBaseСreateNew.adoc[Создание новой базы данных {dv}].
 +
 Перед созданием новой БД ознакомьтесь подробно с требованиями к СУБД в xref:platform:ROOT:requirementsDatabase.adoc[соответствующем разделе].
 +
-* Подключите уже существующую БД: xref:platform:admin:AttachDatabase.adoc[Подключение к серверу {dv} существующей базы данных].
+* Подключите уже существующую БД: xref:platform:admin:dataBaseConnect.adoc[Подключение к серверу {dv} существующей базы данных].
 // end::dbase[]
 +
-В данном разделе приводится обобщённая инструкция по созданию БД, подробная инструкция приведена xref:platform:admin:CreateDatabase.adoc[по ссылке].
+В данном разделе приводится обобщённая инструкция по созданию БД, подробная инструкция приведена xref:platform:admin:dataBaseСreateNew.adoc[по ссылке].
 +
 ****
 [lowerroman]
@@ -79,7 +79,7 @@ image::configMasterSqlServer.png[Создание новой БД {dv}]
 +
 [TIP]
 ====
-Особенности работы через SQL- и Windows-аутентификацию см. по xref:platform:admin:WindowsAccountSingularity.adoc[ссылке].
+Особенности работы через SQL- и Windows-аутентификацию см. по xref:platform:admin:dataBaseAuthentication.adoc[ссылке].
 ====
 +
 .. На странице _Базы данных. Создание_ укажите имя создаваемой БД.
@@ -88,8 +88,8 @@ image::configMasterSqlServer.png[Создание новой БД {dv}]
 image::configMasterSqlCreate.png[Создание новой БД через мастер настройки {dv}]
 +
 * Не используйте кириллицу, пробелы и спецсимволы в имени БД.
-* Для БД Microsoft SQL Server в поле _Язык_ выберите локаль БД, установленную в параметре _Server Collation_ экземпляра Microsoft SQL Server. Рекомендуемое значение: Русский  (Cyrillic_General_CI_AS).
-* При выборе СУБД Microsoft SQL Server также можно настроить сателлитные БД. Больше информации о сателлитных БД xref:platform:admin:DBExternalTables.adoc[по ссылке].
+* Для БД Microsoft SQL Server в поле _Язык_ выберите локаль БД, установленную в параметре `Server Collation ()` экземпляра Microsoft SQL Server. Рекомендуемое значение: Русский  (Cyrillic_General_CI_AS).
+* При выборе СУБД Microsoft SQL Server также можно настроить сателлитные БД. Больше информации о сателлитных БД xref:platform:admin:dataBaseSatellite.adoc[по ссылке].
 +
 WARNING: После создания БД изменять конфигурацию сателлитных БД не рекомендуется. Это может привести к потере данных.
 +
