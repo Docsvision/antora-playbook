@@ -1,8 +1,8 @@
 = Протоколирование работы сервиса полнотекстового индексирования
 
-События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле `[Каталог установки модуля {pl}]\Platform\5.5\FullTextService.Service.exe.config` в секции configuration/nlog.
+События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле `Каталог-установки модуля-{pl}\Platform\5.5\FullTextService.Service.exe.config` в секции `configuration/nlog`.
 
-[source]
+[source,xml]
 ----
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nlog-project.org/schemas/NLog.xsd NLog.xsd" autoReload="true" throwExceptions="false" internalLogLevel="Off" internalLogFile="nlog-internal.log" async="true">
@@ -20,6 +20,6 @@
 </nlog>
 ----
 
-Путь к файлу журнала указан в атрибуте `fileName` элемента `target[xsi:type="File"]`. Файл журнала по умолчанию -- `[Каталог установки модуля {pl}]\Platform\5.5\logs\\{Дата}.log`.
+Путь к файлу журнала указан в атрибуте `fileName` элемента `target [xsi:type="File"]`. Файл журнала по умолчанию -- `Каталог-установки-модуля-{pl}\Platform\5.5\logs\%%Дата%%.log`.
 
-Дополнительная информация по настройке журналирования приведена в документации к компоненту NLog на сайте https://nlog-project.org.
+Дополнительная информация по настройке журналирования приведена в https://nlog-project.org[на сайте] компонента NLog.

@@ -1,21 +1,27 @@
-= Настройка индексирования файлов PDF и Microsoft Office
+= Настроить индексирование файлов PDF и Microsoft Office
 
 Для возможности полнотекстового поиска по содержимому файлов PDF и Microsoft Office выполните следующие действия:
 
-. Установите на компьютере с Microsoft SQL Server программы:
-* Microsoft Office 2010 Filter Packs,
+. Установите на компьютере с Microsoft SQL Server следующее ПО:
++
+* Microsoft Office 2010 Filter Packs.
 * Adobe PDF IFilter 11.0.1.
-. Внесите изменения в параметры "Переменные среды" операционной системы:
-[loweralpha]
-.. Добавьте переменную "AdobeiFilter" со значением "C:\Program Files\Adobe\Adobe PDF iFilter 11 for 64-bit platforms\bin".
 +
+. Добавьте следующие две переменных в "Переменные среды" операционной системы:
++
+- Переменную `AdobeiFilter` со значением `C:\Program Files\Adobe\Adobe PDF iFilter 11 for 64-bit platforms\bin`.
++
+.Создание переменной AdobeiFilter
 image::variablesAdobeiFilter.png[Создание переменной AdobeiFilter]
-.. Добавьте в переменную "Path" значение "%AdobeiFilter%".
 +
+- Добавьте в переменную `Path` значение `%AdobeiFilter%`.
++
+.Изменение переменной Path
 image::variablesPath.png[Изменение переменной Path]
++
 . Выполните скрипт в Microsoft SQL Server:
 +
-[source]
+[source,shell]
 ----
 EXEC sp_fulltext_service 'load_os_resources', 1;
 EXEC sp_fulltext_service 'verify_signature', 0;
