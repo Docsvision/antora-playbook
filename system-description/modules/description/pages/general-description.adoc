@@ -26,53 +26,60 @@
 [plantuml, svg]
 ....
 @startuml
+!pragma layout elk
 hide empty members
 
-package "Клиент" as client #DDDDDD {
-
+package Клиент #DDDDDD [
+{{
+    skinparam backgroundcolor transparent
+    hide empty members
     class "Windows-клиент" as wincl
     class "Web-клиент" as webc
     class "Другие клиенты" as otcl {
         +Пульс
         +Почтовый клиент
         +Прочие
-}
+    }
+    wincl << К,#FF7700 >>
+    webc << К,#FF7700 >>
+    otcl << К,#FF7700 >>
 
-}
+    wincl -[hidden]> webc
+    webc -[hidden]> otcl
+}}
+]
 
-package "Сервер" as server #DDFFFF {
+package Сервер #DDFFFF [
+{{
+    skinparam backgroundcolor transparent
+    hide empty members
     class "Сервер Docsvision" as platform
     class "СУБП" as workflow
     class "Сервис полнотекстового \nиндексирования" as fulltext
     class "Файловый сервис" as fileservice
-}
 
-package "Данные" as data #AAFFFF {
+    platform << С,#DD9955 >>
+    workflow << С,#DD9955 >>
+    fulltext << С,#DD9955 >>
+    fileservice << С,#FF9900 >>
+
+    platform -[hidden]-> workflow
+    platform -[hidden]> fulltext
+    fulltext -[hidden]> fileservice
+}}
+]
+
+package Данные #AAFFFF [
+{{
+  skinparam backgroundcolor transparent
+  hide empty members
   class "СУБД" as db
-}
+  db << Д,#5570dd >>
+}}
+]
 
-wincl << К,#FF7700 >>
-webc << К,#FF7700 >>
-otcl << К,#FF7700 >>
-
-wincl -[hidden]> webc
-webc -[hidden]> otcl
-client -[hidden]-> server
-server -[hidden]-> data
-
-platform -[hidden]-> workflow
-platform -[hidden]> fulltext
-fulltext -[hidden]> fileservice
-
-platform << С,#DD9955 >>
-workflow << С,#DD9955 >>
-fulltext << С,#DD9955 >>
-fileservice << С,#FF9900 >>
-
-db << Д,#5570dd >>
-
-client -down[hidden]-> server
-server -down[hidden]-> data
+Клиент -[hidden]--> Сервер
+Сервер -[hidden]--> Данные
 @enduml
 ....
 
@@ -172,11 +179,11 @@ image::interactionScheme.png[]
 [plantuml, svg]
 ....
 @startuml
-database "База Данных"
+database "\nБаза Данных\n"
 
 package "Сервер Docsvision" as server {
     [Служба \nDocsvision 5.5 Storage Server]
-    [Web-сервис Docsvision в IIS]
+    [Web-сервис \nDocsvision в IIS]
 }
 
 component "Внешнее файловое хранилище" as ext
