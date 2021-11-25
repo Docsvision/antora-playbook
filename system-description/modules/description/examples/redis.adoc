@@ -1,0 +1,25 @@
+.Конфигурация {dv} с внешними хранилищами и Redis
+[plantuml, svg]
+....
+@startuml
+hide empty members
+
+package "Данные" as data #AAFFFF {
+    class "СУБД" as db
+    class "Внешние файловые хранилища" as ext ##[dashed] {
+        +Хранилище 1
+        +Хранилище 2
+        +Хранилище N
+}
+    class "Кэш-сервер Redis" as redis
+}
+
+db -[hidden]> ext
+ext -[hidden]> redis
+
+db << Д,#5570dd >>
+ext << Д,#5570dd >>
+redis << Д,#5570dd >>
+
+@enduml
+....

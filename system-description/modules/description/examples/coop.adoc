@@ -1,0 +1,39 @@
+.Схема взаимодействия основных элементов Системы
+[plantuml, svg]
+....
+@startuml
+
+skinparam databaseBackgroundColor Aqua
+
+database "\nБаза Данных\n" as db
+
+package "Сервер Docsvision" as server {
+    node "Служба \nDocsvision 5.5 Storage Server" as sss
+    node "Web-сервис \nDocsvision в IIS" as iis
+}
+
+storage "Внешнее файловое хранилище" as ext
+
+node "Файловый сервис (Служба \nDocsvision 5.5 File Service)" as fileservice
+
+node "Сервис полнотекстового \nиндексирования (Служба \nDocsvision 5.5 Full-text \nIndexing Service)" as fulltext
+
+node "СУБП (Служба \nDocsvision 5.5 Workflow Server)" as workflow
+
+person "Клиенты, \nработающие \nчерез SOAP" as soap
+
+person "Клиенты, \nработающие \nчерез WCF" as wcf
+
+
+db <--- fulltext
+db <- server
+db <--- fileservice
+ext <---- fileservice
+ext <-- server
+iis <--- workflow : SOAP
+sss <--- wcf: WCF
+iis <--- soap : SOAP
+iis <--- fulltext : SOAP
+iis -[hidden]> sss
+@enduml
+....

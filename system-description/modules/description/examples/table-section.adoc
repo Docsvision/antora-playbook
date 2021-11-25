@@ -1,0 +1,79 @@
+.Табличная секция
+[plantuml, svg]
+....
+@startuml
+
+package Строка1 [
+{{
+hide empty members
+hide circles
+
+class "Поле 1" as f1l1 {
+ +Значение 1
+}
+class "Поле 2" as f2l1 {
+ +Значение 2
+}
+class "Поле 3" as f3l1 {
+ +Значение 3
+}
+class "Поле 4" as f4l1 {
+ +Значение 4
+}
+
+f1l1 -[hidden]> f2l1
+f2l1 -[hidden]> f3l1
+f3l1 -[hidden]> f4l1
+}}
+]
+
+package Строка2 [
+{{
+hide empty members
+hide circles
+class "Поле 1" as f1l2 {
+ +Значение 5
+}
+class "Поле 2" as f2l2 {
+ +Значение 6
+}
+class "Поле 3" as f3l2 {
+ +Значение 7
+}
+class "Поле 4" as f4l2 {
+ +Значение 8
+}
+
+f1l2 -[hidden]> f2l2
+f2l2 -[hidden]> f3l2
+f3l2 -[hidden]> f4l2
+}}
+]
+
+package Строка3 [
+{{
+hide empty members
+hide circles
+class "Поле 1" as f1l3 {
+ +Значение 9
+}
+class "Поле 2" as f2l3 {
+ +Значение 10
+}
+class "Поле 3" as f3l3 {
+ +Значение 11
+}
+class "Поле 4" as f4l3 {
+ +Значение 12
+}
+
+f1l3 -[hidden]> f2l3
+f2l3 -[hidden]> f3l3
+f3l3 -[hidden]> f4l3
+}}
+]
+
+Строка1 -[hidden]-> Строка2
+Строка2 -[hidden]-> Строка3
+@enduml
+....
