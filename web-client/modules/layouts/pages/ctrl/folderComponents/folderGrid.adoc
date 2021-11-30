@@ -11,13 +11,52 @@ image::grid.png[Пример элемента управления "Карточ
 
 include::partial$properties.adoc[tags=general]
 
+=== Внешний вид
+
+[#ribbon]
+==== Использовать ленту по умолчанию
+
+Когда флаг активен, по умолчанию в представлении вместо грида будет отображаться xref:user:ribbon.adoc[лента].
+include::partial$excerpts.adoc[tags=separate]
+
+[#transparency]
+==== Непрозрачность
+
+Свойство регулирует прозрачность грида. Прозрачность может быть настроена в диапазоне от `0` до `100` (в процентах), где `0` означает максимальную прозрачность, а `100` -- максимальную непрозрачность. Значение по умолчанию -- `100`.
+
 === Поведение
 
 include::partial$properties.adoc[tags=visibility]
 
+[#group]
+==== Группировка
+
+:what: группировка разрешена
 include::partial$properties.adoc[tags=addCss]
 
+[#context]
+==== Контекстное меню включено
+
+:what: контекстное меню доступно
+Свойство регулирует доступность контекстного меню xref:user:grid.adoc[грида].
+include::partial$excerpts.adoc[tags=whenactive]
+include::partial$excerpts.adoc[tags=separate]
+
+[#sort]
+==== Сортировка
+
+:what: сортировка разрешена
+Свойство отвечает за сортировку значений в колонках грида.
+include::partial$excerpts.adoc[tags=whenactive]
+
 include::partial$properties.adoc[tags=stdCss]
+
+[#filter]
+==== Фильтрация
+
+:what: фильтрация разрешена
+Свойство отвечает за доступность фильтрации значений в гриде.
+include::partial$excerpts.adoc[tags=whenactive]
 
 include::partial$properties.adoc[tags=widthInPercent]
 
