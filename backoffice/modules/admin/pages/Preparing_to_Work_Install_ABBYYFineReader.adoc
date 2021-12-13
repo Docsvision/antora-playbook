@@ -1,0 +1,53 @@
+[[ariaid-title1]]
+== Настройка ABBYY FineReader Engine
+
+Для выполнения распознавания из карточек Модуля (в том числе для потокового ввода документов и распознавания штрих-кодов) необходимо наличие на компьютере пользователя программы «ABBYY FineReader Engine».
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для использования «ABBYY FineReader Engine» требуется лицензия, которую можно приобрести непосредственно у компании ABBYY или у компании Docsvision, обратившись по адресу [.keyword .parmname]_sales@docsvision.com_.
+====
+
+Пользовательская установка «ABBYY FineReader Engine» проводится из командной строки в тихом режиме (режим отсутствия вывода дополнительной информации и запросов на подтверждение). Для установки в таком режиме следует ввести команду `setup.exe /q`. Для ввода остальных параметров установки (серийный номер, каталог установки и др.) следует воспользоваться параметром `/v`, а затем перечислить все необходимые параметры и их значения.
+
+С учетом вышесказанного, командная строка для установки [.keyword .parmname]_ABBYY FineReader Engine_ выглядит следующим образом:
+
+[source,pre,codeblock]
+----
+setup.exe /q /v ARCH=x86 INSTALLDIR=”C:\ProgramFiles\ABBYY\” SN=XXXX-XXXX-XXXX-XXXX-XXXX
+----
+
+где:
+
+[source,pre,codeblock]
+----
+/q – запуск в silent – режиме; 
+   /v – начало параметров установки;
+   ARCH - разрядность устанавливаемой версии;
+   INSTALLDIR – каталог установки; 
+   SN – серийный номер лицензии на использование.
+----
+
+При установке без указания ключа [.keyword .parmname]_ARCH=x86_ на 64-разрядной машине используется автоматическое определение разрядности, что приводит к установке не поддерживаемой [.dfn .term]_Docsvision_ 64-разрядной версии [.keyword .parmname]_FineReader Engine_.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Перечень всех параметров установки можно найти в справке по продукту [.keyword .parmname]_ABBYY FineReader Engine_ в разделе [.keyword .parmname]_Developer’s Help→Distribution→Installing the Library→Installing the Library in Automatic Mode_.
+====
+
+[NOTE]
+====
+[.note__title]#Важное замечание:#
+
+Для корректной работы Модуля с «FineReader Engine» в GAC должны быть зарегистрированы компоненты:
+
+* [.ph .filepath]`AxInterop.FineReaderVisualComponents.dll`;
+* [.ph .filepath]`Interop.FineReaderVisualComponents.dll`;
+* [.ph .filepath]`Interop.FREngine.dll`.
+
+Перечисленные компоненты размещены в папке [.ph .filepath]`Docsvision\5.5\Client\Components` каталога установки модуля «Docsvision 5. Windows-клиент».
+====
+
+После установки [.keyword .parmname]_ABBYY FineReader Engine_ на панель инструментов окна [.keyword .wintitle]*Сканирование с распознаванием* (открывается из карточки [.dfn .term]_Документ_ при выборе в контекстном меню области вложений команды [.ph .uicontrol]*Добавить отсканированный и распознанный файл*) будут добавлены элементы управления, позволяющие редактировать полученное в результате сканирования изображение, выделять области для детального просмотра и выполнять другие операции.
+
+*На уровень выше:* xref:../pages/Administrator_functions.adoc[Функции администратора]

@@ -1,0 +1,141 @@
+[[ariaid-title1]]
+== Приложение С. XSLT-преобразование и описание исходных данных для почтового уведомления
+
+Текст стандартного XSLT-преобразования, используемого для формировании почтовых уведомлений исполнителям заданий, размещен на ресурсе GitHub в папке https://github.com/DocsVision/DeveloperItems/tree/master/xslt-templates/email-templates, файл [.ph .filepath]`EmailNotifications.xsl`.
+
+Ниже приведен пример исходных данных, к которым применяется данное преобразование, с кратким описанием.
+
+[source,pre,codeblock]
+----
+<TaskModel>
+  <Title MessageType="0" Description="Для вас создано новое задание" />
+  <SendInfo Date="понедельник, 15 апреля" StateName="Не начато" />
+  <Data>
+    <CardTask CardID="9421E319-CDB2-4A7C-A3BD-68DD301C3DC5" CardTypeID="C7B36F33-CDD4-4DA9-8444-600FE14111E4" Description="Задание на исполнение: 23" CreationDateTime="2019-04-15T10:41:32" ChangeDateTime="2019-04-15T10:42:33" Template="0" Topic="" Barcode="">
+      <MainInfo RowID="2C023862-D72F-4496-B913-8340ED2B6E3F" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="23" Author="80286BE4-E221-4AC9-AFB9-6C7F184D8466" Laboriousness="0" LaboriousnessActual="0" ChildTaskList="0E73F83E-164D-4F4D-8FEC-1FA89921E070" ReferenceList="0277B53F-F6CF-40B3-81EE-CCAE9CA38082" SignatureList="E9387AF5-EAB6-4021-960F-F9608442F9FB" PercentCompleted="0" DurationActual="0" OnControl="0" RequiresAcceptance="0" PostponementCount="0" Priority="1" StartTaskDate="2019-04-15T10:42:33.000" CreateMessages="1">
+        <SelectedPerformers>
+          <SelectedPerformersRow RowID="D9124F69-65D1-4828-B54D-419B3CC7EB04" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Employee="4157287D-A18B-45C5-BA26-F50F4CEBB3F1" />
+        </SelectedPerformers>
+        <Performers>
+          <PerformersRow RowID="5F600357-B25B-4C75-8447-5B0F9A2BEBF2" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Employee="4157287D-A18B-45C5-BA26-F50F4CEBB3F1" EmployeeDisplayString="Петров С.А." />
+        </Performers>
+      </MainInfo>
+      <System RowID="E7EB20FB-51AA-44C5-8946-C719E562FE85" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" State="56622649-8696-4C5D-9E69-BC32B5B04ED4" Kind="AB801854-70AF-4B6C-AB48-1B59B5D11AA9" />
+      <CurrentPerformers>
+        <CurrentPerformersRow RowID="35A38C24-0B15-4B4B-BD51-6F2E69EFE456" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Employee="4157287D-A18B-45C5-BA26-F50F4CEBB3F1" EmployeeDisplayString="Петров С.А." />
+      </CurrentPerformers>
+      <Presets RowID="0C6F983B-2313-4F10-BB60-403E39C8D5EC" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" AllowDelegateToAnyEmployee="1" AllowDelegateToEmployeeFromList="1" RequestCommentAtTaskRejection="1" UseBusinessCalendar="1" AllowDelegateManual="1" DelegateToDeputy="1" Initialized="1">
+        <DelegationPresets>
+          <DelegationPresetsRow RowID="3BAF4BF5-31B6-4C28-81E2-F5A6017F1461" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" SearchWord="30D6AA29-D642-49F1-9ABF-D713F995E49B" />
+          <DelegationPresetsRow RowID="70F434A6-CF24-4D4C-98DD-81DFE9D1A272" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" SearchWord="08E802EA-C060-455B-981E-14A1CFD29E7B" />
+          <DelegationPresetsRow RowID="0813F26E-AC70-415C-8A4E-3D351D9180FE" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" SearchWord="0BC4BFB0-30C8-4839-9F4B-4065D48DC546" />
+        </DelegationPresets>
+        <MainLinkTypePresets>
+          <MainLinkTypePresetsRow RowID="73EEAE64-6EFD-449B-BB0F-5A48B10F2D61" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkType="684956CB-F4C4-489E-B520-E068D9B5EAAF" CopyLink="1" />
+        </MainLinkTypePresets>
+        <AttachmentLinkTypePresets>
+          <AttachmentLinkTypePresetsRow RowID="FEB3E343-EFFC-42BE-8D03-D6385CE03646" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkType="694267FD-BA66-4E92-8CEC-57050DA9E883" CopyLink="0" />
+          <AttachmentLinkTypePresetsRow RowID="E228F2B1-D1CF-4515-92F8-137AA48E0ACE" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkType="479B49BC-E4AF-4AA5-BD53-159877692249" CopyLink="0" />
+          <AttachmentLinkTypePresetsRow RowID="AFFAD8FA-C80E-4BA1-AE15-5BFF950BA100" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkType="C28CECC8-1DA0-4832-9778-4F9DE14F7376" CopyLink="0" />
+        </AttachmentLinkTypePresets>
+        <ReportLinkTypePresets>
+          <ReportLinkTypePresetsRow RowID="EC974AE0-7B96-4276-A1BE-2CBEF7054DAB" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkType="24FD4D46-B4F8-493A-A698-1C921393D7CB" CopyLink="0" />
+        </ReportLinkTypePresets>
+        <CompletionPresets RowID="2AB33B39-FA46-4241-84DB-71F6E35D5B1B" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" ReportFileRequired="0" AutoCompletionType="0" CompleteChildren="1" DependingOnRelatedTasksCompletionType="1" ReportRequired="1" CompleteChildrenTaskGroups="0" RecallChildrenMode="0" RecallChildrenTaskGroupsMode="0" />
+        <ChildKindPresets RowID="E94F11C3-E8BE-4F42-88B5-1C659ED78C51" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" ChildTaskKindType="0" />
+        <RoutingPresets RowID="B4B7EAAE-C5C2-449F-8914-A675F5171C54" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" RoutingType="0" />
+        <GroupChildKindPresets RowID="8FD93EE1-12AB-47C2-819E-E4B0D059462F" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" ChildTaskGroupKindType="0" />
+        <TaskRouting RowID="9165620B-7AAE-4096-9C30-3B6E54ACD951" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" ShowLinkedDocumentInMessage="1" MailAttachmentsMaxSize="1000" />
+      </Presets>
+    </CardTask>
+    <RefStaff CardID="6710B92A-E148-4363-8A6F-1AA0EB18936C" CardTypeID="6710B92A-E148-4363-8A6F-1AA0EB18936C" Description="Staff directory" CreationDateTime="2019-04-12T09:11:48" ChangeDateTime="2019-04-15T10:36:22" Template="0" Topic="" Barcode="">
+      <Units>
+        <UnitsRow RowID="D3715C05-E4F4-4471-90A2-779DE541C19A" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="test" Type="0" Phone="" Fax="" Email="" Telex="" Account="" CorrespondentAccount="" BankName="" BIK="" INN="" KPP="" OKPO="" OKONH="" RootFolder="51F6D4BF-DD7F-45ED-9F55-56C863A4DB95" Comments="" CalendarID="00000000-0000-0000-0000-000000000000" FullName="" NotAvailable="0" ADsPath="" ADsNotSynchronize="0" KindSpecified="0" EmployeeKindSpecified="0" TemplateFolder="0D2414D8-15B3-4BA2-BA0E-B146E79F39E2">
+          <Employees>
+            <EmployeesRow RowID="4157287D-A18B-45C5-BA26-F50F4CEBB3F1" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" FirstName="Петров" LastName="Сергей" AccountName="company\petrov" RoomNumber="" Phone="" MobilePhone="" HomePhone="" IPPhone="" Fax="" Email="petrov@company.com" RoutingType="1" IDNumber="" IDIssuedBy="" BirthDate="1899-12-30T00:00:00.000" Comments="" CalendarID="00000000-0000-0000-0000-000000000000" Status="2" NotAvailable="0" NotSearchable="0" Gender="0" ActiveEmployee="4157287D-A18B-45C5-BA26-F50F4CEBB3F1" Importance="0" AccountSID="S-1-5-21-1200119191-682303521-433219294-4846" DisplayString="Петров С.А." ClockNumber="" IDCode="" CardEmployeeKindSpecified="0" SysAccountName="company\petrov" InactiveStatus="0" ShowCertificateWindow="1" UseThinClient="0" AskForKeyContainerPassword="0" />
+            <EmployeesRow RowID="80286BE4-E221-4AC9-AFB9-6C7F184D8466" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" FirstName="Сидоров" LastName="Павел" AccountName="company\sidorov" RoomNumber="" Phone="" MobilePhone="" HomePhone="" IPPhone="" Fax="" Email="sidorov@company.com" RoutingType="5" IDNumber="" IDIssuedBy="" BirthDate="1899-12-30T00:00:00.000" Comments="" CalendarID="00000000-0000-0000-0000-000000000000" Status="0" NotAvailable="0" NotSearchable="0" Gender="0" ActiveEmployee="80286BE4-E221-4AC9-AFB9-6C7F184D8466" Importance="0" AccountSID="S-1-5-21-1200119191-682303521-433219294-7496" DisplayString="dvwf1 d." CardEmployeeKindSpecified="0" SysAccountName="company\sidorov" ShowCertificateWindow="1" UseThinClient="0" AskForKeyContainerPassword="0" />
+          </Employees>
+        </UnitsRow>
+      </Units>
+    </RefStaff>
+    <RefKinds CardID="8F704E7D-A123-4917-94B4-F3B851F193B2" CardTypeID="8F704E7D-A123-4917-94B4-F3B851F193B2" Description="Card subtypes directory" CreationDateTime="2019-04-12T09:11:44" ChangeDateTime="2019-04-14T23:39:30" Template="0" Topic="" Barcode="">
+      <CardTypes>
+        <CardTypesRow RowID="E97923DA-1AFF-4B60-908B-EA90B1B8DB88" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" CardTypeId="C7B36F33-CDD4-4DA9-8444-600FE14111E4" HelpURL="" HelpTopic="">
+          <CardKinds>
+            <CardKindsRow RowID="2CF57906-2B3F-497E-A1BE-CEC99C8F3FCE" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="Задание" UseOwnLayouts="1" UseOwnSettings="1" NotAvailable="1" ScriptProtect="" UseOwnExtendedSettings="1" Digest="Задание &lt;xsl:value-of select=&quot;//MainInfo/@Name&quot;/&gt;" NotCreatable="1">
+              <CardKindsRow RowID="EB5A9945-4275-413D-9478-6EB76B316429" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="Задание УД" UseOwnLayouts="1" UseOwnSettings="1" NotAvailable="1" Script="8C88846D-6564-42A3-BE73-2E241B50E258" UseOwnExtendedSettings="1" NotCreatable="1">
+                <CardKindsRow RowID="AB801854-70AF-4B6C-AB48-1B59B5D11AA9" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="На исполнение" UseOwnLayouts="1" UseOwnSettings="1" NotAvailable="0" Script="11057FB3-B800-4182-A241-A5F4EA22E168" UseOwnExtendedSettings="1" Digest="Задание на исполнение: &lt;xsl:value-of select=&quot;//MainInfo/@Name&quot;/&gt;" />
+              </CardKindsRow>
+            </CardKindsRow>
+          </CardKinds>
+        </CardTypesRow>
+      </CardTypes>
+    </RefKinds>
+    <RefLinks CardID="38165FA6-FA69-4261-9EC3-675FEBB89C8B" CardTypeID="38165FA6-FA69-4261-9EC3-675FEBB89C8B" Description="Link directory" CreationDateTime="2019-04-12T09:11:45" ChangeDateTime="2019-04-12T09:25:37" Template="0" Topic="" Barcode="">
+      <LinkTypes>
+        <LinkTypesRow RowID="24FD4D46-B4F8-493A-A698-1C921393D7CB" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkName="КЗ_Отчет" DisplayName="Отчет" NotAvailable="0" />
+        <LinkTypesRow RowID="479B49BC-E4AF-4AA5-BD53-159877692249" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkName="КЗ_ДополненияСсылки" DisplayName="Ссылки" NotAvailable="0" />
+        <LinkTypesRow RowID="C28CECC8-1DA0-4832-9778-4F9DE14F7376" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkName="КЗ_ДополненияФайлы" DisplayName="Дополнительные файлы" NotAvailable="0" />
+        <LinkTypesRow RowID="684956CB-F4C4-489E-B520-E068D9B5EAAF" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkName="КЗ_Основной документ" DisplayName="Основной документ" NotAvailable="0" />
+        <LinkTypesRow RowID="694267FD-BA66-4E92-8CEC-57050DA9E883" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LinkName="КЗ_ДополненияКарточки" DisplayName="Связанные карточки" NotAvailable="0" />
+      </LinkTypes>
+    </RefLinks>
+    <RefStates CardID="443F55F0-C8AB-4DD3-BCBD-5328C7C9D385" CardTypeID="443F55F0-C8AB-4DD3-BCBD-5328C7C9D385" Description="States designer" CreationDateTime="2019-04-12T09:11:46" ChangeDateTime="2019-04-12T14:18:38" Template="0" Topic="" Barcode="">
+      <CardKindStateSettings>
+        <CardKindStateSettingsRow RowID="81DD0FD5-E20B-4269-9C5F-5945210C1EFC" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Kind="AB801854-70AF-4B6C-AB48-1B59B5D11AA9" StateMachineLayout="D907C376-7E54-4AF2-9059-FB6B3996EB60" FirstState="B32D9F4A-8A1D-4906-ADAF-451F24ADEE49">
+          <States>
+            <StatesRow RowID="56622649-8696-4C5D-9E69-BC32B5B04ED4" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" DefaultName="Started" Dynamic="1" BuiltInState="0BBDEBD9-FE01-464A-A29A-6BBA045AA112" />
+          </States>
+        </CardKindStateSettingsRow>
+      </CardKindStateSettings>
+    </RefStates>
+  </Data>
+  <LinkedDocument />
+  <Employee Id="53ff7d76-e08d-4b81-bace-580846dcc318" Email="ivanov@company.com">
+    <Hints>
+      <Deputy Employee="Иванов С.А."/>
+      <Hint Text="&lt;strong&gt;Отклонить:&lt;/strong&gt; добавьте комментарий в тексте ответного письма." />
+      <Hint Text="&lt;strong&gt;Завершить:&lt;/strong&gt; добавьте файл отчета или введите текст отчета в ответном письме. Вы можете приложить файл отчета либо добавить отчет в текст ответного письма." />
+    </Hints>
+    <Operations>
+      <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3Dfc093f09-47bf-46eb-9926-0291616386e9%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="В работу" />
+      <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3Db017c708-ee9b-4158-bb79-122de47d1428%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="Отклонить" />
+      <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D67678953-6474-46cd-9f83-ecb95a030432%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="Завершить" />
+      <Operation Link="mailto:?bcc=service@company.com&amp;subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D5c450552-fc27-4255-a247-f95bc9d3b499%26r%3DFalse%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318%26LettterMustBeIgnored%3DTrue&amp;body=Выполняется%20делегирование%20задания.%20Для%20работы%20с%20ним%20необходимо%20дождаться%20сообщения%20о%20делегировании%20от%20системы." Name="Делегировать без возврата" />
+      <Operation Link="mailto:?bcc=service@company.com&amp;subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D5c450552-fc27-4255-a247-f95bc9d3b499%26r%3DTrue%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318%26LettterMustBeIgnored%3DTrue&amp;body=Выполняется%20делегирование%20задания.%20Для%20работы%20с%20ним%20необходимо%20дождаться%20сообщения%20о%20делегировании%20от%20системы." Name="Делегировать с возвратом" />
+    </Operations>
+    <AdditionalInfo>
+      <OpenCard Link="http://docsvision.company.com/Docsvision/?CardID={9421e319-cdb2-4a7c-a3bd-68dd301c3dc5}&amp;ShowPanels=2048" />
+    </AdditionalInfo>
+  </Employee>
+</TaskModel>
+----
+
+Здесь:
+
+* Title:
+** MessageType:
+*** 0 – уведомление о новом задании;
+*** 1 – уведомление об успешном завершении операции;
+*** 2 – сообщение об ошибке;
+*** 3 – уведомление об отклонении задания;
+** Description – заголовок сообщения;
+* SendInfo:
+** Date – дата;
+** StateName – состояние карточки;
+* Data – xml карточки;
+* LinkedDocument – html связанного документа;
+* Employee – информация по сотруднику (ИД и e-mail);
+** Hints – подсказки:
+*** Deputy > Employee – замещаемый сотрудник;
+** Operations – список операций, доступных данному сотруднику с этой карточкой (для формирования кнопок);
+*** Link – ссылка для создания письма с этой операцией;
+*** Name – название операции;
+** AdditionalInfo > OpenCard – ссылка для открытия карточки в клиенте Docsvision.
+
+Получить автора и исполнителей задания можно из данных Data:
+
+* TaskModel\Data\CardTask\MainInfo\Author – автор;
+* TaskModel\Data\CardTask\MainInfo\Performers – исполнители.
+
+*Parent topic:* xref:../pages/Appendixes.adoc[Приложения]

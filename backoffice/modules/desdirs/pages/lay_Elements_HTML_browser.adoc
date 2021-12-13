@@ -1,0 +1,62 @@
+[[ariaid-title1]]
+== HTML браузер
+
+=== Назначение
+
+Элемент предназначен для отображения произвольного HTML-документа по URL-адресу, либо XML связанной карточки с (опционально) примененным XSL-преобразованием.
+
+=== Отображение в области 'Панель инструментов'
+
+ +
+image:img/lay_Element_HTML_browser.png[image] +
+
+=== Общие
+
+xref:lay_Elements_general.adoc[Общие свойства элементов управления]
+
+=== Данные
+
+Источник данных::
+  Не требует привязки к полю.
+*XSLT-преобразование*::
+  Текст XSLT, применяемого к XML-данным карточки.
+*Пользовательские данные*::
+  Предопределенный HTML-документ (используется при выборе в качестве типа содержимого пользовательского HTML); может содержать до 4000 знаков.
+*Тип содержимого*::
+  Определяет тип HTML-документа, отображаемого в элементе управления:
+  +
+  * [.keyword .parmname]_Card Data XML_ – XML данных карточки: в качестве содержимого будет использован XML-документ, содержащий данные карточки. Для использования элемента требуется написать скрипт.
+  +
+  Пример скрипта для события карточки [.keyword]*CardActivated* приведен ниже:
+
+[source,pre,codeblock]
+----
+private void Документ_CardActivated(System.Object sender, DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ var browser = (this.CardControl as ICustomizableControl).FindPropertyItem<HtmlBrowser>("BrowserName");
+ var fieldInfo = browser.GetType().BaseType.GetField("cardData", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic); 
+ fieldInfo.SetValue(browser, this.CardData);
+
+ var methodInfo = browser.GetType().BaseType.GetMethod("ReflectChanges", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+   methodInfo.Invoke(browser, null);
+}
+----
+  * [.keyword .parmname]_Custom HTML_ – пользовательский HTML: будет использоваться предопределенный HTML-документ. Для использования элемента в поле [.keyword]*Пользовательские данные* нужно указать содержимое html-документа (html-код).
+  * [.keyword .parmname]_Custom URL_ – пользовательский URL: будет отображаться HTML-страница по заданному адресу. Для использования элемента в поле [.keyword]*Пользовательские данные* нужно указать адрес html-документа (ссылку).
+*Контекстное меню*::
+  Определяет режим отображения или скрытия контекстного меню в браузере:
+  +
+  * *Да* – отображать;
+  * *Нет* – не отображать.
+
+=== Настройка локализации
+
+[#reference_ecw_plw_2m__common_properties_locale .ph]#Допускается xref:lay_Locale_common_element_properties.html[локализация [.dfn .term]_общих_ свойств] элемента. Описание настройки локализации содержится в разделе link:lay_Elements_general.adoc[Общие свойства элементов управления].#
+
+Для элемента [.keyword]*HTML браузер* может быть локализовано свойство [.keyword]*XSLT-преобразование*. Добавление локализованных названий выполняется в окне [.keyword .wintitle]*Локализация отображаемого значения*, открываемом при нажатии на кнопку image:images/Buttons/lay_Locale_properties.png[image] справа от поля.
+
+image::images/lay_Locale_html_browser.png[[.fig--title-label]##Рис. 1. ##Добавление локализации для свойства 'XSLT-преобразование']
+
+В поле [.keyword]*Значение по умолчанию* и таблице значений можно указать текст преобразования. Для ввода используется XML редактор. Подробнее о настройке локализации см. раздел xref:lay_Layout_locale.adoc[Локализация разметки].
+
+*На уровень выше:* xref:../pages/lay_Control_elements.adoc[Описание стандартных элементов управления]
