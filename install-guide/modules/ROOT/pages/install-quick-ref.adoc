@@ -1,0 +1,32 @@
+= Краткая справка по установке системы {dv}
+
+Для установки системы {dv}, следуйте пунктам, приведённым в данном разделе. Обратите внимание, что здесь приведена обобщенная инструкция по установке модулей системы {dv}. За более подробной инструкцией обратитесь к руководству администратора соответствующего устанавливаемого модуля.
+
+. Ознакомьтесь со списком требований к xref:requirements-software.adoc[программному] и xref:requirements-hardware.adoc[техническому] обеспечению, а также к xref:requirements-database.adoc[СУБД].
+. Выполните xref:pre-config-server.adoc[предварительную настройку]: xref:pre-config-server.adoc#preconfigureSystem[операционной системы] сервера {dv}, xref:pre-config-server.adoc#preconfigureServer[IIS] и СУБД xref:pre-config-server.adoc#msSql[Microsoft SQL Server] или xref:pre-config-server.adoc#pgSql[PostgreSQL].
+. Установите серверные компоненты базовых модулей {dv} в следующем порядке:
+[lowerroman]
+.. xref:install-platform-server.adoc[{pl}].
++
+IMPORTANT: Серверный компонент модуля {pl} всегда должен устанавливаться в первую очередь.
++
+.. Базовые Объекты.
+.. Управление процессами.
+.. Управление Документами.
+.. Конструктор Согласований.
+.. Делопроизводство 4.5.
+.. {wincl} или xref:webclient:admin:installServerExtension.adoc[{wc}].
+. xref:config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить сервер {dv}.
+. xref:pre-config-server.adoc#preconfigureServer[Измените настройки сайта] с веб-приложением сервера {dv} и xref:post-config-server.adoc#disableCache[отключите] кэширование.
+. xref:post-config-server.adoc#accountsRights[Предоставьте права учётным записям] сервисов {dv}.
+. xref:post-config-server.adoc[Выполните] действия после первоначальной настройки сервера
+. xref:install-client.adoc[Установите] клиентские компоненты модулей.
++
+[TIP]
+====
+Клиентские компоненты могут быть установлены при помощи xref:gpo-guide.adoc[групповых политик], автоматически с сервера или xref:install-client.adoc[вручную]. При ручной установке соблюдайте следующий порядокfootnote:[Остальные модули будут установлены автоматически при запуске {wincl}а.]:
+
+[lowerroman]
+.. Платформа.
+.. {wincl}.
+====
