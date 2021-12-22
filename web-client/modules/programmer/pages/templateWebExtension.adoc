@@ -35,8 +35,7 @@ extensionManager.registerExtension({ <.>
 
 Команда `import * as EventHandlers from "./EventHandlers"` импортирует все публичные сущности (с `export`) из файла `EventHandlers` (`.tsx`).
 
-Чтобы импортировать функции из другого файла, необходимо добавить новую команду импорта, указав относительный путь к файлу:
-
+.Чтобы импортировать функции из другого файла, необходимо добавить новую команду импорта, указав относительный путь к файлу:
 [source,typescript]
 ----
 import * as EventHandlers from "./EventHandlers";
@@ -48,8 +47,7 @@ import * as NewEventHandlers from "./Scripts/NewEventHandlers"; <.>
 
 Команда `extensionManager.registerExtension({ … })` регистрирует клиентское расширение с названием `Template web extension`, которое предоставляет глобальные обработчики (`globalEventHandlers`).
 
-Чтобы добавить в расширение обработчики из нового файла, добавьте их в массив `globalEventHandlers`:
-
+.Чтобы добавить в расширение обработчики из нового файла, добавьте их в массив `globalEventHandlers`:
 [source,typescript]
 ----
 globalEventHandlers: [ EventHandlers, NewEventHandlers] <.>
