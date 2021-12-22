@@ -1,15 +1,16 @@
 = Приложение С. XSLT-преобразование и описание исходных данных для почтового уведомления
 
-Текст стандартного XSLT-преобразования, используемого для формировании почтовых уведомлений исполнителям заданий, размещен на ресурсе GitHub в папке https://github.com/DocsVision/DeveloperItems/tree/master/xslt-templates/email-templates, файл `EmailNotifications.xsl`.
+Текст стандартного XSLT-преобразования, используемого для формирования почтовых уведомлений исполнителям заданий, размещен на ресурсе https://github.com/DocsVision/DeveloperItems/tree/master/xslt-templates/email-templates[GitHub], файл `EmailNotifications.xsl`.
 
-Ниже приведен пример исходных данных, к которым применяется данное преобразование, с кратким описанием.
-
+.В этом блоке приведен пример исходных данных, к которым применяется данное преобразование, с кратким описанием.
+[%collapsible]
+====
 [source,xml]
 ----
 <TaskModel>
-  <Title MessageType="0" Description="Для вас создано новое задание" />
-  <SendInfo Date="понедельник, 15 апреля" StateName="Не начато" />
-  <Data>
+  <Title MessageType="0" Description="Для вас создано новое задание" /> <.>
+  <SendInfo Date="понедельник, 15 апреля" StateName="Не начато" /> <.>
+  <Data> <.>
     <CardTask CardID="9421E319-CDB2-4A7C-A3BD-68DD301C3DC5" CardTypeID="C7B36F33-CDD4-4DA9-8444-600FE14111E4" Description="Задание на исполнение: 23" CreationDateTime="2019-04-15T10:41:32" ChangeDateTime="2019-04-15T10:42:33" Template="0" Topic="" Barcode="">
       <MainInfo RowID="2C023862-D72F-4496-B913-8340ED2B6E3F" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="23" Author="80286BE4-E221-4AC9-AFB9-6C7F184D8466" Laboriousness="0" LaboriousnessActual="0" ChildTaskList="0E73F83E-164D-4F4D-8FEC-1FA89921E070" ReferenceList="0277B53F-F6CF-40B3-81EE-CCAE9CA38082" SignatureList="E9387AF5-EAB6-4021-960F-F9608442F9FB" PercentCompleted="0" DurationActual="0" OnControl="0" RequiresAcceptance="0" PostponementCount="0" Priority="1" StartTaskDate="2019-04-15T10:42:33.000" CreateMessages="1">
         <SelectedPerformers>
@@ -89,50 +90,54 @@
       </CardKindStateSettings>
     </RefStates>
   </Data>
-  <LinkedDocument />
-  <Employee Id="53ff7d76-e08d-4b81-bace-580846dcc318" Email="ivanov@company.com">
-    <Hints>
-      <Deputy Employee="Иванов С.А."/>
+  <LinkedDocument /> <.>
+  <Employee Id="53ff7d76-e08d-4b81-bace-580846dcc318" Email="ivanov@company.com"> <.>
+    <Hints> <.>
+      <Deputy Employee="Иванов С.А."/> <.>
       <Hint Text="&lt;strong&gt;Отклонить:&lt;/strong&gt; добавьте комментарий в тексте ответного письма." />
       <Hint Text="&lt;strong&gt;Завершить:&lt;/strong&gt; добавьте файл отчета или введите текст отчета в ответном письме. Вы можете приложить файл отчета либо добавить отчет в текст ответного письма." />
     </Hints>
-    <Operations>
-      <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3Dfc093f09-47bf-46eb-9926-0291616386e9%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="В работу" />
+    <Operations> <.>
+      <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3Dfc093f09-47bf-46eb-9926-0291616386e9%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="В работу" /> <.>
       <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3Db017c708-ee9b-4158-bb79-122de47d1428%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="Отклонить" />
       <Operation Link="mailto:service@company.com?subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D67678953-6474-46cd-9f83-ecb95a030432%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318&amp;body=%20" Name="Завершить" />
       <Operation Link="mailto:?bcc=service@company.com&amp;subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D5c450552-fc27-4255-a247-f95bc9d3b499%26r%3DFalse%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318%26LettterMustBeIgnored%3DTrue&amp;body=Выполняется%20делегирование%20задания.%20Для%20работы%20с%20ним%20необходимо%20дождаться%20сообщения%20о%20делегировании%20от%20системы." Name="Делегировать без возврата" />
       <Operation Link="mailto:?bcc=service@company.com&amp;subject=6EDEA0D1%26c%3D9421e319-cdb2-4a7c-a3bd-68dd301c3dc5%26o%3D5c450552-fc27-4255-a247-f95bc9d3b499%26r%3DTrue%26em%3D53ff7d76-e08d-4b81-bace-580846dcc318%26LettterMustBeIgnored%3DTrue&amp;body=Выполняется%20делегирование%20задания.%20Для%20работы%20с%20ним%20необходимо%20дождаться%20сообщения%20о%20делегировании%20от%20системы." Name="Делегировать с возвратом" />
     </Operations>
-    <AdditionalInfo>
-      <OpenCard Link="http://docsvision.company.com/Docsvision/?CardID={9421e319-cdb2-4a7c-a3bd-68dd301c3dc5}&amp;ShowPanels=2048" />
+    <AdditionalInfo> <.>
+      <OpenCard Link="http://docsvision.company.com/Docsvision/?CardID={9421e319-cdb2-4a7c-a3bd-68dd301c3dc5}&amp;ShowPanels=2048" /> <.>
     </AdditionalInfo>
   </Employee>
 </TaskModel>
 ----
+<.> `Title` -- заголовок уведомления.
+<.> `MessageType` -- тип уведомления.
++
+.Возможные значения:
+* `0` -- уведомление о новом задании.
+* `1` -- уведомление об успешном завершении операции.
+* `2` -- сообщение об ошибке.
+* `3` -- уведомление об отклонении задания.
++
+`Description` -- заголовок сообщения.
++
+<.> `SendInfo` -- информации о карточке:
++
+* `Date` -- дата отправки.
+* `StateName` -- состояние карточки.
+<.> `Data` – XML карточки.
+<.> `LinkedDocument` -- HTML связанного документа.
+<.> `Employee` -- информация по сотруднику (ИД и e-mail).
+<.> `Hints` -- подсказки:
++
+* `Deputy` > `Employee` -- замещаемый сотрудник.
++
+<.> `Operations` -- список операций, доступных данному сотруднику с этой карточкой (для формирования кнопок).
+<.> `Link` -- ссылка для создания письма с этой операцией.
+<.> `Name` -- название операции.
+<.> `AdditionalInfo` > `OpenCard` -- ссылка для открытия карточки в клиенте {dv}.
+====
 
-Здесь:
-
-* Title:
-** MessageType:
-*** 0 – уведомление о новом задании;
-*** 1 – уведомление об успешном завершении операции;
-*** 2 – сообщение об ошибке;
-*** 3 – уведомление об отклонении задания;
-** Description – заголовок сообщения;
-* SendInfo:
-** Date – дата;
-** StateName – состояние карточки;
-* Data – xml карточки;
-* LinkedDocument – html связанного документа;
-* Employee – информация по сотруднику (ИД и e-mail);
-** Hints – подсказки:
-*** Deputy > Employee – замещаемый сотрудник;
-** Operations – список операций, доступных данному сотруднику с этой карточкой (для формирования кнопок);
-*** Link – ссылка для создания письма с этой операцией;
-*** Name – название операции;
-** AdditionalInfo > OpenCard – ссылка для открытия карточки в клиенте Docsvision.
-
-.Получить автора и исполнителей задания можно из данных Data:
-* TaskModel\Data\CardTask\MainInfo\Author – автор;
-* TaskModel\Data\CardTask\MainInfo\Performers – исполнители.
-
+.Получить автора и исполнителей задания можно из данных `Data`:
+* TaskModel\Data\CardTask\MainInfo\Author -- автор;
+* TaskModel\Data\CardTask\MainInfo\Performers -- исполнители.
