@@ -2,20 +2,13 @@
 
 По умолчанию пользователь может добавлять в карточки файлы со следующими расширениямиfootnote:[Для возможности загрузки файлов .ascx, .cs и .java требуется дополнительная настройка. См. xref:installAfter.adoc[Действия после установки {wc}а].]:
 
-`.rtf`, `.dot`, `.doc`, `.dotx`, `.dotm`, `.ods`, `.docx`, `.docm`, `.odt`, `.csv`, `.xlt`, `.xltm`, `.xls`, `.xlsm`, `.xltx`, `.xlsx`, `.pdf`, `.jpg`, `.jpeg`, `.gif`, `.png`, `.bmp`, `.tiff`, `.tif`, `.emf`, `.wmf`, `.xslt`, `.xsl`, `.xml`, `.htm`, `.html`, `.txt`, `.log`, `.cs`, `.asmx`, `.ascx`, `.aspx`, `.js`, `.cpp`, `.h`, `.css`, `.idl`, `.ini`, `.java`, `.rc`, `.rc2`, `.shtm`, `.shtml`, `.sql`, `.zip`, `.rar`, `.7z`, `.vsd`, `.vsdx`, `.msg`, `.one`, `.pptx`, `.ppt`.
+include::user:partial$file-types.adoc[tags=types]
 
-Администратор может добавить в список новые расширения файлов или удалить существующие.
-
+.Чтобы добавить в список новые расширения файлов или удалить существующие:
 . Откройте конфигурационный файл `{webconfig}`.
 . Перейдите к секции {setgroups-wc}.
 . Измените значение параметра *_AcceptableFileExtensions_*. Значение содержит строку регулярного выражения. Новые расширения файлов нужно добавлять во вторые скобки, через символ `|`.
 +
-.Добавление `.dwg` в допустимые расширения:
-====
-[source]
-----
-<Setting Name="AcceptableFileExtensions" Value="(.|/)(rtf|dot|doc|dotm|dotx|docm|ods|docx|odt|csv|xlt|xls|xlsm|xltm|xltx|xlsx|pdf|jpg|jpeg|gif|png|bmp|tiff|tif|emf|wmf|xslt|xsl|xml|htm|html|txt|log|cs|asmx|ascx|aspx|js|cpp|h|css|idl|ini|java|rc|rc2|shtm|shtml|sql|zip|rar|7z|vsd|vsdx|msg|one|pptx|ppt|avi|wav|dwg)$" />
-----
-====
+include::partial$dwg.adoc[]
 +
 . Сохраните изменения конфигурационного файла.
