@@ -2,7 +2,7 @@
 
 Для работы с файлами карточек _Задание_ и _Группа заданий_ предназначен элемент управления `_Файловая панель_`.
 
-.ЭУ "Файловая панель" предоставляет следующие функции работы с файлами:
+.ЭУ `_Файловая панель_` предоставляет следующие функции работы с файлами:
 - <<addFiles,Добавлять файлы>>,
 - <<deleteFiles,Откреплять файлы>>,
 - <<previewFiles,Просматривать файлы>> (ограничено),
@@ -38,8 +38,11 @@ image::taskFilePanelView.png["Файловая панель" с добавлен
 
 .Условия добавления файлов:
 
-* Типы файлов, которые можно добавлять:
-include::partial$file-types.adoc[]
+* Типы файлов, которые можно добавлять: `.docx`, `.pdf`, `.rtf`, `.dot`, `.doc`, `.dotm`, `.docm`, `.dotx`, `.ods`, `.odt`, `.csv`, `.xlt`, `.xls`, `.xltm`, `.xlsm`, `.xltx`, `.xlsx`, `.jpg`, `.jpeg`, `.gif`, `.png`, `.bmp`, `.tiff`, `.tif`, `.emf`, `.wmf`, `.xslt`, `.xsl`, `.xml`, `.htm`, `.html`, `.txt`, `.log`, `.cs`, `.asmx`, `.ascx`, `.aspx`, `.js`, `.cpp`, `.h`, `.css`, `.idl`, `.ini`, `.java`, `.rc`, `.rc2`, `.shtm`, `.shtml`, `.sql`, `.zip`, `.rar`, `.7z`, `.vsd`, `.vsdx`, `.msg`, `.one`, `.pptx`, `.ppt`, `.avi`, `.wav`.
+
+TIP: Для возможности загрузки файлов .ascx, .cs и .java требуется xref:admin:installAfter.adoc#java[дополнительная настройка].
+
+include::partial$excerpts.adoc[tags=letters]
 
 [#deleteFiles]
 == Открепление файлов
@@ -59,7 +62,7 @@ include::partial$file-types.adoc[]
 +
 .Условия редактирования файлов:
 ****
-include::partial$only-office.adoc[]
+Данная возможность доступна только для файлов Microsoft Office (соответствующие программы должны быть установлены): `.doc`, `.docx`, `.docm`, `.xls`, `.xlsx`, `.xlsm`, `.ppt`, `.pptx`, `.odt` и `.ods`.
 
 До завершения редактирования файла не закрывайте карточку, из которой он был открыт.
 
