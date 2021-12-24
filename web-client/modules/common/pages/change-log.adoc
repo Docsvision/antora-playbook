@@ -79,9 +79,14 @@ image::user:search-current-folder.png[Строка поиска]
 Новое свойство ЭУ "Данные папки"::
 Добавлено новое свойство `*Выбор представления*` для режима *_Системная папка_*, позволяющее ограничить выбор доступных представлений в папке. Подробнее см. xref:layouts:ctrl/folderComponents/folderDataContext.adoc[].
 
+Элемент управления SignatureButton::
+Для работы с подписью.
+
 == Разработка
 
 [#old-api]
 Изменения в API::
 - Внутренние компоненты `FileSignCreateDialog`, `FileSignSelectCertificateDialog` и связанные с ними заменены на `SignatureDialog`.
 - Сервис `$DocumentCardController` заменён на `$SignatureController`.
+- Во внутреннем классе `FileSign` удалена часть методов.
+- Для работы с подписью появился ЭУ `SignatureButton` и сервис `$DigitalSignature`.
