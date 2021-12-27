@@ -1,0 +1,44 @@
+= Автоматическое заполнение поля "Рабочая группа" в документах, заданиях и группах заданий
+
+. Откройте _Конструктор скриптов_.
+
+. Выберите вид _Документ УД Рабочий_.
+
+. В секцию using добавьте `using {dv}.Platform.CardHost`.
+
+. Добавьте код:
+
+```csharp
+ /// <summary>
+ /// Карточка открыта
+ /// </summary>
+ public override void CardActivated({dv}.Platform.WinForms.CardActivatedEventArgs e)
+ {
+ if ((e.ActivateFlags &amp; ActivateFlags.NewFromTemplate) == ActivateFlags.NewFromTemplate || (e.ActivateFlags &amp; ActivateFlags.New) == ActivateFlags.New)
+ this.DocumentHelper.FillWorkGroup();
+ DocumentHelper.CardActivated(e);
+ }
+
+/// <summary>
+ /// Создать задание
+ /// </summary>
+ public override void CreateTask_ItemClick()
+ {
+ Task task = DocumentHelper.CreateTask_ItemClick();
+ if (task != null)
+ task.MainInfo.WorkGroup = ((Document)this.BaseObject).MainInfo.WorkGroup;
+ }
+
+/// <summary>
+ /// Создать группу заданий
+ /// </summary>
+ public override void CreateTasksGroup_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+ {
+ TaskGroup taskGroup = DocumentHelper.CreateTasksGroup_ItemClick(sender, e);
+ if (taskGroup != null)
+ taskGroup.MainInfo.WorkGroup = ((Document)this.BaseObject).MainInfo.WorkGroup;
+ }
+
+```
+
+. Скомпилируйте скрипт и сохраните.

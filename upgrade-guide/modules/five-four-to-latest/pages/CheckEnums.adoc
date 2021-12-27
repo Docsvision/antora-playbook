@@ -1,0 +1,35 @@
+= Проверка перечислений
+
+В {dv} 5.5 установлено ограничение на количество символов в псевдониме элемента перечисления (Enum): не более 64.
+
+image::image-20200615145110721.png[]
+
+При обновлении БД, содержащей нарушающие ограничение метаданные, возникнет ошибка: "Псевдоним элемента перечисления не может быть длиннее '64' символов".
+
+Перед выполнением обновления найдите и исправьте такие перечисления:
+
+. Найдите перечисления, в названии (Alias) значений которых больше 64 символов.
+
+Перечисление можно найти "вручную" в Конструкторе разметок (просматривая значения расширенных/динамических полей) или запросом в БД:
+
+* Для БД с расширенными полями:
+
+`mssql
+ select cast(XMLSchema as XML)
+ from dvsys_carddefs_extensions where XMLSchema LIKE &#39;%Type=&quot;enum&quot;%&#39;
+`
+
+* Для БД с динамическими полями:
+
+`mssql
+ select tCard.CardTypeID, tCard.Alias [CardAlias], tSec.SectionTypeID, tSec.Alias[SectionAlias], tFields.Alias [FieldAlias], 
+        tEnum.*, tString.Value [StringValue], tAnsiString.Value [AnsiStringValue] 
+ from dvsys_dynamic_enumdefs tEnum
+ join dvsys_fielddefs tFields on (tFields.FieldID = tEnum.FieldID)
+ join dvsys_sectiondefs tSec on (tFields.SectionTypeID = tSec.SectionTypeID)
+ join dvsys_carddefs tCard on (tCard.CardTypeID = tSec.CardTypeID)
+ left join dvsys_dynamic_string tString on (tString.FieldID = tEnum.FieldID)
+ left join dvsys_dynamic_ansistring tAnsiString on (tAnsiString.FieldID = tEnum.FieldID)
+`
+
+. Исправьте (сократите) название значения перечисления, содержащее более 64 символов, в Конструкторе разметок.
