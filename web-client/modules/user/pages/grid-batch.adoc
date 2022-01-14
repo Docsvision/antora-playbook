@@ -41,28 +41,50 @@ image::grid-batch.png[Панель групповых операции в гри
 . В появившейся панели групповых операций выберите нужную операцию.
 . Если для выбранных карточек недоступны групповые операции, будет отображаться сообщение, заданное в свойстве xref:layouts:ctrl/folderComponents/folderGrid_FolderGridBatchOperationsNode.adoc#message["Текст, если нет групповых операций"] элемента управления `_Узел для групповых операций_`.
 
+[#batch-read]
 :caps: Прочитать
 :act: прочитать
 :en: read
 include::partial$new-batch-ops.adoc[tags=simple]
 
+[#batch-copy]
 :caps: Копировать
 :act: копировать
 :pr: Копирование
 :en: copy
 include::partial$new-batch-ops.adoc[tags=hard]
 
+[#batch-move]
 :caps: Переместить
 :act: переместить
 :pr: Премещение
 :en: move
 include::partial$new-batch-ops.adoc[tags=hard]
 
-:caps: Удалить
-:act: удалить
-:en: delete
-:del:
+[#batch-remove]
+:caps: Удалить ярлык
+:en: remove
 include::partial$new-batch-ops.adoc[tags=simple]
+
+[#batch-delete]
+:caps: Удалить карточки
+:en: delete
+include::partial$new-batch-ops.adoc[tags=simple]
+
+[#batch-download]
+=== Скачать файлы карточки
+
+.Чтобы скачать файлы из нескольких карточек:
+. Выберите нужные карточки, поставив флаги слева от заголовка строки.
+. Нажмите кнопку *Скачать файлы* на панели групповых операций.
+. Дождитесь завершения групповой операции.
++
+.Выполнение групповой операции "Скачать файлы карточки"
+image::batch-op-download-process.png[Выполнение групповой операции "Скачать файлы карточки"]
+
+Если в процессе выполнения групповой операции возникли ошибки, информация будет выведена в окне выполнения.
+
+Из карточки могут быть скачаны основные файлы, дополнительные или файлы с подписями. Возможность скачивания файлов и формат подписей зависят от настроек свойств xref:layouts:ctrl/batchOperations/downloadFilesBatchOperation.adoc[ЭУ групповой операции].
 
 === Групповое делегирование
 
