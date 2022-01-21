@@ -27,12 +27,12 @@ xref:lay_Elements_general.adoc[Общие свойства элементов у
 *Тип содержимого*::
 Определяет тип HTML-документа, отображаемого в элементе управления:
 +
-* _Card Data XML_ – XML данных карточки: в качестве содержимого будет использован XML-документ, содержащий данные карточки. Для использования элемента требуется написать скрипт.
+* _Card Data XML_ -- XML данных карточки: в качестве содержимого будет использован XML-документ, содержащий данные карточки. Для использования элемента требуется написать скрипт.
 +
 .Пример скрипта для события карточки *CardActivated*:
 [source,javascript]
 ----
-private void Документ_CardActivated(System.Object sender, DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+private void Документ_CardActivated(System.Object sender, {dv}.Platform.WinForms.CardActivatedEventArgs e)
 {
  var browser = (this.CardControl as ICustomizableControl).FindPropertyItem<HtmlBrowser>("BrowserName");
  var fieldInfo = browser.GetType().BaseType.GetField("cardData", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic); 
@@ -43,14 +43,14 @@ private void Документ_CardActivated(System.Object sender, DocsVision.Pla
 }
 ----
 +
-* _Custom HTML_ – пользовательский HTML: будет использоваться предопределенный HTML-документ. Для использования элемента в поле *Пользовательские данные* нужно указать содержимое html-документа (html-код).
-* _Custom URL_ – пользовательский URL: будет отображаться HTML-страница по заданному адресу. Для использования элемента в поле *Пользовательские данные* нужно указать адрес html-документа (ссылку).
+* _Custom HTML_ -- пользовательский HTML: будет использоваться предопределенный HTML-документ. Для использования элемента в поле *Пользовательские данные* нужно указать содержимое html-документа (html-код).
+* _Custom URL_ -- пользовательский URL: будет отображаться HTML-страница по заданному адресу. Для использования элемента в поле *Пользовательские данные* нужно указать адрес html-документа (ссылку).
 
 *Контекстное меню*::
 Определяет режим отображения или скрытия контекстного меню в браузере:
 +
-* *Да* – отображать;
-* *Нет* – не отображать.
+* *Да* -- отображать;
+* *Нет* -- не отображать.
 
 == Настройка локализации
 
