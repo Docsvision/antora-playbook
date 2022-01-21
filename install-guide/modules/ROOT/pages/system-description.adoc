@@ -11,7 +11,7 @@
 
 .Инструкция актуальна для следующих версии модулей {dv}:
 - Docsvision 5. Платформа версии {latest-platform}.
-- Docsvision 5. Базовые объекты версии {latest-baseobjects}.
+- Docsvision 5. {bo} версии {latest-baseobjects}.
 - Docsvision 5. Управление процессами версии {latest-workflow}.
 - Docsvision 5. {ud} версии {latest-documentmanagement}.
 - Docsvision 5. {ad} версии {latest-approvaldesigner}.
@@ -39,7 +39,7 @@ skinparam monochrome true
 State "Базовые модули" as base {
 
 State "Платформа" as platform
-State "Базовые объекты" as baseobjects
+State "{bo}" as baseobjects
 State "Управление процессами" as workflow
 State "{ud}" as documentmanagement
 State "{ad}" as approvaldesigner
@@ -79,7 +79,7 @@ base --> other
 - Базовые сервисы работы с данными (чтение/запись).
 - Функции безопасности, поиска и прочие.
 +
-* Базовые объекты -- модуль предоставляет:
+* {bo} -- модуль предоставляет:
 - Базовые типы карточек: _Задание_, _Группа заданий_, _Документ_.
 - Конструкторы для настройки электронного документооборота.
 - Справочники, предоставляющие информацию для использования в других карточках.
@@ -115,7 +115,7 @@ base --> other
 . `{dv} 5 Platform client.msi` (клиентская часть).
 --
 --
-.Модуль Базовые объекты:
+.Модуль {bo}:
 . `{dv} 5 BackOffice server.msi` (серверная часть);
 . `{dv} 5 BackOffice client.msi` (клиентская часть).
 --
