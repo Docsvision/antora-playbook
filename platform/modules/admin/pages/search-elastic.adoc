@@ -8,20 +8,28 @@
 
 Elasticsearch может быть установлен на любой компьютер организации, который удовлетворяет требованиям данной системы полнотекстового поиска.
 
-. Загрузите систему Elasticsearch по https://www.elastic.co/downloads/past-releases/elasticsearch-7-9-0[ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+. Загрузите систему Elasticsearch по https://www.elastic.co/downloads/past-releases/elasticsearch-{es-d}[ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
-TIP: Рекомендуемая версия: Elasticsearch 7.9.
+CAUTION: Рекомендуемая версия: Elasticsearch {es-v}. Работоспособность с более высокими версиями не тестировалась.
++
+. https://artifacts.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-7.13.4.zip[Загрузите] на компьютер компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для Elasticsearch версии {es-v}.
++
+Компонент "Ingest Attachment Processor" можно установить из диалога установки Elasticsearch, установив флаг:
++
+.Компонент "Ingest Attachment Processor"
+image::ingest.png[Компонент "Ingest Attachment Processor"]
 +
 . Создайте папку `hunspell` с подпапками
 `en_US` и `ru-RU` в директории
 `C:\ProgramData\Elastic\Elasticsearch\config`.
-. Сохраните словари Hunspell для Elasticsearch версии 7.9 в папки на компьютере, созданные на предыдущем шаге.
+. Сохраните словари Hunspell для Elasticsearch версии {es-v} в папки на компьютере, созданные на предыдущем шаге. Скачать словари можно по ссылкам <<links,ниже>>.
 +
 Словари необходимы для индексации с учетом морфологии.
 +
 [lowerroman]
 .. Откройте указанные ниже файлы в браузере:
 +
+[#links]
 - https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic]
 - https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
 - https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic]
@@ -52,7 +60,7 @@ image::saveAs.png[Сохранить как для файла]
 .Сохранение файла "ru_RU.dic"
 image::savingAs.png[Сохранение файла]
 +
-. Перезапустите Elasticsearch .
+. Перезапустите Elasticsearch.
 +
 От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-7.9.0.zip%%`.
 +
