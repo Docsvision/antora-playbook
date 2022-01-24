@@ -68,13 +68,27 @@ include::install.adoc[tags=api]
 Microsoft SQL Server или PostgreSQL в зависимости от используемой базы данных.
 
 Строка подключения к базе данных для хранения настроек::
-В строке укажите адрес подключения к базе данных для хранения настроек в формате: `Data Source=<sql_server>;Initial Catalog=<db_name>;Integrated Security=False;User ID=<sql_login>;Password=<sql_user_password>`.
+Строка подключения содержит адрес подключения к базе данных для хранения настроек. Вид строки подключения зависит от выбранной базы данных.
 +
+--
+Для Microsoft SQL Server: `Data Source=<sql_server>;Initial Catalog=<db_name>;Integrated Security=False;User ID=<sql_login>;Password=<sql_user_password>`.
+
 * `<sql_server>` -- адрес сервера SQL для подключения к БД.
 * `<db_name>` -- псевдоним базы данных.
 * `Integrated Security=False` -- SQL-аутентификация: true -- используется, false -- не используется.
 * `<sql_login>` -- учётная запись пользователя для подключения к БД.
 * `<sql_user_password>` -- пароль учётной записи для подключения к БД.
+--
++
+--
+Для PostgreSQL: `host=<pg_server>;Port=<pg_server_port>;database=<db_name>;Username=<pg_sql_login>;Password=<sql_user_password>`.
+
+* `<pg_server>` -- адрес сервера SQL для подключения к БД.
+* `<pg_server_port>` -- порт SQL-сервера.
+* `<db_name>` -- псевдоним базы данных.
+* `<pg_sql_login>` -- учётная запись пользователя для подключения к БД.
+* `<sql_user_password>` -- пароль учётной записи для подключения к БД.
+--
 ****
 +
 include::workerservice:admin:page$install.adoc[tags=confirm]
