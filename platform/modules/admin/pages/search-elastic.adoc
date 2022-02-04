@@ -12,15 +12,15 @@ Elasticsearch может быть установлен на любой комп�
 +
 CAUTION: Рекомендуемая версия: Elasticsearch {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
-. https://artifacts.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-7.13.4.zip[Загрузите] на компьютер компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для Elasticsearch версии {es-v}.
+. Установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для Elasticsearch версии {es-v}.
 +
-Компонент "Ingest Attachment Processor" можно установить из диалога установки Elasticsearch, установив флаг:
+Компонент "Ingest Attachment Processor" можно установить из диалога установки Elasticsearch, поставив флаг:
 +
 .Компонент "Ingest Attachment Processor"
 image::ingest.png[Компонент "Ingest Attachment Processor"]
 +
 . Создайте папку `hunspell` с подпапками
-`en-US` и `ru-RU` в директории
+`en_US` и `ru_RU` в директории
 `C:\ProgramData\Elastic\Elasticsearch\config`.
 . Сохраните словари Hunspell для Elasticsearch версии {es-v} в папки на компьютере, созданные на предыдущем шаге. Скачать словари можно по ссылкам <<links,ниже>>.
 +
@@ -43,8 +43,8 @@ image::saveAs.png[Сохранить как для файла]
 .. В открывшемся окне проводника проверьте путь до папки и имя файла, затем нажмите *Сохранить*.
 +
 .Путь до папки:
-- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru-RU` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
-- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\en-US` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff].
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru_RU` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\en_US` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff].
 +
 [WARNING]
 ====
@@ -62,9 +62,9 @@ image::savingAs.png[Сохранение файла]
 +
 . Перезапустите Elasticsearch.
 +
-От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-7.9.0.zip%%`.
+От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%%`.
 +
-`%%path-to-ingest-attachment-7.9.0.zip%%` необходимо заменить на путь загрузки компонента.
+`%%path-to-ingest-attachment-{es-d}.zip%%` необходимо заменить на путь загрузки компонента.
 +
 . Если система Elasticsearch установлена отдельно от сервера {dv}, настройте прослушивание публичного адреса.
 +
