@@ -116,7 +116,7 @@ public class SomeTaskFactory : IWorkerTaskFactory, IInitializeWithServiceProvide
 . Добавьте расширение `SomeTaskFactory` в конфигурацию Службы:
 +
 [#STask]
-.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Tasks\STask`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Tasks\STask`.
 +
 .. В созданном разделе укажите полное имя класса `SomeTaskFactory` в параметре по умолчанию.
 +
@@ -125,7 +125,7 @@ image::taskRegistry.png[Значение "SomeTaskFactory" в созданном
 +
 . Создайте `Роль {of-ws}`, через которую {is-ws} будет получать расширение `SomeTaskFactory`:
 +
-.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithSTask`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\RoleWithSTask`.
 +
 .. В разделе создайте строковый параметр `Tasks` со значением `STask` -- названием раздела с типом расширения, созданным <<STask,ранее>>.
 +
@@ -134,7 +134,7 @@ image::taskRoleRegistry.png[Добавление нового параметра
 +
 . Зарегистрируйте экземпляр {of-ws} с _Ролью_ `RoleWithSTask`.
 +
-.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpSTask`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\WorkerProcesses\WpSTask`.
 +
 include::partial$moreChunks.adoc[tags=parameters]
 +

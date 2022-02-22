@@ -86,7 +86,7 @@ public class BestComponent : IThreadedRuntimeComponent, ISettings
 +
 . Добавьте расширение `SomeComponent` в конфигурацию Службы:
 +
-. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Components\SomeComponent`.
+. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Components\SomeComponent`.
 +
 .. В созданном разделе укажите полное имя класса `SomeComponent` в параметре по умолчанию.
 [#ComponentSetting]
@@ -94,7 +94,7 @@ public class BestComponent : IThreadedRuntimeComponent, ISettings
 +
 . Создайте `Роль {of-ws}`, через которую {is-ws} будет получать расширение `BestComponent`:
 +
-.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithBestComponent`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\RoleWithBestComponent`.
 +
 .. В разделе создайте строковый параметр `Components` со значением `ComponentSetting` -- название строки с параметрами расширения `BestComponent`, которая была создана <<ComponentSetting,ранее>>.
 +
@@ -103,7 +103,7 @@ image::componentRoleRegistry.png[Строковый параметр  со зн�
 +
 . Зарегистрируйте экземпляр {of-ws} с _Ролью_ `RoleWithBestComponent`.
 +
-. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpBestComponent`.
+. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\WorkerProcesses\WpBestComponent`.
 +
 include::partial$moreChunks.adoc[tags=parameters]
 +

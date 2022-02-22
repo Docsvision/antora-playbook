@@ -93,7 +93,7 @@ WARNING: Из-за наличия ошибки в версии 5.5.1 не сле
 [#SmtpConnectFactory]
 . Добавьте расширение `SmtpConnectFactory` в конфигурацию Службы:
 +
-. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Connections\SmtpConnect`.
+. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Connections\SmtpConnect`.
 +
 .. В созданном разделе укажите полное имя класса `SmtpConnectFactory` в параметре по умолчанию.
 .. Создайте строковый параметр с произвольным именем, например `SmtpClientSetting`. В значении укажите строку настроек -- `smtp.com.org`.
@@ -102,7 +102,7 @@ WARNING: Из-за наличия ошибки в версии 5.5.1 не сле
 +
 . Создайте `Роль {of-ws}`, через которую {is-ws} будет получать расширение `SmtpConnectFactory`:
 +
-.. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\RoleWithSmtpConnect`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\RoleWithSmtpConnect`.
 +
 .. В созданном разделе создайте строковый параметр `Connections` со значением `SmtpClientSetting` -- название строки с параметрами `SmtpConnectFactory`, которая была создана <<SmtpConnectFactory,ранее>>.
 +
@@ -111,7 +111,7 @@ image::connectionRoleRegistry.png[]
 +
 . Зарегистрируйте экземпляр {of-ws} с _Ролью_ `RoleWithSmtpConnect`.
 +
-. Создайте раздел с произвольным именем в реестре ОС, например `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Roles\SOFTWARE\{dv}\WorkerService\5.5\WorkerProcesses\WpSmtpConnect`.
+. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\5.5\Roles\WorkerProcesses\WpSmtpConnect`.
 +
 include::partial$moreChunks.adoc[tags=parameters]
 +
