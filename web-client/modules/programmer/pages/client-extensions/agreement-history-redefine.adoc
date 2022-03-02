@@ -1,0 +1,124 @@
+= Переопределение сервиса отрисовки элемента "Ход согласования"
+
+Элемент управления `*Ход согласования*` xref:layouts:ctrl/approval/agreementHistory.adoc[представляет собой] таблицу, в которой отображаются события заданий согласования (выполнение, делегирование и др.).
+
+Программист может переопределить функцию отрисовки всей таблицы и отдельных элементов: заголовков и ячеек определённых столбцов. Для этого нужно передать в поле `stageRenderer` класса элемента управления `_Ход согласования_` (тип `AgreementHistory`) сервис с интерфейсом `IAgreementHistoryStageRenderer`:
+
+[source,typescript]
+----
+interface IAgreementHistoryStageRenderer {
+    renderStageTable?(props: IApprovalCycleInfoProps): React.ReactNode;
+    renderStageHeaderCells?(): React.ReactNode;  
+    renderApproverCell?(stageItemProps: IApprovalStageItemRowProps): React.ReactNode; 
+    renderDecisionCell?(stageItemProps: IApprovalStageItemRowProps): React.ReactNode;
+    renderDateCell?(stageItemProps: IApprovalStageItemRowProps): React.ReactNode;
+    renderCommentCell?(stageItemProps: IApprovalStageItemRowProps): React.ReactNode;
+    renderCorrectionsCell?(stageItemProps: IApprovalStageItemRowProps): React.ReactNode;
+}
+----
+
+Интерфейс `IAgreementHistoryStageRenderer` определяет функции, обеспечивающие отрисовку определённых элементов таблицы `_Ход согласования_`:
+
+* `renderStageTable` -- отрисовка всей таблицы.
+* `renderStageHeaderCells` -- отрисовка заголовков таблицы.
+* `renderApproverCell` -- отрисовка ячеек столбца _Согласующий_.
+* `renderDecisionCell` -- отрисовка ячеек столбца _Решение_.
+* `renderDateCell` -- отрисовка ячеек столбца _Дата_.
+* `renderCommentCell` -- отрисовка ячеек столбца _Комментарий_.
+* `renderCorrectionsCell` -- отрисовка ячеек столбца _Правки_.
+
+При реализации объекта `IAgreementHistoryStageRenderer` могут быть переопределены все или только требуемые функции интерфейса.
+
+Ниже приведён пример реализации компонента, который переопределяется функцию отрисовки ячеек столбца `Комментарий`: ставит `-`, если комментария не было, и текст комментария -- если был. Компонент реализуется в виде стандартного xref:client-extensions/create-publish.adoc[клиентского расширения].
+
+.Компонент включает две составляющие:
+- Сервис, который будет передан в `stageRenderer`.
+- Метод, который будет вызываться при открытии вкладки `Ход согласования` карточки _ДокументУД/Исходящий_, и передавать сервис в `stageRenderer`.
+
+Ниже приведено содержимое файла `EventHandlers.tsx` (стандартное название основного файла клиентского расширения, создаваемого из шаблона).
+
+[source,typescript]
+----
+import { IAgreementHistoryStageRenderer } from "@{dv}/webclient/Approval/$AgreementHistoryStageRenderer";
+import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { IApprovalStageItemRowProps } from "@{dv}/webclient/Approval/IApprovalStageItemRowProps";
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { AgreementHistory } from "@{dv}/webclient/Approval/AgreementHistory";
+import { Tab } from "@{dv}/webclient/Platform/Tab";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+
+import * as React from 'react' <.>
+
+export function loadRender(sender: Tab, e: IEventArgs) { <.>
+
+    if(sender.params.activeTabPage.key == "agreementHistoryTabPage"){ <.>
+
+        let agreementHistory = sender.layout.controls.get<AgreementHistory>("agreementHistory"); <.>
+
+        agreementHistory.params.stageRenderer = sender.layout.getService($AgreementHistoryRenderService); <.>
+    }
+}
+
+export class AgreementHistoryRenderService implements IAgreementHistoryStageRenderer { <.>
+    constructor(private services: $RequestManager) {
+    }
+
+    renderCommentCell(stageItemProps: IApprovalStageItemRowProps): React.ReactNode{ <.>
+
+            if (!stageItemProps.stageItem.hasComment){
+                return (
+                <td key="comment"> - </td> <.>
+                )
+            }
+
+            return (
+            <td key="comment">{stageItemProps.stageItem.comment}</td> <.>
+            )
+    }
+}
+
+export type $AgreementHistoryRenderService = { renderService: AgreementHistoryRenderService };
+export const $AgreementHistoryRenderService = serviceName((s: $AgreementHistoryRenderService) => s.renderService); <.>
+----
+<.> Импорт зависимостей.
+<.> Определяется функция, которая будет вызываться при открытии страниц элемента "Вкладки".
+<.> Следующий код применяется только для страницы с названием `agreementHistoryTabPage`.
+<.> Получение элемента управления `_Ход согласования_`.
+<.> Передача сервиса отрисовки.
+<.> Реализация сервиса отрисовки, наследуемого от `IAgreementHistoryStageRenderer`.
+<.> Переопределяется метод отрисовки ячеек столбца "Комментарий".
+<.> Если комментария нет, пишется `-`.
+<.> Если комментарий есть, пишется его текст.
+<.> Экспорт сервиса AgreementHistoryRenderService.
+
+TIP: Инструкция по разработке и регистрации клиентских сервисов приведена в пункте xref:client-extensions/with-client-service.adoc[Разработка расширения с клиентским сервисом].
+
+.В файле `Index.ts` нужно добавить регистрацию сервиса `$AgreementHistoryRenderService`.
+[source,typescript]
+----
+import * as EventHandlers from "./EventHandlers";
+import { $AgreementHistoryRenderService, AgreementHistoryRenderService } from "./EventHandlers";
+import { Service } from "@{dv}/webclient/System/Service";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
+
+extensionManager.registerExtension({
+    name: "Template web extension",
+    version: "5.5.15",
+    globalEventHandlers: [ EventHandlers ],
+    layoutServices: [
+        Service.fromFactory($AgreementHistoryRenderService, (services: $RequestManager) => new AgreementHistoryRenderService(services)) 
+    ]
+})
+----
+
+После загрузки клиентского расширения на сервер {wc}а нужно указать обработчик для переключения страниц элемента `_Вкладки_` карточки _Документ_:
+
+. Откройте программу {kvr} и перейдите к разметке просмотра карточки _ДокументУД/Исходящий_.
+. Перейдите к свойствам элемента `_contentTab_`.
+. В событии `*После переключения активной вкладки*` укажите обработчик loadRender.
+. Сохраните изменения и перезапустите IIS (для загрузки скриптов).
+
+Чтобы проверить пример, откройте исходящий документ с согласованием и перейдите на страницу `_Ход согласования_`. В столбце _Комментарий_ у событий согласования с комментарием будет указан комментарий, у событий без комментария -- знак `-`.
+
+TIP: Чтобы получить другие примеры, включая пример получения списка файлов для отображения столбца _Правки_, обратитесь к исходному коду элемента управления `_Ход согласования_` в каталоге установки {wc}а: `C:\Program Files (x86)Docsvision\WebClient\5.5\Site\Content\App\Approval\Controls\AgreementHistory`.

@@ -1,0 +1,121 @@
+= Отправка оповещений пользователям
+
+Для отправки оповещений пользователям {wc}а могут быть использованы функции SignalR, реализованные в сервисе xref:classLib/IRealtimeCommunicationService.adoc[IRealtimeCommunicationService]. Данный сервис позволяет отправлять оповещения всем пользователям или определённому пользователю.
+
+Не следует путать оповещение с функцией отображения диалоговых окон (пункт xref:client-extensions/show-info.adoc["Отображение сообщений, запросов, предупреждений"]).
+
+Текстовые оповещения отображаются в правом нижнем углу окна {wc}а.
+
+.Пример оповещения
+image::real-time-message.png[Пример оповещения]
+
+TIP: На стороне клиента также предоставляется доступ к механизму оповещения, позволяющий передавать сообщения между вкладками браузера и на сервер {wc}а. Данная функциональность реализована в клиентском сервисе `$RealtimeCommunicationService` (см. описание в xref:how-to-use-js-api.adoc[JsDocApi]).
+
+В качестве примера работы с сервисом xref:classLib/IRealtimeCommunicationService.adoc[IRealtimeCommunicationService] реализуем функцию рассылки сообщений всем пользователям, доступную на стороне клиента.
+
+TIP: Полный код примера доступен в репозитории на GitHub.
+
+== Реализация серверного метода для рассылки оповещений
+
+Во-первых нужно реализовать серверный метод, использующий функции сервиса `IRealtimeCommunicationService` для рассылки оповещений.
+
+Для этого разработаем серверное расширение с web-функцией. Ниже приведён код такой функции, реализованной в контроллере.
+
+.Файл `_Controllers\ServiceController.cs_`
+[source,csharp]
+----
+using {dv}.Platform.WebClient.Models.RealTimeCommunication;
+using {dv}.Platform.WebClient.Models.RealTimeCommunication.NotificationMessage;
+using {dv}.Platform.WebClient.Services;
+using System;
+using System.Web.Http;
+
+namespace SignalForUsersExtension
+{
+    public class ServiceController : ApiController
+    {
+        readonly IRealtimeCommunicationService communicationService;
+
+        public ServiceController(IRealtimeCommunicationService communicationService) <.>
+        {
+            this.communicationService = communicationService;
+        }
+
+        <.>
+        [HttpPost]
+        public void SendAll([FromBody]SendMessageRequest request)
+        {
+            var commMessage = new RealtimeCommunicationMessage<NotificationRealtimeMessage>();
+            var messageData = new NotificationRealtimeMessage()
+            {
+                NotificationType = request.MessageType,
+                Message = request.Message
+            };
+            commMessage.Initialize(NotificationRealtimeMessage.MessageType, messageData);
+            communicationService.SendAll(commMessage);
+        }
+    }
+}
+----
+<.> Сервис IRealtimeCommunicationService получаем из конструктора.
+<.> Отправляет оповещение всем пользователям
++
+<param name="request">Сообщение</param>
+
+Для удобства использования методов серверного расширения разработаем клиентское расширение с сервисом, который будет вызывать web-методы.
+
+.Файл `_src\MessageService.tsx_`
+[source,typescript]
+----
+import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { urlStore } from "@{dv}/webclient/System/UrlStore";
+
+export class MessageService { <.>
+    constructor(private services: $RequestManager) {
+    }
+
+    sendAll(message: string, messageType: MessageType) { <.>
+        let url = urlStore.urlResolver.resolveApiUrl("SendAll", "Service");
+
+        this.services.requestManager.post(url, JSON.stringify({ message, messageType }));
+    }
+}
+
+export type $MessageService = { messageService: MessageService };
+export const $MessageService = serviceName((s: $MessageService) => s.messageService);
+----
+<.> Клиентский сервис, предоставляющий доступ к серверным методам работы с подсистемой оповещений.
+<.> Отправляет сообщение message всем пользователям. Тип сообщения `messageType` влияет на оформление сообщения.
+
+Здесь `messageType` -- ограниченный список значений, которые может принимать тип сообщения:
+
+[source,typescript]
+----
+export enum MessageType {
+    Alert = 0,
+    Success = 1,
+    Warning = 2,
+    Error = 3,
+    Info = 4
+}
+----
+
+Осталось добавить функцию, которая будет обрабатывать, к примеру, нажатие кнопки разметки и вызывать метод `MessageService.sendAll`:
+
+.Файл `_src\EventHandlers.tsx_`
+[source,typescript]
+----
+import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
+import { Layout } from "@{dv}/webclient/System/Layout";
+import { $MessageService, MessageType, MessageService } from "./MessageService";
+import { layoutManager } from "@{dv}/webclient/System/LayoutManager";
+
+export function sendMessage(sender: Layout, e: IEventArgs) { <.>
+   let messageService = layoutManager.cardLayout.getService<MessageService>($MessageService);
+   return messageService.sendAll("В 12:00 планируется перезагрузка {wc}а. Сохраните данные.", MessageType.Warning);
+}
+----
+<.> Функция использует сервис `$MessageService` (проект) для отправки оповещения всем пользователям.
++
+Функция `sendMessage` может быть указана в качестве обработчика нажатия кнопки или другого события.

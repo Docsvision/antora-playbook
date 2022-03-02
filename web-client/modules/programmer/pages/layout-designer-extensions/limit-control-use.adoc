@@ -1,0 +1,131 @@
+= Ограничение прав на использование элементом управления в программе {kvr}
+
+Программист может установить запрет на выполнение определённых действий с элементом управления в программе {kvr}.
+
+Ограничение устанавливается "функцией проверки", которая возвращает набор флагов, разрешающих только определённые действия с элементом управления. Например, _функция проверки_ может ограничить использование элемента управления определённым типом карточек.
+
+== Добавление функции проверки
+
+Чтобы создать расширение, добавляющее функцию проверки, выполните приведенную далее инструкцию.
+
+. xref:layout-designer-extensions/create-publish.adoc[Создайте проект расширения программы {kvr}].
++
+. Добавьте в ядро расширения (файл TemplateDesignerExtension.cs) функцию проверки следующего вида:
++
+[source,csharp]
+----
+public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider serviceProvider)
+{
+    var flags = AllowedOperationsFlag.All; <.>
+
+    return flags;
+}
+----
+<.> По умолчанию доступны все операции
++
+Функция проверки должна вернуть набор флагов xref:classLib/AllowedOperationsFlag.adoc[AllowedOperationsFlag].
++
+. Добавьте в код функции проверки алгоритм, добавляющий нужные ограничения.
++
+Следующий код демонстрирует пример функции проверки, запрещающей добавление элемента управления в разметку карточки, если тип карточки не _Документ_.
++
+[source,csharp]
+----
+public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider serviceProvider)
+{
+    var flags = AllowedOperationsFlag.All; <.>
+
+    var selectedLayoutService = ServiceUtil.GetService<ISelectedLayoutService>(serviceProvider); <.>
+
+    if (selectedLayoutService.SelectedCardTypeId != DocsVision.BackOffice.CardLib.CardDefs.CardDocument.ID) <.>
+        flags &= ~AllowedOperationsFlag.Create; <.>
+
+    return flags;
+}
+----
+<.> По умолчанию доступны все операции.
+<.> Получение сервиса для работы с разметкой.
+<.> Из сервиса получаем идентификатор типа карточек, для которых настраивается разметка.
+<.> Если тип карточки не документ (CardDocument.ID) из возможных операций удаляется флаг Create. Что фактически приводит к невозможности добавить элемент управления в разметку
++
+В примере информация о контексте использования элемента управления предоставляется сервисом xref:classLib/ISelectedLayoutService.adoc[ISelectedLayoutService].
++
+. Переопределите метод `GetAllowedOperations` базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя. Метод позволяет получить функцию проверки. Значение представлено функцией проверки:
++
+[source,charp]
+----
+protected override Dictionary<string, Func<AllowedOperationsFlag>> GetAllowedOperations()
+{
+    return new Dictionary<string, Func<AllowedOperationsFlag>>
+    {
+        {"GetPossibleOperation", () => GetPossibleOperation(this.serviceProvider) } <.>
+    };
+}
+----
+<.> Обратите внимание, что в функцию передается сервис-провайдер расширения.
++
+. Скомпилируйте проект и скопируйте полученную сборку на сервер {wc}а в папку `{wcd}\Plugins\%Каталог Решения%`. Ресурсные сборки скопируйте в папки `{wcd}\ru\` (для русской локализации), `{wcd}\uk\` (для английской локализации) и т.д.
++
+. Перезапустите {kvr}.
+
+== Проверка примера
+
+. xref:layout-designer-extensions/add-new-control.adoc[Создайте проект нового элемента управления].
++
+. В поле GetAllowedOperations (функция проверки) описателя элемента управления укажите функцию GetPossibleOperation.
++
+[source,csharp]
+----
+ControlTypeDescription GetSuperControlTypeDescription()
+{
+    var controlTypeDescription = new ControlTypeDescription("SuperControl")
+    {
+        DisplayName = "Супер элемент управления",
+        ControlGroupDisplayName = "Примеры",
+        PropertyDescriptions = {
+            PropertyFactory.GetNameProperty (),
+            PropertyFactory.GetVisibilityProperty (),
+            PropertyFactory.GetClickEvent ()
+        },
+        GetAllowedOperations = () => GetPossibleOperation(serviceProvider) <.>
+    };
+
+    return controlTypeDescription;
+}
+----
+<.> Передаем функцию проверки.
++
+Функция проверки также может быть получена по имени из хранилища функций проверки:
++
+[source,csharp]
+----
+GetAllowedOperations = AllowedOperationsStorage.GetAllowedOperations("GetPossibleOperation")
+----
++
+Код получения хранилища функций проверки:
++
+[source,charp]
+----
+IAllowedOperationsStorage allowedOperationsStorage;
+protected IAllowedOperationsStorage AllowedOperationsStorage
+{
+    get
+    {
+        return this.allowedOperationsStorage ?? (this.allowedOperationsStorage = ServiceUtil.GetService<IAllowedOperationsStorage>(serviceProvider));
+    }
+}
+----
++
+. Опубликуйте расширение с элементом управления на сервере {wc}а.
++
+. Откройте для настройки разметку карточки _Документ_.
++
+****
+Элемент управления `_Супер элемент управления_` будет представлен в библиотеке элементов управления.
+****
++
+. Откройте любую другую разметку.
++
+****
+Элемент управления `_Супер элемент управления_` будет отсутствовать в библиотеке элементов управления.
+****

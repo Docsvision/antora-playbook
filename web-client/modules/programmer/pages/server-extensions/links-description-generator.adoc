@@ -1,0 +1,123 @@
+= Разработка расширения для формирования описаний ссылок
+
+Описание ссылки, отображаемое в списке ссылок в элементе `_Ссылки_`, может формироваться одним из трёх способов:
+
+* Стандартное -- используется описание карточки, на которую указывает ссылка.
+* Разметка -- используется специальная разметка, в которой выводятся требуемые данные карточки.
+* Расширение -- для формирования описаний ссылок используется расширение {wc}а.
+
+Особенности использования стандартного способа формирования описаний, а также формирования описаний с помощью разметок рассмотрены см. в описании элемента управления xref:layouts:ctrl/special/links.adoc[Ссылки] в xref:layouts:Руководстве пользователя программы {kvr}.
+
+В данном пункте рассмотрен пример разработки расширения для формирования описаний.
+
+Описание ссылки формируется с помощью метода, зарегистрированного в сервисе ссылок xref:classLib/ILinksService.adoc[ILinksService] и указанного в качестве *Метода для описания* в настройках элемента `_Ссылки_` в программе {kvr}.
+
+Ниже приведён пример такого метода. Здесь в описание ссылки включается название карточки, на которую ведёт ссылка, а также название метки карточки (устанавливается в {wincl}е).
+
+[source,csharp]
+----
+private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, List<ReferenceListReference> allowedReferences, ref object cache) <.> <.> <.> <.>
+{
+    var labels = new StringBuilder();
+    
+    foreach (var label in sessionContext.AdvancedCardManager.GetCardData(reference.Card).Labels) <.>
+    {
+        labels.AppendFormat("{0} ", label.Name);
+    }
+
+    string linkTitle = labels.Length > 0 ? string.Format("{0} [{1}]", reference.CardDescription, labels) : reference.CardDescription; <.>
+
+    return linkTitle;
+}
+----
+<.> `sessionContext` -- контекст сессии, из которого могут быть получены сервисы или другие функции. Сервисы или другие функции могут быть полезны при формировании описания ссылки.
+<.> `reference` -- ссылка, для которой формируется описание.
+<.> `allowedReferences` -- все ссылки элемента "Ссылки";
+<.> `cache` -- кэш, содержащий результаты формирования описаний ссылок.
+<.> Формируем строку из меток карточки `reference.Card`. Переменная `reference.Card` содержит в себе идентификатор карточки, на которую указывает ссылка.
+<.> Формируем описание ссылки. Если меток нет, в описание добавляем только название карточки.
+
+С целью оптимизации в методе формирования описания может использоваться кэш. В этом случае метод `GetReferenceForLink` будет иметь следующий вид:
+
+[source,csharp]
+----
+private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, List<ReferenceListReference> allowedReferences, ref object cache)
+{
+    var dictionary = cache != null ? cache as ConcurrentDictionary<Guid, string> : new ConcurrentDictionary<Guid, string>();
+
+    if (!dictionary.TryGetValue(reference.Card, out string description)) <.>
+    {
+        description = GenDescription(sessionContext, reference);
+        dictionary.TryAdd(reference.Card, description);
+    }
+
+    return description;
+}
+
+private string GenDescription(SessionContext sessionContext, ReferenceListReference reference) <.>
+{
+    var labels = new StringBuilder();
+    foreach (var label in sessionContext.AdvancedCardManager.GetCardData(reference.Card).Labels)
+    {
+        labels.AppendFormat("{0} ", label.Name);
+    }
+    return labels.Length > 0 ? string.Format("{0} [{1}]", reference.CardDescription, labels) : reference.CardDescription;
+}
+----
+<.> Получаем описание из кэша или формируем новое.
+<.> Формирование описания вынесено в отдельный метод.
+
+Дополнительной оптимизацией механизма получения описания ссылок может быть отказ от использования объектной модели карточек в пользу отчётов (хранимых процедур). В данном случае описание будет формироваться непосредственно в БД. Вызвать такой отчёт можно с помощью менеджера отчётов (см. _Руководство программиста {dv}_):
+
+[source,csharp]
+----
+Report report = sessionContext.Session.ReportManager.Reports[ReportID]; <.>
+----
+<.> ReportId -- идентификатор отчёта.
+
+Разработанный метод необходимо зарегистрировать в серверном расширении {wc}а:
+
+. xref:server-extensions/create-publish.adoc[Создайте проект серверного расширения]
++
+. Добавьте разработанный метод (`GetReferenceForLink` в данном примере) в ядро расширения.
++
+. Переопределите метод `OnLoad(ILifetimeScope)` ядра расширения следующим образом:
++
+--
+[source,csharp]
+----
+ public override void OnLoad(ILifetimeScope lifetimeScope)
+ {
+ //
+ var linksService = lifetimeScope.Resolve<ILinksService>(); <.>
+
+   //
+   //
+   //
+   linksService.RegisterDescriptionColumnGenerator("SomeLinkGenerator", GetReferenceDocumentManagementDelegate); <.>
+
+   base.OnLoad(lifetimeScope);
+}
+----
+<.> Получение сервиса для работы со ссылками.
+<.> Регистрация метода для описания.
++
+В первом параметре указывается любое текстовое название метода (без пробелов, спецсимволов и пр.), по которому его можно вызывать. Данное название метода нужно будет указать в программе {kvr}
++
+Во втором параметре указывается делегат на разработанный метод формирования описания ссылки
+--
++
+. Опубликуйте разработанное расширение на сервере {wc}а.
++
+. Откройте в программе {kvr} разметку карточки, в которой описание ссылок должно формироваться с помощью расширения.
++
+. В свойстве `*Метод для описания*` элемента `_Ссылки_` выберите вариант *_Расширение_*, а в свойстве `*Наименование метода для описания*` укажите название разработанного метода, с которым он был зарегистрирован в сервисе ссылок (в данном примере -- название `SomeLinkGenerator`).
++
+. Сохраните разметку и перезапустите сервер {wc}а.
++
+****
+При открытии карточки с настроенной разметкой названия ссылок будут содержать описание карточки, а если у карточки установлены метки -- описание и название метки в квадратных скобках.
+
+.Пример отображения ссылок в карточке
+image::links.png[Пример отображения ссылок в карточке]
+****

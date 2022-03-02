@@ -1,0 +1,63 @@
+= Создание и публикация расширения программы {kvr}
+
+Серверное расширение представляет собой библиотеку DLL, разработанную на платформе .NET.
+
+.Чтобы создать расширение программы {kvr}:
+. Создайте в Visual Studio новый проект с типом TemplateDesignerExtension.
++
+. Обновите в проекте ссылки на зависимости.
++
+CAUTION: Версии подключаемых компонентов должны соответствовать версиям компонентов, используемых сервером {wc}а, для которого разрабатывается расширение.
++
+. Реализуйте в проекте функции расширения программы {kvr}.
++
+TIP: Примеры кода расширений программы {kvr} приведены в следующих пунктах раздела, а также в xref:how-to-use-js-api.adoc[репозитории "ДоксВижн"].
++
+. Настройте ядро расширения.
++
+Ядром расширения является класс, производный от `WebLayoutsDesignerExtension`, который содержится в файле `Extension/TemplateDesignerExtension.cs`.
++
+[source,csharp]
+----
+ class TemplateDesignerExtension : WebLayoutsDesignerExtension
+ {
+ public TemplateDesignerExtension(IServiceProvider provider)
+ : base(provider)
+ {
+ }
+   protected override List<ControlTypeDescription> GetControlTypeDescriptions() <.>
+   {
+       return new List<ControlTypeDescription>
+       {
+       };
+   }
+
+   protected override Dictionary<string, PropertyDescription> GetPropertyDescriptions() <.>
+   {
+       return new Dictionary<string, PropertyDescription>
+       {
+       };
+   }
+
+   protected override List<ResourceManager> GetResourceManagers() <.>
+   {
+       return new List<ResourceManager>
+       {
+         Resources.ResourceManager
+       };
+   }
+}
+----
+<.> Метод регистрации новых типов элементов управления.
+<.> Метод регистрации новых свойств элементов управления.
+<.> Метод регистрации локализованных ресурсов.
++
+. Скомпилируйте проект.
++
+****
+В результате будет получен файл DLL с ядром расширения программы {kvr} и реализуемыми функциями, а также файлы DLL с локализованными ресурсами.
+****
++
+. Скопируйте файл расширения на сервер {wc}а в папку `{wcd}\Plugins\%Каталог Решения%`. Каталог Решения необходимо создать самостоятельно. Ресурсные сборки нужно скопировать в папки `{wcd}\ru\` (для русской локализации), `{wcd}\uk\` (для английской локализации) и т.д.
++
+. Перезапустите {kvr}.

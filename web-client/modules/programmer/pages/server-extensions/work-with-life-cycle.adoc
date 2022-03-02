@@ -1,0 +1,35 @@
+= Работа с сервисом жизненного цикла объектов {wc}а
+
+Рассмотренные в пунктах xref:server-extensions/card-factory.adoc[] и xref:server-extensions/row-factory.adoc[] компоненты, которые позволяют внести изменения в механизмы создания, изменения и удаления карточек и строк секций из разметок, доступны программисту через специальный сервис `ILifeCycleService`. Данный сервис определяет методы:
+
+* `GetCardLifeCycle` -- Возвращает реализацию интерфейса `ICardLifeCycle` для указанного типа карточек.
+* `GetRowLifeCycle` -- Возвращает реализацию интерфейса `IRowLifeCycle` для указанной секции.
+
+Следующий код демонстрирует способ получения сервиса `ICardLifeCycle` и его использования в веб-методе для создания карточки по шаблону:
+
+[source,csharp]
+----
+public class CardServiceController : ApiController
+{
+    private readonly ILifeCycleService lifeCycleService;
+    
+    public CardServiceController(ILifeCycleService lifeCycleService) <.>
+    {
+        this.lifeCycleService = lifeCycleService;
+    }
+
+    [HttpGet]
+    public Guid CreateByTemplate(Guid cardTypeId)
+    {
+        var documentCardLifeCycle = lifeCycleService.GetCardLifeCycle(CardDocument.ID); <.>
+        if (templateId != Guid.Empty)
+        {
+            var newDocumentId = documentCardLifeCycle.CreateFromTemplate(sessionContext, templateId, null); <.>
+        }
+        return newDocumentId;
+    }
+}
+----
+<.> Принимаем требуемый сервис в конструкторе.
+<.> Получаем интерфейс для работы с карточкой типа CardDocument.
+<.> Используем метод создания карточки по шаблону.
