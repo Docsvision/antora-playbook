@@ -1,0 +1,73 @@
+= IReferenceListService - интерфейс
+
+Сервис для работы со списками ссылок на карточки.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IReferenceListService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IReferenceListService.CreateReference_MT.adoc[CreateReference(ReferenceList, LinksLinkType, FoldersFolder)] |Добавляет ссылку на папку в [.dfn .term]_список ссылок_.
+|xref:IReferenceListService.CreateReference_1_MT.adoc[CreateReference(ReferenceList, LinksLinkType, String)] |Добавляет ссылку на URL-адрес в [.dfn .term]_список ссылок_.
+|xref:IReferenceListService.CreateReference_2_MT.adoc[CreateReference(ReferenceList, LinksLinkType, BaseCard, String, Boolean)] |Добавляет ссылку на карточку в [.dfn .term]_список ссылок_.
+|xref:IReferenceListService.CreateReference_3_MT.adoc[CreateReference(ReferenceList, LinksLinkType, Guid, Guid, Boolean)] |Добавляет ссылку на карточку с заданным идентификатором в [.dfn .term]_список ссылок_.
+|xref:IReferenceListService.CreateReferenceFromReference_MT.adoc[CreateReferenceFromReference(ReferenceList, ReferenceListReference)] |Создает ссылку на основе существующей ссылки.
+|xref:IReferenceListService.CreateReferenceList_MT.adoc[CreateReferenceList] |Создает пустой [.dfn .term]_список ссылок на карточки_.
+|xref:IReferenceListService.GetReferenceDescription_MT.adoc[GetReferenceDescription(ReferenceListReference)] |Возвращает описание для объекта, на который установлена ссылка.
+|xref:IReferenceListService.RemoveReference_MT.adoc[RemoveReference(BaseCard, ReferenceList, ReferenceListReference)] |Удаляет ссылку из [.dfn .term]_списка ссылок на карточки_.
+|xref:IReferenceListService.TryGetReferenceListFromCard_MT.adoc[TryGetReferenceListFromCard(Guid, Boolean, ReferenceList)] |Получает [.dfn .term]_список ссылок на карточки_ из карточки.
+|===
+
+== Примеры
+
+Ниже приведен пример добавления ссылки на папку в список ссылок на карточки.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервисов
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
+ILinkService linkService = objectContext.GetService<ILinkService>();
+
+// Получение документа, в который добавляется ссылка
+Guid documentId = new Guid("00000000-0000-0000-0000-000000000000");
+            
+// Получение списка ссылок на карточки из документа
+ReferenceList referenceList;
+referenceListService.TryGetReferenceListFromCard(documentId, true, out referenceList);
+
+// Получение папки, на которую создается ссылка
+FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Получение типа ссылки
+LinksLinkType linksLinkType = linkService.FindLink("Ссылки");
+
+// Добавление ссылки в список ссылок
+referenceListService.CreateReference(referenceList, linksLinkType, foldersFolder);
+            
+// Сохранение изменений
+objectContext.AcceptChanges();
+----
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReference_MT.adoc[IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, FoldersFolder)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReference_1_MT.adoc[IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReference_2_MT.adoc[IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, BaseCard, String, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReference_3_MT.adoc[IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, Guid, Guid, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReferenceFromReference_MT.adoc[IReferenceListService.CreateReferenceFromReference - метод (ReferenceList, ReferenceListReference)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.CreateReferenceList_MT.adoc[IReferenceListService.CreateReferenceList - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.GetReferenceDescription_MT.adoc[IReferenceListService.GetReferenceDescription - метод (ReferenceListReference)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.RemoveReference_MT.adoc[IReferenceListService.RemoveReference - метод (BaseCard, ReferenceList, ReferenceListReference)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService.TryGetReferenceListFromCard_MT.adoc[IReferenceListService.TryGetReferenceListFromCard - метод (Guid, Boolean, ReferenceList)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

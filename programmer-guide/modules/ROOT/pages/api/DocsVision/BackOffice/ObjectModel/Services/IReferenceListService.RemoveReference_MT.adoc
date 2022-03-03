@@ -1,0 +1,49 @@
+= IReferenceListService.RemoveReference - метод (BaseCard, ReferenceList, ReferenceListReference)
+
+Удаляет ссылку из [.dfn .term]_списка ссылок на карточки_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool RemoveReference(BaseCard parentCard, ReferenceList referenceList, ReferenceListReference reference)
+----
+
+Параметры
+
+parentCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка со списком ссылок
+referenceList::
+  Тип: xref:../ReferenceList_CL.adoc[ReferenceList]
+  +
+  Список ссылок на карточки, из которого удаляется ссылка
+reference::
+  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
+  +
+  Удаляемая ссылка
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если true - ссылка была удалена, иначе - false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр referenceList или reference.
+|===
+
+== Заметки
+
+Также удаляется обратная ссылка.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

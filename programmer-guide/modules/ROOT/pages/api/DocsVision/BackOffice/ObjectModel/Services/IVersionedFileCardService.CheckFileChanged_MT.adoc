@@ -1,0 +1,33 @@
+= IVersionedFileCardService.CheckFileChanged - метод (VersionedFileCard)
+
+Определяет наличие изменений в файле.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool CheckFileChanged(DocsVision.Platform.ObjectManager.SystemCards.VersionedFileCard versionedFileCard)
+----
+
+Параметры
+
+versionedFileCard::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Версионный файл
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - файл был изменен, иначе - false
+
+== Заметки
+
+Файл считается измененным, если присутствует разница (от 2 секунд) между фактической датой изменения выгруженного файла и датой его изменения в карточке. Также при проверке учитывается наличие флага `ForceChanged` (флаг принудительного оповещения о наличии изменений) у экземпляра версионного файла.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

@@ -1,0 +1,31 @@
+= FolderFlags - перечисление
+
+Дополнительные атрибуты папки.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum FolderFlags
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Отсутствует. Значение 0x00.
+|VirtualWithSubfolders |Показывать дочерние подпапки виртуальной папки. Значение 0x01.
+|NoAutoRefresh |Отключить авто-обновление содержимого папки. Значение 0x02.
+|NoUnreadCards |Отключить подсветку количества непрочитанных карточек в папке. Значение 0x04.
+|CustomRefresh |Автоматическое обновление содержимого папки в режиме "Специальное". Значение 0x08.
+|NoChangeFolderRefresh |Не обновлять содержимое при переходе в папку. Значение 0x10.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]

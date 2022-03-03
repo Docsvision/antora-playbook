@@ -1,0 +1,41 @@
+= DocsVision.Platform.Wpf.NavExtension - класс
+
+Базовый класс расширения Windows-клиента для реализации пользовательского интерфейса (если предусмотрен) с использованием WPF.
+
+* [.keyword]*Пространство имен:* xref:Wpf_NS.adoc[DocsVision.Platform.Wpf]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.Wpf.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[ClassInterface(ClassInterfaceType.None)]
+[ComVisible(true)]
+[DefaultEvent("CardLoaded")]
+[Guid("2BE11F4F-2F18-40C0-814D-E99DFD13AC79")]
+[ToolboxItem(false)]
+public class NavExtension : CardControl, INavExtension, INavCardSubTypesExtension, INavDragDropExtension, 
+            INavFolderExtTypesExtension, INavReportExtension, INavCommandExtension, INavStandardCommandExtension, 
+            INavEventExtension, INavPickerExtension, INavControlExtension, INavPropPagesExtension, 
+            INavCardCreatorExtension, INavCardCreatorEntryContainerExtension, INavExtensionInitialize
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|NavExtension |Инициализирует новый экземпляр класса NavExtension.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:NavExtension.SupportedTypes_PR.adoc[SupportedTypes] |Возвращает список элементов Windows-клиента, для которых предназначено данное расширение.
+|===
+
+* *xref:../../../../api/DocsVision/Platform/Wpf/NavExtension.SupportedTypes_PR.adoc[NavExtension.SupportedTypes - свойство]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Wpf/Wpf_NS.adoc[DocsVision.Platform.Wpf - пространство имен]

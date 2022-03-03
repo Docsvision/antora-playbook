@@ -1,0 +1,34 @@
+= CardLibary.GetLibraryDefinition - метод
+
+Возвращает XML-описание библиотеки карточек.
+
+* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+protected virtual string GetLibraryDefinition()
+----
+
+Возвращаемое значение
+
+::
+  Тип: System.String
+  +
+  Схема библиотеки карточек.
+
+== Примеры
+
+Схема карточки должна быть добавлена в компонент в виде ресурса, который может быть возвращен методом GetLibraryDefinition:
+
+[source,pre,codeblock]
+----
+public override string GetCardDefinition(Guid cardTypeID)
+{
+   return Resources.SomeCardLibXml;
+}
+----
+
+*Parent topic:* xref:../../../../api/DocsVision/Platform/WinForms/CardLibrary_CL.adoc[CardLibrary - класс]

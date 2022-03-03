@@ -1,0 +1,54 @@
+= IBaseUniversalService.AddNewItemType - метод (BaseUniversalItemType)
+
+Создает дочерний узел в указанном узле справочника.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseUniversalItemType AddNewItemType(BaseUniversalItemType parentItemType)
+----
+
+Параметры
+
+parentItemType::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Родительский узел
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Добавленный узел
+
+== Заметки
+
+Если parentItemType не задан, то узел будет создан в корневом узле дерева справочника.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервисов
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+
+//создаем новый узел в корне справочника
+BaseUniversalItemType baseUniversalItemType = baseUniversalService.AddNewItemType(null);
+baseUniversalItemType.Name = "Узел справочника";
+baseUniversalItemType.Description = "Узел справочника созданный из кода";
+
+//элементы узла будут использовать порядковые номера
+baseUniversalItemType.UseOrder = true;
+
+//сохранение
+objectContext.SaveObject<BaseUniversalItemType>(baseUniversalItemType);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

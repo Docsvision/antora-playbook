@@ -1,0 +1,26 @@
+= Staff.Units - свойство
+
+Задает или возвращает коллекцию подразделений верхнего уровня иерархии.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public ObjectCollection<StaffUnit> Units { get; set; }
+----
+
+Значение свойства
+
+::
+  Тип: xref:../../Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<StaffUnit>
+  +
+  Коллекция подразделений типа xref:StaffUnit_CL.adoc[StaffUnit]
+
+== Заметки
+
+Данное свойство возвращает организации расположенные непосредственно на первом уровне иерархии подразделений. Дочерние организации и подразделения могут быть получены через свойство xref:StaffUnit.Units_PR.adoc[StaffUnit.Units] конкретной организации.
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/Staff_CL.adoc[Staff - класс]

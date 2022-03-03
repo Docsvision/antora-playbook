@@ -1,0 +1,41 @@
+= IStaffService.AddUnitTreeEmployeesToGroup - метод (StaffGroup, StaffUnit)
+
+Добавляет всех сотрудников подразделения в указанную группу [.dfn .term]_справочника сотрудников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+List<StaffGroupItem> AddUnitTreeEmployeesToGroup(StaffGroup group, StaffUnit unit)
+----
+
+Параметры
+
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа, в которую добавляются сотрудники
+unit::
+  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
+  +
+  Подразделение, сотрудники которого добавляются в группу group
+
+Возвращаемое значение
+
+::
+  Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroupItem>
+  +
+  Список добавленных элементов типа xref:../StaffGroupItem_CL.adoc[StaffGroupItem]
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group или unit.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

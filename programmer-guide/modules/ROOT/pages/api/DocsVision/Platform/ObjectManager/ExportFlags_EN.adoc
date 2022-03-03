@@ -1,0 +1,34 @@
+= ExportFlags - перечисление
+
+Задает формат экспорта данных.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum ExportFlags
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Условия не заданы. Значение 0x00.
+|Namespace |Указывать пространство имен. Значение 0x01.
+|LinkedCards |Включать связанные карточки. Значение 0x02.
+|LinkedFiles |Включать данные файлов. Значение 0x04.
+|LinkedRows |Включать связанные строки. Значение 0x08.
+|LinkedFilesNoData |Включать атрибуты файлов (без данных). Значение 0x10.
+|ChildRows |Включать дочерние строки иерархии. Значение 0x20.
+|ChildSections |Включать строки дочерних секций. Значение 0x40.
+|Security |Включать дескрипторы безопасности объектов. Значение 0x80.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

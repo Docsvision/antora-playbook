@@ -1,0 +1,67 @@
+= LinkGetCardInfo
+
+Возвращает данные о ссылках карточки.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/LinkGetCardInfo"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LinkGetCardInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <instanceID>guid</instanceID>
+      <toCard>boolean</toCard>
+      <linkTypes>int</linkTypes>
+      <recurseDepth>int</recurseDepth>
+    </LinkGetCardInfo>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+instanceID::
+  Идентификатор карточки
+toCard::
+  Если true, будут возвращены ссылки на карточку, иначе ссылки карточки
+linkTypes::
+  Тип ссылки:
+  +
+  * 0 - не указан
+  * 1 - слабая
+  * 2 - сильная
+  * 4 - автоматическая
+  * 255 - все типы
+recurseDepth::
+  Уровень вложенности
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LinkGetCardInfoResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <linksData>string</linksData>
+      <usingCompression>boolean</usingCompression>
+    </LinkGetCardInfoResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Common.adoc[Прочее]

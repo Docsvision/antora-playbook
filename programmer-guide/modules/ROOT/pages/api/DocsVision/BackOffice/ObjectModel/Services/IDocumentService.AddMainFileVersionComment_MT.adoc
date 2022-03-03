@@ -1,0 +1,76 @@
+= IDocumentService.AddMainFileVersionComment - метод ([Тип параметра перегрузки])
+
+Добавляет комментарий к указанной версии основного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool AddMainFileVersionComment(Document document, DocumentFile file, Guid versionId, string comment)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ, содержащий основной файл file
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Объектная модель файла документа
+versionId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор версии, к которой добавляется комментарий
+comment::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Комментарий к версии основного файла
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - комментарий добавлен успешно, иначе false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или comment.
+|===
+
+== Примеры
+
+В приведенном примере добавляется комментарий к первой версии основного файла документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение первого основного файла
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+
+VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(file.FileId);
+
+// Получение первой версии файла
+FileVersion version = versionedFileCard.Versions.First();
+
+// Добавление комментария
+documentService.AddMainFileVersionComment(document, file, version.VersionId, "Первая версия основного файла");
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

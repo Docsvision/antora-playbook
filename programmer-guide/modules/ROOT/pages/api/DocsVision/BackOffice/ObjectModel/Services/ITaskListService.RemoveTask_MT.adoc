@@ -1,0 +1,62 @@
+= ITaskListService.RemoveTask - метод (TaskList, Task, BaseCard)
+
+Удаляет задание из переданного списка заданий.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void RemoveTask(TaskList taskList, Task task, BaseCard parentCard)
+----
+
+Параметры
+
+taskList::
+  Тип: xref:../TaskList_CL.adoc[TaskList]
+  +
+  Список заданий
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Удаляемое задание
+parentCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка, в которой содержится taskList
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskList, task или parentCard.
+|https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception] |Ошибка возвращается при наличии установленной на taskList блокировки.
+|===
+
+== Примеры
+
+Ниже приведен пример, в котором производится удаление первого задания в списке заданий документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+
+// Получение документа с заполненным списком заданий
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение списка заданий из документа и первого задания из списка
+TaskList taskList = document.MainInfo.Tasks;
+Task task = taskList.Tasks.First().Task;
+
+// Удаление задания
+taskListService.RemoveTask(taskList, task, document);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService - интерфейс]

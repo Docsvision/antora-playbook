@@ -1,0 +1,60 @@
+= IKindService.AddCardKind - метод (KindsCardType)
+
+Добавляет дополнительный вид карточки, указанного типа, и возвращает на него ссылку.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+KindsCardKind AddCardKind(KindsCardType cardType)
+----
+
+Параметры
+
+cardType::
+  Тип: xref:../KindsCardType_CL.adoc[KindsCardType]
+  +
+  Тип карточки, к которому осуществляется добавление вида карточки
+
+Возвращаемое значение
+
+::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Ссылка на новый вид карточки
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр cardType.
+|===
+
+== Заметки
+
+Название нового вида карточки будет сформировано на основе названия типа карточки.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы со Справочником видов карточек
+IKindService kindService = objectContext.GetService<IKindService>();
+
+// Получение типа карточки "Документ"
+KindsCardType kindType = kindService.GetCardType(new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"));
+
+// Добавление нового вида карточки
+KindsCardKind newKind = kindService.AddCardKind(kindType);
+
+// Обязательное сохранение
+objectContext.SaveObject(newKind);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

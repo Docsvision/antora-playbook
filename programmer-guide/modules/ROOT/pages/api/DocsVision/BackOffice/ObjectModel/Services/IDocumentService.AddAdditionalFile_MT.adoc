@@ -1,0 +1,43 @@
+= IDocumentService.AddAdditionalFile - метод (Document, VersionedFileCard)
+
+Добавляет в документ дополнительный файл.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+DocumentFile AddAdditionalFile(Document document, VersionedFileCard versionedFileCard)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ, в который добавляется файл
+versionedFileCard::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Карточка версионного файла
+
+Возвращаемое значение
+
+::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или versionedFileCard.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для добавления дополнительного файла.
+|https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если невозможно загрузить дополнительный файл, в.т.ч. по причине наличия в документе дополнительного файла с подобным именем.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

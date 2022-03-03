@@ -1,0 +1,37 @@
+= CardManager.GetCardData - метод (Guid, Boolean)
+
+Возвращает по идентификатору карточки объект для работы с её данными, с обновлением кэша.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract CardData GetCardData(Guid cardId, bool refresh)
+----
+
+Параметры
+
+cardId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
+  +
+  Идентификатор карточки
+refresh::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
+  +
+  true - обновить кэш карточек; false - не обновлять
+
+Возвращаемое значение
+
+::
+  Тип: xref:CardData_CL.adoc[CardData]
+  +
+  Карточка
+
+== Заметки
+
+Параметр `refresh` не влияет на обновление данных карточки при наличии незавершенных обновления. В этом случает рекомендуется выполнить принудительное обновление - вызвать метод [.keyword .apiname]#CardData.Refresh#.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

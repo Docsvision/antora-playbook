@@ -1,0 +1,54 @@
+= IStaffService.AddGroupFolder - метод (StaffGroup, Guid, Boolean)
+
+Добавляет папку в папки группы указанной группе сотрудников.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffGroupFolder AddGroupFolder(StaffGroup staffGroup, Guid folderId, bool showInTab)
+----
+
+Параметры
+
+staffGroup::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа, которой добавляется папка группы
+folderId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор добавляемой папки
+showInTab::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - папка будет отображаться в области [.dfn .term]_моих папок_ пользователя, иначе false
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffGroupFolder_CL.adoc[StaffGroupFolder]
+  +
+  Папка группы
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение группы
+StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Добавление к группе существующей папки с идентификатором 00000000-0000-0000-0000-000000000001
+staffService.AddGroupFolder(group, new Guid("00000000-0000-0000-0000-000000000001"), true);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

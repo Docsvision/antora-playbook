@@ -1,0 +1,177 @@
+= Создание нового типа правил добавления в хранилище
+
+Администратор может настроить правила помещения бинарных данных файлов в определённые группы хранилищ, в зависимости от типа файла, его размера или принадлежности к справочникам Docsvision. Разработчику предоставляется возможность реализовать собственные типы правил для настройки условий помещения в хранилища.
+
+[NOTE]
+====
+[.note__title]#Important:# Для использования собственного типа правил добавление в хранилище необходима лицензия на систему Docsvision с редакцией «Ecm».
+====
+
+Компонент, реализующий правило добавления в хранилище, представляется собой библиотеку DLL с классом, реализующим интерфейсы xref:../api/DocsVision/Platform/StorageServer/IBinaryStorageRule_IN.adoc[IBinaryStorageRule] и xref:../api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
+
+Интерфейс IBinaryStorageRule определяет метод проверки выполнения условий помещения в хранилище. Интерфейс IExtensionInitialize определяет метод инициализации провайдера (Initialize), принимающий в сериализованном виде настройки хранилища. Настройки хранилища устанавливаются с помощью графического интерфейса настройки (рассмотрено далее).
+
+Стандартной реализацией интерфейсов IBinaryStorageRule и IExtensionInitialize является класс BaseBinaryStorageRule, который можно использовать в качестве базового класса разрабатываемого компонента с правилом добавления в хранилище.
+
+Также может быть реализован компонент настройки правила, если предполагается предоставлять возможность настройки правила с помощью Консоли настройки Docsvision.
+
+[[StorageRule__section_lrl_wmt_wlb]]
+== Пример
+
+Далее демонстрируется пример реализации правила помещения в хранилища в зависимости от установленного в настройках шаблона файлов. Исходный код примера доступен по xref:../examples/ruleByFileName.zip[ссылке].
+
+. Основной класс.
++
+В данном примере основной класс правила базируется на классе [.keyword .apiname]#BaseBinaryStorageRule#. Класс должен быть помечен атрибутом [.keyword .apiname]#System.ComponentModel.DisplayName# с указанием отображаемого названия типа правила – отображается в Консоли настройки Docsvision.
++
+Реализация компонента правила предполагает возможность его настройки с помощью Консоли настройки Docsvision. Для этого класс должен быть помечен атрибутом [.keyword .apiname]#System.ComponentModel.Editor#, в котором нужно указать полное название класс, реализующего форму настройки (описание будет приведено далее).
++
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.Platform.StorageServer.BinaryStorages.Rules;
+using DocsVision.Platform.StorageServer.Files;
+using System;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+
+namespace RuleByFileName
+{
+    [DisplayName("Шаблон файла")]
+    [Editor(
+        "RuleByFileName.FileNamePatternPropertyControl, RuleByFileName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=774759c67c4f8865, processorArchitecture=MSIL"
+        , "DocsVision.Platform.WinForms.Controls.IExtensionPropertiesControl, DocsVision.Platform.WinForms"
+    )]
+    public class FileNameStorageRule : BaseBinaryStorageRule
+    {
+        string fileNamePattern;
+
+        // Обязательный конструктор без аргументов    
+        public FileNameStorageRule()
+        {
+        }
+     
+        public FileNameStorageRule(IServiceProvider serviceProvider) : base(serviceProvider, null)
+        {
+        }
+        
+        // Метод, осуществляющий проверку соответствия файла условиям данного правила    
+        public override bool IsRuleSatisfied(IFileInfo fileInfo)
+        {
+            // Файл проверяется по маске с помощью регулярного выражения fileNamePattern
+            Regex regex = new Regex(fileNamePattern, RegexOptions.IgnoreCase);
+            return regex.IsMatch(fileInfo.Name);
+        }
+
+        // Загрузка настроек
+        protected override void ReadSettings()
+        {
+            // Из маски, установленной пользователем в Консоли настройки Docsvision формируется шаблон регулярного выражения
+            fileNamePattern = Settings.Replace(@"\", @"\\").Replace(".", @"\.").Replace("*", ".*");
+            fileNamePattern = "^" + fileNamePattern + "$";
+        }
+    }
+}
+----
++
+По умолчанию настройки, установленные в Консоли настройки Docsvision, загружаются в строковую переменную Settings. Предполагается, что пользователь будет указывать шаблон файла в виде «Акт*.doc*», а для проверки соответствия имени файла шаблону будет использоваться регулярное выражение. Чтобы привести установленный пользователем шаблон к виду шаблона регулярного выражения был переопределён стандартный метод загрузки настроек [.keyword .apiname]#ReadSettings#.
+. Компонент настройки.
++
+При создании нового типа правил помещения в хранилище можно предоставлять возможность его настройки с помощью Консоли настройки Docsvision, или хранить настройки непосредственно в классе, или предоставлять иные способы настройки.
++
+В данном примере предусмотрен стандартный способ настройки правила с помощью Консоли настройки Docsvision, который предполагает возможность ввода шаблона на странице настройки внешних хранилищ.
+
+image::img/storageRule.png[image]
++
+Для реализации данной функции нужно:
+
+[loweralpha]
+.. Создать класс с формой настройки.
+.. Указать данный класс в атрибуте [.keyword .apiname]#Editor# основного класса правила помещения в хранилище.
++
+Класс с формой настройки представляется собой компонент типа [.keyword .apiname]#System.Windows.Forms.UserControl# с реализованным программным интерфейсом link:../api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl]. Далее приведён код примера данного класса.
+
+[source,pre,codeblock]
+----
+using DocsVision.Platform.WinForms.Controls;
+using System;
+using System.Windows.Forms;
+
+namespace RuleByUser
+{
+    public partial class FileNamePatternPropertyControl : UserControl, IExtensionPropertiesControl
+    {
+       
+        public FileNamePatternPropertyControl()
+        {
+            InitializeComponent();
+        }
+
+        public string Settings
+        {
+            get;
+            private set;
+        }
+
+        public event EventHandler OnPropertiesChanged;
+
+        // Вызывается при загрузке компонента 
+        public void Initialize(string settings)
+        {
+            // Если строка настройки отсутствует, используется стандартный шаблон «*.*»
+            Settings = settings ?? "*.*";
+
+            // Отображаем загруженный шаблон в графическом интерфейсе
+            PatternBox.Text = Settings;
+        }
+
+        // Вызывается при сохранении настроек
+        public bool Save()
+        {
+            // Шаблон, установленный пользователем, должен быть сохранён в переменную Settings
+            Settings = PatternBox.Text;
+
+            return true;
+        }
+
+        private void PatternBox_TextChanged(object sender, EventArgs e)
+        {
+            OnPropertiesChanged?.Invoke(this, e);
+        }
+    }
+}
+----
++
+Пример формы настройки:
+
+image::img/storageRuleForm.png[image]
++
+У класса формы две основных задачи:
+
+* показать пользователю текущие настройки при открытии формы настройки при вызове метода Initialize;
+* сохранить настройки пользователя в переменную Settings при вызове метода Save.
+
+При вызове Save можно осуществить проверку настроек пользователя: если настройки не содержат ошибки нужно вернуть true, иначе – false.
+. Подписание сборки.
++
+Разработанный компонент должен быть подписан. Это необходимо для формирования полного имени сборки и регистрации компонента в GAC.
+. Регистрация компонента в GAC.
++
+Собранный компонент, включающий основной класс и класс формы настройки, должен быть зарегистрирован в GAC сервера Docsvision. Для регистрации используйте [.ph .filepath]`gacutil`.
+
+== Проверка
+
+. Настройка нового правила помещения в хранилище.
+[loweralpha]
+.. Откройте Консоль настройки Docsvision.
+.. Перейдите в раздел [.ph .menucascade]#[.ph .uicontrol]*Базы данных* > [.ph .uicontrol]*Настройки базы данных* > [.ph .uicontrol]*Внешние хранилища*#.
+.. В секции «Правила помещения в хранилища» добавьте новое правила.
+[lowerroman]
+... При добавлении в параметре [.ph .uicontrol]*Тип* выберите вариант [.ph .uicontrol]*Добавить из сборки* и выберите сборку с реализованным новым правилом. В список типов правил добавить строка «Шаблон файла».
+... Выберите тип «Шаблон файла» и укажите шаблон файла.
+... Укажите группу хранилищ, в которую будет помещаться файлы по данному правилу.
+.. Переместите правило в начало списка правил, чтобы оно проверялось первым при добавлении файла.
+.. Если требуется настройте другие параметры хранилищ.
+.. Сохраните настройки.
+. Создайте карточку и добавьте файл с названием, соответствующим указанному в правиле «Шаблон файла» шаблону. Файл будет сохранён в хранилище из группы хранилищ, указанных при настройке правила «Шаблон файла».
+
+*Parent topic:* xref:../pages/ExternalStorages.adoc[Внешние хранилища]

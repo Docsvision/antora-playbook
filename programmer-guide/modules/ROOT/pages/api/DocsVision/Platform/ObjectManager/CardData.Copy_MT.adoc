@@ -1,0 +1,42 @@
+= CardData.Copy - метод
+
+Серверное копирование данных карточек.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract CardData Copy()
+----
+
+Возвращаемое значение
+
+::
+  Тип: xref:CardData_CL.adoc[CardData]
+  +
+  Экземпляр карточки
+
+== Заметки
+
+Копирует данные текущей карточки. В результат получается новый независимый экземпляр карточки с другим идентификатором.
+
+== Примеры
+
+Ниже приведен пример использования метода [.keyword .apiname]#Copy# при создании копии карточки с изменением описания
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение карточки
+CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"), false);
+
+// Создание копии 
+CardData newCardData = userSession.CardManager.GetCardData(cardData.Id, false).Copy();
+newCardData.Description = newCardData.Description + " Copy";
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

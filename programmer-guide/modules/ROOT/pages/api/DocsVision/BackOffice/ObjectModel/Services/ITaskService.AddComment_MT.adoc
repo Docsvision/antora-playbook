@@ -1,0 +1,50 @@
+= ITaskService.AddComment - метод (Task, StaffEmployee, String, DateTime)
+
+Добавляет комментарий в указанное задание.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+TaskComment AddComment(Task task, StaffEmployee author, string text, DateTime creationDate)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, в которое добавляется комментарий
+author::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, который осуществляет добавление
+text::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Содержимое комментария
+creationDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Дата добавления комментария
+
+Возвращаемое значение
+
+::
+  Тип: xref:../TaskComment_CL.adoc[TaskComment]
+  +
+  Сущность комментария
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, author или text.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав на добавление комментария.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

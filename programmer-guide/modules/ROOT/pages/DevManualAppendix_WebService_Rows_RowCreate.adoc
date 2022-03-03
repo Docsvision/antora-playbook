@@ -1,0 +1,93 @@
+= RowCreate
+
+Создает новую строку секции.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowCreate"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowCreate xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <sectionId>guid</sectionId>
+      <rowId>guid</rowId>
+      <instanceID>guid</instanceID>
+      <parentRowId>guid</parentRowId>
+      <parentTreeRowId>guid</parentTreeRowId>
+    </RowCreate>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+sectionId::
+  Идентификатор секции
+rowId::
+  Идентификатор создаваемой строки
+instanceID::
+  Идентификатор карточки
+parentRowId::
+  Идентификатор родительской строки, если создаваемая строка должна быть подчиненной
+parentTreeRowId::
+  Идентификатор родительской строки, если создаваемая строка должна быть подчиненной в иерархической секции
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowCreateResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newRowId>guid</newRowId>
+    </RowCreateResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowCreate"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowCreate xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <sectionId>2FDE03C2-FF87-4E42-A8C2-7CED181977FB</sectionId>
+      <rowId>00000000-0000-0000-0000-000000000000</rowId>
+      <instanceID>272AFAA6-238D-E511-9417-90E6BA57B9F8</instanceID>
+      <parentRowId>00000000-0000-0000-0000-000000000000</parentRowId>
+      <parentTreeRowId>00000000-0000-0000-0000-000000000000</parentTreeRowId>
+    </RowCreate>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Разбираем ответ и выводим идентификатор новой строки
+responseParsed = ElementTree.fromstring(response.content)
+newRowId = responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newRowId")
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Rows.adoc[Строки секций]

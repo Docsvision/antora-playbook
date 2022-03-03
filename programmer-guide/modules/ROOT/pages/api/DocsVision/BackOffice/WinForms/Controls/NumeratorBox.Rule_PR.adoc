@@ -1,0 +1,43 @@
+= NumeratorBox.Rule - свойство
+
+Задает или возвращает идентификатор правила нумерации, используемого элементом управления.
+
+* [.keyword]*Пространство имен:* xref:Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public Guid Rule { get; set; }
+----
+
+Значение свойства
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор правила нумерации
+
+== Примеры
+
+Ниже приведен пример кода, который выводит на экран название правила нумерации, используемого элементом управления "Нумератор".
+
+[source,pre,codeblock,language-csharp]
+----
+private void ShowRuleName_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ // Получаем элемент управления с названием "НомерДокумента"
+ ICustomizableControl customizable = this.CardControl;
+ NumeratorBox registrationNumber = customizable.FindPropertyItem<NumeratorBox>("НомерДокумента");
+ 
+ // Получаем идентификатор правила нумерации
+ Guid ruleId = registrationNumber.Rule;
+ 
+ // Получаем и выводим название правила
+ NumerationRulesRule numerationRule = this.CardControl.ObjectContext.GetObject<NumerationRulesRule>(ruleId);
+ MessageBox.Show(numerationRule.Name);
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/WinForms/Controls/NumeratorBox_CL.adoc[NumeratorBox - класс]

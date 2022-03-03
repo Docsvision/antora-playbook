@@ -1,0 +1,34 @@
+= INumerationRulesService.DeleteRuleItem - метод (NumerationRulesRuleItem, NumerationRulesRule)
+
+Удаляет строку правила нумерации из [.dfn .term]_конструктора правил нумерации_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteRuleItem(NumerationRulesRuleItem ruleItem, NumerationRulesRule rule)
+----
+
+Параметры
+
+ruleItem::
+  Тип: xref:../NumerationRulesRuleItem_CL.adoc[NumerationRulesRuleItem]
+  +
+  Удаляемая строка правила нумерации
+rule::
+  Тип: xref:../NumerationRulesRule_CL.adoc[NumerationRulesRule]
+  +
+  Правило нумерации, из которого удаляется строка
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр ruleItem или rule.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]

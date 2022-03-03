@@ -1,0 +1,37 @@
+= IBaseCardService.GetBusinessProcessesToStart - метод (BaseCard)
+
+Получает список видов бизнес-процесса, которые могут быть запущены из карточки.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+IEnumerable<KindsCardProcess> GetBusinessProcessesToStart(BaseCard baseCard)
+----
+
+Параметры
+
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<KindsCardProcess>
+  +
+  Коллекция видов типа xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

@@ -1,0 +1,41 @@
+= BuiltInState - класс
+
+Представляет встроенное состояние конструктора состояний.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public sealed class BuiltInState
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|First |Возвращает признак того, что состояние является начальным для объекта.
+|Id |Возвращает идентификатор состояния.
+|LocalizedName |Возвращает локализованное название состояния.
+|Name |Возвращает название состояния.
+|Owner |Возвращает идентификатор владельца состояния (идентификатор типа карточки).
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Register(Dictionary<Int32, String>, Guid, Guid) |Регистрирует состояние в коллекции.
+|Register(Dictionary<Int32, String>, Guid, Boolean, Guid) |Регистрирует состояние в коллекции. Позволяет обозначить состояние признаком начального состояния.
+|ToString |Возвращает название состояния, по возможности локализованное.
+|===
+
+== Заметки
+
+В классе BuiltInState используется статический список для хранения зарегистрированных состояний, и последующего обращения к ним. Количество зарегистрированных состояний ограничено и составляет 65535.
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

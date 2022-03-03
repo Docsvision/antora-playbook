@@ -1,0 +1,74 @@
+= FileArchiveGroup
+
+Перемещает несколько файлов в архив.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FileArchiveGroup"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FileArchiveGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <items>string</items>
+      <delay>boolean</delay>
+    </FileArchiveGroup>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+items::
+  Список идентификаторов архивируемых файлов
+delay::
+  Если true, то метод отметит файл, как перемещаемый в архив, а непосредственное перемещение будет выполнено позднее
+
+Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="GroupOperation">
+  <xsd:annotation>
+    <xsd:documentation>Group operation items</xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType>
+    <xsd:sequence maxOccurs="unbounded">
+      <xsd:element name="Item">
+        <xsd:complexType>
+          <xsd:attribute name="ID" type="xsd:string" use="required"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FileArchiveGroupResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <failedItems>string</failedItems>
+    </FileArchiveGroupResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Files.adoc[Файлы]

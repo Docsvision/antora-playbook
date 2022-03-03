@@ -1,0 +1,35 @@
+= NavFolderControlType - перечисление
+
+Предоставляет для расширения Windows-клиента типы папок .
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:Extensibility_NS.adoc[DocsVision.Platform.Extensibility]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.Extensibility.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum NavFolderControlType
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|Unknown |Неизвестный тип папки. Значение 0x0000.
+|PublicRoot |Папка общедоступных документов. Значение 0x0001.
+|Folder |Обычная папка. Значение 0x0002.
+|CardsRoot |Системная папка "Карточки". Значение 0x04.
+|CardLibrary |Папка библиотеки карточек в системной ветке "Карточки". Значение 0x0008.
+|CardType |Папка типа карточек в системной ветке "Карточки". Значение 0x0010.
+|SearchResults |Системная папка "Результаты поиска". Значение 0x0020.
+|References |Системная папка "Справочники". Значение 0x0040.
+|RecycleBin |Системная папка "Корзина". Значение 0x0080.
+|FavoritesPersonal |Папка "Избранное". Значение 0x0200.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Extensibility/Extensibility_NS.adoc[DocsVision.Platform.Extensibility - пространство имен]

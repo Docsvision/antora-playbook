@@ -1,0 +1,67 @@
+= JoinSection - класс
+
+Предоставляет данные присоединенной секции в поисковом запросе.
+
+* [.keyword]*Пространство имен:* xref:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class JoinSection
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Alias |Задает или возвращает псевдоним данного присоединения (присоединения секции).
+|Id |Задает или возвращает идентификатор секции, к которой выполнено присоединение.
+|JoinWith |Задает или возвращает псевдоним присоединения, если данное присоединение от другого присоединения.
+|ReturnFields |[.dfn .term]_Не используется._
+|SectionField |Задает или возвращает название поля, к которому выполнено присоединение.
+|SectionQuery |Задает или возвращает текущий поисковый запрос.
+|TableName |Задает или возвращает название SQL-таблицы, если выполнено присоединение к таблице базы данных. Указывать Id не требуется.
+|WithField |Задает или возвращает псевдоним поля, от которого присоединяется секция.
+|===
+
+== Примеры
+
+В качестве примера, найдем документы, автором которых является сотрудник с табельным номером 456.
+
+[source,pre,codeblock,language-csharp]
+----
+// Создаем поисковый запрос
+SearchQuery searchQuery = userSession.CreateSearchQuery();
+
+// Создаем поиск по типу карточки
+CardTypeQuery cardTypeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(CardDocument.ID);
+            
+// Добавляем поиск по секции карточки Основная информация
+SectionQuery sectionQuery = cardTypeQuery.SectionQueries.AddNew(CardDocument.MainInfo.ID);
+
+// Создаем присоединяемую секцию с псевдонимом Author1
+JoinSection joinSection = sectionQuery.JoinSections.AddNew("Author1");
+
+// Указываем идентификатор секции, к которой присоединяемся - сотрудники Справочника сотрудников
+joinSection.Id = RefStaff.Employees.ID;
+
+// Указываем идентификатор поля, к которому присоединяемся - идентификатор сотрудника
+joinSection.SectionField = "RowID";
+
+// Указываем псевдоним поля основной секции, по которому выполняется присоединение - автор документа
+joinSection.WithField = CardDocument.MainInfo.Author;
+
+// Добавляем условие поиска по табельному номеру 
+Condition condition = sectionQuery.ConditionGroup.Conditions.AddNew(RefStaff.Employees.ClockNumber, FieldType.Unistring, ConditionOperation.Equals, "456");
+
+// Указываем псевдоним секции, по которой выполняется поиск - псевдоним присоединенной секции
+condition.SectionAlias = joinSection.Alias;
+            
+// Выполняем поиск и получаем результат - карточки, автором которых является сотрудник с таб. номером 456
+CardDataCollection result = userSession.CardManager.FindCards(searchQuery.GetXml());
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SearchModel/SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel - пространство имен]

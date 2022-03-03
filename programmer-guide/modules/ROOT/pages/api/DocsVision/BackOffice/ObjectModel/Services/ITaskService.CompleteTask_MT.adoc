@@ -1,0 +1,66 @@
+= ITaskService.CompleteTask - метод (Task, String)
+
+Завершает указанное задание.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BuiltInState CompleteTask(Task task, string comments)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+comments::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Комментарий к завершению задания
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BuiltInState_CL.adoc[BuiltInState]
+  +
+  Состояние завершения
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
+|===
+
+== Заметки
+
+Данный метод завершает задание от имени владельца сессии; дополнительно требуется вызвать xref:IStateService.ChangeState_MT.adoc[IStateService.ChangeState] для изменения фактического состояния карточки.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+// Получение задания
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Завершение задания
+BuiltInState state = taskService.CompleteTask(task, "Все документы получены");
+
+// Иземение состояния карточки
+IStateService stateService = objectContext.GetService<IStateService>();            
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(state, task));
+objectContext.AcceptChanges();    
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

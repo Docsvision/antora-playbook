@@ -1,0 +1,35 @@
+= ServiceError - класс
+
+Содержит статические методы формирования исключений, возникающих при работе сервисов.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public static class ServiceError
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ArgumentNull(String) |Возвращает исключение типа [.keyword .apiname]#System.ArgumentNullException#.
+|ArgumentOutOfRange(String) |Возвращает исключение типа [.keyword .apiname]#System.ArgumentOutOfRangeException#.
+|FileNotFound(String) |Возвращает исключение типа [.keyword .apiname]#System.IO.FileNotFoundException#.
+|InvalidOperation(String) |Возвращает исключение типа [.keyword .apiname]#System.InvalidOperationException#.
+|InvalidOperation(String, Object[]) |Возвращает исключение типа [.keyword .apiname]#System.InvalidOperationException#. Текст ошибки формируется согласно переданному шаблону.
+|ObjectLockedException(String) |Возвращает исключение типа [.keyword .apiname]#System.Exception#.
+|OperationAccessDenied(String) |Возвращает исключение типа [.keyword .apiname]#System.MethodAccessException#.
+|PathTooLong(String) |Возвращает исключение типа [.keyword .apiname]#System.IO.PathTooLongException#.
+|ServiceNotAvailable(String) |Возвращает исключение типа [.keyword .apiname]#DocsVision.Platform.ObjectModel.ServiceNotAvailableException#.
+|SettingsForKindAreNull |Возвращает исключение типа [.keyword .apiname]#System.Exception#.
+|TaskHierarchySearchException(String) |Возвращает исключение типа [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.Services.Entities.TaskHierarchySearchException#.
+|TaskInactivePerformersException(String) |Возвращает исключение типа [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.Services.Entities.TaskInactivePerformersException#.
+|WrongStatePassed |Возвращает исключение типа [.keyword .apiname]#System.Exception#.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

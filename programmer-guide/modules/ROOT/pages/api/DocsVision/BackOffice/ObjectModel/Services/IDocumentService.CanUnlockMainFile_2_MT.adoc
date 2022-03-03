@@ -1,0 +1,46 @@
+= IDocumentService.CanUnlockMainFile - метод (Document, DocumentFile, String)
+
+Определяет возможность разблокировки определенного основного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool CanUnlockMainFile(Document document, DocumentFile file, out string failReason)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+failReason::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Причина, по которой невозможно разблокировать основной файла
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - файл может быть разблокирован, иначе - false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
+|https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если невозможно сопоставить файл версионной карточки, указанному файлу документа - file.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

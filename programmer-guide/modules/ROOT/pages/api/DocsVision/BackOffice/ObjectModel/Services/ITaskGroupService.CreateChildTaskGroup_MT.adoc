@@ -1,0 +1,71 @@
+= ITaskGroupService.CreateChildTaskGroup - метод (Task, KindsCardKind, BaseCard, TaskList)
+
+Создает новую подчиненную группу заданий.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+TaskGroup CreateChildTaskGroup(Task parentTask, KindsCardKind kind, BaseCard parentCard, TaskList taskList)
+----
+
+Параметры
+
+parentTask::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, в которое может быть добавлена группа. Может быть передан null, тогда группа заданий будет добавлена в taskList
+kind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид группы заданий
+parentCard::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Карточка, в которую будет добавлена группы заданий
+taskList::
+  Тип: xref:../TaskList_CL.adoc[TaskList]
+  +
+  Список подписей, к которому будет прикреплена новая группа заданий
+
+Возвращаемое значение
+
+::
+  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
+  +
+  Созданная группа заданий
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind, parentCard или taskList.
+|===
+
+== Примеры
+
+Ниже приведен пример создания группы заданий в существующем документе
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с группой заданий
+ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
+
+// Получение вида группы заданий (например, "Группа заданий УД")
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("6D76D0A7-5434-40F2-912E-6370D33C3151"));
+
+// Получение документа, в который будет добавлена группа заданий
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Добавление группы заданий
+taskGroupService.CreateChildTaskGroup(null, kind, document, document.MainInfo.Tasks);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

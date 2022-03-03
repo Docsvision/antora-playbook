@@ -1,0 +1,49 @@
+= INumerationRulesService - интерфейс
+
+Сервис для работы с [.dfn .term]_конструктором правил нумерации_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface INumerationRulesService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:INumerationRulesService.AddNewCondition_MT.adoc[AddNewCondition(NumerationRulesRuleItem)] |Добавляет условие в строку правила нумерации в [.dfn .term]_конструкторе правил нумерации_.
+|xref:INumerationRulesService.AddNewNumerator_MT.adoc[AddNewNumerator] |Создает новый нумератор.
+|xref:INumerationRulesService.AddNewRule_MT.adoc[AddNewRule] |Создает новое правило нумерации в [.dfn .term]_конструкторе правил нумерации_.
+|xref:INumerationRulesService.AddNewRuleItem_MT.adoc[AddNewRuleItem(NumerationRulesRule)] |Добавляет новую строчку в правило нумерации.
+|xref:INumerationRulesService.CreateNumber_MT.adoc[CreateNumber(CardData, BaseCard, NumerationRulesRule)] |Выделяет указанной карточке номер из нумератора следуя приложенному правилу нумерации.
+|xref:INumerationRulesService.CreateTextNumber_MT.adoc[CreateTextNumber(BaseCard, String)] |Создает объект типа [.keyword .apiname]#BaseCardNumber#, содержащий текстовое представление номера.
+|xref:INumerationRulesService.DeleteCondition_MT.adoc[DeleteCondition(NumerationRulesRuleItemCondition, NumerationRulesRuleItem)] |Удаляет условие из строки правила нумерации.
+|xref:INumerationRulesService.DeleteNumber_MT.adoc[DeleteNumber(BaseCardNumber)] |Удаляет указанный номер из владеющей им карточки.
+|xref:INumerationRulesService.DeleteNumerator_MT.adoc[DeleteNumerator(NumerationRulesNumerator)] |Удаляет нумератор из [.dfn .term]_конструктора правил нумерации_.
+|xref:INumerationRulesService.DeleteRule_MT.adoc[DeleteRule(NumerationRulesRule)] |Удаляет правило нумерации из [.dfn .term]_конструктора правил нумерации_.
+|xref:INumerationRulesService.DeleteRuleItem_MT.adoc[DeleteRuleItem(NumerationRulesRuleItem, NumerationRulesRule)] |Удаляет строку правила нумерации из [.dfn .term]_конструктора правил нумерации_.
+|xref:INumerationRulesService.FindRuleBy_MT.adoc[FindRuleBy(NumerationRulesRuleItem)] |Возвращает правило нумерации, которому принадлежит указанная строка.
+|xref:INumerationRulesService.GetNumber_MT.adoc[GetNumber(BaseCard, Guid)] |Возвращает из карточки номер с указанным идентификатором.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.AddNewCondition_MT.adoc[INumerationRulesService.AddNewCondition - метод (NumerationRulesRuleItem)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.AddNewNumerator_MT.adoc[INumerationRulesService.AddNewNumerator - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.AddNewRule_MT.adoc[INumerationRulesService.AddNewRule - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.AddNewRuleItem_MT.adoc[INumerationRulesService.AddNewRuleItem - метод (NumerationRulesRule)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.CreateNumber_MT.adoc[INumerationRulesService.CreateNumber - метод (CardData, BaseCard, NumerationRulesRule)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.CreateTextNumber_MT.adoc[INumerationRulesService.CreateTextNumber - метод (BaseCard, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.DeleteCondition_MT.adoc[INumerationRulesService.DeleteCondition - метод (NumerationRulesRuleItemCondition, NumerationRulesRuleItem)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.DeleteNumber_MT.adoc[INumerationRulesService.DeleteNumber - метод (BaseCardNumber)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.DeleteNumerator_MT.adoc[INumerationRulesService.DeleteNumerator - метод (NumerationRulesNumerator)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.DeleteRule_MT.adoc[INumerationRulesService.DeleteRule - метод (NumerationRulesRule)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.DeleteRuleItem_MT.adoc[INumerationRulesService.DeleteRuleItem - метод (NumerationRulesRuleItem, NumerationRulesRule)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.FindRuleBy_MT.adoc[INumerationRulesService.FindRuleBy - метод (NumerationRulesRuleItem)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService.GetNumber_MT.adoc[INumerationRulesService.GetNumber - метод (BaseCard, Guid)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

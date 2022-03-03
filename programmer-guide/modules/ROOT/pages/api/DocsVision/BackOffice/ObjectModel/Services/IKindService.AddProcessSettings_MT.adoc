@@ -1,0 +1,41 @@
+= IKindService.AddProcessSettings - метод (KindsCardKind, Guid, String)
+
+Добавляет бизнес-процесс c настройками к указанному виду карточки.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+KindsCardProcess AddProcessSettings(KindsCardKind cardKind, Guid templateId, string name)
+----
+
+Параметры
+
+cardKind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид карточки, к которой осуществляется добавление
+templateId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор шаблона бизнес-процесса
+
+Возвращаемое значение
+
+::
+  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
+  +
+  Бизнес-процесс, описанный в настройках карточки определенного вида
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр cardKind или templateId.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

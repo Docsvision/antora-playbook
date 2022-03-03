@@ -1,0 +1,45 @@
+= Описание (схема) форматирования
+
+Важной частью представления, помимо получения данных, является их форматирование (а также, возможно, дополнительная обработка) при отображении в конечном клиентском приложении.
+
+Windows-клиент, который является базовым средством для работы с представлениями, предлагает следующие возможности обработки и форматирования данных:
+
+* фильтрация данных (при помощи дополнительных фильтров);
+* агрегация (вычисление статистических величин);
+* группировка данных в таблице;
+* сортировка данных в таблице;
+* указание шрифта для таблицы;
+* разметка линий сетки в таблице;
+* указание ширины строк в таблице;
+* задание имен колонок.
+
+Для работы с настройками представлений Windows-клиента в объектной модели предусмотрен объект xref:../api/DocsVision/Platform/ObjectManager/SystemCards/NavigatorCard.ViewSettings_PR.adoc[ViewSettings], доступный из карточки Windows-клиента (xref:../api/DocsVision/Platform/ObjectManager/SystemCards/NavigatorCard_CL.adoc[NavigatorCard]).
+
+Каждому конкретному представлению соответствуют индивидуальные настройки отображения, поэтому общее число объектов ViewSettings соответствует количеству настроенных в системе представлений.
+
+Пример кода работы с настройками представления:
+
+[source,pre,codeblock,language-csharp]
+----
+//Получение первого попавшегося представления
+SavedView view = viewcard.Views[0];
+  
+//Получение карточки Windows-клиента
+const string NAVIGATOR_CARD_TYPE = "{A7F9784B-96A4-4B3E-B820-2E714A2A1463}";
+NavigatorCard nav = (NavigatorCard)session.CardManager.GetDictionary(new Guid(NAVIGATOR_CARD_TYPE));
+  
+//Получение настроек представления
+ViewSettings settings = nav.ViewSettings[view.Id];
+  
+//Перебор всех колонок и вывод их названий
+foreach(ViewColumnSettings col in settings.Columns)
+{
+ MessageBox.Show(col.Caption);
+}
+----
+
+== См. далее
+
+* xref:dm_views_getdata.adoc[Получение данных представления]
+
+*На уровень выше:* xref:../pages/dm_views.adoc[Работа с представлениями]

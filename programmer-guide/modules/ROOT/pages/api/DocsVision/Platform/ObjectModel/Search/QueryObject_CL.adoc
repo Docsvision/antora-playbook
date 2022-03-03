@@ -1,0 +1,67 @@
+= QueryObject - класс
+
+Класс QueryObject представляет собой контейнер для формирования поискового запроса.
+
+* [.keyword]*Пространство имен:* xref:Search_NS.adoc[DocsVision.Platform.ObjectModel.Search]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class QueryObject
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|QueryObject() |Инициализирует новый экземпляр класса QueryObject.
+|QueryObject(Criterion) |Инициализирует новый экземпляр класса QueryObject с заданными параметрами.
+|QueryObject(String, CompareOperation) |Инициализирует новый экземпляр класса QueryObject с заданными параметрами.
+|QueryObject(String, Object) |Инициализирует новый экземпляр класса QueryObject с заданными параметрами.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:QueryObject.Criteria_PR.adoc[Criteria] |Возвращает коллекцию критериев поиска, определенных в контейнере поискового запроса.
+|xref:QueryObject.ObjectTypeId_PR.adoc[ObjectTypeId] |Задает или возвращает идентификатор типа объекта поиска.
+|xref:QueryObject.Operation_PR.adoc[Operation] |Задает или возвращает логическую операцию, применяемую к критериям поиска.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddCriterion(Criterion) |Добавляет новый критерий поиска к запросу.
+|AddCriterion(String, CompareOperation) |Добавляет критерий поиска по значению поля.
+|AddCriterion(String, Object) |Добавляет критерий поиска по значению поля.
+|xref:QueryObject.AddCriterion_MT.adoc[AddCriterion(String, Object, CompareOperation)] |Добавляет новый критерий поиска в контейнер поискового запроса.
+|===
+
+== Примеры
+
+В приведенном примере выполняется поиск строки с именем "SyncMaster 123" в узлах [.dfn .term]_Конструктора справочников_
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Формирование поискового запроса по полю Name
+QueryObject query = new QueryObject(BaseUniversalItem.NameProperty.Name, "SyncMaster 123");
+
+// Выполнение запроса
+BaseUniversalItem item = objectContext.FindObject<BaseUniversalItem>(query);
+----
+
+* *xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/QueryObject.Criteria_PR.adoc[QueryObject.Criteria - свойство]* +
+* *xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/QueryObject.ObjectTypeId_PR.adoc[QueryObject.ObjectTypeId - свойство]* +
+* *xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/QueryObject.Operation_PR.adoc[QueryObject.Operation - свойство]* +
+* *xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/QueryObject.AddCriterion_MT.adoc[QueryObject.AddCriterion - метод (String, Object, CompareOperation)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/Search_NS.adoc[DocsVision.Platform.ObjectModel.Search - пространство имен]

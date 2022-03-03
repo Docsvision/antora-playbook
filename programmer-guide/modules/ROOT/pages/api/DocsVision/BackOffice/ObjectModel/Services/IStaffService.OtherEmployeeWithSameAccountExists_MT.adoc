@@ -1,0 +1,45 @@
+= IStaffService.OtherEmployeeWithSameAccountExists - метод (StaffEmployee, String)
+
+Определяет наличие сотрудников с указанной учетной записью.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool OtherEmployeeWithSameAccountExists(StaffEmployee employee, string name)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, который не должен учитываться при проверке
+name::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Проверяемая учетная запись
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - есть сотрудники с указанной учетной записью
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|===
+
+== Заметки
+
+Данный метод может быть использован при добавлении нового сотрудника, чтобы предупредить дублирование информации.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

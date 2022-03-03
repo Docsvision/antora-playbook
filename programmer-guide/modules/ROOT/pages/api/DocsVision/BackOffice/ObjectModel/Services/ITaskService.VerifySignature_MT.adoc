@@ -1,0 +1,109 @@
+= ITaskService.VerifySignature - метод (Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)
+
+Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных к заданием.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardSignatureVerification VerifySignature(Task task, BaseCardSignature signature, X509Certificate2 certificate, bool signDocument, IEnumerable<CardFieldSetting> fields)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, содержащий подписанные данные
+signature::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Проверяемая подпись
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат ЭЦП сотрудника, чей сертификат использовался при подписании
+signDocument::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Параметр не проверяется
+fields::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
+  +
+  Коллекция полей типа xref:Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], у которых должна быть проверена подпись. Список подписываемых полей задается в Справочнике видов карточек
+
+Возвращаемое значение
+
+::
+  Тип: xref:Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]
+  +
+  Результат проверки ЭЦП
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или signature.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+using System.Linq;
+using System.Windows.Forms.Design;
+
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.BackOffice.WinForms.Controls;
+using DocsVision.Platform.ObjectModel;
+
+namespace BackOffice
+{
+ public class CardTaskТестScript : CardTaskНа_ознакомлениеScript
+ {
+  private void VerifySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+  {
+   ObjectContext objectContext = base.CardControl.ObjectContext;
+   Task task = (base.BaseObject as Task);
+
+   // Получение сервисов для работы с заданиями и интерфесом пользователя
+   ITaskService taskService = objectContext.GetService<ITaskService>();
+   IUIService uiService = objectContext.GetService<IUIService>();
+
+   bool cancel = false;
+
+   // Получение сертификата
+   var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
+   if (cancel) return;
+
+   // Получение настроек вида карточки
+   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind);
+
+   // Получение настроек (с названием SignOperation) подписания операции, которые определены в Справочнике видов карточек
+   // При проверке подписей установленных на поля карточки, будет использован список полей из настроек
+   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation");
+
+   // Получение последней установленной подписи
+   BaseCardSignature lastSignature = task.MainInfo.SignatureList.Signatures.Last();
+
+   // Проверка подписи
+   var result = taskService.VerifySignature(task, lastSignature, certificate, true, signatureSetting.Fields);
+
+   // Оповещение пользователя о результате проверки ЭЦП
+   if (result.IsValid)
+   {
+    uiService.ShowMessage("Задание является надежным");
+   } else {
+    uiService.ShowError("Задание не является надежным");
+   }
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

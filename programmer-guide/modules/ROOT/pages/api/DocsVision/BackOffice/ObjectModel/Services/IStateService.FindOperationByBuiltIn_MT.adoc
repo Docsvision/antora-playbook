@@ -1,0 +1,41 @@
+= IStateService.FindOperationByBuiltIn - метод (BuiltInOperation, KindsCardKind)
+
+Возвращает операцию (редактирования или перехода), определенную в [.dfn .term]_Конструкторе состояний_ и соответствующую заданной встроенной операции.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StatesOperation FindOperationByBuiltIn(BuiltInOperation builtInOperation, KindsCardKind kind)
+----
+
+Параметры
+
+builtInOperation::
+  Тип: xref:../BuiltInOperation_CL.adoc[BuiltInOperation]
+  +
+  Встроенная операция
+kind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид карточки
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
+  +
+  Операция [.dfn .term]_конструктора состояний_
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInOperation.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

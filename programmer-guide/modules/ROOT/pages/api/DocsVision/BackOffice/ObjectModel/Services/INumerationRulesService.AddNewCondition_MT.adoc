@@ -1,0 +1,37 @@
+= INumerationRulesService.AddNewCondition - метод (NumerationRulesRuleItem)
+
+Добавляет условие в строку правила нумерации в [.dfn .term]_конструкторе правил нумерации_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+NumerationRulesRuleItemCondition AddNewCondition(NumerationRulesRuleItem ruleItem)
+----
+
+Параметры
+
+ruleItem::
+  Тип: xref:../NumerationRulesRuleItem_CL.adoc[NumerationRulesRuleItem]
+  +
+  Строка правила нумерации, в которую добавляется условие
+
+Возвращаемое значение
+
+::
+  Тип: xref:../NumerationRulesRuleItemCondition_CL.adoc[NumerationRulesRuleItemCondition]
+  +
+  Добавленное условие
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр ruleItem.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]

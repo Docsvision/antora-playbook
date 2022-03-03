@@ -1,0 +1,36 @@
+= LogMessage - класс
+
+Представляет запись в журнале бизнес-процесса.
+
+* [.keyword]*Пространство имен:* xref:Objects_NS.adoc[DocsVision.Workflow.Objects]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Objects.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class LogMessage : LogMessageWrapper
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ID |Возвращает идентификатор сообщения.
+|InUpdate |Возвращает признак включения для объекта режима отложенных изменения.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|BeginUpdate |Включает режим отложенных изменений.
+|CancelUpdate |Отменяет несохраненные изменения и выключает режим отложенных изменений.
+|EndUpdate |Отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
+|Refresh |Выполняет обновление данных.
+|UpdateNow |Отправляет накопленные изменения на сервер.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Objects/Objects_NS.adoc[DocsVision.Workflow.Objects - пространство имен]

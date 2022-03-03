@@ -1,0 +1,129 @@
+= ReportGetData
+
+Получает результат выполнения отчета.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/ReportGetData"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ReportGetData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <reportId>guid</reportId>
+      <paramsData>string</paramsData>
+    </ReportGetData>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+reportId::
+  Идентификатор отчета
+paramsData::
+  Параметры выполнения отчета
+
+Строка [.keyword]*paramsData* должна соответствовать формату элемента [.keyword]*MethodCall*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="MethodCall">
+  <xsd:complexType>
+    <xsd:sequence>
+      <xsd:element name="Parameter" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+              <xsd:attribute name="Name" type="xsd:string" use="optional"/>
+              <xsd:attribute name="Type" use="required">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="bool"/>
+                    <xsd:enumeration value="byte"/>
+                    <xsd:enumeration value="short"/>
+                    <xsd:enumeration value="integer"/>
+                    <xsd:enumeration value="long"/>
+                    <xsd:enumeration value="single"/>
+                    <xsd:enumeration value="double"/>
+                    <xsd:enumeration value="decimal"/>
+                    <xsd:enumeration value="uniqueidentifier"/>
+                    <xsd:enumeration value="char"/>
+                    <xsd:enumeration value="string"/>
+                    <xsd:enumeration value="datetime"/>
+                    <xsd:enumeration value="text"/>
+                    <xsd:enumeration value="binary"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:attribute>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="MethodName" type="xsd:string"/>
+    <xsd:attribute name="ObjectName" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+</xsd:element>
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ReportGetDataResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <cursorInfo>
+        <ID>guid</ID>
+        <PageCount>unsignedInt</PageCount>
+        <RowCount>unsignedInt</RowCount>
+        <FirstPage>string</FirstPage>
+        <UsingCompression>boolean</UsingCompression>
+      </cursorInfo>
+    </ReportGetDataResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/ReportGetData"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ReportGetData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <reportId>31058C9C-B730-4C8B-88EA-D16080DD9460</reportId>
+      <paramsData>&lt;MethodCall&gt;&lt;Parameter Name=&quot;EmployeeID&quot; Type=&quot;uniqueidentifier&quot; xmlns:dt=&quot;urn:schemas-microsoft-com:datatypes&quot; dt:dt=&quot;string&quot;&gt;{A81E1347-9CDE-405F-BA2F-EB122DF74B8F}&lt;/Parameter&gt;&lt;/MethodCall&gt;</paramsData>
+    </ReportGetData>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Common.adoc[Прочее]

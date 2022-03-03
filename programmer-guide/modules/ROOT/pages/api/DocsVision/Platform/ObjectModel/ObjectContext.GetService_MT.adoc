@@ -1,0 +1,45 @@
+= ObjectContext.GetService<T> - метод
+
+Возвращает [.dfn .term]_сервис_, реализующий переданный интерфейс.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public T GetService<T>()
+----
+
+Параметры типа
+
+T::
+  Интерфейс, реализованный [.dfn .term]_сервисом_
+
+Возвращаемое значение
+
+::
+  Тип: T
+  +
+  [.dfn .term]_Сервис_
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если сервис не зарегистрирован.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с документами
+IDocumentService documentService = objectContext.GetService<IDocumentService>();   
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

@@ -1,0 +1,68 @@
+= StaticObjectContext - класс
+
+Предоставляет статические члены создания и получения контекста объектов.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public sealed class StaticObjectContext
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Current |Задает или возвращает статическое значение контекста объектов.
+|ObjectContext |Возвращает контекст объектов.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Create |Инициализирует контекст с пустым сервис-провайдером.
+|Create(IServiceProvider) |Инициализирует контекст с указанным сервис-провайдером.
+|===
+
+== Примеры
+
+Инициализация статического контекста объектов во многом аналогична инициализации контекста объектов, пример которой приведен в примере xref:../../../../pages/DM_FullContextInit.adoc[Инициализация контекста объектов]
+
+[source,pre,codeblock,language-csharp]
+----
+private static void CreateStaticContext()
+{
+ // Инициализация сервис-провайдера
+ var sessionContainer = new System.ComponentModel.Design.ServiceContainer();
+ sessionContainer.AddService(typeof(DocsVision.Platform.ObjectManager.UserSession), userSession);
+ 
+ // Создание контекста объектов
+ StaticObjectContext.Create(sessionContainer);
+
+ // Регистрация базовых (SystemCardsMapperFactory, BackOfficeMapperFactory) фабрик преобразователей данных
+ BackOffice.Register(StaticObjectContext.Current);
+
+ // Регистрация базовых файбрик сервисов
+ var serviceFactoryRegistry = StaticObjectContext.Current.GetService<IServiceFactoryRegistry>();
+ serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
+ serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
+
+ // Регистрация сервиса для работы с хранилищем Docsvision
+ StaticObjectContext.Current.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
+
+ // Регистрация поставщика метаданных карточек
+ IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession);
+ StaticObjectContext.Current.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
+ StaticObjectContext.Current.AddService<IMetadataProvider>(metadataProvider);
+}
+----
+
+Сессия пользователя (userSession) может быть получена по аналогии с примером xref:../../../../pages/DM_FullContextInit.adoc[Инициализация контекста объектов]
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

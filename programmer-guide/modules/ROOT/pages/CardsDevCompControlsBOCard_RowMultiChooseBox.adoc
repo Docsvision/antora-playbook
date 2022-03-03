@@ -1,0 +1,51 @@
+= Элемент управления RowMultiChooseBox
+
+Элемент управления RowMultiChooseBox предназначен для выбора нескольких значений: из различных справочников; из различных секций одного справочника. Соответствует элементу управления [.ph .uicontrol]*Коллекция значений* [.dfn .term]_Конструктора разметок_.
+
+image::img/dev_card_50.png[image]
+
+* image:img/Button/ComboBoxSelect.png[image] - открывает окно выбора строки справочника;
+* [.ph .uicontrol]*X* - очищает результат выбора.
+
+Данный элемент управления имеет следующие свойства:
+
+* ObjectContext - [.dfn .term]_контекст объектов_. Рекомендуется самостоятельно передавать [.dfn .term]_контекст объектов_ в FieldSelector, к примеру, при инициализации карточки:
++
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ this.fieldSelector.ObjectContext = this.ObjectContext; // Передача контекста объектов
+ this.fieldSelector.CardTypeId = this.BaseObject.CardType.Id; // Определение типа карточки, схема которой используется при выборке поля
+} 
+----
+* SectionTypeIds - список идентификаторов справочников и их секций, из которых осуществляется выбор. Каждая строка списка должна соответствовать строковому формату: "Идентификатор справочника[.keyword]**;##Идентификатор секции" (см. пример ниже);
+* TypeIds - сформированная коллекция из пары: "Идентификатор справочника", "Идентификатор секции".
+
+RowChooseBox предоставляет следующие методы:
+
+* ChooseValue - открывает окно выбора элементов.
+
+RowChooseBox позволяет подписываться на следующие события:
+
+* CustomizeTypeSearchQuery - событие срабатывает при формировании поискового запроса при вводе символов в строку поиска, если не используется кэш. Если данные для вывода имеются в кэше, событие не срабатывает.
+
+Пример инициализации RowMultiChooseBox, с возможностью выбора сотрудников из [.dfn .term]_Справочника сотрудников_ и [.dfn .term]_Справочника контрагентов_
+
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ // Начало инициализации - стандартное
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ this.rowMultiChooseBox.SectionTypeIds.Add(string.Format("{0};{1}", "6710B92A-E148-4363-8A6F-1AA0EB18936C", "DBC8AE9D-C1D2-4D5E-978B-339D22B32482"));
+ this.rowMultiChooseBox.SectionTypeIds.Add(string.Format("{0};{1}", "65FF9382-17DC-4E9F-8E93-84D6D3D8FE8C", "1A46BF0F-2D02-4AC9-8866-5ADF245921E8"));
+}
+----
+
+*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

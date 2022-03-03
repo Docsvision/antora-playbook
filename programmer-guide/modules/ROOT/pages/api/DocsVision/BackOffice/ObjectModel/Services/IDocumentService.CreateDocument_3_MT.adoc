@@ -1,0 +1,64 @@
+= IDocumentService.CreateDocument - метод (String, KindsCardKind, DocumentVersioningType)
+
+Создает документ с заданным видом карточки и добавляет основной файл с указанным типов версионинга.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Document CreateDocument(string filePath, KindsCardKind kind, DocumentVersioningType versioningType)
+----
+
+Параметры
+
+filePath::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Путь к основному файлу
+kind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид документа
+versioningType::
+  Тип: xref:../DocumentVersioningType_EN.adoc[DocumentVersioningType]
+  +
+  Вид документа
+
+Возвращаемое значение
+
+::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Созданный документ
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возникает в том случае, если добавляемый файл является подписанным, но в соответствующем сообщении отсутствуют файлы.
+|===
+
+== Примеры
+
+Далее приведен пример создания карточки документ с основным файлом, у которого автоматический тип версионинга указан
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение вида карточки (в примере, Заявка)
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"));
+
+// Создание документа
+Document document = documentService.CreateDocument(@"x:\Sample.docx", kind, DocumentVersioningType.Auto);
+objectContext.SaveObject(document);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

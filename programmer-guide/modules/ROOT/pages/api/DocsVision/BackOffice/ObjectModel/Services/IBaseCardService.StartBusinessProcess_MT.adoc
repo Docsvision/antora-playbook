@@ -1,0 +1,67 @@
+= IBaseCardService.StartBusinessProcess - метод (BaseCard, KindsCardProcess)
+
+Запускает бизнес-процесс указанного вида.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Process StartBusinessProcess(BaseCard baseCard, KindsCardProcess kindsCardProcess)
+----
+
+Параметры
+
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка
+kindsCardProcess::
+  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
+  +
+  Вид бизнес-процесса
+
+Возвращаемое значение
+
+::
+  Тип: xref:../../../Workflow/Objects/Process_CL.adoc[Process]
+  +
+  Бизнес-процесс
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
+|[.keyword .apiname]#DocsVision.Platform.StorageServer.StorageServerException# |Возвращается в случае появления ошибки на стороне сервера.
+|===
+
+== Заметки
+
+Если текущий сотрудник не определен, то бизнес-процесс будет создан, но не будет запущен. Запуск БП может быть отменен по результатам обработки события [.keyword .apiname]#IBaseCardService.BeforeBusinessProcessStart#, но только в случае запуска процесса из сервиса [.keyword .apiname]#IBaseCardService#.
+
+== Примеры
+
+Ниже приведен пример запуска бизнес-процесса, определенного в виде карточки
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получаем необходимый сервис            
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+
+//получаем документ, вид которого позволяет запускать бизнес-процесс вида 00000000-0000-0000-0000-000000000001
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//получение вида бизнес-процесса
+KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+//запуск БП
+baseCardService.StartBusinessProcess(document, kindsCardProcess);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

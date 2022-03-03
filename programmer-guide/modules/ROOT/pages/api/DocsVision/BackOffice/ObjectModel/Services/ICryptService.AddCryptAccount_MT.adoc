@@ -1,0 +1,98 @@
+= ICryptService.AddCryptAccount - метод (X509Certificate2, Guid, String)
+
+Предоставляет доступ указанному сотруднику к зашифрованному файлу.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void AddCryptAccount(X509Certificate2 certificate, Guid fileId, string accountName)
+----
+
+Параметры
+
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат шифрования, которым зашифрован файл
+fileId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор зашифрованного файла
+accountName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Учетная запись сотрудника, которому предоставляется доступ к зашифрованному файлу
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр certificate или accountName.
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если файл с указанным идентификатором не существует, либо у указанного сотрудника уже имеется доступ к файлу, либо у указанного сотрудника отсутствует открытый ключ шифрования.
+|===
+
+== Заметки
+
+В том случае, если файл не является зашифрованным, будет произведено шифрование сертификатом `certificate`, поэтому вызывать метод [.keyword .apiname]#ICryptService.EncryptFile# не требуется.
+
+== Примеры
+
+В приведенном ниже примере (скрипт вызываемый из карточки приложения "Управление документами"), выполняется шифрование основных файлов текущей карточки ключами сотрудников предопределенной группы
+
+[source,pre,codeblock,language-csharp]
+----
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
+
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.BackOffice.WinForms;
+using DocsVision.BackOffice.WinForms.Controls;
+using DocsVision.Platform.ObjectManager;
+
+namespace BackOffice
+{
+ public class CardDocumentТестScript : CardDocumentДокументУДScript
+ {
+  private void ЗашифроватьДляГруппы_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+  {
+   bool cancel = false;
+
+   // Вызов формы для получения сертификата текущего сотрудника
+   X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
+   if (cancel) return;
+
+   // Получения сервиса шифрования базовых объектов и сервиса для работы со справочником сотрудников
+   ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>();
+   IStaffService staffService = base.CardControl.ObjectContext.GetService<IStaffService>();
+   
+   // Получение основных файлов карточки
+   IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main);
+
+   // Получение группы с идентификатором 
+   StaffGroup staffGroup = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+
+   foreach (DocumentFile item in mainFiles)
+   {
+
+    // Предоставление доступа к текущему файлу сотрудникам, входящих в группу сотрудников
+    // Отдельного вызова шифрования файла не требуется, т.к. при в том случае, если файл не зашифрован, шифрование будет произведено автоматически
+    foreach (StaffEmployee employee in staffGroup.Employees)
+    {
+     cryptService.AddCryptAccount(certificate, item.FileVersionRowId, employee.AccountName);
+    }
+   }
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService - интерфейс]

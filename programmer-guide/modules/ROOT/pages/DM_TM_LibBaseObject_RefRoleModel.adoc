@@ -1,0 +1,60 @@
+= Конструктор ролей
+
+[cols=",",]
+|===
+|Назначение |Определяет механизм распределения прав пользователей при работе с рядом приложений Docsvision на основе данных самой карточки.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/RoleModel_CL.adoc[DocsVision.BackOffice.ObjectModel.RoleModel]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/IRoleModelService_IN.adoc[IRoleModelService], с помощью которого можно получить доступ к сохраненным правилам и свойствам ролевой модели, а также создавать и управлять объектами данного уровня безопасности.
+
+Доступные операции:
+
+* создание условий и групп условий для ролей;
+* создание пользовательских параметров и операций;
+* связывание настроек в сопоставление операция-состояние;
+* создание и получение настроек ролевой модели для вида карточки;
+* получение ролей для вида карточки.
+
+В примере создается роль, которая может быть использована для ограничении времени доступа к документам в выходные дни.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервиса
+IRoleModelService roleModelService = objectContext.GetService<IRoleModelService>();
+
+//получение вида карточки Документ
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("8ACE1220-A452-455D-8EEB-9EDF9DC6E327"));
+
+//создание настроек для вида карточки
+RoleModelCardKindRoleSetting roleModelCardKindRoleSetting = roleModelService.GetOrCreatePreferredCardKindSetting(kindsCardKind);
+RoleModelRole roleModelRole = roleModelService.CreateRole(roleModelCardKindRoleSetting);
+roleModelRole.Name = "Работа по выходным";
+
+//логическая операция между условиями - ИЛИ
+roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or;
+
+//создание первого условия (сегодня = суббота)
+RoleModelRoleCondition condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
+condition.Parameter = RoleModelRoleConditionParameter.Today;
+condition.Operation = RoleModelRoleConditionOperation.Equals;
+condition.Value = System.DayOfWeek.Saturday;
+
+//создание второго условия (сегодня = воскресенье)
+condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
+condition.Parameter = RoleModelRoleConditionParameter.Today;
+condition.Operation = RoleModelRoleConditionOperation.Equals;
+condition.Value = System.DayOfWeek.Sunday;
+
+//сохранение изменений
+objectContext.AcceptChanges();
+
+//отметим роль признаком "Общая", что позволит использовать ее во всех карточках
+roleModelService.MakeRoleCommon(roleModelRole);
+----
+
+Роль не создает реального ограничения, для настройки используется матрица доступа (недоступна для карточки "Документ", доступная для "ДокументУД").
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

@@ -1,0 +1,77 @@
+= IDocumentService.SyncPropertiesToFile - метод (Document, DocumentFile, IList<IDocumentPropertySetting>)
+
+Выполняет синхронизацию значений полей карточки [.dfn .term]_Документ_ со свойствами основного файла данного документа. Передача осуществляется в сторону вложенного файла.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool SyncPropertiesToFile(Document document, DocumentFile file, IList<IDocumentPropertySetting> propertySettings)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+propertySettings::
+  Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<IDocumentPropertySetting>
+  +
+  Синхронизируемые свойства документа
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Значение всегда false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
+|===
+
+== Заметки
+
+Параметры синхронизации полей карточки и свойств основного документа задаются в [.dfn .term]_Справочнике видов карточек_.
+
+Синхронизация производится только с файлами MS Office.
+
+== Примеры
+
+Ниже приведен пример использования метода [.keyword .apiname]#SyncPropertiesToFile# при синхронизации названия документа со свойствами основного файла, привязаного к документу
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с документами
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Изменение данных
+document.MainInfo.Name = "Изменение названия и синхронизация";
+objectContext.SaveObject(document);
+
+// Получение настроек для вида документа и приведение к требуемому типу
+DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
+IList<IDocumentPropertySetting> setting = documentSetting.Properties.Cast<IDocumentPropertySetting>().ToList();
+
+// Передача названия карточки в файл
+documentService.SyncPropertiesToFile(document, document.Files.First(t => t.FileType = DocumentFileType.Main), setting);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

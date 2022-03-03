@@ -1,0 +1,67 @@
+= IDocumentService.AttachMainFile - метод (Document, VersionedFileCard)
+
+Добавляет в документ карточку версионного файла в качестве основного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+DocumentFile AttachMainFile(Document document, VersionedFileCard versionedFileCard)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+versionedFileCard::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Карточка файла с версиями
+
+Возвращаемое значение
+
+::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception] |Ошибка будет возвращена, если по каким либо причинам добавление основного файла невозможно.
+|===
+
+== Заметки
+
+Данный метод, в отличии от метода [.keyword .apiname]#AddMainFile#, позволяет корректно загружать подписанные файлы.
+
+== Примеры
+
+Ниже приведен пример использования метода [.keyword .apiname]#AttachMainFile# при добавлении существующей карточки файла с версиями в документ
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса 
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение карточки файла с версиями
+VersionedFileCard versionedFileCard = (VersionedFileCard)userSession.CardManager.GetCard(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Добавление файла
+documentService.AttachMainFile(document, versionedFileCard);
+objectContext.SaveObject(document);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

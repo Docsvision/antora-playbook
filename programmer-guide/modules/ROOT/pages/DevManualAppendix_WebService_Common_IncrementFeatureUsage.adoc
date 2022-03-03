@@ -1,0 +1,49 @@
+= IncrementFeatureUsage
+
+Увеличивает число активных соединений в счетчике дополнительной опции лицензии.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/IncrementFeatureUsage"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <IncrementFeatureUsage xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <featureId>guid</featureId>
+    </IncrementFeatureUsage>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+featureId::
+  Идентификатор дополнительной опции
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <IncrementFeatureUsageResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Common.adoc[Прочее]

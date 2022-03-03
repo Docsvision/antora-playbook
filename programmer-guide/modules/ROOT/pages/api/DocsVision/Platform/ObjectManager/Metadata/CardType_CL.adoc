@@ -1,0 +1,64 @@
+= CardType - класс
+
+Содержит методы для работы с типами карточек и описывающие эти объекты свойства.
+
+* [.keyword]*Пространство имен:* xref:Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class CardType
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CardType() |Инициализирует новый экземпляр класса CardType.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Actions |Возвращает коллекцию методов данного карточки.
+|Alias |Возвращает псевдоним типа карточки.
+|AllSections |Возвращает коллекцию всех секций карточки (без учета иерархии).
+|Clsid |Возвращает идентификатор класса программного компонента карточки.
+|Definition |Полное XML-описание карточки
+|FetchMode |Возвращает режим загрузки данных карточки.
+|Flags |Задает или возвращает дополнительные атрибуты карточки.
+|Icon |Возвращает иконку типа карточки.
+|Id |Возвращает идентификатор типа.
+|LibraryId |Возвращает идентификатор библиотеки, которой принадлежит карточка.
+|LicenseKey |Лицензионный ключ для активации COM-компонента библиотеки.
+|Modes |Возвращает коллекцию режимов работы карточки.
+|Name |Возвращает локализованное название типа.
+|ProgId |Возвращает идентификатор программного компонента библиотеки.
+|Schema |Возвращает строку содержащую XSD-схему описания карточки.
+|Sections |Возвращает коллекцию секций верхнего уровня карточки.
+|Session |Возвращает текущую сессию пользователя.
+|Transformations |Возвращает коллекция возможных преобразований карточки.
+|TypeName |Возвращает полное название класса программного компонента карточки.
+|Views |Возвращает коллекцию описаний представлений карточки.
+|xref:CardType.VirtualFields_PR.adoc[VirtualFields] |Возвращает коллекцию виртуальных полей карточки.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AccessCheck(int) |Осуществляет проверку наличия прав доступа.
+|GetAccessControl |Возвращает описатель прав на объект.
+|GetAccessControl(AccessControlSections) |Возвращает описатель прав на объект из выбранных разделов безопасность.
+|SetAccessControl(CardDataSecurity) |Сохраняет измененные права доступа к объекту.
+|===
+
+* *xref:../../../../../api/DocsVision/Platform/ObjectManager/Metadata/CardType.VirtualFields_PR.adoc[CardType.VirtualFields - свойство]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/Metadata/Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata - пространство имен]

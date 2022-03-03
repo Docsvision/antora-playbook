@@ -1,0 +1,102 @@
+= IRoleModelService - интерфейс
+
+Сервис для работы с [.dfn .term]_Конструктором ролей_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IRoleModelService
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|RolesDictionary |Возвращает ссылку на объектную модель конструктора ролей.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddCondition(RoleModelRoleConditionGroup) |Создает условие в переданной группе условий для роли.
+|AddConditionGroup(RoleModelRoleConditionGroup) |Создает группу условий в переданной корневой группе.
+|AddCustomOperation(String, String) |Создает новую пользовательскую операцию.
+|AddCustomParameter(String, RoleModelCustomParameterType) |Создает новый пользовательский параметр.
+|AddLink(RoleModelCardKindRoleSetting, StatesOperation, RoleModelRole, StatesState, RoleModelOperationStatus) |Добавляет в настройки соответствие между операцией и состоянием.
+|AddRootConditionGroup(RoleModelRole) |Создает корневую группу условий.
+|CreateCardField(String) |Создает модель поля карточки в рамках ролевой модели.
+|CreateDayWorkStatus(RoleModelConditionValueDayWorkStatus, Guid) |Создает значение статуса дня для использования в условие.
+|CreateKindRoleSettings(KindsCardKind) |Добавляет указанный вид карточки в ролевую модель.
+|CreateRole(RoleModelCardKindRoleSetting) |Создает роль для вида карточки.
+|CreateTimeWorkStatus(RoleModelConditionValueTimeWorkStatus, Guid) |Создает значение со статусом времени для использования в условие.
+|DeleteRole(RoleModelRole) |Удаление роли.
+|FindKindCommonRoleSettings |Предоставляет доступ к контейнеру общих ролей.
+|GetConditionsByCardType(Guid) |Возвращает коллекцию условий ролевой модели для указанного типа карточки.
+|GetConditionValueDescription(RoleModelRoleCondition) |Создает строку описания из заданного условия ролевой модели.
+|GetDateValueDescription(Object) |Создает строку описания для объекта содержащего дату (обычная [.keyword .apiname]#System.DateTime#, либо дата ролевой модели - [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.RoleModelConditionDayWorkStatus#).
+|GetDayOfWeekDescription(DayOfWeek) |Создает стандартную строку описания для дня недели.
+|GetDayStatusDescription(RoleModelConditionValueDayWorkStatus) |Создает стандартную строку описания для типа рабочего дня (выходной, рабочий).
+|GetKindRoleSettings(KindsCardKind) |Возвращает настройки ролевой модели для вида карточки.
+|GetLinks(BaseCard) |Возвращает соответствие между операциями и состояниями для переданной карточки.
+|GetLinks(Guid) |Возвращает соответствие между операциями и состояниями для карточки с указанным идентификатором.
+|GetOperationStatus(KindsCardKind, IEnumerable<RoleModelRole>, StatesState, StatesOperation) |Определяет статус (запрещена, разрешена, не разрешена) заданной операции для списка ролей. Приоритет имеет статус "Запрещена".
+|GetOrCreatePreferredCardKindSetting(KindsCardKind) |Создает или возвращает, в зависимости от существования, настройки ролевой модели для вида карточки.
+|GetPreferredCardKindSetting(KindsCardKind) |Возвращает настройки ролевой модели для вида карточки.
+|GetRoles(KindsCardKind) |Возвращает коллекцию ролей, применимых для заданного вида карточки.
+|GetTimeStatusDescription(RoleModelConditionValueTimeWorkStatus) |Возвращает локализованное название для заданного статуса рабочего времени.
+|GetTimeValueDescription(Object) |Возвращает сформированное строковое представление времени.
+|MakeRoleCommon(RoleModelRole) |Переводит роль в разряд общих, доступных для всех видов карточек.
+|MakeRoleNotCommon(RoleModelRole, KindsCardKind) |Привязывает роль к заданному виду карточек.
+|RemoveCardKindRoleSetting(KindsCardKind) |Удаляет настройки ролевой модели у переданного вида карточек.
+|ValidateRoles(KindsCardKind, IList<String>) |Получает список ошибок ролевой модели для заданного вида карточки.
+|===
+
+== Примеры
+
+В примере создается роль, которая может быть использована для ограничении времени доступа к документам в выходные дни.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервиса
+IRoleModelService roleModelService = objectContext.GetService<IRoleModelService>();
+
+//получение вида карточки Документ
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("8ACE1220-A452-455D-8EEB-9EDF9DC6E327"));
+
+//создание настроек для вида карточки
+RoleModelCardKindRoleSetting roleModelCardKindRoleSetting = roleModelService.GetOrCreatePreferredCardKindSetting(kindsCardKind);
+RoleModelRole roleModelRole = roleModelService.CreateRole(roleModelCardKindRoleSetting);
+roleModelRole.Name = "Работа по выходным";
+
+//логическая операция между условиями - ИЛИ
+roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or;
+
+//создание первого условия (сегодня = суббота)
+RoleModelRoleCondition condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
+condition.Parameter = RoleModelRoleConditionParameter.Today;
+condition.Operation = RoleModelRoleConditionOperation.Equals;
+condition.Value = System.DayOfWeek.Saturday;
+
+//создание второго условия (сегодня = воскресенье)
+condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
+condition.Parameter = RoleModelRoleConditionParameter.Today;
+condition.Operation = RoleModelRoleConditionOperation.Equals;
+condition.Value = System.DayOfWeek.Sunday;
+
+//сохранение изменений
+objectContext.AcceptChanges();
+
+//отметим роль признаком "Общая", что позволит использовать ее во всех карточках
+roleModelService.MakeRoleCommon(roleModelRole);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

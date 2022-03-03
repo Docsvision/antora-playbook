@@ -1,0 +1,37 @@
+= CardData.RemoveLock - метод
+
+Снимает блокировку сделанную в своей сессии.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract void RemoveLock()
+----
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Получение с сервера данных карточки с известным идентификатором
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
+
+//Проверка блокировки на карточке
+if (card.LockStatus != LockStatus.Free)
+{
+    //Объект заблокирован - проверка владельца
+    if (card.LockStatus = LockStatus.OwnerLocked)
+    {
+        card.RemoveLock();
+    }
+    else
+    {
+        MessageBox.Show("Объект заблокирован пользователем " + card.LockOwner);
+    }
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

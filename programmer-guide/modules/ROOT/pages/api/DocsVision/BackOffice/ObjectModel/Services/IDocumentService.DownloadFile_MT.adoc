@@ -1,0 +1,53 @@
+= IDocumentService.DownloadFile - метод (Guid)
+
+Сохраняет файл с указанным идентификатором на файловую систему.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+string DownloadFile(Guid versionedFileCardId)
+----
+
+Параметры
+
+versionedFileCardId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор карточки версионного файла
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Путь, по которому был выгружен файл
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр versionedFileCardId.
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается, если карточка версионного файла была удалена или не существует.
+|===
+
+== Примеры
+
+Ниже приведен пример использования метода DownloadFile при выгрузке файла документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Выгрузка файла по пути pathFile
+string pathFile = documentService.DownloadFile(new Guid("00000000-0000-0000-0000-000000000000"));
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -1,0 +1,42 @@
+= ViewSource - класс
+
+Источник данных представления. Этот класс не может быть унаследован.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public sealed class ViewSource
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ShowArchived |Возвращает или задает признак необходимости отображения в представлении архивных карточек.
+|ShowDeleted |Возвращает или задает признак необходимости отображения в представлении удаленных карточек.
+|ShowHidden |Возвращает или задает признак необходимости отображения в представлении скрытых и системных карточек.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|FromCardLib(Guid) |В качестве источника данных используется указанная библиотека карточек.
+|FromCards |Источником данных являются все карточки.
+|FromCardType(Guid) |Источником данных являются все карточки заданного типа.
+|FromFolder(Guid) |Источником данных является заданная папка.
+|FromRecycleBin |Источником является корзина.
+|FromReferences |Источником являются справочники.
+|FromSearch(Guid) |Источником является сохраненный поисковый запрос.
+|FromSearch(String) |Источником является сформированный поисковый запрос (XML).
+|FromSearchFolder(Guid) |Источником является заданная виртуальная папка.
+|FromSearchResults(Guid) |Источником является заданная системная папка "Результаты поиска".
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

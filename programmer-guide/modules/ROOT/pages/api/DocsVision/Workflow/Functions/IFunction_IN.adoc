@@ -1,0 +1,38 @@
+= IFunction - интерфейс
+
+Описывает свойства и методы серверного компонента функции.
+
+* [.keyword]*Пространство имен:* xref:Functions_NS.adoc[DocsVision.Workflow.Functions]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Runtime.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IFunction
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Data |Задает или возвращает настройки функции. Позволяет передать функции настройки, заданные в клиентской части.
+|FunctionData |Задает или возвращает данные функции в процессе.
+|AutoRemoveSubscriptions |Задает или возвращает требование автоматического удаления подписки после обработки функции, действовавшие на момент начала работы функции
+|AutoRemoveMessages |Задает или возвращает требование автоматического удаления сообщения после обработки функции, полученные на момент начала работы функции.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AllowExecute(ProcessInfo, PassState) |Определяет возможность исполнения функции.
+|Execute(ProcessInfo, PassState) |Запускает функцию на исполнение.
+|GetNextExecuteTime(Int32) |Получает время следующего выполнения функции.
+|GetExecuteDisallowReason(ProcessInfo, PassState) |Возвращает причину запрета исполнения функции.
+|GetName |Получает название функции.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Functions/Functions_NS.adoc[DocsVision.Workflow.Functions - пространство имен]

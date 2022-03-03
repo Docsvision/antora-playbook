@@ -1,0 +1,30 @@
+= NavCommandStatus - перечисление
+
+Определяет статус команды в расширении меню Windows-клиента.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:Extensibility_NS.adoc[DocsVision.Platform.Extensibility]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.Extensibility.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum NavCommandStatus
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Не задан. Значение 0x0
+|Supported |Команда применима к данному типу объектов. Значение 0x1
+|Enabled |Команда активна. Значение 0x2
+|Latched |Кнопка нажата и пункт меню отмечен. Значение 0x4
+|HideStandard |Спрятать стандартные команды. Значение 0x8. Не используется.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Extensibility/Extensibility_NS.adoc[DocsVision.Platform.Extensibility - пространство имен]

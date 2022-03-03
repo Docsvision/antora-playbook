@@ -1,0 +1,41 @@
+= IBaseUniversalService.CopyItem - метод (BaseUniversalItem, BaseUniversalItemType)
+
+Создает копию строки в заданным узле конструктора справочников.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseUniversalItem CopyItem(BaseUniversalItem copiedItem, BaseUniversalItemType targetItemType)
+----
+
+Параметры
+
+copiedItem::
+  Тип: xref:../BaseUniversalItem_CL.adoc[BaseUniversalItem]
+  +
+  Копируемая строка
+targetItemType::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Узел в который производится копирование
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseUniversalItem_CL.adoc[BaseUniversalItem]
+  +
+  Созданная копия строки
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр copiedItem или targetItemType.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

@@ -1,0 +1,97 @@
+= IBaseCardService - интерфейс
+
+Данный сервис определяет общие для всех базовых объектов методы.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IBaseCardService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IBaseCardService.AddBusinessProcess_MT.adoc[AddBusinessProcess(BaseCard, Guid, KindsCardProcess)] |Добавляет к карточке бизнес-процесс с переданным идентификатором.
+|xref:IBaseCardService.AddSignature_MT.adoc[AddSignature(SignatureList, X509Certificate2, String, StatesState)] |Добавляет в переданный список подписей ЭЦП.
+|xref:IBaseCardService.AddSignaturePart_MT.html[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard)] |Инициализирует и добавляет в указанную подпись часть подписи.
+|link:IBaseCardService_AddSignaturePart_1_MT.html[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)] |Инициализирует и добавляет в указанную подпись часть подписи, прошедшую проверку валидности.
+|link:IBaseCardService.CanStartBusinessProcess_MT.adoc[CanStartBusinessProcess(BaseCard, KindsCardProcess)] |Проверяет допустимость запуска бизнес-процесса и возвращает объект содержащий ошибку.
+|xref:IBaseCardService.CanStartBusinessProcesses_MT.adoc[CanStartBusinessProcesses(BaseCard, IEnumerable<KindsCardProcess>)] |Проверяет допустимость запуска коллекции бизнес-процессов и возвращает список ошибок.
+|xref:IBaseCardService.ComputeSignature_MT.adoc[ComputeSignature(Stream, X509Certificate2)] |Подписывает поток данных.
+|xref:IBaseCardService.CopySignatures_MT.adoc[CopySignatures(SignatureList, SignatureList)] |Создает список подписей на основе имеющегося.
+|xref:IBaseCardService.ExtractCertificate_MT.adoc[ExtractCertificate(BaseCardSignaturePart)] |Извлекает объект типа X509Certificate2 из части подписи.
+|xref:IBaseCardService.FindCardsByUniqueAttributes_MT.adoc[FindCardsByUniqueAttributes(Guid, SearchParametersInfo)] |Возвращает список идентификаторов карточек, имеющих указанные уникальные атрибуты.
+|xref:IBaseCardService.GenerateDigest_MT.adoc[GenerateDigest(BaseCard, IXmlExportable, String)] |Генерирует дайджест на основе данных карточки.
+|xref:IBaseCardService.GetActiveBusinessProcessInstances_MT.adoc[GetActiveBusinessProcessInstances(BaseCard, KindsCardProcess)] |Получает список активных бизнес-процессов Workflow для заданной карточки.
+|xref:IBaseCardService.GetAllBusinessProcessInstances_MT.adoc[GetAllBusinessProcessInstances(BaseCard, KindsCardProcess)] |Получает список всех бизнес-процессов Workflow указанного вида для заданной карточки.
+|xref:IBaseCardService.GetBaseCardSectionRow_MT.adoc[GetBaseCardSectionRow(BaseCard, CardSection)] |Получает строку секции карточки.
+|xref:IBaseCardService.GetBaseCardSectionRows_MT.adoc[GetBaseCardSectionRows(BaseCard, CardSection)] |Возвращает коллекцию всех строк секции карточки.
+|xref:IBaseCardService.GetBusinessProcessesToStart_MT.adoc[GetBusinessProcessesToStart(BaseCard)] |Получает список бизнес-процессов, которые могут быть запущены из карточки.
+|xref:IBaseCardService.GetBusinessProcessesToStop_MT.adoc[GetBusinessProcessesToStop(BaseCard)] |Получает список активных бизнес-процессов для карточки.
+|xref:IBaseCardService.GetBusinessProcessesToView_MT.adoc[GetBusinessProcessesToView(BaseCard)] |Получает список бизнес-процессов у которых установлено разрешение на просмотр из карточки.
+|xref:IBaseCardService.GetCardTypeIcon_MT.adoc[GetCardTypeIcon(KindsCardKind)] |Возвращает иконку для карточки указанного вида карточки.
+|xref:IBaseCardService.GetSignaturePartData_MT.adoc[GetSignaturePartData(BaseCardSignaturePart)] |Извлекает данные из части подписи.
+|xref:IBaseCardService.InitializeBusinessProcessVariables_MT.adoc[InitializeBusinessProcessVariables(Process, Dictionary<String, Object>)] |Выполняет инициализацию переменных бизнес-процесса.
+|xref:IBaseCardService.InitializeSystemInfo_MT.adoc[InitializeSystemInfo(BaseCard, KindsCardKind)] |Инициализирует системную информацию карточки.
+|IsSignaturePartOperation(BaseCardSignaturePart) |Возвращает true, если указанной частью подписи подписана операция.
+|xref:IBaseCardService.RemoveSignature_MT.adoc[RemoveSignature(SignatureList, BaseCardSignature)] |Удалят указанную подпись из списка подписей.
+|xref:IBaseCardService.RemoveSignaturePart_MT.adoc[RemoveSignaturePart(BaseCardSignaturePart)] |Удаляет указанную часть из подписи.
+|xref:IBaseCardService.StartBusinessProcess_MT.adoc[StartBusinessProcess(BaseCard, KindsCardProcess)] |Запускает бизнес-процесс указанного вида
+|xref:IBaseCardService.SendMailNotification_MT.adoc[SendMailNotification(IEnumerable<MailNotificationInfo>)] |Отправляет оповещение по электронной почте.
+|xref:IBaseCardService.GetPartSignatureInfo_MT.adoc[SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate)] |Представляет информацию о части подписи.
+|xref:IBaseCardService.StopBusinessProcess_MT.adoc[StopBusinessProcess(BaseCard, Process)] |Останавливает выполнение бизнес-процесса.
+|xref:IBaseCardService.UpdateBusinessProcessActiveInstancesProperties_MT.adoc[UpdateBusinessProcessActiveInstancesProperties(BaseCard)] |Сохраняет в карточку значение переменных активных бизнес-процессов карточки.
+|xref:IBaseCardService.UpdateBusinessProcessActiveInstancesVariables_MT.adoc[UpdateBusinessProcessActiveInstancesVariables(BaseCard)] |Загружает из карточки значения переменных активных бизнес-процессов карточки.
+|xref:IBaseCardService.VerifySignature_MT.adoc[VerifySignature(BaseCardSignature, IDictionary<BaseCardSignaturePart, Stream>, X509Certificate2)] |Проверяет корректность подписи.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IBaseCardService.BeforeBusinessProcessStart_EV.adoc[BeforeBusinessProcessStart] |Происходит перед непосредственным запуском бизнес-процесса.
+|BusinessProcessVariableInitialized |Предоставляет метод для обработки события, возникающего после инициализации переменных бизнес-процесса.
+|ResolveProcessVariableBindedElement |Предоставляет метод обработки события, возникающего перед получением названия переменной бизнес-процесса для разметки.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.AddBusinessProcess_MT.adoc[IBaseCardService.AddBusinessProcess - метод (BaseCard, Guid, KindsCardProcess)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.AddSignature_MT.adoc[IBaseCardService.AddSignature - метод (SignatureList, X509Certificate2, String, StatesState)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.AddSignaturePart_MT.html[IBaseCardService.AddSignaturePart - метод (BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard)]* +
+* *link:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_AddSignaturePart_1_MT.html[IBaseCardService.AddSignaturePart - метод (BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)]* +
+* *link:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.CanStartBusinessProcess_MT.adoc[IBaseCardService.CanStartBusinessProcess - метод (BaseCard, KindsCardProcess)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.CanStartBusinessProcesses_MT.adoc[IBaseCardService.CanStartBusinessProcesses - метод (BaseCard, IEnumerable<KindsCardProcess>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.ComputeSignature_MT.adoc[IBaseCardService.ComputeSignature - метод (Stream, X509Certificate2)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.CopySignatures_MT.adoc[IBaseCardService.CopySignatures - метод (SignatureList, SignatureList)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.ExtractCertificate_MT.adoc[IBaseCardService.ExtractCertificate - метод (BaseCardSignaturePart)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.FindCardsByUniqueAttributes_MT.adoc[IBaseCardService.FindCardsByUniqueAttributes - метод (Guid, SearchParametersInfo)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GenerateDigest_MT.adoc[IBaseCardService.GenerateDigest - метод (BaseCard, IXmlExportable, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetActiveBusinessProcessInstances_MT.adoc[IBaseCardService.GetActiveBusinessProcessInstances - метод (BaseCard, KindsCardProcess)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetAllBusinessProcessInstances_MT.adoc[IBaseCardService.GetAllBusinessProcessInstances - метод (BaseCard, KindsCardProcess)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetBaseCardSectionRow_MT.adoc[IBaseCardService.GetBaseCardSectionRow - метод (BaseCard, CardSection)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetBaseCardSectionRows_MT.adoc[IBaseCardService.GetBaseCardSectionRows - метод (BaseCard, CardSection)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetBusinessProcessesToStart_MT.adoc[IBaseCardService.GetBusinessProcessesToStart - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetBusinessProcessesToStop_MT.adoc[IBaseCardService.GetBusinessProcessesToStop - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetBusinessProcessesToView_MT.adoc[IBaseCardService.GetBusinessProcessesToView - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetCardTypeIcon_MT.adoc[IBaseCardService.GetCardTypeIcon - метод (KindsCardKind)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetSignaturePartData_MT.adoc[IBaseCardService.GetSignaturePartData - метод (BaseCardSignaturePart)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.InitializeBusinessProcessVariables_MT.adoc[IBaseCardService.InitializeBusinessProcessVariables - метод (Process, Dictionary<String, Object>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.InitializeSystemInfo_MT.adoc[IBaseCardService.InitializeSystemInfo - метод (BaseCard, KindsCardKind)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.RemoveSignature_MT.adoc[IBaseCardService.RemoveSignature - метод (SignatureList, BaseCardSignature)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.RemoveSignaturePart_MT.adoc[IBaseCardService.RemoveSignaturePart - метод (BaseCardSignaturePart)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.SendMailNotification_MT.adoc[IBaseCardService.SendMailNotification - метод (IEnumerable<MailNotificationInfo>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetPartSignatureInfo_MT.adoc[IBaseCardService.GetPartSignatureInfo - метод (BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.StartBusinessProcess_MT.adoc[IBaseCardService.StartBusinessProcess - метод (BaseCard, KindsCardProcess)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.StopBusinessProcess_MT.adoc[IBaseCardService.StopBusinessProcess - метод (BaseCard, Process)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.UpdateBusinessProcessActiveInstancesProperties_MT.adoc[IBaseCardService.UpdateBusinessProcessActiveInstancesProperties - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.UpdateBusinessProcessActiveInstancesVariables_MT.adoc[IBaseCardService.UpdateBusinessProcessActiveInstancesVariables - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.VerifySignature_MT.adoc[IBaseCardService.VerifySignature - метод (BaseCardSignature, IDictionary<BaseCardSignaturePart, Stream>, X509Certificate2)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.BeforeBusinessProcessStart_EV.adoc[IBaseCardService.BeforeBusinessProcessStart - событие]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

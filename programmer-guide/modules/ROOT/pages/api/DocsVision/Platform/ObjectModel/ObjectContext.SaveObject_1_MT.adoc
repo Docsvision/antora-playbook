@@ -1,0 +1,37 @@
+= ObjectContext.SaveObject - метод (ObjectBase)
+
+Сохраняет изменения выбранного объекта.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IObjectRef SaveObject(ObjectBase objectInstance)
+----
+
+Параметры
+
+objectInstance::
+  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
+  +
+  Сохраняемый объект
+
+Возвращаемое значение
+
+::
+  Тип: xref:IObjectRef_IN.adoc[IObjectRef]
+  +
+  Ссылка на сохраненный объект
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

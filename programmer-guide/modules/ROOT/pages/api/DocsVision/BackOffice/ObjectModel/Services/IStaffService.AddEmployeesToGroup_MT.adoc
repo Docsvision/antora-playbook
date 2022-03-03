@@ -1,0 +1,66 @@
+= IStaffService.AddEmployeesToGroup - метод (StaffGroup, IEnumerable<StaffEmployee>)
+
+Добавляет указанных сотрудников в группу сотрудников.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+List<StaffGroupItem> AddEmployeesToGroup(StaffGroup group, IEnumerable<StaffEmployee> employees)
+----
+
+Параметры
+
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа сотрудников, в которую добавляются сотрудники
+employees::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
+  +
+  Коллекция сотрудников xref:../StaffEmployee_CL.adoc[StaffEmployee]
+
+Возвращаемое значение
+
+::
+  Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroupItem>
+  +
+  Список сотрудников, представленных в группе. Тип xref:../StaffGroupItem_CL.adoc[StaffGroupItem]
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group или employees.
+|===
+
+== Примеры
+
+Ниже приведен пример копирования всех сотрудников одной группы в другую с использованием метода [.keyword .apiname]#AddEmployeesToGroup#
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получения сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение группы, из которой выбирабтся сотрудники для копирования
+StaffGroup groupSource = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение группы, в которую осуществляется копирование
+StaffGroup groupRecipient = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Получение всех сотрудников из первой группы
+IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(groupSource);
+
+// Добавление сотрудников в группу-получатель
+staffService.AddEmployeesToGroup(groupRecipient, employees);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

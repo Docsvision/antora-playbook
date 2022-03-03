@@ -1,0 +1,51 @@
+= AccessManager - класс
+
+Представляет объектную модель [.keyword]*менеджера объектов безопасности*. Содержит методы для работы с зашифрованными и подписанными объектами. Осуществляет управление правами (дескрипторами безопасности) на объекты системы.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class AccessManager
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AccessManager.SecuritySchema_PR.adoc[SecuritySchema] |Возвращает строку содержащую схему безопасности в XML-формате.
+|xref:AccessManager.Session_PR.adoc[Session] |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AccessManager.AccessCheck_MT.adoc[AccessCheck(SecureObjectType, Guid, Guid, Int32)] |Проверка наличия заданных прав на объект у пользователя.
+|xref:AccessManager.CreateCustomSecureObject_MT.adoc[CreateCustomSecureObject(Guid)] |Создает объект безопасности.
+|DeleteCryptObject(Guid) |Удаляет крипто-объект с заданным идентификатором.
+|DeleteCryptObjects(Guid, CryptObjectType) |Удаляет все крипто-объекты заданного типа для указанного файла.
+|GetAccessControl(SecureObjectType, Guid, Guid) |Возвращает описатель прав для объекта.
+|GetCryptObject(Guid) |Возвращает подпись, либо ключ шифрования для крипто-объекта с заданным идентификатором.
+|GetCryptObjectInfo(Guid) |Возвращает коллекцию нетепизированных данных для заданного крипто-объекта.
+|GetCryptObjects(Guid, CryptObjectType) |Возвращает коллекцию нетепизированных данных крипто-объектов, сопоставляемых указанному файлу.
+|GetKey(Guid) |Получает ключ шифрования для заданного объекта.
+|SetAccessControl(SecureObjectType, Guid, Guid, DVObjectSecurity) |Устанавливает права на объект.
+|StoreCryptObject(Guid, Guid, CryptObjectType, Byte[], String, String, Guid, String) |Сохраняет новую подпись или ключ шифрования.
+|StoreKey(Guid, Byte[]) |Сохраняет ключ шифрования объекта.
+|StoreKey(Guid, Byte[], String) |Сохраняет ключ шифрования объекта для указанного пользователя.
+|StoreSignature(Guid, Byte[], String) |Сохраняет подпись объекта.
+|StoreSignature(Guid, Byte[], String, Guid, String) |Сохраняет подпись объекта с дополнительным описанием.
+|===
+
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/AccessManager.SecuritySchema_PR.adoc[AccessManager.SecuritySchema - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/AccessManager.Session_PR.adoc[AccessManager.Session - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/AccessManager.AccessCheck_MT.adoc[AccessManager.AccessCheck - метод (SecureObjectType, Guid, Guid, Int32)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/AccessManager.CreateCustomSecureObject_MT.adoc[AccessManager.CreateCustomSecureObject - метод (Guid)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

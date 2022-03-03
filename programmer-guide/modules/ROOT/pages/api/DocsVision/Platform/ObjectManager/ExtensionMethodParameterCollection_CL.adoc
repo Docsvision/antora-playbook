@@ -1,0 +1,38 @@
+= ExtensionMethodParameterCollection - класс
+
+Содержит методы для работы к коллекцией ExtensionMethodParameter.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class ExtensionMethodParameterCollection : IEnumerable<ExtensionMethodParameter>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Count |Возвращает количество элементов в коллекции.
+|Item |Возвращает элемент коллекции с заданным индексом.
+|Item |Возвращает элемент коллекции с заданным псевдонимом.
+|Session |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddNew(String, ParameterValueType) |Добавляет пустой элемент коллекции.
+|AddNew(String, ParameterValueType, Object) |Добавляет элемент коллекции.
+|Clear |Удаляет все элементы коллекции.
+|Contains(String) |Определяет вхождение элемента в коллекцию элемента с заданным псевдонимом.
+|GetEnumerator |Возвращает перечислитель.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

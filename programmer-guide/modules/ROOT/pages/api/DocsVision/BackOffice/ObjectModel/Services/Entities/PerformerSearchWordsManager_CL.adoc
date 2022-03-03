@@ -1,0 +1,39 @@
+= PerformerSearchWordsManager - класс
+
+Представляет статические методы работы с поисковыми словами.
+
+* [.keyword]*Пространство имен:* xref:Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public static class PerformerSearchWordsManager
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|GetEmployeesSearchWord(ObjectContext, StaffEmployee, Guid) |Возвращает список сотрудников, выбранных поисковым словом.
+|GetPerformerSearchWordDescription(Guid) |Возвращает описание поискового слова.
+|GetPerformerSearchWords |Возвращает коллекцию идентификаторов и описаний поисковых слов, зарегистрированных в классе [.keyword .apiname]#PerformerSearchWordsManager#.
+|===
+
+== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|SearchWordDepartmentEmployees |Сотрудники департамента автора.
+|SearchWordDeputyFor |Замещаемые.
+|SearchWordManagedUnits |Подразделения, в которых автор - руководитель.
+|SearchWordManager |Руководитель.
+|SearchWordMyDeputies |Заместители.
+|SearchWordSubordinates |Подчинённые.
+|SearchWordSubordinatesAll |Все подчинённые.
+|===
+
+*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities - пространство имен]

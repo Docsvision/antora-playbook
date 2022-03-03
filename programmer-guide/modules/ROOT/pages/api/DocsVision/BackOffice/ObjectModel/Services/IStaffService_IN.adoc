@@ -1,0 +1,232 @@
+= IStaffService - интерфейс
+
+Сервис для работы со [.dfn .term]_справочником сотрудников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IStaffService
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IStaffService.Impersonated_PR.adoc[Impersonated] |Возвращает признак того, что при вызове методов сервиса будет использоваться принудительно установленная учетная запись сотрудника.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IStaffService.ActualizeEmployeesState_MT.adoc[ActualizeEmployeesState] |Актуализирует состояние сотрудника в соответствии с параметрами, заданными в [.dfn .term]_Справочнике сотрудников_.
+|xref:IStaffService.AddDeputy_MT.adoc[AddDeputy(StaffEmployee)] |Добавляет указанному сотруднику заместителя.
+|xref:IStaffService.AddEmployeesToGroup_MT.adoc[AddEmployeesToGroup(StaffGroup, IEnumerable<StaffEmployee>)] |Добавляет указанных сотрудников в группу сотрудников.
+|xref:IStaffService.AddEmployeeToGroup_MT.adoc[AddEmployeeToGroup(StaffGroup, StaffEmployee)] |Добавляет указанного сотрудника в группу сотрудников.
+|xref:IStaffService.AddGroupFolder_MT.adoc[AddGroupFolder(StaffGroup, Guid, Boolean)] |Добавляет папку группы к указанной группе сотрудников, с возможностью отображения в Windows-клиенте.
+|xref:IStaffService.AddNewAddress_MT.adoc[AddNewAddress(StaffUnit, StaffAddresseAddressType)] |Добавляет новый адрес для указанного подразделения.
+|xref:IStaffService.AddNewADMapping_MT.adoc[AddNewADMapping] |Создает экземпляр класса [.keyword .apiname]#StaffADsMapping# для определения соответствие между атрибутом Active Directory и полем [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.AddNewEmployee_MT.adoc[AddNewEmployee(StaffUnit)] |Добавляет нового сотрудника в указанное подразделение.
+|xref:IStaffService.AddNewEmployeeFormatItem_MT.adoc[AddNewEmployeeFormatItem(StaffUnit)] |Добавляет новый элемент к формату отображения данных сотрудника подразделения.
+|xref:IStaffService.AddNewEmployeePicture_MT.adoc[AddNewEmployeePicture(StaffEmployee)] |Добавляет сотруднику новую фотографию.
+|xref:IStaffService.AddNewGroup_MT.adoc[AddNewGroup(StaffGroup)] |Данный метод позволяет добавить новою подгруппу в существующую группу сотрудников.
+|AddNewNameCase(StaffEmployee, StaffNameCaseNameCase) |Добавляет новый падеж имени у заданного сотрудника.
+|xref:IStaffService.AddNewPosition_MT.adoc[AddNewPosition] |Добавляет новую должность в [.dfn .term]_справочник сотрудников_.
+|xref:IStaffService.AddNewRole_MT.adoc[AddNewRole] |Создает новую роль в [.dfn .term]_справочнике сотрудников_.
+|xref:IStaffService.AddNewUnit_MT.adoc[AddNewUnit(StaffUnit)] |Добавляет вложенное подразделение в указанную организацию.
+|AddNewViewField(ObjectBase, GridViewFieldCollectionType) |Добавляет отображаемое поле для подразделения, либо сотрудника.
+|xref:IStaffService.AddRoleEmployee_MT.adoc[AddRoleEmployee(StaffRole, StaffEmployee)] |Добавляет сотрудника в роль.
+|xref:IStaffService.AddRoleFolder_MT.adoc[AddRoleFolder(StaffRole, Guid, Boolean)] |Добавляет новую папку в список папок роли.
+|xref:IStaffService.AddRoleGroup_MT.adoc[AddRoleGroup(StaffRole, StaffGroup)] |Добавляет группу сотрудников в роль.
+|xref:IStaffService.AddRoleRole_MT.adoc[AddRoleRole(StaffRole, StaffRole)] |Добавляет в роль дочернюю роль.
+|xref:IStaffService.AddRoleUnit_MT.adoc[AddRoleUnit(StaffRole, StaffUnit)] |Добавляет в роль подразделение сотрудников.
+|xref:IStaffService.AddUnitTreeEmployeesToGroup_MT.adoc[AddUnitTreeEmployeesToGroup(StaffGroup, StaffUnit)] |Добавляет всех сотрудников подразделения в указанную группу [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.ApplyDisplayFormatToEmployees_MT.adoc[ApplyDisplayFormatToEmployees(StaffUnit, Boolean)] |Немедленно применяет формат отображения данных о сотрудниках подразделения.
+|CanMoveGroup(StaffGroup, StaffGroup) |Определяет возможность перемещения группы.
+|CanMoveUnit(StaffUnit, StaffUnit) |Определяет возможность перемещения подразделения.
+|CanMoveViewField(IGridViewField, GridViewFieldCollectionType, Boolean) |Определяет возможность перемещения отображаемого поля.
+|xref:IStaffService.ChangeEmployeeFolder_MT.adoc[ChangeEmployeeFolder(StaffEmployee, FoldersFolder)] |Изменяет личную папку сотрудника.
+|CheckSignatureAndEncryptionSetting |Проверяет настройки криптографии.
+|CheckUnitADPath(String) |Проверяет узел Active Directory.
+|xref:IStaffService.CopyGroup_MT.adoc[CopyGroup(StaffGroup, StaffGroup)] |Копирует группу [.dfn .term]_справочника сотрудников_ в указанную группу.
+|xref:IStaffService.CreateDelegateFolder_MT.adoc[CreateDelegateFolder(FoldersFolder, FoldersFolder)] |Создает папку-делегат.
+|xref:IStaffService.CreateEmployeeFolder_MT.adoc[CreateEmployeeFolder(StaffEmployee)] |Создает персональную папку сотрудника.
+|xref:IStaffService.CreateFolder_MT.adoc[CreateFolder(StaffUnit, String)] |Создает папку с указанным именем в корневой папке подразделения.
+|xref:IStaffService.CreateUnitFolder_MT.adoc[CreateUnitFolder(StaffUnit)] |Создает корневую папку для указанного подразделения.
+|DeleteADMapping(StaffADsMapping) |Удаляет заданное соответствие полей Active Directory.
+|xref:IStaffService.DeleteDeputy_MT.adoc[DeleteDeputy(StaffEmployee, StaffDeputy)] |Удаляет заместителя сотрудника.
+|xref:IStaffService.DeleteEmployee_MT.adoc[DeleteEmployee(StaffEmployee)] |Удаляет сотрудника из [.dfn .term]_справочника сотрудников_.
+|DeleteEmployeeFormatItem(StaffUnit, StaffEmployeesFormat) |Удаляет заданный формат отображения сотрудника.
+|xref:IStaffService.DeleteEmployeePicture_MT.adoc[DeleteEmployeePicture(StaffEmployee, StaffPicture)] |Удаляет указанную фотографию сотрудника.
+|xref:IStaffService.DeleteGroup_MT.adoc[DeleteGroup(StaffGroup)] |Удаляет указанную группу из [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.DeletePosition_MT.adoc[DeletePosition(StaffPosition)] |Удаляет должность из [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.DeleteRole_MT.adoc[DeleteRole(StaffRole)] |Удаляет роль из [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.DeleteRoleElement_MT.adoc[DeleteRoleElement(StaffRole, StaffContain)] |Удаляет указанной элемент из роли в [.dfn .term]_справочнике сотрудников_.
+|xref:IStaffService.DeleteUnit_MT.adoc[DeleteUnit(StaffUnit)] |Удаляет подразделение из [.dfn .term]_справочника сотрудников_.
+|DeleteViewField(IGridViewField, GridViewFieldCollectionType) |Удаляет указанное отображаемое поле.
+|xref:IStaffService.FindCompanyByNameOnServer_MT.adoc[FindCompanyByNameOnServer(StaffUnit, String)] |Выполняет поиск подразделения с заданным названием.
+|xref:IStaffService.FindDeputiesWhereEmployeeIsDeputy_MT.adoc[FindDeputiesWhereEmployeeIsDeputy(StaffEmployee)] |Возвращает список замещений сотрудников, в которых указанный сотрудник является заместителем.
+|xref:IStaffService.FindEmployeeGroups_MT.adoc[FindEmployeeGroups(StaffEmployee)] |Возвращает группы, в которых числится указанный сотрудник.
+|xref:IStaffService.FindEmployeeGroupsByRole_MT.adoc[FindEmployeeGroupsByRole(StaffEmployee, StaffGroupRole)] |Возвращает рабочие группы, в которых указанный сотрудник имеет определенную роль.
+|xref:IStaffService.FindEmpoyeeByAccountName_MT.adoc[FindEmpoyeeByAccountName(String)] |Выполняет поиск сотрудника по названию учетной записи.
+|xref:IStaffService.FindEmployeeRoles_MT.adoc[FindEmployeeRoles(StaffEmployee)] |Возвращает список ролей, в которых участвует сотрудник.
+|xref:IStaffService.FindGroupByAccountName_MT.adoc[FindGroupByAccountName(String)] |Возвращает группу с определенным названием учетной записи.
+|xref:IStaffService.FindGroupByName_MT.adoc[FindGroupByName(StaffGroup, String)] |Возвращает группу с указанным названием.
+|xref:IStaffService.FindRoleByAccountName_MT.adoc[FindRoleByAccountName(String)] |Возвращает роль, привязанную к указанной учетной записи.
+|xref:IStaffService.FindRoleWithSameName_MT.adoc[FindRoleWithSameName(StaffRole, String)] |Осуществляет поиск роли по названию с исключением указанной роли из результатов.
+|xref:IStaffService.FindUnitByActiveDirectoryId_MT.adoc[FindUnitByActiveDirectoryId(String)] |Получает подразделение с указанным идентификатором контейнера в Active Directory.
+|FindViewField(ViewCardFieldsGroup, IGridViewField) |Осуществляет поиск отображаемого поля.
+|xref:IStaffService.Get_MT.adoc[Get(Guid)] |Возвращает сотрудника с указанным идентификатором.
+|GetAllEmployeeViewFields |Возвращает отображаемые поля сотрудников.
+|GetAllUnitViewFields |Возвращает отображаемые поля подразделений.
+|xref:IStaffService.GetCurrentEmployee_MT.adoc[GetCurrentEmployee] |Возвращает текущего сотрудника.
+|xref:IStaffService.GetDepartment_MT.adoc[GetDepartment(Guid)] |Возвращает подразделение с заданным идентификатором.
+|GetDeputyAccessRightsSetting |Возвращает режим доступа для заместителя из карточки "Системные настройки".
+|GetEmployeeAllFormatFields |Возвращает все отображаемые поля сотрудника.
+|GetEmployeeCardFieldValue(StaffEmployee, Guid, String) |Возвращает значение поля с указанным псевдонимом из карточки сотрудника.
+|GetEmployeeCardKind(StaffEmployee) |Получает для сотрудника его вид карточки.
+|GetEmployeeDefaultViewFields |Возвращает базовый список отображаемых полей сотрудника.
+|GetEmployeeDisplayString(StaffUnit, StaffEmployee) |Возвращает отображаемую строку сотрудника, сформированная в соответствии с настройками подразделения.
+|GetEmployeeFieldDisplayName(Guid, String) |Возвращает отображаемое название для указанного поля.
+|xref:IStaffService.GetEmployeeManager_MT.adoc[GetEmployeeManager(StaffEmployee)] |Возвращает руководителя из карточки подразделения.
+|GetEmployeesCount(StaffUnit, Boolean, Boolean) |Возвращает количество сотрудников в заданном подразделении с учетом иерархии.
+|GetEmployeesDisplayFormat(StaffUnit) |Возвращает формат отображения сотрудников в заданном подразделении.
+|GetGroup(Guid) |Возвращает группу с заданным идентификатором.
+|GetGroupEmployeeRoleDescription |Возвращает описание к указанной роли сотрудника в группе.
+|xref:IStaffService.GetGroupEmployees_1_MT.adoc[GetGroupEmployees(StaffGroup)] |Возвращает сотрудников группы.
+|xref:IStaffService.GetGroupEmployees_MT.adoc[GetGroupEmployees(StaffGroup, Boolean, Boolean)] |Возвращает сотрудников группы.
+|GetGroupInheritedViewFields(StaffGroup) |Возвращает унаследованные от родительской группы отображаемые поля.
+|xref:IStaffService.GetGroupItems_MT.adoc[GetGroupItems(StaffGroup, Boolean)] |Возвращает элементы заданной группы.
+|xref:IStaffService.GetImpersonatedEmployee_MT.adoc[GetImpersonatedEmployee] |Возвращает сотрудника, являющегося истинным владельцем сессии, независимо от назначения, выполненного методом [.keyword .apiname]#SetCurrentEmployee#.
+|GetInheritedCalendarId(StaffEmployee) |Возвращает идентификатор унаследованного календаря.
+|GetInheritedTemplateFolder(StaffUnit) |Возвращает унаследованную шаблонную папку.
+|xref:IStaffService.GetRoleEmployees_MT.adoc[GetRoleEmployees(StaffRole)] |Возвращает список сотрудников с указанной ролью.
+|xref:IStaffService.GetRoleEmployees_1_MT.adoc[GetRoleEmployees(StaffRole, Boolean, Boolean)] |Возвращает список сотрудников с указанной ролью.
+|GetUnitADpath(StaffUnit) |Возвращает путь AD для подразделения.
+|GetUnitCardFieldValue(StaffUnit, Guid, String) |Возвращает значение поля с указанным псевдонимом из карточки подразделения.
+|GetUnitCardKind(StaffUnit) |Получает для указанного подразделения его вид карточки.
+|GetUnitDefaultViewFields |Возвращает базовый список отображаемых полей подразделения.
+|GetUnitEmployeeCardKind(StaffUnit) |Возвращает вид карточки сотрудника для указанного подразделения.
+|xref:IStaffService.GetUnitEmployees_MT.adoc[GetUnitEmployees(StaffUnit, Boolean, Boolean)] |Возвращает список сотрудников указанного подразделения.
+|xref:IStaffService.GetUnitEmployees_2_MT.adoc[GetUnitEmployees(StaffUnit, Boolean, Boolean, Boolean)] |Возвращает список сотрудников указанного подразделения.
+|xref:IStaffService.GetUnitEmployees_1_MT.adoc[GetUnitEmployees(StaffUnit, Boolean, Boolean, Boolean, Boolean)] |Возвращает список сотрудников указанного подразделения.
+|GetUnitFieldDisplayName(Guid, String) |Возвращает отображаемое название указанного поля подразделения.
+|GetUnitInheritedViewFields(StaffUnit, Boolean) |Возвращает коллекцию унаследованных отображаемых полей подразделения.
+|xref:IStaffService.GetUnits_MT.adoc[GetUnits(StaffUnit, Boolean)] |Возвращает список дочерних подразделений.
+|GetViewFields(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для заданного объекта и типа объекта в справочнике.
+|GetViewFieldsAsObject(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для заданного объекта и типа объекта в справочнике, без приведения к типу.
+|xref:IStaffService.IsEmployeeInGroup_MT.adoc[IsEmployeeInGroup(StaffEmployee, StaffGroup, Boolean)] |Определяет принадлежность сотрудника к указанной группе.
+|xref:IStaffService.LoadEmployeeFromAD_MT.adoc[LoadEmployeeFromAD(StaffEmployee)] |Загружает данные сотрудника из Active Directory.
+|LoadEmployeeFromAD(StaffEmployee, String) |Выполняет загрузку данных из AD в [.dfn .term]_Справочник сотрудников_. Позволяет указать имя учетной записи, независимо от значения данного поля у сотрудника в [.dfn .term]_Справочнике сотрудников_.
+|MoveEmployee(StaffEmployee, StaffUnit, Boolean) |Переносит сотрудника в указанное подразделение.
+|MoveEmployees(IEnumerable<StaffEmployee>, StaffGroup, StaffGroup) |Переносит несколько сотрудников в заданную группу.
+|MoveEmployees(IEnumerable<StaffEmployee>, StaffUnit, Boolean) |Переносит несколько сотрудников в заданное подразделение.
+|MoveGroup(StaffGroup, StaffGroup) |Перемещает группу в указанную группу.
+|MoveUnit(StaffUnit, StaffUnit) |Перемещает подразделение в указанное подразделение.
+|MoveViewField(IGridViewField, GridViewFieldCollectionType, Boolean) |Перемещает отображаемое поле в порядке отображаемых полей.
+|OpenOrCreateDepartmentCard(StaffUnit, Boolean) |Создает или возвращает карточку подразделения.
+|OpenOrCreateEmployeeCard(StaffEmployee, Boolean) |Создает или возвращает карточку сотрудника.
+|xref:IStaffService.OpenOrCreateEmployeeCard_MT.adoc[OpenOrCreateEmployeeCard(StaffEmployee, Boolean, Boolean)] |Создает или возвращает карточку сотрудника.
+|OtherADMappingWithSameFieldNameExists(StaffADsMapping, String) |Проверяет наличие коллекции соответствий полей и атрибутов AD с указанным именем атрибута.
+|xref:IStaffService.OtherEmployeeWithSameAccountExists_MT.adoc[OtherEmployeeWithSameAccountExists(StaffEmployee, String)] |Определяет наличие сотрудников с указанной учетной записью.
+|xref:IStaffService.OtherPositionWithSameNameExists_MT.adoc[OtherPositionWithSameNameExists(StaffPosition, String)] |Определяет наличие должности с указанным названием.
+|PrepareAddToWorkGroupMailNotifications(StaffGroup, IEnumerable<StaffGroupItem>, Dictionary<StaffGroupFolder, String>) |Подготавливает содержимое почтового сообщения для отсылки сотрудникам при добавлении в [.dfn .term]_рабочую группу_.
+|PrepareRemoveFromWorkGroupMailNotifications(StaffGroup, IEnumerable<StaffGroupItem>) |Подготавливает содержимое почтового сообщения для отсылки участникам при исключении из [.dfn .term]_рабочей группы_.
+|PrepareRemoveWorkGroupMailNotifications(StaffGroup) |Подготавливает содержимое почтового сообщения для отсылки участникам при удалении [.dfn .term]_рабочей группы_.
+|xref:IStaffService.PropagateNotAvailable_MT.adoc[PropagateNotAvailable(StaffUnit)] |Распространяет признак "Не показывать при выборе" с родительского подразделения на дочерние подразделения и сотрудников.
+|xref:IStaffService.RemoveGroupEmployee_MT.adoc[RemoveGroupEmployee(StaffGroup, StaffEmployee)] |Удаляет сотрудника из группы [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.RemoveGroupItems_MT.adoc[RemoveGroupItems(StaffGroup, IEnumerable<StaffGroupItem>)] |Удаляет элементы (группы, сотрудники) из группы [.dfn .term]_справочника сотрудников_.
+|xref:IStaffService.SetCurrentEmployee_MT.adoc[SetCurrentEmployee(StaffEmployee)] |Переопределяет текущего сотрудника, возвращаемого методом GetCurrentEmployee.
+|xref:IStaffService.SetFoldersRights_MT.adoc[SetFoldersRights(FoldersFolder, String)] |Предоставляет полные права доступа к папке сотруднику с указанной учетной записью.
+|xref:IStaffService.SynchronizeGroupWithActiveDirectory_MT.adoc[SynchronizeGroupWithActiveDirectory(StaffGroup, IADSynchronizationSettings, ILongProcessManager)] |Синхронизирует данные группы [.dfn .term]_справочника сотрудников_ с Active Directory.
+|xref:IStaffService.SynchronizeRoleWithActiveDirectory_MT.adoc[SynchronizeRoleWithActiveDirectory(StaffRole, IADSynchronizationSettings, ILongProcessManager)] |Синхронизирует данные роли [.dfn .term]_справочника сотрудников_ с Active Directory.
+|xref:IStaffService.SynchronizeUnitWithActiveDirectory_MT.adoc[SynchronizeUnitWithActiveDirectory(StaffUnit, IADSynchronizationSettings, ILongProcessManager)] |Синхронизирует данные подразделения [.dfn .term]_справочника сотрудников_ с Active Directory.
+|xref:IStaffService.SynchronizeWithActiveDirectory_MT.adoc[SynchronizeWithActiveDirectory(IADSynchronizationSettings, ILongProcessManager)] |Синхронизирует данные групп, ролей и подразделений [.dfn .term]_справочника сотрудников_ с Active Directory.
+|xref:IStaffService.TransferEmployee_MT.adoc[TransferEmployee(StaffEmployee, StaffUnit, Boolean)] |Переносит сотрудника в указанное подразделение.
+|xref:IStaffService.ValidateUser_MT.adoc[ValidateUser] |Проверяет вхождение текущего пользователя в доменную группу "Администраторы".
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.Impersonated_PR.adoc[IStaffService.Impersonated - свойство]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.ActualizeEmployeesState_MT.adoc[IStaffService.ActualizeEmployeesState - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddDeputy_MT.adoc[IStaffService.AddDeputy - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddEmployeesToGroup_MT.adoc[IStaffService.AddEmployeesToGroup - метод (StaffGroup, IEnumerable<StaffEmployee>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddEmployeeToGroup_MT.adoc[IStaffService.AddEmployeeToGroup - метод (StaffGroup, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddGroupFolder_MT.adoc[IStaffService.AddGroupFolder - метод (StaffGroup, Guid, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewAddress_MT.adoc[IStaffService.AddNewAddress - метод (StaffUnit, StaffAddresseAddressType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewADMapping_MT.adoc[IStaffService.AddNewADMapping - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewEmployee_MT.adoc[IStaffService.AddNewEmployee - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewEmployeeFormatItem_MT.adoc[IStaffService.AddNewEmployeeFormatItem - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewEmployeePicture_MT.adoc[IStaffService.AddNewEmployeePicture - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewGroup_MT.adoc[IStaffService.AddNewGroup - метод (StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewUnit_MT.adoc[IStaffService.AddNewUnit - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewPosition_MT.adoc[IStaffService.AddNewPosition - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddNewRole_MT.adoc[IStaffService.AddNewRole - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddRoleEmployee_MT.adoc[IStaffService.AddRoleEmployee - метод (StaffRole, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddRoleFolder_MT.adoc[IStaffService.AddRoleFolder - метод (StaffRole, Guid, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddRoleGroup_MT.adoc[IStaffService.AddRoleGroup - метод (StaffRole, StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddRoleRole_MT.adoc[IStaffService.AddRoleRole - метод (StaffRole, StaffRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddRoleUnit_MT.adoc[IStaffService.AddRoleUnit - метод (StaffRole, StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.AddUnitTreeEmployeesToGroup_MT.adoc[IStaffService.AddUnitTreeEmployeesToGroup - метод (StaffGroup, StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.ApplyDisplayFormatToEmployees_MT.adoc[IStaffService.ApplyDisplayFormatToEmployees - метод (StaffUnit, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindCompanyByNameOnServer_MT.adoc[IStaffService.FindCompanyByNameOnServer - метод (StaffUnit, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindDeputiesWhereEmployeeIsDeputy_MT.adoc[IStaffService.FindDeputiesWhereEmployeeIsDeputy - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindEmpoyeeByAccountName_MT.adoc[IStaffService.FindEmpoyeeByAccountName - метод (String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.ChangeEmployeeFolder_MT.adoc[IStaffService.ChangeEmployeeFolder - метод (StaffEmployee, FoldersFolder)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.CopyGroup_MT.adoc[IStaffService.CopyGroup - метод (StaffGroup, StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.CreateDelegateFolder_MT.adoc[IStaffService.CreateDelegateFolder - метод (FoldersFolder, FoldersFolder)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.CreateEmployeeFolder_MT.adoc[IStaffService.CreateEmployeeFolder - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.CreateFolder_MT.adoc[IStaffService.CreateFolder - метод (StaffUnit, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.CreateUnitFolder_MT.adoc[IStaffService.CreateUnitFolder - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteDeputy_MT.adoc[IStaffService.DeleteDeputy - метод (StaffEmployee, StaffDeputy)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteEmployee_MT.adoc[IStaffService.DeleteEmployee - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteEmployeePicture_MT.adoc[IStaffService.DeleteEmployeePicture - метод (StaffEmployee, StaffPicture)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteGroup_MT.adoc[IStaffService.DeleteGroup - метод (StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeletePosition_MT.adoc[IStaffService.DeletePosition - метод (StaffPosition)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteRole_MT.adoc[IStaffService.DeleteRole - метод (StaffRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteRoleElement_MT.adoc[IStaffService.DeleteRoleElement - метод (StaffRole, StaffContain)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.DeleteUnit_MT.adoc[IStaffService.DeleteUnit - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindEmployeeGroups_MT.adoc[IStaffService.FindEmployeeGroups - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindEmployeeGroupsByRole_MT.adoc[IStaffService.FindEmployeeGroupsByRole - метод (StaffEmployee, StaffGroupRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindEmployeeRoles_MT.adoc[IStaffService.FindEmployeeRoles - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindGroupByAccountName_MT.adoc[IStaffService.FindGroupByAccountName - метод (String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindGroupByName_MT.adoc[IStaffService.FindGroupByName - метод (StaffGroup, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindRoleByAccountName_MT.adoc[IStaffService.FindRoleByAccountName - метод (String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindRoleWithSameName_MT.adoc[IStaffService.FindRoleWithSameName - метод (StaffRole, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.FindUnitByActiveDirectoryId_MT.adoc[IStaffService.FindUnitByActiveDirectoryId - метод (String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.Get_MT.adoc[IStaffService.Get - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetCurrentEmployee_MT.adoc[IStaffService.GetCurrentEmployee - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetDepartment_MT.adoc[IStaffService.GetDepartment - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetGroupEmployees_1_MT.adoc[IStaffService.GetGroupEmployees - метод (StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetGroupEmployees_MT.adoc[IStaffService.GetGroupEmployees - метод (StaffGroup, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetGroupItems_MT.adoc[IStaffService.GetGroupItems - метод (StaffGroup, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetImpersonatedEmployee_MT.adoc[IStaffService.GetImpersonatedEmployee - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetRoleEmployees_MT.adoc[IStaffService.GetRoleEmployees - метод (StaffRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetRoleEmployees_1_MT.adoc[IStaffService.GetRoleEmployees - метод (StaffRole, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetUnitEmployees_MT.adoc[IStaffService.GetUnitEmployees - метод (StaffUnit, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetUnitEmployees_2_MT.adoc[IStaffService.GetUnitEmployees - метод (StaffUnit, Boolean, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetUnitEmployees_1_MT.adoc[IStaffService.GetUnitEmployees - метод (StaffUnit, Boolean, Boolean, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetUnits_MT.adoc[IStaffService.GetUnits - метод (StaffUnit, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.IsEmployeeInGroup_MT.adoc[IStaffService.IsEmployeeInGroup - метод (StaffEmployee, StaffGroup, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.LoadEmployeeFromAD_MT.adoc[IStaffService.LoadEmployeeFromAD - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.OpenOrCreateEmployeeCard_MT.adoc[IStaffService.OpenOrCreateEmployeeCard - метод (StaffEmployee, Boolean, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.OtherEmployeeWithSameAccountExists_MT.adoc[IStaffService.OtherEmployeeWithSameAccountExists - метод (StaffEmployee, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.OtherPositionWithSameNameExists_MT.adoc[IStaffService.OtherPositionWithSameNameExists - метод (StaffPosition, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.PropagateNotAvailable_MT.adoc[IStaffService.PropagateNotAvailable - метод (StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.RemoveGroupEmployee_MT.adoc[IStaffService.RemoveGroupEmployee - метод (StaffGroup, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.RemoveGroupItems_MT.adoc[IStaffService.RemoveGroupItems - метод (StaffGroup, IEnumerable<StaffGroupItem>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SetCurrentEmployee_MT.adoc[IStaffService.SetCurrentEmployee - метод (StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SetFoldersRights_MT.adoc[IStaffService.SetFoldersRights - метод (FoldersFolder, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SynchronizeGroupWithActiveDirectory_MT.adoc[IStaffService.SynchronizeGroupWithActiveDirectory - метод (StaffGroup, IADSynchronizationSettings, ILongProcessManager)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SynchronizeRoleWithActiveDirectory_MT.adoc[IStaffService.SynchronizeRoleWithActiveDirectory - метод (StaffRole, IADSynchronizationSettings, ILongProcessManager)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SynchronizeUnitWithActiveDirectory_MT.html[IStaffService.SynchronizeUnitWithActiveDirectory - метод ([Тип параметра перегрузки])]* +
+* *link:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SynchronizeWithActiveDirectory_MT.adoc[IStaffService.SynchronizeWithActiveDirectory - метод (IADSynchronizationSettings, ILongProcessManager)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.TransferEmployee_MT.adoc[IStaffService.TransferEmployee - метод (StaffEmployee, StaffUnit, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.ValidateUser_MT.adoc[IStaffService.ValidateUser - метод]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

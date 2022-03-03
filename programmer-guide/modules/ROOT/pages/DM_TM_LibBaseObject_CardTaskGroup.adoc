@@ -1,0 +1,101 @@
+= Группа заданий
+
+[cols=",",]
+|===
+|Назначение |Предназначена для создания детализированных распоряжений по документу, разбитых на отдельные подзадачи. Каждая подзадача предназначена для определенного исполнителя или группы исполнителей, снабжена описанием работ, сроками их исполнения и другими параметрами, а также предусматривает необходимый контроль за ходом его реализации.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[DocsVision.BackOffice.ObjectModel.TaskGroup]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService], с помощью которого можно работать с группами заданий. Позволяет создавать группы заданий, отправлять на исполнение и отзывать.
+
+Доступные операции:
+
+* создание группы заданий;
+* добавление в задание дочерней группы заданий;
+* добавление исполнителей, в том числе с индивидуальными настройками;
+* отправка группы заданий на исполнение;
+* отзыв группы заданий;
+* проверка заданий на наличие ошибок;
+
+Далее перечислены базовые сценарии работы с объектной моделью карточки Группа заданий, для которых действительно следующее:
+
+* Контекст объектов может быть получен в соответствии с примером, приведенным в разделе xref:DM_FullContextInit.adoc[Инициализация контекста объектов].
+* Сервисы получаем стандартным способом:
++
+[source,pre,codeblock,language-csharp]
+----
+IStaffService staffService = objectContext.GetService<IStaffService>(); //сервис для работой со Справочником сотрудников
+IStateService stateService = objectContext.GetService<IStateService>(); //сервис для работы с Конструктором состояний
+ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>(); //сервис для работы с Группой заданий
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); //сервис для работы со список заданий
+----
+* Для получения информации по классам и переменным, используемым в примерах, воспользуйтесь поиском.
+
+== Создание Группы заданий
+
+[source,pre,codeblock,language-csharp]
+----
+static void TaskGroupCreate()
+{
+ // Получение вида для группы заданий.
+ KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("6D76D0A7-5434-40F2-912E-6370D33C3151"));
+
+ // Создание Группы заданий
+ TaskGroup taskGroup = taskGroupService.CreateTaskGroup(kind);
+ taskGroup.Description = "Новая группа заданий";
+ taskGroup.MainInfo.Name = "Данная группы заданий создана из кода";
+ taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
+ taskGroup.MainInfo.StartDate = DateTime.Now;
+ taskGroup.MainInfo.EndDate = taskGroup.MainInfo.StartDate.Value.AddHours(5D);
+ taskGroup.MainInfo.Content = "Необходимо выполнить данные задания.\nСрок 5 часов.";
+
+ // Добавление текущего пользователя в качестве исполнителя
+ taskGroupService.AddSelectedPerformer(taskGroup, staffService.GetCurrentEmployee());
+
+ objectContext.SaveObject(taskGroup);
+}
+----
+
+== Добавление Группы заданий в документ
+
+[source,pre,codeblock,language-csharp]
+----
+static void AddTaskGroupToDocument()
+{
+ // Получение документа, в который добавляется группа заданий
+ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Получение добавляемой группы заданий
+ TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+ // Добавление группы заданий в документа
+ taskListService.AddTaskGroup(document.MainInfo.Tasks, taskGroup, document);
+ objectContext.SaveObject(document);
+}   
+----
+
+== Отправка Группы заданий на исполнение
+
+[source,pre,codeblock,language-csharp]
+----
+static void SendToPerformance()
+{
+ // Получение группы заданий, отправляемой на исполнение
+ TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Получение вида создаваемых заданий из параметров вида группы заданий
+ Guid kindId = taskGroupService.GetKindSettings(taskGroup.SystemInfo.CardKind).DefaultTaskCardKind;
+ KindsCardKind kindTask = objectContext.GetObject<KindsCardKind>(kindId);
+
+ // Отправка на исполнение
+ taskGroupService.SendToPerformance(taskGroup, kindTask);
+
+ // Получение состояния На исполнение
+ StatesState statesState = stateService.FindStateByBuiltIn(TaskGroup.PerformanceState, taskGroup);
+ 
+ // Смена состояния карточки
+ stateService.ChangeState(taskGroup, statesState);
+}
+----
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

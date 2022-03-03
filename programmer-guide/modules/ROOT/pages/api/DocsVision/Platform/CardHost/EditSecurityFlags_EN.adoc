@@ -1,0 +1,48 @@
+= EditSecurityFlags - перечисление
+
+Режим открытия редактора политики безопасности.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum EditSecurityFlags
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|ShowOwner |Отображать закладку владельца. Значение 0x00000001.
+|ShowAudits |Отображать закладку аудита. Значение 0x00000002.
+|PermissionsReadOnly |Отключить возможность изменения прав доступа. Значение 0x00000008.
+|ShowAdvanced |Отображать кнопку Дополнительно. Значение 0x00000010.
+|ShowResetSecurity |Предоставить возможность сброса параметров безопасности. Значение 0x00000020.
+|OwnerReadOnly |Отключить возможность смены владельца. Значение 0x00000040.
+|ShowProperties |Отображать свойства. Значение 0x00000080.
+|ShowResetOwnerOnChildren |Разрешить возможность наследование владельца для дочерних элементов. Значение 0x00000100.
+|ShowPropagateFromParent |Окно прав распространенных от родителя. Значение 0x00000200.
+|ShowNoPropagateInherit |Окно не распространять наследование. Значение 0x00000400.
+|ShowResetPermissionsOnChildren |Разрешить возможность наследование прав доступа для дочерних элементов. Значение 0x00004000.
+|ShowResetAuditsOnChildren |Разрешить возможность наследование политик аудита для дочерних элементов. Значение 0x00008000.
+|ShowEffectivePermissions |Отображать вкладку эффективных прав доступа. Значение 0x00020000.
+|ShowResetPermissions |Предоставить возможность сброса прав доступа. Значение 0x00040000.
+|ShowResetAudits |Предоставить возможность сброса политики аудита. Значение 0x00080000.
+|ShowResetOwner |Предоставить возможность сброса владельца. Значение 0x00100000.
+|ShowSpecialPermissions |Просмотр специальных прав. Значение 0x00200000.
+|ViewOnly |Режим просмотра. Значение 0x00400000.
+|DefaultSet |Установить начальные параметры безопасности. Значение 0x005EC333.
+|RequireElevationToEditPermissions |Требуется повышение для изменения прав. Значение 0x01000000.
+|RequireElevationToEditAudits |Требуется повышение для изменения политики аудита. Значение 0x02000000.
+|RequireElevationToEditOwner |Требуется повышение для изменения владельца. Значение 0x04000000.
+|MayWritePermissions |Полный доступ. Значение 0x10000000.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost - пространство имен]

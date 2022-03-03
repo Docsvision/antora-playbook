@@ -1,0 +1,37 @@
+= CardManager.FindCardsInfo - метод (Guid, QueryParameterCollection)
+
+Ищет информацию по карточкам согласно заданному идентификатору поискового запроса с учетом параметров поиска.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public InfoRowCollection FindCardsInfo(Guid queryId, QueryParameterCollection parameters)
+----
+
+Параметры
+
+queryId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
+  +
+  Идентификатор запроса
+parameters::
+  Тип: xref:QueryParameterCollection_CL.dita[QueryParameterCollection]
+  +
+  Параметр поиска
+
+Возвращаемое значение
+
+::
+  Тип: link:InfoRowCollection_CL.adoc[InfoRowCollection]
+  +
+  Коллекция данных
+
+== Заметки
+
+Поиск осуществляется согласно заданному запросу, сохраненному в системе.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

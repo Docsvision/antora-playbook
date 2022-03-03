@@ -1,0 +1,39 @@
+= ExGate.AddVariable - метод (Int32, String)
+
+Создает указанного типа переменную шлюза.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IGateVariable AddVariable(int Type, string VariableInfo)
+----
+
+Type::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
+  +
+  Тип переменной:
+  +
+  * 0 - сообщение
+  * 1- получатель сообщения
+  * 2 - вложение
+VariableInfo::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Не используется. Может быть передан null
+
+Возвращаемое значение
+
+::
+  Тип: xref:IGateVariable_IN.adoc[IGateVariable]
+  +
+  Переменная шлюза.
+
+== Заметки
+
+Действительный тип возвращаемого объекта зависит от значения Type
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/ExGate_CL.adoc[ExGate - класс]

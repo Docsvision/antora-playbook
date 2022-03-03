@@ -1,0 +1,61 @@
+= Согласование документа
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для отправки документа на согласование с помощью API необходимо, чтобы в шаблоне, из которого создается согласование, был установлен флаг [.keyword]*Запускать согласование без показа карточки*. Также должен существовать режим создания согласования (в [.dfn .term]_Справочнике видов карточек_), который задействует данный шаблон.
+====
+
+. Подключите к проекту или скрипту карточки дополнительные сборки: [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll` и [.ph .filepath]`DocsVision.DocumentsManagement.ObjectModel.dll`, в которых определены преобразователь данных и сервис для отправки согласования.
+. Подключите дополнительные пространства имен:
+* DocsVision.ApprovalDesigner.ObjectModel.Mapping
+* DocsVision.ApprovalDesigner.ObjectModel.Services
+* DocsVision.BackOffice.ObjectModel.Services
+* DocsVision.DocumentsManagement.ObjectModel.Services
+* DocsVision.Platform.ObjectModel.Mapping
+* System.Linq
+. Подключите в коде сервисы и преобразователи данных для работы с согласованием:
++
+[source,pre,codeblock,language-csharp]
+----
+// Добавляем в контекст фабрику ApprovalDesignerServiceFactory
+IServiceFactoryRegistry serviceFactoryRegistry = context.GetService<IServiceFactoryRegistry>();
+serviceFactoryRegistry.RegisterFactory(typeof(ApprovalDesignerServiceFactory));
+
+// Добавляем в контекст преобразовать данных ApprovalDesignerMapperFactory
+var mapperFactoryRegistry = context.GetService<IObjectMapperFactoryRegistry>();
+mapperFactoryRegistry.RegisterFactory(typeof(ApprovalDesignerMapperFactory));
+----
+. Получите идентификатор согласуемого документа, например, так:
++
+[source,pre,codeblock]
+----
+// Получаем идентификатор документа, при в скрипте карточки
+Guid initialCardId = context.GetObjectRef(this.BaseObject).Id;
+----
+. Получите настройки режима создания согласования:
++
+[source,pre,codeblock]
+----
+// Получаем настройки вида карточки "Согласование КС"
+KindsCardKind cardKind = context.GetObject<KindsCardKind>(new Guid("9C0E5586-41B8-411E-B5CD-C94B605CB7A1"));
+
+// Получаем настройки режима создания "СогласованиеПример" (режим использует шаблон согласования с флагом Запускать согласование без показа карточки)
+KindsCardCreationSetting cardCreationSetting = cardKind.CreationSettings.FirstOrDefault(t => t.ModeName.Equals("СогласованиеПример"));
+----
+. Создайте новое согласование для документа:
++
+[source,pre,codeblock,language-csharp]
+----
+Guid reconciliationId = context.GetService<IReconcileService>().CreateReconciliationCard(initialCardId, cardCreationSetting);
+----
+. Вызовите метод HandleDocumentAfterReconcileCreated, который завершит подготовку согласования и запустит его:
++
+[source,pre,codeblock,language-csharp]
+----
+CardData reconciliationCardData = Session.CardManager.GetCardData(reconciliationId);
+context.GetService<IReconcileService>().HandleDocumentAfterReconcileCreated((Document)this.BaseObject, reconciliationCardData);
+----
++
+Приведенным способом можно отправлять документы на согласование из скрипта карточки или из внешнего приложения.
+
+*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

@@ -1,0 +1,95 @@
+= Элемент управления CardChooseBox
+
+Элемент управления CardChooseBox предоставляет функциональность выбора карточки с возможностью фильтрации по типу, а также открытия ранее выбранной карточки. Соответствует элементу управления [.ph .uicontrol]*Карточка* [.dfn .term]_Конструктора разметок_.
+
+image::img/dev_card_41.PNG[image]
+
+CardChooseBox содержит следующие функциональные кнопки:
+
+* [.ph .uicontrol]*...* - открывает окно выбора карточки;
+* [.ph .uicontrol]*X* - очищает результат выбора карточки;
+* image:img/dev_card_41_1.PNG[image] - открывает выбранную карточку
+
+В списке задач элемента управления CardChooseBox можно изменить тип редактора для элемента управления. Тип редактора определяет возможности элемента управления.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для полнофункциональной работы элемента управления CardChooseBox должен быть установлен тип [.keyword .apiname]#DocsVision.BackOffice.WinForms.Controls.ChooseBox# (значение по умолчанию).
+====
+
+Данный элемент управления имеет следующие свойства:
+
+* Caption - определяет заголовок окна выбора карточки.
+* CardControl - возвращает ссылку на компонент карточки (унаследован от xref:../api/DocsVision/Platform/WinForms/CardControl_CL.adoc[CardControl]), на котором расположен данный элемент управления.
+* CardOpenMode - определяет режим открытия карточки при нажатия кнопки открытия карточки. Доступны следующие варианты:
+** Standard - разрешено редактирование карточки;
+** ReadOnly - карточка будет открыта в режиме чтения;
+* CardsFilter - текстовый фильтр для отбора карточек.
++
+[NOTE]
+====
+[.note__title]#Прим.:# Текстовый фильтр может быть составлен вручную или создан при помощи утилиты Docsvision Explorer (входит в Resource Kit).
+====
++
+В качестве примера можно использовать запрос, выбирающий задания, в которых текущий сотрудник назначен контролером:
+
+[source,pre,codeblock,language-xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<Search Version="4300" Limit="100" CombineResults="OR">
+ <AttributiveSearch>
+   <CardTypeQuery CardTypeID="{C7B36F33-CDD4-4DA9-8444-600FE14111E4}">
+     <SectionQuery Version="4300" SectionTypeID="{20D21193-9F7F-4B62-8D69-272E78E1D6A8}">
+       <ConditionGroup Alias="alias2" Operation="OR">
+         <Condition Alias="alias3" ParameterAlias="SW_I" SearchWord="true">
+           <Field FieldType="refid">Controller</Field>
+           <Op>EQ</Op>
+           <Value>'{9E3ED92F-9474-4725-9823-F2C1A7122CD3}'</Value>
+         </Condition>
+       </ConditionGroup>
+     </SectionQuery>
+   </CardTypeQuery>
+ </AttributiveSearch>
+ <Params>
+   <Param Alias="SW_I" Name="" Type="uniqueid" Flags="3" Value="{9E3ED92F-9474-4725-9823-F2C1A7122CD3}" ContextWord="{48293072-F090-47F5-8A9E-8C041884B6CA}" />
+ </Params>
+</Search>
+----
+
+[NOTE]
+====
+[.note__title]#Важное замечание:# Перед записью запроса в свойство элемента управления CardChooseBox, запрос необходимо перевести из многострочного варианта в однострочный.
+====
+* CardsTypeID - позволяет ограничить выбор карточек типом с заданным идентификатором.
+* CommandMenuStrip - позволяет установить новое контекстное меню.
+* Enabled - при значении false будет заблокирована возможность ввода теста в область ввода.
+* InheritedCaption - задает строку, отображаемую в области ввода, если была выполнена очистка результат выбора карточки. Работает при установленном InheritedValue.
+* InheritedValue - задает идентификатор предустановленной карточки. Данная карточка будет открыта при нажатии кнопки открытия карточки, если была выполнена очистка результатов выбора карточки.
+* ObjectContext - [.dfn .term]_контекст объектов_. Рекомендуется самостоятельно передавать [.dfn .term]_контекст объектов_ в CommunicativeChooseBox, к примеру, при инициализации карточки:
++
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ this.cardChooseBox.ObjectContext = this.ObjectContext; // Передача контекста объектов
+} 
+----
+* OpenCardButtonInvisible - при значении true, кнопка открытия карточки будет скрыта.
+* SearchTemplate - при значении true, запрещает вывод шаблонов в список карточек.
+* Session - возвращает сессию пользователя.
+* SimpleView - при установленном значении true, будут скрыты все кнопки управления.
+* Text - значение, отображаемое в области ввода.
+* Value - идентификатор выбранной карточки.
+* ValueResolved - возвращает true, если карточка выбрана.
+
+Наиболее интересные методы:
+
+* [.keyword .apiname]#ChooseValue()# - открывает окно выбора карточки;
+* [.keyword .apiname]#FilterCardKinds(IEnumerable<Guid>)# - при заданном CardsTypeID, ограничивает выбор карточек перечисленными видами.
+
+Событие [.keyword .apiname]#ValueChanged# оповещает о том, что карточка была выбрана .
+
+*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

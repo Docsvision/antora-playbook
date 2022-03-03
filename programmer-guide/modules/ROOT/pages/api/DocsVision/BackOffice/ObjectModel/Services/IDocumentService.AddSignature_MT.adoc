@@ -1,0 +1,88 @@
+= IDocumentService.AddSignature - метод (Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)
+
+Добавляет новую подпись в список подписей карточки и устанавливает ЭЦП на поля, основные и дополнительные файлы документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardSignature AddSignature(Document document, X509Certificate2 cert, bool signAttachments, ICollection<CardFieldSetting> fields)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+cert::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат, которым будет выполнено подписание
+signAttachments::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - подписывать дополнительные файлы, иначе false
+fields::
+  Тип: http://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
+  +
+  Коллекция подписываемых полей типа xref:Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определенных для карточки в Справочнике видов карточек
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Подпись
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document.
+|===
+
+== Заметки
+
+Сертификат сотрудника может быть получен из карточки Настроек пользователя. Данный метод инициализирует новую подпись в виде объекта типа [.keyword .apiname]#BaseCardSignature#, которую использует при непосредственном подписании данных карточки [.dfn .term]_Документ_.
+
+== Примеры
+
+Ниже приведен пример подписания документа, осуществляемое из скрипта самой карточки
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.BackOffice.WinForms.Controls;
+
+namespace BackOffice
+{
+ public class CardDocumentПримерScript : CardDocumentДокументУДScript
+ {
+  private void addSignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+  {
+
+   // Получение сервиса для работы с карточкой Документ
+   IDocumentService documentService = base.CardControl.ObjectContext.GetService<IDocumentService>();              
+   bool cancel = false;
+
+   // Отображение окна выбора сертификата. Простой сертификат может быть установлен, если присвоить certificate значение null
+   var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
+   if(cancel) return;
+
+   // Получение из параметров вида карточки полей, для которых предусмотрено подписание
+   var fields = documentService.GetKindSettings(base.BaseObject.SystemInfo.CardKind).DocumentSignature.Fields;
+   
+   // Осуществление подписания
+   documentService.AddSignature((base.BaseObject as Document), certificate, false, fields);
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

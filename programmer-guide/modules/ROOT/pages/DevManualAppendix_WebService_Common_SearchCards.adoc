@@ -1,0 +1,79 @@
+= SearchCards
+
+Возвращает результат выполнения поискового запроса.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SearchCards"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SearchCards xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <filter>string</filter>
+    </SearchCards>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+filter::
+  Поисковый запрос в виде xml-документ. Сформировать запрос можно, в том числе, утилитой «Docsvision Explorer» (входит в Resource Kit).
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SearchCardsResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <cards>string</cards>
+      <usingCompression>boolean</usingCompression>
+    </SearchCardsResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит список найденных карточек. Для каждой карточки указывается: идентификатор, тип, описание, дату создания и изменения, отметку об удалении и признак шаблона.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SearchCards"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SearchCards xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <filter>&lt;Search AllCards=&quot;true&quot;&gt;&lt;Scope&gt;&lt;CardTypes Enabled=&quot;true&quot;&gt;&lt;CardType&gt;{B9F7BFD7-7429-455E-A3F1-94FFB569C794}&lt;/CardType&gt;&lt;/CardTypes&gt;&lt;/Scope&gt;&lt;/Search&gt;</filter>
+    </SearchCards>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Search.adoc[Поиск]

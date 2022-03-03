@@ -1,0 +1,62 @@
+= Получение URL-ссылки на карточку
+
+Приведенный далее скрипт позволяет получить ссылку на заданную карточку в виде URL-строки.
+
+[.dfn .term]_Сценарий_ работает со следующими [.dfn .term]_переменными процесса_:
+
+* `Card` - карточка, для которой формируется ссылка. Тип "Карточка DV".
+* `URL` - переменная будет использована для сохранения ссылки. Тип "Строка".
+
+[source,pre,codeblock,language-csharp]
+----
+// подключение системных библиотек
+using System;
+using System.Xml;
+
+// подключение библиотек СУБП
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI;
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    // Получение переменных процесса
+    ProcessVariable oURL = process.GetVariableByName("URL");
+    ProcessVariable oCard = process.GetVariableByName("Card");
+      
+    // Приведение переменной к типу "Карточка DV"
+    DVCard dvCard = oCard.Value as DVCard;
+        
+    // Приведение переменной к строковому типу
+    string strUrl = oURL.Value.ToString();
+
+    DVGate dvGate = process.Gates[DVGate.GateID] as DVGate;
+       
+    // Формирование строки URL
+    if (dvGate.BaseURL != null) 
+    {
+     strUrl += Environment.NewLine + "<" + dvGate.BaseURL + ((dvGate.BaseURL.IndexOf('?') > 0) ? "&" : "?") + "CardID=" + dvCard.ID + ">";
+    }
+                
+    // Сохранение значения URL в переменную
+    oURL.Value = strUrl;
+   } catch (Exception ex)
+   {
+  
+    // Добавление сообщения об ошибке в журнал процесса
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message);
+   }
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../pages/SM_Workflow_Cat.adoc[Примеры использования API Workflow]

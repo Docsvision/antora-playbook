@@ -1,0 +1,41 @@
+= IStaffService.RemoveGroupEmployee - метод (StaffGroup, StaffEmployee)
+
+Удаляет сотрудника из группы [.dfn .term]_справочника сотрудников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool RemoveGroupEmployee(StaffGroup group, StaffEmployee employee)
+----
+
+Параметры
+
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа, из которой удаляется сотрудник
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, удаляемый из группы
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - если удаляемый элемент был найден и удален, иначе - false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group или employee.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

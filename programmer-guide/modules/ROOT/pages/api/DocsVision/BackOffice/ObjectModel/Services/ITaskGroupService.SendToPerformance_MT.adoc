@@ -1,0 +1,34 @@
+= ITaskGroupService.SendToPerformance - метод (TaskGroup, KindsCardKind)
+
+Отправляет группу заданий на исполнение.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void SendToPerformance(TaskGroup taskGroup, KindsCardKind taskKind)
+----
+
+Параметры
+
+taskGroup::
+  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
+  +
+  Отправляемая на исполнение группа заданий
+taskKind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид заданий, отправляемых исполнителям
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskGroup или taskKind.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

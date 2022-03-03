@@ -1,0 +1,71 @@
+= Реализация компонента карточки с обработчиками событий
+
+В данном примере, предполагается реализовать для компонента карточки обработчики событий инициализации и закрытия карточки. Предполагается, что интерфейс пользователя был или будет реализован.
+
+[source,pre,codeblock,language-csharp]
+----
+using System;
+using System.Windows.Forms;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.WinForms;
+using DocsVision.Platform.WinForms.DataSource;
+using DocsVision.Platform.CardHost;
+
+namespace DocsVision.Test
+{
+    public sealed partial class TestCard : CardControl
+    {
+        private bool isReadOnly;
+        private bool isChanged;
+
+        public TestCard() { }
+
+        //инициируется после создания компонента карточки, и передачи ей актуальных данных.
+        protected override void OnCardInitialized(EventArgs e)
+        {
+            base.OnCardInitialized(e);
+            InitializeComponent();
+        }
+
+        //инициируется после активации компонента карточки Windows-клиентом
+        protected override void OnCardActivated(CardActivatedEventArgs e)
+        {
+            base.OnCardActivated(e);
+            
+            //проверка режим редактирования, либо чтения
+            isReadOnly = (e.ActivateMode != ActivateMode.Edit);
+            isChanged = ((e.ActivateFlags & ActivateFlags.New) = ActivateFlags.New);
+        }
+
+        //возникает до закрытия пользовательского интерфейса карточки
+        protected override void OnCardClosing(CardClosingEventArgs e)
+        {
+            base.OnCardClosing(e);
+
+            //карточка будет сохранять данные только при ActivateMode.Edit и наличии изменений
+            if (!isReadOnly && isChanged)
+            {
+                e.ActionFlags = ActionFlags.None;
+                MessageResult result = ShowMessage("Сохранить изменения?", "Карточка", null,
+                    MessageType.Question, MessageButtons.YesNoCancel);
+
+                switch (result)
+                {
+                    case MessageResult.Yes:
+                        e.ActionFlags = ActionFlags.ContinueAction | ActionFlags.CommittedData;
+                        break;
+
+                    case MessageResult.No:
+                        e.ActionFlags = ActionFlags.ContinueAction;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+}
+----
+
+*На уровень выше:* xref:../pages/samples_container_createcomponents.adoc[Примеры реализации компонента карточек, библиотек карточек и расширений]

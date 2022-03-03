@@ -1,0 +1,46 @@
+= ObjectContext.DeleteObject - метод (ObjectBase)
+
+Данный метод используется для удаления заданного объекта.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void DeleteObject(ObjectBase objectInstance)
+----
+
+Параметры
+
+objectInstance::
+  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
+  +
+  Удаляемый объект
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+     
+// Получение документа с идентификатором 00000000-0000-0000-0000-000000000000
+var document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Удаление объекта
+objectContext.DeleteObject(document);
+
+// Сохранение изменений в контексте
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

@@ -1,0 +1,34 @@
+= IStaffService.SetFoldersRights - метод (FoldersFolder, String)
+
+Предоставляет полные права доступа к папке сотруднику с указанной учетной записью.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void SetFoldersRights(FoldersFolder folder, string accountName)
+----
+
+Параметры
+
+folder::
+  Тип: xref:../../../Platform/SystemCards/ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]
+  +
+  Папка
+accountName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Учетная запись сотрудника, которому выдаются права
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр folder.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

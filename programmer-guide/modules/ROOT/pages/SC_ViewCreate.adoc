@@ -1,0 +1,95 @@
+= Создание нового представления
+
+[source,pre,codeblock,language-csharp]
+----
+// Создание представления по документам с пятью колонками:
+// - Тема документа
+// - Номер документа
+// - Должность согласующего лица
+// - Количество файлов
+// - Количество свойств
+
+DocsVision.Platform.ObjectManager.ViewModel.View view = session.CreateView();
+
+// Добавление колонок
+view.Columns.AddNew("Name").Caption = "Тема документа";
+view.Columns.AddNew("Number").Caption = "Номер документа";
+view.Columns.AddNew("ApproverPos").Caption = "Должность согласующего лица";
+view.Columns.AddNew("FilesCount").Caption = "Количество файлов";
+view.Columns.AddNew("PropertiesCount").Caption = "Количество свойств";
+
+// Сортировка - по полю "Номер"
+view.Sorting.AddNew("Number").Ascending = true;
+
+// В представление будут выводиться данные только по Входящим документам
+// Поэтому будет только один элемент данных (ViewElement)
+// Его базовая секция – "Основная информация" Входящего документа
+ViewElement element = view.Elements.AddNew(new Guid("8C77892A-21CC-4972-AD71-A9919BCA8187"));
+
+// Данные двух колонок - Тема и Номер 
+// выводятся непосредственно из физических полей секции
+element.SectionFields.AddNew("Name").Name = "Name";
+element.SectionFields.AddNew("Number").Name = "FullNumber";
+
+// Формирование колонки Должность согласующего лица
+// Базовой секцией представления является "Основная информация”
+// А согласующее лицо хранится в секции "Сотрудники"
+// Поэтому сначала нужно присоединить секцию "Сотрудники" к представлению
+JoinDefinition join1 = element.JoinDefinitions.AddNew("Employees");
+join1.SourceField = "InstanceID";
+join1.DestinationField  = "InstanceID";
+join1.SectionId = new Guid("47C41171-9C64-450A-A3A6-102B3156AD79");
+
+// Условие присоединения: в секции "Сотрудники" поле "Type"
+// должно иметь значение "3" (согласующее лицо)
+DataCondition cond = join1.ConditionGroup.Conditions.AddNew();
+cond.Operation = ConditionOperation.Equals;
+DataConditionItem item1 = cond.ConditionItems.AddNew();
+item1.SectionAlias = "Employees";
+item1.Value = "Type";
+item1.DataType = DataType.Integer;
+DataConditionItem item2 = cond.ConditionItems.AddNew();
+item2.DataType = DataType.Integer;
+item2.Value = 3;
+
+// Далее нужно присоединить секцию справочника сотрудников
+JoinDefinition join2 = element.JoinDefinitions.AddNew("RefStaffEmployees");
+join2.SourceField = "EmployeeID";
+join2.DestinationField = "RowID";
+join2.SectionId = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482");
+
+// Наконец, для получения названия должности, нужно присоединить секцию должностей
+JoinDefinition join3=element.JoinDefinitions.AddNew("RefStaffPositions");
+join3.SourceField = "Position";
+join3.DestinationField = "RowID";
+join3.SectionId = new Guid("CFDFE60A-21A8-4010-84E9-9D2DF348508C");
+
+// Добавляем в к элементу представления колонку - название должности
+SectionField field = element.SectionFields.AddNew("ApproverPos");
+field.SectionAlias = "RefStaffPositions";
+field.Name = "Name";
+
+// Четвертая колонка - Количество файлов - уже определена в описании карточки
+// в виде виртуального поля. Нужно только добавить её к представлению
+CardType type =  session.CardManager.CardTypes[new Guid("C1FED883-08DE-420F-8FB4-C16CEFFC1630")];
+
+CardVirtualField virtfield = type.VirtualFields["FilesCount"];
+element.MergeVirtualField(virtfield.Export(), "Main", "FilesCount");
+
+// Последняя колонка - Количество свойств - это вычисляемое поле
+// Представляет собой агрегацию (количество строк) по секции "Свойства"
+
+// Присоединяем секцию Свойства
+JoinDefinition join4 = element.JoinDefinitions.AddNew("Properties");
+join4.SourceField = "InstanceID";
+join4.DestinationField = "InstanceID";
+join4.SectionId = new Guid("B822D7D1-2280-4B51-AE58-A1CF757C5672");
+
+// Создание вычисляемого поля - количество строк в секции Свойства
+ComputedField compfield = element.ComputedFields.AddNew("PropertiesCount");
+ComputationPart comppart = compfield.ComputationGroup.ComputationParts.AddNew();
+comppart.DataItem.SectionAlias = "Properties";
+comppart.DataItem.Value = "RowID";
+----
+
+*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

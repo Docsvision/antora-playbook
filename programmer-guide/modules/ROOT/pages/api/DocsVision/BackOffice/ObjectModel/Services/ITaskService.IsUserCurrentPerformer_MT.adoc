@@ -1,0 +1,41 @@
+= ITaskService.IsUserCurrentPerformer - метод (Task, StaffEmployee)
+
+Определяет входит ли указанный сотрудник в список текущих исполнителей.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool IsUserCurrentPerformer(Task task, StaffEmployee user)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+user::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - сотрудник входит в число текущих исполнителей, иначе - false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или user.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

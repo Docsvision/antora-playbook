@@ -1,0 +1,53 @@
+= IStaffService.LoadEmployeeFromAD - метод (StaffEmployee)
+
+Загружает данные сотрудника из Active Directory.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+List<string> LoadEmployeeFromAD(StaffEmployee employee)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, для которого загружаются данные
+
+Возвращаемое значение
+
+::
+  Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<string>
+  +
+  Список обновленных атрибутов
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|===
+
+== Примеры
+
+Ниже приведен пример загрузки данных текущего сотрудника из Active Directory в [.dfn .term]_справочник сотрудников_.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Загрузка данных сотрудника из AD
+staffService.LoadEmployeeFromAD(staffService.GetCurrentEmployee());
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

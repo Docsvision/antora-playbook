@@ -1,0 +1,47 @@
+= IDocumentService.CreateDocument - метод
+
+Создает экземпляр нового документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Document CreateDocument()
+----
+
+Возвращаемое значение
+
+::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Карточка типа "Документ"
+
+== Заметки
+
+Для созданного экземпляра карточки будут использованы настройки корневого вида карточки.
+
+== Примеры
+
+Ниже приведен пример создания карточки типа Документ и изменение ее описания.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с документами
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Создание документа
+Document document = documentService.CreateDocument();
+
+// Изменение описания
+document.Description = "Документ созданный из кода";
+
+// Сохранение изменений в контексте
+objectContext.SaveObject<Document>(document);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

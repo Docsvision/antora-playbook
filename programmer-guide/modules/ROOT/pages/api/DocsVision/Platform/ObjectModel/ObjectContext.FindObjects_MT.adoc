@@ -1,0 +1,49 @@
+= ObjectContext.FindObjects - метод (QueryObject)
+
+Возвращает список объектов, полученный в результате выполнения переданного запроса.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IEnumerable<T> FindObjects<T>(QueryObject query) where T : ObjectBase
+----
+
+Параметры типа
+
+T::
+  Тип искомого объекта
+
+Параметры
+
+query::
+  Тип: xref:Search/QueryObject_CL.adoc[QueryObject]
+  +
+  Запрос
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<T>
+  +
+  Коллекция объектов
+
+== Примеры
+
+Ниже приведен пример поиска сотрудников компании с именем Иван
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Формирование поискового запроса по полю FirstName
+QueryObject query = new QueryObject(StaffEmployee.FirstNameProperty.Name, "Иван");
+
+// Выполнение запроса
+IEnumerable<StaffEmployee> employees = objectContext.FindObjects<StaffEmployee>(query);
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

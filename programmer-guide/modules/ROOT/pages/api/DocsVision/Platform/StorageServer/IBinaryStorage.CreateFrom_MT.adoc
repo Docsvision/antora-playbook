@@ -1,0 +1,41 @@
+= IBinaryStorage.CreateFrom - метод (IFileInfo, String, StoragePartitionType)
+
+Формирует во внешнем хранилище путь к добавляемому файлу.
+
+* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+string CreateFrom(IFileInfo fileInfo, string sourceId, StoragePartitionType onPartition = StoragePartitionType.Primary)
+----
+
+Параметры
+
+fileInfo::
+  Тип: xref:Files/IFileInfo_IN.adoc[IFileInfo]
+  +
+  Информация о файле
+sourceId::
+  Тип: System.String
+  +
+  Идентификатор файла, данные которого копируются в новый файл, во внешнем хранилище
+onPartition::
+  Тип: xref:StoragePartitionType_EN.adoc[StoragePartitionType]
+  +
+  Раздела хранилища, в который записывается файл
+
+Возвращаемое значение
+
+::
+  Тип: System.String
+  +
+  Уникальный идентификатор файла в хранилище
+
+== Заметки
+
+Метод CreateFrom должен создать новый файл во внешнем хранилище в разделе onPartition, и записать в него данные файла sourceId.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage - интерфейс]

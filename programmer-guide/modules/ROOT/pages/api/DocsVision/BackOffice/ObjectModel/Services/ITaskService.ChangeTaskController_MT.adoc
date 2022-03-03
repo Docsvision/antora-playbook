@@ -1,0 +1,57 @@
+= ITaskService.ChangeTaskController - метод (Task, StaffEmployee, DateTime)
+
+Заменяет контролёра задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void ChangeTaskController(Task task, StaffEmployee employee, DateTime? сontrolDate)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Новый контролёр
+сontrolDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Новый дата контроля, если требуется изменить
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или employee.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для изменения контролёра.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+// Получение задания и нового контролёра
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Замена контролёра 
+taskService.ChangeTaskController(task, employee, null);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

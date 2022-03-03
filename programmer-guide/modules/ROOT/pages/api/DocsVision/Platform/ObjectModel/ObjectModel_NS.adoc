@@ -1,0 +1,88 @@
+= DocsVision.Platform.ObjectModel - пространство имен
+
+Пространство имен DocsVision.Platform.ObjectModel содержит классы определяющие фабрики сервисов и преобразователей данных, сущности хранящие данные контекста объектов, а также вспомогательные классы и интерфейсы. Эти классы составляют объектную модель уровня бизнес-логики.
+
+== Пространства имен
+
+[cols=",",options="header",]
+|===
+|Пространство имен |Описание
+|xref:Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping] |Пространство имен DocsVision.Platform.ObjectModel.Mapping содержит преобразователи данных.
+|xref:Search/Search_NS.adoc[DocsVision.Platform.ObjectModel.Search] |Пространство имен DocsVision.Platform.ObjectModel.Search предоставляет типы, используемые для организации поиска.
+|===
+
+== Классы
+
+[cols=",",options="header",]
+|===
+|Класс |Описание
+|xref:ContextService_CL.adoc[ContextService] |Базовый класс сервисов использующих контекст объектов.
+|xref:ObjectBase_CL.adoc[ObjectBase] |Базовый класс объектов модели уровня бизнес-логики.
+|xref:ObjectBaseSecurity_CL.adoc[ObjectBaseSecurity] |Представляет объект безопасности. Предоставляет методы установки и получения прав доступа.
+|xref:ObjectCollection_CL.adoc[ObjectCollection<T>] |Основной класс коллекции объектов ObjectBase, поддерживающий функцию оповещения об изменении.
+|xref:ObjectContext_CL.adoc[ObjectContext] |Класс ObjectContext предоставляет методы доступа к сущностям объектной модели уровня бизнес-логики.
+|xref:ObjectHelper_CL.adoc[ObjectHelper] |Содержит метод получения родительского объекта.
+|xref:ObjectLockInfo_CL.adoc[ObjectLockInfo] |Содержит информацию о блокировке объекта.
+|xref:ObjectModelException_CL.adoc[ObjectModelException] |Представляет общее исключение объектной модели.
+|xref:ObjectProperty_CL.adoc[ObjectProperty] |Предоставляет методы для работы со свойствами объектной модели.
+|xref:ObjectPropertyValue_CL.adoc[ObjectPropertyValue] |Предоставляет значение для коллекции [.keyword .apiname]#ObjectPropertyValueCollection#.
+|xref:ObjectPropertyValueCollection_CL.adoc[ObjectPropertyValueCollection] |Используется некоторыми преобразователями данных для хранения значений.
+|xref:ObjectRef_CL.adoc[ObjectRef<T>] |Содержит ссылку на объект в [.dfn .term]_контексте объектов_.
+|xref:ObjectState_CL.adoc[ObjectState] |Позволяет получать флаги состояния объекта.
+|xref:ServiceFactory_CL.adoc[ServiceFactory] |Управляет получением сервиса из фабрики сервисов.
+|xref:StaticObjectContext_CL.adoc[StaticObjectContext] |Управляет получением сервиса из фабрики сервисов.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header",]
+|===
+|Интерфейс |Описание
+|IContextService |Определяет возможность передачи контекста объектов в класс.
+|IInitializable |Обозначает в классе признак того, что объект был инициализирован.
+|xref:ILockManager_IN.adoc[ILockManager] |Представляет менеджер блокировки.
+|xref:IObjectContext_IN.adoc[IObjectContext] |Описывает ключевую функциональность класса xref:ObjectContext_CL.adoc[ObjectContext] по осуществлению наиболее общих действий над объектами системы.
+|xref:IObjectRef_IN.adoc[IObjectRef] |Определяет наличие у объекта уникального идентификатора и типа.
+|xref:IObjectStateService_IN.adoc[IObjectStateService] |Представляет интерфейс сервиса состояний объектов.
+|xref:IServiceFactoryRegistry_IN.adoc[IServiceFactoryRegistry] |Интерфейс реестра фабрик сервисов.
+|===
+
+== Перечисления
+
+[cols=",",options="header",]
+|===
+|Перечисление |Описание
+|xref:ObjectAccessControlType_EN.adoc[ObjectAccessControlType] |Определяет тип объекта доступа.
+|xref:ObjectLockStatus_EN.adoc[ObjectLockStatus] |Определяет статус блокировки объекта.
+|xref:ObjectPropertyOptions_EN.adoc[ObjectPropertyOptions] |Определяет список флагов, используемых свойствами объектной модели.
+|xref:ObjectStateFlags_EN.adoc[ObjectStateFlags] |Определяет состояние объекта.
+|===
+
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/Search/Search_NS.adoc[DocsVision.Platform.ObjectModel.Search - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ContextService_CL.adoc[ContextService - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectBaseSecurity_CL.adoc[ObjectBaseSecurity - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection<T> - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectHelper_CL.adoc[ObjectHelper - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectLockInfo_CL.adoc[ObjectLockInfo - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModelException_CL.adoc[ObjectModelException - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectProperty_CL.adoc[ObjectProperty - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectPropertyValue_CL.adoc[ObjectPropertyValue - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectPropertyValueCollection_CL.adoc[ObjectPropertyValueCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectRef_CL.adoc[ObjectRef - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectState_CL.adoc[ObjectState - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ServiceFactory_CL.adoc[ServiceFactory - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/StaticObjectContext_CL.adoc[StaticObjectContext - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ILockManager_IN.adoc[ILockManager - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectContext_IN.adoc[IObjectContext - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectRef_IN.adoc[IObjectRef - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectStateService_IN.adoc[IObjectStateService - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/IServiceFactoryRegistry_IN.adoc[IServiceFactoryRegistry - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectAccessControlType_EN.adoc[ObjectAccessControlType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectLockStatus_EN.adoc[ObjectLockStatus - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectPropertyOptions_EN.adoc[ObjectPropertyOptions - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectStateFlags_EN.adoc[ObjectStateFlags - перечисление]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Platform_NS.adoc[DocsVision.Platform - пространство имен]

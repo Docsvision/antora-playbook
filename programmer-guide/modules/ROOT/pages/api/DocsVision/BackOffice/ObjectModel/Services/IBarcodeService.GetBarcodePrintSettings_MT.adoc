@@ -1,0 +1,64 @@
+= IBarcodeService.GetBarcodePrintSettings - метод (StaffEmployee, KindsCardKind)
+
+Возвращает системные настройки печати.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BarcodePrintSettingsCollection GetBarcodePrintSettings(StaffEmployee employee, KindsCardKind cardKind)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, для которого выбираются настройки
+cardKind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид документа, для которого выбираются настройки
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BarcodePrintSettingsCollection_CL.adoc[BarcodePrintSettingsCollection]
+  +
+  Настройки печати, представленные коллекцией элементов типа xref:../BarcodePrintSettings_CL.adoc[BarcodePrintSettings]
+
+== Заметки
+
+Настроек, проходящих выборку, может быть несколько, поэтому итоговое решение, по применению той или иной настройки, принимается разработчиком.
+
+== Примеры
+
+Ниже приведен пример скрипта карточки, позволяющий определить необходимость печати штрих-кода (определена в системных настройках)
+
+[source,pre,codeblock,language-csharp]
+----
+private void Button_Click(System.Object sender, System.EventArgs e)
+{
+ //получение сервисов
+ IBarcodeService iBarcodeService = CardControl.ObjectContext.GetService<IBarcodeService>();
+ IStaffService staffService = CardControl.ObjectContext.GetService<IStaffService>();
+
+ //получение настроек печати штрих-кода, для текущего пользователя
+ BarcodePrintSettingsCollection printSettingsCollection = iBarcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(), 
+            BaseObject.SystemInfo.CardKind);
+        
+ if (printSettingsCollection.Count() > 0)
+ {
+  //получение первой подходящей настройки
+  BarcodePrintSettings printSettings = printSettingsCollection.FirstOrDefault();
+  
+  //если false - установлен признак "Не печатать штрих код"
+  bool isPrinting = printSettings.IsPrinting;
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService_IN.adoc[IBarcodeService - интерфейс]

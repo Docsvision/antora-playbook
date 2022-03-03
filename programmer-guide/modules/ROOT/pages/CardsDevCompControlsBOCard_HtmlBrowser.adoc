@@ -1,0 +1,36 @@
+= Элемент управления HtmlBrowser
+
+Элемент управления HtmlBrowser предназначен для отображения произвольного HTML-документа, либо XML-содержимого связанной карточки с (опционально) примененным XSL-преобразованием. Соответствует элементу управления [.ph .uicontrol]*HTML браузер* [.dfn .term]_Конструктора разметок_.
+
+HtmlBrowser не содержит элементов управления.
+
+HtmlBrowser содержит следующие свойства:
+
+* ContentType - тип отображаемого контента:
+** CardDataXml - HtmlBrowser отобразит содержимое карточки, полученной из ссылочного поля, если определены `ReferenceCardFieldAlias` и `ReferenceCardSectionId`. Если определено свойство `XslTransform`, будет применено соответствующее преобразование.
+** CustomHtml - предопределенный HTML-документ, который задан в значении `CustomData`;
+** CustomUrl - отображение HTML-страницы с URL. При установке значения `CustomData` необходимо соблюдать формат адреса, например: [.ph .filepath]`http://www.docsvision.com` ;
+** OwnCardDataXml - HtmlBrowser отобразит содержимое текущей карточки в формате XML, либо преобразованный документ, если определено свойство `XslTransform`.
+* CustomData - URL-адрес для режима CustomUrl, либо HTML-документ для режима CustomHtml.
+* IsContextMenuEnabled - при значении true будет доступно контекстное меню;
+* ObjectContext - [.dfn .term]_контекст объектов_;
+* ReferenceCardFieldAlias - псевдоним ссылочного поля карточки, из которой должен быть получен идентификатор карточки для отображения содержимого в режиме `CardDataXml`.
+* ReferenceCardSectionId - идентификатор секции, в которой содержится поле `ReferenceCardFieldAlias`;
+* XslTransform - XSLT-шаблон для преобразования содержимого карточки в режимах CardDataXml и OwnCardDataXml.
+
+Пример инициализации HtmlBrowser с отображением содержимого карточки, идентификатор которой указан в ссылочном поле CategoryList:
+
+[source,pre,codeblock]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+ 
+ this.htmlBrowser.ContentType = DocsVision.BackOffice.WinForms.Controls.HtmlBrowserContentType.CardDataXml;
+ this.htmlBrowser.ReferenceCardSectionId = new Guid("783CD108-BA4A-432D-9C12-B32E0577D53C");
+ this.htmlBrowser.ReferenceCardFieldAlias = "CategoryList";
+}
+----
+
+*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

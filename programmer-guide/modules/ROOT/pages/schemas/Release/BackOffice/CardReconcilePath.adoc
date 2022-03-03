@@ -1,0 +1,109 @@
+= Маршрут согласования
+
+* Идентификатор: 99DD6295-1B3D-4DA6-8256-8332D3E955C9
+* Псевдоним: CardReconcilePath
+* Название: Маршрут согласования
+
+== Секции карточки
+
+*Секция "Системные свойства"*
+
+* Идентификатор: D96941F5-E1D4-4E5E-907C-47B018C9D8EB
+* Псевдоним: System
+* Название: Системные свойства
+* Тип секции: struct
+
+.[.table--title-label]##Табл. 1. ##[.title]##Поля секции "Системные свойства"##
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Псевдоним |Название |Тип поля |Размер |Дополнительная информация
+|State |Состояние |refid | |
+|Kind |Вид |refid | |
+|===
+
+*Секция "Номера"*
+
+* Идентификатор: 79DB0422-1EA4-47B8-A4E7-E317C22039B8
+* Псевдоним: Numbers
+* Название: Номера
+* Тип секции: coll
+
+.[.table--title-label]##Табл. 2. ##[.title]##Поля секции "Номера"##
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Псевдоним |Название |Тип поля |Размер |Дополнительная информация
+|NumericPart |Числовая часть |refid | |
+|Number |Полный номер |string | |
+|===
+
+*Секция "Бизнес-процессы"*
+
+* Идентификатор: 0429F4EE-E08F-432D-A1F1-9C9F39ADBE7B
+* Псевдоним: Processes
+* Название: Бизнес-процессы
+* Тип секции: coll
+
+.[.table--title-label]##Табл. 3. ##[.title]##Поля секции "Бизнес-процессы"##
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Псевдоним |Название |Тип поля |Размер |Дополнительная информация
+|ProcessID |Бизнес-процесс |refcardid | a|
+Идентификатор типа: AE82DD57-348C-4407-A50A-9F2C7D694DA8
+
+Идентификатор секции: 0EF6BCCA-7A09-4027-A3A2-D2EEECA1BF4D
+
+Поля ссылки: Process_Name > Name, Process_State > State
+
+|ProcessKind |Вид процесса |refid | |
+|===
+
+*Секция "ReconcileOrderTable"*
+
+* Идентификатор: 20C01E7C-0820-4B14-BBD9-A9B6E14C196B
+* Псевдоним: ReconcileOrderTable
+* Название: ReconcileOrderTable
+* Тип секции: coll
+
+.[.table--title-label]##Табл. 4. ##[.title]##Поля секции "ReconcileOrderTable"##
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Псевдоним |Название |Тип поля |Размер |Дополнительная информация
+|Order |Порядок |int | |
+|Condition1 |Условие 1 |unitext | |
+|Condition2 |Условие 2 |unitext | |
+|StageCard |Этап |refcardid | |Идентификатор типа: 35E7139A-82B8-425D-AB14-ADC2DB757D7A
+|ReconcileType |Тип согласования |enum | |Значения: Sequential = 0, Parallel = 1, Consolidation = 2, Registration = 3
+|ReconcilerType |Тип согласующего |enum | |Значения: Сотрудник = 0, Группа = 1, Роль = 2, Руководитель инициатора = 3, Все руководители инициатора = 4, Руководитель инициатора на уровне = 5, Инициатор = 6, Регистратор = 7
+|ParticipantAlias |Псевдоним участника |unitext | |
+|===
+
+*Секция "MainInfo"*
+
+* Идентификатор: 25B976F7-1C74-4D5C-B60A-7A8F4897A8CE
+* Псевдоним: MainInfo
+* Название: MainInfo
+* Тип секции: struct
+
+.[.table--title-label]##Табл. 5. ##[.title]##Поля секции "MainInfo"##
+[width="100%",cols="20%,20%,20%,20%,20%",options="header",]
+|===
+|Псевдоним |Название |Тип поля |Размер |Дополнительная информация
+|Name |Название |unitext | |
+|Author |Автор |unitext | |
+|RegisteredBy |Регистратор |unitext | |
+|BusinessProcessFolder |Папка экземпляров БП |refid | |
+|ReconcileProjectsFolder |Папка проектов на согласовании |refid | |
+|RegistrationFolder |Папка регистрации |refid | |
+|RejectFolder |Папка при отзыве |refid | |
+|ProjectsFolder |Название папки проектов |unitext | |
+|RegistrationNumerator |Регистрационный нумератор |refid | |
+|FinishBusinessProcess |Запуск процесса при завершении |refcardid | |Идентификатор типа: AE82DD57-348C-4407-A50A-9F2C7D694DA8
+|RejectBusinessProcess |Запуск процесса при отклонении |refcardid | |Идентификатор типа: AE82DD57-348C-4407-A50A-9F2C7D694DA8
+|FinalState |Финальное состояние |unitext | |
+|SkipRepeatApprove |Пропускать повторное согласование |bool | |
+|CreatedByTrigger |Создано триггером |bool | |
+|Kind |Вид |refid | |
+|State |Состояние |refid | |
+|===
+
+*На уровень выше:* xref:../../../pages/DM_StandartCards_5.5.adoc[Описание полей стандартных карточек Docsvision 5.5]

@@ -1,0 +1,45 @@
+= StaffUnit.Manager - свойство
+
+Задает или возвращает сотрудника, который является руководителем организации.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public StaffEmployee Manager { get; set; }
+----
+
+Значение свойства
+
+::
+  Тип: xref:StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Руководитель организации/подразделения
+
+== Заметки
+
+Руководитель подразделения или организации может быть задан, например, в [.dfn .term]_Справочнике сотрудников_.
+
+== Примеры
+
+В примере выполняется проверка того, что текущий сотрудника является руководителем подразделения, в котором числиться.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы со Справочником сотрудников
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получения текущего сотрудника
+StaffEmployee employee = staffService.GetCurrentEmployee();
+
+// Получение руководителя подразделения, в котором числиться сотрудник 
+StaffEmployee manager = employee.Unit.Manager;
+bool isManager = (employee = manager);
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit - класс]

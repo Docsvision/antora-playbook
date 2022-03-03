@@ -1,0 +1,37 @@
+= ILockService - интерфейс
+
+Сервис управления блокировкой объектов.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ILockService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:ILockService.IsObjectLocked_MT.adoc[IsObjectLocked<T>(T, Boolean, String)] |Определяет наличие и владельца блокировки, установленной на объект.
+|xref:ILockService.IsObjectLockedByAnotherUser_MT.adoc[IsObjectLockedByAnotherUser<T>(T)] |Определяет наличие у объекта блокировки, установленной другим сотрудником.
+|xref:ILockService.IsObjectLockedByAnotherUser_1_MT.adoc[IsObjectLockedByAnotherUser<T>(T, String)] |Определяет наличие у объекта блокировки, установленной другим сотрудником, а также учетную запись сотрудника, выполнившего блокировку.
+|xref:ILockService.IsObjectLockedByMe_MT.adoc[IsObjectLockedByMe<T>(T)] |Определяет наличие у объекта блокировки, установленной текущим пользователем.
+|xref:ILockService.LockObject_MT.adoc[LockObject<T>(T)] |Устанавливает временную блокировку на объект.
+|xref:ILockService.LockObjectBase_MT.adoc[LockObjectBase<T>(T)] |Устанавливает временную блокировку на объект.
+|xref:ILockService.UnlockObject_MT.adoc[UnlockObject<T>(T)] |Снимает временную блокировку с объекта.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.IsObjectLocked_MT.adoc[ILockService.IsObjectLocked<T> - метод (T, Boolean, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.IsObjectLockedByAnotherUser_MT.adoc[ILockService.IsObjectLockedByAnotherUser<T> - метод (T)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.IsObjectLockedByAnotherUser_1_MT.adoc[ILockService.IsObjectLockedByAnotherUser<T> - метод (T, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.IsObjectLockedByMe_MT.adoc[ILockService.IsObjectLockedByMe<T> - метод (T)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.LockObject_MT.adoc[ILockService.LockObject<T> - метод (T)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.LockObjectBase_MT.adoc[ILockService.LockObjectBase<T> - метод (T)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService.UnlockObject_MT.adoc[ILockService.UnlockObject<T> - метод (T)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

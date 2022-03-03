@@ -1,0 +1,86 @@
+= LicenseManager - класс
+
+Класс LicenseManager содержит функциональность по работе с дополнительными опциями лицензии Docsvision, в которых присутствует ограничение по количеству соединений.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class LicenseManager
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Session |Возвращает сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|DecrementFeatureUsage(Guid) |Уменьшает число активных соединений в счетчике дополнительной опции лицензии.
+|IncrementFeatureUsage(Guid) |Увеличивает число активных соединений в счетчике дополнительной опции лицензии.
+|===
+
+== Заметки
+
+На основе методов [.keyword .apiname]#DecrementFeatureUsage# и [.keyword .apiname]#IncrementFeatureUsage# реализуется механизм контроля числа пользователей, использующих определенный модуль Docsvision, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
+
+== Примеры
+
+К примеру, при осуществлении доступа к дополнительному модулю Docsvision, необходимо выполнить проверку того, не достигнут ли предел подключений пользователей:
+
+[source,pre,codeblock,language-csharp]
+----
+// userSession - сессия пользователя
+// featureId - идентификатор дополнительной опции в лицензии Docsvision
+private void Take(UserSession userSession, Guid featureId)
+{
+ try
+ {
+  // Увеличение числа соединений с модулем
+  userSession.LicenseManager.IncrementFeatureUsage(featureId);
+  return;
+ } catch (StorageServerException ex)
+ {
+  // если достигнут предел подключений..
+  if (ex.ErrorCode = (int)ErrorCode.FeatureLimit)
+  {
+   /* Вывод сообщения о превышении количества пользователей */
+   return;
+  } else
+  {
+   /* Вывод сообщения о прочей ошибке */
+   return;
+  }
+ }
+}
+----
+
+После выхода пользователя из модуля, соединение должно быть освобождено:
+
+[source,pre,codeblock,language-csharp]
+----
+private void Release(UserSession userSession, Guid featureId)
+{
+ try
+ {
+  // Уменьшение числа соединений с модулем
+  userSession.LicenseManager.DecrementFeatureUsage(featureId);
+  return;
+ } catch (StorageServerException ex)
+ {
+  /* Вывод сообщения о прочей ошибке */
+  return;
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

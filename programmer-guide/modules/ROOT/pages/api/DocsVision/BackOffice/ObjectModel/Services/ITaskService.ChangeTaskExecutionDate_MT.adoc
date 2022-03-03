@@ -1,0 +1,60 @@
+= ITaskService.ChangeTaskExecutionDate - метод (Task, DateTime, DateTime, String)
+
+Устанавливает новые сроки исполнения задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void ChangeTaskExecutionDate(Task task, DateTime? newStartDate, DateTime? newEndDate, string comment)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, для которого устанавливаются новые сроки
+newStartDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Новая плановая дата начала
+newStartDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Новая плановая дата завершения
+comment::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Комментарий к операции изменения сроков для записи в историю карточки
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, либо параметры newStartDate и newEndDate не имеют значения, либо newStartDate и newEndDate меньше минимальной даты.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав на изменение сроков или на запись в историю карточки.
+|https://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException] |Ошибка возвращается, если дата newEndDate меньше newStartDate.
+|===
+
+== Заметки
+
+Сроки могут быть изменены для отправленного задания.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+Task task = objectContext.GetObject<Task>(new Guid("89C2EB62-8B6D-E511-9415-90E6BA57B9F8"));
+taskService.ChangeTaskExecutionDate(task, DateTime.Parse("10.10.2015"), DateTime.Parse("14.10.2015"),"Сотрудник отправлен в командировку.");
+objectContext.AcceptChanges(); 
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

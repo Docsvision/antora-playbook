@@ -1,0 +1,41 @@
+= IBaseCardService.GetBusinessProcessesToStop - метод (BaseCard)
+
+Получает список видов бизнес-процесса карточки, который может быть остановлен.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+IEnumerable<KindsCardProcess> GetBusinessProcessesToStop(BaseCard baseCard)
+----
+
+Параметры
+
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<KindsCardProcess>
+  +
+  Коллекция видов типа xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard.
+|===
+
+== Заметки
+
+Возможность остановки БП определяется исходя из наличие у карточки активных экземпляров БП.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

@@ -1,0 +1,39 @@
+= InfoRowCollection - класс
+
+Содержит методы для работы к коллекцией InfoRow. Этот класс является [.keyword]*абстрактным*.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+ public abstract class InfoRowCollection : IEnumerable<InfoRow>, IEnumerable, IDisposable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Count |Возвращает число элементов в коллекции.
+|CurrentPage |Возвращает текущую страницу.
+|CursorID |Возвращает идентификатор серверного курсора.
+|Fields |Возвращает названия полей строк коллекции.
+|Item |Возвращает элемент коллекции с заданным индексом.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Dispose |Очищает ресурсы.
+|Dispose(Boolean) |Очищает неуправляемые ресурсы.
+|GetEnumerator |Возвращает перечислитель.
+|SaveXml(Stream) |Сохраняет коллекцию в поток в XML-формате.
+|UpdateRow(Guid, ViewReadRequest) |Обновление данных одной строки.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

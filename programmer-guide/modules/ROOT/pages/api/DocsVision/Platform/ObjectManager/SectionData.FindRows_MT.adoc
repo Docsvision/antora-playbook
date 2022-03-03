@@ -1,0 +1,54 @@
+= SectionData.FindRows - метод (String)
+
+Осуществляет поиск строк в секции карточки (справочника).
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract RowDataCollection FindRows(string queryXml)
+----
+
+Параметры
+
+queryXml::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[String]
+  +
+  Поисковый запрос
+
+Возвращаемое значение
+
+::
+  Тип: xref:RowDataCollection_CL.adoc[RowDataCollection]
+  +
+  Коллекция найденных строк
+
+== Примеры
+
+Приведенный далее пример демонстрирует использование серверного поиска при получении сотрудников определенного подразделения
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+                
+// Поиск по секции
+SectionQuery sectionQuery = userSession.CreateSectionQuery();
+
+// Подразделение, из которого осуществляется выборка сотрудников
+Guid departmentID = new Guid(" 00000000-0000-0000-0000-000000000000");
+
+// Добавление условия поиска сотрудников в подразделении departmentId
+sectionQuery.ConditionGroup.Conditions.AddNew("ParentRowID", FieldType.UniqueId, ConditionOperation.Equals, departmentID);
+
+// Получение Справочника сотрудников и секции Сотрудники 
+CardData staffData = userSession.CardManager.GetDictionaryData(RefStaff.ID);
+SectionData employeesSection = staffData.Sections[RefStaff.Employees.ID];
+
+// Выполнение поиска
+RowDataCollection employees = employeesSection.FindRows(sectionQuery.GetXml());
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData - класс]

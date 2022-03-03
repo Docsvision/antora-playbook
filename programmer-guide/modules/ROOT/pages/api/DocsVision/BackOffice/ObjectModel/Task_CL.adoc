@@ -1,0 +1,181 @@
+= Task - класс
+
+Объектная модель карточки [.dfn .term]_Задание_.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class Task : BaseCard
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:Task.ActualDelegates_PR.adoc[ActualDelegates] |Возвращает коллекцию актуальных делегатов, которым в последний раз было явно делегировано задание.
+|xref:Task.Comments_PR.adoc[Comments] |Возвращает коллекцию комментариев.
+|xref:Task.CurrentPerformers_PR.adoc[CurrentPerformers] |Возвращает коллекцию текущих исполнителей.
+|xref:Task.Delegates_PR.adoc[Delegates] |Возвращает список делегирования (список предыдущих исполнителей задания).
+|xref:Task.MainInfo_PR.adoc[MainInfo] |Возвращает основные свойства карточки "Задание".
+|xref:Task.Preset_PR.adoc[Preset] |Возвращает индивидуальные настройки задания.
+|===
+
+== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AcceptanceState |Представляет состояние "На приемке".
+|AcceptanceToCompletedByAccept |Представляет переход "Приемка - Завершено".
+|AcceptanceToNotAcceptedByTakeToRework |Представляет переход "Приемка - На доработке".
+|AcceptanceToRecalledByRecall |Представляет переход "Приемка - Отозвано".
+|AcceptOperation |Операция приемки.
+|ActualDelegatesProperty |Определяет свойство "Актуальные делегаты".
+|AddAttachmentOperation |Операция добавления дополнения.
+|AddCommentOperation |Операция добавления комментария.
+|AddMainDocumentOperation |Операция добавления основного документа.
+|AddReportOperation |Операция добавления отчета.
+|CancelDelegationOperation |Операция отмены делегирования.
+|ChangeCurrentPerformerOperation |Операция изменения текущего исполнителя.
+|ChangeExecutionDateOperation |Операция изменения срока исполнения.
+|ChangeOperation |Операция изменения.
+|CommentsProperty |Представляет свойство "Комментарии".
+|CompletedState |Представляет состояние "Завершено".
+|CompleteOperation |Операция завершения.
+|CopyChildTaskOperation |Операция копирования подчинённого задания.
+|CreateChildTaskGroupOperation |Операция создания подчиненной группы заданий.
+|CreateChildTaskOperation |Операция создания подчинённого задания.
+|CurrentPerformersProperty |Представляет свойство "Текущие исполнители".
+|DeferOperation |Операция отложения.
+|DeferredState |Представляет состояние "Отложено".
+|DeferredToInWorkByTakeToWork |Представляет переход "Отложено - В работе".
+|DeferredToRecalledByRecall |Представляет переход "Отложено - Отозвано".
+|DeferredToRejectedByReject |Представляет переход "Отложено - Отклонено".
+|DelegatedState |Представляет состояние "Делегировано".
+|DelegatedToDelegatedByCancelDelegation |Представляет переход "Делегировано - Делегирование отменено".
+|DelegatedToDelegatedByDelegate |Представляет переход "Делегировано - Делегировано".
+|DelegatedToInWorkByTakeToWork |Представляет переход "Делегировано - В работе".
+|DelegatedToNotStartedByCancelDelegation |Представляет переход "Делегировано - Делегирование отменено".
+|DelegatedToRecalledByRecall |Представляет переход "Делегировано - Отозвано".
+|DelegatedToRejectedByReject |Представляет переход "Делегировано - Отклонено".
+|DelegateOperation |Операция делегирования.
+|DelegatesProperty |Представляет свойство "Список делегирования".
+|DontTakeToWorkOperation |Операция отказа брать в работу.
+|EditCompletionPresetOperation |Операция редактирования настроек завершения.
+|EditPlannedTermsOperation |Операция ввода плановых сроков.
+|EditPresetsOperation |Операция редактирования общих настроек.
+|EditRealTermsOperation |Операция редактирования фактических параметров исполнения.
+|EditRemindersOperation |Операция редактирования напоминаний.
+|InitializationState |Представляет состояние "Инициализация".
+|InitializationToRecalledByRecall |Представляет переход "Инициализация - Отозвано".
+|InitializationToStartedByStart |Представляет переход "Инициализация - Отправить".
+|InWorkState |Представляет состояние "В работе".
+|InWorkToCompletedByComplete |Представляет переход "В работе - Завершено".
+|InWorkToCompletedByStopExecution |Представляет переход "В работе - Прекратить исполнение".
+|InWorkToDeferredByDefer |Представляет переход "В работе - Отложено".
+|InWorkToDelegatedByDelegate |Представляет переход "В работе - Делегировано".
+|InWorkToRecalledByRecall |Представляет переход "В работе - Отозвано".
+|InWorkToRejectedByReject |Представляет переход "В работе в Отклонено".
+|MainInfoProperty |Представляет свойство "Задание".
+|ModifyAnyCommentOperation |Операция изменения любого комментария.
+|ModifyOwnCommentOperation |Операция изменения только собственного комментария
+|NotAcceptedState |Представляет состояние "На доработке".
+|NotAcceptedToAcceptanceByComplete |Представляет переход "На доработке - На приёмке".
+|NotAcceptedToCompletedByComplete |Представляет переход "На доработке - Завершено".
+|NotAcceptedToInWorkByTakeToWork |Представляет переход "На доработке - В работе".
+|NotAcceptedToRecalledByRecall |Представляет переход "На доработке - Отозвано".
+|PresetsProperty |Представляет свойство "Настройки".
+|RecalledState |Представляет состояние "Отозвано".
+|RecalledToInitializationByChange |Представляет переход "Отозвано - Инициализация".
+|RecallOperation |Операция отзыва.
+|RejectedState |Представляет состояние "Отклонено".
+|RejectedToInitializationByChange |Представляет переход "Отклонено - Инициализация".
+|RejectedToInWorkByTakeToWork |Представляет переход "Отклонено - В работе".
+|RejectedToRecalledByRecall |Представляет переход "Отклонено - Отозвано".
+|RejectOperation |Операция отклонения.
+|RemoveAttachmentOperation |Операция удаления дополнения.
+|RemoveChildTaskGroupOperation |Операция удаления подчиненной группы заданий.
+|RemoveChildTaskOperation |Операция удаления подчинённого задания.
+|RemoveMainDocumentOperation |Операция удаления основного документа.
+|RemoveReportOperation |Операция удаления отчета.
+|ReturnFromTheDelegationState |Представляет состояние "Возврат с делегирования".
+|ReturnFromTheDelegationToAcceptanceByComplete |Представляет переход "Возврат с делегирования - На приемке".
+|ReturnFromTheDelegationToCompletedByComplete |Представляет переход "Возврат с делегирования - Завершено".
+|ReturnFromTheDelegationToInWorkByTakeToWork |Представляет переход "Возврат с делегирования - В работе".
+|ReturnFromTheDelegationToRecalledByRecall |Представляет переход "Возврат с делегирования - Отозвано".
+|SelectPerformerOperation |Операция выбора исполнителя.
+|SetAuthorOperation |Операция редактирования автора.
+|SetContentOperation |Операция редактирования содержания.
+|SetControllerOperation |Операция редактирования контролера.
+|SetPriorityOperation |Операция установки важности.
+|StartedState |Представляет состояние "Начато".
+|StopExecutionOperation |Операция прекращения исполнения.
+|TakeToReworkOperation |Операция отправки на доработку.
+|TakeToWorkOperation |Операция приемки в работу.
+|===
+
+== Примеры
+
+Ниже приведен пример создания задания, у которого запрещено ручное делегирование. После создания, задание отправляется исполнителю
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение необходимых сервисов
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStaffService staffService = objectContext.GetService<IStaffService>();
+ILogService iLogService = objectContext.GetService<ILogService>();
+IStateService stateService = objectContext.GetService<IStateService>();
+    
+//получение вид задания
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//создание задания
+Task task = taskService.CreateTask(kindsCardKind);
+
+//Инициализация задания: заполняется поле автор и настройки вида
+taskService.InitializeDefaults(task);
+
+//повышенный приоритет
+task.MainInfo.Priority = TaskPriority.High;
+task.MainInfo.Content = "Разобрать входящие документы";
+task.MainInfo.Name = "Важное задание";
+
+//запрет ручного делегирования
+task.Preset.AllowDelegateManual = false;
+
+//добавление исполнителей (текущий пользователь)
+taskService.AddSelectedPerformer(task.MainInfo, staffService.GetCurrentEmployee());
+
+//сохранение - для возможности получения данных карточки
+objectContext.SaveObject<Task>(task);
+
+//получение данных карточки
+CardData cardData = userSession.CardManager.GetCardData(objectContext.GetObjectRef<Task>(task).Id);
+task.Description = baseCardService.GenerateDigest(task, cardData, "Важное задание");
+
+//добавление события в журнал
+iLogService.AddLogMessage(task, Task.CreateCardOperation, "Карточка создана");
+objectContext.AcceptChanges();
+
+//запуск задания, и смена статуса
+taskService.StartTask(task);
+StatesStateMachineBranch state = stateService.FindBranchByBuiltIn(Task.InitializationToStartedByStart, task.SystemInfo.State);
+stateService.ChangeState(task, state);
+objectContext.AcceptChanges();
+----
+
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.ActualDelegates_PR.adoc[Task.ActualDelegates - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Comments_PR.adoc[Task.Comments - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.CurrentPerformers_PR.adoc[Task.CurrentPerformers - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Delegates_PR.adoc[Task.Delegates - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.MainInfo_PR.adoc[Task.MainInfo - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Preset_PR.adoc[Task.Preset - свойство]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

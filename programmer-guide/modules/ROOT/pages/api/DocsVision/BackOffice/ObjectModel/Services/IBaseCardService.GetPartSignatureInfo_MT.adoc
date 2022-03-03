@@ -1,0 +1,40 @@
+= IBaseCardService.GetPartSignatureInfo - метод (BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate)
+
+Возвращает информацию о части подписи документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[GetExtendedSignatureInfo__section_jct_3ds_mpb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate);
+----
+
+[[GetExtendedSignatureInfo__section_nyy_4fs_mpb]]
+Параметры
+
+signaturePart::
+  Тип: xref:../BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
+  +
+  Часть подписи, для которой запрашивается информация
+contentStream::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]
+  +
+  Поток подписываемых данных
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат подписи
+
+Возвращаемое значение:
+
+::
+  Тип: xref:../../DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo]
+  +
+  Информация о подписи.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

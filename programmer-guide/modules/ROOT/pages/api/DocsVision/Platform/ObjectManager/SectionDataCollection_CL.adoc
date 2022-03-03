@@ -1,0 +1,39 @@
+= SectionDataCollection - класс
+
+Содержит методы для работы к коллекцией SectionData.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class SectionDataCollection : IEnumerable<SectionData>, IEnumerable, IXmlExportable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Card |Возвращает ссылку на родительскую карточку.
+|Count |Возвращает размер коллекции.
+|Item |Возвращает элемент коллекции с заданным идентификатором.
+|Item |Возвращает элемент коллекции с указанным индексом.
+|Session |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Contains(Guid) |Определяет вхождение в коллекцию элемента с заданным идентификатором.
+|GetEnumerator |Возвращает перечислитель.
+|SaveXml(Stream) |Сохраняет данные секции в поток.
+|SaveXml(Stream, ExportFlags) |Сохраняет данные секции в поток, с учетом формат экспорта.
+|SaveXml(Stream, ExportFlags, ExportCardInspector) |Сохраняет данные секции в поток, с применением инспектора экспорта.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

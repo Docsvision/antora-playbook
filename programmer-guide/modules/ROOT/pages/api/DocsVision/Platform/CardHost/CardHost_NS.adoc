@@ -1,0 +1,83 @@
+= DocsVision.Platform.CardHost - пространство имен
+
+В пространстве имен DocsVision.Platform.CardHost содержаться классы и интерфейсы, относящиеся к взаимодействию с контейнером карточек.
+
+== Классы
+
+[cols=",",options="header",]
+|===
+|Класс |Описание
+|xref:CardEventArgs_CL.adoc[CardEventArgs] |Предоставляет данные для различных событий карточек.
+|CardFrame |Содержит методы доступа к параметрам окна карточки и методы управления этим окном.
+|xref:CardHost_CL.adoc[CardHost] |Реализует механизм доступа к контейнеру карточек.
+|xref:NavFolderType_CL.adoc[NavFolderType] |Представляет тип папки для Windows-клиента.
+|xref:ParameterCollection_CL.adoc[ParameterCollection] |Представляет хранилище коллекции параметров с возможность выбора элемента по псевдониму.
+|xref:RefreshEventArgs_CL.adoc[RefreshEventArgs] |Предоставляет данные для события обновления.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header",]
+|===
+|Интерфейс |Описание
+|ICard |Добавляет к производному классу метод обновления карточки и ее идентификатор.
+|ICardContainer |Описывает механизм загрузки карточки в контейнер.
+|xref:ICardFrame_IN.adoc[ICardFrame] |Описывает методы взаимодействия с окном карточки.
+|xref:ICardHost_IN.adoc[ICardHost] |Описывает механизм организации взаимодействия с контейнером карточки.
+|ICardInitialize |Определяет возможность загрузки данных карточки и сессии в контейнер.
+|ICardUI |Описывает низкоуровневое взаимодействие с окном карточки.
+|ICardUIAction |Предоставляет возможность вызова определенного действия карточки.
+|IEditSecurityDialog |Компонент реализующий окно настроек безопасности.
+|IExtensionManager |Предоставляет механизм доступа к расширениям Windows-клиента.
+|IMessageService |Сервис IMessageService предоставляется методы для отображения сообщений в Windows-клиенте.
+|INavigator |Предоставляет возможность хранения идентификатора папки.
+|xref:IPropertyPageFrame_IN.adoc[IPropertyPageFrame] |Определяет механизм доступа к странице свойств карточки или папки
+|IPropertyPageUI |Предоставляет доступ к механизму взаимодействия с окном карточки.
+|xref:IReusableCardComponent_IN.adoc[IReusableCardComponent] |Определяет возможность переиспользования компонента карточки.
+|===
+
+== Делегаты
+
+[cols=",",options="header",]
+|===
+|Делегат |Описание
+|CardEventHandler(object, CardEventArgs) |Представляет метод, который будет обрабатывать события от карточек.
+|RefreshEventHandler(object, RefreshEventArgs) |Представляет метод, который будет обрабатывать событие обновления данных карточки.
+|===
+
+== Перечисления
+
+[cols=",",options="header",]
+|===
+|Перечисление |Описание
+|xref:ActionFlags_EN.adoc[ActionFlags] |Действия, которые должен выполнить Windows-клиент после обработки события.
+|xref:ActivateFlags_EN.adoc[ActivateFlags] |Дополнительные флаги активации карточки.
+|xref:ActivateMode_EN.adoc[ActivateMode] |Режим активации карточки.
+|xref:EditSecurityFlags_EN.adoc[EditSecurityFlags] |Режим открытия редактора политики безопасности.
+|xref:MessageButtons_EN.adoc[MessageButtons] |Определяет наборы кнопок, отображаемых в окне сообщения, формируемого методом xref:../WinForms/CardControl.ShowMessage_MT.adoc[ShowMessage].
+|xref:MessageResult_EN.adoc[MessageResult] |Определяет возможные результаты выбора пользователя в окне сообщения. Возвращается методом xref:../WinForms/CardControl.ShowMessage_MT.adoc[ShowMessage].
+|xref:MessageType_EN.adoc[MessageType] |Определяет возможные типы сообщений, формируемых методом xref:../WinForms/CardControl.ShowMessage_MT.adoc[ShowMessage].
+|xref:ReusageMode_EN.adoc[ReusageMode] |Определяет возможные режимы переиспользования компонента карточки.
+|xref:SystemDialogType_EN.adoc[SystemDialogType] |Тип модального окна системного назначения.
+|===
+
+* *xref:../../../../api/DocsVision/Platform/CardHost/CardEventArgs_CL.adoc[CardEventArgs - класс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/CardHost_CL.adoc[CardHost - класс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/NavFolderType_CL.adoc[NavFolderType - класс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ParameterCollection_CL.adoc[ParameterCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/RefreshEventArgs_CL.adoc[RefreshEventArgs - класс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ICardFrame_IN.adoc[ICardFrame - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[ICardHost - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/IPropertyPageFrame_IN.adoc[IPropertyPageFrame - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ActionFlags_EN.adoc[ActionFlags - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ActivateFlags_EN.adoc[ActivateFlags - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ActivateMode_EN.adoc[ActivateMode - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/EditSecurityFlags_EN.adoc[EditSecurityFlags - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/MessageButtons_EN.adoc[MessageButtons - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/MessageResult_EN.adoc[MessageResult - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/MessageType_EN.adoc[MessageType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/ReusageMode_EN.adoc[ReusageMode - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/SystemDialogType_EN.adoc[SystemDialogType - перечисление]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Platform_NS.adoc[DocsVision.Platform - пространство имен]

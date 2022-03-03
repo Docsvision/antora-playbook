@@ -1,0 +1,66 @@
+= Сервисы объектной модели
+
+На уровне объектной модели Docsvision принято выносить бизнес-логику из объектной модели карточки в отдельные [.dfn .term]_сервисы_, доступ к которым можно получить непосредственно из [.dfn .term]_контекста объектов_. [.dfn .term]_Сервисы_ выполняют задачи, аналогичные тем, что выполняют [.dfn .term]_менеджеры_ базового API, но со специализацией на конкретных типах карточек - есть сервисы для работы с документами, с заданиями, со справочниками и т.п.
+
+На программном уровне, [.dfn .term]_сервис_ - это пара, состоящая из интерфейса, определяющего функциональные возможности [.dfn .term]_сервиса_, и класса, реализующего данный интерфейс.
+
+В базовой поставке Docsvision предоставляются системные сервисы (для работы с блокировками, доступом и т.п.), а также сервисы для работы с карточками библиотеки карточек "Базовые объекты". Полный список сервисов приведен далее.
+
+[cols=",,",options="header",]
+|===
+|Область действия |Сервис |Назначение
+|Общего назначения |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService_IN.adoc[IAccessCheckingService] |Определяет функции получения списка ролей и доступных операций сотрудника в пределах заданной карточки. Предоставляет методы сброса кэша ролевой модели.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService] |Предоставляет методы установки и проверки ЭЦП, генерации дайджеста и управления бизнес-процессом.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService] |Позволяет управлять состоянием блокировки объектов, получать информацию о текущем состоянии и владельце блокировки.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ILogService_IN.adoc[ILogService] |Определяет методы добавления и получения записей журнала карточки.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IServerExtensionProxyService_IN.adoc[IServerExtensionProxyService] |Позволяет выполнять методы серверного расширения BackOffice.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ISettingsCardService_IN.adoc[ISettingsCardService] |Предоставляет методы доступа к системным настройкам.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService] |Сервис шифрования файлов карточек приложения [.dfn .term]_Базовые объекты_
+| | |
+|Карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService] |Предназначен для работы с карточками типа [.dfn .term]_Документ_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService_IN.adoc[IBarcodeService] |Определяет методы генерации и печати штрих-кодов карточки документа.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService] |Предназначен для работы с карточками типа [.dfn .term]_Задание_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService] |Предназначен для работы с карточками типа [.dfn .term]_Группа заданий_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService] |Предназначен для работы с карточками типа [.dfn .term]_Список ссылок на карточки заданий_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService] |Предназначен для работы с карточками типа [.dfn .term]_Список категорий_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService] |Предназначен для работы с карточками типа [.dfn .term]_Карточка нумератора_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService] |Предназначен для работы с карточками типа [.dfn .term]_Конструктор правил нумерации_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService] |Предназначен для работы с карточками типа [.dfn .term]_Список ссылок на карточки_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService] |Предназначен для работы с карточками типа [.dfn .term]_Бизнес-календарь_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService] |Предназначен для работы с карточками типа [.dfn .term]_Карточка файла с версиями_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ISurveyService_IN.adoc[ISurveyService] |Предназначен для работы с карточками типа [.dfn .term]_Список опросов_
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IUserProfileCardService_IN.adoc[IUserProfileCardService] |Предназначен для работы с карточками типа [.dfn .term]_Карточка настроек пользователя_
+| | |
+|Конструкторы |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IRoleModelService_IN.adoc[IRoleModelService] |Конструктор ролей
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService] |Карточка строки справочника
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ILayoutService_IN.adoc[ILayoutService] |Конструктор разметок
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IScriptingService_IN.adoc[IScriptingService] |Конструктор скриптов
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService] |Конструктор состояний
+| | |
+|Справочники |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService] |Справочник категорий
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService] |Справочник видов карточек
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ISettingsService_IN.adoc[ISettingsService] |Предоставляет методы для работы с настройками расширений справочника видов.
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService] |Справочник сотрудников
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService] |Справочник контрагентов
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/IServersService_IN.adoc[IServersService] |Справочник серверов
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ISignatureLabelService_IN.adoc[ISignatureLabelService] |Справочник меток подписей
+| |xref:../api/DocsVision/BackOffice/ObjectModel/Services/ILinkService_IN.adoc[ILinkService] |Справочник ссылок
+|===
+
+Для того, чтобы получить один из [.dfn .term]_сервисов_, необходимо использовать метод [.keyword .apiname]#GetService# [.dfn .term]_контекста объектов_, уточнив тип (публичный интерфейс) запрашиваемого сервиса:
+
+[source,pre,codeblock,language-csharp]
+----
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+----
+
+Здесь:
+
+* `objectContext` - сущность xref:dm_session_context.adoc[контекста объектов];
+* [.keyword .apiname]#IDocumentService# - интерфейс, реализуемый [.dfn .term]_сервисом_.
+
+== См. далее
+
+* xref:dm_mappers.adoc[Преобразователи данных]
+
+*На уровень выше:* xref:../pages/dm_generalinformation.adoc[Общие сведения]

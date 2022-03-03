@@ -1,0 +1,42 @@
+= ITaskService.DoNotTakeToWorkTask - метод (Task)
+
+Отменяет взятие задания в работу.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BuiltInState DoNotTakeToWorkTask(Task task)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание для отмены взятия
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BuiltInState_CL.adoc[BuiltInState]
+  +
+  Новое состояние карточки
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для отмены взятия.
+|===
+
+== Заметки
+
+Возможность отмены взятия в работу задания должна быть предусмотрена соответствующими настройками в конструкторах.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

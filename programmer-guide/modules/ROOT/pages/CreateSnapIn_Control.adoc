@@ -1,0 +1,113 @@
+= Пользовательский интерфейс расширения
+
+Если для [.dfn .term]_решения_ необходима административная настройка, к примеру: выбор почтового сервера, то для расширения [.keyword]*Консоли настройки Docsvision* может быть реализован пользовательский интерфейс.
+
+Для _Модуля учета сетевых устройств_ предусмотрен ввод некоторых данных: e-mail администратора, лицензионный ключ, признак глобального отключения проверки.
+
+image::img/ServerConsole.PNG[image]
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для работы с карточками [.dfn .term]_учета сетевого оборудования_ требуется лицензионный ключ: введите в поле [.ph .uicontrol]*Лицензионный ключ* значение "ЛИЦЕНЗИЯ".
+====
+
+Интерфейс управления для расширения [.keyword]*консоли настройки* - это обычный WinForms элемент управления (типа [.keyword .apiname]#System.Windows.Forms.UserControl#), в котором реализован интерфейс [.keyword .apiname]#IConsoleControl# (сборка [.ph .filepath]`DocsVision.Tools.ServerConsole.Interfaces.dll`).
+
+Интерфейс [.keyword .apiname]#IConsoleControl# добавляет:
+
+* Свойство `Changed`, которое возвращает признак наличие изменений в данных. При закрытии формы, при наличии изменений, будет выдано предупреждение о необходимости сохранения данных.
++
+[source,pre,codeblock,language-csharp]
+----
+public bool Changed
+{
+ set
+ {
+  isChanged = value;
+  ControlChanged();
+ }
+ get
+ {
+  return isChanged;
+ }
+}
+----
+* Свойство [.dfn .term]_Valid_, которое возвращает результат проверки данных на наличии ошибок. Проверка выполняется при закрытии формы. Алгоритм верификации данных разрабатывается самостоятельно.
++
+[source,pre,codeblock,language-csharp]
+----
+public bool Valid
+{ 
+ get
+ {
+  bool result = true;
+  if (Admin_eMail.Text.Contains("@") = false)
+  { 
+   result = false; // Возвращаем ошибку, если e-mail некорректен
+  }
+  return result;
+ }
+}
+----
+* Свойство `Caption` - название модуля, которое отображается в узле [.ph .uicontrol]*Модули расширения* [.dfn .term]_Консоли настройки_.
++
+[source,pre,codeblock,language-csharp]
+----
+public string Caption
+{
+ get { return "Модуль учета сетевых устройств"; }
+}
+----
+* Свойство `Instance` - должно возвращать экземпляр класса, реализующего элемент управления.
++
+[source,pre,codeblock,language-csharp]
+----
+public UserControl Instance
+{
+ get { return this; }
+}
+----
+* Метод Execute - вызывается при сохранении данных. Данный метод будет вызван, если на запрос сохранения данных, был получен утвердительный ответ.
++
+[source,pre,codeblock,language-csharp]
+----
+public bool Execute()
+{
+ try
+ {
+  using (RegistryKey key = Common.GetSubKey(Registry.LocalMachine, Common.NetstatSolutionKey))
+  {
+   key.SetValue(Common.EmailAdminRegName, Admin_eMail.Text);
+   key.SetValue(Common.CheckIsEnabledRegName, Convert.ToInt32(CheckIsOn.Checked));
+   key.SetValue(Common.LicenseRegName, License.Text);
+  }
+  isChanged = false;
+ } catch
+ {
+  return false;
+ }
+ return true;
+}
+----
+* Метод [.keyword .apiname]#Initialize# - отвечает за предварительную загрузку данных и другие подготовительные действия; вызывается перед открытием формы.
++
+[source,pre,codeblock,language-csharp]
+----
+public void Initialize()
+{
+ using (RegistryKey key = Common.GetSubKey(Registry.LocalMachine, Common.NetstatSolutionKey))
+ {
+  Admin_eMail.Text = key.GetValue(Common.EmailAdminRegName, string.Empty).ToString();
+  CheckIsOn.Checked = Convert.ToBoolean((int)key.GetValue(Common.CheckIsEnabledRegName, 1));
+  License.Text = key.GetValue(Common.LicenseRegName, string.Empty).ToString();
+ }
+ isChanged = false;
+}
+----
+* Генерация событие [.keyword .apiname]#ControlChanged# позволяет уведомить [.dfn .term]_Консоль настройки_ об изменении данных, что активирует кнопку сохранения данных. Если самостоятельно не вызвать данный метод, сохранить данные можно будет только при закрытии формы, при появлении соответствующего запроса.
+
+== См. также
+
+* xref:CreateInstaller.adoc[Создание пакета установки]
+
+*На уровень выше:* xref:../pages/CreateSnapIn.adoc[Создание расширения для Консоли настройки]

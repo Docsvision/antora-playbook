@@ -1,0 +1,45 @@
+= IBaseCardService.AddBusinessProcess - метод (BaseCard, Guid, KindsCardProcess)
+
+Добавляет к карточке бизнес-процесс с переданным идентификатором.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardProcess AddBusinessProcess(BaseCard baseCard, Guid processId, KindsCardProcess kindProcessSettings)
+----
+
+Параметры
+
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка к которой будет добавлен бизнес-процесс
+processId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор экземпляра бизнес-процесса
+kindProcessSettings::
+  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
+  +
+  Параметры экземпляра бизнес-процесса
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardProcess_CL.adoc[BaseCardProcess]
+  +
+  Предоставляет ссылку на экземпляр и настройки бизнес-процесса
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processId.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

@@ -1,0 +1,26 @@
+= StaffEmployee.Status - свойство
+
+Задает или возвращает текущее состояние сотрудника.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public StaffEmployeeStatus Status { get; set; }
+----
+
+Значение свойства
+
+::
+  Тип: xref:StaffEmployeeStatus_EN.adoc[StaffEmployeeStatus]
+  +
+  Состояние сотрудника
+
+== Заметки
+
+Текущее состояние сотрудника может быть установлено, например, в [.dfn .term]_Справочнике сотрудников_. Актуализация состояния сотрудника, с проверкой наступления периода отсутствия, производится при вызове метода [.keyword .apiname]#IStaffService.ActualizeEmployeesState()#. Актуализация состояния выполняется автоматически бизнес-процессом "Процесс актуализации состояния сотрудников".
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee - класс]

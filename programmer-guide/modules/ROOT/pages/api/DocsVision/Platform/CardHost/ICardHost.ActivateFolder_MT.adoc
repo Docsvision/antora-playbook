@@ -1,0 +1,34 @@
+= ICardHost.ActivateFolder - метод (Guid, Boolean)
+
+При переопределении в производном классе производит позиционирование курсора на указанной папке.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void ActivateFolder(Guid folderId, bool showSubfolders)
+----
+
+Параметры
+
+folderId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор папки, на которой будет выполнено позиционирование курсора
+showSubfolders::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Зарезервированный параметр
+
+== Заметки
+
+Данный метод позволяет осуществить установку курсора на папке в приложении Windows-клиент. Может быть использован, к примеру, при реализации расширения Windows-клиента.
+
+== Примеры
+
+Пример создания расширения Windows-клиента, использующего данный метод, приведен в разделе xref:../../../../pages/SampleCode_NavSelectFolder.adoc[Позиционирование курсора на папке]
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[ICardHost - интерфейс]

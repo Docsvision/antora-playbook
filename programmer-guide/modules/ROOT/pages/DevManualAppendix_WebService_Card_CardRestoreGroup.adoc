@@ -1,0 +1,95 @@
+= CardRestoreGroup
+
+Восстанавливает несколько карточек, помеченных к удалению.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardRestoreGroup"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardRestoreGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <items>string</items>
+    </CardRestoreGroup>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+items::
+  Список идентификаторов восстанавливаемых карточек
+
+Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="GroupOperation">
+  <xsd:annotation>
+    <xsd:documentation>Group operation items</xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType>
+    <xsd:sequence maxOccurs="unbounded">
+      <xsd:element name="Item">
+        <xsd:complexType>
+          <xsd:attribute name="ID" type="xsd:string" use="required"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element> 
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardRestoreGroupResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <failedItems>string</failedItems>
+    </CardRestoreGroupResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификаторы карточек, восстановление которых недоступно.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardRestoreGroup"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardRestoreGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <items>&lt;GroupOperation&gt;&lt;Item ID=&quot;D5C4008F-0B89-E511-9417-90E6BA57B9F8&quot;/&gt;&lt;Item ID=&quot;DF84039F-5288-E511-9417-90E6BA57B9F8&quot;/&gt;&lt;/GroupOperation&gt;</items>
+    </CardRestoreGroup>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

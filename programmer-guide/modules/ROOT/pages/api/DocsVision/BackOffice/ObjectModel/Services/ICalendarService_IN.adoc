@@ -1,0 +1,31 @@
+= ICalendarService - интерфейс
+
+Сервис для работы с бизнес-календарем.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ICalendarService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddCalendarDay(Int32) |Создает объект типа [.keyword .apiname]#CalendarDay# с заданным значением календарного дня.
+|AddCalendarDefaultWorkTime(DateTime, DateTime) |Создает объект типа [.keyword .apiname]#CalendarDefaultWorkTime# с заданными значениями начального и конечного времени.
+|AddCalendarWorkTime(DateTime, DateTime) |Создает объект типа [.keyword .apiname]#CalendarWorkTime# с заданными значениями начального и конечного времени.
+|AddCalendarYear(Int32) |Создает объект типа [.keyword .apiname]#CalendarYear# с заданным значением года.
+|GetCalendarID(IEnumerable<ObjectBase>) |Возвращает идентификатор бизнес-календаря.
+|GetCalendarID(IEnumerable<Guid>) |Возвращает идентификатор бизнес-календаря.
+|GetDuration(Guid, DateTime, DateTime) |Рассчитывает длительность (в часах) заданного периода времени с учетом плана в бизнес-календаре.
+|GetEndDate(Guid, DateTime, Double) |Рассчитывает конечное время с учетом плана в бизнес-календаре и указанной длительности.
+|GetStartDate(Guid, DateTime, Double) |Рассчитывает начальное время с учетом плана в бизнес-календаре и указанной длительности.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

@@ -1,0 +1,37 @@
+= IStaffService.IsEmployeeInGroup - метод (StaffEmployee, StaffGroup, Boolean)
+
+Определяет принадлежность сотрудника к указанной группе.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool IsEmployeeInGroup(StaffEmployee employee, StaffGroup group, bool searchInChildGroups)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа, к которой осуществляется принадлежность
+searchInChildGroups::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - также проверять подчиненные подразделения
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - пользователь входит в группу, иначе - false
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

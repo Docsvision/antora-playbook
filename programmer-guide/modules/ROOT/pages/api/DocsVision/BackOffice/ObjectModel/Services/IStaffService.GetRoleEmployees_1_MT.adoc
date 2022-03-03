@@ -1,0 +1,37 @@
+= IStaffService.GetRoleEmployees - метод (StaffRole, Boolean, Boolean)
+
+Возвращает список сотрудников с указанной ролью.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+IEnumerable<StaffEmployee> GetRoleEmployees(StaffRole role, bool useNotAvailable, bool useNotSearchable)
+----
+
+Параметры
+
+role::
+  Тип: xref:../StaffRole_CL.adoc[StaffRole]
+  +
+  Роль
+useNotAvailable::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если true, то из результата будут исключены сотрудники с флагом NotAvailable
+useNotSearchable::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если true, то из результата будут исключены сотрудники с флагом NotSearchable
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>
+  +
+  Список сотрудников подразделения
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

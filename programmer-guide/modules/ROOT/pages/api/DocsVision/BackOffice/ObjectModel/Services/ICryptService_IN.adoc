@@ -1,0 +1,39 @@
+= ICryptService - интерфейс
+
+Сервис для работы с шифрованием базовых объектов.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ICryptService
+----
+
+== Методы
+
+[width="100%",cols="51%,49%",options="header",]
+|===
+|Имя |Описание
+|xref:ICryptService.AddCryptAccount_MT.adoc[AddCryptAccount(X509Certificate2, Guid, String)] |Предоставляет доступ указанному сотруднику к зашифрованному файлу.
+|xref:ICryptService.DecryptFile_MT.adoc[DecryptFile(X509Certificate2, Guid, Stream)] |Расшифровывает файл в переданный поток.
+|xref:ICryptService.EncryptFile_MT.adoc[EncryptFile(X509Certificate2, Guid)] |Выполняет шифрование файла с помощью переданного сертификата.
+|xref:ICryptService.RemoveCryptAccount_MT.adoc[RemoveCryptAccount(X509Certificate2, Guid, String)] |Отменяет доступ указанного сотрудника к зашифрованному файлу.
+|xref:ICryptService.RemoveEncryption_MT.adoc[RemoveEncryption(X509Certificate2, Guid)] |Расшифровывает файл и удаляет связанные с ним крипто-объекты.
+|===
+
+== Заметки
+
+Сервис шифрования базовых объектов доступен для вызова исключительно из скрипта карточки, унаследованной от класса xref:../../WinForms/BaseCardControl_CL.adoc[BaseCardControl].
+
+Шифрование файлов и сервис шифрования доступны начиная с версии 5.4 платформы.
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService.AddCryptAccount_MT.adoc[ICryptService.AddCryptAccount - метод (X509Certificate2, Guid, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService.DecryptFile_MT.adoc[ICryptService.DecryptFile - метод (X509Certificate2, Guid, Stream)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService.EncryptFile_MT.adoc[ICryptService.EncryptFile - метод (X509Certificate2, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService.RemoveCryptAccount_MT.adoc[ICryptService.RemoveCryptAccount - метод (X509Certificate2, Guid, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService.RemoveEncryption_MT.adoc[ICryptService.RemoveEncryption - метод (X509Certificate2, Guid)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

@@ -1,0 +1,58 @@
+= LayoutsLayoutAttributeVisibility - перечисление
+
+Определяет режим отображения атрибута разметки.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public enum LayoutsLayoutAttributeVisibility
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|Visible |Видимый.
+|EmptySpace |Пустая ячейка.
+|Invisible |Невидимый.
+|===
+
+== Заметки
+
+Атрибуты разметки определяют дополнительные свойства элементов управления и представлены в секции "Свойства карточки" конструктора разметок.
+
+== Примеры
+
+Ниже приведен пример установки видимости элемента разметки
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервиса
+ILayoutService layoutService = objectContext.GetService<ILayoutService>();
+    
+//получение вида карточки
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//получение дерева дизайнов и представления из первого узла дерева
+LayoutsDesignTree layoutsDesignTree = layoutService.GetDesignTree(kindsCardKind);
+LayoutsLayout layoutsLayout = layoutsDesignTree.NodeLayouts.FirstOrDefault().Layout;
+
+//получение свойства карточки
+LayoutsProperty layoutsProperty = layoutService.GetCustomProperty(kindsCardKind, "ButtonGo", false);
+
+//получение атрибута разметки
+LayoutsLayoutAttribute layoutsLayoutAttribute = layoutService.GetLayoutAttribute(layoutsProperty, layoutsLayout);
+
+//установка видимости элемента
+layoutsLayoutAttribute.Visibility = LayoutsLayoutAttributeVisibility.Invisible;
+objectContext.SaveObject(layoutsProperty);
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

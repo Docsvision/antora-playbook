@@ -1,0 +1,50 @@
+= ITaskService.CompleteTask - метод (Task, String, StaffEmployee)
+
+Завершает задание от имени указанного сотрудника.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BuiltInState CompleteTask(Task task, string comments, StaffEmployee completedUser)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+comments::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Комментарий к завершению задания
+completedUser::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, завершающий задание
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BuiltInState_CL.adoc[BuiltInState]
+  +
+  Состояние завершения
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или completedUser.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если у владельца сессии недостаточно прав для завершения задания.
+|===
+
+== Заметки
+
+Данный метод завершает задание с указанием completedUser в качестве сотрудника, завершившего задание. Операция выполняется в контексте владельца сессии, поэтому владелец сессии должен иметь право на завершении данного задания. Для изменения фактического состояния карточки необходимо использовать метод xref:IStateService.ChangeState_MT.adoc[IStateService.ChangeState] .
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

@@ -1,0 +1,70 @@
+= Позиционирование курсора на папке
+
+Ниже приведен пример кода расширения Windows-клиента, которое регистрирует кнопку ленты инструментов, позволяющей осуществить позиционирование курсора на нужной папке.
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.Platform.Extensibility;
+using DocsVision.Platform.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace DocsVision.Test.NavPluging
+{
+  [ComVisible(true)]
+  [Guid("6A0676EE-1DAF-4A59-B5EB-E0B5B4C175E1")]
+  [ClassInterface(ClassInterfaceType.None)]
+  public partial class Plugin : NavExtension
+  {
+   public Plugin()
+   {
+    InitializeComponent();
+   }
+
+   // Возвращает типы расширений, реализуемых данным классом
+   protected override NavExtensionTypes SupportedTypes
+   {
+    get
+    {
+     return NavExtensionTypes.Command;
+    }
+   }
+
+   // Возвращаемое имя будет использовано Windows-клиентом при именовании группы кнопок в ленте инструментов
+   protected override string GetExtensionName(NavExtensionTypes extensionType)
+   {
+    return "Быстрый выбор";
+   }
+
+   // Возвращает Windows-клиенту список доступных команд
+   protected override IEnumerable<NavCommand> CreateCommands()
+   {
+    NavCommand myCommand = new NavCommand();
+    myCommand.CommandType = NavCommandTypes.ToolBar;
+    myCommand.Name = "Выбрать";
+    myCommand.Description = "Выбирает домашнюю папку";
+
+    return new List<NavCommand> { myCommand };
+   }
+
+   protected override NavCommandStatus QueryCommandStatus(NavCommand command, NavCommandContext context)
+   {
+    return NavCommandStatus.Enabled;
+   }
+
+   protected override void InvokeCommand(NavCommand command, NavCommandContext context)
+   {
+
+    // Выполнение позиционирования на папке с идентификатором 3C2A8C6F-B992-4C68-813E-0EE36A205746
+    CardFrame.CardHost.ActivateFolder(new Guid("3C2A8C6F-B992-4C68-813E-0EE36A205746"), false);
+   }
+  }
+}
+----
+
+В примере, мы регистрируем только одну команду, которая вызывает метод xref:../api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)], выполняющий позиционирование курсора на определенной папке Windows-клиента. Папка может быть обычной, либо виртуальной.
+
+Правило создание расширение Windows-клиента приведено в разделе xref:dm_extension_navigator.adoc[Расширение Windows-клиента].
+
+*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

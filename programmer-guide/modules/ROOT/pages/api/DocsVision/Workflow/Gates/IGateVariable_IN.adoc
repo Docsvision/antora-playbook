@@ -1,0 +1,37 @@
+= IGateVariable - интерфейс
+
+Данный интерфейс описывает свойства стандартной переменной шлюза, единые для всех типов переменных. Все переменные, уникальные для конкретного шлюза, должны реализовывать этот интерфейс.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IGateVariable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|DisplayValue |Возвращает отображаемое значение.
+|GateID |Возвращает уникальный идентификатор шлюза.
+|ID |Возвращает идентификатор переменной.
+|Name |Возвращает название переменной.
+|SubTypeID |Возвращает подтип переменной.
+|Type |Возвращает тип переменной в шлюзе.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Convert(VarTypeEnum, IGate, Int32) |Приводит значение переменной к заданному типу.
+|LogicalOperation(String, IGateVariable) |Выполняет логическую операцию над переменными.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]

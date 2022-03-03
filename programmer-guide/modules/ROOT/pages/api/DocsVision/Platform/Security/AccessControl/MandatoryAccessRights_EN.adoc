@@ -1,0 +1,30 @@
+= MandatoryAccessRights - перечисление
+
+Права доступа для участников с уровнем мандата ниже требуемого.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum MandatoryAccessRights
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Не указан.
+|NoWriteUp |Запрещен доступ на запись.
+|NoReadUp |Запрещен доступ на чтение.
+|NoExecuteUp |Запрещен доступ на выполнение.
+|All |Доступ запрещен.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/Security/AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl - пространство имен]

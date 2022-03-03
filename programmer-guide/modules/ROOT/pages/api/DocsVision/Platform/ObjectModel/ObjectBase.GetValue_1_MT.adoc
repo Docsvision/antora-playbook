@@ -1,0 +1,38 @@
+= ObjectBase.GetValue - метод (String)
+
+Получает значение свойства с заданным названием.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public object GetValue(string propertyName)
+----
+
+Параметры
+
+propertyName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название свойства
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
+  +
+  Значение свойства
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр propertyName.
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если свойство не зарегистрировано.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase - класс]

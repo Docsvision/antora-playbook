@@ -1,0 +1,35 @@
+= ObjectStateFlags - перечисление
+
+Определяет состояние объекта.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum ObjectStateFlags
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Флаг не установлен. Значение 0x00.
+|Modified |Объект был модифицирован. Значение 0x01.
+|Added |Объект был добавлен. Значение 0x02.
+|Deleted |Объект был удален. Значение 0x04.
+|Attached |Объект был прикреплен к другому. Значение 0x08.
+|DeletedFromParent |Объект был удален у родителя. Значение 0x10.
+|===
+
+== Заметки
+
+Данные флаги проверяются при сохранении контекста объектов, для проверки необходимости сохранения изменений у конкретного объекта.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

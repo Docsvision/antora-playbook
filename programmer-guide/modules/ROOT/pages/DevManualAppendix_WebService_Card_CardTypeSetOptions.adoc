@@ -1,0 +1,81 @@
+= CardTypeSetOptions
+
+Обновляет дополнительные флаги, установленные для типа карточки.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardTypeSetOptions"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardTypeSetOptions xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <cardId>guid</cardId>
+      <options>int</options>
+    </CardTypeSetOptions>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+cardId::
+  Идентификатор типа карточки
+options::
+  Дополнительные флаги. Значение может быть получено сложением:
+  +
+  * 0 - Not specified
+  * 1 - Card is a dictionary (only one instance allowed at all)
+  * 2 - Card instance cannot be created directly
+  * 4 - Card instances cannot be displayed in views
+  * 8 - Card instances cannot be found by search
+  * 0x10 - Card instance can be open from another card by link
+  * 0x20 - Card would not be automatically locked while opening by user (developer have to manage locks by himself)
+  * 0x40 - Specific card type to implement Navigator extensions
+  * 0x80 - Hard shortcut would not be created automatically while creating a new card instance in a folder
+  * 0x100 - Specific card type which stores information about folders
+  * 0x200 - Card instances cannot be marked as unread
+  * 0x400 - Card instances can be copyed
+  * 0x800 - Specifies whether a server should store own security descriptors for card sections and rows, or not
+  * 0x1000 - Card instances can be marked as templates
+  * 0x2000 - Card instances cannot be deleted directly
+  * 0x4000 - Specifies whether card instances can be opened in selection mode (specific to dictionaries)
+  * 0x8000 - Card instances cannot be exported to XML
+  * 0x10000 - Card creation can be denied by administrator
+  * 0x20000 - Card deletion can be denied by administrator
+  * 0x1000000 - Card instances cannot be archived
+  * 0x2000000 - Card instances cannot be replicated to another database
+  * 0x4000000 - Only instances marked as templates can be replicated to another database
+  * 0x8000000 - Determines whether card type is marked for replication
+  * 0x10000000 - Card provide method to get timestamp info for optimizing client cache update
+  * 0x20000000 - Try to use server extension while access check
+  * 0x40000000 - Caching on disk is restricted
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardTypeSetOptionsResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <options>int</options>
+    </CardTypeSetOptionsResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

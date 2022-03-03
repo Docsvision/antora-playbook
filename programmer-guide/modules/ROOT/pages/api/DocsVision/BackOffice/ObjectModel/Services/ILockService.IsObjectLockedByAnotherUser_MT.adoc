@@ -1,0 +1,34 @@
+= ILockService.IsObjectLockedByAnotherUser<T> - метод (T)
+
+Определяет наличие у объекта блокировки, установленной другим сотрудником.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool IsObjectLockedByAnotherUser<T>(T obj) where T : ObjectBase
+----
+
+Параметры типа
+
+T::
+  Тип заблокированного объекта
+
+Параметры
+
+obj::
+  Тип: T
+  +
+  Объект, для которого проверяется блокировка
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если объект заблокирован другим сотрудником, возвращает true. Если блокировка не установлена, либо установлена самим сотрудником, возвращает false
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService - интерфейс]

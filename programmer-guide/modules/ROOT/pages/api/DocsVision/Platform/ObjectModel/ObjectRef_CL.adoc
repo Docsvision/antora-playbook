@@ -1,0 +1,42 @@
+= ObjectRef - класс
+
+Содержит ссылку на объект в [.dfn .term]_контексте объектов_.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class ObjectRef<T> : IObjectRef where T : ObjectBase
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ObjectRef(Guid) |Создает новый экземпляр класса ObjectRef с заданным значением.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Id |Возвращает идентификатор объекта.
+|Type |Возвращает тип объекта.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Equals(Object) |Сравнивает текущий объект с заданным.
+|GetHashCode |Возвращает хэш объекта. В качестве основы используется идентификатор объекта.
+|ToString |Возвращает строковое представление названия типа объекта и его идентификатора.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

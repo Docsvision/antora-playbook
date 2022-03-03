@@ -1,0 +1,67 @@
+= ICardHost.SelectCard - метод (String, Object)
+
+При переопределении в производном классе открывает окно выбора с отфильтрованным списком карточек. Окно выбора будет иметь заданный заголовок.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Guid SelectCard(string caption, object selectParams)
+----
+
+Параметры
+
+caption::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Заголовок окна выбора карточки
+selectParams::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
+  +
+  Дополнительные параметры
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор выбранной карточки
+
+== Заметки
+
+Позиционирование на папке "Результаты поиска" (Search results) возможно в Windows-клиенте версии 5.4 и выше.
+
+== Примеры
+
+Ниже приведен пример вызова окна выбора карточки с предварительным позиционированием на папке с идентификатором 00000000-0000-0000-0000-000000000000
+
+[source,pre,codeblock,language-csharp]
+----
+private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
+                
+ // Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора
+ p["CurrentFolderID"] =  new Guid("00000000-0000-0000-0000-000000000000");
+ Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
+}
+----
+
+Для приложения "Рабочее места администратора" код должен быть модифицирован
+
+[source,pre,codeblock,language-csharp]
+----
+private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
+                
+ // Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора
+ p["Filter"] =  "00000000-0000-0000-0000-000000000000";
+ Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[ICardHost - интерфейс]

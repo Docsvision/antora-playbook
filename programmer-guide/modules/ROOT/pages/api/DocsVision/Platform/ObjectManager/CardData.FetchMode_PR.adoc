@@ -1,0 +1,26 @@
+= CardData.FetchMode - свойство
+
+Возвращает или задает режим загрузки данных карточки.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract FetchMode FetchMode { get; set; }
+----
+
+Значение свойства
+
+::
+  Тип: xref:Metadata/FetchMode_EN.adoc[FetchMode]
+  +
+  Режим загрузки
+
+== Заметки
+
+Режим загрузки используется для снижения объема передаваемых данных (загрузка с сервера больших справочников), либо наоборот для увеличения скорости доступа (небольшую карточку можно загрузить целиком, вместо организации нескольких обращений на чтение к серверу).
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

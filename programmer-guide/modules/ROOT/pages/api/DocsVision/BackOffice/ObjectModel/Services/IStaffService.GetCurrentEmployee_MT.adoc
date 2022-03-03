@@ -1,0 +1,26 @@
+= IStaffService.GetCurrentEmployee - метод
+
+Возвращает текущего сотрудника.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffEmployee GetCurrentEmployee()
+----
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Текущий сотрудник
+
+== Заметки
+
+Данный метод возвращает текущего сотрудника, который может не совпадать с владельцем сессии - был переопределен методом xref:IStaffService.SetCurrentEmployee_MT.adoc[SetCurrentEmployee]. Если необходимо получить истинного текущего сотрудника, используйте метод xref:IStaffService.GetImpersonatedEmployee_MT.adoc[GetImpersonatedEmployee].
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

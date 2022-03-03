@@ -1,0 +1,109 @@
+= IPartnersService - интерфейс
+
+Описывает сервис для работы со справочником контрагентов.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IPartnersService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddNewBankAccount(PartnersCompany) |Добавляет контрагенту банковские реквизиты.
+|AddNewCode(PartnersCompany) |Добавляет новый элемент в коды контрагента.
+|AddNewContact(PartnersCompany) |Добавляет контактное лицо.
+|xref:IPartnersService.AddNewEmployee_MT.adoc[AddNewEmployee(PartnersCompany)] |Добавляет нового сотрудника в указанную организацию/подразделение.
+|AddNewEmployeeFormatItem(PartnersCompany) |Добавляет дополнительное условие в формат отображения данных о сотрудниках.
+|AddNewGroup(PartnersGroup) |Создает новую партнерскую группу.
+|AddNewNameCase(PartnersEmployee, PartnersNameCaseNameCase) |Создает у сотрудника заданный падеж имени.
+|AddNewOrgType |Добавляет новый тип юридического лица.
+|AddNewPosition |Добавляет новую должность.
+|AddNewTitle |Добавляет форму обращения к сотрудникам контрагентов.
+|xref:IPartnersService.AddNewUnit_MT.adoc[AddNewUnit(PartnersCompany)] |Добавляет подразделение в заданную организацию контрагента.
+|AddNewViewField(ObjectBase, GridViewFieldCollectionType) |Добавляет отображаемое поле для сотрудников, групп или подразделений.
+|AddUnitToGroup(PartnersGroup, PartnersCompany) |Добавляет компанию в указанную группу компаний.
+|ApplyDisplayFormatToEmployees(PartnersCompany, Boolean) |Применяет установленный формат отображения данных о сотрудниках к сотрудникам организации. Возможно применение ко всем подчиненным подразделениям.
+|CanMoveGroup(PartnersGroup, PartnersGroup) |Определяет возможность перемещения группы.
+|CanMoveUnit(PartnersCompany, PartnersCompany) |Определяет возможность перемещения подразделения.
+|CanMoveViewField(IGridViewField, GridViewFieldCollectionType, Boolean) |Определяет возможность перемещения отображаемого поля.
+|CopyGroup(PartnersGroup, PartnersGroup) |Копирует группу в указанную группу.
+|DeleteBankAccount(PartnersBankAccount) |Удаляет заданные банковские реквизиты.
+|DeleteCode(PartnersCode) |Удаляет указанные элемент из кодов контрагента.
+|DeleteContact(PartnersContact) |Удаляет контакт.
+|xref:IPartnersService.DeleteEmployee_MT.adoc[DeleteEmployee(PartnersEmployee)] |Удаляет сотрудника контрагента.
+|DeleteEmployeeFormatItem(PartnersCompany, PartnersEmployeesFormat) |Удаляет условие из формата отображения данных о сотрудниках.
+|DeleteGroup(PartnersGroup) |Удаляет группу.
+|DeleteOrgType(PartnersOrgType) |Удаляет тип юридического лица.
+|DeletePosition(PartnersPosition) |Удаляет указанную должность.
+|DeleteTitle(PartnersTitle) |Удаляет форму обращения к сотрудникам контрагента.
+|DeleteUnit(PartnersCompany) |Удаляет заданное подразделение.
+|DeleteViewField(IGridViewField, GridViewFieldCollectionType) |Удаляет указанное отображаемое поле.
+|xref:IPartnersService.FindCompanyByNameOnServer_MT.adoc[FindCompanyByNameOnServer(PartnersCompany, String)] |Осуществляет поиск подразделения с заданным названием.
+|FindCompanyWithSameNameOnServer(PartnersCompany, String) |Выполняет поиск организации с именем, аналогичным приведенному.
+|FindDepartmentWithSameNameOnServer(PartnersCompany, String) |Выполняет поиск подразделения с именем, аналогичным приведенному.
+|FindDublicateCompaniesOnServer(PartnersCompany) |Осуществляет поиск дубликатов контрагента. В возвращаемом значении указаны название атрибутов по которым обнаружено дублирование. Уникальные атрибуты должны быть заданы в [.dfn .term]_Справочнике контрагентов_.
+|FindSameCompanyOnServer(PartnersCompany, String, String) |Выполняет поиск организации с указанным именем, либо заданным ИНН.
+|xref:IPartnersService.FindUnitGroups_MT.adoc[FindUnitGroups(PartnersCompany)] |Возвращает список всех групп, в которые входит заданное подразделение контрагента.
+|FindViewField(ViewCardFieldsGroup, IGridViewField) |Осуществляет поиск отображаемого поля.
+|Get(Guid) |Возвращает сотрудника контрагента с заданным идентификатором.
+|GetAllEmployeeViewFields |Возвращает весь список отображаемых полей сотрудников.
+|GetAllUnitViewFields |Возвращает весь список отображаемых полей групп.
+|GetCompany(Guid) |Возвращает подразделение с заданным идентификатором.
+|GetEmployeeAllFormatFields |Возвращает весь список, составленный на основе схемы метаданных карточки, отображаемых полей сотрудников.
+|GetEmployeeCardFieldValue(PartnersEmployee, Guid, String) |Возвращает значение указанного поля карточки сотрудника контрагента.
+|GetEmployeeCardKind(PartnersEmployee) |Возвращает вид карточки сотрудника контрагента.
+|GetEmployeeDefaultViewFields |Возвращает список базовых отображаемых полей сотрудников.
+|GetEmployeeDisplayString(PartnersCompany, PartnersEmployee) |Возвращает отображаемое имя сотрудника, полученное на основе параметров указанной организации.
+|GetEmployeeFieldDisplayName(Guid, String) |Возвращает отображаемое название указанного поля карточки сотрудников.
+|GetEmployeesCount(PartnersCompany, Boolean, Boolean) |Получает количество сотрудников контрагента с учетом иерархии.
+|GetEmployeesDisplayFormat(PartnersCompany) |Возвращает формат отображения данных о сотрудниках для указанной компании.
+|GetGroupInheritedViewFields(PartnersGroup) |Возвращает унаследованные от родительской группы отображаемые поля.
+|GetGroupItems(PartnersGroup, Boolean) |Возвращает список подгрупп заданной группы.
+|GetUnitCardFieldValue(PartnersCompany, Guid, String) |Возвращает значение отображаемого поля подразделения.
+|GetUnitCardKind(PartnersCompany) |Возвращает вид карточки подразделения.
+|GetUnitDefaultViewFields |Возвращает базовый список отображаемых полей подразделения.
+|GetUnitEmployeeCardKind(PartnersCompany) |Возвращает вид карточки сотрудника установленный для заданного подразделения.
+|GetUnitEmployees(PartnersCompany, Boolean) |Возвращает коллекцию сотрудников из указанного подразделения.
+|GetUnitEmployees(PartnersCompany, Boolean, Boolean) |Возвращает коллекцию сотрудников из указанного подразделения, а также из всех подчиненных подразделений.
+|GetUnitFieldDisplayName(Guid, String) |Возвращает отображаемое имя поля карточки подразделения контрагента.
+|GetUnitInheritedViewFields(PartnersCompany, Boolean) |Возвращает унаследованные отображаемые поля подразделения.
+|GetUnits(PartnersCompany, Boolean) |Предоставляет коллекцию подразделений, входящих в указанное подразделение.
+|GetUnits(PartnersCompany, Boolean, Boolean) |Предоставляет коллекцию подразделений, входящих в указанное подразделение, с учетом иерархии.
+|GetViewFields(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для указанного объекта (группа, компания или сотрудник). Все возвращаемые записи будут приведены к типу [.keyword .apiname]#IGridViewField#.
+|GetViewFieldsAsObject(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для указанного объекта (группа, компания или сотрудник) без приведения типов.
+|MoveEmployees(IEnumerable<PartnersEmployee>, PartnersCompany) |Перемещает выбранных сотрудников в выбранное подразделение.
+|MoveGroup(PartnersGroup, PartnersGroup) |Перемещает выбранную подгруппу в заданную группу.
+|MoveUnit(PartnersCompany, PartnersCompany) |Перемещает выбранное подразделение.
+|MoveViewField(IGridViewField, GridViewFieldCollectionType, Boolean) |Перемещает выбранное отображаемое поле.
+|OpenOrCreateDepartmentCard(PartnersCompany, Boolean) |Возвращает карточку подразделения контрагента; при отсутствии карточки, она будет создана.
+|OpenOrCreateEmployeeCard(PartnersEmployee, Boolean) |Возвращает карточку сотрудника контрагента. В случае отсутствии карточки, будет создана новая.
+|OrgTypeWithSameNameExists(PartnersOrgType, String) |Возвращает признак наличия в [.dfn .term]_справочнике контрагентов_ типа юридического лица с указанным названием, но не эквивалентным переданному объекту.
+|OtherPositionWithSameNameExists(PartnersPosition, String) |Возвращает признак наличия в [.dfn .term]_справочнике контрагентов_ должности с указанным названием, но не эквивалентным переданному объекту.
+|OtherTitleWithSameNameExists(PartnersTitle, String) |Возвращает признак наличия в [.dfn .term]_справочнике контрагентов_ обращения (к сотруднику) с указанным названием, но не эквивалентным переданному объекту.
+|PropagateNotAvailable(PartnersCompany) |Распространяет значение флага "Не показывать при выборе", установленное у заданного подразделения, на все дочерние элементы.
+|RemoveGroupItems(PartnersGroup, IEnumerable<PartnersGroupGroup>) |Удаляет заданные элементы из группы контрагентов.
+|RemoveGroupUnit(PartnersGroup, PartnersCompany) |Удаляет из группы указанного контрагента.
+|RemoveGroupUnits(PartnersGroup, IEnumerable<PartnersCompany>) |Удаляет список контрагентов из группы.
+|SetCompanyUniqueAttributes(IEnumerable<CardFieldInfo>) |Задает атрибуты организации, проверяемые на уникальность.
+|SetCompanyUniqueAttributesUnion(PartnersCompanyUniqueAttributesOperation) |Задает тип объединения для атрибутов организации, проверяемых на уникальность.
+|===
+
+== Заметки
+
+Тип контейнера (организация, либо подразделение) определяется значением свойства [.keyword .apiname]#StaffUnit.Type#.
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService.AddNewEmployee_MT.adoc[IPartnersService.AddNewEmployee - метод (PartnersCompany)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService.AddNewUnit_MT.adoc[IPartnersService.AddNewUnit - метод (PartnersCompany)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService.DeleteEmployee_MT.adoc[IPartnersService.DeleteEmployee - метод (PartnersEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService.FindCompanyByNameOnServer_MT.adoc[IPartnersService.FindCompanyByNameOnServer - метод (PartnersCompany, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService.FindUnitGroups_MT.adoc[IPartnersService.FindUnitGroups - метод (PartnersCompany)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

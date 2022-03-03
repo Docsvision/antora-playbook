@@ -1,0 +1,68 @@
+= Разработка компонента карточки
+
+[NOTE]
+====
+[.note__title]#Прим.:# Исходный код компонента карточки расположен в подкаталоге [.ph .filepath]`NetstatSolutionCard` приложенного архива.
+====
+
+Пример разработки компонента карточки приведен в разделе xref:CardsDevComp.adoc[Разработка компонента карточки], а также в статье https://docsvision.zendesk.com/entries/79607235[Создание карточек в Docsvision 5], поэтому не будем останавливаться на этом подробно, лишь отметим ключевые моменты его реализации для [.dfn .term]_Модуля учета сетевых устройств_.
+
+Реализация интерфейса карточки в компоненте не планируется, вместо этого в [.dfn .term]_Конструкторе разметок_ будет настроена её разметка, с последующей выгрузкой этих настроек (рассмотрено в разделе xref:CreatePackages.adoc[Формирование CardPackage и SqlPackage]) для размещения в пакете установки. Для того, чтобы разметка карточки могла быть настроена в конструктора, класс компонента карточки отмечен специальным атрибутом [.keyword .apiname]#Customizable#.
+
+В конструктор класса компонента карточки добавим простой алгоритм проверки лицензионного ключа, значение которого считывается из реестра Windows. Для ввода лицензионного ключа предполагается использовать [.dfn .term]_SnapIn_, который будет разработан позднее.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Проверку лицензии, при необходимости, можно реализовать несколькими методами (см. xref:License.adoc[Лицензирование]).
+====
+
+Класс компонента должен быть отмечен атрибутом [.keyword]*Guid*, значение которого соответствует [.dfn .term]_Идентификатору COM-компонента карточки_ (см. xref:CreateCardLib_SchemaCard.adoc[Создание схемы метаданных карточки]).
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.BackOffice.WinForms;
+using DocsVision.Platform.CardHost;
+using System;
+using System.Runtime.InteropServices;
+
+namespace NetstatSolutionCard
+{
+ [ComVisible(true)]
+ [Customizable(true)]
+ [Guid("053B0CA1-95FD-4DDA-95FA-6043AFACCC1F")]
+ [ClassInterface(ClassInterfaceType.None)]
+ public partial class MainControl : DocsVision.BackOffice.WinForms.BaseCardControl
+ {
+  public MainControl()
+  {
+   // В случае отсутствия лицензии, при открытии карточки будет выдано сообщение об ошибке
+   if (!CheckLicense())
+   {
+    throw new Exception("Отсутствует лицензия для Модуля учета сетевых устройств");
+   }
+
+   InitializeComponent();
+  }
+
+  // Алгоритм проверки лицензии
+  private bool CheckLicense()
+  {
+   bool result = false;
+  
+   // Логику проверки смотрите в исходном коде проекта
+   return result;
+  }
+ }
+} 
+----
+
+[NOTE]
+====
+[.note__title]#Прим.:# Если Вы работаете с исходными кодами проекта, то компонент карточки собирается первым.
+====
+
+== См. далее
+
+* xref:CreateCardLib_LibControl.adoc[Разработка компонента библиотеки карточек]
+
+*На уровень выше:* xref:../pages/CreateCardLib.adoc[Разработка библиотеки карточек]

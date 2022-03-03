@@ -1,0 +1,177 @@
+= DocsVision.Platform.ObjectManager - пространство имен
+
+Пространство имен DocsVision.Platform.ObjectManager предоставляет классы и интерфейсы, декларирующие API бизнес-логики Docsvision.
+
+== Пространства имен
+
+[cols=",",options="header",]
+|===
+|Пространство имен |Описание
+|xref:Metadata/Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata] |Предоставляет методы для работы с метаданными карточек.
+|xref:SearchModel/SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel] |Пространство имен DocsVision.Platform.ObjectManager.SearchModel содержит классы предоставляющие методы доступа к серверному поиску.
+|xref:SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards] |Содержит классы с реализацией объектов бизнес-логики для [.keyword]*системных карточек*.
+|xref:ViewModel/ViewModel_NS.adoc[DocsVision.Platform.ObjectManager.ViewModel] |Содержит классы описывающие объектную модель [.keyword]*представлений* и методы для работы с представлениями.
+|===
+
+== Классы
+
+[cols=",",options="header",]
+|===
+|Класс |Описание
+|xref:AccessManager_CL.adoc[AccessManager] |Представляет объектную модель [.keyword]*менеджера объектов безопасности*. Содержит методы для работы с зашифрованными и подписанными объектами. Осуществляет управление правами (дескрипторами безопасности) на объекты системы.
+|AutoLocker |Содержит вспомогательные методы для работы с блокировкой объектов.
+|AutoUpdater |Содержит вспомогательные методы для работы с режимом отложенной блокировки.
+|xref:CardData_CL.adoc[CardData] |Содержит данные карточки.
+|xref:CardDataCollection_CL.adoc[CardDataCollection] |Предоставляет методы для работы к коллекцией CardData.
+|xref:CardLabelCollection_CL.adoc[CardLabelCollection] |Представляет коллекцию меток карточек.
+|xref:CardManager_CL.adoc[CardManager] |Представляет объектную модель [.keyword]*менеджера карточек*. Содержит методы чтение, изменение, создание и удаление карточек.
+|xref:Connection_CL.adoc[Connection] |Соединение с сервером Docsvision.
+|DigestViewColumns |Представляет колонку в представление.
+|xref:ExportCardErrorEventArgs_CL.adoc[ExportCardErrorEventArgs] |Предоставляет данные для события xref:ExportCardInspector.Error_EV.adoc[ExportCardInspector.Error]
+|xref:ExportCardInspector_CL.adoc[ExportCardInspector] |Инспектор, позволяющий гибко управлять логикой экспорта.
+|xref:ExtensionManager_CL.adoc[ExtensionManager] |Представляет объектную модель [.keyword]*менеджера расширений*. Содержит методы для работы с серверными расширениями.
+|xref:ExtensionMethod_CL.adoc[ExtensionMethod] |Описывает структуру серверного расширения.
+|xref:ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter] |Представляет параметр метода серверного расширения.
+|xref:ExtensionMethodParameterCollection_CL.adoc[ExtensionMethodParameterCollection] |Содержит методы для работы к коллекцией ExtensionMethodParameter.
+|xref:FileData_CL.adoc[FileData] |Содержит методы для организации работы с простыми файлами.
+|FileDataCollection |Содержит методы для работы к коллекцией FileData.
+|xref:FileManager_CL.adoc[FileManager] |Представляет объектную модель [.keyword]*менеджера файлов*. Содержит методы для работы с файлами.
+|xref:ImportCardInspector_CL.adoc[ImportCardInspector] |Инспектор, позволяющий гибко управлять логикой импорта.
+|InfoRow |Представляет элемент коллекции поддерживающей страничное чтение.
+|xref:InfoRowCollection_CL.adoc[InfoRowCollection] |Содержит методы для работы к коллекцией InfoRow.
+|xref:LicenseManager_CL.adoc[LicenseManager] |Класс LicenseManager содержит функциональность по работе с дополнительными опциями лицензии Docsvision, в которых присутствует ограничение по количеству соединений.
+|xref:LockedObject_CL.adoc[LockedObject] |Представляет объект поддерживающий блокировку.
+|xref:LockedObjectCollection_CL.adoc[LockedObjectCollection] |Содержит методы для работы к коллекцией LockedObject.
+|xref:LockManager_CL.adoc[LockManager] |Представляет объектную модель [.keyword]*менеджера блокировок*. Содержит методы управления блокировками на объекты.
+|xref:LogManager_CL.adoc[LogManager] |Представляет объектную модель [.keyword]*менеджера журнала*. Содержит методы работы с журналом системы.
+|xref:LogSearchQuery_CL.adoc[LogSearchQuery] |Представляет фильтр данных для журнала.
+|xref:QueryParameter_CL.adoc[QueryParameter] |Предоставляет хранилище для параметров запроса.
+|xref:QueryParameterCollection_CL.adoc[QueryParameterCollection] |Содержит методы для работы к коллекцией QueryParameter.
+|xref:Report_CL.adoc[Report] |Представляет данные для хранимой процедуры.
+|xref:ReportCollection_CL.adoc[ReportCollection] |Содержит методы для работы к коллекцией Report.
+|xref:ReportManager_CL.adoc[ReportManager] |Представляет объектную модель [.dfn .term]_менеджера хранимых процедур_.
+|xref:ReportParameter_CL.adoc[ReportParameter] |Осуществляет хранение параметров хранимых процедур.
+|xref:ReportParameterCollection_CL.adoc[ReportParameterCollection] |Содержит методы для работы к коллекцией ReportParameter.
+|xref:RowData_CL.adoc[RowData] |Представляет строку данных карточки.
+|xref:RowDataCollection_CL.adoc[RowDataCollection] |Содержит методы для работы к коллекцией RowData.
+|xref:RowField_CL.adoc[RowField] |Описывает поле секции карточки.
+|xref:RowFieldCollection_CL.adoc[RowFieldCollection] |Содержит методы для работы к коллекцией RowField.
+|xref:SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo] |Список объектов.
+|xref:SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest] |Объект запроса.
+|xref:SectionData_CL.adoc[SectionData] |Представляет секцию карточки.
+|xref:SectionDataCollection_CL.adoc[SectionDataCollection] |Содержит методы для работы к коллекцией SectionData.
+|xref:SectionDataReader_CL.adoc[SectionDataReader] |Серверный курсор для чтения данных секции.
+|xref:SessionManager_CL.adoc[SessionManager] |Представляет объектную модель [.keyword]*менеджера сессий*. Содержит методы управления сессиями пользователей.
+|xref:SubSectionData_CL.adoc[SubSectionData] |Представляет подсекцию карточки.
+|xref:QueryParameter_CL.adoc[QueryParameter] |Осуществляет хранение параметра запроса.
+|xref:QueryParameterCollection_CL.adoc[QueryParameterCollection] |Содержит методы для работы к коллекцией QueryParameter.
+|xref:ViewReadRequest_CL.adoc[ViewReadRequest] |Запрос представления.
+|xref:ViewSource_CL.adoc[ViewSource] |Источник данных представления.
+|xref:UserSession_CL.adoc[UserSession] |Содержит данные сессии пользователя, а также предоставляет доступ к менеджерам управления объектами системы
+|===
+
+== Интерфейсы
+
+[cols=",",options="header",]
+|===
+|Интерфейс |Описание
+|xref:ILockable_IN.adoc[ILockable] |Разрешает для объекта управление режимом отложенной блокировки.
+|xref:IProcessInfo_IN.adoc[IProcessInfo] |Определяет возможности по управлению состоянием конкретного бизнес-процесса и получению базовой информации о самом бизнес-процессе.
+|xref:ISecurable_IN.adoc[ISecurable] |Разрешает объекту реализовывать модель безопасности.
+|xref:IUpdatable_IN.adoc[IUpdatable] |Разрешает для объекта режим отложенной записи.
+|xref:IXmlExportable_IN.adoc[IXmlExportable] |Разрешает сохранять данные объекта в XML-формате.
+|===
+
+== Перечисления
+
+[cols=",",options="header",]
+|===
+|Перечисление |Описание
+|xref:ArchiveOptions_EN.adoc[ArchiveOptions] |Режим архивации объекта.
+|xref:ArchiveState_EN.adoc[ArchiveState] |Определяет признак архивирования объекта.
+|xref:ClearLogStrategy_EN.adoc[ClearLogStrategy] |Определяет стратегию автоматической очистки журнала.
+|xref:CryptObjectType_EN.adoc[CryptObjectType] |Тип крипто-объекта.
+|xref:EventType_EN.adoc[EventType] |Определяет типы записей в журнале событий.
+|xref:ExportFlags_EN.adoc[ExportFlags] |Задает формат экспорта данных.
+|xref:LinkType_EN.adoc[LinkType] |Маска типа ссылки.
+|xref:LockedObjectType_EN.adoc[LockedObjectType] |Типы блокированных объектов.
+|xref:LockStatus_EN.adoc[LockStatus] |Состояние блокировки объекта.
+|xref:LogStrategy_EN.adoc[LogStrategy] |Определяет стратегию ведения журнала.
+|xref:ObjectState_EN.adoc[ObjectState] |Определяет состояние объекта.
+|xref:ObjectStatus_EN.adoc[ObjectStatus] |Состояние объекта в режиме отложенной записи.
+|xref:OfflineState_EN.adoc[OfflineState] |Состояние хранения файла.
+|xref:ParameterValueType_EN.adoc[ParameterValueType] |Предоставляет тип для параметра метода серверного расширения.
+|xref:RecordStatus_EN.adoc[RecordStatus] |Состояние задействованности объекта.
+|xref:SessionLoginFlags_EN.adoc[SessionLoginFlags] |Описывает флаги открытия новой сессии.
+|===
+
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/Metadata/Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SearchModel/SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ViewModel/ViewModel_NS.adoc[DocsVision.Platform.ObjectManager.ViewModel - пространство имен]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/AccessManager_CL.adoc[AccessManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/CardDataCollection_CL.adoc[CardDataCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/CardLabelCollection_CL.adoc[CardLabelCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/Connection_CL.adoc[Connection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardErrorEventArgs_CL.adoc[ExportCardErrorEventArgs - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector_CL.adoc[ExportCardInspector - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionMethod_CL.adoc[ExtensionMethod - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionMethodParameterCollection_CL.adoc[ExtensionMethodParameterCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[FileData - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/FileManager_CL.adoc[FileManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ImportCardInspector_CL.adoc[ImportCardInspector - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/InfoRowCollection_CL.adoc[InfoRowCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LicenseManager_CL.adoc[LicenseManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LockedObject_CL.adoc[LockedObject - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LockedObjectCollection_CL.adoc[LockedObjectCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LockManager_CL.adoc[LockManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogSearchQuery_CL.adoc[LogSearchQuery - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/Report_CL.adoc[Report - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ReportCollection_CL.adoc[ReportCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ReportManager_CL.adoc[ReportManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ReportParameter_CL.adoc[ReportParameter - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ReportParameterCollection_CL.adoc[ReportParameterCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/RowField_CL.adoc[RowField - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/RowFieldCollection_CL.adoc[RowFieldCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionDataCollection_CL.adoc[SectionDataCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionDataReader_CL.adoc[SectionDataReader - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager_CL.adoc[SessionManager - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/QueryParameter_CL.adoc[QueryParameter - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/QueryParameterCollection_CL.adoc[QueryParameterCollection - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ViewReadRequest_CL.adoc[ViewReadRequest - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ViewSource_CL.adoc[ViewSource - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/UserSession_CL.adoc[UserSession - класс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ILockable_IN.adoc[ILockable - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/IProcessInfo_IN.adoc[IProcessInfo - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ISecurable_IN.adoc[ISecurable - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable_IN.adoc[IUpdatable - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/IXmlExportable_IN.adoc[IXmlExportable - интерфейс]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ArchiveOptions_EN.adoc[ArchiveOptions - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ArchiveState_EN.adoc[ArchiveState - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ClearLogStrategy_EN.adoc[ClearLogStrategy - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/CryptObjectType_EN.adoc[CryptObjectType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/EventType_EN.adoc[EventType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportFlags_EN.adoc[ExportFlags - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LinkType_EN.adoc[LinkType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LockedObjectType_EN.adoc[LockedObjectType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LockStatus_EN.adoc[LockStatus - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogStrategy_EN.adoc[LogStrategy - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectState_EN.adoc[ObjectState - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectStatus_EN.adoc[ObjectStatus - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/OfflineState_EN.adoc[OfflineState - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/ParameterValueType_EN.adoc[ParameterValueType - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/RecordStatus_EN.adoc[RecordStatus - перечисление]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionLoginFlags_EN.adoc[SessionLoginFlags - перечисление]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/Platform_NS.adoc[DocsVision.Platform - пространство имен]

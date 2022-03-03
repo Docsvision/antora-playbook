@@ -1,0 +1,41 @@
+= BaseCardControl.Save - метод
+
+Проверяет данные карточки на корректность и сохраняет ее в случае отсутствия ошибок.
+
+* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public virtual bool Save()
+----
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - сохранение прошло успешно, иначе - false
+
+== Заметки
+
+Данный метод может быть вызван из скрипта карточки и по своему действию эквивалентен нажатию кнопки [.ph .uicontrol]*Сохранить* в карточке.
+
+== Примеры
+
+К примеру, метод который по нажатию кнопки устанавливает название темы документа в значение по умолчанию и сохраняет карточку.
+
+[source,pre,codeblock,language-csharp]
+----
+private void DefaultTheme_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICustomizableControl customizableControl = CardControl;
+ ILayoutPropertyItem layoutPropertyItem = customizableControl.FindPropertyItem<ILayoutPropertyItem>("Theme");
+ layoutPropertyItem.ControlValue = "Default value";
+ CardControl.Save();
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl - класс]

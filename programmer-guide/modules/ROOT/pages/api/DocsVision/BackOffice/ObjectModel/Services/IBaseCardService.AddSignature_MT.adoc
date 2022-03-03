@@ -1,0 +1,53 @@
+= IBaseCardService.AddSignature - метод (SignatureList, X509Certificate2, String, StatesState)
+
+Инициализирует электронную подпись и добавляет ее в список подписей.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardSignature AddSignature(SignatureList signatureList, X509Certificate2 certificate, string cardDescription, StatesState cardState)
+----
+
+Параметры
+
+signatureList::
+  Тип: xref:../SignatureList_CL.adoc[SignatureList]
+  +
+  Список подписей
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат
+cardDescription::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Примечание к подписи
+cardState::
+  Тип: xref:../StatesState_CL.adoc[StatesState]
+  +
+  Состояние карточки
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Объект содержащий полную информацию по установленной ЭЦП
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signatureList.
+|===
+
+== Заметки
+
+Если certificate не задан, то будет проставлена простая подпись.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

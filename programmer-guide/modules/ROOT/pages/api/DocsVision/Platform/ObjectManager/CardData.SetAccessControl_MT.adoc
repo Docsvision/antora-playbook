@@ -1,0 +1,42 @@
+= CardData.SetAccessControl - метод (CardDataSecurity)
+
+Задает описатель прав на карточку.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void SetAccessControl(CardDataSecurity cardSecurity)
+----
+
+Параметры
+
+cardSecurity::
+  Тип: xref:../Security/AccessControl/CardDataSecurity_CL.adoc[CardDataSecurity]
+  +
+  Описатель прав
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Получение с сервера данных карточки с известным идентификатором
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
+
+//Получение описателя прав карточки
+CardDataSecurity rights = card.GetAccessControl();
+
+//Создание нового разрешения – совокупного права чтения
+CardDataAccessRule rule = new CardDataAccessRule("TESTDOMAIN\\IvanovII", CardDataRights.Read, AccessControlType.Allow);
+
+//Добавление нового разрешения к описателю прав
+rights.SetAccessRule(rule);
+
+//Сохранение измененного описателя прав
+card.SetAccessControl(rights);
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

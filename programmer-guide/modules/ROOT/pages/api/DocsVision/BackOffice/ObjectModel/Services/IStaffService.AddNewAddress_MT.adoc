@@ -1,0 +1,65 @@
+= IStaffService.AddNewAddress - метод (StaffUnit, StaffAddresseAddressType)
+
+Добавляет новый адрес для указанного подразделения.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffAddresse AddNewAddress(StaffUnit unit, StaffAddresseAddressType type)
+----
+
+Параметры
+
+unit::
+  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
+  +
+  Подразделение, для которого добавляется адрес
+type::
+  Тип: xref:../StaffAddresseAddressType_EN.adoc[StaffAddresseAddressType]
+  +
+  Подразделение, для которого добавляется адрес
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffAddresse_CL.adoc[StaffAddresse]
+  +
+  Адрес подразделения
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit.
+|===
+
+== Заметки
+
+При повторном вводе адреса, он будет перезаписан.
+
+== Примеры
+
+Ниже представлен пример добавления почтового адреса
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса             
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение подразделения, которому добавляется адрес
+StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Добавление адреса
+StaffAddresse addresse = staffService.AddNewAddress(unit, StaffAddresseAddressType.PostAddress);
+addresse.Address = "Большой Смоленский пр, 2а";
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

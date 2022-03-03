@@ -1,0 +1,63 @@
+= ObjectContext.SaveObject<T> - метод (T)
+
+Сохраняет изменения выбранного объекта.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public ObjectRef<T> SaveObject<T>(T objectInstance) where T : ObjectBase
+----
+
+Параметры типа
+
+T::
+  Тип объекта
+
+Параметры
+
+objectInstance::
+  Тип: T
+  +
+  Сохраняемый объект
+
+Возвращаемое значение
+
+::
+  Тип: xref:ObjectRef_CL.adoc[ObjectRef<T>]
+  +
+  Ссылка на объект в [.dfn .term]_контексте объектов_
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|===
+
+== Примеры
+
+Ниже приведен пример создания и сохранения документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с документами
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Создание документа
+Document document = documentService.CreateDocument();
+
+// Изменение описания
+document.Description = "Документ созданный из кода";
+
+// Сохранение изменений в контексте
+objectContext.SaveObject<Document>(document);
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

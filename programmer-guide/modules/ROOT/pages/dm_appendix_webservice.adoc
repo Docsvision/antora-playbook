@@ -1,0 +1,83 @@
+= Методы веб-сервиса Docsvision
+
+Взаимодействие с сервером Docsvision, помимо использования базового API, может быть организовано через SOAP.
+
+Адрес сервера для подключения SOAP-клиента указан в настройках сервера Docsvision и обычно соответствует виду: [.ph .filepath]`http://DOCSVISION_SERVER.COM/DocsVision/StorageServer/StorageServerService.asmx`.
+
+Описание методов веб-сервиса доступно по адресу: [.ph .filepath]`http://DOCSVISION_SERVER.COM/DocsVision/StorageServer/StorageServerService.asmx?WSDL`.
+
+Для передачи данных в формате SOAP на адрес сервера Docsvision используется метод HTTP POST .
+
+[NOTE]
+====
+[.note__title]#Прим.:# Описание протокола SOAP доступно по http://www.w3.org/TR/2000/NOTE-SOAP-20000508/[ссылке].
+====
+
+Конкретный способ подключения к серверу Docsvision и отправка сообщения зависят от языка программирования и используемой библиотеки: suds (Python), SOAPClient (PHP), SOAP::Lite for Perl и пр.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для параметров всех методов справедливо: если текст передается в формате xml, то спецсимволы, содержащиеся в нем, должны быть экранированы. Это применимо и к SOAP-ответу.
+====
+
+В данном подразделе, помимо описания методов веб-сервиса, приведены примеры использования данных методов на языке Python (версии 3); SOAP-клиент не используется.
+
+Во всех примерах, приведенных далее, для подключения к веб-сервису Docsvision используется общий шаблон:
+
+[source,pre,codeblock,language-python]
+----
+import xml.etree.ElementTree as ElementTree
+import requests
+from requests_ntlm import HttpNtlmAuth
+import base64
+
+# Адрес веб-сервиса
+url = 'http://DOCSVISION_SERVER.COM/DocsVision/StorageServer/StorageServerService.asmx'
+
+# Учетные данные пользователя Docsvision
+username = 'Domain\User.Name'
+password = 'User.Password'
+
+session = requests.Session()
+session.auth = HttpNtlmAuth(username, password, session)
+session.headers['Content-Type'] =  'text/xml; charset=utf-8'
+----
+
+[NOTE]
+====
+[.note__title]#Прим.:# Модуль python-ntlm может быть получен по https://github.com/mullender/python-ntlm[ссылке].
+====
+
+== В этом подразделе
+
+* xref:dm_appendix_webservice_connection.adoc[Подключения к серверу]
+* xref:DevManualAppendix_WebService_Card.adoc[Карточки]
+* xref:DevManualAppendix_WebService_Rows.adoc[Строки секций]
+* xref:DevManualAppendix_WebService_Num.adoc[Нумераторы]
+* xref:DevManualAppendix_WebService_Files.adoc[Файлы]
+* xref:DevManualAppendix_WebService_Folders.adoc[Папки]
+* xref:DevManualAppendix_WebService_Search.adoc[Поиск]
+* xref:DevManualAppendix_WebService_Lock.adoc[Блокировки]
+* xref:DevManualAppendix_WebService_Library.adoc[Библиотеки карточек]
+* xref:DevManualAppendix_WebService_Labels.adoc[Цветовые метки карточки]
+* xref:DevManualAppendix_WebService_Dynamic.adoc[Расширенные метаданные]
+* xref:DevManualAppendix_WebService_Cursor.adoc[Курсоры]
+* xref:DevManualAppendix_WebService_Common.adoc[Прочее]
+
+* *xref:../pages/dm_appendix_webservice_connection.adoc[Подключения к серверу]* +
+* *xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]* +
+* *xref:../pages/DevManualAppendix_WebService_Rows.adoc[Строки секций]* +
+* *xref:../pages/DevManualAppendix_WebService_Num.adoc[Нумераторы]* +
+* *xref:../pages/DevManualAppendix_WebService_Files.adoc[Файлы]* +
+* *xref:../pages/DevManualAppendix_WebService_Folders.adoc[Папки]* +
+* *xref:../pages/DevManualAppendix_WebService_Search.adoc[Поиск]* +
+* *xref:../pages/DevManualAppendix_WebService_Lock.adoc[Блокировки]* +
+* *xref:../pages/DevManualAppendix_WebService_Library.adoc[Библиотеки карточек]* +
+* *xref:../pages/DevManualAppendix_WebService_Labels.adoc[Цветовые метки карточки]* +
+* *xref:../pages/DevManualAppendix_WebService_Dynamic.adoc[Расширенные метаданные]* +
+* *xref:../pages/DevManualAppendix_WebService_Cursor.adoc[Курсоры]* +
+* *xref:../pages/DevManualAppendix_WebService_Icons.adoc[Иконки]* +
+* *xref:../pages/DevManualAppendix_WebService_Common.adoc[Прочее]* +
+* *xref:../pages/DevManualAppendix_WebService_Samples.adoc[Примеры использования]* +
+
+*На уровень выше:* xref:../pages/dm_appendix.adoc[Приложение]

@@ -1,0 +1,41 @@
+= ITaskService.CopyTask - метод (Task)
+
+Создает копию задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Task CopyTask(Task task)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Копируемое задание
+
+Возвращаемое значение
+
+::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Копия задания
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
+|===
+
+== Заметки
+
+У копии задание устанавливает состояние "Инициализация". Комментарии исходного задания в копию не переносятся.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

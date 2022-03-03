@@ -1,0 +1,51 @@
+= IReferenceListService.GetReferenceDescription - метод (ReferenceListReference)
+
+Возвращает описание для объекта, на который установлена ссылка.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+string GetReferenceDescription(ReferenceListReference reference)
+----
+
+Параметры
+
+reference::
+  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
+  +
+  Ссылка
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Описание объекта
+
+== Заметки
+
+Метод возвращает:
+
+* для ссылки на карточку: название типа карточки;
+* для ссылки на папку: название папки;
+* для url-адреса: сформированную HTML-ссылку.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
+
+// Получение ссылки
+ReferenceListReference reference = objectContext.GetObject<ReferenceListReference>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//Получение описания объекта
+string description = referenceListService.GetReferenceDescription(reference); 
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

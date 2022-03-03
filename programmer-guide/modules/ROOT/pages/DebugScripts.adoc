@@ -1,0 +1,31 @@
+= Отладка скриптов карточек
+
+Отладка скриптов карточек выполняется в Visual Studio.
+
+. Создайте в Visual Studio проект с типом Windows Forms Control Library (или Class library).
++
+В качестве целевой платформы укажите:
+
+* .NET Framework 4.0 – если используется система Docsvision версии 5.4,
+* .NET Framework 4.6.1 (не «Client profile») – если используется система Docsvision версии 5.5.
+. Подключите к проекту сборки из папки установки Windows-клиента:
+* DocsVision.Platform.ObjectManager.dll,
+* DocsVision.Platform.ObjectModel.dll,
+* DocsVision.Platform.WinForms.dll,
+* DocsVision.Platform.CardHost.dll,
+* DocsVision.BackOffice.ObjectModel.dll,
+* DocsVision.BackOffice.WinForms.dll и др.
+. Добавьте в проект публичный класс с публичным методом, содержащим код отлаживаемого скрипта.
++
+В метод можно передать любые требуемые параметры, например: [.keyword .apiname]#BaseCardControl# – даст доступ к классу карточки.
+. Постройте проект и подключите полученную сборку к скриптам карточки.
+. Измените реализацию отлаживаемого скрипта карточки, оставив только вызов функции, реализованной в отладочной сборке.
+. Подключитесь в Visual Studio к процессу Windown-клиента (Navigator.exe). Будет предоставлена возможность выполнить отладку кода в контексте работы карточки.
++
+[NOTE]
+====
+[.note__title]#Note:# Visual Studio предоставляет средства, которые можно использовать для удаленной отладки – Visual Studio Remote Debugger.
+====
+. После завершения отладки, рабочий код из проекта можно скопировать в скрипт карточки и отключить отладочную сборку.
+
+*Parent topic:* xref:../pages/dm_scripts.adoc[Разработка скриптов карточки]

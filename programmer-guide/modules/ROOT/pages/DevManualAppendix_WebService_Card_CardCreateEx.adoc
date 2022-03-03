@@ -1,0 +1,89 @@
+= CardCreateEx
+
+Создает новый экземпляр карточки.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Карточка создается пустой.
+====
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardCreateEx"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardCreateEx xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <cardId>guid</cardId>
+      <newInstanceId>guid</newInstanceId>
+    </CardCreateEx>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+cardId::
+  Идентификатор типа карточки
+newInstanceId::
+  Собственный идентификатор новой карточки. Если идентификатор должен быть сформирован системой, то необходимо передать "00000000-0000-0000-0000-000000000000"
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardCreateExResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newInstanceId>guid</newInstanceId>
+      <cardInfo>string</cardInfo>
+    </CardCreateExResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор (newInstanceId) созданной карточки, а также её атрибуты (cardInfo).
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardCreateEx"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardCreateEx xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <cardId>B9F7BFD7-7429-455E-A3F1-94FFB569C794</cardId>
+      <newInstanceId>00000000-0000-0000-0000-000000000000</newInstanceId>
+    </CardCreateEx>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Разбираем ответ и выводим идентификатор созданной карточки
+responseParsed = ElementTree.fromstring(response.content)
+print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newInstanceId"))
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

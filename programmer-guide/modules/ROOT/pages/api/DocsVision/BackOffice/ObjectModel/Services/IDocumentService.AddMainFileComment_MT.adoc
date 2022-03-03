@@ -1,0 +1,66 @@
+= IDocumentService.AddMainFileComment - метод (Document, DocumentFile, String)
+
+Добавляет комментарий к основному файлу документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool AddMainFileComment(Document document, DocumentFile file, string comment)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ, содержащий файл file
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Объектная модель файла документа
+comment::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Комментарий к файлу
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - комментарий был успешно добавлен, иначе false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или comment.
+|===
+
+== Примеры
+
+В приведенном примере комментарий добавляется к первому основному файлу
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение первого основного файла
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+
+//Добавление комментария
+documentService.AddMainFileComment(document, file, "Данный файл был проверен");
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

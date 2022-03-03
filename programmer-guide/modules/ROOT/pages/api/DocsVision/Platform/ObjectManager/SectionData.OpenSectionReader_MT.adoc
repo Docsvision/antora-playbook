@@ -1,0 +1,41 @@
+= SectionData.OpenSectionReader - метод (FetchMode, Guid, Guid)
+
+Открывает серверный курсор для чтения данных секции.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract SectionDataReader OpenSectionReader(FetchMode fetchMode, Guid parentRowId, Guid parentTreeRowId)
+----
+
+Параметры
+
+fetchMode::
+  Тип: xref:Metadata/FetchMode_EN.adoc[FetchMode]
+  +
+  Режим загрузки данных с сервера
+parentRowId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
+  +
+  Идентификатор родительской строки
+parentTreeRowId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
+  +
+  Идентификатор родительской строки дерева
+
+Возвращаемое значение
+
+::
+  Тип: xref:SectionDataReader_CL.adoc[SectionDataReader]
+  +
+  Объект для чтения данных
+
+== Заметки
+
+Данный метод рекомендуется использовать при чтении данных секции с очень большим количеством строк. Основное отличие данного метода заключается в построчном чтении данных, без сохранения их в кэше.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData - класс]

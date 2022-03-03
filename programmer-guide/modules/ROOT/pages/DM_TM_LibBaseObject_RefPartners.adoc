@@ -1,0 +1,70 @@
+= Справочник контрагентов
+
+[cols=",",]
+|===
+|Назначение |Предназначен для хранения информации о структуре и сотрудниках внешних организаций, с которыми взаимодействует компания..
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Partners_CL.adoc[DocsVision.BackOffice.ObjectModel.Partners]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService], с помощью которого можно программно создавать и удалять контрагентов, сотрудников и групп компаний.
+
+Доступные операции:
+
+* управление подразделениями;
+* управление сотрудниками;
+* управление группами;
+* осуществление поиска по различным параметрам.
+
+В приведенном примере создается новый вид для xref:DM_TM_LibBaseObject_Document.adoc[карточки "Документ"]
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервиса 
+IPartnersService partnersService = objectContext.GetService<IPartnersService>();
+
+//добавление типа юр. лица            
+PartnersOrgType orgType = partnersService.AddNewOrgType();
+orgType.Name = "ЗАО";
+
+//добавление должностей            
+PartnersPosition positionDir = partnersService.AddNewPosition();
+positionDir.Name = "Директор";        
+PartnersPosition positionMan = partnersService.AddNewPosition();
+positionMan.Name = "Начальник отдела продаж";
+            
+//создание организации
+PartnersCompany partnersCompany = partnersService.AddNewUnit(null);
+partnersCompany.Name = "ЗАО \"Луч\"";
+partnersCompany.FullName = "Закрытое акционерное общество \"ЛУЧ\"";
+partnersCompany.Type = PartnersCompanyType.Organization;
+partnersCompany.OrgType = orgType;
+partnersCompany.IsVendor = true; //ставим признак, что организации
+
+//добавление сотрудника            
+PartnersEmployee partnersEmployee = partnersService.AddNewEmployee(partnersCompany);
+partnersEmployee.LastName = "Иванов";
+partnersEmployee.FirstName = "Александр";
+partnersEmployee.MiddleName = "Сергеевич";
+partnersEmployee.Position = positionDir; //должность "Директор"
+
+//назначаем сотрудника руководителем       
+partnersCompany.Manager = partnersEmployee;
+
+//создание подразделения
+PartnersCompany partnersDepartment = partnersService.AddNewUnit(partnersCompany);
+partnersDepartment.Name = "Отдел продаж";
+partnersDepartment.Type = PartnersCompanyType.Department;         
+PartnersEmployee partnersEmployee2 = partnersService.AddNewEmployee(partnersDepartment);
+partnersEmployee2.LastName = "Константинов";
+partnersEmployee2.FirstName = "Сергей";
+partnersEmployee2.MiddleName = "Иванович";
+partnersEmployee2.Position = positionMan;
+partnersDepartment.Manager = partnersEmployee2;
+
+//сохранение изменений                        
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

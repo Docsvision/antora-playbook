@@ -1,0 +1,208 @@
+= ITaskService - интерфейс
+
+Сервис ITaskService предоставляет методы создания и управления заданиями.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ITaskService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:ITaskService.AcceptTask_MT.adoc[AcceptTask(Task)] |Приемка указанного задания.
+|xref:ITaskService.AddChildCopyField_MT.adoc[AddChildCopyField(Task)] |Добавляет в настройки задания параметры копирования поля из родительского задания в дочернее.
+|xref:ITaskService.AddChildKindSettings_MT.adoc[AddChildKindSettings(KindsCardKind, ObjectCollection<TaskPresetChildKindSetting>, Boolean)] |Добавляет в переданную коллекцию настроек вид, доступный для выбора при создании подчинённого задания.
+|xref:ITaskService.AddComment_1_MT.adoc[AddComment(Task, StaffEmployee, String)] |Добавляет комментарий в указанное задание.
+|xref:ITaskService.AddComment_MT.adoc[AddComment(Task, StaffEmployee, String, DateTime)] |Добавляет комментарий в указанное задание.
+|xref:ITaskService.AddDelegatePreset_MT.adoc[AddDelegatePreset(Task, System.Guid)] |Добавляет поисковое слово в список делегатов, выбираемых из задания, при делегировании задания вручную.
+|xref:ITaskService.AddDelegatePreset_1_MT.adoc[AddDelegatePreset(Task, StaffEmployee)] |Добавляет сотрудника в список делегатов, выбираемых из задания, при делегировании задания вручную.
+|xref:ITaskService.AddDelegatePreset_2_MT.adoc[AddDelegatePreset(Task, StaffUnit)] |Добавляет подразделение в список делегатов, выбираемых из задания, при делегировании задания вручную.
+|xref:ITaskService.AddDelegatePreset_3_MT.adoc[AddDelegatePreset(Task, StaffRole)] |Добавляет роль в список делегатов, выбираемых из задания, при делегировании задания вручную.
+|xref:ITaskService.AddDelegatePreset_4_MT.adoc[AddDelegatePreset(Task, StaffGroup)] |Добавляет группу сотрудников в список делегатов, выбираемых из задания, при делегировании задания вручную.
+|xref:ITaskService.AddLinkOnParentCard_MT.adoc[AddLinkOnParentCard(Task, TaskSetting, BaseCard)] |Добавляет в задание ссылку на родительскую карточку.
+|xref:ITaskService.AddPerformer_MT.adoc[AddPerformer(Task, StaffEmployee)] |Добавляет сотрудника в список назначенных исполнителей задания.
+|xref:ITaskService.AddSelectedPerformer_1_MT.adoc[AddSelectedPerformer(TaskMainInfo, Guid)] |Добавляет выбранного исполнителя задания в формате поискового слова.
+|xref:ITaskService.AddSelectedPerformer_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffEmployee)] |Добавляет указанного сотрудника в список выбранных исполнителей задания.
+|xref:ITaskService.AddSelectedPerformer_2_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffGroup)] |Добавляет выбранного исполнителя задания в формате группы сотрудников.
+|xref:ITaskService.AddSelectedPerformer_3_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffRole)] |Добавляет выбранного исполнителя задания в формате роли.
+|xref:ITaskService.AddSelectedPerformer_4_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffUnit)] |Добавляет выбранного исполнителя задания в формате подразделения.
+|xref:ITaskService.AddSignature_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)] |Данный метод добавляет новую подпись в список подписей карточки [.dfn .term]_Задание_, и устанавливает ЭЦП на указанные поля карточки.
+|xref:ITaskService.AddSignature_1_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>, IEnumerable<Document>)] |Данный метод добавляет новую подпись в список подписей карточки [.dfn .term]_Задание_, и устанавливает ЭЦП на указанные поля карточки, а также на указанные документы.
+|xref:ITaskService.AddSignatureToCardReconcileLog_MT.adoc[AddSignatureToCardReconcileLog(Task, X509Certificate2)] |Подписывает ЭЦП карточку хода согласования.
+|xref:ITaskService.CancelDelegate_MT.adoc[CancelDelegate(Task)] |Отменяет делегирование задания.
+|xref:ITaskService.CanCompleteTask_MT.adoc[CanCompleteTask(Task, TaskSetting, String)] |Проверяет возможность завершения задания.
+|xref:ITaskService.CanCompleteTaskByCompletionParameter_MT.adoc[CanCompleteTaskByCompletionParameter(Task, StatesStateMachineBranch)] |Проверяет возможность завершения задания.
+|xref:ITaskService.ChangeTask_MT.adoc[ChangeTask(Task)] |Добавляет в историю карточки запись об изменении задания.
+|xref:ITaskService.ChangeTaskController_MT.adoc[ChangeTaskController(Task, StaffEmployee, DateTime)] |Заменяет контролёра задания.
+|xref:ITaskService.ChangeTaskCurrentPerformer_MT.adoc[ChangeTaskCurrentPerformer(Task, StaffEmployee)] |Заменяет текущего исполнителя задания.
+|xref:ITaskService.ChangeTaskExecutionDate_MT.adoc[ChangeTaskExecutionDate(Task, DateTime, DateTime, String)] |Устанавливает новые сроки исполнения задания.
+|xref:ITaskService.CompleteTask_MT.adoc[CompleteTask(Task, String)] |Завершает указанное задание.
+|xref:ITaskService.CompleteTask_1_MT.adoc[CompleteTask(Task, String, StaffEmployee)] |Завершает задание от имени указанного сотрудника.
+|xref:ITaskService.CopyDataFromParentTask_MT.adoc[CopyDataFromParentTask(Task, TaskSetting, Task)] |Копирует значения и ссылки из родительского задания в дочернее.
+|xref:ITaskService.CopyResultsToParentTask_MT.adoc[CopyResultsToParentTask(Task, Task, TaskCopyResultsOptions)] |Переносит результаты выполнения дочернего задания в родительское.
+|xref:ITaskService.CopyTask_MT.adoc[CopyTask(Task)] |Создает копию задания.
+|xref:ITaskService.CreateChildTask_MT.adoc[CreateChildTask(Task, KindsCardKind, BaseCard, TaskList)] |Создает дочернее задание.
+|xref:ITaskService.CreateSignatureList_MT.adoc[CreateSignatureList] |Создает пустой список подписей.
+|xref:ITaskService.CreateTask_1_MT.adoc[CreateTask] |Создает пустое задание.
+|xref:ITaskService.CreateTask_MT.adoc[CreateTask(KindsCardKind)] |Создает новое задание указанного вида.
+|xref:ITaskService.CreateTaskFromTemplate_MT.adoc[CreateTaskFromTemplate(Guid)] |Создает задание по шаблону.
+|xref:ITaskService.DeferTask_MT.adoc[DeferTask(Task)] |Откладывает задание.
+|xref:ITaskService.Delegate_MT.adoc[Delegate(Task, IEnumerable<StaffEmployee>, StaffEmployee, Boolean, Boolean, String)] |Делегирует задание.
+|xref:ITaskService.Delegate_1_MT.adoc[Delegate(Task, IEnumerable<StaffEmployee>, StaffEmployee, Boolean, Boolean, String, StaffEmployee)] |Делегирует задание.
+|xref:ITaskService.DoNotTakeToWorkTask_MT.adoc[DoNotTakeToWorkTask(Task)] |Отменяет взятие задания в работу.
+|xref:ITaskService.GetCompletionParameters_MT.adoc[GetCompletionParameters(Task)] |Возвращает параметры завершения задания.
+|xref:ITaskService.GetKindSettings_MT.adoc[GetKindSettings(KindsCardKind)] |Возвращает настройки вида задания.
+|xref:ITaskService.GetLastDelegate_MT.adoc[GetLastDelegate(Task)] |Возвращает последнюю запись списка делегирования.
+|xref:ITaskService.GetLastDelegate_1_MT.adoc[GetLastDelegate(Task, Boolean)] |Возвращает последнюю запись списка делегирования.
+|xref:ITaskService.GetSelectedPerformers_MT.adoc[GetSelectedPerformers(Task)] |Возвращает выбранных исполнителей задания.
+|xref:ITaskService.GetTaskAcceptanceMailNotificationInfo_MT.adoc[GetTaskAcceptanceMailNotificationInfo(Task, String)] |Возвращает письмо, подготовленное для отправки, с информацией о передаче задания на приемку.
+|xref:ITaskService.GetTaskBuiltInState_MT.adoc[GetTaskBuiltInState(Task)] |Получает для задания встроенное состояние.
+|xref:ITaskService.GetTaskCompletionMailNotificationInfo_MT.adoc[GetTaskCompletionMailNotificationInfo(Task, String)] |Возвращает письмо, подготовленное для отправки, с информацией о завершении задания.
+|xref:ITaskService.GetTaskRejectionMailNotificationInfo_MT.adoc[GetTaskRejectionMailNotificationInfo(Task, String)] |Возвращает письмо, подготовленное для отправки, с информацией об отклонении задания.
+|xref:ITaskService.HasCompletionParameterValue_MT.adoc[HasCompletionParameterValue(Task, Guid, String)] |Проверяет наличие значения у параметра завершения задания.
+|xref:ITaskService.InitializeDefaults_MT.adoc[InitializeDefaults(Task)] |Инициализация параметров нового задания.
+|xref:ITaskService.IsCurrentUserCurrentPerformer_MT.adoc[IsCurrentUserCurrentPerformer(Task)] |Возвращает признак того, что текущий сотрудник входит в список текущих исполнителей задания.
+|xref:ITaskService.IsCurrentUserDeputyOfCurrentPerformer_MT.adoc[IsCurrentUserDeputyOfCurrentPerformer(Task)] |Определяет, является ли текущий сотрудник заместителем одного из текущих исполнителей.
+|xref:ITaskService.IsTaskDelegated_MT.adoc[IsTaskDelegated(Task)] |Возвращает признак того, что задание делегировано.
+|xref:ITaskService.IsUserCurrentPerformer_MT.adoc[IsUserCurrentPerformer(Task, StaffEmployee)] |Определяет входит ли указанный сотрудник в список текущих исполнителей.
+|xref:ITaskService.RecallTask_MT.adoc[RecallTask(Task)] |Отзывает задание.
+|xref:ITaskService.RejectTask_MT.adoc[RejectTask(Task, StaffEmployee, String)] |Отклоняет задание.
+|xref:ITaskService.RemoveComment_MT.adoc[RemoveComment(TaskComment)] |Удаляет комментарий к заданию.
+|xref:ITaskService.ResolveDelegatePerformer_MT.adoc[ResolveDelegatePerformer(Task)] |Получает список текущих исполнителей задания, за которых текущий сотрудник может делегировать задание.
+|xref:ITaskService.ResolveDelegatePerformer_1_MT.adoc[ResolveDelegatePerformer(Task, StaffEmployee)] |Получает список текущих исполнителей задания, за которых указанный сотрудник может делегировать задание.
+|xref:ITaskService.SetTaskCompletionResult_MT.adoc[SetTaskCompletionResult(Task, TaskCompletionParameter)] |Устанавливает результат завершения задания.
+|xref:ITaskService.GetPartSignatureInfo_MT.adoc[SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart)] |Возвращает информацию о части подписи документа.
+|xref:ITaskService.StartTask_MT.adoc[StartTask(Task)] |Отправляет задание на исполнение.
+|xref:ITaskService.StopExecutionRelatedTask_MT.adoc[StopExecutionRelatedTask(Task, Boolean)] |Прекращает исполнение подчиненных заданий.
+|xref:ITaskService.StopExecutionTask_MT.adoc[StopExecutionTask(Task)] |Прекращает исполнение задания.
+|xref:ITaskService.TakeTaskToRework_MT.adoc[TakeTaskToRework(Task)] |Отправляет задание на доработку.
+|xref:ITaskService.TakeToWork_MT.adoc[TakeToWork(Task)] |Взятие задание в работу.
+|xref:ITaskService.UpdateComment_MT.adoc[UpdateComment(TaskComment, String)] |Обновляет содержимое комментария.
+|xref:ITaskService.ValidateForBegin_MT.adoc[ValidateForBegin(Task, String)] |Определяет готовность задания к отправке на исполнение.
+|xref:ITaskService.ValidateInactivePerformers_MT.adoc[ValidateInactivePerformers(Task, String)] |Определяет наличие в задании активных исполнителей.
+|xref:ITaskService.VerifySignature_MT.adoc[VerifySignature(Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)] |Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных к заданием.
+|xref:ITaskService.GetPartSignatureInfo_MT.adoc[ITaskService.SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart)] |Метод для получения информации о подписи
+|===
+
+== Примеры
+
+В приведенном ниже примере демонстрируется использование сервиса для работы с заданиями: создание нового задания и отправка его на исполнение.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервисов
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();          
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStaffService staffService = objectContext.GetService<IStaffService>();
+IStateService stateService = objectContext.GetService<IStateService>();
+
+// Получаем вид карточки На исполнение
+KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+
+// Инициализация нового задания
+Task task = taskService.CreateTask(cardKind);
+taskService.InitializeDefaults(task);
+task.MainInfo.Name = "Пример задания";
+
+// Добавление исполнителя
+taskService.AddSelectedPerformer(task.MainInfo, staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")));
+objectContext.SaveObject(task);
+            
+// Формирование дайджеста
+CardData cardData = userSession.CardManager.GetCardData(objectContext.GetObjectRef(task).Id);
+string digest = baseCardService.GenerateDigest(task, cardData, "Задание на исполнение");
+task.Description = digest;
+
+// Отправка задания
+taskService.StartTask(task);
+objectContext.SaveObject(task);
+
+// Изменение состояния задания
+StatesStateMachineBranch state = stateService.FindBranchByBuiltIn(Task.InitializationToStartedByStart, task.SystemInfo.State);
+stateService.ChangeState(task, state);
+----
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AcceptTask_MT.adoc[ITaskService.AcceptTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddChildCopyField_MT.adoc[ITaskService.AddChildCopyField - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddChildKindSettings_MT.adoc[ITaskService.AddChildKindSettings - метод (KindsCardKind, ObjectCollection<TaskPresetChildKindSetting>, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddDelegatePreset_MT.adoc[ITaskService.AddDelegatePreset - метод (Task, System.Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddDelegatePreset_1_MT.adoc[ITaskService.AddDelegatePreset - метод (Task, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddDelegatePreset_2_MT.adoc[ITaskService.AddDelegatePreset - метод (Task, StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddDelegatePreset_3_MT.adoc[ITaskService.AddDelegatePreset - метод (Task, StaffRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddDelegatePreset_4_MT.adoc[ITaskService.AddDelegatePreset - метод (Task, StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddComment_1_MT.adoc[ITaskService.AddComment - метод (Task, StaffEmployee, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddComment_MT.adoc[ITaskService.AddComment - метод (Task, StaffEmployee, String, DateTime)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddLinkOnParentCard_MT.adoc[ITaskService.AddLinkOnParentCard - метод (Task, TaskSetting, BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddPerformer_MT.adoc[ITaskService.AddPerformer - метод (Task, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSelectedPerformer_1_MT.adoc[ITaskService.AddSelectedPerformer - метод (TaskMainInfo, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSelectedPerformer_MT.adoc[ITaskService.AddSelectedPerformer - метод (TaskMainInfo, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSelectedPerformer_2_MT.adoc[ITaskService.AddSelectedPerformer - метод (TaskMainInfo, StaffGroup)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSelectedPerformer_3_MT.adoc[ITaskService.AddSelectedPerformer - метод (TaskMainInfo, StaffRole)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSelectedPerformer_4_MT.adoc[ITaskService.AddSelectedPerformer - метод (TaskMainInfo, StaffUnit)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSignature_MT.adoc[ITaskService.AddSignature - метод (Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSignature_1_MT.adoc[ITaskService.AddSignature - метод (Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>, IEnumerable<Document>)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSignatureToCardReconcileLog_MT.adoc[ITaskService.AddSignatureToCardReconcileLog - метод (Task, X509Certificate2)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CancelDelegate_MT.adoc[ITaskService.CancelDelegate - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CanCompleteTask_MT.adoc[ITaskService.CanCompleteTask - метод (Task, TaskSetting, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CanCompleteTaskByCompletionParameter_MT.adoc[ITaskService.CanCompleteTaskByCompletionParameter - метод (Task, StatesStateMachineBranch)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ChangeTask_MT.adoc[ITaskService.ChangeTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ChangeTaskController_MT.adoc[ITaskService.ChangeTaskController - метод (Task, StaffEmployee, DateTime)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ChangeTaskCurrentPerformer_MT.adoc[ITaskService.ChangeTaskCurrentPerformer - метод (Task, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ChangeTaskExecutionDate_MT.adoc[ITaskService.ChangeTaskExecutionDate - метод (Task, DateTime, DateTime, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CompleteTask_MT.adoc[ITaskService.CompleteTask - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CompleteTask_1_MT.adoc[ITaskService.CompleteTask - метод (Task, String, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CopyDataFromParentTask_MT.adoc[ITaskService.CopyDataFromParentTask - метод (Task, TaskSetting, Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CopyResultsToParentTask_MT.adoc[ITaskService.CopyResultsToParentTask - метод (Task, Task, TaskCopyResultsOptions)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CopyTask_MT.adoc[ITaskService.CopyTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CreateChildTask_MT.adoc[ITaskService.CreateChildTask - метод (Task, KindsCardKind, BaseCard, TaskList)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CreateTask_1_MT.adoc[ITaskService.CreateTask - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CreateTask_MT.adoc[ITaskService.CreateTask - метод (KindsCardKind)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CreateTaskFromTemplate_MT.adoc[ITaskService.CreateTaskFromTemplate - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.CreateSignatureList_MT.adoc[ITaskService.CreateSignatureList - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.DeferTask_MT.adoc[ITaskService.DeferTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.Delegate_MT.adoc[ITaskService.Delegate - метод (Task, IEnumerable<StaffEmployee>, StaffEmployee, Boolean, Boolean, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.Delegate_1_MT.adoc[ITaskService.Delegate - метод (Task, IEnumerable<StaffEmployee>, StaffEmployee, Boolean, Boolean, String, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.DoNotTakeToWorkTask_MT.adoc[ITaskService.DoNotTakeToWorkTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetCompletionParameters_MT.adoc[ITaskService.GetCompletionParameters - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetKindSettings_MT.adoc[ITaskService.GetKindSettings - метод (KindsCardKind)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetLastDelegate_MT.adoc[ITaskService.GetLastDelegate - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetLastDelegate_1_MT.adoc[ITaskService.GetLastDelegate - метод (Task, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetSelectedPerformers_MT.adoc[ITaskService.GetSelectedPerformers - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetTaskAcceptanceMailNotificationInfo_MT.adoc[ITaskService.GetTaskAcceptanceMailNotificationInfo - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetTaskBuiltInState_MT.adoc[ITaskService.GetTaskBuiltInState - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetTaskCompletionMailNotificationInfo_MT.adoc[ITaskService.GetTaskCompletionMailNotificationInfo - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetTaskRejectionMailNotificationInfo_MT.adoc[ITaskService.GetTaskRejectionMailNotificationInfo - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.HasCompletionParameterValue_MT.adoc[ITaskService.HasCompletionParameterValue - метод (Task, Guid, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.InitializeDefaults_MT.adoc[ITaskService.InitializeDefaults - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.IsCurrentUserCurrentPerformer_MT.adoc[ITaskService.IsCurrentUserCurrentPerformer - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.IsCurrentUserDeputyOfCurrentPerformer_MT.adoc[ITaskService.IsCurrentUserDeputyOfCurrentPerformer - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.IsTaskDelegated_MT.adoc[ITaskService.IsTaskDelegated - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.IsUserCurrentPerformer_MT.adoc[ITaskService.IsUserCurrentPerformer - метод (Task, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.RecallTask_MT.adoc[ITaskService.RecallTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.RejectTask_MT.adoc[ITaskService.RejectTask - метод (Task, StaffEmployee, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.RemoveComment_MT.adoc[ITaskService.RemoveComment - метод (TaskComment)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ResolveDelegatePerformer_MT.adoc[ITaskService.ResolveDelegatePerformer - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ResolveDelegatePerformer_1_MT.adoc[ITaskService.ResolveDelegatePerformer - метод (Task, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.SetTaskCompletionResult_MT.adoc[ITaskService.SetTaskCompletionResult - метод (Task, TaskCompletionParameter)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetPartSignatureInfo_MT.adoc[ITaskService.GetPartSignatureInfo - метод (BaseCardSignaturePart signaturePart)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.StartTask_MT.adoc[ITaskService.StartTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.StopExecutionRelatedTask_MT.adoc[ITaskService.StopExecutionRelatedTask - метод (Task, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.StopExecutionTask_MT.adoc[ITaskService.StopExecutionTask - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.TakeTaskToRework_MT.adoc[ITaskService.TakeTaskToRework - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.TakeToWork_MT.adoc[ITaskService.TakeToWork - метод (Task)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.UpdateComment_MT.adoc[ITaskService.UpdateComment - метод (TaskComment, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ValidateForBegin_MT.adoc[ITaskService.ValidateForBegin - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.ValidateInactivePerformers_MT.adoc[ITaskService.ValidateInactivePerformers - метод (Task, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.VerifySignature_MT.adoc[ITaskService.VerifySignature - метод (Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

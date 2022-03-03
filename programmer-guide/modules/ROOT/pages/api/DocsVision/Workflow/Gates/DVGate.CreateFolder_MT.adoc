@@ -1,0 +1,37 @@
+= DVGate.CreateFolder - метод (DVFolder, String, DVCardRow)
+
+Создает новую папку указанного типа.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public DVFolder CreateFolder(DVFolder ParentFolder, string Name, DVCardRow FolderTypeRow)
+----
+
+Параметры
+
+ParentFolder::
+  Тип: [.keyword .apiname]#DVFolder#
+  +
+  Родительская папка. Если null, то папка будет создана в корневой папке.
+Name::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название создаваемой папки
+FolderTypeRow::
+  Тип: [.keyword .apiname]#DVCardRow#
+  +
+  Тип создаваемой папки. Передается в виде строки [.dfn .term]_Справочника типов папок_.
+
+Возвращаемое значение
+
+::
+  Тип: DVFolder
+  +
+  Созданная папка
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

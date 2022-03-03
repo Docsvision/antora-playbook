@@ -1,0 +1,326 @@
+= Программное открытие справочников
+
+Во всех следующих примерах, описывающих методы открытия различных видов справочников:
+
+* *selectionMode* - определяет метод открытия записи и соответствует значению из перечисления xref:../api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[DocsVision.BackOffice.WinForms.Controls.ItemSelectionMode] приведенному к System.Int32. Допустимые значения:
+** 0 – позиционирование на записи;
+** 1 – открытие записи для редактирования;
+** 2 - открытие записи для чтения.
+* *multiselect* – возможность выбора нескольких записей, соответствует типу System.Boolean. Значение _true_(множественный выбор разрешен) допустимо при selectionMode установленном в 0, иначе должно быть false .
+
+В примере, методы вызываются из некого скрипта (привязан с кнопке в [.keyword]*Конструкторе разметок*). В компоненте карточки, унаследованном от xref:../api/DocsVision/Platform/WinForms/CardControl_CL.adoc[DocsVision.Platform.WinForms.CardControl] или xref:../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], код будет выглядеть аналогично, с единственным отличием в том, что параметр CardHost будет доступен уже из базового класса.
+
+== Открытие записи из [.keyword]*Справочника категорий* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefCategories_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой категории в Справочнике категорий
+ string categoryID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+        
+ //идентификатор Справочника категорий
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefCategories.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { System.Reflection.Missing.Value, categoryID, multiselect, System.Reflection.Missing.Value, 
+     selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None,
+     activateParams);
+}
+----
+
+== Открытие записи из [.keyword]*Справочника ссылок* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefLinks_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой ссылки в Справочнике ссылок
+ string linkID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор Справочника ссылок
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefLinks.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { System.Reflection.Missing.Value, linkID, multiselect, System.Reflection.Missing.Value, 
+     System.Reflection.Missing.Value, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи сотрудника из [.keyword]*Справочника сотрудников* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefStaffEmployees_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемого сотрудника
+ string employeeID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор Справочника сотрудников
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.ID;
+ 
+ //идентификатор выбираемой секции справочника - сотрудники
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.Employees.ID.ToString("B").ToUpperInvariant();
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, employeeID, System.Reflection.Missing.Value, System.Reflection.Missing.Value,
+     System.Reflection.Missing.Value, multiselect, false, false, 0, System.Reflection.Missing.Value, true, true, selectionMode };
+ 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи группы из [.keyword]*Справочника сотрудников* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefStaffGroups_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой группы
+ string groupID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор выбираемой секции справочника - группы
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.AlternateHierarchy.ID.ToString("B").ToUpperInvariant();
+  
+ //идентификатор Справочника Сотрудников
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, groupID, System.Reflection.Missing.Value, System.Reflection.Missing.Value, 
+     System.Reflection.Missing.Value, multiselect, false, false, 0, System.Reflection.Missing.Value, true, true, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи организации из [.keyword]*Справочника сотрудников* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefStaffUnits_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой организации
+ string unitID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор выбираемой секции справочника - организации
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.Units.ID.ToString("B").ToUpperInvariant();
+ 
+ //идентификатор Справочника Сотрудников
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, unitID, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value,
+     multiselect, false, false, 0, System.Reflection.Missing.Value, true, true, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи сотрудника из [.keyword]*Справочника контрагентов* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefPartnersEmployees_Click(object sender, EventArgs e) 
+{
+  //идентификатор выбираемого сотрудника
+ string employeeID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор выбираемой секции справочника - сотрудники
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.Employees.ID.ToString("B").ToUpperInvariant();
+ 
+ //идентификатор Справочника контрагентов
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, employeeID, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value, 
+     multiselect, System.Reflection.Missing.Value, false, true, true, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи группы из [.keyword]*Справочника контрагентов* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefPartnersGroups_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой группы
+ string groupID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор выбираемой секции справочника - группы
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.Groups.ID.ToString("B").ToUpperInvariant();
+    
+ //идентификатор Справочника контрагентов
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, groupID, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value, 
+     multiselect, System.Reflection.Missing.Value, false, true, true, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи организации из [.keyword]*Справочника контрагентов* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefPartnersCompanies_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой организации
+ string unitID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ bool multiselect = false;
+ 
+ //идентификатор выбираемой секции справочника - организации
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.Companies.ID.ToString("B").ToUpperInvariant();
+        
+ //идентификатор Справочника контрагентов
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefPartners.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, unitID, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value, 
+     multiselect, System.Reflection.Missing.Value, false, true, true, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи из [.keyword]*Справочника видов карточек* в режиме позиционирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefKindsCompanies_Click(object sender, EventArgs e) 
+{
+ //идентификатор типа карточки (например, Документ)
+ string rootKindID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+        
+ //идентификатор выбираемого вида карточки (например, Внутренний)
+ string kindID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ 
+ //идентификатор выбираемой секции справочника
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefKinds.CardKinds.ID.ToString("B").ToUpperInvariant();
+
+ //идентификатор Справочника видов карточек
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefKinds.ID;
+ 
+ object activateParams = new object[] { sectionID, rootKindID, System.Reflection.Missing.Value, true, System.Reflection.Missing.Value, kindID, 
+     System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value };
+ 
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+[NOTE]
+====
+[.note__title]#Прим.:# Справочник видов карточек поддерживает исключительно позиционирование на записи.
+====
+
+== Открытие записи узла из [.keyword]*Конструктора справочников* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefBaseUniversalNode_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемого узла
+ string nodeID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ 
+ //идентификатор выбираемой секции справочника – Узлы справочника
+ string sectionID = new Guid("A1DCE6C1-DB96-4666-B418-5A075CDB02C9").ToString("B").ToUpperInvariant();
+        
+ //идентификатор Конструктора справочников
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefBaseUniversal.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { sectionID, nodeID, System.Reflection.Missing.Value, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+== Открытие записи строки из [.keyword]*Конструктора справочников* в режиме редактирования.
+
+Пример открытия на редактирование строки Вид ОРД / Приказ:
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefBaseUniversalString_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемой строки
+ Guid stringID = new Guid("285A31D9-2433-415A-AEC7-BAD45E705389"); 
+ int selectionMode = 1;
+
+ //идентификатор узла содержащего выбираемую строку 
+ Guid nodeID = new Guid("B8B58477-CCC3-4213-8190-EFC66FEF86C1");
+
+ //идентификатор Конструктора справочников 
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefBaseUniversal.ID;
+
+ // параметры активации
+ object activateParams = new object[] { RefBaseUniversal.Items.ID, stringID, nodeID, selectionMode };
+
+ //вызов метода показа карточки в режиме редактирования 
+ base.CardControl.CardHost.ShowCard(RefBaseUniversal.ID, Guid.Empty, ActivateMode.Edit, ActivateFlags.None, activateParams);
+}
+----
+
+== Открытие записи из [.keyword]*Справочника серверов* в режиме редактирования.
+
+[source,pre,codeblock,language-csharp]
+----
+private void RefBaseUniversalString_Click(object sender, EventArgs e) 
+{
+ //идентификатор выбираемого сервера
+ string serverID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
+ int selectionMode = 1;
+ 
+ //идентификатор Справочника серверов
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefServers.ID;
+ 
+ //параметры активации
+ object activateParams = new object[] { System.Reflection.Missing.Value, serverID, selectionMode };
+ 
+ //вызов метода показа карточки в режиме редактирования
+ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, DocsVision.Platform.CardHost.ActivateMode.Edit, DocsVision.Platform.CardHost.ActivateFlags.None, 
+     activateParams);
+}
+----
+
+*На уровень выше:* xref:../pages/dm_cardhost.adoc[Взаимодействие с контейнером карточек]

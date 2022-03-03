@@ -1,0 +1,37 @@
+= FSGate.AddVariable - метод (Int32, String)
+
+Создает новый файл или папку в указанном каталоге.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IGateVariable AddVariable(int Type, string VariableInfo)
+----
+
+Параметры
+
+Type::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
+  +
+  Тип переменной: 0 - папка; 1 - файл
+VariableInfo::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Путь в файловой системе для создания папки или файла
+
+Возвращаемое значение
+
+::
+  Тип: xref:IGateVariable_IN.adoc[IGateVariable]
+  +
+  В зависимости от типа создаваемой переменной вернет объект типа: [.keyword .apiname]#FSFileFolder# - для папки; [.keyword .apiname]#FSFile# - для файла.
+
+== Заметки
+
+Данный метод создает в файловой системе файл или папку (в зависимости от значения параметра `Type`) по пути, переданному в `VariableInfo`. Если файл или папка существует, будет возращена ошибка [.keyword .apiname]#FSGateException#. Также для создания файла или папки можно использовать соответственно методы [.keyword .apiname]#CreateFile# и [.keyword .apiname]#CreateFolder#.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/FSGate_CL.adoc[FSGate - класс]

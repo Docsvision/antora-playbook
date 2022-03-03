@@ -1,0 +1,144 @@
+= AssemblyResolver - класс
+
+Класс AssemblyResolver реализует функцию загрузки сборок Docvision из каталога установки Windows-клиента в runtime программы.
+
+* [.keyword]*Пространство имен:* xref:Platform_NS.adoc[DocsVision.Platform]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[ComVisible(true)]
+[Guid("230DA85B-DC28-479E-B0B8-62E05C8E3065")]
+public class AssemblyResolver
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AssemblyResolver() |Инициализирует новый экземпляр класса AssemblyResolver.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AddPath(String) |Регистрирует указанный каталог в список каталогов, из которых могут быть загружены требуемые сборки.
+|RemovePath(String) |Разрегистрирует указанный каталог со сборками.
+|StartResolve |Активирует функцию предоставления сборок из зарегистрированных каталогов со сборками. Автоматически вызывается из конструктора класса AssemblyResolver.
+|StopResolve |Останавливает функцию предоставления сборок из зарегистрированных каталогов.
+|===
+
+== Заметки
+
+Функциональность, реализуемую классом AssemblyResolver, позволяет получать сущности из клиентских сборок Docsvision без необходимости загрузки этих сборок в каталог программы и GAC. Windows-клиент должен быть установлен.
+
+Метод в StartResolve подписывается на событие AppDomain.CurrentDomain.AssemblyResolve и, при необходимости, предоставляет сборки, размещенные в каталоге клиента Docsvision и зарегистрированных каталогах.
+
+Конструктор класса AssemblyResolver автоматически вызывает метод StartResolve, поэтому отдельно вызывать его не требуется.
+
+В каталоги со сборками по умолчанию добавляется каталог установки Windows-клиента.
+
+Для использования типов API Docsvision в программе потребуется разместить соответствующие сборки Docsvision в каталоге программы.
+
+== Примеры
+
+Следующие код демонстрирует пример использования AssemblyResolver.
+
+[source,pre,codeblock,language-csharp]
+----
+using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.Win32;
+
+namespace ObjectContextSample
+{
+    internal static class ResolverInstance
+    {
+        private const string ClientRootKey = @"SOFTWARE\DocsVision\Platform\5.5\Client";
+        private const string ClientBasePathValue = "BasePath";
+        private static readonly Guid ResolverClsId = new Guid("230DA85B-DC28-479E-B0B8-62E05C8E3065");
+        private const string DocsVisionPlatformAssembly = "DocsVision.Platform.dll";
+        private const string AssemblyResolverTypeName = "DocsVision.Platform.AssemblyResolver";
+
+        private static object resolver;
+
+        public static void CreateResolver()
+        {
+            if (resolver != null)
+                return;
+
+            try
+            {
+                // создаем по CLSID
+                resolver = Activator.CreateInstance(Type.GetTypeFromCLSID(ResolverClsId));
+            }
+            catch
+            {
+            }
+
+            if (resolver != null)
+                return;
+
+            // если не смогли, ищем по пути из реестра
+            string basePath = GetResolverBasePath();
+            if (string.IsNullOrEmpty(basePath))
+                return;
+
+            try
+            {
+                Assembly resolverAssembly = Assembly.LoadFrom(Path.Combine(basePath, DocsVisionPlatformAssembly));
+                resolver = resolverAssembly.CreateInstance(AssemblyResolverTypeName);
+            }
+            catch
+            {
+            }
+        }
+
+        private static string GetResolverBasePath()
+        {
+            try
+            {
+                using (RegistryKey regSettings = Registry.LocalMachine.OpenSubKey(ClientRootKey, false))
+                {
+                    if (regSettings != null)
+                    {
+                        string basePath = (string) regSettings.GetValue(ClientBasePathValue);
+                        if (!string.IsNullOrEmpty(basePath))
+                            return basePath;
+                    }
+                }
+
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                using (RegistryKey regSettings = Registry.CurrentUser.OpenSubKey(ClientRootKey, false))
+                {
+                    if (regSettings != null)
+                    {
+                        string basePath = (string) regSettings.GetValue(ClientBasePathValue);
+                        if (!string.IsNullOrEmpty(basePath))
+                            return basePath;
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+    }
+}
+----
+
+*На уровень выше:* xref:../../../api/DocsVision/Platform/Platform_NS.adoc[DocsVision.Platform - пространство имен]

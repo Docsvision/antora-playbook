@@ -1,0 +1,87 @@
+= FolderCopyEx
+
+Копирует папку вместе с ссылками.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderCopyEx"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyEx xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <folderId>guid</folderId>
+      <targetFolderId>guid</targetFolderId>
+      <newFolderName>string</newFolderName>
+    </FolderCopyEx>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+folderId::
+  Идентификатор копируемой папки
+targetFolderId::
+  Папка, в которую выполняется копирование
+newFolderName::
+  Название копии папки
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyExResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newFolderId>guid</newFolderId>
+    </FolderCopyExResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор созданной папки.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderCopyEx"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyEx xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <folderId>E3768B6E-CDD2-47E7-BF26-F86C9EEC2840</folderId>
+      <targetFolderId>B89B3747-4245-4AEF-94BA-7EB096A734E1</targetFolderId>
+      <newFolderName>Folder-Copy</newFolderName>
+    </FolderCopyEx>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Разбираем ответ и выводим идентификатор копии папки
+responseParsed = ElementTree.fromstring(response.content)
+print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newFolderId"))
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Folders.adoc[Папки]

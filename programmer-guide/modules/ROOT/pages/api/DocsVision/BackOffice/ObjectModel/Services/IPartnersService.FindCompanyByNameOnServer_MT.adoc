@@ -1,0 +1,37 @@
+= IPartnersService.FindCompanyByNameOnServer - метод (PartnersCompany, String)
+
+Осуществляет поиск подразделения с заданным названием.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+PartnersCompany FindCompanyByNameOnServer(PartnersCompany parentUnit, string unitName)
+----
+
+Параметры
+
+parentUnit::
+  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
+  +
+  Организация, в которой выполняется поиск дочернего подразделения/организации
+unitName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название искомого подразделения
+
+Возвращаемое значение
+
+::
+  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
+  +
+  Организация с указанным названием
+
+== Заметки
+
+Если parentUnit не задан, то будет осуществлен поиск в корневом каталоге подразделений.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

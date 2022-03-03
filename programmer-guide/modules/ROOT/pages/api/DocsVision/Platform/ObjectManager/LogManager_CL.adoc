@@ -1,0 +1,79 @@
+= LogManager - класс
+
+Представляет объектную модель [.keyword]*менеджера журнала*. Содержит методы работы с журналом системы.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class LogManager
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:LogManager.ClearLogCutCount_PR.adoc[ClearLogCutCount] |Возвращает количество записей, которое должно оставаться в журнале после очистки.
+|xref:LogManager.ClearLogCutDays_PR.adoc[ClearLogCutDays] |Возвращает максимальное время хранения в журнале.
+|xref:LogManager.ClearLogMaxCount_PR.adoc[ClearLogMaxCount] |Возвращает максимальное количество записей в журнале.
+|xref:LogManager.ClearLogStrategy_PR.adoc[ClearLogStrategy] |Стратегия очистки журнала.
+|xref:LogManager.LogStrategy_PR.adoc[LogStrategy] |Стратегия записи в журнал.
+|xref:LogManager.Session_PR.adoc[Session] |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:LogManager.DeleteMessages_MT.adoc[DeleteMessages(LogSearchQuery)] |Удаление записей из журнала согласно заданному фильтру.
+|xref:LogManager.ExportMessages_MT.adoc[ExportMessages(String)] |Экспорт сообщений из журнала в строку XML-формата.
+|xref:LogManager.FindMessages_MT.adoc[FindMessages(LogSearchQuery)] |Получение данных из журнала согласно заданному фильтру.
+|xref:LogManager.FindMessages_1_MT.adoc[FindMessages(String)] |Получение данных из журнала согласно заданному поисковому запросу.
+|xref:LogManager.GetMessage_MT.adoc[GetMessage(Int32)] |Возвращает сообщение из журнала согласно заданному идентификатору.
+|xref:LogManager.GetMessageDetails_MT.adoc[GetMessageDetails(Int32)] |Возвращает информационную часть сообщения из журнала согласно заданному идентификатору.
+|xref:LogManager.ImportMessages_MT.adoc[ImportMessages(String)] |Импортирует заданные сообщения для последующей обработки.
+|xref:LogManager.LogMessage_MT.adoc[LogMessage(EventType, Int32, String, Guid, Guid, Guid, String)] |Осуществляет запись сообщения в журнал.
+|xref:LogManager.LogMessageEx_MT.adoc[LogMessageEx(EventType, Guid, String, Guid, Guid, Guid, String)] |Выполняет запись сообщения в журнал с указанием идентификатора соответствующей операции из описания библиотеки карточек.
+|xref:LogManager.SetLogStrategy_MT.adoc[SetLogStrategy(LogStrategy, ClearLogStrategy, Int32, Int32, Int32)] |Установка параметров стратегии ведения журнала событий.
+|===
+
+== Примеры
+
+Ниже пример кода, где организуется поиск записей в журнале по идентификатору карточки.
+
+[source,pre,codeblock,language-csharp]
+----
+LogSearchQuery search = new LogSearchQuery();
+search.ObjectId = new Guid("идентификатор_карточки");
+
+InfoRowCollection messages = session.LogManager.FindMessages(search);
+
+foreach(InfoRow row in messages)
+{
+    System.Diagnostics.Debug.Print("Дата: " + row["Date"].ToString() + "; сообщение:" + row["Data"].ToString());
+}
+----
+
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ClearLogCutCount_PR.adoc[LogManager.ClearLogCutCount - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ClearLogCutDays_PR.adoc[LogManager.ClearLogCutDays - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ClearLogMaxCount_PR.adoc[LogManager.ClearLogMaxCount - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ClearLogStrategy_PR.adoc[LogManager.ClearLogStrategy - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.LogStrategy_PR.adoc[LogManager.LogStrategy - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.Session_PR.adoc[LogManager.Session - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.DeleteMessages_MT.adoc[LogManager.DeleteMessages - метод (LogSearchQuery)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ExportMessages_MT.adoc[LogManager.ExportMessages - метод (String)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.FindMessages_MT.adoc[LogManager.FindMessages - метод (LogSearchQuery)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.FindMessages_1_MT.adoc[LogManager.FindMessages - метод (String)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.GetMessage_MT.adoc[LogManager.GetMessage - метод (Int32)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.GetMessageDetails_MT.adoc[LogManager.GetMessageDetails - метод (Int32)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.ImportMessages_MT.adoc[LogManager.ImportMessages - метод (String)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.LogMessage_MT.adoc[LogManager.LogMessage - метод (EventType, Int32, String, Guid, Guid, Guid, String)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.LogMessageEx_MT.adoc[LogManager.LogMessageEx - метод (EventType, Guid, String, Guid, Guid, Guid, String)]* +
+* *xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager.SetLogStrategy_MT.adoc[LogManager.SetLogStrategy - метод (LogStrategy, ClearLogStrategy, Int32, Int32, Int32)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

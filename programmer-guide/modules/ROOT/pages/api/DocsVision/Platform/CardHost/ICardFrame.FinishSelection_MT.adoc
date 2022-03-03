@@ -1,0 +1,40 @@
+= ICardFrame.FinishSelection - метод (Object)
+
+Завершает выбор, если карточка была открыта на выбор.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void FinishSelection(object selectedValue)
+----
+
+Параметры
+
+selectedValue::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
+  +
+  Возвращаемое значение выбора
+
+== Заметки
+
+== Примеры
+
+В примере, некий метод, вызываемый закрытие карточки, вызывает FinishSelection с передачей результата выполнения описанного запроса. Результат передается только в случае нажатия пользователем кнопки OK, в диалоговом окне.
+
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardClosed(EventArgs e)
+{
+    if (this.DialogResult = DialogResult.OK)
+    {
+        this.CardFrame.FinishSelection(query.GetXML(true, null));
+    }
+    base.OnCardClosed(e);
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/ICardFrame_IN.adoc[ICardFrame - интерфейс]

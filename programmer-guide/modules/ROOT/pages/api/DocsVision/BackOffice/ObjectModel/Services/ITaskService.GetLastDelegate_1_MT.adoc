@@ -1,0 +1,33 @@
+= ITaskService.GetLastDelegate - метод (Task, Boolean)
+
+Возвращает последнюю запись списка делегирования.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+TaskDelegate GetLastDelegate(Task task, bool returned)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+returned::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  При true возвращает только возвращенные с делегирования, иначе - все делегированные
+
+Возвращаемое значение
+
+::
+  Тип: xref:../TaskDelegate_CL.adoc[TaskDelegate]
+  +
+  Элемент списка делегирования
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

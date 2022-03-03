@@ -1,0 +1,65 @@
+= IBaseCardService.AddSignaturePart - метод (BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard)
+
+Инициализирует и добавляет в указанную подпись часть подписи.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardSignature AddSignaturePart(BaseCardSignature signature, Guid typeId, byte[] signatureData, string description, Guid fileId, Guid fileVersionId, BaseCard partObject)
+----
+
+Параметры
+
+signature::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Электронная подпись
+typeId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор типа части подписи
+signatureData::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
+  +
+  Содержимое добавляемой части подписи
+description::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Примечание к части подписи
+fileId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор подписываемого файла
+fileVersionId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор версии подписываемого файла
+partObject::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Базовый объект
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Итоговая подпись, включающая добавляемую часть подписи
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signature или signatureData.
+|===
+
+== Заметки
+
+Как правило, вызывать данный метод нет необходимости - соответствующий вызов делает сервис. Например, метод [.keyword .apiname]#IDocumentService.ComputeAttachmentSignature# вызовет [.keyword .apiname]#AddSignaturePart# с необходимыми параметрами.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

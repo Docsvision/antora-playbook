@@ -1,0 +1,77 @@
+= Описание (схема) данных представления
+
+Описание данных представления хранится в специальной системной карточке и представляет собой XML-документ (также как схемы карточек и библиотек). Однако, работать с этим описанием, оперируя непосредственно узлами и атрибутами XML-документа, было бы слишком сложно и неудобно. Поэтому в объектной модели системы предусмотрен ряд специальных объектов, которые позволяют работать с описанием представления уже на уровне семантических объектов (полей карточек, операций с ними), что существенно упрощает взаимодействие с ними. Базовым объектом в этой модели является объект xref:../api/DocsVision/Platform/ObjectManager/ViewModel/View_CL.adoc[View]. Этот объект является создаваемым (например, его можно создать при добавлении в систему нового описания представления). Также он может быть проинициализирован на основании существующего описания представления, сохраненного в карточке xref:../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard_CL.adoc[ViewCard].
+
+image::img/views_sh_1.png[[.fig--title-label]##Рис. 1. ##Доступ к представлению из карточки представления]
+
+Для загрузки существующего описания представления используется вспомогательный объект xref:../api/DocsVision/Platform/ObjectManager/SystemCards/SavedView_CL.adoc[SavedView] (сохраненное описание представления), который можно получить из карточки сохраненных представлений ([.keyword .apiname]#ViewCard#).
+
+Карточка сохраненных представлений является справочником, поэтому ее экземпляр всегда можно получить:
+
+[source,pre,codeblock,language-csharp]
+----
+const string VIEW_CARD_ID = "17F8F0B3-7E93-45E9-B250-EED4E93F3FA3";
+ViewCard vcard = (ViewCard)session.CardManager.GetDictionary(new Guid(VIEW_CARD_ID));
+----
+
+Из коллекции сохраненных описаний объекта (свойство xref:../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Views_PR.adoc[Views]), необходимое выбрать нужное представление и вызвать метод xref:../api/DocsVision/Platform/ObjectManager/SystemCards/SavedView.Export_MT.adoc[SavedView.Export], что бы на выходе получить низкоуровневый объект xref:../api/DocsVision/Platform/ObjectManager/ViewModel/View_CL.adoc[View] для непосредственного редактирования описания представления.
+
+Отдельно стоит остановиться на использовании виртуальных полей. Виртуальные поля представляют собой наборы правил, согласно которым можно извлечь данные из физических таблиц базы данных – с использованием вычислений, агрегаций, присоединений и т.д. Определения виртуальных полей привязаны к конкретному типу секции, от которой начинается процесс вычислений.
+
+Виртуальные поля могут быть определены разработчиком в процессе xref:CardsDevDataSchemeSecVirtualFields.adoc[создания схемы] карточки (такие поля всегда будут доступны для использования во всех представлениях). Доступ к определениям этих полей можно получить через объектную модель метаданных ( xref:../api/DocsVision/Platform/ObjectManager/Metadata/CardType.VirtualFields_PR.adoc[CardType.VirtualFields]). Элементы этой коллекции доступны только для чтения, так как они жестко определены в схеме карточки.
+
+Также виртуальные поля можно создать (выделить) в процессе построения конкретного представления, и сохранить как отдельные объекты для дальнейшего использования в других представлениях по аналогичной секции. Такие виртуальные поля создаются на основе готовых элементов представлений (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement_CL.adoc[ViewElement]) при помощи метода xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.ExtractVirtualField_MT.adoc[ExtractVirtualField]. Они сохраняются в той же системной карточке xref:../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard_CL.adoc[ViewCard], что и описания представлений, и доступны для последующего повторного использования через её объектную модель. Для работы с такими виртуальными полями используется другой тип объектов – xref:../api/DocsVision/Platform/ObjectManager/SystemCards/SavedVirtualField_CL.adoc[SavedVirtualField].
+
+Пример добавления предварительно сохраненного виртуального поля к описанию представления:
+
+[source,pre,codeblock,language-csharp]
+----
+const string SECTION_TYPE_ID = "{8C77892A-21CC-4972-AD71-A9919BCA8187}";
+      
+//Получение сохраненных определений виртуальных полей для конкретного типа секции
+SavedVirtualFieldCollection savedColl = viewcard.GetVirtualFields(new Guid(SECTION_TYPE_ID));
+
+//Получение поля с псевдонимом "Performer"
+SavedVirtualField  savedField = savedColl["Performer"];
+
+//Добавление поля к описанию представления
+ViewElement element;
+element.MergeVirtualField(savedField.Export(), "Performers", "Performers");
+----
+
+Типичный алгоритм создания нового описания представления может включать в себя следующие шаги:
+
+. Определить количество и состав колонок будущего представления (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/View.Columns_PR.adoc[View.Columns]), задать порядок сортировки данных в колонках (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/View.Sorting_PR.adoc[View.Sorting]).
+. Сформировать как минимум один элемент представления (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement_CL.adoc[ViewElement]), определяющий источники данных для колонок:
+[loweralpha]
+.. Задать основную секцию карточки, из которой будут извлекаться данные (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.SectionId_PR.adoc[SectionId]).
+.. Физические поля секции, которые выводятся в представление в непосредственном виде, перечислить в коллекции xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.SectionFields_PR.adoc[SectionFields].
+.. Если для данной секции ранее были определены виртуальные поля (в схеме карточки или в конкретной базе данных), то загрузить их описание при помощи метода xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.MergeVirtualField_MT.adoc[MergeVirtualField].
+.. Для вывода данных из полей другой секции или таблицы:
+[lowerroman]
+... Присоединить эту секцию (или таблицу) к основной секции в коллекции xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.JoinDefinitions_PR.adoc[JoinDefinitions].
+... Выбрать поля присоединенной секции (или таблицы), добавив их в коллекцию xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.SectionFields_PR.adoc[SectionFields] вместе с псевдонимом присоединенной секции.
+. Если представление должно содержать данные, не присутствующие в физических полях секций, то такие данные нужно оформить в виде вычисляемых полей (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.ComputedFields_PR.adoc[ComputedFields]). Для каждого вычисляемого поля (xref:../api/DocsVision/Platform/ObjectManager/ViewModel/ComputedField_CL.adoc[ComputedFileld]) необходимо:
+[loweralpha]
+.. Определить набор физических источников данных (*ComputationParts*), каждый их которых может быть значением физического поля секции или результатом выполнения арифметической функции.
+.. Определить агрегацию (*Aggregation*), выполняемую над физическими источниками данных.
+.. Определить операцию (*Operation*), выполняемую над физическими источниками данных.
+.. Задать ожидаемый тип результата вычислений (*Type*).
+.. При необходимости, можно сопоставить каждому из возможных результатов вычислений конкретное значение, которое будет итоговым результатом (*ResultSwitch*).
+
+Пример кода: xref:SC_ViewCreate.adoc[Создание нового представления]
+
+[NOTE]
+====
+[.note__title]#Прим.:# При построении представления можно использовать псевдонимы трех предопределённых секций:
+
+* Main – базовая секция представления;
+* Inst – строка из системной таблицы dvsys_instances, соответствующая текущей карточке;
+* Shortcuts – строка из секции ярлыков карточки папок, соответствующая текущей карточке.
+====
+
+== См. далее
+
+* xref:dm_views_schema_formating.adoc[Описание (схема) форматирования]
+
+*На уровень выше:* xref:../pages/dm_views.adoc[Работа с представлениями]

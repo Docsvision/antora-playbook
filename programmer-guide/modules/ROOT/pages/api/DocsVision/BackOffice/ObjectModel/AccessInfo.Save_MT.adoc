@@ -1,0 +1,34 @@
+= AccessInfo.Save - метод (XmlWriter)
+
+Сохраняет параметры доступа в XML.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void Save(XmlWriter writer)
+----
+
+Параметры
+
+writer::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.xml.xmlwriter.aspx[System.Xml.XmlWriter]
+  +
+  Объект для записи данных
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр writer.
+|===
+
+== Заметки
+
+Метод сериализует списки операций и ролей в [.keyword .apiname]#XmlWriter#.
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo_CL.adoc[AccessInfo - класс]

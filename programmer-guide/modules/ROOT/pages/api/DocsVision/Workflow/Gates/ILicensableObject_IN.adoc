@@ -1,0 +1,32 @@
+= ILicensableObject - интерфейс
+
+Определяет поддержку шлюзом лицензирования, предоставляет тип лицензии.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ILicensableObject
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Type |Возвращает тип лицензии.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CheckLicense(Object) |Осуществляет проверку лицензии на шлюз. Проверка применима для типов лицензии: [.keyword .apiname]#LicenseTypeEnum.FileLicense# и [.keyword .apiname]#LicenseTypeEnum.StringLicense#. В метод будет передан объект [.keyword .apiname]#GateInfo.LicenseInfo#, содержащий лицензию полученную из справочника [.dfn .term]_шлюзов_.
+|GetRequestedFeature |Получает идентификатор опции лицензии. Применимо для типа лицензии: [.keyword .apiname]#LicenseTypeEnum.DocsVisionLicenseFeature#.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]

@@ -1,0 +1,87 @@
+= CardTypeGetInfo
+
+Возвращает информацию о типе карточки.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardTypeGetInfo"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardTypeGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <typeId>guid</typeId>
+      <infoType>CARD_TYPE_SCHEMA or CARD_TYPE_ICON or CARD_TYPE_XSD</infoType>
+    </CardTypeGetInfo>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+typeId::
+  Идентификатор типа карточки
+infoType::
+  Тип запрашиваемых данных:
+  +
+  * CARD_TYPE_SCHEMA - возвращает схему;
+  * CARD_TYPE_ICON - возвращает иконку;
+  * CARD_TYPE_XSD.
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardTypeGetInfoResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <info>string</info>
+      <usingCompression>boolean</usingCompression>
+    </CardTypeGetInfoResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит данные типа карточки, которые определены значением infoType.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardTypeGetInfo"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardTypeGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <typeId>B9F7BFD7-7429-455E-A3F1-94FFB569C794</typeId>
+      <infoType>CARD_TYPE_SCHEMA</infoType>
+    </CardTypeGetInfo>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

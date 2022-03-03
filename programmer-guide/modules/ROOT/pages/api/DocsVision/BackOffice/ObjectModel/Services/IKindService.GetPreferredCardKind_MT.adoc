@@ -1,0 +1,33 @@
+= IKindService.GetPreferredCardKind - метод (KindsCardKind)
+
+Возвращает вид карточки, имеющий все собственные настройки (наследование отключено).
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+KindsCardKind GetPreferredCardKind(KindsCardKind cardKind)
+----
+
+Параметры
+
+cardKind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид карточки, начиная с которого начинается поиск (по дереву наследования) вида, имеющего собственные настройки
+
+Возвращаемое значение
+
+::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид карточки, не наследующий настроек
+
+== Заметки
+
+Наследование настроек вида карточки устанавливается в [.dfn .term]_Справочнике видов карточек_, в секции Наследование.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

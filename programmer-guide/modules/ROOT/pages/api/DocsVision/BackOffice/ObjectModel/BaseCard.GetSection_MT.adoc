@@ -1,0 +1,57 @@
+= BaseCard.GetSection - метод (Guid)
+
+Получает все строки указанной секции карточки.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IList GetSection(Guid sectionId)
+----
+
+Параметры
+
+sectionId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор секции
+
+Возвращаемое значение
+
+::
+  Тип: https://msdn.microsoft.com/ru-ru/library/system.collections.ilist.aspx[System.Collections.Generic.IList]
+  +
+  Список строк секции
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException] |Ошибка возвращается в случае, если передан нулевой идентификатор секции.
+|===
+
+== Примеры
+
+Ниже приведен пример скрипта, записывающего пустую строку в поле "fieldName" строчек определенной секции карточки Документ:
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//Получение всех строчек секции с идентификатором 00000000-0000-0000-0000-000000000001
+var rows = (ICollection<BaseCardSectionRow>)document.GetSection(new Guid("00000000-0000-0000-0000-000000000001"));
+
+//Присвоение пустого строкового значения полю fieldName каждой строчки секции
+foreach (var item in rows)
+{
+ item["fieldName"] = string.Empty;
+}
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard - класс]

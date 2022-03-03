@@ -1,0 +1,41 @@
+= ITaskService.AddComment - метод (Task, StaffEmployee, String)
+
+Добавляет комментарий в указанное задание.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+TaskComment AddComment(Task task, StaffEmployee author, string text)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, в которое добавляется комментарий
+author::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, который осуществляет добавление
+text::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Содержимое комментария
+
+Возвращаемое значение
+
+::
+  Тип: xref:../TaskComment_CL.adoc[TaskComment]
+  +
+  Сущность комментария
+
+== Заметки
+
+Для добавленного комментария указывается текущая дата создания.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

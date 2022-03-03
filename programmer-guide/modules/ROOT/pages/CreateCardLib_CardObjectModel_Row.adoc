@@ -1,0 +1,55 @@
+= Разработка объектной модели строк секций
+
+Единственная карточка библиотеки содержит секции: MainInfo, Journal, System, Numbers, Processes, причем три последних были скопированы из карточки типа "Документ". Базовый класс карточек библиотеки "Базовые объекты" уже содержит описание данных секций, поэтому достаточно создать объектную модель для оставшихся двух: MainInfo и Journal.
+
+Первоначально разработаем объектную модель строчки секции MainInfo.
+
+. Создаем класс строки секции, используя в качестве базового класс [.keyword .apiname]#BaseCardSectionRow# - базовый класс строчки секции карточки библиотеки "Базовые объекты":
++
+[source,pre,codeblock,language-csharp]
+----
+public class NetstatSolutionCardMainInfo : BaseCardSectionRow
+----
+. Добавляем в класс статическое поле для каждого поля секции карточки:
++
+[source,pre,codeblock,language-csharp]
+----
+public static readonly ObjectProperty NameProperty; //Название узла
+public static readonly ObjectProperty AddressProperty; //IP-адрес узла
+// и т.д.
+----
+. Добавляем в класс свойства, по которым будут доступны значения соответствующих полей:
++
+[source,pre,codeblock,language-csharp]
+----
+public string Name
+ {
+  get { return (string)base.GetValue(NetstatSolutionCardMainInfo.NameProperty); }
+  set { base.SetValue(NetstatSolutionCardMainInfo.NameProperty, value); }
+ }
+ public string Address
+ {
+  get { return (string)base.GetValue(NetstatSolutionCardMainInfo.AddressProperty); }
+  set { base.SetValue(NetstatSolutionCardMainInfo.AddressProperty, value); }
+ }
+// и т.д.
+----
+. В статическом конструкторе класса регистрируем связи между полями карточки и объектной моделью:
++
+[source,pre,codeblock,language-csharp]
+----
+static NetstatSolutionCardMainInfo()
+{
+ // В метод Register передаем название поля (как в схеме метаданных), его тип (как определен выше) и тип самой секции (текущий класс)
+ NetstatSolutionCardMainInfo.NameProperty = ObjectProperty.Register("Name", typeof(string), typeof(NetstatSolutionCardMainInfo));
+ NetstatSolutionCardMainInfo.AddressProperty = ObjectProperty.Register("Address", typeof(string), typeof(NetstatSolutionCardMainInfo));
+// и т.д.
+----
+
+Аналогичным образом разрабатывается объектная модель строчек секции Journal.
+
+== См. далее
+
+* xref:CreateCardLib_CardObjectModel_Card.adoc[Разработка объектной модели карточки]
+
+*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

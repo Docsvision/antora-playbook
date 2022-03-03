@@ -1,0 +1,101 @@
+= CardDearchiveGroup
+
+Извлекает из архива несколько карточек.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardDearchiveGroup"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardDearchiveGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <items>string</items>
+      <options>int</options>
+    </CardDearchiveGroup>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+items::
+  Список идентификаторов карточек, извлекаемых из архива
+options::
+  Флаг разархивирования карточки:
+  +
+  * 0 - без параметров
+  * 1 - режим отложенной разархивации
+  * 2 - извлечь из архива связанные карточки
+  * 4 - извлечь из архива связанные файлы
+
+Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="GroupOperation">
+  <xsd:complexType>
+    <xsd:sequence maxOccurs="unbounded">
+      <xsd:element name="Item">
+        <xsd:complexType>
+          <xsd:attribute name="ID" type="xsd:string" use="required"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element> 
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardDearchiveGroupResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <failedItems>string</failedItems>
+    </CardDearchiveGroupResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификаторы карточек, которые не были извлечены из архива.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardDearchiveGroup"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardDearchiveGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <items>&lt;GroupOperation&gt;&lt;Item ID=&quot;693DDF1A-F48C-E511-9417-90E6BA57B9F8&quot;/&gt;&lt;Item ID=&quot;4E3C2F21-F38C-E511-9417-90E6BA57B9F8&quot;/&gt;&lt;/GroupOperation&gt;</items>
+      <options>0</options>
+    </CardDearchiveGroup>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

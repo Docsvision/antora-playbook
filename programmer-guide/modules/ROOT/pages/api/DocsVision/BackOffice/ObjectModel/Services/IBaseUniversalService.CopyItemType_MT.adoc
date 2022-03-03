@@ -1,0 +1,64 @@
+= IBaseUniversalService.CopyItemType - метод (BaseUniversalItemType, BaseUniversalItemType)
+
+Создает копию узла в заданным узле конструктора справочников.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseUniversalItemType CopyItemType(BaseUniversalItemType copiedItemType, BaseUniversalItemType targetItemType)
+----
+
+Параметры
+
+copiedItemType::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Копируемый узел
+targetItemType::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Узел в который производится копирование
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
+  +
+  Созданная копия узла
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр copiedItemType.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервисов
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+
+//копируемый узел справочника
+BaseUniversalItemType baseUniversalItemTypeToCopy = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000"));
+           
+//узел в который будет произведено копирование
+BaseUniversalItemType baseUniversalItemTypeParent = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+//создание копии
+BaseUniversalItemType copiedItem = baseUniversalService.CopyItemType(baseUniversalItemTypeToCopy, baseUniversalItemTypeParent);
+copiedItem.Name = string.Format("Копия {0}", baseUniversalItemTypeToCopy.Name);
+
+//сохранение
+objectContext.SaveObject<BaseUniversalItemType>(copiedItem);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

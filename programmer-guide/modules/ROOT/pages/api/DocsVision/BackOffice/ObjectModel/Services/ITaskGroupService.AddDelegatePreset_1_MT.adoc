@@ -1,0 +1,41 @@
+= ITaskGroupService.AddDelegatePreset - метод (TaskGroupPresets, StaffGroup)
+
+Добавляет группу сотрудников в число исполнителей в индивидуальные настройки исполнителя группы заданий.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+TaskGroupPresetsDelegate AddDelegatePreset(TaskGroupPresets presets, StaffGroup group)
+----
+
+Параметры
+
+presets::
+  Тип: xref:../TaskGroupPresets_CL.adoc[TaskGroupPresets]
+  +
+  Группа заданий
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа сотрудников
+
+Возвращаемое значение
+
+::
+  Тип: xref:../TaskGroupPresetsDelegate_CL.adoc[TaskGroupPresetsDelegate]
+  +
+  Индивидуальные настройки исполнителя группы заданий
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр presets.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

@@ -1,0 +1,41 @@
+= IObjectStateService - интерфейс
+
+Представляет интерфейс сервиса состояний объектов.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IObjectStateService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|GetModifiedObjects(ObjectBase) |Возвращает массив измененных объектов контекста.
+|GetObjectState(IObjectRef) |Возвращает статус для переданной ссылки на объект.
+|GetObjectState(ObjectBase) |Возвращает статус для заданного объекта.
+|HasChangedObjects |Получает статус наличия измененных объектов в контексте.
+|IsObjectChanged(ObjectBase) |Определяет, является ли переданный объект изменённым.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ObjectAdded |Событие возникает при добавлении объекта в контекст объектов.
+|ObjectDeleted |Событие возникает при удалении объекта из контексте объектов.
+|ObjectModified |Событие возникает при изменении объекта в контексте объектов.
+|===
+
+== Заметки
+
+События сигнализируют об изменениях произошедших в текущем контексте объектов, т.е. если изменения в карточке произведены в другом контексте, то событие не будет вызвано.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

@@ -1,0 +1,34 @@
+= ITaskService.SetTaskCompletionResult - метод (Task, TaskCompletionParameter)
+
+Устанавливает результат завершения задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void SetTaskCompletionResult(Task task, TaskCompletionParameter completionParameter)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, для которого устанавливается результат завершения
+completionParameter::
+  Тип: xref:../TaskCompletionParameter_CL.adoc[TaskCompletionParameter]
+  +
+  Параметры завершения задания
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или completionParameter.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

@@ -1,0 +1,34 @@
+= INumeratorCardService.DeleteNumeratorRange - метод (NumeratorRange, NumeratorCard)
+
+Удаляет диапазон номеров из нумератора.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteNumeratorRange(NumeratorRange range, NumeratorCard card)
+----
+
+Параметры
+
+range::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorRange_CL.adoc[NumeratorRange]
+  +
+  Удаляемый диапазон
+card::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
+  +
+  Нумератор, из которого удаляется диапазон номеров
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр range или card.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService - интерфейс]

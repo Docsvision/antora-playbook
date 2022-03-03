@@ -1,0 +1,52 @@
+= IBaseUniversalService - интерфейс
+
+Описывает сервис для работы с [.dfn .term]_Конструктором справочников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IBaseUniversalService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IBaseUniversalService.AddItem_MT.adoc[AddItem(BaseUniversalItemType, BaseUniversalItem)] |Добавляет строку в указанный узел справочника.
+|xref:IBaseUniversalService.AddNewItem_MT.adoc[AddNewItem(BaseUniversalItemType)] |Создает новую строку в указанном узле справочника.
+|xref:IBaseUniversalService.AddNewItemType_MT.adoc[AddNewItemType(BaseUniversalItemType)] |Создает дочерний узел в указанном узле справочника.
+|xref:IBaseUniversalService.AddNewViewField_MT.adoc[AddNewViewField(String, SectionField, BaseUniversalItemType)] |Создает отображаемое поле в коллекции полей, и возвращает на него ссылку.
+|xref:IBaseUniversalService.CanCopyItemType_MT.adoc[CanCopyItemType(BaseUniversalItemType, BaseUniversalItemType)] |Определяет возможность создания копии узла в заданном узле конструктора справочников.
+|xref:IBaseUniversalService.CanMoveItemType_MT.adoc[CanMoveItemType(BaseUniversalItemType, BaseUniversalItemType)] |Определяет возможность перемещения узла в заданный узел конструктора справочников.
+|xref:IBaseUniversalService.CopyItem_MT.adoc[CopyItem(BaseUniversalItem, BaseUniversalItemType)] |Создает копию строки в заданным узле конструктора справочников.
+|xref:IBaseUniversalService.CopyItemType_MT.adoc[CopyItemType(BaseUniversalItemType, BaseUniversalItemType)] |Создает копию узла в заданным узле конструктора справочников.
+|xref:IBaseUniversalService.DeleteItem_MT.adoc[DeleteItem(BaseUniversalItem)] |Удаляет заданную строку справочника.
+|DeleteItemType(BaseUniversalItemType) |Удаляет заданный узел справочника.
+|DeleteViewField(BaseUniversalItemTypeViewField, BaseUniversalItemType) |Удаляет переданное отображаемое поле из узла справочника.
+|FindItemTypeWithSameName(String, BaseUniversalItemType) |Осуществляет поиск узла с заданным именем в переданном родительском узле.
+|FindItemWithSameName(String, BaseUniversalItemType) |Осуществляет поиск строки с заданным именем в переданном родительском узле.
+|GetFieldDisplayName(SectionField) |Возвращает, по возможности локализованное, название отображаемого поля.
+|GetItemSectionField(BaseUniversalItemTypeViewField) |Возвращает поле строки секции справочника, соответствующее заданному отображаемому полю.
+|GetItemTypeCardKind(BaseUniversalItemType) |Определяет вид карточки строки справочника.
+|MoveItem(BaseUniversalItem, BaseUniversalItemType) |Перемещает строку в заданный узел справочника.
+|MoveItems(IEnumerable<BaseUniversalItem>, BaseUniversalItemType) |Перемещает строки из коллекции в заданный узел справочника.
+|MoveItemType(BaseUniversalItemType, BaseUniversalItemType) |Перемещает узел справочника в переданный узел.
+|OpenOrCreateItemCard(BaseUniversalItem) |Возвращает карточку строки справочника, если не существует, то создаст пустую.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.AddItem_MT.adoc[IBaseUniversalService.AddItem - метод (BaseUniversalItemType, BaseUniversalItem)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.AddNewItem_MT.adoc[IBaseUniversalService.AddNewItem - метод (BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.AddNewItemType_MT.adoc[IBaseUniversalService.AddNewItemType - метод (BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.AddNewViewField_MT.adoc[IBaseUniversalService.AddNewViewField - метод (String, SectionField, BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.CanCopyItemType_MT.adoc[IBaseUniversalService.CanCopyItemType - метод (BaseUniversalItemType, BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.CanMoveItemType_MT.adoc[IBaseUniversalService.CanMoveItemType - метод (BaseUniversalItemType, BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.CopyItem_MT.adoc[IBaseUniversalService.CopyItem - метод (BaseUniversalItem, BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.CopyItemType_MT.adoc[IBaseUniversalService.CopyItemType - метод (BaseUniversalItemType, BaseUniversalItemType)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService.DeleteItem_MT.adoc[IBaseUniversalService.DeleteItem - метод (BaseUniversalItem)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

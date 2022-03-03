@@ -1,0 +1,33 @@
+= Элемент управления GridEx
+
+Элемент управления GridEx предназначен для организации табличного ввода данных. Соответствует элементу управления [.ph .uicontrol]*Таблица* [.dfn .term]_Конструктора разметок_.
+
+image::img/dev_card_47.png[image]
+
+Для получения сведений о функциональности GridEx, обратитесь к документации к элементу управления https://documentation.devexpress.com/#WindowsForms/CustomDocument3461[DevExpress Data Grid], от которого наследуется GridEx.
+
+GridEx содержит следующие дополнительные свойства:
+
+* AllowEdit - разрешает или запрещает редактирование в таблице.
+* SourceCollection - отображаемые данные в виде перечисления. При записи обновлении значения, будет вызвано перестроение таблицы.
+
+GridEx содержит следующие дополнительные методы:
+
+* RefreshDataSource - перезагружает данные из источника данных.
+* RefreshSourceCollection - перезагружает данные из источника данных, и выполняет перестроение таблицы.
+
+Пример инициализации GridEx с использование подразделений из [.dfn .term]_Справочника сотрудников_ в качестве источника:
+
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ IStaffService staffService = this.ObjectContext.GetService<IStaffService>();
+ gridEx.DataSource = staffService.GetUnits(null, false);
+}
+----
+
+*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

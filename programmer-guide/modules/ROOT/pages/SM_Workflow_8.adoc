@@ -1,0 +1,72 @@
+= Подписка на разблокировку карточки
+
+В процессе исполнения бизнес-процесса возникают ситуации, при которых процессу необходимо получить доступ к карточке, у которой установлена блокировка, но принудительная разблокировка является нежелательной. В таком случае можно воспользоваться механизмом подписки, который предлагает шлюз к Docsvision. Далее приведен пример оформления такой подписки.
+
+[source,pre,codeblock]
+----
+using System;
+using System.Xml;
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI;
+using DocsVision.Workflow.Functions;
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public ExecResultEnum Execute (ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    // Получение шлюза к Docsvision
+    DVGate dvGate = (DVGate)process.Gates[DVGate.GateID];
+
+    // Получение карточки из переменной процесса
+    ProcessVariable cardVar = process.GetVariableByName("Карточка");
+
+    // Получение идентификатора карточки
+    Guid cardId = new Guid(((DVCard)cardVar.Value).ID);
+
+    // Получение данных карточки
+    var cardData = dvGate.UserSession.CardManager.GetCardData(cardId);
+                
+    // Выполнение проверки наличия блокировки карточки. Если карточка является заблокированной, то будет выполнена подписка на событие разблокировки шлюза
+    if ((int)cardData.LockStatus != 0)
+    {
+     process.LogMessage("Ожидание разблокировки карточки");
+     
+     // Выполнение подписки
+     dvGate.SubscriptionChannel.Subscribe((int)DocsVisionSubscriptionType.ObjectUnlock, process.ID, passInfo.FunctionID, cardId);
+     
+     // Ожидание наступления события
+     return ExecResultEnum.WaitForMessage;
+    } else
+    {
+     process.LogMessage("Карточка разблокирована.");
+
+     // Возвращает признак успешного выполнения функции
+     return ExecResultEnum.Done;               
+    }
+   } catch (Exception ex)
+   {
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message);
+
+    // Возвращение ошибки
+    return ExecResultEnum.Error;
+   }
+  }
+ }
+}
+----
+
+Подписка осуществляется путем передачи в метод [.keyword .apiname]#Subscribe#:
+
+* типа подписки - DocsVisionSubscriptionType (`DocsVisionSubscriptionType.ObjectUnlock`);
+* идентификатора бизнес-процесса (`process.ID`);
+* идентификатора текущей функции (`passInfo.FunctionID`);
+* идентификатор карточки (`cardId`), на события которой осуществляется подписка.
+
+*На уровень выше:* xref:../pages/SM_Workflow_Cat.adoc[Примеры использования API Workflow]

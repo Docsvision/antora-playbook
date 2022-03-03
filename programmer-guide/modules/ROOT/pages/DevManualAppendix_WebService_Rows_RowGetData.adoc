@@ -1,0 +1,85 @@
+= RowGetData
+
+Возвращает содержимое строки секции карточки.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowGetData"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowGetData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <sectionId>guid</sectionId>
+      <rowId>guid</rowId>
+      <instanceID>guid</instanceID>
+    </RowGetData>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+sectionId::
+  Идентификатор секции
+rowId::
+  Идентификатор строки
+instanceID::
+  Идентификатор карточки
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowGetDataResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <rowData>string</rowData>
+      <usingCompression>boolean</usingCompression>
+    </RowGetDataResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowGetData"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowGetData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <sectionId>7473F07F-11ED-4762-9F1E-7FF10808DDD1</sectionId>
+      <rowId>23E73F8B-5748-4759-9548-A2B79D680024</rowId>
+      <instanceID>6710B92A-E148-4363-8A6F-1AA0EB18936C</instanceID>
+    </RowGetData>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Rows.adoc[Строки секций]

@@ -1,0 +1,53 @@
+= AccessInfoOperationResult - перечисление
+
+Определяет режим доступа к операции.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public enum AccessInfoOperationResult
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Не задан (не запрещен или разрешен).
+|Allowed |Операция разрешена.
+|Denied |Операция запрещена.
+|===
+
+== Заметки
+
+AccessInfoOperationResult получает значение в результате загрузки информации по операциям методом [.keyword .apiname]#AccessInfoOperation.Load#, и может быть получен из свойства [.keyword .apiname]#AccessInfoOperation.Result#.
+
+== Примеры
+
+Ниже приведен пример получения AccessInfoOperationResult из информации по первой операции документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+            
+//получение прав в формате XML, статус и вид карточки забираем из самой карточки
+string accessInfoString = iServerExtensionProxyService.GetAccessInfo(objectContext.GetObjectRef<Document>(document).Id,
+ objectContext.GetObjectRef<KindsCardKind>(document.SystemInfo.CardKind).Id,
+ objectContext.GetObjectRef<StatesState>(document.SystemInfo.State).Id);
+
+//заполнение AccessInfo данными
+AccessInfo accessInfo = new AccessInfo();
+accessInfo.Load(new XmlTextReader(new StringReader(accessInfoString)));
+
+//получение результата по первой операции
+AccessInfoOperationResult result = accessInfo.Operations.FirstOrDefault().Result;
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

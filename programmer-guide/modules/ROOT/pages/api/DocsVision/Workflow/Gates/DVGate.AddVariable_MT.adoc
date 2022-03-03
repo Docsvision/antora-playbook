@@ -1,0 +1,41 @@
+= DVGate.AddVariable - метод (Int32, String)
+
+Добавляет новую переменную шлюза
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IGateVariable AddVariable(int Type, string VariableInfo)
+----
+
+Параметры
+
+Type::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
+  +
+  Тип добавляемой переменной: xref:DVVariableType_EN.adoc[DVVariableType.DOCUMENT], [.keyword .apiname]#DVVariableType.FILE# или [.keyword .apiname]#DVVariableType.PRINCIPAL#
+VariableInfo::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Зависит от типа добавляемой переменной:
+  +
+  * [.keyword .apiname]#DVVariableType.DOCUMENT# - должен быть указан идентификатор типа карточки, которая будет создана при добавлении переменной шлюза.
+  * [.keyword .apiname]#DVVariableType.PRINCIPAL# - должна быть указана фамилия сотрудника из Справочника сотрудников, сущность которого будет загружена в переменную шлюза
+  * [.keyword .apiname]#DVVariableType.FILE# - должен быть указан путь к файлу, на основе которого будет создан версионный файл.
+
+Возвращаемое значение
+
+::
+  Тип: xref:IGateVariable_IN.adoc[IGateVariable]
+  +
+  Реальный возвращаемый тип зависит от типа добавляемой переменной:
+  +
+  * [.keyword .apiname]#DVVariableType.DOCUMENT# - возвращает [.keyword .apiname]#DVCard#
+  * [.keyword .apiname]#DVVariableType.PRINCIPAL# - возвращает [.keyword .apiname]#DVPrincipal#
+  * [.keyword .apiname]#DVVariableType.FILE# - - возвращает [.keyword .apiname]#DVFileCard#
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

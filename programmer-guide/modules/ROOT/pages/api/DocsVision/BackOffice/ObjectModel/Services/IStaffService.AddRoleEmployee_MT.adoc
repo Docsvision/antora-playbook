@@ -1,0 +1,58 @@
+= IStaffService.AddRoleEmployee - метод (StaffRole, StaffEmployee)
+
+Добавляет сотрудника в роль.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffContain AddRoleEmployee(StaffRole role, StaffEmployee employee)
+----
+
+Параметры
+
+role::
+  Тип: xref:../StaffRole_CL.adoc[StaffRole]
+  +
+  Роль
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, добавляемый в роль
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffContain_CL.adoc[StaffContain]
+  +
+  Контейнер роли
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр role или employee.
+|===
+
+== Примеры
+
+Далее приведен пример добавления роли указанному сотруднику
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+IStaffService staffService = objectContext.GetService<IStaffService>();   
+
+StaffRole role = objectContext.GetObject<StaffRole>(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+StaffContain result = staffService.AddRoleEmployee(role, employee);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

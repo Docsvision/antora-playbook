@@ -1,0 +1,49 @@
+= Создание дочерней карточки задания
+
+Пример создания дочернего задания связанного с карточкой документа:
+
+[source,pre,codeblock,language-csharp]
+----
+// Получаем контекст
+ObjectContext context = GetContext();
+
+// Получаем идентификатор вида задания
+Guid kindId = GetTaskKindId();
+            
+// Получаем вид задания
+KindsCardKind taskKind = context.GetObject<KindsCardKind>(kindId);
+
+// Получаем идентификатор родительской карточки
+Guid parentCardId = GetParentCardId();
+
+// Получаем документ
+Document document = context.GetObject<Document>(parentCardId);
+
+// Получаем список заданий документа
+TaskList taskList = document.MainInfo.Tasks;
+
+// Если список заданий в документе отсутствует - его необходимо создать
+if (taskList = null)
+{
+    // Получаем сервис списков заданий
+    ObjectModel.Services.ITaskListService taskListService = context.GetService<ObjectModel.Services.ITaskListService>();
+    taskList = taskListService.CreateTaskList();
+
+    // Сохраняем список заданий в документ
+    document.MainInfo.Tasks = taskList;
+}
+
+// Получаем родительское задание, предполагается, что функция GetParentTask вернет задание, дочерним для которого будет является созданное
+Task parentTask = GetParentTask();
+
+// Получаем сервис для работы с заданиями
+ObjectModel.Services.ITaskService taskService = context.GetService<ObjectModel.Services.ITaskService>();
+
+// Создаем задание
+Task task = TaskService.CreateChildTask(parentTask, taskKind, document, taskList);
+
+// Сохраняем изменения
+context.AcceptChanges();
+----
+
+*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

@@ -1,0 +1,67 @@
+= IconCreate
+
+Добавляет новую иконку.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/IconCreate"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <IconCreate xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <xmlIcon>string</xmlIcon>
+    </IconCreate>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+xmlIcon::
+  Данные иконки
+
+Строка [.keyword]*xmlIcon* должна соответствовать формату элемента [.keyword]*IconInfo*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:complexType name="IconInfo">
+  <xsd:sequence>
+    <xsd:element name="Data" type="xsd:base64Binary"/>
+    <xsd:element name="Description" type="xsd:string" />
+  </xsd:sequence>
+  <xsd:attribute name="ID" type="ms:guid" use="required"/>
+  <xsd:attribute name="Name" type="xsd:string"/>
+</xsd:complexType> 
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <IconCreateResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newIconId>guid</newIconId>
+    </IconCreateResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор добавленной сущности.
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Icons.adoc[Иконки]

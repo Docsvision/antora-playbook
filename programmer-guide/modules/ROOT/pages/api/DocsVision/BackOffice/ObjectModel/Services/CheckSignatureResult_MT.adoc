@@ -1,0 +1,53 @@
+= CheckSignatureResult - метод (byte[], Stream, X509Certificate2, bool, bool, DateTime?)
+
+Проверяет подпись.
+
+* [.keyword]*Пространство имен:* [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.Services#
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[CheckSignatureResult_CheckSignature_MT__section_jct_3ds_mpb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+CheckSignatureResult CheckSignature(byte[] signature, Stream contentStream, X509Certificate2 certificate, bool detached, bool isHash, DateTime? signatureDate)
+----
+
+[[CheckSignatureResult_CheckSignature_MT__section_nyy_4fs_mpb]]
+Параметры
+
+signature::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
+  +
+  Закодированный в сообщение CMS/PKCS 7 поток подписываемых данных
+contentStream::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]
+  +
+  Поток подписываемых данных
+
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат подписи
+detached::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Устанавливается значение true, если подпись является отсоединённой
+
+isHash::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Устанавливается значение true, если подпись является простой
+signatureDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Дата создания подписи
+
+Возвращаемое значение:
+
+::
+  Тип: xref:Entities/CheckSignatureResult_CL.adoc[CheckSignatureResult]
+  +
+  Возвращает результат проверки подписи
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ISignatureService_IN.adoc[ISignatureService - интерфейс]

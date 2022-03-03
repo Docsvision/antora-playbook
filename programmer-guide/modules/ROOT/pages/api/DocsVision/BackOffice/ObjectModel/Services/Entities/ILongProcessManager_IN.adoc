@@ -1,0 +1,36 @@
+= ILongProcessManager - интерфейс
+
+Добавляется в производный класс возможности менеджера длительных процессов.
+
+* [.keyword]*Пространство имен:* xref:Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ILongProcessManager : IMessageLogger
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CancellationPending |Возвращает значение, показывающее, запросило ли приложение отмену фоновой операции.
+|PausePending |Возвращает значение, показывающее, запросило ли приложение приостановку фоновой операции.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Cancel |Завершает фоновую операцию.
+|===
+
+== Заметки
+
+Менеджер длительных процессов позволяет выполнить принудительное завершение процесса, поддерживающего работу с менеджером.
+
+*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities - пространство имен]

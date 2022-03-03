@@ -1,0 +1,36 @@
+= SectionDataReader - класс
+
+Серверный курсор для чтения данных секции.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class SectionDataReader : IDisposable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Section |Возвращает данные секции.
+|Session |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Close |Закрывает серверный курсор.
+|Dispose(Boolean) |Очищает неуправляемые ресурсы.
+|GetValue(String) |Возвращает значение поля.
+|GetValueType(String) |Возвращает значение тип поля.
+|Read |Читает следующую строку данных.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

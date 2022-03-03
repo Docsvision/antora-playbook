@@ -1,0 +1,52 @@
+= IReferenceListService.TryGetReferenceListFromCard - метод (Guid, Boolean, ReferenceList)
+
+Получает [.dfn .term]_список ссылок на карточки_ из карточки.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool TryGetReferenceListFromCard(Guid cardId, bool createNew, out ReferenceList referenceList)
+----
+
+Параметры
+
+cardId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор карточки, из которой возвращает [.dfn .term]_список ссылок на карточки_
+createNew::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  При true, если [.dfn .term]_список ссылок на карточки_ отсутствует в карточек, будет создан новый
+referenceList::
+  Тип: xref:../ReferenceList_CL.adoc[ReferenceList]
+  +
+  [.dfn .term]_Список ссылок на карточки_
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Возвращает true, если есть [.dfn .term]_список ссылок на карточки_, иначе - false
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
+
+// Карточка, из которой будет получен список ссылок на карточки
+Guid cardId = new Guid("DED125DE-4097-E511-9417-90E6BA57B9F8");
+ReferenceList referenceList;
+
+// Получаем список ссылок
+bool result = referenceListService.TryGetReferenceListFromCard(cardId, true, out referenceList);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

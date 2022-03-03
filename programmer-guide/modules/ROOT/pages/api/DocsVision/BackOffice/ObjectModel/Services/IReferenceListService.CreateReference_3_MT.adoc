@@ -1,0 +1,53 @@
+= IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, Guid, Guid, Boolean)
+
+Добавляет ссылку на карточку с заданным идентификатором в [.dfn .term]_список ссылок_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+ReferenceListReference CreateReference(ReferenceList referenceList, LinksLinkType linkType, Guid cardId, Guid cardTypeId, bool hardlink)
+----
+
+Параметры
+
+referenceList::
+  Тип: xref:../ReferenceList_CL.adoc[ReferenceList]
+  +
+  Список ссылок на карточки, в который добавляется ссылка
+linkType::
+  Тип: xref:../LinksLinkType_CL.adoc[LinksLinkType]
+  +
+  Тип ссылки
+cardId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор карточки, на которую создается ссылка
+cardTypeId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор типа карточки
+hardlink::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если true, то жесткая ссылка
+
+Возвращаемое значение
+
+::
+  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
+  +
+  Ссылка
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр referenceList или cardId.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

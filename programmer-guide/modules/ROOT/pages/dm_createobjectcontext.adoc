@@ -1,0 +1,80 @@
+= Инициализация контекста объектов
+
+После того как было выполнено подключение к серверу Docsvision - xref:dm_connection.adoc[создана пользовательская сессия] - может быть создан xref:dm_session_context.adoc[контекст объектов] для работы с методами API уровня бизнес-логики. В создании контекста объектов нет необходимости, если:
+
+* Пишется код для скрипта карточки, т.к. в этом случае готовый контекст объектов может быть получен непосредственно из класса скрипта.
+* Предполагается использовать исключительно методы базового API.
+
+Для инициализации контекста объектов потребуется:
+
+. Получить экземпляр класса xref:../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext] - сущность контекста объектов.
+. Используя платформенные сервисы, загрузить в контекст объектов xref:dm_mappers.adoc[преобразователи данных] и xref:dm_services.adoc[необходимые сервисы].
+
+[NOTE]
+====
+[.note__title]#Важное замечание:# Создание и инициализация [.dfn .term]_контекста объектов_ - достаточно затратная, с точки зрения потребления аппаратных ресурсов, операция. Рекомендуется использовать созданный и проинициализированный [.dfn .term]_контекст объектов_, а не создавать новый.
+====
+
+Далее приведен полный код инициализации контекста объектов для возможности работы с системными карточками и карточками библиотеки "Базовые объекты".
+
+[source,pre,codeblock,language-csharp]
+----
+ObjectContext CreateObjectContext(UserSession userSession)
+{
+ var sessionContainer = new ServiceContainer();
+ sessionContainer.AddService(typeof(UserSession), userSession);
+
+ var objectContext = new ObjectContext(sessionContainer);
+
+ var mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>();
+ mapperFactoryRegistry.RegisterFactory(typeof(SystemCardsMapperFactory));
+ mapperFactoryRegistry.RegisterFactory(typeof(BackOfficeMapperFactory));
+       
+
+ var serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>();
+ serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
+ serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
+    
+
+ objectContext.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
+
+ IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession);
+ objectContext.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
+ objectContext.AddService<IMetadataProvider>(metadataProvider);
+
+ return objectContext;
+}
+----
+
+Для использования приведенных в коде типов потребуется:
+
+. Добавить в проект сборки Docsvision:
+* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* [.ph .filepath]`DocsVision.Platform.SystemCards.ObjectModel.dll`
+* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
++
+Указанные DLL-файлы входят в состав клиента и сервера Docsvision.
+. Подключить пространства имен:
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.BackOffice.ObjectModel.Mapping;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.Platform.Data.Metadata;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.ObjectModel;
+using DocsVision.Platform.ObjectModel.Mapping;
+using DocsVision.Platform.ObjectModel.Persistence;
+using DocsVision.Platform.SystemCards.ObjectModel.Mapping;
+using DocsVision.Platform.SystemCards.ObjectModel.Services;
+using System.ComponentModel.Design;
+----
+
+== См. также
+
+* xref:dm_cards.adoc[Работа с карточками]
+
+*На уровень выше:* xref:../pages/dm_container.adoc[Руководство по разработке]

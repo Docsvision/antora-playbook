@@ -1,0 +1,37 @@
+= StatesCardKindStateSetting.FindBuiltInOperation - метод (BuiltInOperation)
+
+Возвращает операцию ([.dfn .term]_конструктора состояний_), соответствующую переданной встроенной операции.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public StatesOperation FindBuiltInOperation(BuiltInOperation builtInOperation)
+----
+
+Параметры
+
+builtInOperation::
+  Тип: xref:BuiltInOperation_CL.adoc[BuiltInOperation]
+  +
+  Встроенная операция
+
+Возвращаемое значение
+
+::
+  Тип: xref:StatesOperation_CL.adoc[StatesOperation]
+  +
+  Операция ([.dfn .term]_конструктора состояний_)
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInOperation.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting - класс]

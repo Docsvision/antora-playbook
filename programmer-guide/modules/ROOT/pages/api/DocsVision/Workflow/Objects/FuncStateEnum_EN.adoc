@@ -1,0 +1,32 @@
+= FuncStateEnum - перечисление
+
+Определяет состояние функции в текущем проходе.
+
+* [.keyword]*Пространство имен:* xref:Objects_NS.adoc[DocsVision.Workflow.Objects]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Objects.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public enum FuncStateEnum
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|NonActive |Не активна.
+|Wait |Готова к исполнению.
+|Active |Выполняется.
+|Done |Проход завершен.
+|Finished |Процесс завершен.
+|Error |Завршено с ошибкой.
+|WaitForAnyFunctionFinished |Ожидание завершения любой другой функции.
+|WaitForLinkedCardChange |Ожидание изменений в связанной карточке. _Не используется и не обрабатывается._
+|WaitForWeakLinkedCardChange |Ожидание изменений в слабо-связанной карточке. _Не используется и не обрабатывается._
+|WaitForMessage |Ожидание поступления сообщения.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Objects/Objects_NS.adoc[DocsVision.Workflow.Objects - пространство имен]

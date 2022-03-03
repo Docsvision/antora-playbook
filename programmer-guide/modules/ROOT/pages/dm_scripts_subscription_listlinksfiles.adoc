@@ -1,0 +1,78 @@
+= События элемента управления 'Ссылки'
+
+Стандартный элемент управления "Ссылки" предоставляет возможность подписываться на события вызова настраиваемых команд (CustomizeCommands), которые выбираются из контекстного меню элемента управления "Ссылки". Для подписки на подобные события необходимо знать идентификатор соответствующей команды, которые собраны в статическом классе [.keyword .apiname]#DocsVision.BackOffice.WinForms.Controls.Commands.ReferenceListView.ReferenceListViewCommandIds# (сборка [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`):
+
+* [.keyword .apiname]#ReferenceListViewCommandAddCardFromTemplateId# - добавление карточки по шаблону;
+* [.keyword .apiname]#ReferenceListViewCommandAddCardId# - добавление карточки;
+* [.keyword .apiname]#ReferenceListViewCommandAddDVFolderId# - добавление папки Docsvision;
+* [.keyword .apiname]#ReferenceListViewCommandAddFileFromFileSystemId# - добавление файла;
+* [.keyword .apiname]#ReferenceListViewCommandAddURLId# - добавление URL;
+* [.keyword .apiname]#ReferenceListViewCommandCancelLockFileId# - отмена блокировки;
+* [.keyword .apiname]#ReferenceListViewCommandCopyId# - копирование;
+* ReferenceListViewCommandCreateCardId - создание карточки;
+* [.keyword .apiname]#ReferenceListViewCommandDeleteId# - удаление;
+* [.keyword .apiname]#ReferenceListViewCommandLockFileId# - блокировка для работы;
+* [.keyword .apiname]#ReferenceListViewCommandOpenCardId# - открытие карточки;
+* [.keyword .apiname]#ReferenceListViewCommandOpenFileAsReadOnlyId# - открытие файла в режиме чтения;
+* [.keyword .apiname]#ReferenceListViewCommandOpenFileId# - открытие файла в режиме изменения;
+* [.keyword .apiname]#ReferenceListViewCommandOpenId# - открытие карточки;
+* [.keyword .apiname]#ReferenceListViewCommandRefreshId# - обновление;
+* [.keyword .apiname]#ReferenceListViewCommandScanAndAddId# - отсканировать и добавить;
+* [.keyword .apiname]#ReferenceListViewCommandShowDescriptionId# - описание;
+* [.keyword .apiname]#ReferenceListViewCommandShowGroupPanelId# - показать область группировки;
+* [.keyword .apiname]#ReferenceListViewCommandShowPreviewPanelId# - показать область описания;
+* [.keyword .apiname]#ReferenceListViewCommandUnlockFileId# - показать область группировки.
+
+Элемент управление "Ссылки" предоставляет единую точку входа для обработки всех этих событий - событие [.keyword .apiname]#CustomizeCommands#. В качестве примера, используем собственный обработчик события [.keyword .apiname]#CustomizeCommands# для обработки команд добавления URL-ссылки и и открытия карточки из списка добавленных карточек:
+
+[source,pre,codeblock,language-csharp]
+----
+// Организуем подписку в обработчике события активации карточки
+private void Document_CardActivated(System.Object sender, DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ // Получаем элемент управления типа "Ссылки"
+ ReferenceListView referenceListView = ((ICustomizableControl)CardControl).FindPropertyItem<ReferenceListView>("Свойство1");
+
+ // Добавляем обработчик для срабатывания настраиваемой команды
+ referenceListView.CustomizeCommands += new EventHandler<ReferenceListViewCustomizeCommandsEventArgs>(ReferenceListView_CustomizeCommands);
+}
+
+// Обрабатываем событие вызова настраиваемой команды
+private void ReferenceListView_CustomizeCommands(object sender, ReferenceListViewCustomizeCommandsEventArgs e)
+{
+ foreach (IReferenceListViewCommand command in e.Commands)
+ {
+  // Получаем идентификатор вызванной команды
+  Guid commandId = ((IReferenceListViewCommand2)command).Id;
+
+  // Выбираем команду добавления URL, либо открытия карточки
+  if (commandId = ReferenceListViewCommandIds.ReferenceListViewCommandAddURLId)
+  {
+   // Обрабатываем событие до непосредственного добавления URL
+   command.BeforeCommandExecute += new EventHandler<ReferenceListViewCommandExecuteEventArgs>(AddUrlCommand_BeforeCommandExecute);
+  }
+  else if (commandId = ReferenceListViewCommandIds.ReferenceListViewCommandOpenCardId)
+  {
+   // Обрабатываем событие после открытия карточки 
+   command.AfterCommandExecute += new EventHandler<ReferenceListViewCommandExecuteEventArgs>(OpenCardCommand_AfterCommandExecute);
+  }
+ }
+}
+
+// Обработка команды добавления URL
+private void AddUrlCommand_BeforeCommandExecute(object sender, ReferenceListViewCommandExecuteEventArgs e)
+{
+ // Прервать дальнейшее исполнение команды
+ e.Cancel = true;
+}
+
+// Обработка команды добавления карточки
+private void OpenCardCommand_AfterCommandExecute(object sender, ReferenceListViewCommandExecuteEventArgs e)
+{
+ MessageBox.Show("Добавлена карточек";
+}
+----
+
+В обработчиках событий, срабатывающих до исполнения соответствующей команды, можно добавить логику прерывания команды, как в примере, установив e.Cancel в значение true .
+
+*На уровень выше:* xref:../pages/dm_scripts_subscription.adoc[Подписка на события]

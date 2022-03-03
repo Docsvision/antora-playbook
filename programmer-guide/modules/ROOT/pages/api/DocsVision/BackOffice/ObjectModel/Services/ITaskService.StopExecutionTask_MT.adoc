@@ -1,0 +1,54 @@
+= ITaskService.StopExecutionTask - метод (Task)
+
+Прекращает исполнение задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void StopExecutionTask(Task task)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, которое будет прекращено
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для прекращения задания.
+|===
+
+== Заметки
+
+Прекращение задания, в отличии от завершения, не является штатной операцией, и необходима для принудительного завершения задания. Исполнение подчиненных заданий не прекращается.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервисов
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStateService stateService = objectContext.GetService<IStateService>();
+
+// Получение задания
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Прекращение исполнения задания
+taskService.StopExecutionTask(task);
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.CompletedState, task));
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

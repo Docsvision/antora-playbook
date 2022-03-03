@@ -1,0 +1,34 @@
+= ILockService.IsObjectLockedByMe<T> - метод (T)
+
+Определяет наличие у объекта блокировки, установленной текущим пользователем.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool IsObjectLockedByMe<T>(T obj) where T : ObjectBase
+----
+
+Параметры типа
+
+T::
+  Тип объекта, блокировка которого определяется
+
+Параметры
+
+obj::
+  Тип: T
+  +
+  Объект, блокировка которого определяется
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если блокировка установлена текущим сотрудником, возвращает true. Если объект не заблокирован или блокировка установлена другим сотрудником, возвращает false.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService - интерфейс]

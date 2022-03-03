@@ -1,0 +1,47 @@
+= Пример реализации расширения дерева папок Windows-клиента
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.Platform.Extensibility;
+using DocsVision.Platform.WinForms;
+using System;
+using System.Runtime.InteropServices;
+
+namespace DocsVision.Test.FolderTreeExtension
+{
+ [ComVisible(true)]
+ [Guid("6A0676EE-1DAF-4A59-B5EB-E0B5B4C175E1")]
+ [ClassInterface(ClassInterfaceType.None)]
+ public partial class Plugin : NavExtension, INavFolderTreeExtension
+ {
+  public Plugin()
+  {
+  }
+
+  protected override NavExtensionTypes SupportedTypes
+  {
+   get
+   {
+    return NavExtensionTypes.FolderTree;
+   }
+  }
+
+  // Название расширения
+  protected override string GetExtensionName(NavExtensionTypes extensionType)
+  {
+   return "Расширение дерева папок Windows-клиента";
+   }
+
+  public NavFolderInfo[] GetTreeExtensionFolders()
+  {
+   NavFolderInfo folder = new NavFolderInfo();
+   folder.Flags = NavFolderTreeFlags.ShowInPersonalFolder;
+   folder.FolderId = new Guid("FC849072-406E-4BB2-AA25-18F33E6AB252");
+   folder.Location = NavFolderLocationFlags.AboveRegular;
+   return new NavFolderInfo[] { folder };
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../pages/samples_container_createcomponents.adoc[Примеры реализации компонента карточек, библиотек карточек и расширений]

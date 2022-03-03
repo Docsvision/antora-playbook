@@ -1,0 +1,43 @@
+= ActivateFlags - перечисление
+
+Дополнительные флаги активации карточки.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum ActivateFlags
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Флаги отсутствуют. Значение 0x00.
+|ModalWindow |Карточка открыта модально. Значение 0x01.
+|FolderPanel |Карточка папки. Значение 0x02.
+|New |Создан новый экземпляр карточки. Значение 0x04.
+|NewFromTemplate |Новая карточка из шаблона. Значение 0x08.
+|ByShortcut |Карточка открыта по ярлыку. Значение 0x10.
+|ByUrl |Карточка открыта по ссылке. Значение 0x20.
+|ReadOnly |Карточка открыта только для чтения. Значение 0x40.
+|NoCreateNew |Запрет создания новых карточек в этой же папке. Значение 0x80.
+|===
+
+== Заметки
+
+Для побитового соединения значений используйте побитовый оператор OR, как показано в следующем примере
+
+[source,pre,codeblock,language-csharp]
+----
+ActivateFlags args = ActivateFlags.New | ActivateFlags.NewFromTemplate;
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost - пространство имен]

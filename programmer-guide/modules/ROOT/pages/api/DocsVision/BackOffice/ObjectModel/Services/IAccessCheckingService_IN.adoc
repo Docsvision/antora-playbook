@@ -1,0 +1,82 @@
+= IAccessCheckingService - интерфейс
+
+Предоставляет методы получения списка ролей и доступных операций для сотрудника, а также методы сброса кэша ролевой модели.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[ResDescription("IAccessCheckingService"), ResName("IAccessCheckingService")]
+public interface IAccessCheckingService
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IAccessCheckingService.EditMode_PR.adoc[EditMode] |Задает или возвращает признак того, что сервис работает в режиме записи/чтения.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IAccessCheckingService.GetUserOperations_MT.adoc[GetUserOperations(BaseCard, StaffEmployee)] |Возвращает список всех операций, доступных указанному сотруднику для карточки.
+|xref:IAccessCheckingService.GetUserRoles_MT.adoc[GetUserRoles(BaseCard)] |Получает список ролей карточки для текущего сотрудника.
+|xref:IAccessCheckingService.GetUserRoles_1_MT.adoc[GetUserRoles(BaseCard, Guid)] |Получает список ролей карточки для указанного сотрудника.
+|xref:IAccessCheckingService.GetUserRoles_2_MT.adoc[GetUserRoles(BaseCard, StaffEmployee)] |Получает список ролей карточки для указанного сотрудника.
+|xref:IAccessCheckingService.IsOperationAllowed_MT.adoc[IsOperationAllowed(BaseCard, BuiltInOperation)] |Возвращает признак разрешения выполнения встроенной операции для заданной карточки.
+|xref:IAccessCheckingService.IsOperationAllowed_1_MT.adoc[IsOperationAllowed(BaseCard, StatesOperation)] |Возвращает признак разрешения выполнения операции для заданной карточки.
+|xref:IAccessCheckingService.ResetRolesCache_MT.adoc[ResetRolesCache] |Сбрасывает локальный кэш сервиса.
+|xref:IAccessCheckingService.ResetRolesCache_1_MT.adoc[ResetRolesCache(BaseCard)] |Удаляет из кэша информацию полученную для указанной карточки.
+|xref:IAccessCheckingService.ResetRolesCache_2_MT.adoc[ResetRolesCache(Guid)] |Удаляет из кэша информацию полученную для карточки с заданным идентификатором.
+|===
+
+== Заметки
+
+Метод ResetRolesCache сбрасывает только локальный кэш ролевой модели. Поэтому его желательно вызывать вместе с IServerExtensionProxyService.ResetRolesCache, который сбрасывает кэш ролевой модели на сервере.
+
+== Примеры
+
+В следующем примере запрашивается список ролей для документа с идентификатором 00000000-0000-0000-0000-000000000000
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+        
+// Получение сервиса проверки прав доступа
+IAccessCheckingService accessCheckService = objectContext.GetService<IAccessCheckingService>();
+
+// Получение сервиса для работы со справочником сотрудников
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение документа с идентификатором 00000000-0000-0000-0000-000000000000           
+BaseCard card = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение списка ролей для картояки
+IEnumerable<RoleModelRole> roles = accessCheckService.GetUserRoles(card);
+
+// Выведение в консоль названий ролей
+foreach (var item in roles)
+{
+  Console.WriteLine(item.Name);
+}
+----
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.EditMode_PR.adoc[IAccessCheckingService.EditMode - свойство]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.GetUserOperations_MT.adoc[IAccessCheckingService.GetUserOperations - метод (BaseCard, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.GetUserRoles_MT.adoc[IAccessCheckingService.GetUserRoles - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.GetUserRoles_1_MT.adoc[IAccessCheckingService.GetUserRoles - метод (BaseCard, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.GetUserRoles_2_MT.adoc[IAccessCheckingService.GetUserRoles - метод (BaseCard, StaffEmployee)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.IsOperationAllowed_MT.adoc[IAccessCheckingService.IsOperationAllowed - метод (BaseCard, BuiltInOperation)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.IsOperationAllowed_1_MT.adoc[IAccessCheckingService.IsOperationAllowed - метод (BaseCard, StatesOperation)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.ResetRolesCache_MT.adoc[IAccessCheckingService.ResetRolesCache - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.ResetRolesCache_1_MT.adoc[IAccessCheckingService.ResetRolesCache - метод (BaseCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService.ResetRolesCache_2_MT.adoc[IAccessCheckingService.ResetRolesCache - метод (Guid)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

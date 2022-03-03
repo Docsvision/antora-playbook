@@ -1,0 +1,43 @@
+= NumeratorRange - класс
+
+Содержит методы для работы с диапазоном номеров нумератора.
+
+* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class NumeratorRange : IUpdatable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|EndNumber |Возвращает конечный номер диапазона.
+|Id |Возвращает идентификатор диапазона.
+|InUpdate |Возвращает признак включения для объекта режима отложенных изменения.
+|OwnerId |Возвращает идентификатор владельца диапазона номеров.
+|Session |Возвращает текущую сессию пользователя.
+|StartNumber |Возвращает начальный номер диапазона.
+|===
+
+== Методы
+
+[width="100%",cols="50%,50%",options="header",]
+|===
+|Имя |Описание
+|BeginUpdate |Включает режим отложенных изменений
+|CancelUpdate |Отменяет несохраненные изменения и выключает режим отложенных изменений.
+|EndUpdate |Отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
+|MarkCardForDeletion(Guid) |Требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
+|SetEndNumber(Int32) |Устанавливает конченый номер диапазона.
+|SetOwnerID(String) |Задает владельца текущего диапазона номеров.
+|SetStartNumber(Int32) |Задает начальный номер диапазона номеров.
+|UpdateNow |Позволяет отправить накопленные изменения на сервер.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]

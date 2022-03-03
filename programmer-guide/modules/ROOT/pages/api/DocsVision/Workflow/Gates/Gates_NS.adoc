@@ -1,0 +1,65 @@
+= DocsVision.Workflow.Gates - пространство имен
+
+Данное пространство имен содержит интерфейсы, используемые при создании шлюза Workflow, методы работы со шлюзами, а также несколько готовых объектов данного типа: шлюз к базовым типам, к Docsvision, шлюз в файловую систему и в Microsoft Exchange.
+
+== Классы
+
+[cols=",",options="header",]
+|===
+|Класс |Описание
+|xref:BasicGate_CL.adoc[BasicGate] |Содержит методы и свойства шлюза к простым типам.
+|xref:DVGate_CL.adoc[DVGate] |Содержит методы и свойства шлюза к Docsvision.
+|xref:ExGate_CL.adoc[ExGate] |Содержит методы и свойства шлюза к почте.
+|xref:FSGate_CL.adoc[FSGate] |Содержит методы и свойства шлюза к файловой системе.
+|xref:FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo] |Предоставляет значения для фильтра при подписке на события шлюза файловой системы.
+|xref:MailFilter_CL.adoc[MailFilter] |Предоставляет значения для фильтра почтовых сообщений.
+|xref:MessageChannel_CL.adoc[MessageChannel] |Предоставляет методы для работы с сообщениями шлюза.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header",]
+|===
+|Интерфейс |Описание
+|xref:ICollectionalProperty_IN.adoc[ICollectionalProperty] |Данный интерфейс описывает способ взаимодействия с коллекционным свойством стандартной переменной шлюза.
+|xref:IGate_IN.adoc[IGate] |Данный интерфейс реализуется серверными компонентами шлюзов. При помощи методов, представленных в данном интерфейсе, сервис СУБП работает с переменными шлюза.
+|xref:IGateMessageSource_IN.adoc[IGateMessageSource] |Определяет метод инициализации механизма подписки на события шлюза, а также свойство, через которое может быть получен канал подписки на события.
+|xref:IGateVariable_IN.adoc[IGateVariable] |Данный интерфейс описывает свойства стандартной переменной шлюза, единые для всех типов переменных. Все переменные, уникальные для конкретного шлюза, должны реализовывать этот интерфейс.
+|xref:IGateVariableCustomProperties_IN.adoc[IGateVariableCustomProperties] |Данный интерфейс описывает методы для работы с пользовательскими свойствами объекта шлюза, поддерживающего обработку подобных свойств.
+|xref:ILicensableObject_IN.adoc[ILicensableObject] |Определяет поддержку шлюзом лицензирования, предоставляет тип лицензии.
+|xref:ILockableObject_IN.adoc[ILockableObject] |Данный интерфейс описывает методы и свойства объекта шлюза, поддерживающего блокировку доступа к данным объекта.
+|xref:ISubscriptionChannel_IN.adoc[ISubscriptionChannel] |Данный интерфейс добавляет методы подписки на события, и реализуется для соответствующего шлюза Workflow.
+|===
+
+== Перечисления
+
+[cols=",",options="header",]
+|===
+|Перечисление |Описание
+|xref:DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType] |Типы подписок на события, поддерживаемые шлюзом к Docsvision.
+|xref:DVVariableType_EN.adoc[DVVariableType] |Типы переменных шлюза к Docsvision.
+|xref:FSSubscriptionType_EN.adoc[FSSubscriptionType] |Типы подписок на события, поддерживаемые шлюзом к файловой системе.
+|xref:MailSubscriptionType_EN.adoc[MailSubscriptionType] |Типы подписок на события, поддерживаемые шлюзом к почте.
+|===
+
+* *xref:../../../../api/DocsVision/Workflow/Gates/BasicGate_CL.adoc[BasicGate - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/ExGate_CL.adoc[ExGate - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate_CL.adoc[FSGate - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/MailFilter_CL.adoc[MailFilter - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/MessageChannel_CL.adoc[MessageChannel - класс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/ICollectionalProperty_IN.adoc[ICollectionalProperty - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate_IN.adoc[IGate - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGateMessageSource_IN.adoc[IGateMessageSource - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGateVariable_IN.adoc[IGateVariable - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGateVariableCustomProperties_IN.adoc[IGateVariableCustomProperties - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/ILicensableObject_IN.adoc[ILicensableObject - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/ILockableObject_IN.adoc[ILockableObject - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel - интерфейс]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType - перечисление]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/DVVariableType_EN.adoc[DVVariableType - перечисление]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSSubscriptionType_EN.adoc[FSSubscriptionType - перечисление]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/MailSubscriptionType_EN.adoc[MailSubscriptionType - перечисление]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Workflow_NS.adoc[DocsVision.Workflow - пространство имен]

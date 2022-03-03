@@ -1,0 +1,42 @@
+= IStaffService.SynchronizeGroupWithActiveDirectory - метод (StaffGroup, IADSynchronizationSettings, ILongProcessManager)
+
+Синхронизирует данные группы [.dfn .term]_справочника сотрудников_ с Active Directory.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void SynchronizeGroupWithActiveDirectory(StaffGroup group, IADSynchronizationSettings settings, ILongProcessManager syncManager)
+----
+
+Параметры
+
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Синхронизируемая группа
+settings::
+  Тип: xref:Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]
+  +
+  Параметры синхронизации
+syncManager::
+  Тип: xref:Entities/ILongProcessManager_IN.adoc[ILongProcessManager]
+  +
+  Менеджер длительных процессов
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group, settings или syncManager.
+|===
+
+== Заметки
+
+Пример инициализации менеджера длительных процессов см. в xref:../../../../../pages/SC_TM_SyncFromAD.adoc[примере].
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

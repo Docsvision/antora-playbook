@@ -1,0 +1,71 @@
+= Удаление унаследованных прав на карточку
+
+Сценарий, приведенный в примере, предназначен для удаления унаследованных прав на карточку
+
+[.dfn .term]_Сценарий_ работает со следующими [.dfn .term]_переменными процесса_:
+
+* `Card` - карточка, для которой осуществляется удаление унаследованных прав. Тип "Карточка DV".
+
+[source,pre,codeblock,language-csharp]
+----
+// подключение системных библиотек
+using System;
+using System.Security.AccessControl;
+using System.Xml;
+
+// подключение библиотек СУБП
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.Security.AccessControl;
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    // Получение переменных процесса
+    ProcessVariable varCard = process.GetVariableByName("Card");
+
+    // Приведение переменной к типу "Карточка DV"
+    DVCard oCard = varCard.Value as DVCard;
+
+    DVGate dvGate = process.Gates[DVGate.GateID] as DVGate;
+    CardData card = dvGate.UserSession.CardManager.GetCardData(new Guid(oCard.ID));
+   
+    // Получение ACL для карточки
+    CardDataSecurity cardDataSecurity = card.GetAccessControl();
+
+    // Получение дескриптора безопасности
+    byte[] descBytes = cardDataSecurity.GetSecurityDescriptorBinaryForm();
+    CommonSecurityDescriptor desc = new CommonSecurityDescriptor(true, false, descBytes, 0);
+
+    // Отключение наследования прав
+    desc.SetDiscretionaryAclProtection(true, false);
+   
+    // Сохранение дескриптора
+    descBytes = new byte[desc.BinaryLength];            
+    desc.GetBinaryForm(descBytes, 0);
+    cardDataSecurity.SetSecurityDescriptorBinaryForm(descBytes);
+
+    // Обновление ACL для карточки
+    card.SetAccessControl(cardDataSecurity);
+        
+   } catch (Exception ex)
+   {
+
+    // Добавление сообщения об ошибке в журнал процесса
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message);
+   }
+  }
+ }
+}
+----
+
+*На уровень выше:* xref:../pages/SM_Workflow_Cat.adoc[Примеры использования API Workflow]

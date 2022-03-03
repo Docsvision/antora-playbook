@@ -1,0 +1,52 @@
+= LockGetInfo
+
+Возвращает детальную информацию о блокировке, установленной на объект.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/LockGetInfo"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LockGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <resourceId>guid</resourceId>
+    </LockGetInfo>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+resourceId::
+  Идентификатор объекта. для которого запрашивается информация
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LockGetInfoResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <lockStatus>STATUS_FREE or STATUS_LOCKED or STATUS_CHECKED_OUT or STATUS_OWNER_LOCKED or STATUS_OWNER_CHECKED_OUT</lockStatus>
+      <ownerName>string</ownerName>
+    </LockGetInfoResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Lock.adoc[Блокировки]

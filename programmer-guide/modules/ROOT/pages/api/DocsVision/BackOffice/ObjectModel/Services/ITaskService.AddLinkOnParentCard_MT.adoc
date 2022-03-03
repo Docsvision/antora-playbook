@@ -1,0 +1,62 @@
+= ITaskService.AddLinkOnParentCard - метод (Task, TaskSetting, BaseCard)
+
+Добавляет в задание ссылку на родительскую карточку.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void AddLinkOnParentCard(Task task, TaskSetting taskSetting, BaseCard card)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, в список ссылок которого будет добавлена ссылка на карточку
+taskSetting::
+  Тип: xref:Entities/KindSetting/TaskSetting_CL.adoc[TaskSetting]
+  +
+  Настройки вида задания
+card::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка, на которую добавляется ссылка
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, taskSetting или card.
+|===
+
+== Заметки
+
+При добавлении в задание ссылки на карточку `card`, в самой карточке ссылка на задание не формируется.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+// Получение карточек задание и его родительской карточки
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Получение настроек вида задания
+TaskSetting taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind);
+
+// Добавление ссылки
+taskService.AddLinkOnParentCard(task, taskSetting, card);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

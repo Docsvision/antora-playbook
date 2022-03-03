@@ -1,0 +1,56 @@
+= ObjectContext.RollBackObject - метод (ObjectBase)
+
+Отменяет несохраненные изменения в заданном объекте.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public IObjectRef RollBackObject(ObjectBase objectInstance)
+----
+
+Параметры
+
+objectInstance::
+  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
+  +
+  Объект, у которого отменяются изменения
+
+Возвращаемое значение
+
+::
+  Тип: xref:IObjectRef_IN.adoc[IObjectRef]
+  +
+  Ссылка на объект в [.dfn .term]_контексте объектов_
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+        
+// Получение и изменение документа       
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+document.Description = "Описание не корректно";
+
+// Флаг разрешающий откат изменений
+if (roolback)
+{
+
+ // Отмена изменений в документе
+ objectContext.RollBackObject(document);
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

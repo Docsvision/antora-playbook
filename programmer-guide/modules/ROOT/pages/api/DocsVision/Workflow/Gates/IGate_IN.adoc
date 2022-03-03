@@ -1,0 +1,60 @@
+= IGate - интерфейс
+
+Данный интерфейс реализуется серверными компонентами шлюзов. При помощи методов, представленных в данном интерфейсе, сервис СУБП работает с переменными шлюза.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IGate
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IGate.Data_PR.adoc[Data] |Задает или возвращает конфигурацию шлюза.
+|xref:IGate.ExecutionMode_PR.adoc[ExecutionMode] |Возвращает поддерживаемый режим исполнения процесса.
+|xref:IGate.ID_PR.adoc[ID] |Возвращает уникальный идентификатор шлюза.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IGate.AddVariable_MT.adoc[AddVariable(Int32, String)] |Добавляет переменную с указанным типом и дополнительными данными.
+|xref:IGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)] |Сравнивает значения двух однотипных переменных шлюза.
+|xref:IGate.CopyVariable_MT.adoc[CopyVariable(Int32, String, String)] |Создает копию указанной переменной (объекта).
+|xref:IGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)] |Удаляет переменную шлюза.
+|GetVariable(Int32, String) |Получает переменную по её типу и строке-идентификатору.
+|GetVariable(Int64, String) |Получает переменную по её типу и строке-идентификатору.
+|xref:IGate.GetVariable_MT.adoc[GetVariable(Int32, String, Object)] |Получает переменную по её типу и строке-идентификатору.
+|xref:IGate.GetVariableInternalReference_MT.adoc[GetVariableInternalReference(Int32, String)] |Возвращает ссылку на переменную шлюза во внутреннем формате.
+|xref:IGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)] |Возвращает внешнюю ссылку на заданную переменную шлюза.
+|===
+
+== Примечание
+
+В методах под переменной подразумевается переменная шлюза, но не переменная процесса - xref:../Runtime/ProcessVariable_CL.adoc[ProcessVariable].
+
+== Примеры
+
+См. примеры в описании конкретного шлюза.
+
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.Data_PR.adoc[IGate.Data - свойство]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.ExecutionMode_PR.adoc[IGate.ExecutionMode - свойство]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.ID_PR.adoc[IGate.ID - свойство]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.AddVariable_MT.adoc[IGate.AddVariable - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.CompareVariables_MT.adoc[IGate.CompareVariables - метод (Int32, String, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.CopyVariable_MT.adoc[IGate.CopyVariable - метод (Int32, String, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.DeleteVariable_MT.adoc[IGate.DeleteVariable - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.GetVariable_MT.adoc[IGate.GetVariable - метод (Int32, String, Object)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.GetVariableInternalReference_MT.adoc[IGate.GetVariableInternalReference - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/IGate.GetVariableReference_MT.adoc[IGate.GetVariableReference - метод (Int32, String)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]

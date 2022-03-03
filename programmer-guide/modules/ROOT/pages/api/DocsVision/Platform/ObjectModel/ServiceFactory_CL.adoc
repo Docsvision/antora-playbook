@@ -1,0 +1,52 @@
+= ServiceFactory - класс
+
+Управляет получением сервиса из фабрики сервисов.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class ServiceFactory : IServiceFactory
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ServiceFactory() |Инициализирует новый экземпляр класса ServiceFactory.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|GetService(Type) |Возвращает [.dfn .term]_сервис_ указанного типа.
+|===
+
+== Примеры
+
+Ниже приведен пример создания фабрики сервисов, в котором переопределяется метод GetService, создающий сервис определенного типа
+
+[source,pre,codeblock,language-csharp]
+----
+public class TestWorkLibServiceFactory : ServiceFactory
+{
+ protected override object GetService(System.Type serviceType)
+ {
+  // Интерфейс сервиса, предоставляемого фабрикой
+  if (serviceType = typeof(ITestWorkService))
+  {
+   //возвращение экземпляра класса реализующего соответствующий интерфейс
+   return new TestWorkService();
+  }
+  return null;
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

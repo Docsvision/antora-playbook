@@ -1,0 +1,54 @@
+= IStaffService.DeleteEmployee - метод (StaffEmployee)
+
+Удаляет сотрудника из [.dfn .term]_справочника сотрудников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteEmployee(StaffEmployee employee)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудника, для которого создается персональная папка
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|===
+
+== Примеры
+
+Пример удаления уволенных сотрудников из группы.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение группы, из которой удаляются сотрудники
+StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+
+foreach (StaffEmployee employee in group.Employees)
+{
+ // Если сотрудник уволен (в т.ч. без возможности восстановления), удаляем
+ if (employee.Status = StaffEmployeeStatus.Discharged || employee.Status = StaffEmployeeStatus.DischargedNoRestoration)
+ {
+  staffService.DeleteEmployee(employee);
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

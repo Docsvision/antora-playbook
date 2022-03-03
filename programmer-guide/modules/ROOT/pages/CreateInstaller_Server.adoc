@@ -1,0 +1,84 @@
+= Пакет установки серверной части решения
+
+[NOTE]
+====
+[.note__title]#Прим.:# Исходный код [.dfn .term]_SnapIn_ расположен в подкаталоге [.ph .filepath]`NetstatSolutionInstaller` архива проекта.
+====
+
+Пакет установки серверной части включает в себя все разработанные ранее компоненты, в том числе пакет установки клиентской части. Данный установщик отвечает за весь цикл регистрации и удаления решения.
+
+Далее перечислены основные шаги, которые должен выполнить пакет установки серверной части [.dfn .term]_решения_:
+
+. Создать подкаталог [.dfn .term]_решения_ в папке Docsvision (по умолчанию [.ph .filepath]`C:\Program Files (x86)\Docsvision`).
+. Выгрузить в созданный подкаталог компонент [.dfn .term]_SnapIn_ и пакет установки клиентской части [.dfn .term]_решения_.
+. Создать в каталоге [.dfn .term]_решения_ подкаталог [.ph .filepath]`CardPackage` и выгрузить в него xref:CreatePackages.adoc[CardPackage], а также связанные с ним XML-файлы.
+. Создать в каталоге [.dfn .term]_решения_ подкаталог [.ph .filepath]`Database` и выгрузить в него xref:CreatePackages.adoc[SqlPackage], а также схемы карточек и библиотека карточек, а также их ресурсы.
+. В ветке реестра [.ph .filepath]`HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns` создать раздел с названием решения.
+. В созданный раздел добавить два строковых параметра:
+* Path - путь к сборке SnapIn.
+* TypeName - название класса SnapIn, который реализует интерфейс [.keyword .apiname]#ISnapIn#.
++
+[source,pre,codeblock,language-xml]
+----
+<Component Id="RegistryEntries" Guid="75B4E976-5771-423C-AB7D-DC583114F893" Win64="yes">
+ <RegistryKey Root="HKLM" Key="SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns\NetstatSolution" ForceDeleteOnUninstall="yes" ForceCreateOnInstall="yes">
+  <RegistryValue Type="string" Name="Path" Value="C:\Program Files (x86)\Docsvision\NetstatSolution\NetstatSolution.Snapin.dll"/>
+  <RegistryValue Type="string" Name="TypeName" Value="NetstatSolution.Snapin.SnapIn"/>
+ </RegistryKey>
+</Component>
+----
+. Вызвать Консоль настройки Docsvision с параметрами: [.ph .filepath]`"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
++
+[source,pre,codeblock]
+----
+<CustomAction Id="RegisterSnapIn" Directory='INSTALLFOLDER' Return="check" Execute='deferred' 
+ ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n NetstatSolution' />
+<InstallExecuteSequence>
+ <Custom Action='RegisterSnapIn' Before='InstallFinalize'>NOT Installed</Custom>
+</InstallExecuteSequence>
+----
+
+При удалении решения, необходимо вызвать [.dfn .term]_Консоль настройки_ Docsvision с параметрами: [.ph .filepath]`"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
+
+[source,pre,codeblock]
+----
+<CustomAction Id="UnRegisterSnapIn" Directory='INSTALLFOLDER' Return="ignore" Execute='deferred' 
+ ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n NetstatSolution' />
+<InstallExecuteSequence>
+ <Custom Action='UnRegisterSnapIn' After="InstallInitialize">REMOVE~="All" AND (NOT UPGRADINGPRODUCTCODE)</Custom>
+</InstallExecuteSequence>
+----
+
+Чтобы серверная часть поддерживала обновление, добавляем:
+
+[source,pre,codeblock]
+----
+ <MajorUpgrade DowngradeErrorMessage="Более новая версия продукта [ProductName] уже установлена." />
+ <Upgrade Id="$(var.UpgradeCode)">
+  <UpgradeVersion Minimum="$(var.ProductVersion)"
+   IncludeMinimum="no"
+   OnlyDetect="yes"
+   Language="1049"
+   Property="NEWPRODUCTFOUND" />
+
+  <UpgradeVersion Minimum="$(var.RTMProductVersion)"
+   IncludeMinimum="yes"
+   Maximum="$(var.ProductVersion)"
+   IncludeMaximum="no"
+   Language="1049"
+   Property="UPGRADEFOUND" />
+ </Upgrade>
+----
+
+[NOTE]
+====
+[.note__title]#Прим.:# Если Вы работаете с исходными кодами проекта, то пакет установки серверной части собирается последним.
+====
+
+Фактически данный шаг является заключительным: после сборки, пакет может быть установлен на сервер для всестороннего тестирования. Клиентская часть устанавливается автоматически при запуске Windows-клиента.
+
+== См. также
+
+* xref:UpdateSolution.adoc[Обновление решения]
+
+*На уровень выше:* xref:../pages/CreateInstaller.adoc[Создание пакета установки]

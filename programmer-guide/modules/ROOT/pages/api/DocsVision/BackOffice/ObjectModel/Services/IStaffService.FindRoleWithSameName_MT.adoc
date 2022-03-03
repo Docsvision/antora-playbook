@@ -1,0 +1,45 @@
+= IStaffService.FindRoleWithSameName - метод (StaffRole, String)
+
+Осуществляет поиск роли по названию с исключением указанной роли из результатов.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffRole FindRoleWithSameName(StaffRole role, string roleName)
+----
+
+Параметры
+
+role::
+  Тип: xref:../StaffRole_CL.adoc[StaffRole]
+  +
+  Роль, которая должна быть исключена из результатов
+roleName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название искомой роли
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffRole_CL.adoc[StaffRole]
+  +
+  Роль с названием roleName
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр role, либо передан пустой параметр roleName.
+|===
+
+== Заметки
+
+Метод может быть полезен при поиске возможных дубликатов роли `role`.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

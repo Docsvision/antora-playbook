@@ -1,0 +1,35 @@
+= IReusableCardComponent - интерфейс
+
+Определяет возможность переиспользования компонента карточки.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IReusableCardComponent
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IReusableCardComponent.CanBeReused_PR.adoc[CanBeReused] |Возвращает признак того, что компонент может быть переиспользован.
+|xref:IReusableCardComponent.Mode_PR.adoc[Mode] |Возвращает режим переиспользования компонента карточки.
+|===
+
+== Заметки
+
+Переиспользуемый компонент кэшируется во внутреннем хранилище контейнера карточек и при следующем обращении (в т.ч. к карточке аналогичного типа) запрашивается из кэша, вместо повторного создания.
+
+Если установлен режим [.keyword .apiname]#Mode.OwnLogic#, то контейнер карточек получает признак переиспользования компонента из переменной [.keyword .apiname]#CanBeReused#, если режим [.keyword .apiname]#Mode.CardHostLogic#, то необходимость переиспользования компонента определяется самим контейнером карточек, исходя из внутренней логики. В режиме [.keyword .apiname]#Mode.NoReusage# компонент не кэшируется, а создается каждый раз повторно.
+
+Необходимость использования данной функциональности определяется разработчиком.
+
+* *xref:../../../../api/DocsVision/Platform/CardHost/IReusableCardComponent.CanBeReused_PR.adoc[IReusableCardComponent.CanBeReused - свойство]* +
+* *xref:../../../../api/DocsVision/Platform/CardHost/IReusableCardComponent.Mode_PR.adoc[IReusableCardComponent.Mode - свойство]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost - пространство имен]

@@ -1,0 +1,79 @@
+= AccessInfo - класс
+
+Результат проверки доступности операции для вида карточки и набора исполняемых ролей.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public sealed class AccessInfo
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AccessInfo_CT.adoc[AccessInfo()] |Инициализирует новый экземпляр класса AccessInfo.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AccessInfo.Operations_PR.adoc[Operations] |Возвращает список всех доступных для карточки операций и признак разрешения запуска согласно ролевой модели.
+|xref:AccessInfo.Roles_PR.adoc[Roles] |Возвращает коллекцию ролей, у которых есть доступ к карточке.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AccessInfo.Load_MT.adoc[Load(XmlReader)] |Загружает параметры доступа из XML.
+|xref:AccessInfo.Save_MT.adoc[Save(XmlWriter)] |Сохраняет параметры доступа в XML.
+|===
+
+== Примеры
+
+Ниже приведен пример вывода в консоль информации по доступности операций документа с идентификатором 00000000-0000-0000-0000-000000000000
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение необходимых сервисов
+IServerExtensionProxyService iServerExtensionProxyService = objectContext.GetService<IServerExtensionProxyService>();
+
+//получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//получение прав в формате XML, статус и вид карточки забираем из самой карточки
+string accessInfoString = iServerExtensionProxyService.GetAccessInfo(objectContext.GetObjectRef<Document>(document).Id,
+ objectContext.GetObjectRef<KindsCardKind>(document.SystemInfo.CardKind).Id,
+ objectContext.GetObjectRef<StatesState>(document.SystemInfo.State).Id);
+
+//заполнение AccessInfo данными
+AccessInfo accessInfo = new AccessInfo();
+accessInfo.Load(new XmlTextReader(new StringReader(accessInfoString)));
+
+//обрабатываем только операции
+foreach (var item in accessInfo.Operations)
+{
+ //получение локализованного названия операции, вывод в консоль вместе с признаком разрешения
+ string operationName = objectContext.GetObject<StatesOperation>(item.OperationId).LocalizedName;
+ Console.WriteLine(string.Format("Operation {0} is {1}", operationName, item.Result));
+}
+----
+
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo_CT.adoc[AccessInfo - конструктор]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Operations_PR.adoc[AccessInfo.Operations - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Roles_PR.adoc[AccessInfo.Roles - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Load_MT.adoc[AccessInfo.Load - метод (XmlReader)]* +
+* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Save_MT.adoc[AccessInfo.Save - метод (XmlWriter)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

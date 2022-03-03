@@ -1,0 +1,42 @@
+= Элемент управления CommunicativeMultiChooseBox
+
+Элемент управления CommunicativeMultiChooseBox предоставляет функциональность выбора нескольких сотрудников из [.dfn .term]_Справочника сотрудников_. Соответствует элементу управления [.ph .uicontrol]*Сотрудники* [.dfn .term]_Конструктора разметок_.
+
+image::img/dev_card_44.png[image]
+
+CommunicativeMultiChooseBox содержит следующие функциональные кнопки:
+
+* image:img/dev_card_44_1.png[image] - флаг состояния выбранного сотрудника в Microsoft Lynс Server. Открывает окно отправки сообщения сотрудникам;
+* image:img/dev_card_44_2.png[image] - открывает окно выбора сотрудников;
+* [.ph .uicontrol]*X* - очищает результат выбора сотрудников.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Связь с сотрудником возможна только при наличии на компьютере пользователя установленного MS Lynс.
+====
+
+CommunicativeMultiChooseBox содержит следующие свойства:
+
+* ObjectContext - [.dfn .term]_контекст объектов_. Элемент управления CommunicativeMultiChooseBox требует ручной передачи [.dfn .term]_контекста объектов_, к примеру, при инициализации карточки
++
+[source,pre,codeblock,language-csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ this.communicativeMultiChooseBox.ObjectContext = this.ObjectContext; // Передача контекста объектов
+}
+----
+* Text - возвращает текст, отображаемый в строке поиска.
+
+Элемент управления предоставляет методы:
+
+* ChooseValue() - открывает окно поиска.
+
+CommunicativeMultiChooseBox разрешает подписку на следующие события:
+
+* CustomizeTypeSearchQuery - событие срабатывает при вводе текста в область поиска.
+
+*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

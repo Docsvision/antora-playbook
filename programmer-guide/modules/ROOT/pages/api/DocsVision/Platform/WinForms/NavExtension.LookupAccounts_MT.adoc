@@ -1,0 +1,34 @@
+= NavExtension.LookupAccounts - метод (String[], SecurityIdentifier[], String[], NavPickerAccountTypes[])
+
+Формирует коллекцию идентификаторов безопасности SID из коллекции имен учетных записей.
+
+* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+protected virtual void LookupAccounts(string[] accountNames, SecurityIdentifier[] accountSids, string[] commonNames, NavPickerAccountTypes[] accountTypes)
+----
+
+Параметры
+
+accountNames::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String][]
+  +
+  Массив имен учетных записей.
+accountSids::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.principal.securityidentifier.aspx[System.Security.Principal.SecurityIdentifier][]
+  +
+  Массив идентификаторов безопасности SID.
+commonNames::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String][]
+  +
+  Массив полных имена учетных записей.
+accountTypes::
+  Тип: xref:../Extensibility/NavPickerAccountTypes_EN.adoc[NavPickerAccountTypes][]
+  +
+  Массив типов учетных записей.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/WinForms/NavExtension_CL.adoc[NavExtension - класс]

@@ -1,0 +1,45 @@
+= INumerationRulesService.GetNumber - метод (BaseCard, Guid)
+
+Возвращает из карточки номер с указанным идентификатором.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardNumber GetNumber(BaseCard baseCard, Guid numberId)
+----
+
+Параметры
+
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка, из которой должен быть полу
+numberId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор номера в карточке
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardNumber_CL.adoc[BaseCardNumber]
+  +
+  Номер в карточке
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или numberId.
+|===
+
+== Заметки
+
+Идентификатор номера в карточке отличается от идентификатора номера в нумераторе.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]

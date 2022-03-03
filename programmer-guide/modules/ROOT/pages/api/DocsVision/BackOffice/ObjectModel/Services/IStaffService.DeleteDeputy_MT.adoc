@@ -1,0 +1,57 @@
+= IStaffService.DeleteDeputy - метод (StaffEmployee, StaffDeputy)
+
+Удаляет заместителя сотрудника.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteDeputy(StaffEmployee employee, StaffDeputy deputy)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник с заместителем
+deputy::
+  Тип: xref:../StaffDeputy_CL.adoc[StaffDeputy]
+  +
+  Заместитель, который должен быть удален
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee или deputy.
+|===
+
+== Примеры
+
+Ниже приведен пример удаления заместителя у текущего сотрудника.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение текущего сотрудника и сотруждника, выполняющего роль заместителя
+StaffEmployee employee = staffService.GetCurrentEmployee();
+StaffEmployee deputyEmployee = objectContext.GetObject<StaffEmployee>(new Guid("21E55387-6A4A-4B86-AC0F-1A454DE1F3DD"));
+
+// Получение удаляемого заместителя сотрудника
+StaffDeputy deputy = employee.Deputies.First(t => t.Employee = deputyEmployee);
+
+// Удаление сотрудника            
+staffService.DeleteDeputy(employee, deputy);
+objectContext.AcceptChanges();   
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

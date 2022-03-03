@@ -1,0 +1,37 @@
+= INumerationRulesService.AddNewRuleItem - метод (NumerationRulesRule)
+
+Добавляет новую строчку в правило нумерации.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+NumerationRulesRuleItem AddNewRuleItem(NumerationRulesRule rule)
+----
+
+Параметры
+
+rule::
+  Тип: xref:../NumerationRulesRule_CL.adoc[NumerationRulesRule]
+  +
+  Правило нумерации, в которое добавляется строка
+
+Возвращаемое значение
+
+::
+  Тип: xref:../NumerationRulesRuleItem_CL.adoc[NumerationRulesRuleItem]
+  +
+  Новая строка в правиле нумерации
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр rule.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]

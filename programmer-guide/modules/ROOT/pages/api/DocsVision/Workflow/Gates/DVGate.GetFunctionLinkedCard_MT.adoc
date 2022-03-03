@@ -1,0 +1,34 @@
+= DVGate.GetFunctionLinkedCard - метод (String, Boolean, ProcessVariable)
+
+Получает карточку, связанную с функцией бизнес-процесса.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void GetFunctionLinkedCard(string FunctionName, bool HardLinked, ProcessVariable Card)
+----
+
+Параметры
+
+FunctionName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название функции бизнес-процесса, из которой будет получена карточка
+HardLinked::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Тип ссылки, по которой получается карточка: true - по сильной ссылке, false - по слабой
+Card::
+  Тип: xref:../Runtime/ProcessVariable_CL.adoc[ProcessVariable]
+  +
+  Переменная процесса, в которую будет сохранена полученная карточка. Карточка сохраняется в `Card.Value`.
+
+== Заметки
+
+Метод [.keyword .apiname]#GetFunctionLinkedCard# позволяет получить ([.keyword]*если это предусмотрено*) идентификатор карточки, из которой был запущен бизнес-процесс. В частности, данный метод может быть использован для получения карточки задания из бизнес-процесса отправки данного задания на исполнение. Особенности использования функции ("Получить карточку, связанную с функцией") приведены в документе [.dfn .term]_Docsvision 5. Руководство по настройке_.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

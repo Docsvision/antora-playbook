@@ -1,0 +1,57 @@
+= IStaffService.AddDeputy - метод (StaffEmployee)
+
+Добавляет указанному сотруднику заместителя.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffDeputy AddDeputy(StaffEmployee employee)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник, которому будет добавлен заместитель
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffDeputy_CL.adoc[StaffDeputy]
+  +
+  Заместитель
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение сотрудника, которому добавляется заместитель
+StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Добавление заместителя с минимальным набором прав
+StaffDeputy deputy = staffService.AddDeputy(employee);
+
+// Определение сотрудника, являющегося заместителем
+deputy.Employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000001"));
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

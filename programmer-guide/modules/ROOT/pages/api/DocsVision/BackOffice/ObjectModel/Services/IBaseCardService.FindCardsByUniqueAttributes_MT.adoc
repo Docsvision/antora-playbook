@@ -1,0 +1,74 @@
+= IBaseCardService.FindCardsByUniqueAttributes - метод (Guid, SearchParametersInfo)
+
+Возвращает список идентификаторов карточек, имеющих указанные уникальные атрибуты.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+IEnumerable<Guid> FindCardsByUniqueAttributes(Guid cardKindId, SearchParametersInfo searchParametersInfo)
+----
+
+Параметры
+
+cardKindId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор вида карточки
+searchParametersInfo::
+  Тип: xref:../../Xml/Schemas/SearchParametersInfo_CL.adoc[SearchParametersInfo]
+  +
+  Параметры поиска, представленные в виде массива полей карточки
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<Guid>
+  +
+  Коллекция идентификаторов карточек, удовлетворяющих условиям поиска
+
+== Заметки
+
+Для выполнения данного запроса у карточки заданного вида должны быть настроены уникальные атрибуты в [.dfn .term]_Справочнике видов карточек_. Для поиска необходимо передать значение всех полей, обозначенных как уникальные атрибуты.
+
+== Примеры
+
+Для примера можно рассмотреть поиск по уникальным атрибутам карточек вида "Заявка" (идентификатор 7DB9044E-91B7-447D-8CAA-5E5A4967B8D4). Для данного вида карточки в Справочнике видов карточек добавлены уникальные атрибуты: "Дата регистрации" и "Регистратор".
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Инициализация массива параметров поиска
+SearchParametersInfo searchParametersInfo = new SearchParametersInfo();
+
+// Добавление значения параметра поиска по регистратору документа
+// Регистратор - сотрудник с идентификатор, к примеру, 00000000-0000-0000-0000-000000000000
+// !Название поля состоит из названия секции (MainInfo) и названия поля (Registrar)
+// Тип параметра указывается в соответствии с типом поля
+SearchParameterInfo registrator = new SearchParameterInfo() { 
+ Name = "MainInfoRegistrar",
+ Type = (int)DocsVision.Platform.Data.Metadata.CardModel.FieldType.RefId,
+ Value = new Guid("00000000-0000-0000-0000-000000000000").ToString("B") };
+
+// Добавление значения параметра поиска по дате регистрации документа 
+SearchParameterInfo regDate = new DocsVision.BackOffice.Xml.Schemas.SearchParameterInfo() { 
+ Name = "MainInfoRegDate", 
+ Type = (int)DocsVision.Platform.Data.Metadata.CardModel.FieldType.Date, 
+ Value = "2015.01.01" };
+
+searchParametersInfo.SearchParameterInfo = new SearchParameterInfo[] { registrator, regDate };
+
+// Получение сервиса для работы с базовыми объектами
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+
+// Осуществления поиска документов с указанными уникальными атрибутами
+IEnumerable<Guid> cards = baseCardService.FindCardsByUniqueAttributes(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"), searchParametersInfo);
+----
+
+С помощью аналогичного запроса можно выявить сотрудников нарушивших уникальность документов, для которых предусмотрено ограничение на число экземпляров.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

@@ -1,0 +1,37 @@
+= IBinaryStorage.Write - метод (String, Stream, Int64)
+
+Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
+
+* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+long Write(string id, Stream sourceStream, long position)
+----
+
+Параметры
+
+id::
+  Тип: System.String
+  +
+  [Описание]
+sourceStream::
+  Тип: System.IO.Stream
+  +
+  Поток с данными файла
+position::
+  Тип: System.Int64
+  +
+  Позиция в файле в хранилище, с которой должна выполняться запись
+
+Возвращаемое значение
+
+::
+  Тип: System.Int64
+  +
+  Количество записанных байт
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage - интерфейс]

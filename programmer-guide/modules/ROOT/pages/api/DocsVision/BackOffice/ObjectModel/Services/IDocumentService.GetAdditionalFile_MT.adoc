@@ -1,0 +1,47 @@
+= IDocumentService.GetAdditionalFile - метод (DocumentFile)
+
+Возвращает карточку файл с версиями из дополнительного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+VersionedFileCard GetAdditionalFile(DocumentFile additionalFile)
+----
+
+Параметры
+
+additionalFile::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Дополнительный файл документа
+
+Возвращаемое значение
+
+::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Карточка файла с версиями
+
+== Примеры
+
+Ниже приведен пример получения файла с версиями из документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение файла с версиями
+VersionedFileCard versionedFileCard = documentService.GetAdditionalFile(document.Files.First(t => t.FileType = DocumentFileType.Additional));
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

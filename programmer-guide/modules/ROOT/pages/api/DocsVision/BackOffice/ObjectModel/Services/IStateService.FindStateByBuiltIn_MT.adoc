@@ -1,0 +1,61 @@
+= IStateService.FindStateByBuiltIn - метод (BuiltInState, BaseCard)
+
+Возвращает состояние карточки, представленное в [.dfn .term]_Конструкторе состояний_ и соответствующее переданному встроенному состоянию.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StatesState FindStateByBuiltIn(BuiltInState builtInState, BaseCard baseCard)
+----
+
+Параметры
+
+builtInState::
+  Тип: xref:../BuiltInState_CL.adoc[BuiltInState]
+  +
+  Встроенное состояние
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка, для которой выполняется
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StatesState_CL.adoc[StatesState]
+  +
+  Состояние, определенное в [.dfn .term]_Конструкторе состояний_
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInState.
+|===
+
+== Заметки
+
+Параметр `baseCard` используется для получения вида карточки, из параметров которого может быть найдено соответствие с переданным состоянием `builtInState`.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IStateService stateService = objectContext.GetService<IStateService>();
+
+// Получение задания
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Состояние карточки, соответствующее builtInState
+StatesState state = stateService.FindStateByBuiltIn(Task.RejectedState, task);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

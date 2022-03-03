@@ -1,0 +1,69 @@
+= IFilesViewWithPreview - интерфейс
+
+Интерфейс IFilesViewWithPreview определяет события и свойства элемента для предпросмотра содержимого файла.
+
+* [.keyword]*Пространство имен:* xref:CardDocument_NS.adoc[DocsVision.BackOffice.Cards.CardDocument]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.Cards.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IFilesViewWithPreview
+----
+
+[[IFilesViewWithPreview_IN__section_uth_4b4_3qb]]
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:AddFile_MT.adoc[AddFile(DocumentLoadSource)] |Добавляет файл из указанного источника.
+|xref:AddFileAsync_MT.adoc[AddFileAsync(DocumentLoadSource)] |Добавляет файл из указанного источника асинхронно.
+|xref:AddMainFSFile_1_MT.adoc[AddMainFSFile] |Добавляет основной файл из файловой системы.
+|xref:AddMainFSFileAsync_1_MT.adoc[AddMainFSFileAsync] |Добавляет основной файл из файловой системы асинхронно.
+|xref:AddMainScanFile_1_MT.adoc[AddMainScanFile] |Добавляет основной файл со сканера.
+|xref:AddMainScanFile_1_MT.adoc[AddMainScanFileAsync] |Добавляет основной файл со сканера.
+|xref:OpenMainFile_1_MT.adoc[OpenMainFile] |Открывает основной файл.
+|xref:OpenMainFileAsync_1_MT.adoc[OpenMainFileAsync] |Открывает основной файл асинхронно.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|FileOperationInProgress |Возвращает признак выполнения длительной операции в списке файлов. Если true – в данный момент выполняется длительная операция.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AdditionalFileAdded |Событие возникает после открытия дополнительного файла.
+|AdditionalFileRemoved |Событие возникает после удаления дополнительного файла.
+|AdditionalFileSelected |Событие возникает при выборе дополнительного файла.
+|AfterFileOpened |Событие возникает после открытия файла (основного или дополнительного).
+|BeforeFileOpened |Событие возникает перед открытием файла (основного или дополнительного).
+|BeforeMainFileAdded |Событие возникает перед открытием основного файла.
+|BeforeAdditionalFileAdded |Событие возникает перед открытием дополнительного файла.
+|BeforeMainFileRemoved |Событие возникает перед удалением основного файла.
+|BeforeAdditionalFileRemoved |Событие возникает перед удалением дополнительного файла.
+|DocumentUnlocking |Событие возникает перед снятием блокировки с файла (основного или дополнительного).
+|DocumentUnlocked |Событие возникает после снятия блокировки с файла (основного или дополнительного).
+|MainFileSelected |Событие возникает при выборе основного файла.
+|MainFileRemoved |Событие возникает после удаления основного файла.
+|MainFileAdded |Событие возникает после открытия основного файла.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddFile_MT.adoc[AddFile - метод (DocumentLoadSource)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddFileAsync_MT.adoc[AddFileAsync - метод (DocumentLoadSource)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFile_1_MT.adoc[AddMainFSFile - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFileAsync_1_MT.adoc[AddMainFSFileAsync - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFile_1_MT.adoc[AddMainScanFile - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFileAsync_1_MT.adoc[AddMainScanFileAsync - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFile_1_MT.adoc[OpenMainFile - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFileAsync_1_MT.adoc[OpenMainFileAsync - метод]* +
+
+*Parent topic:* xref:../../../../../api/DocsVision/BackOffice/Cards/CardDocument/CardDocument_NS.adoc[DocsVision.BackOffice.Cards.CardDocument - пространство имен]

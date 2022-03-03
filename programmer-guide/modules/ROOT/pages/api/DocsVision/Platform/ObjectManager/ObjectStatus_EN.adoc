@@ -1,0 +1,30 @@
+= ObjectStatus - перечисление
+
+Состояние объекта в режиме отложенной записи.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum ObjectStatus
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|Normal |Исходное состояние. Значение 0x0.
+|New |Новый объект. Значение 0x1.
+|Deleted |Объект удален. Значение 0x2.
+|Changed |Данные объекта были изменены. Значение 0x4.
+|Moved |Изменено положение объекта в иерархии. Значение 0x8.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

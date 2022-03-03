@@ -1,0 +1,53 @@
+= LogSearchQuery - класс
+
+Представляет фильтр данных для журнала.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class LogSearchQuery
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|LogSearchQuery |Инициализирует новый экземпляр класса LogSearchQuery.
+|LogSearchQuery(String) |Инициализирует новый экземпляр класса LogSearchQuery с предопределенным значением автора операции.
+|LogSearchQuery(String, Guid) |Инициализирует новый экземпляр класса LogSearchQuery с предопределенным значением автора операции и идентификатора объекта.
+|LogSearchQuery(String, Guid, EventType) |Инициализирует новый экземпляр класса LogSearchQuery с предопределенным типом сообщения.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AccountName |Задает или возвращает учетную запись пользователя, выполнявшего операцию.
+|CreatedAfter |Задает или возвращает нижнюю границу даты совершения операции.
+|CreatedBefore |Задает или возвращает верхнюю границу даты совершения операции.
+|EventType |Задает или возвращает тип сообщения.
+|LogType |Задает или возвращает тип системный уровень сообщения.
+|OperationAfter |Задает или возвращает нижнюю идентификатора кода операции.
+|OperationBefore |Задает или возвращает верхнюю идентификатора кода операции.
+|Operations |Возвращает коллекцию кодов операций.
+|Operations |Возвращает коллекцию идентификаторов операций.
+|ParentId |Задает или возвращает идентификатор родительского объекта.
+|ResourceId |Задает или возвращает идентификатор объекта.
+|TypeId |Задает или возвращает идентификатор типа объекта.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|GetSectionQueryXml(UserSession) |Создает из установленных ограничений строку поиска в формате XML.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

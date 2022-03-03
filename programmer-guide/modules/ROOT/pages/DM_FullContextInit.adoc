@@ -1,0 +1,88 @@
+= Инициализация контекста объектов
+
+[NOTE]
+====
+[.note__title]#Прим.:# Если в качестве базового класса для карточки используется базовая карточка xref:../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[DocsVision.BackOffice.WinForms.BaseCardControl], создавать и инициализировать контекст объектов нет необходимости – он доступен через свойство `ObjectContext`, при этом в него уже добавлены необходимые сервисы для работы с «Базовыми объектами».
+====
+
+[NOTE]
+====
+[.note__title]#Прим.:# Для класса, унаследованного от xref:../api/DocsVision/BackOffice/WinForms/ScriptClassBase_CL.adoc[DocsVision.BackOffice.WinForms.ScriptClassBase], [.dfn .term]_контекст объектов_ будет доступен через свойство `base.CardControl.ObjectContext`.
+====
+
+Пример инициализации контекста объектов, а также добавления в него основных сервисов и преобразователей данных приведен ниже.
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.BackOffice.ObjectModel.Mapping;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.Platform.Data.Metadata;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.ObjectModel;
+using DocsVision.Platform.ObjectModel.Mapping;
+using DocsVision.Platform.ObjectModel.Persistence;
+using DocsVision.Platform.SystemCards.ObjectModel.Mapping;
+using DocsVision.Platform.SystemCards.ObjectModel.Services;
+
+namespace ConnectDV
+{
+ class Program
+ {
+  static UserSession userSession; // сессия пользователя
+  static ObjectContext objectContext; // контекст объектов
+
+  static void Main(string[] args)
+  {
+   CreateContext();
+  }
+
+  static void CreateContext()
+  {
+
+   // Строка соединения с сервером Docsvision
+   string serverDocsvisionUrl = "ConnectAddress=http://localhost/DocsVision/StorageServer/StorageServerService.asmx;BaseName=SampleBase;UserName=IvanovII;Password=SamplePass";
+
+   // Подключение к серверу и открытие сессии
+   SessionManager sessionManager = SessionManager.CreateInstance(serverDocsvisionUrl);
+   userSession = sessionManager.CreateSession();
+
+   // Инициализация сервис-провайдера                            
+   var sessionContainer = new System.ComponentModel.Design.ServiceContainer();
+   sessionContainer.AddService(typeof(DocsVision.Platform.ObjectManager.UserSession), userSession);
+
+   // Инициализация контекста объектов
+   // В качестве контейнера может выступать компонент карточки, унаследованный от DocsVision.Platform.WinForms.CardControl
+   objectContext = new ObjectContext(sessionContainer);
+
+   // Получение сервис-реестра и регистрация фабрик преобразователей
+   IObjectMapperFactoryRegistry mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>();
+   mapperFactoryRegistry.RegisterFactory(typeof(SystemCardsMapperFactory));
+   mapperFactoryRegistry.RegisterFactory(typeof(BackOfficeMapperFactory));
+
+   // Получение сервис-реестра и регистрация фабрик сервисов
+   IServiceFactoryRegistry serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>();
+   serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
+   serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
+
+   // Регистрация сервиса для работы с хранилищем Docsvision
+   objectContext.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
+
+   // Регистрация поставщика метаданных карточек
+   IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession);
+   objectContext.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
+   objectContext.AddService<IMetadataProvider>(metadataProvider);
+  }
+ }
+}
+----
+
+Для корректной сборки необходимо подключить к проекту следующие библиотеки:
+
+* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* [.ph .filepath]`DocsVision.Platform.SystemCards.ObjectModel.dll`
+* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

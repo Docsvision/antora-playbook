@@ -1,0 +1,41 @@
+= ICategoryListService.AddCategory - метод (CategoryList, CategoriesCategory)
+
+Добавляет категорию в заданный список категорий.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+CategoryListCategory AddCategory(CategoryList categoryList, CategoriesCategory category)
+----
+
+Параметры
+
+categoryList::
+  Тип: xref:../CategoryList_CL.adoc[CategoryList]
+  +
+  Список категорий, в который осуществляется добавление
+category::
+  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
+  +
+  Категория, в которую осуществляется добавление
+
+Возвращаемое значение
+
+::
+  Тип: xref:../CategoryListCategory_CL.adoc[CategoryListCategory]
+  +
+  Добавленная категория, представленная в списке категорий
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр categoryList или category.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService - интерфейс]

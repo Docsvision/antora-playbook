@@ -1,0 +1,37 @@
+= QueryObject.AddCriterion - метод (String, Object, CompareOperation)
+
+Добавляет новый критерий поиска в контейнер поискового запроса.
+
+* [.keyword]*Пространство имен:* xref:Search_NS.adoc[DocsVision.Platform.ObjectModel.Search]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public Criterion AddCriterion(string fieldName, object value, CompareOperation operation)
+----
+
+Параметры
+
+fieldName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Название поля, по котором производится поиск
+value::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
+  +
+  Значение искомого поля
+operation::
+  Тип: xref:CompareOperation_EN.adoc[CompareOperation]
+  +
+  Оператор сравнения действительного и искомого значений поля
+
+Возвращаемое значение
+
+::
+  Тип: xref:Criterion_CL.adoc[Criterion]
+  +
+  Критерий поиска
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject - класс]

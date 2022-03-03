@@ -1,0 +1,55 @@
+= IDocumentService.GetMainFile - метод (DocumentFile)
+
+Возвращает карточку файл с версиями из основного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+VersionedFileCard GetMainFile(DocumentFile file)
+----
+
+Параметры
+
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Основной файл документа
+
+Возвращаемое значение
+
+::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Карточка файла с версиями
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр file.
+|===
+
+== Примеры
+
+Ниже приведен пример получения файла с версиями из первого основного файла документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение файла с версиями
+VersionedFileCard versionedFileCard = documentService.GetMainFile(document.Files.First(t => t.FileType = DocumentFileType.Main));
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

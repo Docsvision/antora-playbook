@@ -1,0 +1,161 @@
+= Задание
+
+[cols=",",]
+|===
+|Назначение |Предназначена для доставки на рабочие места пользователей информации о необходимости выполнения того или иного действия в рамках налаженного документооборота, а также доставки файлов, карточек и ссылок на внешние по отношению к системе Docsvision объекты.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService], с помощью которого можно работать с заданиями. Позволяет создавать задания, настраивать и управлять ими.
+
+Доступные операции:
+
+* создание задания;
+* управление состоянием задания;
+* управление комментариями к заданию;
+* управление исполнителями и контроллерами задания;
+* управление делегированием задания;
+* управление подписями задания;
+* подготовка вложений задания;
+* управление настройками задания;
+* управление дочерними и родительскими заданиями.
+
+Далее перечислены базовые сценарии работы с объектной моделью карточки Задание, для которых действительно следующее:
+
+* Контекст объектов может быть получен в соответствии с примером, приведенным в разделе xref:DM_FullContextInit.adoc[Инициализация контекста объектов].
+* Сервисы получаем стандартным способом:
++
+[source,pre,codeblock,language-csharp]
+----
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); //сервис для работы с документами
+ILinkService linkService = objectContext.GetService<ILinkService>(); //сервис для работы со Справочником ссылок
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>(); //сервис для работы со списками ссылок
+IStaffService staffService = objectContext.GetService<IStaffService>(); //сервис для работой со Справочником сотрудников
+IStateService stateService = objectContext.GetService<IStateService>(); //сервис для работы с Конструктором состояний
+ITaskService taskService = objectContext.GetService<ITaskService>(); //сервис для работы с заданиями
+----
+* Для получения информации по классам и переменным, используемым в примерах, воспользуйтесь поиском.
+
+== Создание нового Задания
+
+[source,pre,codeblock,language-csharp]
+----
+static void CreateTask()
+{
+ // Получение вида для создаваемого задания. AB801854-70AF-4B6C-AB48-1B59B5D11AA9 - "На исполнение"
+ KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+
+ // Получение сотрудника, назначаемого исполнителем задания
+ StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Создание задания и заполнение базовых данных
+ Task task = taskService.CreateTask(kind);
+ task.MainInfo.Name = "Название задания";
+ task.Description = "Дайджест созданного задания"; 
+ task.MainInfo.Author = staffService.GetCurrentEmployee(); //автор задания
+ taskService.AddSelectedPerformer(task.MainInfo, employee); //добавление выбранного исполнителя
+ task.MainInfo.Priority = TaskPriority.Low; //установка низкого приоритета
+ task.MainInfo.EndDate = DateTime.Now.AddDays(1); //срок выполнения - "завтра"
+ task.MainInfo.Content = "Данное задание является примером и не требует исполнения";
+ objectContext.SaveObject(task); //сохранение созданного задания
+}
+----
+
+== Добавление файла в Задание
+
+[source,pre,codeblock,language-csharp]
+----
+static void AddFile()
+{
+ string file = @"z:\Sample.docx"; //загружаемый файл
+ 
+ // Получение задания, в которое производится добавление файла
+ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Создание нового списка ссылок               
+ ReferenceList referenceList = referenceListService.CreateReferenceList();
+ task.MainInfo.ReferenceList = referenceList;
+
+ // Получение типа ссылки по имени
+ LinksLinkType linkType = linkService.FindLink("КЗ_ДополненияФайлы");
+
+ // Создание карточки Файл для последующей загрузки в задание
+ KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("F9A8D158-9884-4765-859D-31C4EFCA149D")); //получение вида карточки
+ Document fileCard = documentService.CreateDocument(file, kind); //создание документа
+ fileCard.MainInfo.Name = "Файл для задания";
+ objectContext.SaveObject(fileCard); //требуется сохранение
+
+ // Добавление ссылки на файл в список ссылок            
+ referenceListService.CreateReference(referenceList, linkType, fileCard, string.Empty, true);
+ objectContext.AcceptChanges();
+}
+----
+
+== Отправка Задания на исполнение
+
+[source,pre,codeblock,language-csharp]
+----
+static void StartTask()
+{
+ // Получение задания
+ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Запуск задания на исполнение
+ taskService.StartTask(task);
+
+ // Получение перехода Подготовка - Не начато
+ StatesStateMachineBranch branch = stateService.FindBranchByBuiltIn(Task.InitializationToStartedByStart, task.SystemInfo.State);
+
+ // Изменение состояния
+ stateService.ChangeState(task, branch);
+}    
+----
+
+== Делегирование задания
+
+[source,pre,codeblock,language-csharp]
+----
+static void DelegateTask()
+{
+ // Получение задания
+ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Получение сотрудника, которому осуществляется делегирование задания
+ StaffEmployee newPerformer = staffService.Get(new Guid("00000000-0000-0000-0000-000000000001"));
+ 
+ // Делегирование задания сотруднику newPerformer
+ taskService.Delegate(task, new StaffEmployee[] { newPerformer }, null, false, false, "Необходимо выполнить задание");
+
+ // Установка для задания состояния Делегировано
+ stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.DelegatedState, task));
+}
+----
+
+== Завершение Задания
+
+[source,pre,codeblock,language-csharp]
+----
+static void CompleteTask()
+{
+ // Получение задания
+ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+ // Завершение задания с комментарием
+ BuiltInState state = taskService.CompleteTask(task, "Задание было завершено успешно");
+
+ //Поиск в Конструкторе состояний состояния, соответствующего "встроенного" состоянию Завершено
+ StatesState cancelState = stateService.FindStateByBuiltIn(state, task); 
+ 
+ // Изменение состояния
+ stateService.ChangeState(task, cancelState);
+}
+----
+
+Метод [.keyword .apiname]#CompleteTask# выполняет проверку и установку параметров, необходимых для корректного завершения задания, но фактическое изменение состояние производит метод [.keyword .apiname]#ChangeState#.
+
+[NOTE]
+====
+[.note__title]#Прим.:# При работе с методами сервиса [.keyword .apiname]#ITaskService# нужно учитывать, что при выполнении статусных методов (отозвать, принять, отклонить и т.д.) статус самого задание не изменяется. Для непосредственной смены статуса используется метод [.keyword .apiname]#IStateService.ChangeState(BaseCard, StatesState)#.
+====
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

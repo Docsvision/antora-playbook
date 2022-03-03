@@ -1,0 +1,63 @@
+= INumerationRulesService.CreateNumber - метод (CardData, BaseCard, NumerationRulesRule)
+
+Выделяет указанной карточке номер из нумератора следуя приложенному правилу нумерации.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardNumber CreateNumber(CardData cardData, BaseCard baseCard, NumerationRulesRule rule)
+----
+
+Параметры
+
+cardData::
+  Тип: xref:../../../Platform/ObjectManager/CardData_CL.adoc[CardData]
+  +
+  Карточка, которой выделяется номер
+baseCard::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Объектная модель карточки, которой выделяется номер
+rule::
+  Тип: xref:../NumerationRulesRule_CL.adoc[NumerationRulesRule]
+  +
+  Правило нумерации, по которому будет выделен номер
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardNumber_CL.adoc[BaseCardNumber]
+  +
+  Выделенный номер
+
+== Примеры
+
+Ниже приведен пример выделения номера из нумератора для карточки.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+INumerationRulesService numerationRulesService = objectContext.GetService<INumerationRulesService>();
+
+// Получение правила нумерации, по которому выделяется номер
+QueryObject query = new QueryObject(RefNumerationRules.Rules.RuleName, "УД Исходящий");
+NumerationRulesRule numerationRule = objectContext.FindObject<NumerationRulesRule>(query);
+
+// Идентификатор карточки, которой выделяется номер
+Guid cardId = new Guid(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Выделение номера
+numerationRulesService.CreateNumber(userSession.CardManager.GetCardData(cardId),
+objectContext.GetObject<Document>(cardId), numerationRule);
+objectContext.AcceptChanges();
+----
+
+Если необходимо использовать выделенный номер в качестве регистрационного номера документа, достаточно записать идентификатор выделенного номера в поле [.keyword]*RegNumber* карточки.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]

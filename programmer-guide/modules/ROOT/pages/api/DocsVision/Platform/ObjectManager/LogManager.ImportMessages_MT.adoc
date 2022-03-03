@@ -1,0 +1,35 @@
+= LogManager.ImportMessages - метод (String)
+
+Импортирует заданные сообщения для последующей обработки.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract InfoRowCollection ImportMessages(string xml)
+----
+
+Параметры
+
+xml::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Строка содержащая импортируемые события
+
+Возвращаемое значение
+
+::
+  Тип: xref:InfoRowCollection_CL.adoc[InfoRowCollection]
+  +
+  Коллекция нетипизированных данных
+
+== Заметки
+
+Импортируемые данные не сохраняются в журнал событий, а служат для последующей обработки и загрузки методами LogMessage или LogMessageEx.
+
+Метод возвращает коллекцию нетипизированных данных InfoRowCollection, поля которой соответствуют полям системного журнала (dvsys_log).
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager - класс]

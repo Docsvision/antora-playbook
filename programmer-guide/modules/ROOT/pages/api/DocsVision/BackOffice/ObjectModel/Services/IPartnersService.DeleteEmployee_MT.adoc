@@ -1,0 +1,46 @@
+= IPartnersService.DeleteEmployee - метод (PartnersEmployee)
+
+Удаляет сотрудника контрагента
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteEmployee(PartnersEmployee employee)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../PartnersEmployee_CL.adoc[PartnersEmployee]
+  +
+  Сотрудник контрагента
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получаем сервис для работы с контрагентами
+IPartnersService partnersService = objectContext.GetService<IPartnersService>();
+
+// Получаем сотрудника контрагента
+PartnersEmployee partnersEmployee = partnersService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Удаляем сотрудника
+partnersService.DeleteEmployee(partnersEmployee);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

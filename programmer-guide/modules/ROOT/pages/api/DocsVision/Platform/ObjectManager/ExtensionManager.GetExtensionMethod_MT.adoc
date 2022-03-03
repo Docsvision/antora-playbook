@@ -1,0 +1,53 @@
+= ExtensionManager.GetExtensionMethod - метод (String, String)
+
+Получает объект для вызова метода серверного расширения.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract ExtensionMethod GetExtensionMethod(string extensionName, string methodName)
+----
+
+Параметры
+
+extensionName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Имя расширения. Данное имя должно быть записано в реестре сервера
+methodName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Имя вызываемого метода
+
+Возвращаемое значение
+
+::
+  Тип: xref:ExtensionMethod_CL.adoc[ExtensionMethod]
+  +
+  Объект для доступа к методу расширения
+
+== Заметки
+
+В случае отсутствия указанного в параметрах расширения или метода, GetExtensionMethod вернет ошибку.
+
+== Примеры
+
+В приведенном примере, вызывается метод GetFileContent расширения SampleExtension, с передачей в качестве параметра расположения файла на диске.
+
+[source,pre,codeblock,language-csharp]
+----
+//Получаем метод расширения
+ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("SampleExtension", "GetFileContent");
+
+//Добавляем параметр метода
+method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "C:\\Test.txt";
+    
+//Вызов метода
+string content = method.Execute().ToString();
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager - класс]

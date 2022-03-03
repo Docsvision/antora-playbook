@@ -1,0 +1,78 @@
+= IBaseCardService.AddSignaturePart - метод (BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)
+
+Инициализирует и добавляет в указанную подпись часть подписи, прошедшую проверку срока действия.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[AddSignaturePart1__section_mlc_jcr_4pb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+BaseCardSignature AddSignaturePart(BaseCardSignature signature, Guid typeId, byte[] signatureData, string description, Guid fileId, Guid fileVersionId, BaseCard partObject, DateTime? expireDate, BaseCardSignaturePartStatus status)
+----
+
+Параметры
+
+signature::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Электронная подпись
+typeId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор типа части подписи
+signatureData::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
+  +
+  Содержимое добавляемой части подписи
+description::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Примечание к части подписи
+fileId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор подписываемого файла
+fileVersionId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор версии подписываемого файла
+partObject::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Базовый объект
+
+expireDate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
+  +
+  Дата и время окончания срока действия сертификата части подписи
+
+status::
+  Тип: BaseCardSignaturePartStatus
+  +
+  Результат проверки подписи. Может принимать значения из: Unknown = 0, Valid = 1, Invalid = 2, Expired = 3, Error = 4, Expiring = 5
+
+Возвращаемое значение
+
+::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Итоговая подпись, включающая добавляемую часть подписи после прохождения проверки срока действия.
+
+[[AddSignaturePart1__section_nlc_jcr_4pb]]
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signature или signatureData.
+|===
+
+[[AddSignaturePart1__section_plc_jcr_4pb]]
+== Заметки
+
+Как правило, вызывать данный метод нет необходимости - соответствующий вызов делает сервис. Например, метод [.keyword .apiname]#IDocumentService.ComputeAttachmentSignature# вызовет [.keyword .apiname]#AddSignaturePart# с необходимыми параметрами.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

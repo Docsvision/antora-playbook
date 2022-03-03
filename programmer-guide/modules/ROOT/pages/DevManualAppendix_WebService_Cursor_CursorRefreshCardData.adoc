@@ -1,0 +1,89 @@
+= CursorRefreshCardData
+
+Возвращает данные карточки.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CursorRefreshCardData"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshCardData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <instanceId>guid</instanceId>
+      <timestamp>long</timestamp>
+    </CursorRefreshCardData>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+instanceId::
+  Идентификатор карточки
+timestamp::
+  Метка времени. Если timestamp соответствует метке времени на сервере, то данные возвращены не будут.
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshCardDataResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <timestamp>long</timestamp>
+      <cursorInfo>
+        <ID>guid</ID>
+        <PageCount>unsignedInt</PageCount>
+        <RowCount>unsignedInt</RowCount>
+        <FirstPage>string</FirstPage>
+        <UsingCompression>boolean</UsingCompression>
+      </cursorInfo>
+    </CursorRefreshCardDataResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит данные, если существующие в кэше данные устарели. Актуальность определяется на основе метки времени.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CursorRefreshCardData"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshCardData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <instanceId>6710B92A-E148-4363-8A6F-1AA0EB18936C</instanceId>
+      <timestamp>377104</timestamp>
+    </CursorRefreshCardData>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Cursor.adoc[Курсоры]

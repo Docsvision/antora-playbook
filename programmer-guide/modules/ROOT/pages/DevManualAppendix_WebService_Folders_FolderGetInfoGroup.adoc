@@ -1,0 +1,117 @@
+= FolderGetInfoGroup
+
+Возвращает массив данных о нескольких папках.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderGetInfoGroup"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderGetInfoGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <folderIds>string</folderIds>
+      <folderInfoOptions>string</folderInfoOptions>
+    </FolderGetInfoGroup>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+folderIds::
+  Идентификаторы папок
+folderInfoOptions::
+  Дополнительные параметры запроса
+
+Строка [.keyword]*folderIds* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="GroupOperation">
+  <xsd:complexType>
+    <xsd:sequence maxOccurs="unbounded">
+      <xsd:element name="Item">
+        <xsd:complexType>
+          <xsd:attribute name="ID" type="xsd:string" use="required"/>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>
+----
+
+Строка [.keyword]*folderInfoOptions* должна соответствовать формату элемента [.keyword]*FolderInfoOptions*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+
+[source,pre,codeblock]
+----
+<xsd:element name="FolderInfoOptions">
+  <xsd:complexType>
+    <xsd:attribute name="IncludeArchived" type="xsd:boolean"/>
+    <xsd:attribute name="IncludeDeleted" type="xsd:boolean"/>
+  </xsd:complexType>
+</xsd:element>
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderGetInfoGroupResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <cursorInfo>
+        <ID>guid</ID>
+        <PageCount>unsignedInt</PageCount>
+        <RowCount>unsignedInt</RowCount>
+        <FirstPage>string</FirstPage>
+        <UsingCompression>boolean</UsingCompression>
+      </cursorInfo>
+    </FolderGetInfoGroupResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит количество непрочитанных карточек и количество подчиненных папок. Серверный курсор будет открыт при необходимости.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderGetInfoGroup"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderGetInfoGroup xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <folderIds>&lt;GroupOperation&gt;&lt;Item ID=&quot;E3768B6E-CDD2-47E7-BF26-F86C9EEC2840&quot;/&gt;&lt;Item ID=&quot;B89B3747-4245-4AEF-94BA-7EB096A734E1&quot;/&gt;&lt;/GroupOperation&gt;</folderIds>
+      <folderInfoOptions>&lt;FolderInfoOptions IncludeArchived=&quot;false&quot; IncludeDeleted=&quot;false&quot;/&gt;</folderInfoOptions>
+    </FolderGetInfoGroup>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Folders.adoc[Папки]

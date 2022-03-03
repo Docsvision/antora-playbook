@@ -1,0 +1,38 @@
+= ApprovalFilesCreator.CreateFiles - метод (ObjectContext, Document , SectionData, IEnumerable<DocumentFile>)
+
+Добавляет файлы документа в карточку Согласование.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public static void CreateFiles(ObjectContext context, Document initialDocument, SectionData approvalFilesSectionData, IEnumerable<DocumentFile> files)
+----
+
+Параметры
+
+context::
+  Тип: xref:../../Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext]
+  +
+  Текущий контекст объектов
+initialDocument::
+  Тип: xref:../../BackOffice/ObjectModel/Document_CL.adoc[Document]
+  +
+  Документ, файлы которого добавляются в Согласование; инициирующий документ
+approvalFilesSectionData::
+  Тип: xref:../../Platform/ObjectManager/SectionData_CL.adoc[SectionData]
+  +
+  Секция карточки Согласование, в которую будут добавлены ссылки на файлы
+files::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>
+  +
+  Добавляемые в Согласование файлы документа; тип - xref:../../BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+
+== Заметки
+
+Для добавления файлов документа в Согласование используйте вместо [.keyword .apiname]#CreateFiles# метод xref:../../DocumentsManagement/ObjectModel/IReconcileService.FillFiles_MT.adoc[FillFiles] сервиса [.keyword .apiname]#IReconcileService# (реализованного в сборке [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`).
+
+*На уровень выше:* xref:../../../../api/DocsVision/ApprovalDesigner/ObjectModel/ApprovalFilesCreator_CL.adoc[ApprovalFilesCreator - класс]

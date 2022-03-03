@@ -1,0 +1,58 @@
+= ILockService.IsObjectLocked<T> - метод (T, Boolean, String)
+
+Определяет наличие и владельца блокировки, установленной на объект.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool IsObjectLocked<T>(T obj, out bool byMe, out string ownerName) where T : ObjectBase;
+----
+
+Параметры типа
+
+T::
+  Тип объекта, состояние блокировки которого запрашивается
+
+Параметры
+
+obj::
+  Тип: T
+  +
+  Объект, состояние блокировки которого запрашивается
+byMe::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если true, то блокировка установлена текущим пользователем
+ownerName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Учетная запись сотрудника, заблокировавшего объект. Если заблокировано текущим пользователем, то возвращает пустую строку
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если объект заблокирован, то возвращает true
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+ILockService lockService = objectContext.GetService<ILockService>();
+bool lockIsMy;
+string lockOwner;
+
+// Получение документа, для которого определяется блокировка
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение владельца блокировки
+bool locked = lockService.IsObjectLocked<BaseCard>(document, out lockIsMy, out lockOwner);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService - интерфейс]

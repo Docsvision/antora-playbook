@@ -1,0 +1,53 @@
+= ICustomizableControl - интерфейс
+
+Добавляет к базовому классу карточки возможность работы с разметкой.
+
+* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ICustomizableControl
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CardData |Возвращает данные карточки.
+|LayoutControl |Возвращает разметку карточки.
+|xref:ICustomizableControl.RibbonControl_PR.adoc[RibbonControl] |Предоставляет доступ к свойствам ленты карточки.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|FindLayoutItem(String) |Осуществляет поиск элемента разметки с указанным именем.
+|xref:ICustomizableControl.FindPropertyItem_MT.adoc[FindPropertyItem<T>(String)] |Осуществляет поиск свойства указанного типа `T` с заданным названием.
+|PrepareDesignMode |Переводит окно карточки в режим конструктора. Отключает элементы управления расположенные на ленте инструментов.
+|RefreshLayoutItems(IEnumerable<LayoutsProperty>) |Обновляет свойства элементов представления, полученных из переданного списка.
+|===
+
+== Примеры
+
+Ниже приведен пример скрипта, скрывающего кнопку "Сохранить".
+
+[source,pre,codeblock,language-csharp]
+----
+using DevExpress.XtraBars;
+
+private void Button_Click(System.Object sender, System.EventArgs e)
+{       
+ (this.CardControl as ICustomizableControl).RibbonControl.Items["saveRibbonButtonItem"].Visibility = BarItemVisibility.Never;
+}
+----
+
+* *xref:../../../../api/DocsVision/BackOffice/WinForms/ICustomizableControl.RibbonControl_PR.adoc[ICustomizableControl.RibbonControl - свойство]* +
+* *xref:../../../../api/DocsVision/BackOffice/WinForms/ICustomizableControl.FindPropertyItem_MT.adoc[ICustomizableControl.FindPropertyItem<T> - метод (String)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms - пространство имен]

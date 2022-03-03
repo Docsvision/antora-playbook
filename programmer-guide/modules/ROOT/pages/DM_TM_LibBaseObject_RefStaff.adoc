@@ -1,0 +1,48 @@
+= Справочник сотрудников
+
+[cols=",",]
+|===
+|Назначение |Предназначен для хранения сведений о структуре организации: входящих в ее состав подразделениях и отдельных сотрудниках.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Staff_CL.adoc[DocsVision.BackOffice.ObjectModel.Staff]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService], с помощью которого можно программно создавать и удалять объекты справочника сотрудников, управлять ими, кроме того, возможна синхронизация с Active Directory.
+
+Доступные операции:
+
+* добавление объектов в справочник;
+* удаление объектов из справочника;
+* поиск объектов в справочнике;
+* проверить уникальность данных;
+* получение объектов справочника;
+* синхронизация с ActiveDirectory;
+* управление данными сотрудника и подразделения;
+* управление структурой справочника;
+* управление правами.
+
+В простейшем примере, заведем нового сотрудника в существующее подразделение
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//Получение сервиса для работы со справочником сотрудников
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+//Получение подразделения в которое поступает сотрудник
+StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//Создание нового сотрудника
+StaffEmployee employee = staffService.AddNewEmployee(unit);
+
+//Заполнение данных
+employee.AccountName = "myDomain/myName";
+employee.BirthDate = DateTime.Now;
+employee.LastName = "Иванов";
+employee.FirstName = "Иван";
+
+//Сохранение контекста
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

@@ -1,0 +1,42 @@
+= ITaskService.GetTaskCompletionMailNotificationInfo - метод (Task, String)
+
+Возвращает письмо, подготовленное для отправки, с информацией о завершении задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+MailNotificationInfo GetTaskCompletionMailNotificationInfo(Task task, string taskCardUrl)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+taskCardUrl::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Ссылка на карточку для возможности открытия карточки по url
+
+Возвращаемое значение
+
+::
+  Тип: xref:Entities/MailNotificationInfo_CL.adoc[MailNotificationInfo]
+  +
+  Сущность сообщения
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или taskCardUrl. Также ошибка может быть возвращена, если не определен автор, либо его почтовый адрес, или сотрудник, завершивший задание.
+|https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.PlatformNotSupportedException] |Ошибка возвращается в случае, если задание не находится в состоянии "Завершено".
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

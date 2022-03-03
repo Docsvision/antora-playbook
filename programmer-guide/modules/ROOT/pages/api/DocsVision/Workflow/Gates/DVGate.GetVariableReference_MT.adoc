@@ -1,0 +1,35 @@
+= DVGate.GetVariableReference - метод (Int32, String)
+
+Возвращает URL (ссылку) для открытия карточки или папки.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public virtual string GetVariableReference(int Type, string ID)
+----
+
+Type::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
+  +
+  Тип переменной: xref:DVVariableType_EN.adoc[DVVariableType.DOCUMENT], [.keyword .apiname]#DVVariableType.FILE# или [.keyword .apiname]#DVVariableType.FOLDER#
+ID::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Идентификатор карточки или папки
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Сформированная ссылка
+
+== Заметки
+
+Данный метод предоставляется ссылку для открытия карточки или папки из браузера.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

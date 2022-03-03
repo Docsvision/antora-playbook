@@ -1,0 +1,83 @@
+= Разработка преобразователя данных
+
+Для строчек секций и карточки должны быть разработаны xref:DM_CardsDev_CreateObjectModel_Mapper.adoc[преобразователи данных].
+
+== Разработка преобразователя данных для строк секций
+
+Т.к. базовым классом строк секций был выбран класс xref:../api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow], то преобразователь данных должен наследоваться от класса [.keyword .apiname]#BaseCardSectionRowMapper<T>#.
+
+. Добавляем класс преобразователя данных:
++
+[source,pre,codeblock,language-csharp]
+----
+public class NetstatSolutionCardMainInfoMapper : BaseCardSectionRowMapper<NetstatSolutionCardMainInfo>
+----
+. Регистрируем поля секции в карте преобразователя данных:
++
+[source,pre,codeblock,language-csharp]
+----
+private static void InitializeObjectMap()
+{
+ NetstatSolutionCardMainInfoMapper.map = new ObjectMap();
+ NetstatSolutionCardMainInfoMapper.map.ObjectTypeId = NetstatSolutionCardDefs.MainInfo.ID;
+ NetstatSolutionCardMainInfoMapper.map.Field(NetstatSolutionCardMainInfo.AddressProperty, "Address");
+ NetstatSolutionCardMainInfoMapper.map.Field(NetstatSolutionCardMainInfo.IsCheckedProperty, "IsChecked");
+// и т.д.
+----
+
+Для строчек секции Journal преобразователь данных создается аналогичным способом.
+
+== Разработка преобразователя данных для карточки
+
+Преобразователь данных для карточки оформляется аналогично преобразователю данных для строчек секции, за исключением базового класса.
+
+. Добавляем класс преобразователя данных:
++
+[source,pre,codeblock,language-csharp]
+----
+ public class NetstatSolutionCardMapper : BaseCardMapper<NetstatSolutionCard>
+----
+. Регистрируем секции карточки в карте преобразователя данных:
++
+[source,pre,codeblock,language-csharp]
+----
+private static void InitializeObjectMap()
+{
+ NetstatSolutionCardMapper.map = new ObjectMap();
+ NetstatSolutionCardMapper.map.ObjectTypeId = NetstatSolutionCardDefs.ID;
+ NetstatSolutionCardMapper.map.Collection(NetstatSolutionCard.MainInfoProperty, NetstatSolutionCardDefs.MainInfo.ID);
+ NetstatSolutionCardMapper.map.Collection(NetstatSolutionCard.JournalProperty, NetstatSolutionCardDefs.Journal.ID);
+}
+----
+
+== Создание фабрики преобразователей данных
+
+Для добавления функциональности преобразователей данных в контекст объектов, необходимо разработать фабрику преобразователей данных.
+
+. Создаем класс фабрики преобразователей данных с базовым классом [.keyword .apiname]#ObjectMapperFactory#:
++
+[source,pre,codeblock]
+----
+public class NetstatSolutionMapperFactory : ObjectMapperFactory
+----
+. Добавляем конструктор, принимающий контекст объектов. В конструкторе регистрируются все разработанные ранее преобразователи данных.
++
+[source,pre,codeblock,language-csharp]
+----
+public NetstatSolutionMapperFactory(ObjectContext context) : base(context)
+{
+ // Регистрируем в фабрике созданные ранее преобразователи данных
+ // В RegisterObjectMapper передается тип объекта и тип преобразователя, соотвествующего объекту
+ base.RegisterObjectMapper(typeof(NetstatSolutionCard), typeof(NetstatSolutionCardMapper));
+ base.RegisterObjectMapper(typeof(NetstatSolutionCardMainInfo), typeof(NetstatSolutionCardMainInfoMapper));
+ base.RegisterObjectMapper(typeof(NetstatSolutionCardJournal), typeof(NetstatSolutionCardJournalMapper));
+}
+----
+
+После разработки объектной модели карточки (и секций), а также фабрики преобразователей данных, собрав и подключив библиотеку к проекту, уже можно получить объект карточки из контекста объектов, если фабрика преобразователей данных была зарегистрирована в контексте объектов (см. xref:DM_FullContextInit.adoc[пример] инициализации контекста).
+
+== См. также
+
+* xref:CreateCardLib_Services.adoc[Разработка сервиса для работы с карточкой]
+
+*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

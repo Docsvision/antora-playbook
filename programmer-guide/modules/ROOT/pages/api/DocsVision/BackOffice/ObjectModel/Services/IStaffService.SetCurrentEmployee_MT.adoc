@@ -1,0 +1,46 @@
+= IStaffService.SetCurrentEmployee - метод (StaffEmployee)
+
+Переопределяет текущего сотрудника, возвращаемого методом GetCurrentEmployee.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void SetCurrentEmployee(StaffEmployee employee)
+----
+
+Параметры
+
+employee::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Сотрудник
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка будет возвращена, если текущий владелец сессии не входит в группу DocsVision Administrators или DocsVision Power Users.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы со Справочником сотрудников
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение сотрудника, которым будет подменен текущий сотрудник
+StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Подмена сотрудника
+staffService.SetCurrentEmployee(staffEmployee);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

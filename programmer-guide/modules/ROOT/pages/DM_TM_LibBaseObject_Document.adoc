@@ -1,0 +1,123 @@
+= Документ
+
+[cols=",",]
+|===
+|Назначение |Карточки данного типа предназначены для работы с файлами: хранения файлов в различных форматах, предварительный просмотр, учет версий, экспорта в различные форматы, наложение электронно-цифровых подписей в формате p7s.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[DocsVision.BackOffice.ObjectModel.Document]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService], с помощью которого можно выполнять различные операции с документом, начиная с создания документа, и заканчивая работой с файлами и подписями документа.
+
+Доступные операции:
+
+* создание документа;
+* синхронизация свойств с файлом;
+* управление подписями документа;
+* работа с файлами документа;
+* экспорт документа.
+
+Далее перечислены базовые сценарии работы с объектной моделью карточки Документ, для которых действительно следующее:
+
+* Контекст объектов может быть получен в соответствии с примером, приведенным в разделе xref:DM_FullContextInit.adoc[Инициализация контекста объектов].
+* Сервисы получаем стандартным способом:
++
+[source,pre,codeblock,language-csharp]
+----
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); //сервис для работы с документами
+ILinkService linkService = objectContext.GetService<ILinkService>(); //сервис для работы со Справочником ссылок
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>(); //сервис для работы со списками ссылок
+IStaffService staffService = objectContext.GetService<IStaffService>(); //сервис для работой со Справочником сотрудников
+IStateService stateService = objectContext.GetService<IStateService>(); //сервис для работы с Конструктором состояний
+----
+* Для получения информации по классам и переменным, используемым в примерах, воспользуйтесь поиском.
+
+== Создание нового Документа
+
+[source,pre,codeblock,language-csharp]
+----
+static void CreateDocument()
+{
+ // Получение вида карточки Исходящий
+ KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("8E40F327-9517-4A43-998D-BF2BD619588D"));
+ 
+ // Создание документа
+ Document document = documentService.CreateDocument(null, kind);
+ document.Description = "Дайджест карточки Документ"; //отображается в сетке Windows-клиента
+ document.MainInfo.Name = "Название документа"; //отображается при открытии карточки
+ document.MainInfo.Author = document.MainInfo.Registrar = staffService.GetCurrentEmployee(); //регистратор/подготовил + автор
+ document.MainInfo["Content"] = "Содержимое документа"; //таким образом можно получить доступ к полю, отсутствующему в объектной модели       
+ objectContext.SaveObject(document); 
+}
+----
+
+== Добавление основного файла в Документ
+
+[source,pre,codeblock,language-csharp]
+----
+static void AddFile()
+{
+ string filePath = @"z:\Sample.docx"; //прикрепляемый документ
+
+ // Получение документа, к которому добавляется файл
+ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+ 
+ // Добавление основного документа 
+ documentService.AttachMainFile(document, filePath);
+ objectContext.SaveObject<Document>(document);
+}
+----
+
+== Добавление в Документ ссылки на другую карточку
+
+[source,pre,codeblock,language-csharp]
+----
+static void AddLink()
+{
+ // Получение документа, в который добавляется ссылка на карточку
+ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+ BaseCard addedCard = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+ // Получение типа ссылки
+ LinksLinkType linkType = linkService.FindLink("В ответ на");
+
+ // Добавление ссылки в список ссылок документа document
+ referenceListService.CreateReference(document.MainInfo.ReferenceList, linkType, addedCard, "Ссылка на документ", false);   
+}   
+----
+
+== Смена состояния Документа
+
+[source,pre,codeblock,language-csharp]
+----
+static void ChangeDocumentState()
+{
+ // Получение документа
+ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+ 
+ // Получение конечного состояния Документа. В данном случае - Подписан
+ StatesState endState = stateService.GetStates(document.SystemInfo.CardKind).First(t => t.DefaultName.Equals("Is signed"));
+
+ // Смена состояния
+ stateService.ChangeState(document, endState);
+}  
+----
+
+== Подписание Документа и основных файлов
+
+[source,pre,codeblock,language-csharp]
+----
+static void SignDocument()
+{
+ // Получение подписываемого документа
+ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+ 
+ // Получение списка полей, которые должны быть подписаны. Настройки получаем из Справочника видов карточек
+ ICollection<CardFieldSetting> fields = documentService.GetKindSettings(document.SystemInfo.CardKind).DocumentSignature.Fields;
+
+ // Подписание документа. Будут подписаны основные файлы и отдельные поля карточки. Дополнительные файлы подписаны не будут. 
+ documentService.AddSignature(document, GetCertificate(), false, fields);
+ objectContext.SaveObject(document);   
+}
+----
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

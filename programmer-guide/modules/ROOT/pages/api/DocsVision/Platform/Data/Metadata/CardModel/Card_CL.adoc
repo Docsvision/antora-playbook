@@ -1,0 +1,57 @@
+= Card - класс
+
+Предоставляет доступ к метаданным карточки.
+
+* [.keyword]*Пространство имен:* xref:CardModel_NS.adoc[DocsVision.Platform.Data.Metadata.CardModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[CLSCompliant(true)]
+public sealed class Card : CardNamedObject, ICloneable
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Card() |Инициализирует новый экземпляр класса Card.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Actions |Возвращает коллекцию методов карточки.
+|CardFlags |Задает или возвращает флаги карточки.
+|DefaultSecurity |Задает или возвращает набор прав по умолчанию, которые будут назначаться на экземпляры карточки при их создании.
+|FetchMode |Задает или возвращает механизм чтения карточки.
+|Icon |Задает или возвращает иконку.
+|IconFile |Задает или возвращает путь к файлу иконки.
+|LibraryId |Задает или возвращает идентификатор библиотеки.
+|Modes |Возвращает коллекцию режимов работы карточки.
+|ProgId |Задает или возвращает программный идентификатор COM-компонента, реализующего функциональность карточки.
+|Sections |Возвращает коллекцию секций карточки.
+|Transformations |Возвращает коллекцию возможных преобразований данных карточки.
+|TypeName |Задает или возвращает полное имя класса компонента карточки.
+|Version |Задает или возвращает номер версии карточки.
+|VirtualFields |Возвращает коллекцию виртуальных полей.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Accept(CardObjectVisitor) |Применяет внесенные изменения.
+|Clone |Создает копию карточки со всеми секциями.
+|GetSectionByAlias(String) |Возвращает секцию карточки с указанным псевдонимом.
+|Load(XmlReader) |Загружает схему карточки из объекта [.keyword .apiname]#XmlReader#.
+|Save(XmlWriter) |Сериализует схему карточки в объект [.keyword .apiname]#XmlWriter#.
+|===
+
+*На уровень выше:* xref:../../../../../../api/DocsVision/Platform/Data/Metadata/CardModel/CardModel_NS.adoc[DocsVision.Platform.Data.Metadata.CardModel - пространство имен]

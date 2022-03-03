@@ -1,0 +1,34 @@
+= BaseCardMapper<T> - класс
+
+Базовый класс для преобразователей данных карточек библиотеки карточек "Базовые объекты".
+
+* [.keyword]*Пространство имен:* xref:Mapping_NS.adoc[DocsVision.BackOffice.ObjectModel.Mapping]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class BaseCardMapper<T> : CardMapper<T> where T : BaseCard
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:BaseCardMapper.Mapping_PR.adoc[Mapping] |Возвращает карту преобразователя данных.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CreateObject(T) |При переопределении в производном классе должен создавать экземпляр объекта типа T.
+|LoadObject(ObjectRef<T>, IDictionary<String, Object>) |Получает данные карточки из хранилища и загружает их в новый экземпляр карточки.
+|===
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Mapping/BaseCardMapper.Mapping_PR.adoc[BaseCardMapper<T>.Mapping - свойство]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.BackOffice.ObjectModel.Mapping - пространство имен]

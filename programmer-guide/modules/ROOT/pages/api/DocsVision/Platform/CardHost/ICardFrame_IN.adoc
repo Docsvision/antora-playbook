@@ -1,0 +1,55 @@
+= ICardFrame - интерфейс
+
+Описывает методы взаимодействия с окном карточки.
+
+* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+ public interface ICardFrame
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Caption |Задает или возвращает заголовок окна.
+|CardHost |Возвращает контейнер карточки.
+|Id |Возвращает идентификатор окна.
+|Visible |Задает или возвращает режим видимости окна.
+|Window |Возвращает объект, реализующий доступ низкоуровневым параметрам окна.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Close |При переопределении в производном классе немедленно закрывает окно.
+|CloseAndCreateNew(Guid) |При переопределении в производном классе закрывает окно и открывает новое в указанном режиме.
+|Commit(ActionFlags) |При переопределении в производном классе завершает работу карточки с сохранением изменений.
+|xref:ICardFrame.FinishSelection_MT.adoc[FinishSelection(Object)] |Завершает выбор, если карточка была открыта на выбор методом SelectFromCard.
+|Refresh |При переопределении в производном классе обновляет окно.
+|ShowMessage(String, String, String, MessageType, MessageButtons) |Отображает сообщение в модальном окне.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CardChanged |Происходит после изменении данных карточки.
+|CardCloseAndCreate |Происходит при вызове метода CloseAndCreateNew.
+|CardClosed |Происходит при закрытии карточки.
+|CardOpened |Происходит при открытии карточки.
+|===
+
+== Данный механизм возможно использовать только при работе с Windows-клиентом.
+
+* *xref:../../../../api/DocsVision/Platform/CardHost/ICardFrame.FinishSelection_MT.adoc[ICardFrame.FinishSelection - метод (Object)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost - пространство имен]

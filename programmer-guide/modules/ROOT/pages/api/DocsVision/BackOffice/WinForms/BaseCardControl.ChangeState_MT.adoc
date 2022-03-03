@@ -1,0 +1,59 @@
+= BaseCardControl.ChangeState - метод (StatesStateMachineBranch)
+
+Изменяет состояние карточки следуя предоставленному переходу автомата состояний.
+
+* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void ChangeState(StatesStateMachineBranch branch)
+----
+
+Параметры
+
+branch::
+  Тип: xref:../ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
+  +
+  Переход автомата состояний
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
+|===
+
+== Заметки
+
+При смене статуса не происходит сохранение карточки - нужно выполнить сохранение самостоятельно.
+
+== Примеры
+
+Ниже приведем пример скрипта СУБП, выполняющего смену статуса карточки на "Согласован"
+
+[source,pre,codeblock,language-csharp]
+----
+using System.Collections.Generic;
+using System.Linq;
+using DocsVision.BackOffice.ObjectModel.Services;
+   
+private void Button_Click(System.Object sender, System.EventArgs e)
+{
+ //получение всех значений автомата состояний для карточки
+ IList<StatesStateMachineBranch> statesStateMachineBranch = CardControl.ObjectContext.GetService<IStateService>().GetStateMachineBranches(BaseObject.SystemInfo.CardKind);
+ 
+ //выбирается первый переход с начальным статусом соотвествующем текущему статусу карточки, и названием "Согласован"
+ StatesStateMachineBranch statesStateMachineBranchLines = statesStateMachineBranch.Where(t => t.StartState = base.BaseObject.SystemInfo.State
+  && t.BranchType = StatesStateMachineBranchBranchType.Line
+  && t.EndState.DefaultName.Equals("Is approved")).FirstOrDefault();
+
+ //смена статуса
+ this.CardControl.ChangeState(statesStateMachineBranchLines);
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl - класс]

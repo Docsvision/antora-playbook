@@ -1,0 +1,38 @@
+= ITaskService.GetPartSignatureInfo - метод (BaseCardSignaturePart signaturePart)
+
+Возвращает информацию о части подписи документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[ITaskService_GetPartSignatureInfo__section_u1q_yty_mpb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+SignatureInfo GetPartSignatureInfo(Task task, BaseCardSignaturePart signaturePart, X509Certificate2 certificate);
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание, из которого будет получена информация о подписи
+signaturePart::
+  Тип: xref:../BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
+  +
+  Часть подписи
+certificate::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+  +
+  Сертификат подписи
+
+Возвращаемое значение
+
+::
+  Тип: xref:../../DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo]
+  +
+  Информация о подписи
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

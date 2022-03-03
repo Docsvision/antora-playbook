@@ -1,0 +1,33 @@
+= CardManager.GetCard - метод (Guid)
+
+Возвращает ссылку на программный интерфейс карточки.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public object GetCard(Guid cardId)
+----
+
+Параметры
+
+cardId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
+  +
+  Идентификатор карточки
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[Object]
+  +
+  Интерфейс карточки
+
+== Заметки
+
+Данный метод работает только с карточками входящими в библиотеку "Системные карточки" ("Карточка папок", "Карточка настроек пользователя" и т.д.). Для простых карточек метод вернет ошибку [.keyword .apiname]#System.IO.FileNotFoundException#.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

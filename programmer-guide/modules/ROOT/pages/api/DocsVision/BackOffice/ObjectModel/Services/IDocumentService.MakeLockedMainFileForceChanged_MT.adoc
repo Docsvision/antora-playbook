@@ -1,0 +1,63 @@
+= IDocumentService.MakeLockedMainFileForceChanged - метод (Document, DocumentFile)
+
+Устанавливает признака наличия изменений для выгруженного основного файла документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void MakeLockedMainFileForceChanged(Document document, DocumentFile file)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
+|===
+
+== Примеры
+
+Далее приведен пример использования метода [.keyword .apiname]#MakeLockedMainFileForceChanged# при редактировании основного файла документа
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с документами
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение основного файла документа
+DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
+
+// Выгрузка файла для редактирования
+string path = documentService.EditMainFile(document, documentFile);
+
+/* Редактирование файла */
+
+// Установка признака наличия изменений
+documentService.MakeLockedMainFileForceChanged(document, documentFile);
+
+// Разблокировка файла после редактирования с созданием новой версии файла
+documentService.UnlockMainFile(document, documentFile);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

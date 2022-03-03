@@ -1,0 +1,33 @@
+= ITaskService.CanCompleteTaskByCompletionParameter - метод (Task, StatesStateMachineBranch)
+
+Проверяет возможность завершения задания.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool CanCompleteTaskByCompletionParameter(Task task, out StatesStateMachineBranch branch)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+branch::
+  Тип: xref:../StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
+  +
+  Переход автомата состояний в конечное состояние
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - задание может быть завершено, иначе - false
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

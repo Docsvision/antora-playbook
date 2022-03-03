@@ -1,0 +1,34 @@
+= IBaseCardService.RemoveSignature - метод (SignatureList, BaseCardSignature)
+
+Удалят указанную подпись из списка подписей.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void RemoveSignature(SignatureList signatureList, BaseCardSignature signature)
+----
+
+Параметры
+
+signatureList::
+  Тип: xref:../SignatureList_CL.adoc[SignatureList]
+  +
+  Список, содержащий удаляемую подпись
+signature::
+  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
+  +
+  Подпись
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signatureList или signature.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

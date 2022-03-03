@@ -1,0 +1,85 @@
+= ITaskService.Delegate - метод (Task, IEnumerable<StaffEmployee>, StaffEmployee, Boolean, Boolean, String)
+
+Делегирует задание.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+bool Delegate(Task task, IEnumerable<StaffEmployee> delegates, StaffEmployee noticeable, bool restrictDelegation, bool returnAfterDelegation, string comment)
+----
+
+Параметры
+
+task::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Задание
+delegates::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
+  +
+  Список сотрудников, которым делегируется задание
+noticeable::
+  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
+  +
+  Уведомляемый сотрудник, если при делегировании невозможно однозначно разрешить, кто является исполнителем задания
+restrictDelegation::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Устанавливает флаг "Запретить делегирование"
+returnAfterDelegation::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Устанавливает флаг "Возврат с делегирования"
+comment::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Комментарий при делегировании
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  true - делегирование выполнено успешно, иначе - false
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или delegates .
+|https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для делегирования задания.
+|https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если запрещено делегировать задание вручную.
+|===
+
+== Заметки
+
+Сотрудник, переданный в параметре [.dfn .term]_noticeable_, будет указан в качестве исполнителя задания, делегировавшего задание, если невозможно однозначно определить сотрудника, выполнившего делегирование, что может произойти, к примеру, при делегировании задания сотрудником, являющимся заместителем для нескольких исполнителей задания.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+// Получение делегируемого задания
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение сотрудника, которому выполняется делегирование, и уведомляемого сотрудника
+StaffEmployee delegEmployee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffEmployee noticEmployee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000002"));
+IEnumerable<StaffEmployee> delegates = new StaffEmployee[] { delegateEmployee };
+
+// Делегирование задания
+taskService.Delegate(task, delegates, noticEmployee, true, true, "Передано компетентному сотруднику");
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

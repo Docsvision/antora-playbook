@@ -1,0 +1,59 @@
+= NumeratorBox - класс
+
+Класс элемента управления типа [.keyword]*Нумератор*.
+
+* [.keyword]*Пространство имен:* xref:Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class NumeratorBox : DevExpress.XtraEditors.ButtonEdit
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|NumeratorBox() |Инициализирует экземпляр класса NumeratorBox.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ManualEditAllowed |Задает или возвращает признак, разрешающий ручной ввод номера в нумераторе.
+|ObjectContext |Задает или возвращает контекст объектов.
+|xref:NumeratorBox.Rule_PR.adoc[Rule] |Задает или возвращает идентификатор правила нумерации, используемого элементом управления.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Allocate |Выделяет номер из связанного нумератора.
+|ManualEdit |Вызывает форму ручного ввода номера в нумераторе
+|Release |Освобождает выделенный номер.
+|===
+
+== Примеры
+
+Далее приведен пример получения из кода элемента управления типа [.dfn .term]_Нумератор_ с последующим выделением номера.
+
+[source,pre,codeblock,language-csharp]
+----
+private void NumeratorAllocate_Click(System.Object sender, System.EventArgs e)
+{       
+ ICustomizableControl customizableControl = CardControl;
+ NumeratorBox numeratorBox = customizableControl.FindPropertyItem<NumeratorBox>("НомерДокумента");
+ numeratorBox.Allocate();   
+}
+----
+
+* *xref:../../../../../api/DocsVision/BackOffice/WinForms/Controls/NumeratorBox.Rule_PR.adoc[NumeratorBox.Rule - свойство]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/WinForms/Controls/Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls - пространство имен]

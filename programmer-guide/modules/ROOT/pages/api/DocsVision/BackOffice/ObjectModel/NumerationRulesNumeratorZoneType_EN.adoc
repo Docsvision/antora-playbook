@@ -1,0 +1,46 @@
+= NumerationRulesNumeratorZoneType - перечисление
+
+Определяет режим обновления зоны нумератора.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public enum NumerationRulesNumeratorZoneType
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Нет обновления.
+|Daily |Ежедневно.
+|Weekly |Еженедельно.
+|Monthly |Ежемесячно.
+|Yearly |Ежегодно.
+|===
+
+== Заметки
+
+Тип обновления определяет частоту переключение на следующую зону нумератора. Зона создается автоматически.
+
+== Примеры
+
+Ниже рассматривается пример получения типа обновления зоны нумератора
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение правила нумерации
+NumerationRulesNumerator numerationRulesRule = objectContext.GetObject<NumerationRulesNumerator>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+//получение типа обновления
+NumerationRulesNumeratorZoneType zoneType = numerationRulesRule.ZoneType;
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

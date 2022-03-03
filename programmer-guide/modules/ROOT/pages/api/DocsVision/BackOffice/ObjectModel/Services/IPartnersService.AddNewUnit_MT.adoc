@@ -1,0 +1,33 @@
+= IPartnersService.AddNewUnit - метод (PartnersCompany)
+
+Добавляет подразделение в заданную организацию контрагента.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public PartnersCompany AddNewUnit(PartnersCompany parentUnit)
+----
+
+Параметры
+
+parentUnit::
+  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
+  +
+  Организация контрагента, в которую будет добавлено новое подразделение
+
+Возвращаемое значение
+
+::
+  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
+  +
+  Созданная организация/подразделение
+
+== Заметки
+
+Если parentUnit не задан, организация будет добавлена в корневой каталог организаций.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

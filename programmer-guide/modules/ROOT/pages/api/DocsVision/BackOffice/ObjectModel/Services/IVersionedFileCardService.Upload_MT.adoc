@@ -1,0 +1,38 @@
+= IVersionedFileCardService.Upload - метод (VersionedFileCard, String, Guid)
+
+Загружает новую версию версионного файла.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void Upload(VersionedFileCard versionedFileCard, string filePath, Guid userId)
+----
+
+Параметры
+
+versionedFileCard::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Версионный файл
+filePath::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Расположение выгруженного файла
+userId::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
+  +
+  Идентификатор сотрудника, сделавшего изменение
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если указан несуществующий filePath.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

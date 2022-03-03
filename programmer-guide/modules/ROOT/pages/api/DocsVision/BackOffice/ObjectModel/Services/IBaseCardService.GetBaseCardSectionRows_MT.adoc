@@ -1,0 +1,41 @@
+= IBaseCardService.GetBaseCardSectionRows - метод (BaseCard, CardSection)
+
+Возвращает коллекцию всех строк секции карточки.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+IEnumerable<BaseCardSectionRow> GetBaseCardSectionRows(BaseCard card, CardSection section)
+----
+
+Параметры
+
+card::
+  Тип: xref:../BaseCard_CL.adoc[BaseCard]
+  +
+  Карточка
+section::
+  Тип: xref:../../../Platform/Data/Metadata/CardModel/CardSection_CL.adoc[CardSection]
+  +
+  Секция карточки
+
+Возвращаемое значение
+
+::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<BaseCardSectionRow>
+  +
+  Коллекция строк секции типа xref:../BaseCardSectionRow_CL.adoc[BaseCardSectionRow]
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр card или section.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

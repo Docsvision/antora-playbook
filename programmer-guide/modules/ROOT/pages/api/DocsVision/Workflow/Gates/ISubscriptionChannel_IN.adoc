@@ -1,0 +1,39 @@
+= ISubscriptionChannel - интерфейс
+
+Данный интерфейс представляет источник сообщений и добавляет методы подписки на события от шлюза Workflow.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ISubscriptionChannel
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:ISubscriptionChannel.Subscribe_MT.adoc[Subscribe(Int32, Guid, Guid)] |Выполняет подписку на событие шлюза Workflow.
+|Subscribe(Int32, Guid, Guid, String) |Выполняет подписку на событие шлюза Workflow.
+|Subscribe(Int32, Guid, Guid, Guid) |Выполняет подписку на событие шлюза Workflow.
+|Unsubscribe(Guid, Guid) |Отменяет подписку на указанное событие.
+|GetSubscriptions(Guid, Guid) |Возвращает список подписок для указанной функции и бизнес-процесса.
+|GetSubscriptions |Возвращает список всех подписок.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Subscribed |Позволяет обработать подписку на события Workflow.
+|Unsubscribed |Позволяет обработать отмену подписки на события Workflow.
+|===
+
+* *xref:../../../../api/DocsVision/Workflow/Gates/ISubscriptionChannel.Subscribe_MT.adoc[ISubscriptionChannel.Subscribe - метод (Int32, Guid, Guid)]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]

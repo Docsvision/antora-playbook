@@ -1,0 +1,68 @@
+= SessionSetSettings
+
+Обновляет параметры пользовательской сессии.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionSetSettings"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionSetSettings xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <settings>string</settings>
+    </SessionSetSettings>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+settings::
+  Параметры сессии
+
+Строка [.keyword]*settings* должна соответствовать схеме элемента:
+
+[source,pre,codeblock]
+----
+<xs:element name="Settings">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Setting" maxOccurs="unbounded" type="xs:string">
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:string"></xs:attribute>
+          <xs:attribute name="Type" type="xs:string"></xs:attribute>
+          <xs:attribute name="ReadOnly" type="xs:int"></xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element> 
+----
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionSetSettingsResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----
+
+*На уровень выше:* xref:../pages/dm_appendix_webservice_connection.adoc[Подключения к серверу]

@@ -1,0 +1,67 @@
+= IDocumentService.RenameMainFile - метод (Document, DocumentFile, String)
+
+Переименовывает основной файл документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void RenameMainFile(Document document, DocumentFile file, string newFileName)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ, которому принадлежит файл
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл, название которого изменяется
+newFileName::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Новое название файла. Имя файла должно содержать расширение.
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или newFileName.
+|https://msdn.microsoft.com/ru-ru/library/system.argumentexception.aspx[System.ArgumentException] |Ошибка возвращается, если newFileName содержит только символы-разделители, либо содержит недопустимые (*, /, \, |, <, >, “, ?, :) символы.
+|===
+
+== Заметки
+
+Чтобы сотрудник мог переименовывать файлы документа, ему должны быть предоставлены права в ролевой модели безопасности: Переименование файлов и Запись.
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа с основным файлом
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Изменение названия первого основного файла
+documentService.RenameMainFile(document, document.Files.First(t => t.FileType = DocumentFileType.Main), "Новое имя файла.docx");
+----
+
+Можно указывать новое название файла без расширения, а расширение получать из оригинального файла, например, так:
+
+[source,pre,codeblock]
+----
+DocumentFile firstMainFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
+string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(firstMainFile.FileName));
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

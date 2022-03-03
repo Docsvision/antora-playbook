@@ -1,0 +1,112 @@
+= IVersionedFileCardService - интерфейс
+
+Сервис для работы с карточкой версионного файла.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface IVersionedFileCardService
+----
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IVersionedFileCardService.CanCheckIn_MT.adoc[CanCheckIn(VersionedFileCard)] |Определяет возможность снятия блокировки с версионного файла.
+|xref:IVersionedFileCardService.CanCheckOut_MT.adoc[CanCheckOut(VersionedFileCard)] |Определяет возможность блокировки версионного файла.
+|xref:IVersionedFileCardService.CanCheckOut_1_MT.adoc[CanCheckOut(VersionedFileCard, Boolean)] |Определяет возможность блокировки версионного файла.
+|xref:IVersionedFileCardService.CheckFileChanged_MT.adoc[CheckFileChanged(VersionedFileCard)] |Определяет наличие изменений в файле.
+|xref:IVersionedFileCardService.CheckIn_MT.adoc[CheckIn(VersionedFileCard, Boolean, Int32, String, Boolean, String, Guid)] |Снимает блокировку с карточки файла с версиями.
+|xref:IVersionedFileCardService.CheckOut_MT.adoc[CheckOut(VersionedFileCard)] |Выгружает файл на диск с установкой постоянной блокировки.
+|xref:IVersionedFileCardService.CheckVersionInCache_MT.adoc[CheckVersionInCache(Guid)] |Определяет наличие в кэше сервиса определенной версии файла.
+|xref:IVersionedFileCardService.CreateCard_1_MT.adoc[CreateCard(FileData)] |Создает версионный файл на основе обычного файла.
+|xref:IVersionedFileCardService.CreateCard_MT.adoc[CreateCard(String)] |Создает версионный файл из файла, расположенного на диске.
+|xref:IVersionedFileCardService.Download_MT.adoc[Download(VersionedFileCard)] |Сохраняет последнюю версию версионного файла на диск.
+|xref:IVersionedFileCardService.Download_1_MT.adoc[Download(VersionedFileCard, Guid)] |Сохраняет указанную версию версионного файла на диск.
+|xref:IVersionedFileCardService.Download_2_MT.adoc[Download(VersionedFileCard, Guid, String)] |Сохраняет указанную версию версионного файла на диск.
+|xref:IVersionedFileCardService.FindLockedVersionFileName_MT.adoc[FindLockedVersionFileName(Guid)] |Возвращает путь выгрузки заблокированного файла.
+|xref:IVersionedFileCardService.FindVersionFileNames_MT.adoc[FindVersionFileNames(Guid)] |Возвращает пути ко всем экземплярам выгруженной версии файла.
+|xref:IVersionedFileCardService.GetLockOwner_MT.adoc[GetLockOwner(VersionedFileCard)] |Возвращает имя учетной записи сотрудника, заблокировавшего версионный файл.
+|xref:IVersionedFileCardService.GetLockStatus_MT.adoc[GetLockStatus(VersionedFileCard)] |Возвращает статус блокировки для карточки файл с версиями.
+|xref:IVersionedFileCardService.GetUsedFiles_MT.adoc[GetUsedFiles] |Возвращает расположение всех выгруженных файлов.
+|xref:IVersionedFileCardService.GetVersionNumber_MT.adoc[GetVersionNumber(VersionedFileCard, Guid)] |Возвращает версии файла в текстовом виде.
+|xref:IVersionedFileCardService.HasVersion_MT.adoc[HasVersion(VersionedFileCard, Guid)] |Определяет наличие у версионного файла указанной версии.
+|xref:IVersionedFileCardService.MakeLockedInstanceForceChanged_MT.adoc[MakeLockedInstanceForceChanged(VersionedFileCard)] |Принудительно устанавливает флаг наличия изменений в файле.
+|xref:IVersionedFileCardService.OpenCard_MT.adoc[OpenCard(Guid)] |Возвращает карточку файла с версиями.
+|xref:IVersionedFileCardService.PurgeCache_MT.adoc[PurgeCache(VersionedFileCard)] |Удаляет из кэша сервиса версионный файл.
+|xref:IVersionedFileCardService.PurgeLockCache_MT.adoc[PurgeLockCache] |Удаляет из кэша сервиса информацию о блокировках версионных файлов.
+|xref:IVersionedFileCardService.RenameFile_MT.adoc[RenameFile(VersionedFileCard, String)] |Переименовывает файл [.dfn .term]_карточки файла с версиями_.
+|xref:IVersionedFileCardService.UndoCheckOut_MT.adoc[UndoCheckOut(VersionedFileCard)] |Отменяет блокировку версионного файла.
+|xref:IVersionedFileCardService.UpdateFileCache_MT.adoc[UpdateFileCache(VersionedFileCard, String)] |Обновляет кэш сервиса.
+|xref:IVersionedFileCardService.Upload_MT.adoc[Upload(VersionedFileCard, String, Guid)] |Загружает новую версию версионного файла.
+|xref:IVersionedFileCardService.Upload_1_MT.adoc[Upload(VersionedFileCard, String, Guid, Int32)] |Загружает новую версию версионного файла.
+|===
+
+== События
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IVersionedFileCardService.CheckedInFile_EV.adoc[CheckedInFile] |Событие происходит после снятия блокировки с файла.
+|===
+
+== Примеры
+
+Ниже приведен пример простого использования сервиса - создается карточка файла с версиями, в которую загружается локальный файл, и поднимается номер версии
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервиса
+IVersionedFileCardService iVersionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+
+//создание карточки файла с версиями (версия 1.0), загрузка в карточку файла с локальной ФС
+VersionedFileCard versionedFileCard = iVersionedFileCardService.CreateCard(@"C:\test.txt");
+
+//блокировка файла
+iVersionedFileCardService.CheckOut(versionedFileCard);
+
+//принудительно сообщаем сервису, что изменения были
+iVersionedFileCardService.MakeLockedInstanceForceChanged(versionedFileCard);
+
+//разблокировка и увеличением номера версии до 1.1
+iVersionedFileCardService.CheckIn(versionedFileCard, false, 1);
+----
+
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CanCheckIn_MT.adoc[IVersionedFileCardService.CanCheckIn - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CanCheckOut_MT.adoc[IVersionedFileCardService.CanCheckOut - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CanCheckOut_1_MT.adoc[IVersionedFileCardService.CanCheckOut - метод (VersionedFileCard, Boolean)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CheckFileChanged_MT.adoc[IVersionedFileCardService.CheckFileChanged - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CheckIn_MT.adoc[IVersionedFileCardService.CheckIn - метод (VersionedFileCard, Boolean, Int32, String, Boolean, String, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CheckedInFile_EV.adoc[IVersionedFileCardService.CheckedInFile - событие]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CheckOut_MT.adoc[IVersionedFileCardService.CheckOut - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CheckVersionInCache_MT.adoc[IVersionedFileCardService.CheckVersionInCache - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CreateCard_1_MT.adoc[IVersionedFileCardService.CreateCard - метод (FileData)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.CreateCard_MT.adoc[IVersionedFileCardService.CreateCard - метод (String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.Download_MT.adoc[IVersionedFileCardService.Download - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.Download_1_MT.adoc[IVersionedFileCardService.Download - метод (VersionedFileCard, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.Download_2_MT.adoc[IVersionedFileCardService.Download - метод (VersionedFileCard, Guid, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.FindLockedVersionFileName_MT.adoc[IVersionedFileCardService.FindLockedVersionFileName - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.FindVersionFileNames_MT.adoc[IVersionedFileCardService.FindVersionFileNames - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.GetLockOwner_MT.adoc[IVersionedFileCardService.GetLockOwner - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.GetLockStatus_MT.adoc[IVersionedFileCardService.GetLockStatus - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.GetUsedFiles_MT.adoc[IVersionedFileCardService.GetUsedFiles - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.GetVersionNumber_MT.adoc[IVersionedFileCardService.GetVersionNumber - метод (VersionedFileCard, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.HasVersion_MT.adoc[IVersionedFileCardService.HasVersion - метод (VersionedFileCard, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.MakeLockedInstanceForceChanged_MT.adoc[IVersionedFileCardService.MakeLockedInstanceForceChanged - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.OpenCard_MT.adoc[IVersionedFileCardService.OpenCard - метод (Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.PurgeCache_MT.adoc[IVersionedFileCardService.PurgeCache - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.PurgeLockCache_MT.adoc[IVersionedFileCardService.PurgeLockCache - метод]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.RenameFile_MT.adoc[IVersionedFileCardService.RenameFile - метод (VersionedFileCard, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.UndoCheckOut_MT.adoc[IVersionedFileCardService.UndoCheckOut - метод (VersionedFileCard)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.UpdateFileCache_MT.adoc[IVersionedFileCardService.UpdateFileCache - метод (VersionedFileCard, String)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.Upload_MT.adoc[IVersionedFileCardService.Upload - метод (VersionedFileCard, String, Guid)]* +
+* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService.Upload_1_MT.adoc[IVersionedFileCardService.Upload - метод (VersionedFileCard, String, Guid, Int32)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

@@ -1,0 +1,71 @@
+= DynamicMetadataUpdate
+
+Обновляет расширенные метаданные.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/DynamicMetadataUpdate"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <DynamicMetadataUpdate xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <metadataXml>string</metadataXml>
+    </DynamicMetadataUpdate>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+metadataXml::
+  Метаданные
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <DynamicMetadataUpdateResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/DynamicMetadataUpdate"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <DynamicMetadataUpdate xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <metadataXml>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;DynamicMetadataDefinition xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;&lt;Card ID=&quot;b9f7bfd7-7429-455e-a3f1-94ffb569c794&quot;&gt;&lt;Section Alias=&quot;SimpleSection&quot; Type=&quot;struct&quot; ID=&quot;65BA351C-4FA1-487D-9B2C-FE89C96ACE1E&quot; SimpleSecurity=&quot;true&quot; Dynamic=&quot;true&quot;&gt;&lt;Name&gt;&lt;LocalizedString Language=&quot;en&quot;&gt;SimpleSection&lt;/LocalizedString&gt;&lt;/Name&gt;&lt;Field Alias=&quot;NewExtField&quot; ID=&quot;65DCA871-6237-49A9-9B01-525029D1510C&quot; Type=&quot;int&quot; DefaultValue=&quot;&quot; CopyBehavior=&quot;Null&quot; Dynamic=&quot;true&quot;&gt;&lt;Name&gt;&lt;LocalizedString Language=&quot;en&quot;&gt;Desc NewExtField Override&lt;/LocalizedString&gt;&lt;/Name&gt;&lt;Description /&gt;&lt;/Field&gt;&lt;DisplayFields /&gt;&lt;/Section&gt;&lt;/Card&gt;&lt;/DynamicMetadataDefinition&gt;</metadataXml>
+    </DynamicMetadataUpdate>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+----
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Dynamic.adoc[Расширенные метаданные]

@@ -1,0 +1,59 @@
+= Разработка объектной модели карточки
+
+Т.к. ранее было решено поддержать возможность настройки карточки при помощи конструкторов, необходимо сохранить в её объектной модели секции System, Numbers, Processes. Для этого достаточно унаследовать свой класс объекта карточки от базового класса [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.BaseCard#.
+
+. Создаем класс объекта карточки:
++
+[source,pre,codeblock,language-csharp]
+----
+public class NetstatSolutionCard : BaseCard
+----
+. Для каждой секции добавляем статическое поле класса:
++
+[source,pre,codeblock,language-csharp]
+----
+public static readonly ObjectProperty MainInfoProperty;
+public static readonly ObjectProperty JournalProperty;
+----
+. Добавляем в класс свойства для доступа к данным секции:
++
+[source,pre,codeblock,language-csharp]
+----
+public NetstatSolutionCardMainInfo MainInfo
+{
+ get
+ {
+  // Считаем, что данная секция должна быть, а если её нет, то создаем пустую
+  if (((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).Count = 0)
+  {
+   ((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).Add(new NetstatSolutionCardMainInfo());
+  }
+  return ((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).First<NetstatSolutionCardMainInfo>();
+ }
+}
+public ObjectCollection<NetstatSolutionCardJournal> Journal
+{
+ get
+ {
+  return (ObjectCollection<NetstatSolutionCardJournal>)base.GetValue(NetstatSolutionCard.JournalProperty);
+ }
+}
+----
+. Регистрируем связи между секциями карточки и их объектной моделью в статическом конструкторе класса:
++
+[source,pre,codeblock,language-csharp]
+----
+static NetstatSolutionCard()
+{
+ NetstatSolutionCard.MainInfoProperty = ObjectProperty.Register("MainInfo", typeof(ObjectCollection<NetstatSolutionCardMainInfo>), typeof(NetstatSolutionCard));
+ NetstatSolutionCard.JournalProperty = ObjectProperty.Register("Journal", typeof(ObjectCollection<NetstatSolutionCardJournal>), typeof(NetstatSolutionCard));
+}
+----
+
+В платформе Docsvision принято выносить бизнес-логику карточки из её объектной модели в сервисы; последуем данному правилу и вынесем основные функции карточки в отдельный сервис (будет разработан позднее).
+
+== См. далее
+
+* xref:CreateCardLib_CardObjectModel_Mappers.adoc[Разработка преобразователя данных]
+
+*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

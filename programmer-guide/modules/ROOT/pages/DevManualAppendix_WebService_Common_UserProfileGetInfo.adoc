@@ -1,0 +1,54 @@
+= UserProfileGetInfo
+
+Возвращает описание пользователя.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/UserProfileGetInfo"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <UserProfileGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <userName>string</userName>
+    </UserProfileGetInfo>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+sessionId::
+  Идентификатор пользовательской сессии
+userName::
+  Учетная запись пользователя
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <UserProfileGetInfoResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <curUserName>string</curUserName>
+      <userRefId>guid</userRefId>
+    </UserProfileGetInfoResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор карточки настроек пользователя.
+
+*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Common.adoc[Прочее]

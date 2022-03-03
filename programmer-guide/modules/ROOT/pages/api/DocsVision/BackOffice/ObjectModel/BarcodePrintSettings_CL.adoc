@@ -1,0 +1,64 @@
+= BarcodePrintSettings - класс
+
+Получает настройки печати штрих-кода.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public sealed class BarcodePrintSettings
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|BarcodeLength |Возвращает значение длины штрих-кода.
+|BarcodeWidth |Возвращает ширину символа.
+|DefaultSettings |Возвращает значение настроек по умолчанию.
+|FontName |Возвращает название шрифта.
+|FontSize |Возвращает размер шрифта.
+|FontStyle |Возвращает стиль шрифта.
+|GraphicsUnit |Возвращает единицу измерения.
+|IsPrinting |Возвращает признак необходимости печати штрих-кода.
+|IsPrintVertical |Возвращает признак того, что штрих-код требует вертикальной печати.
+|Position |Возвращает координаты для печати штрих-кода на листе.
+|===
+
+== Заметки
+
+Подобные настройки могут быть введены в пользовательском интерфейсе Windows-клиента, справочник "Системные настройки".
+
+== Примеры
+
+Ниже приведен пример скрипта карточки, позволяющий определить необходимость печати штрих-кода (определена в системных настройках)
+
+[source,pre,codeblock,language-csharp]
+----
+private void Button_Click(System.Object sender, System.EventArgs e)
+{
+
+ //получение сервисов
+ IBarcodeService iBarcodeService = CardControl.ObjectContext.GetService<IBarcodeService>();
+ IStaffService staffService = CardControl.ObjectContext.GetService<IStaffService>();
+
+ //получение настроек печати штрих-кода, для текущего пользователя
+ BarcodePrintSettingsCollection printSettingsCollection = iBarcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(), 
+            BaseObject.SystemInfo.CardKind);
+        
+ if (printSettingsCollection.Count() > 0)
+ {
+  //получение первой подходящей настройки
+  BarcodePrintSettings printSettings = printSettingsCollection.FirstOrDefault();
+  
+  //если false - установлен признак "Не печатать штрих код"
+  bool isPrinting = printSettings.IsPrinting;
+ }
+}
+----
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

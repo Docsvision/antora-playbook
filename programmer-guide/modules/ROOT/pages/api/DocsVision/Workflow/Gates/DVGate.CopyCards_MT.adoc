@@ -1,0 +1,31 @@
+= DVGate.CopyCards - метод (Array, Boolean, ProcessVariable)
+
+Создает копии нескольких карточек.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public void CopyCards(Array cards, bool ClearTemplateFlag, ProcessVariable result);
+----
+
+Параметры
+
+cards::
+  Тип: https://msdn.microsoft.com/ru-ru/library/system.array.aspx[System.Array]
+  +
+  Массив элементов типа [.keyword .apiname]#DVCard# - копируемых карточек
+ClearTemplateFlag::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  Если копируемая карточка является шаблоном, то при установленном флаге `ClearTemplateFlag`, признак шаблона из копии будет убран.
+
+result::
+  Тип: xref:../Runtime/ProcessVariable_CL.adoc[ProcessVariable]
+  +
+  Переменная процесса, в которую будут сохранены копии карточек. Копии сохраняются в `result.Values`.
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

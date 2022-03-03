@@ -1,0 +1,164 @@
+= Реализация стандартных интерфейсов
+
+Расширение Консоли настройки, разрабатываемое для _Модуля учета сетевых устройств_, должно регистрировать клинский пакет установки, устанавливать новую библиотеку карточек, а также загружать в базу данных Docsvision заранее подготовленные данные карточек и справочников. Для этого в классе [.dfn .term]_SnapIn_ должно быть реализовано несколько интерфейсов.
+
+== Реализация интерфейса ISnapIn
+
+Основной интерфейс расширения, который добавляет:
+
+* `LibraryID` - [.dfn .term]_идентификатор библиотеки карточек_, с которой данное расширение ассоциировано. `LibraryID` требуется для регистрации пакетов установки, добавления библиотеки карточек в базу данных, удаления [.dfn .term]_решения_, а также для некоторых других сценариев работы [.dfn .term]_Консоли настройки_.
++
+[source,pre,codeblock,language-csharp]
+----
+public string LibraryID
+{
+ get { return "{F729F178-15DA-4BDE-82B8-DD0B2F0C0BC6}"; }
+}
+----
+* `Name` - название модуля. Используется в некоторых сервисных функциях, например: при отображении названия расширения в списке зарегистрированных расширений [.dfn .term]_Консоли настройки_.
++
+[source,pre,codeblock,language-csharp]
+----
+public string Name
+{
+ get { return "Консоль управления модулем Проверка сети"; }
+}
+----
+* Метод [.keyword .apiname]#Initialize(IEnvironment)# - позволяет получить переменные контекста работы Консоли настройки, которые предоставляют доступ к сервису регистрации пакетов установки клиентской части.
++
+[source,pre,codeblock,language-csharp]
+----
+public void Initialize(IEnvironment environment)
+{
+ _environment = environment;
+}
+----
+* Метод [.keyword .apiname]#QueryInterface(SnapInInterfacesEnum)# - возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы [.dfn .term]_Консоли настройки_. Подробнее см. в разделе xref:DM_ConsolePlugin.adoc[Модуль расширения Консоли настройки].
++
+[source,pre,codeblock,language-csharp]
+----
+public object QueryInterface(SnapInInterfacesEnum itf)
+{
+ object result = null;
+ switch (itf)
+ {
+  case SnapInInterfacesEnum.CONFIGURATOR:
+  case SnapInInterfacesEnum.UNINSTALL_SNAP_IN:
+  case SnapInInterfacesEnum.DB_INFORMATION:
+   result = this;
+   break;
+
+  case SnapInInterfacesEnum.CONSOLE_CONTROL:
+   result = new SnapInForm(); // Экземпляр типа, реализующего пользовательский интерфейс
+   break;
+  }
+ return result;
+}
+----
+
+== Реализация интерфейса IConfigurator
+
+Данный интерфейс должен быть реализован, если расширение может выполнять первоначальную настройку [.dfn .term]_решения_.
+
+Как правило, метод [.keyword .apiname]#Execute#, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, [.dfn .term]_Идентификатор пакета установки_ и [.dfn .term]_Код продукта_, которые были указаны при xref:CreateCardLib_SchemaLib.adoc[разработке библиотеки карточек]:
+
+[source,pre,codeblock,language-csharp]
+----
+public bool Execute()
+{
+ ILog log = (ILog)_environment.QueryService(EnvironmentServiceEnum.LOG);
+
+ // Регистрация клиентского пакета установки
+ ICardLibConfigurator2 cardLibConfig = (ICardLibConfigurator2)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR);
+
+ // Регистрация пакета установки
+ cardLibConfig.RegisterPackage(
+  "E98E531F-D34C-41D6-9BCA-9972F46EB6DF", // Идентификатор пакета установки
+  "22CE4047-0BA8-4014-9BBE-7D8C43FDE907", // Код продукта
+  Path.Combine(AssemblyFolder, "NetstatSolutionClient.msi")); // Абсолютный путь к пакету установки клиентской части
+
+ log.WriteMessage("Конфигурирование завершено");
+
+ // Если метод должен сообщить об ошибке, то необходимо вызвать исключение. В обычном случает, метод возвращает true
+ return true;
+}
+----
+
+== Реализация интерфейса IDBInformation
+
+Данный интерфейс добавляет методы, предоставляющие [.dfn .term]_Консоли настройки_ пути к [.dfn .term]_CardPackage_ и [.dfn .term]_SqlPackage_.
+
+Метод [.keyword .apiname]#GetCardPackage# должен вернуть абсолютный путь к пакету [.dfn .term]_CardPackage_:
+
+[source,pre,codeblock,language-csharp]
+----
+public string GetCardPackage()
+{
+ return Path.Combine(AssemblyFolder, "CardPackage\\CardPackage.xml");
+}
+----
+
+Метод [.keyword .apiname]#GetScript(ScriptTypeEnum)# должен вернуть абсолютный путь к пакету [.dfn .term]_SqlPackage_, если запрашивается тип [.keyword .apiname]#ScriptTypeEnum.INSTALL_TABLES#:
+
+[source,pre,codeblock,language-csharp]
+----
+public string GetScript(ScriptTypeEnum type)
+{
+ string result = string.Empty;
+
+ switch (type)
+ {
+  case ScriptTypeEnum.INSTALL_TABLES:
+   result = Path.Combine(AssemblyFolder, "Database\\NetstatSolutionInstall.xml");
+   break;
+ }
+ return result;
+}
+----
+
+Также добавляется переменная `ContainsCardLib`, которая определяет наличие у [.dfn .term]_решения_ собственной библиотеки карточек.
+
+[source,pre,codeblock,language-csharp]
+----
+public bool ContainsCardLib
+{
+ get { return true; }
+}
+----
+
+== Реализация интерфейса IUninstallSnapIn
+
+Данный интерфейс добавляет единственный метод [.keyword .apiname]#Uninstall(Boolean)#, вызываемый при удалении расширения (и решения в целом).
+
+Метод [.keyword .apiname]#Uninstall# может, к примеру, удалять библиотеку карточек, а также настройки [.dfn .term]_решения_, как в данном случае:
+
+[source,pre,codeblock,language-csharp]
+----
+public void Uninstall(bool removeSettings)
+{
+ ILog log = (ILog)_environment.QueryService(EnvironmentServiceEnum.LOG);
+ ICardLibConfigurator cardLibConfig = (ICardLibConfigurator)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR);
+ log.WriteMessage("Запущено удаление");
+
+ // Удаление библиотеки карточек
+ cardLibConfig.RemoveCardLib(LibraryID);
+
+ // Удаление настроек модуля
+ if (removeSettings)
+ { 
+  using (RegistryKey key = Common.GetSubKey(Registry.LocalMachine, Common.NetstatSolutionKey))
+  {
+   key.DeleteValue(Common.EmailAdminRegName, false);
+   key.DeleteValue(Common.CheckIsEnabledRegName, false);
+   key.DeleteValue(Common.LicenseRegName, false);
+  }
+ }
+ log.WriteMessage("Записи реестра удалены");
+}
+----
+
+== См. далее
+
+* xref:CreateSnapIn_Control.adoc[Пользовательский интерфейс расширения]
+
+*На уровень выше:* xref:../pages/CreateSnapIn.adoc[Создание расширения для Консоли настройки]

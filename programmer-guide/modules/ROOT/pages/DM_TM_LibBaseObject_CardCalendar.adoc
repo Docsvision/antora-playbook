@@ -1,0 +1,69 @@
+= Бизнес-календарь
+
+[cols=",",]
+|===
+|Назначение |Предназначена для хранения информации о расписании работы сотрудников (количество рабочих дней, рабочих часов и др.) на определенный период времени.
+|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Calendar_CL.adoc[DocsVision.BackOffice.ObjectModel.Calendar]
+|===
+
+Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService]. Сервис предоставляет следующие операции:
+
+* добавление рабочих дат в бизнес-календарь;
+* добавление рабочего время;
+* получение сроков рабочего времени для различных условий.
+
+В примере создается бизнес-календарь в котором все пятницы 2014 года объявляются сокращенными (рабочее время с 10 до 15 часов). По созданному календарю будет работать текущий пользователь. Дополнительных проверок не проводим.
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+//получение сервисов
+ICalendarService calendarService = objectContext.GetService<ICalendarService>();
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+//инициализация карточки типа Бизнес-календарь (использует CardManager, старый API)
+CardData cardData = userSession.CardManager.CreateCardData(DocsVision.BackOffice.CardLib.CardDefs.CardCalendar.ID);
+
+//доступ к карточке через объектную модель
+DocsVision.BackOffice.ObjectModel.Calendar calendar = objectContext.GetObject<DocsVision.BackOffice.ObjectModel.Calendar>(cardData.Id);
+calendar.MainInfo.Name = "bestWorks";
+calendar.Description = "Легкий день";
+int year = 2014;
+
+//создание объекта типа Год
+CalendarYear calendarYear = calendarService.AddCalendarYear(year);
+
+//инициализация коллекции дней в году
+calendarYear.Days = new ObjectCollection<CalendarDay>();
+DateTime startDate = new DateTime(year, 1, 1);
+
+//заполнение дней
+for (DateTime i = startDate; i <= new DateTime(year, 12, 31); i = i.AddDays(1))
+{
+ if (i.DayOfWeek = DayOfWeek.Friday)
+ {
+  //создание объекта содержащего укороченное рабочее время
+  CalendarWorkTime calendarWorkTime = calendarService.AddCalendarWorkTime(new System.DateTime(2000, 1, 1, 10, 0, 0), new System.DateTime(2000, 1, 1, 15, 0, 0));
+  
+  //создание объекта типа День и добавление в него рабочего времени
+  CalendarDay calendarDay = calendarService.AddCalendarDay(i.DayOfYear);
+  calendarDay.WorkTime = new ObjectCollection<CalendarWorkTime>();
+  calendarDay.WorkTime.Add(calendarWorkTime);
+
+  //добавление дня в год
+  calendarYear.Days.Add(calendarDay);
+ }
+}
+
+//сохранение года в календаре
+calendar.Years.Add(calendarYear);
+
+//присвоение календаря текущему пользователю            
+staffService.GetCurrentEmployee().CalendarID = cardData.Id;
+
+//сохранение всех изменений
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

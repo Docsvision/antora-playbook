@@ -1,0 +1,34 @@
+= IStaffService.DeleteUnit - метод (StaffUnit)
+
+Удаляет подразделение из [.dfn .term]_справочника сотрудников_.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void DeleteUnit(StaffUnit unit)
+----
+
+Параметры
+
+unit::
+  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
+  +
+  Удаляемое подразделение
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit.
+|===
+
+== Заметки
+
+При удалении подразделения будут удалены все подчиненные подразделения, а также сотрудники, которые в них числятся.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

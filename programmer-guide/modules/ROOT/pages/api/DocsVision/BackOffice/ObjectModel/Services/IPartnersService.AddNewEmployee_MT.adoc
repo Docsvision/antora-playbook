@@ -1,0 +1,55 @@
+= IPartnersService.AddNewEmployee - метод (PartnersCompany)
+
+Добавляет нового сотрудника в указанную организацию/подразделение.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+PartnersEmployee AddNewEmployee(PartnersCompany unit)
+----
+
+Параметры
+
+unit::
+  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
+  +
+  Подразделение, в которое добавляется сотрудник
+
+Возвращаемое значение
+
+::
+  Тип: xref:../PartnersEmployee_CL.adoc[PartnersEmployee]
+  +
+  Сотрудник, добавленный в организацию
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit.
+|===
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы с контрагентами
+IPartnersService partnersService = objectContext.GetService<IPartnersService>();
+
+// Получение организации, в которую добавляется сотрудник
+PartnersCompany partnersCompany = objectContext.GetObject<PartnersCompany>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Добавление и сохранение сотрудника
+PartnersEmployee partnersEmployee = partnersService.AddNewEmployee(partnersCompany);
+partnersEmployee.LastName = "Иванов";
+objectContext.SaveObject(partnersEmployee);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

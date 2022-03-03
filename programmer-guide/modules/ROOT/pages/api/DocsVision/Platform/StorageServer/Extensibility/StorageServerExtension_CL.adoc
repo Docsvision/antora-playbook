@@ -1,0 +1,37 @@
+= StorageServerExtension - класс
+
+Базовый класс для создания серверного расширения.
+
+* [.keyword]*Пространство имен:* xref:Extensibility_NS.adoc[DocsVision.Platform.StorageServer.Extensibility]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.Runtime.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class StorageServerExtension : IServiceProvider, IDisposable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Application |Возвращает объект типа IApplication.
+|DbRequest |Возвращает объект типа IDbRequest.
+|Request |Возвращает объект, содержащий запрос к сессии.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:StorageServerExtension.GetCursorBuilder_MT.adoc[GetCursorBuilder] |Создает и возвращает программно-заполняемый серверный курсор
+|xref:StorageServerExtension.ExecuteCursorCommand_MT.adoc[ExecuteCursorCommand(DatabaseCommand)] |Запускает сформированный SQL-запрос и возвращает серверный курсор с данными.
+|===
+
+* *xref:../../../../../api/DocsVision/Platform/StorageServer/Extensibility/StorageServerExtension.GetCursorBuilder_MT.adoc[StorageServerExtension.GetCursorBuilder - метод]* +
+* *xref:../../../../../api/DocsVision/Platform/StorageServer/Extensibility/StorageServerExtension.ExecuteCursorCommand_MT.adoc[StorageServerExtension.ExecuteCursorCommand - метод (DatabaseCommand)]* +
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/StorageServer/Extensibility/Extensibility_NS.adoc[Extensibility - пространство имен]

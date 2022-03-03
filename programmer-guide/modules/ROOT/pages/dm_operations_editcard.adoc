@@ -1,0 +1,88 @@
+= Изменение данных карточки
+
+Под изменением данных карточки обычно подразумевается изменение значения полей её секций, т.к. именно поля выступают основным хранилищем её данных. Последовательность доступа к полям карточки в этом случае абсолютно аналогична приведенной в xref:dm_operations_getsection.adoc[Получение данных из секции карточки]
+
+== Базовый API
+
+Изменение данных карточки в обычном режиме:
+
+[source,pre,codeblock,language-csharp]
+----
+// Получаем данные карточки с идентификатором cardId
+CardData card = userSession.CardManager.GetCardData(cardId);
+
+// В качестве примера получим первую строку секции с идентификатором sectionId
+RowData sectionRow = card.Sections[sectionId].FirstRow;
+
+// Изменяем содержимое поля с псевдонимом Field
+sectionRow["Field"] = "Новое значение поля";
+----
+
+Если необходимо изменить значения нескольких полей, то предварительно рекомендуется активировать xref:dm_delayedchanges.adoc[режим отложенных изменений]:
+
+[source,pre,codeblock]
+----
+CardData card = userSession.CardManager.GetCardData(cardId);
+
+// Включаем режим отложенных изменений
+card.BeginUpdate();
+RowData sectionRow = card.Sections[sectionId].FirstRow;
+
+// Изменяем значение полей с псевдонимами FieldFirst и FieldSecond
+sectionRow["FieldFirst"] = "Новое значение первого поля";
+sectionRow["FieldSecond"] = "Новое значение второго поля";
+
+// Фиксируем изменения в базе данных
+card.EndUpdate();
+----
+
+Если в сценарии изменения данных предполагается изменение одного поля, то активировать режим отложенных изменений не требуется
+
+== Объектная модель
+
+На высоком уровне API сценарий изменения данных зависит от способа (см. описание в разделе xref:dm_operations_getsection.adoc[Получение данных из секции карточки]) представления секции в объектной модели карточки.
+
+Если сущность секции представлена в объектной модели карточки в виде свойства, то код изменяющий, к примеру, название карточки типа [.dfn .term]_Документ_ будет следующим:
+
+[source,pre,codeblock,language-csharp]
+----
+// Получаем карточку типа Документ
+Document card = objectContext.GetObject<Document>(cardId);
+
+// Изменяем значение поля
+card.MainInfo.Name = "Новое название документа"; ;
+
+// Сохраняем изменения
+objectContext.SaveObject(card);
+----
+
+Если необходимо, вместо сохранения изменений одного объекта, можно сохранить все изменения контекста объектов:
+
+[source,pre,codeblock,language-csharp]
+----
+objectContext.AcceptChanges();
+----
+
+Если объектная модель карточки не предоставляет непосредственного доступа к секции, можно воспользоваться методом [.keyword .apiname]#GetSection# базового класса xref:../api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]:
+
+[source,pre,codeblock,language-csharp]
+----
+// Получаем карточку
+BaseCard baseCard = objectContext.GetObject<BaseCard>(cardId);
+            
+// Получаем первую строку секции 
+// Переданный идентификатор соответствует идентификатору секция "Основная информация" карточки типа Документ
+BaseCardSectionRow row = (BaseCardSectionRow)baseCard.GetSection(new Guid("30EB9B87-822B-4753-9A50-A1825DCA1B74"))[0];
+
+// Изменяем значение поля
+row["Name"] = "Новое название документа";
+
+// Сохраняем изменения строки
+objectContext.SaveObject(row);
+----
+
+== См. далее
+
+* xref:dm_operations_createcard.adoc[Создание нового экземпляра карточки]
+
+*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

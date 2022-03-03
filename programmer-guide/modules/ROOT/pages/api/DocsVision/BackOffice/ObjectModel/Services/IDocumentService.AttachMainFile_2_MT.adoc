@@ -1,0 +1,56 @@
+= IDocumentService.AttachMainFile - метод (Document, string, SignedCms, bool)
+
+Добавляет в документ подпись в качестве основного файла документа, проверяет срок действия подписи.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[AttachMainFile2__section_sj4_42r_4pb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+DocumentFile AttachMainFile(Document document, string fileName, SignedCms signedCms, bool verifySignatures)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+fileName::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
+  +
+  Карточка файла с подписями
+signedCms::
+  Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
+  +
+  Сообщение CMS/PKCS 7
+verifySignatures::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  При true, проверяется срок действия подписей
+
+Возвращаемое значение
+
+::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+
+[[AttachMainFile2__section_tj4_42r_4pb]]
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception] |Ошибка будет возвращена, если по каким либо причинам добавление основного файла невозможно.
+|===
+
+[[AttachMainFile2__section_vj4_42r_4pb]]
+== Заметки
+
+Данный метод, в отличии от метода [.keyword .apiname]#AddMainFile#, позволяет корректно загружать подписанные файлы.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -1,0 +1,66 @@
+= IDocumentService.RemoveMainFileComments - метод (Document, DocumentFile, FileCommentCollection, IEnumerable<FileComment>)
+
+Удаляет комментарии к файлу документа.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void RemoveMainFileComments(Document document, DocumentFile file, FileCommentCollection collection, IEnumerable<FileComment> comments)
+----
+
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Документ
+file::
+  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
+  +
+  Файл документа
+collection::
+  Тип: xref:../../../Platform/ObjectManager/SystemCards/FileCommentCollection_CL.adoc[FileCommentCollection]
+  +
+  Коллекция комментариев
+comments::
+  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<FileComment>
+  +
+  Коллекция удаляемых комментариев
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file, collection или comments.
+|===
+
+== Примеры
+
+В приведенном примере демонстрируется использование метода [.keyword .apiname]#RemoveMainFileComments# при удалении комментариев, содержащих слово "удалить", к первому основному файлу
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+
+// Получение документа
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Получение первого основного файла
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+
+// Получение карточки файла с версией из основного файла
+VersionedFileCard versionedFileCard = documentService.GetMainFile(file);
+
+// Удаление комментария
+documentService.RemoveMainFileComments(document, file, versionedFileCard.Comments, versionedFileCard.Comments.Where(t => t.Comment.Contains("удалить")));
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

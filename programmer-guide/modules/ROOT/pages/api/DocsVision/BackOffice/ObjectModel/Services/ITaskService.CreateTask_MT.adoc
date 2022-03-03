@@ -1,0 +1,62 @@
+= ITaskService.CreateTask - метод (KindsCardKind)
+
+Создает новое задание указанного вида.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+Task CreateTask(KindsCardKind kind)
+----
+
+Параметры
+
+kind::
+  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
+  +
+  Вид создаваемого задания
+
+Возвращаемое значение
+
+::
+  Тип: xref:../Task_CL.adoc[Task]
+  +
+  Созданное задание
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind.
+|===
+
+== Примеры
+
+Ниже приведен пример создания нового задания вида "На исполнение".
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервисов
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+// Получение вида На исполнение
+QueryObject query = new QueryObject(RefKinds.CardKinds.Name, "На исполнение");
+KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query);
+
+// Создание задания
+Task newTask = taskService.CreateTask(cardKind);
+newTask.MainInfo.Name = newTask.Description = "Новое задание";
+
+// Инициализация основных параметров задания
+taskService.InitializeDefaults(newTask);
+objectContext.AcceptChanges();
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

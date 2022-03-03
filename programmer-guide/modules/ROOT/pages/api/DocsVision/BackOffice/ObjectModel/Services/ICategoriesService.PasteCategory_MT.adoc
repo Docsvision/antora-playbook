@@ -1,0 +1,61 @@
+= ICategoriesService.PasteCategory - метод (CategoriesCategory, CategoriesCategory)
+
+Создает копию указанной категории с сохранением прав доступа и существующих подкатегорий.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+CategoriesCategory PasteCategory(CategoriesCategory parentCategory, CategoriesCategory categoryToCopy)
+----
+
+Параметры
+
+parentCategory::
+  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
+  +
+  Категория, в которую будет помещена копия категории
+categoryToCopy::
+  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
+  +
+  Копируемая категория
+
+Возвращаемое значение
+
+::
+  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
+  +
+  Готовая копия категории
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр categoryToCopy.
+|===
+
+== Заметки
+
+== Примеры
+
+[source,pre,codeblock,language-csharp]
+----
+//Инициализация контекста объектов
+
+// Получение сервиса для работы со Справочником категорий
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>();
+
+// Получение копируемой категории и категории, в которую будет помещена копия
+CategoriesCategory copiedCategory = categoriesService.FindCategoryByName(null, "Копируемая категория");
+CategoriesCategory parentCategory = categoriesService.FindCategoryByName(null, "Родительская категория");
+
+// Создание копии
+CategoriesCategory copy = categoriesService.PasteCategory(parentCategory, copiedCategory);
+objectContext.SaveObject(copiedCategory);
+----
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService - интерфейс]

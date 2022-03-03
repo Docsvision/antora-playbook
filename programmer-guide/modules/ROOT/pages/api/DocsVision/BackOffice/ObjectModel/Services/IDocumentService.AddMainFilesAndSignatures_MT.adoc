@@ -1,0 +1,41 @@
+= IDocumentService.AddMainFilesAndSignatures - метод (Document, IEnumerable<string>, bool, out IEnumerable<DocumentFile>, out IEnumerable<BaseCardSignature>)
+
+Импортирует файлы с подписью в карточку документа
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+[[IDocumentService_AddMainFilesAndSignatures_MT__section_jct_3ds_mpb]]
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+void AddMainFilesAndSignatures(Document document, IEnumerable<string> filePaths, bool verifySignatures, out IEnumerable<DocumentFile> files, out IEnumerable<BaseCardSignature> signatures)
+----
+
+[[IDocumentService_AddMainFilesAndSignatures_MT__section_nyy_4fs_mpb]]
+Параметры
+
+document::
+  Тип: xref:../Document_CL.adoc[Document]
+  +
+  Подписываемый документ
+filePaths::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
+  +
+  Находит импортируемые файлы по расширению
+verifySignatures::
+  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+  +
+  При true
+files::
+  Тип:
+  +
+  Добавляет найденные файлы как основные
+
+signatures::
+  Тип:
+  +
+  Импортирует файлы подписи
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

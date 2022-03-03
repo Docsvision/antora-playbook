@@ -1,0 +1,76 @@
+= Создание нового экземпляра карточки
+
+== Базовый API
+
+[.dfn .term]_Менеджер карточек_ базового API предоставляет метод [.keyword .apiname]#CreateCardData# для создания новых экземпляров карточек определенного типа. В качестве примера, новый экземпляр [.dfn .term]_карточки файла с версиями_ может быть создан следующим образом:
+
+[source,pre,codeblock,language-csharp]
+----
+CardData card = userSession.CardManager.CreateCardData(new Guid("6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3"));
+----
+
+Здесь:
+
+* userSession - xref:dm_connection.adoc[пользовательская сессия];
+* 6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3 - идентификатор карточки типа [.dfn .term]_Карточка файла с версиями_.
+
+[NOTE]
+====
+[.note__title]#Прим.:# Идентификатор типа карточки можно посмотреть в разделе xref:DM_StandartCards.adoc[Описание полей стандартной карточки], либо в схеме карточки, например, используя программу «CardManager» из комплекта Resource Kit.
+====
+
+Если необходимо создать карточку с определенным идентификатором, можно воспользоваться соотвествующей перегрузкой метода:
+
+[source,pre,codeblock,language-csharp]
+----
+// newCardId - идентификатор создаваемой карточки
+CardData card = userSession.CardManager.CreateCardData(new Guid("6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3"), newCardId);
+----
+
+После создания экземпляра карточки, если необходимо, её данные могут быть изменены по аналогии с примером, приведенным в разделе xref:dm_operations_editcard.adoc[Изменение данных карточки]. Возможность изменения определенных данных карточки, а также тип этих данных определяются типом карточки, описание которых приведено в разделе xref:DM_StandartCards.adoc[Описание полей стандартной карточки].
+
+== Объектная модель
+
+API данного уровня не предлагает отдельного метода для создания нового экземпляра карточки. Данная задача распределена между преобразователем данных соответствующего типа карточки и сервисом для работы с этим типом карточек (понятие преобразователя и сервиса приведено в разделе xref:dm_connection.adoc[Подключение к серверу Docsvision]).
+
+[NOTE]
+====
+[.note__title]#Прим.:# Полное описание [.dfn .term]_сервисов_, предоставляемых в рамках базовой поставки Docsvision, было приведено в разделе xref:dm_services.adoc[Сервисы объектной модели], также можно обращаться к описанию интерфейсов сервисов в разделе xref:../api/Intro.adoc[Библиотека классов].
+====
+
+Далее приведен пример использования методов для создания карточек типа документ и задание:
+
+[source,pre,codeblock,language-csharp]
+----
+// Получаем из контекста объектов два сервиса: для работы с документами и для работы с заданиями
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+ITaskService taskService = objectContext.GetService<ITaskService>();
+
+// Создаем экземпляр карточки типа Документ
+Document document = documentService.CreateDocument();
+
+// Создаем экземпляр карточки типа Задание
+Task taks = taskService.CreateTask();
+
+// Сохраняем все изменения контекста объектов
+objectContext.AcceptChanges();
+----
+
+Здесь:
+
+* objectContext - xref:dm_connection.adoc[контекст объектов];
+* Метод xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.GetService_MT.adoc[GetService] возвращает сервис по его интерфейсу.
+
+Как видно из примера, типовой сценарий создания экземпляра карточки включает три шага:
+
+. Получение сервиса для работы с карточками определенного типа.
+. Вызов метода, отвечающего за создание карточки.
+. Сохранение изменений методами [.keyword .apiname]#ObjectContext.AcceptChanges# или [.keyword .apiname]#ObjectContext.SaveObject#.
+
+Перед сохранением данных, если необходимо, можно изменить данные карточки (см. xref:dm_operations_editcard.adoc[Изменение данных карточки]).
+
+== См. далее
+
+* xref:dm_operations_deleteobject.adoc[Удаление объектов]
+
+*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

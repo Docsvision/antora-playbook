@@ -1,0 +1,40 @@
+= LockedObject - класс
+
+Представляет объект поддерживающий блокировку.
+
+* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class LockedObject : ILockable
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CardId |Возвращает идентификатор карточки, если заблокированный объект – карточка.
+|CardTypeId |Возвращает идентификатор типа карточки, если заблокированный объект – карточка.
+|Id |Возвращает идентификатор объекта.
+|LockOwner |Возвращает название учетной записи владельца блокировки.
+|LockStatus |Возвращает статус блокировки.
+|Name |Возвращает название объекта.
+|ObjectType |Возвращает тип заблокированного объекта.
+|SectionId |Возвращает тип секции, если заблокированный объект – строка.
+|Session |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ForceUnlock |Принудительно снимает блокировку из другой сессии.
+|RemoveLock |Снятие блокировки.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

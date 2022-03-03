@@ -1,0 +1,44 @@
+= FileDataRights - перечисление
+
+Определяет возможные права на файл.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[Flags]
+public enum FileDataRights
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|GenericRead |Простое чтение. Значение 0x80000000.
+|GenericWrite |Простая запись. Значение 0x40000000.
+|GenericExecute |Простое выполнение. Значение 0x20000000.
+|GenericAll |Чтение, запись и выполнение. Значение 0x10000000.
+|Delete |Удаление. Значение 0x00010000.
+|ReadPermissions |Чтение прав. Значение 0x00020000.
+|ChangePermissions |Изменение прав. Значение 0x00040000.
+|TakeOwnership |Назначение владельца. Значение 0x00080000.
+|StandardRightsAll |Стандартные права на объект. Значение 0x000F0000.
+|ReadData |Чтение. Значение 0x00000001.
+|WriteData |Запись. Значение 0x00000002.
+|Copy |Копирование. Значение 0x00000008.
+|ReadAttributes |Чтение атрибутов. Значение 0x00000010.
+|WriteAttributes |Запись атрибутов. Значение 0x00000020.
+|SpecificRightsAll |Все существующие права. Значение 0x0000003B.
+|Read |Чтение. Значение 0x00020019.
+|Modify |Изменение. Значение 0x00000022.
+|Own |Назначить себя владельцем. Значение 0x000E0000.
+|FullControl |Полный доступ. Значение 0x000F003B.
+|===
+
+*На уровень выше:* xref:../../../../../api/DocsVision/Platform/Security/AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl - пространство имен]

@@ -1,0 +1,138 @@
+= FSGate - класс
+
+Содержит методы и свойства шлюза к файловой системе.
+
+* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class FSGate : IGate, IGateMessageSource
+----
+
+== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|FSGate() |Инициализирует новый экземпляр класса FSGate.
+|===
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:IGate.Data_PR.adoc[Data] |Задает или возвращает конфигурацию шлюза.
+|xref:IGate.ExecutionMode_PR.adoc[ExecutionMode] |Возвращает поддерживаемый режим исполнения процесса.
+|xref:IGate.ID_PR.adoc[ID] |Возвращает уникальный идентификатор шлюза.
+|xref:IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel] |Возвращает канал подписки на события шлюза.
+|===
+
+== Методы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:FSGate.AddVariable_MT.adoc[AddVariable(Int32, String)] |Создает новый файл или папку в указанном каталоге.
+|AddVariable(Int64, String) |Создает новый файл или папку в указанном каталоге.
+|xref:FSGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)] |Сравнивает пути к двум файлам или папкам.
+|CompareVariables(Int64, String, String) |Сравнивает пути к двум файлам или папкам.
+|CopyVariable(Int32, String, String) |Копирование не поддерживается.
+|CopyVariable(Int64, String, String) |Копирование не поддерживается.
+|xref:FSGate.CreateFile_MT.adoc[CreateFile(String)] |Создает в файловой системе новый файл.
+|xref:FSGate.CreateFolder_MT.adoc[CreateFolder(String)] |Создает в файловой системе новую папку.
+|xref:FSGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)] |Удаляет указанный файл или папку.
+|DeleteVariable(Int64, String) |Удаляет указанный файл или папку.
+|xref:FSGate.GetVariable_MT.adoc[GetVariable(Int32, String)] |Возвращает сущность указанного файла или папки.
+|GetVariable(Int64, String) |Возвращает сущность указанного файла или папки.
+|GetVariable(Int32, String, String) |Возвращает сущность указанного файла или папки.
+|xref:IGate.GetVariableInternalReference_MT.adoc[GetVariableInternalReference(Int32, String)] |Возвращает ссылку на переменную шлюза во внутреннем формате.
+|xref:IGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)] |Возвращает внешнюю ссылку на заданную переменную шлюза.
+|xref:IGateMessageSource.Initialize_MT.adoc[Initialize(Guid, IMessageChannel, ISubscriptionChannel)] |Инициализирует механизм подписки на события шлюза.
+|===
+
+== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|xref:FSGate.GateID_FL.adoc[GateID] |Предоставляет идентификатор шлюза.
+|xref:FSGate.GateName_FL.adoc[GateName] |Предоставляет название шлюза.
+|===
+
+== Примечание
+
+При работе с файловой системой из бизнес-процесса (особенно) в кластере СУБП необходимо учитывать, что конкретная функция может обрабатываться на любом из серверов СУБП, работающих в кластере, т.е. список файлов локального диска для одной функции может отличаться от списка файлов, полученного другой функцией.
+
+== Примеры
+
+Ниже приведен пример простого скрипта бизнес-процесса, который получает из шлюза список файлов определенной папки, содержащей новые приказы, и на их основе создает документы.
+
+[source,pre,codeblock,language-csharp]
+----
+// Стандартная точка входа функции БП, дополненная параметром context
+public void Execute (ProcessInfo process, PassState passInfo, ObjectContext context)
+{
+ try
+ {
+  // Получаем шлюз к файловой системе
+  FSGate fsGate = (FSGate)process.Gates[FSGate.GateID];
+
+  // Получаем сервис для работы с документами для создания документов
+  IDocumentService documentService = context.GetService<IDocumentService>();
+
+  // Получаем из настроек БП папки: с новыми приказами и для обработанных БП приказов    
+  string newOrderFolder = (string)process.Variables.GetVariableByName("newOrderFolder").Value;
+  string processedOrderFolder = (string)process.Variables.GetVariableByName("processedOrderFolder").Value;
+
+  // Получаем объект-папку из шлюза
+  FSFileFolder folder = fsGate.GetVariable(0, newOrderFolder) as FSFileFolder;
+  
+  // Получаем список файлов (.DOCX) из папки             
+  string[] orders = folder.GetFiles("*.docx");
+                                
+  for(int i =0; i<orders.Length; i++)
+  {
+   // Получаем объект-файл
+   FSFile currentFile = (FSFile)fsGate.GetVariable(1, orders[i]);
+   
+   // Обрабатываем только приказы, выпущенные вчера (или ранее)
+   if(currentFile.CreationTime < DateTime.Today)
+   {
+    try{
+
+     //Создаем документ
+     Document document = documentService.CreateDocument(currentFile.ID);
+     context.SaveObject(document);
+
+     // Убираем обработанный файл                                                    
+     currentFile.Move(System.IO.Path.Combine(processedOrderFolder, currentFile.Name));
+     process.LogMessage ("Создан документ по файлу: " + currentFile.Name);
+    } catch 
+    { 
+     throw; 
+    }   
+   }
+  }
+ } catch (Exception ex)
+ {
+  // запись в журнал ошибки исполнения
+  process.LogMessage("Ошибка выполнения скрипта:" + ex.Message);
+ }
+ return;
+}
+----
+
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.AddVariable_MT.adoc[FSGate.AddVariable - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.CompareVariables_MT.adoc[FSGate.CompareVariables - метод (Int32, String, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.CreateFile_MT.adoc[FSGate.CreateFile - метод (String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.CreateFolder_MT.adoc[FSGate.CreateFolder - метод (String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.DeleteVariable_MT.adoc[FSGate.DeleteVariable - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.GetVariable_MT.adoc[FSGate.GetVariable - метод (Int32, String)]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.GateID_FL.adoc[FSGate.GateID - поле]* +
+* *xref:../../../../api/DocsVision/Workflow/Gates/FSGate.GateName_FL.adoc[FSGate.GateName - поле]* +
+
+*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]

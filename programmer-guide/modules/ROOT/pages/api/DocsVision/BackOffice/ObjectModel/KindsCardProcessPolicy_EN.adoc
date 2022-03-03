@@ -1,0 +1,29 @@
+= KindsCardProcessPolicy - перечисление
+
+Определяет политику запуска бизнес-процесса для вида карточки.
+
+Это перечисление имеет атрибут FlagsAttribute, поддерживающий побитовое соединение составляющих его значений.
+
+* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+[System.Flags]
+public enum KindsCardProcessPolicy
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+|None |Не задана. Значение 0x00.
+|Command |Запускается вручную из карточки. Значение 0x01.
+|StateBranch |При переходе состояния. Значение 0x02.
+|StateOperation |По операции. Значение 0x04.
+|===
+
+*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

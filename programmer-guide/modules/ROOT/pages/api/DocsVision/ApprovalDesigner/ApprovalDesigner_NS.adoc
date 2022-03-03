@@ -1,0 +1,34 @@
+= DocsVision.ApprovalDesigner - пространство имен
+
+Пространство имен DocsVision.ApprovalDesigner содержит типы и методы приложения [.dfn .term]_Конструктор согласований_.
+
+== Пространства имен
+
+[cols=",",options="header",]
+|===
+|Пространство имен |Описание
+|xref:ObjectModel/ObjectModel_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel] |Содержит типы объектной модели приложения Конструктор согласований.
+|===
+
+== Заметки
+
+Для возможности получения или создания сущностей пространства имен DocsVision.ApprovalDesigner в xref:../../../pages/DM_FullContextInit.adoc[контексте объектов] помимо стандартных должны быть зарегистрированы дополнительные фабрики из сборки [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`:
+
+* фабрика преобразователей данных [.keyword .apiname]#ApprovalDesignerMapperFactory#
+* и фабрика сервисов [.keyword .apiname]#ApprovalDesignerServiceFactory#
+
+[source,pre,codeblock,language-csharp]
+----
+using DocsVision.ApprovalDesigner.ObjectModel.Mapping;
+// ...
+
+var serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>();
+serviceFactoryRegistry.RegisterFactory(typeof(ApprovalDesignerServiceFactory));
+
+var mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>();
+mapperFactoryRegistry.RegisterFactory(typeof(ApprovalDesignerMapperFactory));
+----
+
+* *xref:../../../api/DocsVision/ApprovalDesigner/ObjectModel/ObjectModel_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel - пространство имен]* +
+
+*На уровень выше:* xref:../../../api/DocsVision/DocsVision_NS.adoc[DocsVision - пространство имен]

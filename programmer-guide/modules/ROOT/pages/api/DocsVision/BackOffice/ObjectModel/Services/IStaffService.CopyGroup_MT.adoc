@@ -1,0 +1,45 @@
+= IStaffService.CopyGroup - метод (StaffGroup, StaffGroup)
+
+Копирует группу [.dfn .term]_справочника сотрудников_ в указанную группу.
+
+* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+StaffGroup CopyGroup(StaffGroup group, StaffGroup parentGroup)
+----
+
+Параметры
+
+group::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Копируемая группа
+parentGroup::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Группа сотрудников, в которую осуществляется копирование
+
+Возвращаемое значение
+
+::
+  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
+  +
+  Копия группы group
+
+== Исключения
+
+[cols=",",options="header",]
+|===
+|Исключение |Условие
+|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group.
+|===
+
+== Заметки
+
+Если `parentGroup` равен null, то группа `group` будет скопирована в корень дерева групп сотрудников.
+
+*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
