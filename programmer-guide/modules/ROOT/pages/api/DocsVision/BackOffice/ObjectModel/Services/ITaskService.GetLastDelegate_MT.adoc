@@ -2,12 +2,12 @@
 
 Возвращает последнюю запись списка делегирования.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskDelegate GetLastDelegate(Task task)
 ----
@@ -15,22 +15,20 @@ TaskDelegate GetLastDelegate(Task task)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskDelegate_CL.adoc[TaskDelegate]
-  +
-  Элемент списка делегирования
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskDelegate_CL.adoc[TaskDelegate]
++
+Элемент списка делегирования
 
 == Примеры
 
 Приведенный далее пример демонстрирует использование метода [.keyword .apiname]#GetLastDelegate# при получении сотрудника (первого из списка), которому выполнено делегирование.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -44,5 +42,3 @@ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-0000
 TaskDelegate taskDelegate = taskService.GetLastDelegate(task);
 StaffEmployee employee = taskDelegate.DelegatedTo.FirstOrDefault().Employee;
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

@@ -2,19 +2,19 @@
 
 Представляет встроенный переход в автомате состояний.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class BuiltInBranch
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |BranchType |Возвращает тип перехода.
@@ -27,7 +27,7 @@ public sealed class BuiltInBranch
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Register(Guid, Guid, BuiltInState, BuiltInOperation, BuiltInState) |Регистрирует встроенное состояние в объектной модели.
@@ -38,5 +38,3 @@ public sealed class BuiltInBranch
 == Заметки
 
 В классе [.keyword .apiname]#BuiltInBranch# используется статический список для хранения зарегистрированных переходов состояний, и последующего обращения к ним. Количество зарегистрированных переходов состояний ограничено и составляет 65535.
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

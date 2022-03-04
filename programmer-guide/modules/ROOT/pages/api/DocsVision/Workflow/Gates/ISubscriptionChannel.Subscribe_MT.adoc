@@ -2,12 +2,12 @@
 
 Выполняет подписку на событие шлюза Workflow.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Interfaces.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void Subscribe(int messageType, Guid processId, Guid functionId)
 ----
@@ -15,17 +15,17 @@ void Subscribe(int messageType, Guid processId, Guid functionId)
 Параметры
 
 messageType::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Тип события
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Тип события
 processId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор бизнес-процесса, из которого выполняется подписка
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор бизнес-процесса, из которого выполняется подписка
 functionId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор функции бизнес-процесса, которая выполняет подписку
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор функции бизнес-процесса, которая выполняет подписку
 
 == Заметки
 
@@ -35,5 +35,3 @@ functionId::
 * изменение любой карточки определенного типа;
 * разблокировка объекта;
 * блокировка объекта.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel - интерфейс]

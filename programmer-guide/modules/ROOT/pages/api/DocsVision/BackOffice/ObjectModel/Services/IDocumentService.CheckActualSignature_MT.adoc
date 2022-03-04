@@ -2,12 +2,12 @@
 
 Определяет актуальность ЭЦП по отношению к данным документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CheckActualSignature(Document document, ICollection<CardFieldSetting> fields, BaseCardSignature signature)
 ----
@@ -15,24 +15,22 @@ bool CheckActualSignature(Document document, ICollection<CardFieldSetting> field
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, проверяемые тестируемые данные
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, проверяемые тестируемые данные
 fields::
-  Тип: http://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
-  +
-  Коллекция полей типа xref:Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], у которых должна быть проверена подпись. Список полей определен в Справочнике видов карточек
+Тип: http://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
++
+Коллекция полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], у которых должна быть проверена подпись. Список полей определен в Справочнике видов карточек
 signature::
-  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
-  +
-  ЭЦП, для которой производится проверка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
++
+ЭЦП, для которой производится проверка
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - подпись актуальна, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - подпись актуальна, иначе false
 
 == Заметки
 
@@ -42,7 +40,7 @@ signature::
 
 Ниже приведен пример использования данного метода в скрипте карточки
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System.Linq;
 using System.Windows.Forms.Design;
@@ -80,5 +78,3 @@ namespace BackOffice
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

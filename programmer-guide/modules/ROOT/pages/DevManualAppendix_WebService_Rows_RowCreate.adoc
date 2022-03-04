@@ -30,17 +30,17 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Row
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 sectionId::
-  Идентификатор секции
+Идентификатор секции
 rowId::
-  Идентификатор создаваемой строки
+Идентификатор создаваемой строки
 instanceID::
-  Идентификатор карточки
+Идентификатор карточки
 parentRowId::
-  Идентификатор родительской строки, если создаваемая строка должна быть подчиненной
+Идентификатор родительской строки, если создаваемая строка должна быть подчиненной
 parentTreeRowId::
-  Идентификатор родительской строки, если создаваемая строка должна быть подчиненной в иерархической секции
+Идентификатор родительской строки, если создаваемая строка должна быть подчиненной в иерархической секции
 
 == Ответ
 
@@ -89,5 +89,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 newRowId = responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newRowId")
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Rows.adoc[Строки секций]

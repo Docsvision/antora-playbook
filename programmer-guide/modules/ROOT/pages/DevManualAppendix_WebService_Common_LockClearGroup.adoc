@@ -27,13 +27,13 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Loc
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 items::
-  Список объектов
+Список объектов
 forceUnlock::
-  Для снятия блокировки, установленной в другой сессии, указать true. Для принудительной разблокировки необходимы права администратора Docsvision.
+Для снятия блокировки, установленной в другой сессии, указать true. Для принудительной разблокировки необходимы права администратора Docsvision.
 
-Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *items* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -69,5 +69,3 @@ Content-Length: length
 ----
 
 Ответ содержит список объектов, которые не были разблокированы из-за ошибки.
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Lock.adoc[Блокировки]

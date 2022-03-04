@@ -1,23 +1,23 @@
 = Реализация стандартных интерфейсов
 
-Расширение Консоли настройки, разрабатываемое для _Модуля учета сетевых устройств_, должно регистрировать клинский пакет установки, устанавливать новую библиотеку карточек, а также загружать в базу данных Docsvision заранее подготовленные данные карточек и справочников. Для этого в классе [.dfn .term]_SnapIn_ должно быть реализовано несколько интерфейсов.
+Расширение Консоли настройки, разрабатываемое для _Модуля учета сетевых устройств_, должно регистрировать клинский пакет установки, устанавливать новую библиотеку карточек, а также загружать в базу данных Docsvision заранее подготовленные данные карточек и справочников. Для этого в классе _SnapIn_ должно быть реализовано несколько интерфейсов.
 
 == Реализация интерфейса ISnapIn
 
 Основной интерфейс расширения, который добавляет:
 
-* `LibraryID` - [.dfn .term]_идентификатор библиотеки карточек_, с которой данное расширение ассоциировано. `LibraryID` требуется для регистрации пакетов установки, добавления библиотеки карточек в базу данных, удаления [.dfn .term]_решения_, а также для некоторых других сценариев работы [.dfn .term]_Консоли настройки_.
+* `LibraryID` - _идентификатор библиотеки карточек_, с которой данное расширение ассоциировано. `LibraryID` требуется для регистрации пакетов установки, добавления библиотеки карточек в базу данных, удаления _решения_, а также для некоторых других сценариев работы _Консоли настройки_.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public string LibraryID
 {
  get { return "{F729F178-15DA-4BDE-82B8-DD0B2F0C0BC6}"; }
 }
 ----
-* `Name` - название модуля. Используется в некоторых сервисных функциях, например: при отображении названия расширения в списке зарегистрированных расширений [.dfn .term]_Консоли настройки_.
+* `Name` - название модуля. Используется в некоторых сервисных функциях, например: при отображении названия расширения в списке зарегистрированных расширений _Консоли настройки_.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public string Name
 {
@@ -26,16 +26,16 @@ public string Name
 ----
 * Метод [.keyword .apiname]#Initialize(IEnvironment)# - позволяет получить переменные контекста работы Консоли настройки, которые предоставляют доступ к сервису регистрации пакетов установки клиентской части.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void Initialize(IEnvironment environment)
 {
  _environment = environment;
 }
 ----
-* Метод [.keyword .apiname]#QueryInterface(SnapInInterfacesEnum)# - возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы [.dfn .term]_Консоли настройки_. Подробнее см. в разделе xref:DM_ConsolePlugin.adoc[Модуль расширения Консоли настройки].
+* Метод [.keyword .apiname]#QueryInterface(SnapInInterfacesEnum)# - возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы _Консоли настройки_. Подробнее см. в разделе xref:DM_ConsolePlugin.adoc[Модуль расширения Консоли настройки].
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public object QueryInterface(SnapInInterfacesEnum itf)
 {
@@ -58,11 +58,11 @@ public object QueryInterface(SnapInInterfacesEnum itf)
 
 == Реализация интерфейса IConfigurator
 
-Данный интерфейс должен быть реализован, если расширение может выполнять первоначальную настройку [.dfn .term]_решения_.
+Данный интерфейс должен быть реализован, если расширение может выполнять первоначальную настройку _решения_.
 
-Как правило, метод [.keyword .apiname]#Execute#, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, [.dfn .term]_Идентификатор пакета установки_ и [.dfn .term]_Код продукта_, которые были указаны при xref:CreateCardLib_SchemaLib.adoc[разработке библиотеки карточек]:
+Как правило, метод [.keyword .apiname]#Execute#, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, _Идентификатор пакета установки_ и _Код продукта_, которые были указаны при xref:CreateCardLib_SchemaLib.adoc[разработке библиотеки карточек]:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public bool Execute()
 {
@@ -86,11 +86,11 @@ public bool Execute()
 
 == Реализация интерфейса IDBInformation
 
-Данный интерфейс добавляет методы, предоставляющие [.dfn .term]_Консоли настройки_ пути к [.dfn .term]_CardPackage_ и [.dfn .term]_SqlPackage_.
+Данный интерфейс добавляет методы, предоставляющие _Консоли настройки_ пути к _CardPackage_ и _SqlPackage_.
 
-Метод [.keyword .apiname]#GetCardPackage# должен вернуть абсолютный путь к пакету [.dfn .term]_CardPackage_:
+Метод [.keyword .apiname]#GetCardPackage# должен вернуть абсолютный путь к пакету _CardPackage_:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public string GetCardPackage()
 {
@@ -98,9 +98,9 @@ public string GetCardPackage()
 }
 ----
 
-Метод [.keyword .apiname]#GetScript(ScriptTypeEnum)# должен вернуть абсолютный путь к пакету [.dfn .term]_SqlPackage_, если запрашивается тип [.keyword .apiname]#ScriptTypeEnum.INSTALL_TABLES#:
+Метод [.keyword .apiname]#GetScript(ScriptTypeEnum)# должен вернуть абсолютный путь к пакету _SqlPackage_, если запрашивается тип [.keyword .apiname]#ScriptTypeEnum.INSTALL_TABLES#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public string GetScript(ScriptTypeEnum type)
 {
@@ -116,9 +116,9 @@ public string GetScript(ScriptTypeEnum type)
 }
 ----
 
-Также добавляется переменная `ContainsCardLib`, которая определяет наличие у [.dfn .term]_решения_ собственной библиотеки карточек.
+Также добавляется переменная `ContainsCardLib`, которая определяет наличие у _решения_ собственной библиотеки карточек.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public bool ContainsCardLib
 {
@@ -130,9 +130,9 @@ public bool ContainsCardLib
 
 Данный интерфейс добавляет единственный метод [.keyword .apiname]#Uninstall(Boolean)#, вызываемый при удалении расширения (и решения в целом).
 
-Метод [.keyword .apiname]#Uninstall# может, к примеру, удалять библиотеку карточек, а также настройки [.dfn .term]_решения_, как в данном случае:
+Метод [.keyword .apiname]#Uninstall# может, к примеру, удалять библиотеку карточек, а также настройки _решения_, как в данном случае:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void Uninstall(bool removeSettings)
 {
@@ -160,5 +160,3 @@ public void Uninstall(bool removeSettings)
 == См. далее
 
 * xref:CreateSnapIn_Control.adoc[Пользовательский интерфейс расширения]
-
-*На уровень выше:* xref:../pages/CreateSnapIn.adoc[Создание расширения для Консоли настройки]

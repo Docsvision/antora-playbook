@@ -2,26 +2,24 @@
 
 Запускает процедуру на исполнение.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract InfoRowCollection GetData()
 ----
 
-Возвращаемое значение
-
-::
-  Тип: xref:InfoRowCollection_CL.adoc[InfoRowCollection]
-  +
-  Результат запроса
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/InfoRowCollection_CL.adoc[InfoRowCollection]
++
+Результат запроса
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string REPORT_ID = "75AD4670-0DF3-43CD-A6FE-C34BC6E36E31";
 
@@ -35,5 +33,3 @@ report.Parameters["Param2"].Value = 0;
 //Вызов процедуры и получение данных
 InfoRowCollection results = report.GetData();
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/Report_CL.adoc[Report - класс]

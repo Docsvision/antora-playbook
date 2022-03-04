@@ -2,12 +2,12 @@
 
 Копирует значения и ссылки из родительского задания в дочернее.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void CopyDataFromParentTask(Task task, TaskSetting taskSetting, Task parentTask)
 ----
@@ -15,21 +15,21 @@ void CopyDataFromParentTask(Task task, TaskSetting taskSetting, Task parentTask)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание (подчиненное), в которое переносятся значения
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание (подчиненное), в которое переносятся значения
 taskSetting::
-  Тип: xref:Entities/KindSetting/TaskSetting_CL.adoc[TaskSetting]
-  +
-  Настройки вида задания, для определения параметров копирования значений
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/TaskSetting_CL.adoc[TaskSetting]
++
+Настройки вида задания, для определения параметров копирования значений
 parentTask::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание (родительское), из которого выполняется копирование значений
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание (родительское), из которого выполняется копирование значений
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, taskSetting или parentTask.
@@ -41,9 +41,9 @@ parentTask::
 
 == Примеры
 
-В приведенном ниже примере демонстрируется использование метода [.keyword .apiname]#CopyDataFromParentTask# при копировании данных из основного задания в дочернее. В основном задании данные были изменены, к примеру, из объектной модели, поэтому изменения в подчиненное не попали. Настройки ([.dfn .term]_справочника видов карточек_) подчиненного вида задания подразумевают получение определенных данных из родительского.
+В приведенном ниже примере демонстрируется использование метода [.keyword .apiname]#CopyDataFromParentTask# при копировании данных из основного задания в дочернее. В основном задании данные были изменены, к примеру, из объектной модели, поэтому изменения в подчиненное не попали. Настройки (_справочника видов карточек_) подчиненного вида задания подразумевают получение определенных данных из родительского.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -61,5 +61,3 @@ TaskSetting childTaskKindSetting = taskService.GetKindSettings(childTask.SystemI
 taskService.CopyDataFromParentTask(childTask, childTaskKindSetting, parentTask);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

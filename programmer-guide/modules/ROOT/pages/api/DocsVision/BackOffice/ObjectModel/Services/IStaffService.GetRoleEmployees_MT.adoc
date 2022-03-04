@@ -2,12 +2,12 @@
 
 Возвращает список сотрудников с указанной ролью.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 System.Collections.Generic.IEnumerable<StaffEmployee> GetRoleEmployees(StaffRole role)
 ----
@@ -15,16 +15,14 @@ System.Collections.Generic.IEnumerable<StaffEmployee> GetRoleEmployees(StaffRole
 Параметры
 
 role::
-  Тип: xref:../StaffRole_CL.adoc[StaffRole]
-  +
-  Роль сотрудника, подразделения или группы
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffRole_CL.adoc[StaffRole]
++
+Роль сотрудника, подразделения или группы
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
-  +
-  Список сотрудников типа xref:../StaffEmployee_CL.adoc[StaffEmployee]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
++
+Список сотрудников типа xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
 
 == Заметки
 
@@ -34,7 +32,7 @@ role::
 
 Пример получения списка сотрудников, имеющих роль с идентификатором 00000000-0000-0000-0000-000000000000
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 StaffRole role = objectContext.GetObject<StaffRole>(new Guid("00000000-0000-0000-0000-000000000000"));
@@ -42,5 +40,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 
 var employees = staffService.GetRoleEmployees(role);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

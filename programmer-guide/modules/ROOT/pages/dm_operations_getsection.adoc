@@ -4,9 +4,9 @@
 
 == Базовый API
 
-На данном уровне API, секция карточки представлена типом xref:../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData]. Получить данные секции карточки можно следующим образом:
+На данном уровне API, секция карточки представлена типом xref:..xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData]. Получить данные секции карточки можно следующим образом:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 SectionData section = card.Sections[sectionId];
 ----
@@ -26,20 +26,20 @@ SectionData section = card.Sections[sectionId];
 
 * получить все её строки (для иерархической секции будут возвращены строки только первого уровня):
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 RowDataCollection rows = section.Rows;
 ----
 * получить все строки без учета иерархии, т.е. для иерархической секции будут возвращены все строки :
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 RowDataCollection rows = section.GetAllRows();
 ----
 * найти строку, пользуясь xref:dm_search_api_filter.adoc[клиентской фильтрацией], либо строки, используя поиск по секции;
 * получить строку секции по идентификатору строки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 RowData row = section.GetRow(rowId);
 ----
@@ -47,19 +47,19 @@ RowData row = section.GetRow(rowId);
 
 * выбрать первую строку - востребовано для плоской секции, которая содержит единственную строку:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 RowData row = section.FirstRow;
 ----
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Полный список методов и свойств класса секции см. в описании типа xref:../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData].
+[.note__title]#Прим.:# Полный список методов и свойств класса секции см. в описании типа xref:..xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData].
 ====
 
-С большой долей вероятности, целью получения данных секции ([.keyword .apiname]#SectionData#) является доступ к полям её строк. В качестве примера, рассмотрим полный код, который выводит названия (поле "Name") всех подпапок первого из [.dfn .term]_карточки папок_:
+С большой долей вероятности, целью получения данных секции ([.keyword .apiname]#SectionData#) является доступ к полям её строк. В качестве примера, рассмотрим полный код, который выводит названия (поле "Name") всех подпапок первого из _карточки папок_:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем данные карточки папок (см. Описание полей стандартной карточки)
 CardData card = userSession.CardManager.GetCardData(new Guid("DA86FABF-4DD7-4A86-B6FF-C58C24D12DE2"));
@@ -86,18 +86,18 @@ foreach (var folderRow in row.ChildRows)
 Способ получения данных из секции карточки на этом уровне API зависит от способа представления этой секции в объектной модели карточки:
 
 . Для предоставляется данных отдельной секции, объектная модель карточки содержит свойство, возвращающее сущность секции, а точнее коллекцию сущностей её строк, т.о. данные секции могут быть получены из свойства класса объектной модели карточки. Такой способ реализации является основным для объектной модели карточек библиотеки "Базовые объекты".
-. Объектная модель карточки не содержит отдельных свойств, возвращающих сущность секции (как в первом случае), но класс объектной карточки унаследован от класса xref:../api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]. В этом случае коллекция строк секции может быть получена с помощью метода xref:../api/DocsVision/BackOffice/ObjectModel/BaseCard.GetSection_MT.adoc[GetSection].
+. Объектная модель карточки не содержит отдельных свойств, возвращающих сущность секции (как в первом случае), но класс объектной карточки унаследован от класса xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]. В этом случае коллекция строк секции может быть получена с помощью метода xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCard.GetSection_MT.adoc[GetSection].
 +
 [NOTE]
 ====
 [.note__title]#Прим.:# Метод [.keyword .apiname]#GetSection# не предназначен для работы с иерархическими секциями - при получении секции данного типа, будут возвращены строки только первого уровня иерархии. Для работы с иерархическими секциями потребуется самостоятельно разработать объектную модель карточки (первый способ получения данных секции), либо использовать базовый API.
 ====
 
-Для сравнение приведенных способов получения данных секции карточки рассмотрим сценарий, в котором нужно получить названия всех основных файлов карточки типа [.dfn .term]_Документ_.
+Для сравнение приведенных способов получения данных секции карточки рассмотрим сценарий, в котором нужно получить названия всех основных файлов карточки типа _Документ_.
 
-В классе объектной модели карточки типа [.dfn .term]_Документ_ - xref:../api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document] - объявлено свойство xref:../api/DocsVision/BackOffice/ObjectModel/Document.Files_PR.adoc[Document.Files], которое возвращает коллекцию файлов документа (типа xref:../api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]), из которых может быть получено название. Код, предоставляющий названия файлов, может быть следующим:
+В классе объектной модели карточки типа _Документ_ - xref:..xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document] - объявлено свойство xref:..xref:api/DocsVision/BackOffice/ObjectModel/Document.Files_PR.adoc[Document.Files], которое возвращает коллекцию файлов документа (типа xref:..xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]), из которых может быть получено название. Код, предоставляющий названия файлов, может быть следующим:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку типа Документ по идентификатору карточки
 Document document = objectContext.GetObject<Document>(cardId);
@@ -113,9 +113,9 @@ foreach (DocumentFile file in files)
 }
 ----
 
-Для реализации сценария вторым способом потребуется самостоятельно получить название из [.dfn .term]_Карточки файла с версиями_:
+Для реализации сценария вторым способом потребуется самостоятельно получить название из _Карточки файла с версиями_:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку (используется из первого примера)
 // Тип возвращаемого объекта не уточняется намеренно, для демонстрации возможностей базового класса
@@ -138,15 +138,15 @@ foreach (var file in files)
 
 Т.е. чтобы получить данные из секций, если объектная модель секции не реализована, требуется:
 
-. Получить строки этой секции с помощью метода xref:../api/DocsVision/BackOffice/ObjectModel/BaseCard.GetSection_MT.adoc[BaseCard.GetSection]:
+. Получить строки этой секции с помощью метода xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCard.GetSection_MT.adoc[BaseCard.GetSection]:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 var files = (IEnumerable<BaseCardSectionRow>)card.GetSection(new Guid("A6FA8BAF-2EA4-4071-AA3E-5C4E71646A90"));
 ----
 . Получить значение нужного поля из строки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Способ получения значения поля по псевдониму с приведением к нужному типу
 int type = (int)file["FileType"];
@@ -157,11 +157,11 @@ Guid fileId = file.GetGuid("FileId");
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Каким образом получить документ (тип xref:../api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]), если есть объектная модель файла этого документа (тип xref:../api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile])?
+[.note__title]#Прим.:# Каким образом получить документ (тип xref:..xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]), если есть объектная модель файла этого документа (тип xref:..xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile])?
 
-Чтобы получить родительский объект используйте метод xref:../api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]:
+Чтобы получить родительский объект используйте метод xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 DocumentFile documentFile;
 Document document = ObjectHelper.GetParent<Document>(docFile);
@@ -171,5 +171,3 @@ Document document = ObjectHelper.GetParent<Document>(docFile);
 == См. далее
 
 * xref:dm_operations_editcard.adoc[Изменение данных карточки]
-
-*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

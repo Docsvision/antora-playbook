@@ -2,12 +2,12 @@
 
 Добавляет нового сотрудника в указанную организацию/подразделение.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 PartnersEmployee AddNewEmployee(PartnersCompany unit)
 ----
@@ -15,20 +15,18 @@ PartnersEmployee AddNewEmployee(PartnersCompany unit)
 Параметры
 
 unit::
-  Тип: xref:../PartnersCompany_CL.adoc[PartnersCompany]
-  +
-  Подразделение, в которое добавляется сотрудник
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/PartnersCompany_CL.adoc[PartnersCompany]
++
+Подразделение, в которое добавляется сотрудник
 
-Возвращаемое значение
-
-::
-  Тип: xref:../PartnersEmployee_CL.adoc[PartnersEmployee]
-  +
-  Сотрудник, добавленный в организацию
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/PartnersEmployee_CL.adoc[PartnersEmployee]
++
+Сотрудник, добавленный в организацию
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit.
@@ -36,7 +34,7 @@ unit::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -51,5 +49,3 @@ PartnersEmployee partnersEmployee = partnersService.AddNewEmployee(partnersCompa
 partnersEmployee.LastName = "Иванов";
 objectContext.SaveObject(partnersEmployee);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

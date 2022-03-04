@@ -2,12 +2,12 @@
 
 Создает дочернее задание.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Task CreateChildTask(Task parentTask, KindsCardKind kind, BaseCard parentCard, TaskList parentCardTaskList)
 ----
@@ -15,32 +15,30 @@ Task CreateChildTask(Task parentTask, KindsCardKind kind, BaseCard parentCard, T
 Параметры
 
 parentTask::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Основное задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Основное задание
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид создаваемого задания
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид создаваемого задания
 parentCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Родительская карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Родительская карточка
 parentCardTaskList::
-  Тип: xref:../TaskList_CL.adoc[TaskList]
-  +
-  Список подчинённых заданий из родительской карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[TaskList]
++
+Список подчинённых заданий из родительской карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Подчиненное задание
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Подчиненное задание
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind, parentCard или parentCardTaskList.
@@ -48,7 +46,7 @@ parentCardTaskList::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -63,5 +61,3 @@ Task childTask = taskService.CreateChildTask(parentTask, parentTask.SystemInfo.C
 childTask.MainInfo.Name = "Подчиненное задание";
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

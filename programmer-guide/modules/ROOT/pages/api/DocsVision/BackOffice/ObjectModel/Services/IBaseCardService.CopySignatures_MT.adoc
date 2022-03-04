@@ -2,12 +2,12 @@
 
 Создает список подписей на основе имеющегося.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void CopySignatures(SignatureList sourceSignatureList, SignatureList destinationSignatureList)
 ----
@@ -15,17 +15,17 @@ void CopySignatures(SignatureList sourceSignatureList, SignatureList destination
 Параметры
 
 sourceSignatureList::
-  Тип: xref:../SignatureList_CL.adoc[SignatureList]
-  +
-  Исходный список подписей
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/SignatureList_CL.adoc[SignatureList]
++
+Исходный список подписей
 destinationSignatureList::
-  Тип: xref:../SignatureList_CL.adoc[SignatureList]
-  +
-  Конечный список подписей
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/SignatureList_CL.adoc[SignatureList]
++
+Конечный список подписей
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр sourceSignatureList или destinationSignatureList.
@@ -34,5 +34,3 @@ destinationSignatureList::
 == Заметки
 
 При копировании создаются объекты типа [.keyword .apiname]#BaseCardSignature# и [.keyword .apiname]#BaseCardSignaturePart#, которые заполняются данными существующих подписей и частей подписи.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

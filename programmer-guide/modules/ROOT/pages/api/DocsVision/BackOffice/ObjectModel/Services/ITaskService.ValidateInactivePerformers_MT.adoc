@@ -2,12 +2,12 @@
 
 Определяет наличие в задании активных исполнителей.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool ValidateInactivePerformers(Task task, out string errorMessage)
 ----
@@ -15,24 +15,22 @@ bool ValidateInactivePerformers(Task task, out string errorMessage)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание
 errorMessage::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Сообщение с ошибкой
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Сообщение с ошибкой
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  false - все исполнители задания неактивны (и не имеют активных заместителей), иначе - true
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+false - все исполнители задания неактивны (и не имеют активных заместителей), иначе - true
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
@@ -41,5 +39,3 @@ errorMessage::
 == Заметки
 
 В ходе проверки определяется наличие активных (находятся в состоянии "Активен") исполнителей задания, если таковых не найдено (к примеру, все исполнители в отпуске), то проверяется наличие у них активных заместителей.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

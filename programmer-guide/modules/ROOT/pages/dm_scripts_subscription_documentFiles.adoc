@@ -1,6 +1,6 @@
 = События элемента управления файлами документа
 
-Элемент управления файлами документа реализует интерфейс xref:../api/DocsVision/BackOffice/Cards/CardDocument/IFilesViewWithPreview_IN.adoc[IFilesViewWithPreview], который добавляет подписку на события:
+Элемент управления файлами документа реализует интерфейс xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/IFilesViewWithPreview_IN.adoc[IFilesViewWithPreview], который добавляет подписку на события:
 
 * BeforeFileOpened, AfterFileOpened - перед/после открытия файла (основного или дополнительного);
 * BeforeMainFileAdded, MainFileAdded - перед/после добавления основного файла;
@@ -13,7 +13,7 @@
 
 Для подписки на событие в скрипте карточки, достаточно получить из компонента карточки элемент управления файлами, возвращаемый из свойства FilesViewWithPreview. К примера подпишемся на событие, вызываемое перед открытием любого файла:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Указываем дополнительные пространства имен
 using DocsVision.BackOffice.ObjectModel.Services.Entities;
@@ -52,5 +52,3 @@ private void FilesViewWithPreview_BeforeFileOpened(object sender, DocumentOpenFi
 ====
 
 В обработчиках событий, срабатывающих до исполнения соответствующей команды, можно добавить логику прерывания команды - установить e.Cancel в значение true.
-
-*На уровень выше:* xref:../pages/dm_scripts_subscription.adoc[Подписка на события]

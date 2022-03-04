@@ -2,12 +2,12 @@
 
 Удаляет зону нумерации из нумератора.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void DeleteNumeratorZone(NumeratorZone zone, NumeratorCard card)
 ----
@@ -15,20 +15,18 @@ void DeleteNumeratorZone(NumeratorZone zone, NumeratorCard card)
 Параметры
 
 zone::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorZone_CL.adoc[NumeratorZone]
-  +
-  Удаляемая зона нумерации
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorZone_CL.adoc[NumeratorZone]
++
+Удаляемая зона нумерации
 card::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
-  +
-  Нумератор, из которого удаляется зона нумерации
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
++
+Нумератор, из которого удаляется зона нумерации
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр zone или card.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService - интерфейс]

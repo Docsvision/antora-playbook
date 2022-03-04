@@ -1,20 +1,20 @@
 = SavedViewsView - класс
 
-Представляет объектную модель [.dfn .term]_Карточки сохраненных представлений_.
+Представляет объектную модель _Карточки сохраненных представлений_.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.SystemCards.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.SystemCards.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.SystemCards.ObjectModel]
+* *Сборка:* `DocsVision.Platform.SystemCards.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class SavedViewsView : ObjectBase
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |SavedViewsView |Инициализирует новый экземпляр класса SavedViewsView.
@@ -22,7 +22,7 @@ public sealed class SavedViewsView : ObjectBase
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Hidden |Задает или возвращает признак скрытого представления.
@@ -32,7 +32,7 @@ public sealed class SavedViewsView : ObjectBase
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |HiddenProperty |Определяет свойство "Скрытое представление".
@@ -42,17 +42,15 @@ public sealed class SavedViewsView : ObjectBase
 
 == Заметки
 
-Представление может быть создано в [.dfn .term]_Рабочем месте администратора_ (см. документ "Справка Docsvision 4.5").
+Представление может быть создано в _Рабочем месте администратора_ (см. документ "Справка Docsvision 4.5").
 
 == Примеры
 
 Представление может быть получено по уникальному идентификатору
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
             
 SavedViewsView savedViewsView = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-0000-0000-000000000000"));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/SystemCards/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.SystemCards.ObjectModel - пространство имен]

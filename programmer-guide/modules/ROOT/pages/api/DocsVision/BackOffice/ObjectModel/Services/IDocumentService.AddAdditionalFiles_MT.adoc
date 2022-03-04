@@ -2,12 +2,12 @@
 
 Добавляет дополнительные файлы в документ.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<DocumentFile> AddAdditionalFiles(Document document, IEnumerable<string> filePaths)
 ----
@@ -15,24 +15,22 @@ IEnumerable<DocumentFile> AddAdditionalFiles(Document document, IEnumerable<stri
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, в который будут добавлены файлы
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, в который будут добавлены файлы
 filePaths::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<System.String>
-  +
-  Расположение файлов
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<System.String>
++
+Расположение файлов
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>
-  +
-  Список файлов документа
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>
++
+Список файлов документа
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или filePaths.
@@ -48,7 +46,7 @@ filePaths::
 
 В приведенном примере к документу добавляются два дополнительных файла с файловой системы
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -65,5 +63,3 @@ documentService.AddAdditionalFiles(document, filePaths);
 // Сохранение
 objectContext.SaveObject(document);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

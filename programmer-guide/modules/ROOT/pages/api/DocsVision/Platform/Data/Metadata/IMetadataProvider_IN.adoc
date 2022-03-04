@@ -2,19 +2,19 @@
 
 Предоставляет доступ к метаданным карточек, секций, и полей.
 
-* [.keyword]*Пространство имен:* xref:Metadata_NS.adoc[DocsVision.Platform.Data.Metadata]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/Data/Metadata/Metadata_NS.adoc[DocsVision.Platform.Data.Metadata]
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IMetadataProvider
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Cards |Возвращает коллекцию метаданных карточек, зарегистрированных на сервере.
@@ -23,7 +23,7 @@ public interface IMetadataProvider
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |GetCard(Guid) |Возвращает метаданные карточки с заданным идентификатором.
@@ -36,7 +36,7 @@ public interface IMetadataProvider
 
 Код регистрация провайдера метаданных выглядит следующим образом:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession);
 objectContext.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
@@ -45,9 +45,7 @@ objectContext.AddService<IMetadataProvider>(metadataProvider);
 
 Доступ к поставщику метаданных аналогичен получения сервиса:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IMetadataProvider iMetadataProvider = objectContext.GetService<IMetadataProvider>();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/Data/Metadata/Metadata_NS.adoc[DocsVision.Platform.Data.Metadata - пространство имен]

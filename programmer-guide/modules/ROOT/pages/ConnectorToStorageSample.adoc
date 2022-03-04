@@ -4,11 +4,11 @@
 
 *Обратите внимание*: данный пример не является готовым решением для использования Google Drive в качестве внешнего хранилища, а только демонстрирует способ создания провайдера к нему.
 
-Облачное хранилище Google Drive предоставляет возможность и API для работы с файлами из собственного приложения. Инструкция по работе с Google Drive API приведена на странице https://developers.google.com/drive/api/v3/about-sdk.
+Облачное хранилище Google Drive предоставляет возможность и API для работы с файлами из собственного приложения. Инструкция по работе с Google Drive API приведена на странице https://developers.google.com/drivexref:api/v3/about-sdk.
 
 Для работы с Google Drive в данном примере используется предоставляемая реализация обертки для работы с Google Drive API в .NET (NuGet пакет https://www.nuget.org/packages/Google.Apis.Drive.v3/).
 
-Исходный код примера доступен по xref:../examples/gDriveStorage.zip[ссылке].
+Исходный код примера доступен по xref:example$/gDriveStorage.zip[ссылке].
 
 Пример содержит два проекта:
 
@@ -33,9 +33,9 @@
 
 == Последовательность работы с примером
 
-. Распакуйте link:../examples/gDriveStorage.zip[архив] примера на локальный диск.
-. Получите файл с конфигурацией клиента ([.ph .filepath]`credentials.json`) на странице https://developers.google.com/drive/api/v3/quickstart/dotnet (шаг 1). Потребуется авторизоваться в Google.
-. Загрузите файл [.ph .filepath]`credentials.json` в папку [.ph .filepath]`GoogleDriveStorageProvider\AskToken\bin\Debug\` распакованного архива примера.
+. Распакуйте xref:example$/gDriveStorage.zip[архив] примера на локальный диск.
+. Получите файл с конфигурацией клиента (`credentials.json`) на странице https://developers.google.com/drivexref:api/v3/quickstart/dotnet (шаг 1). Потребуется авторизоваться в Google.
+. Загрузите файл `credentials.json` в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\` распакованного архива примера.
 . Включите в Visual Studio настройку https://docs.microsoft.com/ru-ru/nuget/consume-packages/package-restore-troubleshooting[Allow Nuget to download missing package] для автоматической загрузки необходимых пакетов библиотеки Google Drive API.
 . Переподключите зависимости DocsVision.Platform.StorageServer и DocsVision.Platform.WinForms в проекте «GoogleDriveStorageProvider». К проекту должны быть подключены компоненты, используемые на сервере Docsvision.
 . Соберите проект «GoogleDriveStorageProvider».
@@ -57,10 +57,10 @@ using (var stream =
             }
 ----
 +
-Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в https://developers.google.com/drive/api/v3/quickstart/dotnet[примере], шаг 3). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
+Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в https://developers.google.com/drivexref:api/v3/quickstart/dotnet[примере], шаг 3). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
 +
-Токен будет сохранен в папку [.ph .filepath]`GoogleDriveStorageProvider\AskToken\bin\Debug\token.json\`.
-. Скопируйте на сервер Docsvision файлы из папки [.ph .filepath]`GoogleDriveStorageProvider\bin\Debug\`:
+Токен будет сохранен в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\token.json\`.
+. Скопируйте на сервер Docsvision файлы из папки `GoogleDriveStorageProvider\bin\Debug\`:
 * GoogleDriveStorageProvider.dll,
 * ru\GoogleDriveStorageProvider.resources.dll,
 * Google.Apis.Drive.v3.dll,
@@ -71,7 +71,7 @@ using (var stream =
 * Google.Apis.dll,
 * Newtonsoft.Json.dll.
 . Зарегистрируйте в GAC скопированные файлы.
-. Скопируйте на сервер Docsvision папку [.ph .filepath]`AskToken\bin\Debug\token.json\` и файл [.ph .filepath]`AskToken\bin\Debug\credentials.json`. Данные файлы потребуются для работы провайдера к Google Drive. Файл и папку нужно скопировать в каталог доступный для сервера Docsvision, но недоступный рядовым пользователям (из-за наличия конфиденциальных данных в файлах).
+. Скопируйте на сервер Docsvision папку `AskToken\bin\Debug\token.json\` и файл `AskToken\bin\Debug\credentials.json`. Данные файлы потребуются для работы провайдера к Google Drive. Файл и папку нужно скопировать в каталог доступный для сервера Docsvision, но недоступный рядовым пользователям (из-за наличия конфиденциальных данных в файлах).
 . Подключите новый тип хранилища к Docsvision.
 +
 *Обратите внимание*: проверяйте работу компонентов на тестовом сервере Docsvision.
@@ -79,15 +79,14 @@ using (var stream =
 .. Откройте Консоль настройки Docsvision.
 .. Перейдите в раздел Настройки сервера/Базы данных. Выберите настраиваемую БД и нажмите кнопку [.ph .uicontrol]*Настройка*. Будет открыто окно «Свойства и управление базой данных».
 .. Перейдите на страницу «Внешние хранилища».
-.. Добавьте новое хранилище. В окне настройки хранилища в поле [.ph .uicontrol]*Тип* нужно выбрать вариант «Добавить из сборки» и выбрать файл [.ph .filepath]`GoogleDriveStorageProvider.dll` из каталога GAC. В список типов хранилищ будет добавлено хранилище с названием «Хранилище в Google Drive».
+.. Добавьте новое хранилище. В окне настройки хранилища в поле [.ph .uicontrol]*Тип* нужно выбрать вариант «Добавить из сборки» и выбрать файл `GoogleDriveStorageProvider.dll` из каталога GAC. В список типов хранилищ будет добавлено хранилище с названием «Хранилище в Google Drive».
 .. Настройте новое хранилище с типом «Хранилище в Google Drive», группу и правило помещения в хранилище следуя инструкции, приведенной в Руководстве администратор модуля «Docsvision 5. Платформа».
 +
-При настройке хранилища необходимо указать: путь к файлу [.ph .filepath]`credentials.json` и папке [.ph .filepath]`token.json` (загружены в п. 10), путь к файлу журнала работы провайдера.
+При настройке хранилища необходимо указать: путь к файлу `credentials.json` и папке `token.json` (загружены в п. 10), путь к файлу журнала работы провайдера.
 +
-image::img/ConfigurationGoogleStoragePanel.png[[.fig--title-label]##Figure 1. ##Пример настройки хранилища в Google Drive]
+image::ConfigurationGoogleStoragePanel.png[[.fig--title-label]##Figure 1. ##Пример настройки хранилища в Google Drive]
 +
 После перезапуска сервера Docsvision (будет выполнен после добавления хранилища) в Google Drive будут созданы две папки: «DV_PrimaryPart» (представляет раздел для основных файлов) и «DV_ArchivePart» (представляет раздел для архивных файлов).
 +
 Проверить работу провайдера можно настроив правило на помещение в хранилище файлов с расширением PDF. При добавлении в карточку Docsvision файла с типом PDF, соответствующий файл будет загружен в Google Drive.
 
-*Parent topic:* link:../pages/ConnectorToStorage.adoc[Разработка провайдера к внешнему хранилищу]

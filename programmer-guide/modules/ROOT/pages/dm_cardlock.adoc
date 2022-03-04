@@ -13,7 +13,7 @@
 
 На карточку может быть установлена как временная, так и постоянная блокировка:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку
 CardData cardData = userSession.CardManager.GetCardData(cardId);
@@ -27,7 +27,7 @@ card.PlaceLock(true);
 
 Аналогичным образом устанавливается временна или постоянная блокировка на строку секции:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем секцию, содержащую блокируемую строку
 SectionData section = card.Sections[sectionId]
@@ -38,7 +38,7 @@ section.FirstRow.PlaceLock()
 
 Абсолютно аналогично работает блокировка файлов (не путать с карточками файла с версиями и файлами документов):
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем файл
 FileData fileData = userSession.FileManager.GetFile(fileId);
@@ -47,7 +47,7 @@ FileData fileData = userSession.FileManager.GetFile(fileId);
 fileData.PlaceLock(true);
 ----
 
-Помимо методов блокировки, классы карточек ([.keyword .apiname]#CardData#), строк ([.keyword .apiname]#RowData#) и файлов ([.keyword .apiname]#FileData#) содержат методы снятия блокировки, определяемые интерфейсом xref:../api/DocsVision/Platform/ObjectManager/ILockable_IN.adoc[ILockable]:
+Помимо методов блокировки, классы карточек ([.keyword .apiname]#CardData#), строк ([.keyword .apiname]#RowData#) и файлов ([.keyword .apiname]#FileData#) содержат методы снятия блокировки, определяемые интерфейсом xref:..xref:api/DocsVision/Platform/ObjectManager/ILockable_IN.adoc[ILockable]:
 
 * [.keyword .apiname]#RemoveLock# - снимает блокировку с объекта, установленную в собственной сессии;
 * [.keyword .apiname]#ForceUnlock# - принудительно снимает блокировку, в т.ч. установленную другим пользователем - необходимы административные права.
@@ -76,9 +76,9 @@ if (cardData.LockStatus = LockStatus.Free)
 
 * cardData - карточка, которая должна быть заблокирована.
 
-Помимо методов, которые предлагают классы карточек, строк и файлов, базовый API предоставляет специальный объект для работы с блокировками - [.dfn .term]_менеджер блокировок_, который можно получить из сессии пользователя:
+Помимо методов, которые предлагают классы карточек, строк и файлов, базовый API предоставляет специальный объект для работы с блокировками - _менеджер блокировок_, который можно получить из сессии пользователя:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 LockManager lockManager = userSession.LockManager;
 ----
@@ -92,13 +92,13 @@ LockManager lockManager = userSession.LockManager;
 
 API данного уровня предоставляет две точки доступа к механизму блокировки:
 
-* методы [.dfn .term]_контекста объектов_:
-** xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[ObjectContext.LockObject] - установка блокировки, в т.ч. постоянной;
-** xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.UnlockObject_MT.adoc[ObjectContext.UnlockObject] - снятие собственной блокировки.
+* методы _контекста объектов_:
+** xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[ObjectContext.LockObject] - установка блокировки, в т.ч. постоянной;
+** xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.UnlockObject_MT.adoc[ObjectContext.UnlockObject] - снятие собственной блокировки.
 +
-Заблокировать карточку, используя методы [.dfn .term]_контекста объектов_, можно следующим образом:
+Заблокировать карточку, используя методы _контекста объектов_, можно следующим образом:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку (но может быть и строка)
 BaseCard card = objectContext.GetObject<BaseCard>(cardId);
@@ -109,7 +109,7 @@ objectContext.LockObject(card, true);
 +
 Абсолютно аналогично блокируется строка карточки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardSectionRow row = objectContext.GetObject<BaseCardSectionRow>(rowId);
 objectContext.LockObject(row, true);
@@ -117,13 +117,13 @@ objectContext.LockObject(row, true);
 +
 Здесь:
 ** rowId - идентификатор блокируемой строки.
-* методы сервиса для работы с блокировками - xref:../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService]:
+* методы сервиса для работы с блокировками - xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService]:
 ** LockObject - устанавливает на объект временную блокировку.
 ** UnlockObject - снимает с объекта временную блокировку.
 +
-Далее приведен пример, в котором документ (карточка типа [.dfn .term]_Документ_) блокируется для изменения, после чего блокировка снимается.
+Далее приведен пример, в котором документ (карточка типа _Документ_) блокируется для изменения, после чего блокировка снимается.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение сервиса для работы с блокировками
 ILockService lockService = objectContext.GetService<ILockService>();
@@ -151,5 +151,3 @@ if (!(lockService.IsObjectLockedByAnotherUser(document) && lockService.IsObjectL
 == См. далее
 
 * xref:dm_cardarchive.adoc[Архивирование и извлечение карточки из архива]
-
-*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

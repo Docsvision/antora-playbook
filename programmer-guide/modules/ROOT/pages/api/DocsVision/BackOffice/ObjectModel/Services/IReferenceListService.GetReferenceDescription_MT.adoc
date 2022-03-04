@@ -2,12 +2,12 @@
 
 Возвращает описание для объекта, на который установлена ссылка.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string GetReferenceDescription(ReferenceListReference reference)
 ----
@@ -15,16 +15,14 @@ string GetReferenceDescription(ReferenceListReference reference)
 Параметры
 
 reference::
-  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
-  +
-  Ссылка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/ReferenceListReference_CL.adoc[ReferenceListReference]
++
+Ссылка
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Описание объекта
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Описание объекта
 
 == Заметки
 
@@ -36,7 +34,7 @@ reference::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
@@ -47,5 +45,3 @@ ReferenceListReference reference = objectContext.GetObject<ReferenceListReferenc
 //Получение описания объекта
 string description = referenceListService.GetReferenceDescription(reference); 
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

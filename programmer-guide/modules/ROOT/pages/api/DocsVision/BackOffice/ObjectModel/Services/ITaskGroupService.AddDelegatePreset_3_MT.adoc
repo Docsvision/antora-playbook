@@ -2,12 +2,12 @@
 
 Добавляет подразделение в число исполнителей в индивидуальные настройки исполнителя группы заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskGroupPresetsDelegate AddDelegatePreset(TaskGroupPresets presets, StaffUnit unit)
 ----
@@ -15,27 +15,23 @@ TaskGroupPresetsDelegate AddDelegatePreset(TaskGroupPresets presets, StaffUnit u
 Параметры
 
 presets::
-  Тип: xref:../TaskGroupPresets_CL.adoc[TaskGroupPresets]
-  +
-  Группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroupPresets_CL.adoc[TaskGroupPresets]
++
+Группа заданий
 unit::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Подразделение
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Подразделение
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskGroupPresetsDelegate_CL.adoc[TaskGroupPresetsDelegate]
-  +
-  Индивидуальные настройки исполнителя группы заданий
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroupPresetsDelegate_CL.adoc[TaskGroupPresetsDelegate]
++
+Индивидуальные настройки исполнителя группы заданий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр presets.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

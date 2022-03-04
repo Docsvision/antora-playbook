@@ -4,9 +4,9 @@
 
 == Удаление объекта методами базового API
 
-Для удаления экземпляра карточки на уровне базового API предназначен метод [.keyword .apiname]#DeleteCard# [.dfn .term]_менеджера карточек_, принимающий идентификатор удаляемой карточки:
+Для удаления экземпляра карточки на уровне базового API предназначен метод [.keyword .apiname]#DeleteCard# _менеджера карточек_, принимающий идентификатор удаляемой карточки:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 userSession.CardManager.DeleteCard(cardId);
 ----
@@ -18,7 +18,7 @@ userSession.CardManager.DeleteCard(cardId);
 
 Приведенный выше код удаляет карточку без возможности восстановления, при этом другая перегрузка метода позволяет пометить карточку как удаленную (в Windows-клиенте отображается курсивом) без фактического удаления:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Для возможности восстановления второй параметр должен иметь значение false
 userSession.CardManager.DeleteCard(cardId, false);
@@ -26,14 +26,14 @@ userSession.CardManager.DeleteCard(cardId, false);
 
 Для восстановления карточки, помеченной к удалению используйте метод [.keyword .apiname]#RestoreCard#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 userSession.CardManager.RestoreCard(cardId);
 ----
 
 Чтобы удалить строку из секции карточки необходимо использовать метод [.keyword .apiname]#DeleteRow# сущности секции. В качестве примера, удалим первую строку из секции карточки:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку, из которой удаляется строка
 CardData card = userSession.CardManager.GetCardData(cardId);
@@ -54,16 +54,16 @@ section.DeleteRow(firstRowId);
 
 Обычно заранее известен идентификатор удаляемой строки, поэтому фактически удаление можно привести к виду:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 card.Sections[sectionId].DeleteRow(rowId);
 ----
 
 == Удаление объекта на уровне объектной модели
 
-Данный уровень API предлагает использовать для удаления объектов единый метод контекста объектов - xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.DeleteObject_MT.adoc[DeleteObject]. В качестве примера его применения, удалим один из файлов документа (карточка типа Документ):
+Данный уровень API предлагает использовать для удаления объектов единый метод контекста объектов - xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.DeleteObject_MT.adoc[DeleteObject]. В качестве примера его применения, удалим один из файлов документа (карточка типа Документ):
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку типа Документа
 Document document = objectContext.GetObject<Document>(cardId);
@@ -76,7 +76,7 @@ objectContext.DeleteObject(file);
 objectContext.AcceptChanges();
 ----
 
-Данный код фактически выполняет удаление строки из секции "Файлы" карточки [.dfn .term]_Документ_, по аналогии с рассмотренным выше примером для базового API. Аналогичным образом может быть удален и сам документ.
+Данный код фактически выполняет удаление строки из секции "Файлы" карточки _Документ_, по аналогии с рассмотренным выше примером для базового API. Аналогичным образом может быть удален и сам документ.
 
 Метод [.keyword .apiname]#DeleteObject# удаляет объект без возможности восстановления. Если требуется пометить карточку как удаленную, используйте базовый API.
 
@@ -85,5 +85,3 @@ objectContext.AcceptChanges();
 == См. далее
 
 * xref:dm_cardlock.adoc[Блокировка и снятие блокировки]
-
-*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

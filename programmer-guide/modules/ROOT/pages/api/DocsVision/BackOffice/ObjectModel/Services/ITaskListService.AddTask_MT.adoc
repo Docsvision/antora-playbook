@@ -2,12 +2,12 @@
 
 Добавляет существующее задание в предоставленный список заданий
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskListTask AddTask(TaskList taskList, Task task, BaseCard parentCard)
 ----
@@ -15,28 +15,26 @@ TaskListTask AddTask(TaskList taskList, Task task, BaseCard parentCard)
 Параметры
 
 taskList::
-  Тип: xref:../TaskList_CL.adoc[TaskList]
-  +
-  Список заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[TaskList]
++
+Список заданий
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Добавляемое задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Добавляемое задание
 parentCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, содержащая список заданий, в который осуществляется добавление
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, содержащая список заданий, в который осуществляется добавление
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskListTask_CL.adoc[TaskListTask]
-  +
-  Задание в списке заданий
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskListTask_CL.adoc[TaskListTask]
++
+Задание в списке заданий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskList, task или parentCard.
@@ -45,5 +43,3 @@ parentCard::
 == Заметки
 
 Данный метод записывает событие добавления подчиненного задания в журнал карточки parentCard.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService - интерфейс]

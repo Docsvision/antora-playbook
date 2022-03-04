@@ -2,12 +2,12 @@
 
 Возвращает объект, который содержит указанный дочерний объект.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public static T GetParent<T>(object objectInstance)
 ----
@@ -15,27 +15,25 @@ public static T GetParent<T>(object objectInstance)
 Параметры типа
 
 T::
-  Тип родительского объекта
+Тип родительского объекта
 
 Параметры
 
 objectInstance::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
-  +
-  Дочерний объект
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
++
+Дочерний объект
 
-Возвращаемое значение
-
-::
-  Тип: T
-  +
-  Родительский объект
+Возвращаемое значение::
+Тип: T
++
+Родительский объект
 
 == Примеры
 
 Приведен пример использования метода [.keyword .apiname]#GetObject# для получения узла конструктора справочников, содержащего строку с определенным идентификатором
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -48,5 +46,3 @@ BaseUniversalItemType baseUniversalItemType = ObjectHelper.GetParent<BaseUnivers
 //получение идентификатора узла
 Guid id = objectContext.GetObjectRef<BaseUniversalItemType>(baseUniversalItemType).Id;
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectHelper_CL.adoc[ObjectHelper - класс]

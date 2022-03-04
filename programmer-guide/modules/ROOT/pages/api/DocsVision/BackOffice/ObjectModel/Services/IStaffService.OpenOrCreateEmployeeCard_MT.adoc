@@ -2,12 +2,12 @@
 
 Создает или возвращает карточку сотрудника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 EmployeeCard OpenOrCreateEmployeeCard(StaffEmployee employee, out bool createNew, bool attachNewCardToEmployee)
 ----
@@ -15,27 +15,23 @@ EmployeeCard OpenOrCreateEmployeeCard(StaffEmployee employee, out bool createNew
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, для которого возвращается карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, для которого возвращается карточка
 createNew::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Признак создания новой карточки: true - если была создана новая карточка, иначе - false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Признак создания новой карточки: true - если была создана новая карточка, иначе - false
 attachNewCardToEmployee::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Флаг прикрепления карточки сотрудника к сотруднику: true - прикреплять, иначе - false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Флаг прикрепления карточки сотрудника к сотруднику: true - прикреплять, иначе - false
 
-Возвращаемое значение
-
-::
-  Тип: xref:../EmployeeCard_CL.adoc[EmployeeCard]
-  +
-  Карточка сотрудника
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/EmployeeCard_CL.adoc[EmployeeCard]
++
+Карточка сотрудника
 
 == Заметки
 
-Метод [.keyword .apiname]#OpenOrCreateEmployeeCard# возвращает существующую карточку сотрудника, если она отсутствует, то будет создана новая. При создании новой карточки флаг `createNew` устанавливается в значение [.keyword]*true*. По умолчанию, если создается новая карточка, она не прикрепляется к записи сотрудника - `StaffEmployee.CardEmployee` остается в null. Чтобы изменить данное поведение, флаг `attachNewCardToEmployee` должен быть выставлен в значение [.keyword]*true*.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
+Метод [.keyword .apiname]#OpenOrCreateEmployeeCard# возвращает существующую карточку сотрудника, если она отсутствует, то будет создана новая. При создании новой карточки флаг `createNew` устанавливается в значение *true*. По умолчанию, если создается новая карточка, она не прикрепляется к записи сотрудника - `StaffEmployee.CardEmployee` остается в null. Чтобы изменить данное поведение, флаг `attachNewCardToEmployee` должен быть выставлен в значение *true*.

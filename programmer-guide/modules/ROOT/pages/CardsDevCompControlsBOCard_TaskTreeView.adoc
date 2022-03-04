@@ -1,15 +1,15 @@
 = Элемент управления TaskTreeView
 
-Элемент управления TaskTreeView предназначен для наглядного отображения жизненного цикла карточек [.dfn .term]_Задание_ и [.dfn .term]_Группа заданий_. Соответствует элементу управления [.ph .uicontrol]*Дерево исполнения* [.dfn .term]_Конструктора разметок_.
+Элемент управления TaskTreeView предназначен для наглядного отображения жизненного цикла карточек _Задание_ и _Группа заданий_. Соответствует элементу управления [.ph .uicontrol]*Дерево исполнения* _Конструктора разметок_.
 
-image::img/dev_card_51.png[image]
+image::dev_card_51.png[image]
 
 TaskTreeView содержит следующие свойства:
 
-* AllowedOperations - список операций (см. описание xref:../api/DocsVision/BackOffice/WinForms/Controls/TaskTreeViewOperation_EN.adoc[TaskTreeViewOperation] ), доступных из контекстного меню TaskTreeView.
-* Columns - перечисление типов (см. описание перечисления xref:../api/DocsVision/BackOffice/WinForms/Controls/TaskTreeViewColumn_EN.adoc[TaskTreeViewColumn]) отображаемых колонок. Например:
+* AllowedOperations - список операций (см. описание xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/TaskTreeViewOperation_EN.adoc[TaskTreeViewOperation] ), доступных из контекстного меню TaskTreeView.
+* Columns - перечисление типов (см. описание перечисления xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/TaskTreeViewColumn_EN.adoc[TaskTreeViewColumn]) отображаемых колонок. Например:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 this.taskTreeView.Columns = DocsVision.BackOffice.WinForms.Controls.TaskTreeViewColumn.Name| 
 DocsVision.BackOffice.WinForms.Controls.TaskTreeViewColumn.State;
@@ -18,7 +18,7 @@ DocsVision.BackOffice.WinForms.Controls.TaskTreeViewColumn.State;
 * FocusedNodeInfo - возвращает информацию по выделенному элементу;
 * NeedInitialize - при true, требуется инициализация элемента управления. Используйте метод [.keyword .apiname]#Initialize(ObjectContext, TaskList, BaseCard)#.
 * ParentCard - возвращает карточку, указанную при инициализации в качестве родительской;
-* ParentTask - возвращает карточку, приведенную к типу xref:../api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task] и указанную при инициализации в качестве родительской;
+* ParentTask - возвращает карточку, приведенную к типу xref:..xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task] и указанную при инициализации в качестве родительской;
 * StatesOperations - список операций с признаком доступности;
 * TaskList - возвращает список заданий, связанный с TaskTreeView.
 
@@ -34,7 +34,7 @@ TaskTreeView предоставляет следующие методы:
 * EnsureColumns - формирует список колонок для отображения основываясь на значении свойства [.keyword .apiname]#Columns#.
 * Initialize(ObjectContext, TaskList, BaseCard) - инициализация элемента управления. Пример инициализации TaskTreeView с отображением в дереве заданий, полученных из карточки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 protected override void OnCardActivated(DocsVision.Platform.WinForms.CardActivatedEventArgs e)
 {
@@ -53,5 +53,3 @@ TaskTreeView разрешает подписку на следующие сво�
 * NodeCustomDisplayText - событие вызывается перед формированием в интерфейсе единичного узла дерева заданий;
 * TaskCreated - событие вызывается после создания задания;
 * TaskGroupCreated - событие вызывается после создания группы заданий.
-
-*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

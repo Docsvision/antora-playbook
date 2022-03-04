@@ -2,23 +2,23 @@
 
 Интерфейс IReusableLayoutItem определяет явную поддержку в компоненте элемента управления механизма переиспользования разметки.
 
-* [.keyword]*Пространство имен:* xref:LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IReusableLayoutItem
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IReusableLayoutItem.OnLayoutLoad_MT.adoc[OnLayoutLoad] |Вызывается при первоначальной загрузке разметки.
-|xref:IReusableLayoutItem.OnLayoutReuse_MT.adoc[OnLayoutReuse] |Вызывается при переиспользовании разметки. Вызывается раньше, чем передается контекст в свойство [.keyword .apiname]#ObjectContext# элемента управления.
+|xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutLoad_MT.adoc[OnLayoutLoad] |Вызывается при первоначальной загрузке разметки.
+|xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutReuse_MT.adoc[OnLayoutReuse] |Вызывается при переиспользовании разметки. Вызывается раньше, чем передается контекст в свойство [.keyword .apiname]#ObjectContext# элемента управления.
 |===
 
 == Заметки
@@ -29,7 +29,7 @@ public interface IReusableLayoutItem
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public partial class HtmlBrowser : PanelControl, IReusableLayoutItem
 {
@@ -55,7 +55,3 @@ public partial class HtmlBrowser : PanelControl, IReusableLayoutItem
 }
 ----
 
-* *xref:../../../../../../api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutLoad_MT.adoc[IReusableLayoutItem.OnLayoutLoad - метод]* +
-* *xref:../../../../../../api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutReuse_MT.adoc[IReusableLayoutItem.OnLayoutReuse - метод]* +
-
-*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/WinForms/Design/LayoutItems/LayoutItems_NS.adoc[LayoutItems - пространство имен]

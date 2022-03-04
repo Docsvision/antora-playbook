@@ -2,12 +2,12 @@
 
 Извлекает объект типа X509Certificate2 из части подписи.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 X509Certificate2 ExtractCertificate(BaseCardSignaturePart signaturePart)
 ----
@@ -15,19 +15,15 @@ X509Certificate2 ExtractCertificate(BaseCardSignaturePart signaturePart)
 Параметры
 
 signaturePart::
-  Тип: xref:../BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
-  +
-  Часть подписи
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
++
+Часть подписи
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат
 
 == Заметки
 
 Метод извлекает из объекта информацию по последней подписи и возвращает ее вызвавшей стороне.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

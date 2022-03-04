@@ -2,12 +2,12 @@
 
 Создает экземпляр нового документа с основным файлом.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Document CreateDocument(string filePath)
 ----
@@ -15,24 +15,22 @@ Document CreateDocument(string filePath)
 Параметры
 
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к загружаемому файлу документа
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к загружаемому файлу документа
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 
 == Заметки
 
-В качестве вида документа будет установлен корневой вид (обычно Документ) документа в [.dfn .term]_Справочнике видов карточек_.
+В качестве вида документа будет установлен корневой вид (обычно Документ) документа в _Справочнике видов карточек_.
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -44,5 +42,3 @@ Document document = documentService.CreateDocument(@"x:\Sample.docx");
 
 objectContext.SaveObject(document);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -2,19 +2,19 @@
 
 Определяет наличие стандартных параметров элемента управления.
 
-* [.keyword]*Пространство имен:* xref:PropertyControls_NS.adoc[DocsVision.BackOffice.WinForms.Design.PropertyControls]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/Design/PropertyControls/PropertyControls_NS.adoc[DocsVision.BackOffice.WinForms.Design.PropertyControls]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IPropertyControl
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AllowEdit |Задает или возвращает признак разрешения редактирования значения элемента управления.
@@ -29,7 +29,7 @@ public interface IPropertyControl
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Commit |Сохраняет изменение значения элемента управления. Без вызова данного метода изменение значения через объектную модель зафиксировано не будет.
@@ -39,7 +39,7 @@ public interface IPropertyControl
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ControlValueChanged |Событие вызывается после изменения значения элемента управления.
@@ -48,5 +48,3 @@ public interface IPropertyControl
 == Заметки
 
 Изменение значения элемента управления, выполненное из объектной модели, должно быть зафиксированы вызовом метода [.keyword .apiname]#Commit#. Если фиксация изменений произведена не будет, то пользователь не получит запроса на сохранение изменений в карточке при ее закрытии .
-
-*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/WinForms/Design/PropertyControls/PropertyControls_NS.adoc[PropertyControls - пространство имен]

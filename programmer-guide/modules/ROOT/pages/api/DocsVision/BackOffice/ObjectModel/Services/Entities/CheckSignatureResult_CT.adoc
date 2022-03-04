@@ -2,13 +2,13 @@
 
 Инициализирует новый экземпляр класса CheckSignatureResult.
 
-* [.keyword]*Пространство имен:* xref:Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 [[internal_CheckSignatureResult__section_vlv_nct_mpb]]
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 internal CheckSignatureResult(string result, bool isExpiredCertificate, bool isRevokedCertificate, DateTime? signatureDate, DateTime? clrEntryDate, DateTime? expireDate)
 ----
@@ -16,28 +16,26 @@ internal CheckSignatureResult(string result, bool isExpiredCertificate, bool isR
 Параметры
 
 result::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Адрес электронной почты получателя сообщения
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Адрес электронной почты получателя сообщения
 isExpiredCertificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Проверка срока действия сертификата подписи: true -— срок действия истёк, false — сертификат действителен.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Проверка срока действия сертификата подписи: true -— срок действия истёк, false — сертификат действителен.
 isRevokedCertificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Проверка действительности сертификата: true -— сертификат отозван и больше не действителен, false — сертификат действителен
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Проверка действительности сертификата: true -— сертификат отозван и больше не действителен, false — сертификат действителен
 signatureDate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
-  +
-  Дата создания подписи.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
++
+Дата создания подписи.
 clrEntryDate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
-  +
-  Дата и время записи об отзыве сертификата в CRL. ​ Если подпись была сделана до этой даты, она действительна, если после - то нет
+Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
++
+Дата и время записи об отзыве сертификата в CRL. ​ Если подпись была сделана до этой даты, она действительна, если после - то нет
 expireDate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
-  +
-  Срок действия подписи.
-
-*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Entities/CheckSignatureResult_CL.adoc[CheckSignatureResult - класс]
+Тип: http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]
++
+Срок действия подписи.

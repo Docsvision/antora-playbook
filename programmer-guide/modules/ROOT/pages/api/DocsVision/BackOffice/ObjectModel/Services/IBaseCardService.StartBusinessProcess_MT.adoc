@@ -2,12 +2,12 @@
 
 Запускает бизнес-процесс указанного вида.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Process StartBusinessProcess(BaseCard baseCard, KindsCardProcess kindsCardProcess)
 ----
@@ -15,24 +15,22 @@ Process StartBusinessProcess(BaseCard baseCard, KindsCardProcess kindsCardProces
 Параметры
 
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка
 kindsCardProcess::
-  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
-  +
-  Вид бизнес-процесса
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
++
+Вид бизнес-процесса
 
-Возвращаемое значение
-
-::
-  Тип: xref:../../../Workflow/Objects/Process_CL.adoc[Process]
-  +
-  Бизнес-процесс
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]
++
+Бизнес-процесс
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
@@ -47,7 +45,7 @@ kindsCardProcess::
 
 Ниже приведен пример запуска бизнес-процесса, определенного в виде карточки
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -63,5 +61,3 @@ KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(ne
 //запуск БП
 baseCardService.StartBusinessProcess(document, kindsCardProcess);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

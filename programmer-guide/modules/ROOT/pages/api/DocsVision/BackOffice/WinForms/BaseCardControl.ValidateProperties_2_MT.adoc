@@ -2,12 +2,12 @@
 
 Проверяет данные карточки на наличие ошибок с возможностью отключения проверки отдельных данных.
 
-* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public virtual bool ValidateProperties(bool showMessage, IEnumerable<string> excludedProperties, out IEnumerable<string> requiredFields, out IEnumerable<string> notResolvedFields, out IEnumerable<string> notResolvedTables)
 ----
@@ -15,31 +15,27 @@ public virtual bool ValidateProperties(bool showMessage, IEnumerable<string> exc
 Параметры
 
 showMessage::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  false - не отображать сообщение о наличии ошибок, иначе - true
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+false - не отображать сообщение о наличии ошибок, иначе - true
 excludedProperties::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
-  +
-  Список свойств карточки, которые должны быть исключены из проверки. Под названиям свойств карточки подразумеваются названия соответствующих элементов управления.
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
++
+Список свойств карточки, которые должны быть исключены из проверки. Под названиям свойств карточки подразумеваются названия соответствующих элементов управления.
 requiredFields::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
-  +
-  Получает список свойств, требующих обязательного заполнения. Из списка исключаются свойства, перечисленные в `excludedProperties`.
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
++
+Получает список свойств, требующих обязательного заполнения. Из списка исключаются свойства, перечисленные в `excludedProperties`.
 notResolvedFields::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
-  +
-  Получает список свойств, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются свойства, перечисленные в `excludedProperties`. Данный параметр может сигнализировать, к примеру, о некорректно введенном значении в элемент управления типа [.keyword]*Сотрудник*.
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
++
+Получает список свойств, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются свойства, перечисленные в `excludedProperties`. Данный параметр может сигнализировать, к примеру, о некорректно введенном значении в элемент управления типа *Сотрудник*.
 notResolvedTables::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
-  +
-  Получает список таблиц, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются таблицы, перечисленные в `excludedProperties`.
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
++
+Получает список таблиц, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются таблицы, перечисленные в `excludedProperties`.
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - ошибки отсутствуют, иначе - false
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl - класс]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - ошибки отсутствуют, иначе - false

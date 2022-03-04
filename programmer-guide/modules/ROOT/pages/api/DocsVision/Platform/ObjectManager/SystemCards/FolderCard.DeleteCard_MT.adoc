@@ -2,12 +2,12 @@
 
 Помечает к удалению, либо удаляет карточку с заданным идентификатором.
 
-* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void DeleteCard(Guid cardId, bool permanently)
 ----
@@ -15,13 +15,13 @@ public abstract void DeleteCard(Guid cardId, bool permanently)
 Параметры
 
 cardId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор карточки
 permanently::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - производит стандартное удаление; при false - помечает карточку к удалению
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - производит стандартное удаление; при false - помечает карточку к удалению
 
 == Заметки
 
@@ -31,7 +31,7 @@ permanently::
 
 В примере, карточка с идентификатором 00000000-0000-0000-0000-000000000000 помечает к удалению. userSession - текущая сессия пользователя
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Получаем карточку папок
 FolderCard folderCard = (FolderCard)userSession.CardManager.GetDictionary(new Guid("DA86FABF-4DD7-4A86-B6FF-C58C24D12DE2"));
@@ -39,5 +39,3 @@ FolderCard folderCard = (FolderCard)userSession.CardManager.GetDictionary(new Gu
 //Помечаем карточку к удалению
 folderCard.DeleteCard(new Guid("00000000-0000-0000-0000-000000000000"), false);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard_CL.adoc[FolderCard - класс]

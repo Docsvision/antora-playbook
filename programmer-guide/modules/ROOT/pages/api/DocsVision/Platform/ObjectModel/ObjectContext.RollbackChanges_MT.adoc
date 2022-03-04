@@ -2,27 +2,27 @@
 
 Отменяет все изменения в контексте объектов, которые не были сохранены методом [.keyword .apiname]#AcceptChanges#, [.keyword .apiname]#SaveObject<T>(T)# или [.keyword .apiname]#SaveObjects<T>(IEnumerable<T>)#.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void RollbackChanges()
 ----
 
 == Заметки
 
-Отменяются изменения объектов, имеющих следующие флаги в состояний (xref:ObjectStateFlags_EN.adoc[ObjectStateFlags]): [.keyword .apiname]#ObjectStateFlags.Modified#, [.keyword .apiname]#ObjectStateFlags.Added# или [.keyword .apiname]#ObjectStateFlags.Deleted#. Перед непосредственной отменой изменений, метод взывает событие [.keyword .apiname]#ObjectContext.BeforeRollback#, которое может быть использовано для прекращения процедуры отката.
+Отменяются изменения объектов, имеющих следующие флаги в состояний (xref:api/DocsVision/Platform/ObjectModel/ObjectStateFlags_EN.adoc[ObjectStateFlags]): [.keyword .apiname]#ObjectStateFlags.Modified#, [.keyword .apiname]#ObjectStateFlags.Added# или [.keyword .apiname]#ObjectStateFlags.Deleted#. Перед непосредственной отменой изменений, метод взывает событие [.keyword .apiname]#ObjectContext.BeforeRollback#, которое может быть использовано для прекращения процедуры отката.
 
-После вызова xref:ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges] отмена принятых изменений будет невозможна.
+После вызова xref:api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges] отмена принятых изменений будет невозможна.
 
 == Примеры
 
 В качестве примера приведен код получения двух документов, в каждый из которых вносится определенное изменение. Изменения могут быть отменены при проверке флага `roolback`
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
         
@@ -41,5 +41,3 @@ if (roolback)
  objectContext.RollbackChanges();
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

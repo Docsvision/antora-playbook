@@ -3,10 +3,10 @@
 [cols=",",]
 |===
 |Назначение |Создает список заданий для последующего добавление в другую карточку (например, Документ).
-|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[DocsVision.BackOffice.ObjectModel.TaskList]
+|Класс карточки |xref:..xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[DocsVision.BackOffice.ObjectModel.TaskList]
 |===
 
-Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService], с помощью которого можно создавать и получать карточки списков заданий, которые прикладываются к карточкам документа.
+Для работы с карточкой предназначен сервис xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService], с помощью которого можно создавать и получать карточки списков заданий, которые прикладываются к карточкам документа.
 
 Доступные операции:
 
@@ -18,7 +18,7 @@
 
 В примере создается список заданий, в который добавляется отдельное задание. Список закрепляется за документом.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 //Получение документа с ИД 00000000-0000-0000-0000-000000000000 для которого будет добавлено задание 
@@ -48,5 +48,3 @@ taskListService.AddTask(taskList, task, document);
 //Сохранение контекста
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

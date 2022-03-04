@@ -2,12 +2,12 @@
 
 Проверяет существование переменной шлюза.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public bool IsVariableExists(DVVariableType Type, string ID)
 ----
@@ -15,23 +15,19 @@ public bool IsVariableExists(DVVariableType Type, string ID)
 Параметры
 
 Type::
-  Тип: xref:DVVariableType_EN.adoc[DVVariableType]
-  +
-  Тип переменной
+Тип: xref:api/DocsVision/Workflow/Gates/DVVariableType_EN.adoc[DVVariableType]
++
+Тип переменной
 ID::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Идентификатор переменной
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Идентификатор переменной
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - переменная существует, иначе - false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - переменная существует, иначе - false
 
 == Заметки
 
 Для проверки существования строки, идентификатор следует передовать в виде: "CardId,SectionId,RowId".
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]

@@ -1,12 +1,12 @@
 = Элемент управления CategoryListView
 
-Элемент CategoryListView предоставляет функциональность выбора категории из дерева категорий. Соответствует элементу управления [.ph .uicontrol]*Категории* [.dfn .term]_Конструктора разметок_.
+Элемент CategoryListView предоставляет функциональность выбора категории из дерева категорий. Соответствует элементу управления [.ph .uicontrol]*Категории* _Конструктора разметок_.
 
-image::img/dev_card_42.PNG[image]
+image::dev_card_42.PNG[image]
 
-Для работы CategoryListView необходимо наличие в карточке, к которой привязан данный элемент управления, поля, ссылающегося на экземпляр карточки [.dfn .term]_Список категорий_, содержащей список категорий. В качестве примера можно рассмотреть часть класса карточки, у которой описана специальное поле:
+Для работы CategoryListView необходимо наличие в карточке, к которой привязан данный элемент управления, поля, ссылающегося на экземпляр карточки _Список категорий_, содержащей список категорий. В качестве примера можно рассмотреть часть класса карточки, у которой описана специальное поле:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Идентификатор секции, содержащей ссылочное поле со ссылкой на карточку "Список категорий"
 private Guid mainSectionID = new Guid("783CD108-BA4A-432D-9C12-B32E0577D53C");
@@ -43,14 +43,14 @@ protected override void OnCardInitialized(EventArgs e)
 Элемент управления CategoryListView обладает следующими свойствами:
 
 * CategoryList - возвращает связанную карточку "Список категорий".
-* CategoryService - возвращает сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService] для работы со списками категорий.
-* Context - [.dfn .term]_контекст объектов_.
+* CategoryService - возвращает сервис xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService] для работы со списками категорий.
+* Context - _контекст объектов_.
 * RootCategory - определяет корневую категорию, начиная с которой будет построено дерево категорий.
 * StatesOperations - предоставляет доступ к правам доступа на совершение типовых операций с CategoryListView.
 
 Элемент управления CategoryListView содержит следующие методы:
 
-* [.keyword .apiname]#Initialize(ObjectContext, CategoryList)# - данный метод используется для передачи элементу управления [.dfn .term]_контекста объектов_ и списка категорий карточки. Должен быть вызван на этапе инициализации карточки (см. пример выше).
+* [.keyword .apiname]#Initialize(ObjectContext, CategoryList)# - данный метод используется для передачи элементу управления _контекста объектов_ и списка категорий карточки. Должен быть вызван на этапе инициализации карточки (см. пример выше).
 * [.keyword .apiname]#Rebind()# - выполняет перестроение дерева категорий.
 * [.keyword .apiname]#RefreshData()# - повторно загружает данные для списка категорий.
 
@@ -61,5 +61,3 @@ protected override void OnCardInitialized(EventArgs e)
 * CategoryUnchecked - вызывает при снятии флажка с категории.
 
 Первоначально срабатывает событие [.keyword .apiname]#CategoryChecked#/[.keyword .apiname]#CategoryUnchecked#, после чего срабатывает [.keyword .apiname]#ListChanged#.
-
-*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

@@ -2,12 +2,12 @@
 
 Создает задание по шаблону.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Task CreateTaskFromTemplate(Guid templateId)
 ----
@@ -15,24 +15,20 @@ Task CreateTaskFromTemplate(Guid templateId)
 Параметры
 
 templateId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор задания-шаблона
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор задания-шаблона
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Созданное задание
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Созданное задание
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр templateId.
 |https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если шаблон не найден, либо карточка не является шаблоном или не является шаблоном задания.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

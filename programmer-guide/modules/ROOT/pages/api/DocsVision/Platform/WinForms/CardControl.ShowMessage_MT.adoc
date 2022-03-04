@@ -2,41 +2,39 @@
 
 Отображает окно сообщения с заданным текстом, заголовком окна и полем дополнительной информации. Также передается список отображаемых кнопок и тип сообщения.
 
-* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/WinForms/WinForms_NS.adoc[DocsVision.Platform.WinForms]
+* *Сборка:* `DocsVision.Platform.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public MessageResult ShowMessage(string text, string caption, string details, MessageType messageType, MessageButtons buttons);
 ----
 
-Параметры
+*Параметры*
 
 text::
-  Тип: String
-  +
-  Содержимое сообщения.
+Тип: String
++
+Содержимое сообщения.
 caption::
-  Тип: String
-  +
-  Заголовок окна сообщения.
+Тип: String
++
+Заголовок окна сообщения.
 messageType::
-  Тип: xref:../CardHost/MessageType_EN.adoc[MessageType]
-  +
-  Тип сообщение. Влияет на оформление окна.
+Тип: xref:xref:api/DocsVision/Platform/CardHost/MessageType_EN.adoc[MessageType]
++
+Тип сообщение. Влияет на оформление окна.
 buttons::
-  Тип: xref:../CardHost/MessageButtons_EN.adoc[MessageButtons]
-  +
-  Кнопки, отображаемые в окне сообщения.
+Тип: xref:xref:api/DocsVision/Platform/CardHost/MessageButtons_EN.adoc[MessageButtons]
++
+Кнопки, отображаемые в окне сообщения.
 
-Возвращаемое значение
-
-::
-  Тип: xref:../CardHost/MessageResult_EN.adoc[MessageResult]
-  +
-  Кнопка, которая была нажата пользователем при закрытии сообщения.
+Возвращаемое значение::
+Тип: xref:xref:api/DocsVision/Platform/CardHost/MessageResult_EN.adoc[MessageResult]
++
+Кнопка, которая была нажата пользователем при закрытии сообщения.
 
 == Примеры
 
@@ -54,4 +52,3 @@ buttons::
 }
 ----
 
-*Parent topic:* xref:../../../../api/DocsVision/Platform/WinForms/CardControl_CL.adoc[CardControl - класс]

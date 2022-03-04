@@ -2,12 +2,12 @@
 
 Возвращает, а при необходимости создает, настройки автомата состояний вида карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StatesCardKindStateSetting GetOrCreatePreferredCardKindSetting(KindsCardKind cardKind)
 ----
@@ -15,19 +15,15 @@ StatesCardKindStateSetting GetOrCreatePreferredCardKindSetting(KindsCardKind car
 Параметры
 
 cardKind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting]
-  +
-  Настройки автомата состояний
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting]
++
+Настройки автомата состояний
 
 == Заметки
 
 В том случае, если вид cardKind наследует свои настройки от родительского вида, настройки автомата состояний будут сформированы для него (для родительского вида с собственными настройками).
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

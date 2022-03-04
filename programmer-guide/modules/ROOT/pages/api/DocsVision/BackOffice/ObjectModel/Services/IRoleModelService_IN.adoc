@@ -1,20 +1,20 @@
 = IRoleModelService - интерфейс
 
-Сервис для работы с [.dfn .term]_Конструктором ролей_.
+Сервис для работы с _Конструктором ролей_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IRoleModelService
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |RolesDictionary |Возвращает ссылку на объектную модель конструктора ролей.
@@ -22,7 +22,7 @@ public interface IRoleModelService
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AddCondition(RoleModelRoleConditionGroup) |Создает условие в переданной группе условий для роли.
@@ -62,7 +62,7 @@ public interface IRoleModelService
 
 В примере создается роль, которая может быть использована для ограничении времени доступа к документам в выходные дни.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -98,5 +98,3 @@ objectContext.AcceptChanges();
 //отметим роль признаком "Общая", что позволит использовать ее во всех карточках
 roleModelService.MakeRoleCommon(roleModelRole);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

@@ -2,12 +2,12 @@
 
 Расшифровывает файл и удаляет связанные с ним крипто-объекты.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RemoveEncryption(X509Certificate2 certificate, Guid fileId)
 ----
@@ -15,17 +15,17 @@ void RemoveEncryption(X509Certificate2 certificate, Guid fileId)
 Параметры
 
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат шифрования, которым зашифрован файл
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат шифрования, которым зашифрован файл
 fileId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор зашифрованного файла
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор зашифрованного файла
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр certificate.
@@ -38,9 +38,9 @@ fileId::
 
 == Примеры
 
-Приведенный ниже пример содержит код скрипта карточки типа [.dfn .term]_Документ_, который расшифровывает основные файла текущей карточки. В ходе работы скрипта будет вызвана, при необходимости, форма для выбора сертификата шифрования.
+Приведенный ниже пример содержит код скрипта карточки типа _Документ_, который расшифровывает основные файла текущей карточки. В ходе работы скрипта будет вызвана, при необходимости, форма для выбора сертификата шифрования.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System;
 using System.Collections.Generic;
@@ -86,5 +86,3 @@ namespace BackOffice
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService - интерфейс]

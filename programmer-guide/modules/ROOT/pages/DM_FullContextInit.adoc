@@ -2,17 +2,17 @@
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Если в качестве базового класса для карточки используется базовая карточка xref:../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[DocsVision.BackOffice.WinForms.BaseCardControl], создавать и инициализировать контекст объектов нет необходимости – он доступен через свойство `ObjectContext`, при этом в него уже добавлены необходимые сервисы для работы с «Базовыми объектами».
+[.note__title]#Прим.:# Если в качестве базового класса для карточки используется базовая карточка xref:..xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[DocsVision.BackOffice.WinForms.BaseCardControl], создавать и инициализировать контекст объектов нет необходимости – он доступен через свойство `ObjectContext`, при этом в него уже добавлены необходимые сервисы для работы с «Базовыми объектами».
 ====
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Для класса, унаследованного от xref:../api/DocsVision/BackOffice/WinForms/ScriptClassBase_CL.adoc[DocsVision.BackOffice.WinForms.ScriptClassBase], [.dfn .term]_контекст объектов_ будет доступен через свойство `base.CardControl.ObjectContext`.
+[.note__title]#Прим.:# Для класса, унаследованного от xref:..xref:api/DocsVision/BackOffice/WinForms/ScriptClassBase_CL.adoc[DocsVision.BackOffice.WinForms.ScriptClassBase], _контекст объектов_ будет доступен через свойство `base.CardControl.ObjectContext`.
 ====
 
 Пример инициализации контекста объектов, а также добавления в него основных сервисов и преобразователей данных приведен ниже.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using DocsVision.BackOffice.ObjectModel;
 using DocsVision.BackOffice.ObjectModel.Mapping;
@@ -79,10 +79,8 @@ namespace ConnectDV
 
 Для корректной сборки необходимо подключить к проекту следующие библиотеки:
 
-* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
-* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.Platform.SystemCards.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
-* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]
+* `DocsVision.Platform.ObjectManager.dll`
+* `DocsVision.Platform.ObjectModel.dll`
+* `DocsVision.Platform.SystemCards.ObjectModel.dll`
+* `DocsVision.Platform.StorageServer.dll`
+* `DocsVision.BackOffice.ObjectModel.dll`

@@ -1,8 +1,8 @@
 = Параметры активации справочников
 
-Открытие некоторых справочников Docsvision может сопровождаться установкой курсора (открытием) на заранее определенной записи справочника, что уменьшить количество переходов в интерфейсе при редактировании записи. Для установки курсора на определенный записи достаточно передать в метод xref:../api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[CardHost.ShowCard] специальный объект, содержащий параметры активации карточки.
+Открытие некоторых справочников Docsvision может сопровождаться установкой курсора (открытием) на заранее определенной записи справочника, что уменьшить количество переходов в интерфейсе при редактировании записи. Для установки курсора на определенный записи достаточно передать в метод xref:..xref:api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[CardHost.ShowCard] специальный объект, содержащий параметры активации карточки.
 
-Далее приведен пример скрипта карточки, в котором используется функциональность открытия [.dfn .term]_Справочника сотрудников_ с установкой курсора на определенном сотруднике
+Далее приведен пример скрипта карточки, в котором используется функциональность открытия _Справочника сотрудников_ с установкой курсора на определенном сотруднике
 
 [source,pre,codeblock]
 ----
@@ -27,7 +27,7 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.Select, Acti
 
 == Справочник сотрудников
 
-[width="100%",cols="15%,85%",options="header",]
+[width="100%",cols="15%,85%",options="header"]
 |===
 |Номер параметра |Описание
 |0 a|
@@ -53,14 +53,14 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.Select, Acti
 |9 |Если задействован параметр 8, то указывается идентификатор той группы или подразделения, из которого будет разрешен выбор. Остальные подразделения или группы будут скрыты.
 |10 |Не разрешать выбор подразделений, если true.
 |11 |Не разрешать выбор организаций, если true.
-|12 |Режим открытия записи (см. xref:../api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
+|12 |Режим открытия записи (см. xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
 |13 |Не отображать записи с флагом NotAvailable.
 |14 |Не отображать записи с флагом NotSearchable.
 |===
 
 == Справочник контрагентов
 
-[width="100%",cols="15%,85%",options="header",]
+[width="100%",cols="15%,85%",options="header"]
 |===
 |Номер параметра |Описание
 |0 a|
@@ -76,12 +76,12 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.Select, Acti
 |5 |При true разрешается множественный выбор.
 |8 |Не разрешать выбор подразделений, если true.
 |9 |Не разрешать выбор организаций, если true.
-|10 |Режим открытия записи (см. xref:../api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
+|10 |Режим открытия записи (см. xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
 |===
 
 == Конструктор справочников
 
-[width="100%",cols="15%,85%",options="header",]
+[width="100%",cols="15%,85%",options="header"]
 |===
 |Номер параметра |Описание
 |0 a|
@@ -93,7 +93,7 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.Select, Acti
 |1 a|
 Идентификатор открываемой/выбираемой строки.
 
-Может использоваться только при открытии в режиме чтения/редактирования [.dfn .term]_Конструктора справочников_ методом [.keyword .apiname]#CardHost.ShowCard#. Должен быть указан узел (параметр 2), из которого выбирается строка.
+Может использоваться только при открытии в режиме чтения/редактирования _Конструктора справочников_ методом [.keyword .apiname]#CardHost.ShowCard#. Должен быть указан узел (параметр 2), из которого выбирается строка.
 
 |2 a|
 Идентификатор узла из которого осуществляется выбор.
@@ -102,12 +102,12 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.Select, Acti
 
 Не предназначен для ограничения области выбора в режиме выбора узла.
 
-|3 |Режим открытия записи (см. xref:../api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
+|3 |Режим открытия записи (см. xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
 |===
 
-К примеру, чтобы выбрать строку (без открытия записи) из узла [.dfn .term]_Конструктора справочников_, нужно выполнить скрипт:
+К примеру, чтобы выбрать строку (без открытия записи) из узла _Конструктора справочников_, нужно выполнить скрипт:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Идентификатор Конструктора справочников
 Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefBaseUniversal.ID;
@@ -128,7 +128,7 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.ReadOnly, Ac
 
 == Справочник ссылок
 
-[width="100%",cols="15%,85%",options="header",]
+[width="100%",cols="15%,85%",options="header"]
 |===
 |Номер параметра |Описание
 |0 |ID секции, из которой выбираем (только типы ссылок)
@@ -145,13 +145,11 @@ base.CardControl.CardHost.ShowCard(cardID, Guid.Empty, ActivateMode.ReadOnly, Ac
 
 == Справочник категорий
 
-[width="100%",cols="15%,85%",options="header",]
+[width="100%",cols="15%,85%",options="header"]
 |===
 |Номер параметра |Описание
 |1 |Идентификатор объекта, выбираемого при открытии справочника.
 |2 |При true разрешается множественный выбор.
 |3 |Массив идентификаторов выбранных объектов.
-|4 |Режим открытия записи (см. xref:../api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
+|4 |Режим открытия записи (см. xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[ItemSelectionMode]) приведенный к типу int.
 |===
-
-*На уровень выше:* xref:../pages/dm_appendix.adoc[Приложение]

@@ -2,12 +2,12 @@
 
 Данный метод предназначен для выполнения подписания операции в документе.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardSignature AddSignature(Document document, X509Certificate2 cert, bool signAttachments, ICollection<CardFieldSetting> fields, bool signDocument, StatesOperation operation, Guid signatureType)
 ----
@@ -15,44 +15,42 @@ BaseCardSignature AddSignature(Document document, X509Certificate2 cert, bool si
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 cert::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат сотрудника
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат сотрудника
 signAttachments::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Признак подписания дополнительных файлов документа: true - подписывать, иначе false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Признак подписания дополнительных файлов документа: true - подписывать, иначе false
 fields::
-  Тип: https://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
-  +
-  Поля документа, требующие подписания
+Тип: https://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
++
+Поля документа, требующие подписания
 signDocument::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Признак подписания основных файлов документа: true - подписывать, иначе false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Признак подписания основных файлов документа: true - подписывать, иначе false
 operation::
-  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
-  +
-  Подписываемая операция
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
++
+Подписываемая операция
 signatureType::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор вида подписи из [.dfn .term]_Справочника видов карточек_
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор вида подписи из _Справочника видов карточек_
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
-  +
-  Созданная подпись
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
++
+Созданная подпись
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или operation.
@@ -60,13 +58,13 @@ signatureType::
 
 == Заметки
 
-Для того, чтобы использовать возможность выполнять подписание операций, необходимо добавить соответствующую настройку в [.dfn .term]_Справочнике видов карточек_. Она регистрируется во вкладке [.keyword .wintitle]*Подпись* в разделе [.ph .uicontrol]*Подписание операций*.
+Для того, чтобы использовать возможность выполнять подписание операций, необходимо добавить соответствующую настройку в _Справочнике видов карточек_. Она регистрируется во вкладке [.keyword .wintitle]*Подпись* в разделе [.ph .uicontrol]*Подписание операций*.
 
 == Примеры
 
-Ниже приведен пример использования метода [.keyword .apiname]#AddSignature# при подписании операции перехода "Согласован" для карточки типа [.dfn .term]_Документ_
+Ниже приведен пример использования метода [.keyword .apiname]#AddSignature# при подписании операции перехода "Согласован" для карточки типа _Документ_
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -98,7 +96,7 @@ objectContext.AcceptChanges();
 
 Для получения сертификата сотрудника используется следующий метод
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static X509Certificate2 GetCertificate()
 {
@@ -116,5 +114,3 @@ static X509Certificate2 GetCertificate()
  return null;
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

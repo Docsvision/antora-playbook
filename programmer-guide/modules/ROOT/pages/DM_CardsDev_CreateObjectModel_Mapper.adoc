@@ -1,12 +1,12 @@
 = Разработка преобразователя данных
 
-Неотъемлемой частью разработки объектной модели карточки является разработка [.dfn .term]_преобразователя данных_ - объект, в котором объясняется каким образом элементы объектной модели карточки (или секций) связаны с данными этой карточки в базе данных.
+Неотъемлемой частью разработки объектной модели карточки является разработка _преобразователя данных_ - объект, в котором объясняется каким образом элементы объектной модели карточки (или секций) связаны с данными этой карточки в базе данных.
 
-[.dfn .term]_Контекст объектов_ задействует [.dfn .term]_преобразователь данных_ на этапе создании экземпляра карточки (к примеру, методом [.keyword .apiname]#GetObject#), а также при сохранении новых или измененных данных.
+_Контекст объектов_ задействует _преобразователь данных_ на этапе создании экземпляра карточки (к примеру, методом [.keyword .apiname]#GetObject#), а также при сохранении новых или измененных данных.
 
-[.dfn .term]_Преобразователь данных_ разрабатывается для каждого созданного класса строки секции, а также для самой карточки.
+_Преобразователь данных_ разрабатывается для каждого созданного класса строки секции, а также для самой карточки.
 
-С программной точки зрения, преобразователь данных должен вернуть объект типа xref:../api/DocsVision/Platform/ObjectModel/Mapping/ObjectMap_CL.adoc[ObjectMap] (карта преобразователя), который содержит списки, связывающие элементы объектной модели с их эквивалентами в схеме метаданных карточки.
+С программной точки зрения, преобразователь данных должен вернуть объект типа xref:..xref:api/DocsVision/Platform/ObjectModel/Mapping/ObjectMap_CL.adoc[ObjectMap] (карта преобразователя), который содержит списки, связывающие элементы объектной модели с их эквивалентами в схеме метаданных карточки.
 
 В качестве примера, разработаем преобразователи для строк секций и карточки, рассмотренных ранее.
 
@@ -16,7 +16,7 @@
 
 Для строки плоской секции, разработанной ранее, преобразователь будет выглядеть следующим образом:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 internal sealed class SampleCardStructSectionMapper : CardRowMapper<SampleCardStructSection>
 {
@@ -68,7 +68,7 @@ internal sealed class SampleCardStructSectionMapper : CardRowMapper<SampleCardSt
 
 Отличие в реализации преобразователя для строки иерархической секции в наличии в карте объявления подчиненных секций:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
  public class SampleCardTreeSectionMapper : CardRowMapper<SampleCardTreeSection>
 {
@@ -102,9 +102,9 @@ internal sealed class SampleCardStructSectionMapper : CardRowMapper<SampleCardSt
 
 == Преобразователь данных для карточки
 
-Преобразователь данных для карточки оформляется аналогичным образом, за исключением базового класса (должен быть класс xref:../api/DocsVision/BackOffice/ObjectModel/Mapping/BaseCardMapper_CL.adoc[BaseCardMapper<T>]) и того, что в карте присутствую исключительно секции.
+Преобразователь данных для карточки оформляется аналогичным образом, за исключением базового класса (должен быть класс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Mapping/BaseCardMapper_CL.adoc[BaseCardMapper<T>]) и того, что в карте присутствую исключительно секции.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class SampleCardMapper : CardMapper<SampleCard>
 {
@@ -141,9 +141,9 @@ public class SampleCardMapper : CardMapper<SampleCard>
 
 == Преобразователь данных для справочника
 
-Класс преобразователя данных для справочника реализуется по аналогии с преобразователя данных карточки. Единственное отличие - базовый класс здесьlink:../api/DocsVision/Platform/ObjectModel/Mapping/DictionaryMapper_CL.html[DictionaryMapper<T>].
+Класс преобразователя данных для справочника реализуется по аналогии с преобразователя данных карточки. Единственное отличие - базовый класс здесьxref:..xref:api/DocsVision/Platform/ObjectModel/Mapping/DictionaryMapper_CL.html[DictionaryMapper<T>].
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class SampleDictionaryMapper : DictionaryMapper<SampleDictionary>
 {
@@ -176,9 +176,9 @@ public class SampleDictionaryMapper : DictionaryMapper<SampleDictionary>
 
 == Регистрация преобразователей данных
 
-После того, как классы преобразователей данных били разработаны, требуется создать еще один класс - [.dfn .term]_фабрика преобразователей данных_-, в котором нужно связать тип преобразователя к классом карточки или секции, за который он отвечает. Базовым классом для [.dfn .term]_фабрики преобразователей данных_ выступает класс [.keyword .apiname]#ObjectMapperFactory#.
+После того, как классы преобразователей данных били разработаны, требуется создать еще один класс - _фабрика преобразователей данных_-, в котором нужно связать тип преобразователя к классом карточки или секции, за который он отвечает. Базовым классом для _фабрики преобразователей данных_ выступает класс [.keyword .apiname]#ObjectMapperFactory#.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
  public sealed class SampleCardsMapperFactory : ObjectMapperFactory
 {
@@ -193,6 +193,4 @@ public class SampleDictionaryMapper : DictionaryMapper<SampleDictionary>
 }
 ----
 
-Для того, чтобы контекст объектов мог работать с типами карточек/секций, для которых разработаны [.dfn .term]_фабрика преобразователей данных_, эти фабрики должны быть добавлены в контекст (см. на примере добавления фабрики [.keyword .apiname]#BackOfficeMapperFactory# в xref:DM_FullContextInit.adoc[примере]).
-
-*На уровень выше:* xref:../pages/DM_CardsDev_CreateObjectModel.adoc[Создание объектной модели карточки]
+Для того, чтобы контекст объектов мог работать с типами карточек/секций, для которых разработаны _фабрика преобразователей данных_, эти фабрики должны быть добавлены в контекст (см. на примере добавления фабрики [.keyword .apiname]#BackOfficeMapperFactory# в xref:DM_FullContextInit.adoc[примере]).

@@ -2,12 +2,12 @@
 
 Определяет наличие должности с указанным названием.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool OtherPositionWithSameNameExists(StaffPosition position, string name)
 ----
@@ -15,27 +15,23 @@ bool OtherPositionWithSameNameExists(StaffPosition position, string name)
 Параметры
 
 position::
-  Тип: xref:../StaffPosition_CL.adoc[StaffPosition]
-  +
-  Должность, которая должна быть исключена из результатов поиска
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffPosition_CL.adoc[StaffPosition]
++
+Должность, которая должна быть исключена из результатов поиска
 name::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Искомое название
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Искомое название
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true, если найдены должности (кроме position) с названием name
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true, если найдены должности (кроме position) с названием name
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр position или name.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

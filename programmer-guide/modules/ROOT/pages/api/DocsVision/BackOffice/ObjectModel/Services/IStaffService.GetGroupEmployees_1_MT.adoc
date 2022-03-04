@@ -2,12 +2,12 @@
 
 Возвращает сотрудников группы.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<StaffEmployee> GetGroupEmployees(StaffGroup group)
 ----
@@ -15,20 +15,18 @@ IEnumerable<StaffEmployee> GetGroupEmployees(StaffGroup group)
 Параметры
 
 group::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffGroup]
-  +
-  Группа сотрудников
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffGroup]
++
+Группа сотрудников
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
-  +
-  Список сотрудников типа xref:../StaffEmployee_CL.adoc[StaffEmployee]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
++
+Список сотрудников типа xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -41,5 +39,3 @@ StaffGroup group = staffService.FindGroupByName(null, "Бухгалтерия");
 // Получение сотрудников, входящих в группу
 IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(group);         
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

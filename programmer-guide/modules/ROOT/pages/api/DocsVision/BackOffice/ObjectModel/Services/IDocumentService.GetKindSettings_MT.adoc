@@ -2,12 +2,12 @@
 
 Возвращает настройки заданного вида карточки Документ.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 DocumentSetting GetKindSettings(KindsCardKind kind)
 ----
@@ -15,20 +15,18 @@ DocumentSetting GetKindSettings(KindsCardKind kind)
 Параметры
 
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки Документ
 
-Возвращаемое значение
-
-::
-  Тип: xref:Entities/KindSetting/DocumentSetting_CL.adoc[DocumentSetting]
-  +
-  Настройки вида документа
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/DocumentSetting_CL.adoc[DocumentSetting]
++
+Настройки вида документа
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind.
@@ -36,11 +34,11 @@ kind::
 
 == Заметки
 
-Настройки вида карточки задаются в [.dfn .term]_Справочнике видов карточек_.
+Настройки вида карточки задаются в _Справочнике видов карточек_.
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -53,5 +51,3 @@ KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-9
 // Получение настроек вида карточки        
 DocumentSetting documentSettings = documentService.GetKindSettings(kind);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

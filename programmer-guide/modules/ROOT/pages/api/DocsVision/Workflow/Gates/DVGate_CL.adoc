@@ -2,19 +2,19 @@
 
 Содержит методы и свойства шлюза к Docsvision.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class DVGate : IGate, IDisposable, IGateMessageSource
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |DVGate() |Инициализирует новый экземпляр класса DVGate.
@@ -22,127 +22,125 @@ public class DVGate : IGate, IDisposable, IGateMessageSource
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:DVGate.BaseURL_PR.adoc[BaseURL] |Возвращает URL к корню WEB-сервера Docsvision.
-|xref:IGate.Data_PR.adoc[Data] |Задает или возвращает конфигурацию шлюза.
-|xref:IGate.ExecutionMode_PR.adoc[ExecutionMode] |Возвращает поддерживаемый режим исполнения процесса.
-|xref:DVGate.FoldersCard_PR.adoc[FoldersCard] |Возвращает карточку папок.
-|xref:IGate.ID_PR.adoc[ID] |Возвращает уникальный идентификатор шлюза.
-|xref:DVGate.MessageChannel_PR.adoc[MessageChannel] |Возвращает канал сообщений шлюза.
-|xref:DVGate.RefPartners_PR.adoc[RefPartners] |Возвращает справочник контрагентов.
-|xref:DVGate.RefStaff_PR.adoc[RefStaff] |Возвращает справочник сотрудников.
-|xref:DVGate.RefUniversal_PR.adoc[RefUniversal] |Возвращает универсальный справочников (Делопроизводство).
+|xref:api/DocsVision/Workflow/Gates/DVGate.BaseURL_PR.adoc[BaseURL] |Возвращает URL к корню WEB-сервера Docsvision.
+|xref:api/DocsVision/Workflow/Gates/IGate.Data_PR.adoc[Data] |Задает или возвращает конфигурацию шлюза.
+|xref:api/DocsVision/Workflow/Gates/IGate.ExecutionMode_PR.adoc[ExecutionMode] |Возвращает поддерживаемый режим исполнения процесса.
+|xref:api/DocsVision/Workflow/Gates/DVGate.FoldersCard_PR.adoc[FoldersCard] |Возвращает карточку папок.
+|xref:api/DocsVision/Workflow/Gates/IGate.ID_PR.adoc[ID] |Возвращает уникальный идентификатор шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.MessageChannel_PR.adoc[MessageChannel] |Возвращает канал сообщений шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.RefPartners_PR.adoc[RefPartners] |Возвращает справочник контрагентов.
+|xref:api/DocsVision/Workflow/Gates/DVGate.RefStaff_PR.adoc[RefStaff] |Возвращает справочник сотрудников.
+|xref:api/DocsVision/Workflow/Gates/DVGate.RefUniversal_PR.adoc[RefUniversal] |Возвращает универсальный справочников (Делопроизводство).
 |Session |Задает или возвращает пользовательскую сессию.
-|xref:IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel] |Возвращает канал подписки на события шлюза.
+|xref:api/DocsVision/Workflow/Gates/IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel] |Возвращает канал подписки на события шлюза.
 |UserSession |Задает или возвращает пользовательскую сессию.
 |WorkflowUserID |Возвращает идентификатор пользователя Workflow.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:DVGate.AddVariable_MT.adoc[AddVariable(Int32, String)] |Добавляет новую переменную шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.AddVariable_MT.adoc[AddVariable(Int32, String)] |Добавляет новую переменную шлюза.
 |AddVariable(Int64, String) |Добавляет новую переменную шлюза.
-|xref:IGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)] |Сравнивает значения двух однотипных переменных шлюза. Выполняется простое сравнение двух строковых переменных.
+|xref:api/DocsVision/Workflow/Gates/IGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)] |Сравнивает значения двух однотипных переменных шлюза. Выполняется простое сравнение двух строковых переменных.
 |CompareVariables(Int64, String, String) |Сравнивает значения двух однотипных переменных шлюза. Выполняется простое сравнение двух строковых переменных.
-|xref:DVGate.CopyCard_MT.adoc[CopyCard(DVCard, Boolean)] |Создает копию переданной карточки.
-|xref:DVGate.CopyCards_MT.adoc[CopyCards(Array, Boolean, ProcessVariable)] |Создает копии нескольких карточек.
-|xref:DVGate.CopyVariable_MT.adoc[CopyVariable(Int32, String, String)] |Создает копию переменной шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CopyCard_MT.adoc[CopyCard(DVCard, Boolean)] |Создает копию переданной карточки.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CopyCards_MT.adoc[CopyCards(Array, Boolean, ProcessVariable)] |Создает копии нескольких карточек.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CopyVariable_MT.adoc[CopyVariable(Int32, String, String)] |Создает копию переменной шлюза.
 |CopyVariable(Int64, String, String) |Создает копию переменной шлюза.
 |CreateCard(DVCardType) |Создает новую карточку указанного типа.
-|xref:DVGate.CreateCard_MT.adoc[CreateCard(String)] |Создает новую карточку указанного типа.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateCard_MT.adoc[CreateCard(String)] |Создает новую карточку указанного типа.
 |CreateCardInFolder(DVCardType, DVFolder) |Создает новую карточку указанного типа и добавляет ярлык для её открытия в папку.
-|xref:DVGate.CreateCardInFolder_MT.adoc[CreateCardInFolder(String, DVFolder)] |Создает новую карточку указанного типа и ярлык на неё.
-|xref:DVGate.CreateDVFileFromExAttachment_MT.adoc[CreateDVFileFromExAttachment(ExAttachment)] |Создает карточку версионного файла на основе вложения письма переданного шлюзом к Exchange.
-|xref:DVGate.CreateDVFileFromExAttachmentInFolder_MT.adoc[CreateDVFileFromExAttachmentInFolder(ExAttachment, DVFolder, ProcessVariable)] |Создает карточку версионного файла на основе вложения письма переданного шлюзом к Exchange.
-|xref:DVGate.CreateDVFileFromFSFile_MT.adoc[CreateDVFileFromFSFile(FSFile)] |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе.
-|xref:DVGate.CreateDVFileFromFSFileInFolder_MT.adoc[CreateDVFileFromFSFileInFolder(FSFile, DVFolder, ProcessVariable)] |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе, и ярлык на карточку.
-|xref:DVGate.CreateFolder_MT.adoc[CreateFolder(DVFolder, String, DVCardRow)] |Создает новую папку указанного типа.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateCardInFolder_MT.adoc[CreateCardInFolder(String, DVFolder)] |Создает новую карточку указанного типа и ярлык на неё.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachment_MT.adoc[CreateDVFileFromExAttachment(ExAttachment)] |Создает карточку версионного файла на основе вложения письма переданного шлюзом к Exchange.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachmentInFolder_MT.adoc[CreateDVFileFromExAttachmentInFolder(ExAttachment, DVFolder, ProcessVariable)] |Создает карточку версионного файла на основе вложения письма переданного шлюзом к Exchange.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFile_MT.adoc[CreateDVFileFromFSFile(FSFile)] |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFileInFolder_MT.adoc[CreateDVFileFromFSFileInFolder(FSFile, DVFolder, ProcessVariable)] |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе, и ярлык на карточку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.CreateFolder_MT.adoc[CreateFolder(DVFolder, String, DVCardRow)] |Создает новую папку указанного типа.
 |CreateMessage(String, String, DVCard, DVPrincipal) |Создает карточку "Сообщение" с переданными параметрами.
 |CreateMessage(String, String, DVCard, DVPrincipal, DVPrincipal) |Создает карточку "Сообщение" с переданными параметрами.
 |CreateMessage(String, String, DVCard, String, DVPrincipal) |Создает карточку "Сообщение" с переданными параметрами.
 |CreateMessageFrom(String, String, DVCard, DVPrincipal, DVPrincipal) |Создает карточку "Сообщение" с переданными параметрами.
 |CreateMessageInFolder(String, String, DVCard, DVFolder, DVPrincipal) |Создает карточку "Сообщение" с переданными параметрами.
-|xref:DVGate.DeleteCard_MT.adoc[DeleteCard(DVCard, Boolean)] |Удаляет карточку.
-|xref:DVGate.DeleteFolder_MT.adoc[DeleteFolder(DVFolder, Boolean)] |Удаляет папку.
-|xref:DVGate.DeleteShortcut_MT.adoc[DeleteShortcut(DVShortcut, Boolean)] |Удаляет ярлык на карточку.
-|xref:DVGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)] |Удаляет переменную шлюза.
-|xref:DVGate.GetCard_MT.adoc[GetCard(Guid, Boolean)] |Получает карточку.
-|xref:DVGate.GetCardHardLink_MT.adoc[GetCardHardLink(String)] |Получает сильный ярлык на карточку.
-|xref:DVGate.GetCardSecurable_MT.adoc[GetCardSecurable(Guid)] |Возвращает описатель прав для карточки.
-|xref:DVGate.GetCardTypeByID_MT.adoc[GetCardTypeByID(Guid)] |Получает тип карточки по его идентификатору.
-|xref:DVGate.GetCurrentProcess_MT.adoc[GetCurrentProcess(ProcessVariable)] |Получает текущий бизнес-процесс.
-|xref:DVGate.GetDocStateByName_MT.adoc[GetDocStateByName(DVCardRow, String)] |Получает строку состояния карточки по названию.
-|xref:DVGate.GetDocStates_MT.adoc[GetDocStates(DVCardRow, ProcessVariable)] |Получает все возможные состояния карточки и сохраняет их в переменную процесса.
-|xref:DVGate.GetDocumentByTypeID_MT.adoc[GetDocumentByTypeID(String)] |Получает справочник по его идентификатору.
-|xref:DVGate.GetFunctionLinkedCard_MT.adoc[GetFunctionLinkedCard(String, Boolean, ProcessVariable)] |Получает карточку, связанную с функцией бизнес-процесса.
-|xref:DVGate.GetRow_MT.adoc[GetRow(Guid, Guid)] |Получает строку секции карточки.
-|xref:DVGate.GetVariable_MT.adoc[GetVariable(Int32, String, Object)] |Получает переменную процесса по её идентификатору и типу.
-|xref:DVGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)] |Возвращает URL (ссылку) для открытия карточки или папки.
-|xref:DVGate.ImportCard_MT.adoc[ImportCard(String)] |Импортирует карточку из XML.
-|xref:DVGate.ImportCardFromFile_MT.adoc[ImportCardFromFile(FSFile)] |Импортирует карточку из текстового файла.
-|xref:DVGate.ImportCardIntoFolder_MT.adoc[ImportCardIntoFolder(String, DVFolder, ProcessVariable)] |Импортирует карточку из XML и создаёт ярлык.
-|xref:DVGate.ImportCardIntoFolderFromFile_MT.adoc[ImportCardIntoFolderFromFile(FSFile, DVFolder, ProcessVariable)] |Импортирует карточку из текстового файла и создаёт ярлык.
+|xref:api/DocsVision/Workflow/Gates/DVGate.DeleteCard_MT.adoc[DeleteCard(DVCard, Boolean)] |Удаляет карточку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.DeleteFolder_MT.adoc[DeleteFolder(DVFolder, Boolean)] |Удаляет папку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.DeleteShortcut_MT.adoc[DeleteShortcut(DVShortcut, Boolean)] |Удаляет ярлык на карточку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)] |Удаляет переменную шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetCard_MT.adoc[GetCard(Guid, Boolean)] |Получает карточку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetCardHardLink_MT.adoc[GetCardHardLink(String)] |Получает сильный ярлык на карточку.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetCardSecurable_MT.adoc[GetCardSecurable(Guid)] |Возвращает описатель прав для карточки.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetCardTypeByID_MT.adoc[GetCardTypeByID(Guid)] |Получает тип карточки по его идентификатору.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetCurrentProcess_MT.adoc[GetCurrentProcess(ProcessVariable)] |Получает текущий бизнес-процесс.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetDocStateByName_MT.adoc[GetDocStateByName(DVCardRow, String)] |Получает строку состояния карточки по названию.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetDocStates_MT.adoc[GetDocStates(DVCardRow, ProcessVariable)] |Получает все возможные состояния карточки и сохраняет их в переменную процесса.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetDocumentByTypeID_MT.adoc[GetDocumentByTypeID(String)] |Получает справочник по его идентификатору.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetFunctionLinkedCard_MT.adoc[GetFunctionLinkedCard(String, Boolean, ProcessVariable)] |Получает карточку, связанную с функцией бизнес-процесса.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetRow_MT.adoc[GetRow(Guid, Guid)] |Получает строку секции карточки.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetVariable_MT.adoc[GetVariable(Int32, String, Object)] |Получает переменную процесса по её идентификатору и типу.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)] |Возвращает URL (ссылку) для открытия карточки или папки.
+|xref:api/DocsVision/Workflow/Gates/DVGate.ImportCard_MT.adoc[ImportCard(String)] |Импортирует карточку из XML.
+|xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardFromFile_MT.adoc[ImportCardFromFile(FSFile)] |Импортирует карточку из текстового файла.
+|xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolder_MT.adoc[ImportCardIntoFolder(String, DVFolder, ProcessVariable)] |Импортирует карточку из XML и создаёт ярлык.
+|xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolderFromFile_MT.adoc[ImportCardIntoFolderFromFile(FSFile, DVFolder, ProcessVariable)] |Импортирует карточку из текстового файла и создаёт ярлык.
 |Initialize(Guid, IMessageChannel, ISubscriptionChannel) |Инициализирует новый экземпляр шлюза.
-|xref:DVGate.IsVariableExists_MT.adoc[IsVariableExists(DVVariableType, String)] |Проверяет существование переменной шлюза
-|xref:DVGate.SendMessageToProcess_MT.adoc[SendMessageToProcess(Guid, Guid, Int32, String, Guid)] |Отправляет сообщение функции процесса.
-|xref:DVGate.SendMessageToProcessFunctions_MT.adoc[SendMessageToProcessFunctions(Guid, String, Int32, String, Guid)] |Отправляет сообщение функции процесса.
+|xref:api/DocsVision/Workflow/Gates/DVGate.IsVariableExists_MT.adoc[IsVariableExists(DVVariableType, String)] |Проверяет существование переменной шлюза
+|xref:api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcess_MT.adoc[SendMessageToProcess(Guid, Guid, Int32, String, Guid)] |Отправляет сообщение функции процесса.
+|xref:api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcessFunctions_MT.adoc[SendMessageToProcessFunctions(Guid, String, Int32, String, Guid)] |Отправляет сообщение функции процесса.
 |===
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:DVGate.GateID_FL.adoc[GateID] |Предоставляет идентификатор шлюза.
-|xref:DVGate.GateName_FL.adoc[GateName] |Предоставляет название шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GateID_FL.adoc[GateID] |Предоставляет идентификатор шлюза.
+|xref:api/DocsVision/Workflow/Gates/DVGate.GateName_FL.adoc[GateName] |Предоставляет название шлюза.
 |===
 
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.BaseURL_PR.adoc[DVGate.BaseURL - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.FoldersCard_PR.adoc[DVGate.FoldersCard - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.MessageChannel_PR.adoc[DVGate.MessageChannel - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.RefPartners_PR.adoc[DVGate.RefPartners - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.RefStaff_PR.adoc[DVGate.RefStaff - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.RefUniversal_PR.adoc[DVGate.RefUniversal - свойство]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.AddVariable_MT.adoc[DVGate.AddVariable - метод (Int32, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CopyCard_MT.adoc[DVGate.CopyCard - метод (DVCard, Boolean)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CopyCards_MT.adoc[DVGate.CopyCards - метод (Array, Boolean, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CopyVariable_MT.adoc[DVGate.CopyVariable - метод (Int32, String, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateCard_MT.adoc[DVGate.CreateCard - метод (String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateCardInFolder_MT.adoc[DVGate.CreateCardInFolder - метод (String, DVFolder)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachment_MT.adoc[DVGate.CreateDVFileFromExAttachment - метод (ExAttachment)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachmentInFolder_MT.adoc[DVGate.CreateDVFileFromExAttachmentInFolder - метод (ExAttachment, DVFolder, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFile_MT.adoc[DVGate.CreateDVFileFromFSFile - метод (FSFile)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFileInFolder_MT.adoc[DVGate.CreateDVFileFromFSFileInFolder - метод (FSFile, DVFolder, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.CreateFolder_MT.adoc[DVGate.CreateFolder - метод (DVFolder, String, DVCardRow)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.DeleteCard_MT.adoc[DVGate.DeleteCard - метод (DVCard, Boolean)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.DeleteFolder_MT.adoc[DVGate.DeleteFolder - метод (DVFolder, Boolean)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.DeleteShortcut_MT.adoc[DVGate.DeleteShortcut - метод (DVShortcut, Boolean)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.DeleteVariable_MT.adoc[DVGate.DeleteVariable - метод (Int32, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetCard_MT.adoc[DVGate.GetCard - метод (Guid, Boolean)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetCardHardLink_MT.adoc[DVGate.GetCardHardLink - метод (String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetCardSecurable_MT.adoc[DVGate.GetCardSecurable - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetCardTypeByID_MT.adoc[DVGate.GetCardTypeByID - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetCurrentProcess_MT.adoc[DVGate.GetCurrentProcess - метод (ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetDocStateByName_MT.adoc[DVGate.GetDocStateByName - метод (DVCardRow, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetDocStates_MT.adoc[DVGate.GetDocStates - метод (DVCardRow, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetDocumentByTypeID_MT.adoc[DVGate.GetDocumentByTypeID - метод (String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetFunctionLinkedCard_MT.adoc[DVGate.GetFunctionLinkedCard - метод (String, Boolean, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetRow_MT.adoc[DVGate.GetRow - метод (Guid, Guid)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetVariable_MT.adoc[DVGate.GetVariable - метод (Int32, String, Object)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GetVariableReference_MT.adoc[DVGate.GetVariableReference - метод (Int32, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.ImportCard_MT.adoc[DVGate.ImportCard - метод (String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.ImportCardFromFile_MT.adoc[DVGate.ImportCardFromFile - метод (FSFile)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolder_MT.adoc[DVGate.ImportCardIntoFolder - метод (String, DVFolder, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolderFromFile_MT.adoc[DVGate.ImportCardIntoFolderFromFile - метод (FSFile, DVFolder, ProcessVariable)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.IsVariableExists_MT.adoc[DVGate.IsVariableExists - метод (DVVariableType, String)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcess_MT.adoc[DVGate.SendMessageToProcess - метод (Guid, Guid, Int32, String, Guid)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcessFunctions_MT.adoc[DVGate.SendMessageToProcessFunctions - метод (Guid, String, Int32, String, Guid)]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GateID_FL.adoc[DVGate.GateID - поле]* +
-* *xref:../../../../api/DocsVision/Workflow/Gates/DVGate.GateName_FL.adoc[DVGate.GateName - поле]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates - пространство имен]
+* *xref:api/DocsVision/Workflow/Gates/DVGate.BaseURL_PR.adoc[DVGate.BaseURL - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.FoldersCard_PR.adoc[DVGate.FoldersCard - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.MessageChannel_PR.adoc[DVGate.MessageChannel - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.RefPartners_PR.adoc[DVGate.RefPartners - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.RefStaff_PR.adoc[DVGate.RefStaff - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.RefUniversal_PR.adoc[DVGate.RefUniversal - свойство]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.AddVariable_MT.adoc[DVGate.AddVariable - метод (Int32, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CopyCard_MT.adoc[DVGate.CopyCard - метод (DVCard, Boolean)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CopyCards_MT.adoc[DVGate.CopyCards - метод (Array, Boolean, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CopyVariable_MT.adoc[DVGate.CopyVariable - метод (Int32, String, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateCard_MT.adoc[DVGate.CreateCard - метод (String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateCardInFolder_MT.adoc[DVGate.CreateCardInFolder - метод (String, DVFolder)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachment_MT.adoc[DVGate.CreateDVFileFromExAttachment - метод (ExAttachment)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromExAttachmentInFolder_MT.adoc[DVGate.CreateDVFileFromExAttachmentInFolder - метод (ExAttachment, DVFolder, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFile_MT.adoc[DVGate.CreateDVFileFromFSFile - метод (FSFile)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateDVFileFromFSFileInFolder_MT.adoc[DVGate.CreateDVFileFromFSFileInFolder - метод (FSFile, DVFolder, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.CreateFolder_MT.adoc[DVGate.CreateFolder - метод (DVFolder, String, DVCardRow)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.DeleteCard_MT.adoc[DVGate.DeleteCard - метод (DVCard, Boolean)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.DeleteFolder_MT.adoc[DVGate.DeleteFolder - метод (DVFolder, Boolean)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.DeleteShortcut_MT.adoc[DVGate.DeleteShortcut - метод (DVShortcut, Boolean)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.DeleteVariable_MT.adoc[DVGate.DeleteVariable - метод (Int32, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetCard_MT.adoc[DVGate.GetCard - метод (Guid, Boolean)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetCardHardLink_MT.adoc[DVGate.GetCardHardLink - метод (String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetCardSecurable_MT.adoc[DVGate.GetCardSecurable - метод (Guid)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetCardTypeByID_MT.adoc[DVGate.GetCardTypeByID - метод (Guid)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetCurrentProcess_MT.adoc[DVGate.GetCurrentProcess - метод (ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetDocStateByName_MT.adoc[DVGate.GetDocStateByName - метод (DVCardRow, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetDocStates_MT.adoc[DVGate.GetDocStates - метод (DVCardRow, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetDocumentByTypeID_MT.adoc[DVGate.GetDocumentByTypeID - метод (String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetFunctionLinkedCard_MT.adoc[DVGate.GetFunctionLinkedCard - метод (String, Boolean, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetRow_MT.adoc[DVGate.GetRow - метод (Guid, Guid)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetVariable_MT.adoc[DVGate.GetVariable - метод (Int32, String, Object)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GetVariableReference_MT.adoc[DVGate.GetVariableReference - метод (Int32, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.ImportCard_MT.adoc[DVGate.ImportCard - метод (String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardFromFile_MT.adoc[DVGate.ImportCardFromFile - метод (FSFile)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolder_MT.adoc[DVGate.ImportCardIntoFolder - метод (String, DVFolder, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.ImportCardIntoFolderFromFile_MT.adoc[DVGate.ImportCardIntoFolderFromFile - метод (FSFile, DVFolder, ProcessVariable)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.IsVariableExists_MT.adoc[DVGate.IsVariableExists - метод (DVVariableType, String)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcess_MT.adoc[DVGate.SendMessageToProcess - метод (Guid, Guid, Int32, String, Guid)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.SendMessageToProcessFunctions_MT.adoc[DVGate.SendMessageToProcessFunctions - метод (Guid, String, Int32, String, Guid)]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GateID_FL.adoc[DVGate.GateID - поле]* +
+* *xref:api/DocsVision/Workflow/Gates/DVGate.GateName_FL.adoc[DVGate.GateName - поле]* +

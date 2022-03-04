@@ -2,12 +2,12 @@
 
 Определяет возможность блокировки указанного основного файла документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanLockMainFile(Document document, DocumentFile file, bool forceUnlock)
 ----
@@ -15,32 +15,28 @@ bool CanLockMainFile(Document document, DocumentFile file, bool forceUnlock)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 forceUnlock::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - принудительная разблокировка
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - принудительная разблокировка
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - блокировка файла возможна, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - блокировка файла возможна, иначе false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
 |http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается, если карточка версионного файла была удалена или не существует.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -2,12 +2,12 @@
 
 Возвращает сущность указанного файла или папки.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public IGateVariable GetVariable(int Type, string ID)
 ----
@@ -15,19 +15,15 @@ public IGateVariable GetVariable(int Type, string ID)
 Параметры
 
 Type::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Тип переменной: 0 - папка; 1 - файл
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Тип переменной: 0 - папка; 1 - файл
 VariableInfo::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к запрашиваемому файлу или папке
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к запрашиваемому файлу или папке
 
-Возвращаемое значение
-
-::
-  Тип: xref:IGateVariable_IN.adoc[IGateVariable]
-  +
-  В зависимости от типа переменной будет возвращен объект типа: [.keyword .apiname]#FSFileFolder# - для папки; [.keyword .apiname]#FSFile# - для файла.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/FSGate_CL.adoc[FSGate - класс]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Workflow/Gates/IGateVariable_IN.adoc[IGateVariable]
++
+В зависимости от типа переменной будет возвращен объект типа: [.keyword .apiname]#FSFileFolder# - для папки; [.keyword .apiname]#FSFile# - для файла.

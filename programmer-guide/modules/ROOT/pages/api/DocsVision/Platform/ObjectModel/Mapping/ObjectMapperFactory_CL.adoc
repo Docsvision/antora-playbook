@@ -1,20 +1,20 @@
 = ObjectMapperFactory - класс
 
-Базовый класс [.dfn .term]_фабрики преобразователей данных_.
+Базовый класс _фабрики преобразователей данных_.
 
-* [.keyword]*Пространство имен:* xref:Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class ObjectMapperFactory : IObjectMapperFactory
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ObjectMapperFactory(ObjectContext) |Инициализирует новый экземпляр класса ObjectMapperFactory с помощью указанного значения.
@@ -22,18 +22,18 @@ public abstract class ObjectMapperFactory : IObjectMapperFactory
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|GetObjectMapper(Type) |Возвращает [.dfn .term]_преобразователь данных_ указанного типа.
-|RegisterObjectMapper(Type, Type) |Регистрирует новый [.dfn .term]_преобразователь данных_ в [.dfn .term]_фабрике преобразователей данных_
+|GetObjectMapper(Type) |Возвращает _преобразователь данных_ указанного типа.
+|RegisterObjectMapper(Type, Type) |Регистрирует новый _преобразователь данных_ в _фабрике преобразователей данных_
 |===
 
 == Примеры
 
-В качестве примера приведена часть класса [.dfn .term]_SystemCardsMapperFactory_ ([.dfn .term]_фабрика преобразователей данных_ библиотеки "Системные карточки")
+В качестве примера приведена часть класса _SystemCardsMapperFactory_ (_фабрика преобразователей данных_ библиотеки "Системные карточки")
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class SystemCardsMapperFactory : ObjectMapperFactory
 {
@@ -45,5 +45,3 @@ public sealed class SystemCardsMapperFactory : ObjectMapperFactory
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping - пространство имен]

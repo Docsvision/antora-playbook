@@ -2,12 +2,12 @@
 
 Добавляет к виду карточки подвид с указанным названием и возвращает на него ссылку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 KindsCardKind AddCardKind(KindsCardKind parentKind, string name)
 ----
@@ -15,27 +15,23 @@ KindsCardKind AddCardKind(KindsCardKind parentKind, string name)
 Параметры
 
 parentKind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Родительский вид карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Родительский вид карточки
 name::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название нового вида карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название нового вида карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Добавленный вид карточки
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Добавленный вид карточки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр parentKind.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

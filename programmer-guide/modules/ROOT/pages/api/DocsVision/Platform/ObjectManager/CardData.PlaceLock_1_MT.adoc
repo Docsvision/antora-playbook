@@ -2,12 +2,12 @@
 
 Установка постоянной или временной блокировки.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void PlaceLock(bool permanently)
 ----
@@ -15,12 +15,10 @@ public abstract void PlaceLock(bool permanently)
 Параметры
 
 permanently::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
-  +
-  true - постоянная блокировка; false - временная блокировка;
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
++
+true - постоянная блокировка; false - временная блокировка;
 
 == Заметки
 
 Временная блокировка ограничена существованием сессии, из которой эта блокировка установлена. Постоянная блокировка должна быть снята тем, кто её установил, либо администратором системы.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

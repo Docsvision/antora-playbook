@@ -1,13 +1,13 @@
 = IStaffService.DeleteEmployee - метод (StaffEmployee)
 
-Удаляет сотрудника из [.dfn .term]_справочника сотрудников_.
+Удаляет сотрудника из _справочника сотрудников_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void DeleteEmployee(StaffEmployee employee)
 ----
@@ -15,13 +15,13 @@ void DeleteEmployee(StaffEmployee employee)
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудника, для которого создается персональная папка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудника, для которого создается персональная папка
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
@@ -31,7 +31,7 @@ employee::
 
 Пример удаления уволенных сотрудников из группы.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -50,5 +50,3 @@ foreach (StaffEmployee employee in group.Employees)
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

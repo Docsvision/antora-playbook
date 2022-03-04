@@ -2,12 +2,12 @@
 
 Добавляет объект в контекст объектов.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void AddObject(ObjectBase objectInstance)
 ----
@@ -15,13 +15,13 @@ public void AddObject(ObjectBase objectInstance)
 Параметры
 
 objectInstance::
-  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
-  +
-  Объект типа ObjectBase
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
++
+Объект типа ObjectBase
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
@@ -32,5 +32,3 @@ objectInstance::
 Многие методы и сервисы самостоятельно добавляют созданные объекты в контекст - смотрите заметки к методам и сервисам.
 
 При добавлении объекта в контекст объектов, он (объект) становится доступен в рамках данного контекста. Для сохранения такого объекта в базе данных используйте методы [.keyword .apiname]#AcceptChanges# и [.keyword .apiname]#SaveObject#.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

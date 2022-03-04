@@ -2,22 +2,22 @@
 
 Завершает выбор, если карточка была открыта на выбор.
 
-* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* *Сборка:* `DocsVision.Platform.CardHost.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void FinishSelection(object selectedValue)
 ----
 
-Параметры
+*Параметры*
 
 selectedValue::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
-  +
-  Возвращаемое значение выбора
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
++
+Возвращаемое значение выбора
 
 == Заметки
 
@@ -25,7 +25,7 @@ selectedValue::
 
 В примере, некий метод, вызываемый закрытие карточки, вызывает FinishSelection с передачей результата выполнения описанного запроса. Результат передается только в случае нажатия пользователем кнопки OK, в диалоговом окне.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 protected override void OnCardClosed(EventArgs e)
 {
@@ -36,5 +36,3 @@ protected override void OnCardClosed(EventArgs e)
     base.OnCardClosed(e);
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/ICardFrame_IN.adoc[ICardFrame - интерфейс]

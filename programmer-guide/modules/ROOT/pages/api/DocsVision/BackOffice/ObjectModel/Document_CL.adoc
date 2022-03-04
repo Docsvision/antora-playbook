@@ -2,28 +2,28 @@
 
 Объектная модель карточки [.keyword .apiname]#Документ#.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class Document : BaseCard
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:Document.Files_PR.adoc[Files] |Возвращает коллекцию файлов карточки документа.
-|xref:Document.MainInfo_PR.adoc[MainInfo] |Предоставляет доступ к основной информации документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Document.Files_PR.adoc[Files] |Возвращает коллекцию файлов карточки документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Document.MainInfo_PR.adoc[MainInfo] |Предоставляет доступ к основной информации документа.
 |===
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CancelLockFileOperation |Операция отмены блокировки файла.
@@ -61,7 +61,7 @@ public class Document : BaseCard
 
 Ниже приведен пример создания документа и выделение ему регистрационного номера
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -94,7 +94,3 @@ document.MainInfo["RegDate"] = DateTime.Now;
 objectContext.SaveObject<Document>(document);
 ----
 
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Document.Files_PR.adoc[Document.Files - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Document.MainInfo_PR.adoc[Document.MainInfo - свойство]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

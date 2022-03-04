@@ -2,12 +2,12 @@
 
 Возвращает системные настройки печати.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BarcodePrintSettingsCollection GetBarcodePrintSettings(StaffEmployee employee, KindsCardKind cardKind)
 ----
@@ -15,20 +15,18 @@ BarcodePrintSettingsCollection GetBarcodePrintSettings(StaffEmployee employee, K
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, для которого выбираются настройки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, для которого выбираются настройки
 cardKind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид документа, для которого выбираются настройки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид документа, для которого выбираются настройки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BarcodePrintSettingsCollection_CL.adoc[BarcodePrintSettingsCollection]
-  +
-  Настройки печати, представленные коллекцией элементов типа xref:../BarcodePrintSettings_CL.adoc[BarcodePrintSettings]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BarcodePrintSettingsCollection_CL.adoc[BarcodePrintSettingsCollection]
++
+Настройки печати, представленные коллекцией элементов типа xref:api/DocsVision/BackOffice/ObjectModel/BarcodePrintSettings_CL.adoc[BarcodePrintSettings]
 
 == Заметки
 
@@ -38,7 +36,7 @@ cardKind::
 
 Ниже приведен пример скрипта карточки, позволяющий определить необходимость печати штрих-кода (определена в системных настройках)
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void Button_Click(System.Object sender, System.EventArgs e)
 {
@@ -60,5 +58,3 @@ private void Button_Click(System.Object sender, System.EventArgs e)
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService_IN.adoc[IBarcodeService - интерфейс]

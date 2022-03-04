@@ -2,12 +2,12 @@
 
 Определяет наличие подписи у указанного основного файла документ.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CheckMainFileSigned(Document document, DocumentFile mainFile)
 ----
@@ -15,26 +15,24 @@ bool CheckMainFileSigned(Document document, DocumentFile mainFile)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 mainFile::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - файл подписан, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - файл подписан, иначе false
 
 == Примеры
 
 Далее приведен пример использования метода [.keyword .apiname]#CheckMainFileSigned# при определении наличия подписи у первого основного файла документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -50,5 +48,3 @@ DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileT
 // Проверка подписи
 bool result = documentService.CheckMainFileSigned(document, documentFile);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

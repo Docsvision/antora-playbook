@@ -1,13 +1,13 @@
 = IStateService.FindStateByBuiltIn - метод (BuiltInState, BaseCard)
 
-Возвращает состояние карточки, представленное в [.dfn .term]_Конструкторе состояний_ и соответствующее переданному встроенному состоянию.
+Возвращает состояние карточки, представленное в _Конструкторе состояний_ и соответствующее переданному встроенному состоянию.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StatesState FindStateByBuiltIn(BuiltInState builtInState, BaseCard baseCard)
 ----
@@ -15,24 +15,22 @@ StatesState FindStateByBuiltIn(BuiltInState builtInState, BaseCard baseCard)
 Параметры
 
 builtInState::
-  Тип: xref:../BuiltInState_CL.adoc[BuiltInState]
-  +
-  Встроенное состояние
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BuiltInState_CL.adoc[BuiltInState]
++
+Встроенное состояние
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, для которой выполняется
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, для которой выполняется
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Состояние, определенное в [.dfn .term]_Конструкторе состояний_
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Состояние, определенное в _Конструкторе состояний_
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInState.
@@ -44,7 +42,7 @@ baseCard::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -57,5 +55,3 @@ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-0000
 // Состояние карточки, соответствующее builtInState
 StatesState state = stateService.FindStateByBuiltIn(Task.RejectedState, task);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

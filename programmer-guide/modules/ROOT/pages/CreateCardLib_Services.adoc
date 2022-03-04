@@ -4,7 +4,7 @@
 
 . Создаем интерфейс, описывающий функциональность будущего сервиса:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface INetstatSolutionService
 {
@@ -17,7 +17,7 @@ public interface INetstatSolutionService
 ----
 . Добавляем класс, реализующий интерфейс INetstatSolutionService и наследующий от [.keyword .apiname]#ContextService# - базовый класс сервисов объектной модели:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 internal class NetstatSolutionService : ContextService, INetstatSolutionService
 ----
@@ -28,7 +28,7 @@ internal class NetstatSolutionService : ContextService, INetstatSolutionService
 Реализацию смотрите в проекте решения.
 . Создаем фабрику сервисов в виде класса, наследующего от [.keyword .apiname]#ServiceFactory#. Фабрика предоставляет экземпляр сервиса по его типу.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class NetstatSolutionServiceFactory : ServiceFactory
 {
@@ -48,11 +48,9 @@ public class NetstatSolutionServiceFactory : ServiceFactory
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Типы и интерфейс, разработанные для сервиса, собраны в папке [.ph .filepath]`Services` проекта [.keyword]*NetstatSolutionCard*.
+[.note__title]#Прим.:# Типы и интерфейс, разработанные для сервиса, собраны в папке `Services` проекта *NetstatSolutionCard*.
 ====
 
 == См. далее
 
 * xref:CreateCardLib_CardControl.adoc[Разработка компонента карточки]
-
-*На уровень выше:* xref:../pages/CreateCardLib.adoc[Разработка библиотеки карточек]

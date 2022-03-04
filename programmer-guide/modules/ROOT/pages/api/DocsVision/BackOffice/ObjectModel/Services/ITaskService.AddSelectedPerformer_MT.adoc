@@ -2,12 +2,12 @@
 
 Добавляет указанного сотрудника в список выбранных исполнителей задания.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, StaffEmployee employee)
 ----
@@ -15,24 +15,22 @@ TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, StaffEmployee 
 Параметры
 
 mainInfo::
-  Тип: xref:../TaskMainInfo_CL.adoc[TaskMainInfo]
-  +
-  Основная информация карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskMainInfo_CL.adoc[TaskMainInfo]
++
+Основная информация карточки
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Выбранный исполнитель
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Выбранный исполнитель
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]
-  +
-  Сущность выбранного исполнителя
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]
++
+Сущность выбранного исполнителя
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр mainInfo или employee.
@@ -40,7 +38,7 @@ employee::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -55,5 +53,3 @@ StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("000000
 taskService.AddSelectedPerformer(task.MainInfo, employee);
 objectContext.AcceptChanges();   
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

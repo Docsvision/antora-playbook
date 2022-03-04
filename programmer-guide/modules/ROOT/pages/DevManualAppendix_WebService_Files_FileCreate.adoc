@@ -31,9 +31,9 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Fil
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 name::
-  Название файл
+Название файл
 
 == Ответ
 
@@ -80,5 +80,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}fileId"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Files.adoc[Файлы]

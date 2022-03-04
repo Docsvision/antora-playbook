@@ -2,12 +2,12 @@
 
 Добавляет вложенное подразделение в указанную организацию.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffUnit AddNewUnit(StaffUnit parentUnit)
 ----
@@ -15,26 +15,24 @@ StaffUnit AddNewUnit(StaffUnit parentUnit)
 Параметры
 
 parentUnit::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Организация, в которую добавляется подразделение
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Организация, в которую добавляется подразделение
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Добавленное подразделение
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Добавленное подразделение
 
 == Заметки
 
-Если параметр parentUnit не задан, организация будет добавлена в корень [.dfn .term]_Справочника сотрудников_.
+Если параметр parentUnit не задан, организация будет добавлена в корень _Справочника сотрудников_.
 
 == Примеры
 
-Ниже приведен пример добавления новой организации в [.dfn .term]_Справочник сотрудников_
+Ниже приведен пример добавления новой организации в _Справочник сотрудников_
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -47,5 +45,3 @@ unit.Type = StaffUnitType.Organization;
 unit.Name = "ООО \"Василёк\"";
 objectContext.SaveObject(unit);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

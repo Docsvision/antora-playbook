@@ -2,7 +2,7 @@
 
 Ниже приведен пример проверки действительности подписи, установленной на поля документа. В этом случае проверка подписи на файлах не проводится. Для проверки вызывается метод CheckActualSignature сервиса документов IDocumentService.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IDocumentService documentService = objectContext.GetService<IDocumentService>();
 IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>();
@@ -23,5 +23,3 @@ foreach (var item in document.MainInfo.SignatureList.Signatures)
  Console.WriteLine("{0} - {1}",item.Signer.DisplayName, isCheckOk);
 }
 ----
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

@@ -1,32 +1,32 @@
 = SessionManager - класс
 
-Представляет объектную модель [.keyword]*менеджера сессий*. Содержит методы управления сессиями пользователей. Этот класс является [.keyword]*абстрактным*.
+Представляет объектную модель *менеджера сессий*. Содержит методы управления сессиями пользователей. Этот класс является *абстрактным*.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class SessionManager
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:SessionManager.CloseSession_MT.adoc[CloseSession(Guid)] |Принудительное закрытие сессии с указанным идентификатором.
-|xref:SessionManager.Connect_MT.adoc[Connect(string)] |Устанавливает соединение с сервером Docsvision.
-|xref:SessionManager.Connect_1_MT.adoc[Connect(string, string)] |Устанавливает соединение с сервером Docsvision.
-|xref:SessionManager.Connect_2_MT.adoc[Connect(string, string, string, string)] |Устанавливает соединение с сервером Docsvision.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_MT.adoc[CloseSession(Guid)] |Принудительное закрытие сессии с указанным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_MT.adoc[Connect(string)] |Устанавливает соединение с сервером Docsvision.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_1_MT.adoc[Connect(string, string)] |Устанавливает соединение с сервером Docsvision.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_2_MT.adoc[Connect(string, string, string, string)] |Устанавливает соединение с сервером Docsvision.
 |ConnectProxy(object) |Установка соединения с сервером используя указанное соединение.
-|xref:SessionManager.CreateInstance_MT.adoc[CreateInstance] |Создание экземпляра менеджера сессий.
-|xref:SessionManager.CreateInstance_1_MT.adoc[CreateInstance(string)] |Создание экземпляра менеджера сессий с указанием строки соединения.
-|xref:SessionManager.CloseSession_MT.adoc[CreateSession] |Создает пользовательскую сессию.
-|xref:SessionManager.CloseSession_1_MT.adoc[CreateSession(SessionLoginFlags)] |Создает пользовательскую сессию..
-|xref:SessionManager.GetLocaleId_MT.adoc[GetLocaleId] |Получение идентификатора языка для локализации сообщений.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_MT.adoc[CreateInstance] |Создание экземпляра менеджера сессий.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_1_MT.adoc[CreateInstance(string)] |Создание экземпляра менеджера сессий с указанием строки соединения.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_MT.adoc[CreateSession] |Создает пользовательскую сессию.
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_1_MT.adoc[CreateSession(SessionLoginFlags)] |Создает пользовательскую сессию..
+|xref:api/DocsVision/Platform/ObjectManager/SessionManager.GetLocaleId_MT.adoc[GetLocaleId] |Получение идентификатора языка для локализации сообщений.
 |GetOpenSessions |Получение списка всех открытых сессий пользователя.
 |SetLocaleId(int) |Установка идентификатора языка для текущей сессии.
 |===
@@ -39,22 +39,20 @@ public abstract class SessionManager
 
 В примере организуется соединение с сервером localhost с указанием названия подключаемой базы данных - "Docsvision".
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string connect = "ConnectAddress=http://localhost/DocsVision/StorageServer/StorageServerService.asmx;BaseName=Docsvision";
 SessionManager manager = SessionManager.CreateInstance();
 manager.Connect(connect);
 ----
 
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_MT.adoc[SessionManager.CloseSession - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.Connect_MT.adoc[SessionManager.Connect - метод (string)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.Connect_1_MT.adoc[SessionManager.Connect - метод (string, string)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.Connect_2_MT.adoc[SessionManager.Connect - метод (string, string, string, string)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_MT.adoc[SessionManager.CreateInstance - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_1_MT.adoc[SessionManager.CreateInstance - метод (String)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.CreateSession_MT.adoc[SessionManager.CreateSession - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_1_MT.adoc[SessionManager.CreateSession - метод (SessionLoginFlags)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.GetLocaleId_MT.adoc[SessionManager.GetLocaleId - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SessionManager.GetOpenSessions_MT.adoc[SessionManager.GetOpenSessions - метод]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_MT.adoc[SessionManager.CloseSession - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_MT.adoc[SessionManager.Connect - метод (string)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_1_MT.adoc[SessionManager.Connect - метод (string, string)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.Connect_2_MT.adoc[SessionManager.Connect - метод (string, string, string, string)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_MT.adoc[SessionManager.CreateInstance - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.CreateInstance_1_MT.adoc[SessionManager.CreateInstance - метод (String)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.CreateSession_MT.adoc[SessionManager.CreateSession - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.CloseSession_1_MT.adoc[SessionManager.CreateSession - метод (SessionLoginFlags)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.GetLocaleId_MT.adoc[SessionManager.GetLocaleId - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SessionManager.GetOpenSessions_MT.adoc[SessionManager.GetOpenSessions - метод]* +

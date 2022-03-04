@@ -2,12 +2,12 @@
 
 Создает отображаемое поле в коллекции полей, и возвращает на него ссылку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseUniversalItemTypeViewField AddNewViewField(string fieldName, SectionField sectionField, BaseUniversalItemType itemType)
 ----
@@ -15,30 +15,28 @@ BaseUniversalItemTypeViewField AddNewViewField(string fieldName, SectionField se
 Параметры
 
 fieldName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название поля для которого создается отображение
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название поля для которого создается отображение
 sectionField::
-  Тип: xref:../../../Platform/Data/Metadata/CardModel/SectionField_CL.adoc[SectionField]
-  +
-  Поле секции для которого создается отображение
+Тип: xref:api/DocsVision/Platform/Data/Metadata/CardModel/SectionField_CL.adoc[SectionField]
++
+Поле секции для которого создается отображение
 itemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел справочника к которому добавляется отображаемое поле
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел справочника к которому добавляется отображаемое поле
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseUniversalItemTypeViewField_CL.adoc[BaseUniversalItemTypeViewField]
-  +
-  Отображаемое поле
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemTypeViewField_CL.adoc[BaseUniversalItemTypeViewField]
++
+Отображаемое поле
 
 == Примеры
 
 В приведенном ниже примере создается отображаемое поле в узле конструктора справочников
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
          
@@ -64,5 +62,3 @@ baseUniversalItemTypeViewField.Order = baseUniversalItemType.ViewFields.Count;
 //сохранение            
 objectContext.SaveObject(baseUniversalItemTypeViewField);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

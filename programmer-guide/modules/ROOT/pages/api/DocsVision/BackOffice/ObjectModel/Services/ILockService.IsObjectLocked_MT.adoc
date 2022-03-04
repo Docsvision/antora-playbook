@@ -2,12 +2,12 @@
 
 Определяет наличие и владельца блокировки, установленной на объект.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool IsObjectLocked<T>(T obj, out bool byMe, out string ownerName) where T : ObjectBase;
 ----
@@ -15,33 +15,31 @@ bool IsObjectLocked<T>(T obj, out bool byMe, out string ownerName) where T : Obj
 Параметры типа
 
 T::
-  Тип объекта, состояние блокировки которого запрашивается
+Тип объекта, состояние блокировки которого запрашивается
 
 Параметры
 
 obj::
-  Тип: T
-  +
-  Объект, состояние блокировки которого запрашивается
+Тип: T
++
+Объект, состояние блокировки которого запрашивается
 byMe::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Если true, то блокировка установлена текущим пользователем
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Если true, то блокировка установлена текущим пользователем
 ownerName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Учетная запись сотрудника, заблокировавшего объект. Если заблокировано текущим пользователем, то возвращает пустую строку
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Учетная запись сотрудника, заблокировавшего объект. Если заблокировано текущим пользователем, то возвращает пустую строку
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Если объект заблокирован, то возвращает true
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Если объект заблокирован, то возвращает true
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 ILockService lockService = objectContext.GetService<ILockService>();
@@ -54,5 +52,3 @@ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-00
 // Получение владельца блокировки
 bool locked = lockService.IsObjectLocked<BaseCard>(document, out lockIsMy, out lockOwner);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService - интерфейс]

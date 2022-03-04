@@ -2,12 +2,12 @@
 
 Данный метод позволяет добавить новою подгруппу в существующую группу сотрудников.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffGroup AddNewGroup(StaffGroup parentGroup)
 ----
@@ -15,26 +15,24 @@ StaffGroup AddNewGroup(StaffGroup parentGroup)
 Параметры
 
 parentGroup::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Группа пользователей, в которую осуществляется добавление новой группы
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Группа пользователей, в которую осуществляется добавление новой группы
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Объектная модель новой группы пользователей
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Объектная модель новой группы пользователей
 
 == Заметки
 
-Если parentGroup не задан, группа будет добавлена в корневой узел групп, в [.dfn .term]_Справочнике сотрудников_.
+Если parentGroup не задан, группа будет добавлена в корневой узел групп, в _Справочнике сотрудников_.
 
 == Примеры
 
-Ниже приведен пример простого добавления нового подразделения в корневой узел, в [.dfn .term]_Справочник сотрудников_
+Ниже приведен пример простого добавления нового подразделения в корневой узел, в _Справочник сотрудников_
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -48,5 +46,3 @@ staffUnit.Name = "Подразделение компании";
 // Сохранение изменений
 objectContext.SaveObject(staffUnit);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

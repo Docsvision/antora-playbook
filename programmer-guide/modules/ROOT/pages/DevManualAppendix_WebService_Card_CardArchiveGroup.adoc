@@ -32,13 +32,13 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 items::
-  Идентификаторы архивируемых карточек
+Идентификаторы архивируемых карточек
 options::
-  Флаг архивирования карточек. См. описание параметра options в xref:DevManualAppendix_WebService_Card_CardArchive.adoc[CardArchive]
+Флаг архивирования карточек. См. описание параметра options в xref:DevManualAppendix_WebService_Card_CardArchive.adoc[CardArchive]
 
-Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *items* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -97,5 +97,3 @@ body = """<?xml version="1.0" encoding="utf-8"?>
 # Отправляем SOAP-сообщение
 response = session.post(url,  data=body)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

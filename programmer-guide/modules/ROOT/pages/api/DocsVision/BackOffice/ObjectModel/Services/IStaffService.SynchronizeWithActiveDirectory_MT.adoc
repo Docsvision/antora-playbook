@@ -1,13 +1,13 @@
 = IStaffService.SynchronizeWithActiveDirectory - метод (IADSynchronizationSettings, ILongProcessManager)
 
-Синхронизирует данные групп, ролей и подразделений [.dfn .term]_справочника сотрудников_ с Active Directory.
+Синхронизирует данные групп, ролей и подразделений _справочника сотрудников_ с Active Directory.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void SynchronizeWithActiveDirectory(IADSynchronizationSettings settings, ILongProcessManager syncManager)
 ----
@@ -15,17 +15,17 @@ void SynchronizeWithActiveDirectory(IADSynchronizationSettings settings, ILongPr
 Параметры
 
 settings::
-  Тип: xref:Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]
-  +
-  Параметры синхронизации Справочника сотрудников и Active Directory
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]
++
+Параметры синхронизации Справочника сотрудников и Active Directory
 syncManager::
-  Тип: xref:Entities/ILongProcessManager_IN.adoc[ILongProcessManager]
-  +
-  Менеджер длительных процессов
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ILongProcessManager_IN.adoc[ILongProcessManager]
++
+Менеджер длительных процессов
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр settings или syncManager.
@@ -33,10 +33,8 @@ syncManager::
 
 == Заметки
 
-Синхронизация элементов [.dfn .term]_справочника сотрудников_ возможна при наличии настроенной связи соответствующего элемента с контейнером в Active Directory.
+Синхронизация элементов _справочника сотрудников_ возможна при наличии настроенной связи соответствующего элемента с контейнером в Active Directory.
 
 == Примеры
 
-Пример синхронизации доступен по xref:../../../../../pages/SC_TM_SyncFromAD.adoc[ссылке].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
+Пример синхронизации доступен по xref:SC_TM_SyncFromAD.adoc[ссылке].

@@ -2,12 +2,12 @@
 
 Добавляет в документ основной файл.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 DocumentFile AddMainFile(Document document, string filePath)
 ----
@@ -15,24 +15,22 @@ DocumentFile AddMainFile(Document document, string filePath)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, в который добавляется файл
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, в который добавляется файл
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к добавляемому файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к добавляемому файлу
 
-Возвращаемое значение
-
-::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -46,5 +44,3 @@ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-00
 documentService.AddMainFile(document, @"Z:\Инструкция пожарной безопасности.docx");
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

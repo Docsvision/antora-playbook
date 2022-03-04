@@ -2,12 +2,12 @@
 
 Заменяет текущего исполнителя задания.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ChangeTaskCurrentPerformer(Task task, StaffEmployee employee)
 ----
@@ -15,17 +15,17 @@ void ChangeTaskCurrentPerformer(Task task, StaffEmployee employee)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Новый текущий исполнитель
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Новый текущий исполнитель
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или employee.
@@ -34,7 +34,7 @@ employee::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -49,5 +49,3 @@ StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("000000
 taskService.ChangeTaskCurrentPerformer(task, employee);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

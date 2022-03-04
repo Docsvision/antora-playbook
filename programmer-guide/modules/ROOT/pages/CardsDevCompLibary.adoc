@@ -6,7 +6,7 @@
 
 Помимо этого, по наличию или отсутствию регистрации данного компонента на клиентской машине определяется сам факт установки решения в целом. Если решение зарегистрировано в базе данных, но при запуске Windows-клиент не может создать компонент библиотеки карточек, им будет предпринята попытка заново установить инсталляционный пакет решения на данной машине, а в случае неудачи - выдано сообщение о том, что библиотека карточек некорректно установлена. По этой причине компонент библиотеки карточек является обязательной частью законченного решения. Его создание может быть пропущено или отложено в процессе разработки карточек решения (в пределах компьютера разработчика), но к нему обязательно необходимо будет вернуться при распространении созданного решения.
 
-Компонент библиотеки карточек является реализацией интерфейса [.keyword .apiname]#ICardLibraryInfo#, который определяет методы получения информации о библиотеке. Данный интерфейс реализован в классе xref:../api/DocsVision/Platform/WinForms/CardLibrary_CL.adoc[DocsVision.Platform.WinForms.CardLibrary], который можно использовать в качестве базового в собственных реализациях компонентов библиотек карточек. При этом нужно переопределить методы: [.keyword .apiname]#GetIcon#, [.keyword .apiname]#GetCardIcon#, [.keyword .apiname]#GetLibraryDefinition# и [.keyword .apiname]#GetCardDefinition#.
+Компонент библиотеки карточек является реализацией интерфейса [.keyword .apiname]#ICardLibraryInfo#, который определяет методы получения информации о библиотеке. Данный интерфейс реализован в классе xref:..xref:api/DocsVision/Platform/WinForms/CardLibrary_CL.adoc[DocsVision.Platform.WinForms.CardLibrary], который можно использовать в качестве базового в собственных реализациях компонентов библиотек карточек. При этом нужно переопределить методы: [.keyword .apiname]#GetIcon#, [.keyword .apiname]#GetCardIcon#, [.keyword .apiname]#GetLibraryDefinition# и [.keyword .apiname]#GetCardDefinition#.
 
 [NOTE]
 ====
@@ -15,7 +15,7 @@
 
 В код проекта также необходимо включить ресурсный файл, который будет содержать иконки и XML-описания карточек, входящих в библиотеку, а также XML-описания самой библиотеки карточек. Такой файл можно создать при помощи встроенного редактора Visual Studio. А чтобы избежать дублирования, можно просто вставить в ресурсный файл *ссылки* на файлы из проекта – например, так:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 <data name="Icon_TestCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
   <value>..\..\CardDefs\Icons\TestCard.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -38,7 +38,7 @@
 
 Ниже приведен пример базового кода компонента библиотеки
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System;
 using System.Drawing;
@@ -88,5 +88,3 @@ namespace DocsVision.Test
 == См. также
 
 * xref:dm_extension.adoc[Разработка расширений Docsvision]
-
-*На уровень выше:* xref:../pages/dm_developmentcards.adoc[Разработка карточек и библиотек карточек]

@@ -2,7 +2,7 @@
 
 Для возможности работы с собственными типами хранилищ разработчик должен реализовать специальный компонент – провайдер к внешнему хранилищу (далее – просто провайдер), который представляет собой библиотеку с публичным классом, в котором реализуются определенные программные интерфейсы, набор которых определяется возможностями внешнего хранилища.
 
-В простейшем случае, провайдер должен реализовывать два интерфейса: xref:../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage] и xref:../api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
+В простейшем случае, провайдер должен реализовывать два интерфейса: xref:..xref:api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage] и xref:..xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
 
 [source,pre,codeblock]
 ----
@@ -15,7 +15,7 @@ public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 
 Следует обратить внимание, что сервер Docsvision может в течении пользовательской сессии многократно создавать экземпляры класса провайдера и инициализировать его, что может привести к росту потребления ресурсов, если при инициализации создаются дополнительные объекты. Данную особенность следует учитывать при создании класса провайдера.
 
-Для более эффективной работы сервера Docsvision с хранилищем, провайдер может поддерживать интерфейс xref:../api/DocsVision/Platform/StorageServer/IStreamedBinaryStorage_IN.adoc[IStreamedBinaryStorage], позволяющий серверу работать напрямую с потоками чтения/записи к хранилищу. Также может быть поддержан интерфейс xref:../api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IEnumerableBinaryStorage], если провайдер может предоставить идентификаторы всех файлов, хранящихся в определенном разделе хранилища.
+Для более эффективной работы сервера Docsvision с хранилищем, провайдер может поддерживать интерфейс xref:..xref:api/DocsVision/Platform/StorageServer/IStreamedBinaryStorage_IN.adoc[IStreamedBinaryStorage], позволяющий серверу работать напрямую с потоками чтения/записи к хранилищу. Также может быть поддержан интерфейс xref:..xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IEnumerableBinaryStorage], если провайдер может предоставить идентификаторы всех файлов, хранящихся в определенном разделе хранилища.
 
 [source,pre,codeblock]
 ----
@@ -82,4 +82,3 @@ public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 
 Если возможность настройки не требуется, то атрибут Editor не указывается.
 
-*Parent topic:* xref:../pages/ConnectorToStorage.adoc[Разработка провайдера к внешнему хранилищу]

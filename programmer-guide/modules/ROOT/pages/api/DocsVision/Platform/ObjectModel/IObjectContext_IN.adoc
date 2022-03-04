@@ -2,32 +2,32 @@
 
 Описывает ключевую функциональность класса ObjectContext по осуществлению наиболее общих действий над объектами системы.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IObjectContext
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IObjectContext.IsClosed_PR.adoc[IsClosed] |Возвращает состояние контекста объектов.
-|xref:IObjectContext.UserAccount_PR.adoc[UserAccount] |Возвращает имя учетной записи текущего пользователя.
+|xref:api/DocsVision/Platform/ObjectModel/IObjectContext.IsClosed_PR.adoc[IsClosed] |Возвращает состояние контекста объектов.
+|xref:api/DocsVision/Platform/ObjectModel/IObjectContext.UserAccount_PR.adoc[UserAccount] |Возвращает имя учетной записи текущего пользователя.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IObjectContext.AcceptChanges_MT.adoc[AcceptChanges] |При переопределении в производном классе сохраняет все произведенные изменения в контексте объектов.
-|xref:IObjectContext.AddObject_MT.adoc[AddObject(ObjectBase)] |При переопределении в производном классе создает новый объект в контексте.
+|xref:api/DocsVision/Platform/ObjectModel/IObjectContext.AcceptChanges_MT.adoc[AcceptChanges] |При переопределении в производном классе сохраняет все произведенные изменения в контексте объектов.
+|xref:api/DocsVision/Platform/ObjectModel/IObjectContext.AddObject_MT.adoc[AddObject(ObjectBase)] |При переопределении в производном классе создает новый объект в контексте.
 |DeleteObject(ObjectBase) |При переопределении в производном классе удаляет заданный объект.
 |GetObject(IObjectRef) |При переопределении в производном классе получает объект из переданной ссылки.
 |GetObject<T>(Object) |При переопределении в производном классе получает объект заданного типа с указанным идентификатором.
@@ -38,10 +38,3 @@ public interface IObjectContext
 |SaveObject<T>(T) |При переопределении в производном классе сохраняет изменения в указанном объекте.
 |SaveObjects<T>(IEnumerable<T>) |При переопределении в производном классе сохраняет изменения в заданной коллекции объектов.
 |===
-
-* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectContext.IsClosed_PR.adoc[IObjectContext.IsClosed - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectContext.UserAccount_PR.adoc[IObjectContext.UserAccount - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectContext.AcceptChanges_MT.adoc[IObjectContext.AcceptChanges - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectModel/IObjectContext.AddObject_MT.adoc[IObjectContext.AddObject - метод (ObjectBase)]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

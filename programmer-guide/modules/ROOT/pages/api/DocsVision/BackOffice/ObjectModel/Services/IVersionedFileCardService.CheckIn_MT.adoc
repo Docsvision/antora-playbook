@@ -2,12 +2,12 @@
 
 Снимает блокировку с карточки файла с версиями.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void CheckIn(VersionedFileCard versionedFileCard, bool keepCheckout, int level, string comment, bool commentToVersion, string checkOutPath, System.Guid userId)
 ----
@@ -15,37 +15,37 @@ void CheckIn(VersionedFileCard versionedFileCard, bool keepCheckout, int level, 
 Параметры
 
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 keepCheckout::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Для сохранения блокировки должно быть значение true
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Для сохранения блокировки должно быть значение true
 level::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Позиция числа, значение которого будет увеличено, в номере версии
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Позиция числа, значение которого будет увеличено, в номере версии
 comment::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Комментарий к версии или к файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Комментарий к версии или к файлу
 commentToVersion::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  При значении true, `comment` - комментарий к версии, иначе - комментарий к файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+При значении true, `comment` - комментарий к версии, иначе - комментарий к файлу
 checkOutPath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к выгруженному файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к выгруженному файлу
 userId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор сотрудника, выполнившего блокировку файла
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор сотрудника, выполнившего блокировку файла
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возникает, если файл не заблокирован, либо заблокирован, но не сотрудником с идентификатором `userId`, либо выгруженный файл `checkOutPath` не существует.
@@ -55,7 +55,7 @@ userId::
 
 Пример снятия блокировки с заблокированного и первого файла документа с повышением вспомогательного номера версии. Предполагается, что блокировка и изменения были произведены ранее.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
         
@@ -68,5 +68,3 @@ VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(document
 // Снятие блокировки с повышением версии
 versionedFileCardService.CheckIn(versionedFileCard, false, 1);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

@@ -1,13 +1,13 @@
 = BaseCardControl - класс
 
-Базовый класс карточки, поддерживающей механизм настройки разметки (при помощи [.dfn .term]_конструктора разметок_) и автомат состояний. Является базовым классом для карточек библиотеки "Базовые объекты".
+Базовый класс карточки, поддерживающей механизм настройки разметки (при помощи _конструктора разметок_) и автомат состояний. Является базовым классом для карточек библиотеки "Базовые объекты".
 
-* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 [CardFrameWindowType(typeof(CardFrameForm))]
 [ComVisible(true)]
@@ -18,43 +18,43 @@ public class BaseCardControl : CardControl, ICustomizableControl, ICardView
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:BaseCardControl_CT.adoc[BaseCardControl()] |Инициализирует новый экземпляр класса BaseCardControl.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CT.adoc[BaseCardControl()] |Инициализирует новый экземпляр класса BaseCardControl.
 |===
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:BaseCardControl.AvailableBranches_PR.adoc[AvailableBranches] |Возвращает список доступных переходов состояний карточки.
-|xref:BaseCardControl.BaseObject_PR.adoc[BaseObject] |Возвращает объектную модель открытой карточки.
-|xref:BaseCardControl.Caption_PR.adoc[Caption] |Задает или возвращает заголовок окна в котором открыта карточка.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.AvailableBranches_PR.adoc[AvailableBranches] |Возвращает список доступных переходов состояний карточки.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.BaseObject_PR.adoc[BaseObject] |Возвращает объектную модель открытой карточки.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.Caption_PR.adoc[Caption] |Задает или возвращает заголовок окна в котором открыта карточка.
 |ObjectContext |Возвращает текущий контекст объектов.
 |ReadOnly |Возвращает true, если карточка открыта на чтение.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:BaseCardControl.ChangeState_MT.adoc[ChangeState(StatesStateMachineBranch)] |Изменяет состояние карточки следуя предоставленному переходу автомата состояний.
-|xref:BaseCardControl.Commit_MT.adoc[Commit] |Сохраняет данные карточки.
-|xref:BaseCardControl.HasChanges_MT.adoc[HasChanges] |Возвращает признак наличия не сохраненных изменений в контексте объектов.
-|xref:BaseCardControl.ReloadLayout_MT.adoc[ReloadLayout(Boolean)] |Перезагружает разметку карточки.
-|xref:BaseCardControl.Rollback_MT.adoc[Rollback] |Отменяет несохраненные изменения данных карточки.
-|xref:BaseCardControl.Save_MT.adoc[Save] |Сохраняет данные карточки в случае отсутствия в них ошибок.
-|xref:BaseCardControl.ValidateProperties_MT.adoc[ValidateProperties] |Проверяет данные карточки на наличие ошибок. При наличии ошибок будет выдано соответствующее сообщение.
-|xref:BaseCardControl.ValidateProperties_1_MT.adoc[ValidateProperties(Boolean)] |Проверяет данные карточки на наличие ошибок с возможностью отключения сообщения о наличии ошибок.
-|xref:BaseCardControl.ValidateProperties_2_MT.adoc[ValidateProperties(Boolean, IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>)] |Проверяет данные карточки на наличие ошибок с возможностью отключения проверки отдельных данных.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.ChangeState_MT.adoc[ChangeState(StatesStateMachineBranch)] |Изменяет состояние карточки следуя предоставленному переходу автомата состояний.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.Commit_MT.adoc[Commit] |Сохраняет данные карточки.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.HasChanges_MT.adoc[HasChanges] |Возвращает признак наличия не сохраненных изменений в контексте объектов.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.ReloadLayout_MT.adoc[ReloadLayout(Boolean)] |Перезагружает разметку карточки.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.Rollback_MT.adoc[Rollback] |Отменяет несохраненные изменения данных карточки.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.Save_MT.adoc[Save] |Сохраняет данные карточки в случае отсутствия в них ошибок.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_MT.adoc[ValidateProperties] |Проверяет данные карточки на наличие ошибок. При наличии ошибок будет выдано соответствующее сообщение.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_1_MT.adoc[ValidateProperties(Boolean)] |Проверяет данные карточки на наличие ошибок с возможностью отключения сообщения о наличии ошибок.
+|xref:api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_2_MT.adoc[ValidateProperties(Boolean, IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>)] |Проверяет данные карточки на наличие ошибок с возможностью отключения проверки отдельных данных.
 |===
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AfterConvertToTemplate |Событие возникает после конвертации карточки в шаблон.
@@ -74,18 +74,5 @@ public class BaseCardControl : CardControl, ICustomizableControl, ICardView
 |StateChanged |Событие возникает после смены состояния карточки.
 |===
 
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl_CT.adoc[BaseCardControl - конструктор]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.AvailableBranches_PR.adoc[BaseCardControl.AvailableBranches - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.BaseObject_PR.adoc[BaseCardControl.BaseObject - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.Caption_PR.adoc[BaseCardControl.Caption - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.ChangeState_MT.adoc[BaseCardControl.ChangeState - метод (StatesStateMachineBranch)]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.Commit_MT.adoc[BaseCardControl.Commit - метод]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.HasChanges_MT.adoc[BaseCardControl.HasChanges - метод]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.ReloadLayout_MT.adoc[BaseCardControl.ReloadLayout - метод (Boolean)]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.Rollback_MT.adoc[BaseCardControl.Rollback - метод (Boolean)]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.Save_MT.adoc[BaseCardControl.Save - метод]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_MT.adoc[BaseCardControl.ValidateProperties - метод]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_1_MT.adoc[BaseCardControl.ValidateProperties - метод (Boolean)]* +
-* *xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl.ValidateProperties_2_MT.adoc[BaseCardControl.ValidateProperties - метод (Boolean, IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>, out IEnumerable<string>)]* +
 
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms - пространство имен]
+

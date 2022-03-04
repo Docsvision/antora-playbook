@@ -2,12 +2,12 @@
 
 Инициализирует системную информацию карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void InitializeSystemInfo(BaseCard baseCard, KindsCardKind cardKind)
 ----
@@ -15,17 +15,17 @@ void InitializeSystemInfo(BaseCard baseCard, KindsCardKind cardKind)
 Параметры
 
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка
 cardKind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки. Используется в случае невозможности получения данных вида карточки из самой карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки. Используется в случае невозможности получения данных вида карточки из самой карточки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возникает в случае невозможности получения вида карточки - не определен baseCard.SystemInfo.CardKind и не задан cardKind. Может также возникнуть, если не в справочнике состояний не указано начальное состояние вида карточки.
@@ -34,5 +34,3 @@ cardKind::
 == Заметки
 
 Метод выполняется в том случае, если baseCard.SystemInfo не является null. Фактически метод задает значение вида карточки, если не задано, и устанавливает текущее состояние карточки в начальное значение.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

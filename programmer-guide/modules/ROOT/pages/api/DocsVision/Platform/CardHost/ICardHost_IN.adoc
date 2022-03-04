@@ -2,12 +2,12 @@
 
 Описывает механизм организации взаимодействия с контейнером карточки.
 
-* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* *Сборка:* `DocsVision.Platform.CardHost.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 [ServiceContract(Namespace = "http://DocsVision.Platform.CardHost")]
 public interface ICardHost
@@ -15,7 +15,7 @@ public interface ICardHost
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CardCount |Возвращает количество запущенных немодальных карточек.
@@ -27,25 +27,25 @@ public interface ICardHost
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)] |При переопределении в производном классе производит позиционирование курсора на указанной папке.
+|xref:api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)] |При переопределении в производном классе производит позиционирование курсора на указанной папке.
 |CloseCards |При переопределении в производном классе закрывает все карточки.
 |CreateCard(Guid, Guid, ParameterCollection) |Создает карточку.
 |GetCardUrl(Guid, Guid) |При переопределении в производном классе формирует URL-адрес для указанной карточки.
 |GetFolderUrl(Guid, Guid) |При переопределении в производном классе формирует URL-адрес для указанной папки.
 |GetShortcutUrl(Guid, Guid, Guid) |При переопределении в производном классе формирует URL-адрес для указанного ярлыка.
 |Refresh(Boolean) |При переопределении в производном классе инициирует обновление данных.
-|xref:ICardHost.SelectCard_MT.adoc[SelectCard(String)] |При переопределении в производном классе открывает окно выбора со списком карточек. Окно выбора будет иметь заданный заголовок.
-|xref:ICardHost.SelectCard_1_MT.adoc[SelectCard(String, Object)] |При переопределении в производном классе открывает окно выбора с отфильтрованным списком карточек. Окно выбора будет иметь заданный заголовок.
+|xref:api/DocsVision/Platform/CardHost/ICardHost.SelectCard_MT.adoc[SelectCard(String)] |При переопределении в производном классе открывает окно выбора со списком карточек. Окно выбора будет иметь заданный заголовок.
+|xref:api/DocsVision/Platform/CardHost/ICardHost.SelectCard_1_MT.adoc[SelectCard(String, Object)] |При переопределении в производном классе открывает окно выбора с отфильтрованным списком карточек. Окно выбора будет иметь заданный заголовок.
 |SelectCards(String) |При переопределении в производном классе открывает окно выбора нескольких экземпляров из списка карточек. Окно выбора будет иметь заданный заголовок.
 |SelectCards(String, String) |При переопределении в производном классе открывает окно выбора нескольких экземпляров из отфильтрованного списка карточек. Окно выбора будет иметь заданный заголовок.
 |SelectFolder(String) |При переопределении в производном классе открывает окно выбора со списком папок. Окно выбора будет иметь заданный заголовок.
 |SelectFolder(String, Int) |При переопределении в производном классе открывает окно выбора со списком папок заданного типа. Окно выбора будет иметь заданный заголовок.
 |SelectFolder(String, Int32, Guid) |При переопределении в производном классе открывает окно выбора со списком папок заданного типа. Курсор будет предустановлен на заданной папке. Окно выбора будет иметь заданный заголовок.
-|xref:ICardHost.SelectFromCard_MT.adoc[SelectFromCard(Guid, String)] |При переопределении в производном классе отображает карточку в режиме выбора строки.
-|xref:ICardHost.SelectFromCard_1_MT.adoc[SelectFromCard(Guid, String, Object)] |При переопределении в производном классе отображает карточку в режиме выбора строки. Позволяет использовать дополнительные параметры активации.
+|xref:api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_MT.adoc[SelectFromCard(Guid, String)] |При переопределении в производном классе отображает карточку в режиме выбора строки.
+|xref:api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_1_MT.adoc[SelectFromCard(Guid, String, Object)] |При переопределении в производном классе отображает карточку в режиме выбора строки. Позволяет использовать дополнительные параметры активации.
 |ShowCard(Guid, ActivateMode) |При переопределении в производном классе отображает пользовательский интерфейс карточки в режиме контейнера.
 |ShowCardModal(Guid, ActivateMode) |При переопределении в производном классе отображает модально пользовательский интерфейс карточки в режиме контейнера.
 |ShowCard(Guid, Guid, ActivateMode, ActivateFlags, Object) |При переопределении в производном классе отображает модально пользовательский интерфейс карточки в режиме контейнера с передачей параметров активации карточки.
@@ -54,7 +54,7 @@ public interface ICardHost
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CardChanged |Происходит после изменении данных карточки.
@@ -63,11 +63,4 @@ public interface ICardHost
 |Refreshed |Происходит при обновления данных карточки.
 |===
 
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ICardHost.ActivateFolder - метод (Guid, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.CreateCard_MT.adoc[ICardHost.CreateCard - метод (Guid, Guid, ParameterCollection, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.SelectCard_MT.adoc[ICardHost.SelectCard - метод (String)]* +
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.SelectCard_1_MT.adoc[ICardHost.SelectCard - метод (String, Object)]* +
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_MT.adoc[ICardHost.SelectFromCard - метод (Guid, String)]* +
-* *xref:../../../../api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_1_MT.adoc[ICardHost.SelectFromCard - метод (Guid, String, Object)]* +
 
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost - пространство имен]

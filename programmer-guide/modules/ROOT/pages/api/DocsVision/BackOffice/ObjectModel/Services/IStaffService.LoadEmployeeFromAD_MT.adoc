@@ -2,12 +2,12 @@
 
 Загружает данные сотрудника из Active Directory.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 List<string> LoadEmployeeFromAD(StaffEmployee employee)
 ----
@@ -15,20 +15,18 @@ List<string> LoadEmployeeFromAD(StaffEmployee employee)
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, для которого загружаются данные
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, для которого загружаются данные
 
-Возвращаемое значение
-
-::
-  Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<string>
-  +
-  Список обновленных атрибутов
+Возвращаемое значение::
+Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<string>
++
+Список обновленных атрибутов
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
@@ -36,9 +34,9 @@ employee::
 
 == Примеры
 
-Ниже приведен пример загрузки данных текущего сотрудника из Active Directory в [.dfn .term]_справочник сотрудников_.
+Ниже приведен пример загрузки данных текущего сотрудника из Active Directory в _справочник сотрудников_.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -49,5 +47,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 staffService.LoadEmployeeFromAD(staffService.GetCurrentEmployee());
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

@@ -26,11 +26,11 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Fil
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 searchFilter::
-  Поисковый запрос
+Поисковый запрос
 
-Строка [.keyword]*searchFilter* должна соответствовать формату элемента [.keyword]*FileSearch*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *searchFilter* должна соответствовать формату элемента *FileSearch*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -100,5 +100,3 @@ response = session.post(url, data=body)
 # Выводим ответ
 print(response.content)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Files.adoc[Файлы]

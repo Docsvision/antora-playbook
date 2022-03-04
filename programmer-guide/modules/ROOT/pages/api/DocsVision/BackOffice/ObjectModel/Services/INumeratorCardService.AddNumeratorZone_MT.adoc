@@ -2,12 +2,12 @@
 
 Добавляет в нумератор новую зону нумерации.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 NumeratorZone AddNumeratorZone(NumeratorCard card, string name)
 ----
@@ -15,27 +15,23 @@ NumeratorZone AddNumeratorZone(NumeratorCard card, string name)
 Параметры
 
 card::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
-  +
-  Нумератор, в который добавляется новая зона
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
++
+Нумератор, в который добавляется новая зона
 name::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название добавляемой зоны
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название добавляемой зоны
 
-Возвращаемое значение
-
-::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorZone_CL.adoc[NumeratorZone]
-  +
-  Зона нумерации
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorZone_CL.adoc[NumeratorZone]
++
+Зона нумерации
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр card.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService - интерфейс]

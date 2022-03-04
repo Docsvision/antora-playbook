@@ -2,12 +2,12 @@
 
 Создает новую подчиненную группу заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskGroup CreateChildTaskGroup(Task parentTask, KindsCardKind kind, BaseCard parentCard, TaskList taskList)
 ----
@@ -15,32 +15,30 @@ TaskGroup CreateChildTaskGroup(Task parentTask, KindsCardKind kind, BaseCard par
 Параметры
 
 parentTask::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание, в которое может быть добавлена группа. Может быть передан null, тогда группа заданий будет добавлена в taskList
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание, в которое может быть добавлена группа. Может быть передан null, тогда группа заданий будет добавлена в taskList
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид группы заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид группы заданий
 parentCard::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Карточка, в которую будет добавлена группы заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Карточка, в которую будет добавлена группы заданий
 taskList::
-  Тип: xref:../TaskList_CL.adoc[TaskList]
-  +
-  Список подписей, к которому будет прикреплена новая группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[TaskList]
++
+Список подписей, к которому будет прикреплена новая группа заданий
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Созданная группа заданий
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Созданная группа заданий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind, parentCard или taskList.
@@ -50,7 +48,7 @@ taskList::
 
 Ниже приведен пример создания группы заданий в существующем документе
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -67,5 +65,3 @@ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-00
 taskGroupService.CreateChildTaskGroup(null, kind, document, document.MainInfo.Tasks);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

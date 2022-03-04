@@ -1,6 +1,6 @@
 = События элемента управления 'Ссылки'
 
-Стандартный элемент управления "Ссылки" предоставляет возможность подписываться на события вызова настраиваемых команд (CustomizeCommands), которые выбираются из контекстного меню элемента управления "Ссылки". Для подписки на подобные события необходимо знать идентификатор соответствующей команды, которые собраны в статическом классе [.keyword .apiname]#DocsVision.BackOffice.WinForms.Controls.Commands.ReferenceListView.ReferenceListViewCommandIds# (сборка [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`):
+Стандартный элемент управления "Ссылки" предоставляет возможность подписываться на события вызова настраиваемых команд (CustomizeCommands), которые выбираются из контекстного меню элемента управления "Ссылки". Для подписки на подобные события необходимо знать идентификатор соответствующей команды, которые собраны в статическом классе [.keyword .apiname]#DocsVision.BackOffice.WinForms.Controls.Commands.ReferenceListView.ReferenceListViewCommandIds# (сборка `DocsVision.BackOffice.WinForms.dll`):
 
 * [.keyword .apiname]#ReferenceListViewCommandAddCardFromTemplateId# - добавление карточки по шаблону;
 * [.keyword .apiname]#ReferenceListViewCommandAddCardId# - добавление карточки;
@@ -25,7 +25,7 @@
 
 Элемент управление "Ссылки" предоставляет единую точку входа для обработки всех этих событий - событие [.keyword .apiname]#CustomizeCommands#. В качестве примера, используем собственный обработчик события [.keyword .apiname]#CustomizeCommands# для обработки команд добавления URL-ссылки и и открытия карточки из списка добавленных карточек:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Организуем подписку в обработчике события активации карточки
 private void Document_CardActivated(System.Object sender, DocsVision.Platform.WinForms.CardActivatedEventArgs e)
@@ -74,5 +74,3 @@ private void OpenCardCommand_AfterCommandExecute(object sender, ReferenceListVie
 ----
 
 В обработчиках событий, срабатывающих до исполнения соответствующей команды, можно добавить логику прерывания команды, как в примере, установив e.Cancel в значение true .
-
-*На уровень выше:* xref:../pages/dm_scripts_subscription.adoc[Подписка на события]

@@ -1,20 +1,20 @@
 = ObjectMapperBase<T> - класс
 
-Базовый класс [.dfn .term]_преобразователя данных_.
+Базовый класс _преобразователя данных_.
 
-* [.keyword]*Пространство имен:* xref:Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class ObjectMapperBase<T> : ObjectMapper<T> where T : ObjectBase
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ObjectMapperBase(ObjectContext) |Инициализирует новый экземпляр класса ObjectMapperBase с помощью указанного значения.
@@ -22,29 +22,29 @@ public abstract class ObjectMapperBase<T> : ObjectMapper<T> where T : ObjectBase
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|Mapping |Возвращает ссылку на [.dfn .term]_карту объектов_, которая содержит коллекцию связей между свойствами объекта и отдельными элементами карточки.
+|Mapping |Возвращает ссылку на _карту объектов_, которая содержит коллекцию связей между свойствами объекта и отдельными элементами карточки.
 |PersistentStore |Возвращает интерфейс хранилища Docsvision, предоставляющий методы создания, поиска и удаления объектов, а также несколько вспомогательных методов.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CreateObject(ObjectInitializationData) |Создает новый объект, с переданными параметрами, в хранилище Docsvision .
-|GetObjectMap |Возвращает [.dfn .term]_карту объектов_.
+|GetObjectMap |Возвращает _карту объектов_.
 |GetObjectRef(Object) |Возвращает ссылку на переданный объект. Позволяет получить идентификатор объекта.
 |GetParentObject(T, Type) |Возвращает родительский объект.
 |GetStore(ObjectRef< T>) |Возвращает хранилище данных переданного по ссылке объекта.
 |GetStore(T) |Возвращает хранилище данных переданного объекта.
 |GetStore(ObjectRef<T>, Boolean) |Возвращает хранилище данных переданного по ссылке объекта.
 |GetStore(T, Boolean) |Возвращает хранилище данных переданного объекта.
-|LoadObject(ObjectRef<T>) |Загружает объект, переданный по ссылке, в [.dfn .term]_преобразователь данных_.
-|LoadObject(PropertyStore) |Загружает объект в [.dfn .term]_преобразователь данных_.
-|LoadObject(ObjectRef<T>, IDictionary<String, Object>) |Загружает объект, переданный по ссылке, в [.dfn .term]_преобразователь данных_. Также загружает параметры объекта.
+|LoadObject(ObjectRef<T>) |Загружает объект, переданный по ссылке, в _преобразователь данных_.
+|LoadObject(PropertyStore) |Загружает объект в _преобразователь данных_.
+|LoadObject(ObjectRef<T>, IDictionary<String, Object>) |Загружает объект, переданный по ссылке, в _преобразователь данных_. Также загружает параметры объекта.
 |LoadObjectData(PropertyStore, ObjectInitializationData) |Выполняет загрузку данных из хранилища в проинициализированное хранилище данных.
 |LoadObjectData(ObjectRef<T>, IDictionary<String, Object>, ObjectInitializationData) |Выполняет загрузку данных из хранилища в проинициализированное хранилище данных. Также загружает параметры объекта.
 |RefreshObject(T) |Выполняет обновление данных в хранилище данных объекта.
@@ -55,6 +55,4 @@ public abstract class ObjectMapperBase<T> : ObjectMapper<T> where T : ObjectBase
 
 == Заметки
 
-Практическая информация по разработке [.dfn .term]_преобразователя данных_ содержится в разделе xref:../../../../../pages/DM_CardsDev_CreateObjectModel_Mapper.adoc[Разработка преобразователя данных].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping - пространство имен]
+Практическая информация по разработке _преобразователя данных_ содержится в разделе xref:DM_CardsDev_CreateObjectModel_Mapper.adoc[Разработка преобразователя данных].

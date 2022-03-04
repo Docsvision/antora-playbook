@@ -1,8 +1,8 @@
 = Синхронизация Справочника сотрудников с Active Directory
 
-Для синхронизации [.dfn .term]_Справочника сотрудников_ с Active Directory достаточно вызвать специальный метод сервиса для работы со xref:DM_TM_LibBaseObject_RefStaff.adoc[Справочником сотрудников]
+Для синхронизации _Справочника сотрудников_ с Active Directory достаточно вызвать специальный метод сервиса для работы со xref:DM_TM_LibBaseObject_RefStaff.adoc[Справочником сотрудников]
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -19,9 +19,9 @@ LongProcessManager longProcessManager = new LongProcessManager();
 staffService.SynchronizeWithActiveDirectory(syncSettings, longProcessManager);
 ----
 
-В приведенном примере класс [.keyword .apiname]#SynchronizationDepartmentsSettings# должен реализовывать интерфейс xref:../api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings], например, следующим образом:
+В приведенном примере класс [.keyword .apiname]#SynchronizationDepartmentsSettings# должен реализовывать интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings], например, следующим образом:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 class SynchronizationDepartmentsSettings : IADSynchronizationSettings
 {
@@ -47,16 +47,16 @@ class SynchronizationDepartmentsSettings : IADSynchronizationSettings
 }
 ----
 
-Здесь класс [.keyword .apiname]#SynchronizationDepartmentsSettings# устанавливает требование по синхронизации подразделений в [.dfn .term]_Справочнике сотрудников_ информацией, полученной из Active Directory.
+Здесь класс [.keyword .apiname]#SynchronizationDepartmentsSettings# устанавливает требование по синхронизации подразделений в _Справочнике сотрудников_ информацией, полученной из Active Directory.
 
 [NOTE]
 ====
 [.note__title]#Прим.:# Полное описание свойств класса [.keyword .apiname]#SynchronizationDepartmentsSettings# смотрите в описании интерфейса [.keyword .apiname]#IADSynchronizationSettings#.
 ====
 
-Менеджер длительных процессов `longProcessManager` должен реализовывать интерфейс xref:../api/DocsVision/BackOffice/ObjectModel/Services/Entities/ILongProcessManager_IN.adoc[ILongProcessManager], и для простоты определим его следующим образом:
+Менеджер длительных процессов `longProcessManager` должен реализовывать интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ILongProcessManager_IN.adoc[ILongProcessManager], и для простоты определим его следующим образом:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 class LongProcessManager : ILongProcessManager
 {
@@ -67,6 +67,4 @@ class LongProcessManager : ILongProcessManager
 }
 ----
 
-Для того, чтобы синхронизация могла быть выполнена необходимо связать элемент [.dfn .term]_Справочника сотрудников_ и объект Active Directory. Подробнее об этом читайте в соответствующем разделе документа "Docsvision 5. Руководство по настройке".
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]
+Для того, чтобы синхронизация могла быть выполнена необходимо связать элемент _Справочника сотрудников_ и объект Active Directory. Подробнее об этом читайте в соответствующем разделе документа "Docsvision 5. Руководство по настройке".

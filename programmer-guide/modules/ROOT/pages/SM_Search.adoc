@@ -2,7 +2,7 @@
 
 Ниже приведен пример серверного поиска, выполняемого из скрипта карточки, по следующим данным карточки: части названия, автору и дате создания (должна быть больше указанной). Необходимые данные для серверного поиска получаем из соответствующих элементов управления.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void Поиск_Click(System.Object sender, System.EventArgs e)
 {
@@ -46,5 +46,3 @@ private void Поиск_Click(System.Object sender, System.EventArgs e)
  CardDataCollection result = Session.CardManager.FindCards(searchQuery.GetXml());
 }
 ----
-
-*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

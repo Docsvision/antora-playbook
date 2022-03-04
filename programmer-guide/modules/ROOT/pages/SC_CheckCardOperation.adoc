@@ -2,7 +2,7 @@
 
 Пример проверки допустимости выполнения встроенной операции TakeToWorkOperation для карточки задания:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем контекст
 ObjectContext context = GetContext();
@@ -22,5 +22,3 @@ ObjectModel.Services.IAccessCheckingService accessService = context.GetService<O
 // Используем сервис для проверки разрешенности операции по состояниям и по правам доступа
 bool operationAllowed = stateService.IsOperationAllowed(Task.TakeToWorkOperation, task) && accessService.IsOperationAllowed(task, Task.TakeToWorkOperation);
 ----
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

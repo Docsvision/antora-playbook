@@ -2,47 +2,47 @@
 
 Результат проверки доступности операции для вида карточки и набора исполняемых ролей.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class AccessInfo
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:AccessInfo_CT.adoc[AccessInfo()] |Инициализирует новый экземпляр класса AccessInfo.
+|xref:api/DocsVision/BackOffice/ObjectModel/AccessInfo_CT.adoc[AccessInfo()] |Инициализирует новый экземпляр класса AccessInfo.
 |===
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:AccessInfo.Operations_PR.adoc[Operations] |Возвращает список всех доступных для карточки операций и признак разрешения запуска согласно ролевой модели.
-|xref:AccessInfo.Roles_PR.adoc[Roles] |Возвращает коллекцию ролей, у которых есть доступ к карточке.
+|xref:api/DocsVision/BackOffice/ObjectModel/AccessInfo.Operations_PR.adoc[Operations] |Возвращает список всех доступных для карточки операций и признак разрешения запуска согласно ролевой модели.
+|xref:api/DocsVision/BackOffice/ObjectModel/AccessInfo.Roles_PR.adoc[Roles] |Возвращает коллекцию ролей, у которых есть доступ к карточке.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:AccessInfo.Load_MT.adoc[Load(XmlReader)] |Загружает параметры доступа из XML.
-|xref:AccessInfo.Save_MT.adoc[Save(XmlWriter)] |Сохраняет параметры доступа в XML.
+|xref:api/DocsVision/BackOffice/ObjectModel/AccessInfo.Load_MT.adoc[Load(XmlReader)] |Загружает параметры доступа из XML.
+|xref:api/DocsVision/BackOffice/ObjectModel/AccessInfo.Save_MT.adoc[Save(XmlWriter)] |Сохраняет параметры доступа в XML.
 |===
 
 == Примеры
 
 Ниже приведен пример вывода в консоль информации по доступности операций документа с идентификатором 00000000-0000-0000-0000-000000000000
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -70,10 +70,3 @@ foreach (var item in accessInfo.Operations)
 }
 ----
 
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo_CT.adoc[AccessInfo - конструктор]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Operations_PR.adoc[AccessInfo.Operations - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Roles_PR.adoc[AccessInfo.Roles - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Load_MT.adoc[AccessInfo.Load - метод (XmlReader)]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/AccessInfo.Save_MT.adoc[AccessInfo.Save - метод (XmlWriter)]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

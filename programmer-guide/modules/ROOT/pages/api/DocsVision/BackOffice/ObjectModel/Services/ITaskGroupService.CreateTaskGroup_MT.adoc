@@ -2,12 +2,12 @@
 
 Создает группу заданий указанного вида.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskGroup CreateTaskGroup(KindsCardKind kind)
 ----
@@ -15,20 +15,18 @@ TaskGroup CreateTaskGroup(KindsCardKind kind)
 Параметры
 
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид группы заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид группы заданий
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Группа заданий
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Группа заданий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind.
@@ -38,7 +36,7 @@ kind::
 
 Ниже приведен пример создания группы вида "Группа заданий УД".
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -57,5 +55,3 @@ taskGroup.Description = "Подготовить финансовый отчет"
 taskGroup.MainInfo.Name = "Подготовить финансовый отчет";
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

@@ -2,12 +2,12 @@
 
 Выполняет пакетное обновление данных для указанных карточек.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void BatchUpdate(Guid[] cardIds)
 ----
@@ -15,12 +15,10 @@ public abstract void BatchUpdate(Guid[] cardIds)
 Параметры
 
 cardIds::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid][]
-  +
-  Массив идентификаторов карточек
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid][]
++
+Массив идентификаторов карточек
 
 == Заметки
 
 Данный метод допустим для карточек находящихся в режиме отложенных изменений. Метод осуществляет отправку изменений, накопившихся в карточках, на сервер одним пакетом.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

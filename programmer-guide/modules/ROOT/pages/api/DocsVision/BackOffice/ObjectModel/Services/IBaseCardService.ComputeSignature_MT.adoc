@@ -2,12 +2,12 @@
 
 Подписывает поток данных.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 byte[] ComputeSignature(Stream contentStream, X509Certificate2 certificate)
 ----
@@ -15,19 +15,15 @@ byte[] ComputeSignature(Stream contentStream, X509Certificate2 certificate)
 Параметры
 
 contentStream::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]
-  +
-  Подписываемый объект
+Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]
++
+Подписываемый объект
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат подписи
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат подписи
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
-  +
-  Закодированный в сообщение CMS/PKCS 7 поток. Если параметр certificate не задан, метод вернет хэш потока.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
++
+Закодированный в сообщение CMS/PKCS 7 поток. Если параметр certificate не задан, метод вернет хэш потока.

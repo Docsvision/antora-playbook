@@ -2,12 +2,12 @@
 
 Задает описатель прав на карточку.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void SetAccessControl(CardDataSecurity cardSecurity)
 ----
@@ -15,13 +15,13 @@ public void SetAccessControl(CardDataSecurity cardSecurity)
 Параметры
 
 cardSecurity::
-  Тип: xref:../Security/AccessControl/CardDataSecurity_CL.adoc[CardDataSecurity]
-  +
-  Описатель прав
+Тип: xref:api/DocsVision/Platform/Security/AccessControl/CardDataSecurity_CL.adoc[CardDataSecurity]
++
+Описатель прав
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Получение с сервера данных карточки с известным идентификатором
 CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
@@ -38,5 +38,3 @@ rights.SetAccessRule(rule);
 //Сохранение измененного описателя прав
 card.SetAccessControl(rights);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

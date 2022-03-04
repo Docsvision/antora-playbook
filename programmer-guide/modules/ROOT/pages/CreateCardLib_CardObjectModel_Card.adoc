@@ -4,20 +4,20 @@
 
 . Создаем класс объекта карточки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class NetstatSolutionCard : BaseCard
 ----
 . Для каждой секции добавляем статическое поле класса:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public static readonly ObjectProperty MainInfoProperty;
 public static readonly ObjectProperty JournalProperty;
 ----
 . Добавляем в класс свойства для доступа к данным секции:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public NetstatSolutionCardMainInfo MainInfo
 {
@@ -41,7 +41,7 @@ public ObjectCollection<NetstatSolutionCardJournal> Journal
 ----
 . Регистрируем связи между секциями карточки и их объектной моделью в статическом конструкторе класса:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static NetstatSolutionCard()
 {
@@ -55,5 +55,3 @@ static NetstatSolutionCard()
 == См. далее
 
 * xref:CreateCardLib_CardObjectModel_Mappers.adoc[Разработка преобразователя данных]
-
-*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

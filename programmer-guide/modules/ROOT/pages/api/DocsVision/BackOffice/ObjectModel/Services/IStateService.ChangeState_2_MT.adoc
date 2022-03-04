@@ -2,12 +2,12 @@
 
 Изменяет состояние карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ChangeState(BaseCard card, StatesState endState, bool startBusinessProcess, out string startBusinessProcessErrors)
 ----
@@ -15,20 +15,18 @@ void ChangeState(BaseCard card, StatesState endState, bool startBusinessProcess,
 Параметры
 
 card::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, для которой выполняется смена состояния
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, для которой выполняется смена состояния
 endState::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Конечное состояние карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Конечное состояние карточки
 startBusinessProcess::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Если true, то будут запущены бизнес-процессы, связанные с изменением состояния карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Если true, то будут запущены бизнес-процессы, связанные с изменением состояния карточки
 startBusinessProcessErrors::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Журнал ошибок запуска бизнес-процессов
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Журнал ошибок запуска бизнес-процессов

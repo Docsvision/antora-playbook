@@ -2,12 +2,12 @@
 
 Добавляет существующую группу заданий в предоставленный список заданий, без внесения изменений в историю карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskListTaskGroup CreateTaskGroup(TaskList taskList, TaskGroup taskGroup)
 ----
@@ -15,24 +15,22 @@ TaskListTaskGroup CreateTaskGroup(TaskList taskList, TaskGroup taskGroup)
 Параметры
 
 taskList::
-  Тип: xref:../TaskList_CL.adoc[TaskList]
-  +
-  Список заданий, в который будет добавлена группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[TaskList]
++
+Список заданий, в который будет добавлена группа заданий
 taskGroup::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Добавляемая группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Добавляемая группа заданий
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskListTaskGroup_CL.adoc[TaskListTaskGroup]
-  +
-  Добавленная группа заданий
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskListTaskGroup_CL.adoc[TaskListTaskGroup]
++
+Добавленная группа заданий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskList или taskGroup.
@@ -44,7 +42,7 @@ taskGroup::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -69,5 +67,3 @@ taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
 taskListService.CreateTaskGroup(taskList, taskGroup);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService - интерфейс]

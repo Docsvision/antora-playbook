@@ -2,12 +2,12 @@
 
 Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе, и ярлык на карточку.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public DVFileCard CreateDVFileFromFSFileInFolder(FSFile File, DVFolder Folder, ProcessVariable OutShortcut)
 ----
@@ -15,23 +15,19 @@ public DVFileCard CreateDVFileFromFSFileInFolder(FSFile File, DVFolder Folder, P
 Параметры
 
 File::
-  Тип: [.keyword .apiname]#FSFile#
-  +
-  Сущность файла, полученного через шлюз к файловой системе
+Тип: [.keyword .apiname]#FSFile#
++
+Сущность файла, полученного через шлюз к файловой системе
 Folder::
-  Тип: [.keyword .apiname]#DVFolder#
-  +
-  Папка для размещения ярлыка
+Тип: [.keyword .apiname]#DVFolder#
++
+Папка для размещения ярлыка
 OutShortcut::
-  Тип: xref:../Runtime/ProcessVariable_CL.adoc[ProcessVariable]
-  +
-  Переменная бизнес-процесса, в значение которой будет записан созданный ярлык. Если не требуется - передать null.
+Тип: xref:api/DocsVision/Workflow/Runtime/ProcessVariable_CL.adoc[ProcessVariable]
++
+Переменная бизнес-процесса, в значение которой будет записан созданный ярлык. Если не требуется - передать null.
 
-Возвращаемое значение
-
-::
-  Тип: [.keyword .apiname]#DVFileCard#
-  +
-  Карточка файла с версиями
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]
+Возвращаемое значение::
+Тип: [.keyword .apiname]#DVFileCard#
++
+Карточка файла с версиями

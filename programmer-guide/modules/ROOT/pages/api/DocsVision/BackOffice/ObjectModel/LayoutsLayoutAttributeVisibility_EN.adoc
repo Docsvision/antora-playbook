@@ -2,19 +2,19 @@
 
 Определяет режим отображения атрибута разметки.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public enum LayoutsLayoutAttributeVisibility
 ----
 
 == Члены
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя члена |Описание
 |Visible |Видимый.
@@ -30,7 +30,7 @@ public enum LayoutsLayoutAttributeVisibility
 
 Ниже приведен пример установки видимости элемента разметки
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -54,5 +54,3 @@ LayoutsLayoutAttribute layoutsLayoutAttribute = layoutService.GetLayoutAttribute
 layoutsLayoutAttribute.Visibility = LayoutsLayoutAttributeVisibility.Invisible;
 objectContext.SaveObject(layoutsProperty);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

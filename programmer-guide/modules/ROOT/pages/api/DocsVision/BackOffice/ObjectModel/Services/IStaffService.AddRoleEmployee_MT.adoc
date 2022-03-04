@@ -2,12 +2,12 @@
 
 Добавляет сотрудника в роль.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffContain AddRoleEmployee(StaffRole role, StaffEmployee employee)
 ----
@@ -15,24 +15,22 @@ StaffContain AddRoleEmployee(StaffRole role, StaffEmployee employee)
 Параметры
 
 role::
-  Тип: xref:../StaffRole_CL.adoc[StaffRole]
-  +
-  Роль
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffRole_CL.adoc[StaffRole]
++
+Роль
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, добавляемый в роль
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, добавляемый в роль
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffContain_CL.adoc[StaffContain]
-  +
-  Контейнер роли
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffContain_CL.adoc[StaffContain]
++
+Контейнер роли
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр role или employee.
@@ -42,7 +40,7 @@ employee::
 
 Далее приведен пример добавления роли указанному сотруднику
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -54,5 +52,3 @@ StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("000000
 StaffContain result = staffService.AddRoleEmployee(role, employee);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

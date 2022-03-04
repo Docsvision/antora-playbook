@@ -2,12 +2,12 @@
 
 Отменяет доступ указанного сотрудника к зашифрованному файлу.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RemoveCryptAccount(X509Certificate2 certificate, Guid fileId, string accountName)
 ----
@@ -15,21 +15,21 @@ void RemoveCryptAccount(X509Certificate2 certificate, Guid fileId, string accoun
 Параметры
 
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат шифрования, которым зашифрован файл
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат шифрования, которым зашифрован файл
 fileId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор зашифрованного файла
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор зашифрованного файла
 accountName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Учетная запись сотрудника, у которого отбирается доступ к зашифрованному файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Учетная запись сотрудника, у которого отбирается доступ к зашифрованному файлу
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр certificate или accountName.
@@ -39,5 +39,3 @@ accountName::
 == Заметки
 
 В том случае, если доступ к файлу имеет только владелец, то файл будет расшифрован.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService - интерфейс]

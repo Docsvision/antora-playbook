@@ -1,24 +1,24 @@
 = IStaffService.ActualizeEmployeesState - метод
 
-Актуализирует состояние сотрудника в соответствии с параметрами, заданными в [.dfn .term]_Справочнике сотрудников_.
+Актуализирует состояние сотрудника в соответствии с параметрами, заданными в _Справочнике сотрудников_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ActualizeEmployeesState()
 ----
 
 == Заметки
 
-Данный метод выполняет блокировку или разблокировку сотрудника, основываясь на значении периода его отсутствия, определенном в [.dfn .term]_Справочнике сотрудников_. Проверка осуществляется для всех сотрудников, присутствующих в [.dfn .term]_Справочнике сотрудников_. Данный метод используется в бизнес-процессе "Процесс актуализации состояния сотрудников".
+Данный метод выполняет блокировку или разблокировку сотрудника, основываясь на значении периода его отсутствия, определенном в _Справочнике сотрудников_. Проверка осуществляется для всех сотрудников, присутствующих в _Справочнике сотрудников_. Данный метод используется в бизнес-процессе "Процесс актуализации состояния сотрудников".
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 ////Инициализация контекста объектов
 
@@ -28,5 +28,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 // Осуществление актуализации
 staffService.ActualizeEmployeesState();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

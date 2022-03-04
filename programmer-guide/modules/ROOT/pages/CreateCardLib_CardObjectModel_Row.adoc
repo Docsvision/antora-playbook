@@ -6,13 +6,13 @@
 
 . Создаем класс строки секции, используя в качестве базового класс [.keyword .apiname]#BaseCardSectionRow# - базовый класс строчки секции карточки библиотеки "Базовые объекты":
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class NetstatSolutionCardMainInfo : BaseCardSectionRow
 ----
 . Добавляем в класс статическое поле для каждого поля секции карточки:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public static readonly ObjectProperty NameProperty; //Название узла
 public static readonly ObjectProperty AddressProperty; //IP-адрес узла
@@ -20,7 +20,7 @@ public static readonly ObjectProperty AddressProperty; //IP-адрес узла
 ----
 . Добавляем в класс свойства, по которым будут доступны значения соответствующих полей:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public string Name
  {
@@ -36,7 +36,7 @@ public string Name
 ----
 . В статическом конструкторе класса регистрируем связи между полями карточки и объектной моделью:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static NetstatSolutionCardMainInfo()
 {
@@ -51,5 +51,3 @@ static NetstatSolutionCardMainInfo()
 == См. далее
 
 * xref:CreateCardLib_CardObjectModel_Card.adoc[Разработка объектной модели карточки]
-
-*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

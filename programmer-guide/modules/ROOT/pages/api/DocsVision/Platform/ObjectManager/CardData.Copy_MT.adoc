@@ -2,22 +2,20 @@
 
 Серверное копирование данных карточек.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract CardData Copy()
 ----
 
-Возвращаемое значение
-
-::
-  Тип: xref:CardData_CL.adoc[CardData]
-  +
-  Экземпляр карточки
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData]
++
+Экземпляр карточки
 
 == Заметки
 
@@ -27,7 +25,7 @@ public abstract CardData Copy()
 
 Ниже приведен пример использования метода [.keyword .apiname]#Copy# при создании копии карточки с изменением описания
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -38,5 +36,3 @@ CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-
 CardData newCardData = userSession.CardManager.GetCardData(cardData.Id, false).Copy();
 newCardData.Description = newCardData.Description + " Copy";
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

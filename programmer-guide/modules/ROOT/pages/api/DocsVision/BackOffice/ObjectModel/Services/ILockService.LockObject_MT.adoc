@@ -2,12 +2,12 @@
 
 Устанавливает временную блокировку на объект.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void LockObject<T>(T obj) where T : ObjectBase
 ----
@@ -15,19 +15,17 @@ void LockObject<T>(T obj) where T : ObjectBase
 Параметры типа
 
 T::
-  Тип блокируемого объекта
+Тип блокируемого объекта
 
 Параметры
 
 obj::
-  Тип: Т
-  +
-  Блокируемый объект
+Тип: Т
++
+Блокируемый объект
 
 == Заметки
 
-Для установки постоянной блокировки используйте метод xref:../../../Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[LockObject].
+Для установки постоянной блокировки используйте метод xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[LockObject].
 
 Все блокировки, установленные при помощи [.keyword .apiname]#ILockService.LockObject#, автоматически снимаются при закрытии контекста объектов.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService - интерфейс]

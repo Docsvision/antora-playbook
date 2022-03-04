@@ -27,13 +27,13 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 instanceId::
-  Идентификатор карточки
+Идентификатор карточки
 recordStatus::
-  Устанавливаемое состояние карточки:
-  +
-  * OBJECT_STATUS_OPERATIVE - обычный режим.
+Устанавливаемое состояние карточки:
++
+* OBJECT_STATUS_OPERATIVE - обычный режим.
   * OBJECT_STATUS_RECORD - карточка записываться. Действует ограничение на удаление карточки в данном состоянии.
   * OBJECT_STATUS_WITHDRAWN. Режим не используется.
 
@@ -75,5 +75,3 @@ body = """<?xml version="1.0" encoding="utf-8"?>
 # Отправляем SOAP-сообщение
 response = session.post(url, data=body)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

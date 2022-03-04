@@ -2,12 +2,12 @@
 
 Добавляет итоговое состояние документа в Маршрут согласования.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/ApprovalDesigner/ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 ApprovalPathState AddDocumentState(ApprovalPath approvalPath, KindsCardKind kind, StatesState state)
 ----
@@ -15,23 +15,19 @@ ApprovalPathState AddDocumentState(ApprovalPath approvalPath, KindsCardKind kind
 Параметры
 
 approvalPath::
-  Тип: xref:../ApprovalPath_CL.adoc[ApprovalPath]
-  +
-  Маршрут согласования
+Тип: xref:api/DocsVision/ApprovalDesigner/ObjectModel//ApprovalPath_CL.adoc[ApprovalPath]
++
+Маршрут согласования
 kind::
-  Тип: xref:../../../BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки Документ
 state::
-  Тип: xref:../../../BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
-  +
-  Состояние документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Состояние документа
 
-Возвращаемое значение
-
-::
-  Тип: xref:../ApprovalPathState_CL.adoc[ApprovalPathState]
-  +
-  Добавленное состояние документа
-
-*На уровень выше:* xref:../../../../../api/DocsVision/ApprovalDesigner/ObjectModel/Services/IApprovalPathService_IN.adoc[IApprovalPathService - интерфейс]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/ApprovalDesigner/ObjectModel/ApprovalPathState_CL.adoc[ApprovalPathState]
++
+Добавленное состояние документа

@@ -2,12 +2,12 @@
 
 Установка параметров стратегии ведения журнала событий.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void SetLogStrategy(LogStrategy logStrategy, ClearLogStrategy clearStrategy, int clearLogMaxCount, int clearLogCutCount, int clearLogCutDays);
 ----
@@ -15,24 +15,22 @@ public abstract void SetLogStrategy(LogStrategy logStrategy, ClearLogStrategy cl
 Параметры
 
 logStrategy::
-  Тип: xref:LogStrategy_EN.adoc[LogStrategy]
-  +
-  Стратегия записи сообщений в журнал.
+Тип: xref:api/DocsVision/Platform/ObjectManager/LogStrategy_EN.adoc[LogStrategy]
++
+Стратегия записи сообщений в журнал.
 clearStrategy::
-  Тип: xref:ClearLogStrategy_EN.adoc[ClearLogStrategy]
-  +
-  Стратегия очистки журнала.
+Тип: xref:api/DocsVision/Platform/ObjectManager/ClearLogStrategy_EN.adoc[ClearLogStrategy]
++
+Стратегия очистки журнала.
 clearLogMaxCount::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Максимальное количество записей в журнале
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Максимальное количество записей в журнале
 clearLogCutCount::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Количество сохраняемых после чистки записей
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Количество сохраняемых после чистки записей
 clearLogCutDays::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Максимальное количество дней хранения записей в журнале
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager - класс]
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Максимальное количество дней хранения записей в журнале

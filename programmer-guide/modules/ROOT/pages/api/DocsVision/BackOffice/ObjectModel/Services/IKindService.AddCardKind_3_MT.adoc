@@ -2,12 +2,12 @@
 
 Добавляет к приведенной коллекции видов карточке подвид с указанным названием и возвращает на него ссылку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 KindsCardKind AddCardKind(ObjectCollection<KindsCardKind> cardKinds, string name)
 ----
@@ -15,24 +15,22 @@ KindsCardKind AddCardKind(ObjectCollection<KindsCardKind> cardKinds, string name
 Параметры
 
 cardKinds::
-  Тип: xref:../../../Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<KindsCardKind>
-  +
-  Коллекция видов карточек
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<KindsCardKind>
++
+Коллекция видов карточек
 name::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название нового вида карточек
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название нового вида карточек
 
-Возвращаемое значение
-
-::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Созданный вид карточки
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Созданный вид карточки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр cardKinds.
@@ -40,6 +38,4 @@ name::
 
 == Заметки
 
-Коллекция видов карточек может быть получена, например, из свойства типа карточки: xref:../KindsCardType.Kinds_PR.adoc[KindsCardType.Kinds].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]
+Коллекция видов карточек может быть получена, например, из свойства типа карточки: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardType.Kinds_PR.adoc[KindsCardType.Kinds].

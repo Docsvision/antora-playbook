@@ -2,12 +2,12 @@
 
 Добавляет к карточке бизнес-процесс с переданным идентификатором.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardProcess AddBusinessProcess(BaseCard baseCard, Guid processId, KindsCardProcess kindProcessSettings)
 ----
@@ -15,31 +15,27 @@ BaseCardProcess AddBusinessProcess(BaseCard baseCard, Guid processId, KindsCardP
 Параметры
 
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка к которой будет добавлен бизнес-процесс
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка к которой будет добавлен бизнес-процесс
 processId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор экземпляра бизнес-процесса
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор экземпляра бизнес-процесса
 kindProcessSettings::
-  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
-  +
-  Параметры экземпляра бизнес-процесса
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
++
+Параметры экземпляра бизнес-процесса
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseCardProcess_CL.adoc[BaseCardProcess]
-  +
-  Предоставляет ссылку на экземпляр и настройки бизнес-процесса
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardProcess_CL.adoc[BaseCardProcess]
++
+Предоставляет ссылку на экземпляр и настройки бизнес-процесса
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processId.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

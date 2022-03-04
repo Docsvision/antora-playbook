@@ -2,28 +2,28 @@
 
 Снимает с объекта собственную блокировку.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void UnlockObject(ObjectBase objectInstance)
 ----
 
-Параметры
+*Параметры*
 
 objectInstance::
-  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
-  +
-  Объект, с которого снимается блокировка
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
++
+Объект, с которого снимается блокировка
 
 == Примеры
 
 Приведенный далее пример демонстрирует снятие с карточки собственной блокировки.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -37,5 +37,3 @@ if(objectContext.GetObjectLockInfo(card).Status = ObjectLockStatus.OwnerLocked)
  objectContext.UnlockObject(card);
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

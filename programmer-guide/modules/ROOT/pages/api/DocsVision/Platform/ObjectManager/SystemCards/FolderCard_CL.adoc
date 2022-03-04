@@ -2,19 +2,19 @@
 
 Специализированный тип отражающий семантику объекта 'Карточка папок'.
 
-* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class FolderCard : SystemCard
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Folders |Возвращает коллекцию папок верхнего уровня.
@@ -25,13 +25,13 @@ public abstract class FolderCard : SystemCard
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CreateFolder(Guid, String) |Создает в указанной папке с подпапку с указанным именем.
 |CreateIcon(Icon, String) |Загружает иконку с описанием в коллекцию иконок.
 |CreateShortcut(Guid, Guid, Boolean) |Создает для заданной карточки ярлык в указанной папке.
-|xref:FolderCard.DeleteCard_MT.adoc[DeleteCard(Guid, Boolean)] |Помечает к удалению, либо удаляет карточку с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard.DeleteCard_MT.adoc[DeleteCard(Guid, Boolean)] |Помечает к удалению, либо удаляет карточку с заданным идентификатором.
 |DeleteFolder(Guid, Boolean) |Помечает к удалению, либо удаляет папку с указанным идентификатором.
 |DeleteIcon(Guid) |Удаляет заданную иконку.
 |DeleteShortcut(Guid, Boolean) |Помечает к удалению, либо удаляет ярлык с указанным идентификатором.
@@ -47,7 +47,3 @@ public abstract class FolderCard : SystemCard
 |RestoreShortcut(Guid) |Восстанавливает ярлык помеченный к удалению.
 |ShortcutExists(Guid) |Проверяет существование ярлыка с заданным идентификатором.
 |===
-
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard.DeleteCard_MT.adoc[FolderCard.DeleteCard - метод (Guid, Boolean)]* +
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]

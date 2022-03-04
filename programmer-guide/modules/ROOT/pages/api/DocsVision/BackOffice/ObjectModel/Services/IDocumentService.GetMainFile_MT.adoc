@@ -2,12 +2,12 @@
 
 Возвращает карточку файл с версиями из основного файла документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 VersionedFileCard GetMainFile(DocumentFile file)
 ----
@@ -15,20 +15,18 @@ VersionedFileCard GetMainFile(DocumentFile file)
 Параметры
 
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Основной файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Основной файл документа
 
-Возвращаемое значение
-
-::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр file.
@@ -38,7 +36,7 @@ file::
 
 Ниже приведен пример получения файла с версиями из первого основного файла документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -51,5 +49,3 @@ Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-00
 // Получение файла с версиями
 VersionedFileCard versionedFileCard = documentService.GetMainFile(document.Files.First(t => t.FileType = DocumentFileType.Main));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -28,11 +28,11 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Lab
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 xmlLabel::
-  Данные добавляемой цветовой метки
+Данные добавляемой цветовой метки
 
-Строка [.keyword]*xmlLabel* должна соответствовать формату элемента [.keyword]*CardLabelInfo*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *xmlLabel* должна соответствовать формату элемента *CardLabelInfo*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -89,5 +89,3 @@ body = """<?xml version="1.0" encoding="utf-8"?>
 # Отправляем SOAP-сообщение
 response = session.post(url, data=body)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Labels.adoc[Цветовые метки карточки]

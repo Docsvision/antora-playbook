@@ -2,12 +2,12 @@
 
 Изменяет состояние карточки следуя предоставленному переходу автомата состояний.
 
-* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void ChangeState(StatesStateMachineBranch branch)
 ----
@@ -15,13 +15,13 @@ public void ChangeState(StatesStateMachineBranch branch)
 Параметры
 
 branch::
-  Тип: xref:../ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
-  +
-  Переход автомата состояний
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
++
+Переход автомата состояний
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
@@ -35,7 +35,7 @@ branch::
 
 Ниже приведем пример скрипта СУБП, выполняющего смену статуса карточки на "Согласован"
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System.Collections.Generic;
 using System.Linq;
@@ -55,5 +55,3 @@ private void Button_Click(System.Object sender, System.EventArgs e)
  this.CardControl.ChangeState(statesStateMachineBranchLines);
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl - класс]

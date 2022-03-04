@@ -1,15 +1,15 @@
 = Доступ к элементам ленты карточки
 
-Лента карточки - сущность типа https://documentation.devexpress.com/#WindowsForms/clsDevExpressXtraBarsRibbonRibbonControltopic[RibbonControl], доступ к которой обеспечивает одноименное свойство класса xref:../api/DocsVision/BackOffice/WinForms/ICustomizableControl_IN.adoc[ICustomizableControl]:
+Лента карточки - сущность типа https://documentation.devexpress.com/#WindowsForms/clsDevExpressXtraBarsRibbonRibbonControltopic[RibbonControl], доступ к которой обеспечивает одноименное свойство класса xref:..xref:api/DocsVision/BackOffice/WinForms/ICustomizableControl_IN.adoc[ICustomizableControl]:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 RibbonControl ribbonControl = (CardControl as ICustomizableControl).RibbonControl;
 ----
 
-Класс [.keyword .apiname]#RibbonControl# предоставляет доступ к существующим элементам ленты (страницы, группы и элементы), а также позволяет добавлять новые. В качестве примера использования данной сущности рассмотрим сценарий добавления на ленту карточки [.dfn .term]_Документ_ новой кнопки на страницу "Документ" в группу "Общие". Добавление может осуществляться при загрузке карточки при соблюдении условий, или при выполнении определенных действий с карточкой, или иной бизнес-логики, когда стандартных механизмов (например, ролевой модели) недостаточно для реализации сценария. В приведенном далее примере добавление нового элемента - кнопки, выполняется при загрузке карточки.
+Класс [.keyword .apiname]#RibbonControl# предоставляет доступ к существующим элементам ленты (страницы, группы и элементы), а также позволяет добавлять новые. В качестве примера использования данной сущности рассмотрим сценарий добавления на ленту карточки _Документ_ новой кнопки на страницу "Документ" в группу "Общие". Добавление может осуществляться при загрузке карточки при соблюдении условий, или при выполнении определенных действий с карточкой, или иной бизнес-логики, когда стандартных механизмов (например, ролевой модели) недостаточно для реализации сценария. В приведенном далее примере добавление нового элемента - кнопки, выполняется при загрузке карточки.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Обработчик загрузки карточки нужно добавить через Конструктор разметок
 private void CardDocument_CardLoaded(System.Object sender, System.EventArgs e)
@@ -37,5 +37,3 @@ private void MyRibbonButton_ItemClick(object sender, DevExpress.XtraBars.ItemCli
  MessageBox.Show("Выполняется сценарий нажатия кнопки 'Новая кнопка'");
 }
 ----
-
-*На уровень выше:* xref:../pages/dm_scripts.adoc[Разработка скриптов карточки]

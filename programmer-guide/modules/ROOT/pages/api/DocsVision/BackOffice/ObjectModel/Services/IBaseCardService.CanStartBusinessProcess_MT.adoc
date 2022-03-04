@@ -2,12 +2,12 @@
 
 Проверяет допустимость запуска бизнес-процесса и возвращает объект содержащий ошибку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StartBusinessProcessErrorInfo CanStartBusinessProcess(BaseCard baseCard, KindsCardProcess processSettings)
 ----
@@ -15,24 +15,22 @@ StartBusinessProcessErrorInfo CanStartBusinessProcess(BaseCard baseCard, KindsCa
 Параметры
 
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Проверяемая карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Проверяемая карточка
 processSettings::
-  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
-  +
-  Настройки бизнес-процесса
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
++
+Настройки бизнес-процесса
 
-Возвращаемое значение
-
-::
-  Тип: xref:Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]
-  +
-  Содержимое ошибки
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]
++
+Содержимое ошибки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processSettings.
@@ -40,6 +38,4 @@ processSettings::
 
 == Заметки
 
-Метод в любом случае вернет объект [.keyword .apiname]#StartBusinessProcessErrorInfo#, но в случае отсутствия ошибки - StartBusinessProcessErrorInfo.ErrorType будет равен xref:Entities/BusinessProcessErrorType_EN.adoc[BusinessProcessErrorType.None]. Фактически возвращается первая встреченная ошибка, таким образом необходимо произвести исправление и повторить проверку.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]
+Метод в любом случае вернет объект [.keyword .apiname]#StartBusinessProcessErrorInfo#, но в случае отсутствия ошибки - StartBusinessProcessErrorInfo.ErrorType будет равен xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BusinessProcessErrorType_EN.adoc[BusinessProcessErrorType.None]. Фактически возвращается первая встреченная ошибка, таким образом необходимо произвести исправление и повторить проверку.

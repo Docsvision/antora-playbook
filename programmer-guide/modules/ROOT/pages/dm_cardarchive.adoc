@@ -4,7 +4,7 @@
 
 За архивацию карточек на уровне базового API отвечает метод [.keyword .apiname]#Archive#, который предоставляется классом карточки - [.keyword .apiname]#CardData#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем данные карточки
 CardData cardData = userSession.CardManager.GetCardData(cardId);
@@ -15,7 +15,7 @@ cardData.Archive(ArchiveOptions.None);
 
 Второй метод класса [.keyword .apiname]#CardData# позволяет извлечь карточку из архива:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 cardData.Dearchive(ArchiveOptions.None)
 ----
@@ -32,5 +32,3 @@ cardData.Dearchive(ArchiveOptions.None)
 == См. далее
 
 * xref:dm_search.adoc[Поиск]
-
-*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

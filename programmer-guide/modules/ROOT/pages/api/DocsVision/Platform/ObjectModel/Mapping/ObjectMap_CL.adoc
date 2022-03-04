@@ -2,19 +2,19 @@
 
 Поставляет данные для преобразователя данных.
 
-* [.keyword]*Пространство имен:* xref:Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class ObjectMap
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ObjectMap() |Инициализирует новый экземпляр класса ObjectMap.
@@ -22,7 +22,7 @@ public class ObjectMap
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Collections |Возвращает коллекцию секций.
@@ -34,7 +34,7 @@ public class ObjectMap
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Collection(ObjectProperty, Guid) |Связывает свойство с секцией.
@@ -46,7 +46,7 @@ public class ObjectMap
 
 Ниже приведен пример части преобразователя данных для карточки "Документ", в котором выполняется привязка идентификатора секции к свойству Document.MainInfoProperty
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 protected override ObjectMap GetObjectMap()
 {
@@ -60,5 +60,3 @@ protected override ObjectMap GetObjectMap()
  return objectMap;
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping - пространство имен]

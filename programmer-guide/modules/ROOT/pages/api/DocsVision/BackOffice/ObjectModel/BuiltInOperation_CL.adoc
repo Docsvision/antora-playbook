@@ -2,19 +2,19 @@
 
 Предоставляет методы регистрации встроенных операций и получения их свойств.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class BuiltInOperation
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CardEditModeOnly |Определяет признак того, что операция доступна только в режиме редактирования.
@@ -26,7 +26,7 @@ public sealed class BuiltInOperation
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Register(Dictionary<Int32, String>, Guid, Guid) |Регистрирует операцию в коллекции. CardEditModeOnly устанавливается в true.
@@ -37,5 +37,3 @@ public sealed class BuiltInOperation
 == Заметки
 
 В классе BuiltInOperation используется статический список для хранения зарегистрированных операций, и последующего обращения к ним. Количество зарегистрированных операций ограничено и составляет 65535.
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

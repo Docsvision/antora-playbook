@@ -2,7 +2,7 @@
 
 Пример создания дочернего задания связанного с карточкой документа:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем контекст
 ObjectContext context = GetContext();
@@ -45,5 +45,3 @@ Task task = TaskService.CreateChildTask(parentTask, taskKind, document, taskList
 // Сохраняем изменения
 context.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

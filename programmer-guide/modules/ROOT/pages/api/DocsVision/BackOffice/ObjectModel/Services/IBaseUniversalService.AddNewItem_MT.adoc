@@ -2,12 +2,12 @@
 
 Создает новую строку в указанном узле справочника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseUniversalItem AddNewItem(BaseUniversalItemType itemType)
 ----
@@ -15,20 +15,18 @@ BaseUniversalItem AddNewItem(BaseUniversalItemType itemType)
 Параметры
 
 itemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел справочника
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел справочника
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseUniversalItem_CL.adoc[BaseUniversalItem]
-  +
-  Добавленная строка
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItem_CL.adoc[BaseUniversalItem]
++
+Добавленная строка
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр itemType.
@@ -38,7 +36,7 @@ itemType::
 
 В примере, сервис используется для добавления строки в существующий узел
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -54,5 +52,3 @@ baseUniversalItem.Name = "Строка справочника";
 baseUniversalItem.Description = "Строка справочника созданная из кода";
 objectContext.SaveObject<BaseUniversalItem>(baseUniversalItem);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

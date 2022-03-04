@@ -2,12 +2,12 @@
 
 Создает дочерний узел в указанном узле справочника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseUniversalItemType AddNewItemType(BaseUniversalItemType parentItemType)
 ----
@@ -15,16 +15,14 @@ BaseUniversalItemType AddNewItemType(BaseUniversalItemType parentItemType)
 Параметры
 
 parentItemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Родительский узел
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Родительский узел
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Добавленный узел
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Добавленный узел
 
 == Заметки
 
@@ -32,7 +30,7 @@ parentItemType::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -50,5 +48,3 @@ baseUniversalItemType.UseOrder = true;
 //сохранение
 objectContext.SaveObject<BaseUniversalItemType>(baseUniversalItemType);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

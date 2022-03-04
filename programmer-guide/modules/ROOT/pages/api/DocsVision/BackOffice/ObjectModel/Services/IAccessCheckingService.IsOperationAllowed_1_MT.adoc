@@ -2,12 +2,12 @@
 
 Возвращает признак разрешения выполнения операции для заданной карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool IsOperationAllowed(BaseCard card, StatesOperation operation)
 ----
@@ -15,23 +15,19 @@ bool IsOperationAllowed(BaseCard card, StatesOperation operation)
 Параметры
 
 card::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка из библиотеки "Базовые объекты"
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка из библиотеки "Базовые объекты"
 operation::
-  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
-  +
-  Встроенная операция
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
++
+Встроенная операция
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - операция разрешена, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - операция разрешена, иначе false
 
 == Заметки
 
 Если операция не запрещена, то она отмечается разрешенной.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService_IN.adoc[IAccessCheckingService - интерфейс]

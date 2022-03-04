@@ -2,12 +2,12 @@
 
 Изменяет состояние карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ChangeState(BaseCard card, StatesState endState)
 ----
@@ -15,17 +15,17 @@ void ChangeState(BaseCard card, StatesState endState)
 Параметры
 
 card::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, для которой выполняется смена состояния
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, для которой выполняется смена состояния
 endState::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Новое состояние карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Новое состояние карточки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр card или endState.
@@ -33,7 +33,7 @@ endState::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -46,5 +46,3 @@ Task card = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-0000
 // Смена состояния на состояние Завершено
 stateService.ChangeState(card, stateService.FindStateByBuiltIn(Task.CompletedState, card));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

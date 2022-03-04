@@ -2,12 +2,12 @@
 
 Приемка указанного задания.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void AcceptTask(Task task)
 ----
@@ -15,13 +15,13 @@ void AcceptTask(Task task)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Объектная модель задания, для которого выполняется смена состояния
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Объектная модель задания, для которого выполняется смена состояния
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task.
@@ -30,6 +30,4 @@ task::
 
 == Заметки
 
-При вызове метода, непосредственная смена состояния задания не производится. Для изменения состояния карточки необходимо дополнительно использовать метод xref:IStateService.ChangeState_MT.adoc[IStateService.ChangeState].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]
+При вызове метода, непосредственная смена состояния задания не производится. Для изменения состояния карточки необходимо дополнительно использовать метод xref:api/DocsVision/BackOffice/ObjectModel/Services/IStateService.ChangeState_MT.adoc[IStateService.ChangeState].

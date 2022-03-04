@@ -2,12 +2,12 @@
 
 Определяет возможность выполнения встроенной операции, применительно к определенной карточке.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool IsOperationAllowed(BuiltInOperation builtInOperation, BaseCard baseCard)
 ----
@@ -15,24 +15,22 @@ bool IsOperationAllowed(BuiltInOperation builtInOperation, BaseCard baseCard)
 Параметры
 
 builtInOperation::
-  Тип: xref:../BuiltInOperation_CL.adoc[BuiltInOperation]
-  +
-  Встроенная операция
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BuiltInOperation_CL.adoc[BuiltInOperation]
++
+Встроенная операция
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, для которой выполняется проверка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, для которой выполняется проверка
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - операция допустима, иначе - false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - операция допустима, иначе - false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInOperation или baseCard.
@@ -40,13 +38,13 @@ baseCard::
 
 == Заметки
 
-Доступность операции проверяется исключительно на основе данных [.dfn .term]_конструктора состояние_.
+Доступность операции проверяется исключительно на основе данных _конструктора состояние_.
 
 == Примеры
 
 В примере демонстрируется использование метода [.keyword .apiname]#IsOperationAllowed# для определения возможности делегирования задания другому сотруднику
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -59,5 +57,3 @@ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-0000
 // Проверка возможности совершения операции делегирования
 bool isValid = stateService.IsOperationAllowed(Task.DelegateOperation, task);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

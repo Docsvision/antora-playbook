@@ -2,12 +2,12 @@
 
 Удаляет сотрудника контрагента
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void DeleteEmployee(PartnersEmployee employee)
 ----
@@ -15,13 +15,13 @@ void DeleteEmployee(PartnersEmployee employee)
 Параметры
 
 employee::
-  Тип: xref:../PartnersEmployee_CL.adoc[PartnersEmployee]
-  +
-  Сотрудник контрагента
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/PartnersEmployee_CL.adoc[PartnersEmployee]
++
+Сотрудник контрагента
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
@@ -29,7 +29,7 @@ employee::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -42,5 +42,3 @@ PartnersEmployee partnersEmployee = partnersService.Get(new Guid("00000000-0000-
 // Удаляем сотрудника
 partnersService.DeleteEmployee(partnersEmployee);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService - интерфейс]

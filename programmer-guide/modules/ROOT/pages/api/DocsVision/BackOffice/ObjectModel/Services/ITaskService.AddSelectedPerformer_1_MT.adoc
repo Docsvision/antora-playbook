@@ -2,12 +2,12 @@
 
 Добавляет выбранного исполнителя задания в формате поискового слова.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, Guid searchWordId)
 ----
@@ -15,24 +15,22 @@ TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, Guid searchWor
 Параметры
 
 mainInfo::
-  Тип: xref:../TaskMainInfo_CL.adoc[TaskMainInfo]
-  +
-  Основная информация карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskMainInfo_CL.adoc[TaskMainInfo]
++
+Основная информация карточки
 searchWordId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор поискового слова
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор поискового слова
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]
-  +
-  Сущность выбранного исполнителя
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]
++
+Сущность выбранного исполнителя
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр mainInfo или searchWordId.
@@ -40,6 +38,4 @@ searchWordId::
 
 == Заметки
 
-Идентификаторы поисковых слов могут быть получены из xref:Entities/PerformerSearchWordsManager_CL.adoc[PerformerSearchWordsManager].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]
+Идентификаторы поисковых слов могут быть получены из xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/PerformerSearchWordsManager_CL.adoc[PerformerSearchWordsManager].

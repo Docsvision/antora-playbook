@@ -2,19 +2,19 @@
 
 Определяет режим доступа к операции.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public enum AccessInfoOperationResult
 ----
 
 == Члены
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя члена |Описание
 |None |Не задан (не запрещен или разрешен).
@@ -30,7 +30,7 @@ AccessInfoOperationResult получает значение в результа�
 
 Ниже приведен пример получения AccessInfoOperationResult из информации по первой операции документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -49,5 +49,3 @@ accessInfo.Load(new XmlTextReader(new StringReader(accessInfoString)));
 //получение результата по первой операции
 AccessInfoOperationResult result = accessInfo.Operations.FirstOrDefault().Result;
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

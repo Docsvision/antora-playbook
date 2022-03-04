@@ -2,32 +2,30 @@
 
 Задает или возвращает сотрудника, который является руководителем организации.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public StaffEmployee Manager { get; set; }
 ----
 
-Значение свойства
-
-::
-  Тип: xref:StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Руководитель организации/подразделения
+Значение свойства::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Руководитель организации/подразделения
 
 == Заметки
 
-Руководитель подразделения или организации может быть задан, например, в [.dfn .term]_Справочнике сотрудников_.
+Руководитель подразделения или организации может быть задан, например, в _Справочнике сотрудников_.
 
 == Примеры
 
 В примере выполняется проверка того, что текущий сотрудника является руководителем подразделения, в котором числиться.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -41,5 +39,3 @@ StaffEmployee employee = staffService.GetCurrentEmployee();
 StaffEmployee manager = employee.Unit.Manager;
 bool isManager = (employee = manager);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit - класс]

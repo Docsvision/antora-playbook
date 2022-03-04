@@ -2,12 +2,12 @@
 
 Определяет возможность добавления основного файла в документ.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanAttachMainFile(Document document, VersionedFileCard versionedFileCard)
 ----
@@ -15,19 +15,15 @@ bool CanAttachMainFile(Document document, VersionedFileCard versionedFileCard)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, для которого определяется возможность добавления основного файла
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, для которого определяется возможность добавления основного файла
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка основного файла
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка основного файла
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - указанный файл может быть добавлен как основной, иначе - false
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - указанный файл может быть добавлен как основной, иначе - false

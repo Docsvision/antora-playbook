@@ -2,12 +2,12 @@
 
 Создает новое задание указанного вида.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Task CreateTask(KindsCardKind kind)
 ----
@@ -15,20 +15,18 @@ Task CreateTask(KindsCardKind kind)
 Параметры
 
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид создаваемого задания
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид создаваемого задания
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Созданное задание
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Созданное задание
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kind.
@@ -38,7 +36,7 @@ kind::
 
 Ниже приведен пример создания нового задания вида "На исполнение".
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -58,5 +56,3 @@ newTask.MainInfo.Name = newTask.Description = "Новое задание";
 taskService.InitializeDefaults(newTask);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

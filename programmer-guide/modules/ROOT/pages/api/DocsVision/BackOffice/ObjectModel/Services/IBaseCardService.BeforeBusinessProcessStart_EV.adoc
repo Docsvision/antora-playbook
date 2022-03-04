@@ -2,12 +2,12 @@
 
 Происходит перед непосредственным запуском бизнес-процесса.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 event EventHandler<BusinessProcessCancelEventArgs> BeforeBusinessProcessStart
 ----
@@ -20,7 +20,7 @@ event EventHandler<BusinessProcessCancelEventArgs> BeforeBusinessProcessStart
 
 Ниже приведен пример перехвата запуска БП у которого приоритет выше 2
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -46,5 +46,3 @@ KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(ne
 //запуск БП
 baseCardService.StartBusinessProcess(document, kindsCardProcess);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

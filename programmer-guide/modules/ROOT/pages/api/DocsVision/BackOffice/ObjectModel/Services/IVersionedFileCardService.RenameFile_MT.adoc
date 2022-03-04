@@ -1,13 +1,13 @@
 = IVersionedFileCardService.RenameFile - метод (VersionedFileCard, String)
 
-Переименовывает файл [.dfn .term]_карточки файла с версиями_.
+Переименовывает файл _карточки файла с версиями_.
 
-* [.keyword]**Пространство имен: ##xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* **Пространство имен: ##xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RenameFile(VersionedFileCard versionedFileCard, string newFileName);
 ----
@@ -15,17 +15,17 @@ void RenameFile(VersionedFileCard versionedFileCard, string newFileName);
 Параметры
 
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 newFileName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Новое название файла. Имя файла должно содержать расширение.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Новое название файла. Имя файла должно содержать расширение.
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр versionedFileCard или newFileName.
@@ -34,7 +34,7 @@ newFileName::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -55,5 +55,3 @@ versionedFileCardService.RenameFile(fileCard, "Новое название фа�
 // Формируем имя файла, получив расширение из оригинального файла
 string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(fileCard.Name));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

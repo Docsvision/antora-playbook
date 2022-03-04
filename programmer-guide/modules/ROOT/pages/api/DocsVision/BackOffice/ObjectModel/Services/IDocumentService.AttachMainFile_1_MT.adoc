@@ -2,12 +2,12 @@
 
 Добавляет в документ карточку версионного файла в качестве основного файла документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 DocumentFile AttachMainFile(Document document, VersionedFileCard versionedFileCard)
 ----
@@ -15,24 +15,22 @@ DocumentFile AttachMainFile(Document document, VersionedFileCard versionedFileCa
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 
-Возвращаемое значение
-
-::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception] |Ошибка будет возвращена, если по каким либо причинам добавление основного файла невозможно.
@@ -46,7 +44,7 @@ versionedFileCard::
 
 Ниже приведен пример использования метода [.keyword .apiname]#AttachMainFile# при добавлении существующей карточки файла с версиями в документ
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -63,5 +61,3 @@ VersionedFileCard versionedFileCard = (VersionedFileCard)userSession.CardManager
 documentService.AttachMainFile(document, versionedFileCard);
 objectContext.SaveObject(document);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

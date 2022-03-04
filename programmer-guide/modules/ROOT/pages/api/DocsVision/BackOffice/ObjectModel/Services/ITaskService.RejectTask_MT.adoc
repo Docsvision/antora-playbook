@@ -2,12 +2,12 @@
 
 Отклоняет задание.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RejectTask(Task task, StaffEmployee employee, string comment)
 ----
@@ -15,21 +15,21 @@ void RejectTask(Task task, StaffEmployee employee, string comment)
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Отклоняемое задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Отклоняемое задание
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, отклонивший задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, отклонивший задание
 comment::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Комментарий
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Комментарий
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или employee.
@@ -40,7 +40,7 @@ comment::
 
 Ниже приведен пример отклонения задания. Для фактической смены состояния карточки необходимо использовать метод [.keyword .apiname]#IStateService.ChangeState#.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -56,5 +56,3 @@ taskService.RejectTask(task, staffService.GetCurrentEmployee(), "Уже выпо
 stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.RejectedState, task));
 objectContext.AcceptChanges();   
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

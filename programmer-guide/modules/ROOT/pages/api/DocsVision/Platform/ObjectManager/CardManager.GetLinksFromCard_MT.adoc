@@ -2,12 +2,12 @@
 
 Возвращает коллекцию карточек, на которые ссылается данная карточка, с заданным типом ссылки и глубиной вложенности.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract CardDataCollection GetLinksToCard(Guid cardId, LinkType linkType, int recurseDepth)
 ----
@@ -15,27 +15,23 @@ public abstract CardDataCollection GetLinksToCard(Guid cardId, LinkType linkType
 Параметры
 
 cardId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор карточки
 linkType::
-  Тип: xref:LinkType_EN.adoc[LinkType]
-  +
-  Тип ссылки
+Тип: xref:api/DocsVision/Platform/ObjectManager/LinkType_EN.adoc[LinkType]
++
+Тип ссылки
 recurseDepth::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Глубина рекурсии
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Глубина рекурсии
 
-Возвращаемое значение
-
-::
-  Тип: xref:CardDataCollection_CL.adoc[CardDataCollection]
-  +
-  Коллекция карточек
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/CardDataCollection_CL.adoc[CardDataCollection]
++
+Коллекция карточек
 
 == Заметки
 
 Параметр recurseDepth определяет на сколько шагов карточки могут отстоять от данной.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

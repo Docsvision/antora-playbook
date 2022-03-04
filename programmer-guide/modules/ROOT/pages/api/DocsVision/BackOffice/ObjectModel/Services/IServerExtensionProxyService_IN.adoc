@@ -2,19 +2,19 @@
 
 Предоставляет доступ к некоторым методам серверных расширений, специфичным для карточек BackOffice
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IServerExtensionProxyService
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |GetAccessInfo(Guid, Guid, Guid) |Получает список доступных операции для указанного состояния карточки. Результат представлен в формате XML.
@@ -26,5 +26,3 @@ public interface IServerExtensionProxyService
 |ResetRolesCache(Guid) |Сбрасывает серверный кэш ролевой модели. Также сбрасывает кэш связанных карточек.
 |StopExecutionRelatedTasks(Guid, Boolean) |Останавливает связанные задания. При возможности (задания завершены) завершает все задания поддерева задания, начиная с родительского. В принудительном режиме может завершить заблокированные задания.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

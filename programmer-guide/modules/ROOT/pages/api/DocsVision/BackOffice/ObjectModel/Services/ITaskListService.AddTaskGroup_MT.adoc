@@ -2,12 +2,12 @@
 
 Добавляет группу заданий в предоставленный список заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskListTaskGroup AddTaskGroup(TaskList taskList, TaskGroup taskGroup, BaseCard parentCard)
 ----
@@ -15,28 +15,26 @@ TaskListTaskGroup AddTaskGroup(TaskList taskList, TaskGroup taskGroup, BaseCard 
 Параметры
 
 taskList::
-  Тип: xref:../TaskList_CL.adoc[TaskList]
-  +
-  Список заданий, в который добавляется группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskList_CL.adoc[TaskList]
++
+Список заданий, в который добавляется группа заданий
 taskGroup::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Добавляемая группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Добавляемая группа заданий
 parentCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, содержащая список заданий, в который добавляется группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, содержащая список заданий, в который добавляется группа заданий
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskListTaskGroup_CL.adoc[TaskListTaskGroup]
-  +
-  Группа карточек
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskListTaskGroup_CL.adoc[TaskListTaskGroup]
++
+Группа карточек
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskList, taskGroup или parentCard.
@@ -45,5 +43,3 @@ parentCard::
 == Заметки
 
 Дополнительно записывает событие добавления группы карточек в историю работы с карточкой.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService - интерфейс]

@@ -2,12 +2,12 @@
 
 Возвращает роль, привязанную к указанной учетной записи.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffRole FindRoleByAccountName(string accountName)
 ----
@@ -15,23 +15,19 @@ StaffRole FindRoleByAccountName(string accountName)
 Параметры
 
 accountName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название учетной записи
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название учетной записи
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffRole_CL.adoc[StaffRole]
-  +
-  Найденная роль
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffRole_CL.adoc[StaffRole]
++
+Найденная роль
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если передан пустой accountName.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

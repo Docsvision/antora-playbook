@@ -2,7 +2,7 @@
 
 В следующем примере в текущей сессии userSession мы получаем данные карточки. Активировав режим отложенных изменений для карточки, мы проводим изменение секции "MainInfo", после чего отключаем режим отложенных изменений.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение с сервера данных карточки с известным идентификатором
 CardData cardData = userSession.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
@@ -32,5 +32,3 @@ catch(Exception ex)
    if (cardData.InUpdate) cardData.CancelUpdate();
 }
 ----
-
-*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

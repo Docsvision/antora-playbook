@@ -2,12 +2,12 @@
 
 Добавляет в нумератор новый диапазон номеров.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 NumeratorRange AddNumeratorRange(NumeratorCard card, int startNumber, int endNumber, Guid ownerId)
 ----
@@ -15,35 +15,31 @@ NumeratorRange AddNumeratorRange(NumeratorCard card, int startNumber, int endNum
 Параметры
 
 card::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
-  +
-  Нумератор, в который добавляется новый диапазон
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorCard_CL.adoc[NumeratorCard]
++
+Нумератор, в который добавляется новый диапазон
 startNumber::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Начальный номер диапазона
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Начальный номер диапазона
 endNumber::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Конечный номер диапазона
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Конечный номер диапазона
 ownerId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Начальный номер диапазона
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Начальный номер диапазона
 
-Возвращаемое значение
-
-::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/NumeratorRange_CL.adoc[NumeratorRange]
-  +
-  Диапазон нумератора
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/NumeratorRange_CL.adoc[NumeratorRange]
++
+Диапазон нумератора
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр card.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService - интерфейс]

@@ -2,12 +2,12 @@
 
 Устанавливает у документа определенные настройки вида карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ApplyKindSettings(Document document, DocumentSetting documentSetting)
 ----
@@ -15,21 +15,19 @@ void ApplyKindSettings(Document document, DocumentSetting documentSetting)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, к которому применяются настройки вида карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, к которому применяются настройки вида карточки
 documentSetting::
-  Тип: xref:Entities/KindSetting/DocumentSetting_CL.adoc[DocumentSetting]
-  +
-  Настройки документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/DocumentSetting_CL.adoc[DocumentSetting]
++
+Настройки документа
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или documentSetting.
 |https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception] |Ошибка возвращается в случае, если невозможно прикрепить основной файл, если его добавление определено настройками documentSetting.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

@@ -1,66 +1,64 @@
 = ExportCardInspector - класс
 
-Инспектор, позволяющий гибко управлять логикой экспорта. Этот класс является [.keyword]*абстрактным*.
+Инспектор, позволяющий гибко управлять логикой экспорта. Этот класс является *абстрактным*.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class ExportCardInspector
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ExportCardInspector.Session_PR.adoc[Session] |Возвращает текущую сессию пользователя.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.Session_PR.adoc[Session] |Возвращает текущую сессию пользователя.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ExportCardInspector.AfterExport_MT.adoc[AfterExport] |Инициируется после экспорта всех данных.
-|xref:ExportCardInspector.AfterExportCard_MT.adoc[AfterExportCard(CardData)] |Инициируется после экспорта данных очередной карточки.
-|xref:ExportCardInspector.AfterExportField_MT.adoc[AfterExportField(RowData, Field)] |Инициируется после экспорта данных поля.
-|xref:ExportCardInspector.AfterExportFile_MT.adoc[AfterExportFile(FileData)] |Инициируется после экспорта данных файла.
-|xref:ExportCardInspector.AfterExportRow_MT.adoc[AfterExportRow(RowData)] |Инициируется после экспорта данных строки.
-|xref:ExportCardInspector.AfterExportSection_MT.adoc[AfterExportSection(SectionData, Guid)] |Инициируется после экспорта данных секции.
-|xref:ExportCardInspector.BeforeExport_MT.adoc[BeforeExport(Boolean)] |Инициируется перед началом экспорта.
-|xref:ExportCardInspector.BeforeExportCard_MT.adoc[BeforeExportCard(CardData, Boolean)] |Инициируется перед началом экспорта данных карточки.
-|xref:ExportCardInspector.BeforeExportField_MT.adoc[BeforeExportField(RowData, Field, Boolean)] |Инициируется перед началом экспорта данных поля.
-|xref:ExportCardInspector.BeforeExportFile_MT.adoc[BeforeExportFile(FileData, Boolean)] |Инициируется перед началом экспорта данных файла.
-|xref:ExportCardInspector.BeforeExportRow_MT.adoc[BeforeExportRow(RowData, Boolean)] |Инициируется перед началом экспорта данных строки.
-|xref:ExportCardInspector.BeforeExportSection_MT.adoc[BeforeExportSection(SectionData, Guid, Boolean)] |Инициируется перед началом экспорта данных секции.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExport_MT.adoc[AfterExport] |Инициируется после экспорта всех данных.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportCard_MT.adoc[AfterExportCard(CardData)] |Инициируется после экспорта данных очередной карточки.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportField_MT.adoc[AfterExportField(RowData, Field)] |Инициируется после экспорта данных поля.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportFile_MT.adoc[AfterExportFile(FileData)] |Инициируется после экспорта данных файла.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportRow_MT.adoc[AfterExportRow(RowData)] |Инициируется после экспорта данных строки.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportSection_MT.adoc[AfterExportSection(SectionData, Guid)] |Инициируется после экспорта данных секции.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExport_MT.adoc[BeforeExport(Boolean)] |Инициируется перед началом экспорта.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportCard_MT.adoc[BeforeExportCard(CardData, Boolean)] |Инициируется перед началом экспорта данных карточки.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportField_MT.adoc[BeforeExportField(RowData, Field, Boolean)] |Инициируется перед началом экспорта данных поля.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportFile_MT.adoc[BeforeExportFile(FileData, Boolean)] |Инициируется перед началом экспорта данных файла.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportRow_MT.adoc[BeforeExportRow(RowData, Boolean)] |Инициируется перед началом экспорта данных строки.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportSection_MT.adoc[BeforeExportSection(SectionData, Guid, Boolean)] |Инициируется перед началом экспорта данных секции.
 |OnError(Int32, String, Boolean) |Позволяет обработать ошибку экспорта.
 |===
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ExportCardInspector.Error_EV.adoc[Error] |Событие получает сигнал, когда обнаружена ошибка в процессе экспорта.
+|xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.Error_EV.adoc[Error] |Событие получает сигнал, когда обнаружена ошибка в процессе экспорта.
 |===
 
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.Session_PR.adoc[ExportCardInspector.Session - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExport_MT.adoc[ExportCardInspector.AfterExport - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportCard_MT.adoc[ExportCardInspector.AfterExportCard - метод (CardData)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportField_MT.adoc[ExportCardInspector.AfterExportField - метод (RowData, Field)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportFile_MT.adoc[ExportCardInspector.AfterExportFile - метод (FileData)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportRow_MT.adoc[ExportCardInspector.AfterExportRow - метод (RowData)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportSection_MT.adoc[ExportCardInspector.AfterExportSection - метод (SectionData, Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExport_MT.adoc[ExportCardInspector.BeforeExport - метод (Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportCard_MT.adoc[ExportCardInspector.BeforeExportCard - метод (CardData, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportField_MT.adoc[ExportCardInspector.BeforeExportField - метод (RowData, Field, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportFile_MT.adoc[ExportCardInspector.BeforeExportFile - метод (FileData, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportRow_MT.adoc[ExportCardInspector.BeforeExportRow - метод (RowData, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportSection_MT.adoc[ExportCardInspector.BeforeExportSection - метод (SectionData, Guid, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/ExportCardInspector.Error_EV.adoc[ExportCardInspector.Error - событие]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.Session_PR.adoc[ExportCardInspector.Session - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExport_MT.adoc[ExportCardInspector.AfterExport - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportCard_MT.adoc[ExportCardInspector.AfterExportCard - метод (CardData)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportField_MT.adoc[ExportCardInspector.AfterExportField - метод (RowData, Field)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportFile_MT.adoc[ExportCardInspector.AfterExportFile - метод (FileData)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportRow_MT.adoc[ExportCardInspector.AfterExportRow - метод (RowData)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.AfterExportSection_MT.adoc[ExportCardInspector.AfterExportSection - метод (SectionData, Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExport_MT.adoc[ExportCardInspector.BeforeExport - метод (Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportCard_MT.adoc[ExportCardInspector.BeforeExportCard - метод (CardData, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportField_MT.adoc[ExportCardInspector.BeforeExportField - метод (RowData, Field, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportFile_MT.adoc[ExportCardInspector.BeforeExportFile - метод (FileData, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportRow_MT.adoc[ExportCardInspector.BeforeExportRow - метод (RowData, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.BeforeExportSection_MT.adoc[ExportCardInspector.BeforeExportSection - метод (SectionData, Guid, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/ExportCardInspector.Error_EV.adoc[ExportCardInspector.Error - событие]* +

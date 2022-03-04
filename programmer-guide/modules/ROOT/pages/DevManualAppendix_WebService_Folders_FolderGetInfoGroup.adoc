@@ -27,13 +27,13 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Fol
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 folderIds::
-  Идентификаторы папок
+Идентификаторы папок
 folderInfoOptions::
-  Дополнительные параметры запроса
+Дополнительные параметры запроса
 
-Строка [.keyword]*folderIds* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *folderIds* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -50,7 +50,7 @@ folderInfoOptions::
 </xsd:element>
 ----
 
-Строка [.keyword]*folderInfoOptions* должна соответствовать формату элемента [.keyword]*FolderInfoOptions*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *folderInfoOptions* должна соответствовать формату элемента *FolderInfoOptions*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -113,5 +113,3 @@ response = session.post(url, data=body)
 # Ответ SOAP
 print(response.content)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Folders.adoc[Папки]

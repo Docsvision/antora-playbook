@@ -2,12 +2,12 @@
 
 Создает карточку файла с версиями из файла, расположенного на файловой системе.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 VersionedFileCard CreateCard(string filePath)
 ----
@@ -15,16 +15,14 @@ VersionedFileCard CreateCard(string filePath)
 Параметры
 
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Расположение файла
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Расположение файла
 
-Возвращаемое значение
-
-::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 
 == Заметки
 
@@ -32,7 +30,7 @@ filePath::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -42,5 +40,3 @@ IVersionedFileCardService versionedFileCardService = objectContext.GetService<IV
 // Создания карточки файла с версиями
 VersionedFileCard versionedFileCard = versionedFileCardService.CreateCard(@"Z:\Sample.docx");
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

@@ -2,12 +2,12 @@
 
 Отзывает группу заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string RecallTaskGroup(TaskGroup taskGroup)
 ----
@@ -15,20 +15,18 @@ string RecallTaskGroup(TaskGroup taskGroup)
 Параметры
 
 taskGroup::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Отзываемая группа заданий
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Отзываемая группа заданий
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Сообщения всех заданий об отзыве
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Сообщения всех заданий об отзыве
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр taskGroup.
@@ -37,7 +35,7 @@ taskGroup::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -53,5 +51,3 @@ taskGroupService.RecallTaskGroup(taskGroup);
 stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.RecalledState, taskGroup));
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

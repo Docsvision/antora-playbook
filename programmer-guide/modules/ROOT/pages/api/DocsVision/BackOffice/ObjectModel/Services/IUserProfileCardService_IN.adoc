@@ -2,19 +2,19 @@
 
 Описывает сервис для работы с карточкой настроек пользователя.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IUserProfileCardService
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |GetCertificate(String) |Получает сертификат пользователя с указанным именем учетной записи.
@@ -31,7 +31,7 @@ public interface IUserProfileCardService
 
 Приведен пример простого использования методов сервиса - запись и чтение настроек
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -49,7 +49,7 @@ Console.WriteLine(value);
 
 Еще один пример использования сервиса - создание и установка личной папки пользователя
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -75,5 +75,3 @@ objectContext.AcceptChanges();
 iUserProfileCardService.SetPersonalFolder(staffEmployee.AccountName, newfoldersFolder);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

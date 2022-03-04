@@ -2,26 +2,26 @@
 
 Определяет методы генерации и печати штрих-кодов карточки
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IBarcodeService
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IBarcodeService.ChangeBarcode_MT.adoc[ChangeBarcode(Document, String)] |Задает значение штрих-кода карточки документа.
-|xref:IBarcodeService.GenerateBarcode_MT.adoc[GenerateBarcode(Document)] |Формирует штрих-код для заданной карточки документа.
-|xref:IBarcodeService.GenerateBarcode_1_MT.adoc[GenerateBarcode(Document, DateTime)] |Формирует штрих-код для заданной карточки документа.
-|xref:IBarcodeService.GetBarcodePrintSettings_MT.adoc[GetBarcodePrintSettings(StaffEmployee, KindsCardKind)] |Возвращает системные настройки печати.
-|xref:IBarcodeService.PrintBarcode_MT.adoc[PrintBarcode(Document, BarcodePrintSettings, PrinterSettings)] |Отправляет на печать штрих-код документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.ChangeBarcode_MT.adoc[ChangeBarcode(Document, String)] |Задает значение штрих-кода карточки документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GenerateBarcode_MT.adoc[GenerateBarcode(Document)] |Формирует штрих-код для заданной карточки документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GenerateBarcode_1_MT.adoc[GenerateBarcode(Document, DateTime)] |Формирует штрих-код для заданной карточки документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GetBarcodePrintSettings_MT.adoc[GetBarcodePrintSettings(StaffEmployee, KindsCardKind)] |Возвращает системные настройки печати.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.PrintBarcode_MT.adoc[PrintBarcode(Document, BarcodePrintSettings, PrinterSettings)] |Отправляет на печать штрих-код документа.
 |===
 
 == Заметки
@@ -32,7 +32,7 @@ public interface IBarcodeService
 
 Пример генерации штрих-кода для карточка "Документ" (вид карточки должен поддерживать использование штрих-кода, иначе при назначении вернется ошибка)
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -53,10 +53,3 @@ barcodeService.ChangeBarcode(document, barcode);
 
 Метод [.keyword .apiname]#GetBarcodePrintSettings# в большинстве случаев в настроенной системе содержит один объект, но возможны ситуации, когда таких настроек больше чем одна, в таком случае необходимо реализовать логику выбора необходимой настройки. Если настроек нет, то следует использовать настройки печати по умолчанию, которые содержатся в [.keyword .apiname]#BarcodePrintSettings.DefaultSettings#
 
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.ChangeBarcode_MT.adoc[IBarcodeService.ChangeBarcode - метод (Document, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GenerateBarcode_MT.adoc[IBarcodeService.GenerateBarcode - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GenerateBarcode_1_MT.adoc[IBarcodeService.GenerateBarcode - метод (Document, DateTime)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.GetBarcodePrintSettings_MT.adoc[IBarcodeService.GetBarcodePrintSettings - метод (StaffEmployee, KindsCardKind)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService.PrintBarcode_MT.adoc[IBarcodeService.PrintBarcode - метод (Document, BarcodePrintSettings, PrinterSettings)]* +
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

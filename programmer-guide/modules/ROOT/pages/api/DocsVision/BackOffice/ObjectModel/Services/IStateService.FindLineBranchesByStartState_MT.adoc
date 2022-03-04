@@ -2,12 +2,12 @@
 
 Возвращает все допустимые переходы состояний карточки, имеющей указанное начальное состояние.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<StatesStateMachineBranch> FindLineBranchesByStartState(StatesState state)
 ----
@@ -15,20 +15,18 @@ IEnumerable<StatesStateMachineBranch> FindLineBranchesByStartState(StatesState s
 Параметры
 
 state::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Начальное состояние
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Начальное состояние
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StatesStateMachineBranch>
-  +
-  Коллекция объектов типа xref:../StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StatesStateMachineBranch>
++
+Коллекция объектов типа xref:api/DocsVision/BackOffice/ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр state.
@@ -38,7 +36,7 @@ state::
 
 Ниже приведен пример использования метода [.keyword .apiname]#FindLineBranchesByStartState# при получении всех доступных переходов из состояния Делегировано для карточки задания вида На исполнение
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
         
@@ -52,5 +50,3 @@ StatesState state = stateService.FindStateByBuiltIn(Task.DelegatedState, cardKin
 // Доступные переходы из состояния Делегирования
 IEnumerable<StatesStateMachineBranch> branches = stateService.FindLineBranchesByStartState(state);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

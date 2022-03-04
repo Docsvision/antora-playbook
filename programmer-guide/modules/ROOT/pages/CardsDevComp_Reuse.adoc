@@ -4,9 +4,9 @@
 
 Для того, чтобы задействовать данный режим необходимо:
 
-* для карточек, унаследованных от типа [.keyword .apiname]#CardControl#, нужно реализовать в классе компонента карточки интерфейс xref:../api/DocsVision/Platform/CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]:
+* для карточек, унаследованных от типа [.keyword .apiname]#CardControl#, нужно реализовать в классе компонента карточки интерфейс xref:..xref:api/DocsVision/Platform/CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed partial class TestCard : CardControl, IReusableCardComponent
 {
@@ -27,7 +27,7 @@ public sealed partial class TestCard : CardControl, IReusableCardComponent
 ----
 * для карточек, унаследованных от типа [.keyword .apiname]#BaseCardControl#, нужно переопределить методы GetCanBeReused и GetReusageMode:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed partial class TestCard : BaseCardControl
 {
@@ -48,5 +48,3 @@ public sealed partial class TestCard : BaseCardControl
 ----
 +
 В режиме ReusageMode.OwnLogic необходимость переиспользования определяется по значению переменной `CanBeReused`; в режиме ReusageMode.NoReusage компонент карточки кэшироваться не будет; в режиме ReusageMode.CardHostLogic необходимость кэширования компонента определяется внутренней логикой контейнера карточек.
-
-*На уровень выше:* xref:../pages/CardsDevCompInterface.adoc[Реализация стандартных интерфейсов]

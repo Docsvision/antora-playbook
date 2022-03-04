@@ -2,27 +2,27 @@
 
 Представляет описатель прав карточки.
 
-* [.keyword]*Пространство имен:* xref:AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.dll`
+* *Пространство имен:* xref:xref:api/DocsVision/Platform/Security/AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]
+* *Сборка:* `DocsVision.Platform.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public sealed class CardDataSecurity : DVObjectSecurity
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:CardDataSecurity_CT.adoc[CardDataSecurity()] |Инициализирует новый экземпляр класса CardDataSecurity.
+|xref:api/DocsVision/Platform/Security/AccessControl/CardDataSecurity_CT.adoc[CardDataSecurity()] |Инициализирует новый экземпляр класса CardDataSecurity.
 |===
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AccessRightType |Возвращает тип объекта-описателя прав.
@@ -32,27 +32,20 @@ public sealed class CardDataSecurity : DVObjectSecurity
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AccessRuleFactory(IdentityReference, Int32, Boolean, InheritanceFlags, PropagationFlags, AccessControlType) |Создание нового разрешения на объект.
-|xref:CardDataSecurity.AddAccessRule_MT.adoc[AddAccessRule(CardDataAccessRule)] |Добавляет новое разрешение на карточку.
+|xref:api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.AddAccessRule_MT.adoc[AddAccessRule(CardDataAccessRule)] |Добавляет новое разрешение на карточку.
 |AddAuditRule(CardDataAuditRule) |Добавляет аудит на объект.
 |AuditRuleFactory(IdentityReference, Int32, Boolean, InheritanceFlags, PropagationFlags, AuditFlags) |Создание нового аудита.
 |RemoveAccessRule(CardDataAccessRule) |Удаляет разрешение из описателя прав.
 |RemoveAccessRuleAll(CardDataAccessRule) |Удаляет все разрешения для данного субъекта из описателя прав.
-|xref:CardDataSecurity.RemoveAccessRuleSpecific_MT.adoc[RemoveAccessRuleSpecific(CardDataAccessRule)] |Удаляет специфическое разрешение из описателя прав (учитываются все признаки разрешения).
+|xref:api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.RemoveAccessRuleSpecific_MT.adoc[RemoveAccessRuleSpecific(CardDataAccessRule)] |Удаляет специфическое разрешение из описателя прав (учитываются все признаки разрешения).
 |RemoveAuditRule(CardDataAuditRule) |Удаляет конкретный аудит из описателя прав.
 |RemoveAuditRuleAll(CardDataAuditRule) |Удаляет все правила аудита для данного субъекта из описателя прав.
 |RemoveAuditRuleSpecific(CardDataAuditRule) |Удаляет специфический аудит из описателя прав (учитываются все признаки аудита).
 |ResetAccessRule(CardDataAccessRule) |Удаляет все не унаследованные разрешения объекта, и добавляет одно новое – переданное в качестве параметра
-|xref:CardDataSecurity.SetAccessRule_MT.adoc[SetAccessRule(CardDataAccessRule)] |Удаляет из описателя прав все разрешения для данного субъекта, и добавляет вместо них одно новое – переданное в качестве параметра.
+|xref:api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.SetAccessRule_MT.adoc[SetAccessRule(CardDataAccessRule)] |Удаляет из описателя прав все разрешения для данного субъекта, и добавляет вместо них одно новое – переданное в качестве параметра.
 |SetAuditRule(CardDataAuditRule) |Удаляет из описателя прав все аудиты для данного субъекта, и добавляет вместо них одно новое – переданное в качестве параметра.
 |===
-
-* *xref:../../../../../api/DocsVision/Platform/Security/AccessControl/CardDataSecurity_CT.adoc[CardDataSecurity - конструктор]* +
-* *xref:../../../../../api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.AddAccessRule_MT.adoc[CardDataSecurity.AddAccessRule - метод (CardDataAccessRule)]* +
-* *xref:../../../../../api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.RemoveAccessRuleSpecific_MT.adoc[CardDataSecurity.RemoveAccessRuleSpecific - метод (CardDataAccessRule)]* +
-* *xref:../../../../../api/DocsVision/Platform/Security/AccessControl/CardDataSecurity.SetAccessRule_MT.adoc[CardDataSecurity.SetAccessRule - метод (CardDataAccessRule)]* +
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/Security/AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl - пространство имен]

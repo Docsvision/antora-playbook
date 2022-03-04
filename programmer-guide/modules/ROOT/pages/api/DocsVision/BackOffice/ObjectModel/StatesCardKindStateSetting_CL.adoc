@@ -1,42 +1,42 @@
 = StatesCardKindStateSetting - класс
 
-Настройки автомата состояний для вида карточки, приведенные в [.dfn .term]_конструкторе состояний_.
+Настройки автомата состояний для вида карточки, приведенные в _конструкторе состояний_.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class StatesCardKindStateSetting : ObjectBase
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:StatesCardKindStateSetting.FirstState_PR.adoc[FirstState] |Задает или возвращает начальное состояние карточки.
-|xref:StatesCardKindStateSetting.Kind_PR.adoc[Kind] |Задает или возвращает вид карточки, которому принадлежат данная настройка.
-|xref:StatesCardKindStateSetting.Operations_PR.adoc[Operations] |Задает или возвращает коллекцию операций (перехода или редактирования), доступных для вида карточки.
-|xref:StatesCardKindStateSetting.StateMachineBranches_PR.adoc[StateMachineBranches] |Задает или возвращает переходы автомата состояний.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FirstState_PR.adoc[FirstState] |Задает или возвращает начальное состояние карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.Kind_PR.adoc[Kind] |Задает или возвращает вид карточки, которому принадлежат данная настройка.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.Operations_PR.adoc[Operations] |Задает или возвращает коллекцию операций (перехода или редактирования), доступных для вида карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.StateMachineBranches_PR.adoc[StateMachineBranches] |Задает или возвращает переходы автомата состояний.
 |StateMachineLayout |Задает или возвращает разметку для области построения автомата состояний.
-|xref:StatesCardKindStateSetting.States_PR.adoc[States] |Задает или возвращает коллекцию состояний, доступных виду карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.States_PR.adoc[States] |Задает или возвращает коллекцию состояний, доступных виду карточки.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:StatesCardKindStateSetting.FindBuiltInOperation_MT.adoc[FindBuiltInOperation(BuiltInOperation)] |Возвращает операцию ([.dfn .term]_конструктора состояний_), соответствующую переданной встроенной операции.
-|xref:StatesCardKindStateSetting.FindBuiltInState_MT.adoc[FindBuiltInState(BuiltInState)] |Возвращает состояние ([.dfn .term]_конструктора состояний_), соответствующую переданному встроенному состоянию.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FindBuiltInOperation_MT.adoc[FindBuiltInOperation(BuiltInOperation)] |Возвращает операцию (_конструктора состояний_), соответствующую переданной встроенной операции.
+|xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FindBuiltInState_MT.adoc[FindBuiltInState(BuiltInState)] |Возвращает состояние (_конструктора состояний_), соответствующую переданному встроенному состоянию.
 |===
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |FirstStateProperty |Представляет свойство "Первое состояние".
@@ -51,7 +51,7 @@ public class StatesCardKindStateSetting : ObjectBase
 
 Далее приведен пример использования метода [.keyword .apiname]#GetKindStateSetting# при получении начального состояния карточки задание вида На исполнение
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -66,12 +66,5 @@ StatesCardKindStateSetting stateSetting = stateService.GetKindStateSetting(cardK
 StatesState startState = stateSetting.FirstState;
 ----
 
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FirstState_PR.adoc[StatesCardKindStateSetting.FirstState - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.Kind_PR.adoc[StatesCardKindStateSetting.Kind - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.Operations_PR.adoc[StatesCardKindStateSetting.Operations - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.StateMachineBranches_PR.adoc[StatesCardKindStateSetting.StateMachineBranches - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.States_PR.adoc[StatesCardKindStateSetting.States - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FindBuiltInOperation_MT.adoc[StatesCardKindStateSetting.FindBuiltInOperation - метод (BuiltInOperation)]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting.FindBuiltInState_MT.adoc[StatesCardKindStateSetting.FindBuiltInState - метод (BuiltInState)]* +
 
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]
+

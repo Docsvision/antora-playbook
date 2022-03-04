@@ -2,12 +2,12 @@
 
 Изменяет состояние карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ChangeState(BaseCard card, StatesStateMachineBranch branch)
 ----
@@ -15,19 +15,19 @@ void ChangeState(BaseCard card, StatesStateMachineBranch branch)
 Параметры
 
 card::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, для которой выполняется смена состояния
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, для которой выполняется смена состояния
 branch::
-  Тип: xref:../StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
-  +
-  Переход автомата состояний
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
++
+Переход автомата состояний
 
 == Примеры
 
 Далее приведен пример завершения исполнения карточки, следуя переходу состояний - "Начато-Завершено"
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -40,5 +40,3 @@ Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-0000
 // Смена состояния
 stateService.ChangeState(task, stateService.FindBranchByBuiltIn(Task.NotStartedToCompletedByComplete, task.SystemInfo.State));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

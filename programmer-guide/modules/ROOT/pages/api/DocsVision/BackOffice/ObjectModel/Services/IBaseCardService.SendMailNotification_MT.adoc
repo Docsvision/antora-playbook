@@ -2,12 +2,12 @@
 
 Отправляет оповещение по электронной почте.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void SendMailNotification(IEnumerable<MailNotificationInfo> mailNotificationInfos)
 ----
@@ -15,13 +15,13 @@ void SendMailNotification(IEnumerable<MailNotificationInfo> mailNotificationInfo
 Параметры
 
 mailNotificationInfos::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<MailNotificationInfo>
-  +
-  Коллекция сообщений, подготовленных к отправке
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<MailNotificationInfo>
++
+Коллекция сообщений, подготовленных к отправке
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр mailNotificationInfos.
@@ -35,7 +35,7 @@ mailNotificationInfos::
 
 Ниже приведен пример отправки почтового уведомления с использованием сервиса базовых объектов
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -54,5 +54,3 @@ MailNotificationInfo mailNotificationInfo = new MailNotificationInfo(eMail, "У�
 // Отправка сообщения
 baseCardService.SendMailNotification(new MailNotificationInfo[] { mailNotificationInfo });
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

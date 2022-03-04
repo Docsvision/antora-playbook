@@ -2,12 +2,12 @@
 
 Выделяет указанной карточке номер из нумератора следуя приложенному правилу нумерации.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardNumber CreateNumber(CardData cardData, BaseCard baseCard, NumerationRulesRule rule)
 ----
@@ -15,30 +15,28 @@ BaseCardNumber CreateNumber(CardData cardData, BaseCard baseCard, NumerationRule
 Параметры
 
 cardData::
-  Тип: xref:../../../Platform/ObjectManager/CardData_CL.adoc[CardData]
-  +
-  Карточка, которой выделяется номер
+Тип: xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData]
++
+Карточка, которой выделяется номер
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Объектная модель карточки, которой выделяется номер
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Объектная модель карточки, которой выделяется номер
 rule::
-  Тип: xref:../NumerationRulesRule_CL.adoc[NumerationRulesRule]
-  +
-  Правило нумерации, по которому будет выделен номер
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/NumerationRulesRule_CL.adoc[NumerationRulesRule]
++
+Правило нумерации, по которому будет выделен номер
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseCardNumber_CL.adoc[BaseCardNumber]
-  +
-  Выделенный номер
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardNumber_CL.adoc[BaseCardNumber]
++
+Выделенный номер
 
 == Примеры
 
 Ниже приведен пример выделения номера из нумератора для карточки.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -58,6 +56,4 @@ objectContext.GetObject<Document>(cardId), numerationRule);
 objectContext.AcceptChanges();
 ----
 
-Если необходимо использовать выделенный номер в качестве регистрационного номера документа, достаточно записать идентификатор выделенного номера в поле [.keyword]*RegNumber* карточки.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService - интерфейс]
+Если необходимо использовать выделенный номер в качестве регистрационного номера документа, достаточно записать идентификатор выделенного номера в поле *RegNumber* карточки.

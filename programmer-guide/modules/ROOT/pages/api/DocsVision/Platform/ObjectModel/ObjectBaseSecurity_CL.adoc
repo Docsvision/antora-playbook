@@ -2,12 +2,12 @@
 
 Представляет объект безопасности. Предоставляет методы установки и получения прав доступа.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 [ClassInterface(ClassInterfaceType.AutoDual)]
 [ComVisible(true)]
@@ -16,7 +16,7 @@ public sealed class ObjectBaseSecurity : ISecureObject
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AcceptSecurityChangesOnly |Задает или возвращает признак того, что в случае наличия изменений объекта, следует применять исключительно изменения настроек прав.
@@ -29,7 +29,7 @@ public sealed class ObjectBaseSecurity : ISecureObject
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AccessCheck(Int32, Int32) |Проверяет наличие указанного доступа и записывает существующий.
@@ -38,5 +38,3 @@ public sealed class ObjectBaseSecurity : ISecureObject
 |GetDefaultValue(ObjectAccessControlType) |Возвращает делегат, получающий базовые настройки безопасности.
 |SetAccessControl(Byte[], AccessControlSections, AccessControlPropagation) |Устанавливает параметры безопасности для объекта.
 |===
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

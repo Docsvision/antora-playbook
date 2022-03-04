@@ -2,12 +2,12 @@
 
 Осуществляет проверку группы условий роли.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public bool Validate(bool isRoleCommon, out List<string> reasons)
 ----
@@ -15,23 +15,19 @@ public bool Validate(bool isRoleCommon, out List<string> reasons)
 Параметры
 
 isRoleCommon::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Роль является общей
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Роль является общей
 reasons::
-  Тип: http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<String>
-  +
-  Результат проверки
+Тип: http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<String>
++
+Результат проверки
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - ошибок не обнаружено, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - ошибок не обнаружено, иначе false
 
 == Заметки
 
 Метод проверяет на ошибки условия заданные в роли.
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/RoleModelRole_CL.adoc[RoleModelRole - класс]

@@ -2,12 +2,12 @@
 
 Распространяет признак "Не показывать при выборе" с родительского подразделения на дочерние подразделения и сотрудников.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void PropagateNotAvailable(StaffUnit staffUnit)
 ----
@@ -15,12 +15,12 @@ void PropagateNotAvailable(StaffUnit staffUnit)
 Параметры
 
 staffUnit +
-xref:../StaffUnit_CL.adoc[StaffUnit]::
-  Подразделение [.dfn .term]_Справочника сотрудников_, для дочерних элементов которого устанавливается признак "Не показывать при выборе"
+xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]::
+Подразделение _Справочника сотрудников_, для дочерних элементов которого устанавливается признак "Не показывать при выборе"
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр staffUnit.
@@ -30,7 +30,7 @@ xref:../StaffUnit_CL.adoc[StaffUnit]::
 
 Ниже приведен пример распространения признака "Не показывать при выборе" с подразделения с идентификатором 00000000-0000-0000-0000-000000000000, на вложенные подразделения и сотрудников
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -40,5 +40,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 staffService.PropagateNotAvailable(unit);
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

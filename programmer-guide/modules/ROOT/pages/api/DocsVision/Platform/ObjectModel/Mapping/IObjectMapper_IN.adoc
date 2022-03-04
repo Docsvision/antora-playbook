@@ -1,29 +1,29 @@
 = IObjectMapper - интерфейс
 
-Описывает основную функциональность [.dfn .term]_преобразователь данных_.
+Описывает основную функциональность _преобразователь данных_.
 
-* [.keyword]*Пространство имен:* xref:Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IObjectMapper
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|MapperType |Возвращает тип [.dfn .term]_преобразователя данных_.
-|Mapping |Возвращает карту объектов, определенную в [.dfn .term]_преобразователе данных_.
+|MapperType |Возвращает тип _преобразователя данных_.
+|Mapping |Возвращает карту объектов, определенную в _преобразователе данных_.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CopyObject(ObjectBase, ObjectBase) |При переопределении в производном классе создает копию переданного объекта в указанном родительском объекте.
@@ -43,5 +43,3 @@ public interface IObjectMapper
 |TransformQuery(QueryObject) |При переопределении в производном классе преобразует переданный запрос в соответствии с картой объектов, загруженной в преобразователь данных.
 |UnlockObject(IObjectRef) |При переопределении в производном классе снимает блокировку с переданного объекта.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectModel/Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping - пространство имен]

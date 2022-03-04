@@ -2,9 +2,9 @@
 
 *Каким образом получить родительский объект имея подчиненный?*
 
-Для этого предназначен метод xref:../api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent], который, к примеру, можно использовать для получения документа, которому принадлежит файл:
+Для этого предназначен метод xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent], который, к примеру, можно использовать для получения документа, которому принадлежит файл:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // documentFile - файл (тип DocumentFile) искомого документа
 Document document = ObjectHelper.GetParent<Document>(documentFile);
@@ -12,9 +12,9 @@ Document document = ObjectHelper.GetParent<Document>(documentFile);
 
 *Как изменить значение в элементе управления в карточке*
 
-Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу [.keyword .apiname]#FindPropertyItem# базового класса карточки xref:../api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], передав название элемента управления:
+Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу [.keyword .apiname]#FindPropertyItem# базового класса карточки xref:..xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], передав название элемента управления:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 ICustomizableControl control = CardControl;
 
@@ -28,7 +28,7 @@ layoutItem.ControlValue = "Новое значение";
 layoutItem.Commit();
 ----
 
-Название элемента можно посмотреть в [.dfn .term]_Конструкторе разметок_.
+Название элемента можно посмотреть в _Конструкторе разметок_.
 
 *Пример работы с Docsvision из Powershell*
 
@@ -97,7 +97,7 @@ $number = $client.NumGetFirstFree($sessionId, $numeratorCardID, $zoneName, $user
 
 Для получения идентификатора объекта (например, объект document типа [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.Document#) можно воспользоваться методом [.keyword .apiname]#ObjectContext.GetObjectRef(ObjectBase)#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Guid id_document = objectContext.GetObjectRef(document).Id;
 или так (начиная с НО9):
@@ -106,12 +106,12 @@ Guid id_document = document.GetObjectId();
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Корректный идентификатор нового объекта может быть получен только после сохранения объекта в [.dfn .term]_контексте объектов_.
+[.note__title]#Прим.:# Корректный идентификатор нового объекта может быть получен только после сохранения объекта в _контексте объектов_.
 ====
 
 *Получить отображаемое имя текущего сотрудника*
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffEmployee currentEmployee = objectContext.GetService<IStaffService>().GetCurrentEmployee();
 string displayName = currentEmployee.DisplayName;
@@ -119,7 +119,7 @@ string displayName = currentEmployee.DisplayName;
 
 *Получить карточку сотрудника по его идентификатору (id_empl)*
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffEmployee staffEmployee = staffService.Get(new Guid("id_empl"));
 ----
@@ -130,7 +130,7 @@ StaffEmployee staffEmployee = staffService.Get(new Guid("id_empl"));
 
 *Доступ к значению поля*
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 int? result = userSession.CardManager.GetCardData(cardID).Sections[sectionID].FirstRow.GetInt32(fieldAlias);
 ----
@@ -139,7 +139,7 @@ cardID - идентификатор карточки; sectionID - идентиф
 
 С точки зрения доступа, динамические поля не отличаются от статических, поэтому получение значения такого поля может выглядеть следующим образом
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //идентификатор карточки
 Guid cardID = new Guid("00000000-0000-0000-0000-000000000000");
@@ -180,7 +180,7 @@ result = (((BaseCardSectionRow)document.GetSection(sectionID)[0])[fieldAlias] as
 
 . Вне контекста Windows-клиента:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>();
 X509Certificate2 certificate = iUserProfileCardService.GetCertificate(@"DOMAIN\IvanovII");
@@ -191,7 +191,7 @@ X509Certificate2 certificate = iUserProfileCardService.GetCertificate(@"DOMAIN\I
 [[concept_rcq_qll_w4__Method_GetCertificate]]
 Другой вариант - получения сертификата из хранилища сертификатов ОС Windows. В примере получаем первый сертификат с закрытым ключом.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 X509Certificate2 GetCertificate()
 {
@@ -206,7 +206,7 @@ X509Certificate2 GetCertificate()
 ----
 . В контексте Windows-клиента (например, в скрипте карточки)
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool cancel = false;
 X509Certificate2 certificate = DocsVision.BackOffice.WinForms.Controls.SelectCertificateForm.SelectCertificate(ref cancel, objectContext);
@@ -214,5 +214,3 @@ if(cancel) return;
 ----
 +
 В данном случае, сотруднику будет выведено окно выбора сертификата.
-
-*На уровень выше:* xref:../pages/samples_container.adoc[Сборник примеров]

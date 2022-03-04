@@ -2,12 +2,12 @@
 
 Определяет возможность создания копии узла в заданном узле конструктора справочников.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanCopyItemType(BaseUniversalItemType copiedItemType, BaseUniversalItemType targetItemType)
 ----
@@ -15,24 +15,22 @@ bool CanCopyItemType(BaseUniversalItemType copiedItemType, BaseUniversalItemType
 Параметры
 
 copiedItemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел, который проверяется на возможность копирования
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел, который проверяется на возможность копирования
 targetItemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел, который является получателем копии
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел, который является получателем копии
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - копирование допустимо, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - копирование допустимо, иначе false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр copiedItemType.
@@ -41,5 +39,3 @@ targetItemType::
 == Заметки
 
 Метод проходит дерево от targetItemType до его родительского узла, проверяя наличии copiedItemType среди родительских узлов.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

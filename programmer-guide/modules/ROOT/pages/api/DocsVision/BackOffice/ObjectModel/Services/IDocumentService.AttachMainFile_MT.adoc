@@ -2,12 +2,12 @@
 
 Загружает в документ основной файл.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 DocumentFile AttachMainFile(Document document, string fileName)
 ----
@@ -15,24 +15,22 @@ DocumentFile AttachMainFile(Document document, string fileName)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, к которому добавляется файл
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, к которому добавляется файл
 fileName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к загружаемому файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к загружаемому файлу
 
-Возвращаемое значение
-
-::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Объектная модель файла документа
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Объектная модель файла документа
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document.
@@ -44,5 +42,3 @@ fileName::
 == Заметки
 
 Данный метод, в отличии от метода [.keyword .apiname]#AddMainFile#, позволяет корректно загружать подписанные файлы.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

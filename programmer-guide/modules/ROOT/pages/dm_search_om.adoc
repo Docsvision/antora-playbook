@@ -1,8 +1,8 @@
 = Возможности поиска в контексте объектов
 
-[.dfn .term]_Контекст объектов_ предоставляет достаточно простой и функциональный механизм поисковых запросов - метод [.keyword .apiname]#FindObject# контекста объектов, принимающий тип искомого объекта.
+_Контекст объектов_ предоставляет достаточно простой и функциональный механизм поисковых запросов - метод [.keyword .apiname]#FindObject# контекста объектов, принимающий тип искомого объекта.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCard foundCard = objectContext.FindObject<BaseCard>(query);
 ----
@@ -11,11 +11,11 @@ BaseCard foundCard = objectContext.FindObject<BaseCard>(query);
 
 * objectContext - контекст объектов.
 * BaseCard - тип возвращаемого объекта. В качестве типа возвращаемого объекта может быть передан тип объектной модели карточки или строки.
-* query - поисковый запрос типа xref:../api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]
+* query - поисковый запрос типа xref:..xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]
 
-К примеру, для поиска в [.dfn .term]_Справочнике сотрудников_, сотрудника с определенной учетной записью, воспользуйтесь примером, приведенным далее, в котором параметры поискового запроса передаются непосредственно в конструктор класса [.keyword .apiname]#QueryObject#.
+К примеру, для поиска в _Справочнике сотрудников_, сотрудника с определенной учетной записью, воспользуйтесь примером, приведенным далее, в котором параметры поискового запроса передаются непосредственно в конструктор класса [.keyword .apiname]#QueryObject#.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Формируем поисковый запрос по полю AccountName
 QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "MYDOMAIN\\KukoffSA");
@@ -28,11 +28,11 @@ StaffEmployee employee = objectContext.FindObject<StaffEmployee>(query);
 
 * StaffEmployee.AccountNameProperty.Name - возвращает название поля, по которому выполняется поиск.
 * "MYDOMAIN\\KukoffSA" - искомое значение.
-* xref:../api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee] - класс (объектной модели) искомого объекта.
+* xref:..xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee] - класс (объектной модели) искомого объекта.
 
 Также возможно более сложные поисковые запросы, которые включают несколько критериев поиска. К примеру, далее приведен код запроса, выполняющего поиск контрагента по названию и типу (организация или подразделение).
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 QueryObject query = new QueryObject();
 
@@ -54,5 +54,3 @@ PartnersCompany partnersCompany = objectContext.FindObject<PartnersCompany>(quer
 == См. далее
 
 * xref:dm_exportimportprint.adoc[Экспорт, импорт и подготовка карточек к печати]
-
-*На уровень выше:* xref:../pages/dm_search.adoc[Поиск]

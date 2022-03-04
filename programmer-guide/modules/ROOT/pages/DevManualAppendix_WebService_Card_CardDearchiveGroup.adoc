@@ -27,18 +27,18 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 items::
-  Список идентификаторов карточек, извлекаемых из архива
+Список идентификаторов карточек, извлекаемых из архива
 options::
-  Флаг разархивирования карточки:
-  +
-  * 0 - без параметров
+Флаг разархивирования карточки:
++
+* 0 - без параметров
   * 1 - режим отложенной разархивации
   * 2 - извлечь из архива связанные карточки
   * 4 - извлечь из архива связанные файлы
 
-Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *items* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -97,5 +97,3 @@ body = """<?xml version="1.0" encoding="utf-8"?>
 # Отправляем SOAP-сообщение
 response = session.post(url, data=body)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

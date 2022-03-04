@@ -2,12 +2,12 @@
 
 Инициализирует электронную подпись и добавляет ее в список подписей.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardSignature AddSignature(SignatureList signatureList, X509Certificate2 certificate, string cardDescription, StatesState cardState)
 ----
@@ -15,32 +15,30 @@ BaseCardSignature AddSignature(SignatureList signatureList, X509Certificate2 cer
 Параметры
 
 signatureList::
-  Тип: xref:../SignatureList_CL.adoc[SignatureList]
-  +
-  Список подписей
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/SignatureList_CL.adoc[SignatureList]
++
+Список подписей
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат
 cardDescription::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Примечание к подписи
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Примечание к подписи
 cardState::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Состояние карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Состояние карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
-  +
-  Объект содержащий полную информацию по установленной ЭЦП
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
++
+Объект содержащий полную информацию по установленной ЭЦП
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signatureList.
@@ -49,5 +47,3 @@ cardState::
 == Заметки
 
 Если certificate не задан, то будет проставлена простая подпись.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

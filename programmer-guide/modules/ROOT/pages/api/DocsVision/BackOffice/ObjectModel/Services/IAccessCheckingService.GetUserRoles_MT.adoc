@@ -2,12 +2,12 @@
 
 Получает список ролей карточки для текущего сотрудника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<RoleModelRole> GetUserRoles(BaseCard card)
 ----
@@ -15,20 +15,18 @@ IEnumerable<RoleModelRole> GetUserRoles(BaseCard card)
 Параметры
 
 card::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка библиотеки "Базовые объекты"
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка библиотеки "Базовые объекты"
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<RoleModelRole>
-  +
-  Коллекция объектов типа xref:../RoleModelRole_CL.adoc[RoleModelRole]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<RoleModelRole>
++
+Коллекция объектов типа xref:api/DocsVision/BackOffice/ObjectModel/RoleModelRole_CL.adoc[RoleModelRole]
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Возникает при передаче в метод NULL.
@@ -37,5 +35,3 @@ card::
 == Заметки
 
 В первую очередь производиться поиск в локальном кэше. В случае возникновения ошибки, метод вернет пустую коллекцию.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService_IN.adoc[IAccessCheckingService - интерфейс]

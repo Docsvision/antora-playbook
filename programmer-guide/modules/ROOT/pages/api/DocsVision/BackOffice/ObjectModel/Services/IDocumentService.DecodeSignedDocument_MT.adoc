@@ -2,12 +2,12 @@
 
 Расшифровывает сообщение CMS/PKCS 7, которое содержится в файле, расположенном по указанному пути.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string DecodeSignedDocument(string filePath, Document document, out System.Security.Cryptography.Pkcs.SignedCms signedCms)
 ----
@@ -15,30 +15,28 @@ string DecodeSignedDocument(string filePath, Document document, out System.Secur
 Параметры
 
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к файлу с криптографическим сообщением
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к файлу с криптографическим сообщением
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, в который производится добавление содержимого сообщения. Если документ содержит основной файл с именем идентичным имени файла (без учета расширения p7s) загружаемого сообщения, то содержимое основного файла будет загружено в сообщение
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, в который производится добавление содержимого сообщения. Если документ содержит основной файл с именем идентичным имени файла (без учета расширения p7s) загружаемого сообщения, то содержимое основного файла будет загружено в сообщение
 signedCms::
-  Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
-  +
-  Сообщение CMS/PKCS 7. Если не было проинициализировано, то будет выполнена инициализация
+Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
++
+Сообщение CMS/PKCS 7. Если не было проинициализировано, то будет выполнена инициализация
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Расположение временного файла, содержащего расшифрованный объект
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Расположение временного файла, содержащего расшифрованный объект
 
 == Примеры
 
 Ниже приведен пример скрипта карточки, который запускает загрузку основного файла упакованного с подписью в криптографическое сообщение.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System.Security.Cryptography.Pkcs;
 using System.Windows.Forms;
@@ -77,5 +75,3 @@ namespace BackOffice
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

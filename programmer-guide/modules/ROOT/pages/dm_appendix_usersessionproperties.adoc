@@ -4,7 +4,7 @@
 
 Следующий код демонстрирует пример получения имени учетной записи текущего пользователя из пользовательской сессии.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
      
@@ -15,7 +15,7 @@ string accountName = userSession.Properties["AccountName"].Value.ToString()
 
 В следующей таблице перечислены стандартные свойства пользовательской сессии, список которых может отличаться в зависимости от текущего Решения.
 
-[width="100%",cols="50%,50%",options="header",]
+[width="100%",cols="50%,50%",options="header"]
 |===
 |Название свойства |Описание
 |AccountName |Имя учетной записи текущего пользователя.
@@ -26,7 +26,7 @@ string accountName = userSession.Properties["AccountName"].Value.ToString()
 |CacheMode |Режим кэширования данных карточек на клиенте.
 |CardPoolSize |Количество карточек в кэше ObjectManager.
 |ClearCacheFrom |Дата последней очистки клиентского кэша.
-|ClientVersion |Версия клиентских компонент. Определяется по версии сборки [.ph .filepath]`ObjectManager.dll`.
+|ClientVersion |Версия клиентских компонент. Определяется по версии сборки `ObjectManager.dll`.
 |Compression |Флаг, указывающий используется или нет сжатие при передаче данных по сети.
 |ComputerAddress |IP-адрес клиентского компьютера.
 |ComputerName |Имя клиентского компьютера.
@@ -58,7 +58,7 @@ string accountName = userSession.Properties["AccountName"].Value.ToString()
 |ServerName |Имя компьютера, на котором расположен сервер Docsvision.
 |ServerTime |Текущее время на сервере Docsvision.
 |ServerUrl |URL к корню WEB-сервера.
-|ServerVersion |Версия сервера Docsvision. Определяется по версии сборки [.ph .filepath]`DocsVision.StorageServer.dll`.
+|ServerVersion |Версия сервера Docsvision. Определяется по версии сборки `DocsVision.StorageServer.dll`.
 |SimpleOperationsTimeout |Время отклика сервера для стандартной операции. Проверяется при включенном контроле сети.
 |Timeout |Величина максимального времени (в мс) ожидания ответа сервера Docsvision при установке соединения или выполнении операций.
 |UpdateLimit |Дата окончания срока действия возможности обновления сервера.
@@ -66,5 +66,3 @@ string accountName = userSession.Properties["AccountName"].Value.ToString()
 |UseSectionDelayedRefresh |Флаг, указывающий, что включено отложенное обновлений секций.
 |UseStreaming |Флаг, указывающий на использования потокового способа работы с файлами.
 |===
-
-*На уровень выше:* xref:../pages/dm_appendix.adoc[Приложение]

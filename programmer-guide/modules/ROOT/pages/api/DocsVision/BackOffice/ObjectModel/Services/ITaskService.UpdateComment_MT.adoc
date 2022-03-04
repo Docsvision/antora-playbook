@@ -2,12 +2,12 @@
 
 Обновляет содержимое комментария
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void UpdateComment(TaskComment comment, string text)
 ----
@@ -15,21 +15,19 @@ void UpdateComment(TaskComment comment, string text)
 Параметры
 
 comment::
-  Тип: xref:../TaskComment_CL.adoc[TaskComment]
-  +
-  Комментария к заданию
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskComment_CL.adoc[TaskComment]
++
+Комментария к заданию
 text::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Новое содержимое комментария
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Новое содержимое комментария
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр comment или text.
 |https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для изменения комментария.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

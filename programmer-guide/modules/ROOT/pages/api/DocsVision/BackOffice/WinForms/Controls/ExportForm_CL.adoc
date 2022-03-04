@@ -2,19 +2,19 @@
 
 Класс ExportForm представляет форму экспорта и печати содержимого карточки, позволяет отправлять содержимое по электронной почте.
 
-* [.keyword]*Пространство имен:* xref:Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/Controls/Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class ExportForm : DevExpress.XtraEditors.XtraForm
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |public ExportForm() |Инициализирует новый экземпляр класса ExportForm.
@@ -22,7 +22,7 @@ public class ExportForm : DevExpress.XtraEditors.XtraForm
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Caption |Задает или возвращает тему письма, отправляемого из формы ExportForm.
@@ -41,7 +41,7 @@ public class ExportForm : DevExpress.XtraEditors.XtraForm
 . Используется `CardData` - диалог вызывается для существующей карточки. Параметры `CardXml`, `CardTypeId`, `Caption` указывать не требуется.
 . Используется `CardXml` - диалог вызывается для печати переданной Xml-строки. Параметр `CardData` указывать не требуется. Данный параметр доступен начиная с версии платформы 5.4.
 
-При печати собственного XML-документа список доступных пребразований печати и экспорта будет ограничен преобразованиями имеющими тип `Custom` (см. раздел xref:../../../../../pages/CardsDevDataSchemeSecTransformations.adoc[Раздел 'Transformations']).
+При печати собственного XML-документа список доступных пребразований печати и экспорта будет ограничен преобразованиями имеющими тип `Custom` (см. раздел xref:CardsDevDataSchemeSecTransformations.adoc[Раздел 'Transformations']).
 
 Не рекомендуется задавать значения `CardData` и `CardXml` одновременно, так как при этом возможно формирование некорректного списка преобразований.
 
@@ -49,7 +49,7 @@ public class ExportForm : DevExpress.XtraEditors.XtraForm
 
 Ниже приведен пример скрипта, вызываемого из карточки, который открывает окно экспорта и печати
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
@@ -68,7 +68,7 @@ private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemCl
 
 Далее приведен пример использования класса [.keyword .apiname]#ExportForm# при выводе на печать/экспорт собственного XML-документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
@@ -96,5 +96,3 @@ private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemCl
  }
 }       
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/WinForms/Controls/Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls - пространство имен]

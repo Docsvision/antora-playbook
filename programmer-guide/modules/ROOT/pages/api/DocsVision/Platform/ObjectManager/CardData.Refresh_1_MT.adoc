@@ -2,12 +2,12 @@
 
 Принудительное обновление данных карточки с сервера, независимо от наличия или отсутствия изменений
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void Refresh(bool ignoreTimestamp)
 ----
@@ -15,12 +15,10 @@ public abstract void Refresh(bool ignoreTimestamp)
 Параметры
 
 ignoreTimestamp::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
-  +
-  true - игнорировать отсутствие изменений; false - учитывать отсутствие изменений
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
++
+true - игнорировать отсутствие изменений; false - учитывать отсутствие изменений
 
 == Заметки
 
 При установке ignoreTimestamp в значение true, данные объектов будут получены с сервера в любом случае.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

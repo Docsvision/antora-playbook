@@ -2,12 +2,12 @@
 
 Возвращает письмо, подготовленное для отправки, с информацией о передаче задания на приемку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 MailNotificationInfo GetTaskAcceptanceMailNotificationInfo(Task task, string taskCardUrl)
 ----
@@ -15,28 +15,24 @@ MailNotificationInfo GetTaskAcceptanceMailNotificationInfo(Task task, string tas
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание
 taskCardUrl::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Ссылка на карточку для возможности открытия карточки по url
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Ссылка на карточку для возможности открытия карточки по url
 
-Возвращаемое значение
-
-::
-  Тип: xref:Entities/MailNotificationInfo_CL.adoc[MailNotificationInfo]
-  +
-  Сущность сообщения
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/MailNotificationInfo_CL.adoc[MailNotificationInfo]
++
+Сущность сообщения
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или taskCardUrl.
 |https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.PlatformNotSupportedException] |Ошибка возвращается в случае, если задание не находится в состоянии "На приемке".
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

@@ -2,12 +2,12 @@
 
 Удаление записей из журнала согласно заданному фильтру.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public virtual void DeleteMessages(LogSearchQuery searchQuery)
 ----
@@ -15,20 +15,18 @@ public virtual void DeleteMessages(LogSearchQuery searchQuery)
 Параметры
 
 searchQuery::
-  Тип: xref:LogSearchQuery_CL.adoc[LogSearchQuery]
-  +
-  Фильтр
+Тип: xref:api/DocsVision/Platform/ObjectManager/LogSearchQuery_CL.adoc[LogSearchQuery]
++
+Фильтр
 
 == Примеры
 
 Ниже пример удаления сообщений за текущий день.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 LogSearchQuery search = new LogSearchQuery();
 search.CreatedAfter = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0));
 
 session.LogManager.DeleteMessages(search);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager - класс]

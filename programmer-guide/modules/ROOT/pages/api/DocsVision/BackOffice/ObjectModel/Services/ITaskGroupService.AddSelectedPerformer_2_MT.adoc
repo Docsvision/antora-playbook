@@ -2,12 +2,12 @@
 
 Добавляет группу в число выбранных исполнителей группы заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskGroupSelectedPerformer AddSelectedPerformer(TaskGroup routeStage, StaffGroup group)
 ----
@@ -15,27 +15,23 @@ TaskGroupSelectedPerformer AddSelectedPerformer(TaskGroup routeStage, StaffGroup
 Параметры
 
 routeStage::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Группа заданий, в список выбранных исполнителей которой добавляется сотрудник
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Группа заданий, в список выбранных исполнителей которой добавляется сотрудник
 group::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Группа сотрудников
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Группа сотрудников
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskGroupSelectedPerformer_CL.adoc[TaskGroupSelectedPerformer]
-  +
-  Выбранный исполнитель
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroupSelectedPerformer_CL.adoc[TaskGroupSelectedPerformer]
++
+Выбранный исполнитель
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр routeStage или group.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]

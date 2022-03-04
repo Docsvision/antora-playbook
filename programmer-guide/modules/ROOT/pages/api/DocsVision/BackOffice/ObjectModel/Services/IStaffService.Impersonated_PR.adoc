@@ -2,25 +2,21 @@
 
 Возвращает признак того, что при вызове методов сервиса будет использоваться принудительно установленная учетная запись сотрудника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool Impersonated { get; }
 ----
 
-Значение свойства
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - если владелец-сотрудник контекста был установлен принудительно, иначе false
+Значение свойства::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - если владелец-сотрудник контекста был установлен принудительно, иначе false
 
 == Заметки
 
-Установка владельца контекста производится с использованием метода xref:IStaffService.SetCurrentEmployee_MT.adoc[IStaffService.SetCurrentEmployee].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
+Установка владельца контекста производится с использованием метода xref:api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.SetCurrentEmployee_MT.adoc[IStaffService.SetCurrentEmployee].

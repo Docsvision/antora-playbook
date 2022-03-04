@@ -3,10 +3,10 @@
 [cols=",",]
 |===
 |Назначение |Предназначена для хранения информации о расписании работы сотрудников (количество рабочих дней, рабочих часов и др.) на определенный период времени.
-|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Calendar_CL.adoc[DocsVision.BackOffice.ObjectModel.Calendar]
+|Класс карточки |xref:..xref:api/DocsVision/BackOffice/ObjectModel/Calendar_CL.adoc[DocsVision.BackOffice.ObjectModel.Calendar]
 |===
 
-Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService]. Сервис предоставляет следующие операции:
+Для работы с карточкой предназначен сервис xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService]. Сервис предоставляет следующие операции:
 
 * добавление рабочих дат в бизнес-календарь;
 * добавление рабочего время;
@@ -14,7 +14,7 @@
 
 В примере создается бизнес-календарь в котором все пятницы 2014 года объявляются сокращенными (рабочее время с 10 до 15 часов). По созданному календарю будет работать текущий пользователь. Дополнительных проверок не проводим.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -65,5 +65,3 @@ staffService.GetCurrentEmployee().CalendarID = cardData.Id;
 //сохранение всех изменений
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

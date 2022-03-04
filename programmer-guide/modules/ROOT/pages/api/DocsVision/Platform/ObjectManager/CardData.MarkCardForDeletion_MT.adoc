@@ -2,12 +2,12 @@
 
 Требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void MarkCardForDeletion(Guid cardId)
 ----
@@ -15,12 +15,10 @@ public abstract void MarkCardForDeletion(Guid cardId)
 Параметры
 
 cardId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор удаляемой карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор удаляемой карточки
 
 == Заметки
 
 При отмене пакета изменений (в режиме отложенных изменений), карточка будет автоматически удалена. Этот метод позволяет избавить разработчика от необходимости самому следить за жизненным циклом объектов, которые он создает в режиме отложенных изменений.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData - класс]

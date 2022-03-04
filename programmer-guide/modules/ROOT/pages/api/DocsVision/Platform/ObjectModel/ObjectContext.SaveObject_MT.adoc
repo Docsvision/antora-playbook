@@ -2,12 +2,12 @@
 
 Сохраняет изменения выбранного объекта.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public ObjectRef<T> SaveObject<T>(T objectInstance) where T : ObjectBase
 ----
@@ -15,25 +15,23 @@ public ObjectRef<T> SaveObject<T>(T objectInstance) where T : ObjectBase
 Параметры типа
 
 T::
-  Тип объекта
+Тип объекта
 
-Параметры
+*Параметры*
 
 objectInstance::
-  Тип: T
-  +
-  Сохраняемый объект
+Тип: T
++
+Сохраняемый объект
 
-Возвращаемое значение
-
-::
-  Тип: xref:ObjectRef_CL.adoc[ObjectRef<T>]
-  +
-  Ссылка на объект в [.dfn .term]_контексте объектов_
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectRef_CL.adoc[ObjectRef<T>]
++
+Ссылка на объект в _контексте объектов_
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
@@ -43,7 +41,7 @@ objectInstance::
 
 Ниже приведен пример создания и сохранения документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -59,5 +57,3 @@ document.Description = "Документ созданный из кода";
 // Сохранение изменений в контексте
 objectContext.SaveObject<Document>(document);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

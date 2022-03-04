@@ -2,12 +2,12 @@
 
 Выполняет поиск категории с заданным именем.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 CategoriesCategory FindCategoryByName(CategoriesCategory parentCategory, string name)
 ----
@@ -15,24 +15,22 @@ CategoriesCategory FindCategoryByName(CategoriesCategory parentCategory, string 
 Параметры
 
 parentCategory::
-  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
-  +
-  Категория, в которой осуществляется поиск
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
++
+Категория, в которой осуществляется поиск
 name::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название категории
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название категории
 
-Возвращаемое значение
-
-::
-  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
-  +
-  Искомая категория
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
++
+Искомая категория
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр name.
@@ -44,7 +42,7 @@ name::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -54,5 +52,3 @@ ICategoriesService categoriesService = objectContext.GetService<ICategoriesServi
 // Поиск категории с названием "Новая категория" (регистр не имеет значения) в корневой категории
 CategoriesCategory category = categoriesService.FindCategoryByName(null, "Новая категория");
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService - интерфейс]

@@ -7,7 +7,7 @@
 [.note__title]#Important:# Для использования собственного типа правил добавление в хранилище необходима лицензия на систему Docsvision с редакцией «Ecm».
 ====
 
-Компонент, реализующий правило добавления в хранилище, представляется собой библиотеку DLL с классом, реализующим интерфейсы xref:../api/DocsVision/Platform/StorageServer/IBinaryStorageRule_IN.adoc[IBinaryStorageRule] и xref:../api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
+Компонент, реализующий правило добавления в хранилище, представляется собой библиотеку DLL с классом, реализующим интерфейсы xref:..xref:api/DocsVision/Platform/StorageServer/IBinaryStorageRule_IN.adoc[IBinaryStorageRule] и xref:..xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
 
 Интерфейс IBinaryStorageRule определяет метод проверки выполнения условий помещения в хранилище. Интерфейс IExtensionInitialize определяет метод инициализации провайдера (Initialize), принимающий в сериализованном виде настройки хранилища. Настройки хранилища устанавливаются с помощью графического интерфейса настройки (рассмотрено далее).
 
@@ -18,7 +18,7 @@
 [[StorageRule__section_lrl_wmt_wlb]]
 == Пример
 
-Далее демонстрируется пример реализации правила помещения в хранилища в зависимости от установленного в настройках шаблона файлов. Исходный код примера доступен по xref:../examples/ruleByFileName.zip[ссылке].
+Далее демонстрируется пример реализации правила помещения в хранилища в зависимости от установленного в настройках шаблона файлов. Исходный код примера доступен по xref:example$/ruleByFileName.zip[ссылке].
 
 . Основной класс.
 +
@@ -26,7 +26,7 @@
 +
 Реализация компонента правила предполагает возможность его настройки с помощью Консоли настройки Docsvision. Для этого класс должен быть помечен атрибутом [.keyword .apiname]#System.ComponentModel.Editor#, в котором нужно указать полное название класс, реализующего форму настройки (описание будет приведено далее).
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using DocsVision.Platform.StorageServer.BinaryStorages.Rules;
 using DocsVision.Platform.StorageServer.Files;
@@ -80,7 +80,7 @@ namespace RuleByFileName
 +
 В данном примере предусмотрен стандартный способ настройки правила с помощью Консоли настройки Docsvision, который предполагает возможность ввода шаблона на странице настройки внешних хранилищ.
 
-image::img/storageRule.png[image]
+image::storageRule.png[image]
 +
 Для реализации данной функции нужно:
 
@@ -88,7 +88,7 @@ image::img/storageRule.png[image]
 .. Создать класс с формой настройки.
 .. Указать данный класс в атрибуте [.keyword .apiname]#Editor# основного класса правила помещения в хранилище.
 +
-Класс с формой настройки представляется собой компонент типа [.keyword .apiname]#System.Windows.Forms.UserControl# с реализованным программным интерфейсом link:../api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl]. Далее приведён код примера данного класса.
+Класс с формой настройки представляется собой компонент типа [.keyword .apiname]#System.Windows.Forms.UserControl# с реализованным программным интерфейсом xref:..xref:api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl]. Далее приведён код примера данного класса.
 
 [source,pre,codeblock]
 ----
@@ -143,7 +143,7 @@ namespace RuleByUser
 +
 Пример формы настройки:
 
-image::img/storageRuleForm.png[image]
+image::storageRuleForm.png[image]
 +
 У класса формы две основных задачи:
 
@@ -156,7 +156,7 @@ image::img/storageRuleForm.png[image]
 Разработанный компонент должен быть подписан. Это необходимо для формирования полного имени сборки и регистрации компонента в GAC.
 . Регистрация компонента в GAC.
 +
-Собранный компонент, включающий основной класс и класс формы настройки, должен быть зарегистрирован в GAC сервера Docsvision. Для регистрации используйте [.ph .filepath]`gacutil`.
+Собранный компонент, включающий основной класс и класс формы настройки, должен быть зарегистрирован в GAC сервера Docsvision. Для регистрации используйте `gacutil`.
 
 == Проверка
 
@@ -174,4 +174,3 @@ image::img/storageRuleForm.png[image]
 .. Сохраните настройки.
 . Создайте карточку и добавьте файл с названием, соответствующим указанному в правиле «Шаблон файла» шаблону. Файл будет сохранён в хранилище из группы хранилищ, указанных при настройке правила «Шаблон файла».
 
-*Parent topic:* xref:../pages/ExternalStorages.adoc[Внешние хранилища]

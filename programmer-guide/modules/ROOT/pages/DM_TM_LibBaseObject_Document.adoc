@@ -3,10 +3,10 @@
 [cols=",",]
 |===
 |Назначение |Карточки данного типа предназначены для работы с файлами: хранения файлов в различных форматах, предварительный просмотр, учет версий, экспорта в различные форматы, наложение электронно-цифровых подписей в формате p7s.
-|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[DocsVision.BackOffice.ObjectModel.Document]
+|Класс карточки |xref:..xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[DocsVision.BackOffice.ObjectModel.Document]
 |===
 
-Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService], с помощью которого можно выполнять различные операции с документом, начиная с создания документа, и заканчивая работой с файлами и подписями документа.
+Для работы с карточкой предназначен сервис xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService], с помощью которого можно выполнять различные операции с документом, начиная с создания документа, и заканчивая работой с файлами и подписями документа.
 
 Доступные операции:
 
@@ -21,7 +21,7 @@
 * Контекст объектов может быть получен в соответствии с примером, приведенным в разделе xref:DM_FullContextInit.adoc[Инициализация контекста объектов].
 * Сервисы получаем стандартным способом:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IDocumentService documentService = objectContext.GetService<IDocumentService>(); //сервис для работы с документами
 ILinkService linkService = objectContext.GetService<ILinkService>(); //сервис для работы со Справочником ссылок
@@ -33,7 +33,7 @@ IStateService stateService = objectContext.GetService<IStateService>(); //сер
 
 == Создание нового Документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void CreateDocument()
 {
@@ -52,7 +52,7 @@ static void CreateDocument()
 
 == Добавление основного файла в Документ
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void AddFile()
 {
@@ -69,7 +69,7 @@ static void AddFile()
 
 == Добавление в Документ ссылки на другую карточку
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void AddLink()
 {
@@ -87,7 +87,7 @@ static void AddLink()
 
 == Смена состояния Документа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void ChangeDocumentState()
 {
@@ -104,7 +104,7 @@ static void ChangeDocumentState()
 
 == Подписание Документа и основных файлов
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void SignDocument()
 {
@@ -119,5 +119,3 @@ static void SignDocument()
  objectContext.SaveObject(document);   
 }
 ----
-
-*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

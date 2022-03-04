@@ -2,12 +2,12 @@
 
 Добавляет указанного сотрудника в группу сотрудников.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffGroupItem AddEmployeeToGroup(StaffGroup group, StaffEmployee employee)
 ----
@@ -15,24 +15,22 @@ StaffGroupItem AddEmployeeToGroup(StaffGroup group, StaffEmployee employee)
 Параметры
 
 group::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Группа, в которую включается сотрудника
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Группа, в которую включается сотрудника
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Добавляемый сотрудник
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Добавляемый сотрудник
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffGroupItem_CL.adoc[StaffGroupItem]
-  +
-  Сотрудник, включенный в группу
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroupItem_CL.adoc[StaffGroupItem]
++
+Сотрудник, включенный в группу
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group или employee.
@@ -40,7 +38,7 @@ employee::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -57,5 +55,3 @@ StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-0000
 staffService.AddEmployeeToGroup(group, employee);
 objectContext.SaveObject(group);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

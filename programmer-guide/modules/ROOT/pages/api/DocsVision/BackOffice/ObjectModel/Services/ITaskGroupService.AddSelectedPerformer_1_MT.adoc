@@ -2,12 +2,12 @@
 
 Добавляет поисковое слово в число выбранных исполнителей группы заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskGroupSelectedPerformer AddSelectedPerformer(TaskGroup routeStage, Guid searchWordId)
 ----
@@ -15,24 +15,22 @@ TaskGroupSelectedPerformer AddSelectedPerformer(TaskGroup routeStage, Guid searc
 Параметры
 
 routeStage::
-  Тип: xref:../TaskGroup_CL.adoc[TaskGroup]
-  +
-  Группа заданий, в список выбранных исполнителей которой добавляется сотрудник
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroup_CL.adoc[TaskGroup]
++
+Группа заданий, в список выбранных исполнителей которой добавляется сотрудник
 searchWordId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор поискового слова
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор поискового слова
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskGroupSelectedPerformer_CL.adoc[TaskGroupSelectedPerformer]
-  +
-  Выбранный исполнитель
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskGroupSelectedPerformer_CL.adoc[TaskGroupSelectedPerformer]
++
+Выбранный исполнитель
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр routeStage.
@@ -40,6 +38,4 @@ searchWordId::
 
 == Заметки
 
-Идентификаторы основных поисковых слов предоставляет класс xref:Entities/PerformerSearchWordsManager_CL.adoc[PerformerSearchWordsManager].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService - интерфейс]
+Идентификаторы основных поисковых слов предоставляет класс xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/PerformerSearchWordsManager_CL.adoc[PerformerSearchWordsManager].

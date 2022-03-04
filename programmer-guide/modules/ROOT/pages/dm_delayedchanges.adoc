@@ -2,11 +2,11 @@
 
 == Отложенные изменения в базовом API
 
-При изменения данных в обычном режиме работы автоматически вызывается серверный метод, отвечающий за запись изменений в базу данных. Такой вызов будет выполнен при каждом изменении значения поля карточки, что может привести к значительным накладным расходам при большом количестве изменений. Для оптимизации подобных сценариев, связанных с изменением большого количества значений, предусмотрен т.н. [.dfn .term]_режим отложенных изменений_, при котором все изменения накапливаются на клиентской стороне и передаются на сервер одним вызовом.
+При изменения данных в обычном режиме работы автоматически вызывается серверный метод, отвечающий за запись изменений в базу данных. Такой вызов будет выполнен при каждом изменении значения поля карточки, что может привести к значительным накладным расходам при большом количестве изменений. Для оптимизации подобных сценариев, связанных с изменением большого количества значений, предусмотрен т.н. _режим отложенных изменений_, при котором все изменения накапливаются на клиентской стороне и передаются на сервер одним вызовом.
 
-Режим отложенных изменений устанавливается вызовом у объекта, реализующего интерфейс xref:../api/DocsVision/Platform/ObjectManager/IUpdatable_IN.adoc[IUpdatable], метода [.keyword .apiname]#BeginUpdate#:
+Режим отложенных изменений устанавливается вызовом у объекта, реализующего интерфейс xref:..xref:api/DocsVision/Platform/ObjectManager/IUpdatable_IN.adoc[IUpdatable], метода [.keyword .apiname]#BeginUpdate#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение данных карточки
 CardData card = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"));
@@ -17,28 +17,28 @@ card.BeginUpdate();
 
 После того, как в карточку были внесены изменения, их нужно зафиксировать в базе данных, вызвав метод [.keyword .apiname]#EndUpdate#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 card.EndUpdate();
 ----
 
 Также существует возможность отменить несохраненные изменения, вызвав метод [.keyword .apiname]#CancelUpdate#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 card.CancelUpdate();
 ----
 
 Режим отложенных изменений поддерживает не только карточка, но и другие объекты, реализующие интерфейс [.keyword .apiname]#IUpdatable#. Общий список таких объектов следующий:
 
-* xref:../api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData];
-* xref:../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData];
-* xref:../api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData];
-* xref:../api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData];
-* xref:../api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection];
-* xref:../api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[FileData]
-* xref:../api/DocsVision/Platform/ObjectManager/SystemCards/Folder_CL.adoc[Folder]
-* xref:../api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut]
+* xref:..xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData];
+* xref:..xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData];
+* xref:..xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData];
+* xref:..xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData];
+* xref:..xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection];
+* xref:..xref:api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[FileData]
+* xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder_CL.adoc[Folder]
+* xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut]
 
 У данного режима есть несколько важных особенностей:
 
@@ -59,9 +59,9 @@ API уровня бизнес-логики по умолчанию работа�
 
 Для работы с отложенными изменения на данном уровне API предусмотрено несколько методов:
 
-* xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges] - сохраняет все изменения в контексте объектов:
+* xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges] - сохраняет все изменения в контексте объектов:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение карточки
 BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000000"));
@@ -78,30 +78,28 @@ otherCard.Description = "Новое описание для другой кар�
 // Сохранение всех изменений контекста объектов
 objectContext.AcceptChanges();
 ----
-* xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.SaveObject_1_MT.adoc[ObjectContext.SaveObject] - сохраняет изменения одного конкретного объекта:
+* xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.SaveObject_1_MT.adoc[ObjectContext.SaveObject] - сохраняет изменения одного конкретного объекта:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Сохраняем изменения в измененном объекте card
 objectContext.SaveObject(card);
 ----
-* xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.RollbackChanges_MT.adoc[ObjectContext.RollbackChanges] - отменяет все несохраненные изменения контекста объектов:
+* xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollbackChanges_MT.adoc[ObjectContext.RollbackChanges] - отменяет все несохраненные изменения контекста объектов:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 objectContext.RollbackChanges();
 ----
-* xref:../api/DocsVision/Platform/ObjectModel/ObjectContext.RollBackObject_MT.adoc[ObjectContext.RollBackObject] - отменяет несохраненные изменения одного объекта:
+* xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollBackObject_MT.adoc[ObjectContext.RollBackObject] - отменяет несохраненные изменения одного объекта:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 objectContext.RollBackObject(card);
 ----
 
-Контекст объектов также предоставляет методы для сохранения и отмены изменения нескольких карточек. Полный список доступных методов см. в описании типа xref:../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext].
+Контекст объектов также предоставляет методы для сохранения и отмены изменения нескольких карточек. Полный список доступных методов см. в описании типа xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext].
 
 == См. также
 
 * xref:dm_eventlogs.adoc[Журналирование]
-
-*На уровень выше:* xref:../pages/dm_container.adoc[Руководство по разработке]

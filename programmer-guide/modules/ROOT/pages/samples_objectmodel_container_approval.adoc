@@ -2,10 +2,10 @@
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Для отправки документа на согласование с помощью API необходимо, чтобы в шаблоне, из которого создается согласование, был установлен флаг [.keyword]*Запускать согласование без показа карточки*. Также должен существовать режим создания согласования (в [.dfn .term]_Справочнике видов карточек_), который задействует данный шаблон.
+[.note__title]#Прим.:# Для отправки документа на согласование с помощью API необходимо, чтобы в шаблоне, из которого создается согласование, был установлен флаг *Запускать согласование без показа карточки*. Также должен существовать режим создания согласования (в _Справочнике видов карточек_), который задействует данный шаблон.
 ====
 
-. Подключите к проекту или скрипту карточки дополнительные сборки: [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll` и [.ph .filepath]`DocsVision.DocumentsManagement.ObjectModel.dll`, в которых определены преобразователь данных и сервис для отправки согласования.
+. Подключите к проекту или скрипту карточки дополнительные сборки: `DocsVision.ApprovalDesigner.ObjectModel.dll` и `DocsVision.DocumentsManagement.ObjectModel.dll`, в которых определены преобразователь данных и сервис для отправки согласования.
 . Подключите дополнительные пространства имен:
 * DocsVision.ApprovalDesigner.ObjectModel.Mapping
 * DocsVision.ApprovalDesigner.ObjectModel.Services
@@ -15,7 +15,7 @@
 * System.Linq
 . Подключите в коде сервисы и преобразователи данных для работы с согласованием:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Добавляем в контекст фабрику ApprovalDesignerServiceFactory
 IServiceFactoryRegistry serviceFactoryRegistry = context.GetService<IServiceFactoryRegistry>();
@@ -44,18 +44,16 @@ KindsCardCreationSetting cardCreationSetting = cardKind.CreationSettings.FirstOr
 ----
 . Создайте новое согласование для документа:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Guid reconciliationId = context.GetService<IReconcileService>().CreateReconciliationCard(initialCardId, cardCreationSetting);
 ----
 . Вызовите метод HandleDocumentAfterReconcileCreated, который завершит подготовку согласования и запустит его:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 CardData reconciliationCardData = Session.CardManager.GetCardData(reconciliationId);
 context.GetService<IReconcileService>().HandleDocumentAfterReconcileCreated((Document)this.BaseObject, reconciliationCardData);
 ----
 +
 Приведенным способом можно отправлять документы на согласование из скрипта карточки или из внешнего приложения.
-
-*На уровень выше:* xref:../pages/samples_objectmodel_container.adoc[Использование объектной модели уровня бизнес-логики]

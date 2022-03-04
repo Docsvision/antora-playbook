@@ -1,20 +1,20 @@
 = VersionedFileCard - класс
 
-Реализует логику карточки [.keyword]*файл с версиями*.
+Реализует логику карточки *файл с версиями*.
 
-* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class VersionedFileCard : SystemCard
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Barcode |Возвращает или задает код файла в строчном формате.
@@ -33,7 +33,7 @@ public abstract class VersionedFileCard : SystemCard
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CheckIn(String, Int32, Boolean, Boolean) |Снимет постоянную блокировку и создает новую версию файла.
@@ -44,5 +44,3 @@ public abstract class VersionedFileCard : SystemCard
 |Initialize(String, Guid, Boolean, Boolean) |Создание новой карточки на базе содержимого файла, и создание первой версии.
 |UndoCheckout |Отменяет режим единоличного владения файлом.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]

@@ -2,12 +2,12 @@
 
 Создает экземпляр нового документа с указанным видом, с основным файлом.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 [WorkflowVisible(WorkflowVisibility.Visible)]
 Document CreateDocument(string filePath, KindsCardKind kind)
@@ -16,24 +16,22 @@ Document CreateDocument(string filePath, KindsCardKind kind)
 Параметры
 
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Путь к основному файлу
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Путь к основному файлу
 kind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Экземпляр карточки Документ
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Экземпляр карточки Документ
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -52,5 +50,3 @@ document.Description = "Пример документа";
 // Сохранение изменений в контексте
 objectContext.SaveObject(document);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

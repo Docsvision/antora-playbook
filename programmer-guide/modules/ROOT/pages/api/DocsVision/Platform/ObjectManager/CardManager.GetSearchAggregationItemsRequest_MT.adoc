@@ -2,13 +2,13 @@
 
 Возвращает результат агрегации.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 [[GetSearchAggregationItemsRequest_MT__section_jct_3ds_mpb]]
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public virtual SearchAggregationItemsRequest GetSearchAggregationItemsRequest(SearchAggregationItemsResultType resultType, Guid folderId, Guid queryId, string queryXml, int? localeId)
 ----
@@ -17,36 +17,34 @@ public virtual SearchAggregationItemsRequest GetSearchAggregationItemsRequest(Se
 Параметры
 
 resultType::
-  Тип: xref:SearchModel/SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType]
-  +
-  Тип получаемого результата.
+Тип: xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType]
++
+Тип получаемого результата.
 folderId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор папки-хранилища для сохранения результатов фильтрации.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор папки-хранилища для сохранения результатов фильтрации.
 
 queryId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор поиска. Альтернатива `QueryXml`. Если он не `Guid.Empty`, будет использоваться именно сохранённый запрос.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор поиска. Альтернатива `QueryXml`. Если он не `Guid.Empty`, будет использоваться именно сохранённый запрос.
 
 queryXml::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Xml поиска. Должно быть заполнено как минимум поле QueryString полнотекстового поиска. Также могут быть использованы любые другие части - как и сам атрибутивный поиск, так и ограничения по результатам (ограничение на папку например).
-  +
-  `QueryXml` можно не заполнять, но в таком случае не будет заполнена папка результатами поиска, но список агрегатов вернётся.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Xml поиска. Должно быть заполнено как минимум поле QueryString полнотекстового поиска. Также могут быть использованы любые другие части - как и сам атрибутивный поиск, так и ограничения по результатам (ограничение на папку например).
++
+`QueryXml` можно не заполнять, но в таком случае не будет заполнена папка результатами поиска, но список агрегатов вернётся.
 
 localeId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Номер локализации в которой необходимо вернуть имя агрегации. Если значение не задано или не найдено в настройках агрегата, будет использоваться английская локаль. Если английская локаль не найдена, будет использоваться первая найденная. Если никакие настройки не заданы, в качестве значения будет использоваться алиас агрегата.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Номер локализации в которой необходимо вернуть имя агрегации. Если значение не задано или не найдено в настройках агрегата, будет использоваться английская локаль. Если английская локаль не найдена, будет использоваться первая найденная. Если никакие настройки не заданы, в качестве значения будет использоваться алиас агрегата.
 
 Возвращаемое значение:
 
 ::
-  Тип: xref:SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest]
-  +
-  Возвращает
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]
+Тип: xref:api/DocsVision/Platform/ObjectManager/SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest]
++
+Возвращает

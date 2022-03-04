@@ -2,45 +2,43 @@
 
 Разрешает для объекта режим отложенной записи.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IUpdatable
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IUpdatable.InUpdate_PR.adoc[InUpdate] |При переопределении в производном классе возвращает признак включения для объекта режима отложенных изменения.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.InUpdate_PR.adoc[InUpdate] |При переопределении в производном классе возвращает признак включения для объекта режима отложенных изменения.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IUpdatable.BeginUpdate_MT.adoc[BeginUpdate] |При переопределении в производном классе включает режим отложенных изменений.
-|xref:IUpdatable.CancelUpdate_MT.adoc[CancelUpdate] |При переопределении в производном классе отменяет несохраненные изменения и выключает режим отложенных изменений.
-|xref:IUpdatable.EndUpdate_MT.adoc[EndUpdate] |При переопределении в производном классе отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
-|xref:IUpdatable.MarkCardForDeletion_MT.adoc[MarkCardForDeletion(Guid)] |При переопределении в производном классе требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
-|xref:IUpdatable.UpdateNow_MT.adoc[UpdateNow] |При переопределении в производном классе позволяет отправить накопленные изменения на сервер.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.BeginUpdate_MT.adoc[BeginUpdate] |При переопределении в производном классе включает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.CancelUpdate_MT.adoc[CancelUpdate] |При переопределении в производном классе отменяет несохраненные изменения и выключает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.EndUpdate_MT.adoc[EndUpdate] |При переопределении в производном классе отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.MarkCardForDeletion_MT.adoc[MarkCardForDeletion(Guid)] |При переопределении в производном классе требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/IUpdatable.UpdateNow_MT.adoc[UpdateNow] |При переопределении в производном классе позволяет отправить накопленные изменения на сервер.
 |===
 
 == Заметки
 
-Подробнее о данном режиме читайте в разделе xref:../../../../pages/dm_delayedchanges.adoc[Режим отложенных изменений].
+Подробнее о данном режиме читайте в разделе xref:dm_delayedchanges.adoc[Режим отложенных изменений].
 
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.InUpdate_PR.adoc[IUpdatable.InUpdate - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.BeginUpdate_MT.adoc[IUpdatable.BeginUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.CancelUpdate_MT.adoc[IUpdatable.CancelUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.EndUpdate_MT.adoc[IUpdatable.EndUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.MarkCardForDeletion_MT.adoc[IUpdatable.MarkCardForDeletion - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/IUpdatable.UpdateNow_MT.adoc[IUpdatable.UpdateNow - метод]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.InUpdate_PR.adoc[IUpdatable.InUpdate - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.BeginUpdate_MT.adoc[IUpdatable.BeginUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.CancelUpdate_MT.adoc[IUpdatable.CancelUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.EndUpdate_MT.adoc[IUpdatable.EndUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.MarkCardForDeletion_MT.adoc[IUpdatable.MarkCardForDeletion - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/IUpdatable.UpdateNow_MT.adoc[IUpdatable.UpdateNow - метод]* +

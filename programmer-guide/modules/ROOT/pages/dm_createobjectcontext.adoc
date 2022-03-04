@@ -7,17 +7,17 @@
 
 Для инициализации контекста объектов потребуется:
 
-. Получить экземпляр класса xref:../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext] - сущность контекста объектов.
+. Получить экземпляр класса xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext] - сущность контекста объектов.
 . Используя платформенные сервисы, загрузить в контекст объектов xref:dm_mappers.adoc[преобразователи данных] и xref:dm_services.adoc[необходимые сервисы].
 
 [NOTE]
 ====
-[.note__title]#Важное замечание:# Создание и инициализация [.dfn .term]_контекста объектов_ - достаточно затратная, с точки зрения потребления аппаратных ресурсов, операция. Рекомендуется использовать созданный и проинициализированный [.dfn .term]_контекст объектов_, а не создавать новый.
+[.note__title]#Важное замечание:# Создание и инициализация _контекста объектов_ - достаточно затратная, с точки зрения потребления аппаратных ресурсов, операция. Рекомендуется использовать созданный и проинициализированный _контекст объектов_, а не создавать новый.
 ====
 
 Далее приведен полный код инициализации контекста объектов для возможности работы с системными карточками и карточками библиотеки "Базовые объекты".
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 ObjectContext CreateObjectContext(UserSession userSession)
 {
@@ -49,16 +49,16 @@ ObjectContext CreateObjectContext(UserSession userSession)
 Для использования приведенных в коде типов потребуется:
 
 . Добавить в проект сборки Docsvision:
-* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
-* [.ph .filepath]`DocsVision.Platform.SystemCards.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* `DocsVision.Platform.ObjectModel.dll`
+* `DocsVision.Platform.ObjectManager.dll`
+* `DocsVision.Platform.SystemCards.ObjectModel.dll`
+* `DocsVision.BackOffice.ObjectModel.dll`
+* `DocsVision.Platform.StorageServer.dll`
 +
 Указанные DLL-файлы входят в состав клиента и сервера Docsvision.
 . Подключить пространства имен:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using DocsVision.BackOffice.ObjectModel;
 using DocsVision.BackOffice.ObjectModel.Mapping;
@@ -76,5 +76,3 @@ using System.ComponentModel.Design;
 == См. также
 
 * xref:dm_cards.adoc[Работа с карточками]
-
-*На уровень выше:* xref:../pages/dm_container.adoc[Руководство по разработке]

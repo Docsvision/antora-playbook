@@ -1,13 +1,13 @@
 = IDocumentService.SyncPropertiesToFile - метод (Document, DocumentFile, IList<IDocumentPropertySetting>)
 
-Выполняет синхронизацию значений полей карточки [.dfn .term]_Документ_ со свойствами основного файла данного документа. Передача осуществляется в сторону вложенного файла.
+Выполняет синхронизацию значений полей карточки _Документ_ со свойствами основного файла данного документа. Передача осуществляется в сторону вложенного файла.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool SyncPropertiesToFile(Document document, DocumentFile file, IList<IDocumentPropertySetting> propertySettings)
 ----
@@ -15,28 +15,26 @@ bool SyncPropertiesToFile(Document document, DocumentFile file, IList<IDocumentP
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 propertySettings::
-  Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<IDocumentPropertySetting>
-  +
-  Синхронизируемые свойства документа
+Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<IDocumentPropertySetting>
++
+Синхронизируемые свойства документа
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Значение всегда false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Значение всегда false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
@@ -44,7 +42,7 @@ propertySettings::
 
 == Заметки
 
-Параметры синхронизации полей карточки и свойств основного документа задаются в [.dfn .term]_Справочнике видов карточек_.
+Параметры синхронизации полей карточки и свойств основного документа задаются в _Справочнике видов карточек_.
 
 Синхронизация производится только с файлами MS Office.
 
@@ -52,7 +50,7 @@ propertySettings::
 
 Ниже приведен пример использования метода [.keyword .apiname]#SyncPropertiesToFile# при синхронизации названия документа со свойствами основного файла, привязаного к документу
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -73,5 +71,3 @@ IList<IDocumentPropertySetting> setting = documentSetting.Properties.Cast<IDocum
 // Передача названия карточки в файл
 documentService.SyncPropertiesToFile(document, document.Files.First(t => t.FileType = DocumentFileType.Main), setting);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

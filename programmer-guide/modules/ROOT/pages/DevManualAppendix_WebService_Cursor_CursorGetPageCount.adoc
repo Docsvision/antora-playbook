@@ -26,9 +26,9 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Cur
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 cursorId::
-  Идентификатор открытого серверного курсора
+Идентификатор открытого серверного курсора
 
 == Ответ
 
@@ -73,5 +73,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext( ".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}count"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Cursor.adoc[Курсоры]

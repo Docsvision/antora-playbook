@@ -2,12 +2,12 @@
 
 Формирует во внешнем хранилище путь к добавляемому файлу.
 
-* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/StorageServer/StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string Create(IFileInfo fileInfo, StoragePartitionType onPartition = StoragePartitionType.Primary)
 ----
@@ -15,23 +15,19 @@ string Create(IFileInfo fileInfo, StoragePartitionType onPartition = StoragePart
 Параметры
 
 fileInfo::
-  Тип: xref:Files/IFileInfo_IN.adoc[IFileInfo]
-  +
-  Информация о файле
+Тип: xref:api/DocsVision/Platform/StorageServer/Files/IFileInfo_IN.adoc[IFileInfo]
++
+Информация о файле
 onPartition::
-  Тип: xref:StoragePartitionType_EN.adoc[StoragePartitionType]
-  +
-  Раздела хранилища, в который записывается файл
+Тип: xref:api/DocsVision/Platform/StorageServer/StoragePartitionType_EN.adoc[StoragePartitionType]
++
+Раздела хранилища, в который записывается файл
 
-Возвращаемое значение
-
-::
-  Тип: System.String
-  +
-  Уникальный идентификатор файла в хранилище
+Возвращаемое значение::
+Тип: System.String
++
+Уникальный идентификатор файла в хранилище
 
 == Заметки
 
-Метод Create не записывает бинарные данные во внешнее хранилище, а только возвращает уникальный идентификатор для файла в данном хранилище. По полученному идентификатору Docsvision будет получать файл из хранилища. Способ формирования идентификатора определяется программистом. Запись бинарных данных в хранилище осуществляет метод xref:IBinaryStorage.Write_MT.adoc[Write].
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage - интерфейс]
+Метод Create не записывает бинарные данные во внешнее хранилище, а только возвращает уникальный идентификатор для файла в данном хранилище. По полученному идентификатору Docsvision будет получать файл из хранилища. Способ формирования идентификатора определяется программистом. Запись бинарных данных в хранилище осуществляет метод xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Write_MT.adoc[Write].

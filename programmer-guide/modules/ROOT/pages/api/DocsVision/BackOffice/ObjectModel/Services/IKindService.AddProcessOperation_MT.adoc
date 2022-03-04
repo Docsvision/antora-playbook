@@ -2,12 +2,12 @@
 
 Добавляет бизнес-процесс к списку процессов, привязанных к операциям в карточке определенного вида.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 KindsCardProcessOperation AddProcessOperation(KindsCardProcess process, StatesOperation operation)
 ----
@@ -15,27 +15,23 @@ KindsCardProcessOperation AddProcessOperation(KindsCardProcess process, StatesOp
 Параметры
 
 process::
-  Тип: xref:../KindsCardProcess_CL.adoc[KindsCardProcess]
-  +
-  Параметры связываемого бизнес-процесса
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
++
+Параметры связываемого бизнес-процесса
 operation::
-  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
-  +
-  Операция в карточке, приводящая к запуску бизнес-процесса
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
++
+Операция в карточке, приводящая к запуску бизнес-процесса
 
-Возвращаемое значение
-
-::
-  Тип: xref:../KindsCardProcessOperation_CL.adoc[KindsCardProcessOperation]
-  +
-  Операция процесса
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcessOperation_CL.adoc[KindsCardProcessOperation]
++
+Операция процесса
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр process или operation.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

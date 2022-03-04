@@ -2,19 +2,19 @@
 
 Определяет дополнительные методы взаимодействия с окном карточки.
 
-* [.keyword]*Пространство имен:* xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface ICardView
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |SaveChildCardOnClosing |Задает или возвращает признак принудительного сохранения подчиненных карточек при их закрытии.
@@ -22,12 +22,12 @@ public interface ICardView
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ActivateChildCard(Guid) |При переопределении в производном классе активирует подчиненную карточку с указанным идентификатором.
 |GetActivatedChildCards |Возвращает массив активированных подчиненных карточек.
-|GetActiveChildCard |При переопределении в производном классе возвращает объект типа xref:BaseCardControl_CL.adoc[BaseCardControl], представляющий активную дочернюю карточку.
+|GetActiveChildCard |При переопределении в производном классе возвращает объект типа xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], представляющий активную дочернюю карточку.
 |GetChildCardIds |Возвращает массив идентификаторов подчиненных карточек.
 |GetRibbonPages |При переопределении в производном классе возвращает массив страниц ленты инструментов.
 |GetSetting |При переопределении в производном классе возвращает настройки вида карточки. Требует приведения к нужному типу.
@@ -39,7 +39,7 @@ public interface ICardView
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ChildCardActivated |Событие возникает после активации компонента карточки.
@@ -47,8 +47,6 @@ public interface ICardView
 
 == Заметки
 
-Данный интерфейс реализуется классом xref:BaseCardControl_CL.adoc[DocsVision.BackOffice.WinForms.BaseCardControl].
+Данный интерфейс реализуется классом xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[DocsVision.BackOffice.WinForms.BaseCardControl].
 
 Под активацией карточки подразумевается активация компонента карточки, которая происходит при открытии карточки. При закрытии карточки её компонент остаётся активированным, т.е. в списке, возвращаемом методом [.keyword .apiname]#GetActivatedChildCards# будут присутствовать в т.ч. карточки, которые были закрыты.
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/WinForms/WinForms_NS.adoc[DocsVision.BackOffice.WinForms - пространство имен]

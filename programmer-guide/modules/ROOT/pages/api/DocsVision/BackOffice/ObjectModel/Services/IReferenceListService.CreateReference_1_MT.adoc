@@ -1,13 +1,13 @@
 = IReferenceListService.CreateReference - метод (ReferenceList, LinksLinkType, String)
 
-Добавляет ссылку на URL-адрес в [.dfn .term]_список ссылок_.
+Добавляет ссылку на URL-адрес в _список ссылок_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 ReferenceListReference CreateReference(ReferenceList referenceList, LinksLinkType linkType, string url)
 ----
@@ -15,31 +15,27 @@ ReferenceListReference CreateReference(ReferenceList referenceList, LinksLinkTyp
 Параметры
 
 referenceList::
-  Тип: xref:../ReferenceList_CL.adoc[ReferenceList]
-  +
-  Список ссылок на карточки, в который добавляется ссылка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/ReferenceList_CL.adoc[ReferenceList]
++
+Список ссылок на карточки, в который добавляется ссылка
 linkType::
-  Тип: xref:../LinksLinkType_CL.adoc[LinksLinkType]
-  +
-  Тип ссылки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/LinksLinkType_CL.adoc[LinksLinkType]
++
+Тип ссылки
 url::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Добавляемый адрес
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Добавляемый адрес
 
-Возвращаемое значение
-
-::
-  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
-  +
-  Ссылка
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/ReferenceListReference_CL.adoc[ReferenceListReference]
++
+Ссылка
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр referenceList или url.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

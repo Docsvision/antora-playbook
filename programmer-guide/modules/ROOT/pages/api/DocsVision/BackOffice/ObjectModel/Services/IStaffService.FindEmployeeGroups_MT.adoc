@@ -2,12 +2,12 @@
 
 Возвращает группы, в которых числится указанный сотрудник.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 List<StaffGroup> FindEmployeeGroups(StaffEmployee employee)
 ----
@@ -15,23 +15,19 @@ List<StaffGroup> FindEmployeeGroups(StaffEmployee employee)
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, для которого определяется список групп
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, для которого определяется список групп
 
-Возвращаемое значение
-
-::
-  Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroup>
-  +
-  Список групп типа xref:../StaffGroup_CL.adoc[StaffGroup]
+Возвращаемое значение::
+Тип: https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroup>
++
+Список групп типа xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

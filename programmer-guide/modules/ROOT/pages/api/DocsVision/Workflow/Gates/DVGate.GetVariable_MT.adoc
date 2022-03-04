@@ -2,34 +2,30 @@
 
 Получает переменную процесса по её идентификатору и типу.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public IGateVariable GetVariable(int TypeID, string SubTypeID, object ID)
 ----
 
 TypeID::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Тип получаемой переменной из типов xref:DVVariableType_EN.adoc[DVVariableType], кроме [.keyword .apiname]#DVVariableType.GROUPROLE#
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Тип получаемой переменной из типов xref:api/DocsVision/Workflow/Gates/DVVariableType_EN.adoc[DVVariableType], кроме [.keyword .apiname]#DVVariableType.GROUPROLE#
 SubTypeID::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Идентификатор подтипа
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Идентификатор подтипа
 ID::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
-  +
-  Идентификатор переменной
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
++
+Идентификатор переменной
 
-Возвращаемое значение
-
-::
-  Тип: xref:IGateVariable_IN.adoc[IGateVariable]
-  +
-  Переменная процесса
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/DVGate_CL.adoc[DVGate - класс]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Workflow/Gates/IGateVariable_IN.adoc[IGateVariable]
++
+Переменная процесса

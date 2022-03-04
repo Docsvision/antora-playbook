@@ -2,12 +2,12 @@
 
 Осуществляет запись сообщения в журнал.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract void LogMessage(EventType eventType, int eventOperation, string resourceName, Guid resourceId, Guid typeId, Guid parentId, string eventData)
 ----
@@ -15,50 +15,50 @@ public abstract void LogMessage(EventType eventType, int eventOperation, string 
 Параметры
 
 eventType::
-  Тип: xref:EventType_EN.adoc[EventType]
-  +
-  Тип сообщения
+Тип: xref:api/DocsVision/Platform/ObjectManager/EventType_EN.adoc[EventType]
++
+Тип сообщения
 eventOperation::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код 0)
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код 0)
 resourceName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Имя объекта, с которым произведена операция (формируется в зависимости от контекста – например, при операциях с карточкой это может быть её описание)
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Имя объекта, с которым произведена операция (формируется в зависимости от контекста – например, при операциях с карточкой это может быть её описание)
 resourceId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор объекта, с которым производится операция (ID карточки, строки, файла и т.д.)
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор объекта, с которым производится операция (ID карточки, строки, файла и т.д.)
 typeId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Тип объекта (например, для карточки – CardTypeID)
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Тип объекта (например, для карточки – CardTypeID)
 parentId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор родительского объекта (например, для операции со строкой – родительским объектом будет секция)
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор родительского объекта (например, для операции со строкой – родительским объектом будет секция)
 eventData::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Любые дополнительные данные, связанные с событием
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Любые дополнительные данные, связанные с событием
 
 == Заметки
 
-Начиная с версии Docsvision 4.5, появился новый метод для записи в журнал приложений xref:LogManager.LogMessageEx_MT.adoc[LogMessageEx].
+Начиная с версии Docsvision 4.5, появился новый метод для записи в журнал приложений xref:api/DocsVision/Platform/ObjectManager/LogManager.LogMessageEx_MT.adoc[LogMessageEx].
 
 == Примеры
 
 Например, для записи собственного сообщения:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 session.LogManager.LogMessage(EventType.Information, 0, "Моя карточка", data.ID, Guid.Empty, Guid.Empty, "Добавлен исполнитель");
 ----
 
 Вот как будет выглядеть такое сообщение в стандартном диалоге просмотра журнала:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Тип сообщения: Информация.
 Операция: Не определено.
@@ -70,5 +70,3 @@ session.LogManager.LogMessage(EventType.Information, 0, "Моя карточка
 Новый идентификатор: <Неизвестный идентификатор>.
 Данные сообщения: Добавлен исполнитель.
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager - класс]

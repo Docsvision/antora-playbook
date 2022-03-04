@@ -2,40 +2,40 @@
 
 Сервис ITaskListService предоставляет методы для работы со списками заданий.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface ITaskListService
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ITaskListService.AddTask_MT.adoc[AddTask(TaskList, Task, BaseCard)] |Добавляет существующее задание в предоставленный список заданий.
-|xref:ITaskListService.AddTaskGroup_MT.adoc[AddTaskGroup(TaskList, TaskGroup, BaseCard)] |Добавляет группу заданий в предоставленный список заданий.
-|xref:ITaskListService.CopyTask_MT.adoc[CopyTask(TaskList, Task, BaseCard)] |Создает копию указанного задания в списке заданий.
-|xref:ITaskListService.CreateTask_MT.adoc[CreateTask(TaskList, Task, Boolean, StaffEmployee)] |Добавляет существующее задание в предоставленный список заданий, без внесения изменений в историю карточки.
-|xref:ITaskListService.CreateTaskGroup_MT.adoc[CreateTaskGroup(TaskList, TaskGroup)] |Добавляет существующую группу заданий в предоставленный список заданий, без внесения изменений в историю карточки.
-|xref:ITaskListService.CreateTaskList_MT.adoc[CreateTaskList()] |Инициализирует новый пустой список заданий.
-|xref:ITaskListService.GetTasksTree_MT.adoc[GetTasksTree(TaskList)] |Возвращает список узлов дерева заданий, построенного из списка заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.AddTask_MT.adoc[AddTask(TaskList, Task, BaseCard)] |Добавляет существующее задание в предоставленный список заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.AddTaskGroup_MT.adoc[AddTaskGroup(TaskList, TaskGroup, BaseCard)] |Добавляет группу заданий в предоставленный список заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CopyTask_MT.adoc[CopyTask(TaskList, Task, BaseCard)] |Создает копию указанного задания в списке заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTask_MT.adoc[CreateTask(TaskList, Task, Boolean, StaffEmployee)] |Добавляет существующее задание в предоставленный список заданий, без внесения изменений в историю карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTaskGroup_MT.adoc[CreateTaskGroup(TaskList, TaskGroup)] |Добавляет существующую группу заданий в предоставленный список заданий, без внесения изменений в историю карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTaskList_MT.adoc[CreateTaskList()] |Инициализирует новый пустой список заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.GetTasksTree_MT.adoc[GetTasksTree(TaskList)] |Возвращает список узлов дерева заданий, построенного из списка заданий.
 |GetTasksTree(IEnumerable<Task>, IEnumerable<TaskGroup>) |Возвращает список узлов дерева заданий, построенного из списка заданий.
 |GetTasksTree(TaskList, IEnumerable<Guid>) |Возвращает список узлов дерева заданий, построенного из списка заданий.
 |GetTasksTree(IEnumerable<Task>, IEnumerable<TaskGroup>, IEnumerable<Guid>) |Возвращает список узлов дерева заданий, построенного из списка заданий.
-|xref:ITaskListService.RemoveTask_MT.adoc[RemoveTask(TaskList, Task, BaseCard)] |Удаляет задание из переданного списка заданий.
-|xref:ITaskListService.RemoveTaskGroup_MT.adoc[RemoveTaskGroup(TaskList, TaskGroup, BaseCard)] |Удаляет группу заданий из списка заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.RemoveTask_MT.adoc[RemoveTask(TaskList, Task, BaseCard)] |Удаляет задание из переданного списка заданий.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.RemoveTaskGroup_MT.adoc[RemoveTaskGroup(TaskList, TaskGroup, BaseCard)] |Удаляет группу заданий из списка заданий.
 |===
 
 == Примеры
 
-Приведенный далее пример демонстрирует использование сервиса [.keyword .apiname]#ITaskListService# при создании списка заданий в карточке [.dfn .term]_Документ_.
+Приведенный далее пример демонстрирует использование сервиса [.keyword .apiname]#ITaskListService# при создании списка заданий в карточке _Документ_.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
         
@@ -64,14 +64,4 @@ document.MainInfo.Tasks = taskList;
 objectContext.AcceptChanges();
 ----
 
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.AddTask_MT.adoc[ITaskListService.AddTask - метод (TaskList, Task, BaseCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.AddTaskGroup_MT.adoc[ITaskListService.AddTaskGroup - метод (TaskList, TaskGroup, BaseCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CopyTask_MT.adoc[ITaskListService.CopyTask - метод (TaskList, Task, BaseCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTask_MT.adoc[ITaskListService.CreateTask - метод (TaskList, Task, Boolean, StaffEmployee)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTaskGroup_MT.adoc[ITaskListService.CreateTaskGroup - метод (TaskList, TaskGroup)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.CreateTaskList_MT.adoc[ITaskListService.CreateTaskList - метод]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.GetTasksTree_MT.adoc[ITaskListService.GetTasksTree - метод (TaskList)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.RemoveTask_MT.adoc[ITaskListService.RemoveTask - метод (TaskList, Task, BaseCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService.RemoveTaskGroup_MT.adoc[ITaskListService.RemoveTaskGroup - метод (TaskList, TaskGroup, BaseCard)]* +
 
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]

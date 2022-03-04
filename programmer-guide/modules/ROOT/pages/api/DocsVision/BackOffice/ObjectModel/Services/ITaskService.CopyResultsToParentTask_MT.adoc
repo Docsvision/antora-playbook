@@ -2,12 +2,12 @@
 
 Переносит результаты выполнения дочернего задания в родительское.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void CopyResultsToParentTask(Task task, Task parentTask, TaskCopyResultsOptions options)
 ----
@@ -15,21 +15,21 @@ void CopyResultsToParentTask(Task task, Task parentTask, TaskCopyResultsOptions 
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Подчиненное задание, из которого должны быть скопированы результаты завершения
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Подчиненное задание, из которого должны быть скопированы результаты завершения
 parentTask::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание (основное), в которое будут перенесены результаты выполнения подчиненного задания
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание (основное), в которое будут перенесены результаты выполнения подчиненного задания
 options::
-  Тип: xref:Entities/TaskCopyResultsOptions_CL.adoc[TaskCopyResultsOptions]
-  +
-  Параметры переноса результатов
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/TaskCopyResultsOptions_CL.adoc[TaskCopyResultsOptions]
++
+Параметры переноса результатов
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, parentTask или options. Также ошибка возвращает, если задание task не завершено.
@@ -40,5 +40,3 @@ options::
 == Заметки
 
 Параметр options формируется самостоятельно.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

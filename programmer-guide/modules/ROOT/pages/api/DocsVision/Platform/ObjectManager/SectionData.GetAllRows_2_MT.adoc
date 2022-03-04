@@ -2,12 +2,12 @@
 
 Получение всех строк в секции для конкретной строки родительской секции, без учета уровня иерархии.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract RowDataCollection GetAllRows(Guid? parentRowId, bool traverseHierarchy)
 ----
@@ -15,19 +15,15 @@ public abstract RowDataCollection GetAllRows(Guid? parentRowId, bool traverseHie
 Параметры
 
 parentRowId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор строки в родительской секции. Если null, то вернет все строки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор строки в родительской секции. Если null, то вернет все строки
 traverseHierarchy::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
-  +
-  true - игнорировать значение свойства строки ParentTreeRowID, иначе false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]
++
+true - игнорировать значение свойства строки ParentTreeRowID, иначе false
 
-Возвращаемое значение
-
-::
-  Тип: xref:RowDataCollection_CL.adoc[RowDataCollection]
-  +
-  Коллекция искомых строк
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData - класс]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection]
++
+Коллекция искомых строк

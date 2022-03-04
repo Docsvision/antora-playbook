@@ -1,13 +1,13 @@
 = ICategoriesService.AddCategory - метод (CategoriesCategory)
 
-Добавляет новую категорию в [.dfn .term]_Справочник категорий_, в указанную родительскую категорию.
+Добавляет новую категорию в _Справочник категорий_, в указанную родительскую категорию.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 CategoriesCategory AddCategory(CategoriesCategory parentCategory)
 ----
@@ -15,24 +15,22 @@ CategoriesCategory AddCategory(CategoriesCategory parentCategory)
 Параметры
 
 parentCategory::
-  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
-  +
-  Родительская категория
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
++
+Родительская категория
 
-Возвращаемое значение
-
-::
-  Тип: xref:../CategoriesCategory_CL.adoc[CategoriesCategory]
-  +
-  Созданная категория
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
++
+Созданная категория
 
 == Заметки
 
-Если параметр parentCategory не задан (имеет значение null), то в качестве родительской категории будет использована корневая категория [.dfn .term]_Справочника категорий_.
+Если параметр parentCategory не задан (имеет значение null), то в качестве родительской категории будет использована корневая категория _Справочника категорий_.
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -50,5 +48,3 @@ category.View = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-
 // Сохранение
 objectContext.SaveObject(category);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService - интерфейс]

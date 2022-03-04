@@ -1,13 +1,13 @@
 = ITaskService.AddSignature - метод (Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)
 
-Данный метод добавляет новую подпись в список подписей карточки [.dfn .term]_Задание_, и устанавливает ЭЦП на указанные поля карточки.
+Данный метод добавляет новую подпись в список подписей карточки _Задание_, и устанавливает ЭЦП на указанные поля карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 BaseCardSignature AddSignature(Task task, X509Certificate2 certificate, StatesOperation operation, Guid signatureType, IEnumerable<CardFieldSetting> fields)
 ----
@@ -15,36 +15,34 @@ BaseCardSignature AddSignature(Task task, X509Certificate2 certificate, StatesOp
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание, содержащее подписываемые данные
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание, содержащее подписываемые данные
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат сотрудника, которым будет выполнено подписания
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат сотрудника, которым будет выполнено подписания
 operation::
-  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
-  +
-  Подписываемая операция
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
++
+Подписываемая операция
 signatureType::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Тип подписи, который может быть получен из [.keyword .apiname]#TaskOperationSignatureSetting.Name#
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Тип подписи, который может быть получен из [.keyword .apiname]#TaskOperationSignatureSetting.Name#
 fields::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
-  +
-  Коллекция подписываемых полей типа xref:Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определенных для карточки в Справочнике видов карточек
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
++
+Коллекция подписываемых полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определенных для карточки в Справочнике видов карточек
 
-Возвращаемое значение
-
-::
-  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
-  +
-  Подпись
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
++
+Подпись
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task и operation.
@@ -52,13 +50,13 @@ fields::
 
 == Заметки
 
-Настройки (подписываемые поля; операция, при которой будет произведено подписание; и т.д.), используемые при подписании, задаются в [.dfn .term]_Справочнике видов карточек_.
+Настройки (подписываемые поля; операция, при которой будет произведено подписание; и т.д.), используемые при подписании, задаются в _Справочнике видов карточек_.
 
 == Примеры
 
-Ниже приведен пример скрипта, который позволяет осуществить подписание операции в карточке [.dfn .term]_Задание_. Обычно подписание осуществляется автоматически, в соответствии с настройками вида в [.dfn .term]_Справочнике видов карточек_
+Ниже приведен пример скрипта, который позволяет осуществить подписание операции в карточке _Задание_. Обычно подписание осуществляется автоматически, в соответствии с настройками вида в _Справочнике видов карточек_
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System.Linq;
 using System.Reflection;
@@ -103,5 +101,3 @@ namespace BackOffice
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

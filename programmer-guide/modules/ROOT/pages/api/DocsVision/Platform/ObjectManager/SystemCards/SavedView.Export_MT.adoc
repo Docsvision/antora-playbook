@@ -2,26 +2,24 @@
 
 Позволяет получить объект для упрощенной работы с представлением.
 
-* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract View Export()
 ----
 
-Возвращаемое значение
-
-::
-  Тип: xref:../ViewModel/View_CL.adoc[View]
-  +
-  Описание представления
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/ViewModel/View_CL.adoc[View]
++
+Описание представления
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string VIEW_CARD_ID = "17F8F0B3-7E93-45E9-B250-EED4E93F3FA3";
 ViewCard vcard = (ViewCard)session.CardManager.GetDictionary(new Guid(VIEW_CARD_ID));
@@ -29,5 +27,3 @@ ViewCard vcard = (ViewCard)session.CardManager.GetDictionary(new Guid(VIEW_CARD_
 SavedView sview = vcard.Views[0];
 DocsVision.Platform.ObjectManager.ViewModel.View view = sview.Export();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SavedView_CL.adoc[SavedView - класс]

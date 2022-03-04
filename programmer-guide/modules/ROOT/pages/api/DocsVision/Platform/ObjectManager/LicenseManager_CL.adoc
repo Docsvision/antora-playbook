@@ -2,19 +2,19 @@
 
 Класс LicenseManager содержит функциональность по работе с дополнительными опциями лицензии Docsvision, в которых присутствует ограничение по количеству соединений.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class LicenseManager
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Session |Возвращает сессию пользователя.
@@ -22,7 +22,7 @@ public abstract class LicenseManager
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |DecrementFeatureUsage(Guid) |Уменьшает число активных соединений в счетчике дополнительной опции лицензии.
@@ -37,7 +37,7 @@ public abstract class LicenseManager
 
 К примеру, при осуществлении доступа к дополнительному модулю Docsvision, необходимо выполнить проверку того, не достигнут ли предел подключений пользователей:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // userSession - сессия пользователя
 // featureId - идентификатор дополнительной опции в лицензии Docsvision
@@ -66,7 +66,7 @@ private void Take(UserSession userSession, Guid featureId)
 
 После выхода пользователя из модуля, соединение должно быть освобождено:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void Release(UserSession userSession, Guid featureId)
 {
@@ -82,5 +82,3 @@ private void Release(UserSession userSession, Guid featureId)
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

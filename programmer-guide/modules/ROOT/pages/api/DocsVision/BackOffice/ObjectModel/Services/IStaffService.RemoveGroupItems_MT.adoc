@@ -1,13 +1,13 @@
 = IStaffService.RemoveGroupItems - метод (StaffGroup, IEnumerable<StaffGroupItem>)
 
-Удаляет элементы (группы, сотрудники) из группы [.dfn .term]_справочника сотрудников_.
+Удаляет элементы (группы, сотрудники) из группы _справочника сотрудников_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RemoveGroupItems(StaffGroup group, IEnumerable<StaffGroupItem> items)
 ----
@@ -15,20 +15,18 @@ void RemoveGroupItems(StaffGroup group, IEnumerable<StaffGroupItem> items)
 Параметры
 
 group::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Группа из которой должны быть удалены элементы
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Группа из которой должны быть удалены элементы
 items::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffGroupItem>
-  +
-  Список удаляемых элементов типа xref:../StaffGroupItem_CL.adoc[StaffGroupItem]
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffGroupItem>
++
+Список удаляемых элементов типа xref:api/DocsVision/BackOffice/ObjectModel/StaffGroupItem_CL.adoc[StaffGroupItem]
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр group или items.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

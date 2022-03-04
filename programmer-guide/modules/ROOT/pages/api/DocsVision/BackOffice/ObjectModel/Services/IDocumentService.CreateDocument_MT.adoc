@@ -2,22 +2,20 @@
 
 Создает экземпляр нового документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Document CreateDocument()
 ----
 
-Возвращаемое значение
-
-::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Карточка типа "Документ"
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Карточка типа "Документ"
 
 == Заметки
 
@@ -27,7 +25,7 @@ Document CreateDocument()
 
 Ниже приведен пример создания карточки типа Документ и изменение ее описания.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -43,5 +41,3 @@ document.Description = "Документ созданный из кода";
 // Сохранение изменений в контексте
 objectContext.SaveObject<Document>(document);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

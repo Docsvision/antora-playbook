@@ -1,20 +1,20 @@
 = RowData - класс
 
-Представляет строку данных карточки. Этот класс является [.keyword]*абстрактным*.
+Представляет строку данных карточки. Этот класс является *абстрактным*.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class RowData : IUpdatable, ILockable, IXmlExportable
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AllChildRows |Возвращает все дочерние строки ниже по дереву иерархии.
@@ -37,7 +37,7 @@ public abstract class RowData : IUpdatable, ILockable, IXmlExportable
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AccessCheck(System.Int32) |Проверяет наличие заданного доступа.
@@ -93,7 +93,7 @@ public abstract class RowData : IUpdatable, ILockable, IXmlExportable
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение с сервера данных карточки с известным идентификатором
 CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
@@ -110,5 +110,3 @@ if (row.GetValueType("Number") = FieldType.Int)
     row.SetInt32("Number", 10);
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]

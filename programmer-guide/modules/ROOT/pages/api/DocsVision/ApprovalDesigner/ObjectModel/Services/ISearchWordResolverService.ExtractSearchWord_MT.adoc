@@ -2,12 +2,12 @@
 
 Возвращает сотрудников, найденных по поисковому слову.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/ApprovalDesigner/ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<StaffEmployee> ExtractSearchWord(ObjectContext context, Guid searchWordId, Guid initiatorId, Guid registratorId)
 ----
@@ -15,27 +15,23 @@ IEnumerable<StaffEmployee> ExtractSearchWord(ObjectContext context, Guid searchW
 Параметры
 
 context::
-  Тип: xref:../../../Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext]
-  +
-  Текущий контекст объектов
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext]
++
+Текущий контекст объектов
 searchWordId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор поискового слова, по которому ищутся сотрудники
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор поискового слова, по которому ищутся сотрудники
 initiatorId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор инициатора согласования
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор инициатора согласования
 registratorId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор согласующего
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор согласующего
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
-  +
-  Найденные сотрудники. Тип элемента - xref:../../../BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
-
-*На уровень выше:* xref:../../../../../api/DocsVision/ApprovalDesigner/ObjectModel/Services/ISearchWordResolverService_IN.adoc[ISearchWordResolverService - интерфейс]
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
++
+Найденные сотрудники. Тип элемента - xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]

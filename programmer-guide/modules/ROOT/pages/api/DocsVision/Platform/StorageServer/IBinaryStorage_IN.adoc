@@ -2,19 +2,19 @@
 
 Определяет методы провайдера к внешнему хранилищу.
 
-* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/StorageServer/StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IBinaryStorage
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |IsIntegratedStorage a|
@@ -23,23 +23,23 @@ public interface IBinaryStorage
 *Должен всегда возвращать false*.
 
 |StorageId |Задает или возвращает уникальный идентификатор хранилища.
-|xref:IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions] |Задает или возвращает типы разделов, поддерживаемых хранилищем.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions] |Задает или возвращает типы разделов, поддерживаемых хранилищем.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)] |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
-|xref:IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)] |Создает файл во внешнем хранилище.
-|xref:IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)] |Создает файл во внешнем хранилище и загружает в него данные другого файла.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)] |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)] |Создает файл во внешнем хранилище.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)] |Создает файл во внешнем хранилище и загружает в него данные другого файла.
 |Delete(String) |Удаляет файл с указанным идентификатором из внешнего хранилища.
 |Read(String, Stream) |Считывает данные файла из внешнего хранилища в поток.
-|xref:IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)] |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.
-|xref:IBinaryStorage.SafeMove_MT.adoc[SafeMove(String, StoragePartitionType)] |Перемещает файл в новый раздел внешнего хранилища.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)] |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SafeMove_MT.adoc[SafeMove(String, StoragePartitionType)] |Перемещает файл в новый раздел внешнего хранилища.
 |Write(String, Stream) |Записывает данные из потока в файл во внешнем хранилище.
-|xref:IBinaryStorage.Write_MT.adoc[Write(String, Stream, Int64)] |Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
+|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Write_MT.adoc[Write(String, Stream, Int64)] |Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
 |===
 
 == Заметки
@@ -52,12 +52,5 @@ public interface IBinaryStorage
 * System.ArgumentNullException – при вызове метода передан нулевой/пустой обязательный аргумент;
 * DocsVision.Platform.StorageServer.BinaryStorageException – прочая ошибка в хранилище, не относящаяся к другим типам ошибок.
 
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.SupportedPartions_PR.adoc[IBinaryStorage.SupportedPartions - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.CanSafelyMove_MT.adoc[IBinaryStorage.CanSafelyMove - метод (String, StoragePartitionType)]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.Create_MT.adoc[IBinaryStorage.Create - метод (IFileInfo, StoragePartitionType)]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.CreateFrom_MT.adoc[IBinaryStorage.CreateFrom - метод (IFileInfo, String, StoragePartitionType)]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.Read_MT.adoc[IBinaryStorage.Read - метод (String, Stream, Int64, Int32)]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.SafeMove_MT.adoc[IBinaryStorage.SafeMove - метод (String, StoragePartitionType)]* +
-* *xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage.Write_MT.adoc[IBinaryStorage.Write - метод (String, Stream, Int64)]* +
 
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/StorageServer_NS.adoc[DocsVision.Platform.StorageServer - пространство имен]
+

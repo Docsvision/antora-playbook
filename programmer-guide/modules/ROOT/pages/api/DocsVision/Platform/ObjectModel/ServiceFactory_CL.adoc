@@ -2,19 +2,19 @@
 
 Управляет получением сервиса из фабрики сервисов.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class ServiceFactory : IServiceFactory
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |ServiceFactory() |Инициализирует новый экземпляр класса ServiceFactory.
@@ -22,17 +22,17 @@ public abstract class ServiceFactory : IServiceFactory
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|GetService(Type) |Возвращает [.dfn .term]_сервис_ указанного типа.
+|GetService(Type) |Возвращает _сервис_ указанного типа.
 |===
 
 == Примеры
 
 Ниже приведен пример создания фабрики сервисов, в котором переопределяется метод GetService, создающий сервис определенного типа
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class TestWorkLibServiceFactory : ServiceFactory
 {
@@ -48,5 +48,3 @@ public class TestWorkLibServiceFactory : ServiceFactory
  }
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel - пространство имен]

@@ -2,12 +2,12 @@
 
 Извлекает данные из части подписи.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 byte[] GetSignaturePartData(BaseCardSignaturePart singaturePart)
 ----
@@ -15,20 +15,18 @@ byte[] GetSignaturePartData(BaseCardSignaturePart singaturePart)
 Параметры
 
 singaturePart::
-  Тип: xref:../BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
-  +
-  Часть подписи
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
++
+Часть подписи
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
-  +
-  Содержимое подписи
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
++
+Содержимое подписи
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр singaturePart.
@@ -36,6 +34,4 @@ singaturePart::
 
 == Заметки
 
-Полученные данные могут быть использованы,например, в методе xref:IBaseCardService.AddSignaturePart_MT.adoc[IBaseCardService.AddSignaturePart].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]
+Полученные данные могут быть использованы,например, в методе xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.AddSignaturePart_MT.adoc[IBaseCardService.AddSignaturePart].

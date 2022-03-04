@@ -2,11 +2,11 @@
 
 Поисковый запрос, созданный вручную или с использованием объектной модели, может быть сохранен в системе для дальнейшего использования (например, в виртуальных папках).
 
-image::img/tj_search_5.png[[.fig--title-label]##Рис. 1. ##Сохраненный запрос]
+image::tj_search_5.png[[.fig--title-label]##Рис. 1. ##Сохраненный запрос]
 
 Для хранения сформированных запросов в системе предусмотрена специальная карточка – карточка сохраненных поисковых запросов (*SavedSearchCard*), расположенная в системной библиотеке карточек (*DocsVision.Platform.ObjectManager.SystemCards*). Чтобы избежать необходимости оперировать с данными этой карточки напрямую, в объектной модели реализован соответствующий объект – *SearchCard*. Данная карточка является справочником, и поэтому может быть получена по идентификатору типа:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string SEARCH_CARD_TYPE = "{05E4BE46-6304-42A7-A780-FD07F7541AF0}";
 SearchCard searchCard = session.CardManager.GetDictionary(new Guid(SEARCH_CARD_TYPE)) as SearchCard;
@@ -14,7 +14,7 @@ SearchCard searchCard = session.CardManager.GetDictionary(new Guid(SEARCH_CARD_T
 
 Пример кода – создание нового поискового запроса и сохранение его в карточке:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Формирование поискового запроса
 SearchQuery query = session.CreateSearchQuery();
@@ -30,5 +30,3 @@ searchCard.Queries.AddNew("Мой новый запрос").Import(oQuery);
 == См. также
 
 * xref:dm_search_om.adoc[Возможности поиска в контексте объектов]
-
-*На уровень выше:* xref:../pages/dm_search_api.adoc[Поиск объектов с использованием базового API]

@@ -2,12 +2,12 @@
 
 Генерирует дайджест на основе данных карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string GenerateDigest(BaseCard baseCard, IXmlExportable cardData, string defaultDigest)
 ----
@@ -15,28 +15,26 @@ string GenerateDigest(BaseCard baseCard, IXmlExportable cardData, string default
 Параметры
 
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка
 cardData::
-  Тип: xref:../../../Platform/ObjectManager/IXmlExportable_IN.adoc[IXmlExportable]
-  +
-  Данные карточки
+Тип: xref:api/DocsVision/Platform/ObjectManager/IXmlExportable_IN.adoc[IXmlExportable]
++
+Данные карточки
 defaultDigest::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Базовое значение, которое будет возвращено в случае невозможности создания дайджеста из данных карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Базовое значение, которое будет возвращено в случае невозможности создания дайджеста из данных карточки
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Дайджест
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Дайджест
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или cardData.
@@ -46,7 +44,7 @@ defaultDigest::
 
 В качестве примера использования данного сервиса, можно привести код, который позволяет сгенерировать описание (дайджест) карточки, на основе ее данных. Это может понадобиться, например, при программном изменении имени документа (свойство `MainInfo.Name`).
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
         
@@ -69,5 +67,3 @@ document.Description = digest;
 //Сохранение всего контекста
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

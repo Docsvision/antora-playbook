@@ -27,11 +27,11 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 cardId::
-  Идентификатор типа удаляемых карточек
+Идентификатор типа удаляемых карточек
 maxDate::
-  https://msdn.microsoft.com/ru-ru/library/system.datetime.tooadate.aspx[Дата OLE-автоматизации], которой ограничивается удаление карточек. Будут удалены карточки, время удаления которых меньше указанного значения.
+https://msdn.microsoft.com/ru-ru/library/system.datetime.tooadate.aspx[Дата OLE-автоматизации], которой ограничивается удаление карточек. Будут удалены карточки, время удаления которых меньше указанного значения.
 
 == Ответ
 
@@ -73,5 +73,3 @@ body = """<?xml version="1.0" encoding="utf-8"?>
 # Отправляем SOAP-сообщение
 response = session.post(url, data=body)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

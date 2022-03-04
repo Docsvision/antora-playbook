@@ -2,44 +2,44 @@
 
 Сервис для работы со справочником видов карточек.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IKindService
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IKindService.KindsDictionary_PR.adoc[KindsDictionary] |Возвращает виды карточек, определенные в Справочнике видов карточек.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.KindsDictionary_PR.adoc[KindsDictionary] |Возвращает виды карточек, определенные в Справочнике видов карточек.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IKindService.AddCardKind_MT.adoc[AddCardKind(KindsCardKind)] |Добавляет к заданному виду карточки подвид и возвращает ссылку на созданный объект.
-|xref:IKindService.AddCardKind_2_MT.adoc[AddCardKind(KindsCardKind, String)] |Добавляет к виду карточки подвид с указанным названием и возвращает на него ссылку.
-|xref:IKindService.AddCardKind_1_MT.adoc[AddCardKind(KindsCardType)] |Добавляет дополнительный вид карточки, указанного типа, и возвращает на него ссылку.
-|xref:IKindService.AddCardKind_3_MT.adoc[AddCardKind(ObjectCollection<KindsCardKind>, String)] |Добавляет к приведенной коллекции видов карточке подвид с указанным названием и возвращает на него ссылку.
-|xref:IKindService.AddCardType_MT.adoc[AddCardType(Guid)] |Добавляет новый тип карточки с предопределенным идентификатором.
-|xref:IKindService.AddCreationSettings_MT.adoc[AddCreationSettings(KindsCardKind, Guid, String, KindsCardKind, Boolean, StatesOperation)] |Добавляет новый режим создания карточки к указанному виду карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_MT.adoc[AddCardKind(KindsCardKind)] |Добавляет к заданному виду карточки подвид и возвращает ссылку на созданный объект.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_2_MT.adoc[AddCardKind(KindsCardKind, String)] |Добавляет к виду карточки подвид с указанным названием и возвращает на него ссылку.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_1_MT.adoc[AddCardKind(KindsCardType)] |Добавляет дополнительный вид карточки, указанного типа, и возвращает на него ссылку.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_3_MT.adoc[AddCardKind(ObjectCollection<KindsCardKind>, String)] |Добавляет к приведенной коллекции видов карточке подвид с указанным названием и возвращает на него ссылку.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardType_MT.adoc[AddCardType(Guid)] |Добавляет новый тип карточки с предопределенным идентификатором.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCreationSettings_MT.adoc[AddCreationSettings(KindsCardKind, Guid, String, KindsCardKind, Boolean, StatesOperation)] |Добавляет новый режим создания карточки к указанному виду карточки.
 |AddExtendedSettingGroup(KindsCardExtendedSettingGroupCollection) |Создает новую группу настроек в указанной коллекции групп настроек расширения карточки определенного вида.
-|AddExtension(String, String) |Добавляет расширение для типа карточки в [.dfn .term]_Справочник видов карточек_.
-|xref:IKindService.AddProcessOperation_MT.adoc[AddProcessOperation(KindsCardProcess, StatesOperation)] |Добавляет бизнес-процесс к списку процессов, привязанных к операциям в карточке определенного вида.
-|xref:IKindService.AddProcessSettings_MT.adoc[AddProcessSettings(KindsCardKind, Guid, String)] |Добавляет бизнес-процесс c настройками к указанному виду карточки.
+|AddExtension(String, String) |Добавляет расширение для типа карточки в _Справочник видов карточек_.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddProcessOperation_MT.adoc[AddProcessOperation(KindsCardProcess, StatesOperation)] |Добавляет бизнес-процесс к списку процессов, привязанных к операциям в карточке определенного вида.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddProcessSettings_MT.adoc[AddProcessSettings(KindsCardKind, Guid, String)] |Добавляет бизнес-процесс c настройками к указанному виду карточки.
 |AddProcessStateBranch(KindsCardProcess, StatesStateMachineBranch) |Добавляет переход состояний для процесса.
 |AddProcessVariable(KindsCardProcess, Guid, Guid, String, Boolean, KindsCardProcessVariableSync) |Добавляет переменную для бизнес-процесса.
-|xref:IKindService.GetCardDefaultLocationDescription_MT.adoc[GetCardDefaultLocationDescription(KindsCardCreationSettingLocation)] |Возвращает название размещения по умолчанию для карточки определенного вида.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.GetCardDefaultLocationDescription_MT.adoc[GetCardDefaultLocationDescription(KindsCardCreationSettingLocation)] |Возвращает название размещения по умолчанию для карточки определенного вида.
 |GetCardType(Guid) |Возвращает тип карточки с заданным идентификатором.
-|xref:IKindService.GetPreferredCardKind_MT.adoc[GetPreferredCardKind(KindsCardKind)] |Возвращает вид карточки, имеющий все собственные настройки (наследование отключено).
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService.GetPreferredCardKind_MT.adoc[GetPreferredCardKind(KindsCardKind)] |Возвращает вид карточки, имеющий все собственные настройки (наследование отключено).
 |GetPreferredCardKindByExtendedSettings(KindsCardKind) |Возвращает первого родителя указанного вида карточки, у которого установлен признак "Использовать собственные настройки расширений". Может быть возвращен вид карточки, переданный в метод в качестве параметра.
 |GetPreferredCardKindByLayout(KindsCardKind) |Возвращает первого родителя указанного вида карточки, который не использует наследование настроек (установлен признак "Использовать собственные разметки" или "Использовать собственные настройки вида, автомат состояний, ролевую модель и разметки"). Может быть возвращен вид карточки, переданный в метод в качестве параметра.
 |RemoveCardKind(KindsCardKind) |Удаляет указанный вид карточки.
@@ -49,7 +49,7 @@ public interface IKindService
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -76,16 +76,6 @@ kindService.AddProcessOperation(kindsCardProcess, statesOperation);
 objectContext.AcceptChanges();      
 ----
 
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.KindsDictionary_PR.adoc[IKindService.KindsDictionary - свойство]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_MT.adoc[IKindService.AddCardKind - метод (KindsCardKind)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_2_MT.adoc[IKindService.AddCardKind - метод (KindsCardKind, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_1_MT.adoc[IKindService.AddCardKind - метод (KindsCardType)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardKind_3_MT.adoc[IKindService.AddCardKind - метод (ObjectCollection<KindsCardKind>, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCardType_MT.adoc[IKindService.AddCardType - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddCreationSettings_MT.adoc[IKindService.AddCreationSettings - метод (KindsCardKind, Guid, String, KindsCardKind, Boolean, StatesOperation)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddProcessOperation_MT.adoc[IKindService.AddProcessOperation - метод (KindsCardProcess, StatesOperation)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.AddProcessSettings_MT.adoc[IKindService.AddProcessSettings - метод (KindsCardKind, Guid, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.GetCardDefaultLocationDescription_MT.adoc[IKindService.GetCardDefaultLocationDescription - метод (KindsCardCreationSettingLocation)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService.GetPreferredCardKind_MT.adoc[IKindService.GetPreferredCardKind - метод (KindsCardKind)]* +
 
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]
+
+

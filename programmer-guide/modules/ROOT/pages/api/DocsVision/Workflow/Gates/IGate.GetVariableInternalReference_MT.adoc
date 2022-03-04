@@ -2,12 +2,12 @@
 
 Возвращает ссылку на переменную шлюза во внутреннем формате.
 
-* [.keyword]*Пространство имен:* xref:Gates_NS.adoc[DocsVision.Workflow.Gates]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]
+* *Сборка:* `DocsVision.Workflow.Interfaces.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 object GetVariableInternalReference(int Type, string ID);
 ----
@@ -15,23 +15,19 @@ object GetVariableInternalReference(int Type, string ID);
 Параметры
 
 Type::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
-  +
-  Тип переменной
+Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
++
+Тип переменной
 ID::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Идентификатор переменной
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Идентификатор переменной
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
-  +
-  Ссылка
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
++
+Ссылка
 
 == Заметки
 
 Идентификатор объекта, переданный в `ID`, не обязательно содержит действительный идентификатор объекта в целевой системе. К примеру, в шлюзе к Docsvision при работе со строкой секции в `ID` содержатся идентификаторы карточки, секции и собственно строки. Метод [.keyword .apiname]#GetVariableInternalReference# в таком случае позволяет получить корректный идентификатор строки.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Gates/IGate_IN.adoc[IGate - интерфейс]

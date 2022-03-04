@@ -2,12 +2,12 @@
 
 Добавляет дополнительный вид карточки, указанного типа, и возвращает на него ссылку.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 KindsCardKind AddCardKind(KindsCardType cardType)
 ----
@@ -15,20 +15,18 @@ KindsCardKind AddCardKind(KindsCardType cardType)
 Параметры
 
 cardType::
-  Тип: xref:../KindsCardType_CL.adoc[KindsCardType]
-  +
-  Тип карточки, к которому осуществляется добавление вида карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardType_CL.adoc[KindsCardType]
++
+Тип карточки, к которому осуществляется добавление вида карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Ссылка на новый вид карточки
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Ссылка на новый вид карточки
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр cardType.
@@ -40,7 +38,7 @@ cardType::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -56,5 +54,3 @@ KindsCardKind newKind = kindService.AddCardKind(kindType);
 // Обязательное сохранение
 objectContext.SaveObject(newKind);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService - интерфейс]

@@ -2,12 +2,12 @@
 
 Возвращает группу с определенным названием учетной записи.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffGroup FindGroupByAccountName(string accountName)
 ----
@@ -15,20 +15,18 @@ StaffGroup FindGroupByAccountName(string accountName)
 Параметры
 
 accountName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Название учетной записи
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Название учетной записи
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffGroup_CL.adoc[StaffGroup]
-  +
-  Группа с искомым названием учетной записи
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffGroup_CL.adoc[StaffGroup]
++
+Группа с искомым названием учетной записи
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если передан пустой accountName.
@@ -36,7 +34,7 @@ accountName::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -46,5 +44,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 // Поиск группы с указанной учетной записью 
 StaffGroup group = staffService.FindGroupByAccountName(@"WorkDomain.com\ADGroupName");
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

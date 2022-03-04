@@ -2,12 +2,12 @@
 
 Получает объект для вызова метода серверного расширения.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract ExtensionMethod GetExtensionMethod(string extensionName, string methodName)
 ----
@@ -15,20 +15,18 @@ public abstract ExtensionMethod GetExtensionMethod(string extensionName, string 
 Параметры
 
 extensionName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Имя расширения. Данное имя должно быть записано в реестре сервера
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Имя расширения. Данное имя должно быть записано в реестре сервера
 methodName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Имя вызываемого метода
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Имя вызываемого метода
 
-Возвращаемое значение
-
-::
-  Тип: xref:ExtensionMethod_CL.adoc[ExtensionMethod]
-  +
-  Объект для доступа к методу расширения
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/ExtensionMethod_CL.adoc[ExtensionMethod]
++
+Объект для доступа к методу расширения
 
 == Заметки
 
@@ -38,7 +36,7 @@ methodName::
 
 В приведенном примере, вызывается метод GetFileContent расширения SampleExtension, с передачей в качестве параметра расположения файла на диске.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Получаем метод расширения
 ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("SampleExtension", "GetFileContent");
@@ -49,5 +47,3 @@ method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "C:\\Tes
 //Вызов метода
 string content = method.Execute().ToString();
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager - класс]

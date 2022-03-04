@@ -2,12 +2,12 @@
 
 Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
 
-* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/StorageServer/StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanSafelyMove(string id, StoragePartitionType toPartition);
 ----
@@ -15,19 +15,15 @@ bool CanSafelyMove(string id, StoragePartitionType toPartition);
 Параметры
 
 id::
-  Тип: System.String
-  +
-  Идентификатор файла в хранилище
+Тип: System.String
++
+Идентификатор файла в хранилище
 toPartition::
-  Тип: xref:StoragePartitionType_EN.adoc[StoragePartitionType]
-  +
-  Раздел хранилища, возможность перемещения в который проверяется
+Тип: xref:api/DocsVision/Platform/StorageServer/StoragePartitionType_EN.adoc[StoragePartitionType]
++
+Раздел хранилища, возможность перемещения в который проверяется
 
-Возвращаемое значение
-
-::
-  Тип: System.Boolean
-  +
-  true – перемещение возможно, false – перемещение невозможно
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage - интерфейс]
+Возвращаемое значение::
+Тип: System.Boolean
++
+true – перемещение возможно, false – перемещение невозможно

@@ -2,40 +2,36 @@
 
 При переопределении в производном классе открывает окно выбора со списком карточек. Окно выбора будет иметь заданный заголовок.
 
-* [.keyword]*Пространство имен:* xref:CardHost_NS.adoc[DocsVision.Platform.CardHost]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.CardHost.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost]
+* *Сборка:* `DocsVision.Platform.CardHost.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 Guid SelectCard(string caption)
 ----
 
-Параметры
+*Параметры*
 
 caption::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Заголовок окна выбора карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Заголовок окна выбора карточки
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор выбранной карточки
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор выбранной карточки
 
 == Примеры
 
 Для вызова окна выбора из Windows-клиента, в Конструкторе разметки, для нужного вида карточки, добавьте код
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
  Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку");
 }
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[ICardHost - интерфейс]

@@ -2,14 +2,14 @@
 
 Возвращает информацию о части подписи документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
 
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 [[GetExtendedSignatureInfo__section_jct_3ds_mpb]]
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate);
 ----
@@ -18,23 +18,21 @@ SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart, Stream c
 Параметры
 
 signaturePart::
-  Тип: xref:../BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
-  +
-  Часть подписи, для которой запрашивается информация
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]
++
+Часть подписи, для которой запрашивается информация
 contentStream::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]
-  +
-  Поток подписываемых данных
+Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]
++
+Поток подписываемых данных
 certificate::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
-  +
-  Сертификат подписи
+Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
++
+Сертификат подписи
 
 Возвращаемое значение:
 
 ::
-  Тип: xref:../../DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo]
-  +
-  Информация о подписи.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]
+Тип: xref:api/DocsVision/BackOffice/DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo]
++
+Информация о подписи.

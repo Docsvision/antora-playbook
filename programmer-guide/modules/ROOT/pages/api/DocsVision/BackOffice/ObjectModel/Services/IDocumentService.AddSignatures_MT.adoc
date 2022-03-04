@@ -2,12 +2,12 @@
 
 Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<BaseCardSignature> AddSignatures(Document document, System.Security.Cryptography.Pkcs.SignedCms signedCms)
 ----
@@ -15,24 +15,22 @@ IEnumerable<BaseCardSignature> AddSignatures(Document document, System.Security.
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Подписываемый документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Подписываемый документ
 signedCms::
-  Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
-  +
-  Сообщение CMS/PKCS 7
+Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
++
+Сообщение CMS/PKCS 7
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<BaseCardSignature>
-  +
-  Список подписей
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<BaseCardSignature>
++
+Список подписей
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или signedCms.
@@ -40,13 +38,13 @@ signedCms::
 
 == Заметки
 
-Данный метод может быть использован для импорта подписанного файла, сохраненного в виде сообщения CMS/PKCS 7, в карточку. Docsvision экспортирует подписанные файлы в один файл с расширением [.ph .filepath]`p7s`, либо в два файла: экспортируемый файл и отдельно сообщение CMS/PKCS 7 в виде файла с расширением [.ph .filepath]`p7s`. Для извлечения исходного файла из сообщения предназначен метод xref:IDocumentService.DecodeSignedDocument_MT.adoc[IDocumentService.DecodeSignedDocument].
+Данный метод может быть использован для импорта подписанного файла, сохраненного в виде сообщения CMS/PKCS 7, в карточку. Docsvision экспортирует подписанные файлы в один файл с расширением `p7s`, либо в два файла: экспортируемый файл и отдельно сообщение CMS/PKCS 7 в виде файла с расширением `p7s`. Для извлечения исходного файла из сообщения предназначен метод xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[IDocumentService.DecodeSignedDocument].
 
 == Примеры
 
 Ниже приведен пример использования метода [.keyword .apiname]#AddSignatures# в скрипте карточки. В данном примере выполняется импорт основного файла, экспортированного с отсоединенной подписью из карточки. Файл и подпись хранятся в одном каталоге и имеют идентичные названия (у криптографического сообщения добавлено расширение p7s).
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
@@ -111,6 +109,4 @@ namespace BackOffice
 }
 ----
 
-К скрипту карточки требуется добавить сборку [.ph .filepath]`System.Security.dll`.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]
+К скрипту карточки требуется добавить сборку `System.Security.dll`.

@@ -2,38 +2,38 @@
 
 Представляет системную карточку сохраненных представлений.
 
-* [.keyword]*Пространство имен:* xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class ViewCard : SystemCard
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ViewCard.Groups_PR.adoc[Groups] |Возвращает коллекцию групп представлений.
-|xref:ViewCard.Views_PR.adoc[Views] |Возвращает коллекцию сохраненных описаний представлений.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Groups_PR.adoc[Groups] |Возвращает коллекцию групп представлений.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Views_PR.adoc[Views] |Возвращает коллекцию сохраненных описаний представлений.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:ViewCard.CreateGroup_MT.adoc[CreateGroup(Guid, String)] |Создает подгруппу в заданной группе представлений.
-|xref:ViewCard.DeleteGroup_MT.adoc[DeleteGroup(Guid)] |Удаляет заданную группу представлений.
-|xref:ViewCard.DeleteView_MT.adoc[DeleteView(Guid)] |Удаляет заданное представление.
-|xref:ViewCard.GetGroup_MT.adoc[GetGroup(Guid)] |Получает группу представлений с заданным идентификатором.
-|xref:ViewCard.GetView_MT.adoc[GetView(Guid)] |Получает представление с заданным идентификатором.
-|xref:ViewCard.GetVirtualFields_MT.adoc[GetVirtualFields(Guid)] |Получает коллекцию сохраненных описаний виртуальных полей для секции заданного типа.
-|xref:ViewCard.GroupExists_MT.adoc[GroupExists(Guid)] |Проверяет существование группы представлений с заданным идентификатором.
-|xref:ViewCard.ViewExists_MT.adoc[ViewExists(Guid)] |Проверяет существование представления с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.CreateGroup_MT.adoc[CreateGroup(Guid, String)] |Создает подгруппу в заданной группе представлений.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.DeleteGroup_MT.adoc[DeleteGroup(Guid)] |Удаляет заданную группу представлений.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.DeleteView_MT.adoc[DeleteView(Guid)] |Удаляет заданное представление.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetGroup_MT.adoc[GetGroup(Guid)] |Получает группу представлений с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetView_MT.adoc[GetView(Guid)] |Получает представление с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetVirtualFields_MT.adoc[GetVirtualFields(Guid)] |Получает коллекцию сохраненных описаний виртуальных полей для секции заданного типа.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GroupExists_MT.adoc[GroupExists(Guid)] |Проверяет существование группы представлений с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.ViewExists_MT.adoc[ViewExists(Guid)] |Проверяет существование представления с заданным идентификатором.
 |===
 
 == Заметки
@@ -44,21 +44,11 @@ public abstract class ViewCard : SystemCard
 
 Получение карточки сохраненных представлений:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string VIEW_CARD_ID = "17F8F0B3-7E93-45E9-B250-EED4E93F3FA3";
 ViewCard vcard = (ViewCard)session.CardManager.GetDictionary(new Guid(VIEW_CARD_ID));
 ----
 
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Groups_PR.adoc[ViewCard.Groups - свойство]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Views_PR.adoc[ViewCard.Views - свойство]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.CreateGroup_MT.adoc[ViewCard.CreateGroup - метод (Guid, String)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.DeleteGroup_MT.adoc[ViewCard.DeleteGroup - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.DeleteView_MT.adoc[ViewCard.DeleteView - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetGroup_MT.adoc[ViewCard.GetGroup - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetView_MT.adoc[ViewCard.GetView - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GetVirtualFields_MT.adoc[ViewCard.GetVirtualFields - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.GroupExists_MT.adoc[ViewCard.GroupExists - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.ViewExists_MT.adoc[ViewCard.ViewExists - метод (Guid)]* +
 
-*На уровень выше:* xref:../../../../../api/DocsVision/Platform/ObjectManager/SystemCards/SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards - пространство имен]
+

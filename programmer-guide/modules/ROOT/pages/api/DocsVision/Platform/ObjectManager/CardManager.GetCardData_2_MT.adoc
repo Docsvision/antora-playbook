@@ -2,12 +2,12 @@
 
 Возвращает данные карточки с секцией заданного типа и заданным идентификатором строки.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract CardData GetCardData(Guid rowId, Guid sectionId)
 ----
@@ -15,23 +15,19 @@ public abstract CardData GetCardData(Guid rowId, Guid sectionId)
 Параметры
 
 rowId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор строки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор строки
 sectionId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор секции
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор секции
 
-Возвращаемое значение
-
-::
-  Тип: xref:CardData_CL.adoc[CardData]
-  +
-  Карточка
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData]
++
+Карточка
 
 == Заметки
 
 Этот метод удобно использовать, если идентификатор самой карточки неизвестен, но известна одна из ее строк.
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

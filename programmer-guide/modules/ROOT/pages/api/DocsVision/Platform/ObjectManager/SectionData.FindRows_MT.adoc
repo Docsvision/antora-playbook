@@ -2,12 +2,12 @@
 
 Осуществляет поиск строк в секции карточки (справочника).
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract RowDataCollection FindRows(string queryXml)
 ----
@@ -15,22 +15,20 @@ public abstract RowDataCollection FindRows(string queryXml)
 Параметры
 
 queryXml::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[String]
-  +
-  Поисковый запрос
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[String]
++
+Поисковый запрос
 
-Возвращаемое значение
-
-::
-  Тип: xref:RowDataCollection_CL.adoc[RowDataCollection]
-  +
-  Коллекция найденных строк
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection]
++
+Коллекция найденных строк
 
 == Примеры
 
 Приведенный далее пример демонстрирует использование серверного поиска при получении сотрудников определенного подразделения
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
                 
@@ -50,5 +48,3 @@ SectionData employeesSection = staffData.Sections[RefStaff.Employees.ID];
 // Выполнение поиска
 RowDataCollection employees = employeesSection.FindRows(sectionQuery.GetXml());
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData - класс]

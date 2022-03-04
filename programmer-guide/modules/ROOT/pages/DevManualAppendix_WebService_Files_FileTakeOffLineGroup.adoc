@@ -27,13 +27,13 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Fil
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 items::
-  Список файлов
+Список файлов
 autoRestore::
-  Если true, то файл из группы будет возвращен в базу данных по первому запросу к нему
+Если true, то файл из группы будет возвращен в базу данных по первому запросу к нему
 
-Строка [.keyword]*items* должна соответствовать формату элемента [.keyword]*GroupOperation*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *items* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -72,5 +72,3 @@ Content-Length: length
 ----
 
 Ответ содержит идентификаторы файлов, не перемещенных в хранилище.
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Files.adoc[Файлы]

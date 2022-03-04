@@ -2,12 +2,12 @@
 
 Определяет возможность разблокировки определенного основного файла документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanUnlockMainFile(Document document, DocumentFile file, LockStatus lockStatus)
 ----
@@ -15,32 +15,28 @@ bool CanUnlockMainFile(Document document, DocumentFile file, LockStatus lockStat
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 lockStatus::
-  Тип: xref:../../../Platform/ObjectManager/LockStatus_EN.adoc[LockStatus]
-  +
-  Собственное значение состояние блокировки файла документа, если настоящее состояние блокировки не должно учитываться
+Тип: xref:api/DocsVision/Platform/ObjectManager/LockStatus_EN.adoc[LockStatus]
++
+Собственное значение состояние блокировки файла документа, если настоящее состояние блокировки не должно учитываться
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - файл может быть разблокирован, иначе - false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - файл может быть разблокирован, иначе - false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или file.
 |https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если невозможно сопоставить файл версионной карточки, указанному файлу документа - file.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

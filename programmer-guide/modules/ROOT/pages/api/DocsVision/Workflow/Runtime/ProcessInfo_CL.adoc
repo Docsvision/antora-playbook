@@ -1,20 +1,20 @@
 = ProcessInfo - класс
 
-Объект типа ProcessInfo выступает в качестве входного параметра функции [.dfn .term]_сценария_. С его помощью [.dfn .term]_сценарий_ может оперировать данными процесса.
+Объект типа ProcessInfo выступает в качестве входного параметра функции _сценария_. С его помощью _сценарий_ может оперировать данными процесса.
 
-* [.keyword]*Пространство имен:* xref:Runtime_EN.adoc[DocsVision.Workflow.Runtime]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Runtime.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Runtime/Runtime_EN.adoc[DocsVision.Workflow.Runtime]
+* *Сборка:* `DocsVision.Workflow.Runtime.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class ProcessInfo
 ----
 
 == Конструкторы
 
-[width="100%",cols="39%,61%",options="header",]
+[width="100%",cols="39%,61%",options="header"]
 |===
 |Имя |Описание
 |ProcessInfo(Process, Library) |Инициализирует новый экземпляр типа ProcessInfo с помощью указанного значения.
@@ -23,7 +23,7 @@ public class ProcessInfo
 
 == Свойства
 
-[width="100%",cols="39%,61%",options="header",]
+[width="100%",cols="39%,61%",options="header"]
 |===
 |Имя |Описание
 |ActivePassStates |Возвращает список с информацией об активных проходах функций.
@@ -45,7 +45,7 @@ public class ProcessInfo
 
 == Методы
 
-[width="100%",cols="39%,61%",options="header",]
+[width="100%",cols="39%,61%",options="header"]
 |===
 |Имя |Описание
 |AddLogMessage(ActionTypeEnum, String, Int32, String, String, String, String, String) |Создает записи в журнале работы Workflow.
@@ -72,5 +72,3 @@ public class ProcessInfo
 |SetProcessInfo(ProcessStateEnum, DateTime, Boolean) |Принудительно задает состояние процесса, время последнего запуска и признак подготовки к выполнению.
 |UpdateFunctionStatistics(Guid, Double) |Обновляет время последнего запуска указанной функции.
 |===
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Runtime/Runtime_EN.adoc[DocsVision.Workflow.Runtime - пространство имен]

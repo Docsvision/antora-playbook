@@ -2,12 +2,12 @@
 
 Определяет корректность ЭЦП, установленной на основных файлах документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CheckAllMainFilesSigned(Document document, BaseCardSignature signature)
 ----
@@ -15,24 +15,22 @@ bool CheckAllMainFilesSigned(Document document, BaseCardSignature signature)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, для которого проводится проверка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, для которого проводится проверка
 signature::
-  Тип: xref:../BaseCardSignature_CL.adoc[BaseCardSignature]
-  +
-  Подпись карточки, содержащая актуальные ЭЦП
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
++
+Подпись карточки, содержащая актуальные ЭЦП
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - все подписи корректны, либо документ не содержит основных файлов, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - все подписи корректны, либо документ не содержит основных файлов, иначе false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или signature.
@@ -40,7 +38,7 @@ signature::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -56,5 +54,3 @@ BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Las
 // Выполнение проверки
 bool result = documentService.CheckAllMainFilesSigned(document, lastSignature);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

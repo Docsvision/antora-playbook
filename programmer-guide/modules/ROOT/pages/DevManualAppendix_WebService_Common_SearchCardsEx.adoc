@@ -28,15 +28,15 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Sea
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 search::
-  Поисковый запрос в виде xml-документ. Сформировать запрос можно, в том числе, утилитой «Docsvision Explorer» (входит в Resource Kit).
+Поисковый запрос в виде xml-документ. Сформировать запрос можно, в том числе, утилитой «Docsvision Explorer» (входит в Resource Kit).
 flags::
-  Дополнительные флаг: 0 - отсутствует; 1- в `search` передан идентификатор сохраненного поискового запроса, а не его содержимое
+Дополнительные флаг: 0 - отсутствует; 1- в `search` передан идентификатор сохраненного поискового запроса, а не его содержимое
 parameters::
-  Параметры запроса, если поисковый запрос использует их
+Параметры запроса, если поисковый запрос использует их
 
-Строка [.keyword]*parameters* должна соответствовать формату элемента [.keyword]*MethodCall*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *parameters* должна соответствовать формату элемента *MethodCall*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -131,5 +131,3 @@ response = session.post(url, data=body)
 # Ответ SOAP
 print(response.content)
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Search.adoc[Поиск]

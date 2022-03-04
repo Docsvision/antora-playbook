@@ -6,7 +6,7 @@
 
 Изменение данных карточки в обычном режиме:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем данные карточки с идентификатором cardId
 CardData card = userSession.CardManager.GetCardData(cardId);
@@ -42,9 +42,9 @@ card.EndUpdate();
 
 На высоком уровне API сценарий изменения данных зависит от способа (см. описание в разделе xref:dm_operations_getsection.adoc[Получение данных из секции карточки]) представления секции в объектной модели карточки.
 
-Если сущность секции представлена в объектной модели карточки в виде свойства, то код изменяющий, к примеру, название карточки типа [.dfn .term]_Документ_ будет следующим:
+Если сущность секции представлена в объектной модели карточки в виде свойства, то код изменяющий, к примеру, название карточки типа _Документ_ будет следующим:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку типа Документ
 Document card = objectContext.GetObject<Document>(cardId);
@@ -58,14 +58,14 @@ objectContext.SaveObject(card);
 
 Если необходимо, вместо сохранения изменений одного объекта, можно сохранить все изменения контекста объектов:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 objectContext.AcceptChanges();
 ----
 
-Если объектная модель карточки не предоставляет непосредственного доступа к секции, можно воспользоваться методом [.keyword .apiname]#GetSection# базового класса xref:../api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]:
+Если объектная модель карточки не предоставляет непосредственного доступа к секции, можно воспользоваться методом [.keyword .apiname]#GetSection# базового класса xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получаем карточку
 BaseCard baseCard = objectContext.GetObject<BaseCard>(cardId);
@@ -84,5 +84,3 @@ objectContext.SaveObject(row);
 == См. далее
 
 * xref:dm_operations_createcard.adoc[Создание нового экземпляра карточки]
-
-*На уровень выше:* xref:../pages/dm_cards.adoc[Работа с карточками]

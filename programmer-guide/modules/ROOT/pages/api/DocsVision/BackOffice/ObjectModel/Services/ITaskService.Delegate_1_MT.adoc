@@ -2,12 +2,12 @@
 
 Делегирует задание.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool Delegate(Task task, IEnumerable<StaffEmployee> delegates, StaffEmployee noticeable, bool restrictDelegation, bool returnAfterDelegation, string comment, StaffEmployee delegatedUser)
 ----
@@ -15,49 +15,45 @@ bool Delegate(Task task, IEnumerable<StaffEmployee> delegates, StaffEmployee not
 Параметры
 
 task::
-  Тип: xref:../Task_CL.adoc[Task]
-  +
-  Задание
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
++
+Задание
 delegates::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
-  +
-  Список сотрудников, которым делегируется задание
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
++
+Список сотрудников, которым делегируется задание
 noticeable::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Уведомляемый сотрудник, если при делегировании невозможно однозначно разрешить, кто является исполнителем задания
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Уведомляемый сотрудник, если при делегировании невозможно однозначно разрешить, кто является исполнителем задания
 restrictDelegation::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Устанавливает флаг "Запретить делегирование"
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Устанавливает флаг "Запретить делегирование"
 returnAfterDelegation::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Устанавливает флаг "Возврат с делегирования"
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Устанавливает флаг "Возврат с делегирования"
 comment::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Комментарий при делегировании
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Комментарий при делегировании
 delegatedUser::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, выполнивший делегирование (для дерева исполнения; в истории отображается владелец сессии)
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, выполнивший делегирование (для дерева исполнения; в истории отображается владелец сессии)
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - делегирование выполнено успешно, иначе - false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - делегирование выполнено успешно, иначе - false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task, delegates или delegatedUser.
 |https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается, если недостаточно прав для делегирования задания.
 |https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если запрещено делегировать задание вручную.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]

@@ -2,12 +2,12 @@
 
 Сохраняет последнюю версию версионного файла на диск.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string Download(VersionedFileCard versionedFileCard)
 ----
@@ -15,16 +15,14 @@ string Download(VersionedFileCard versionedFileCard)
 Параметры
 
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Карточка файла с версиями
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Карточка файла с версиями
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Расположение выгруженного файла
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Расположение выгруженного файла
 
 == Заметки
 
@@ -32,7 +30,7 @@ versionedFileCard::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -45,5 +43,3 @@ VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(new Guid
 // Выгрузка файла
 string path = versionedFileCardService.Download(versionedFileCard);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

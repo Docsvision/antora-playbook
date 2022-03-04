@@ -2,12 +2,12 @@
 
 Возвращает список сотрудников указанного подразделения.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IList<StaffEmployee> GetUnitEmployees(StaffUnit unit,  bool hierarchy,  bool selection)
 ----
@@ -15,30 +15,28 @@ IList<StaffEmployee> GetUnitEmployees(StaffUnit unit,  bool hierarchy,  bool sel
 Параметры
 
 unit::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Подразделение, из которого возвращается список сотрудников
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Подразделение, из которого возвращается список сотрудников
 hierarchy::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  При true в итоговый список сотрудников. будут включены все подчиненные сотрудники, при false только подчиненные непосредственно unit
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+При true в итоговый список сотрудников. будут включены все подчиненные сотрудники, при false только подчиненные непосредственно unit
 selection::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  При true будут возвращены сотрудники, у которых отсутствует признак "Не показывать при выборе"
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+При true будут возвращены сотрудники, у которых отсутствует признак "Не показывать при выборе"
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>
-  +
-  Список сотрудников подразделения
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>
++
+Список сотрудников подразделения
 
 == Примеры
 
 Пример получения всего списка сотрудников, доступных для выбора, независимо от иерархии подразделения
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -47,5 +45,3 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 
 var employees = staffService.GetUnitEmployees(unit, true, true);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

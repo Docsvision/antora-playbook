@@ -2,12 +2,12 @@
 
 Создает карточку и возвращает ссылку на интерфейс компонента карточки.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public object CreateCard(Guid cardTypeId)
 ----
@@ -15,16 +15,14 @@ public object CreateCard(Guid cardTypeId)
 Параметры
 
 cardTypeId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
-  +
-  Идентификатор типа карточки
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]
++
+Идентификатор типа карточки
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[Object]
-  +
-  Интерфейс карточки
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[Object]
++
+Интерфейс карточки
 
 == Заметки
 
@@ -32,7 +30,7 @@ cardTypeId::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //константа, идентификатор типа карточки-файла
 const string FILE_CARD_TYPE = "6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3";
@@ -44,5 +42,3 @@ fileCard.Initialize(@"C:\Test.doc", Guid.Empty, false, false);
 FileVersion fileVersion = fileCard.CurrentVersion;
 MessageBox.Show(fileVersion.VersionString);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

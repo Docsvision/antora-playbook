@@ -4,17 +4,17 @@
 
 == Разработка преобразователя данных для строк секций
 
-Т.к. базовым классом строк секций был выбран класс xref:../api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow], то преобразователь данных должен наследоваться от класса [.keyword .apiname]#BaseCardSectionRowMapper<T>#.
+Т.к. базовым классом строк секций был выбран класс xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow], то преобразователь данных должен наследоваться от класса [.keyword .apiname]#BaseCardSectionRowMapper<T>#.
 
 . Добавляем класс преобразователя данных:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class NetstatSolutionCardMainInfoMapper : BaseCardSectionRowMapper<NetstatSolutionCardMainInfo>
 ----
 . Регистрируем поля секции в карте преобразователя данных:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private static void InitializeObjectMap()
 {
@@ -33,13 +33,13 @@ private static void InitializeObjectMap()
 
 . Добавляем класс преобразователя данных:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
  public class NetstatSolutionCardMapper : BaseCardMapper<NetstatSolutionCard>
 ----
 . Регистрируем секции карточки в карте преобразователя данных:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private static void InitializeObjectMap()
 {
@@ -62,7 +62,7 @@ public class NetstatSolutionMapperFactory : ObjectMapperFactory
 ----
 . Добавляем конструктор, принимающий контекст объектов. В конструкторе регистрируются все разработанные ранее преобразователи данных.
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public NetstatSolutionMapperFactory(ObjectContext context) : base(context)
 {
@@ -79,5 +79,3 @@ public NetstatSolutionMapperFactory(ObjectContext context) : base(context)
 == См. также
 
 * xref:CreateCardLib_Services.adoc[Разработка сервиса для работы с карточкой]
-
-*На уровень выше:* xref:../pages/CreateCardLib_CardObjectModel.adoc[Разработка объектной модели карточки]

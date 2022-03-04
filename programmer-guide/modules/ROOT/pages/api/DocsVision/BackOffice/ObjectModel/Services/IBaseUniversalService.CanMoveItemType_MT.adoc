@@ -2,12 +2,12 @@
 
 Определяет возможность перемещения узла в заданный узел конструктора справочников.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool CanMoveItemType(BaseUniversalItemType movedItemType, BaseUniversalItemType targetItemType)
 ----
@@ -15,24 +15,22 @@ bool CanMoveItemType(BaseUniversalItemType movedItemType, BaseUniversalItemType 
 Параметры
 
 movedItemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел, который проверяется на возможность перемещения
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел, который проверяется на возможность перемещения
 targetItemType::
-  Тип: xref:../BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
-  +
-  Узел, в который планируется перемещение
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversalItemType_CL.adoc[BaseUniversalItemType]
++
+Узел, в который планируется перемещение
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - перемещение допустимо, иначе false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - перемещение допустимо, иначе false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр movedItemType.
@@ -41,5 +39,3 @@ targetItemType::
 == Заметки
 
 Метод проходит дерево от targetItemType до его родительского узла, проверяя наличии movedItemType среди родительских узлов.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService - интерфейс]

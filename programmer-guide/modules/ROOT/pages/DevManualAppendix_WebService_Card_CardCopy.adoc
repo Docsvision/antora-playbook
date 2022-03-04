@@ -31,9 +31,9 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 instanceID::
-  Идентификатор копируемой карточки
+Идентификатор копируемой карточки
 
 == Ответ
 
@@ -80,5 +80,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext( ".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newInstanceId"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

@@ -2,74 +2,74 @@
 
 Представляет сервис для работы с документами.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IDocumentService
 ----
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IDocumentService.AddAdditionalFile_1_MT.adoc[AddAdditionalFile(Document, String)] |Добавляет в документ дополнительный файл.
-|xref:IDocumentService.AddAdditionalFile_MT.adoc[AddAdditionalFile(Document, VersionedFileCard)] |Добавляет в документ дополнительный файл.
-|xref:IDocumentService.AddAdditionalFiles_MT.adoc[AddAdditionalFiles(Document, IEnumerable<string>)] |Добавляет дополнительные файлы в документ.
-|xref:IDocumentService.AddMainFile_MT.adoc[AddMainFile(Document, String)] |Добавляет в документ основной файл.
-|xref:IDocumentService.AddMainFileComment_MT.adoc[AddMainFileComment(Document, DocumentFile, String)] |Добавляет комментарий к основному файлу документа.
-|xref:IDocumentService.AddMainFiles_MT.adoc[AddMainFiles(Document document, IEnumerable<String>)] |Добавляет несколько основных файлов в документ.
-|xref:IDocumentService.AddMainFileVersionComment_MT.adoc[AddMainFileVersionComment(Document, DocumentFile, Guid, String)] |Добавляет комментарий к указанной версии основного файла документа.
-|xref:IDocumentService.AddSignature_MT.adoc[AddSignature(Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)] |Добавляет новую подпись в список подписей карточки и устанавливает ЭЦП на поля, основные и дополнительные файлы документа.
-|xref:IDocumentService.AddSignature_1_MT.adoc[AddSignature(Document, X509Certificate2, SignatureLabel, StaffEmployee, String, Boolean, ICollection<CardFieldSetting>)] |Данный метод предназначен для выполнения подписания операции в документе.
-|xref:IDocumentService.AddSignatures_MT.adoc[AddSignatures(Document, SignedCms)] |Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
-|xref:IDocumentService_AddSignatures_1_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
-|xref:IDocumentService.AddSignatures_2_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-|xref:IDocumentService.AddSignatures_3_MT.adoc[AddSignatures - метод (Document, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-|xref:IDocumentService.ApplyKindSettings_1_MT.adoc[ApplyKindSettings(Document, DocumentSetting)] |Устанавливает у документа определенные настройки вида карточки.
-|xref:IDocumentService.ApplyKindSettings_MT.adoc[ApplyKindSettings(Document, KindsCardKind)] |Устанавливает у документа настройки указанного вида карточки.
-|xref:IDocumentService.AttachMainFile_MT.adoc[AttachMainFile(Document, String)] |Загружает в документ основной файл.
-|xref:IDocumentService.AttachMainFile_1_MT.adoc[AttachMainFile(Document, VersionedFileCard)] |Добавляет в документ карточку версионного файла в качестве основного файла документа.
-|xref:IDocumentService.AttachMainFile_2_MT.adoc[AttachMainFile(Document, string, SignedCms, bool)] |Добавляет в документ подпись в качестве основного файла документа, проверяет срок действия подписи.
-|xref:IDocumentService.CanAttachMainFile_MT.adoc[CanAttachMainFile(Document, VersionedFileCard)] |Определяет возможность добавления основного файла в документ.
-|xref:IDocumentService.CanAttachMainFile_1_MT.adoc[CanAttachMainFile(Document, VersionedFileCard, SignedCms)] |Определяет возможность добавления основного файла в документ.
-|xref:IDocumentService.CanCancelLockAnyMainFile_MT.adoc[CanCancelLockAnyMainFile(Document)] |Определяет возможность снятия блокировки с основных файлов.
-|xref:IDocumentService.CanCancelLockMainFile_MT.adoc[CanCancelLockMainFile(DocumentFile)] |Определяет возможность снятия блокировки с основного файла.
-|xref:IDocumentService.CancelLockMainFile_MT.adoc[CancelLockMainFile(Document, DocumentFile)] |Снимает блокировку с основного файла документа.
-|xref:IDocumentService.CancelLockMainFileIfNeeded_MT.adoc[CancelLockMainFileIfNeeded(Document, DocumentFile)] |Снимает блокировку с основного файла документа, если это необходимо.
-|xref:IDocumentService.CanEditAnyMainFile_MT.adoc[CanEditAnyMainFile(Document)] |Определяет наличие в документе основного файла, который может быть открыт для редактирования.
-|xref:IDocumentService.CanEditMainFile_MT.adoc[CanEditMainFile(Document, DocumentFile, Boolean)] |Определяет возможность выгрузки указанного основного файла для редактирования.
-|xref:IDocumentService.CanLockAnyMainFile_MT.adoc[CanLockAnyMainFile(Document)] |Определяет наличие по меньшей мере одного основного файла документа, который может быть заблокирован.
-|xref:IDocumentService.CanLockMainFile_MT.adoc[CanLockMainFile(Document, DocumentFile, Boolean)] |Определяет возможность блокировки указанного основного файла документа.
-|xref:IDocumentService.CanRemoveMainFile_MT.adoc[CanRemoveMainFile(Document, DocumentFile)] |Определяет возможность удаления указанного основного файла.
-|xref:IDocumentService.CanRemoveMainFiles_MT.adoc[CanRemoveMainFiles(Document document, IEnumerable<DocumentFile>)] |Определяет возможность удаления указанных основных файлов.
-|xref:IDocumentService.CanUnlockAnyMainFile_MT.adoc[CanUnlockAnyMainFile(Document)] |Определяет наличие в документе основных файлов, которые могут быть разблокированы.
-|xref:IDocumentService.CanUnlockMainFile_MT.adoc[CanUnlockMainFile(Document, DocumentFile)] |Определяет возможность разблокировки определенного основного файла документа.
-|xref:IDocumentService.CanUnlockMainFile_1_MT.adoc[CanUnlockMainFile(Document, DocumentFile, LockStatus)] |Определяет возможность разблокировки определенного основного файла документа.
-|xref:IDocumentService.CanUnlockMainFile_2_MT.adoc[CanUnlockMainFile(Document, DocumentFile, String)] |Определяет возможность разблокировки определенного основного файла документа.
-|xref:IDocumentService.CheckActualSignature_MT.adoc[CheckActualSignature(Document, ICollection<CardFieldSetting>, BaseCardSignature)] |Определяет актуальность ЭЦП по отношению к данным документа.
-|xref:IDocumentService.CheckAllMainFilesSigned_MT.adoc[CheckAllMainFilesSigned(Document, BaseCardSignature)] |Определяет корректность ЭЦП, установленной на основных файлах документа.
-|xref:IDocumentService.CheckMainFileSigned_MT.adoc[CheckMainFileSigned(Document, DocumentFile)] |Определяет наличие подписи у указанного основного файла документ.
-|xref:IDocumentService.ComputeAttachmentSignature_MT.adoc[ComputeAttachmentSignature(Document, BaseCardSignature, X509Certificate2)] |Подписывает дополнительные файлы документа.
-|xref:IDocumentService.ComputeFieldsSignature_MT.adoc[ComputeFieldsSignature(Document, BaseCardSignature, X509Certificate2, ICollection<CardFieldSetting>)] |Подписывает атрибуты документа.
-|xref:IDocumentService.ComputeMainFileSignature_MT.adoc[ComputeMainFileSignature(Document, BaseCardSignature, X509Certificate2)] |Подписывает основные файлы документа.
-|xref:IDocumentService.CreateDocument_MT.adoc[CreateDocument] |Создает экземпляр нового документа.
-|xref:IDocumentService.CreateDocument_2_MT.adoc[CreateDocument(String)] |Создает экземпляр нового документа с основным файлом.
-|xref:IDocumentService.CreateDocument_1_MT.adoc[CreateDocument(String, KindsCardKind)] |Создает экземпляр нового документа с указанным видом, с основным файлом.
-|xref:IDocumentService.CreateDocument_3_MT.adoc[CreateDocument(String, KindsCardKind, DocumentVersioningType)] |Создает документ с заданным видом карточки и добавляет основной файл с указанным типов версионинга.
-|xref:IDocumentService.CreateListCards_MT.adoc[CreateListCards(Document)] |Инициализирует списки, используемые документом.
-|xref:IDocumentService.CreateSignatureList_MT.adoc[CreateSignatureList] |Инициализирует новый экземпляр списка подписей документа.
-|xref:IDocumentService.DecodeSignedDocument_MT.adoc[DecodeSignedDocument(String, Document, SignedCms)] |Расшифровывает сообщение CMS/PKCS 7, которое содержится в файле, расположенном по указанному пути.
-|xref:IDocumentService.DownloadAdditionalFile_1_MT.adoc[DownloadAdditionalFile(Document, DocumentFile)] |Выгружает в файловую систему указанный дополнительный файл документа.
-|xref:IDocumentService.DownloadAdditionalFile_MT.adoc[DownloadAdditionalFile(Document, DocumentFile, String)] |Выгружает дополнительный файл документа в указанный каталог.
-|xref:IDocumentService.DownloadFile_MT.adoc[DownloadFile(Guid)] |Сохраняет файл с указанным идентификатором на файловую систему.
-|xref:IDocumentService.DownloadMainFile_1_MT.adoc[DownloadMainFile(Document, DocumentFile)] |Выгружает основной файл документа на диск.
-|xref:IDocumentService.DownloadMainFile_MT.adoc[DownloadMainFile(Document, DocumentFile, String)] |Выгружает основной файл документа в указанный каталог.
-|xref:IDocumentService.DownloadMainFileVersion_MT.adoc[DownloadMainFileVersion(Document, DocumentFile, Guid)] |Выгружает определенную версию основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFile_1_MT.adoc[AddAdditionalFile(Document, String)] |Добавляет в документ дополнительный файл.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFile_MT.adoc[AddAdditionalFile(Document, VersionedFileCard)] |Добавляет в документ дополнительный файл.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFiles_MT.adoc[AddAdditionalFiles(Document, IEnumerable<string>)] |Добавляет дополнительные файлы в документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFile_MT.adoc[AddMainFile(Document, String)] |Добавляет в документ основной файл.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFileComment_MT.adoc[AddMainFileComment(Document, DocumentFile, String)] |Добавляет комментарий к основному файлу документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFiles_MT.adoc[AddMainFiles(Document document, IEnumerable<String>)] |Добавляет несколько основных файлов в документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFileVersionComment_MT.adoc[AddMainFileVersionComment(Document, DocumentFile, Guid, String)] |Добавляет комментарий к указанной версии основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[AddSignature(Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)] |Добавляет новую подпись в список подписей карточки и устанавливает ЭЦП на поля, основные и дополнительные файлы документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_1_MT.adoc[AddSignature(Document, X509Certificate2, SignatureLabel, StaffEmployee, String, Boolean, ICollection<CardFieldSetting>)] |Данный метод предназначен для выполнения подписания операции в документе.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_MT.adoc[AddSignatures(Document, SignedCms)] |Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_AddSignatures_1_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures - метод (Document, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_1_MT.adoc[ApplyKindSettings(Document, DocumentSetting)] |Устанавливает у документа определенные настройки вида карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_MT.adoc[ApplyKindSettings(Document, KindsCardKind)] |Устанавливает у документа настройки указанного вида карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_MT.adoc[AttachMainFile(Document, String)] |Загружает в документ основной файл.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_1_MT.adoc[AttachMainFile(Document, VersionedFileCard)] |Добавляет в документ карточку версионного файла в качестве основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_2_MT.adoc[AttachMainFile(Document, string, SignedCms, bool)] |Добавляет в документ подпись в качестве основного файла документа, проверяет срок действия подписи.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanAttachMainFile_MT.adoc[CanAttachMainFile(Document, VersionedFileCard)] |Определяет возможность добавления основного файла в документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanAttachMainFile_1_MT.adoc[CanAttachMainFile(Document, VersionedFileCard, SignedCms)] |Определяет возможность добавления основного файла в документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanCancelLockAnyMainFile_MT.adoc[CanCancelLockAnyMainFile(Document)] |Определяет возможность снятия блокировки с основных файлов.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanCancelLockMainFile_MT.adoc[CanCancelLockMainFile(DocumentFile)] |Определяет возможность снятия блокировки с основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CancelLockMainFile_MT.adoc[CancelLockMainFile(Document, DocumentFile)] |Снимает блокировку с основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CancelLockMainFileIfNeeded_MT.adoc[CancelLockMainFileIfNeeded(Document, DocumentFile)] |Снимает блокировку с основного файла документа, если это необходимо.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanEditAnyMainFile_MT.adoc[CanEditAnyMainFile(Document)] |Определяет наличие в документе основного файла, который может быть открыт для редактирования.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanEditMainFile_MT.adoc[CanEditMainFile(Document, DocumentFile, Boolean)] |Определяет возможность выгрузки указанного основного файла для редактирования.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanLockAnyMainFile_MT.adoc[CanLockAnyMainFile(Document)] |Определяет наличие по меньшей мере одного основного файла документа, который может быть заблокирован.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanLockMainFile_MT.adoc[CanLockMainFile(Document, DocumentFile, Boolean)] |Определяет возможность блокировки указанного основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanRemoveMainFile_MT.adoc[CanRemoveMainFile(Document, DocumentFile)] |Определяет возможность удаления указанного основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanRemoveMainFiles_MT.adoc[CanRemoveMainFiles(Document document, IEnumerable<DocumentFile>)] |Определяет возможность удаления указанных основных файлов.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockAnyMainFile_MT.adoc[CanUnlockAnyMainFile(Document)] |Определяет наличие в документе основных файлов, которые могут быть разблокированы.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_MT.adoc[CanUnlockMainFile(Document, DocumentFile)] |Определяет возможность разблокировки определенного основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_1_MT.adoc[CanUnlockMainFile(Document, DocumentFile, LockStatus)] |Определяет возможность разблокировки определенного основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_2_MT.adoc[CanUnlockMainFile(Document, DocumentFile, String)] |Определяет возможность разблокировки определенного основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckActualSignature_MT.adoc[CheckActualSignature(Document, ICollection<CardFieldSetting>, BaseCardSignature)] |Определяет актуальность ЭЦП по отношению к данным документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckAllMainFilesSigned_MT.adoc[CheckAllMainFilesSigned(Document, BaseCardSignature)] |Определяет корректность ЭЦП, установленной на основных файлах документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckMainFileSigned_MT.adoc[CheckMainFileSigned(Document, DocumentFile)] |Определяет наличие подписи у указанного основного файла документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeAttachmentSignature_MT.adoc[ComputeAttachmentSignature(Document, BaseCardSignature, X509Certificate2)] |Подписывает дополнительные файлы документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeFieldsSignature_MT.adoc[ComputeFieldsSignature(Document, BaseCardSignature, X509Certificate2, ICollection<CardFieldSetting>)] |Подписывает атрибуты документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeMainFileSignature_MT.adoc[ComputeMainFileSignature(Document, BaseCardSignature, X509Certificate2)] |Подписывает основные файлы документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_MT.adoc[CreateDocument] |Создает экземпляр нового документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_2_MT.adoc[CreateDocument(String)] |Создает экземпляр нового документа с основным файлом.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_1_MT.adoc[CreateDocument(String, KindsCardKind)] |Создает экземпляр нового документа с указанным видом, с основным файлом.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_3_MT.adoc[CreateDocument(String, KindsCardKind, DocumentVersioningType)] |Создает документ с заданным видом карточки и добавляет основной файл с указанным типов версионинга.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateListCards_MT.adoc[CreateListCards(Document)] |Инициализирует списки, используемые документом.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateSignatureList_MT.adoc[CreateSignatureList] |Инициализирует новый экземпляр списка подписей документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[DecodeSignedDocument(String, Document, SignedCms)] |Расшифровывает сообщение CMS/PKCS 7, которое содержится в файле, расположенном по указанному пути.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadAdditionalFile_1_MT.adoc[DownloadAdditionalFile(Document, DocumentFile)] |Выгружает в файловую систему указанный дополнительный файл документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadAdditionalFile_MT.adoc[DownloadAdditionalFile(Document, DocumentFile, String)] |Выгружает дополнительный файл документа в указанный каталог.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadFile_MT.adoc[DownloadFile(Guid)] |Сохраняет файл с указанным идентификатором на файловую систему.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_1_MT.adoc[DownloadMainFile(Document, DocumentFile)] |Выгружает основной файл документа на диск.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_MT.adoc[DownloadMainFile(Document, DocumentFile, String)] |Выгружает основной файл документа в указанный каталог.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFileVersion_MT.adoc[DownloadMainFileVersion(Document, DocumentFile, Guid)] |Выгружает определенную версию основного файла документа.
 |DownloadMainFileVersion(Document, DocumentFile, Guid, String) |Выгружает указанную версию основного файла документа в заданный каталог.
 |EditMainFile(Document, DocumentFile) |Устанавливает временную блокировку и выгружает файл в файловую систему.
 |EditMainFile(Document, DocumentFile, String) |Устанавливает временную блокировку и выгружает файл в заданный каталог.
@@ -82,16 +82,16 @@ public interface IDocumentService
 |ExportToPDF(String, Document, DocumentFile) |Отправляет на печать указанный файл документа.
 |ExportToPDF(String, Document, IEnumerable<DocumentFile>) |Отправляет на печать коллекцию файлов документа.
 |ExportToZip(String, Dictionary<String, Stream>) |Архивирует файлы, представленные в виде потока, в формате zip.
-|xref:IDocumentService.GetAdditionalFile_MT.adoc[GetAdditionalFile(DocumentFile)] |Возвращает карточку файл с версиями из дополнительного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetAdditionalFile_MT.adoc[GetAdditionalFile(DocumentFile)] |Возвращает карточку файл с версиями из дополнительного файла документа.
 |GetAdditionalFiles(Document) |Получает все дополнительные файлы заданного документа.
 |GetFiles(Document) |Получает все файлы документа.
 |GetFileTypeLocalizedName(DocumentFile) |Возвращает локализованное название типа файла документа (основной, дополнительный).
-|xref:IDocumentService.GetKindSettings_MT.adoc[GetKindSettings(KindsCardKind)] |Возвращает настройки заданного вида карточки Документ.
-|xref:IDocumentService.GetMainFile_MT.adoc[GetMainFile(DocumentFile)] |Возвращает карточку файл с версиями из основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetKindSettings_MT.adoc[GetKindSettings(KindsCardKind)] |Возвращает настройки заданного вида карточки Документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetMainFile_MT.adoc[GetMainFile(DocumentFile)] |Возвращает карточку файл с версиями из основного файла документа.
 |GetMainFileChanged(DocumentFile) |Возвращает признак того, что в указанном файле есть несохраненные изменения.
 |GetMainFileLockStatus(DocumentFile, LockStatus) |Возвращает статус блокировки основного файла.
 |GetMainFileLockStatus(DocumentFile, LockStatus, String) |Возвращает статус блокировки основного файла и учетную запись заблокировавшего сотрудника.
-|xref:IDocumentService.GetMainFiles_MT.adoc[GetMainFiles(Document)] |Возвращает все основные файлы документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetMainFiles_MT.adoc[GetMainFiles(Document)] |Возвращает все основные файлы документа.
 |GetMainFileVersionNumber(DocumentFile, Guid) |Возвращает строковое представление указанной версии основного файла.
 |HasAnyMainFileChanged(Document) |Определяет наличие основного файла карточки с несохраненными изменениями.
 |HasEditedMainFile(DocumentFile) |Определяет наличие редактируемого основного файла карточки.
@@ -107,126 +107,65 @@ public interface IDocumentService
 |IsEncodedSignedDocument(String) |Определяет соответствие указанного файла криптографическому сообщению CMS/PKCS 7.
 |IsFileNotEmpty(Document, DocumentFile) |Возвращает true, если файл документа не нулевой.
 |LockMainFile(Document, DocumentFile) |Выгружает файл карточки и ставит постоянную блокировку.
-|xref:IDocumentService.LockMainFile_MT.adoc[LockMainFile(Document, DocumentFile, String)] |Выгружает файл из документа на диск с установкой постоянной блокировки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.LockMainFile_MT.adoc[LockMainFile(Document, DocumentFile, String)] |Выгружает файл из документа на диск с установкой постоянной блокировки.
 |MakeCurrentMainFileVersion(Document, DocumentFile, Guid) |Задает последнюю версию файла.
-|xref:IDocumentService.MakeLockedMainFileForceChanged_MT.adoc[MakeLockedMainFileForceChanged(Document, DocumentFile)] |Устанавливает признака наличия изменений для выгруженного основного файла документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MakeLockedMainFileForceChanged_MT.adoc[MakeLockedMainFileForceChanged(Document, DocumentFile)] |Устанавливает признака наличия изменений для выгруженного основного файла документа.
 |PrepareToVerifySignature(Document, IDictionary<BaseCardSignaturePart, Stream>, IEnumerable<BaseCardSignaturePart>, Boolean, Boolean, ICollection<CardFieldSetting>) |Заполняет коллекцию IDictionary<BaseCardSignaturePart, Stream>, где ключ соответствует части ЭЦП, а значение коллекции - сопоставленные частям ЭЦП значения полей, основных или дополнительных файлов.
-|xref:IDocumentService.PurgeFileCache_MT.adoc[PurgeFileCache(Document)] |Очищает кэш файлов документ.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.PurgeFileCache_MT.adoc[PurgeFileCache(Document)] |Очищает кэш файлов документ.
 |RemoveAdditionalFile(Document, DocumentFile) |Удаляет заданный дополнительный файл из документа.
 |RemoveMainFile(Document, DocumentFile) |Удаляет заданный основной файл из документа.
 |RemoveMainFile(Document, DocumentFile) |Удаляет заданный основной файл из документа. Если файл заблокирован, то блокировка отменяется.
-|xref:IDocumentService.RemoveMainFileComments_MT.adoc[RemoveMainFileComments(Document, DocumentFile, FileCommentCollection, IEnumerable<FileComment>)] |Удаляет комментарии к файлу документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RemoveMainFileComments_MT.adoc[RemoveMainFileComments(Document, DocumentFile, FileCommentCollection, IEnumerable<FileComment>)] |Удаляет комментарии к файлу документа.
 |RemoveMainFileVersion(Document, DocumentFile, Guid) |Удаляет указанную версию файла документа.
 |RemoveMainFileVersionComments(Document, DocumentFile, Guid, IEnumerable<FileComment>) |Удаляет комментарии к заданной версии файла.
-|xref:IDocumentService.RenameAdditionalFile_MT.adoc[RenameAdditionalFile(Document, DocumentFile, String)] |Переименовывает дополнительный файл документа.
-|xref:IDocumentService.RenameMainFile_MT.adoc[RenameMainFile(Document, DocumentFile, String)] |Переименовывает основной файл документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RenameAdditionalFile_MT.adoc[RenameAdditionalFile(Document, DocumentFile, String)] |Переименовывает дополнительный файл документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RenameMainFile_MT.adoc[RenameMainFile(Document, DocumentFile, String)] |Переименовывает основной файл документа.
 |ReplaceMainFile(Document, DocumentFile, String, SignedCms) |Заменяет основной файл документа. Новый файл должен иметь название аналогичное старому.
-|xref:IDocumentService.GetPartSignatureInfo_MT.adoc[SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart)] |Возвращает информацию о части подписи документа.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetPartSignatureInfo_MT.adoc[SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart)] |Возвращает информацию о части подписи документа.
 |SyncPropertiesFromFile(Document, IList<IDocumentPropertySetting>, String) |Загружает свойства документа из файла.
 |SyncPropertiesFromFiles(Document, IList<IDocumentPropertySetting>, IEnumerable<string>) |Загружает свойства документа из нескольких файлов.
-|xref:IDocumentService.SyncPropertiesToFile_MT.adoc[SyncPropertiesToFile(Document, DocumentFile, IList<IDocumentPropertySetting>)] |Выполняет синхронизацию значений полей карточки [.dfn .term]_Документ_ со свойствами основного файла данного документа. Передача осуществляется в сторону вложенного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SyncPropertiesToFile_MT.adoc[SyncPropertiesToFile(Document, DocumentFile, IList<IDocumentPropertySetting>)] |Выполняет синхронизацию значений полей карточки _Документ_ со свойствами основного файла данного документа. Передача осуществляется в сторону вложенного файла.
 |UnlockMainFile(Document, DocumentFile) |Разблокирует указанный файл. При наличии изменений в файле документа, номер версии будет увеличен.
 |UnlockMainFile(Document, DocumentFile, String) |Разблокирует файл, расположенный по заданному пути. В случае наличия изменений в файле документа, увеличивает номер версии.
 |UnlockMainFile(Document, DocumentFile, Int32, String, Boolean) |Разблокирует файл. В случае наличия изменений в файле документа, увеличивает номер версии. К файлу или версии файла добавляется комментарий.
 |UnlockMainFile(Document, DocumentFile, Int32, String, Boolean, String) |Разблокирует файл, расположенный по заданному пути. В случае наличия изменений в файле документа, увеличивает номер версии. К файлу или версии файла добавляется комментарий.
-|xref:IDocumentService.VerifySignature_MT.adoc[VerifySignature(Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)] |Выполняет проверку ЭЦП, установленной на документе, файлах документа или полях, и возвращает результат проверки.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.VerifySignature_MT.adoc[VerifySignature(Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)] |Выполняет проверку ЭЦП, установленной на документе, файлах документа или полях, и возвращает результат проверки.
 |===
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:IDocumentService.AdditionalFileAdded_EV.adoc[AdditionalFileAdded] |Событие срабатывает после добавлении дополнительного файла.
-|xref:IDocumentService.AdditionalFileRemoved_EV.adoc[AdditionalFileRemoved] |Событие срабатывает после удаления дополнительного файла.
-|xref:IDocumentService.MainFileAdded_EV.adoc[MainFileAdded] |Событие срабатывает после добавлении основного файла.
-|xref:IDocumentService.MainFileCancelLocked_EV.adoc[MainFileCancelLocked] |Событие срабатывает после отмены блокировки основного файла.
-|xref:IDocumentService.MainFileCurrentVersionChanged_EV.adoc[MainFileCurrentVersionChanged] |Событие срабатывает после изменения текущей версии основного файла.
-|xref:IDocumentService.MainFileLocked_EV.adoc[MainFileLocked] |Событие срабатывает после блокировки основного файла.
-|xref:IDocumentService.MainFileRemoved_EV.adoc[MainFileRemoved] |Событие срабатывает после удаления основного файла.
-|xref:IDocumentService.MainFileUnlocked_EV.adoc[MainFileUnlocked] |Событие срабатывает после разблокировки основного файла.
-|xref:IDocumentService.MainFileUnlocking_EV.adoc[MainFileUnlocking] |Вызывается до разблокировки основного файла.
-|xref:IDocumentService.SignatureAdded_EV.adoc[SignatureAdded] |Событие срабатывает после подписания документ ЭЦП.
-|xref:IDocumentService.SynchronizationFromFileCompleted_EV.adoc[SynchronizationFromFileCompleted] |Событие срабатывает после синхронизации данных карточки со свойствами основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AdditionalFileAdded_EV.adoc[AdditionalFileAdded] |Событие срабатывает после добавлении дополнительного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AdditionalFileRemoved_EV.adoc[AdditionalFileRemoved] |Событие срабатывает после удаления дополнительного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileAdded_EV.adoc[MainFileAdded] |Событие срабатывает после добавлении основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileCancelLocked_EV.adoc[MainFileCancelLocked] |Событие срабатывает после отмены блокировки основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileCurrentVersionChanged_EV.adoc[MainFileCurrentVersionChanged] |Событие срабатывает после изменения текущей версии основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileLocked_EV.adoc[MainFileLocked] |Событие срабатывает после блокировки основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileRemoved_EV.adoc[MainFileRemoved] |Событие срабатывает после удаления основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileUnlocked_EV.adoc[MainFileUnlocked] |Событие срабатывает после разблокировки основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileUnlocking_EV.adoc[MainFileUnlocking] |Вызывается до разблокировки основного файла.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SignatureAdded_EV.adoc[SignatureAdded] |Событие срабатывает после подписания документ ЭЦП.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SynchronizationFromFileCompleted_EV.adoc[SynchronizationFromFileCompleted] |Событие срабатывает после синхронизации данных карточки со свойствами основного файла.
 |===
 
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFile_1_MT.adoc[IDocumentService.AddAdditionalFile - метод (Document, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFile_MT.adoc[IDocumentService.AddAdditionalFile - метод (Document, VersionedFileCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddAdditionalFiles_MT.adoc[IDocumentService.AddAdditionalFiles - метод (Document, IEnumerable<string>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFile_MT.adoc[IDocumentService.AddMainFile - метод (Document, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFileComment_MT.adoc[IDocumentService.AddMainFileComment - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFiles_MT.adoc[IDocumentService.AddMainFiles - метод (Document document, IEnumerable<String>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFilesAndSignatures_MT.adoc[IDocumentService.AddMainFilesAndSignatures - метод (Document, IEnumerable<string>, bool, out IEnumerable<DocumentFile>, out IEnumerable<BaseCardSignature>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFileVersionComment_MT.html[IDocumentService.AddMainFileVersionComment - метод ([Тип параметра перегрузки])]* +
-* *link:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[IDocumentService.AddSignature - метод (Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_1_MT.adoc[IDocumentService.AddSignature - метод (Document, X509Certificate2, SignatureLabel, StaffEmployee, String, Boolean, ICollection<CardFieldSetting>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_MT.adoc[IDocumentService.AddSignatures - метод (Document, SignedCms)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_AddSignatures_1_MT.adoc[IDocumentService.AddSignatures - метод (Document, DocumentFile, SignedCms)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[IDocumentService.AddSignatures - метод (Document, DocumentFile, SignedCms, bool)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[IDocumentService.AddSignatures - метод (Document, SignedCms, bool)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_1_MT.adoc[IDocumentService.ApplyKindSettings - метод (Document, DocumentSetting)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_MT.adoc[IDocumentService.ApplyKindSettings - метод (Document, KindsCardKind)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_MT.adoc[IDocumentService.AttachMainFile - метод (Document, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_1_MT.adoc[IDocumentService.AttachMainFile - метод (Document, VersionedFileCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_2_MT.adoc[IDocumentService.AttachMainFile - метод (Document, string, SignedCms, bool)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanAttachMainFile_MT.adoc[IDocumentService.CanAttachMainFile - метод (Document, VersionedFileCard)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanAttachMainFile_1_MT.adoc[IDocumentService.CanAttachMainFile - метод (Document, VersionedFileCard, SignedCms)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanCancelLockAnyMainFile_MT.adoc[IDocumentService.CanCancelLockAnyMainFile - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanCancelLockMainFile_MT.adoc[IDocumentService.CanCancelLockMainFile - метод (DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CancelLockMainFile_MT.adoc[IDocumentService.CancelLockMainFile - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CancelLockMainFileIfNeeded_MT.adoc[IDocumentService.CancelLockMainFileIfNeeded - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanEditAnyMainFile_MT.adoc[IDocumentService.CanEditAnyMainFile - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanEditMainFile_MT.adoc[IDocumentService.CanEditMainFile - метод (Document, DocumentFile, Boolean)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanLockAnyMainFile_MT.adoc[IDocumentService.CanLockAnyMainFile - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanLockMainFile_MT.adoc[IDocumentService.CanLockMainFile - метод (Document, DocumentFile, Boolean)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanRemoveMainFile_MT.adoc[IDocumentService.CanRemoveMainFile - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanRemoveMainFiles_MT.adoc[IDocumentService.CanRemoveMainFiles - метод (Document document, IEnumerable<DocumentFile>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockAnyMainFile_MT.adoc[IDocumentService.CanUnlockAnyMainFile - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_MT.adoc[IDocumentService.CanUnlockMainFile - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_1_MT.adoc[IDocumentService.CanUnlockMainFile - метод (Document, DocumentFile, LockStatus)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CanUnlockMainFile_2_MT.adoc[IDocumentService.CanUnlockMainFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckActualSignature_MT.adoc[IDocumentService.CheckActualSignature - метод (Document, ICollection<CardFieldSetting>, BaseCardSignature)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckAllMainFilesSigned_MT.adoc[IDocumentService.CheckAllMainFilesSigned - метод (Document, BaseCardSignature)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckMainFileSigned_MT.adoc[IDocumentService.CheckMainFileSigned - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeAttachmentSignature_MT.adoc[IDocumentService.ComputeAttachmentSignature - метод (Document, BaseCardSignature, X509Certificate2)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeFieldsSignature_MT.adoc[IDocumentService.ComputeFieldsSignature - метод (Document, BaseCardSignature, X509Certificate2, ICollection<CardFieldSetting>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ComputeMainFileSignature_MT.adoc[IDocumentService.ComputeMainFileSignature - метод (Document, BaseCardSignature, X509Certificate2)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_MT.adoc[IDocumentService.CreateDocument - метод]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_2_MT.adoc[IDocumentService.CreateDocument - метод (String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_3_MT.adoc[IDocumentService.CreateDocument - метод (String, KindsCardKind, DocumentVersioningType)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateDocument_1_MT.adoc[IDocumentService.CreateDocument - метод (String, KindsCardKind)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateListCards_MT.adoc[IDocumentService.CreateListCards - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CreateSignatureList_MT.adoc[IDocumentService.CreateSignatureList - метод]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[IDocumentService.DecodeSignedDocument - метод (String, Document, SignedCms)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadAdditionalFile_1_MT.adoc[IDocumentService.DownloadAdditionalFile - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadAdditionalFile_MT.adoc[IDocumentService.DownloadAdditionalFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadFile_MT.adoc[IDocumentService.DownloadFile - метод (Guid)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_1_MT.adoc[IDocumentService.DownloadMainFile - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_MT.adoc[IDocumentService.DownloadMainFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFileVersion_MT.adoc[IDocumentService.DownloadMainFileVersion - метод (Document, DocumentFile, Guid)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetAdditionalFile_MT.adoc[IDocumentService.GetAdditionalFile - метод (DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetKindSettings_MT.adoc[IDocumentService.GetKindSettings - метод (KindsCardKind)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetMainFile_MT.adoc[IDocumentService.GetMainFile - метод (DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetMainFiles_MT.adoc[IDocumentService.GetMainFiles - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.LockMainFile_MT.adoc[IDocumentService.LockMainFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MakeLockedMainFileForceChanged_MT.adoc[IDocumentService.MakeLockedMainFileForceChanged - метод (Document, DocumentFile)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.PurgeFileCache_MT.adoc[IDocumentService.PurgeFileCache - метод (Document)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RemoveMainFileComments_MT.adoc[IDocumentService.RemoveMainFileComments - метод (Document, DocumentFile, FileCommentCollection, IEnumerable<FileComment>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RenameAdditionalFile_MT.adoc[IDocumentService.RenameAdditionalFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.RenameMainFile_MT.adoc[IDocumentService.RenameMainFile - метод (Document, DocumentFile, String)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SyncPropertiesToFile_MT.adoc[IDocumentService.SyncPropertiesToFile - метод (Document, DocumentFile, IList<IDocumentPropertySetting>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetPartSignatureInfo_MT.adoc[IDocumentService.GetPartSignatureInfo - метод (BaseCardSignaturePart signaturePart)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.VerifySignature_MT.adoc[IDocumentService.VerifySignature - метод (Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AdditionalFileAdded_EV.adoc[IDocumentService.AdditionalFileAdded - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AdditionalFileRemoved_EV.adoc[IDocumentService.AdditionalFileRemoved - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileAdded_EV.adoc[IDocumentService.MainFileAdded - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileCancelLocked_EV.adoc[IDocumentService.MainFileCancelLocked - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileCurrentVersionChanged_EV.adoc[IDocumentService.MainFileCurrentVersionChanged - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileLocked_EV.adoc[IDocumentService.MainFileLocked - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileRemoved_EV.adoc[IDocumentService.MainFileRemoved - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileUnlocked_EV.adoc[IDocumentService.MainFileUnlocked - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MainFileUnlocking_EV.adoc[IDocumentService.MainFileUnlocking - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SignatureAdded_EV.adoc[IDocumentService.SignatureAdded - событие]* +
-* *xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SynchronizationFromFileCompleted_EV.adoc[IDocumentService.SynchronizationFromFileCompleted - событие]* +
+* *xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[IDocumentService.AddSignature - метод (Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)]* +
 
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services - пространство имен]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

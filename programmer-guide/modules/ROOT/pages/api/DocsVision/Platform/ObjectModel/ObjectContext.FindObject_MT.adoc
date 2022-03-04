@@ -2,12 +2,12 @@
 
 Возвращает первый результат поиска, удовлетворяющий заданным условиям.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public T FindObject<T>(QueryObject query) where T : ObjectBase
 ----
@@ -15,27 +15,25 @@ public T FindObject<T>(QueryObject query) where T : ObjectBase
 Параметры типа
 
 T::
-  Тип объекта поиска, унаследованный от xref:ObjectBase_CL.adoc[ObjectBase]
+Тип объекта поиска, унаследованный от xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
 
-Параметры
+*Параметры*
 
 query::
-  Тип: xref:Search/QueryObject_CL.adoc[QueryObject]
-  +
-  Поисковый запрос
+Тип: xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]
++
+Поисковый запрос
 
-Возвращаемое значение
-
-::
-  Тип: T
-  +
-  Объект, являющийся результатом поиска
+Возвращаемое значение::
+Тип: T
++
+Объект, являющийся результатом поиска
 
 == Примеры
 
 В приведенном примере выполняется поиск сотрудника с названием учетной записи "DOMAIN\\IvanovII"
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -45,5 +43,3 @@ QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "DOM
 // Выполнение запроса
 StaffEmployee staff = objectContext.FindObject<StaffEmployee>(query);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

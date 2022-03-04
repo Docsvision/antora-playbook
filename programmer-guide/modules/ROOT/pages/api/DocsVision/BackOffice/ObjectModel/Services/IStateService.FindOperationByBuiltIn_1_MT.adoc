@@ -1,13 +1,13 @@
 = IStateService.FindOperationByBuiltIn - метод (BuiltInOperation, BaseCard)
 
-Возвращает операцию [.dfn .term]_конструктора состояний_, соответствующую указанной встроенной операции.
+Возвращает операцию _конструктора состояний_, соответствующую указанной встроенной операции.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StatesOperation FindOperationByBuiltIn(BuiltInOperation builtInOperation, BaseCard baseCard)
 ----
@@ -15,27 +15,23 @@ StatesOperation FindOperationByBuiltIn(BuiltInOperation builtInOperation, BaseCa
 Параметры
 
 builtInOperation::
-  Тип: xref:../BuiltInOperation_CL.adoc[BuiltInOperation]
-  +
-  Встроенная операция
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BuiltInOperation_CL.adoc[BuiltInOperation]
++
+Встроенная операция
 baseCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка, относительно типа которой определяется переход
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка, относительно типа которой определяется переход
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StatesOperation_CL.adoc[StatesOperation]
-  +
-  Операция [.dfn .term]_конструктора состояний_
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
++
+Операция _конструктора состояний_
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр builtInOperation.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

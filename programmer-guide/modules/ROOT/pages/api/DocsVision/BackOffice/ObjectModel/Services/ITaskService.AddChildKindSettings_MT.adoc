@@ -2,12 +2,12 @@
 
 Добавляет в переданную коллекцию настроек вид, доступный для выбора при создании подчинённого задания.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 TaskPresetChildKindSetting AddChildKindSettings(KindsCardKind kindsCardKind, ObjectCollection<TaskPresetChildKindSetting> kindSettings, bool creatable)
 ----
@@ -15,23 +15,19 @@ TaskPresetChildKindSetting AddChildKindSettings(KindsCardKind kindsCardKind, Obj
 Параметры
 
 kindsCardKind::
-  Тип: xref:../KindsCardKind_CL.adoc[KindsCardKind]
-  +
-  Вид карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
++
+Вид карточки
 kindSettings::
-  Тип: xref:../../../Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<TaskPresetChildKindSetting>
-  +
-  Коллекция настроек видов (типа xref:../TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]) для подчиненного задания
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<TaskPresetChildKindSetting>
++
+Коллекция настроек видов (типа xref:api/DocsVision/BackOffice/ObjectModel/TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]) для подчиненного задания
 creatable::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  true - данный вид может быть создан из родительского задания, иначе - false
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+true - данный вид может быть создан из родительского задания, иначе - false
 
-Возвращаемое значение
-
-::
-  Тип: xref:../TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]
-  +
-  Параметры создания вида подчиненного задания
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService - интерфейс]
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]
++
+Параметры создания вида подчиненного задания

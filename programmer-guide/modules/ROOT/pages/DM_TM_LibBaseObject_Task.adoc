@@ -3,10 +3,10 @@
 [cols=",",]
 |===
 |Назначение |Предназначена для доставки на рабочие места пользователей информации о необходимости выполнения того или иного действия в рамках налаженного документооборота, а также доставки файлов, карточек и ссылок на внешние по отношению к системе Docsvision объекты.
-|Класс карточки |xref:../api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task]
+|Класс карточки |xref:..xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task]
 |===
 
-Для работы с карточкой предназначен сервис xref:../api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService], с помощью которого можно работать с заданиями. Позволяет создавать задания, настраивать и управлять ими.
+Для работы с карточкой предназначен сервис xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService], с помощью которого можно работать с заданиями. Позволяет создавать задания, настраивать и управлять ими.
 
 Доступные операции:
 
@@ -25,7 +25,7 @@
 * Контекст объектов может быть получен в соответствии с примером, приведенным в разделе xref:DM_FullContextInit.adoc[Инициализация контекста объектов].
 * Сервисы получаем стандартным способом:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IDocumentService documentService = objectContext.GetService<IDocumentService>(); //сервис для работы с документами
 ILinkService linkService = objectContext.GetService<ILinkService>(); //сервис для работы со Справочником ссылок
@@ -38,7 +38,7 @@ ITaskService taskService = objectContext.GetService<ITaskService>(); //серв�
 
 == Создание нового Задания
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void CreateTask()
 {
@@ -63,7 +63,7 @@ static void CreateTask()
 
 == Добавление файла в Задание
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void AddFile()
 {
@@ -93,7 +93,7 @@ static void AddFile()
 
 == Отправка Задания на исполнение
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void StartTask()
 {
@@ -113,7 +113,7 @@ static void StartTask()
 
 == Делегирование задания
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void DelegateTask()
 {
@@ -133,7 +133,7 @@ static void DelegateTask()
 
 == Завершение Задания
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 static void CompleteTask()
 {
@@ -157,5 +157,3 @@ static void CompleteTask()
 ====
 [.note__title]#Прим.:# При работе с методами сервиса [.keyword .apiname]#ITaskService# нужно учитывать, что при выполнении статусных методов (отозвать, принять, отклонить и т.д.) статус самого задание не изменяется. Для непосредственной смены статуса используется метод [.keyword .apiname]#IStateService.ChangeState(BaseCard, StatesState)#.
 ====
-
-*На уровень выше:* xref:../pages/dm_baseobjectscards.adoc[Библиотека карточек 'Базовые объекты']

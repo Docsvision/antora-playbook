@@ -2,12 +2,12 @@
 
 Добавляет новый адрес для указанного подразделения.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffAddresse AddNewAddress(StaffUnit unit, StaffAddresseAddressType type)
 ----
@@ -15,24 +15,22 @@ StaffAddresse AddNewAddress(StaffUnit unit, StaffAddresseAddressType type)
 Параметры
 
 unit::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Подразделение, для которого добавляется адрес
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Подразделение, для которого добавляется адрес
 type::
-  Тип: xref:../StaffAddresseAddressType_EN.adoc[StaffAddresseAddressType]
-  +
-  Подразделение, для которого добавляется адрес
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffAddresseAddressType_EN.adoc[StaffAddresseAddressType]
++
+Подразделение, для которого добавляется адрес
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffAddresse_CL.adoc[StaffAddresse]
-  +
-  Адрес подразделения
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffAddresse_CL.adoc[StaffAddresse]
++
+Адрес подразделения
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit.
@@ -46,7 +44,7 @@ type::
 
 Ниже представлен пример добавления почтового адреса
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -61,5 +59,3 @@ StaffAddresse addresse = staffService.AddNewAddress(unit, StaffAddresseAddressTy
 addresse.Address = "Большой Смоленский пр, 2а";
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

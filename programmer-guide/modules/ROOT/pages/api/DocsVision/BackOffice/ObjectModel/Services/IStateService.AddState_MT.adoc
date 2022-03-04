@@ -2,12 +2,12 @@
 
 Добавляет новое состояние в автомат состояний вида карточки.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StatesState AddState(StatesCardKindStateSetting kindStateSettings)
 ----
@@ -15,23 +15,19 @@ StatesState AddState(StatesCardKindStateSetting kindStateSettings)
 Параметры
 
 kindStateSettings::
-  Тип: xref:../StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting]
-  +
-  Настройки автомата состояний вида карточки
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting]
++
+Настройки автомата состояний вида карточки
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StatesState_CL.adoc[StatesState]
-  +
-  Добавленное состояний
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesState_CL.adoc[StatesState]
++
+Добавленное состояний
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр kindStateSettings.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService - интерфейс]

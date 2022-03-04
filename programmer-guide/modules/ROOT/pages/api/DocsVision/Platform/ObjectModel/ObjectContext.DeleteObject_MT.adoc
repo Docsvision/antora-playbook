@@ -2,26 +2,26 @@
 
 Данный метод используется для удаления заданного объекта.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void DeleteObject(ObjectBase objectInstance)
 ----
 
-Параметры
+*Параметры*
 
 objectInstance::
-  Тип: xref:ObjectBase_CL.adoc[ObjectBase]
-  +
-  Удаляемый объект
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
++
+Удаляемый объект
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр objectInstance.
@@ -29,7 +29,7 @@ objectInstance::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
      
@@ -42,5 +42,3 @@ objectContext.DeleteObject(document);
 // Сохранение изменений в контексте
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext - класс]

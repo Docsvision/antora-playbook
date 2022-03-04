@@ -29,15 +29,15 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Num
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 numeratorId::
-  Идентификатор карточки нумератора
+Идентификатор карточки нумератора
 userId::
-  Идентификатор сотрудника ([.dfn .term]_справочник сотрудников_), занимающего номер
+Идентификатор сотрудника (_справочник сотрудников_), занимающего номер
 zoneName::
-  Название зоны, которой принадлежит занимаемый
+Название зоны, которой принадлежит занимаемый
 number::
-  Занимаемый номер
+Занимаемый номер
 
 == Ответ
 
@@ -87,5 +87,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}NumberId"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Num.adoc[Нумераторы]

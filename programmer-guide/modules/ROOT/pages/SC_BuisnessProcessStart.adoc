@@ -2,7 +2,7 @@
 
 Далее приведен пример кода скрипта ("Конструктор скриптов"), определенного типа карточки, в котором из существующего шаблона создается, а затем запускает экземпляр бизнес-процесса. Шаблон бизнес-процесса имеет одну переменную (типа "Строка"), в которую передается отображаемое имя сотрудника, выполнившего запуск скрипта. Предполагается, что скрипт запускается из карточки типа "Документ".
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Создание экземпляра БП на основе существующего шаблона с его последующим запуском
 private void Button_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -37,14 +37,12 @@ private void Button_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClic
 
 К скрипту требуется подключить дополнительные сборки:
 
-* [.ph .filepath]`DocsVision.Workflow.Objects.dll`
-* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
+* `DocsVision.Workflow.Objects.dll`
+* `DocsVision.Workflow.Interfaces.dll`
 
 Также необходимо добавить ссылку на пространство имен [.keyword .apiname]#DocsVision.Workflow.Objects#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using DocsVision.Workflow.Objects;
 ----
-
-*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

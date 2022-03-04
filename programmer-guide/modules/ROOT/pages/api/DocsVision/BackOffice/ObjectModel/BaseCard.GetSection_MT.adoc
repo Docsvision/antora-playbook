@@ -2,12 +2,12 @@
 
 Получает все строки указанной секции карточки.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public IList GetSection(Guid sectionId)
 ----
@@ -15,20 +15,18 @@ public IList GetSection(Guid sectionId)
 Параметры
 
 sectionId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор секции
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор секции
 
-Возвращаемое значение
-
-::
-  Тип: https://msdn.microsoft.com/ru-ru/library/system.collections.ilist.aspx[System.Collections.Generic.IList]
-  +
-  Список строк секции
+Возвращаемое значение::
+Тип: https://msdn.microsoft.com/ru-ru/library/system.collections.ilist.aspx[System.Collections.Generic.IList]
++
+Список строк секции
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException] |Ошибка возвращается в случае, если передан нулевой идентификатор секции.
@@ -38,7 +36,7 @@ sectionId::
 
 Ниже приведен пример скрипта, записывающего пустую строку в поле "fieldName" строчек определенной секции карточки Документ:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
@@ -53,5 +51,3 @@ foreach (var item in rows)
 }
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard - класс]

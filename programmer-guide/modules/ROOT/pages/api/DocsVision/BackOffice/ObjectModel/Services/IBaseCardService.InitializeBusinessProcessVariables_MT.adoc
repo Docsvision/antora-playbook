@@ -2,12 +2,12 @@
 
 Выполняет инициализацию переменных бизнес-процесса.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void InitializeBusinessProcessVariables(Process process, Dictionary<string, object> variablesKeyValuePairs)
 ----
@@ -15,17 +15,17 @@ void InitializeBusinessProcessVariables(Process process, Dictionary<string, obje
 Параметры
 
 process::
-  Тип: xref:../../../Workflow/Objects/Process_CL.adoc[Process]
-  +
-  Бизнес-процессы
+Тип: xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]
++
+Бизнес-процессы
 variablesKeyValuePairs::
-  Тип: http://msdn.microsoft.com/ru-ru/library/xfhwa508.aspx[System.Collections.Generic.Dictionary]<String, Object>
-  +
-  Коллекция содержащая название переменной и ее значение
+Тип: http://msdn.microsoft.com/ru-ru/library/xfhwa508.aspx[System.Collections.Generic.Dictionary]<String, Object>
++
+Коллекция содержащая название переменной и ее значение
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр process или variablesKeyValuePairs.
@@ -39,7 +39,7 @@ variablesKeyValuePairs::
 
 В приведенном примере создается экземпляр бизнес-процесса, на основе существующего шаблона, после чего выполняется инициализация двух его переменных (`var1` и `var2`)
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -66,5 +66,3 @@ baseCardService.InitializeBusinessProcessVariables(processInstance, new System.C
 // Запуск экземпляра бизнес-процесса
 processInstance.Start(staffService.GetCurrentEmployee().AccountName, WorkflowLibrary.Dictionary, ExecutionModeEnum.Automatic, true);
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService - интерфейс]

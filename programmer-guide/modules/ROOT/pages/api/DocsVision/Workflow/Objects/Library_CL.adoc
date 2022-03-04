@@ -2,19 +2,19 @@
 
 Представляет объектную модель библиотеки карточек Workflow.
 
-* [.keyword]*Пространство имен:* xref:Objects_NS.adoc[DocsVision.Workflow.Objects]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Workflow.Objects.dll`
+* *Пространство имен:* xref:api/DocsVision/Workflow/Objects/Objects_NS.adoc[DocsVision.Workflow.Objects]
+* *Сборка:* `DocsVision.Workflow.Objects.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class Library
 ----
 
 == Конструкторы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Library(UserSession) |Инициализирует новый экземпляр класса Library с помощью указанного значения.
@@ -23,7 +23,7 @@ public class Library
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |Dictionary |Возвращает справочник СУБП.
@@ -36,7 +36,7 @@ public class Library
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CreateProcess(Boolean) |Создает экземпляр бизнес-процесса.
@@ -56,7 +56,7 @@ public class Library
 
 Ниже приведен пример использования объекта типа [.keyword .apiname]#Library# для запуска бизнес-процесса, полученного из имеющегося шаблона
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
                 
@@ -77,5 +77,3 @@ process.Start(userSession.Properties["AccountName"].Value.ToString(), library.Di
 ----
 
 Идентификатор (00000000-0000-0000-0000-000000000001) переменной бизнес-процесса, может быть получен из шаблона БП при помощи утилиты Docsvision Explorer (поле "ID" секции "Переменные" карточки БП, используемой в качестве шаблона).
-
-*На уровень выше:* xref:../../../../api/DocsVision/Workflow/Objects/Objects_NS.adoc[DocsVision.Workflow.Objects - пространство имен]

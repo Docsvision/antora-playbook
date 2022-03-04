@@ -1,20 +1,20 @@
 = ITableControl - интерфейс
 
-Определяет дополнительные возможности элемента управления типа [.dfn .term]_Таблица_ в [.dfn .term]_Конструкторе разметок_.
+Определяет дополнительные возможности элемента управления типа _Таблица_ в _Конструкторе разметок_.
 
-* [.keyword]*Пространство имен:* xref:LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.WinForms.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface ITableControl
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |FocusedCellIndex |Задает или возвращает номер выделенной ячейки таблицы.
@@ -27,7 +27,7 @@ public interface ITableControl
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AddRow(BaseCard) |Добавляет новую строку в таблицу.
@@ -39,7 +39,7 @@ public interface ITableControl
 
 == События
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CellValueChanged |Событие вызывается при изменении значения ячейки.
@@ -49,7 +49,7 @@ public interface ITableControl
 
 Ниже приведен пример использования интерфейса [.keyword .apiname]#ITableControl# при добавлении строки в элемент управления типа "Таблица"
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
@@ -69,5 +69,3 @@ private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEv
  table.RefreshRow(table.RowCount - 1);
 }
 ----
-
-*На уровень выше:* xref:../../../../../../api/DocsVision/BackOffice/WinForms/Design/LayoutItems/LayoutItems_NS.adoc[LayoutItems - пространство имен]

@@ -2,12 +2,12 @@
 
 Переименовывает основной файл документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RenameMainFile(Document document, DocumentFile file, string newFileName)
 ----
@@ -15,21 +15,21 @@ void RenameMainFile(Document document, DocumentFile file, string newFileName)
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ, которому принадлежит файл
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ, которому принадлежит файл
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл, название которого изменяется
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл, название которого изменяется
 newFileName::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Новое название файла. Имя файла должно содержать расширение.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Новое название файла. Имя файла должно содержать расширение.
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или newFileName.
@@ -42,7 +42,7 @@ newFileName::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -63,5 +63,3 @@ documentService.RenameMainFile(document, document.Files.First(t => t.FileType = 
 DocumentFile firstMainFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
 string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(firstMainFile.FileName));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

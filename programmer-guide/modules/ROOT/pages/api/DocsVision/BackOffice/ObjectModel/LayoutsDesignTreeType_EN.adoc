@@ -2,19 +2,19 @@
 
 Определяет тип узла дерева дизайнов.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public enum LayoutsDesignTreeType
 ----
 
 == Члены
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя члена |Описание
 |Kind |Вид
@@ -30,7 +30,7 @@ public enum LayoutsDesignTreeType
 
 В приведенном примере, определяется тип узла разметки, полученной из дерева разметок
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -46,5 +46,3 @@ LayoutsDesignTree layoutsDesignTree = layoutService.GetDesignTree(kindsCardKind)
 //получение типа корневого узла (обычно LayoutsDesignTreeType.Kind)
 LayoutsDesignTreeType layoutsDesignTreeType = layoutsDesignTree.NodeType;
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

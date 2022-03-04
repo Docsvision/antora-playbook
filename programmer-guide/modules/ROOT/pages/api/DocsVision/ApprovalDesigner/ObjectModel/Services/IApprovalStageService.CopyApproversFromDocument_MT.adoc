@@ -2,12 +2,12 @@
 
 Получает согласующих из согласуемого документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/ApprovalDesigner/ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 IEnumerable<ApprovalStageApprover> CopyApproversFromDocument(ApprovalStage approvalStage, Document document)
 ----
@@ -15,23 +15,19 @@ IEnumerable<ApprovalStageApprover> CopyApproversFromDocument(ApprovalStage appro
 Параметры
 
 approvalStage::
-  Тип: xref:../ApprovalStage_CL.adoc[ApprovalStage]
-  +
-  Этап согласования, в который копируются согласующие
+Тип: xref:api/DocsVision/ApprovalDesigner/ObjectModel/ApprovalStage_CL.adoc[ApprovalStage]
++
+Этап согласования, в который копируются согласующие
 document::
-  Тип: xref:../../../BackOffice/ObjectModel/Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 
-Возвращаемое значение
-
-::
-  Тип: xref:../ApprovalStageApprover_CL.adoc[ApprovalStageApprover]
-  +
-  Добавленные согласующие
+Возвращаемое значение::
+Тип: xref:api/DocsVision/ApprovalDesigner/ObjectModel/ApprovalStageApprover_CL.adoc[ApprovalStageApprover]
++
+Добавленные согласующие
 
 == Заметки
 
 Метод [.keyword .apiname]#CopyApproversFromDocument# возвращает согласующих, полученных из документа `document`. Согласующие выбираются из поля секции, определенного в настройках этапа согласования `approvalStage`, в `MainInfo.ApproversField`.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/ApprovalDesigner/ObjectModel/Services/IApprovalStageService_IN.adoc[IApprovalStageService - интерфейс]

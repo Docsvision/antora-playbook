@@ -2,12 +2,12 @@
 
 Импортирует карточку из потока XML данных.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public CardDataCollection ImportCards(Stream stream)
 ----
@@ -15,16 +15,14 @@ public CardDataCollection ImportCards(Stream stream)
 Параметры
 
 stream::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]
-  +
-  Поток данных
+Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]
++
+Поток данных
 
-Возвращаемое значение
-
-::
-  Тип: xref:CardDataCollection_CL.adoc[CardDataCollection]
-  +
-  Коллекция карточек
+Возвращаемое значение::
+Тип: xref:api/DocsVision/Platform/ObjectManager/CardDataCollection_CL.adoc[CardDataCollection]
++
+Коллекция карточек
 
 == Заметки
 
@@ -32,11 +30,9 @@ stream::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 FileStream file = new FileStream(@"C:\TestCard.xml", FileMode.Open);
 ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session);
 CardDataCollection cards = session.CardManager.ImportCards(file);
 ----
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager - класс]

@@ -2,12 +2,12 @@
 
 При переопределении в производном классе запускает механизм экспорта.
 
-* [.keyword]*Пространство имен:* xref:Extensibility_NS.adoc[DocsVision.Platform.Extensibility]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.Extensibility.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/Extensibility/Extensibility_NS.adoc[DocsVision.Platform.Extensibility]
+* *Сборка:* `DocsVision.Platform.Extensibility.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void CreateReport(object grid, InfoRowCollection rowCollection, Guid folderId)
 ----
@@ -15,16 +15,14 @@ void CreateReport(object grid, InfoRowCollection rowCollection, Guid folderId)
 Параметры
 
 grid::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
-  +
-  Ссылка на элемент управления JanusGrid, используемый для отображения данных представления в Windows-клиенте. Не рекомендуется записывать какие-либо данные непосредственно в JanusGrid или изменять его настройки – это может привести к сбоям в работе Windows-клиента.
+Тип: http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]
++
+Ссылка на элемент управления JanusGrid, используемый для отображения данных представления в Windows-клиенте. Не рекомендуется записывать какие-либо данные непосредственно в JanusGrid или изменять его настройки – это может привести к сбоям в работе Windows-клиента.
 rowCollection::
-  Тип: xref:../ObjectManager/InfoRowCollection_CL.adoc[InfoRowCollection]
-  +
-  Данные текущего представления
+Тип: xref:api/DocsVision/Platform/ObjectManager/InfoRowCollection_CL.adoc[InfoRowCollection]
++
+Данные текущего представления
 folderId::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
-  +
-  Идентификатор текущей папки
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/Extensibility/INavReportExtension_IN.adoc[INavReportExtension - интерфейс]
+Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
++
+Идентификатор текущей папки

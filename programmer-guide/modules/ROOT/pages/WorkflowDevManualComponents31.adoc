@@ -1,43 +1,43 @@
 = Разработка сценариев
 
-Разработка [.dfn .term]_сценариев_ включает в себя следующие этапы:
+Разработка _сценариев_ включает в себя следующие этапы:
 
-* написание кода [.dfn .term]_сценария_;
-* отладка кода [.dfn .term]_сценария_;
-* сохранение готового [.dfn .term]_сценария_ в процессе или подпроцессе.
+* написание кода _сценария_;
+* отладка кода _сценария_;
+* сохранение готового _сценария_ в процессе или подпроцессе.
 
-Код сценарий может быть написан непосредственно в диалоговом окне [.keyword .wintitle]*Редактирование скрипта* Написание кода [.dfn .term]_сценария_ можно производить как непосредственно в диалоговом окне [.dfn .term]_функции_ [.dfn .term]_сценария_, так и в любом другом редакторе или при помощи Visual Studio.NET - с последующей вставкой полученного кода в [.dfn .term]_функцию_ процесса.
+Код сценарий может быть написан непосредственно в диалоговом окне [.keyword .wintitle]*Редактирование скрипта* Написание кода _сценария_ можно производить как непосредственно в диалоговом окне _функции_ _сценария_, так и в любом другом редакторе или при помощи Visual Studio.NET - с последующей вставкой полученного кода в _функцию_ процесса.
 
-К [.dfn .term]_сценарию_ автоматически добавляется коллекция необходимых сборок:
+К _сценарию_ автоматически добавляется коллекция необходимых сборок:
 
-* [.ph .filepath]`Mscorlib.dll`
-* [.ph .filepath]`System.dll`
-* [.ph .filepath]`System.Core.dll`
-* [.ph .filepath]`System.Data.dll`
-* [.ph .filepath]`System.ServiceModel.dll`
-* [.ph .filepath]`System.Xml.dll`
-* [.ph .filepath]`DocsVision.Platform.dll`
-* [.ph .filepath]`DocsVision.Platform.CardLib.dll`
-* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
-* [.ph .filepath]`DocsVision.Platform.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.ObjectManager.Interop.dll` - данная библиотека может быть пропущена, если в настройках сценария будет выставлен флаг "Не добавлять ссылку на DocsVision.ObjectManager.Interop.dll". Будет подключена сборка [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`.
-* [.ph .filepath]`DocsVision.Workflow.Interfaces.dll`
-* [.ph .filepath]`DocsVision.Workflow.Objects.dll`
-* [.ph .filepath]`DocsVision.Workflow.Runtime.dll`
-* [.ph .filepath]`DocsVision.Workflow.Functions.dll`
-* [.ph .filepath]`DocsVision.Workflow.Gates.dll`
-* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
-* [.ph .filepath]`DocsVision.SecurityManager.Interop.dll`
-* [.ph .filepath]`DocsVision.HelperAPI.Interop.dll`
+* `Mscorlib.dll`
+* `System.dll`
+* `System.Core.dll`
+* `System.Data.dll`
+* `System.ServiceModel.dll`
+* `System.Xml.dll`
+* `DocsVision.Platform.dll`
+* `DocsVision.Platform.CardLib.dll`
+* `DocsVision.Platform.ObjectManager.dll`
+* `DocsVision.Platform.ObjectModel.dll`
+* `DocsVision.ObjectManager.Interop.dll` - данная библиотека может быть пропущена, если в настройках сценария будет выставлен флаг "Не добавлять ссылку на DocsVision.ObjectManager.Interop.dll". Будет подключена сборка `DocsVision.Platform.ObjectManager.dll`.
+* `DocsVision.Workflow.Interfaces.dll`
+* `DocsVision.Workflow.Objects.dll`
+* `DocsVision.Workflow.Runtime.dll`
+* `DocsVision.Workflow.Functions.dll`
+* `DocsVision.Workflow.Gates.dll`
+* `DocsVision.BackOffice.ObjectModel.dll`
+* `DocsVision.SecurityManager.Interop.dll`
+* `DocsVision.HelperAPI.Interop.dll`
 
 [NOTE]
 ====
-[.note__title]#Важное замечание:# В сценариях, приведенных далее, будет использоваться сборка [.ph .filepath]`DocsVision.Platform.ObjectManager.dll` (в параметрах сценария установлен флаг "Не добавлять ссылку на DocsVision.ObjectManager.Interop.dll") - нужно учитывать при указании типа переменных.
+[.note__title]#Важное замечание:# В сценариях, приведенных далее, будет использоваться сборка `DocsVision.Platform.ObjectManager.dll` (в параметрах сценария установлен флаг "Не добавлять ссылку на DocsVision.ObjectManager.Interop.dll") - нужно учитывать при указании типа переменных.
 ====
 
 При добавлении в карточку бизнес-процесса сценария, автоматически формируется стандартная структура класса сценария - [.keyword .apiname]#DVScript#, со стандартной точкой входа - метод [.keyword .apiname]#Execute#:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 class DVScript
 {
@@ -75,28 +75,28 @@ class DVScript
 
 Если в сценарии идет обращение к контексту объектов, то вместо его создания (из пользовательской сессии) достаточно изменить точку входа (также необходимо подключить пространство имен [.keyword .apiname]#DocsVision.Platform.ObjectModel#):
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public void Execute (ProcessInfo process, PassState passInfo, ObjectContext objectContext)
 ----
 
 Помимо приведенных сигнатур метода, можно использовать точку входа, возвращающую результат выполнения:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public ExecResultEnum Execute(ProcessInfo process, PassState passInfo)
 ----
 
-Вариант с xref:../api/DocsVision/Workflow/Functions/ExecResultEnum_EN.adoc[ExecResultEnum] позволяет после завершения сценария оставить функцию активной или ожидающей какого-то события - сценарий будет запущен повторно после наступления события или (в зависимости от [.keyword .apiname]#ExecResultEnum#) при следующем проходе.
+Вариант с xref:..xref:api/DocsVision/Workflow/Functions/ExecResultEnum_EN.adoc[ExecResultEnum] позволяет после завершения сценария оставить функцию активной или ожидающей какого-то события - сценарий будет запущен повторно после наступления события или (в зависимости от [.keyword .apiname]#ExecResultEnum#) при следующем проходе.
 
 [NOTE]
 ====
 [.note__title]#Прим.:# В ранних версиях Docsvision подобное поведение можно было организовать при помощи вызова в сценарии исключения типа [.keyword .apiname]#FunctionResultException#.
 ====
 
-Сигнатура приведенного метода не является жесткой - список параметров может формироваться разработчиком [.dfn .term]_сценария_. Допускается использование параметров определенных типов, указанных ниже.
+Сигнатура приведенного метода не является жесткой - список параметров может формироваться разработчиком _сценария_. Допускается использование параметров определенных типов, указанных ниже.
 
-[width="100%",cols="25%,75%",options="header",]
+[width="100%",cols="25%,75%",options="header"]
 |===
 |Тип |Привязка к объекту
 |ProcessInfo |Расширенная объектная модель текущего бизнес-процесса.
@@ -116,18 +116,18 @@ public ExecResultEnum Execute(ProcessInfo process, PassState passInfo)
 |AxaptaGate |Шлюз к Axapta\Dynamics Ax текущего бизнес-процесса.
 |SPGate |Шлюз к SharePoint текущего бизнес-процесса.
 |1CGate |Шлюз к 1C текущего бизнес-процесса.
-|Тип стороннего [.dfn .term]_шлюза_ |Любой сторонний шлюз, который реализует интерфейс [.keyword .apiname]#IGate# и доступен в [.dfn .term]_бизнес-процессе_.
+|Тип стороннего _шлюза_ |Любой сторонний шлюз, который реализует интерфейс [.keyword .apiname]#IGate# и доступен в _бизнес-процессе_.
 |===
 
-Кроме того, предусмотрено использование переменной типа xref:../api/DocsVision/Workflow/Runtime/ProcessVariable_CL.adoc[ProcessVariable] - переменная процесса. В этом случае алгоритм получения значения переменной следующий:
+Кроме того, предусмотрено использование переменной типа xref:..xref:api/DocsVision/Workflow/Runtime/ProcessVariable_CL.adoc[ProcessVariable] - переменная процесса. В этом случае алгоритм получения значения переменной следующий:
 
-. У параметра осуществляется поиск атрибута типа `VariableNameAtrribute`, в значении которого должно быть указано название переменной бизнес-процесса, которую требуется передать в выполняемый [.dfn .term]_сценарий_. Если такой атрибут у параметра отсутствует, то в качестве имени переменной принимается имя самого параметра метода.
-. Если переменная с полученным именем не найдена в [.dfn .term]_бизнес-процессе_, то в качестве значения параметра будет передан null.
+. У параметра осуществляется поиск атрибута типа `VariableNameAtrribute`, в значении которого должно быть указано название переменной бизнес-процесса, которую требуется передать в выполняемый _сценарий_. Если такой атрибут у параметра отсутствует, то в качестве имени переменной принимается имя самого параметра метода.
+. Если переменная с полученным именем не найдена в _бизнес-процессе_, то в качестве значения параметра будет передан null.
 . Если значение параметра определить не удалось, то в качестве его значения принимается DefaultValue данного параметра. Если DefaultValue равно DBValue.Null, то оно принимается равным null.
 
 Использование нескольких параметров, в том числе переменных процессов, позволяет реализовать следующий сценарий:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Подключение системных библиотек
 using System;
@@ -166,10 +166,8 @@ namespace DVScriptHost
 }
 ----
 
-В приведенном примере метод [.keyword .apiname]#Execute# принимает несколько параметров, два из которых (`inputCard`, `outputCard`) будут получены их переменных процесса. Переменные процесса будут получены по схеме приведенной выше. Сам метод [.keyword .apiname]#Execute# будет вызван при запуске [.dfn .term]_функции_, в которой он определен. После выполнения операций, предусмотренных бизнес-логикой, метод должен вернуть результат свой работы, например, ExecResultEnum.Done ("Функция успешно выполнилась"). Параметр `passInfo` используется для передачи в метод контекста выполнения (см. описание типаlink:../api/DocsVision/Workflow/Objects/PassState_CL.html[PassState]) [.dfn .term]_функции_. При повторном вызове [.dfn .term]_функции_ в метод будут переданы новые данные.
+В приведенном примере метод [.keyword .apiname]#Execute# принимает несколько параметров, два из которых (`inputCard`, `outputCard`) будут получены их переменных процесса. Переменные процесса будут получены по схеме приведенной выше. Сам метод [.keyword .apiname]#Execute# будет вызван при запуске _функции_, в которой он определен. После выполнения операций, предусмотренных бизнес-логикой, метод должен вернуть результат свой работы, например, ExecResultEnum.Done ("Функция успешно выполнилась"). Параметр `passInfo` используется для передачи в метод контекста выполнения (см. описание типаxref:..xref:api/DocsVision/Workflow/Objects/PassState_CL.html[PassState]) _функции_. При повторном вызове _функции_ в метод будут переданы новые данные.
 
 == См. далее
 
 * xref:WorkflowDevManualComponents32.adoc[Взаимодействие с объектной моделью Workflow]
-
-*На уровень выше:* xref:../pages/WorkflowDevManualComponents3.adoc[Сценарии]

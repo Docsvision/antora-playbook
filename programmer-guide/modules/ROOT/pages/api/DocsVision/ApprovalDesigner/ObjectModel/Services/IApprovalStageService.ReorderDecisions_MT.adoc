@@ -2,12 +2,12 @@
 
 Сортирует список, содержащий решения по согласованию, по порядковому номеру решения.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.ApprovalDesigner.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/ApprovalDesigner/ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ReorderDecisions(ObjectCollection<ApprovalStageDecision> decisions)
 ----
@@ -15,12 +15,10 @@ void ReorderDecisions(ObjectCollection<ApprovalStageDecision> decisions)
 Параметры
 
 decisions::
-  Тип: xref:../../../Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<ApprovalStageDecision>
-  +
-  Решения по согласованию. Тип элемента - xref:../ApprovalStageDecision_CL.adoc[ApprovalStageDecision]
+Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<ApprovalStageDecision>
++
+Решения по согласованию. Тип элемента - xref:api/DocsVision/ApprovalDesigner/ObjectModel/ApprovalStageDecision_CL.adoc[ApprovalStageDecision]
 
 == Заметки
 
 Метод [.keyword .apiname]#ReorderDecisions# просто сортирует коллекцию `decisions` по значению `Order` элементов коллекции.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/ApprovalDesigner/ObjectModel/Services/IApprovalStageService_IN.adoc[IApprovalStageService - интерфейс]

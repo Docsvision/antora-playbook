@@ -6,11 +6,11 @@
 
 Также текст поискового запроса может быть задан программно – например, при помощи набора стандартных объектов для работы с XML (XML Parser). Однако, для упрощения программного создания и редактирования запросов, в объектной модели [.keyword .apiname]#ObjectManager# предусмотрен ряд специализированных объектов.
 
-image::img/tj_search_1.png[[.fig--title-label]##Рис. 1. ##Структура запроса]
+image::tj_search_1.png[[.fig--title-label]##Рис. 1. ##Структура запроса]
 
 Все объекты для работы с поиском расположены в выделенном пространстве имен *DocsVision.Platform.ObjectManager.SearchModel*, поэтому для их использования нужно подключить данное пространство имен к проекту.
 
-Базовым объектом для построения поискового запроса является объект xref:../api/DocsVision/Platform/ObjectManager/SearchModel/SearchQuery_CL.adoc[SearchQuery]. Для создания этого объекта, предназначен специальный метод xref:../api/DocsVision/Platform/ObjectManager/UserSession.CreateSearchQuery_MT.adoc[CreateSearchQuery] пользовательской сессии (UserSession).
+Базовым объектом для построения поискового запроса является объект xref:..xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchQuery_CL.adoc[SearchQuery]. Для создания этого объекта, предназначен специальный метод xref:..xref:api/DocsVision/Platform/ObjectManager/UserSession.CreateSearchQuery_MT.adoc[CreateSearchQuery] пользовательской сессии (UserSession).
 
 Сам запрос состоит из двух частей - атрибутивного поиска (*AttributiveSearch*) и полнотекстового запроса (*FullTextSearch*). Эти части независимы друг от друга и могут фигурировать в запросе как по отдельности, так и одновременно. Возможно объединение результатов этих частей по И/ИЛИ, для этого предназначен флаг *CombineResults*.
 
@@ -18,7 +18,7 @@ image::img/tj_search_1.png[[.fig--title-label]##Рис. 1. ##Структура 
 
 Пространство карточек, на котором исполняется запрос, ограничивается объектом *Scope*. Это ограничение накладывается и на атрибутивную, и на полнотекстовую части запроса и может включать в себя ограничение по конкретным типам карточек (*CardTypes*) и по папкам, в которых расположены ярлыки карточек (*Folders*).
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 SearchQuery query = session.CreateSearchQuery();
  
@@ -46,7 +46,7 @@ query.Scope.Folders.AddNew(new Guid("C0BCEB41-A19B-4813-A355-82EB6FD4F5F0")).Inc
 
 Пример кода построения полнотекстового запроса:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 SearchQuery query = session.CreateSearchQuery();
 
@@ -57,17 +57,17 @@ query.FullTextSearch.Mode = FullTextSearchMode.Files;
 
 Атрибутивная часть описывает условия на значения полей карточек, которые требуется найти. Она состоит из запросов к карточкам (*CardTypeQuery*). Если требуется найти все карточки, следует выставить в *+++true+++* параметр AllCards. Каждый запрос к типу карточки состоит из набора запросов к секциям карточки (*SectionQuery*).
 
-image::img/tj_search_2.png[[.fig--title-label]##Рис. 2. ##Структура атрибутивного поиска]
+image::tj_search_2.png[[.fig--title-label]##Рис. 2. ##Структура атрибутивного поиска]
 
 Каждый запрос к секции состоит из набора условий (*Condition*), накладываемых на конкретные поля секции. Условия организуются в иерархические группы (*ConditionGroup*). Группа условий — это аналог скобок в выражении. Условия внутри *ConditionGroup* объединяются операцией (И/ИЛИ), задаваемой свойством *Operation*. Группы *ConditionGroup* могут быть вложенными.
 
-image::img/tj_search_3.png[[.fig--title-label]##Рис. 3. ##Структура поиска по секции]
+image::tj_search_3.png[[.fig--title-label]##Рис. 3. ##Структура поиска по секции]
 
 Сформированный поисковый запрос можно выполнить, вызвав метод *CardManager.FindCards* (в параметре метода передается XML-строка сформированного запроса). Метод возвращает *CardDataCollection* – коллекцию найденных карточек, соответствующих условиям запроса. Если же в результате выполнения запроса не было найдено ни одной карточки – коллекция будет пуста.
 
 В качестве примера рассмотрим построение запроса, который вернёт все карточки типа «Документ», у которых название равно «Sample». Перед тем как строить запрос, необходимо выяснить идентификаторы типа карточки, который собираемся искать, а также идентификаторы секций, в полях которых производится поиск. Целесообразно оформить эти идентификаторы в виде констант:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string ID_CARDTYPE = "{B9F7BFD7-7429-455E-A3F1-94FFB569C794}";
 const string ID_SECTION = "{30EB9B87-822B-4753-9A50-A1825DCA1B74}";
@@ -92,7 +92,7 @@ CardDataCollection coll = userSession.CardManager.FindCards(query);
 
 В результате будет выполнен следующий запрос (см. содержимое переменной `query`):
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 <Search Version="4300" CombineResults="OR">
  <AttributiveSearch>
@@ -120,7 +120,7 @@ CardDataCollection coll = userSession.CardManager.FindCards(query);
 
 Пример: основная секция карточки, по которой строится запрос, содержит поле Регистратор – представляющее собой ссылку (*REF_ID*) на запись о сотруднике (из справочника сотрудников) и нужно найти все карточки, у которых E-Mail регистратора содержит подстроку «mail.ru». Такие детали, как E-Mail сотрудника, хранятся только в соответствующей секции справочника сотрудников – поэтому её необходимо присоединить при построении такого запроса:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Идентификатор секции справочника сотрудников
 const string REFSTAFF_EMPLOYEES = "{DBC8AE9D-C1D2-4D5E-978B-339D22B32482}";
@@ -160,7 +160,7 @@ condition.SectionAlias = "RegisteredBy_Info";
 
 Текст запроса для поиска строк соответствует аналогичному запросу для поиска карточек, но в несколько «урезанном» варианте – он начинается сразу с уровня объекта *SectionQuery*, который также является создаваемым при помощи соответствующего метода объекта UserSession:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 SectionQuery secQuery = session.CreateSectionQuery();
 ----
@@ -174,7 +174,7 @@ SectionQuery secQuery = session.CreateSectionQuery();
 
 В приведенном далее примере выполняется поиск всех строк в справочнике сотрудников c фамилией Иванов:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 const string REFSTAFF_CARDTYPE = "6710B92A-E148-4363-8A6F-1AA0EB18936C";
 const string REFSTAFF_EMPLOYEES = "DBC8AE9D-C1D2-4D5E-978B-339D22B32482";
@@ -198,5 +198,3 @@ RowDataCollection results = section.FindRows(query.GetXml());
 == См. также
 
 * xref:dm_search_api_filter.adoc[Клиентская фильтрация]
-
-*На уровень выше:* xref:../pages/dm_search_api.adoc[Поиск объектов с использованием базового API]

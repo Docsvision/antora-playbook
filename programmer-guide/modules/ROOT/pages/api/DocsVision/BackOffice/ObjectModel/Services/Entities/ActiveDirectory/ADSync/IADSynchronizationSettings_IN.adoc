@@ -2,19 +2,19 @@
 
 Определяет в производном классе параметры синхронизации с доменом.
 
-* [.keyword]*Пространство имен:* xref:ADSync_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities.ActiveDirectory.ADSync]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/ADSync_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities.ActiveDirectory.ADSync]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IADSynchronizationSettings
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CreateFolders |Возвращает признак создания папок.
@@ -34,7 +34,7 @@ public interface IADSynchronizationSettings
 
 Ниже приведен пример реализованного класса, которым предусмотрена синхронизация исключительно подразделений в справочнике Docsvision информацией, полученной из Active Directory
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 class SynchronizationDepartmentsSettings : IADSynchronizationSettings
 {
@@ -63,5 +63,3 @@ class SynchronizationDepartmentsSettings : IADSynchronizationSettings
  public bool SynchronizeRoles { get { return false; } }
 }
 ----
-
-*На уровень выше:* xref:../../../../../../../../api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/ADSync_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities.ActiveDirectory.ADSync - пространство имен]

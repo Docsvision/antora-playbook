@@ -2,12 +2,12 @@
 
 Обновляет кэш сервиса.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void UpdateFileCache(VersionedFileCard versionedFileCard, string filePath)
 ----
@@ -15,16 +15,14 @@ void UpdateFileCache(VersionedFileCard versionedFileCard, string filePath)
 Параметры
 
 versionedFileCard::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
-  +
-  Версионный файл
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]
++
+Версионный файл
 filePath::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
-  +
-  Расположение выгруженного файла
+Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
++
+Расположение выгруженного файла
 
 == Заметки
 
 Данный метод добавляет (или обновляет) в кэш сервиса информацию о выгруженном файле с признаком блокировки, установленной другим пользователем.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService - интерфейс]

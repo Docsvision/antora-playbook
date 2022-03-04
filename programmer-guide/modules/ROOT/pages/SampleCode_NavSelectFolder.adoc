@@ -2,7 +2,7 @@
 
 Ниже приведен пример кода расширения Windows-клиента, которое регистрирует кнопку ленты инструментов, позволяющей осуществить позиционирование курсора на нужной папке.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 using DocsVision.Platform.Extensibility;
 using DocsVision.Platform.WinForms;
@@ -63,8 +63,6 @@ namespace DocsVision.Test.NavPluging
 }
 ----
 
-В примере, мы регистрируем только одну команду, которая вызывает метод xref:../api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)], выполняющий позиционирование курсора на определенной папке Windows-клиента. Папка может быть обычной, либо виртуальной.
+В примере, мы регистрируем только одну команду, которая вызывает метод xref:..xref:api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)], выполняющий позиционирование курсора на определенной папке Windows-клиента. Папка может быть обычной, либо виртуальной.
 
 Правило создание расширение Windows-клиента приведено в разделе xref:dm_extension_navigator.adoc[Расширение Windows-клиента].
-
-*На уровень выше:* xref:../pages/SM_Cat_OMBase.adoc[Использование базового API]

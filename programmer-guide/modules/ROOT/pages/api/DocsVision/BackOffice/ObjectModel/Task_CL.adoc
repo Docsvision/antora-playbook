@@ -1,33 +1,33 @@
 = Task - класс
 
-Объектная модель карточки [.dfn .term]_Задание_.
+Объектная модель карточки _Задание_.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class Task : BaseCard
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:Task.ActualDelegates_PR.adoc[ActualDelegates] |Возвращает коллекцию актуальных делегатов, которым в последний раз было явно делегировано задание.
-|xref:Task.Comments_PR.adoc[Comments] |Возвращает коллекцию комментариев.
-|xref:Task.CurrentPerformers_PR.adoc[CurrentPerformers] |Возвращает коллекцию текущих исполнителей.
-|xref:Task.Delegates_PR.adoc[Delegates] |Возвращает список делегирования (список предыдущих исполнителей задания).
-|xref:Task.MainInfo_PR.adoc[MainInfo] |Возвращает основные свойства карточки "Задание".
-|xref:Task.Preset_PR.adoc[Preset] |Возвращает индивидуальные настройки задания.
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.ActualDelegates_PR.adoc[ActualDelegates] |Возвращает коллекцию актуальных делегатов, которым в последний раз было явно делегировано задание.
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.Comments_PR.adoc[Comments] |Возвращает коллекцию комментариев.
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.CurrentPerformers_PR.adoc[CurrentPerformers] |Возвращает коллекцию текущих исполнителей.
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.Delegates_PR.adoc[Delegates] |Возвращает список делегирования (список предыдущих исполнителей задания).
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.MainInfo_PR.adoc[MainInfo] |Возвращает основные свойства карточки "Задание".
+|xref:api/DocsVision/BackOffice/ObjectModel/Task.Preset_PR.adoc[Preset] |Возвращает индивидуальные настройки задания.
 |===
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |AcceptanceState |Представляет состояние "На приемке".
@@ -123,7 +123,7 @@ public class Task : BaseCard
 
 Ниже приведен пример создания задания, у которого запрещено ручное делегирование. После создания, задание отправляется исполнителю
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -171,11 +171,4 @@ stateService.ChangeState(task, state);
 objectContext.AcceptChanges();
 ----
 
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.ActualDelegates_PR.adoc[Task.ActualDelegates - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Comments_PR.adoc[Task.Comments - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.CurrentPerformers_PR.adoc[Task.CurrentPerformers - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Delegates_PR.adoc[Task.Delegates - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.MainInfo_PR.adoc[Task.MainInfo - свойство]* +
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/Task.Preset_PR.adoc[Task.Preset - свойство]* +
 
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

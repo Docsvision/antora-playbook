@@ -28,15 +28,15 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Fol
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 folderId::
-  Идентификатор копируемой папки
+Идентификатор копируемой папки
 newParentFolderId::
-  Папка, в которую выполняется копирование
+Папка, в которую выполняется копирование
 folderOptions::
-  Параметры копирование
+Параметры копирование
 
-Строка [.keyword]*folderOptions* должна соответствовать формату элемента [.keyword]*FolderOptions*, приведенному в схеме [.ph .filepath]`ServerRequests.xsd`:
+Строка *folderOptions* должна соответствовать формату элемента *FolderOptions*, приведенному в схеме `ServerRequests.xsd`:
 
 [source,pre,codeblock]
 ----
@@ -95,5 +95,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newFolderId"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Folders.adoc[Папки]

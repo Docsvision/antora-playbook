@@ -2,12 +2,12 @@
 
 Перемещает файл в новый раздел внешнего хранилища.
 
-* [.keyword]*Пространство имен:* xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.StorageServer.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/StorageServer/StorageServer_NS.adoc[DocsVision.Platform.StorageServer]
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 string SafeMove(string id, StoragePartitionType toPartition)
 ----
@@ -15,19 +15,15 @@ string SafeMove(string id, StoragePartitionType toPartition)
 Параметры
 
 id::
-  Тип: System.String
-  +
-  Идентификатор файла в хранилище
+Тип: System.String
++
+Идентификатор файла в хранилище
 toPartition::
-  Тип: xref:StoragePartitionType_EN.adoc[StoragePartitionType]
-  +
-  Раздел, в который перемещается файл
+Тип: xref:api/DocsVision/Platform/StorageServer/StoragePartitionType_EN.adoc[StoragePartitionType]
++
+Раздел, в который перемещается файл
 
-Возвращаемое значение
-
-::
-  Тип: System.String
-  +
-  Идентификатор файла после перемещения
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage - интерфейс]
+Возвращаемое значение::
+Тип: System.String
++
+Идентификатор файла после перемещения

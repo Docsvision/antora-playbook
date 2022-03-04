@@ -2,12 +2,12 @@
 
 Удаляет комментарии к файлу документа.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void RemoveMainFileComments(Document document, DocumentFile file, FileCommentCollection collection, IEnumerable<FileComment> comments)
 ----
@@ -15,25 +15,25 @@ void RemoveMainFileComments(Document document, DocumentFile file, FileCommentCol
 Параметры
 
 document::
-  Тип: xref:../Document_CL.adoc[Document]
-  +
-  Документ
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Документ
 file::
-  Тип: xref:../DocumentFile_CL.adoc[DocumentFile]
-  +
-  Файл документа
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
++
+Файл документа
 collection::
-  Тип: xref:../../../Platform/ObjectManager/SystemCards/FileCommentCollection_CL.adoc[FileCommentCollection]
-  +
-  Коллекция комментариев
+Тип: xref:api/DocsVision/Platform/ObjectManager/SystemCards/FileCommentCollection_CL.adoc[FileCommentCollection]
++
+Коллекция комментариев
 comments::
-  Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<FileComment>
-  +
-  Коллекция удаляемых комментариев
+Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<FileComment>
++
+Коллекция удаляемых комментариев
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file, collection или comments.
@@ -43,7 +43,7 @@ comments::
 
 В приведенном примере демонстрируется использование метода [.keyword .apiname]#RemoveMainFileComments# при удалении комментариев, содержащих слово "удалить", к первому основному файлу
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -62,5 +62,3 @@ VersionedFileCard versionedFileCard = documentService.GetMainFile(file);
 // Удаление комментария
 documentService.RemoveMainFileComments(document, file, versionedFileCard.Comments, versionedFileCard.Comments.Where(t => t.Comment.Contains("удалить")));
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService - интерфейс]

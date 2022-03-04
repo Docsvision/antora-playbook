@@ -32,11 +32,11 @@ SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/Car
 Параметры
 
 sessionId::
-  Идентификатор пользовательской сессии
+Идентификатор пользовательской сессии
 cardId::
-  Идентификатор типа карточки
+Идентификатор типа карточки
 newInstanceId::
-  Собственный идентификатор новой карточки. Если идентификатор должен быть сформирован системой, то необходимо передать "00000000-0000-0000-0000-000000000000"
+Собственный идентификатор новой карточки. Если идентификатор должен быть сформирован системой, то необходимо передать "00000000-0000-0000-0000-000000000000"
 
 == Ответ
 
@@ -85,5 +85,3 @@ response = session.post(url, data=body)
 responseParsed = ElementTree.fromstring(response.content)
 print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newInstanceId"))
 ----
-
-*На уровень выше:* xref:../pages/DevManualAppendix_WebService_Card.adoc[Карточки]

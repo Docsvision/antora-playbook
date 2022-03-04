@@ -1,32 +1,32 @@
 = KindsCardType - класс
 
-Представляет объектную модель типа карточки, представленного в [.dfn .term]_Справочник видов карточек_.
+Представляет объектную модель типа карточки, представленного в _Справочник видов карточек_.
 
-* [.keyword]*Пространство имен:* xref:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public class KindsCardType : ObjectBase
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CardTypeId |Задает или возвращает идентификатор типа карточки.
 |ExtendedSettings |Возвращает настройки расширения из родительского вида карточки.
-|xref:KindsCardType.Kinds_PR.adoc[Kinds] |Возвращает дочерние виды карточек, принадлежащие текущему типа карточки.
+|xref:api/DocsVision/BackOffice/ObjectModel/KindsCardType.Kinds_PR.adoc[Kinds] |Возвращает дочерние виды карточек, принадлежащие текущему типа карточки.
 |Processes |Возвращает бизнес-процессы, привязанные к типу карточки.
 |RootKind |Возвращает родительский вид карточки.
 |===
 
 == Поля
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
 |CardTypeIdProperty |Определяет свойство "Идентификатор типа карточки".
@@ -37,7 +37,7 @@ public class KindsCardType : ObjectBase
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -53,7 +53,3 @@ KindsCardKind newKind = kindService.AddCardKind(kindType);
 // Обязательное сохранение
 objectContext.SaveObject(newKind);
 ----
-
-* *xref:../../../../api/DocsVision/BackOffice/ObjectModel/KindsCardType.Kinds_PR.adoc[KindsCardType.Kinds - свойство]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/BackOffice/ObjectModel/ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel - пространство имен]

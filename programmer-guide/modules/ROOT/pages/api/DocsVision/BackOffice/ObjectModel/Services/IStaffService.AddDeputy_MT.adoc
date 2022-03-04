@@ -2,12 +2,12 @@
 
 Добавляет указанному сотруднику заместителя.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 StaffDeputy AddDeputy(StaffEmployee employee)
 ----
@@ -15,20 +15,18 @@ StaffDeputy AddDeputy(StaffEmployee employee)
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, которому будет добавлен заместитель
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, которому будет добавлен заместитель
 
-Возвращаемое значение
-
-::
-  Тип: xref:../StaffDeputy_CL.adoc[StaffDeputy]
-  +
-  Заместитель
+Возвращаемое значение::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffDeputy_CL.adoc[StaffDeputy]
++
+Заместитель
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
@@ -36,7 +34,7 @@ employee::
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 //Инициализация контекста объектов
 
@@ -53,5 +51,3 @@ StaffDeputy deputy = staffService.AddDeputy(employee);
 deputy.Employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000001"));
 objectContext.AcceptChanges();
 ----
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

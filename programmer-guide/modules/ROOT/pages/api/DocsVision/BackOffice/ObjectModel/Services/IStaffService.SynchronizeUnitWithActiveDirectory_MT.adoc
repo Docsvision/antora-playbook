@@ -1,13 +1,13 @@
 = IStaffService.SynchronizeUnitWithActiveDirectory - метод ([Тип параметра перегрузки])
 
-Синхронизирует данные подразделения [.dfn .term]_справочника сотрудников_ с Active Directory.
+Синхронизирует данные подразделения _справочника сотрудников_ с Active Directory.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void SynchronizeUnitWithActiveDirectory(StaffUnit unit, IADSynchronizationSettings settings, ILongProcessManager syncManager)
 ----
@@ -15,21 +15,21 @@ void SynchronizeUnitWithActiveDirectory(StaffUnit unit, IADSynchronizationSettin
 Параметры
 
 unit::
-  Тип: xref:../StaffUnit_CL.adoc[StaffUnit]
-  +
-  Синхронизируемое подразделение
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
++
+Синхронизируемое подразделение
 settings::
-  Тип: xref:Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]
-  +
-  Параметры синхронизации
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]
++
+Параметры синхронизации
 syncManager::
-  Тип: xref:Entities/ILongProcessManager_IN.adoc[ILongProcessManager]
-  +
-  Менеджер длительных процессов
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ILongProcessManager_IN.adoc[ILongProcessManager]
++
+Менеджер длительных процессов
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр unit, settings или syncManager.
@@ -37,6 +37,4 @@ syncManager::
 
 == Заметки
 
-Пример инициализации менеджера длительных процессов см. в xref:../../../../../pages/SC_TM_SyncFromAD.adoc[примере].
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
+Пример инициализации менеджера длительных процессов см. в xref:SC_TM_SyncFromAD.adoc[примере].

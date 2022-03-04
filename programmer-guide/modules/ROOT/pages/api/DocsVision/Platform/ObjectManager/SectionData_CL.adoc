@@ -1,67 +1,67 @@
 = SectionData - класс
 
-Представляет секцию карточки. Этот класс является [.keyword]*абстрактным*.
+Представляет секцию карточки. Этот класс является *абстрактным*.
 
-* [.keyword]*Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Platform.ObjectManager.dll`
+* *Пространство имен:* xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
  public abstract class SectionData : IUpdatable, IXmlExportable
 ----
 
 == Свойства
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:SectionData.Card_PR.adoc[Card] |Карточка, которой принадлежит секция.
-|xref:SectionData.FetchMode_PR.adoc[FetchMode] |Возвращает или задает режим загрузки данных.
-|xref:SectionData.Fields_PR.adoc[Fields] |Возвращает поля строки секции.
-|xref:SectionData.FirstRow_PR.adoc[FirstRow] |Возвращает первую строку секции.
-|xref:SectionData.Id_PR.adoc[Id] |Идентификатор типа секции.
-|xref:SectionData.InUpdate_PR.adoc[InUpdate] |Возвращает признак включения для секции режима отложенных изменения.
-|xref:SectionData.Rows_PR.adoc[Rows] |Возвращает коллекцию всех строк верхнего уровня.
-|xref:SectionData.Session_PR.adoc[Session] |Возвращает текущую открытую сессию пользователя.
-|xref:SectionData.Type_PR.adoc[Type] |Предоставляет доступ к метаданным секции карточки.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Card_PR.adoc[Card] |Карточка, которой принадлежит секция.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.FetchMode_PR.adoc[FetchMode] |Возвращает или задает режим загрузки данных.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Fields_PR.adoc[Fields] |Возвращает поля строки секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.FirstRow_PR.adoc[FirstRow] |Возвращает первую строку секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Id_PR.adoc[Id] |Идентификатор типа секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.InUpdate_PR.adoc[InUpdate] |Возвращает признак включения для секции режима отложенных изменения.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Rows_PR.adoc[Rows] |Возвращает коллекцию всех строк верхнего уровня.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Session_PR.adoc[Session] |Возвращает текущую открытую сессию пользователя.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Type_PR.adoc[Type] |Предоставляет доступ к метаданным секции карточки.
 |===
 
 == Методы
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:SectionData.BeginUpdate_MT.adoc[BeginUpdate] |Включает режим отложенных изменений.
-|xref:SectionData.CancelUpdate_MT.adoc[CancelUpdate] |Отменяет несохраненные изменения и выключает режим отложенных изменений.
-|xref:SectionData.CheckRow_MT.adoc[CheckRow(Guid, Boolean)] |Проверяет наличие в секции строки с заданным идентификатором.
-|xref:SectionData.CreateRow_MT.adoc[CreateRow] |Создает новую строку в секции.
-|xref:SectionData.CreateRow_1_MT.adoc[CreateRow(Guid)] |Создает в секции новую строку с заданным идентификатором.
-|xref:SectionData.CreateRow_2_MT.adoc[CreateRow(Guid, Guid, Guid)] |Создает в секции новую строку с заданным идентификатором, а также с конкретными значениями родительской строки секции и родительской строки дерева.
-|xref:SectionData.DeleteRow_MT.adoc[DeleteRow(Guid)] |Удаляет из секции строку с заданным идентификатором.
-|xref:SectionData.EndUpdate_MT.adoc[EndUpdate] |Отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
-|xref:SectionData.FindRow_MT.adoc[FindRow(String)] |Осуществляет поиск строки в секции с использованием XPath-запроса.
-|xref:SectionData.FindRows_MT.adoc[FindRows(String)] |Осуществляет поиск строк в секции карточки (справочника).
-|xref:SectionData.GetAllRows_MT.adoc[GetAllRows] |Возвращает все строки из текущей секции.
-|xref:SectionData.GetAllRows_1_MT.adoc[GetAllRows(Guid)] |Получение всех строк в секции для конкретной строки родительской секции.
-|xref:SectionData.GetAllRows_2_MT.adoc[GetAllRows(Guid, Boolean)] |Получение всех строк в секции для конкретной строки родительской секции, без учета уровня иерархии.
-|xref:SectionData.GetRow_MT.adoc[GetRow(Guid)] |Получение данных строки с заданным идентификатором.
-|xref:SectionData.MarkCardForDeletion_MT.adoc[MarkCardForDeletion(Guid)] |Требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
-|xref:SectionData.OpenSectionReader_MT.adoc[OpenSectionReader(FetchMode, Guid, Guid)] |Открывает серверный курсор для чтения данных секции.
-|xref:SectionData.PurgeCache_MT.adoc[PurgeCache] |Очистка кэша.
-|xref:SectionData.Refresh_MT.adoc[Refresh] |Принудительное обновление данных с сервера.
-|xref:SectionData.Refresh_1_MT.adoc[Refresh(Boolean)] |Принудительное обновление данных с сервера, независимо от наличия или отсутствия изменений.
-|xref:SectionData.RowExists_MT.adoc[RowExists(Guid)] |Проверка существования в секции строки с заданным идентификатором.
-|xref:SectionData.SaveXml_MT.adoc[SaveXml(Stream)] |Сохраняет представление данных объекта в формате XML, в поток.
-|xref:SectionData.SaveXml_1_MT.adoc[SaveXml(Stream, ExportFlags)] |Сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта.
-|xref:SectionData.SaveXml_2_MT.adoc[SaveXml(Stream, ExportFlags, ExportCardInspector)] |Сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта и заданной логикой экспорта.
-|xref:SectionData.UpdateNow_MT.adoc[UpdateNow] |Позволяет отправить накопленные изменения на сервер.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.BeginUpdate_MT.adoc[BeginUpdate] |Включает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.CancelUpdate_MT.adoc[CancelUpdate] |Отменяет несохраненные изменения и выключает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.CheckRow_MT.adoc[CheckRow(Guid, Boolean)] |Проверяет наличие в секции строки с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_MT.adoc[CreateRow] |Создает новую строку в секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_1_MT.adoc[CreateRow(Guid)] |Создает в секции новую строку с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_2_MT.adoc[CreateRow(Guid, Guid, Guid)] |Создает в секции новую строку с заданным идентификатором, а также с конкретными значениями родительской строки секции и родительской строки дерева.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.DeleteRow_MT.adoc[DeleteRow(Guid)] |Удаляет из секции строку с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.EndUpdate_MT.adoc[EndUpdate] |Отправляет накопленные изменения на сервер и выключает режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.FindRow_MT.adoc[FindRow(String)] |Осуществляет поиск строки в секции с использованием XPath-запроса.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.FindRows_MT.adoc[FindRows(String)] |Осуществляет поиск строк в секции карточки (справочника).
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_MT.adoc[GetAllRows] |Возвращает все строки из текущей секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_1_MT.adoc[GetAllRows(Guid)] |Получение всех строк в секции для конкретной строки родительской секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_2_MT.adoc[GetAllRows(Guid, Boolean)] |Получение всех строк в секции для конкретной строки родительской секции, без учета уровня иерархии.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.GetRow_MT.adoc[GetRow(Guid)] |Получение данных строки с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.MarkCardForDeletion_MT.adoc[MarkCardForDeletion(Guid)] |Требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.OpenSectionReader_MT.adoc[OpenSectionReader(FetchMode, Guid, Guid)] |Открывает серверный курсор для чтения данных секции.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.PurgeCache_MT.adoc[PurgeCache] |Очистка кэша.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Refresh_MT.adoc[Refresh] |Принудительное обновление данных с сервера.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.Refresh_1_MT.adoc[Refresh(Boolean)] |Принудительное обновление данных с сервера, независимо от наличия или отсутствия изменений.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.RowExists_MT.adoc[RowExists(Guid)] |Проверка существования в секции строки с заданным идентификатором.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_MT.adoc[SaveXml(Stream)] |Сохраняет представление данных объекта в формате XML, в поток.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_1_MT.adoc[SaveXml(Stream, ExportFlags)] |Сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_2_MT.adoc[SaveXml(Stream, ExportFlags, ExportCardInspector)] |Сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта и заданной логикой экспорта.
+|xref:api/DocsVision/Platform/ObjectManager/SectionData.UpdateNow_MT.adoc[UpdateNow] |Позволяет отправить накопленные изменения на сервер.
 |===
 
 == Примеры
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // Получение с сервера данных карточки с известным идентификатором
 CardData card = session.CardManager.GetCardData(new Guid("идентификатор_карточки"));
@@ -73,38 +73,36 @@ SectionData section = card.Sections[card.Type.Sections["MainInfo"].Id];
 RowData row = section.Rows[0];
 ----
 
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Card_PR.adoc[SectionData.Card - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.FetchMode_PR.adoc[SectionData.FetchMode - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Fields_PR.adoc[SectionData.Fields - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.FirstRow_PR.adoc[SectionData.FirstRow - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Id_PR.adoc[SectionData.Id - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.InUpdate_PR.adoc[SectionData.InUpdate - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Rows_PR.adoc[SectionData.Rows - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Session_PR.adoc[SectionData.Session - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Type_PR.adoc[SectionData.Type - свойство]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.BeginUpdate_MT.adoc[SectionData.BeginUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.CancelUpdate_MT.adoc[SectionData.CancelUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.CheckRow_MT.adoc[SectionData.CheckRow - метод (Guid, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_MT.adoc[SectionData.CreateRow - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_1_MT.adoc[SectionData.CreateRow - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_2_MT.adoc[SectionData.CreateRow - метод (Guid, Guid, Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.DeleteRow_MT.adoc[SectionData.DeleteRow- метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.EndUpdate_MT.adoc[SectionData.EndUpdate - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.FindRow_MT.adoc[SectionData.FindRow - метод (String)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.FindRows_MT.adoc[SectionData.FindRows - метод (String)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_MT.adoc[SectionData.GetAllRows - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_1_MT.adoc[SectionData.GetAllRows - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_2_MT.adoc[SectionData.GetAllRows - метод (Guid, Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.GetRow_MT.adoc[SectionData.GetRow - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.MarkCardForDeletion_MT.adoc[SectionData.MarkCardForDeletion - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.OpenSectionReader_MT.adoc[SectionData.OpenSectionReader - метод (FetchMode, Guid, Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.PurgeCache_MT.adoc[SectionData.PurgeCache - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Refresh_MT.adoc[SectionData.Refresh - метод]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.Refresh_1_MT.adoc[SectionData.Refresh - метод (Boolean)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.RowExists_MT.adoc[SectionData.RowExists - метод (Guid)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_MT.adoc[SectionData.SaveXml - метод (Stream)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_1_MT.adoc[SectionData.SaveXml - метод (Stream, ExportFlags)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_2_MT.adoc[SectionData.SaveXml - метод (Stream, ExportFlags, ExportCardInspector)]* +
-* *xref:../../../../api/DocsVision/Platform/ObjectManager/SectionData.UpdateNow_MT.adoc[SectionData.UpdateNow - метод]* +
-
-*На уровень выше:* xref:../../../../api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager - пространство имен]
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Card_PR.adoc[SectionData.Card - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.FetchMode_PR.adoc[SectionData.FetchMode - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Fields_PR.adoc[SectionData.Fields - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.FirstRow_PR.adoc[SectionData.FirstRow - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Id_PR.adoc[SectionData.Id - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.InUpdate_PR.adoc[SectionData.InUpdate - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Rows_PR.adoc[SectionData.Rows - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Session_PR.adoc[SectionData.Session - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Type_PR.adoc[SectionData.Type - свойство]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.BeginUpdate_MT.adoc[SectionData.BeginUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.CancelUpdate_MT.adoc[SectionData.CancelUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.CheckRow_MT.adoc[SectionData.CheckRow - метод (Guid, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_MT.adoc[SectionData.CreateRow - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_1_MT.adoc[SectionData.CreateRow - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.CreateRow_2_MT.adoc[SectionData.CreateRow - метод (Guid, Guid, Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.DeleteRow_MT.adoc[SectionData.DeleteRow- метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.EndUpdate_MT.adoc[SectionData.EndUpdate - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.FindRow_MT.adoc[SectionData.FindRow - метод (String)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.FindRows_MT.adoc[SectionData.FindRows - метод (String)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_MT.adoc[SectionData.GetAllRows - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_1_MT.adoc[SectionData.GetAllRows - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.GetAllRows_2_MT.adoc[SectionData.GetAllRows - метод (Guid, Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.GetRow_MT.adoc[SectionData.GetRow - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.MarkCardForDeletion_MT.adoc[SectionData.MarkCardForDeletion - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.OpenSectionReader_MT.adoc[SectionData.OpenSectionReader - метод (FetchMode, Guid, Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.PurgeCache_MT.adoc[SectionData.PurgeCache - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Refresh_MT.adoc[SectionData.Refresh - метод]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.Refresh_1_MT.adoc[SectionData.Refresh - метод (Boolean)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.RowExists_MT.adoc[SectionData.RowExists - метод (Guid)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_MT.adoc[SectionData.SaveXml - метод (Stream)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_1_MT.adoc[SectionData.SaveXml - метод (Stream, ExportFlags)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.SaveXml_2_MT.adoc[SectionData.SaveXml - метод (Stream, ExportFlags, ExportCardInspector)]* +
+* *xref:api/DocsVision/Platform/ObjectManager/SectionData.UpdateNow_MT.adoc[SectionData.UpdateNow - метод]* +

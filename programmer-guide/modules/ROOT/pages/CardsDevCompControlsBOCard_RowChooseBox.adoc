@@ -1,8 +1,8 @@
 = Элемент управления RowChooseBox
 
-Элемент управления RowChooseBox предназначен для выбора значения из указанной в настройках элемента секции справочника. Соответствует элементу управления [.ph .uicontrol]*Значение из справочника* [.dfn .term]_Конструктора разметок_.
+Элемент управления RowChooseBox предназначен для выбора значения из указанной в настройках элемента секции справочника. Соответствует элементу управления [.ph .uicontrol]*Значение из справочника* _Конструктора разметок_.
 
-image::img/dev_card_49.png[image]
+image::dev_card_49.png[image]
 
 CardChooseBox содержит следующие функциональные кнопки:
 
@@ -29,7 +29,7 @@ RowChooseBox позволяет подписываться на следующи
 +
 Например. Нужно ограничить поиск по определенному типу записи при выборе значения из "Конструктора справочников". Для этого достаточно добавить условие к существующему поисковому запросу:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void MyUniversalChooseBox_CustomizeSearchQuery(object sender, CustomizeSearchQueryEventArgs e)
 { 
@@ -41,7 +41,7 @@ private void MyUniversalChooseBox_CustomizeSearchQuery(object sender, CustomizeS
 ----
 * CustomTextValue - событие вызывается перед преобразованием идентификатора выбранной строки справочника в текст. Позволяет установить любой текст по выбранному значению. К примеру, для отображения в элементе управления полного названия организации контрагента (при его выборе) обработчик события может быть следующим:
 +
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 private void Sender_CustomTextValue(System.Object sender, CustomTextValueEventArgs e)
 { 
@@ -64,7 +64,7 @@ private void Sender_CustomTextValue(System.Object sender, CustomTextValueEventAr
 
 Нужно обратить внимание на то, что данное событие не сработает до завершения загрузки карточки. Если нужно поддержать обработку на более раннем этапе, добавьте в [.keyword .apiname]#CardActivated# код вида:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public override void CardActivated(CardActivatedEventArgs e)
 {
@@ -78,7 +78,7 @@ public override void CardActivated(CardActivatedEventArgs e)
 
 Пример инициализации RowChooseBox с возможностью выбора сотрудника из справочника сотрудников:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 protected override void OnCardInitialized(EventArgs e)
 {
@@ -91,5 +91,3 @@ protected override void OnCardInitialized(EventArgs e)
  this.rowChooseBox.ReferenceSectionTypeId = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482");
 }
 ----
-
-*На уровень выше:* xref:../pages/CardsDevCompControlsBO.adoc[Элементы управления Docsvision]

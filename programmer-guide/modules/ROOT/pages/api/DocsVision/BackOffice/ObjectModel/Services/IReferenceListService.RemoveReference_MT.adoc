@@ -1,13 +1,13 @@
 = IReferenceListService.RemoveReference - метод (BaseCard, ReferenceList, ReferenceListReference)
 
-Удаляет ссылку из [.dfn .term]_списка ссылок на карточки_.
+Удаляет ссылку из _списка ссылок на карточки_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 bool RemoveReference(BaseCard parentCard, ReferenceList referenceList, ReferenceListReference reference)
 ----
@@ -15,28 +15,26 @@ bool RemoveReference(BaseCard parentCard, ReferenceList referenceList, Reference
 Параметры
 
 parentCard::
-  Тип: xref:../BaseCard_CL.adoc[BaseCard]
-  +
-  Карточка со списком ссылок
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка со списком ссылок
 referenceList::
-  Тип: xref:../ReferenceList_CL.adoc[ReferenceList]
-  +
-  Список ссылок на карточки, из которого удаляется ссылка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/ReferenceList_CL.adoc[ReferenceList]
++
+Список ссылок на карточки, из которого удаляется ссылка
 reference::
-  Тип: xref:../ReferenceListReference_CL.adoc[ReferenceListReference]
-  +
-  Удаляемая ссылка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/ReferenceListReference_CL.adoc[ReferenceListReference]
++
+Удаляемая ссылка
 
-Возвращаемое значение
-
-::
-  Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
-  +
-  Если true - ссылка была удалена, иначе - false
+Возвращаемое значение::
+Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
++
+Если true - ссылка была удалена, иначе - false
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр referenceList или reference.
@@ -45,5 +43,3 @@ reference::
 == Заметки
 
 Также удаляется обратная ссылка.
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService - интерфейс]

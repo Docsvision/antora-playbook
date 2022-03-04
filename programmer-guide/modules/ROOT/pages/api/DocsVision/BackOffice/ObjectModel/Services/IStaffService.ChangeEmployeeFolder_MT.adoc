@@ -2,12 +2,12 @@
 
 Изменяет личную папку сотрудника.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void ChangeEmployeeFolder(StaffEmployee employee, FoldersFolder folder)
 ----
@@ -15,20 +15,18 @@ void ChangeEmployeeFolder(StaffEmployee employee, FoldersFolder folder)
 Параметры
 
 employee::
-  Тип: xref:../StaffEmployee_CL.adoc[StaffEmployee]
-  +
-  Сотрудник, у которого изменяется личная папка
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
++
+Сотрудник, у которого изменяется личная папка
 folder::
-  Тип: xref:../../../Platform/SystemCards/ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]
-  +
-  Новая личная папка
+Тип: xref:api/DocsVision/Platform/SystemCards/ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]
++
+Новая личная папка
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]

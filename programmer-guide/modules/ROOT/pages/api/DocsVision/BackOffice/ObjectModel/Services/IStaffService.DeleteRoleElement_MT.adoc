@@ -1,13 +1,13 @@
 = IStaffService.DeleteRoleElement - метод (StaffRole, StaffContain)
 
-Удаляет указанной элемент из роли в [.dfn .term]_справочнике сотрудников_.
+Удаляет указанной элемент из роли в _справочнике сотрудников_.
 
-* [.keyword]*Пространство имен:* xref:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
-* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.BackOffice.ObjectModel.dll`
+* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 void DeleteRoleElement(StaffRole role, StaffContain staffContain)
 ----
@@ -15,20 +15,18 @@ void DeleteRoleElement(StaffRole role, StaffContain staffContain)
 Параметры
 
 role::
-  Тип: xref:../StaffRole_CL.adoc[StaffRole]
-  +
-  Роль, из которой удаляется элемент
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffRole_CL.adoc[StaffRole]
++
+Роль, из которой удаляется элемент
 staffContain::
-  Тип: xref:../StaffContain_CL.adoc[StaffContain]
-  +
-  Удаляемый элемент роли
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffContain_CL.adoc[StaffContain]
++
+Удаляемый элемент роли
 
 == Исключения
 
-[cols=",",options="header",]
+[cols=",",options="header"]
 |===
 |Исключение |Условие
 |http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр role или staffContain.
 |===
-
-*На уровень выше:* xref:../../../../../api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService - интерфейс]
