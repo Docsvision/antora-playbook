@@ -1,17 +1,19 @@
 image:
-  name: antora/antora:3.0.0
-# workaround for @antora/lunr-extension
+  name: node:16-alpine
 variables:
-  NODE_OPTIONS: '--max-old-space-size=4096'
+  ANTORA_CACHE_DIR: .cache/antora
+  NODE_OPTIONS: --max-old-space-size=4096
 before_script:
-  - npm i
+  - npm ci
 pages:
   stage: deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   cache:
     paths:
-      - .cache/
+      - .cache
   script:
-    - npx antora --cache-dir .cache/antora --redirect-facility gitlab antora-playbook.yml
+    - npx antora --fetch --redirect-facility=gitlab antora-playbook.yml
   artifacts:
     paths:
-      - wwwroot/
+      - site
