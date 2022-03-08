@@ -5,6 +5,8 @@ variables:
   NODE_OPTIONS: --max-old-space-size=4096
 before_script:
   - npm ci
+  - echo creds_user is $creds_user
+  - echo creds_pass is $creds_pass
 pages:
   stage: deploy
   rules:
