@@ -17,7 +17,7 @@ CardData card = userSession.CardManager.GetCardData(cardId)
 Здесь:
 
 * userSession - пользовательская сессия (см. xref:dm_connection.adoc[Подключение к серверу Docsvision]);
-* CardManager - _менеджер карточек_, в котором собрана основная функциональность базового API для работы с карточками (см. описание типа xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager]);
+* CardManager - _менеджер карточек_, в котором собрана основная функциональность базового API для работы с карточками (см. описание типа xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager]);
 * cardId - идентификатор запрашиваемой карточки. Обычно (как и [.keyword .apiname]#GetCardData#) методы принимают идентификаторы, приведенные к типу http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]:
 +
 [source,pre,codeblock]
@@ -35,7 +35,7 @@ Guid cardId = new Guid("00000000-0000-0000-0000-000000000000");
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Полный список доступных методов и свойств см. в описании типа xref:..xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData].
+[.note__title]#Прим.:# Полный список доступных методов и свойств см. в описании типа xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData].
 ====
 
 == Объектная модель
@@ -50,7 +50,7 @@ BaseCard card = objectContext.GetObject<BaseCard>(cardId);
 Здесь:
 
 * objectContext - проинициализированный _контекст объектов_ (см. xref:dm_connection.adoc[Подключение к серверу Docsvision]);
-* BaseCard - класс объектной модели карточки. Здесь использован базовый класс карточек библиотеки "Базовые объекты". В любом случае указываемый тип должен быть наследником типа xref:..xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase] - базовый класс для всех сущностей данного уровня API.
+* BaseCard - класс объектной модели карточки. Здесь использован базовый класс карточек библиотеки "Базовые объекты". В любом случае указываемый тип должен быть наследником типа xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase] - базовый класс для всех сущностей данного уровня API.
 +
 [NOTE]
 ====

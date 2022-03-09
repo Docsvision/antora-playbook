@@ -2,12 +2,12 @@
 
 [NOTE]
 ====
-[.note__title]#Важное замечание:# Приведенная далее функциональность доступна только карточкам, компонент которых унаследован от базового класса xref:..xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl].
+[.note__title]#Важное замечание:# Приведенная далее функциональность доступна только карточкам, компонент которых унаследован от базового класса xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl].
 ====
 
-Базовый класс карточки (xref:..xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl]) реализует интерфейс xref:..xref:api/DocsVision/BackOffice/WinForms/ICustomizableControl_IN.adoc[ICustomizableControl], методы которого можно использовать для доступа к элементам управления карточки.
+Базовый класс карточки (xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl]) реализует интерфейс xref:api/DocsVision/BackOffice/WinForms/ICustomizableControl_IN.adoc[ICustomizableControl], методы которого можно использовать для доступа к элементам управления карточки.
 
-К примеру, метод xref:..xref:api/DocsVision/BackOffice/WinForms/ICustomizableControl.FindPropertyItem_MT.adoc[ICustomizableControl.FindPropertyItem] может быть использован для поиска элементов управления с известным названием и типом:
+К примеру, метод xref:api/DocsVision/BackOffice/WinForms/ICustomizableControl.FindPropertyItem_MT.adoc[ICustomizableControl.FindPropertyItem] может быть использован для поиска элементов управления с известным названием и типом:
 
 [source,csharp]
 ----
@@ -48,7 +48,7 @@ private void FindControl_ItemClick(System.Object sender, DevExpress.XtraBars.Ite
 |Кнопка |DevExpress.XtraEditors.SimpleButton
 |Коллекция значений |DocsVision.BackOffice.WinForms.Controls.RowMultiChooseBox
 |Контрагент |DocsVision.BackOffice.WinForms.Controls.RowChooseBox
-|Нумератор |xref:..xref:api/DocsVision/BackOffice/WinForms/Controls/NumeratorBox_CL.adoc[DocsVision.BackOffice.WinForms.Controls.NumeratorBox]
+|Нумератор |xref:api/DocsVision/BackOffice/WinForms/Controls/NumeratorBox_CL.adoc[DocsVision.BackOffice.WinForms.Controls.NumeratorBox]
 |Обсуждение |DevExpress.XtraEditors.XtraUserControl
 |Подразделение |DocsVision.BackOffice.WinForms.Controls.RowChooseBox
 |Подразделение контрагента |DocsVision.BackOffice.WinForms.Controls.RowChooseBox
@@ -73,7 +73,7 @@ private void FindControl_ItemClick(System.Object sender, DevExpress.XtraBars.Ite
 * тип элемента управления - тип, который указан в свойстве искомого элемента управления в разметки карточки, в _Конструкторе разметок_;
 * тип для поиска - тип, по которому можно выполнить поиск элемента управления.
 
-Для работы со значениями элементов управления, рекомендуется получать элементы управления по интерфейсу xref:..xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/ILayoutPropertyItem_IN.adoc[ILayoutPropertyItem], который предоставляет метод сохранения изменений - [.keyword .apiname]#Commit#.
+Для работы со значениями элементов управления, рекомендуется получать элементы управления по интерфейсу xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/ILayoutPropertyItem_IN.adoc[ILayoutPropertyItem], который предоставляет метод сохранения изменений - [.keyword .apiname]#Commit#.
 
 В качестве примера, рассмотрим скрипт, который по нажатию кнопки в карточке изменяет дату регистрации документа:
 
@@ -107,7 +107,7 @@ private void GetThemeButton_Click(System.Object sender, System.EventArgs e)
 }
 ----
 
-Для вывода содержимого файла карточки, достаточно совместить приведенный выше сценарий с механизмом выгрузки, к примеру, основного файла документа методом xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_MT.adoc[DownloadMainFile] сервиса [.keyword .apiname]#IDocumentService#.
+Для вывода содержимого файла карточки, достаточно совместить приведенный выше сценарий с механизмом выгрузки, к примеру, основного файла документа методом xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DownloadMainFile_MT.adoc[DownloadMainFile] сервиса [.keyword .apiname]#IDocumentService#.
 
 Необходимо учитывать, что в разметке карточек библиотеки "Базовые объекты" имеются элементы управления, недоступные для метода [.keyword .apiname]#FindPropertyItem#. Примером такого элемента управления может служить элемент управления, объединяющий _область вложений_ и _область предварительного просмотра_, в карточке "Документ". Доступ к такому элементу управления не может быть получен стандартным способом, а в _Конструкторе разметок_ данный элемент управления не имеет названия.
 

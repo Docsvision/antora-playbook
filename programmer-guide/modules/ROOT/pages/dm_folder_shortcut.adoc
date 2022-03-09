@@ -4,14 +4,14 @@
 
 == Карточка папок
 
-Разработчик может взаимодействовать с данными карточки папок непосредственно через объект xref:..xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData] – по тем же принципам, как с любой другой карточкой системы. Однако для упрощения этой задачи в объектной модели предусмотрен ряд специализированных объектов, лучше отражающих семантику (xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder_CL.adoc[Folder], xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut] ). Ключевым объектом этой модели является сама карточка папок – объект xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard_CL.adoc[FolderCard].
+Разработчик может взаимодействовать с данными карточки папок непосредственно через объект xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData] – по тем же принципам, как с любой другой карточкой системы. Однако для упрощения этой задачи в объектной модели предусмотрен ряд специализированных объектов, лучше отражающих семантику (xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder_CL.adoc[Folder], xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut] ). Ключевым объектом этой модели является сама карточка папок – объект xref:api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard_CL.adoc[FolderCard].
 
 [NOTE]
 ====
 [.note__title]#Прим.:# Все объекты расположены в специальном пространстве имен для работы с системными карточками - [.keyword .apiname]#DocsVision.Platform.ObjectManager.SystemCards#.
 ====
 
-Как и все системные карточки, этот объект может быть получен через стандартный интерфейс методами xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_MT.adoc[CardManager.GetCard] или xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_MT.adoc[CardManager.GetDictionary.]
+Как и все системные карточки, этот объект может быть получен через стандартный интерфейс методами xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_MT.adoc[CardManager.GetCard] или xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_MT.adoc[CardManager.GetDictionary.]
 
 [NOTE]
 ====
@@ -41,9 +41,9 @@ FolderCard folderCard = (FolderCard)userSession.CardManager.GetDictionary(new Gu
 * URL (отображается страница);
 * карточка (в правой панели отображается интерфейс карточки)
 
-Из объектной модели доступен переключатель режима работы папки (xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder.CurrentStyle_PR.adoc[Folder.CurrentStyle]) и идентификатор карточки папки (xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder.PropCardId_PR.adoc[Folder.PropCardID]). Также можно выполнить соответствующую настройку из Windows-клиента.
+Из объектной модели доступен переключатель режима работы папки (xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder.CurrentStyle_PR.adoc[Folder.CurrentStyle]) и идентификатор карточки папки (xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder.PropCardId_PR.adoc[Folder.PropCardID]). Также можно выполнить соответствующую настройку из Windows-клиента.
 
-При создании карточки папки надо учитывать, что она отображается немодально, когда пользователь открывает папку; и скрывается, как только пользователь переходит на другую папку. У карточки нет возможности отменить закрытие (ей не приходит вызов xref:..xref:api/DocsVision/Platform/WinForms/CardControl.CardClosing_EV.adoc[CardControl.CardClosing]), поэтому в её интерфейсе не должно быть средств редактирования чего-либо, что может остаться несохраненным к моменту перехода на другую папку. Лучше всего использовать интерфейс карточки для отображения чего-либо, а всё редактирование вынести на отдельные формы, по закрытии которых будет производиться сохранение данных.
+При создании карточки папки надо учитывать, что она отображается немодально, когда пользователь открывает папку; и скрывается, как только пользователь переходит на другую папку. У карточки нет возможности отменить закрытие (ей не приходит вызов xref:api/DocsVision/Platform/WinForms/CardControl.CardClosing_EV.adoc[CardControl.CardClosing]), поэтому в её интерфейсе не должно быть средств редактирования чего-либо, что может остаться несохраненным к моменту перехода на другую папку. Лучше всего использовать интерфейс карточки для отображения чего-либо, а всё редактирование вынести на отдельные формы, по закрытии которых будет производиться сохранение данных.
 
 В примере проверяется наличие у папки подпапки с названием "Завершенные"; в случае отсутствия создаем папку с заданным именем
 
@@ -66,7 +66,7 @@ if (!folder.HasSubfolders || folder.Folders.Count(m=>m.Name.Equals(folderName)) 
 
 Как и ссылка, ярлыки бывают двух видов — _слабые_ и _сильные_. Слабый ярлык держит слабую ссылку на карточку и отображается с overlay-иконкой, аналогичной ссылке в Windows. При удалении такого ярлыка удаляется только сам ярлык.
 
-Сильный ярлык держит сильную ссылку на карточку, и отображается обычной иконкой карточки. Для пользователя сильный ярлык полностью соответствует нахождению карточки в этой папке, поэтому правомерно говорить о том, что «карточка лежит в папке». При удалении ярлыка удаляется сама карточка, если на неё нет других сильных ссылок. Если программно нужно удалить карточку, на которую могут быть ярлыки, то надо воспользоваться методом xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard.DeleteCard_MT.adoc[FolderCard.DeleteCard], который удаляет карточку с учетом существующих ярлыков.
+Сильный ярлык держит сильную ссылку на карточку, и отображается обычной иконкой карточки. Для пользователя сильный ярлык полностью соответствует нахождению карточки в этой папке, поэтому правомерно говорить о том, что «карточка лежит в папке». При удалении ярлыка удаляется сама карточка, если на неё нет других сильных ссылок. Если программно нужно удалить карточку, на которую могут быть ярлыки, то надо воспользоваться методом xref:api/DocsVision/Platform/ObjectManager/SystemCards/FolderCard.DeleteCard_MT.adoc[FolderCard.DeleteCard], который удаляет карточку с учетом существующих ярлыков.
 
 [NOTE]
 ====
@@ -75,9 +75,9 @@ if (!folder.HasSubfolders || folder.Folders.Count(m=>m.Name.Equals(folderName)) 
 
 По аналогии с письмами Outlook ярлык на карточку обладает признаком прочитанности. Непрочитанные ярлыки отображаются в Windows-клиенте жирным шрифтом. Когда пользователь открывает карточку, он устанавливает этот признак в «прочитано». Этот признак можно выставить программно, если необходимо сигнализировать пользователю о том, что ему необходимо обратить внимание на новый ярлык.
 
-Кроме этого, ярлык может содержать также дополнительные атрибуты – например, режим открытия карточки (xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut.ModeId_PR.adoc[Shortcut.ModeId]). Таким образом, можно создать на одну карточку несколько ярлыков с разными режимами открытия карточки.
+Кроме этого, ярлык может содержать также дополнительные атрибуты – например, режим открытия карточки (xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut.ModeId_PR.adoc[Shortcut.ModeId]). Таким образом, можно создать на одну карточку несколько ярлыков с разными режимами открытия карточки.
 
-В объектной модели для работы с ярлыками предназначен объект xref:..xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut].
+В объектной модели для работы с ярлыками предназначен объект xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut].
 
 В примере, для заданной карточки удаляются все ярлыки, кроме "сильного":
 

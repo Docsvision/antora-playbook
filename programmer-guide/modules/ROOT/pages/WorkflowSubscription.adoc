@@ -4,7 +4,7 @@ Workflow предоставляет разработчикам механизм 
 
 == Механизм формирование подписок и сообщений
 
-Шлюз, чей серверный компонент реализует специальный интерфейс [.keyword .apiname]#IGateMessageSource#(сборка `DocsVision.Workflow.Interfaces.dll`), предоставляет канал для формирования подписок. Доступ к нему может быть получен через публичное свойство шлюза - SubscriptionChannel (тип xref:..xref:api/DocsVision/Workflow/Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel]), к примеру так:
+Шлюз, чей серверный компонент реализует специальный интерфейс [.keyword .apiname]#IGateMessageSource#(сборка `DocsVision.Workflow.Interfaces.dll`), предоставляет канал для формирования подписок. Доступ к нему может быть получен через публичное свойство шлюза - SubscriptionChannel (тип xref:api/DocsVision/Workflow/Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel]), к примеру так:
 
 [source,csharp]
 ----
@@ -23,7 +23,7 @@ SubscriptionChannel subscriptionChannel = dvGate.SubscriptionChannel;
 subscriptionChannel.Subscribe((int)DocsVisionSubscriptionType.ObjectUnlock, process.ID, passInfo.FunctionID, cardId);
 ----
 
-Метод xref:..xref:api/DocsVision/Workflow/Gates/ISubscriptionChannel.Subscribe_MT.adoc[Subscribe] принимает (по порядку передачи параметров):
+Метод xref:api/DocsVision/Workflow/Gates/ISubscriptionChannel.Subscribe_MT.adoc[Subscribe] принимает (по порядку передачи параметров):
 
 . Тип ожидаемого события шлюза. Список событий индивидуален для каждого шлюза (см. далее по тексту), который в дальнейшем отвечает за обработку подписок, а также генерирует сообщения для функций, осуществивших подписку.
 . Идентификатор процесса (бизнес-процесса), который подписывается на события, и который должен получить сообщение о наступлении события шлюза.
@@ -49,7 +49,7 @@ image::workflowSubscription.png[[.fig--title-label]##Рис. 1. ##Сценари
 
 == События шлюза к Docsvision
 
-Шлюз к Docsvision разрешает подписку на следующие события (см. описание xref:..xref:api/DocsVision/Workflow/Gates/DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType]):
+Шлюз к Docsvision разрешает подписку на следующие события (см. описание xref:api/DocsVision/Workflow/Gates/DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType]):
 
 * CardChange - изменение заданной карточки. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) идентификатор отслеживаемой карточки.
 * AnyCardChange - изменение любой карточки заданного типа. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) идентификатор типа отслеживаемых карточек.
@@ -58,16 +58,16 @@ image::workflowSubscription.png[[.fig--title-label]##Рис. 1. ##Сценари
 
 == События шлюза к файловой системе
 
-Шлюз к файловой системе обеспечивает возможность подписки на события (см. описание xref:..xref:api/DocsVision/Workflow/Gates/FSSubscriptionType_EN.adoc[FSSubscriptionType]):
+Шлюз к файловой системе обеспечивает возможность подписки на события (см. описание xref:api/DocsVision/Workflow/Gates/FSSubscriptionType_EN.adoc[FSSubscriptionType]):
 
-* NewFileInFolder - добавление файла в указанную папку. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный (XML-сериализация) объект типа xref:..xref:api/DocsVision/Workflow/Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo] - параметры подписки.
-* FileChange - изменение указанного файла. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный объект типа xref:..xref:api/DocsVision/Workflow/Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo].
+* NewFileInFolder - добавление файла в указанную папку. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный (XML-сериализация) объект типа xref:api/DocsVision/Workflow/Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo] - параметры подписки.
+* FileChange - изменение указанного файла. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный объект типа xref:api/DocsVision/Workflow/Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo].
 
 == События шлюза к почтовой системе
 
-Шлюз к почтовой системе обеспечивает возможность подписки на события (см. описание xref:..xref:api/DocsVision/Workflow/Gates/MailSubscriptionType_EN.adoc[MailSubscriptionType]):
+Шлюз к почтовой системе обеспечивает возможность подписки на события (см. описание xref:api/DocsVision/Workflow/Gates/MailSubscriptionType_EN.adoc[MailSubscriptionType]):
 
-* NewMessage - поступление нового сообщения. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный объект типа xref:..xref:api/DocsVision/Workflow/Gates/MailFilter_CL.adoc[MailFilter] - фильтр для новых сообщений.
+* NewMessage - поступление нового сообщения. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) сериализованный объект типа xref:api/DocsVision/Workflow/Gates/MailFilter_CL.adoc[MailFilter] - фильтр для новых сообщений.
 * MessageWithSubstringInSubject - поступление нового сообщения с заданным тестом в заголовке письма. При вызове [.keyword .apiname]#Subscribe# необходимо передать (четвертый параметр) текст, который должен содержаться в заголовке ожидаемого письма.
 
 == Подписка на события шлюзов функциями приложения "Управление процессами"

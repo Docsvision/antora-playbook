@@ -7,7 +7,7 @@
 [.note__title]#Important:# Для использования собственного типа правил добавление в хранилище необходима лицензия на систему Docsvision с редакцией «Ecm».
 ====
 
-Компонент, реализующий правило добавления в хранилище, представляется собой библиотеку DLL с классом, реализующим интерфейсы xref:..xref:api/DocsVision/Platform/StorageServer/IBinaryStorageRule_IN.adoc[IBinaryStorageRule] и xref:..xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
+Компонент, реализующий правило добавления в хранилище, представляется собой библиотеку DLL с классом, реализующим интерфейсы xref:api/DocsVision/Platform/StorageServer/IBinaryStorageRule_IN.adoc[IBinaryStorageRule] и xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize].
 
 Интерфейс IBinaryStorageRule определяет метод проверки выполнения условий помещения в хранилище. Интерфейс IExtensionInitialize определяет метод инициализации провайдера (Initialize), принимающий в сериализованном виде настройки хранилища. Настройки хранилища устанавливаются с помощью графического интерфейса настройки (рассмотрено далее).
 
@@ -88,7 +88,7 @@ image::storageRule.png[image]
 .. Создать класс с формой настройки.
 .. Указать данный класс в атрибуте [.keyword .apiname]#Editor# основного класса правила помещения в хранилище.
 +
-Класс с формой настройки представляется собой компонент типа [.keyword .apiname]#System.Windows.Forms.UserControl# с реализованным программным интерфейсом xref:..xref:api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl]. Далее приведён код примера данного класса.
+Класс с формой настройки представляется собой компонент типа [.keyword .apiname]#System.Windows.Forms.UserControl# с реализованным программным интерфейсом xref:api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl]. Далее приведён код примера данного класса.
 
 [source,pre,codeblock]
 ----

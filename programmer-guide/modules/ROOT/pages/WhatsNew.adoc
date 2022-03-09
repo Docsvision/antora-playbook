@@ -4,61 +4,61 @@
 
 * *1.5*:
 ** Изменения в API:
-*** Класс xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager] расширен методами API для работы с агрегатами поиска:
-**** xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager.GetSearchAggregationItemsRequest_MT.adoc[GetSearchAggregationItemsRequest (SearchAggregationItemsResultType, Guid, Guid, string, int?)] - возвращает результат агрегации.
-**** xref:..xref:api/DocsVision/Platform/ObjectManager/CardManager.FindAggregationCardsInfo_MT.adoc[FindAggregationCardsInfo (SearchAggregationItemsRequest)] - получает список агрегатов и/или результаты фильтрации.
-*** В пространство имён xref:..xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager] добавлены новые классы:
-**** xref:..xref:api/DocsVision/Platform/ObjectManager/SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest] - представляет объект запроса
-**** xref:..xref:api/DocsVision/Platform/ObjectManager/SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo] - представляет список объектов.
-*** В пространство имён xref:..xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel] добавлено перечисление:
-**** xref:..xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType] - результат поиска агрегатов.
+*** Класс xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager] расширен методами API для работы с агрегатами поиска:
+**** xref:api/DocsVision/Platform/ObjectManager/CardManager.GetSearchAggregationItemsRequest_MT.adoc[GetSearchAggregationItemsRequest (SearchAggregationItemsResultType, Guid, Guid, string, int?)] - возвращает результат агрегации.
+**** xref:api/DocsVision/Platform/ObjectManager/CardManager.FindAggregationCardsInfo_MT.adoc[FindAggregationCardsInfo (SearchAggregationItemsRequest)] - получает список агрегатов и/или результаты фильтрации.
+*** В пространство имён xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager] добавлены новые классы:
+**** xref:api/DocsVision/Platform/ObjectManager/SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest] - представляет объект запроса
+**** xref:api/DocsVision/Platform/ObjectManager/SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo] - представляет список объектов.
+*** В пространство имён xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel] добавлено перечисление:
+**** xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType] - результат поиска агрегатов.
 * *1.4*:
 ** Изменения в API:
-*** В пространство имён xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services] добавлены:
-**** Новый интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureService_IN.adoc[ISignatureService], включающий метод xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/CheckSignatureResult_MT.html[CheckSignatureResult - метод (byte[], Stream, X509Certificate2, bool, bool, DateTime?)].
-**** Новый класс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/CheckSignatureResult_CL.adoc[CheckSignatureResult] с конструктором xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/CheckSignatureResult_CT.adoc[CheckSignatureResult]
-**** В класс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/BackOfficeServiceFactory_CL.adoc[BackOfficeServiceFactory] добавлен новый сервис, реализующий xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureService_IN.adoc[ISignatureService].
+*** В пространство имён xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services] добавлены:
+**** Новый интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureService_IN.adoc[ISignatureService], включающий метод xref:api/DocsVision/BackOffice/ObjectModel/Services/CheckSignatureResult_MT.adoc[CheckSignatureResult - метод (byte[], Stream, X509Certificate2, bool, bool, DateTime?)].
+**** Новый класс xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/CheckSignatureResult_CL.adoc[CheckSignatureResult] с конструктором xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/CheckSignatureResult_CT.adoc[CheckSignatureResult]
+**** В класс xref:api/DocsVision/BackOffice/ObjectModel/Services/BackOfficeServiceFactory_CL.adoc[BackOfficeServiceFactory] добавлен новый сервис, реализующий xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureService_IN.adoc[ISignatureService].
 ** Прочие изменения в документе:
-*** xref:..xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutReuse_MT.adoc[OnLayoutReuse()] вызывается раньше, чем передается контекст в свойство ObjectContext контрола.
-*** Описан метод xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetEmployeeManager_MT.adoc[IStaffService.GetEmployeeManager(StaffEmployee)], возвращающий руководителя из карточки подразделения.
+*** xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/IReusableLayoutItem.OnLayoutReuse_MT.adoc[OnLayoutReuse()] вызывается раньше, чем передается контекст в свойство ObjectContext контрола.
+*** Описан метод xref:api/DocsVision/BackOffice/ObjectModel/Services/IStaffService.GetEmployeeManager_MT.adoc[IStaffService.GetEmployeeManager(StaffEmployee)], возвращающий руководителя из карточки подразделения.
 * *1.3*:
 ** Изменения в API:
 *** {blank}
 +
-Добавлено новое пространство имён xref:..xref:api/DocsVision/BackOffice/DigitalSignature/DigitalSignature_NS.adoc[DocsVision.BackOffice.DigitalSignature], включающее:
+Добавлено новое пространство имён xref:api/DocsVision/BackOffice/DigitalSignature/DigitalSignature_NS.adoc[DocsVision.BackOffice.DigitalSignature], включающее:
 
-**** Классы: xref:..xref:api/DocsVision/BackOffice/DigitalSignature/CertificateInfo_CL.adoc[CertificateInfo], xref:..xref:api/DocsVision/BackOffice/DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo], xref:..xref:api/DocsVision/BackOffice/DigitalSignature/TimestampInfo_CL.adoc[TimestampInfo],
-**** Конструкторы: xref:..xref:api/DocsVision/BackOffice/DigitalSignature/CertificateInfo_CT.adoc[CertificateInfo], xref:..xref:api/DocsVision/BackOffice/DigitalSignature/SignatureInfo_CT.adoc[SignatureInfo], xref:..xref:api/DocsVision/BackOffice/DigitalSignature/TimestampInfo_CT.adoc[TimestampInfo],
-**** Интерфейс: xref:..xref:api/DocsVision/BackOffice/DigitalSignature/IComplexSignatureService_IN.adoc[IComplexSignatureService],
-**** Перечисление: xref:..xref:api/DocsVision/BackOffice/DigitalSignature/TimestampType_EN.adoc[TimestampType].
-*** Интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ITspService_IN.adoc[ITspService] расширен новым методом [.keyword .apiname]#DateTime GetTimestampExpireDate#, получающим дату и время истечения срока действия штампа времени.
+**** Классы: xref:api/DocsVision/BackOffice/DigitalSignature/CertificateInfo_CL.adoc[CertificateInfo], xref:api/DocsVision/BackOffice/DigitalSignature/SignatureInfo_CL.adoc[SignatureInfo], xref:api/DocsVision/BackOffice/DigitalSignature/TimestampInfo_CL.adoc[TimestampInfo],
+**** Конструкторы: xref:api/DocsVision/BackOffice/DigitalSignature/CertificateInfo_CT.adoc[CertificateInfo], xref:api/DocsVision/BackOffice/DigitalSignature/SignatureInfo_CT.adoc[SignatureInfo], xref:api/DocsVision/BackOffice/DigitalSignature/TimestampInfo_CT.adoc[TimestampInfo],
+**** Интерфейс: xref:api/DocsVision/BackOffice/DigitalSignature/IComplexSignatureService_IN.adoc[IComplexSignatureService],
+**** Перечисление: xref:api/DocsVision/BackOffice/DigitalSignature/TimestampType_EN.adoc[TimestampType].
+*** Интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/ITspService_IN.adoc[ITspService] расширен новым методом [.keyword .apiname]#DateTime GetTimestampExpireDate#, получающим дату и время истечения срока действия штампа времени.
 *** {blank}
 +
-Интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService] расширен новыми методами:
+Интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService] расширен новыми методами:
 
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] - получает информацию о части подписи.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_AddSignaturePart_1_MT.html[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)] - возвращает итоговую подпись, включающую добавляемую часть подписи после прохождения проверки срока действия.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures(Document, DocumentFile, SignedCms, bool)] - Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures(Document, SignedCms, bool)] - Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] - получает информацию о части подписи.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_AddSignaturePart_1_MT.adoc[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)] - возвращает итоговую подпись, включающую добавляемую часть подписи после прохождения проверки срока действия.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures(Document, DocumentFile, SignedCms, bool)] - Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures(Document, SignedCms, bool)] - Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
 *** {blank}
 +
-Интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService] расширен новыми методами:
+Интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService] расширен новыми методами:
 
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] для получения информации о части подписи.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_2_MT.adoc[AttachMainFile(Document, string, SignedCms, bool)] - добавляет в документ карточку версионного файла в качестве основного файла документа.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures(Document, DocumentFile, SignedCms, bool)] - добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-**** xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures(Document, SignedCms, bool)] - добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-*** Интерфейс xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService] расширен новым методом xref:..xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] для получения информации о части подписи.
-*** Добавлено новое перечисление xref:..xref:api/DocsVision/BackOffice/ObjectModel/SignatureType_EN.adoc[SignatureType] в объектную модель [.keyword .apiname]#DocsVision.BackOffice.ObjectModel#.
-*** Добавлен новый интерфейс xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/IFilesView_IN.adoc[IFilesView], определяющий методы элемента управления для работы с файлами карточки.
-*** Интерфейс xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/IFilesViewWithPreview_IN.adoc[IFilesViewWithPreview] расширен новыми методами: xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddFile_MT.adoc[AddFile(DocumentLoadSource)], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddFileAsync_MT.adoc[AddFileAsync(DocumentLoadSource)], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFile_1_MT.adoc[AddMainFSFile], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFileAsync_1_MT.adoc[AddMainFSFileAsync], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFile_1_MT.adoc[AddMainScanFile], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFileAsync_1_MT.adoc[AddMainScanFileAsync], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFile_1_MT.adoc[OpenMainFile], xref:..xref:api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFileAsync_1_MT.adoc[OpenMainFileAsync].
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] для получения информации о части подписи.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_2_MT.adoc[AttachMainFile(Document, string, SignedCms, bool)] - добавляет в документ карточку версионного файла в качестве основного файла документа.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures(Document, DocumentFile, SignedCms, bool)] - добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+**** xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures(Document, SignedCms, bool)] - добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+*** Интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService] расширен новым методом xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.GetPartSignatureInfo_MT.adoc[GetPartSignatureInfo] для получения информации о части подписи.
+*** Добавлено новое перечисление xref:api/DocsVision/BackOffice/ObjectModel/SignatureType_EN.adoc[SignatureType] в объектную модель [.keyword .apiname]#DocsVision.BackOffice.ObjectModel#.
+*** Добавлен новый интерфейс xref:api/DocsVision/BackOffice/Cards/CardDocument/IFilesView_IN.adoc[IFilesView], определяющий методы элемента управления для работы с файлами карточки.
+*** Интерфейс xref:api/DocsVision/BackOffice/Cards/CardDocument/IFilesViewWithPreview_IN.adoc[IFilesViewWithPreview] расширен новыми методами: xref:api/DocsVision/BackOffice/Cards/CardDocument/AddFile_MT.adoc[AddFile(DocumentLoadSource)], xref:api/DocsVision/BackOffice/Cards/CardDocument/AddFileAsync_MT.adoc[AddFileAsync(DocumentLoadSource)], xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFile_1_MT.adoc[AddMainFSFile], xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainFSFileAsync_1_MT.adoc[AddMainFSFileAsync], xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFile_1_MT.adoc[AddMainScanFile], xref:api/DocsVision/BackOffice/Cards/CardDocument/AddMainScanFileAsync_1_MT.adoc[AddMainScanFileAsync], xref:api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFile_1_MT.adoc[OpenMainFile], xref:api/DocsVision/BackOffice/Cards/CardDocument/OpenMainFileAsync_1_MT.adoc[OpenMainFileAsync].
 * *1.2*:
 ** Прочие изменения в документе:
 *** обновлены описания полей карточек в пункте xref:DM_StandartCards_5.5.adoc[Описание полей стандартных карточек Docsvision 5.5].
 * *1.1*:
 ** Изменения в API:
 *** изменены интерфейсы компонента библиотеки карточек:
-**** C#: в базовые классы xref:..xref:api/DocsVision/Platform/WinForms/CardLibrary_CL.adoc[DocsVision.Platform.WinForms.CardLibrary] и [.keyword .apiname]#DocsVision.Platform.Wpf.CardLibrary#:
+**** C#: в базовые классы xref:api/DocsVision/Platform/WinForms/CardLibrary_CL.adoc[DocsVision.Platform.WinForms.CardLibrary] и [.keyword .apiname]#DocsVision.Platform.Wpf.CardLibrary#:
 ***** добавлен новый публичный метод [.keyword .apiname]#GetFileVersion# (возвращает версию сборки клиентского компонента библиотеки карточек);
 ***** добавлен защищенный виртуальный метод [.keyword .apiname]#GetLibraryDefinition# (должен возвращать XML-описание библиотеки карточек);
 ***** изменилась реализация метода [.keyword .apiname]#GetVersion# (теперь пытается получить версию библиотеки из схемы с помощью метода [.keyword .apiname]#GetLibraryDefinition# – если метод не переопределён – версию файла);
@@ -71,7 +71,7 @@
 *** добавлен пункт xref:StorageRule.adoc[Создание нового типа правил добавления в хранилище];
 *** обновлён код примера в пункте xref:CardsDevCompLibary.adoc[Разработка компонента библиотеки карточек] в связи с изменениями в классе [.keyword .apiname]#CardLibrary#;
 *** обновлен пункт xref:dm_storedprocedure.adoc[Использование отчетов];
-*** добавлено описание класса xref:..xref:api/DocsVision/Platform/AssemblyResolver_CL.adoc[AssemblyResolver];
+*** добавлено описание класса xref:api/DocsVision/Platform/AssemblyResolver_CL.adoc[AssemblyResolver];
 *** дополнен перечень флагов активации Справочника сотрудников в пункте xref:dm_appendix_dictionaryactivationparameters.adoc[Параметры активации справочников];
 *** добавлен пункт xref:DebugScripts.adoc[Отладка скриптов карточек].
 * *1.0*:

@@ -11,7 +11,7 @@ BaseCard foundCard = objectContext.FindObject<BaseCard>(query);
 
 * objectContext - контекст объектов.
 * BaseCard - тип возвращаемого объекта. В качестве типа возвращаемого объекта может быть передан тип объектной модели карточки или строки.
-* query - поисковый запрос типа xref:..xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]
+* query - поисковый запрос типа xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]
 
 К примеру, для поиска в _Справочнике сотрудников_, сотрудника с определенной учетной записью, воспользуйтесь примером, приведенным далее, в котором параметры поискового запроса передаются непосредственно в конструктор класса [.keyword .apiname]#QueryObject#.
 
@@ -28,7 +28,7 @@ StaffEmployee employee = objectContext.FindObject<StaffEmployee>(query);
 
 * StaffEmployee.AccountNameProperty.Name - возвращает название поля, по которому выполняется поиск.
 * "MYDOMAIN\\KukoffSA" - искомое значение.
-* xref:..xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee] - класс (объектной модели) искомого объекта.
+* xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee] - класс (объектной модели) искомого объекта.
 
 Также возможно более сложные поисковые запросы, которые включают несколько критериев поиска. К примеру, далее приведен код запроса, выполняющего поиск контрагента по названию и типу (организация или подразделение).
 

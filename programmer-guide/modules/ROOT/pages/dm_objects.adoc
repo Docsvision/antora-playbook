@@ -56,17 +56,17 @@ image::data_struct.png[image]
 [.note__title]#Прим.:# Типы, приведенные далее, определены в сборке `DocsVision.Platform.ObjectManager.dll`.
 ====
 
-* xref:..xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData] - данные экземпляра карточки. Включает совокупность всех данных секций и атрибутов конкретного экземпляра карточки.
-* xref:..xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData] - данные секции карточки, из которой может быть получена коллекция всех её строки.
-* xref:..xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection] - коллекция строк секции, из которой могут быть выбраны конкретные строки.
+* xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData] - данные экземпляра карточки. Включает совокупность всех данных секций и атрибутов конкретного экземпляра карточки.
+* xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData] - данные секции карточки, из которой может быть получена коллекция всех её строки.
+* xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection] - коллекция строк секции, из которой могут быть выбраны конкретные строки.
 +
 [NOTE]
 ====
 [.note__title]#Прим.:# Если коллекция получена непосредственно из карточки, то она считается "живой", т.е. при создании/удалении строки изменения в коллекции будут видны сразу же. Если коллекция получена поисковым запросом, то она является "моментальным снимком" данных, доступным только на чтение.
 ====
-* xref:..xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData] - строка секции. Выбрать строку из коллекции строк можно по уникальному идентификатору или по номеру в коллекции, либо перебором.
-* xref:..xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData] - подмножество строк (подсекция) секции, подчинённых определённой строке из родительской секции.
-* xref:..xref:api/DocsVision/Platform/ObjectManager/Metadata/Field_CL.adoc[Field] - поле строки секции, а точнее его значение.
+* xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData] - строка секции. Выбрать строку из коллекции строк можно по уникальному идентификатору или по номеру в коллекции, либо перебором.
+* xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData] - подмножество строк (подсекция) секции, подчинённых определённой строке из родительской секции.
+* xref:api/DocsVision/Platform/ObjectManager/Metadata/Field_CL.adoc[Field] - поле строки секции, а точнее его значение.
 
 Обычный сценарий доступа к данным карточки с привлечением приведенных типов следующий:
 
@@ -84,14 +84,14 @@ image::data_struct.png[image]
 
 [NOTE]
 ====
-[.note__title]#Важное замечание:# Приведенные далее сведения относятся только к карточкам, объектная модель которых унаследована от базового класса xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]. Если объектная модель создана на основе базовых классов из сборки [.keyword .apiname]#DocsVision.Platform.ObjectModel.dll#, то механизм доступа к данным будет отличаться.
+[.note__title]#Важное замечание:# Приведенные далее сведения относятся только к карточкам, объектная модель которых унаследована от базового класса xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]. Если объектная модель создана на основе базовых классов из сборки [.keyword .apiname]#DocsVision.Platform.ObjectModel.dll#, то механизм доступа к данным будет отличаться.
 ====
 
 Объектная модель карточки предлагает гораздо меньшее (в сравнении с базовым API) число типов:
 ====
 
 * [.keyword .apiname]#BaseCard# - базовый класс карточки, который содержит коллекции всех строк ей секций.
-* xref:..xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow] - строка секции, предоставляющая доступ к своим полям.
+* xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow] - строка секции, предоставляющая доступ к своим полям.
 
 Как видно из списка, в объектной модели нет отдельных классов для секций и полей, что несколько упрощает сценарий доступа к данным, который в общем случае будет следующий:
 
@@ -107,7 +107,7 @@ image::data_struct.png[image]
 . Выбрать нужную строку секции: SampleCard.SampleSection[0]. Если секция является плоской и это учтено при реализации объектной модели, то данный шаг пропускается.
 . Получить значение поля: SampleCard.SampleSection[0].SampleField.
 
-Помимо типов, приведенных выше и относящихся к доступу к данным карточки, в процессе разработки типов могут быть задействованы дополнительные типы, к примеру, относящиеся к справочникам. Если такие типы будут использованы далее, то будет приведено их описание. Также описание большинства типов API Docsvision приведено в разделе xref:..xref:api/Intro.adoc[Библиотека классов].
+Помимо типов, приведенных выше и относящихся к доступу к данным карточки, в процессе разработки типов могут быть задействованы дополнительные типы, к примеру, относящиеся к справочникам. Если такие типы будут использованы далее, то будет приведено их описание. Также описание большинства типов API Docsvision приведено в разделе xref:api/Intro.adoc[Библиотека классов].
 
 == См. также
 
