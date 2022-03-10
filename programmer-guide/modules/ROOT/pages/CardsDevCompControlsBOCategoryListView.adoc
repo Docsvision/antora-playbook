@@ -18,7 +18,7 @@ private CategoryList cardCategoryList;
 // Инициализация карточки
 protected override void OnCardInitialized(EventArgs e)
 {
- // Начало инициализации - стандартное
+ // Начало инициализации -- стандартное
  base.OnCardInitialized(e);
  InitializeComponent();
 
@@ -42,22 +42,22 @@ protected override void OnCardInitialized(EventArgs e)
 
 Элемент управления CategoryListView обладает следующими свойствами:
 
-* CategoryList - возвращает связанную карточку "Список категорий".
-* CategoryService - возвращает сервис xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService] для работы со списками категорий.
-* Context - _контекст объектов_.
-* RootCategory - определяет корневую категорию, начиная с которой будет построено дерево категорий.
-* StatesOperations - предоставляет доступ к правам доступа на совершение типовых операций с CategoryListView.
+* CategoryList -- возвращает связанную карточку "Список категорий".
+* CategoryService -- возвращает сервис xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService] для работы со списками категорий.
+* Context -- _контекст объектов_.
+* RootCategory -- определяет корневую категорию, начиная с которой будет построено дерево категорий.
+* StatesOperations -- предоставляет доступ к правам доступа на совершение типовых операций с CategoryListView.
 
 Элемент управления CategoryListView содержит следующие методы:
 
-* [.keyword .apiname]#Initialize(ObjectContext, CategoryList)# - данный метод используется для передачи элементу управления _контекста объектов_ и списка категорий карточки. Должен быть вызван на этапе инициализации карточки (см. пример выше).
-* [.keyword .apiname]#Rebind()# - выполняет перестроение дерева категорий.
-* [.keyword .apiname]#RefreshData()# - повторно загружает данные для списка категорий.
+* Initialize(ObjectContext, CategoryList)# -- данный метод используется для передачи элементу управления _контекста объектов_ и списка категорий карточки. Должен быть вызван на этапе инициализации карточки (см. пример выше).
+* Rebind()# -- выполняет перестроение дерева категорий.
+* RefreshData()# -- повторно загружает данные для списка категорий.
 
 Элемент управления CategoryListView содержит следующие события:
 
-* ListChanged - вызывается при любых изменениях (снятие/установка флажка на категории) в списке категорий.
-* CategoryChecked - вызывает при установке флажка на категории.
-* CategoryUnchecked - вызывает при снятии флажка с категории.
+* ListChanged -- вызывается при любых изменениях (снятие/установка флажка на категории) в списке категорий.
+* CategoryChecked -- вызывает при установке флажка на категории.
+* CategoryUnchecked -- вызывает при снятии флажка с категории.
 
-Первоначально срабатывает событие [.keyword .apiname]#CategoryChecked#/[.keyword .apiname]#CategoryUnchecked#, после чего срабатывает [.keyword .apiname]#ListChanged#.
+Первоначально срабатывает событие CategoryChecked/CategoryUnchecked, после чего срабатывает ListChanged.

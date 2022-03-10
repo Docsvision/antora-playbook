@@ -27,7 +27,7 @@ IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUnive
 //получение объектной модели Конструктора справочников 
 BaseUniversal baseUniversal = objectContext.GetObject<BaseUniversal>(DocsVision.BackOffice.CardLib.CardDefs.RefBaseUniversal.ID);
 
-//создания одного из узлов первого уровня. null - позволяет создать элемент без родителей, т.е. корневой.
+//создания одного из узлов первого уровня. null -- позволяет создать элемент без родителей, т.е. корневой.
 BaseUniversalItemType techType = baseUniversalService.AddNewItemType(null);
 techType.Name = "Мониторы";
 techType.Description = "Мониторы всех фирм";

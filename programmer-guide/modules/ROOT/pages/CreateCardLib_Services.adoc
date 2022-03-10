@@ -15,7 +15,7 @@ public interface INetstatSolutionService
  ObjectModel.NetstatSolutionCardJournal AddJournalEntry(NetstatSolutionCard.ObjectModel.NetstatSolutionCard card, DateTime date, bool result);
 }
 ----
-. Добавляем класс, реализующий интерфейс INetstatSolutionService и наследующий от [.keyword .apiname]#ContextService# - базовый класс сервисов объектной модели:
+. Добавляем класс, реализующий интерфейс INetstatSolutionService и наследующий от ContextService -- базовый класс сервисов объектной модели:
 +
 [source,csharp]
 ----
@@ -23,10 +23,10 @@ internal class NetstatSolutionService : ContextService, INetstatSolutionService
 ----
 +
 Специально ограничиваем область видимости класса, т.к. контекст объектов предоставляет сервис по его интерфейсу.
-. Реализуем функциональность, описанную интерфейсом [.keyword .apiname]#INetstatSolutionService#.
+. Реализуем функциональность, описанную интерфейсом INetstatSolutionService.
 +
 Реализацию смотрите в проекте решения.
-. Создаем фабрику сервисов в виде класса, наследующего от [.keyword .apiname]#ServiceFactory#. Фабрика предоставляет экземпляр сервиса по его типу.
+. Создаем фабрику сервисов в виде класса, наследующего от ServiceFactory. Фабрика предоставляет экземпляр сервиса по его типу.
 +
 [source,csharp]
 ----

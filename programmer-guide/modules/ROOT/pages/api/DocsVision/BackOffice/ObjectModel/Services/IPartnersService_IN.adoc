@@ -1,4 +1,4 @@
-= IPartnersService - интерфейс
+= IPartnersService -- интерфейс
 
 Описывает сервис для работы со справочником контрагентов.
 
@@ -77,7 +77,7 @@ public interface IPartnersService
 |GetUnitInheritedViewFields(PartnersCompany, Boolean) |Возвращает унаследованные отображаемые поля подразделения.
 |GetUnits(PartnersCompany, Boolean) |Предоставляет коллекцию подразделений, входящих в указанное подразделение.
 |GetUnits(PartnersCompany, Boolean, Boolean) |Предоставляет коллекцию подразделений, входящих в указанное подразделение, с учетом иерархии.
-|GetViewFields(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для указанного объекта (группа, компания или сотрудник). Все возвращаемые записи будут приведены к типу [.keyword .apiname]#IGridViewField#.
+|GetViewFields(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для указанного объекта (группа, компания или сотрудник). Все возвращаемые записи будут приведены к типу IGridViewField.
 |GetViewFieldsAsObject(ObjectBase, GridViewFieldCollectionType) |Возвращает отображаемые поля для указанного объекта (группа, компания или сотрудник) без приведения типов.
 |MoveEmployees(IEnumerable<PartnersEmployee>, PartnersCompany) |Перемещает выбранных сотрудников в выбранное подразделение.
 |MoveGroup(PartnersGroup, PartnersGroup) |Перемещает выбранную подгруппу в заданную группу.
@@ -98,5 +98,5 @@ public interface IPartnersService
 
 == Заметки
 
-Тип контейнера (организация, либо подразделение) определяется значением свойства [.keyword .apiname]#StaffUnit.Type#.
+Тип контейнера (организация, либо подразделение) определяется значением свойства StaffUnit.Type.
 

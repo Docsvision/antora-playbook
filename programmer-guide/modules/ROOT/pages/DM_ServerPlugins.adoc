@@ -4,14 +4,14 @@
 
 Серверное расширение представляет собой .NET сборку (Class Library), в которой должен быть реализован как минимум один класс, унаследованный от xref:api/DocsVision/Platform/StorageServer/Extensibility/StorageServerExtension_CL.adoc[DocsVision.Platform.StorageServer.Extensibility.StorageServerExtension].
 
-Этот базовый класс уже содержит в себе всю необходимую инфраструктуру для реализации модуля расширения. Разработчику остается только определить сигнатуру методов, реализуемых данным модулем расширения. Такие методы необходимо пометить специальным атрибутом: xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_CL.adoc[[.keyword .apiname]#[ExtensionMethod]#].
+Этот базовый класс уже содержит в себе всю необходимую инфраструктуру для реализации модуля расширения. Разработчику остается только определить сигнатуру методов, реализуемых данным модулем расширения. Такие методы необходимо пометить специальным атрибутом: xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_CL.adoc[[ExtensionMethod]#].
 
 [NOTE]
 ====
 [.note__title]#Прим.:# Атрибут `ExtensionMethod` имеет дополнительное свойство `AllowedUserRoles`, которое можно использовать для ограничения возможности вызова данного метода расширения в зависимости от роли пользователя (членства в соответствующей группе безопасности). Пример использования свойства (метод будет доступен только для членов группы «Docsvision Administrators»): [xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_1_CT.adoc[ExtensionMethod(UserRoles.Administrator)]].
 ====
 
-Пример кода реализации серверного расширения, где метод [.keyword .apiname]#GetBaseName# возвращает имя рабочей базы данных:
+Пример кода реализации серверного расширения, где метод GetBaseName возвращает имя рабочей базы данных:
 
 [source,csharp]
 ----
@@ -37,10 +37,10 @@ namespace DocsVision.Samples
 
 В качестве возвращаемого значения метод может вернуть либо скаляр, либо набор данных (коллекцию). Во втором случае лучше воспользоваться специальным типом возвращаемого значения – xref:api/DocsVision/Platform/StorageServer/CursorInfo_ST.adoc[DocsVision.Platform.StorageServer.CursorInfo]. Этот объект позволяет создать серверный курсор, из которого потом можно читать данные на клиенте.
 
-Объект [.keyword .apiname]#CursorInfo# можно создать двумя способами:
+Объект CursorInfo можно создать двумя способами:
 
-* с помощью метода [.keyword .apiname]#GetCursorBuilder#, который возвращает объект [.keyword .apiname]#CursorBuilder# и позволяет программно заполнять серверный курсор.
-* с помощью метода [.keyword .apiname]#ExecuteCursorCommand#, который выполняет SQL-команду, сохраняет её результаты в курсоре, и возвращает готовый [.keyword .apiname]#CursorInfo#.
+* с помощью метода GetCursorBuilder, который возвращает объект CursorBuilder и позволяет программно заполнять серверный курсор.
+* с помощью метода ExecuteCursorCommand, который выполняет SQL-команду, сохраняет её результаты в курсоре, и возвращает готовый CursorInfo.
 
 Пример реализации серверного метода, возвращающего набор значений:
 
@@ -74,13 +74,13 @@ public CursorInfo GetSectionsSize()
 [source,csharp]
 ----
 //Получаем метод расширения
-// Первым параметром указывается имя расширения, вторым - название метода
+// Первым параметром указывается имя расширения, вторым -- название метода
 ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("BackOfficeExtension", "GetFileContent");
 
 // Добавляем параметр вызываемого метода
-// первый аргумент - название параметра метода
-// второй - тип параметра
-// третий - значение параметра
+// первый аргумент -- название параметра метода
+// второй -- тип параметра
+// третий -- значение параметра
 method.Parameters.AddNew("FilePath", ParameterValueType.String, "C:\\Test.txt");
     
 //Вызов метода

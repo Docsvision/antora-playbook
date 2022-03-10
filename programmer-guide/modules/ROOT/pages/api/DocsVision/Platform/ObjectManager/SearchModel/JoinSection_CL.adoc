@@ -1,4 +1,4 @@
-= JoinSection - класс
+= JoinSection -- класс
 
 Предоставляет данные присоединенной секции в поисковом запросе.
 
@@ -45,21 +45,21 @@ SectionQuery sectionQuery = cardTypeQuery.SectionQueries.AddNew(CardDocument.Mai
 // Создаем присоединяемую секцию с псевдонимом Author1
 JoinSection joinSection = sectionQuery.JoinSections.AddNew("Author1");
 
-// Указываем идентификатор секции, к которой присоединяемся - сотрудники Справочника сотрудников
+// Указываем идентификатор секции, к которой присоединяемся -- сотрудники Справочника сотрудников
 joinSection.Id = RefStaff.Employees.ID;
 
-// Указываем идентификатор поля, к которому присоединяемся - идентификатор сотрудника
+// Указываем идентификатор поля, к которому присоединяемся -- идентификатор сотрудника
 joinSection.SectionField = "RowID";
 
-// Указываем псевдоним поля основной секции, по которому выполняется присоединение - автор документа
+// Указываем псевдоним поля основной секции, по которому выполняется присоединение -- автор документа
 joinSection.WithField = CardDocument.MainInfo.Author;
 
 // Добавляем условие поиска по табельному номеру 
 Condition condition = sectionQuery.ConditionGroup.Conditions.AddNew(RefStaff.Employees.ClockNumber, FieldType.Unistring, ConditionOperation.Equals, "456");
 
-// Указываем псевдоним секции, по которой выполняется поиск - псевдоним присоединенной секции
+// Указываем псевдоним секции, по которой выполняется поиск -- псевдоним присоединенной секции
 condition.SectionAlias = joinSection.Alias;
             
-// Выполняем поиск и получаем результат - карточки, автором которых является сотрудник с таб. номером 456
+// Выполняем поиск и получаем результат -- карточки, автором которых является сотрудник с таб. номером 456
 CardDataCollection result = userSession.CardManager.FindCards(searchQuery.GetXml());
 ----

@@ -1,0 +1,81 @@
+= SessionGetList
+
+Возвращает список открытых подключений к серверу.
+
+Для получения списка сессий, необходимы права администратора Docsvision.
+
+== Запрос
+
+[source,pre,codeblock]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionGetList"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetList xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <baseName>string</baseName>
+    </SessionGetList>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры
+
+baseName::
+Название базы данных. Если не указана, возвращается список подключений к базе данных по-умолчанию.
+
+== Ответ
+
+[source,pre,codeblock]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetListResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessions>string</sessions>
+    </SessionGetListResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит сведения о всех подключениях к базе данных и предоставляет следующую информацию:
+
+* идентификатор сессии;
+* учетная запись сотрудника, выполнившего подключение;
+* дата и время подключения, а также последнего запроса к серверу;
+* название и адрес компьютера, с которого выполнено подключение, если эти данные были переданы при открытии сессии.
+
+== Пример запроса
+
+[source,pre,codeblock,language-python]
+----
+# Подключение модулей Python и открытие сессии к серверу {dv} (см. код по ссылке)
+
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionGetList"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetList xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <baseName></baseName>
+    </SessionGetList>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----

@@ -4,7 +4,7 @@
 
 Для того, чтобы задействовать данный режим необходимо:
 
-* для карточек, унаследованных от типа [.keyword .apiname]#CardControl#, нужно реализовать в классе компонента карточки интерфейс xref:api/DocsVision/Platform/CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]:
+* для карточек, унаследованных от типа CardControl, нужно реализовать в классе компонента карточки интерфейс xref:api/DocsVision/Platform/CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]:
 +
 [source,csharp]
 ----
@@ -12,7 +12,7 @@ public sealed partial class TestCard : CardControl, IReusableCardComponent
 {
  // ...
 
- // Определяем необходимость переиспользования компонента: true - используется; false - не используется
+ // Определяем необходимость переиспользования компонента: true -- используется; false -- не используется
  public bool CanBeReused
  {
   get { return true; }
@@ -25,7 +25,7 @@ public sealed partial class TestCard : CardControl, IReusableCardComponent
  }
 }
 ----
-* для карточек, унаследованных от типа [.keyword .apiname]#BaseCardControl#, нужно переопределить методы GetCanBeReused и GetReusageMode:
+* для карточек, унаследованных от типа BaseCardControl, нужно переопределить методы GetCanBeReused и GetReusageMode:
 +
 [source,csharp]
 ----

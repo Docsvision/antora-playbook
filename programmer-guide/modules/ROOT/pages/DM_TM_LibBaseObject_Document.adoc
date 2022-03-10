@@ -94,7 +94,7 @@ static void ChangeDocumentState()
  // Получение документа
  Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
  
- // Получение конечного состояния Документа. В данном случае - Подписан
+ // Получение конечного состояния Документа. В данном случае -- Подписан
  StatesState endState = stateService.GetStates(document.SystemInfo.CardKind).First(t => t.DefaultName.Equals("Is signed"));
 
  // Смена состояния

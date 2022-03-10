@@ -1,0 +1,58 @@
+= Взаимодействие с контейнером карточек
+
+При разработке визуального интерфейса карточек или приложений, работающих с Docsvision, часто возникает необходимость взаимодействия с контейнером карточек (Windows-клиентом) для решения одной из следующих задач:
+
+* выбор карточки;
+* выбор папки;
+* отображение конкретной карточки;
+* навигация по дереву папок;
+* и т.д.
+
+Для решения этих задач можно использовать методы объекта – контейнера карточек (объект должен реализовывать интерфейс xref:api/DocsVision/Platform/CardHost/ICardHost_IN.adoc[DocsVision.Platform.CardHost.ICardHost]).
+
+Ссылку на этот объект все карточки получают в момент инициализации, и впоследствии она доступна в любой момент жизненного цикла карточки через соответствующее свойство базового класса – xref:api/DocsVision/Platform/WinForms/CardControl.CardHost_PR.adoc[CardControl.CardHost].
+
+В случае разработки внешних приложений и утилит, которые работают вне контекста Windows-клиента, этот объект необходимо создавать явно. Для этого предназначен метод xref:api/DocsVision/Platform/CardHost/CardHost.CreateInstance_MT.adoc[CreateInstance]. На вход метода достаточно передать ссылку на текущую сессию.
+
+Пример создания объекта-контейнера карточек:
+
+[source,csharp]
+----
+SessionManager manager = SessionManager.CreateInstance();
+manager.Connect("http://localhost/DocsVision/StorageServer/StorageServerService.asmx", string.Empty);
+UserSession session = manager.CreateSession();
+ICardHost host = CardHost.CreateInstance(session);
+----
+
+Помимо контейнера, в карточку также передается ссылка на другой объект – текущее окно, в котором открыта карточка (xref:api/DocsVision/Platform/WinForms/CardControl.CardFrame_PR.adoc[CardControl.CardFrame]). Этот объект позволяет выполнять действия с окном:
+
+* закрыть окно;
+* задать заголовок окна;
+* открыть карточку в новом окне;
+* и т.д.
+
+[NOTE]
+====
+[.note__title]#Прим.:# При разработке внешних приложений и утилит получить ссылку на объект CardFrame невозможно, т.к. они работают вне контекста контейнера (Windows-клиента).
+====
+
+Пример кода работы с окном, где заголовок окна изменяется по мере ввода текста в некую форму:
+
+[source,csharp]
+----
+private void txtName_TextChanged(object sender, EventArgs e)
+{
+ CardFrame.Caption = txtName.Text;
+ isChanged = true;
+}
+----
+
+Справочники платформы {dv} поддерживают возможность программного открытия и позиционирования на конкретной записи, для чего предусмотрено использование метода *ShowCard* с передачей в качестве параметра activateParams массива управляющих объектов (см. xref:development-manual/dm_appendix_dictionaryactivationparameters.adoc[Параметры активации справочников]). В зависимости от типа справочника передаваемый массив может содержать различное число объектов. При открытии возможно осуществлять позиционирование курсора на конкретной записи, открытие записи на просмотр, либо на редактирование. Примеры смотрите по ссылке xref:development-manual/dm_cardhost_opendictionary.adoc[Программное открытие справочников].
+
+== В этом разделе
+
+* xref:development-manual/dm_cardhost_opendictionary.adoc[Программное открытие справочников]
+
+== См. также
+
+* xref:development-manual/dm_scripts_subscription.adoc[Подписка на события]

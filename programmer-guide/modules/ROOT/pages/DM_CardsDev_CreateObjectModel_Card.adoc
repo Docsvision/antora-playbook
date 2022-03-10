@@ -2,7 +2,7 @@
 
 В объектной модели карточки должны быть перечислены все (или необходимые) её секции.
 
-Базовым классом карточки выступает всё тот же класс [.keyword .apiname]#ObjectBase#.
+Базовым классом карточки выступает всё тот же класс ObjectBase.
 
 В качестве примера реализуем объектную модель карточки, содержащую секции, рассмотренные xref:DM_CardsDev_CreateObjectModel_Sections.adoc[ранее]. Регистрация секций в карточке, аналогична регистрации полей в секции:
 
@@ -26,7 +26,7 @@ public class SampleCard : ObjectBase
    {
     ((ObjectCollection<SampleCardStructSection>)base.GetValue(SampleCard.StructSectionProperty)).Add(new SampleCardStructSection());
    }
-   // Т.к. в секции может быть несколько строчек, для плоской секции возвращаем только одну строчку - первую
+   // Т.к. в секции может быть несколько строчек, для плоской секции возвращаем только одну строчку -- первую
    return ((ObjectCollection<SampleCardStructSection>)base.GetValue(SampleCard.StructSectionProperty)).First<SampleCardStructSection>();
   }
  }
@@ -64,7 +64,7 @@ public class SampleCard : ObjectBase
 
 Реализация объектной модели справочника ничем не отличается от реализации для карточки.
 
-В библиотеке карточек "Базовые объекты" базовым классом карточки является класс xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard], который дополняет функциональность класса [.keyword .apiname]#ObjectBase#, и который также можно использовать в качестве базового для объектной модели свой карточки. Для справочников в данном случае базовым классом выступает xref:api/DocsVision/BackOffice/ObjectModel/BaseDictionaryCard_CL.adoc[BaseDictionaryCard].
+В библиотеке карточек _{bo}_ базовым классом карточки является класс xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard], который дополняет функциональность класса ObjectBase, и который также можно использовать в качестве базового для объектной модели свой карточки. Для справочников в данном случае базовым классом выступает xref:api/DocsVision/BackOffice/ObjectModel/BaseDictionaryCard_CL.adoc[BaseDictionaryCard].
 
 == См. далее
 

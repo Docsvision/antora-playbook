@@ -1,4 +1,4 @@
-= LicenseManager - класс
+= LicenseManager -- класс
 
 Класс LicenseManager содержит функциональность по работе с дополнительными опциями лицензии Docsvision, в которых присутствует ограничение по количеству соединений.
 
@@ -31,7 +31,7 @@ public abstract class LicenseManager
 
 == Заметки
 
-На основе методов [.keyword .apiname]#DecrementFeatureUsage# и [.keyword .apiname]#IncrementFeatureUsage# реализуется механизм контроля числа пользователей, использующих определенный модуль Docsvision, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
+На основе методов DecrementFeatureUsage и IncrementFeatureUsage реализуется механизм контроля числа пользователей, использующих определенный модуль Docsvision, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
 
 == Примеры
 
@@ -39,8 +39,8 @@ public abstract class LicenseManager
 
 [source,csharp]
 ----
-// userSession - сессия пользователя
-// featureId - идентификатор дополнительной опции в лицензии Docsvision
+// userSession -- сессия пользователя
+// featureId -- идентификатор дополнительной опции в лицензии Docsvision
 private void Take(UserSession userSession, Guid featureId)
 {
  try

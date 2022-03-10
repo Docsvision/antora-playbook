@@ -1,4 +1,4 @@
-= IDocumentService - интерфейс
+= IDocumentService -- интерфейс
 
 Представляет сервис для работы с документами.
 
@@ -26,10 +26,10 @@ public interface IDocumentService
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddMainFileVersionComment_MT.adoc[AddMainFileVersionComment(Document, DocumentFile, Guid, String)] |Добавляет комментарий к указанной версии основного файла документа.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[AddSignature(Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)] |Добавляет новую подпись в список подписей карточки и устанавливает ЭЦП на поля, основные и дополнительные файлы документа.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_1_MT.adoc[AddSignature(Document, X509Certificate2, SignatureLabel, StaffEmployee, String, Boolean, ICollection<CardFieldSetting>)] |Данный метод предназначен для выполнения подписания операции в документе.
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_MT.adoc[AddSignatures(Document, SignedCms)] |Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_AddSignatures_1_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#.
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures - метод (Document, DocumentFile, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures - метод (Document, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа [.keyword .apiname]#SignedCms#. Позволяет проверять срок действия добавляемых подписей.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_MT.adoc[AddSignatures(Document, SignedCms)] |Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа SignedCms.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_AddSignatures_1_MT.adoc[AddSignatures -- метод (Document, DocumentFile, SignedCms)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа SignedCms.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_2_MT.adoc[AddSignatures -- метод (Document, DocumentFile, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Определяет, к какому файлу будет добавлена подпись. Позволяет использовать для подписания криптографическое сообщение типа SignedCms. Позволяет проверять срок действия добавляемых подписей.
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_3_MT.adoc[AddSignatures -- метод (Document, SignedCms, bool)] |Добавляет коллекцию новых подписей в список подписей карточки. Устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа SignedCms. Позволяет проверять срок действия добавляемых подписей.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_1_MT.adoc[ApplyKindSettings(Document, DocumentSetting)] |Устанавливает у документа определенные настройки вида карточки.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.ApplyKindSettings_MT.adoc[ApplyKindSettings(Document, KindsCardKind)] |Устанавливает у документа настройки указанного вида карточки.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AttachMainFile_MT.adoc[AttachMainFile(Document, String)] |Загружает в документ основной файл.
@@ -110,7 +110,7 @@ public interface IDocumentService
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.LockMainFile_MT.adoc[LockMainFile(Document, DocumentFile, String)] |Выгружает файл из документа на диск с установкой постоянной блокировки.
 |MakeCurrentMainFileVersion(Document, DocumentFile, Guid) |Задает последнюю версию файла.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.MakeLockedMainFileForceChanged_MT.adoc[MakeLockedMainFileForceChanged(Document, DocumentFile)] |Устанавливает признака наличия изменений для выгруженного основного файла документа.
-|PrepareToVerifySignature(Document, IDictionary<BaseCardSignaturePart, Stream>, IEnumerable<BaseCardSignaturePart>, Boolean, Boolean, ICollection<CardFieldSetting>) |Заполняет коллекцию IDictionary<BaseCardSignaturePart, Stream>, где ключ соответствует части ЭЦП, а значение коллекции - сопоставленные частям ЭЦП значения полей, основных или дополнительных файлов.
+|PrepareToVerifySignature(Document, IDictionary<BaseCardSignaturePart, Stream>, IEnumerable<BaseCardSignaturePart>, Boolean, Boolean, ICollection<CardFieldSetting>) |Заполняет коллекцию IDictionary<BaseCardSignaturePart, Stream>, где ключ соответствует части ЭЦП, а значение коллекции -- сопоставленные частям ЭЦП значения полей, основных или дополнительных файлов.
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.PurgeFileCache_MT.adoc[PurgeFileCache(Document)] |Очищает кэш файлов документ.
 |RemoveAdditionalFile(Document, DocumentFile) |Удаляет заданный дополнительный файл из документа.
 |RemoveMainFile(Document, DocumentFile) |Удаляет заданный основной файл из документа.
@@ -150,7 +150,7 @@ public interface IDocumentService
 |xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.SynchronizationFromFileCompleted_EV.adoc[SynchronizationFromFileCompleted] |Событие срабатывает после синхронизации данных карточки со свойствами основного файла.
 |===
 
-* *xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[IDocumentService.AddSignature - метод (Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)]* +
+* *xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[IDocumentService.AddSignature -- метод (Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)]* +
 
 
 

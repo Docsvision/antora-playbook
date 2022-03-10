@@ -2,7 +2,7 @@
 
 [cols=",",]
 |===
-|Назначение |Определяет механизм распределения прав пользователей при работе с рядом приложений Docsvision на основе данных самой карточки.
+|Назначение |Определяет механизм распределения прав пользователей при работе с рядом приложений {dv} на основе данных самой карточки.
 |Класс карточки |xref:api/DocsVision/BackOffice/ObjectModel/RoleModel_CL.adoc[DocsVision.BackOffice.ObjectModel.RoleModel]
 |===
 
@@ -33,7 +33,7 @@ RoleModelCardKindRoleSetting roleModelCardKindRoleSetting = roleModelService.Get
 RoleModelRole roleModelRole = roleModelService.CreateRole(roleModelCardKindRoleSetting);
 roleModelRole.Name = "Работа по выходным";
 
-//логическая операция между условиями - ИЛИ
+//логическая операция между условиями -- ИЛИ
 roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or;
 
 //создание первого условия (сегодня = суббота)

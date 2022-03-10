@@ -1,0 +1,105 @@
+= Режим отложенных изменений
+
+== Отложенные изменения в базовом API
+
+При изменения данных в обычном режиме работы автоматически вызывается серверный метод, отвечающий за запись изменений в базу данных. Такой вызов будет выполнен при каждом изменении значения поля карточки, что может привести к значительным накладным расходам при большом количестве изменений. Для оптимизации подобных сценариев, связанных с изменением большого количества значений, предусмотрен т.н. _режим отложенных изменений_, при котором все изменения накапливаются на клиентской стороне и передаются на сервер одним вызовом.
+
+Режим отложенных изменений устанавливается вызовом у объекта, реализующего интерфейс xref:api/DocsVision/Platform/ObjectManager/IUpdatable_IN.adoc[IUpdatable], метода BeginUpdate:
+
+[source,csharp]
+----
+// Получение данных карточки
+CardData card = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Включение режима отложенных изменений для полученной карточки
+card.BeginUpdate();
+----
+
+После того, как в карточку были внесены изменения, их нужно зафиксировать в базе данных, вызвав метод EndUpdate:
+
+[source,csharp]
+----
+card.EndUpdate();
+----
+
+Также существует возможность отменить несохраненные изменения, вызвав метод CancelUpdate:
+
+[source,csharp]
+----
+card.CancelUpdate();
+----
+
+Режим отложенных изменений поддерживает не только карточка, но и другие объекты, реализующие интерфейс IUpdatable. Общий список таких объектов следующий:
+
+* xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData];
+* xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData];
+* xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData];
+* xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData];
+* xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection];
+* xref:api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[FileData]
+* xref:api/DocsVision/Platform/ObjectManager/SystemCards/Folder_CL.adoc[Folder]
+* xref:api/DocsVision/Platform/ObjectManager/SystemCards/Shortcut_CL.adoc[Shortcut]
+
+У данного режима есть несколько важных особенностей:
+
+* Права доступа и ограничения для изменяемых объектов проверяются не сразу, а в момент обработки пакета изменений на сервере;
+* Множество изменений одних данных не объединяются (не заменяют друг друга), а накапливаются. Например, если значение одного поля было изменено 10 раз, то в итоговой пакет будет записано 10 транзакций, а после получения пакета сервером будут выполнены все 10 операций.
+
+Также следует помнить, что в пределах секции режим отложенных изменений устанавливается в т.ч. и на все подчиненные объекты -- подсекции, строки и поля. Если строки находятся в режиме отложенных изменений, то после перевода в этот режим родительской секции их изменения будут учитываться в контексте родительского объекта. В обратную сторону наследование не распространяется.
+
+Если режим отложенных изменений включён для родительского объекта, то управление режимом из подчиненного объекта не допускается, т.е. нельзя, к примеру, отменить режим для секции, если он установлен в карточке.
+
+Как правило, режим отложенных изменений устанавливается на всю карточку (так как по умолчанию вся карточка блокируется пользователем для изменения), но возможны случаи, когда это не так (например, работа со справочниками).
+
+Практический пример доступен по ссылке xref:SC_DelayedChanges.adoc[Пример использования режима отложенных изменений]
+
+== Отложенные изменения в объектной модели
+
+API уровня бизнес-логики по умолчанию работает в режиме эквивалентном режиму отложенных изменений, т.е. фактически изменения накапливаются на клиенте и отправляются на сервер одним вызовом. Причем, в отличии от режима отложенных изменений базового API, в объектной модели данный режим действует сразу для всех объектов, с которыми выполняются изменения.
+
+Для работы с отложенными изменения на данном уровне API предусмотрено несколько методов:
+
+* xref:api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges] -- сохраняет все изменения в контексте объектов:
++
+[source,csharp]
+----
+// Получение карточки
+BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000000"));
+
+// Изменение данных
+card.Description = "Новое описание";
+
+// Получение другой карточки
+BaseCard otherCard = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001"));
+
+// Изменение данных другой карточки
+otherCard.Description = "Новое описание для другой карточки";
+
+// Сохранение всех изменений контекста объектов
+objectContext.AcceptChanges();
+----
+* xref:api/DocsVision/Platform/ObjectModel/ObjectContext.SaveObject_1_MT.adoc[ObjectContext.SaveObject] -- сохраняет изменения одного конкретного объекта:
++
+[source,csharp]
+----
+// Сохраняем изменения в измененном объекте card
+objectContext.SaveObject(card);
+----
+* xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollbackChanges_MT.adoc[ObjectContext.RollbackChanges] -- отменяет все несохраненные изменения контекста объектов:
++
+[source,csharp]
+----
+objectContext.RollbackChanges();
+----
+* xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollBackObject_MT.adoc[ObjectContext.RollBackObject] -- отменяет несохраненные изменения одного объекта:
++
+[source,csharp]
+----
+objectContext.RollBackObject(card);
+----
+
+Контекст объектов также предоставляет методы для сохранения и отмены изменения нескольких карточек. Полный список доступных методов см. в описании типа xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext].
+
+== См. также
+
+* xref:development-manual/dm_eventlogs.adoc[Журналирование]

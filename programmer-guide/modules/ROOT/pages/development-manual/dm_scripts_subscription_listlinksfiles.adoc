@@ -1,0 +1,76 @@
+= События элемента управления 'Ссылки'
+
+Стандартный элемент управления "Ссылки" предоставляет возможность подписываться на события вызова настраиваемых команд (CustomizeCommands), которые выбираются из контекстного меню элемента управления "Ссылки". Для подписки на подобные события необходимо знать идентификатор соответствующей команды, которые собраны в статическом классе DocsVision.BackOffice.WinForms.Controls.Commands.ReferenceListView.ReferenceListViewCommandIds (сборка `DocsVision.BackOffice.WinForms.dll`):
+
+* ReferenceListViewCommandAddCardFromTemplateId -- добавление карточки по шаблону;
+* ReferenceListViewCommandAddCardId -- добавление карточки;
+* ReferenceListViewCommandAddDVFolderId -- добавление папки Docsvision;
+* ReferenceListViewCommandAddFileFromFileSystemId -- добавление файла;
+* ReferenceListViewCommandAddURLId -- добавление URL;
+* ReferenceListViewCommandCancelLockFileId -- отмена блокировки;
+* ReferenceListViewCommandCopyId -- копирование;
+* ReferenceListViewCommandCreateCardId -- создание карточки;
+* ReferenceListViewCommandDeleteId -- удаление;
+* ReferenceListViewCommandLockFileId -- блокировка для работы;
+* ReferenceListViewCommandOpenCardId -- открытие карточки;
+* ReferenceListViewCommandOpenFileAsReadOnlyId -- открытие файла в режиме чтения;
+* ReferenceListViewCommandOpenFileId -- открытие файла в режиме изменения;
+* ReferenceListViewCommandOpenId -- открытие карточки;
+* ReferenceListViewCommandRefreshId -- обновление;
+* ReferenceListViewCommandScanAndAddId -- отсканировать и добавить;
+* ReferenceListViewCommandShowDescriptionId -- описание;
+* ReferenceListViewCommandShowGroupPanelId -- показать область группировки;
+* ReferenceListViewCommandShowPreviewPanelId -- показать область описания;
+* ReferenceListViewCommandUnlockFileId -- показать область группировки.
+
+Элемент управление "Ссылки" предоставляет единую точку входа для обработки всех этих событий -- событие CustomizeCommands. В качестве примера, используем собственный обработчик события CustomizeCommands для обработки команд добавления URL-ссылки и и открытия карточки из списка добавленных карточек:
+
+[source,csharp]
+----
+// Организуем подписку в обработчике события активации карточки
+private void Document_CardActivated(System.Object sender, DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ // Получаем элемент управления типа "Ссылки"
+ ReferenceListView referenceListView = ((ICustomizableControl)CardControl).FindPropertyItem<ReferenceListView>("Свойство1");
+
+ // Добавляем обработчик для срабатывания настраиваемой команды
+ referenceListView.CustomizeCommands += new EventHandler<ReferenceListViewCustomizeCommandsEventArgs>(ReferenceListView_CustomizeCommands);
+}
+
+// Обрабатываем событие вызова настраиваемой команды
+private void ReferenceListView_CustomizeCommands(object sender, ReferenceListViewCustomizeCommandsEventArgs e)
+{
+ foreach (IReferenceListViewCommand command in e.Commands)
+ {
+  // Получаем идентификатор вызванной команды
+  Guid commandId = ((IReferenceListViewCommand2)command).Id;
+
+  // Выбираем команду добавления URL, либо открытия карточки
+  if (commandId = ReferenceListViewCommandIds.ReferenceListViewCommandAddURLId)
+  {
+   // Обрабатываем событие до непосредственного добавления URL
+   command.BeforeCommandExecute += new EventHandler<ReferenceListViewCommandExecuteEventArgs>(AddUrlCommand_BeforeCommandExecute);
+  }
+  else if (commandId = ReferenceListViewCommandIds.ReferenceListViewCommandOpenCardId)
+  {
+   // Обрабатываем событие после открытия карточки 
+   command.AfterCommandExecute += new EventHandler<ReferenceListViewCommandExecuteEventArgs>(OpenCardCommand_AfterCommandExecute);
+  }
+ }
+}
+
+// Обработка команды добавления URL
+private void AddUrlCommand_BeforeCommandExecute(object sender, ReferenceListViewCommandExecuteEventArgs e)
+{
+ // Прервать дальнейшее исполнение команды
+ e.Cancel = true;
+}
+
+// Обработка команды добавления карточки
+private void OpenCardCommand_AfterCommandExecute(object sender, ReferenceListViewCommandExecuteEventArgs e)
+{
+ MessageBox.Show("Добавлена карточек";
+}
+----
+
+В обработчиках событий, срабатывающих до исполнения соответствующей команды, можно добавить логику прерывания команды, как в примере, установив e.Cancel в значение true .

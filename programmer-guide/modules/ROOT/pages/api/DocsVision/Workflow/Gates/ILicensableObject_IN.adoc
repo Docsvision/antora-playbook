@@ -1,4 +1,4 @@
-= ILicensableObject - интерфейс
+= ILicensableObject -- интерфейс
 
 Определяет поддержку шлюзом лицензирования, предоставляет тип лицензии.
 
@@ -25,6 +25,6 @@ public interface ILicensableObject
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|CheckLicense(Object) |Осуществляет проверку лицензии на шлюз. Проверка применима для типов лицензии: [.keyword .apiname]#LicenseTypeEnum.FileLicense# и [.keyword .apiname]#LicenseTypeEnum.StringLicense#. В метод будет передан объект [.keyword .apiname]#GateInfo.LicenseInfo#, содержащий лицензию полученную из справочника _шлюзов_.
-|GetRequestedFeature |Получает идентификатор опции лицензии. Применимо для типа лицензии: [.keyword .apiname]#LicenseTypeEnum.DocsVisionLicenseFeature#.
+|CheckLicense(Object) |Осуществляет проверку лицензии на шлюз. Проверка применима для типов лицензии: LicenseTypeEnum.FileLicense и LicenseTypeEnum.StringLicense. В метод будет передан объект GateInfo.LicenseInfo, содержащий лицензию полученную из справочника _шлюзов_.
+|GetRequestedFeature |Получает идентификатор опции лицензии. Применимо для типа лицензии: LicenseTypeEnum.DocsVisionLicenseFeature.
 |===

@@ -1,4 +1,4 @@
-= IRoleModelService - интерфейс
+= IRoleModelService -- интерфейс
 
 Сервис для работы с _Конструктором ролей_.
 
@@ -40,7 +40,7 @@ public interface IRoleModelService
 |FindKindCommonRoleSettings |Предоставляет доступ к контейнеру общих ролей.
 |GetConditionsByCardType(Guid) |Возвращает коллекцию условий ролевой модели для указанного типа карточки.
 |GetConditionValueDescription(RoleModelRoleCondition) |Создает строку описания из заданного условия ролевой модели.
-|GetDateValueDescription(Object) |Создает строку описания для объекта содержащего дату (обычная [.keyword .apiname]#System.DateTime#, либо дата ролевой модели - [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.RoleModelConditionDayWorkStatus#).
+|GetDateValueDescription(Object) |Создает строку описания для объекта содержащего дату (обычная System.DateTime, либо дата ролевой модели -- DocsVision.BackOffice.ObjectModel.RoleModelConditionDayWorkStatus).
 |GetDayOfWeekDescription(DayOfWeek) |Создает стандартную строку описания для дня недели.
 |GetDayStatusDescription(RoleModelConditionValueDayWorkStatus) |Создает стандартную строку описания для типа рабочего дня (выходной, рабочий).
 |GetKindRoleSettings(KindsCardKind) |Возвращает настройки ролевой модели для вида карточки.
@@ -77,7 +77,7 @@ RoleModelCardKindRoleSetting roleModelCardKindRoleSetting = roleModelService.Get
 RoleModelRole roleModelRole = roleModelService.CreateRole(roleModelCardKindRoleSetting);
 roleModelRole.Name = "Работа по выходным";
 
-//логическая операция между условиями - ИЛИ
+//логическая операция между условиями -- ИЛИ
 roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or;
 
 //создание первого условия (сегодня = суббота)

@@ -1,4 +1,4 @@
-= ISurveyService - интерфейс
+= ISurveyService -- интерфейс
 
 Сервис для работы со списком опросов.
 
@@ -40,7 +40,7 @@ public interface ISurveyService
 |AddIssueRoleModelRoleValue(SurveyListSurveyAnswerIssue, RoleModelRole) |Создает значение ответа в виде роли ролевой модели.
 |AddIssueStateValue(SurveyListSurveyAnswerIssue, StatesState) |Создает значение ответа в виде состояния.
 |AddIssueStringValue(SurveyListSurveyAnswerIssue, String) |Создает значение ответа в виде строки.
-|AddIssueVariantValue(SurveyListSurveyAnswerIssue, Object) |Создает значение ответа в виде неявного значения (тип [.keyword .apiname]#System.Object#).
+|AddIssueVariantValue(SurveyListSurveyAnswerIssue, Object) |Создает значение ответа в виде неявного значения (тип System.Object).
 |AddQuestion(SurveyListSurvey, String, String, SurveyListSurveyQuestionDataType) |Добавляет вопрос к опросу.
 |AddQuestionEnumValue(SurveyListSurveyQuestion, Int32, String) |Добавляет варианты ответов к вопросу.
 |AddSignature(SurveyListSurvey, SurveyListSurveyAnswer, X509Certificate2) |Подписывает ЭЦП ответ на опрос.
@@ -48,9 +48,9 @@ public interface ISurveyService
 |CreateSignatureList |Создает карточку списка подписей. Объект автоматически сохраняется в контексте.
 |CreateSurveyList |Создает карточку списка опросов.
 |FindAnswerIssue(SurveyListSurveyAnswer, SurveyListSurveyQuestion) |Осуществляет поиск в ответах указанного значения ответа.
-|FindOrCreateAnswerIssue(SurveyListSurveyAnswer, SurveyListSurveyQuestion) |Осуществляет поиск в ответах указанного значения ответа. В случае отсутствия - будет создан новый элемент вопрос-ответ.
-|FindOrCreateQuestion(SurveyListSurvey, String, String, SurveyListSurveyQuestionDataType) |Осуществляет поиск вопроса в опросе. В случае отсутствия - будет создан новый.
-|FindOrCreateSurvey(SurveyList, String) |Осуществляет поиск опроса в списке опросов. В случае отсутствия - будет создан новый.
+|FindOrCreateAnswerIssue(SurveyListSurveyAnswer, SurveyListSurveyQuestion) |Осуществляет поиск в ответах указанного значения ответа. В случае отсутствия -- будет создан новый элемент вопрос-ответ.
+|FindOrCreateQuestion(SurveyListSurvey, String, String, SurveyListSurveyQuestionDataType) |Осуществляет поиск вопроса в опросе. В случае отсутствия -- будет создан новый.
+|FindOrCreateSurvey(SurveyList, String) |Осуществляет поиск опроса в списке опросов. В случае отсутствия -- будет создан новый.
 |FindQuestion(SurveyListSurvey, String) |Осуществляет поиск вопроса в опросе.
 |FindSurvey(SurveyList, String) |Осуществляет поиск опроса в списке опросов.
 |GetAnswerHash(SurveyListSurveyAnswer) |Вычисляет хэш SHA512 для коллекции вопрос-ответ, содержащейся в ответе на опрос.
@@ -61,7 +61,7 @@ public interface ISurveyService
 
 == Примеры
 
-Создание опроса является довольно простой задачей. Основной момент здесь - это реализация соответствующей разметки в карточке, к которой привязан опрос. Ниже приведен пример создания простого опроса
+Создание опроса является довольно простой задачей. Основной момент здесь -- это реализация соответствующей разметки в карточке, к которой привязан опрос. Ниже приведен пример создания простого опроса
 
 [source,csharp]
 ----

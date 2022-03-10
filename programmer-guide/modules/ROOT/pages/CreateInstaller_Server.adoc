@@ -9,14 +9,14 @@
 
 Далее перечислены основные шаги, которые должен выполнить пакет установки серверной части _решения_:
 
-. Создать подкаталог _решения_ в папке Docsvision (по умолчанию `C:\Program Files (x86)\Docsvision`).
+. Создать подкаталог _решения_ в папке {dv} (по умолчанию `C:\Program Files (x86)\Docsvision`).
 . Выгрузить в созданный подкаталог компонент _SnapIn_ и пакет установки клиентской части _решения_.
 . Создать в каталоге _решения_ подкаталог `CardPackage` и выгрузить в него xref:CreatePackages.adoc[CardPackage], а также связанные с ним XML-файлы.
 . Создать в каталоге _решения_ подкаталог `Database` и выгрузить в него xref:CreatePackages.adoc[SqlPackage], а также схемы карточек и библиотека карточек, а также их ресурсы.
 . В ветке реестра `HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns` создать раздел с названием решения.
 . В созданный раздел добавить два строковых параметра:
-* Path - путь к сборке SnapIn.
-* TypeName - название класса SnapIn, который реализует интерфейс [.keyword .apiname]#ISnapIn#.
+* Path -- путь к сборке SnapIn.
+* TypeName -- название класса SnapIn, который реализует интерфейс ISnapIn#.
 +
 [source,pre,codeblock,language-xml]
 ----
@@ -27,7 +27,7 @@
  </RegistryKey>
 </Component>
 ----
-. Вызвать Консоль настройки Docsvision с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
+. Вызвать Консоль настройки {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 +
 [source,pre,codeblock]
 ----
@@ -38,7 +38,7 @@
 </InstallExecuteSequence>
 ----
 
-При удалении решения, необходимо вызвать _Консоль настройки_ Docsvision с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
+При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 
 [source,pre,codeblock]
 ----

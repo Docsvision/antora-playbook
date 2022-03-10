@@ -1,4 +1,4 @@
-= CardData.RemoveLock - метод
+= CardData.RemoveLock -- метод
 
 Снимает блокировку сделанную в своей сессии.
 
@@ -22,7 +22,7 @@ CardData card = session.CardManager.GetCardData(new System.Guid("идентиф�
 //Проверка блокировки на карточке
 if (card.LockStatus != LockStatus.Free)
 {
-    //Объект заблокирован - проверка владельца
+    //Объект заблокирован -- проверка владельца
     if (card.LockStatus = LockStatus.OwnerLocked)
     {
         card.RemoveLock();

@@ -6,13 +6,13 @@
 
 [source,csharp]
 ----
-// documentFile - файл (тип DocumentFile) искомого документа
+// documentFile -- файл (тип DocumentFile) искомого документа
 Document document = ObjectHelper.GetParent<Document>(documentFile);
 ----
 
 *Как изменить значение в элементе управления в карточке*
 
-Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу [.keyword .apiname]#FindPropertyItem# базового класса карточки xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], передав название элемента управления:
+Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу FindPropertyItem базового класса карточки xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], передав название элемента управления:
 
 [source,csharp]
 ----
@@ -30,7 +30,7 @@ layoutItem.Commit();
 
 Название элемента можно посмотреть в _Конструкторе разметок_.
 
-*Пример работы с Docsvision из Powershell*
+*Пример работы с {dv} из Powershell*
 
 В приведенном ниже примере, создается скрипт, выполняющий подключение к серверу Docsvision, и получение номера из карточки Нумератора
 
@@ -57,7 +57,7 @@ $number = $numeratorCard.Zones[0].GetNumber([GUID]::Empty, 1, [ref] $outId);
 write $number
 ----
 
-Аналогичная задача может быть решена без объектной модели - прямым обращением к сервису Docsvision
+Аналогичная задача может быть решена без объектной модели -- прямым обращением к сервису Docsvision
 
 [source,pre,codeblock]
 ----
@@ -83,7 +83,7 @@ $number = $client.NumGetFirstFree($sessionId, $numeratorCardID, $zoneName, $user
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Полное описание методов сервиса приведено в разделе xref:dm_appendix_webservice.adoc[Методы веб-сервиса Docsvision].
+[.note__title]#Прим.:# Полное описание методов сервиса приведено в разделе xref:development-manual/dm_appendix_webservice.adoc[Методы веб-сервиса Docsvision].
 ====
 
 *Как узнать идентификатор карточки*
@@ -91,11 +91,11 @@ $number = $client.NumGetFirstFree($sessionId, $numeratorCardID, $zoneName, $user
 Узнать идентификатор существующий карточки можно несколькими способами:
 
 * посмотреть в Windows-клиенте – идентификатор карточки отображается в её свойствах;
-* используя утилиту Docsvision Explorer (входит в Resource Kit) – идентификатор карточки отображается в поле [.ph .uicontrol]*Selected card ID*.
+* используя утилиту {dv} Explorer (входит в Resource Kit) – идентификатор карточки отображается в поле [.ph .uicontrol]*Selected card ID*.
 
 *Получить идентификатор созданной карточки, используя объектную модель*
 
-Для получения идентификатора объекта (например, объект document типа [.keyword .apiname]#DocsVision.BackOffice.ObjectModel.Document#) можно воспользоваться методом [.keyword .apiname]#ObjectContext.GetObjectRef(ObjectBase)#:
+Для получения идентификатора объекта (например, объект document типа DocsVision.BackOffice.ObjectModel.Document) можно воспользоваться методом ObjectContext.GetObjectRef(ObjectBase)#:
 
 [source,csharp]
 ----
@@ -126,7 +126,7 @@ StaffEmployee staffEmployee = staffService.Get(new Guid("id_empl"));
 
 *Считывание данных с элемента управления типа коллекция, например "Сотрудники"*
 
-Для сотрудников, в `ControlValue` соответствующего элемента управления содержится коллекция идентификатором выбранных сотрудников - IEnumerable<Guid>. Для записи, в `ControlValue` передается массив таких идентификаторов (Guid[]).
+Для сотрудников, в `ControlValue` соответствующего элемента управления содержится коллекция идентификатором выбранных сотрудников -- IEnumerable<Guid>. Для записи, в `ControlValue` передается массив таких идентификаторов (Guid[]).
 
 *Доступ к значению поля*
 
@@ -135,7 +135,7 @@ StaffEmployee staffEmployee = staffService.Get(new Guid("id_empl"));
 int? result = userSession.CardManager.GetCardData(cardID).Sections[sectionID].FirstRow.GetInt32(fieldAlias);
 ----
 
-cardID - идентификатор карточки; sectionID - идентификатор секции; fieldAlias - псевдоним поля
+cardID -- идентификатор карточки; sectionID -- идентификатор секции; fieldAlias -- псевдоним поля
 
 С точки зрения доступа, динамические поля не отличаются от статических, поэтому получение значения такого поля может выглядеть следующим образом
 
@@ -166,7 +166,7 @@ result = (((BaseCardSectionRow)document.GetSection(sectionID)[0])[fieldAlias] as
 
 *Как узнать идентификатор определенного вида карточки*
 
-Воспользуйтесь утилитой Docsvision Explorer (входит в Resource Kit).
+Воспользуйтесь утилитой {dv} Explorer (входит в Resource Kit).
 
 . Нажать [.ph .uicontrol]*Card types*. В открывшемся окне определить идентификатор типа карточки (идентификатор в Selected type ID), также идентификатор можно найти в разделе xref:DM_StandartCards.adoc[Описание полей стандартной карточки] (идентификатор указан вначале описания конкретной карточки).
 . Нажать [.ph .uicontrol]*Cards*. В списке типов карточек выбрать "Справочник видов карточек", после чего нажать [.ph .uicontrol]*Search*.
@@ -186,10 +186,10 @@ IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUser
 X509Certificate2 certificate = iUserProfileCardService.GetCertificate(@"DOMAIN\IvanovII");
 ----
 +
-Для получения сертификата сотрудника с использованием метода [.keyword .apiname]#GetCertificate#, он (сертификат) должен быть указана в соответствующем поле (см. Руководство по настройке), в Справочнике сотрудников.
+Для получения сертификата сотрудника с использованием метода GetCertificate, он (сертификат) должен быть указана в соответствующем поле (см. Руководство по настройке), в Справочнике сотрудников.
 +
 [[concept_rcq_qll_w4__Method_GetCertificate]]
-Другой вариант - получения сертификата из хранилища сертификатов ОС Windows. В примере получаем первый сертификат с закрытым ключом.
+Другой вариант -- получения сертификата из хранилища сертификатов ОС Windows. В примере получаем первый сертификат с закрытым ключом.
 
 [source,csharp]
 ----

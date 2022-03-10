@@ -43,7 +43,7 @@ sessionId = responseParsed.findtext('.//{http://schemas.docsvision.com/Platform/
 
 == Добавление файла в базу данных
 
-После открытия сессии можно, к примеру, добавить файл (не путать с версионным файлом - _карточка файла с версиями_) в базу данных.
+После открытия сессии можно, к примеру, добавить файл (не путать с версионным файлом -- _карточка файла с версиями_) в базу данных.
 
 Для добавления файла в базу данных необходимо:
 
@@ -163,7 +163,7 @@ print(fileId)
 . Создать карточку типа "Файл с версиями", используя метод xref:DevManualAppendix_WebService_Card_CardCreate.adoc[CardCreate].
 . Создать строки в секциях "Версии" и "Общая информация", используя метод xref:DevManualAppendix_WebService_Rows_RowCreate.adoc[RowCreate].
 . Добавить, используя метод xref:DevManualAppendix_WebService_Rows_RowSetData.adoc[RowSetData], в строку секции "Версии" значения полей (см. xref:DM_StandartCards.adoc[Описание полей стандартной карточки]): FileId (используем идентификатор файла, полученный в предыдущем примере), Version и VersionNumber.
-. Добавить, используя метод [.keyword .apiname]#RowSetData#, в строку секции "Общая информация" значения полей: CheckinDate, CurrentID (указывается идентификатор строки версии, созданной ранее), CurrentVersion, Name и NextVersion.
+. Добавить, используя метод RowSetData, в строку секции "Общая информация" значения полей: CheckinDate, CurrentID (указывается идентификатор строки версии, созданной ранее), CurrentVersion, Name и NextVersion.
 . Изменить описание карточки, используя xref:DevManualAppendix_WebService_Card_CardSetInfo.adoc[CardSetInfo].
 
 Итоговый код может выглядеть следующим образом:
@@ -239,7 +239,7 @@ print(newInstanceId)
 
 [source,pre,codeblock,language-python]
 ----
-# Добавление пустой строки в секцию section_id карточки card_id#
+# Добавление пустой строки в секцию section_id карточки card_id
 
 def create_row(card_id, section_id):
     session.headers['SOAPAction'] =  "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowCreate"

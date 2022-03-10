@@ -14,12 +14,12 @@
 
 . «GoogleDriveStorageProvider» – проект компонента провайдера к файловому хранилищу с классами:
 [loweralpha]
-.. [.keyword .apiname]#GoogleDriveStorage# – класс провайдера с реализацией интерфейсов IBinaryStorage, IExtensionInitialize, IStreamedBinaryStorage, IEnumerableBinaryStorage.
-.. [.keyword .apiname]#GoogleDriveProviderPropertyControl# – класс графического интерфейса настройки провайдера.
-.. [.keyword .apiname]#GoogleDriveProxy# – класс-посредник для работы с Google Drive API.
-.. [.keyword .apiname]#ProviderSettings# – вспомогательный класс с методами сериализации/десериализации настроек провайдера.
-.. [.keyword .apiname]#LogWriter# – вспомогательный класс журналирования работы провайдера.
-.. [.keyword .apiname]#LocalizedDisplayNameAttribute# – класс для получения локализованных ресурсов в атрибутах класса.
+.. GoogleDriveStorage – класс провайдера с реализацией интерфейсов IBinaryStorage, IExtensionInitialize, IStreamedBinaryStorage, IEnumerableBinaryStorage.
+.. GoogleDriveProviderPropertyControl – класс графического интерфейса настройки провайдера.
+.. GoogleDriveProxy – класс-посредник для работы с Google Drive API.
+.. ProviderSettings – вспомогательный класс с методами сериализации/десериализации настроек провайдера.
+.. LogWriter – вспомогательный класс журналирования работы провайдера.
+.. LocalizedDisplayNameAttribute – класс для получения локализованных ресурсов в атрибутах класса.
 . «AskToken» – проект консольного приложения для получения токена для работы с Google Drive.
 
 == Требования примера
@@ -29,7 +29,7 @@
 . Microsoft Visual Studio 2015 или выше.
 . Microsoft .NET Framework 4.6.1.
 
-Пример совместим с системой Docsvision версии 5.5.1.
+Пример совместим с системой {dv} версии 5.5.1.
 
 == Последовательность работы с примером
 
@@ -39,7 +39,7 @@
 . Включите в Visual Studio настройку https://docs.microsoft.com/ru-ru/nuget/consume-packages/package-restore-troubleshooting[Allow Nuget to download missing package] для автоматической загрузки необходимых пакетов библиотеки Google Drive API.
 . Переподключите зависимости DocsVision.Platform.StorageServer и DocsVision.Platform.WinForms в проекте «GoogleDriveStorageProvider». К проекту должны быть подключены компоненты, используемые на сервере Docsvision.
 . Соберите проект «GoogleDriveStorageProvider».
-. Соберите и запустите проект «AskToken». В процессе работы программы AskToken будет вызван код из класса [.keyword .apiname]#GoogleDriveProxy# (проект «GoogleDriveStorageProvider»):
+. Соберите и запустите проект «AskToken». В процессе работы программы AskToken будет вызван код из класса GoogleDriveProxy (проект «GoogleDriveStorageProvider»):
 +
 [source,pre,codeblock]
 ----
@@ -60,7 +60,7 @@ using (var stream =
 Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в https://developers.google.com/drivexref:api/v3/quickstart/dotnet[примере], шаг 3). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
 +
 Токен будет сохранен в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\token.json\`.
-. Скопируйте на сервер Docsvision файлы из папки `GoogleDriveStorageProvider\bin\Debug\`:
+. Скопируйте на сервер {dv} файлы из папки `GoogleDriveStorageProvider\bin\Debug\`:
 * GoogleDriveStorageProvider.dll,
 * ru\GoogleDriveStorageProvider.resources.dll,
 * Google.Apis.Drive.v3.dll,
@@ -71,7 +71,7 @@ using (var stream =
 * Google.Apis.dll,
 * Newtonsoft.Json.dll.
 . Зарегистрируйте в GAC скопированные файлы.
-. Скопируйте на сервер Docsvision папку `AskToken\bin\Debug\token.json\` и файл `AskToken\bin\Debug\credentials.json`. Данные файлы потребуются для работы провайдера к Google Drive. Файл и папку нужно скопировать в каталог доступный для сервера Docsvision, но недоступный рядовым пользователям (из-за наличия конфиденциальных данных в файлах).
+. Скопируйте на сервер {dv} папку `AskToken\bin\Debug\token.json\` и файл `AskToken\bin\Debug\credentials.json`. Данные файлы потребуются для работы провайдера к Google Drive. Файл и папку нужно скопировать в каталог доступный для сервера Docsvision, но недоступный рядовым пользователям (из-за наличия конфиденциальных данных в файлах).
 . Подключите новый тип хранилища к Docsvision.
 +
 *Обратите внимание*: проверяйте работу компонентов на тестовом сервере Docsvision.
@@ -86,7 +86,7 @@ using (var stream =
 +
 image::ConfigurationGoogleStoragePanel.png[[.fig--title-label]##Figure 1. ##Пример настройки хранилища в Google Drive]
 +
-После перезапуска сервера Docsvision (будет выполнен после добавления хранилища) в Google Drive будут созданы две папки: «DV_PrimaryPart» (представляет раздел для основных файлов) и «DV_ArchivePart» (представляет раздел для архивных файлов).
+После перезапуска сервера {dv} (будет выполнен после добавления хранилища) в Google Drive будут созданы две папки: «DV_PrimaryPart» (представляет раздел для основных файлов) и «DV_ArchivePart» (представляет раздел для архивных файлов).
 +
-Проверить работу провайдера можно настроив правило на помещение в хранилище файлов с расширением PDF. При добавлении в карточку Docsvision файла с типом PDF, соответствующий файл будет загружен в Google Drive.
+Проверить работу провайдера можно настроив правило на помещение в хранилище файлов с расширением PDF. При добавлении в карточку {dv} файла с типом PDF, соответствующий файл будет загружен в Google Drive.
 

@@ -19,7 +19,7 @@ LongProcessManager longProcessManager = new LongProcessManager();
 staffService.SynchronizeWithActiveDirectory(syncSettings, longProcessManager);
 ----
 
-В приведенном примере класс [.keyword .apiname]#SynchronizationDepartmentsSettings# должен реализовывать интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings], например, следующим образом:
+В приведенном примере класс SynchronizationDepartmentsSettings должен реализовывать интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings], например, следующим образом:
 
 [source,csharp]
 ----
@@ -47,11 +47,11 @@ class SynchronizationDepartmentsSettings : IADSynchronizationSettings
 }
 ----
 
-Здесь класс [.keyword .apiname]#SynchronizationDepartmentsSettings# устанавливает требование по синхронизации подразделений в _Справочнике сотрудников_ информацией, полученной из Active Directory.
+Здесь класс SynchronizationDepartmentsSettings устанавливает требование по синхронизации подразделений в _Справочнике сотрудников_ информацией, полученной из Active Directory.
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Полное описание свойств класса [.keyword .apiname]#SynchronizationDepartmentsSettings# смотрите в описании интерфейса [.keyword .apiname]#IADSynchronizationSettings#.
+[.note__title]#Прим.:# Полное описание свойств класса SynchronizationDepartmentsSettings смотрите в описании интерфейса IADSynchronizationSettings.
 ====
 
 Менеджер длительных процессов `longProcessManager` должен реализовывать интерфейс xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/ILongProcessManager_IN.adoc[ILongProcessManager], и для простоты определим его следующим образом:

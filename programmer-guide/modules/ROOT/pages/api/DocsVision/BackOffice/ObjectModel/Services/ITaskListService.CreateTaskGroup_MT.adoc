@@ -1,4 +1,4 @@
-= ITaskListService.CreateTaskGroup - метод (TaskList, TaskGroup)
+= ITaskListService.CreateTaskGroup -- метод (TaskList, TaskGroup)
 
 Добавляет существующую группу заданий в предоставленный список заданий, без внесения изменений в историю карточки.
 
@@ -38,7 +38,7 @@ taskGroup::
 
 == Заметки
 
-Данный метод, в отличии от метода [.keyword .apiname]#AddTaskGroup#, не добавляет соответствующую запись в историю карточки.
+Данный метод, в отличии от метода AddTaskGroup, не добавляет соответствующую запись в историю карточки.
 
 == Примеры
 
@@ -55,7 +55,7 @@ ITaskListService taskListService = objectContext.GetService<ITaskListService>();
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
 TaskList taskList = document.MainInfo.Tasks;
 
-// Получение вида карточки для группы заданий (в примере - Группа заданий УД)
+// Получение вида карточки для группы заданий (в примере -- Группа заданий УД)
 KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("6D76D0A7-5434-40F2-912E-6370D33C3151"));
 
 // Создание новой группы заданий          
