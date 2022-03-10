@@ -19,7 +19,7 @@ SectionData section = card.Sections[sectionId];
 +
 [NOTE]
 ====
-[.note__title]#Прим.:# Идентификаторы секций карточек базовой поставки {dv} приведены в разделе xref:DM_StandartCards.adoc[Описание полей стандартной карточки].
+Идентификаторы секций карточек базовой поставки {dv} приведены в разделе xref:DM_StandartCards.adoc[Описание полей стандартной карточки].
 ====
 
 После получения данных секции можно:
@@ -54,7 +54,7 @@ RowData row = section.FirstRow;
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Полный список методов и свойств класса секции см. в описании типа xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData].
+Полный список методов и свойств класса секции см. в описании типа xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData].
 ====
 
 С большой долей вероятности, целью получения данных секции (SectionData) является доступ к полям её строк. В качестве примера, рассмотрим полный код, который выводит названия (поле "Name") всех подпапок первого из _карточки папок_:
@@ -90,7 +90,7 @@ foreach (var folderRow in row.ChildRows)
 +
 [NOTE]
 ====
-[.note__title]#Прим.:# Метод GetSection# не предназначен для работы с иерархическими секциями -- при получении секции данного типа, будут возвращены строки только первого уровня иерархии. Для работы с иерархическими секциями потребуется самостоятельно разработать объектную модель карточки (первый способ получения данных секции), либо использовать базовый API.
+Метод GetSection# не предназначен для работы с иерархическими секциями -- при получении секции данного типа, будут возвращены строки только первого уровня иерархии. Для работы с иерархическими секциями потребуется самостоятельно разработать объектную модель карточки (первый способ получения данных секции), либо использовать базовый API.
 ====
 
 Для сравнение приведенных способов получения данных секции карточки рассмотрим сценарий, в котором нужно получить названия всех основных файлов карточки типа _Документ_.
@@ -157,7 +157,7 @@ Guid fileId = file.GetGuid("FileId");
 
 [NOTE]
 ====
-[.note__title]#Прим.:# Каким образом получить документ (тип xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]), если есть объектная модель файла этого документа (тип xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile])?
+Каким образом получить документ (тип xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]), если есть объектная модель файла этого документа (тип xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile])?
 
 Чтобы получить родительский объект используйте метод xref:api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]:
 

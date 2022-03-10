@@ -1,22 +1,25 @@
 = Инициализация контекста объектов
 
-После того как было выполнено подключение к серверу {dv} -- xref:development-manual/dm_connection.adoc[создана пользовательская сессия] -- может быть создан xref:development-manual/dm_session_context.adoc[контекст объектов] для работы с методами API уровня бизнес-логики. В создании контекста объектов нет необходимости, если:
+После того как было выполнено подключение к серверу {dv} -- xref:development-manual/connect-to-dv-server.adoc[создана пользовательская сессия] -- может быть создан xref:development-manual/general-information.adoc#session-context[контекст объектов] для работы с методами API уровня бизнес-логики.
 
+.Создавать контекст объектов не требуется, если:
 * Пишется код для скрипта карточки, т.к. в этом случае готовый контекст объектов может быть получен непосредственно из класса скрипта.
 * Предполагается использовать исключительно методы базового API.
 
-Для инициализации контекста объектов потребуется:
+.Чтобы инициализировать контекст объектов, потребуется:
+. Получить экземпляр класса xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[`ObjectContext`] -- сущность контекста объектов.
+. Используя платформенные сервисы, загрузить в контекст объектов xref:development-manual/general-information.adoc#mappers[преобразователи данных] и xref:development-manual/general-information.adoc#services[необходимые сервисы].
 
-. Получить экземпляр класса xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[ObjectContext] -- сущность контекста объектов.
-. Используя платформенные сервисы, загрузить в контекст объектов xref:development-manual/dm_mappers.adoc[преобразователи данных] и xref:development-manual/dm_services.adoc[необходимые сервисы].
-
-[NOTE]
+[IMPORTANT]
 ====
-[.note__title]#Важное замечание:# Создание и инициализация _контекста объектов_ -- достаточно затратная, с точки зрения потребления аппаратных ресурсов, операция. Рекомендуется использовать созданный и проинициализированный _контекст объектов_, а не создавать новый.
+Создание и инициализация _контекста объектов_ является затратной операцией с точки зрения потребления аппаратных ресурсов. Рекомендуется использовать созданный и проинициализированный _контекст объектов_, а не создавать новый.
 ====
 
 Далее приведен полный код инициализации контекста объектов для возможности работы с системными карточками и карточками библиотеки _{bo}_.
 
+.Разверните, чтобы увидеть полностью:
+[%collapsible]
+====
 [source,csharp]
 ----
 ObjectContext CreateObjectContext(UserSession userSession)
@@ -45,10 +48,11 @@ ObjectContext CreateObjectContext(UserSession userSession)
  return objectContext;
 }
 ----
+====
 
-Для использования приведенных в коде типов потребуется:
-
+.Чтобы использовать приведенные в коде типы, потребуется:
 . Добавить в проект сборки Docsvision:
++
 * `DocsVision.Platform.ObjectModel.dll`
 * `DocsVision.Platform.ObjectManager.dll`
 * `DocsVision.Platform.SystemCards.ObjectModel.dll`
@@ -56,8 +60,9 @@ ObjectContext CreateObjectContext(UserSession userSession)
 * `DocsVision.Platform.StorageServer.dll`
 +
 Указанные DLL-файлы входят в состав клиента и сервера Docsvision.
++
 . Подключить пространства имен:
-
++
 [source,csharp]
 ----
 using DocsVision.BackOffice.ObjectModel;
@@ -72,7 +77,3 @@ using DocsVision.Platform.SystemCards.ObjectModel.Mapping;
 using DocsVision.Platform.SystemCards.ObjectModel.Services;
 using System.ComponentModel.Design;
 ----
-
-== См. также
-
-* xref:development-manual/dm_cards.adoc[Работа с карточками]
