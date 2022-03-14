@@ -35,7 +35,7 @@ namespace DocsVision.Samples
 }
 ----
 
-В качестве возвращаемого значения метод может вернуть либо скаляр, либо набор данных (коллекцию). Во втором случае лучше воспользоваться специальным типом возвращаемого значения – xref:api/DocsVision/Platform/StorageServer/CursorInfo_ST.adoc[DocsVision.Platform.StorageServer.CursorInfo]. Этот объект позволяет создать серверный курсор, из которого потом можно читать данные на клиенте.
+В качестве возвращаемого значения метод может вернуть либо скаляр, либо набор данных (коллекцию). Во втором случае лучше воспользоваться специальным типом возвращаемого значения -- xref:api/DocsVision/Platform/StorageServer/CursorInfo_ST.adoc[DocsVision.Platform.StorageServer.CursorInfo]. Этот объект позволяет создать серверный курсор, из которого потом можно читать данные на клиенте.
 
 Объект CursorInfo можно создать двумя способами:
 
@@ -63,11 +63,11 @@ public CursorInfo GetSectionsSize()
 "BackOfficeExtension"="DocsVision.BackOffice.ServerExtension.Extension, DocsVision.BackOffice.ServerExtension, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519"
 ----
 
-Для вызова методов модуля расширения на клиенте необходимо воспользоваться специальным объектом – менеджером расширений (xref:api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager]). Менеджер расширений содержит метод для вызова у указанного расширения определенного метода: xref:api/DocsVision/Platform/ObjectManager/ExtensionManager.GetExtensionMethod_MT.adoc[GetExtensionMethod].
+Для вызова методов модуля расширения на клиенте необходимо воспользоваться специальным объектом -- менеджером расширений (xref:api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager]). Менеджер расширений содержит метод для вызова у указанного расширения определенного метода: xref:api/DocsVision/Platform/ObjectManager/ExtensionManager.GetExtensionMethod_MT.adoc[GetExtensionMethod].
 
-Если такого расширения или метода на сервере не зарегистрировано, функция вернет ошибку. В противном случае будет возвращен специальный объект – xref:api/DocsVision/Platform/ObjectManager/ExtensionMethod_CL.adoc[ExtensionMethod], с помощью которого уже можно выполнять непосредственные вызовы метода серверного расширения.
+Если такого расширения или метода на сервере не зарегистрировано, функция вернет ошибку. В противном случае будет возвращен специальный объект -- xref:api/DocsVision/Platform/ObjectManager/ExtensionMethod_CL.adoc[ExtensionMethod], с помощью которого уже можно выполнять непосредственные вызовы метода серверного расширения.
 
-Параметры вызова серверного метода задаются через коллекцию Parameters, в которую их необходимо явно добавить в виде объектов xref:api/DocsVision/Platform/ObjectManager/ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter]. Этот объект очень прост – он описывает название, тип и значение параметра через одноименные свойства.
+Параметры вызова серверного метода задаются через коллекцию Parameters, в которую их необходимо явно добавить в виде объектов xref:api/DocsVision/Platform/ObjectManager/ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter]. Этот объект очень прост -- он описывает название, тип и значение параметра через одноименные свойства.
 
 Пример кода вызова метода серверного расширения:
 

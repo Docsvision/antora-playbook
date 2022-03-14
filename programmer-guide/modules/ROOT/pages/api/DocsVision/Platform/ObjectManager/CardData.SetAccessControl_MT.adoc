@@ -29,7 +29,7 @@ CardData card = session.CardManager.GetCardData(new System.Guid("идентиф�
 //Получение описателя прав карточки
 CardDataSecurity rights = card.GetAccessControl();
 
-//Создание нового разрешения – совокупного права чтения
+//Создание нового разрешения -- совокупного права чтения
 CardDataAccessRule rule = new CardDataAccessRule("TESTDOMAIN\\IvanovII", CardDataRights.Read, AccessControlType.Allow);
 
 //Добавление нового разрешения к описателю прав

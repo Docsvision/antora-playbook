@@ -15,7 +15,7 @@ try
     // Получение данных секции с именем "MainInfo"
     SectionData sectionData = cardData.Sections[card.Type.Sections["MainInfo"].Id];
 
-    // Получение первой строки секции (если строки нет – она будет создана)
+    // Получение первой строки секции (если строки нет -- она будет создана)
     RowData rowData = sectionData.FirstRow;
 
     // Запись значений в поля
@@ -28,7 +28,7 @@ try
 }
 catch(Exception ex)
 {
-    // При возникновении ошибки – отмена всех изменений
+    // При возникновении ошибки -- отмена всех изменений
    if (cardData.InUpdate) cardData.CancelUpdate();
 }
 ----

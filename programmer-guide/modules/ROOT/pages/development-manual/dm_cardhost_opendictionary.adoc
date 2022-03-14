@@ -3,10 +3,10 @@
 Во всех следующих примерах, описывающих методы открытия различных видов справочников:
 
 * *selectionMode* -- определяет метод открытия записи и соответствует значению из перечисления xref:api/DocsVision/BackOffice/WinForms/Controls/ItemSelectionMode_EN.adoc[DocsVision.BackOffice.WinForms.Controls.ItemSelectionMode] приведенному к System.Int32. Допустимые значения:
-** 0 – позиционирование на записи;
-** 1 – открытие записи для редактирования;
+** 0 -- позиционирование на записи;
+** 1 -- открытие записи для редактирования;
 ** 2 -- открытие записи для чтения.
-* *multiselect* – возможность выбора нескольких записей, соответствует типу System.Boolean. Значение _true_(множественный выбор разрешен) допустимо при selectionMode установленном в 0, иначе должно быть false .
+* *multiselect* -- возможность выбора нескольких записей, соответствует типу System.Boolean. Значение _true_(множественный выбор разрешен) допустимо при selectionMode установленном в 0, иначе должно быть false .
 
 В примере, методы вызываются из некого скрипта (привязан с кнопке в *Конструкторе разметок*). В компоненте карточки, унаследованном от xref:api/DocsVision/Platform/WinForms/CardControl_CL.adoc[DocsVision.Platform.WinForms.CardControl] или xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl], код будет выглядеть аналогично, с единственным отличием в том, что параметр CardHost будет доступен уже из базового класса.
 
@@ -260,7 +260,7 @@ private void RefBaseUniversalNode_Click(object sender, EventArgs e)
  string nodeID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant();
  int selectionMode = 1;
  
- //идентификатор выбираемой секции справочника – Узлы справочника
+ //идентификатор выбираемой секции справочника -- Узлы справочника
  string sectionID = new Guid("A1DCE6C1-DB96-4666-B418-5A075CDB02C9").ToString("B").ToUpperInvariant();
         
  //идентификатор Конструктора справочников

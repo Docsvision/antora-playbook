@@ -16,11 +16,11 @@ ViewCard vcard = (ViewCard)session.CardManager.GetDictionary(new Guid(VIEW_CARD_
 
 Из коллекции сохраненных описаний объекта (свойство xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard.Views_PR.adoc[Views]), необходимое выбрать нужное представление и вызвать метод xref:api/DocsVision/Platform/ObjectManager/SystemCards/SavedView.Export_MT.adoc[SavedView.Export], что бы на выходе получить низкоуровневый объект xref:api/DocsVision/Platform/ObjectManager/ViewModel/View_CL.adoc[View] для непосредственного редактирования описания представления.
 
-Отдельно стоит остановиться на использовании виртуальных полей. Виртуальные поля представляют собой наборы правил, согласно которым можно извлечь данные из физических таблиц базы данных – с использованием вычислений, агрегаций, присоединений и т.д. Определения виртуальных полей привязаны к конкретному типу секции, от которой начинается процесс вычислений.
+Отдельно стоит остановиться на использовании виртуальных полей. Виртуальные поля представляют собой наборы правил, согласно которым можно извлечь данные из физических таблиц базы данных -- с использованием вычислений, агрегаций, присоединений и т.д. Определения виртуальных полей привязаны к конкретному типу секции, от которой начинается процесс вычислений.
 
 Виртуальные поля могут быть определены разработчиком в процессе xref:CardsDevDataSchemeSecVirtualFields.adoc[создания схемы] карточки (такие поля всегда будут доступны для использования во всех представлениях). Доступ к определениям этих полей можно получить через объектную модель метаданных ( xref:api/DocsVision/Platform/ObjectManager/Metadata/CardType.VirtualFields_PR.adoc[CardType.VirtualFields]). Элементы этой коллекции доступны только для чтения, так как они жестко определены в схеме карточки.
 
-Также виртуальные поля можно создать (выделить) в процессе построения конкретного представления, и сохранить как отдельные объекты для дальнейшего использования в других представлениях по аналогичной секции. Такие виртуальные поля создаются на основе готовых элементов представлений (xref:api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement_CL.adoc[ViewElement]) при помощи метода xref:api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.ExtractVirtualField_MT.adoc[ExtractVirtualField]. Они сохраняются в той же системной карточке xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard_CL.adoc[ViewCard], что и описания представлений, и доступны для последующего повторного использования через её объектную модель. Для работы с такими виртуальными полями используется другой тип объектов – xref:api/DocsVision/Platform/ObjectManager/SystemCards/SavedVirtualField_CL.adoc[SavedVirtualField].
+Также виртуальные поля можно создать (выделить) в процессе построения конкретного представления, и сохранить как отдельные объекты для дальнейшего использования в других представлениях по аналогичной секции. Такие виртуальные поля создаются на основе готовых элементов представлений (xref:api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement_CL.adoc[ViewElement]) при помощи метода xref:api/DocsVision/Platform/ObjectManager/ViewModel/ViewElement.ExtractVirtualField_MT.adoc[ExtractVirtualField]. Они сохраняются в той же системной карточке xref:api/DocsVision/Platform/ObjectManager/SystemCards/ViewCard_CL.adoc[ViewCard], что и описания представлений, и доступны для последующего повторного использования через её объектную модель. Для работы с такими виртуальными полями используется другой тип объектов -- xref:api/DocsVision/Platform/ObjectManager/SystemCards/SavedVirtualField_CL.adoc[SavedVirtualField].
 
 Пример добавления предварительно сохраненного виртуального поля к описанию представления:
 
@@ -65,11 +65,7 @@ element.MergeVirtualField(savedField.Export(), "Performers", "Performers");
 ====
 При построении представления можно использовать псевдонимы трех предопределённых секций:
 
-* Main – базовая секция представления;
-* Inst – строка из системной таблицы dvsys_instances, соответствующая текущей карточке;
-* Shortcuts – строка из секции ярлыков карточки папок, соответствующая текущей карточке.
+* Main -- базовая секция представления;
+* Inst -- строка из системной таблицы dvsys_instances, соответствующая текущей карточке;
+* Shortcuts -- строка из секции ярлыков карточки папок, соответствующая текущей карточке.
 ====
-
-== См. далее
-
-* xref:development-manual/dm_views_schema_formating.adoc[Описание (схема) форматирования]

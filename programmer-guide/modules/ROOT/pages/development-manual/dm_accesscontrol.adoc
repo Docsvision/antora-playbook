@@ -54,9 +54,9 @@
 
 Наследованием прав можно управлять при помощи специальных флагов, определяющих порядок наследования:
 
-* ContainerInheritAce – права распространяются на дочерние контейнеры;
-* ObjectInheritAce – права распространяются на дочерние объекты;
-* InheritOnlyAce – права распространяются только на потомков, но не на сам объект.
+* ContainerInheritAce -- права распространяются на дочерние контейнеры;
+* ObjectInheritAce -- права распространяются на дочерние объекты;
+* InheritOnlyAce -- права распространяются только на потомков, но не на сам объект.
 
 Таким образом, возможные сочетания этих флагов определяют многообразие типов наследования прав:
 
@@ -130,7 +130,7 @@ CardData card = userSession.CardManager.GetCardData(new System.Guid("00000000-00
 //Получение описателя прав карточки
 CardDataSecurity cardDataSecurity = card.GetAccessControl();
 
-//Создание нового разрешения – совокупного права чтения
+//Создание нового разрешения -- совокупного права чтения
 CardDataAccessRule cardDataAccessRule = new CardDataAccessRule("DOMAIN\\IvanovII", CardDataRights.Read, AccessControlType.Allow);
 
 //Добавление нового разрешения к описателю прав
