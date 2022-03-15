@@ -8,14 +8,14 @@ Workflow предоставляет разработчикам механизм 
 
 [source,csharp]
 ----
-// Получение шлюза к Docsvision
+// Получение шлюза к {dv}
 DVGate dvGate = (DVGate)process.Gates[DVGate.GateID];
 
 // Получение канала подписок
 SubscriptionChannel subscriptionChannel = dvGate.SubscriptionChannel;
 ----
 
-После получения канала подписок, разработчик может выполнить подписку на определенное событие, например, подписаться на событие разблокировки определенной карточки Docsvision:
+После получения канала подписок, разработчик может выполнить подписку на определенное событие, например, подписаться на событие разблокировки определенной карточки {dv}:
 
 [source,csharp]
 ----
@@ -47,7 +47,7 @@ subscriptionChannel.Subscribe((int)DocsVisionSubscriptionType.ObjectUnlock, proc
 
 image::workflowSubscription.png[Сценарий подписки на событие шлюза и формирования сообщения о его наступлении]
 
-== События шлюза к Docsvision
+== События шлюза к {dv}
 
 Шлюз к {dv} разрешает подписку на следующие события (см. описание xref:api/DocsVision/Workflow/Gates/DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType]):
 

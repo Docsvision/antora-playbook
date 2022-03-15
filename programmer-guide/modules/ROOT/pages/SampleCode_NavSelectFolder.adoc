@@ -1,6 +1,6 @@
 = Позиционирование курсора на папке
 
-Ниже приведен пример кода расширения Windows-клиента, которое регистрирует кнопку ленты инструментов, позволяющей осуществить позиционирование курсора на нужной папке.
+Ниже приведен пример кода расширения {wincl}а, которое регистрирует кнопку ленты инструментов, позволяющей осуществить позиционирование курсора на нужной папке.
 
 [source,csharp]
 ----
@@ -31,13 +31,13 @@ namespace DocsVision.Test.NavPluging
     }
    }
 
-   // Возвращаемое имя будет использовано Windows-клиентом при именовании группы кнопок в ленте инструментов
+   // Возвращаемое имя будет использовано {wincl}ом при именовании группы кнопок в ленте инструментов
    protected override string GetExtensionName(NavExtensionTypes extensionType)
    {
     return "Быстрый выбор";
    }
 
-   // Возвращает Windows-клиенту список доступных команд
+   // Возвращает {wincl}у список доступных команд
    protected override IEnumerable<NavCommand> CreateCommands()
    {
     NavCommand myCommand = new NavCommand();
@@ -63,6 +63,6 @@ namespace DocsVision.Test.NavPluging
 }
 ----
 
-В примере, мы регистрируем только одну команду, которая вызывает метод xref:api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)], выполняющий позиционирование курсора на определенной папке Windows-клиента. Папка может быть обычной, либо виртуальной.
+В примере, мы регистрируем только одну команду, которая вызывает метод xref:api/DocsVision/Platform/CardHost/ICardHost.ActivateFolder_MT.adoc[ActivateFolder(Guid, Boolean)], выполняющий позиционирование курсора на определенной папке {wincl}а. Папка может быть обычной, либо виртуальной.
 
-Правило создание расширение Windows-клиента приведено в разделе xref:dm_extension_navigator.adoc[Расширение Windows-клиента].
+Правило создание расширение {wincl}а приведено в разделе xref:dm_extension_navigator.adoc[Расширение {wincl}а].

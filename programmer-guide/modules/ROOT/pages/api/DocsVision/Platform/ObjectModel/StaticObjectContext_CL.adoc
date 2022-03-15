@@ -53,7 +53,7 @@ private static void CreateStaticContext()
  serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
  serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
 
- // Регистрация сервиса для работы с хранилищем Docsvision
+ // Регистрация сервиса для работы с хранилищем {dv}
  StaticObjectContext.Current.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
 
  // Регистрация поставщика метаданных карточек

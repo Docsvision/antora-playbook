@@ -36,11 +36,11 @@ layoutItem.Commit();
 
 [source,pre,codeblock]
 ----
-# Требуется указать действительный путь к используемым библиотекам Docsvision
+# Требуется указать действительный путь к используемым библиотекам {dv}
 Add-Type -Path с:\DocsVision.Platform.dll
 Add-Type -Path с:\DocsVision.Platform.ObjectManager.dll
 
-# Требуется указать действительный адрес подключения к Docsvision
+# Требуется указать действительный адрес подключения к {dv}
 $connectionString = "ConnectAddress=http://docsvision.domain.com/DocsVision/StorageServer/StorageServerService.asmx"
 $sessionManager = [DocsVision.Platform.ObjectManager.SessionManager]::CreateInstance($connectionString)
 $userSession = $sessionManager.CreateSession()
@@ -57,11 +57,11 @@ $number = $numeratorCard.Zones[0].GetNumber([GUID]::Empty, 1, [ref] $outId);
 write $number
 ----
 
-Аналогичная задача может быть решена без объектной модели -- прямым обращением к сервису Docsvision
+Аналогичная задача может быть решена без объектной модели -- прямым обращением к сервису {dv}
 
 [source,pre,codeblock]
 ----
-# Адрес сервиса Docsvision
+# Адрес сервиса {dv}
 $serverUri = "http://docsvision.domain.com/DocsVision/StorageServer/StorageServerService.asmx"
 
 # Идентификатор карточки нумератора и название зоны, в которых будет резервироваться номер
@@ -83,14 +83,14 @@ $number = $client.NumGetFirstFree($sessionId, $numeratorCardID, $zoneName, $user
 
 [NOTE]
 ====
-Полное описание методов сервиса приведено в разделе xref:dm_appendix_webservice.adoc[Методы веб-сервиса Docsvision].
+Полное описание методов сервиса приведено в разделе xref:dm_appendix_webservice.adoc[Методы веб-сервиса {dv}].
 ====
 
 *Как узнать идентификатор карточки*
 
 Узнать идентификатор существующий карточки можно несколькими способами:
 
-* посмотреть в Windows-клиенте -- идентификатор карточки отображается в её свойствах;
+* посмотреть в {wincl}е -- идентификатор карточки отображается в её свойствах;
 * используя утилиту {dv} Explorer (входит в Resource Kit) -- идентификатор карточки отображается в поле *Selected card ID*.
 
 *Получить идентификатор созданной карточки, используя объектную модель*
@@ -178,7 +178,7 @@ result = (((BaseCardSectionRow)document.GetSection(sectionID)[0])[fieldAlias] as
 
 Сертификаты используются при подписании/шифровании/расшифровке данных карточек, а также при верификации установленных подписей. Сертификат сотрудника может быть получен несколькими способами:
 
-. Вне контекста Windows-клиента:
+. Вне контекста {wincl}а:
 +
 [source,csharp]
 ----
@@ -204,7 +204,7 @@ X509Certificate2 GetCertificate()
  return null;
 }
 ----
-. В контексте Windows-клиента (например, в скрипте карточки)
+. В контексте {wincl}а (например, в скрипте карточки)
 +
 [source,csharp]
 ----

@@ -1,6 +1,6 @@
 = Инициализация контекста объектов
 
-После того как было выполнено подключение к серверу {dv} -- xref:work-cards/connect-to-dv-server.adoc[создана пользовательская сессия] -- может быть создан xref:work-cards/general-information.adoc#session-context[контекст объектов] для работы с методами API уровня бизнес-логики.
+После того как было выполнено подключение к серверу {dv} -- xref:cards/connect-to-dv-server.adoc[создана пользовательская сессия] -- может быть создан xref:cards/general-information.adoc#session-context[контекст объектов] для работы с методами API уровня бизнес-логики.
 
 .Создавать контекст объектов не требуется, если:
 * Пишется код для скрипта карточки, т.к. в этом случае готовый контекст объектов может быть получен непосредственно из класса скрипта.
@@ -8,7 +8,7 @@
 
 .Чтобы инициализировать контекст объектов, потребуется:
 . Получить экземпляр класса xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CL.adoc[`ObjectContext`] -- сущность контекста объектов.
-. Используя платформенные сервисы, загрузить в контекст объектов xref:work-cards/general-information.adoc#mappers[преобразователи данных] и xref:work-cards/general-information.adoc#services[необходимые сервисы].
+. Используя платформенные сервисы, загрузить в контекст объектов xref:cards/general-information.adoc#mappers[преобразователи данных] и xref:cards/general-information.adoc#services[необходимые сервисы].
 
 [IMPORTANT]
 ====
@@ -51,7 +51,7 @@ ObjectContext CreateObjectContext(UserSession userSession)
 ====
 
 .Чтобы использовать приведенные в коде типы, потребуется:
-. Добавить в проект сборки Docsvision:
+. Добавить в проект сборки {dv}:
 +
 * `DocsVision.Platform.ObjectModel.dll`
 * `DocsVision.Platform.ObjectManager.dll`
@@ -59,7 +59,7 @@ ObjectContext CreateObjectContext(UserSession userSession)
 * `DocsVision.BackOffice.ObjectModel.dll`
 * `DocsVision.Platform.StorageServer.dll`
 +
-Указанные DLL-файлы входят в состав клиента и сервера Docsvision.
+Указанные DLL-файлы входят в состав клиента и сервера {dv}.
 +
 . Подключить пространства имен:
 +
