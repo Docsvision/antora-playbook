@@ -1,18 +1,49 @@
 = Настройка разметки основного окна {wc}а
 
-include::partial$web-frame-1.adoc[]
-
 Пользователь программы {kvr} может настроить разметку основного окна {wc}а, определяющую расположение основного меню, панели меню, области представления и пр.
+
+include::partial$web-frame.adoc[]
 
 .Чтобы настроить разметки основного окна {wc}а:
 . В программе {kvr} xref:locations-select.adoc[перейдите в локацию] menu:WebFrame[Корень WebFrame].
 . xref:layouts-general-operations.adoc#layoutsCopy[Создайте копию] стандартных разметок в *собственном решении*:
-* _WebFrame_ -- разметка для полной версии {wc}а;
++
+* _WebFrame_ -- разметка для полной версии {wc}а.
 * _WebFrame_Smartphone_ -- разметка для мобильной версии {wc}а.
-. Измените разметки созданной копии разметок в соответствии с собственными требованиями.
 +
-В разметку могут быть добавлены любые из доступных элементов Библиотеки элементов управления. Также может быть изменено размещение элементов, присутствующих по умолчанию в стандартной разметке (см. описание элементов в разделе xref:ctrl-web-frame.adoc[WebFrame]).
+. Измените разметки созданной копии по необходимости.
 +
-include::partial$web-frame-2.adoc[]
+Размещение xref:ctrl-web-frame.adoc[элементов], присутствующих по умолчанию в стандартной разметке может быть изменено. Также в разметку могут быть добавлены любые из доступных элементов Библиотеки элементов управления с небольшими ограничениями.
++
+[#limitations]
+.Ограничения на изменение разметки WebFrame:
+****
+.Следующие элементы могут быть добавлены только в xref:page$ctrl/webFrame/webFrameNavigationBar.adoc[]:
+* xref:page$ctrl/webFrame/webFrameNavigationBarBackButton.adoc[].
+* xref:page$ctrl/webFrame/webFrameNavigationBarCreateButton.adoc[].
+* xref:page$ctrl/webFrame/barcodeSearchButton.adoc[].
+
+.Следующие элементы могут быть добавлены только в xref:page$ctrl/webFrame/webFrameHeaderContainer.adoc[]:
+* xref:page$ctrl/webFrame/webFrameMainMenuButton.adoc[].
+* xref:page$ctrl/webFrame/webFrameCompanyLogo.adoc[].
+* xref:page$ctrl/webFrame/webFrameSearchPanel.adoc[].
+* xref:page$ctrl/webFrame/webFrameDirectorySearchPanel.adoc[].
+* xref:page$ctrl/webFrame/webFrameUserPanel.adoc[].
+* xref:page$ctrl/webFrame/webFrameHelpButton.adoc[].
+
+.Следующие элементы могут быть добавлены в xref:page$ctrl/webFrame/webFrameHeaderContainer.adoc[] и xref:page$ctrl/webFrame/webFrameNavigationBar.adoc[]:
+* xref:page$ctrl/standard/button.adoc[].
+* xref:page$ctrl/standard/textBox.adoc[].
+* xref:page$ctrl/standard/number.adoc[].
+* xref:page$ctrl/standard/url.adoc[].
+* xref:page$ctrl/standard/dropdown.adoc[].
+* xref:page$ctrl/standard/label.adoc[].
+* xref:page$ctrl/standard/radioGroup.adoc[].
+
+.В разметке WebFrame с элементами управления доступны следующие действия:
+* Для ЭУ xref:page$ctrl/webFrame/webFrameHeaderContainer.adoc[] и xref:page$ctrl/webFrame/webFrameNavigationBar.adoc[] доступны только вставка и копирование;
+* Для содержимого ЭУ xref:page$ctrl/webFrame/webFrameHeaderContainer.adoc[] и xref:page$ctrl/webFrame/webFrameNavigationBar.adoc[] доступны все действия: можно менять порядок, удалять элементы.
+* Для всех остальных ЭУ доступно только копирование.
+****
 +
 . Добавьте условие выбора, по которому будут выбираться созданные разметки.

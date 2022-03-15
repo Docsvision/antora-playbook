@@ -3,6 +3,10 @@
 [#functional]
 == Функциональные изменения
 
+[#webframe]
+Редактирование разметки WebFrame::
+Теперь xref:layouts:guide-layouts-web-frame.adoc[редактирование разметки WebFrame] включено по умолчанию и больше не является экспериментальной функцией.
+
 [#poll]
 Опрос по работе {wc}а::
 Теперь через три месяца использования после обновления предлагается xref:user:interface.adoc#poll[пройти опрос] по работе с {wc}ом.
@@ -118,8 +122,20 @@ image::user:search-current-folder.png[Строка поиска]
 [#layouts]
 == Изменения в библиотеке элементов управления
 
+[#edit-webframe]
+Изменения разметки WebFrame::
+* Для ЭУ xref:layouts:page$ctrl/webFrame/webFrameHeaderContainer.adoc[] xref:layouts:page$ctrl/webFrame/webFrameNavigationBar.adoc[] добавлено свойство `*Видимость*`, позволяющее скрыть ЭУ.
+* Для элемента xref:layouts:page$ctrl/webFrame/webFrameHeaderContainer.adoc[] также добавлено свойство `*Высота в пикселях*`, позволяющее указать высоту элемента управления
+* Для ЭУ xref:layouts:page$ctrl/webFrame/webFrameContent.adoc#bg[] добавлено свойство, позволяющее задать фон для главной страницы и/или папок.
+* Фон также можно xref:layouts:locations-about-settings.adoc[задать] в локациях _Папка_, _Последние карточки_, _Результаты поиска_, _Главная страница_ в свойстве `*Фон*` для элемента разметки *root*.
+* Для ЭУ xref:layouts:page$ctrl/webFrame/webFrameCompanyLogo.adoc[] добавлено новое свойство `*Видимость*`, позволяющее скрыть ЭУ.
++
+Также добавлено свойство `*Отображаться всегда*`, позволяющее отображать ЭУ всегда.
++
+* Разметка WebFrame доступна для редактирования всегда с xref:layouts:guide-layouts-web-frame.adoc#limitations[некоторыми ограничениями].
+
 [#tag]
-Новое свойство элементов управления::
+Свойство "Тег" для элементов управления::
 Для каждого ЭУ добавлено новое свойство `*Tag / Тег*`. `*Тег*` -- простое текстовое свойство, позволяющее добавить скрипт для ЭУ в программе {kvr}.
 
 [#folder-grid]
