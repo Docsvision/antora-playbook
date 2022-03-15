@@ -64,9 +64,7 @@ public interface IRoleModelService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
-
-//получение сервиса
+//Инициализация контекста объектов и получение сервиса
 IRoleModelService roleModelService = objectContext.GetService<IRoleModelService>();
 
 //получение вида карточки Документ
@@ -95,6 +93,6 @@ condition.Value = System.DayOfWeek.Sunday;
 //сохранение изменений
 objectContext.AcceptChanges();
 
-//отметим роль признаком "Общая", что позволит использовать ее во всех карточках
+//отметим роль признаком "Общая", что позволит использовать её во всех карточках
 roleModelService.MakeRoleCommon(roleModelRole);
 ----

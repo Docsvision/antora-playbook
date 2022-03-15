@@ -1,0 +1,53 @@
+= Конструктор справочников
+
+[cols=","]
+|===
+|Назначение
+|Карточка предназначена для организации древовидной структуры простых текстовых данных.
+
+|Класс карточки
+|xref:api/DocsVision/BackOffice/ObjectModel/BaseUniversal_CL.adoc[`DocsVision.BackOffice.ObjectModel.BaseUniversal`]
+|===
+
+Для работы с карточкой предназначен сервис xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[`IBaseUniversalService`], с помощью которого можно управлять узлами и строками справочника.
+
+.Доступные операции:
+* Создание узлов и строк.
+* Копирование, перемещение и удаление узлов и строк справочника.
+* Поиск узлов и строк.
+* Создание и получение отображаемых полей.
+
+Ниже приведен пример создания справочника техники магазина. Создается новый узел "Мониторы", в который помещаются узлы с марками и строки с моделями.
+
+[source,csharp]
+----
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
+
+BaseUniversal baseUniversal = objectContext.GetObject<BaseUniversal>(DocsVision.BackOffice.CardLib.CardDefs.RefBaseUniversal.ID); <.>
+
+BaseUniversalItemType techType = baseUniversalService.AddNewItemType(null); <.>
+techType.Name = "Мониторы";
+techType.Description = "Мониторы всех фирм";
+
+BaseUniversalItemType techMark = baseUniversalService.AddNewItemType(techType);
+techMark.Name = "LG";
+techMark.Description = "Производитель LG"; <.>
+
+BaseUniversalItem item = baseUniversalService.AddNewItem(techMark);
+item.Name = "34UM95";
+item.Description = "Модель 34UM95. Разрешение экрана 3440x1440. Матрица IPS."; <.>
+
+item = baseUniversalService.AddNewItem(techMark);
+item.Name = "29UM65";
+item.Description = "Модель 29UM65. Разрешение экрана 2560x1080. Матрица IPS.";
+
+objectContext.AcceptChanges(); <.>
+----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Получение объектной модели Конструктора справочников.
+<.> Создания одного из узлов первого уровня. `null` -- позволяет создать элемент без родителей, т.е. корневой.
+<.> Создание узла с названиями производителей.
+<.> Создание строк с моделями мониторов.
+<.> Сохранение изменений.
+
+Пример можно использовать как часть проекта синхронизации внутреннего справочника фирмы и поставщика техники. Справочник можно подключить к карточке, которая будет играть роль бланка для выписывания техники со склада.

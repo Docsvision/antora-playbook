@@ -1,0 +1,94 @@
+= Подписание и шифрование
+
+В платформе {dv} реализована функциональность по защите и контролю целостности информации, за счет подписания и шифрования объектов. На обоих уровнях API эти методы защиты представлены в той или иной мере.
+
+[NOTE]
+====
+Возможность работы с зашифрованными данными карточек (секций, строк) в платформе не поддерживается.
+====
+
+== Базовый API
+
+На уровне базового API реализация механизма подписания и шифрования обеспечивает возможность создания, чтения и удаления специального типа объектов -- крипто-объектов. Данные объекты могут быть двух типов, перечисленных в xref:api/DocsVision/Platform/ObjectManager/CryptObjectType_EN.adoc[`DocsVision.Platform.ObjectManager.CryptObjectType`]:
+
+* `CryptObjectType.Signature` -- подпись.
+* `CryptObjectType.Key` -- публичный ключ шифрования.
+
+Крипто-объекты не являются зашифрованными или подписанными версиями самих объектов, а лишь хранят соответствующие ключи.
+
+Крипто-объекты сохраняются в специальной системной таблице (*dvsys_crypto*) и привязаны напрямую конкретному подписанному или зашифрованному объекту системы.
+
+[IMPORTANT]
+====
+Платформа оперирует уже готовыми крипто-объектами, а выполнение самих операций подписи и шифрования при этом должно выполняться другими средствами, например при помощи библиотеки http://msdn.microsoft.com/ru-ru/library/system.security.cryptography[`System.Security.Cryptography`] для .NET Framework.
+====
+
+Для работы с крипто-объектами в объектной модели предусмотрен ряд методов, предоставляемых объектом xref:api/DocsVision/Platform/ObjectManager/AccessManager_CL.adoc[`AccessManager`]:
+
+* `StoreCryptObject` -- сохранение новой подписи или ключа шифрования.
+* `GetCryptObjects` -- получает список крипто-объектов для заданного файла.
+* `GetCryptObject` -- возвращает данные подписи или зашифрованного объекта по его собственному идентификатору.
+* `GetCryptObjectInfo` -- получает дополнительную информацию о крипто-объекте с указанным идентификатором.
+* `DeleteCryptObject` -- удаляет крипто-объект по его собственному идентификатору.
+* `DeleteCryptObjects` -- удаляет все крипто-объекты заданного типа для конкретного файла.
+* `GetKey` -- получает ключ шифрования заданного объекта.
+* `StoreKey` -- сохраняет ключ шифрования.
+* `StoreSignature` -- сохраняет ключ ЭЦП.
+
+[IMPORTANT]
+====
+Для файлов, подпись и шифрование которых реализованы в самой платформе, время жизни связанных крипто-объектов контролируется автоматически. То есть, например, при удалении файла все наложенные на него подписи также будут автоматически удалены. Но при создании крипто-объектов собственного типа (не относящихся к файлам) разработчик должен сам контролировать время их жизни и заботиться об удалении.
+====
+
+Рассмотрим пример получения всех подписей.
+
+[source,csharp]
+----
+FileData file = session.FileManager.GetFile(new Guid("идентификатор_файла"));
+InfoRowCollection coll = session.AccessManager.GetCryptObjects(file.Id, CryptObjectType.Signature);
+
+foreach (InfoRow cryptrow in coll)
+{
+   MessageBox.Show("Файл подписан " + cryptrow["CreationDate"].ToString() + " пользователем " + cryptrow["AccountName"].ToString());
+}
+----
+
+[NOTE]
+====
+При выполнении операций подписи или шифрования можно использовать текущие системные настройки криптографии, заданные в справочнике настроек (к их числу относятся крипто-провайдер, алгоритм, длина ключа и т.д.).
+====
+
+== Объектная модель
+
+На данном уровне API подписание и шифрование реализовано для карточек типа _Документ_ и _Задание_. Ниже представлена сводная таблица методов для работы с данной функциональностью.
+
+[width="100%",cols="15%,85%",options="header"]
+|===
+|Метод |Назначение
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignature_MT.adoc[`IDocumentService.AddSignature(Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)`]
+|Данный метод используется для инициализации и добавления подписи в список подписей карточки _Документ_, и устанавливает ЭЦП на поля карточки, а также основные и дополнительные файлы.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.AddSignatures_MT.adoc[`IDocumentService.AddSignatures(Document, SignedCms)`]
+|Данный метод используется для добавления коллекции подписей в список подписей карточки _Документ_. Позволяет использовать при подписании криптографическое сообщение вместо сертификата. Непосредственно выполняет установку ЭЦП на поля карточки, основные и дополнительные файлы.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.CheckActualSignature_MT.adoc[`IDocumentService.CheckActualSignature(Document, ICollection<CardFieldSetting>, BaseCardSignature)`]
+|Данный метод позволяет определить актуальность подписи по отношению к данным карточки. Например, путем сравнения версии основного файла с версией, приведенной в подписи.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[`IDocumentService.DecodeSignedDocument(String, Document, SignedCms)`]
+|Метод DecodeSignedDocument позволяет получить из файла `.p7s` сообщение CMS/PKCS 7, используемое в других методах (например, `IDocumentService.AddSignatures`).
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.VerifySignature_MT.adoc[`IDocumentService.VerifySignature(Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)`]
+|Данный метод используется для проверки ЭЦП, установленной на полях и файлах карточки _Документ_.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[`ICryptService`]
+|Сервис `ICryptService` предоставляет методы шифрования и дешифровки файлов.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSignature_MT.adoc[`ITaskService.AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)`]
+|Данный метод используется при подписании карточки _Задание_.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.AddSignature_1_MT.adoc[`ITaskService.AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>, IEnumerable<Document>)`]
+|Данный метод используется при подписании карточки _Задание_ и основного документа.
+
+|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService.VerifySignature_MT.adoc[`ITaskService.VerifySignature(Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)`]
+|Данный метод используется для проверки ЭЦП, установленной на полях и файлах карточки _Задание_.
+|===
