@@ -7,7 +7,7 @@
 
 [NOTE]
 ====
-Дополнительная информация о разработке элементов управления приведена в разделе xref:develop/dm_cretatesolution_createcontrol.adoc[Разработка элемента управления для Конструктора разметок].
+Дополнительная информация о разработке элементов управления приведена в разделе xref:solutions/control.adoc[Разработка элемента управления для Конструктора разметок].
 ====
 
 В данном примере будет разработан элемент управления (далее -- *Сотрудник с фотографией*) для выбора сотрудника из _Справочника сотрудников_. Реализуемый компонент в определенных сценариях может быть использован в карточек вместо стандартного элемента управления *Сотрудник*.
@@ -344,7 +344,7 @@ public StaffEmployeeStatus? SelectedEmployeeStatus
 
 . В редакторе реестра откройте ветку:
 * HKEY_CURRENT_USER\Software\DocsVision\BackOffice\5.5\Client\PropertyControls -- для текущего пользователя;
-* HKEY_LOCAL_MACHINE\Software\DocsVision\BackOffice\5.5\Client\PropertyControls -- для всех пользователей.
+* {hklm}\Software\DocsVision\BackOffice\5.5\Client\PropertyControls -- для всех пользователей.
 . Добавьте новый строковый параметр с любым названием. В значении добавленного параметра должен быть указан путь к сборке компонента или строгое имя сборки:
 * Полный путь к сборке -- если сборка не зарегистрирована в GAC. Например: `C:\Users\KurkinSA\AppData\Local\Docsvision\5.5\Client\Docsvision.TreeControl.dll`.
 * Строгое имя сборки -- если сборка зарегистрирована в GAC. Например: `Docsvision.TreeControl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519`.

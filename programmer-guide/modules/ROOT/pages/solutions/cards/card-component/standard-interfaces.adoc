@@ -1,0 +1,130 @@
+= Реализация стандартных интерфейсов
+
+Сначала необходимо создать новый проект -- компонент, который будет реализовывать визуальную часть карточки. Проект должен иметь тип "Windows Forms Control Library":
+
+.Создание проекта "Windows Forms Control Library"
+image::dev_card_21.png[Создание проекта "Windows Forms Control Library"]
+
+.К проекту требуется подключить следующие библиотеки:
+* `DocsVision.Platform.WinForms.dll` -- содержит интерфейс для взаимодействия с контейнером карточек (средой, в которой запускаются и работают компоненты карточек), а также элементы управления {dv} для карточек в среде WinForms.
++
+[NOTE]
+====
+Вместо `DocsVision.Platform.WinForms.dll`, можно использовать библиотеку `DocsVision.Platform.WPF.dll` -- она позволяет разрабатывать карточки по технологии Windows Presentation Foundation (WPF). При этом основные принципы разработки и интерфейсы остаются точно такими же, как и в случае WinForms.
+====
++
+* `DocsVision.Platform.ObjectManager.dll` -- библиотека менеджера объектов. В этой библиотеке определены основные интерфейсы для взаимодействия с сервером и другими объектами системы (API).
+
+****
+Эти сборки входят в состав как серверной, так и клиентской программ инсталляции. В случае установки только клиентской программы, их можно взять из папки пользователя, для которого проведена установка: `C:\Users\USERNAME\AppData\Local\DocsVision\5.5\Client`.
+
+При выполнении установки сервера сборки можно взять из папки: `C:\Program Files\DocsVision\Platform\5.0`
+****
+
+Следует подключить пространства имен этих сборок в область видимости текущего проекта при помощи директивы `using`:
+
+[source,csharp]
+----
+using DocsVision.Platform.WinForms;
+using DocsVision.Platform.ObjectManager;
+----
+
+Чтобы карточка могла быть использована совместно с другими компонентами платформы, её программный компонент должен реализовывать набор предопределенных интерфейсов, которые уже реализованы в специальном классе xref:api/DocsVision/Platform/WinForms/CardControl_CL.adoc[`DocsVision.Platform.WinForms.CardControl`]. Все что остается сделать -- это унаследовать основной класс своей карточки от базового класса `CardControl` вместо стандартного `UserControl`:
+
+[source,csharp]
+----
+public sealed partial class TestCard : CardControl
+{
+
+}
+----
+
+.После этого в коде карточки автоматически появится доступ к членам базового класса, среди которых самые важные:
+* `CardData` -- объект данных текущей карточки.
+* `CardHost` -- объект контейнера карточек.
+* `Session` -- текущая сессия пользователя (точка входа к остальным объектам API).
+
+.Дополнительные свойства, доступные из базового класса:
+* `FolderID` -- идентификатор папки, из которой открыта карточка.
+* `ShortcutID` -- идентификатор ярлыка, из которого открыта карточка.
+* `ModeID` -- идентификатор текущего режима карточки.
+
+Таким, готовый код компонента карточки может выглядеть следующим образом (такая карточка будет создаваться и активироваться, но не несет в себе никакой полезной функциональности):
+
+[source,csharp]
+----
+using System;
+using System.Windows.Forms;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.WinForms;
+
+namespace DocsVision.Test
+{
+ public sealed partial class TestCard : CardControl
+ {
+  public TestCard()
+  {
+   InitializeComponent();
+  }
+ }
+}
+----
+
+Чтобы карточка поддерживала механизм настройки разметок через справочник "Конструктор разметок", а также обладала дополнительной встроенной функциональностью (работа с бизнес-процессами, переходы по автомату состояний) следует унаследовать класс не от `CardControl`, а от xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[`BaseCardControl`], входящей в сборку `DocsVision.BackOffice.WinForms.dll`. Данная сборка входит в клиентский инсталляционный пакет {dv} и является одним из компонентов библиотеки карточек "{bo}".
+
+[IMPORTANT]
+====
+Для разработки на основе `BaseCardControl` требуется использование компонентов https://www.devexpress.com/[`Developer Express`]. Необходимые сборки входят в состав клиентской инсталляции {dv}, но их можно использовать только в качестве пробной версии. Для коммерческой разработки требуется покупка соответствующей лицензии.
+====
+
+`BaseCardControl` в свою очередь унаследован от `CardControl`, поэтому все вышеуказанные свойства также будут доступны. Кроме того, в такой карточке автоматически можно использовать элементы объектной модели:
+
+* `BaseObject` -- базовый объект карточки, предоставляющий доступ к её основным свойствам.
+* `ObjectContext` -- контекст объектов, позволяющий работать с другими объектами системы.
+* *Набор сервисов* для использования функциональности существующих карточек (каждый сервис также доступен через `ObjectContext`)
+
+.Шаблон класса карточки, при использовании базового класса `BaseCardControl` и _Конструктора разметок_, требует изменения:
+[source,csharp]
+----
+[ComVisible(true)]
+[Guid("E41A2D89-300A-4649-AAA7-39634E72FD91")]
+[ClassInterface(ClassInterfaceType.None)]
+[Customizable(true)] <.>
+[CardFrameWindowType(typeof(CardFrameForm))]
+public partial class SampleCardClass : DocsVision.BackOffice.WinForms.BaseCardControl
+{
+ public SampleCardClass() <.>
+ {
+  if (IsInDesignMode())
+  {
+   InitializeComponent();
+  }
+ }
+
+ protected override void OnCardInitialized(EventArgs e) <.>
+ {
+  base.OnCardInitialized(e);
+  InitializeComponent();
+ }
+}
+----
+<.> Разрешает настраивать карточку, в т.ч. в "Конструкторе разметок".
+<.> Для отображения элементов управления, определенных в коде, в Конструкторе разметок, необходимо изменить конструктор класса.
+<.> Для работы с разметками карточки, инициализация должна быть осуществлена не в конструкторе, а в методе `OnCardInitialized`.
+
+.Если в настройке карточки нет необходимости, то можно упростить класс карточки:
+[source,pre,codeblock]
+----
+[ComVisible(true)]
+[Guid("E41A2D89-300A-4649-AAA7-39634E72FD91")]
+[ClassInterface(ClassInterfaceType.None)]
+[CardFrameWindowType(typeof(CardFrameForm))]
+public partial class SampleCardClass : DocsVision.BackOffice.WinForms.BaseCardControl
+{
+ protected override void OnCardInitialized(EventArgs e)
+ {
+  base.OnCardInitialized(e);
+  InitializeComponent();
+ }
+}
+----

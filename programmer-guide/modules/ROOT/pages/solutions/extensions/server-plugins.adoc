@@ -2,13 +2,13 @@
 
 Данный вид расширения может быть востребован при необходимости выполнения каких-то действий в контексте основного процесса сервера (с его привилегиями), которые не могут быть выполнены с использованием стандартных методов интерфейса сервера. Механизм расширений позволяет интегрировать в контекст сервера дополнительные методы, а также обеспечивает возможность их вызова с клиента через общую объектную модель (ObjectManager).
 
-Серверное расширение представляет собой .NET сборку (Class Library), в которой должен быть реализован как минимум один класс, унаследованный от xref:api/DocsVision/Platform/StorageServer/Extensibility/StorageServerExtension_CL.adoc[DocsVision.Platform.StorageServer.Extensibility.StorageServerExtension].
+Серверное расширение представляет собой .NET сборку (Class Library), в которой должен быть реализован как минимум один класс, унаследованный от xref:api/DocsVision/Platform/StorageServer/Extensibility/StorageServerExtension_CL.adoc[`DocsVision.Platform.StorageServer.Extensibility.StorageServerExtension`].
 
-Этот базовый класс уже содержит в себе всю необходимую инфраструктуру для реализации модуля расширения. Разработчику остается только определить сигнатуру методов, реализуемых данным модулем расширения. Такие методы необходимо пометить специальным атрибутом: xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_CL.adoc[[ExtensionMethod]].
+Этот базовый класс уже содержит в себе всю необходимую инфраструктуру для реализации модуля расширения. Разработчику остается только определить сигнатуру методов, реализуемых данным модулем расширения. Такие методы необходимо пометить специальным атрибутом: xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_CL.adoc[`ExtensionMethod`].
 
 [NOTE]
 ====
-Атрибут `ExtensionMethod` имеет дополнительное свойство `AllowedUserRoles`, которое можно использовать для ограничения возможности вызова данного метода расширения в зависимости от роли пользователя (членства в соответствующей группе безопасности). Пример использования свойства (метод будет доступен только для членов группы "Docsvision Administrators"): [xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_1_CT.adoc[ExtensionMethod(UserRoles.Administrator)]].
+Атрибут `ExtensionMethod` имеет дополнительное свойство `AllowedUserRoles`, которое можно использовать для ограничения возможности вызова данного метода расширения в зависимости от роли пользователя (членства в соответствующей группе безопасности). Пример использования свойства (метод будет доступен только для членов группы _Docsvision Administrators_): xref:api/DocsVision/Platform/StorageServer/Extensibility/ExtensionMethodAttribute_1_CT.adoc[`ExtensionMethod(UserRoles.Administrator)`].
 ====
 
 Пример кода реализации серверного расширения, где метод GetBaseName возвращает имя рабочей базы данных:
@@ -56,7 +56,7 @@ public CursorInfo GetSectionsSize()
 }
 ----
 
-Готовый модуль расширения необходимо зарегистрировать на сервере. Для этого нужно в ветке реестра `[HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\Platform\5.5\Server\Extensions]` создать строковое значение с названием расширения (любое уникальное, на латинице, без пробелов и спец. знаков) и значением, представляющим полное имя класса, реализующего интерфейс расширения, к примеру:
+Готовый модуль расширения необходимо зарегистрировать на сервере. Для этого нужно в ветке реестра `[{hklm}\SOFTWARE\DocsVision\Platform\5.5\Server\Extensions]` создать строковое значение с названием расширения (любое уникальное, на латинице, без пробелов и спец. знаков) и значением, представляющим полное имя класса, реализующего интерфейс расширения, к примеру:
 
 [source,csharp]
 ----
