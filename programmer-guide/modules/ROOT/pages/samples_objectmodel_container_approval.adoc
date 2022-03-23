@@ -27,14 +27,14 @@ mapperFactoryRegistry.RegisterFactory(typeof(ApprovalDesignerMapperFactory));
 ----
 . Получите идентификатор согласуемого документа, например, так:
 +
-[source,pre,codeblock]
+[source,charp]
 ----
 // Получаем идентификатор документа, при в скрипте карточки
 Guid initialCardId = context.GetObjectRef(this.BaseObject).Id;
 ----
 . Получите настройки режима создания согласования:
 +
-[source,pre,codeblock]
+[source,charp]
 ----
 // Получаем настройки вида карточки "Согласование КС"
 KindsCardKind cardKind = context.GetObject<KindsCardKind>(new Guid("9C0E5586-41B8-411E-B5CD-C94B605CB7A1"));

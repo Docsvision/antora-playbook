@@ -4,7 +4,7 @@
 
 Практически каждый метод веб-сервиса требует идентификатор пользовательской сессии, поэтому первоначальной задачей является создание сессии пользователя. Для этого предназначен метод xref:DevManualAppendix_WebService_Common_SessionLogin.adoc[SessionLogin]. Код для открытия пользовательской сессии может выглядеть следующим образом:
 
-[source,pre,codeblock,language-python]
+[source,charp]
 ----
 import xml.etree.ElementTree as ElementTree
 import requests
@@ -54,7 +54,7 @@ sessionId = responseParsed.findtext('.//{http://schemas.docsvision.com/Platform/
 
 Итоговый код может выглядеть следующим образом:
 
-[source,pre,codeblock,language-python]
+[source,charp]
 ----
 # Создаем объект-файл #
 
@@ -168,7 +168,7 @@ print(fileId)
 
 Итоговый код может выглядеть следующим образом:
 
-[source,pre,codeblock,language-python]
+[source,charp]
 ----
 # Создание карточки типа Файл с версиями #
 
@@ -237,7 +237,7 @@ print(newInstanceId)
 
 Дополнительные методы, использованные выше, реализованы следующим образом:
 
-[source,pre,codeblock,language-python]
+[source,charp]
 ----
 # Добавление пустой строки в секцию section_id карточки card_id
 

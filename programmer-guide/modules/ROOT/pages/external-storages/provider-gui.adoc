@@ -1,16 +1,17 @@
 = Графический интерфейс настройки
 
-Графический интерфейс настройки провайдера к внешнему хранилищу представляет собой компонент типа System.Windows.Forms.UserControl с реализованным программным интерфейсом xref:api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[IExtensionPropertiesControl].
+Графический интерфейс настройки провайдера к внешнему хранилищу представляет собой компонент типа `System.Windows.Forms.UserControl` с реализованным программным интерфейсом xref:api/DocsVision/Platform/WinForms/Controls/IExtensionPropertiesControl_IN.adoc[`IExtensionPropertiesControl`].
 
-[source,pre,codeblock]
+[source,charp]
 ----
 public partial class ProviderConfigurationPropertyControl : UserControl, IExtensionPropertiesControl
 ----
 
-К реализации графического компонента настройки не предъявляется специальных требований (за исключением реализации интерфейса IExtensionPropertiesControl). Программист может реализовать любой графический интерфейс, необходимый для настройки провайдера.
+К реализации графического компонента настройки не предъявляется специальных требований (за исключением реализации интерфейса `IExtensionPropertiesControl`). Программист может реализовать любой графический интерфейс, необходимый для настройки провайдера.
 
 Реализованный компонент добавляется в блок свойства панели настройки хранилища:
 
+.Блок настройки провайдера к хранилищу на панели настройки хранилища
 image::ConfigurationStoragePanel.png[Блок настройки провайдера к хранилищу на панели настройки хранилища]
 
 Настройки могут включать любые элементы, необходимые для настройки подключения к хранилищу или работы с ним.

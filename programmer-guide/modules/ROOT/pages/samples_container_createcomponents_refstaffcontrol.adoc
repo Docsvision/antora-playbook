@@ -168,7 +168,7 @@ public bool HideNotActive
 
 Помимо этого, крайне важно обеспечить передачу значений свойств в свой элемент управления, для чего переопределяем свойство `Control`:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 public override Control Control
 {
@@ -213,7 +213,7 @@ public Guid SectionTypeId
 
 В данном примере тип ControlExtensionInfoPackage реализован в классе ExtensionPackage:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 public sealed class ExtensionPackage : ControlExtensionInfoPackage
 {
@@ -275,7 +275,7 @@ protected override void UpdatePropertyAttributes()
 
 Чтобы ограничить типы полей, которые могут выступать в качестве источника данных, в базовом классе предусмотрен метод IsSectionFieldSupported, который требуется переопределить, добавив логику проверки поля перед отображением в списке доступных полей:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 protected override bool IsSectionFieldSupported(SectionField sectionField)
 {
@@ -295,7 +295,7 @@ protected override bool IsSectionFieldSupported(SectionField sectionField)
 
 Для элемента управления _Сотрудник с фотографией_ данный компонент был реализован в классе StaffControlWrapper, в котором определены два свойства по требованиям к функциональности настройки элемента управления: возможность выбора подразделения и фильтра состояний.
 
-[source,pre,codeblock]
+[source,charp]
 ----
 [Category("Дополнительные настройки"), DisplayName("Подразделение"), Description("Будут выведены только сотрудники указанного подразделения и подчиненных подразделений")]
 [TypeConverter(typeof(UnitConverter))]

@@ -4,7 +4,7 @@
 
 == Запрос
 
-[source,pre,codeblock]
+[source,charp]
 ----
 POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
 Host: DOCSVISION_SERVER.COM
@@ -35,7 +35,7 @@ folderInfoOptions::
 
 Строка *folderIds* должна соответствовать формату элемента *GroupOperation*, приведенному в схеме `ServerRequests.xsd`:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 <xsd:element name="GroupOperation">
   <xsd:complexType>
@@ -52,7 +52,7 @@ folderInfoOptions::
 
 Строка *folderInfoOptions* должна соответствовать формату элемента *FolderInfoOptions*, приведенному в схеме `ServerRequests.xsd`:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 <xsd:element name="FolderInfoOptions">
   <xsd:complexType>
@@ -64,7 +64,7 @@ folderInfoOptions::
 
 == Ответ
 
-[source,pre,codeblock]
+[source,charp]
 ----
 HTTP/1.1 200 OK
 Content-Type: text/xml; charset=utf-8
@@ -90,7 +90,7 @@ Content-Length: length
 
 == Пример запроса
 
-[source,pre,codeblock,language-python]
+[source,charp]
 ----
 # Изменяем цель запроса в заголовке запроса
 session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderGetInfoGroup"

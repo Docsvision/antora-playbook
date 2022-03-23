@@ -18,7 +18,7 @@
 * Path -- путь к сборке SnapIn.
 * TypeName -- название класса SnapIn, который реализует интерфейс ISnapIn#.
 +
-[source,pre,codeblock,language-xml]
+[source,xml]
 ----
 <Component Id="RegistryEntries" Guid="75B4E976-5771-423C-AB7D-DC583114F893" Win64="yes">
  <RegistryKey Root="HKLM" Key="SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns\NetstatSolution" ForceDeleteOnUninstall="yes" ForceCreateOnInstall="yes">
@@ -29,7 +29,7 @@
 ----
 . Вызвать Консоль настройки {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 +
-[source,pre,codeblock]
+[source,charp]
 ----
 <CustomAction Id="RegisterSnapIn" Directory='INSTALLFOLDER' Return="check" Execute='deferred' 
  ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n NetstatSolution' />
@@ -40,7 +40,7 @@
 
 При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 <CustomAction Id="UnRegisterSnapIn" Directory='INSTALLFOLDER' Return="ignore" Execute='deferred' 
  ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n NetstatSolution' />
@@ -51,7 +51,7 @@
 
 Чтобы серверная часть поддерживала обновление, добавляем:
 
-[source,pre,codeblock]
+[source,charp]
 ----
  <MajorUpgrade DowngradeErrorMessage="Более новая версия продукта [ProductName] уже установлена." />
  <Upgrade Id="$(var.UpgradeCode)">

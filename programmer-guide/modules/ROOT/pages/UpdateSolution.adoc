@@ -25,7 +25,7 @@
 image::CardManager4.png[image]
 . Изменяем номер версии библиотеки в xref:CreateCardLib_LibControl.adoc[компоненте библиотеки] (файл `dvver.h`) на номер, указанный в схеме метаданных:
 +
-[source,pre,codeblock]
+[source,charp]
 ----
 #define VERSION_MAJOR                       5
 #define VERSION_MINOR                       0
@@ -54,7 +54,7 @@ public bool Execute()
 ----
 . Изменяем значение *Product Id* в xref:CreateInstaller_Client.adoc[проекте пакета установки клиентской части] (файл Product.wxs), используя _код продукта_ из схемы метаданных:
 +
-[source,pre,codeblock]
+[source,charp]
 ----
 <Product Id="22CE4047-0BA8-4014-9BBE-7D8C43FDE904" 
  Name="NetstatSolutionClient"

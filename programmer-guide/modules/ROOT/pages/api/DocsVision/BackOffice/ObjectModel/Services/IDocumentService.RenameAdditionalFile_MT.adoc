@@ -58,7 +58,7 @@ documentService.RenameAdditionalFile(document, document.Files.First(t => t.FileT
 
 Можно указывать новое название файла без расширения, а расширение получать из оригинального файла, например, так:
 
-[source,pre,codeblock]
+[source,charp]
 ----
 DocumentFile firstAdditionalFile = document.Files.First(t => t.FileType = DocumentFileType.Additional);
 string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(firstAdditionalFile.FileName));
