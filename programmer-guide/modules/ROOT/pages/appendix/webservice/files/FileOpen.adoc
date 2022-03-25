@@ -1,0 +1,80 @@
+= FileOpen
+
+Открывает файловый курсор.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FileOpen"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FileOpen xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <fileId>guid</fileId>
+      <modify>boolean</modify>
+    </FileOpen>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+fileId:::
+Идентификатор файла
+modify:::
+Режим открытия курсора. Если true, то только запись, иначе чтение.
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FileOpenResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <fileHandleId>guid</fileHandleId>
+    </FileOpenResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит указатель на открытый файл.
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FileOpen" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FileOpen xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <fileId>2D6F7690-6B81-E511-9417-90E6BA57B9F8</fileId>
+      <modify>false</modify>
+    </FileOpen>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+
+responseParsed = ElementTree.fromstring(response.content)
+print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}fileHandleId")) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Разбираем ответ и выводим идентификатор открытого курсора.

@@ -35,8 +35,7 @@ rowId:::
 rowData:::
 Содержимое строки
 
-Строка rowData является xml-документом, содержащим название и значение изменяемого поля, например:
-
+.Строка `rowData` является xml-документом, содержащим название и значение изменяемого поля:
 [source,python]
 ----
 <RowData>
@@ -64,10 +63,8 @@ Content-Length: length
 
 [source,python]
 ----
-# Изменяем цель запроса в заголовке запроса
-session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowSetData"
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowSetData" <.>
 
-# SOAP-сообщение
 body = """<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -78,8 +75,10 @@ body = """<?xml version="1.0" encoding="utf-8"?>
       <rowData>&lt;RowData&gt;&lt;row DisplayString=&quot;New DisplayString&quot; FirstName=&quot;New FirstName&quot;/&gt;&lt;/RowData&gt;</rowData>
     </RowSetData>
   </soap:Body>
-</soap:Envelope>"""
+</soap:Envelope>""" <.>
 
-# Отправляем SOAP-сообщение
-response = session.post(url, data=body)
+response = session.post(url, data=body) <.>
 ----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.

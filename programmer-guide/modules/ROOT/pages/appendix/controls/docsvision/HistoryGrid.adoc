@@ -1,0 +1,27 @@
+= Элемент управления "HistoryGrid"
+
+Элемент управления "HistoryGrid" предназначен для просмотра записей в журнале операций, относящихся к данной карточке. Соответствует элементу управления `_История_` _Конструктора разметок_.
+
+.Элемент управления "HistoryGrid"
+image::HistoryGrid.png[Элемент управления "HistoryGrid"]
+
+== Свойства:
+
+* `Context` -- возвращает _контекст объектов_.
+* `ReadOnly` -- при значении `true`, `_HistoryGrid_` доступен на чтение.
+
+== Методы
+
+* `Initialize(ObjectContext, BaseCard, BuiltInOperation)` -- инициализация `_HistoryGrid_` с передачей операции открытия истории. Последний параметр может иметь значение `null`.
+
+.Пример инициализации `_HistoryGrid_` с передачей данных текущей карточки:
+[source,charp]
+----
+protected override void OnCardActivated(DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ base.OnCardActivated(e);
+
+ historyGrid.Initialize(this.ObjectContext, this.BaseObject, Document.ViewHistoryOperation); <.>
+}
+----
+<.> Передача контекста объектов.

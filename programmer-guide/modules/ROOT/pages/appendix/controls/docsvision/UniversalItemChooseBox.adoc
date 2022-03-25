@@ -1,0 +1,26 @@
+= Элемент управления "UniversalItemChooseBox"
+
+Элемент управления `_UniversalItemChooseBox_` предназначен для добавления поля, в котором предполагается выбор строки из справочника, созданного в _Конструкторе справочников_. Соответствует элементу управления `_Строка конструктора справочников_` _Конструктора разметок_.
+
+.Элемент управления "UniversalItemChooseBox"
+image::RowChooseBox-UniversalItemChooseBox.png[Элемент управления "UniversalItemChooseBox"]
+
+.`_CardChooseBox_` содержит следующие функциональные кнопки:
+* *...* -- открывает окно выбора строки справочника.
+* *X* -- очищает результат выбора.
+
+== Свойства
+
+* `*ItemTypeId*` -- идентификатор узла справочника, ограничивающего выбор элементов.
++
+Если значение не задано, будет предоставлено все дерево элементов.
+
+.Пример инициализации `_UniversalItemChooseBox_` с ограничением выбора элементов из определенного узла:
+[source,csharp]
+----
+protected override void OnCardActivated(DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ base.OnCardActivated(e);
+ this.universalItemChooseBox1.ItemTypeId = new Guid("00000000-0000-0000-0000-000000000000");
+}
+----

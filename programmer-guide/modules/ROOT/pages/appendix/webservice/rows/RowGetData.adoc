@@ -58,10 +58,8 @@ Content-Length: length
 
 [source,python]
 ----
-# Изменяем цель запроса в заголовке запроса
-session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowGetData"
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowGetData" <.>
 
-# SOAP-сообщение
 body = """<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -72,11 +70,13 @@ body = """<?xml version="1.0" encoding="utf-8"?>
       <instanceID>6710B92A-E148-4363-8A6F-1AA0EB18936C</instanceID>
     </RowGetData>
   </soap:Body>
-</soap:Envelope>"""
+</soap:Envelope>""" <.>
 
-# Отправляем SOAP-сообщение
-response = session.post(url, data=body)
+response = session.post(url, data=body) <.>
 
-# Ответ SOAP
-print(response.content)
+print(response.content) <.>
 ----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Ответ SOAP.

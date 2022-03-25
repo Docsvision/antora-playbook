@@ -1,0 +1,31 @@
+= Элемент управления "GridEx"
+
+Элемент управления `_GridEx_` предназначен для организации табличного ввода данных. Соответствует элементу управления *Таблица* _Конструктора разметок_.
+
+.Элемент управления "GridEx"
+image::GridEx.png[Элемент управления "GridEx"]
+
+Для получения сведений о функциональности `_GridEx_`, обратитесь к документации элемента управления https://documentation.devexpress.com/#WindowsForms/CustomDocument3461[DevExpress Data Grid], от которого наследуется `_GridEx_`.
+
+== Свойства
+
+* `*AllowEdit*` -- разрешает или запрещает редактирование в таблице.
+* `*SourceCollection*` -- отображаемые данные в виде перечисления. При записи обновлении значения, будет вызвано перестроение таблицы.
+
+== Методы
+
+* `RefreshDataSource` -- перезагружает данные из источника данных.
+* `RefreshSourceCollection` -- перезагружает данные из источника данных, и выполняет перестроение таблицы.
+
+.Пример инициализации `_GridEx_` с использованием подразделений из _Справочника сотрудников_ в качестве источника:
+[source,csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent();
+
+ IStaffService staffService = this.ObjectContext.GetService<IStaffService>();
+ gridEx.DataSource = staffService.GetUnits(null, false);
+}
+----
