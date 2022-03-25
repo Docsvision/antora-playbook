@@ -1,0 +1,74 @@
+= CardPurge
+
+Окончательно удаляет карточки, отмеченные к удалению.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardPurge"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardPurge xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <cardId>guid</cardId>
+      <maxDate>double</maxDate>
+    </CardPurge>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+cardId:::
+Идентификатор типа удаляемых карточек
+maxDate:::
+https://msdn.microsoft.com/ru-ru/library/system.datetime.tooadate.aspx[Дата OLE-автоматизации], которой ограничивается удаление карточек. Будут удалены карточки, время удаления которых меньше указанного значения.
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardPurgeResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+К примеру, удаление карточек типа "Документ", помеченных к удалению ранее 01.10.2015:
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardPurge" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardPurge xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <cardId>B9F7BFD7-7429-455E-A3F1-94FFB569C794</cardId>
+      <maxDate>42278</maxDate>
+    </CardPurge>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.

@@ -1,0 +1,108 @@
+= SessionLogin
+
+Создает новую пользовательскую сессию.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionLogin"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionLogin xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <baseName>string</baseName>
+      <sessionSettings>string</sessionSettings>
+    </SessionLogin>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+baseName:::
+Название базы данных. Если не указана, использует база данных по-умолчанию
+sessionSettings:::
+Параметры сессии
+
+.Строка `sessionSettings` должна соответствовать схеме элемента:
+[source,python]
+----
+<xs:element name="Settings">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Setting" maxOccurs="unbounded" type="xs:string">
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:string"></xs:attribute>
+          <xs:attribute name="Type" type="xs:string"></xs:attribute>
+          <xs:attribute name="ReadOnly" type="xs:int"></xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+----
+
+.Могут быть установлены следующие параметры:
+* `AppID (string)` -- идентификатор приложения, из которого установлено соединение.
+* `BaseName (string)` -- псевдоним базы данных.
+* `ClientVersion (int)` -- версия клиента.
+* `Compression (boolean)` -- необходимость использовать сжатие при передаче данных по сети.
+* `ComputerAddress (string)` -- IP-адрес клиента.
+* `ComputerName (string)` -- имя компьютера-клиента.
+* `FileBlockSize (int)` -- размер блока данных (в KB) для пересылки файлов.
+* `LocaleID (int)` -- числовой идентификатор используемого языка.
+* `MinCompressSize (int)` -- минимальных блок данных (в KB) который нужно сжимать.
+
+Рекомендуется всегда передавать: `ComputerAddress`, `ComputerName` и `LocaleID`.
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionLoginResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <userSettings>string</userSettings>
+    </SessionLoginResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор открытой сессии, а также все её параметры.
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = 'http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionLogin' <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionLogin xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <baseName></baseName>
+      <sessionSettings>&lt;Settings&gt;&lt;Setting Name=&quot;ComputerAddress&quot; Type=&quot;string&quot; ReadOnly=&quot;1&quot;&gt;192.168.0.2&lt;/Setting&gt;&lt;Setting Name=&quot;ComputerName&quot; Type=&quot;string&quot;&gt;connectedComputer&lt;/Setting&gt;&lt;Setting Name=&quot;LocaleID&quot; Type=&quot;int&quot;&gt;1049&lt;/Setting&gt;&lt;/Settings&gt;</sessionSettings>
+    </SessionLogin>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+
+responseParsed = ElementTree.fromstring(response.content)
+print(responseParsed.findtext('.//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}sessionId')) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Разбираем ответ и выводим идентификатор открытой сессии.

@@ -12,29 +12,28 @@
 BaseCardSignature AddSignature(Task task, X509Certificate2 certificate, StatesOperation operation, Guid signatureType, IEnumerable<CardFieldSetting> fields, IEnumerable<Document> documents)
 ----
 
-Параметры
-
-task::
+Параметры::
+task:::
 Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
 +
 Задание, содержащее подписываемые данные
-certificate::
+certificate:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
 +
 Сертификат сотрудника, которым будет выполнено подписания
-operation::
+operation:::
 Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
 +
 Подписываемая операция
-signatureType::
+signatureType:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Тип подписи, который может быть получен из TaskOperationSignatureSetting.Name
-fields::
+fields:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
 +
 Коллекция подписываемых полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определенных для карточки в Справочнике видов карточек
-documents::
+documents:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<Document>
 +
 Коллекция подписываемых документов типа xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]

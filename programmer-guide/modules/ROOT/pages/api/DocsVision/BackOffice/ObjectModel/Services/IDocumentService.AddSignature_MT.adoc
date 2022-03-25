@@ -12,21 +12,20 @@
 BaseCardSignature AddSignature(Document document, X509Certificate2 cert, bool signAttachments, ICollection<CardFieldSetting> fields)
 ----
 
-Параметры
-
-document::
+Параметры::
+document:::
 Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
 +
 Документ
-cert::
+cert:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
 +
 Сертификат, которым будет выполнено подписание
-signAttachments::
+signAttachments:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 true -- подписывать дополнительные файлы, иначе false
-fields::
+fields:::
 Тип: http://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
 +
 Коллекция подписываемых полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определенных для карточки в Справочнике видов карточек

@@ -17,17 +17,16 @@ public T CopyObject<T>(T objectInstance, ObjectCollection<T> newParentCollection
 T::
 Тип копируемого объекта, ограничен классом унаследованным от базового типа xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
 
-*Параметры*
-
-objectInstance::
+Параметры::
+objectInstance:::
 Тип: T
 +
 Экземпляр копируемого объекта
-newParentCollection::
+newParentCollection:::
 Тип: xref:api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<T>
 +
 Коллекция потомков объекта в который производится копирование. В данную коллекцию будет добавлен копируемый objectInstance
-initAction::
+initAction:::
 Тип: http://msdn.microsoft.com/ru-ru/library/018hxwa8.aspx[System.Action]<T>
 +
 Делегат на метод, который будет вызван после создания копии в целевом объекте newParentCollection, но до сохранения изменений методом xref:api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges]

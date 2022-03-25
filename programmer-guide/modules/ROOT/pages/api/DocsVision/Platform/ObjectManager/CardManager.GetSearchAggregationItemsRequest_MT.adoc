@@ -14,30 +14,29 @@ public virtual SearchAggregationItemsRequest GetSearchAggregationItemsRequest(Se
 ----
 
 [[GetSearchAggregationItemsRequest_MT__section_nyy_4fs_mpb]]
-Параметры
-
-resultType::
+Параметры::
+resultType:::
 Тип: xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType]
 +
 Тип получаемого результата.
-folderId::
+folderId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Идентификатор папки-хранилища для сохранения результатов фильтрации.
 
-queryId::
+queryId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Идентификатор поиска. Альтернатива `QueryXml`. Если он не `Guid.Empty`, будет использоваться именно сохранённый запрос.
 
-queryXml::
+queryXml:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
 +
 Xml поиска. Должно быть заполнено как минимум поле QueryString полнотекстового поиска. Также могут быть использованы любые другие части -- как и сам атрибутивный поиск, так и ограничения по результатам (ограничение на папку например).
 +
 `QueryXml` можно не заполнять, но в таком случае не будет заполнена папка результатами поиска, но список агрегатов вернётся.
 
-localeId::
+localeId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
 +
 Номер локализации в которой необходимо вернуть имя агрегации. Если значение не задано или не найдено в настройках агрегата, будет использоваться английская локаль. Если английская локаль не найдена, будет использоваться первая найденная. Если никакие настройки не заданы, в качестве значения будет использоваться алиас агрегата.

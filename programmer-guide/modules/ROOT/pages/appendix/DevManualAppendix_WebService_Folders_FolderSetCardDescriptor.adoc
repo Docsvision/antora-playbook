@@ -1,0 +1,59 @@
+= FolderSetCardDescriptor
+
+Устанавливает дескриптор безопасности на карточку.
+
+== Запрос
+
+[source,charp]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderSetCardDescriptor"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderSetCardDescriptor xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <cardId>guid</cardId>
+      <descBytes>base64Binary</descBytes>
+      <securityInfo>int</securityInfo>
+      <flags>int</flags>
+    </FolderSetCardDescriptor>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+cardId:::
+Идентификатор карточки
+descBytes:::
+Дескриптор безопасности
+securityInfo:::
+Раздел дескриптора безопасности
+flags:::
+Дополнительные флаги:
++
+* 0 -- без флага
+  * 1 -- распространить политики на слабые ярлыки
+  * 2 -- распространить политики на сильные ярлыки
+
+== Ответ
+
+[source,charp]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderSetCardDescriptorResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----

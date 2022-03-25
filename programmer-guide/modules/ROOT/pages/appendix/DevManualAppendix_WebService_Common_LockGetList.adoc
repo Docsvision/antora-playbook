@@ -1,0 +1,55 @@
+= LockGetList
+
+Возвращает детальную информацию о всех блокировках объектов.
+
+== Запрос
+
+[source,charp]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/LockGetList"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LockGetList xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <currentUserOnly>boolean</currentUserOnly>
+      <allTypes>boolean</allTypes>
+      <resType>CUSTOM or CARD or FILE or ROW</resType>
+    </LockGetList>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+currentUserOnly:::
+Если true, то будут выбраны блокировки, установленные текущим пользователем
+allTypes:::
+Если true, то будут выбраны блокировки, установленные на все типы объектов, иначе на указанные в resType
+resType:::
+Тип заблокированного объекта: CUSTOM (неизвестен), CARD (карточка), FILE (файл), ROW (строка секции)
+
+== Ответ
+
+[source,charp]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LockGetListResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <lockedObjects>string</lockedObjects>
+      <usingCompression>boolean</usingCompression>
+    </LockGetListResponse>
+  </soap:Body>
+</soap:Envelope>
+----

@@ -1,0 +1,53 @@
+= LinkGetParent
+
+Возвращает информацию о владельце ссылки на карточку.
+
+== Запрос
+
+[source,charp]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/LinkGetParent"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LinkGetParent xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <instanceID>guid</instanceID>
+    </LinkGetParent>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+instanceID:::
+Идентификатор карточки
+
+== Ответ
+
+[source,charp]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <LinkGetParentResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sourceInstanceId>guid</sourceInstanceId>
+      <sourceRowId>guid</sourceRowId>
+      <sourceFieldId>guid</sourceFieldId>
+      <sourceSectionId>guid</sourceSectionId>
+    </LinkGetParentResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор карточки, секции, строки и поля, в котором содержится ссылка на карточку.

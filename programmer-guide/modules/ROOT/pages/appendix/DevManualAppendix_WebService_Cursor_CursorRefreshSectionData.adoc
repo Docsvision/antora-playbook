@@ -1,0 +1,114 @@
+= CursorRefreshSectionData
+
+Возвращает данные секции карточки.
+
+== Запрос
+
+[source,charp]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CursorRefreshSectionData"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshSectionData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <objectInfo>
+        <InstanceID>guid</InstanceID>
+        <SectionTypeID>guid</SectionTypeID>
+        <ParentID>guid</ParentID>
+      </objectInfo>
+      <readType>READ_SECTION or READ_SUBSECTION or READ_TREE or READ_TREE_LEVEL or READ_FIRST_TREE_LEVEL or READ_SEARCH_RESULTS</readType>
+      <timestamp>long</timestamp>
+      <hash>int</hash>
+    </CursorRefreshSectionData>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+InstanceID:::
+Идентификатор карточки
+SectionTypeID:::
+Идентификатор карточки
+ParentID:::
+Идентификатор родительского, по отношению к выбираемым данным, объекта, ограничивающего выборку при чтения иерархической секции
+readType:::
+Тип чтения:
++
+* READ_SECTION -- читать всю секцию
+  * READ_SUBSECTION -- читать подсекцию
+  * READ_TREE -- читать всё дерево
+  * READ_TREE_LEVEL -- читать уровень дерева, находящийся не на первом уровне иерархии
+  * READ_FIRST_TREE_LEVEL -- читать первый уровень дерева
+  * READ_SEARCH_RESULTS -- читать результаты поиска
+timestamp:::
+Метка времени. Если timestamp и hash соответствуют аналогичным значениям на сервере, то данные возвращены не будут.
+hash:::
+Хеш данных
+
+== Ответ
+
+[source,charp]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshSectionDataResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <timestamp>long</timestamp>
+      <hash>int</hash>
+      <cursorInfo>
+        <ID>guid</ID>
+        <PageCount>unsignedInt</PageCount>
+        <RowCount>unsignedInt</RowCount>
+        <FirstPage>string</FirstPage>
+        <UsingCompression>boolean</UsingCompression>
+      </cursorInfo>
+    </CursorRefreshSectionDataResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит данные, если существующие в кэше данные устарели. Актуальность определяется на основе метки времени.
+
+== Пример запроса
+
+[source,charp]
+----
+# Изменяем цель запроса в заголовке запроса
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CursorRefreshSectionData"
+
+# SOAP-сообщение
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CursorRefreshSectionData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+       <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <objectInfo>
+        <InstanceID>DA86FABF-4DD7-4A86-B6FF-C58C24D12DE2</InstanceID>
+        <SectionTypeID>FE27631D-EEEA-4E2E-A04C-D4351282FB55</SectionTypeID>
+        <ParentID>FFFFFFFF-FFFF-0003-FFFF-000000000000</ParentID>
+      </objectInfo>
+      <readType>READ_TREE_LEVEL</readType>
+      <timestamp>371933</timestamp>
+      <hash>-756518670</hash>
+    </CursorRefreshSectionData>
+  </soap:Body>
+</soap:Envelope>"""
+
+# Отправляем SOAP-сообщение
+response = session.post(url, data=body)
+
+# Ответ SOAP
+print(response.content)
+----

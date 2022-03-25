@@ -12,25 +12,24 @@
 public virtual bool ValidateProperties(bool showMessage, IEnumerable<string> excludedProperties, out IEnumerable<string> requiredFields, out IEnumerable<string> notResolvedFields, out IEnumerable<string> notResolvedTables)
 ----
 
-Параметры
-
-showMessage::
+Параметры::
+showMessage:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 false -- не отображать сообщение о наличии ошибок, иначе -- true
-excludedProperties::
+excludedProperties:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
 +
 Список свойств карточки, которые должны быть исключены из проверки. Под названиям свойств карточки подразумеваются названия соответствующих элементов управления.
-requiredFields::
+requiredFields:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
 +
 Получает список свойств, требующих обязательного заполнения. Из списка исключаются свойства, перечисленные в `excludedProperties`.
-notResolvedFields::
+notResolvedFields:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
 +
 Получает список свойств, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются свойства, перечисленные в `excludedProperties`. Данный параметр может сигнализировать, к примеру, о некорректно введенном значении в элемент управления типа *Сотрудник*.
-notResolvedTables::
+notResolvedTables:::
 Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<string>
 +
 Получает список таблиц, которые из-за ошибки не могут быть связаны с данными карточки. Из списка исключаются таблицы, перечисленные в `excludedProperties`.

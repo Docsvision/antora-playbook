@@ -1,0 +1,96 @@
+= Пример провайдера к внешнему хранилищу Google Drive
+
+В данном пункте рассмотрен пример создания провайдера к внешнему хранилищу Google Drive для хранения бинарных данных файлов {dv}.
+
+[CAUTION]
+====
+Данный пример не является готовым решением для использования Google Drive в качестве внешнего хранилища, а только демонстрирует способ создания провайдера к нему.
+====
+
+Облачное хранилище Google Drive предоставляет возможность и API для работы с файлами из собственного приложения. Инструкция по работе с Google Drive API приведена на https://developers.google.com/drivexref:api/v3/about-sdk[этой] странице.
+
+Для работы с Google Drive в данном примере используется предоставляемая реализация обертки для работы с Google Drive API в .NET (https://www.nuget.org/packages/Google.Apis.Drive.v3/[NuGet пакет]).
+
+Исходный код примера доступен по xref:attachment$gDriveStorage.zip[ссылке].
+
+.Пример содержит два проекта:
+. `GoogleDriveStorageProvider` -- проект компонента провайдера к файловому хранилищу с классами:
+.. `GoogleDriveStorage` -- класс провайдера с реализацией интерфейсов `IBinaryStorage`, `IExtensionInitialize`, `IStreamedBinaryStorage`, `IEnumerableBinaryStorage`.
+.. `GoogleDriveProviderPropertyControl` -- класс графического интерфейса настройки провайдера.
+.. `GoogleDriveProxy` -- класс-посредник для работы с Google Drive API.
+.. `ProviderSettings` -- вспомогательный класс с методами сериализации и десериализации настроек провайдера.
+.. `LogWriter` -- вспомогательный класс журналирования работы провайдера.
+.. `LocalizedDisplayNameAttribute` -- класс для получения локализованных ресурсов в атрибутах класса.
+. `AskToken` -- проект консольного приложения для получения токена для работы с Google Drive.
+
+== Требования примера
+
+.На компьютере программиста должны быть установлены:
+. Microsoft Visual Studio 2015 или выше.
+. Microsoft .NET Framework 4.6.1.
+
+Пример совместим с системой {dv} версии 5.5.1.
+
+== Последовательность работы с примером
+
+. Распакуйте xref:attachment$gDriveStorage.zip[архив] примера на локальный диск.
+. Получите файл с конфигурацией клиента (`credentials.json`) по инструкции в шаге 1 на https://developers.google.com/drivexref:api/v3/quickstart/dotnet[странице]. Потребуется авторизоваться в Google.
+. Загрузите файл `credentials.json` в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\` распакованного архива примера.
+. Включите в Visual Studio настройку https://docs.microsoft.com/ru-ru/nuget/consume-packages/package-restore-troubleshooting[Allow Nuget to download missing package] для автоматической загрузки необходимых пакетов библиотеки Google Drive API.
+. Повторно подключите зависимости `DocsVision.Platform.StorageServer` и `DocsVision.Platform.WinForms` в проекте `GoogleDriveStorageProvider`. К проекту должны быть подключены компоненты, используемые на сервере {dv}.
+. Соберите проект `GoogleDriveStorageProvider`.
+. Соберите и запустите проект `AskToken`. В процессе работы программы `AskToken` будет вызван код из класса `GoogleDriveProxy` (проект `GoogleDriveStorageProvider`):
++
+[source,charp]
+----
+using (var stream =
+                new FileStream(credentialsFile, FileMode.Open, FileAccess.Read))
+            {
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    new string[] { DriveService.Scope.Drive },
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(tokenFolder, true)).Result;
+
+                logWriter.Write("Токен получен из папки: " + tokenFolder);
+            }
+----
++
+Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в шаге 3 https://developers.google.com/drivexref:api/v3/quickstart/dotnet[данного примера]). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
++
+Токен будет сохранен в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\token.json\`.
++
+. Скопируйте на сервер {dv} файлы из папки `GoogleDriveStorageProvider\bin\Debug\`:
+* `GoogleDriveStorageProvider.dll`,
+* `ru\GoogleDriveStorageProvider.resources.dll`,
+* `Google.Apis.Drive.v3.dll`,
+* `Google.Apis.Auth.PlatformServices.dll`,
+* `Google.Apis.Auth.dll`,
+* `Google.Apis.PlatformServices.dll`,
+* `Google.Apis.Core.dll`,
+* `Google.Apis.dll`,
+* `Newtonsoft.Json.dll`.
++
+. Зарегистрируйте в GAC скопированные файлы.
+. Скопируйте на сервер {dv} папку `AskToken\bin\Debug\token.json\` и файл `AskToken\bin\Debug\credentials.json`. Данные файлы потребуются для работы провайдера к Google Drive. Файл и папку нужно скопировать в каталог доступный для сервера {dv}, но недоступный рядовым пользователям (из-за наличия конфиденциальных данных в файлах).
+. Подключите новый тип хранилища к {dv}.
++
+CAUTION: Проверяйте работу компонентов на тестовом сервере {dv}.
++
+.. Откройте {cns}.
+.. Перейдите в раздел menu:Настройки сервер[Базы данных]. Выберите настраиваемую БД и нажмите кнопку *Настройка*., чтобы открыть окно _Свойства и управление базой данных_.
+.. Перейдите на вкладку _Внешние хранилища_.
+.. Добавьте новое хранилище. В окне настройки хранилища в поле _Тип_ нужно выбрать вариант *_Добавить из сборки_* и выбрать файл `GoogleDriveStorageProvider.dll` из каталога GAC. В список типов хранилищ будет добавлено хранилище с названием "Хранилище в Google Drive".
+.. Настройте новое хранилище с типом "Хранилище в Google Drive", группу и правило помещения в хранилище следуя инструкции, приведенной в xref:5.5.5@platform:admin:storage.adoc[документации модуля {pl}].
++
+При настройке хранилища необходимо указать: путь к файлу `credentials.json` и папке `token.json` (загружены в п. 10), путь к файлу журнала работы провайдера.
++
+.Пример настройки хранилища в Google Drive
+image::connectot-gogle-drive.png[Пример настройки хранилища в Google Drive]
++
+.После перезапуска сервера {dv} (будет выполнен после добавления хранилища) в Google Drive будут созданы две папки:
+* `DV_PrimaryPart` -- представляет раздел для основных файлов.
+* `DV_ArchivePart` -- представляет раздел для архивных файлов.
++
+Проверить работу провайдера можно настроив правило на помещение в хранилище файлов с расширением `.pdf`. При добавлении в карточку {dv} файла с типом `.pdf`, соответствующий файл будет загружен в Google Drive.

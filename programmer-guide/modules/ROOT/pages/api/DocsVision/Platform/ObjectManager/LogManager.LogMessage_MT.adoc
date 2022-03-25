@@ -12,33 +12,32 @@
 public abstract void LogMessage(EventType eventType, int eventOperation, string resourceName, Guid resourceId, Guid typeId, Guid parentId, string eventData)
 ----
 
-Параметры
-
-eventType::
+Параметры::
+eventType:::
 Тип: xref:api/DocsVision/Platform/ObjectManager/EventType_EN.adoc[EventType]
 +
 Тип сообщения
-eventOperation::
+eventOperation:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]
 +
 Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код 0)
-resourceName::
+resourceName:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
 +
 Имя объекта, с которым произведена операция (формируется в зависимости от контекста -- например, при операциях с карточкой это может быть её описание)
-resourceId::
+resourceId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Идентификатор объекта, с которым производится операция (ID карточки, строки, файла и т.д.)
-typeId::
+typeId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Тип объекта (например, для карточки -- CardTypeID)
-parentId::
+parentId:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]
 +
 Идентификатор родительского объекта (например, для операции со строкой -- родительским объектом будет секция)
-eventData::
+eventData:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]
 +
 Любые дополнительные данные, связанные с событием

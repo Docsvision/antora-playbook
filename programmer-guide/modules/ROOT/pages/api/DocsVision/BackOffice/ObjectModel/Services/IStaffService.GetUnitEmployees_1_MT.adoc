@@ -12,25 +12,24 @@
 IList<StaffEmployee> GetUnitEmployees(StaffUnit unit, bool hierarchy, bool selection, bool useNotAvailable, bool useNotSearchable)
 ----
 
-Параметры
-
-unit::
+Параметры::
+unit:::
 Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]
 +
 Подразделение, из которого возвращается список сотрудников
-hierarchy::
+hierarchy:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 При true в итоговый список сотрудников. будут включены все подчиненные сотрудники, при false только подчиненные непосредственно unit
-selection::
+selection:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 При true будут учтены значения useNotAvailable и useNotSearchable
-useNotAvailable::
+useNotAvailable:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 Если true, то из результата будут исключены сотрудники с флагом NotAvailable
-useNotSearchable::
+useNotSearchable:::
 Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
 +
 Если true, то из результата будут исключены сотрудники с флагом NotSearchable

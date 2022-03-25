@@ -1,0 +1,63 @@
+= RowCopy
+
+Копирует строку секции.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowCopy"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowCopy xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <sectionId>guid</sectionId>
+      <rowId>guid</rowId>
+      <newRowId>guid</newRowId>
+      <newInstanceId>guid</newInstanceId>
+      <newParentRowId>guid</newParentRowId>
+      <newParentTreeRowId>guid</newParentTreeRowId>
+    </RowCopy>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+sectionId:::
+Идентификатор секции
+rowId:::
+Идентификатор копируемой строки
+newRowId:::
+Идентификатор копии строки
+newInstanceId:::
+Идентификатор экземпляра карточки, в которую копируется строка
+newParentRowId:::
+Идентификатор родительской строки, если копируемая строка должна быть подчиненной
+newParentTreeRowId:::
+Идентификатор родительской строки, если копируемая строка должна быть подчиненной в иерархической секции
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowCopyResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newServerRowId>guid</newServerRowId>
+    </RowCopyResponse>
+  </soap:Body>
+</soap:Envelope>
+----

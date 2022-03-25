@@ -1,0 +1,71 @@
+= SessionGetSettings
+
+Возвращает данные пользовательской сессии.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionGetSettings"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetSettings xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+    </SessionGetSettings>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии, для которой запрашиваются сведения
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetSettingsResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <settings>string</settings>
+    </SessionGetSettingsResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит полный набор сведений о пользовательской сессии (см. xref:appendix/user-session-properties.adoc[Список свойств пользовательской сессии]).
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/SessionGetSettings" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <SessionGetSettings xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>9aef2367-7792-e511-9417-90e6ba57b9f8</sessionId>
+    </SessionGetSettings>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+
+print(response.content) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Ответ SOAP.
