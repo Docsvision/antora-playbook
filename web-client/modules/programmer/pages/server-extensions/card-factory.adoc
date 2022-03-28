@@ -61,7 +61,7 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
     {
         base.Save(sessionContext, cardId);
         var objectContext = sessionContext.ObjectContext;
-        var document = objectContext.GetObject<{dv}.BackOffice.ObjectModel.Document>(cardId);
+        var document = objectContext.GetObject<Docsvision.BackOffice.ObjectModel.Document>(cardId);
         document.MainInfo.Name = "Принудительно установленное наименование документа";
         
         objectContext.AcceptChanges();

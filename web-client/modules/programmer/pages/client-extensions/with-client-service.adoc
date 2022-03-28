@@ -14,9 +14,9 @@ IMPORTANT: Разрабатываемый сервис и его "потреби
 +
 [source,typescript]
 ----
-import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
-import { urlStore } from "@{dv}/webclient/System/UrlStore";
-import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
+import { urlStore } from "@Docsvision/webclient/System/UrlStore";
+import { serviceName } from "@Docsvision/webclient/System/ServiceUtils";
 
 export class CardService {
     constructor(private services: $RequestManager) {
@@ -46,9 +46,9 @@ export const $CardService = serviceName((s: $CardService) => s.cardService); <.>
 [source,typescript]
 ----
 import { $CardService, CardService } from "./WebService"; <.>
-import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
-import { Service } from "@{dv}/webclient/System/Service";
-import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
+import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
+import { Service } from "@Docsvision/webclient/System/Service";
+import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
 
 extensionManager.registerExtension({
     name: "Client extension with service",

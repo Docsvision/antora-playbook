@@ -13,9 +13,9 @@
 
 [source,typescript]
 ----
-import { Employee } from "@{dv}/webclient/BackOffice/Employee";
-import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
-import { MessageBox } from "@{dv}/webclient/Helpers/MessageBox/MessageBox";
+import { Employee } from "@Docsvision/webclient/BackOffice/Employee";
+import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
+import { MessageBox } from "@Docsvision/webclient/Helpers/MessageBox/MessageBox";
 
 export function someHandler(sender: Employee, e: IEventArgs) { <.>
 
@@ -42,7 +42,7 @@ export function someHandler(sender: Employee, e: IEventArgs) { <.>
 [source,typescript]
 ----
 import * as Handlers from "./FileWithHandlers"; <.>
-import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
+import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
 
 extensionManager.registerExtension({
  name: "My web Extension",

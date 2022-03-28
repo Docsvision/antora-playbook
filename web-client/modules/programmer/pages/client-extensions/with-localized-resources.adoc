@@ -10,7 +10,7 @@
 +
 [source,typescript]
 ----
-import { ILocalizationsMap } from "@{dv}/webclient/System/ILocalizationsMap"; <.>
+import { ILocalizationsMap } from "@Docsvision/webclient/System/ILocalizationsMap"; <.>
    
 export function getLocalizedResources(): ILocalizationsMap {
     let cultureMap: ILocalizationsMap = {};
@@ -46,8 +46,8 @@ cultureMap["ru"] = {
 [source,typescript]
 ----
 import { getLocalizedResources } from "./LocalizedResource"; <.>
-import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
-import { ILocalizationsMap } from "@{dv}/webclient/System/ILocalizationsMap";
+import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
+import { ILocalizationsMap } from "@Docsvision/webclient/System/ILocalizationsMap";
 
 extensionManager.registerExtension({ <.>
     name: "Client extension with localization",
@@ -80,9 +80,9 @@ TIP: Проверить работоспособность расширения 
 
 [source,typescript]
 ----
-import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
-import { urlStore } from "@{dv}/webclient/System/UrlStore";
-import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
+import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
+import { urlStore } from "@Docsvision/webclient/System/UrlStore";
+import { serviceName } from "@Docsvision/webclient/System/ServiceUtils";
 
 export class CardService {
 constructor(private services: $RequestManager) {

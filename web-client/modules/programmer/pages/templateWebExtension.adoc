@@ -23,7 +23,7 @@
 [source,ts]
 ----
 import * as EventHandlers from "./EventHandlers";
-import { extensionManager } from "@{dv}/webclient/System/ExtensionManager";
+import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
 
 extensionManager.registerExtension({ <.>
     name: "Template web extension",
@@ -43,7 +43,7 @@ import * as NewEventHandlers from "./Scripts/NewEventHandlers"; <.>
 ----
 <.> Добавлена строчка импорта из файла /Scripts/NewEventHandlers.
 
-Команда `import { extensionManager } from "@{dv}/webclient/System/ExtensionManager"` импортирует из модуля "@{dv}/webclient/System/ExtensionManager" сущность extensionManager (менеджер расширений).
+Команда `import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager"` импортирует из модуля "@Docsvision/webclient/System/ExtensionManager" сущность extensionManager (менеджер расширений).
 
 Команда `extensionManager.registerExtension({ … })` регистрирует клиентское расширение с названием `Template web extension`, которое предоставляет глобальные обработчики (`globalEventHandlers`).
 
@@ -59,8 +59,8 @@ globalEventHandlers: [ EventHandlers, NewEventHandlers] <.>
 .Содержимое файла:
 [source,typescript]
 ----
-import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
-import { Layout } from "@{dv}/webclient/System/Layout";
+import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
+import { Layout } from "@Docsvision/webclient/System/Layout";
 
 export function someHandler(sender: Layout, e: IEventArgs) { <.>
     ...
@@ -87,9 +87,9 @@ export function newHandler(sender: Employee, e: IEventArgs) { <.>
 
 [source,typescript]
 ----
-import { Employee } from "@{dv}/webclient/BackOffice/Employee";
-import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
-import { MessageBox } from "@{dv}/webclient/Helpers/MessageBox/MessageBox"; <.>
+import { Employee } from "@Docsvision/webclient/BackOffice/Employee";
+import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
+import { MessageBox } from "@Docsvision/webclient/Helpers/MessageBox/MessageBox"; <.>
 
 export function changeEmployeeHandler(sender: Employee, e: IEventArgs) { <.>
   MessageBox.ShowInfo(sender.params.value.displayName); 

@@ -24,9 +24,9 @@ TIP: Полный код примера доступен в репозитори
 .Файл `_Controllers\ServiceController.cs_`
 [source,csharp]
 ----
-using {dv}.Platform.WebClient.Models.RealTimeCommunication;
-using {dv}.Platform.WebClient.Models.RealTimeCommunication.NotificationMessage;
-using {dv}.Platform.WebClient.Services;
+using Docsvision.Platform.WebClient.Models.RealTimeCommunication;
+using Docsvision.Platform.WebClient.Models.RealTimeCommunication.NotificationMessage;
+using Docsvision.Platform.WebClient.Services;
 using System;
 using System.Web.Http;
 
@@ -67,9 +67,9 @@ namespace SignalForUsersExtension
 .Файл `_src\MessageService.tsx_`
 [source,typescript]
 ----
-import { serviceName } from "@{dv}/webclient/System/ServiceUtils";
-import { $RequestManager } from "@{dv}/webclient/System/$RequestManager";
-import { urlStore } from "@{dv}/webclient/System/UrlStore";
+import { serviceName } from "@Docsvision/webclient/System/ServiceUtils";
+import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
+import { urlStore } from "@Docsvision/webclient/System/UrlStore";
 
 export class MessageService { <.>
     constructor(private services: $RequestManager) {
@@ -106,10 +106,10 @@ export enum MessageType {
 .Файл `_src\EventHandlers.tsx_`
 [source,typescript]
 ----
-import { IEventArgs } from "@{dv}/webclient/System/IEventArgs";
-import { Layout } from "@{dv}/webclient/System/Layout";
+import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
+import { Layout } from "@Docsvision/webclient/System/Layout";
 import { $MessageService, MessageType, MessageService } from "./MessageService";
-import { layoutManager } from "@{dv}/webclient/System/LayoutManager";
+import { layoutManager } from "@Docsvision/webclient/System/LayoutManager";
 
 export function sendMessage(sender: Layout, e: IEventArgs) { <.>
    let messageService = layoutManager.cardLayout.getService<MessageService>($MessageService);
