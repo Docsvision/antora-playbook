@@ -2,12 +2,12 @@
 
 . Откройте _Конструктор скриптов_.
 . Выберите вид _Документ УД Рабочий_.
-. В секцию using добавьте `using {dv}.Platform.CardHost`.
+. В секцию using добавьте `using Docsvision.Platform.CardHost`.
 . Добавьте следующий код:
 +
 [source,csharp]
 ----
- public override void CardActivated({dv}.Platform.WinForms.CardActivatedEventArgs e) <.>
+ public override void CardActivated(Docsvision.Platform.WinForms.CardActivatedEventArgs e) <.>
  {
  if ((e.ActivateFlags &amp; ActivateFlags.NewFromTemplate) == ActivateFlags.NewFromTemplate || (e.ActivateFlags &amp; ActivateFlags.New) == ActivateFlags.New)
  this.DocumentHelper.FillWorkGroup();
