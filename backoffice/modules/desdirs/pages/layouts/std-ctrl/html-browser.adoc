@@ -32,7 +32,7 @@ XSLT-преобразование::
 .Пример скрипта для события карточки "CardActivated":
 [source,javascript]
 ----
-private void Документ_CardActivated(System.Object sender, {dv}.Platform.WinForms.CardActivatedEventArgs e)
+private void Документ_CardActivated(System.Object sender, Docsvision.Platform.WinForms.CardActivatedEventArgs e)
 {
  var browser = (this.CardControl as ICustomizableControl).FindPropertyItem<HtmlBrowser>("BrowserName");
  var fieldInfo = browser.GetType().BaseType.GetField("cardData", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic); 
