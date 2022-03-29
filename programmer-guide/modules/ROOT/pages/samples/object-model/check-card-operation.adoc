@@ -1,0 +1,25 @@
+= Проверка допустимости выполнения операции над карточкой
+
+Использование сервисов состояний и прав доступа для проверки допустимости выполнения операции над карточкой.
+
+.Пример проверки допустимости выполнения встроенной операции `TakeToWorkOperation` для карточки задания:
+[source,csharp]
+----
+ObjectContext context = GetContext(); <.>
+
+Guid taskId = GetTaskId(); <.>
+
+Task task = context.GetObject<Task>(taskId); <.>
+
+ObjectModel.Services.IStateService stateService = context.GetService<ObjectModel.Services.IStateService>(); <.>
+
+ObjectModel.Services.IAccessCheckingService accessService = context.GetService<ObjectModel.Services.IAccessCheckingService>(); <.>
+
+bool operationAllowed = stateService.IsOperationAllowed(Task.TakeToWorkOperation, task) && accessService.IsOperationAllowed(task, Task.TakeToWorkOperation); <.>
+----
+<.> Получаем контекст.
+<.> Получаем идентификатор задания.
+<.> Получаем задание.
+<.> Получаем сервис состояний.
+<.> Получаем сервис проверки доступа.
+<.> Используем сервис для проверки разрешённости операции по состояниям и по правам доступа.

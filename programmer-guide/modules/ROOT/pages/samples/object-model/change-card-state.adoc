@@ -1,0 +1,35 @@
+= Изменение состояния карточки
+
+.Пример кода, переводящего карточку группового задания в завершенное состояние:
+[source,csharp]
+----
+ObjectContext context = this.LocalContext; <.>
+            
+BaseCard taskGroupCard = GetParentCard(); <.>
+
+if (taskGroupCard != null)
+{
+    if (this.LocalContext.LockObject(taskGroupCard, false)) <.>
+    {
+        ObjectModel.Services.IStateService stateService = context.GetService<ObjectModel.Services.IStateService>(); <.>
+
+        StatesStateMachineBranch branch = stateService.FindBranchByBuiltIn(TaskGroup.PerformanceToCompletedByCompleteBranch, taskGroupCard.SystemInfo.State); <.>
+        if (branch = null)
+            return false;
+
+        taskGroupCard.SystemInfo.State = branch.EndState; <.>
+
+        this.LocalContext.SaveObject<BaseCard>(taskGroupCard); <.>
+
+        this.LocalContext.UnlockObject(taskGroupCard); <.>
+    }
+}
+----
+<.> Получаем контекст.
+<.> Получаем карточку.
+<.> Блокируем карточку.
+<.> Получаем сервис состояний.
+<.> Получаем ветку перехода по встроенной ветке перехода.
+<.> Получаем конечное состояние веки и присваиваем его полю состояния в карточке.
+<.> Сохраняем карточку группового задания.
+<.> Разблокируем карточку.

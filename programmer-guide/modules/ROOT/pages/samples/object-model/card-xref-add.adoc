@@ -1,0 +1,40 @@
+= Добавление ссылки на другую карточку к карточке документа
+
+Ниже приведен пример добавления ссылки на карточку библиотеки _{bo}_ в карточку типа Документ:
+
+[source,csharp]
+----
+<.>
+    
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+LinksLinkType linkType = objectContext.GetObject<LinksLinkType>(new Guid("502F7FE3-477F-492F-9F43-ED2AA7CB32D9")); <.>
+
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>(); <.>
+
+ReferenceList referenceList = document.MainInfo.ReferenceList;
+if (referenceList = null) <.>
+{
+ referenceList = referenceListService.CreateReferenceList(); <.>
+ 
+ document.MainInfo.ReferenceList = referenceList;
+}
+
+referenceListService.CreateReference(referenceList, linkType, card, string.Empty, false); <.>
+
+objectContext.SaveObject<Document>(document); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение документа, в который добавляется ссылка.
+<.> Идентификатор карточки, которая должна быть добавлена в виде ссылки.
+<.> Получение типа ссылки (в примере соответствует типу "В ответ на").
++
+Идентификатор может быть получен из Справочника ссылок.
++
+<.> Получение сервиса для работы со списками ссылок.
+<.> Получение существующего списка ссылок из документа, либо создание нового.
+<.> Создаем список ссылок и сохраняем его в карточку документа.
+<.> Создание слабой ссылки на карточку.
+<.> Сохранение документа.

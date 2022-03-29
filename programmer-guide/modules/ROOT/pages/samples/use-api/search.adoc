@@ -8,41 +8,42 @@ private void Поиск_Click(System.Object sender, System.EventArgs e)
 {
  ICustomizableControl control = CardControl;
 
- // Получение элементов управления, в которых указаны необходимые данные
  ILayoutPropertyItem cardName = control.FindPropertyItem<ILayoutPropertyItem>("Название");
  ILayoutPropertyItem cardAuthorId = control.FindPropertyItem<ILayoutPropertyItem>("Автор");
- ILayoutPropertyItem cardCreateBy = control.FindPropertyItem<ILayoutPropertyItem>("ДатаСозданияОт");
+ ILayoutPropertyItem cardCreateBy = control.FindPropertyItem<ILayoutPropertyItem>("ДатаСозданияОт"); <.>
     
  if(cardName = null || cardAuthorId = null || cardCreateBy = null) return;
 
- // Организация атрибутивного поиска по секции MainInfo карточек типа Документ           
- SearchQuery searchQuery = this.Session.CreateSearchQuery();            
+ SearchQuery searchQuery = this.Session.CreateSearchQuery(); <.>
  CardTypeQuery cardTypeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(CardDocument.ID);
  SectionQuery sectionQuery = cardTypeQuery.SectionQueries.AddNew(CardDocument.MainInfo.ID); 
- sectionQuery.ConditionGroup.Operation = ConditionGroupOperation.And; // Искомые карточки должны удовлетворять всем условиям
+ sectionQuery.ConditionGroup.Operation = ConditionGroupOperation.And; <.>
 
- // Добавление условия поиска по названию документа
  string cardNameValue = cardName.ControlValue as string;
- if(!string.IsNullOrEmpty(cardNameValue))
+ if(!string.IsNullOrEmpty(cardNameValue)) <.>
  {
   sectionQuery.ConditionGroup.Conditions.AddNew(CardDocument.MainInfo.Name, FieldType.Unistring, ConditionOperation.Contains, cardNameValue);
  }
 
- // Добавление условия поиска по автору документа
  Guid cardAuthorIdValue = (Guid)cardAuthorId.ControlValue;
- if(cardAuthorIdValue != Guid.Empty)
+ if(cardAuthorIdValue != Guid.Empty) <.>
  {
   sectionQuery.ConditionGroup.Conditions.AddNew(CardDocument.MainInfo.Author, FieldType.RefId, ConditionOperation.Equals, cardAuthorIdValue);
  }
 
- // Добавление условия поиска по дате создания документа
  DateTime? cardCreateByValue = (DateTime?)cardCreateBy.ControlValue;
- if(cardCreateByValue.HasValue)
+ if(cardCreateByValue.HasValue) <.>
  {
   sectionQuery.ConditionGroup.Conditions.AddNew(CardDocument.MainInfo.RegDate, FieldType.Unistring, ConditionOperation.GreaterEqual, cardCreateByValue.Value.Date);
  }
 
- // Результат поиска, который может быть выведен, к примеру, в список на карточке
- CardDataCollection result = Session.CardManager.FindCards(searchQuery.GetXml());
+ CardDataCollection result = Session.CardManager.FindCards(searchQuery.GetXml()); <.>
 }
 ----
+<.> Получение элементов управления, в которых указаны необходимые данные.
+<.> Организация атрибутивного поиска по секции `MainInfo` карточек типа Документ.
+<.> Искомые карточки должны удовлетворять всем условиям.
+<.> Добавление условия поиска по названию документа.
+<.> Добавление условия поиска по автору документа.
+<.> Добавление условия поиска по дате создания документа.
+<.> Результат поиска, который может быть выведен, к примеру, в список на карточке.

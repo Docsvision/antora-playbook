@@ -1,0 +1,34 @@
+= Пример использования режима отложенных изменений
+
+В следующем примере в текущей сессии `userSession` мы получаем данные карточки. Активировав режим отложенных изменений для карточки, мы проводим изменение секции `MainInfo`, после чего отключаем режим отложенных изменений.
+
+[source,csharp]
+----
+CardData cardData = userSession.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
+
+if (!cardData.InUpdate) cardData.BeginUpdate(); <.>
+
+try
+{
+    SectionData sectionData = cardData.Sections[card.Type.Sections["MainInfo"].Id]; <.>
+
+    RowData rowData = sectionData.FirstRow; <.>
+
+    rowData["Author"] = "Иванов";
+    rowData["Number"] = 11;
+    rowData["CreationDate"] = DateTime.Now; <.>
+    
+    cardData.EndUpdate(); <.>
+}
+catch(Exception ex)
+{
+   if (cardData.InUpdate) cardData.CancelUpdate(); <.>
+}
+----
+<.> Получение с сервера данных карточки с известным идентификатором.
+<.> Включение режима отложенных изменений.
+<.> Получение данных секции с именем `MainInfo`.
+<.> Получение первой строки секции, если строки нет -- она будет создана.
+<.> Запись значений в поля.
+<.> Выключение режима отложенных изменений, передача всех изменений на сервер.
+<.> При возникновении ошибки -- отмена всех изменений.

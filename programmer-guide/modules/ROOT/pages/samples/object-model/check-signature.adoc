@@ -1,0 +1,25 @@
+= Проверка действительности ЭЦП в документе
+
+Ниже приведен пример проверки действительности подписи, установленной на поля документа. В этом случае проверка подписи на файлах не проводится. Для проверки вызывается метод `CheckActualSignature` сервиса документов `IDocumentService`.
+
+[source,csharp]
+----
+IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>();
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+var fields = documentService.GetKindSettings(document.SystemInfo.CardKind).DocumentSignature.Fields; <.>
+            
+foreach (var item in document.MainInfo.SignatureList.Signatures)
+{
+ X509Certificate2 certificate = iUserProfileCardService.GetCertificate(item.Signer.AccountName); <.>
+ 
+ bool isCheckOk = documentService.CheckActualSignature(document, fields, item); <.>
+ Console.WriteLine("{0} -- {1}",item.Signer.DisplayName, isCheckOk);
+}
+----
+<.> Получение документа с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Получение списка подписываемых полей в данном виде документа.
+<.> Получение сертификата из профиля пользователя подписавшего документ (`item.Signer`).
+<.> Проверка подписи, при `true` -- подпись действительна.
