@@ -6,11 +6,11 @@
 
 . Создать проект (MS Visual Studio) типа "Class Library".
 . Создайте элемент управления "User Control" (Windows Forms).
-. Измените базовый класс элемента управления с UserControl на xref:api/DocsVision/Platform/WinForms/NavExtension_CL.adoc[NavExtension].
+. Измените базовый класс элемента управления с UserControl на xref:api/DocsVision/Platform/WinForms/NavExtension_CL.adoc[`NavExtension`].
 . Переопределить необходимые методы и свойства базового класса (см. пример).
 . Создать библиотеку карточек (доступна в архиве проекта), включив в неё карточку использующую созданный компонент.
 . Зарегистрировать реализованный компонент в GAC (предпочтительно) на всех клиентских машинах.
-. Зарегистрировать с использованием программы "CardManager", входящей в Resource Kit созданную библиотеку карточек на сервере Docsvision.
+. Зарегистрировать с использованием программы CardManager, входящей в Resource Kit, созданную библиотеку карточек на сервере {dv}.
 
 [source,csharp]
 ----
@@ -32,8 +32,7 @@ namespace DocsVision.Test.NavPluging
  {
   public Plugin() { }
 
-  // Тип расширения
-  protected override NavExtensionTypes SupportedTypes
+  protected override NavExtensionTypes SupportedTypes <.>
   {
    get
    {
@@ -41,23 +40,20 @@ namespace DocsVision.Test.NavPluging
    }
   }
 
-  // Название расширения
-  protected override string GetExtensionName(NavExtensionTypes extensionType)
+  protected override string GetExtensionName(NavExtensionTypes extensionType) <.>
   {
    return "Быстрый выбор";
   }
 
-  // Инициализация списка команд
-  protected override IEnumerable<NavCommand> CreateCommands()
+  protected override IEnumerable<NavCommand> CreateCommands() <.>
   {
    NavCommand myCommand = new NavCommand();
-   myCommand.CommandType = NavCommandTypes.ToolBar; // В данном случае -- команда размещается на ленте инструментов
+   myCommand.CommandType = NavCommandTypes.ToolBar; <.> // В данном случае -- команда размещается на ленте инструментов
    myCommand.Name = "Выбрать папку";
    myCommand.Description = "Команда выбирает заданную папку";
    myCommand.Location = new NavCommandLocation()
    {
-    // Создание вкладки на панели инструментов, для помещения в ней новой команды
-    RibbonTabLocations = new RibbonTabLocation[]
+    RibbonTabLocations = new RibbonTabLocation[] <.>
     { 
      new RibbonTabLocation
      {
@@ -69,24 +65,19 @@ namespace DocsVision.Test.NavPluging
    return new List<NavCommand> { myCommand };
   }
 
-  // Проверка команды на доступность 
-  protected override NavCommandStatus QueryCommandStatus(NavCommand command, NavCommandContext context)
+  protected override NavCommandStatus QueryCommandStatus(NavCommand command, NavCommandContext context) <.>
   {
-   return NavCommandStatus.Enabled | NavCommandStatus.Supported; // всегда доступна
+   return NavCommandStatus.Enabled | NavCommandStatus.Supported; <.>
   }
   
-  // Непосредственное исполнение команды расширения
-  protected override void InvokeCommand(NavCommand command, NavCommandContext context)
+  protected override void InvokeCommand(NavCommand command, NavCommandContext context) <.>
   {
    string accountName = base.Session.Properties["AccountName"].Value.ToString();
 
-   // Идентификаторы Справочника сотрудников и секции Сотрудники
-   Guid RefStaff = new Guid("6710B92A-E148-4363-8A6F-1AA0EB18936C");
-   Guid Employees = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482");
+   Guid Employees = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482"); <.>
 
-   // Поиск в секции Сотрудники сотрудника с учетной записью accountName (учетная запись текущего сотрудника)
    SectionQuery sectionQuery = base.Session.CreateSectionQuery();
-   sectionQuery.ConditionGroup.Conditions.AddNew("AccountName", FieldType.String, ConditionOperation.Equals, accountName);
+   sectionQuery.ConditionGroup.Conditions.AddNew("AccountName", FieldType.String, ConditionOperation.Equals, accountName); <.>
 
    CardData staffData = base.Session.CardManager.GetDictionaryData(RefStaff, false);
    RowDataCollection users = staffData.Sections[Employees].FindRows(sectionQuery.GetXml());
@@ -94,25 +85,35 @@ namespace DocsVision.Test.NavPluging
    if (users.Count > 0)
    {
 
-    // Получение Личной папки
-    Guid? personalFolderID = users[0].GetGuid("PersonalFolder");
+    Guid? personalFolderID = users[0].GetGuid("PersonalFolder"); <.>
     if (personalFolderID.HasValue)
     {
 
-     // Установка курсора на папку
-     CardFrame.CardHost.ActivateFolder(personalFolderID.Value, true);
+     CardFrame.CardHost.ActivateFolder(personalFolderID.Value, true); <.>
     }
    }
   }
  }
 }
 ----
+<.> Тип расширения.
+<.> Название расширения.
+<.> Инициализация списка команд.
+<.> Создание вкладки на панели инструментов, для помещения в ней новой команды.
+<.> Проверка команды на доступность.
+<.> Команда всегда доступна.
+<.> Непосредственное исполнение команды расширения.
+<.> Идентификаторы Справочника сотрудников и секции Сотрудники
+   `Guid RefStaff = new Guid("6710B92A-E148-4363-8A6F-1AA0EB18936C")`.
+<.> Поиск в секции Сотрудники сотрудника с учетной записью `accountName` (учетная запись текущего сотрудника).
+<.> Получение личной папки.
+<.> Установка курсора на папку.
 
-В реализуемых методах, проверка параметра command не выполняется, однако в реальных проектах это может понадобиться.
+В реализуемых методах, проверка параметра `command` не выполняется, однако в реальных проектах это может понадобиться.
 
 [IMPORTANT]
 ====
-Готовая сборка должна иметь строгое имя (см. http://msdn.microsoft.com/ru-ru/library/xwb8f617.aspx[Создание и использование сборок со строгими именами]).
+Готовая сборка должна иметь строгое имя, см. http://msdn.microsoft.com/ru-ru/library/xwb8f617.aspx[Создание и использование сборок со строгими именами].
 ====
 
 [NOTE]

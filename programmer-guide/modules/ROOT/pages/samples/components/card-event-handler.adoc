@@ -20,30 +20,25 @@ namespace DocsVision.Test
 
         public TestCard() { }
 
-        //инициируется после создания компонента карточки, и передачи ей актуальных данных.
-        protected override void OnCardInitialized(EventArgs e)
+        protected override void OnCardInitialized(EventArgs e) <.>
         {
             base.OnCardInitialized(e);
             InitializeComponent();
         }
 
-        //инициируется после активации компонента карточки {wincl}ом
-        protected override void OnCardActivated(CardActivatedEventArgs e)
+        protected override void OnCardActivated(CardActivatedEventArgs e) <.>
         {
             base.OnCardActivated(e);
             
-            //проверка режим редактирования, либо чтения
             isReadOnly = (e.ActivateMode != ActivateMode.Edit);
-            isChanged = ((e.ActivateFlags & ActivateFlags.New) = ActivateFlags.New);
+            isChanged = ((e.ActivateFlags & ActivateFlags.New) = ActivateFlags.New); <.>
         }
 
-        //возникает до закрытия пользовательского интерфейса карточки
-        protected override void OnCardClosing(CardClosingEventArgs e)
+        protected override void OnCardClosing(CardClosingEventArgs e) <.>
         {
             base.OnCardClosing(e);
 
-            //карточка будет сохранять данные только при ActivateMode.Edit и наличии изменений
-            if (!isReadOnly && isChanged)
+            if (!isReadOnly && isChanged) <.>
             {
                 e.ActionFlags = ActionFlags.None;
                 MessageResult result = ShowMessage("Сохранить изменения?", "Карточка", null,
@@ -67,3 +62,8 @@ namespace DocsVision.Test
     }
 }
 ----
+<.> Инициируется после создания компонента карточки, и передачи ей актуальных данных..
+<.> Инициируется после активации компонента карточки {wincl}ом.
+<.> Проверка режим редактирования, либо чтения.
+<.> Возникает до закрытия пользовательского интерфейса карточки.
+<.> Карточка будет сохранять данные только при `ActivateMode.Edit` и наличии изменений.
