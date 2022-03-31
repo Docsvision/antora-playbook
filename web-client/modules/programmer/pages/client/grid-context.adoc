@@ -1,0 +1,176 @@
+= Расширить контекстное меню
+
+Грид позволяет расширить функциональность контекстного меню при помощи расширений. Данное расширение представляет собой клиентский скрипт, позволяющий добавить новый пункт контекстного меню. Новый пункт контекстного меню позволяет карточку в модальном окне или скрыть существующий элемент.
+
+CAUTION: Данный пример демонстрирует только изменение контекстного меню в таблице с помощью скрипта.
+
+//tag::start[]
+Начальный код расширения должен импортировать прямо или косвенно все остальные строки, чтобы затем объединить код в один пакет.
+//end::start[]
+
+[source,typescript]
+----
+extensionManager.registerExtension({ <.>
+    name: "GridContextMenuItem",
+    version: "5.5.17",
+    initialize() {
+        app.folderPluginProvider.addFactory(new GridContextMenuItemPluginFactory());
+    },
+})
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
+== Добавить новый пункт контекстного меню
+
+Расширение добавляет пункт контекстного меню, который открывает карточку в модальном окне.
+
+[source,typescript]
+----
+export const AddContextMenuItemProvider: TablePlugins.ServiceProvider<$ContextMenuOptions & $FolderGrid & $LayoutCardController & $DeviceType & $LayoutManager> = {
+    name: "AddContextMenuItemProvider",
+    description: "Добавляет пункт контекстного меню, который открывает карточку в модальном окне",
+    feature: GridContextMenuItemFeature,
+    composition: TableCompositionNames.Root,
+    addServices: (composition) => {
+        const { contextMenuOptions, folderGrid } = composition.services;
+
+        if (contextMenuOptions) {
+
+            const isAdded = contextMenuOptions.isAddedProvider(CONTEXT_MENU_ITEM_CUSTOM_PROVIDER_ID, TableCompositionNames.TableCell); <.>
+
+            if (!isAdded) {
+                const provider = {
+                    id: CONTEXT_MENU_ITEM_CUSTOM_PROVIDER_ID, <.>
+                    composition: TableCompositionNames.TableCell, <.>
+                    getItemsToAdd: () => ([ <.>
+                        {
+                            id: "CONTEXT_MENU_CUSTOM_ITEM", <.>
+                            name: "Предпросмотр карточки", <.>
+                            action: (context: TableCompositions.Cell) => showCard(context, composition.services), <.>
+                            blockId: folderGrid?.getContextMenuBlockNames().linkOperation, <.>
+                            order: 0, <.>
+                        }
+                    ])
+                } as IDataItemProvider;
+
+                contextMenuOptions.addItemProvider(provider);
+            }
+        }
+    }
+};
+----
+<.> Поскольку метод `addServices` вызывается при каждой прорисовке, проверим не был ли добавлен ранее наш провайдер.
+<.> Уникальный ID провайдера, содержащего элементы списка контекстного меню.
+<.> Композиция, где будет вызвано контекстное меню.
+<.> Метод, который возвращает массив элементов контекстного меню.
+<.> Уникальный ID элемента контекстного меню.
++
+В данном примере с помощью ID осуществляется доступ к скрытию элемента контекстного меню.
++
+<.> Отображаемое название элемента контекстного меню.
+<.> Метод, который будет вызван после клика на элемент контекстного меню.
+<.> Указание на расположение элемента в блоке элементов контекстного меню.
+<.> Порядковый номер расположения элемента в блоке элементов контекстного меню.
+
+== Скрыть пункт контекстного меню
+
+Следующий пример скрывает пункт "Открыть" в контекстном меню грида.
+
+[source,typescript]
+----
+export const HideContextMenuItemProvider: TablePlugins.ServiceProvider<$ContextMenuOptions> = {
+    name: "HideContextMenuItemProvider",
+    description: "Скрывает пункт «Открыть» в контекстном меню",
+    feature: GridContextMenuItemFeature,
+    composition: TableCompositionNames.Root,
+    addServices: (composition) => {
+        const { contextMenuOptions } = composition.services;
+
+        if (contextMenuOptions) {
+
+            const isAdded = contextMenuOptions.isAddedFilter(CONTEXT_MENU_ITEM_CUSTOM_FILTER_ID, TableCompositionNames.TableCell); <.>
+
+            if (!isAdded) {
+                const filter = {
+                    id: CONTEXT_MENU_ITEM_CUSTOM_FILTER_ID, <.>
+                    composition: TableCompositionNames.TableCell, <.>
+                    getItemsToHide: () => [CONTEXT_MENU_FOLDER_OPEN_ID] <.>
+                } as IDataItemFilter;
+
+                contextMenuOptions.addItemFilter(filter);
+            }
+        }
+    }
+};
+----
+<.> Поскольку метод `addServices` вызывается при каждой прорисовке, проверим не был ли добавлен ранее наш фильтр.
+<.> Уникальный ID фильтра.
+<.> Композиция, где будет вызвано контекстное меню.
+<.> Метод, который возвращает массив ID элементов контекстного меню.
+
+== Отображение модального окна
+
+Данный пример демонстрирует создание и отображение модального окна.
+
+[source,typescript]
+----
+export async function showCard(context: TableCompositions.Cell, services: $ContextMenuOptions & $FolderGrid & $LayoutCardController & $DeviceType & $LayoutManager) {
+    const modalHost = new CommonModalDialogHost("grid-context-menu__card-layout", services); <.>
+
+    <.>
+
+    modalHost.dialogProps.header = "Предпросмотр"; <.>
+
+    modalHost.dialogProps.maxWidth = "80vw"; <.>
+
+    modalHost.dialogProps.maxHeight = "80vh"; <.>
+
+    modalHost.dialogProps.maximizeButtonEnabled = true;
+    modalHost.dialogProps.onMaximize = () => {
+        modalHost.dialogProps.maximized = !modalHost.dialogProps.maximized;
+        modalHost.forceUpdate(); <.>
+    }
+
+    modalHost.onCancelCallback = () => services.layoutManager.destroy(GRID_CONTEXT_MENU_SHOW_CARD_LOCATION_NAME); <.>
+
+    const renderLoading = (state: LoadingState) => <LoadingViewWithText state={state} className="padding-20 margin-30" />; <.>
+
+    const loadLayout = async (): Promise<GenModels.LayoutViewModel> => { <.>
+        const model = await services.layoutCardController.view(context.data.row.entityId, PlatformModeConditionTypes.VIEW);
+        return model;
+    }
+
+    const dialogServices = addServices(services, modalHost.service, true); <.>
+
+    modalHost.renderCallback = () => (
+        <LocationContainerControl
+            async={true}
+            renderLoadingState={renderLoading}
+            customLayoutLoader={loadLayout} <.>
+            locationName={GRID_CONTEXT_MENU_SHOW_CARD_LOCATION_NAME}
+            services={dialogServices}
+            name={GRID_CONTEXT_MENU_SHOW_CARD_LOCATION_NAME} />
+    );
+
+    await modalHost.showDialog(); <.>
+}
+----
+<.> Модальное окно.
+<.> Конфигурируем модальное окно.
+<.> Заголовок модального окна.
+<.> Максимальная ширина.
+<.> Максимальная высота.
+<.> Изменение отображения модального окна (свернуть / развернуть).
+<.> Обработчик закрытия модального окна.
+<.> Отображение текста загрузки разметки.
+<.> Получение разметки карточки в режиме просмотра.
+<.> Сервисы модального окна.
+<.> Тело модального окна.
+<.> Показываем модальное окно.
+
+
+== Проверка примера
+
+. Откройте папку с таблицей и вызовите контекстное меню у произвольной карточки.
+. Кликните на пункт "Предпросмотр карточки" в контекстном меню.
+. Убедитесь, что открылось модальное окно "Предпросмотр", в котором отображается разметка просмотра выбранной карточки.

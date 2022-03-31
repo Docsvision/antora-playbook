@@ -1,0 +1,83 @@
+= Отобразить количество непрочитанных карточек
+
+Расширение в данном примере предназначено для добавления кнопки на панель инструментов грида. Расширение получает список карточек и по нажатию на кнопку отображает общее количество карточек, а также количество непрочитанных.
+
+CAUTION: Данный пример демонстрирует только изменение панели настроек в таблице с помощью скрипта.
+
+include::grid-context.adoc[tags=start]
+
+[source,typescript]
+----
+extensionManager.registerExtension({ <.>
+    name: "GridToolbarButton",
+    version: "5.5.17",
+    initialize() {
+        app.folderPluginProvider.addFactory(new ToolbarButtonPluginFactory());
+    },
+})
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
+.Следующим шагом необходимо получить количество карточек:
+[source,typescript]
+----
+export function ToolbarButtonMessageContent(props: IToolbarButtonMessageContent) {
+    const { data, services } = props;
+
+    useStore(services.tableData.$data); <.>
+
+    const loadedRows = data.rows.filter(x => getRowLoaded(x).loaded).length; <.>
+    const unreadRows = data.rows.filter(x => getUnreadRow(x).isUnread).length; <.>
+
+    return (
+        <>
+            <LabeledText label={"На текущий момент загружено карточек"} text={loadedRows} />
+            <LabeledText label={"Из них не прочитано"} text={unreadRows} />
+        </>
+    )
+}
+----
+<.> Обновляем компонент при изменении хранилища `$data` из `services.tableData`.
+<.> Количество загруженных карточек.
+<.> Количество непрочитанных карточек.
+
+.Затем нужно получить плагины грида:
+[source,typescript]
+----
+export class ToolbarButtonPluginFactory implements IFolderPluginFactory {
+    id: string = "ToolbarButtonPluginFactory";
+
+    getTablePlugins(): ITablePlugins[] { <.>
+        return [ ToolbarButtonPlugins ];
+    }
+}
+----
+<.> Возвращаем плагины грида.
+
+.Добавляем кнопку, отображающую информацию в модальном окне при нажатии:
+[source,typescript]
+----
+export const ToolbarButtonButtonPlugin: TablePlugins.Toolbar.Component<$MessageWindow & $TableData> = {
+    name: "ToolbarButtonButtonPlugin",
+    description: "Отображает кнопку в панели инструментов таблицы",
+    feature: ToolbarButtonFeature,
+    composition: TableCompositionNames.Toolbar,
+    order: CompositionPluginOrder.Priority,
+    component: (props) => {
+        const { data, services } = props.composition;
+
+        const showInfo = () => {
+            services.messageWindow.showInfo(() => <ToolbarButtonMessageContent data={data} services={services} />); <.>
+        };
+
+        return <IconButton iconClassName="dv-ico ico-modal-info" onClick={showInfo} />; <.>
+    }
+};
+----
+<.> Вызывается модальное окно с информацией.
+<.> Кнопка, при нажатии на которую открывается модальное окно с информацией.
+
+== Проверка примера
+
+. Откройте папку с таблицей и нажмите на информационную кнопку в панели настроек таблицы.
+. Убедитесь, что открылось модальное окно с информацией. В окне должно отображаться количество загруженных карточек на данный момент и количество непрочитанных из них.

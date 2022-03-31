@@ -1,0 +1,105 @@
+= Изменение экспорта в Excel
+
+Пример серверного расширения, позволяющего вмешаться в процесс экспорта представления в Excel.
+
+[source,csharp]
+----
+namespace ExcelExportServerExtension
+{
+	public class ExcelExportServerExtension : WebClientExtension <.>
+	{
+        private readonly IServiceProvider _serviceProvider;
+
+		public ExcelExportServerExtension(IServiceProvider serviceProvider) <.>
+			: base(serviceProvider)
+		{
+            this._serviceProvider = serviceProvider;
+		}
+
+		#region Свойства
+
+		public override string ExtensionName => Assembly.GetAssembly(typeof(ExcelExportServerExtension)).GetName().Name; <.>
+
+		public override Version ExtensionVersion => new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); <.>
+
+		#endregion Свойства
+
+		#region Обработчики событий
+
+        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
+        {
+			containerBuilder.RegisterType<ExcelExportExampleService>()
+                .As<IExcelExportService>()
+                .SingleInstance(); <.>
+        }
+
+		#endregion Обработчики событий
+    }
+}
+----
+<.> Задаём описание расширения для WebClient, которое задано в текущей сборке.
+<.> Создаём новый экземпляр класса.
+<.> Получаем название расширения.
+<.> Получаем версию расширения.
+<.> Регистрируем типы в IoC контейнере.
+<.> Регистрируем тип `ExcelExportExampleService` как реализацию интерфейса `IExcelExportService` в `containerBuilder`.
+
+.Затем настраиваем собственные параметры экспорта:
+[source,csharp]
+----
+namespace ExcelExportServerExtension.ExcelExport <.>
+{
+    public class ExcelExportExampleService : ExcelExportService
+    {
+        private readonly Color oddRowColor = Color.LightBlue; <.>
+
+        protected override void ApplyWorkbookSettings(XLWorkbook workbook) <.>
+        {
+            foreach (var worksheet in workbook.Worksheets)
+            {
+                for (var i = 1; i < worksheet.RangeUsed().RowCount(); i += 2) <.>
+                {
+                    var row = worksheet.RangeUsed().Row(i);
+                    row.Style.Fill.BackgroundColor = XLColor.FromColor(oddRowColor);
+                }
+            }
+        }
+
+        protected override string GetGridRowParamValueAsString(object paramValue) <.>
+        {
+            if (paramValue is DateTime dateTime) <.>
+            {
+                return dateTime.ToLongDateString();
+            }
+
+            return base.GetGridRowParamValueAsString(paramValue);
+        }
+
+        protected override IEnumerable<GridColumn> GetGridColumns(GridViewModel viewModel) =>
+            viewModel.Columns.Select(gridColumn => CreateGridColumnModel(gridColumn, viewModel))
+                .OrderBy(column => column.UserColumn?.Order ?? 0)
+                .Select(column => column.GridColumn); <.>
+
+        private static GridColumnModel CreateGridColumnModel(GridColumn gridColumn, GridViewModel viewModel) => new GridColumnModel
+        {
+            GridColumn = gridColumn,
+            UserColumn = viewModel.GridUserSettings
+                .GetColumnsForCurrentPresentation()
+                .FirstOrDefault(x => x.Name == gridColumn.Name)
+        };
+    }
+}
+----
+<.> Описание класса, реализующего свой экспорт в Excel.
+<.> Изменяем цвет нечётных строк.
+<.> Модифицирует документ Excel.
+<.> Меняем фоновый цвет нечётных строк в таблице.
+<.> Получаем строковое значение ячейки таблицы.
+<.> Для ячейки типа `DateTime` устанавливаем длинный формат.
+<.> Получаем все колонки из грида и сортируем их по параметру `Order`.
+
+== Проверка примера
+
+. Откройте папку в Веб-клиенте Docsvision.
+. Нажмите кнопку "Экспортировать в Excel".
+. Загрузится документ в формате `.xlsx`, содержащий выгрузку представления со всеми колонками и выделенными цветом нечетными строками.

@@ -1,0 +1,247 @@
+= Изменить цвет строки по кнопке
+
+В данном примере создаётся новая колонка таблицы грида. В новую колонку добавляется элемент, нажатие на который открывает диалог выбора цвета. При изменении цвета в диалоге, будет изменяться фон строки, в которой находится ячейка.
+
+CAUTION: Данный пример демонстрирует только взаимодействие новой колонки, её ячеек и фона строки, в которой они находятся
+
+include::grid-context.adoc[tags=start]
+
+[source,typescript]
+----
+extensionManager.registerExtension({ <.>
+    name: "BackgroundRows",
+    version: "5.5.17",
+    initialize() {
+        app.folderPluginProvider.addFactory(new BackgroundRowsPluginFactory());
+    },
+})
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
+.Создание кнопки, открывающей диалог выбора цвета:
+[source,typescript]
+----
+export interface IBackgroundRowsButton extends PropsWithChildren<ICompositionPluginProps<"TableCell", ICellData, $BackgroundRows>> {
+}
+
+export function BackgroundRowsButton (props: IBackgroundRowsButton) { <.>
+    const { services: { backgroundRows }, data: { row } } = props.composition;
+
+    const [ color, setColor ] = useState( backgroundRows.$rows.getState()[row.entityId] ?? "#ffffff" ); <.>
+
+    const changeColor = (ev: ChangeEvent<HTMLInputElement>) => {
+        backgroundRows.setBackground({ id: row.entityId, color: ev.target.value }); <.>
+        setColor(ev.target.value); <.>
+    };
+
+    const click = (ev: React.MouseEvent) => {
+        ev.stopPropagation(); <.>
+    };
+
+    if (!getRowLoaded(row).loaded) { <.>
+        return <></>
+    }
+
+    return (
+        <input
+            className="background-rows__button"
+            type="color"
+            value={color}
+            onClick={click}
+            onChange={changeColor} />
+    )
+};
+----
+<.> Предоставляет возможность отобразить палитру цветов
+<.> Исходный цвет: белый.
+<.> Обновляем хранилище.
+<.> Обновляем локальное состояние `input` с `type=color`.
+<.> Прекращает дальнейшую передачу текущего события.
+<.> Если строка ещё не загружена, то ничего не показываем.
+
+.Создаём сервис, который будет хранить и обновлять цвет строки:
+[source,typescript]
+----
+export class BackgroundRowsService implements IBackgroundRowsService {
+    $rows: Store<IBackgroundRows>;
+    setBackground: Event<IBackgroundRow>;
+
+    constructor() {
+        const domain = createDomain("BackgroundRows"); <.>
+
+        this.setBackground = domain.event("setBackground");
+        this.$rows = domain.store({}, { name: "$rows" })
+            .on(this.setBackground, (store, background) => ({...store, [background.id]: background.color }));
+    }
+}
+----
+<.> Инициализируем сущности необходимые для хранения и обновления хранилища.
+
+.Добавляем интерфейс сервиса:
+[source,typescript]
+----
+export interface IBackgroundRows {
+    [id: string]: string;
+}
+
+export interface IBackgroundRow {
+    id: string;
+    color: string;
+}
+
+export interface IBackgroundRowsService { <.>
+    readonly $rows: Store<IBackgroundRows>;
+    setBackground: Event<IBackgroundRow>;
+}
+----
+<.> Интерфейс сервиса.
+
+.Инициализируем сущности, необходимые для хранения и обновления хранилища:
+[source,typescript]
+----
+export class BackgroundRowsService implements IBackgroundRowsService {
+    $rows: Store<IBackgroundRows>;
+    setBackground: Event<IBackgroundRow>;
+
+    constructor() {
+        const domain = createDomain("BackgroundRows");
+
+        this.setBackground = domain.event("setBackground");
+        this.$rows = domain.store({}, { name: "$rows" })
+            .on(this.setBackground, (store, background) => ({...store, [background.id]: background.color }));
+    }
+}
+----
+
+.Подключаем плагины грида:
+[source,typescript]
+----
+export class BackgroundRowsPluginFactory implements IFolderPluginFactory {
+    id: string = "BackgroundRowsPluginFactory";
+
+    getDataLoadingPlugins(): IFolderDataLoadingPlugin[] {
+        return [
+            new BackgroundRowsResponseResolver()
+        ]
+    }
+
+    getTablePlugins(): ITablePlugins[] {
+        return [
+            BackgroundRowsPlugins
+        ];
+    }
+}
+----
+
+.Добавляем новую колонку для элемента переключения цвета:
+[source,typescript]
+----
+export class BackgroundRowsResponseResolver implements IFolderDataLoadingPlugin {
+    id: string = "BackgroundRowsResponseResolver";
+    description: string = "Добавляет новую колонку.";
+    order: PluginOrder = PluginOrder.Normal;
+
+    async resolveResponse(data: ITableData, response: GenModels.GridViewModelEx): Promise<void | ResponseResolveResult> { <.>
+        if (data.columns.length && !data.columns.find(x => x.id == BackgroundRowsColumnId)) { <.>
+
+            const backgroundRowsColumn = {
+                id: BackgroundRowsColumnId, <.>
+                name: "Фон строки", <.>
+            } as IColumn;
+
+            data.columns.push(backgroundRowsColumn);
+        }
+    }
+}
+----
+<.> Вызывается после каждого ответа загрузки данных таблицы.
+<.> Сделаем проверку на существование столбцов в таблице, а также проверим не был ли добавлен столбец, который мы хотим создать.
+<.> Уникальный идентификатор столбца.
+<.> Отображаемое название столбца.
+
+.Настраиваем элемент в ячейке:
+[source,typescript]
+----
+export const BackgroundRowsColumnId = "backgroundRows";
+export const BackgroundRowsFeature = "BackgroundRowsFeature";
+
+export const BackgroundRowsServiceProvider: TablePlugins.ServiceProvider<$BackgroundRows> = {
+    name: "BackgroundRowsServiceProvider",
+    description: "Добавляет сервис $BackgroundRows.",
+    feature: BackgroundRowsFeature,
+    composition: TableCompositionNames.Root,
+    addServices: (composition) => {
+        if (!composition.services.backgroundRows) { <.>
+            composition.services.backgroundRows = new BackgroundRowsService();
+        }
+    }
+};
+
+export const BackgroundRowsCellButtonPlugin: TablePlugins.Cell.Component<$BackgroundRows> = {
+    name: "BackgroundRowsCellButtonPlugin",
+    description: "Отображает кнопку изменения фона строки.",
+    feature: BackgroundRowsFeature,
+    composition: TableCompositionNames.TableCell,
+    shouldRender: (composition) => composition.data.column.id == BackgroundRowsColumnId, <.>
+    component: BackgroundRowsButton <.>
+};
+
+export const BackgroundRowsMountEffect: TablePlugins.Row.MountEffect<$BackgroundRows> = {
+    name: "BackgroundRowsMountEffect",
+    description: "Обновляет композицию при изменении $rows",
+    feature: BackgroundRowsFeature,
+    composition: TableCompositionNames.TableRow,
+    compositionDidMount: (composition) => { <.>
+        const { backgroundRows } = composition.services;
+
+        const optimalUpdate = throttle({ source: backgroundRows.$rows, timeout: 100 }); <.>
+
+        const update = optimalUpdate.watch(() => composition.update()); <.>
+        return () => update.unsubscribe(); <.>
+    }
+};
+
+export const BackgroundRowDecorator: TablePlugins.Row.Decorator<$BackgroundRows> = {
+    name: "BackgroundRowDecorator",
+    description: "Изменяет фон строки.",
+    feature: BackgroundRowsFeature,
+    composition: TableCompositionNames.TableRow,
+    jsxDecorator: (node, composition) => { <.>
+        const { services, data } = composition;
+        const backgroundRows = services.backgroundRows.$rows.getState(); <.>
+
+        return decorate(node, { style: { background: backgroundRows[data.row.entityId] }}); <.>
+    }
+};
+
+export const BackgroundRowsPlugins: ITablePlugins = {
+    serviceProviders: [ BackgroundRowsServiceProvider ],
+    row: {
+        mountEffects: [ BackgroundRowsMountEffect ],
+        containerDecorators: [ BackgroundRowDecorator ]
+    },
+    cell: {
+        content: [ BackgroundRowsCellButtonPlugin ]
+    }
+};
+----
+<.> Поскольку `addServices` вызывается при каждой отрисовке, сделаем проверку на существование сервиса, который хотим добавить.
+<.> Компонент будет отображён, если условие правдиво.
+<.> Компонент, который будет отображён в ячейке добавленной колонки.
+<.> Вызывается при монтировании компоненты.
+<.> Поскольку хранилище `backgroundRow.$rows` может меняться достаточно быстро (зависит от скорости изменения цвета в палитре), необходимо установить ограничение обновления композиции.
++
+В данном случае, `optimalUpdate` будет срабатывать не чаще, чем раз в `100` мс для оптимизации браузера.
++
+<.> Когда сработает событие, композиция таблицы будет обновлена.
+<.> Отписка от события, когда компонент будет размонтирован.
+<.> Метод, с помощью которого появляется возможность декорирования `ReactNode`.
+<.> Получаем хранилище, которое содержит информацию о цвете фона строк.
+<.> В данном методе вторым аргументом является объект свойств `ReactNode`, как в `React.createElement`.
++
+В данном случае, если хранилище содержит информацию о фоне строки, она будет применена, в противном случае стиль не применится.
+
+== Проверка примера
+
+. Откройте папку с таблицей. В колонке "Фон строки" должен отображаться созданный элемент.
+. Нажмите на любой элемент в колонке и измените цвет.

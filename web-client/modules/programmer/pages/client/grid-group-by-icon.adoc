@@ -1,0 +1,115 @@
+= Применить группировку кнопкой в ячейке
+
+Данное расширение добавляет элемент в панель инструментов грида. Элемент будет отображаться в ячейках таблицы при наведении на них курсора мыши. Нажатие на элемент будет выполнять группировку по столбцу.
+
+CAUTION: Данный пример демонстрирует только поведение элемента в панели инструментов при наведении, а также осуществление группировки с помощью расширения.
+
+include::grid-context.adoc[tags=start]
+
+[source,typescript]
+----
+extensionManager.registerExtension({
+    name: "HoverPanelGroping",
+    version: "5.5.17",
+    initialize() {
+        app.setService($HoverPanel, new CustomHoverPanelService()); <.>
+    },
+})
+----
+<.> Заменяем реализацию стандартного сервиса `$HoverPanel` на `CustomHoverPanelService`.
+
+Следующим шагом добавляем в ячейку таблицы элемент, который будет выполнять функцию группировки:
+
+[source,typescript]
+----
+export const HoverPanelGroupingByColumn: HeaderHoverPanelPlugin<$Grouping & $SidePanel> = {
+    name: "HoverPanelGroupingByColumn",
+    description: `
+        Добавляет элемент в панель при наведении, который находится в ячейке шапки таблицы.
+        При клике на элемент, происходит группировка по столбцу.
+    `,
+    feature: CustomHoverPanelFeature,
+    composition: HeaderHoverPanelName,
+    placement: PluginPlacement.AfterContent,
+    component: (props) => {
+        <.>
+        const { data: { column }, services: { grouping, sidePanel } } = props.composition;
+
+
+
+        <.>
+        const groupingPath = useStore(grouping.$groupingPath);
+
+        const groupByColumn = () => {
+            <.>
+            if (grouping.canAddColumnGrouping(column.id) && !sidePanel.$isOpen.getState()) {
+                sidePanel.toggle();
+            }
+
+            grouping.addColumnGrouping(column.id); <.>
+        };
+
+        const isGrouped = Boolean(groupingPath.find(path => path.columnId == column.id)); <.>
+
+        if (grouping.$groupingAvailable.getState() && (isGrouped || !grouping.canAddColumnGrouping(column.id))) {
+            return <></>; <.>
+        }
+
+        return (
+            <Icon
+                iconClass="dv-ico context-menu-group hover-panel-custom-grouping-by-column"
+                onClick={groupByColumn}
+                dv-tooltip="Сгруппировать по столбцу" /> <.>
+        );
+    }
+};
+----
+<.> Деструктуризируем объект `props`, получая все необходимые данные для реализации группировки по столбцу
+<.> С помощью хука useStore получаем данные из хранилища `$gropingPath`.
++
+Хук предоставляет возможность перерисовывать компонент при изменении состояния хранилища `$gropingPath`.
++
+.Так как мы следим за состоянием хранилища и перерисовываем компонент, мы можем учитывать следующую логику:
+- Если столбец уже сгруппирован, то не показывать иконку
+- Если столбец не сгруппирован, то показывать иконку
++
+<.> Проверяем доступна ли колонка для группировки. Если колонка доступна и боковая панель закрыта, открываем боковую панель с группировкой.
+<.> Группируем по колонке.
+<.> Проверяем сценарий, что группировка по колонке уже применена.
+<.> Если группировка доступна и уже применена или недоступна для этой колонки, то ничего не отрисовываем.
+<.> Если группировка доступна, рисуем иконку. Группировка будет применена при нажатии на иконку.
+
+
+[source,typescript]
+----
+export class CustomHoverPanelService implements IHoverPanelService { <.>
+
+
+    getPlugins(defaultPlugins: HeaderHoverPanelPlugin<any>[]): HeaderHoverPanelPlugin<any>[] { <.>
+
+        <.>
+
+        defaultPlugins.push(HoverPanelGroupingByColumn); <.>
+
+        return defaultPlugins;
+    }
+}
+----
+<.> Создаём сервис алогичный `IHoverPanelService`..
+<.> При инициализации плагинов для `HoverPanel`, будет вызван этот метод.
++
+Внутри него мы можем убрать, добавить интересующие нас плагины для панели при наведении и вернуть новый массив плагинов.
++
+<.>  К примеру:
++
+- `defaultPlugins = defaultPlugins.filter(plugin \=> plugin.name !== target)`
+- `defaultPlugins.push(ownPlugin)`
++
+<.> Добавляем плагин для группировки по колонке.
+
+
+== Проверка примера
+
+. Откройте папку с таблицей.
+. Наведите курсор на ячейку в столбце таблицы, которая доступна для группировки.
+. После нажатия на иконку "Сгруппировать по столбцу", должна открыться боковая панель, если она была закрыта, и добавиться колонка в группируемых элементах.
