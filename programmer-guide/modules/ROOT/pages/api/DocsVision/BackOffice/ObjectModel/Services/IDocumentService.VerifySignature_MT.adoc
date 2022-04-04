@@ -89,7 +89,7 @@ namespace BackOffice
    // Получение последней установленной подписи, по ней будет определять подлинность документа
    BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last();
 
-   // Выполнение проверки ЭЦП, установленной на основные и дополнительные документы, а также на поля (для подписания) определенные в Справочнике видов карточек
+   // Выполнение проверки ЭЦП, установленной на основные и дополнительные документы, а также на поля (для подписания) определённые в Справочнике видов карточек
    var result = documentService.VerifySignature(document, lastSignature, certificate, true, true, documentSetting.DocumentSignature.Fields);
 
    // Оповещение пользователя о результате проверки ЭЦП

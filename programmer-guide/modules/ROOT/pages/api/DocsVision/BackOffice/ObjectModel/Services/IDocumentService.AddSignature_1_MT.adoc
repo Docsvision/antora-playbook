@@ -87,7 +87,7 @@ DocumentOperationSignatureSetting operationSignatureSetting = documentSetting.Op
 // Получение сертификата сотрудника, выполняющего подписание       
 X509Certificate2 certificate = GetCertificate();
 
-// Подписание операции. Используются параметры подписания, определенные в Справочнике видов карточек
+// Подписание операции. Используются параметры подписания, определённые в Справочнике видов карточек
 BaseCardSignature signature = documentService.AddSignature(document, certificate, operationSignatureSetting.SignAttachments,
 operationSignatureSetting.Fields, operationSignatureSetting.SignDocument, statesOperation, new Guid(operationSignatureSetting.Name));
 objectContext.AcceptChanges();
