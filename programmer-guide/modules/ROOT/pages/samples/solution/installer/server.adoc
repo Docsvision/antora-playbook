@@ -10,8 +10,8 @@
 .Далее перечислены основные шаги, которые должен выполнить пакет установки серверной части решения:
 . Создать подкаталог _решения_ в папке {dv} (по умолчанию `C:\Program Files (x86)\Docsvision`).
 . Выгрузить в созданный подкаталог компонент _SnapIn_ и пакет установки клиентской части _решения_.
-. Создать в каталоге _решения_ подкаталог `CardPackage` и выгрузить в него xref:samples/solution/card-sql-package.adoc[`CardPackage`], а также связанные с ним XML-файлы.
-. Создать в каталоге _решения_ подкаталог `Database` и выгрузить в него xref:samples/solution/card-sql-package.adoc[`SqlPackage`], а также схемы карточек и библиотека карточек, а также их ресурсы.
+. Создать в каталоге _решения_ подкаталог `CardPackage` и выгрузить в него `xref:samples/solution/card-sql-package.adoc[CardPackage]`, а также связанные с ним XML-файлы.
+. Создать в каталоге _решения_ подкаталог `Database` и выгрузить в него `xref:samples/solution/card-sql-package.adoc[SqlPackage]`, а также схемы карточек и библиотека карточек, а также их ресурсы.
 . В ветке реестра `{hklm}\SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns` создать раздел с названием решения.
 . В созданный раздел добавить два строковых параметра:
 * `Path` -- путь к сборке _SnapIn_.
@@ -53,7 +53,7 @@
 .Чтобы серверная часть поддерживала обновление, добавляем:
 [source,charp]
 ----
- <MajorUpgrade DowngradeErrorMessage="Более новая версия продукта [ProductName] уже установлена." />
+<MajorUpgrade DowngradeErrorMessage="Более новая версия продукта [ProductName] уже установлена." />
  <Upgrade Id="$(var.UpgradeCode)">
   <UpgradeVersion Minimum="$(var.ProductVersion)"
    IncludeMinimum="no"

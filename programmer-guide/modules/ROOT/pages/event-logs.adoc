@@ -85,10 +85,10 @@ image::log-operations.png[Определение операций журнала
 
 При записи Custom-сообщения в журнал приложение должно сформировать xml-документ по схеме `EventData.xsd` и сохранить там все дополнительные атрибуты.
 
-Для работы с журналом предназначен специальный объект xref:api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[`LogManager`], доступ к которому можно получить из объекта сессии (xref:api/DocsVision/Platform/ObjectManager/UserSession_CL.adoc[`UserSession`]).
+Для работы с журналом предназначен специальный объект `xref:api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager]`, доступ к которому можно получить из объекта сессии (`xref:api/DocsVision/Platform/ObjectManager/UserSession_CL.adoc[UserSession]`).
 
-Первоочередной задачей является установка стратегии журнала, указав параметры хранения записей. Сделать это можно вызвав метод xref:api/DocsVision/Platform/ObjectManager/LogManager.SetLogStrategy_MT.adoc[`LogManager.SetLogStrategy`] с соответствующими параметрами.
+Первоочередной задачей является установка стратегии журнала, указав параметры хранения записей. Сделать это можно вызвав метод `xref:api/DocsVision/Platform/ObjectManager/LogManager.SetLogStrategy_MT.adoc[LogManager.SetLogStrategy]` с соответствующими параметрами.
 
-Записывать собственные сообщения в журнал можно вызывая метод xref:api/DocsVision/Platform/ObjectManager/LogManager.LogMessage_MT.adoc[`LogMessage`] или xref:api/DocsVision/Platform/ObjectManager/LogManager.LogMessageEx_MT.adoc[`LogMessageEx`].
+Записывать собственные сообщения в журнал можно вызывая метод `xref:api/DocsVision/Platform/ObjectManager/LogManager.LogMessage_MT.adoc[LogMessage]` или `xref:api/DocsVision/Platform/ObjectManager/LogManager.LogMessageEx_MT.adoc[LogMessageEx]`.
 
-Поиск сообщений осуществляется методом xref:api/DocsVision/Platform/ObjectManager/LogManager.FindMessages_MT.adoc[`FindMessages`], а более полную информацию по конкретному сообщению можно получить вызывая xref:api/DocsVision/Platform/ObjectManager/LogManager.GetMessage_MT.adoc[`GetMessage`] или xref:api/DocsVision/Platform/ObjectManager/LogManager.GetMessageDetails_MT.adoc[`GetMessageDetails`].
+Поиск сообщений осуществляется методом `xref:api/DocsVision/Platform/ObjectManager/LogManager.FindMessages_MT.adoc[FindMessages]`, а более полную информацию по конкретному сообщению можно получить вызывая `xref:api/DocsVision/Platform/ObjectManager/LogManager.GetMessage_MT.adoc[GetMessage]` или `xref:api/DocsVision/Platform/ObjectManager/LogManager.GetMessageDetails_MT.adoc[GetMessageDetails]`.

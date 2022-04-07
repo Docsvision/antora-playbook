@@ -2,20 +2,20 @@
 
 Для возможности работы с собственными типами хранилищ разработчик должен реализовать специальный компонент -- провайдер к внешнему хранилищу (далее -- просто провайдер). Провайдер представляет собой библиотеку с публичным классом, в котором реализуются определённые программные интерфейсы. Набор интерфейсов определяется возможностями внешнего хранилища.
 
-В простейшем случае, провайдер должен реализовывать два интерфейса: xref:api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[`IBinaryStorage`] и xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[`IExtensionInitialize`].
+В простейшем случае, провайдер должен реализовывать два интерфейса: `xref:api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage]` и `xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IExtensionInitialize]`.
 
 [source,charp]
 ----
 public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 ----
 
-Интерфейс `IBinaryStorage` определяет основные параметры хранилища и методы провайдера: идентификатор хранилища, поддерживающий по умолчанию разделы, методы создание, чтения, удаления файлов и др. См. описание интерфейса xref:api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[`IBinaryStorage`]. Реализация методов интерфейса `IBinaryStorage` определяется способом работы с внешним хранилищем.
+Интерфейс `IBinaryStorage` определяет основные параметры хранилища и методы провайдера: идентификатор хранилища, поддерживающий по умолчанию разделы, методы создание, чтения, удаления файлов и др. См. описание интерфейса `xref:api/DocsVision/Platform/StorageServer/IBinaryStorage_IN.adoc[IBinaryStorage]`. Реализация методов интерфейса `IBinaryStorage` определяется способом работы с внешним хранилищем.
 
 Интерфейс `IExtensionInitialize` определяет метод инициализации провайдера (`Initialize`), принимающий в сериализованном виде настройки хранилища. Настройки хранилища устанавливаются с помощью графического интерфейса настройки (рассмотрено далее).
 
 Следует обратить внимание, что сервер {dv} может в течении пользовательской сессии многократно создавать экземпляры класса провайдера и инициализировать его, что может привести к росту потребления ресурсов, если при инициализации создаются дополнительные объекты. Данную особенность следует учитывать при создании класса провайдера.
 
-Для более эффективной работы сервера {dv} с хранилищем, провайдер может поддерживать интерфейс xref:api/DocsVision/Platform/StorageServer/IStreamedBinaryStorage_IN.adoc[`IStreamedBinaryStorage`], позволяющий серверу работать напрямую с потоками чтения/записи к хранилищу. Также может быть поддержан интерфейс xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[`IEnumerableBinaryStorage`], если провайдер может предоставить идентификаторы всех файлов, хранящихся в определённом разделе хранилища.
+Для более эффективной работы сервера {dv} с хранилищем, провайдер может поддерживать интерфейс `xref:api/DocsVision/Platform/StorageServer/IStreamedBinaryStorage_IN.adoc[IStreamedBinaryStorage]`, позволяющий серверу работать напрямую с потоками чтения/записи к хранилищу. Также может быть поддержан интерфейс `xref:api/DocsVision/Platform/StorageServer/IExtensionInitialize_IN.adoc[IEnumerableBinaryStorage]`, если провайдер может предоставить идентификаторы всех файлов, хранящихся в определённом разделе хранилища.
 
 [source,csharp]
 ----

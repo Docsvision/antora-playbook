@@ -55,14 +55,14 @@ _Контекст объектов_ должен быть проинициали
 _Менеджеры_ -- сущности базового API, в которых собраны методы для работы с различными объектами платформы.
 
 .Например, есть менеджеры для работы с карточками, файлами, безопасностью и прочие:
-* xref:api/DocsVision/Platform/ObjectManager/AccessManager_CL.adoc[AccessManager] -- менеджер объектов безопасности, в котором представлены методы управления правами доступа на объекты системы, а также методы для работы с крипто-объектами.
-* xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager] -- менеджер карточек. Данный менеджер предоставляет полный набор средств для работы с экземплярами карточек: создание, получение и удаление.
-* xref:api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager] -- менеджер расширений. Данный менеджер предоставляет единственный метод `GetExtensionMethod`, возвращающий метод серверного расширения.
-* xref:api/DocsVision/Platform/ObjectManager/FileManager_CL.adoc[FileManager] -- менеджер файлов, предоставляющий методы для работы с файлами: создание, получение и удаление, а также некоторые другие.
-* xref:api/DocsVision/Platform/ObjectManager/LicenseManager_CL.adoc[LicenseManager] -- менеджер лицензий. Данный менеджер предоставляет два метода для учета числа подключений в лицензии дополнительного модуля.
-* xref:api/DocsVision/Platform/ObjectManager/LockManager_CL.adoc[LockManager] -- менеджер блокировок. Предоставляет методы получения объектов xref:cards/card-lock.adoc[блокировки] с объекта системы. Для полнофункциональной работы могут потребоваться права администратора.
-* xref:api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager] -- менеджер журнала. Данный менеджер содержит операции для работы с системным журналом.
-* xref:api/DocsVision/Platform/ObjectManager/ReportManager_CL.adoc[ReportManager] -- менеджер хранимых процедур. Предоставляет метод для получения данных хранимой процедуры.
+* `xref:api/DocsVision/Platform/ObjectManager/AccessManager_CL.adoc[AccessManager]` -- менеджер объектов безопасности, в котором представлены методы управления правами доступа на объекты системы, а также методы для работы с крипто-объектами.
+* `xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager]` -- менеджер карточек. Данный менеджер предоставляет полный набор средств для работы с экземплярами карточек: создание, получение и удаление.
+* `xref:api/DocsVision/Platform/ObjectManager/ExtensionManager_CL.adoc[ExtensionManager]` -- менеджер расширений. Данный менеджер предоставляет единственный метод `GetExtensionMethod`, возвращающий метод серверного расширения.
+* `xref:api/DocsVision/Platform/ObjectManager/FileManager_CL.adoc[FileManager]` -- менеджер файлов, предоставляющий методы для работы с файлами: создание, получение и удаление, а также некоторые другие.
+* `xref:api/DocsVision/Platform/ObjectManager/LicenseManager_CL.adoc[LicenseManager]` -- менеджер лицензий. Данный менеджер предоставляет два метода для учета числа подключений в лицензии дополнительного модуля.
+* `xref:api/DocsVision/Platform/ObjectManager/LockManager_CL.adoc[LockManager]` -- менеджер блокировок. Предоставляет методы получения объектов xref:cards/card-lock.adoc[блокировки] с объекта системы. Для полнофункциональной работы могут потребоваться права администратора.
+* `xref:api/DocsVision/Platform/ObjectManager/LogManager_CL.adoc[LogManager]` -- менеджер журнала. Данный менеджер содержит операции для работы с системным журналом.
+* `xref:api/DocsVision/Platform/ObjectManager/ReportManager_CL.adoc[ReportManager]` -- менеджер хранимых процедур. Предоставляет метод для получения данных хранимой процедуры.
 
 Чтобы получить доступ к интересующему _менеджеру_, необходимо обратиться к соответствующему свойству сущности xref:cards/general-information.adoc#session-context[пользовательской сессии]:
 
@@ -86,106 +86,106 @@ CardManager cardManager = userSession.CardManager;
 |Область действия |Сервис |Назначение
 
 .7+|Общего назначения
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService_IN.adoc[IAccessCheckingService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IAccessCheckingService_IN.adoc[IAccessCheckingService]`
 |Определяет функции получения списка ролей и доступных операций сотрудника в пределах заданной карточки. Предоставляет методы сброса кэша ролевой модели.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseCardService_IN.adoc[IBaseCardService]`
 |Предоставляет методы установки и проверки ЭЦП, генерации дайджеста и управления бизнес-процессом.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ILockService_IN.adoc[ILockService]`
 |Позволяет управлять состоянием блокировки объектов, получать информацию о текущем состоянии и владельце блокировки.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ILogService_IN.adoc[ILogService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ILogService_IN.adoc[ILogService]`
 |Определяет методы добавления и получения записей журнала карточки.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IServerExtensionProxyService_IN.adoc[IServerExtensionProxyService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IServerExtensionProxyService_IN.adoc[IServerExtensionProxyService]`
 |Позволяет выполнять методы серверного расширения BackOffice.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ISettingsCardService_IN.adoc[ISettingsCardService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ISettingsCardService_IN.adoc[ISettingsCardService]`
 |Предоставляет методы доступа к системным настройкам.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ICryptService_IN.adoc[ICryptService]`
 |Сервис шифрования файлов карточек приложения _{bo}_
 
 .13+|Карточки
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService_IN.adoc[IDocumentService]`
 |Предназначен для работы с карточками типа _Документ_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService_IN.adoc[IBarcodeService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IBarcodeService_IN.adoc[IBarcodeService]`
 |Определяет методы генерации и печати штрих-кодов карточки документа.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskService_IN.adoc[ITaskService]`
 |Предназначен для работы с карточками типа _Задание_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskGroupService_IN.adoc[ITaskGroupService]`
 |Предназначен для работы с карточками типа _Группа заданий_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ITaskListService_IN.adoc[ITaskListService]`
 |Предназначен для работы с карточками типа _Список ссылок на карточки заданий_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoryListService_IN.adoc[ICategoryListService]`
 |Предназначен для работы с карточками типа _Список категорий_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/INumeratorCardService_IN.adoc[INumeratorCardService]`
 |Предназначен для работы с карточками типа _Карточка нумератора_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/INumerationRulesService_IN.adoc[INumerationRulesService]`
 |Предназначен для работы с карточками типа _Конструктор правил нумерации_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IReferenceListService_IN.adoc[IReferenceListService]`
 |Предназначен для работы с карточками типа _Список ссылок на карточки_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ICalendarService_IN.adoc[ICalendarService]`
 |Предназначен для работы с карточками типа _Бизнес-календарь_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IVersionedFileCardService_IN.adoc[IVersionedFileCardService]`
 |Предназначен для работы с карточками типа _Карточка файла с версиями_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ISurveyService_IN.adoc[ISurveyService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ISurveyService_IN.adoc[ISurveyService]`
 |Предназначен для работы с карточками типа _Список опросов_
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IUserProfileCardService_IN.adoc[IUserProfileCardService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IUserProfileCardService_IN.adoc[IUserProfileCardService]`
 |Предназначен для работы с карточками типа _Карточка настроек пользователя_
 
 .5+|Конструкторы
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IRoleModelService_IN.adoc[IRoleModelService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IRoleModelService_IN.adoc[IRoleModelService]`
 |Конструктор ролей
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IBaseUniversalService_IN.adoc[IBaseUniversalService]`
 |Карточка строки справочника
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ILayoutService_IN.adoc[ILayoutService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ILayoutService_IN.adoc[ILayoutService]`
 |Конструктор разметок
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IScriptingService_IN.adoc[IScriptingService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IScriptingService_IN.adoc[IScriptingService]`
 |Конструктор скриптов
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IStateService_IN.adoc[IStateService]`
 |Конструктор состояний
 
 .8+|Справочники
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ICategoriesService_IN.adoc[ICategoriesService]`
 |Справочник категорий
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IKindService_IN.adoc[IKindService]`
 |Справочник видов карточек
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ISettingsService_IN.adoc[ISettingsService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ISettingsService_IN.adoc[ISettingsService]`
 |Предоставляет методы для работы с настройками расширений справочника видов.
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IStaffService_IN.adoc[IStaffService]`
 |Справочник сотрудников
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IPartnersService_IN.adoc[IPartnersService]`
 |Справочник контрагентов
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/IServersService_IN.adoc[IServersService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/IServersService_IN.adoc[IServersService]`
 |Справочник серверов
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureLabelService_IN.adoc[ISignatureLabelService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ISignatureLabelService_IN.adoc[ISignatureLabelService]`
 |Справочник меток подписей
 
-|xref:api/DocsVision/BackOffice/ObjectModel/Services/ILinkService_IN.adoc[ILinkService]
+|`xref:api/DocsVision/BackOffice/ObjectModel/Services/ILinkService_IN.adoc[ILinkService]`
 |Справочник ссылок
 |===
 
@@ -270,18 +270,18 @@ image::card-sample-structure.png[Структура экземпляра кар�
 
 Типы, приведенные далее, определены в сборке `DocsVision.Platform.ObjectManager.dll`.
 
-* xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[`CardData`] -- данные экземпляра карточки. Включает совокупность всех данных секций и атрибутов конкретного экземпляра карточки.
-* xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[`SectionData`] -- данные секции карточки, из которой может быть получена коллекция всех её строк.
-* xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[`RowDataCollection`] -- коллекция строк секции, из которой могут быть выбраны конкретные строки.
+* `xref:api/DocsVision/Platform/ObjectManager/CardData_CL.adoc[CardData]` -- данные экземпляра карточки. Включает совокупность всех данных секций и атрибутов конкретного экземпляра карточки.
+* `xref:api/DocsVision/Platform/ObjectManager/SectionData_CL.adoc[SectionData]` -- данные секции карточки, из которой может быть получена коллекция всех её строк.
+* `xref:api/DocsVision/Platform/ObjectManager/RowDataCollection_CL.adoc[RowDataCollection]` -- коллекция строк секции, из которой могут быть выбраны конкретные строки.
 +
 [NOTE]
 ====
 Если коллекция получена непосредственно из карточки, то она считается "живой", т.е. при создании/удалении строки изменения в коллекции будут видны сразу же. Если коллекция получена поисковым запросом, она является "моментальным снимком" данных, доступным только на чтение.
 ====
 +
-* xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[`RowData`] -- строка секции. Выбрать строку из коллекции строк можно по уникальному идентификатору, по номеру в коллекции либо перебором.
-* xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[`SubSectionData`] -- подмножество строк (подсекция) секции, подчинённых определённой строке из родительской секции.
-* xref:api/DocsVision/Platform/ObjectManager/Metadata/Field_CL.adoc[`Field`] -- поле строки секции, а точнее его значение.
+* `xref:api/DocsVision/Platform/ObjectManager/RowData_CL.adoc[RowData]` -- строка секции. Выбрать строку из коллекции строк можно по уникальному идентификатору, по номеру в коллекции либо перебором.
+* `xref:api/DocsVision/Platform/ObjectManager/SubSectionData_CL.adoc[SubSectionData]` -- подмножество строк (подсекция) секции, подчинённых определённой строке из родительской секции.
+* `xref:api/DocsVision/Platform/ObjectManager/Metadata/Field_CL.adoc[Field]` -- поле строки секции, а точнее его значение.
 
 .Обычный сценарий доступа к данным карточки с привлечением приведенных типов следующий:
 . Получить экземпляр карточки -- `CardData`.
@@ -297,12 +297,12 @@ image::card-sample-structure.png[Структура экземпляра кар�
 
 [IMPORTANT]
 ====
-Приведенные далее сведения относятся только к карточкам, объектная модель которых унаследована от базового класса xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[`BaseCard`]. Если объектная модель создана на основе базовых классов из сборки `DocsVision.Platform.ObjectModel.dll`, механизм доступа к данным будет отличаться.
+Приведенные далее сведения относятся только к карточкам, объектная модель которых унаследована от базового класса `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`. Если объектная модель создана на основе базовых классов из сборки `DocsVision.Platform.ObjectModel.dll`, механизм доступа к данным будет отличаться.
 ====
 
 .Объектная модель карточки предлагает гораздо меньшее (в сравнении с базовым API) число типов:
 * BaseCard -- базовый класс карточки, который содержит коллекции всех строк её секций.
-* xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[`BaseCardSectionRow`] -- строка секции, предоставляющая доступ к своим полям.
+* `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSectionRow_CL.adoc[BaseCardSectionRow]` -- строка секции, предоставляющая доступ к своим полям.
 
 Как видно из списка, в объектной модели нет отдельных классов для секций и полей, что упрощает сценарий доступа к данным, который в общем случае будет следующий:
 

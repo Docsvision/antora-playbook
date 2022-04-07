@@ -14,7 +14,7 @@
 .Фиктивная секция
 image::fake-section.png[Фиктивная секция]
 
-Компонент карточки-расширения необходимо наследовать от класса xref:api/DocsVision/Platform/WinForms/NavExtension_CL.adoc[`NavExtension`], в котором помимо стандартных интерфейсов компонента карточки реализованы специальные интерфейсы расширения {wincl}а:
+Компонент карточки-расширения необходимо наследовать от класса `xref:api/DocsVision/Platform/WinForms/NavExtension_CL.adoc[NavExtension]`, в котором помимо стандартных интерфейсов компонента карточки реализованы специальные интерфейсы расширения {wincl}а:
 
 [source,csharp]
 ----
@@ -38,13 +38,13 @@ protected override NavExtensionTypes SupportedTypes
 
 == Расширение виртуальных папок
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.VirtualFolder`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.VirtualFolder]`.
 
 Позволяет программно изменить поведение виртуальных папок. Например, "на лету" сформировать новый текст поискового запроса для виртуальной папки или отобразить собственный диалог ввода параметров.
 
-Расширение виртуальных папок не требует реализации никаких специальных интерфейсов. Если карточка расширения назначена в качестве фильтра для виртуальной папки (это нужно сделать явно, выбрав её в поле "Тип фильтра" в свойствах папки), то при активации такой папки {wincl} вызывает карточку расширения методом xref:api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_MT.adoc[`CardHost.SelectFromCard`].
+Расширение виртуальных папок не требует реализации никаких специальных интерфейсов. Если карточка расширения назначена в качестве фильтра для виртуальной папки (это нужно сделать явно, выбрав её в поле "Тип фильтра" в свойствах папки), то при активации такой папки {wincl} вызывает карточку расширения методом `xref:api/DocsVision/Platform/CardHost/ICardHost.SelectFromCard_MT.adoc[CardHost.SelectFromCard]`.
 
-Соответственно, карточка расширения может вернуть результат выбора (настроенный запрос) через xref:api/DocsVision/Platform/CardHost/ICardFrame.FinishSelection_MT.adoc[`FinishSelection`].
+Соответственно, карточка расширения может вернуть результат выбора (настроенный запрос) через `xref:api/DocsVision/Platform/CardHost/ICardFrame.FinishSelection_MT.adoc[FinishSelection]`.
 
 [source,csharp]
 ----
@@ -60,22 +60,22 @@ protected override void OnCardClosed(EventArgs e)
 
 == Расширение экспорта
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.Report`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.Report]`.
 
 Этот тип расширения появляется в списке доступных вариантов экспорта данных представления (по умолчанию в {wincl}е есть только возможность выгрузки данных представления в Excel). Когда пользователь выбирает соответствующую команду экспорта, управление получит код расширения, которое и будет реализовывать собственно логику экспорта данных (например, во внешнюю систему или базу данных).
 
-Расширение экспорта требует реализации в коде карточки специального метода, который будет вызван в момент выбора пользователем соответствующей команды экспорта:xref:api/DocsVision/Platform/WinForms/NavExtension.CreateReport_MT.adoc[`CreateReport`]
+Расширение экспорта требует реализации в коде карточки специального метода, который будет вызван в момент выбора пользователем соответствующей команды экспорта: `xref:api/DocsVision/Platform/WinForms/NavExtension.CreateReport_MT.adoc[CreateReport]`
 
 == Командное расширение
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.Command`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.Command]`.
 
 Расширение позволяет добавить собственные команды в панель инструментов (тулбар) {wincl}а или в контекстное меню карточек и папок.
 
 .Командное расширение предполагает реализацию следующих дополнительных методов:
-* xref:api/DocsVision/Platform/WinForms/NavExtension.CreateCommands_MT.adoc[`CreateCommands`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.QueryCommandStatus_MT.adoc[`QueryCommandStatus`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.InvokeCommand_MT.adoc[`InvokeCommand`].
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.CreateCommands_MT.adoc[CreateCommands]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.QueryCommandStatus_MT.adoc[QueryCommandStatus]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.InvokeCommand_MT.adoc[InvokeCommand]`.
 
 .Логика работы {wincl}а с командами расширения может быть отражена в следующем алгоритме:
 . При первичной загрузке {wincl} опрашивает все доступные карточки расширения на предмет наличия команд. Если расширение поддерживает команды, то возвращает их массив (`CreateCommands`).
@@ -86,33 +86,33 @@ protected override void OnCardClosed(EventArgs e)
 
 == Обработчик событий
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.Event`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.Event]`.
 
 Расширение позволяет добавить собственную обработку стандартных событий {wincl}а: например, таких, как запуск или завершение работы. Данный тип расширений может быть полезен в качестве вспомогательного для других типов. Например, если расширение экспорта выгружает данные в какую-то внешнюю систему, то обработчик событий может при запуске {wincl}а пытаться заранее установить соединение с этой системой.
 
 .В расширение событий должно быть реализовано два специализированных метода:
-* xref:api/DocsVision/Platform/WinForms/NavExtension.OnStartup_MT.adoc[`OnStartup`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.OnShutdown_MT.adoc[`OnShutdown`].
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.OnStartup_MT.adoc[OnStartup]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.OnShutdown_MT.adoc[OnShutdown]`.
 
 == Пикер
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.Picker`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.Picker]`.
 
 Такой тип расширения позволяет разработчику реализовать собственный интерфейс для выбора учетных записей пользователей (это может быть полезно в случае разработки собственного, отличного от стандартного, справочника сотрудников). Расширение такого типа будет вызвано, например, при назначении прав на объекты системы, чтобы пользователь мог оперировать не доменными учетными записями, а более полными сведениями из справочника.
 
 .Расширение-пикер предполагает реализацию следующих методов:
-* xref:api/DocsVision/Platform/WinForms/NavExtension.LookupAccounts_MT.adoc[`LookupAccounts`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.LookupSids_MT.adoc[`LookupSids`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.LookupNames_MT.adoc[`LookupNames`].
-* xref:api/DocsVision/Platform/WinForms/NavExtension.PickAccounts_MT.adoc[`PickAccounts`].
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.LookupAccounts_MT.adoc[LookupAccounts]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.LookupSids_MT.adoc[LookupSids]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.LookupNames_MT.adoc[LookupNames]`.
+* `xref:api/DocsVision/Platform/WinForms/NavExtension.PickAccounts_MT.adoc[PickAccounts]`.
 
 == Контроль папки
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.Control`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.Control]`.
 
 Это расширение позволяет динамически контролировать поведение папок, например, запретить отображать подпапки или не подсвечивать количество непрочитанных карточек.
 
-Расширение контроля папки требует реализации единственного метода: xref:api/DocsVision/Platform/WinForms/NavExtension.QueryFolderControl_MT.adoc[`QueryFolderControl`].
+Расширение контроля папки требует реализации единственного метода: `xref:api/DocsVision/Platform/WinForms/NavExtension.QueryFolderControl_MT.adoc[QueryFolderControl]`.
 
 .Пример кода, в котором для простых папок не показываются дочерние элементы:
 [source,csharp]
@@ -132,11 +132,11 @@ protected override NavFolderControlFlags QueryFolderControl(NavFolderControlType
 
 == Страницы свойств
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.PropertyPages`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.PropertyPages]`.
 
 Расширение такого типа может добавлять собственные страницы свойств к свойствам папок и карточек. На этих дополнительных страницах можно расположить произвольную информацию и элементы управления.
 
-Для реализации дополнительных страниц свойств карточка расширения должна реализовывать специальный метод xref:api/DocsVision/Platform/WinForms/NavExtension.CreatePropertyPages_MT.adoc[`CreatePropertyPages`]. Метод должен создавать коллекцию страниц свойств типа (xref:api/DocsVision/Platform/Extensibility/NavPropertyPage_CL.adoc[`NavPropertyPage`]).
+Для реализации дополнительных страниц свойств карточка расширения должна реализовывать специальный метод `xref:api/DocsVision/Platform/WinForms/NavExtension.CreatePropertyPages_MT.adoc[CreatePropertyPages]`. Метод должен создавать коллекцию страниц свойств типа (`xref:api/DocsVision/Platform/Extensibility/NavPropertyPage_CL.adoc[NavPropertyPage]`).
 
 [source,csharp]
 ----
@@ -153,7 +153,7 @@ protected override IEnumerable<NavPropertyPage> CreatePropertyPages()
 }
 ----
 
-В свою очередь, элемент управления, реализующий собственно страницу свойств, должен быть унаследован от специального класса -- xref:api/DocsVision/Platform/WinForms/NavPropertyPageControl_CL.adoc[`NavPropertyPageControl`]. И так же как и компоненты карточек, он должен иметь идентификатор COM-интерфейса:
+В свою очередь, элемент управления, реализующий собственно страницу свойств, должен быть унаследован от специального класса -- `xref:api/DocsVision/Platform/WinForms/NavPropertyPageControl_CL.adoc[NavPropertyPageControl]`. И так же как и компоненты карточек, он должен иметь идентификатор COM-интерфейса:
 
 [source,csharp]
 ----
@@ -165,29 +165,29 @@ public sealed partial class TestPropertyPage : NavPropertyPageControl
 
 == Расширение типов карточек
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.CardTypes`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.CardTypes]`.
 
 Данное расширение предоставляет информацию о пользовательских подтипах (видах) карточек. Это может быть полезно в случае разработки собственного, отличного от стандартного, справочника типов.
 
 Информация о подтипах, которую вернет расширение, будет доступна в контекстном меню создания новой карточки, а также на странице свойств папки с ограничением на типы карточек.
 
-Для создания расширения требуется переопределить два метода: xref:api/DocsVision/Platform/WinForms/NavExtension.PopulateCardTypes_MT.adoc[`PopulateCardTypes`] и xref:api/DocsVision/Platform/WinForms/NavExtension.LookupCardTypes_MT.adoc[`LookupCardTypes`].
+Для создания расширения требуется переопределить два метода: `xref:api/DocsVision/Platform/WinForms/NavExtension.PopulateCardTypes_MT.adoc[PopulateCardTypes]` и `xref:api/DocsVision/Platform/WinForms/NavExtension.LookupCardTypes_MT.adoc[LookupCardTypes]`.
 
 == Расширение типов папок
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.FolderTypes`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.FolderTypes]`.
 
 Такое расширение предоставляет информацию о пользовательских подтипах папок. Это может быть полезно в случае разработки собственного, отличного от стандартного, справочника типов папок.
 
-Требуется реализовать единственный метод: xref:api/DocsVision/Platform/WinForms/NavExtension.PopulateFolderTypes_MT.adoc[`PopulateFolderTypes`]. Метод должен сформировать и вернуть коллекцию объектов xref:api/DocsVision/Platform/CardHost/NavFolderType_CL.adoc[`NavFolderType`], описывающих тип папки. Свойства этого объекта практически полностью идентичны соответствующим xref:folder-shortcut.adoc[свойствам папки], за исключением следующих:
+Требуется реализовать единственный метод: `xref:api/DocsVision/Platform/WinForms/NavExtension.PopulateFolderTypes_MT.adoc[PopulateFolderTypes]`. Метод должен сформировать и вернуть коллекцию объектов `xref:api/DocsVision/Platform/CardHost/NavFolderType_CL.adoc[NavFolderType]`, описывающих тип папки. Свойства этого объекта практически полностью идентичны соответствующим xref:folder-shortcut.adoc[свойствам папки], за исключением следующих:
 
 * `FolderCardLocation` -- идентификатор карточки папок.
 * `FolderTypes` -- дочерние типы папок.
 
 == Расширение дерева папок {wincl}а
 
-Тип xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[`NavExtensionTypes.FolderTree`].
+Тип `xref:api/DocsVision/Platform/Extensibility/NavExtensionTypes_EN.adoc[NavExtensionTypes.FolderTree]`.
 
 Данное расширение предназначено для добавления ссылок на папки в дерево папок {wincl}а или в список избранных папок без участия папок-делегатов.
 
-Необходимо дополнительно реализовать интерфейс xref:api/DocsVision/Platform/Extensibility/INavFolderTreeExtension_IN.adoc[`INavFolderTreeExtension`]. Метод xref:api/DocsVision/Platform/Extensibility/INavFolderTreeExtension.GetTreeExtensionFolders_MT.adoc[`GetTreeExtensionFolders`] должен возвращать специально подготовленный массив папок, предназначенных для размещения в интерфейсе {wincl}а.
+Необходимо дополнительно реализовать интерфейс `xref:api/DocsVision/Platform/Extensibility/INavFolderTreeExtension_IN.adoc[INavFolderTreeExtension]`. Метод `xref:api/DocsVision/Platform/Extensibility/INavFolderTreeExtension.GetTreeExtensionFolders_MT.adoc[GetTreeExtensionFolders]` должен возвращать специально подготовленный массив папок, предназначенных для размещения в интерфейсе {wincl}а.

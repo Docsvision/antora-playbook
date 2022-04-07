@@ -2,7 +2,7 @@
 
 Возвращает признак разрешения выполнения встроенной операции для заданной карточки.
 
-* *Пространство имен:* xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]
+* *Пространство имён:* `xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
@@ -23,9 +23,9 @@ operation:::
 Встроенная операция
 
 Возвращаемое значение::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-true -- операция разрешена, иначе false
+`true` -- операция разрешена, иначе false
 
 == Заметки
 
@@ -45,6 +45,6 @@ IAccessCheckingService accessCheckingService = objectContext.GetService<IAccessC
 //получение документа
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
 
-//true -- операция редактирования разрешена
+//`true` -- операция редактирования разрешена
 bool allowed = accessCheckingService.IsOperationAllowed(document, Document.MainFileEditOperation);
 ----

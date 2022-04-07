@@ -18,7 +18,7 @@
 
 Слабая ссылка имеет отличие от простой -- при удалении связанной карточки соответствующее поле ссылки будет автоматически обнулено (установлено в значение NULL). Это позволит разработчику не заботиться о проблеме "зависших" ссылок на несуществующие карточки.
 
-Дополнительно появляется возможность узнать, какие карточки ссылаются на данную и на какие карточки ссылается она сама. Для этого предназначены методы xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksToCard_MT.adoc[`GetLinksToCard`] и xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksFromCard_MT.adoc[`GetLinksFromCard`] класса xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[`CardManager`].
+Дополнительно появляется возможность узнать, какие карточки ссылаются на данную и на какие карточки ссылается она сама. Для этого предназначены методы `xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksToCard_MT.adoc[GetLinksToCard]` и `xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksFromCard_MT.adoc[GetLinksFromCard]` класса `xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager]`.
 
 == Сильная ссылка
 
@@ -33,7 +33,7 @@
 +
 * Если на подчинённую карточку есть сильные ссылки, то её напрямую удалить нельзя. При удалении карточки-владельца сервер отмечает удаление сильной ссылки. Если это последняя сильная ссылка на карточку, то она сама тоже удаляется. Таким образом, подчинённая карточка гарантированно живет столько, сколько самый последний из её владельцев.
 
-Если возникает необходимость очистить значение сильной ссылки, но при этом сохранить карточку, то надо воспользоваться методом xref:api/DocsVision/Platform/ObjectManager/CardManager.ClearLink_MT.adoc[`ClearLink`]. Сильные ссылки нужны для реализации владения, контроля области видимости и срока жизни карточек.
+Если возникает необходимость очистить значение сильной ссылки, но при этом сохранить карточку, то надо воспользоваться методом `xref:api/DocsVision/Platform/ObjectManager/CardManager.ClearLink_MT.adoc[ClearLink]`. Сильные ссылки нужны для реализации владения, контроля области видимости и срока жизни карточек.
 
 == Автоматическая ссылка
 

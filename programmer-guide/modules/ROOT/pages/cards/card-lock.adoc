@@ -43,7 +43,7 @@ fileData.PlaceLock(true); <.>
 <.> Получаем файл.
 <.> Устанавливаем постоянную блокировку.
 
-Помимо методов блокировки, классы карточек (`CardData`), строк (`RowData`) и файлов (`FileData`) содержат методы снятия блокировки, определяемые интерфейсом xref:api/DocsVision/Platform/ObjectManager/ILockable_IN.adoc[`ILockable`]:
+Помимо методов блокировки, классы карточек (`CardData`), строк (`RowData`) и файлов (`FileData`) содержат методы снятия блокировки, определяемые интерфейсом `xref:api/DocsVision/Platform/ObjectManager/ILockable_IN.adoc[ILockable]`:
 
 * `RemoveLock` -- снимает блокировку с объекта, установленную в собственной сессии.
 * `ForceUnlock` -- принудительно снимает блокировку, в т.ч. установленную другим пользователем -- необходимы административные права.
@@ -87,8 +87,8 @@ LockManager lockManager = userSession.LockManager;
 
 .API данного уровня предоставляет две точки доступа к механизму блокировки:
 * Методы _контекста объектов_:
-** xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[`ObjectContext.LockObject`] -- установка блокировки, в т.ч. постоянной.
-** xref:api/DocsVision/Platform/ObjectModel/ObjectContext.UnlockObject_MT.adoc[`ObjectContext.UnlockObject`] -- снятие собственной блокировки.
+** `xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[ObjectContext.LockObject]` -- установка блокировки, в т.ч. постоянной.
+** `xref:api/DocsVision/Platform/ObjectModel/ObjectContext.UnlockObject_MT.adoc[ObjectContext.UnlockObject]` -- снятие собственной блокировки.
 
 .Заблокировать карточку, используя методы _контекста объектов_, можно следующим образом:
 [source,csharp]

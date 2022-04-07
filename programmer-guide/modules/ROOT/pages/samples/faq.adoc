@@ -1,7 +1,7 @@
 = Часто задаваемые вопросы
 
 Каким образом получить родительский объект имея подчиненный?::
-Для этого предназначен метод xref:api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[`ObjectHelper.GetParent`].
+Для этого предназначен метод `xref:api/DocsVision/Platform/ObjectModel/ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]`.
 
 .Метод, к примеру, можно использовать для получения документа, которому принадлежит файл:
 [source,csharp]
@@ -11,7 +11,7 @@ Document document = ObjectHelper.GetParent<Document>(documentFile); <.>
 <.> `documentFile` -- файл (тип `DocumentFile`) искомого документа.
 
 Как изменить значение в элементе управления в карточке::
-Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу `FindPropertyItem` базового класса карточки xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[`BaseCardControl`], передав название элемента управления:
+Для доступа к элементу управления из скрипта карточки, достаточно обратиться к методу `FindPropertyItem` базового класса карточки `xref:api/DocsVision/BackOffice/WinForms/BaseCardControl_CL.adoc[BaseCardControl]`, передав название элемента управления:
 
 [source,csharp]
 ----
@@ -32,7 +32,7 @@ layoutItem.Commit(); <.>
 Пример работы с {dv} из Powershell::
 В приведенном ниже примере, создается скрипт, выполняющий подключение к серверу {dv}, и получение номера из карточки Нумератора.
 
-[source,ps]
+[source,powershell]
 ----
 Add-Type -Path с:\DocsVision.Platform.dll
 Add-Type -Path с:\DocsVision.Platform.ObjectManager.dll <.>

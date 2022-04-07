@@ -47,10 +47,10 @@ sessionId = responseParsed.findtext('.//{http://schemas.docsvision.com/Platform/
 После открытия сессии можно, к примеру, добавить файл (не путать с версионным файлом -- _карточка файла с версиями_) в базу данных.
 
 .Чтобы добавить файл в базу данных:
-. Создать объект-файл в базе данных, используя метод xref:appendix/webservice/files/FileCreate.adoc[`FileCreate`].
-. Открыть созданный объект для записи, используя метод xref:appendix/webservice/files/FileOpen.adoc[`FileOpen`].
-. Записать содержимое файла с файловой системы в открытый объект-файл, используя метод xref:appendix/webservice/files/FileWrite.adoc[`FileWrite`].
-. Закрыть с сохранением открытый объект, используя метод xref:appendix/webservice/files/FileClose.adoc[`FileClose`]
+. Создать объект-файл в базе данных, используя метод `xref:appendix/webservice/files/FileCreate.adoc[FileCreate]`.
+. Открыть созданный объект для записи, используя метод `xref:appendix/webservice/files/FileOpen.adoc[FileOpen]`.
+. Записать содержимое файла с файловой системы в открытый объект-файл, используя метод `xref:appendix/webservice/files/FileWrite.adoc[FileWrite]`.
+. Закрыть с сохранением открытый объект, используя метод `xref:appendix/webservice/files/FileClose.adoc[FileClose]`
 
 .Итоговый код может выглядеть следующим образом:
 [source,python]
@@ -162,11 +162,11 @@ print(fileId) <.>
 == Создание карточки файла с версиями
 
 .Чтобы создать карточки файла с версиями:
-. Создать карточку типа "Файл с версиями", используя метод xref:appendix/webservice/cards/CardCreate.adoc[`CardCreate`].
-. Создать строки в секциях "Версии" и "Общая информация", используя метод xref:appendix/webservice/rows/RowCreate.adoc[`RowCreate`].
-. Добавить, используя метод xref:appendix/webservice/rows/RowSetData.adoc[`RowSetData`], в строку секции "Версии" значения полей (см. xref:DM_StandartCards.adoc[Описание полей стандартной карточки]): `FileId` (используем идентификатор файла, полученный в предыдущем примере), `Version` и `VersionNumber`.
+. Создать карточку типа "Файл с версиями", используя метод `xref:appendix/webservice/cards/CardCreate.adoc[CardCreate]`.
+. Создать строки в секциях "Версии" и "Общая информация", используя метод `xref:appendix/webservice/rows/RowCreate.adoc[RowCreate]`.
+. Добавить, используя метод `xref:appendix/webservice/rows/RowSetData.adoc[RowSetData]`, в строку секции "Версии" значения полей (см. xref:DM_StandartCards.adoc[Описание полей стандартной карточки]): `FileId` (используем идентификатор файла, полученный в предыдущем примере), `Version` и `VersionNumber`.
 . Добавить, используя метод `RowSetData`, в строку секции "Общая информация" значения полей: `CheckinDate`, `CurrentID` (указывается идентификатор строки версии, созданной ранее), `CurrentVersion`, `Name` и `NextVersion`.
-. Изменить описание карточки, используя xref:appendix/webservice/cards/CardSetInfo.adoc[`CardSetInfo`].
+. Изменить описание карточки, используя `xref:appendix/webservice/cards/CardSetInfo.adoc[CardSetInfo]`.
 
 .Итоговый код может выглядеть следующим образом:
 [source,python]

@@ -29,9 +29,9 @@
 .Структура запроса
 image::search-query-structure.png[Структура запроса]
 
-Все объекты для работы с поиском расположены в выделенном пространстве имен `DocsVision.Platform.ObjectManager.SearchModel`, поэтому для их использования нужно подключить данное пространство имен к проекту.
+Все объекты для работы с поиском расположены в выделенном пространстве имён `DocsVision.Platform.ObjectManager.SearchModel`, поэтому для их использования нужно подключить данное пространство имён к проекту.
 
-Базовым объектом для построения поискового запроса является объект xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchQuery_CL.adoc[`SearchQuery`]. Для создания этого объекта, предназначен специальный метод xref:api/DocsVision/Platform/ObjectManager/UserSession.CreateSearchQuery_MT.adoc[`CreateSearchQuery`] пользовательской сессии (`UserSession`).
+Базовым объектом для построения поискового запроса является объект `xref:api/DocsVision/Platform/ObjectManager/SearchModel/SearchQuery_CL.adoc[SearchQuery]`. Для создания этого объекта, предназначен специальный метод `xref:api/DocsVision/Platform/ObjectManager/UserSession.CreateSearchQuery_MT.adoc[CreateSearchQuery]` пользовательской сессии (`UserSession`).
 
 Сам запрос состоит из двух частей -- атрибутивного поиска (`AttributiveSearch`) и полнотекстового запроса (`FullTextSearch`). Эти части независимы друг от друга и могут фигурировать в запросе как по отдельности, так и одновременно. Возможно объединение результатов этих частей по И/ИЛИ, для этого предназначен флаг `*CombineResults*`.
 
@@ -305,7 +305,7 @@ BaseCard foundCard = objectContext.FindObject<BaseCard>(query); <.> <.> <.>
 ----
 <.> `objectContext` -- контекст объектов.
 <.> `BaseCard` -- тип возвращаемого объекта. В качестве типа возвращаемого объекта может быть передан тип объектной модели карточки или строки.
-<.> `query` -- поисковый запрос типа xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject].
+<.> `query` -- поисковый запрос типа `xref:api/DocsVision/Platform/ObjectModel/Search/QueryObject_CL.adoc[QueryObject]`.
 
 Чтобы найти в _Справочнике сотрудников_ сотрудника с определённой учетной записью, воспользуйтесь примером, приведенным далее, в котором параметры поискового запроса передаются непосредственно в конструктор класса `QueryObject`.
 
@@ -323,7 +323,7 @@ StaffEmployee employee = objectContext.FindObject<StaffEmployee>(query); <.>
 +
 <.> Получаем сотрудника с искомой учетной записью.
 +
-xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[`StaffEmployee`] -- класс (объектной модели) искомого объекта.
+`xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]` -- класс (объектной модели) искомого объекта.
 
 Также возможны более сложные поисковые запросы, которые включают несколько критериев поиска. К примеру, далее приведен код запроса, выполняющего поиск контрагента по названию и типу (организация или подразделение).
 

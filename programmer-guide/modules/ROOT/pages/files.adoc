@@ -11,9 +11,9 @@
 
 == Системный объект -- файл
 
-Для работы с простыми файлами в системе предусмотрен объект xref:api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[`FileData`]. Это самый низкоуровневый объект для работы с двоичными данными файла -- поэтому у него нет таких понятий как "версия" или "свойства".
+Для работы с простыми файлами в системе предусмотрен объект `xref:api/DocsVision/Platform/ObjectManager/FileData_CL.adoc[FileData]`. Это самый низкоуровневый объект для работы с двоичными данными файла -- поэтому у него нет таких понятий как "версия" или "свойства".
 
-Работа со стандартными файлами осуществляется при помощи менеджера файлов, который может быть получен из интерфейса менеджера объектов xref:api/DocsVision/Platform/ObjectManager/UserSession.FileManager_PR.adoc[`UserSession.FileManager`]. Менеджер файлов позволяет выполнять простейшие операции с файлами -- создавать, удалять, копировать и осуществлять поиск файлов в системе
+Работа со стандартными файлами осуществляется при помощи менеджера файлов, который может быть получен из интерфейса менеджера объектов `xref:api/DocsVision/Platform/ObjectManager/UserSession.FileManager_PR.adoc[UserSession.FileManager]`. Менеджер файлов позволяет выполнять простейшие операции с файлами -- создавать, удалять, копировать и осуществлять поиск файлов в системе
 
 В примере, создадим *файл* с названием `NewFile` и загрузим в него файл из файловой системы `NewFile.doc`, после чего присвоим переменной `newFileId` значение идентификатора созданного файла
 
@@ -59,9 +59,9 @@ Guid newFileId = file.Id; <.>
 
 == Системный объект -- версия файла
 
-Версия файла (объект xref:api/DocsVision/Platform/ObjectManager/SystemCards/FileVersion_CL.adoc[`FileVersion`]) расширяет функциональность стандартного файла и наследует его интерфейс. Свойства и методы версии файла повторяют аналогичные свойства файла и добавляют к ним собственные.
+Версия файла (объект `xref:api/DocsVision/Platform/ObjectManager/SystemCards/FileVersion_CL.adoc[FileVersion]`) расширяет функциональность стандартного файла и наследует его интерфейс. Свойства и методы версии файла повторяют аналогичные свойства файла и добавляют к ним собственные.
 
-Объект версии файла не может быть создан разработчиком напрямую и используется только в системной карточке файла с версиями xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[`VersionedFileCard`].
+Объект версии файла не может быть создан разработчиком напрямую и используется только в системной карточке файла с версиями `xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]`.
 
 == Системная карточка файла
 
@@ -72,9 +72,9 @@ Guid newFileId = file.Id; <.>
 * Обеспечение безопасности при работе с файлом.
 * Поддержка механизма единоличного владения файлом (`CheckIn`/`CheckOut`).
 
-Для работы с системной карточкой файла в менеджере объектов предусмотрен объект xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[`VersionedFileCard`].
+Для работы с системной карточкой файла в менеджере объектов предусмотрен объект `xref:api/DocsVision/Platform/ObjectManager/SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]`.
 
-Поскольку карточка файла является обычной карточкой {dv}, то для её создания необходимо прибегнуть к помощи объекта -- менеджера карточек (xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[`CardManager`]).
+Поскольку карточка файла является обычной карточкой {dv}, то для её создания необходимо прибегнуть к помощи объекта -- менеджера карточек (`xref:api/DocsVision/Platform/ObjectManager/CardManager_CL.adoc[CardManager]`).
 
 .Пример создания и первичной инициализации карточки файла:
 [source,csharp]
