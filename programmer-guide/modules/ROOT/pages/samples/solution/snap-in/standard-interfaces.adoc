@@ -4,8 +4,7 @@
 
 == Реализация интерфейса ISnapIn
 
-Основной интерфейс расширения, который добавляет:
-
+.Основной интерфейс расширения, который добавляет:
 * `LibraryID` -- _идентификатор библиотеки карточек_, с которой данное расширение ассоциировано. `LibraryID` требуется для регистрации пакетов установки, добавления библиотеки карточек в базу данных, удаления _решения_, а также для некоторых других сценариев работы _Консоли настройки_.
 +
 [source,csharp]
@@ -15,6 +14,7 @@ public string LibraryID
  get { return "{F729F178-15DA-4BDE-82B8-DD0B2F0C0BC6}"; }
 }
 ----
++
 * `Name` -- название модуля. Используется в некоторых сервисных функциях, например: при отображении названия расширения в списке зарегистрированных расширений _Консоли настройки_.
 +
 [source,csharp]
@@ -24,7 +24,8 @@ public string Name
  get { return "Консоль управления модулем Проверка сети"; }
 }
 ----
-* Метод Initialize(IEnvironment)# -- позволяет получить переменные контекста работы Консоли настройки, которые предоставляют доступ к сервису регистрации пакетов установки клиентской части.
++
+* `Метод Initialize(IEnvironment)` -- позволяет получить переменные контекста работы Консоли настройки, которые предоставляют доступ к сервису регистрации пакетов установки клиентской части.
 +
 [source,csharp]
 ----
@@ -33,7 +34,8 @@ public void Initialize(IEnvironment environment)
  _environment = environment;
 }
 ----
-* Метод QueryInterface(SnapInInterfacesEnum)# -- возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы _Консоли настройки_. Подробнее см. в разделе xref:solutions/extensions/console-plugin.adoc[Модуль расширения Консоли настройки].
++
+* Метод `QueryInterface(SnapInInterfacesEnum)` -- возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы _Консоли настройки_. Подробнее см. в разделе xref:solutions/extensions/console-plugin.adoc[Модуль расширения Консоли настройки].
 +
 [source,csharp]
 ----
@@ -49,18 +51,19 @@ public object QueryInterface(SnapInInterfacesEnum itf)
    break;
 
   case SnapInInterfacesEnum.CONSOLE_CONTROL:
-   result = new SnapInForm(); // Экземпляр типа, реализующего пользовательский интерфейс
+   result = new SnapInForm(); <.>
    break;
   }
  return result;
 }
 ----
+<.> Экземпляр типа, реализующего пользовательский интерфейс.
 
-== Реализация интерфейса IConfigurator
+== Реализация интерфейса "IConfigurator"
 
 Данный интерфейс должен быть реализован, если расширение может выполнять первоначальную настройку _решения_.
 
-Как правило, метод Execute, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, _Идентификатор пакета установки_ и _Код продукта_, которые были указаны при xref:samples/solution/card-lib/lib-metadata-scheme.adoc[разработке библиотеки карточек]:
+Как правило, метод `Execute`, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, _Идентификатор пакета установки_ и _Код продукта_, которые были указаны при xref:samples/solution/card-lib/lib-metadata-scheme.adoc[разработке библиотеки карточек]:
 
 [source,csharp]
 ----
@@ -68,27 +71,31 @@ public bool Execute()
 {
  ILog log = (ILog)_environment.QueryService(EnvironmentServiceEnum.LOG);
 
- // Регистрация клиентского пакета установки
- ICardLibConfigurator2 cardLibConfig = (ICardLibConfigurator2)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR);
+ ICardLibConfigurator2 cardLibConfig = (ICardLibConfigurator2)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR); <.>
 
- // Регистрация пакета установки
+ <.>
  cardLibConfig.RegisterPackage(
-  "E98E531F-D34C-41D6-9BCA-9972F46EB6DF", // Идентификатор пакета установки
-  "22CE4047-0BA8-4014-9BBE-7D8C43FDE907", // Код продукта
-  Path.Combine(AssemblyFolder, "NetstatSolutionClient.msi")); // Абсолютный путь к пакету установки клиентской части
+  "E98E531F-D34C-41D6-9BCA-9972F46EB6DF", <.>
+  "22CE4047-0BA8-4014-9BBE-7D8C43FDE907", <.>
+  Path.Combine(AssemblyFolder, "NetstatSolutionClient.msi")); <.>
 
  log.WriteMessage("Конфигурирование завершено");
 
- // Если метод должен сообщить об ошибке, то необходимо вызвать исключение. В обычном случает, метод возвращает true
- return true;
+ return true; <.>
 }
 ----
+<.> Регистрация клиентского пакета установки.
+<.> Регистрация пакета установки.
+<.> Идентификатор пакета установки.
+<.> Код продукта.
+<.> Абсолютный путь к пакету установки клиентской части.
+<.> Если метод должен сообщить об ошибке, то необходимо вызвать исключение. В обычном случает, метод возвращает `true`.
 
-== Реализация интерфейса IDBInformation
+== Реализация интерфейса "IDBInformation"
 
 Данный интерфейс добавляет методы, предоставляющие _Консоли настройки_ пути к _CardPackage_ и _SqlPackage_.
 
-Метод GetCardPackage должен вернуть абсолютный путь к пакету _CardPackage_:
+Метод `GetCardPackage` должен вернуть абсолютный путь к пакету _CardPackage_:
 
 [source,csharp]
 ----
@@ -98,7 +105,7 @@ public string GetCardPackage()
 }
 ----
 
-Метод GetScript(ScriptTypeEnum)# должен вернуть абсолютный путь к пакету _SqlPackage_, если запрашивается тип ScriptTypeEnum.INSTALL_TABLEs:
+Метод `GetScript(ScriptTypeEnum)` должен вернуть абсолютный путь к пакету _SqlPackage_, если запрашивается тип `ScriptTypeEnum.INSTALL_TABLES`:
 
 [source,csharp]
 ----
@@ -128,9 +135,9 @@ public bool ContainsCardLib
 
 == Реализация интерфейса IUninstallSnapIn
 
-Данный интерфейс добавляет единственный метод Uninstall(Boolean)#, вызываемый при удалении расширения (и решения в целом).
+Данный интерфейс добавляет единственный метод `Uninstall(Boolean)`, вызываемый при удалении расширения (и решения в целом).
 
-Метод Uninstall может, к примеру, удалять библиотеку карточек, а также настройки _решения_, как в данном случае:
+Метод `Uninstall` может, к примеру, удалять библиотеку карточек, а также настройки _решения_, как в данном случае:
 
 [source,csharp]
 ----
@@ -140,11 +147,9 @@ public void Uninstall(bool removeSettings)
  ICardLibConfigurator cardLibConfig = (ICardLibConfigurator)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR);
  log.WriteMessage("Запущено удаление");
 
- // Удаление библиотеки карточек
- cardLibConfig.RemoveCardLib(LibraryID);
+ cardLibConfig.RemoveCardLib(LibraryID); <.>
 
- // Удаление настроек модуля
- if (removeSettings)
+ if (removeSettings) <.>
  { 
   using (RegistryKey key = Common.GetSubKey(Registry.LocalMachine, Common.NetstatSolutionKey))
   {
@@ -156,3 +161,5 @@ public void Uninstall(bool removeSettings)
  log.WriteMessage("Записи реестра удалены");
 }
 ----
+<.> Удаление библиотеки карточек.
+<.> Удаление настроек модуля.
