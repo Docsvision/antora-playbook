@@ -1,0 +1,67 @@
+= Удаление унаследованных прав на карточку
+
+Сценарий, приведенный в примере, предназначен для удаления унаследованных прав на карточку
+
+.Сценарий работает со следующими переменными процесса:
+* `Card` -- карточка, для которой осуществляется удаление унаследованных прав. Тип "Карточка DV".
+
+[source,csharp]
+----
+using System;
+using System.Security.AccessControl;
+using System.Xml; <.>
+
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.Security.AccessControl; <.>
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    ProcessVariable varCard = process.GetVariableByName("Card"); <.>
+
+    DVCard oCard = varCard.Value as DVCard; <.>
+
+    DVGate dvGate = process.Gates[DVGate.GateID] as DVGate;
+    CardData card = dvGate.UserSession.CardManager.GetCardData(new Guid(oCard.ID));
+   
+    CardDataSecurity cardDataSecurity = card.GetAccessControl(); <.>
+
+    byte[] descBytes = cardDataSecurity.GetSecurityDescriptorBinaryForm();
+    CommonSecurityDescriptor desc = new CommonSecurityDescriptor(true, false, descBytes, 0); <.>
+
+    desc.SetDiscretionaryAclProtection(true, false);
+   
+    descBytes = new byte[desc.BinaryLength];
+    desc.GetBinaryForm(descBytes, 0);
+    cardDataSecurity.SetSecurityDescriptorBinaryForm(descBytes); <.>
+
+    card.SetAccessControl(cardDataSecurity); <.>
+        
+   } catch (Exception ex)
+   {
+
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message); <.>
+   }
+  }
+ }
+}
+----
+<.> Подключение системных библиотек.
+<.> Подключение библиотек СУБП.
+<.> Получение переменных процесса.
+<.> Приведение переменной к типу "Карточка DV".
+<.> Получение ACL для карточки.
+<.> Получение дескриптора безопасности.
+<.> Отключение наследования прав.
+<.> Сохранение дескриптора.
+<.> Обновление ACL для карточки.

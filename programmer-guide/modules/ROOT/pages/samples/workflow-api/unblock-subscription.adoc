@@ -1,0 +1,69 @@
+= Подписка на разблокировку карточки
+
+В процессе исполнения бизнес-процесса возникают ситуации, когда процессу необходимо получить доступ к карточке, у которой установлена блокировка, но принудительная разблокировка является нежелательной. В таком случае можно воспользоваться механизмом подписки, который предлагает шлюз к {dv}. Далее приведен пример оформления такой подписки.
+
+[source,vbnet]
+----
+using System;
+using System.Xml;
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI;
+using DocsVision.Workflow.Functions;
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public ExecResultEnum Execute (ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    DVGate dvGate = (DVGate)process.Gates[DVGate.GateID]; <.>
+
+    ProcessVariable cardVar = process.GetVariableByName("Карточка"); <.>
+
+    Guid cardId = new Guid(((DVCard)cardVar.Value).ID); <.>
+
+    var cardData = dvGate.UserSession.CardManager.GetCardData(cardId); <.>
+                
+    if ((int)cardData.LockStatus != 0) <.>
+    {
+     process.LogMessage("Ожидание разблокировки карточки");
+     
+     dvGate.SubscriptionChannel.Subscribe((int)DocsVisionSubscriptionType.ObjectUnlock, process.ID, passInfo.FunctionID, cardId); <.>
+     
+     return ExecResultEnum.WaitForMessage; <.>
+    } else
+    {
+     process.LogMessage("Карточка разблокирована.");
+
+     return ExecResultEnum.Done; <.>
+    }
+   } catch (Exception ex)
+   {
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message);
+
+    return ExecResultEnum.Error; <.>
+   }
+  }
+ }
+}
+----
+<.> Получение шлюза к {dv}.
+<.> Получение карточки из переменной процесса.
+<.> Получение идентификатора карточки.
+<.> Получение данных карточки.
+<.> Выполнение проверки наличия блокировки карточки. Если карточка является заблокированной, то будет выполнена подписка на событие разблокировки шлюза.
+<.> Выполнение подписки.
+<.> Ожидание наступления события.
+<.> Возвращает признак успешного выполнения функции.
+<.> Возвращение ошибки.
+
+.Подписка осуществляется путем передачи в метод `Subscribe`:
+* Типа подписки -- `DocsVisionSubscriptionType` (`DocsVisionSubscriptionType.ObjectUnlock`).
+* Идентификатора бизнес-процесса (`process.ID`).
+* Идентификатора текущей функции (`passInfo.FunctionID`).
+* Идентификатора карточки (`cardId`), на события которой осуществляется подписка.

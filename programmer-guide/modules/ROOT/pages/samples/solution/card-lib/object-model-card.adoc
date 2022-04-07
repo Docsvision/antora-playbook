@@ -1,6 +1,6 @@
 = Разработка объектной модели карточки
 
-Т.к. ранее было решено поддержать возможность настройки карточки при помощи конструкторов, необходимо сохранить в её объектной модели секции System, Numbers, Processes. Для этого достаточно унаследовать свой класс объекта карточки от базового класса DocsVision.BackOffice.ObjectModel.BaseCard.
+Поскольку ранее было решено поддержать возможность настройки карточки при помощи конструкторов, необходимо сохранить в её объектной модели секции `System`, `Numbers`, `Processes`. Для этого достаточно унаследовать свой класс объекта карточки от базового класса `DocsVision.BackOffice.ObjectModel.BaseCard`.
 
 . Создаем класс объекта карточки:
 +
@@ -8,6 +8,7 @@
 ----
 public class NetstatSolutionCard : BaseCard
 ----
++
 . Для каждой секции добавляем статическое поле класса:
 +
 [source,csharp]
@@ -15,6 +16,7 @@ public class NetstatSolutionCard : BaseCard
 public static readonly ObjectProperty MainInfoProperty;
 public static readonly ObjectProperty JournalProperty;
 ----
++
 . Добавляем в класс свойства для доступа к данным секции:
 +
 [source,csharp]
@@ -23,8 +25,7 @@ public NetstatSolutionCardMainInfo MainInfo
 {
  get
  {
-  // Считаем, что данная секция должна быть, а если её нет, то создаем пустую
-  if (((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).Count = 0)
+  if (((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).Count = 0) <.>
   {
    ((ObjectCollection<NetstatSolutionCardMainInfo>)base.GetValue(NetstatSolutionCard.MainInfoProperty)).Add(new NetstatSolutionCardMainInfo());
   }
@@ -39,6 +40,8 @@ public ObjectCollection<NetstatSolutionCardJournal> Journal
  }
 }
 ----
+<.> Считаем, что данная секция должна быть, а если её нет, то создаем пустую.
++
 . Регистрируем связи между секциями карточки и их объектной моделью в статическом конструкторе класса:
 +
 [source,csharp]
@@ -50,4 +53,4 @@ static NetstatSolutionCard()
 }
 ----
 
-В платформе {dv} принято выносить бизнес-логику карточки из её объектной модели в сервисы; последуем данному правилу и вынесем основные функции карточки в отдельный сервис (будет разработан позднее).
+В платформе {dv} принято выносить бизнес-логику карточки из её объектной модели в сервисы. Последуем данному правилу и вынесем основные функции карточки в отдельный сервис (будет разработан позднее).

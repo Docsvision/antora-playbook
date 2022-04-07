@@ -1,0 +1,56 @@
+= Разработка объектной модели строк секций
+
+Единственная карточка библиотеки содержит секции: `MainInfo`, `Journal`, `System`, `Numbers`, `Processes`, причем три последних были скопированы из карточки типа "Документ". Базовый класс карточек библиотеки _{bo}_ уже содержит описание данных секций, поэтому достаточно создать объектную модель для оставшихся двух: `MainInfo` и `Journal`.
+
+.Первоначально разработаем объектную модель строчки секции `MainInfo`:
+. Создаем класс строки секции, используя в качестве базового класс `BaseCardSectionRow` -- базовый класс строчки секции карточки библиотеки _{bo}_:
++
+[source,csharp]
+----
+public class NetstatSolutionCardMainInfo : BaseCardSectionRow
+----
++
+. Добавляем в класс статическое поле для каждого поля секции карточки:
++
+[source,csharp]
+----
+public static readonly ObjectProperty NameProperty; <.>
+public static readonly ObjectProperty AddressProperty; <.>
+<.>
+----
+<.> Название узла.
+<.> IP-адрес узла.
+<.> И так далее.
++
+. Добавляем в класс свойства, по которым будут доступны значения соответствующих полей:
++
+[source,csharp]
+----
+public string Name
+ {
+  get { return (string)base.GetValue(NetstatSolutionCardMainInfo.NameProperty); }
+  set { base.SetValue(NetstatSolutionCardMainInfo.NameProperty, value); }
+ }
+ public string Address
+ {
+  get { return (string)base.GetValue(NetstatSolutionCardMainInfo.AddressProperty); }
+  set { base.SetValue(NetstatSolutionCardMainInfo.AddressProperty, value); }
+ }
+<.>
+----
+<.> И так далее.
++
+. В статическом конструкторе класса регистрируем связи между полями карточки и объектной моделью:
++
+[source,csharp]
+----
+static NetstatSolutionCardMainInfo()
+{
+ NetstatSolutionCardMainInfo.NameProperty = ObjectProperty.Register("Name", typeof(string), typeof(NetstatSolutionCardMainInfo)); <.>
+ NetstatSolutionCardMainInfo.AddressProperty = ObjectProperty.Register("Address", typeof(string), typeof(NetstatSolutionCardMainInfo));
+<.>
+----
+<.> В метод `Register` передаем название поля (как в схеме метаданных), его тип (как определен выше) и тип самой секции (текущий класс)
+<.> И так далее.
+
+Аналогичным образом разрабатывается объектная модель строчек секции `Journal`.
