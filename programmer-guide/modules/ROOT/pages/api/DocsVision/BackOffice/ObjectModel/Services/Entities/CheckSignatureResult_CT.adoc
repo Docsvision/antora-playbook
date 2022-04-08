@@ -1,11 +1,10 @@
 = CheckSignatureResult -- конструктор (string, bool, bool, DateTime?, DateTime?, DateTime?)
 
-Инициализирует новый экземпляр класса CheckSignatureResult.
+Инициализирует новый экземпляр класса `CheckSignatureResult`.
 
 * *Пространство имён:* `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
-[[internal_CheckSignatureResult__section_vlv_nct_mpb]]
 == Синтаксис
 
 [source,csharp]
@@ -18,22 +17,27 @@ result:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Адрес электронной почты получателя сообщения
+
 isExpiredCertificate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-Проверка срока действия сертификата подписи: true -— срок действия истёк, false -- сертификат действителен.
+Проверка срока действия сертификата подписи: `true` -— срок действия истёк, `false` -- сертификат действителен.
+
 isRevokedCertificate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-Проверка действительности сертификата: true -— сертификат отозван и больше не действителен, false -- сертификат действителен
+Проверка действительности сертификата: true -— сертификат отозван и больше не действителен, false -- сертификат действителен.
+
 signatureDate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
 +
 Дата создания подписи.
+
 clrEntryDate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
 +
-Дата и время записи об отзыве сертификата в CRL. ​ Если подпись была сделана до этой даты, она действительна, если после -- то нет
+Дата и время записи об отзыве сертификата в CRL. Если подпись была сделана до этой даты, она действительна, если после -- то нет.
+
 expireDate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
 +

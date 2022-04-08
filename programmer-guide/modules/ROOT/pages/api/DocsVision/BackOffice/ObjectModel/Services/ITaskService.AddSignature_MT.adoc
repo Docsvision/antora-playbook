@@ -14,15 +14,15 @@ BaseCardSignature AddSignature(Task task, X509Certificate2 certificate, StatesOp
 
 Параметры::
 task:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]`
 +
 Задание, содержащее подписываемые данные
 certificate:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат сотрудника, которым будет выполнено подписания
 operation:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]`
 +
 Подписываемая операция
 signatureType:::
@@ -30,12 +30,12 @@ signatureType:::
 +
 Тип подписи, который может быть получен из TaskOperationSignatureSetting.Name
 fields:::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>`
 +
 Коллекция подписываемых полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], определённых для карточки в Справочнике видов карточек
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Подпись
 
@@ -44,7 +44,7 @@ fields:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task и operation.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task и operation.
 |===
 
 == Заметки
@@ -78,7 +78,7 @@ namespace BackOffice
    ITaskService taskService = objectContext.GetService<ITaskService>();
 
    // Метод (EnsureSign) проверки данных карточки перед подписанием не является публичным, поэтому используем механизм отражения
-   MethodInfo ensureSign = this.CardControl.GetType().GetMethod("EnsureSign", BindingFlags.NonPublic | BindingFlags.Instance);
+   MethodInfo ensureSign = this.CardControl.GetType().GetMethod("EnsureSign", BindingFlags.NonPublic` | BindingFlags.Instance);
    bool result = (ensureSign.Invoke(this.CardControl, null) as bool?).Value;
    if (!result) return;
 

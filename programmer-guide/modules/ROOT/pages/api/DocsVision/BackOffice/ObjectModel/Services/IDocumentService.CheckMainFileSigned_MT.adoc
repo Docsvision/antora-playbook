@@ -14,36 +14,38 @@ bool CheckMainFileSigned(Document document, DocumentFile mainFile)
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 mainFile:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Файл документа
 
 Возвращаемое значение::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-`true` -- файл подписан, иначе false
+`true` -- файл подписан, иначе -- `false`
 
 == Примеры
 
-Далее приведен пример использования метода CheckMainFileSigned при определении наличия подписи у первого основного файла документа
+Далее приведен пример использования метода `CheckMainFileSigned` при определении наличия подписи у первого основного файла документа.
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение первого основного файла         
-DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
+DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileType.Main); <.>
 
-// Проверка подписи
-bool result = documentService.CheckMainFileSigned(document, documentFile);
+bool result = documentService.CheckMainFileSigned(document, documentFile); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение первого основного файла.
+<.> Проверка подписи.

@@ -20,15 +20,15 @@ public enum ActivateFlags
 [cols=",",options="header"]
 |===
 |Имя члена |Описание
-|None |Флаги отсутствуют. Значение 0x00.
-|ModalWindow |Карточка открыта модально. Значение 0x01.
-|FolderPanel |Карточка папки. Значение 0x02.
-|New |Создан новый экземпляр карточки. Значение 0x04.
-|NewFromTemplate |Новая карточка из шаблона. Значение 0x08.
-|ByShortcut |Карточка открыта по ярлыку. Значение 0x10.
-|ByUrl |Карточка открыта по ссылке. Значение 0x20.
-|ReadOnly |Карточка открыта только для чтения. Значение 0x40.
-|NoCreateNew |Запрет создания новых карточек в этой же папке. Значение 0x80.
+|`None` |Флаги отсутствуют. Значение 0x00.
+|`ModalWindow` |Карточка открыта модально. Значение 0x01.
+|`FolderPanel` |Карточка папки. Значение 0x02.
+|`New` |Создан новый экземпляр карточки. Значение 0x04.
+|`NewFromTemplate` |Новая карточка из шаблона. Значение 0x08.
+|`ByShortcut` |Карточка открыта по ярлыку. Значение 0x10.
+|`ByUrl` |Карточка открыта по ссылке. Значение 0x20.
+|`ReadOnly` |Карточка открыта только для чтения. Значение 0x40.
+|`NoCreateNew` |Запрет создания новых карточек в этой же папке. Значение 0x80.
 |===
 
 == Заметки
@@ -37,5 +37,5 @@ public enum ActivateFlags
 
 [source,csharp]
 ----
-ActivateFlags args = ActivateFlags.New | ActivateFlags.NewFromTemplate;
+ActivateFlags args = ActivateFlags.New` | ActivateFlags.NewFromTemplate;
 ----

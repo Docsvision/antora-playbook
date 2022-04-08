@@ -14,13 +14,15 @@ bool AddMainFileComment(Document document, DocumentFile file, string comment)
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
-Документ, содержащий файл file
+Документ, содержащий файл `file`
+
 file:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Объектная модель файла документа
+
 comment:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
@@ -29,14 +31,14 @@ comment:::
 Возвращаемое значение::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-`true` -- комментарий был успешно добавлен, иначе false
+`true` -- комментарий был успешно добавлен, иначе -- `false`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или comment.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`, `file` или `comment`.
 |===
 
 == Примеры
@@ -45,17 +47,18 @@ comment:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение первого основного файла
-DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main); <.>
 
-//Добавление комментария
-documentService.AddMainFileComment(document, file, "Данный файл был проверен");
+documentService.AddMainFileComment(document, file, "Данный файл был проверен"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение первого основного файла.
+<.> Добавление комментария.

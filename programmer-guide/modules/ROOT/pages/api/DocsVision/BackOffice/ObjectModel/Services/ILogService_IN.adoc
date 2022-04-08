@@ -17,17 +17,17 @@ public interface ILogService
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|AddLogMessage(BaseCard, BuiltInOperation, LogItemDetailsCollection) |Добавляет детализированное сообщение об операции с карточкой в журнал. Используется для корректной локализации сообщений журнала.
-|AddLogMessage(BaseCard, BuiltInOperation, String) |Добавляет сообщение об операции с карточкой в журнал.
-|AddLogMessage(BaseCard, BuiltInOperation, String, Boolean) |Добавляет сообщение об операции с карточкой в журнал минуя кэш.
-|AddLogMessage(BaseCard, StatesOperation, LogItemDetailsCollection) |Добавляет детализированное сообщение об изменении статуса карточки в журнал. Сообщение должно быть определено в ресурсах. Используется для корректной локализации сообщений журнала.
-|AddLogMessage(BaseCard, StatesOperation, String) |Добавляет сообщение об изменении статуса карточки в журнал.
-|AddLogMessage(BaseCard, StatesOperation, String, Boolean) |Добавляет сообщение об изменении статуса карточки в журнал минуя кэш.
-|AddMessageAssembly(System.Reflection.Assembly) |Добавляет специальную сборку, содержащую менеджеров ресурсов, которые будут автоматически добавлены во временное хранилище ресурсов. Ресурсы будут использованы при получении готовых сообщений для журнала сообщений.
-|AddMessageResources(Guid, ResourceManager) |Добавляет менеджер ресурсов, предназначенный для получения деталей сообщения в текущем контексте.
-|CommitLog |Производит запись в журнал всех добавленных сообщений.
-|GetLogMessages(DateTime?, DateTime?, BaseCard) |Возвращает коллекцию отфильтрованных записей журнала.
-|GetLogMessageDescription(LogMessage) |Получает строку детализированного сообщения из объекта типа LogMessage.
+|`AddLogMessage(BaseCard, BuiltInOperation, LogItemDetailsCollection)` |Добавляет детализированное сообщение об операции с карточкой в журнал. Используется для корректной локализации сообщений журнала.
+|`AddLogMessage(BaseCard, BuiltInOperation, String)` |Добавляет сообщение об операции с карточкой в журнал.
+|`AddLogMessage(BaseCard, BuiltInOperation, String, Boolean)` |Добавляет сообщение об операции с карточкой в журнал минуя кэш.
+|`AddLogMessage(BaseCard, StatesOperation, LogItemDetailsCollection)` |Добавляет детализированное сообщение об изменении статуса карточки в журнал. Сообщение должно быть определено в ресурсах. Используется для корректной локализации сообщений журнала.
+|`AddLogMessage(BaseCard, StatesOperation, String)` |Добавляет сообщение об изменении статуса карточки в журнал.
+|`AddLogMessage(BaseCard, StatesOperation, String, Boolean)` |Добавляет сообщение об изменении статуса карточки в журнал минуя кэш.
+|`AddMessageAssembly(System.Reflection.Assembly)` |Добавляет специальную сборку, содержащую менеджеров ресурсов, которые будут автоматически добавлены во временное хранилище ресурсов. Ресурсы будут использованы при получении готовых сообщений для журнала сообщений.
+|`AddMessageResources(Guid, ResourceManager)` |Добавляет менеджер ресурсов, предназначенный для получения деталей сообщения в текущем контексте.
+|`CommitLog` |Производит запись в журнал всех добавленных сообщений.
+|`GetLogMessages(DateTime?, DateTime?, BaseCard)` |Возвращает коллекцию отфильтрованных записей журнала.
+|`GetLogMessageDescription(LogMessage)` |Получает строку детализированного сообщения из объекта типа LogMessage.
 |===
 
 == События
@@ -35,7 +35,7 @@ public interface ILogService
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|LogMessage |Событие возникает после добавления сообщения в журнал методом ILogService.AddLogMessage.
+|`LogMessage` |Событие возникает после добавления сообщения в журнал методом ILogService.AddLogMessage.
 |===
 
 == Примеры

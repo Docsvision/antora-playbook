@@ -14,15 +14,17 @@ void DecryptFile(X509Certificate2 certificate, Guid fileId, Stream destStream)
 
 Параметры::
 certificate:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат шифрования, которым зашифрован файл
+
 fileId:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор зашифрованного файла
+
 destStream:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]`
 +
 Поток для записи расшифрованных данных
 
@@ -31,6 +33,6 @@ destStream:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр certificate или destStream.
-|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если файл с указанным идентификатором не существует.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `certificate` или `destStream`.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если файл с указанным идентификатором не существует.
 |===

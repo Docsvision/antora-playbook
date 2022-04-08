@@ -17,13 +17,13 @@ public interface IBinaryStorage
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|IsIntegratedStorage a|
+|`IsIntegratedStorage` a|
 Флаг, указывающий является ли данное хранилище интегрированным в {dv}.
 
 *Должен всегда возвращать false*.
 
-|StorageId |Задает или возвращает уникальный идентификатор хранилища.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions] |Задает или возвращает типы разделов, поддерживаемых хранилищем.
+|`StorageId` |Задает или возвращает уникальный идентификатор хранилища.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions]` |Задает или возвращает типы разделов, поддерживаемых хранилищем.
 |===
 
 == Методы
@@ -31,15 +31,15 @@ public interface IBinaryStorage
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)] |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)] |Создает файл во внешнем хранилище.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)] |Создает файл во внешнем хранилище и загружает в него данные другого файла.
-|Delete(String) |Удаляет файл с указанным идентификатором из внешнего хранилища.
-|Read(String, Stream) |Считывает данные файла из внешнего хранилища в поток.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)] |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SafeMove_MT.adoc[SafeMove(String, StoragePartitionType)] |Перемещает файл в новый раздел внешнего хранилища.
-|Write(String, Stream) |Записывает данные из потока в файл во внешнем хранилище.
-|xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Write_MT.adoc[Write(String, Stream, Int64)] |Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)]` |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)]` |Создает файл во внешнем хранилище.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)]` |Создает файл во внешнем хранилище и загружает в него данные другого файла.
+|`Delete(String)` |Удаляет файл с указанным идентификатором из внешнего хранилища.
+|`Read(String, Stream)` |Считывает данные файла из внешнего хранилища в поток.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)]` |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.SafeMove_MT.adoc[SafeMove(String, StoragePartitionType)]` |Перемещает файл в новый раздел внешнего хранилища.
+|`Write(String, Stream)` |Записывает данные из потока в файл во внешнем хранилище.
+|`xref:api/DocsVision/Platform/StorageServer/IBinaryStorage.Write_MT.adoc[Write(String, Stream, Int64)]` |Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
 |===
 
 == Заметки

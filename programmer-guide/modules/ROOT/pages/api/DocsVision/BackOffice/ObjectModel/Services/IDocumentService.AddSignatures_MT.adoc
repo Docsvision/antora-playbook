@@ -14,16 +14,17 @@ IEnumerable<BaseCardSignature> AddSignatures(Document document, System.Security.
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Подписываемый документ
+
 signedCms:::
-Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
+Тип: `http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]`
 +
 Сообщение CMS/PKCS 7
 
 Возвращаемое значение::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<BaseCardSignature>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<BaseCardSignature>`
 +
 Список подписей
 
@@ -32,16 +33,16 @@ signedCms:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или signedCms.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `signedCms`.
 |===
 
 == Заметки
 
-Данный метод может быть использован для импорта подписанного файла, сохраненного в виде сообщения CMS/PKCS 7, в карточку. {dv} экспортирует подписанные файлы в один файл с расширением `p7s`, либо в два файла: экспортируемый файл и отдельно сообщение CMS/PKCS 7 в виде файла с расширением `p7s`. Для извлечения исходного файла из сообщения предназначен метод xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[IDocumentService.DecodeSignedDocument].
+Данный метод может быть использован для импорта подписанного файла, сохраненного в виде сообщения CMS/PKCS 7, в карточку. {dv} экспортирует подписанные файлы в один файл с расширением `.p7s`, либо в два файла: экспортируемый файл и отдельно сообщение CMS/PKCS 7 в виде файла с расширением `.p7s`. Для извлечения исходного файла из сообщения предназначен метод `xref:api/DocsVision/BackOffice/ObjectModel/Services/IDocumentService.DecodeSignedDocument_MT.adoc[IDocumentService.DecodeSignedDocument]`.
 
 == Примеры
 
-Ниже приведен пример использования метода AddSignatures в скрипте карточки. В данном примере выполняется импорт основного файла, экспортированного с отсоединенной подписью из карточки. Файл и подпись хранятся в одном каталоге и имеют идентичные названия (у криптографического сообщения добавлено расширение p7s).
+Ниже приведен пример использования метода `AddSignatures` в скрипте карточки. В данном примере выполняется импорт основного файла, экспортированного с отсоединенной подписью из карточки. Файл и подпись хранятся в одном каталоге и имеют идентичные названия (у криптографического сообщения добавлено расширение `.p7s`).
 
 [source,csharp]
 ----
@@ -63,34 +64,33 @@ namespace BackOffice
    Document document = (base.BaseObject as Document);
    ObjectContext objectContext = base.CardControl.ObjectContext;
       
-   // Получение необходимых сервисов
+   //
    IDocumentService documentService = objectContext.GetService<IDocumentService>();
-   IUIService uiService = objectContext.GetService<IUIService>();
+   IUIService uiService = objectContext.GetService<IUIService>(); <.>
 
-   // Выбор файла для импорта. Предполагается выбор только импортируемого файла, криптографическое сообщение будет загружено автоматически
+   //
    OpenFileDialog openFileDialog = new OpenFileDialog();
    openFileDialog.Multiselect = false;
    openFileDialog.Filter = "Все файлы (*.*)|*.*";
    DialogResult result = openFileDialog.ShowDialog();
-   if (result != DialogResult.OK) return;
+   if (result != DialogResult.OK) return; <.>
    
-   // Получение имён файла и сообщения
+   //
    string fileName = openFileDialog.FileName;
-   string p7sFileName = fileName + ".p7s";
+   string p7sFileName = fileName + ".p7s"; <.>
    
-   // Не подписанные файлы не загружаются  
-   if (!System.IO.File.Exists(p7sFileName)) return;
+   //
+   if (!System.IO.File.Exists(p7sFileName)) return; <.>
 
-   // Предварительная загрузка основного файла. Необходима для корректной проверки подписи
-   DocumentFile mainFile = documentService.AttachMainFile(document, fileName);
+   //
+   DocumentFile mainFile = documentService.AttachMainFile(document, fileName); <.>
 
    SignedCms signedCms;
    
-   // Выгрузка сообщения CMS/PKCS 7 из файла 
-   documentService.DecodeSignedDocument(p7sFileName, document, out signedCms);
+   //
+   documentService.DecodeSignedDocument(p7sFileName, document, out signedCms); <.>
 
-   // Проверка действительности подписи и сертификата. 
-   // В случае недействительности: загруженный ранее файл будет удален.
+   //
    try
    {
     signedCms.CheckSignature(false);
@@ -98,14 +98,22 @@ namespace BackOffice
    {
     documentService.RemoveMainFile(document, mainFile);
     uiService.ShowError("ЭЦП недействительна");
-    return;
+    return; <.>
    }
    
-   // Подписание документа
-   documentService.AddSignatures(document, signedCms);
+   //
+   documentService.AddSignatures(document, signedCms); <.>
   }
  }
 }
 ----
+<.> Получение необходимых сервисов.
+<.> Выбор файла для импорта. Предполагается выбор только импортируемого файла, криптографическое сообщение будет загружено автоматически.
+<.> Получение имён файла и сообщения.
+<.> Не подписанные файлы не загружаются.
+<.> Предварительная загрузка основного файла. Необходима для корректной проверки подписи.
+<.> Выгрузка сообщения CMS/PKCS 7 из файла.
+<.> Проверка действительности подписи и сертификата. В случае недействительности загруженный ранее файл будет удален.
+<.> Подписание документа.
 
 К скрипту карточки требуется добавить сборку `System.Security.dll`.

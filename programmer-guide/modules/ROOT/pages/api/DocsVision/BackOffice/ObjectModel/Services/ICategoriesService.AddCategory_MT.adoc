@@ -14,36 +14,37 @@ CategoriesCategory AddCategory(CategoriesCategory parentCategory)
 
 Параметры::
 parentCategory:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Родительская категория
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Созданная категория
 
 == Заметки
 
-Если параметр parentCategory не задан (имеет значение null), то в качестве родительской категории будет использована корневая категория _Справочника категорий_.
+Если параметр `parentCategory` не задан (имеет значение `null`), то в качестве родительской категории будет использована корневая категория _Справочника категорий_.
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с сервисами  
-ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>();
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>(); <.>
 
-// Добавление категории в корневую категорию
-CategoriesCategory category = categoriesService.AddCategory(null);
+CategoriesCategory category = categoriesService.AddCategory(null); <.>
 category.Name = "Новая категория";
 category.Comment = "Пример создания категории";
 
-// Получение и присвоение представления. Если представление не задано, то будет использоваться Дайджест
-category.View = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-0000-0000-000000000000"));
+category.View = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Сохранение
-objectContext.SaveObject(category);
+objectContext.SaveObject(category); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с сервисами.
+<.> Добавление категории в корневую категорию.
+<.> Получение и присвоение представления. Если представление не задано, то будет использоваться Дайджест.
+<.> Сохранение.

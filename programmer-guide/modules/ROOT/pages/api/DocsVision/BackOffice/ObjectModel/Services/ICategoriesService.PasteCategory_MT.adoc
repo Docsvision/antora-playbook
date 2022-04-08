@@ -14,16 +14,17 @@ CategoriesCategory PasteCategory(CategoriesCategory parentCategory, CategoriesCa
 
 Параметры::
 parentCategory:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Категория, в которую будет помещена копия категории
+
 categoryToCopy:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Копируемая категория
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Готовая копия категории
 
@@ -32,7 +33,7 @@ categoryToCopy:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр categoryToCopy.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `categoryToCopy`.
 |===
 
 == Заметки
@@ -41,16 +42,17 @@ categoryToCopy:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником категорий
-ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>();
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>(); <.>
 
-// Получение копируемой категории и категории, в которую будет помещена копия
-CategoriesCategory copiedCategory = categoriesService.FindCategoryByName(null, "Копируемая категория");
+CategoriesCategory copiedCategory = categoriesService.FindCategoryByName(null, "Копируемая категория"); <.>
 CategoriesCategory parentCategory = categoriesService.FindCategoryByName(null, "Родительская категория");
 
-// Создание копии
-CategoriesCategory copy = categoriesService.PasteCategory(parentCategory, copiedCategory);
+CategoriesCategory copy = categoriesService.PasteCategory(parentCategory, copiedCategory); <.>
 objectContext.SaveObject(copiedCategory);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником категорий.
+<.> Получение копируемой категории и категории, в которую будет помещена копия.
+<.> Создание копии.

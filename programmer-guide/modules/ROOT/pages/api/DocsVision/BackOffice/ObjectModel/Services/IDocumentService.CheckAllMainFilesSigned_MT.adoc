@@ -14,42 +14,44 @@ bool CheckAllMainFilesSigned(Document document, BaseCardSignature signature)
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ, для которого проводится проверка
+
 signature:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Подпись карточки, содержащая актуальные ЭЦП
 
 Возвращаемое значение::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-`true` -- все подписи корректны, либо документ не содержит основных файлов, иначе false
+`true` -- все подписи корректны, либо документ не содержит основных файлов, иначе -- `false`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или signature.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или signature.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение последней подписи
-BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last();
+BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last(); <.>
 
-// Выполнение проверки
-bool result = documentService.CheckAllMainFilesSigned(document, lastSignature);
+bool result = documentService.CheckAllMainFilesSigned(document, lastSignature); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа.
+<.> Получение последней подписи.
+<.> Выполнение проверки.

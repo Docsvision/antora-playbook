@@ -5,7 +5,6 @@
 * *Пространство имён:* `xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
-[[IDocumentService_AddMainFilesAndSignatures_MT__section_jct_3ds_mpb]]
 == Синтаксис
 
 [source,csharp]
@@ -13,26 +12,24 @@
 void AddMainFilesAndSignatures(Document document, IEnumerable<string> filePaths, bool verifySignatures, out IEnumerable<DocumentFile> files, out IEnumerable<BaseCardSignature> signatures)
 ----
 
-[[IDocumentService_AddMainFilesAndSignatures_MT__section_nyy_4fs_mpb]]
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Подписываемый документ
+
 filePaths:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Находит импортируемые файлы по расширению
+
 verifySignatures:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-При true
+При `true`
+
 files:::
-Тип:
-+
 Добавляет найденные файлы как основные
 
 signatures:::
-Тип:
-+
 Импортирует файлы подписи

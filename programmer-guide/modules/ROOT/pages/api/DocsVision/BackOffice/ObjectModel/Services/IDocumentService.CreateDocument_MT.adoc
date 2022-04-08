@@ -13,7 +13,7 @@ Document CreateDocument()
 ----
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Карточка типа "Документ"
 
@@ -27,17 +27,18 @@ Document CreateDocument()
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Создание документа
-Document document = documentService.CreateDocument();
+Document document = documentService.CreateDocument(); <.>
 
-// Изменение описания
-document.Description = "Документ созданный из кода";
+document.Description = "Документ созданный из кода"; <.>
 
-// Сохранение изменений в контексте
-objectContext.SaveObject<Document>(document);
+objectContext.SaveObject<Document>(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Создание документа.
+<.> Изменение описания.
+<.> Сохранение изменений в контексте.

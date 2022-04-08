@@ -5,7 +5,6 @@
 * *Пространство имён:* `xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
-[[AddSignaturePart1__section_mlc_jcr_4pb]]
 == Синтаксис
 
 [source,csharp]
@@ -15,31 +14,37 @@ BaseCardSignature AddSignaturePart(BaseCardSignature signature, Guid typeId, byt
 
 Параметры::
 signature:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Электронная подпись
+
 typeId:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор типа части подписи
+
 signatureData:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
 +
 Содержимое добавляемой части подписи
+
 description:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Примечание к части подписи
+
 fileId:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор подписываемого файла
+
 fileVersionId:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор версии подписываемого файла
+
 partObject:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Базовый объект
 
@@ -49,25 +54,23 @@ expireDate:::
 Дата и время окончания срока действия сертификата части подписи
 
 status:::
-Тип: BaseCardSignaturePartStatus
+Тип: `BaseCardSignaturePartStatus`
 +
-Результат проверки подписи. Может принимать значения из: Unknown = 0, Valid = 1, Invalid = 2, Expired = 3, Error = 4, Expiring = 5
+Результат проверки подписи. Может принимать значения из: `Unknown = 0`, `Valid = 1`, `Invalid = 2`, `Expired = 3`, `Error = 4`, `Expiring = 5`
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Итоговая подпись, включающая добавляемую часть подписи после прохождения проверки срока действия.
 
-[[AddSignaturePart1__section_nlc_jcr_4pb]]
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signature или signatureData.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `signature` или `signatureData`.
 |===
 
-[[AddSignaturePart1__section_plc_jcr_4pb]]
 == Заметки
 
-Как правило, вызывать данный метод нет необходимости -- соответствующий вызов делает сервис. Например, метод IDocumentService.ComputeAttachmentSignature вызовет AddSignaturePart с необходимыми параметрами.
+Как правило, вызывать данный метод нет необходимости -- соответствующий вызов делает сервис. Например, метод `IDocumentService.ComputeAttachmentSignature` вызовет `AddSignaturePart` с необходимыми параметрами.

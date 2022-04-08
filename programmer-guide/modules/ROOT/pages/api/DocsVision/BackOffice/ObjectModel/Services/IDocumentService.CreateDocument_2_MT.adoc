@@ -19,7 +19,7 @@ filePath:::
 Путь к загружаемому файлу документа
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
 
@@ -31,13 +31,14 @@ filePath:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Создание документа с указанием местоположения основного файла            
-Document document = documentService.CreateDocument(@"x:\Sample.docx");
+Document document = documentService.CreateDocument(@"x:\Sample.docx"); <.>
 
 objectContext.SaveObject(document);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Создание документа с указанием местоположения основного файла.

@@ -14,16 +14,16 @@ MailNotificationInfo GetTaskRejectionMailNotificationInfo(Task task, string task
 
 Параметры::
 task:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]`
 +
 Задание
 taskCardUrl:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]`
 +
 Ссылка на карточку для возможности открытия карточки по url
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/MailNotificationInfo_CL.adoc[MailNotificationInfo]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/MailNotificationInfo_CL.adoc[MailNotificationInfo]`
 +
 Сущность сообщения
 
@@ -32,6 +32,6 @@ taskCardUrl:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или taskCardUrl. Также ошибка может быть возвращена, если не определен автор, либо его почтовый адрес, или сотрудник, отклонивший задание.
-|https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.PlatformNotSupportedException] |Ошибка возвращается в случае, если задание не находится в состоянии "Отклонено".
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или taskCardUrl. Также ошибка может быть возвращена, если не определен автор, либо его почтовый адрес, или сотрудник, отклонивший задание.
+|`https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.PlatformNotSupportedException]` |Ошибка возвращается в случае, если задание не находится в состоянии "Отклонено".
 |===

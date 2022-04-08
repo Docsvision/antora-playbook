@@ -14,7 +14,7 @@ BaseCardSignature AddSignaturePart(BaseCardSignature signature, Guid typeId, byt
 
 Параметры::
 signature:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Электронная подпись
 typeId:::
@@ -22,7 +22,7 @@ typeId:::
 +
 Идентификатор типа части подписи
 signatureData:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
 +
 Содержимое добавляемой части подписи
 description:::
@@ -38,12 +38,12 @@ fileVersionId:::
 +
 Идентификатор версии подписываемого файла
 partObject:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Базовый объект
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Итоговая подпись, включающая добавляемую часть подписи
 
@@ -52,9 +52,9 @@ partObject:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signature или signatureData.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `signature` или `signatureData`.
 |===
 
 == Заметки
 
-Как правило, вызывать данный метод нет необходимости -- соответствующий вызов делает сервис. Например, метод IDocumentService.ComputeAttachmentSignature вызовет AddSignaturePart с необходимыми параметрами.
+Как правило, вызывать данный метод нет необходимости -- соответствующий вызов делает сервис. Например, метод `IDocumentService.ComputeAttachmentSignature` вызовет `AddSignaturePart` с необходимыми параметрами.

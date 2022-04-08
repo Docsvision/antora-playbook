@@ -14,16 +14,17 @@ CategoriesCategory FindCategoryByName(CategoriesCategory parentCategory, string 
 
 Параметры::
 parentCategory:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Категория, в которой осуществляется поиск
+
 name:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Название категории
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/CategoriesCategory_CL.adoc[CategoriesCategory]`
 +
 Искомая категория
 
@@ -32,22 +33,23 @@ name:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр name.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр name.
 |===
 
 == Заметки
 
-Поиск игнорирует регистр значения параметра name. Если параметр parentCategory не задан (значение null), то будет выполнен поиск в корневой категории. Поиск выполняется только среди непосредственных потомков parentCategory -- поиск в подкатегориях не выполняется.
+Поиск игнорирует регистр значения параметра name. Если параметр `parentCategory` не задан (значение `null`), то будет выполнен поиск в корневой категории. Поиск выполняется только среди непосредственных потомков `parentCategory` -- поиск в подкатегориях не выполняется.
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником категорий
-ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>();
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>(); <.>
 
-// Поиск категории с названием "Новая категория" (регистр не имеет значения) в корневой категории
-CategoriesCategory category = categoriesService.FindCategoryByName(null, "Новая категория");
+CategoriesCategory category = categoriesService.FindCategoryByName(null, "Новая категория"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником категорий.
+<.> Поиск категории с названием "Новая категория" (регистр не имеет значения) в корневой категории.

@@ -14,7 +14,7 @@ void SendMailNotification(IEnumerable<MailNotificationInfo> mailNotificationInfo
 
 Параметры::
 mailNotificationInfos:::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<MailNotificationInfo>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<MailNotificationInfo>`
 +
 Коллекция сообщений, подготовленных к отправке
 
@@ -23,7 +23,7 @@ mailNotificationInfos:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр mailNotificationInfos.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `mailNotificationInfos`.
 |===
 
 == Заметки
@@ -36,20 +36,21 @@ mailNotificationInfos:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с базовыми объектами
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
 
-// Специальный формат для почтового адреса
-string eMailFormat = "<root ID=\"{0}\" Email=\"{1}\" Name=\"{1}\"></root>";
+string eMailFormat = "<root ID=\"{0}\" Email=\"{1}\" Name=\"{1}\"></root>"; <.>
 
-// Получение допустимого почтового адреса из "sample@domain.com"
-string eMail = string.Format(eMailFormat, Guid.NewGuid(), "sample@domain.com");
+string eMail = string.Format(eMailFormat, Guid.NewGuid(), "sample@domain.com"); <.>
 
-// Инициализация нового информационного письма с тестовым адресом
-MailNotificationInfo mailNotificationInfo = new MailNotificationInfo(eMail, "Уведомление", "Данное письмо является информационным");
+MailNotificationInfo mailNotificationInfo = new MailNotificationInfo(eMail, "Уведомление", "Данное письмо является информационным"); <.>
 
-// Отправка сообщения
-baseCardService.SendMailNotification(new MailNotificationInfo[] { mailNotificationInfo });
+baseCardService.SendMailNotification(new MailNotificationInfo[] { mailNotificationInfo }); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с базовыми объектами.
+<.> Специальный формат для почтового адреса.
+<.> Получение допустимого почтового адреса из "sample@domain.com".
+<.> Инициализация нового информационного письма с тестовым адресом.
+<.> Отправка сообщения.

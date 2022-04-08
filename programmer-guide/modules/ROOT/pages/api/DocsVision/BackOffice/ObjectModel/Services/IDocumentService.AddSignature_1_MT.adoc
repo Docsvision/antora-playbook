@@ -14,36 +14,42 @@ BaseCardSignature AddSignature(Document document, X509Certificate2 cert, bool si
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 cert:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат сотрудника
+
 signAttachments:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-Признак подписания дополнительных файлов документа: `true` -- подписывать, иначе false
+Признак подписания дополнительных файлов документа: `true` -- подписывать, иначе -- `false`
+
 fields:::
-Тип: https://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
+Тип: `https://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>
 +
 Поля документа, требующие подписания
+
 signDocument:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-Признак подписания основных файлов документа: `true` -- подписывать, иначе false
+Признак подписания основных файлов документа: `true` -- подписывать, иначе -- `false`
+
 operation:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/StatesOperation_CL.adoc[StatesOperation]`
 +
 Подписываемая операция
+
 signatureType:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор вида подписи из _Справочника видов карточек_
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Созданная подпись
 
@@ -52,7 +58,7 @@ signatureType:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или operation.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `operation`.
 |===
 
 == Заметки
@@ -61,39 +67,40 @@ signatureType:::
 
 == Примеры
 
-Ниже приведен пример использования метода AddSignature при подписании операции перехода "Согласован" для карточки типа _Документ_
+Ниже приведен пример использования метода `AddSignature` при подписании операции перехода "Согласован" для карточки типа _Документ_
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 IDocumentService documentService = objectContext.GetService<IDocumentService>();
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение вида и настроек данного вида
 KindsCardKind kind = document.SystemInfo.CardKind;
-DocumentSetting documentSetting = documentService.GetKindSettings(kind);
+DocumentSetting documentSetting = documentService.GetKindSettings(kind); <.>
 
-// Получение операции перехода "Согласован" из Конструктора состояний
-StatesOperation statesOperation = stateService.GetOperations(kind).First(t => t.DefaultName.Equals("Is approved"));
+StatesOperation statesOperation = stateService.GetOperations(kind).First(t => t.DefaultName.Equals("Is approved")); <.>
                     
-// Получение первой настройки подписания для операции перехода "Согласован"
-DocumentOperationSignatureSetting operationSignatureSetting = documentSetting.OperationSignatures.First(t => t.SignedOperations.Contains(statesOperation));
+DocumentOperationSignatureSetting operationSignatureSetting = documentSetting.OperationSignatures.First(t => t.SignedOperations.Contains(statesOperation)); <.>
 
-// Получение сертификата сотрудника, выполняющего подписание       
-X509Certificate2 certificate = GetCertificate();
+X509Certificate2 certificate = GetCertificate(); <.>
 
-// Подписание операции. Используются параметры подписания, определённые в Справочнике видов карточек
 BaseCardSignature signature = documentService.AddSignature(document, certificate, operationSignatureSetting.SignAttachments,
-operationSignatureSetting.Fields, operationSignatureSetting.SignDocument, statesOperation, new Guid(operationSignatureSetting.Name));
+operationSignatureSetting.Fields, operationSignatureSetting.SignDocument, statesOperation, new Guid(operationSignatureSetting.Name)); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа.
+<.> Получение вида и настроек данного вида.
+<.> Получение операции перехода "Согласован" из Конструктора состояний.
+<.> Получение первой настройки подписания для операции перехода "Согласован".
+<.> Получение сертификата сотрудника, выполняющего подписание.
+<.> Подписание операции. Используются параметры подписания, определённые в Справочнике видов карточек.
 
-Для получения сертификата сотрудника используется следующий метод
+Для получения сертификата сотрудника используется следующий метод:
 
 [source,csharp]
 ----

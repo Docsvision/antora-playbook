@@ -14,11 +14,11 @@ void InitializeBusinessProcessVariables(Process process, Dictionary<string, obje
 
 Параметры::
 process:::
-Тип: xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]
+Тип: `xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]`
 +
 Бизнес-процессы
 variablesKeyValuePairs:::
-Тип: http://msdn.microsoft.com/ru-ru/library/xfhwa508.aspx[System.Collections.Generic.Dictionary]<String, Object>
+Тип: `http://msdn.microsoft.com/ru-ru/library/xfhwa508.aspx[System.Collections.Generic.Dictionary]<String, Object>`
 +
 Коллекция содержащая название переменной и её значение
 
@@ -27,7 +27,7 @@ variablesKeyValuePairs:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр process или variablesKeyValuePairs.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `process` или `variablesKeyValuePairs`.
 |===
 
 == Заметки
@@ -40,28 +40,29 @@ variablesKeyValuePairs:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Инициализация объекта для работы с библиотекой карточкой СУБП
-Library WorkflowLibrary = new Library(userSession, 1, 1, false);
+Library WorkflowLibrary = new Library(userSession, 1, 1, false); <.>
 
-// Получение шаблона бизнес-процесса
-DocsVision.Workflow.Objects.Process processTemplate = WorkflowLibrary.GetProcess(new Guid("00000000-0000-0000-0000-000000000000"));
+DocsVision.Workflow.Objects.Process processTemplate = WorkflowLibrary.GetProcess(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Создание экземпляра бизнес-процесса
-DocsVision.Workflow.Objects.Process processInstance = WorkflowLibrary.CreateProcess(processTemplate);
+DocsVision.Workflow.Objects.Process processInstance = WorkflowLibrary.CreateProcess(processTemplate); <.>
 
-// Получение необходимых сервисов
 IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Инициализация двух переменных
-// var2 является переменной с набором значений
-baseCardService.InitializeBusinessProcessVariables(processInstance, new System.Collections.Generic.Dictionary<string, object>{
+baseCardService.InitializeBusinessProcessVariables(processInstance, new System.Collections.Generic.Dictionary<string, object>{ <.>
  {"var1", "Значение строковой переменной"},
- {"var2", new object[]{1,2,4}}
+ {"var2", new object[]{1,2,4}} <.>
 });
 
-// Запуск экземпляра бизнес-процесса
-processInstance.Start(staffService.GetCurrentEmployee().AccountName, WorkflowLibrary.Dictionary, ExecutionModeEnum.Automatic, true);
+processInstance.Start(staffService.GetCurrentEmployee().AccountName, WorkflowLibrary.Dictionary, ExecutionModeEnum.Automatic, true); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Инициализация объекта для работы с библиотекой карточкой СУБП.
+<.> Получение шаблона бизнес-процесса.
+<.> Создание экземпляра бизнес-процесса.
+<.> Получение необходимых сервисов.
+<.> Инициализация двух переменных.
+<.> `var2` является переменной с набором значений.
+<.> Запуск экземпляра бизнес-процесса.

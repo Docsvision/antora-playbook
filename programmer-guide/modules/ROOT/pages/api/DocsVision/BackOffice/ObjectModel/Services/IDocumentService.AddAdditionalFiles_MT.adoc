@@ -14,16 +14,16 @@ IEnumerable<DocumentFile> AddAdditionalFiles(Document document, IEnumerable<stri
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ, в который будут добавлены файлы
 filePaths:::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<System.String>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<System.String>
 +
 Расположение файлов
 
 Возвращаемое значение::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>
 +
 Список файлов документа
 
@@ -32,9 +32,9 @@ filePaths:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document или filePaths.
-|http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается в случае, если текущее состояние документа не позволяет выполнить операцию добавления.
-|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возникает при наличии в документе файла с аналогичным добавляемому названием, либо в случае превышения размера вложений.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `filePaths`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если текущее состояние документа не позволяет выполнить операцию добавления.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возникает при наличии в документе файла с аналогичным добавляемому названием, либо в случае превышения размера вложений.
 |===
 
 == Заметки
@@ -47,18 +47,19 @@ filePaths:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление дополнительных файлов
 string[] filePaths = new string[] { @"X:\Document.docx", @"X:\Document2.docx" };
-documentService.AddAdditionalFiles(document, filePaths);
+documentService.AddAdditionalFiles(document, filePaths); <.>
 
-// Сохранение
-objectContext.SaveObject(document);
+objectContext.SaveObject(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Добавление дополнительных файлов.
+<.> Сохранение.

@@ -14,16 +14,17 @@ Process StartBusinessProcess(BaseCard baseCard, KindsCardProcess kindsCardProces
 
 Параметры::
 baseCard:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Карточка
+
 kindsCardProcess:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]`
 +
 Вид бизнес-процесса
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]
+Тип: `xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]`
 +
 Бизнес-процесс
 
@@ -32,13 +33,13 @@ kindsCardProcess:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
-|DocsVision.Platform.StorageServer.StorageServerException# |Возвращается в случае появления ошибки на стороне сервера.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или `kindsCardProcess`.
+|`DocsVision.Platform.StorageServer.StorageServerException` |Возвращается в случае появления ошибки на стороне сервера.
 |===
 
 == Заметки
 
-Если текущий сотрудник не определен, то бизнес-процесс будет создан, но не будет запущен. Запуск БП может быть отменен по результатам обработки события IBaseCardService.BeforeBusinessProcessStart, но только в случае запуска процесса из сервиса IBaseCardService.
+Если текущий сотрудник не определен, то бизнес-процесс будет создан, но не будет запущен. Запуск БП может быть отменен по результатам обработки события `IBaseCardService.BeforeBusinessProcessStart`, но только в случае запуска процесса из сервиса `IBaseCardService`.
 
 == Примеры
 
@@ -46,17 +47,18 @@ kindsCardProcess:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получаем необходимый сервис            
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
 
-//получаем документ, вид которого позволяет запускать бизнес-процесс вида 00000000-0000-0000-0000-000000000001
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение вида бизнес-процесса
-KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(new Guid("00000000-0000-0000-0000-000000000001"));
+KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-//запуск БП
-baseCardService.StartBusinessProcess(document, kindsCardProcess);
+baseCardService.StartBusinessProcess(document, kindsCardProcess); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получаем необходимый сервис.
+<.> Получаем документ, вид которого позволяет запускать бизнес-процесс вида `00000000-0000-0000-0000-000000000001`.
+<.> Получение вида бизнес-процесса.
+<.> Запускаем БП.

@@ -14,11 +14,11 @@ void StopBusinessProcess(BaseCard baseCard, Process processInstance)
 
 Параметры::
 baseCard:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Карточка
 processInstance:::
-Тип: xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]
+Тип: `xref:api/DocsVision/Workflow/Objects/Process_CL.adoc[Process]`
 +
 Экземпляр бизнес-процесса
 
@@ -27,9 +27,9 @@ processInstance:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processInstance.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или `processInstance`.
 |===
 
 == Заметки
 
-Бизнес-процесс переводится в статус "Остановлен". При невозможности определения текущего сотрудника (IStaffService.GetCurrentEmployee()), что возможно при некорректном открытии сессии, -- метод не отработает.
+Бизнес-процесс переводится в статус "Остановлен". При невозможности определения текущего сотрудника (`IStaffService.GetCurrentEmployee()`), что возможно при некорректном открытии сессии, -- метод не отработает.

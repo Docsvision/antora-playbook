@@ -14,7 +14,7 @@ void DeleteEmployee(StaffEmployee employee)
 
 Параметры::
 employee:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]`
 +
 Сотрудника, для которого создается персональная папка
 
@@ -23,7 +23,7 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee.
 |===
 
 == Примеры
@@ -43,7 +43,7 @@ StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-00000
 foreach (StaffEmployee employee in group.Employees)
 {
  // Если сотрудник уволен (в т.ч. без возможности восстановления), удаляем
- if (employee.Status = StaffEmployeeStatus.Discharged || employee.Status = StaffEmployeeStatus.DischargedNoRestoration)
+ if (employee.Status = StaffEmployeeStatus.Discharged` || employee.Status = StaffEmployeeStatus.DischargedNoRestoration)
  {
   staffService.DeleteEmployee(employee);
  }

@@ -18,12 +18,12 @@ cardKindId:::
 +
 Идентификатор вида карточки
 searchParametersInfo:::
-Тип: xref:api/DocsVision/BackOffice/Xml/Schemas/SearchParametersInfo_CL.adoc[SearchParametersInfo]
+Тип: `xref:api/DocsVision/BackOffice/Xml/Schemas/SearchParametersInfo_CL.adoc[SearchParametersInfo]`
 +
 Параметры поиска, представленные в виде массива полей карточки
 
 Возвращаемое значение::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<Guid>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<Guid>`
 +
 Коллекция идентификаторов карточек, удовлетворяющих условиям поиска
 
@@ -33,37 +33,38 @@ searchParametersInfo:::
 
 == Примеры
 
-Для примера можно рассмотреть поиск по уникальным атрибутам карточек вида "Заявка" (идентификатор 7DB9044E-91B7-447D-8CAA-5E5A4967B8D4). Для данного вида карточки в Справочнике видов карточек добавлены уникальные атрибуты: "Дата регистрации" и "Регистратор".
+Для примера можно рассмотреть поиск по уникальным атрибутам карточек вида "Заявка" (идентификатор `7DB9044E-91B7-447D-8CAA-5E5A4967B8D4`). Для данного вида карточки в Справочнике видов карточек добавлены уникальные атрибуты: "Дата регистрации" и "Регистратор".
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Инициализация массива параметров поиска
-SearchParametersInfo searchParametersInfo = new SearchParametersInfo();
+SearchParametersInfo searchParametersInfo = new SearchParametersInfo(); <.>
 
-// Добавление значения параметра поиска по регистратору документа
-// Регистратор -- сотрудник с идентификатор, к примеру, 00000000-0000-0000-0000-000000000000
-// !Название поля состоит из названия секции (MainInfo) и названия поля (Registrar)
-// Тип параметра указывается в соответствии с типом поля
-SearchParameterInfo registrator = new SearchParameterInfo() { 
- Name = "MainInfoRegistrar",
- Type = (int)DocsVision.Platform.Data.Metadata.CardModel.FieldType.RefId,
- Value = new Guid("00000000-0000-0000-0000-000000000000").ToString("B") };
+SearchParameterInfo registrator = new SearchParameterInfo() { <.>
+ Name = "MainInfoRegistrar", <.>
+ Type = (int)DocsVision.Platform.Data.Metadata.CardModel.FieldType.RefId, <.>
+ Value = new Guid("00000000-0000-0000-0000-000000000000").ToString("B") }; <.>
 
-// Добавление значения параметра поиска по дате регистрации документа 
-SearchParameterInfo regDate = new DocsVision.BackOffice.Xml.Schemas.SearchParameterInfo() { 
+SearchParameterInfo regDate = new DocsVision.BackOffice.Xml.Schemas.SearchParameterInfo() {  <.>
  Name = "MainInfoRegDate", 
  Type = (int)DocsVision.Platform.Data.Metadata.CardModel.FieldType.Date, 
  Value = "2015.01.01" };
 
 searchParametersInfo.SearchParameterInfo = new SearchParameterInfo[] { registrator, regDate };
 
-// Получение сервиса для работы с базовыми объектами
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
 
-// Осуществления поиска документов с указанными уникальными атрибутами
-IEnumerable<Guid> cards = baseCardService.FindCardsByUniqueAttributes(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"), searchParametersInfo);
+IEnumerable<Guid> cards = baseCardService.FindCardsByUniqueAttributes(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"), searchParametersInfo); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Инициализация массива параметров поиска.
+<.> Добавление значения параметра поиска по регистратору документа.
+<.> Название поля состоит из названия секции (`MainInfo`) и названия поля (`Registrar`).
+<.> Тип параметра указывается в соответствии с типом поля.
+<.> Регистратор -- сотрудник с идентификатор, к примеру, `00000000-0000-0000-0000-000000000000.`
+<.> Добавление значения параметра поиска по дате регистрации документа.
+<.> Получение сервиса для работы с базовыми объектами.
+<.> Осуществления поиска документов с указанными уникальными атрибутами.
 
 С помощью аналогичного запроса можно выявить сотрудников нарушивших уникальность документов, для которых предусмотрено ограничение на число экземпляров.

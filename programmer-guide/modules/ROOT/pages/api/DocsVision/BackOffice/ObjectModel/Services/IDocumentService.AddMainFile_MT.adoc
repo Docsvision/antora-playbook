@@ -14,7 +14,7 @@ DocumentFile AddMainFile(Document document, string filePath)
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ, в который добавляется файл
 filePath:::
@@ -23,7 +23,7 @@ filePath:::
 Путь к добавляемому файлу
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Файл документа
 
@@ -31,15 +31,16 @@ filePath:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление основного файла
-documentService.AddMainFile(document, @"Z:\Инструкция пожарной безопасности.docx");
+documentService.AddMainFile(document, @"Z:\Инструкция пожарной безопасности.docx"); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Добавление основного файла.

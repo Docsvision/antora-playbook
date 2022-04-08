@@ -14,20 +14,21 @@ BaseCardSignatureVerification VerifySignature(BaseCardSignature signature, IDict
 
 Параметры::
 signature:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Подпись
 contentStreams:::
-Тип: http://msdn.microsoft.com/ru-ru/library/s4ys34ea.aspx[System.Collections.Generic.IDictionary]<BaseCardSignaturePart, Stream>
+Тип: `http://msdn.microsoft.com/ru-ru/library/s4ys34ea.aspx[System.Collections.Generic.IDictionary]<BaseCardSignaturePart, Stream>`
 +
-Пара типа xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart] и http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream], представляющая подписанный объект и соответствующую ему часть подписи
+Пара типа `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]` и `http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]`, представляющая подписанный объект и соответствующую ему часть подписи
+
 certificate:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат, на основе которого проверяется корректность подписей
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
 +
 Результат проверки
 
@@ -36,9 +37,9 @@ certificate:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр signature.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр signature.
 |===
 
 == Заметки
 
-Метод последовательно проверяет соответствие сертификата (certificate) и подписи (signature), подписанной операции и всех элементов переданного словаря (contentStreams).
+Метод последовательно проверяет соответствие сертификата (`certificate`) и подписи (`signature`), подписанной операции и всех элементов переданного словаря (`contentStreams`).

@@ -17,12 +17,14 @@ filePath:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Путь к файлу с криптографическим сообщением
+
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
-Документ, в который производится добавление содержимого сообщения. Если документ содержит основной файл с именем идентичным имени файла (без учета расширения p7s) загружаемого сообщения, то содержимое основного файла будет загружено в сообщение
+Документ, в который производится добавление содержимого сообщения. Если документ содержит основной файл с именем идентичным имени файла (без учета расширения `.p7s`) загружаемого сообщения, то содержимое основного файла будет загружено в сообщение
+
 signedCms:::
-Тип: http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]
+Тип: `http://msdn.microsoft.com/ru-ru/library/System.Security.Cryptography.Pkcs.SignedCms.aspx[SignedCms]`
 +
 Сообщение CMS/PKCS 7. Если не было проинициализировано, то будет выполнена инициализация
 
@@ -52,25 +54,25 @@ namespace BackOffice
    Document document = (base.BaseObject as Document);
    ObjectContext objectContext = base.CardControl.ObjectContext;
    
-   // Получение сервиса для работы с документами
-   IDocumentService documentService = objectContext.GetService<IDocumentService>();
+   IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-   // Организация выбора файла с криптографическим сообщением
    OpenFileDialog openFileDialog = new OpenFileDialog();
    openFileDialog.Multiselect = false;
    openFileDialog.Filter = "Файлы p7s (*.p7s)|*.p7s";
    DialogResult result = openFileDialog.ShowDialog();
    if (result != DialogResult.OK) return;
-   string fileName = openFileDialog.FileName;
+   string fileName = openFileDialog.FileName; <.>
 
    SignedCms signedCms = null;
 
-   // Расшифровка (распаковка) файла p7s, сообщение CMS/PKCS 7 записывается в signedCms
-   string decodedFileName = documentService.DecodeSignedDocument(fileName, document, out signedCms);
+   string decodedFileName = documentService.DecodeSignedDocument(fileName, document, out signedCms); <.>
 
-   // Загрузка основного файла и подписи к нему в документ
-   documentService.AttachMainFile(document, decodedFileName, signedCms);
+   documentService.AttachMainFile(document, decodedFileName, signedCms); <.>
   }
  }
 }
 ----
+<.> Получение сервиса для работы с документами.
+<.> Организация выбора файла с криптографическим сообщением.
+<.> Расшифровка (распаковка) файла `.p7s`, сообщение CMS/PKCS 7 записывается в `signedCms`.
+<.> Загрузка основного файла и подписи к нему в документ.

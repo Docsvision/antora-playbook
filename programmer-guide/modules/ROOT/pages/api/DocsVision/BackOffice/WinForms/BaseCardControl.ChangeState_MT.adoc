@@ -14,7 +14,7 @@ public void ChangeState(StatesStateMachineBranch branch)
 
 Параметры::
 branch:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]`
 +
 Переход автомата состояний
 
@@ -23,7 +23,7 @@ branch:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если не задан параметр baseCard или kindsCardProcess.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или kindsCardProcess.
 |===
 
 == Заметки
@@ -45,7 +45,7 @@ private void Button_Click(System.Object sender, System.EventArgs e)
  //получение всех значений автомата состояний для карточки
  IList<StatesStateMachineBranch> statesStateMachineBranch = CardControl.ObjectContext.GetService<IStateService>().GetStateMachineBranches(BaseObject.SystemInfo.CardKind);
  
- //выбирается первый переход с начальным статусом соотвествующем текущему статусу карточки, и названием "Согласован"
+ //выбирается первый переход с начальным статусом соответствующем текущему статусу карточки, и названием "Согласован"
  StatesStateMachineBranch statesStateMachineBranchLines = statesStateMachineBranch.Where(t => t.StartState = base.BaseObject.SystemInfo.State
   && t.BranchType = StatesStateMachineBranchBranchType.Line
   && t.EndState.DefaultName.Equals("Is approved")).FirstOrDefault();

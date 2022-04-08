@@ -14,16 +14,16 @@ StartBusinessProcessErrorInfo CanStartBusinessProcess(BaseCard baseCard, KindsCa
 
 Параметры::
 baseCard:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Проверяемая карточка
 processSettings:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]`
 +
 Настройки бизнес-процесса
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]`
 +
 Содержимое ошибки
 
@@ -32,9 +32,9 @@ processSettings:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processSettings.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или processSettings.
 |===
 
 == Заметки
 
-Метод в любом случае вернет объект StartBusinessProcessErrorInfo, но в случае отсутствия ошибки -- StartBusinessProcessErrorInfo.ErrorType будет равен xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BusinessProcessErrorType_EN.adoc[BusinessProcessErrorType.None]. Фактически возвращается первая встреченная ошибка, таким образом необходимо произвести исправление и повторить проверку.
+Метод в любом случае вернет объект StartBusinessProcessErrorInfo, но в случае отсутствия ошибки -- `StartBusinessProcessErrorInfo.ErrorType` будет равен `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BusinessProcessErrorType_EN.adoc[BusinessProcessErrorType.None]`. Фактически возвращается первая встреченная ошибка, таким образом необходимо произвести исправление и повторить проверку.

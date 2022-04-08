@@ -14,27 +14,27 @@ IEnumerable<StartBusinessProcessErrorInfo> CanStartBusinessProcesses(BaseCard ba
 
 Параметры::
 baseCard:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Проверяемая карточка
 kindsCardProcesses:::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<KindsCardProcess>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<KindsCardProcess>`
 +
-Коллекция видов бизнес-процессов типа xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]
+Коллекция видов бизнес-процессов типа `xref:api/DocsVision/BackOffice/ObjectModel/KindsCardProcess_CL.adoc[KindsCardProcess]`
 
 Возвращаемое значение::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StartBusinessProcessErrorInfo>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StartBusinessProcessErrorInfo>`
 +
-Коллекция ошибок типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]
+Коллекция ошибок типа `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/StartBusinessProcessErrorInfo_CL.adoc[StartBusinessProcessErrorInfo]`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или processSettings.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или `processSettings`.
 |===
 
 == Заметки
 
-Метод выполняет последовательный вызов метода IBaseCardService.CanStartBusinessProcess для каждого элемента коллекции kindsCardProcesses.
+Метод выполняет последовательный вызов метода `IBaseCardService.CanStartBusinessProcess` для каждого элемента коллекции `kindsCardProcesses`.

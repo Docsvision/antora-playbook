@@ -14,17 +14,20 @@ bool AddMainFileVersionComment(Document document, DocumentFile file, Guid versio
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
-Документ, содержащий основной файл file
+Документ, содержащий основной файл `file`
+
 file:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Объектная модель файла документа
+
 versionId:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 +
 Идентификатор версии, к которой добавляется комментарий
+
 comment:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
@@ -33,14 +36,14 @@ comment:::
 Возвращаемое значение::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-`true` -- комментарий добавлен успешно, иначе false
+`true` -- комментарий добавлен успешно, иначе -- `false`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document, file или comment.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`, `file` или `comment`.
 |===
 
 == Примеры
@@ -49,23 +52,24 @@ comment:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение первого основного файла
-DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main); <.>
 
 VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(file.FileId);
 
-// Получение первой версии файла
-FileVersion version = versionedFileCard.Versions.First();
+FileVersion version = versionedFileCard.Versions.First(); <.>
 
-// Добавление комментария
-documentService.AddMainFileVersionComment(document, file, version.VersionId, "Первая версия основного файла");
+documentService.AddMainFileVersionComment(document, file, version.VersionId, "Первая версия основного файла"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение первого основного файла.
+<.> Получение первой версии файла.
+<.> Добавление комментария.

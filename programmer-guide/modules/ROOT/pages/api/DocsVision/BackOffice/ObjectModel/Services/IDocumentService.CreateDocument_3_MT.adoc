@@ -17,17 +17,19 @@ filePath:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Путь к основному файлу
+
 kind:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]`
 +
 Вид документа
+
 versioningType:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentVersioningType_EN.adoc[DocumentVersioningType]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentVersioningType_EN.adoc[DocumentVersioningType]`
 +
 Вид документа
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Созданный документ
 
@@ -36,7 +38,7 @@ versioningType:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возникает в том случае, если добавляемый файл является подписанным, но в соответствующем сообщении отсутствуют файлы.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возникает в том случае, если добавляемый файл является подписанным, но в соответствующем сообщении отсутствуют файлы.
 |===
 
 == Примеры
@@ -45,15 +47,16 @@ versioningType:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение вида карточки (в примере, Заявка)
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4")); <.>
 
-// Создание документа
 Document document = documentService.CreateDocument(@"x:\Sample.docx", kind, DocumentVersioningType.Auto);
-objectContext.SaveObject(document);
+objectContext.SaveObject(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение вида карточки (в примере, Заявка).
+<.> Создание документа.

@@ -14,15 +14,15 @@ BaseCardSignatureVerification VerifySignature(Task task, BaseCardSignature signa
 
 Параметры::
 task:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Task_CL.adoc[Task]`
 +
 Задание, содержащий подписанные данные
 signature:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 Проверяемая подпись
 certificate:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат ЭЦП сотрудника, чей сертификат использовался при подписании
 signDocument:::
@@ -30,12 +30,12 @@ signDocument:::
 +
 Параметр не проверяется
 fields:::
-Тип: http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<CardFieldSetting>`
 +
 Коллекция полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], у которых должна быть проверена подпись. Список подписываемых полей задается в Справочнике видов карточек
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
 +
 Результат проверки ЭЦП
 
@@ -44,7 +44,7 @@ fields:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр task или signature.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или signature.
 |===
 
 == Примеры

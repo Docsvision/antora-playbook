@@ -14,13 +14,15 @@ string GenerateDigest(BaseCard baseCard, IXmlExportable cardData, string default
 
 Параметры::
 baseCard:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]`
 +
 Карточка
+
 cardData:::
-Тип: xref:api/DocsVision/Platform/ObjectManager/IXmlExportable_IN.adoc[IXmlExportable]
+Тип: `xref:api/DocsVision/Platform/ObjectManager/IXmlExportable_IN.adoc[IXmlExportable]`
 +
 Данные карточки
+
 defaultDigest:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
@@ -36,7 +38,7 @@ defaultDigest:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр baseCard или cardData.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или cardData.
 |===
 
 == Примеры
@@ -45,24 +47,24 @@ defaultDigest:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
         
-//Получение базового сервиса для работы с карточками
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
 
-//Получение документа для которого мы генерируем дайджест.
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//Получение данных документа
-CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"));
+CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//При генерации метод формирует из данных карточки дайджест, согласно шаблона хранимого в базовом объекте. Если данных для генерации недостаточно,
-//будет использован последний аргумент метода
-string digest = baseCardService.GenerateDigest(document, cardData, "Дайджест по умолчанию");
+string digest = baseCardService.GenerateDigest(document, cardData, "Дайджест по умолчанию"); <.>
 
-//Дайджест Документа сохраняется в свойство Description
-document.Description = digest;
+document.Description = digest; <.>
 
-//Сохранение всего контекста
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение базового сервиса для работы с карточками.
+<.> Получение документа для которого мы генерируем дайджест..
+<.> Получение данных документа.
+<.> При генерации метод формирует из данных карточки дайджест, согласно шаблону хранимого в базовом объекте. Если данных для генерации недостаточно, будет использован последний аргумент метода.
+<.> Дайджест Документа сохраняется в свойство `Description`.
+<.> Сохранение всего контекста.

@@ -14,7 +14,7 @@ void RemoveEncryption(X509Certificate2 certificate, Guid fileId)
 
 Параметры::
 certificate:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат шифрования, которым зашифрован файл
 fileId:::
@@ -27,13 +27,13 @@ fileId:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр certificate.
-|http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException] |Ошибка возвращается в случае, если файл с указанным идентификатором не существует.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр certificate.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если файл с указанным идентификатором не существует.
 |===
 
 == Заметки
 
-Данный метод, в отличии от метода ICryptService.DecryptFile, удаляет крипто-объекты, используемые для расшифровки файла сотрудниками, которым предоставлен соответствующий доступ.
+Данный метод, в отличии от метода `ICryptService.DecryptFile`, удаляет крипто-объекты, используемые для расшифровки файла сотрудниками, которым предоставлен соответствующий доступ.
 
 == Примеры
 
@@ -62,21 +62,17 @@ namespace BackOffice
   {
    bool cancel = false;
             
-   // Вызов формы выбора сертификата
    X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
-   if(cancel) return;
+   if(cancel) return; <.>
             
-   // Получения сервиса шифрования базовых объектов
-   ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>();
+   ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
 
-   // Получение основных файлов
-   IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main);
+   IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
    foreach (DocumentFile item in mainFiles)
    {
     FileData fileData = base.Session.FileManager.GetFile(item.FileVersionRowId);
                 
-    // Проверка наличия зашифрованного файла
-    if(fileData.Encrypted)
+    if(fileData.Encrypted) <.>
     {
      cryptService.RemoveEncryption(certificate, item.FileVersionRowId);
     }
@@ -85,3 +81,7 @@ namespace BackOffice
  }
 }
 ----
+<.> Вызов формы выбора сертификата.
+<.> Получения сервиса шифрования базовых объектов.
+<.> Получение основных файлов.
+<.> Проверка наличия зашифрованного файла.

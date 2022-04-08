@@ -18,13 +18,14 @@ filePath:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
 Путь к основному файлу
+
 kind:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/KindsCardKind_CL.adoc[KindsCardKind]`
 +
 Вид карточки
 
 Возвращаемое значение::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Экземпляр карточки Документ
 
@@ -32,20 +33,21 @@ kind:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение вида карточки
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("0538E317-FAB6-4BB7-85C5-2303375A4EE1"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("0538E317-FAB6-4BB7-85C5-2303375A4EE1")); <.>
 
-// Создание документа с основным файлом
-Document document = documentService.CreateDocument(@"C:\Sample.docx", kind);
+Document document = documentService.CreateDocument(@"C:\Sample.docx", kind); <.>
 
-// Изменение описания
-document.Description = "Пример документа";
+document.Description = "Пример документа"; <.>
 
-// Сохранение изменений в контексте
-objectContext.SaveObject(document);
+objectContext.SaveObject(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение вида карточки.
+<.> Создание документа с основным файлом.
+<.> Изменение описания.
+<.> Сохранение изменений в контексте.

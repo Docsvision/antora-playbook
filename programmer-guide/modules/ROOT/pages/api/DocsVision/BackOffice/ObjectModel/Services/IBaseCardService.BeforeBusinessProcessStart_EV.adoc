@@ -18,31 +18,32 @@ event EventHandler<BusinessProcessCancelEventArgs> BeforeBusinessProcessStart
 
 == Примеры
 
-Ниже приведен пример перехвата запуска БП у которого приоритет выше 2
+Ниже приведен пример перехвата запуска БП у которого приоритет выше 2.
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получаем необходимые сервисы
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
 
-//подключаемся к событию
-baseCardService.BeforeBusinessProcessStart += (s, e) =>
+baseCardService.BeforeBusinessProcessStart += (s, e) => <.>
 {
- //определяем приоритет и если выше 2, блокируем запуск
- if (e.Process.Priority > 2)
+ if (e.Process.Priority > 2) <.>
  {
   e.Cancel = false;
  }
 };
 
-//получаем документ, вид которого позволяет запускать бизнес-процесс вида 00000000-0000-0000-0000-000000000001
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение вида бизнес-процесса
-KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(new Guid("00000000-0000-0000-0000-000000000001"));
+KindsCardProcess kindsCardProcess = objectContext.GetObject<KindsCardProcess>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-//запуск БП
-baseCardService.StartBusinessProcess(document, kindsCardProcess);
+baseCardService.StartBusinessProcess(document, kindsCardProcess); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получаем необходимые сервисы.
+<.> Подключаемся к событию.
+<.> Определяем приоритет и если выше `2`, блокируем запуск.
+<.> Получаем документ, вид которого позволяет запускать бизнес-процесс вида `00000000-0000-0000-0000-000000000001`.
+<.> Получаем вид бизнес-процесса.
+<.> запуск БП.

@@ -14,15 +14,15 @@ void PrintBarcode(Document document, BarcodePrintSettings settings, PrinterSetti
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
 settings:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/BarcodePrintSettings_CL.adoc[BarcodePrintSettings]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BarcodePrintSettings_CL.adoc[BarcodePrintSettings]`
 +
 Настройки печати штрих-кода
 printerSettings:::
-Тип: http://msdn.microsoft.com/ru-ru/library/system.drawing.printing.printersettings.aspx[System.Drawing.Printing.PrinterSettings]
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.drawing.printing.printersettings.aspx[System.Drawing.Printing.PrinterSettings]`
 +
 Сведения о печати документа
 
@@ -31,8 +31,8 @@ printerSettings:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр document.
-|http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается в случае, если у сотрудника недостаточно прав для печати штрих-кода.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав для печати штрих-кода.
 |===
 
 == Примеры
@@ -41,28 +41,28 @@ printerSettings:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
 IBarcodeService barcodeService = objectContext.GetService<IBarcodeService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-//получение документа
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
 
-//получение коллекции доступных настроек для печати штрих-кода
-BarcodePrintSettingsCollection settingsCollection = barcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(), document.SystemInfo.CardKind);
+BarcodePrintSettingsCollection settingsCollection = barcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(), document.SystemInfo.CardKind); <.>
 
-//получение настроек печати по умолчанию
-BarcodePrintSettings printSettings = BarcodePrintSettings.DefaultSettings;
-            
-//вывод диалог выбора принтера
+BarcodePrintSettings printSettings = BarcodePrintSettings.DefaultSettings; <.>
+
 var printDialog = new PrintDialog();
-printDialog.UseEXDialog = true;
+printDialog.UseEXDialog = true; <.>
 
 if (printDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK)
 {
- //вывод на печать
- barcodeService.PrintBarcode(document, printSettings, printDialog.PrinterSettings);
+ barcodeService.PrintBarcode(document, printSettings, printDialog.PrinterSettings); <.>
 }
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа.
+<.> Получение коллекции доступных настроек для печати штрих-кода.
+<.> Получение настроек печати по умолчанию.
+<.> Вывод диалога выбора принтера.

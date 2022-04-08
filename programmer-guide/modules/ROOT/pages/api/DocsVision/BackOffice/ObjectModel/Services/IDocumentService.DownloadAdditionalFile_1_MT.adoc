@@ -14,11 +14,12 @@ string DownloadAdditionalFile(Document document, DocumentFile additionalFile)
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 additionalFile:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Дополнительный файл документа
 
@@ -32,24 +33,29 @@ additionalFile:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр additionalFile.
-|http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается в случае, если у сотрудника недостаточно прав на чтение дополнительного файла.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `additionalFile`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав на чтение дополнительного файла.
 |===
 
 == Примеры
 
-Ниже приведен пример использования метода DownloadAdditionalFile при выгрузке дополнительного файла документа
+Ниже приведен пример использования метода `DownloadAdditionalFile` при выгрузке дополнительного файла документа
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+//
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+//
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+//
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Выгрузка первого дополнительного файла на диск, по пути path
-string path = documentService.DownloadAdditionalFile(document, document.Files.First(t => t.FileType = DocumentFileType.Additional));
+//
+string path = documentService.DownloadAdditionalFile(document, document.Files.First(t => t.FileType = DocumentFileType.Additional)); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа.
+<.> Выгрузка первого дополнительного файла на диск, по пути `path`.

@@ -14,13 +14,16 @@ void DownloadAdditionalFile(Document document, DocumentFile additionalFile, stri
 
 Параметры::
 document:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ, содержащий выгружаемый файл
+
+
 additionalFile:::
-Тип: xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]
+Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Возвращаемый файл документа
+
 path:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
@@ -31,26 +34,27 @@ path:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException] |Ошибка возвращается в случае, если не задан параметр additionalFile.
-|http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException] |Ошибка возвращается в случае, если не задан параметр path.
-|http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException] |Ошибка возвращается в случае, если у сотрудника недостаточно прав для чтения основного файла.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `additionalFile`.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается в случае, если не задан параметр `path`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав для чтения основного файла.
 |===
 
 == Примеры
 
-В примере демонстрируется использование метода DownloadAdditionalFile при выгрузке первого дополнительного файла документа
+В примере демонстрируется использование метода `DownloadAdditionalFile` при выгрузке первого дополнительного файла документа
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение первого дополнительного файла документа
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
-DocumentFile firstAdditionalFile = document.Files.First(t=>t.FileType = DocumentFileType.Additional);
+DocumentFile firstAdditionalFile = document.Files.First(t=>t.FileType = DocumentFileType.Additional); <.>
 
-// Выгрузка файла на файловую систему
-documentService.DownloadAdditionalFile(document, firstAdditionalFile, @"c:\" + firstAdditionalFile.FileName);
+documentService.DownloadAdditionalFile(document, firstAdditionalFile, @"c:\" + firstAdditionalFile.FileName); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение первого дополнительного файла документа.
+<.> Выгрузка файла на файловую систему.

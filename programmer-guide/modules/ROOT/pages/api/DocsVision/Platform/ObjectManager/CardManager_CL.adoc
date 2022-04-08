@@ -17,9 +17,9 @@ public abstract class CardManager
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CardLibraries_PR.adoc[CardLibraries] |Возвращает коллекцию библиотек карточек, зарегистрированных в текущей базе данных.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CardTypes_PR.adoc[CardTypes] |Возвращает коллекцию типов карточек, зарегистрированных в текущей базе данных.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.Session_PR.adoc[Session] |Возвращает сессию текущего пользователя.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CardLibraries_PR.adoc[CardLibraries]` |Возвращает коллекцию библиотек карточек, зарегистрированных в текущей базе данных.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CardTypes_PR.adoc[CardTypes]` |Возвращает коллекцию типов карточек, зарегистрированных в текущей базе данных.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.Session_PR.adoc[Session]` |Возвращает сессию текущего пользователя.
 |===
 
 == Методы
@@ -27,58 +27,58 @@ public abstract class CardManager
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.BatchUpdate_MT.adoc[BatchUpdate(Guid[])] |Выполняет пакетное обновление данных для указанных карточек.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.ClearLink_MT.adoc[ClearLink(Guid, Guid, String)] |Позволяет очистить ссылку, хранящуюся в указанном поле указанной строки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCard_MT.adoc[CreateCard(Guid)] |Создает карточку и возвращает ссылку на интерфейс компонента карточки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCard_1_MT.adoc[CreateCard(Guid, Guid)] |Создает карточку с заданным идентификатором и возвращает ссылку на интерфейс компонента карточки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCardData_MT.adoc[CreateCardData(Guid)] |Создание нового экземпляра карточки указанного типа.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCardData_1_MT.adoc[CreateCardData(Guid, Guid)] |Создание нового экземпляра карточки указанного типа с заданным идентификатором.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.DeleteCard_MT.adoc[DeleteCard(Guid)] |Удаляет карточку.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.DeleteCard_1_MT.adoc[DeleteCard(Guid, Boolean)] |Удаляет карточку с возможностью восстановления.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindAggregationCardsInfo_MT.adoc[FindAggregationCardsInfo (SearchAggregationItemsRequest)] |Получает список агрегатов и/или результаты фильтрации.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCards_MT.adoc[FindCards(String)] |Ищет карточки, удовлетворяющие поисковому запросу.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_MT.adoc[FindCardsInfo(Guid)] |Ищет информацию по карточкам согласно заданному идентификатору поискового запроса.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_1_MT.adoc[FindCardsInfo(String)] |Ищет информацию по карточкам согласно заданному поисковому запросу.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_2_MT.adoc[FindCardsInfo(Guid, QueryParameterCollection)] |Ищет информацию по карточкам согласно заданному идентификатору поискового запроса с учетом параметров поиска.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_3_MT.adoc[FindCardsInfo(String, QueryParameterCollection)] |Ищет информацию по карточкам согласно заданному поисковому запросу с учетом параметров поиска.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_MT.adoc[GetCard(Guid)] |Возвращает ссылку на программный интерфейс карточки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_1_MT.adoc[GetCard(Guid, Boolean)] |Возвращает ссылку на программный интерфейс карточки с обновлением кэша.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_MT.adoc[GetCardData(Guid)] |Возвращает по идентификатору карточки объект для работы с её данными.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_1_MT.adoc[GetCardData(Guid, Boolean)] |Возвращает по идентификатору карточки объект для работы с её данными, с обновлением кэша.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_2_MT.adoc[GetCardData(Guid, Guid)] |Возвращает данные карточки с секцией заданного типа и заданным идентификатором строки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCards_MT.adoc[GetCards(Guid)] |Возвращает коллекцию всех карточек данного типа.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardState_MT.adoc[GetCardState(Guid)] |Возвращает статус карточки. Позволяет определить, что карточка удалена..
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_MT.adoc[GetDictionary(Guid)] |Возвращает ссылку на программный интерфейс справочника.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_1_MT.adoc[GetDictionary(Guid, Boolean)] |Возвращает ссылку на программный интерфейс справочника c обновлением кэша.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionaryData_MT.adoc[GetDictionaryData(Guid)] |Возвращает данные справочника указанного типа.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionaryData_1_MT.adoc[GetDictionaryData(Guid, Boolean)] |Возвращает данные справочника указанного типа c обновлением кэша.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksToCard_MT.adoc[GetLinksToCard(Guid, LinkType, int)] |Возвращает коллекцию карточек, ссылающихся на данную, с заданным типом ссылки и глубиной вложенности.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksFromCard_MT.adoc[GetLinksFromCard(Guid, LinkType, int)] |Возвращает коллекцию карточек, на которые ссылается данная карточка, с заданным типом ссылки и глубиной вложенности.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetSearchAggregationItemsRequest_MT.adoc[GetSearchAggregationItemsRequest (SearchAggregationItemsResultType, Guid, Guid, string, int?)] |Возвращает результат агрегации.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_MT.adoc[GetViewData(ViewReadRequest)] |Возвращает данные представления карточки для заданного запроса представления.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_1_MT.adoc[GetViewData(ViewSource)] |Возвращает данные представления карточки для заданного источника данных представлений.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_2_MT.adoc[GetViewData(ViewSource, Guid)] |Возвращает данные сохраненного представления с указанным идентификатором.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_3_MT.adoc[GetViewData(ViewSource, String)] |Возвращает данные представления с заданным описанием.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_4_MT.adoc[GetViewData(ViewSource, Guid, QueryParameterCollection)] |Возвращает данные сохраненного представления с указанным идентификатором, с указанием параметров поиска.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_5_MT.adoc[GetViewData(ViewSource, string, QueryParameterCollection)] |Возвращает данные представления с учетом приведенного описания, с указанием параметров поиска.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequest_MT.adoc[GetViewRequest] |Создание экземпляра запроса представления.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCardLib_MT.adoc[GetViewRequestFromCardLib] |Создание экземпляра запроса представления для указанной библиотеки карточек.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCards_MT.adoc[GetViewRequestFromCards] |Создание экземпляра запроса представления для карточек.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCardType_MT.adoc[GetViewRequestFromCardType(Guid)] |Создание экземпляра запроса представления для заданного типа карточек.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromFolder_MT.adoc[GetViewRequestFromFolder(Guid)] |Создание экземпляра запроса представления для заданной папки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromInstance_MT.adoc[GetViewRequestFromInstance(Guid)] |Создание экземпляра запроса представления для заданного экземпляра.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromRecycleBin_MT.adoc[GetViewRequestFromRecycleBin] |Создание экземпляра запроса представления для системной папки "Корзина".
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromReferences_MT.adoc[GetViewRequestFromReferences] |Создание экземпляра запроса представления для системной папки "Справочники".
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearch_MT.adoc[GetViewRequestFromSearch(Guid)] |Создание экземпляра запроса представления для существующего поискового запроса.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearch_1_MT.adoc[GetViewRequestFromSearch(String)] |Создание экземпляра запроса представления для переданного поискового запроса.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearchFolder_MT.adoc[GetViewRequestFromSearchFolder(Guid)] |Создание экземпляра запроса представления для виртуальной папки.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearchResults_MT.adoc[GetViewRequestFromSearchResults(Guid)] |Создание экземпляра запроса представления для папки результатов поиска.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.ImportCards_MT.adoc[ImportCards(Stream)] |Импортирует карточку из потока XML данных.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.ImportCards_1_MT.adoc[ImportCards(Stream, ImportCardInspector)] |Импортирует карточку из потока XML данных, с заданным алгоритмом импорта.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCache_MT.adoc[PurgeCache()] |Очистка кэша менеджера объектов.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCards_1_MT.adoc[PurgeCards(DateTime)] |Окончательно удаляет карточки помеченные к удалению с учетом даты удаления.
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCards_2_MT.adoc[PurgeCards(DateTime, Guid)] |Окончательно удаляет карточки помеченные к удалению с учетом даты удаления и типа карточки
-|xref:api/DocsVision/Platform/ObjectManager/CardManager.RestoreCard_MT.adoc[RestoreCard(Guid)] |Восстанавливает карточку помеченную к удалению.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.BatchUpdate_MT.adoc[BatchUpdate(Guid[])]` |Выполняет пакетное обновление данных для указанных карточек.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.ClearLink_MT.adoc[ClearLink(Guid, Guid, String)]` |Позволяет очистить ссылку, хранящуюся в указанном поле указанной строки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCard_MT.adoc[CreateCard(Guid)]` |Создает карточку и возвращает ссылку на интерфейс компонента карточки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCard_1_MT.adoc[CreateCard(Guid, Guid)]` |Создает карточку с заданным идентификатором и возвращает ссылку на интерфейс компонента карточки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCardData_MT.adoc[CreateCardData(Guid)]` |Создание нового экземпляра карточки указанного типа.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.CreateCardData_1_MT.adoc[CreateCardData(Guid, Guid)]` |Создание нового экземпляра карточки указанного типа с заданным идентификатором.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.DeleteCard_MT.adoc[DeleteCard(Guid)]` |Удаляет карточку.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.DeleteCard_1_MT.adoc[DeleteCard(Guid, Boolean)]` |Удаляет карточку с возможностью восстановления.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindAggregationCardsInfo_MT.adoc[FindAggregationCardsInfo (SearchAggregationItemsRequest)]` |Получает список агрегатов и/или результаты фильтрации.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCards_MT.adoc[FindCards(String)]` |Ищет карточки, удовлетворяющие поисковому запросу.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_MT.adoc[FindCardsInfo(Guid)]` |Ищет информацию по карточкам согласно заданному идентификатору поискового запроса.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_1_MT.adoc[FindCardsInfo(String)]` |Ищет информацию по карточкам согласно заданному поисковому запросу.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_2_MT.adoc[FindCardsInfo(Guid, QueryParameterCollection)]` |Ищет информацию по карточкам согласно заданному идентификатору поискового запроса с учетом параметров поиска.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.FindCardsInfo_3_MT.adoc[FindCardsInfo(String, QueryParameterCollection)]` |Ищет информацию по карточкам согласно заданному поисковому запросу с учетом параметров поиска.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_MT.adoc[GetCard(Guid)]` |Возвращает ссылку на программный интерфейс карточки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCard_1_MT.adoc[GetCard(Guid, Boolean)]` |Возвращает ссылку на программный интерфейс карточки с обновлением кэша.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_MT.adoc[GetCardData(Guid)]` |Возвращает по идентификатору карточки объект для работы с её данными.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_1_MT.adoc[GetCardData(Guid, Boolean)]` |Возвращает по идентификатору карточки объект для работы с её данными, с обновлением кэша.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardData_2_MT.adoc[GetCardData(Guid, Guid)]` |Возвращает данные карточки с секцией заданного типа и заданным идентификатором строки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCards_MT.adoc[GetCards(Guid)]` |Возвращает коллекцию всех карточек данного типа.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetCardState_MT.adoc[GetCardState(Guid)]` |Возвращает статус карточки. Позволяет определить, что карточка удалена..
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_MT.adoc[GetDictionary(Guid)]` |Возвращает ссылку на программный интерфейс справочника.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionary_1_MT.adoc[GetDictionary(Guid, Boolean)]` |Возвращает ссылку на программный интерфейс справочника c обновлением кэша.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionaryData_MT.adoc[GetDictionaryData(Guid)]` |Возвращает данные справочника указанного типа.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetDictionaryData_1_MT.adoc[GetDictionaryData(Guid, Boolean)]` |Возвращает данные справочника указанного типа c обновлением кэша.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksToCard_MT.adoc[GetLinksToCard(Guid, LinkType, int)]` |Возвращает коллекцию карточек, ссылающихся на данную, с заданным типом ссылки и глубиной вложенности.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetLinksFromCard_MT.adoc[GetLinksFromCard(Guid, LinkType, int)]` |Возвращает коллекцию карточек, на которые ссылается данная карточка, с заданным типом ссылки и глубиной вложенности.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetSearchAggregationItemsRequest_MT.adoc[GetSearchAggregationItemsRequest (SearchAggregationItemsResultType, Guid, Guid, string, int?)]` |Возвращает результат агрегации.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_MT.adoc[GetViewData(ViewReadRequest)]` |Возвращает данные представления карточки для заданного запроса представления.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_1_MT.adoc[GetViewData(ViewSource)]` |Возвращает данные представления карточки для заданного источника данных представлений.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_2_MT.adoc[GetViewData(ViewSource, Guid)]` |Возвращает данные сохраненного представления с указанным идентификатором.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_3_MT.adoc[GetViewData(ViewSource, String)]` |Возвращает данные представления с заданным описанием.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_4_MT.adoc[GetViewData(ViewSource, Guid, QueryParameterCollection)]` |Возвращает данные сохраненного представления с указанным идентификатором, с указанием параметров поиска.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewData_5_MT.adoc[GetViewData(ViewSource, string, QueryParameterCollection)]` |Возвращает данные представления с учетом приведенного описания, с указанием параметров поиска.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequest_MT.adoc[GetViewRequest]` |Создание экземпляра запроса представления.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCardLib_MT.adoc[GetViewRequestFromCardLib]` |Создание экземпляра запроса представления для указанной библиотеки карточек.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCards_MT.adoc[GetViewRequestFromCards]` |Создание экземпляра запроса представления для карточек.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromCardType_MT.adoc[GetViewRequestFromCardType(Guid)]` |Создание экземпляра запроса представления для заданного типа карточек.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromFolder_MT.adoc[GetViewRequestFromFolder(Guid)]` |Создание экземпляра запроса представления для заданной папки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromInstance_MT.adoc[GetViewRequestFromInstance(Guid)]` |Создание экземпляра запроса представления для заданного экземпляра.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromRecycleBin_MT.adoc[GetViewRequestFromRecycleBin]` |Создание экземпляра запроса представления для системной папки "Корзина".
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromReferences_MT.adoc[GetViewRequestFromReferences]` |Создание экземпляра запроса представления для системной папки "Справочники".
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearch_MT.adoc[GetViewRequestFromSearch(Guid)]` |Создание экземпляра запроса представления для существующего поискового запроса.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearch_1_MT.adoc[GetViewRequestFromSearch(String)]` |Создание экземпляра запроса представления для переданного поискового запроса.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearchFolder_MT.adoc[GetViewRequestFromSearchFolder(Guid)]` |Создание экземпляра запроса представления для виртуальной папки.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.GetViewRequestFromSearchResults_MT.adoc[GetViewRequestFromSearchResults(Guid)]` |Создание экземпляра запроса представления для папки результатов поиска.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.ImportCards_MT.adoc[ImportCards(Stream)]` |Импортирует карточку из потока XML данных.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.ImportCards_1_MT.adoc[ImportCards(Stream, ImportCardInspector)]` |Импортирует карточку из потока XML данных, с заданным алгоритмом импорта.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCache_MT.adoc[PurgeCache()]` |Очистка кэша менеджера объектов.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCards_1_MT.adoc[PurgeCards(DateTime)]` |Окончательно удаляет карточки помеченные к удалению с учетом даты удаления.
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.PurgeCards_2_MT.adoc[PurgeCards(DateTime, Guid)]` |Окончательно удаляет карточки помеченные к удалению с учетом даты удаления и типа карточки
+|`xref:api/DocsVision/Platform/ObjectManager/CardManager.RestoreCard_MT.adoc[RestoreCard(Guid)]` |Восстанавливает карточку помеченную к удалению.
 |===
 
 == Заметки
