@@ -28,7 +28,7 @@ unit:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр unit.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `unit`.
 |===
 
 == Примеры
@@ -37,17 +37,18 @@ unit:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение подразделения, в которое добавляется сотрудник
-StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление сотрудника
 StaffEmployee employee = staffService.AddNewEmployee(unit);
 employee.LastName = "Иванов";
-employee.FirstName = "Иван";
+employee.FirstName = "Иван"; <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение подразделения, в которое добавляется сотрудник.
+<.> Добавление сотрудника.

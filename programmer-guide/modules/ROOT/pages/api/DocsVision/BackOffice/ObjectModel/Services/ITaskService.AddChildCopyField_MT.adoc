@@ -33,30 +33,24 @@ task:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение необходимых сервисов
 IMetadataProvider metadataProvider = objectContext.GetService<IMetadataProvider>();
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление настройки копирования поля
-TaskPresetChildCopyField taskPresetChildCopyField = taskService.AddChildCopyField(task);
+TaskPresetChildCopyField taskPresetChildCopyField = taskService.AddChildCopyField(task); <.>
             
-// Получение поля Название из секции Задание
 DocsVision.Platform.Data.Metadata.CardModel.SectionField sectionField = metadataProvider.GetField(new Guid("F5C843C0-5CE1-4727-81BF-0C764A43243B"));
-DocsVision.Platform.Data.Metadata.CardModel.CardSection section = sectionField.GetParent<DocsVision.Platform.Data.Metadata.CardModel.CardSection>();
+DocsVision.Platform.Data.Metadata.CardModel.CardSection section = sectionField.GetParent<DocsVision.Platform.Data.Metadata.CardModel.CardSection>(); <.>
 
-// Определение значений копируемого поля
 taskPresetChildCopyField.SectionName = section.Name;
 taskPresetChildCopyField.FieldId = sectionField.Id;
 taskPresetChildCopyField.FieldName = sectionField.DisplayName.GetLocalization(System.Globalization.CultureInfo.CurrentCulture);
-taskPresetChildCopyField.FieldAlias = sectionField.Name;
+taskPresetChildCopyField.FieldAlias = sectionField.Name; <.>
 
-// Формирование пути к секции
-Stack<Guid> sections = new Stack<Guid>();
+Stack<Guid> sections = new Stack<Guid>(); <.>
 while (section != null)
 {
  sections.Push(section.Id);
@@ -65,3 +59,10 @@ while (section != null)
 taskPresetChildCopyField.SectionPath = CardFieldSetting.BuildSectionPath(sections);          
 objectContext.SaveObject<Task>(task);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение задания.
+<.> Добавление настройки копирования поля.
+<.> Получение поля "Название" из секции "Задание".
+<.> Определение значений копируемого поля.
+<.> Формирование пути к секции.

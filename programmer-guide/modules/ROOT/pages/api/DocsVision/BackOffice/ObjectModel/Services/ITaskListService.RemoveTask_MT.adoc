@@ -31,7 +31,7 @@ parentCard:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр taskList, task или parentCard.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList`, `task` или `parentCard`.
 |`https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception]` |Ошибка возвращается при наличии установленной на taskList блокировки.
 |===
 
@@ -41,19 +41,20 @@ parentCard:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
 
-// Получение документа с заполненным списком заданий
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение списка заданий из документа и первого задания из списка
-TaskList taskList = document.MainInfo.Tasks;
+TaskList taskList = document.MainInfo.Tasks; <.>
 Task task = taskList.Tasks.First().Task;
 
-// Удаление задания
-taskListService.RemoveTask(taskList, task, document);
+taskListService.RemoveTask(taskList, task, document); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа с заполненным списком заданий.
+<.> Получение списка заданий из документа и первого задания из списка.
+<.> Удаление задания.

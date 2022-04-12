@@ -19,13 +19,13 @@ role:::
 Роль сотрудника, подразделения или группы
 
 Возвращаемое значение::
-Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
 +
-Список сотрудников типа xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
+Список сотрудников типа `xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]`
 
 == Заметки
 
-Метод GetRoleEmployees, помимо сотрудников непосредственно имеющих роль `role`, включает сотрудников из групп, ролей и подразделений, у которых включена роль `role`.
+Метод `GetRoleEmployees`, помимо сотрудников непосредственно имеющих роль `role`, включает сотрудников из групп, ролей и подразделений, у которых включена роль `role`.
 
 == Примеры
 
@@ -33,9 +33,11 @@ role:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
+
 StaffRole role = objectContext.GetObject<StaffRole>(new Guid("00000000-0000-0000-0000-000000000000"));
 IStaffService staffService = objectContext.GetService<IStaffService>();
 
 var employees = staffService.GetRoleEmployees(role);
 ----
+<.> Инициализация контекста объектов.

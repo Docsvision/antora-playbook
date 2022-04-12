@@ -37,27 +37,28 @@ itemType:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
          
-//получение необходимых сервисов
-IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
 
-//получение поставщика метаданных
-IMetadataProvider iMetadataProvider = objectContext.GetService<IMetadataProvider>();
+IMetadataProvider iMetadataProvider = objectContext.GetService<IMetadataProvider>(); <.>
 
-//получение секции, которая содержит отображаемое поле (в нашем случае секция "Строка справочника" карточки "Конструктор справочников")
-CardSection cardSectionMetadata = iMetadataProvider.GetSection(new Guid("1B1A44FB-1FB1-4876-83AA-95AD38907E24")); 
+CardSection cardSectionMetadata = iMetadataProvider.GetSection(new Guid("1B1A44FB-1FB1-4876-83AA-95AD38907E24")); <.>
 
-//получение узла, для которого добавляется отображаемое поле
-BaseUniversalItemType baseUniversalItemType = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseUniversalItemType baseUniversalItemType = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение поля "Описание" 
-SectionField sectionField = cardSectionMetadata.Fields[new Guid("8B45BC58-6831-40C1-B654-E0C0C6E36115")];
+SectionField sectionField = cardSectionMetadata.Fields[new Guid("8B45BC58-6831-40C1-B654-E0C0C6E36115")]; <.>
 
-//создание нового отображаемого поля и установка порядкового номера
 BaseUniversalItemTypeViewField baseUniversalItemTypeViewField = baseUniversalService.AddNewViewField(sectionField.Name, sectionField, baseUniversalItemType);
-baseUniversalItemTypeViewField.Order = baseUniversalItemType.ViewFields.Count;
+baseUniversalItemTypeViewField.Order = baseUniversalItemType.ViewFields.Count; <.>
 
-//сохранение            
-objectContext.SaveObject(baseUniversalItemTypeViewField);
+objectContext.SaveObject(baseUniversalItemTypeViewField); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение поставщика метаданных.
+<.> Получение секции, которая содержит отображаемое поле (в нашем случае секция "Строка справочника" карточки "Конструктор справочников").
+<.> Получение узла, для которого добавляется отображаемое поле.
+<.> Получение поля "Описание".
+<.> Создание нового отображаемого поля и установка порядкового номера.
+<.> Сохранение.

@@ -32,7 +32,7 @@ baseCard:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр builtInOperation или baseCard.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInOperation` или `baseCard`.
 |===
 
 == Заметки
@@ -41,18 +41,19 @@ baseCard:::
 
 == Примеры
 
-В примере демонстрируется использование метода IsOperationAllowed для определения возможности делегирования задания другому сотруднику
+В примере демонстрируется использование метода `IsOperationAllowed` для определения возможности делегирования задания другому сотруднику
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение задания, для которого определяется возможность делегирования
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Проверка возможности совершения операции делегирования
-bool isValid = stateService.IsOperationAllowed(Task.DelegateOperation, task);
+bool isValid = stateService.IsOperationAllowed(Task.DelegateOperation, task); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания, для которого определяется возможность делегирования.
+<.> Проверка возможности совершения операции делегирования.

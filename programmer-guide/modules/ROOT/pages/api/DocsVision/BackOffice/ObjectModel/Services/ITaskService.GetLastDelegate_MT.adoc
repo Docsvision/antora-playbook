@@ -29,15 +29,16 @@ task:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение сотрудника, которому выполнено делегирование
 TaskDelegate taskDelegate = taskService.GetLastDelegate(task);
-StaffEmployee employee = taskDelegate.DelegatedTo.FirstOrDefault().Employee;
+StaffEmployee employee = taskDelegate.DelegatedTo.FirstOrDefault().Employee; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания.
+<.> Получение сотрудника, которому выполнено делегирование.

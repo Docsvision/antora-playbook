@@ -65,23 +65,26 @@ public interface ISurveyService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
-ISurveyService surveyService = objectContext.GetService<ISurveyService>();
+ISurveyService surveyService = objectContext.GetService<ISurveyService>(); <.>
 
-//создание списка
-SurveyList surveyList = surveyService.CreateSurveyList();
+SurveyList surveyList = surveyService.CreateSurveyList(); <.>
 
-//добавление опроса в список опросов
-SurveyListSurvey surveyListSurvey = surveyService.AddSurvey(surveyList, "Утренние опросы");
-surveyListSurvey.OneTime = true; //отвечать единожды
-surveyListSurvey.Sign = true; //подписывать
+SurveyListSurvey surveyListSurvey = surveyService.AddSurvey(surveyList, "Утренние опросы"); <.>
+surveyListSurvey.OneTime = true; <.>
+surveyListSurvey.Sign = true; <.>
 surveyListSurvey.SignatureList = surveyService.CreateSignatureList();
 
-//добавляем вопрос, тип данных boolean
-SurveyListSurveyQuestion surveyListSurveyQuestion = surveyService.AddQuestion(surveyListSurvey, "Доброе", "Скажите, является ли утро добрым?", SurveyListSurveyQuestionDataType.Boolean);
+SurveyListSurveyQuestion surveyListSurveyQuestion = surveyService.AddQuestion(surveyListSurvey, "Доброе", "Скажите, является ли утро добрым?", SurveyListSurveyQuestionDataType.Boolean); <.>
 
-//сохранение
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Создание списка.
+<.> Добавление опроса в список опросов.
+<.> Отвечать единожды.
+<.> Подписывать.
+<.> Добавляем вопрос, тип данных `boolean`.
+<.> Сохранение.

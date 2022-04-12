@@ -32,23 +32,24 @@ baseCard:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр builtInOperation или baseCard.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInOperation` или `baseCard`.
 |===
 
 == Примеры
 
-В примере демонстрируется использование метода IsOperationAllowedFull для определения возможности отклонения задания текущим сотрудником
+В примере демонстрируется использование метода `IsOperationAllowedFull` для определения возможности отклонения задания текущим сотрудником
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение задания, для которого определяется возможность делегирования
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Проверка возможности отклонения сотрудником
-bool isValid = stateService.IsOperationAllowedFull(Task.RejectOperation, task);
+bool isValid = stateService.IsOperationAllowedFull(Task.RejectOperation, task); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания, для которого определяется возможность делегирования.
+<.> Проверка возможности отклонения сотрудником.

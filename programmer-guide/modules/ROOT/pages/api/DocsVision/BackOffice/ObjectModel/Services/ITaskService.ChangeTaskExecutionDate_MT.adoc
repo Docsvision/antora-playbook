@@ -35,9 +35,9 @@ comment:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task, либо параметры newStartDate и newEndDate не имеют значения, либо newStartDate и newEndDate меньше минимальной даты.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`, либо параметры `newStartDate` и `newEndDate` не имеют значения, либо `newStartDate` и `newEndDate` меньше минимальной даты.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав на изменение сроков или на запись в историю карточки.
-|`https://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается, если дата newEndDate меньше newStartDate.
+|`https://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается, если дата `newEndDate` меньше `newStartDate`.
 |===
 
 == Заметки
@@ -48,10 +48,11 @@ comment:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
-ITaskService taskService = objectContext.GetService<ITaskService>();
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
 Task task = objectContext.GetObject<Task>(new Guid("89C2EB62-8B6D-E511-9415-90E6BA57B9F8"));
 taskService.ChangeTaskExecutionDate(task, DateTime.Parse("10.10.2015"), DateTime.Parse("14.10.2015"),"Сотрудник отправлен в командировку.");
 objectContext.AcceptChanges(); 
 ----
+<.> Инициализация контекста объектов

@@ -32,15 +32,15 @@ public enum LayoutsDesignTreeType
 
 [source,csharp]
 ----
-//Инициализация контекста объектов и получение сервиса
-ILayoutService layoutService = objectContext.GetService<ILayoutService>();
+ILayoutService layoutService = objectContext.GetService<ILayoutService>(); <.>
     
-//получение вида карточки
-KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение дерева дизайнов для вида карточки
-LayoutsDesignTree layoutsDesignTree = layoutService.GetDesignTree(kindsCardKind);
+LayoutsDesignTree layoutsDesignTree = layoutService.GetDesignTree(kindsCardKind); <.>
 
-//получение типа корневого узла (обычно LayoutsDesignTreeType.Kind)
-LayoutsDesignTreeType layoutsDesignTreeType = layoutsDesignTree.NodeType;
+LayoutsDesignTreeType layoutsDesignTreeType = layoutsDesignTree.NodeType; <.>
 ----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Получение вида карточки.
+<.> Получение дерева дизайнов для вида карточки.
+<.> Получение типа корневого узла (обычно `LayoutsDesignTreeType.Kind`).

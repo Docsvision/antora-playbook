@@ -19,16 +19,16 @@ employee:::
 Сотрудник, для которого определяется список замещений
 
 Возвращаемое значение::
-Тип: `http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffDeputy>
+Тип: `http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffDeputy>`
 +
-Список замещений, представленный коллекцией объектов xref:api/DocsVision/BackOffice/ObjectModel/StaffDeputy_CL.adoc[StaffDeputy]
+Список замещений, представленный коллекцией объектов `xref:api/DocsVision/BackOffice/ObjectModel/StaffDeputy_CL.adoc[StaffDeputy]`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
 |===
 
 == Заметки
@@ -41,18 +41,19 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение списка замещений в который участвует текущий сотрудник
-List<StaffDeputy> deputy = staffService.FindDeputiesWhereEmployeeIsDeputy(staffService.GetCurrentEmployee());
+List<StaffDeputy> deputy = staffService.FindDeputiesWhereEmployeeIsDeputy(staffService.GetCurrentEmployee()); <.>
 
-// Сброс флага, разрешающего подписание документов, для всех замещений
-foreach (StaffDeputy item in deputy)
+foreach (StaffDeputy item in deputy) <.>
 {
  item.Signature = false;
 }
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение списка замещений в который участвует текущий сотрудник.
+<.> Сброс флага, разрешающего подписание документов, для всех замещений.

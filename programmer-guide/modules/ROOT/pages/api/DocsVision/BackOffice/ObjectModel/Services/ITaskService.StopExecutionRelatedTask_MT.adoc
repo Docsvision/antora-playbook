@@ -35,14 +35,15 @@ force:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Прекращение исполнения подчиненных заданий
-TaskStopExecutionInfo taskStopExecutionInfo = taskService.StopExecutionRelatedTask(task, true);
+TaskStopExecutionInfo taskStopExecutionInfo = taskService.StopExecutionRelatedTask(task, true); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания.
+<.> Прекращение исполнения подчиненных заданий.

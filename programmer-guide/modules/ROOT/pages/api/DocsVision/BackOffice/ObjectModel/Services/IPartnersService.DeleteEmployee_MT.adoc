@@ -23,21 +23,22 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получаем сервис для работы с контрагентами
-IPartnersService partnersService = objectContext.GetService<IPartnersService>();
+IPartnersService partnersService = objectContext.GetService<IPartnersService>(); <.>
 
-// Получаем сотрудника контрагента
-PartnersEmployee partnersEmployee = partnersService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+PartnersEmployee partnersEmployee = partnersService.Get(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Удаляем сотрудника
-partnersService.DeleteEmployee(partnersEmployee);
+partnersService.DeleteEmployee(partnersEmployee); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получаем сервис для работы с контрагентами.
+<.> Получаем сотрудника контрагента.
+<.> Удаляем сотрудника.

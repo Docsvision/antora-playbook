@@ -35,13 +35,14 @@ _Список ссылок на карточки_
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
 
-// Карточка, из которой будет получен список ссылок на карточки
 Guid cardId = new Guid("DED125DE-4097-E511-9417-90E6BA57B9F8");
-ReferenceList referenceList;
+ReferenceList referenceList; <.>
 
-// Получаем список ссылок
-bool result = referenceListService.TryGetReferenceListFromCard(cardId, true, out referenceList);
+bool result = referenceListService.TryGetReferenceListFromCard(cardId, true, out referenceList); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Карточка, из которой будет получен список ссылок на карточки.
+<.> Получаем список ссылок.

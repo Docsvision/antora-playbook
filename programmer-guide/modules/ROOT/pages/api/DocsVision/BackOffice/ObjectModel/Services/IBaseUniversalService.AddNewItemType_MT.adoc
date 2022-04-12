@@ -31,19 +31,20 @@ parentItemType:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
-IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
 
-//создаем новый узел в корне справочника
 BaseUniversalItemType baseUniversalItemType = baseUniversalService.AddNewItemType(null);
 baseUniversalItemType.Name = "Узел справочника";
-baseUniversalItemType.Description = "Узел справочника созданный из кода";
+baseUniversalItemType.Description = "Узел справочника созданный из кода"; <.>
 
-//элементы узла будут использовать порядковые номера
-baseUniversalItemType.UseOrder = true;
+baseUniversalItemType.UseOrder = true; <.>
 
-//сохранение
-objectContext.SaveObject<BaseUniversalItemType>(baseUniversalItemType);
+objectContext.SaveObject<BaseUniversalItemType>(baseUniversalItemType); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Создаем новый узел в корне справочника.
+<.> Элементы узла будут использовать порядковые номера.
+<.> Сохранение.

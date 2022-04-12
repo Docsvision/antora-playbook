@@ -33,7 +33,7 @@ objectInstance:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `objectInstance`.
 |===
 
 == Примеры
@@ -42,17 +42,18 @@ objectInstance:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Создание документа
-Document document = documentService.CreateDocument();
+Document document = documentService.CreateDocument(); <.>
 
-// Изменение описания
-document.Description = "Документ созданный из кода";
+document.Description = "Документ созданный из кода"; <.>
 
-// Сохранение изменений в контексте
-objectContext.SaveObject<Document>(document);
+objectContext.SaveObject<Document>(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Создание документа.
+<.> Изменение описания.
+<.> Сохранение изменений в контексте.

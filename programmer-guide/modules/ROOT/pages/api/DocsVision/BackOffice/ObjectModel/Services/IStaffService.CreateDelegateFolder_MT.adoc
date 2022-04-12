@@ -31,16 +31,17 @@ templateFolder:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение папки, в которой создается папка-делегат, а также папки, на которую создается делегат
 FoldersFolder personalFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000000"));
-FoldersFolder templateFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001"));
+FoldersFolder templateFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Создание папки-делегата
-FoldersFolder delegateFolder = staffService.CreateDelegateFolder(personalFolder, templateFolder);
+FoldersFolder delegateFolder = staffService.CreateDelegateFolder(personalFolder, templateFolder); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение папки, в которой создается папка-делегат, а также папки, на которую создается делегат.
+<.> Создание папки-делегата.

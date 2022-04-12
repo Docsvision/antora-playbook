@@ -28,16 +28,15 @@ versionedFileCard:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр versionedFileCard или versionId.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `versionedFileCard` или `versionId`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//
 IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
 
 Document document = objectContext.GetObject<Document>(new Guid("94F4E425-917C-E511-9416-90E6BA57B9F8"));
@@ -46,3 +45,4 @@ DocumentFile documentFile = document.Files.First();
 VersionedFileCard fileCard =  versionedFileCardService.OpenCard(documentFile.FileId);
 string version = versionedFileCardService.GetVersionNumber(fileCard, documentFile.FileVersionId);
 ----
+<.> Инициализация контекста объектов.

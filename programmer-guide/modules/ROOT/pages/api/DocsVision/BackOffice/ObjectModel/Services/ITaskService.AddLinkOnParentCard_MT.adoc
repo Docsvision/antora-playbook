@@ -31,7 +31,7 @@ card:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task, taskSetting или card.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`, `taskSetting` или `card`.
 |===
 
 == Заметки
@@ -42,18 +42,19 @@ card:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение карточек задание и его родительской карточки
 Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
-BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001"));
+BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Получение настроек вида задания
-TaskSetting taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind);
+TaskSetting taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind); <.>
 
-// Добавление ссылки
-taskService.AddLinkOnParentCard(task, taskSetting, card);
+taskService.AddLinkOnParentCard(task, taskSetting, card); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение карточек задание и его родительской карточки.
+<.> Получение настроек вида задания.
+<.> Добавление ссылки.

@@ -60,39 +60,41 @@ public interface IRoleModelService
 
 == Примеры
 
-В примере создается роль, которая может быть использована для ограничении времени доступа к документам в выходные дни.
+В примере создается роль, которая может быть использована для ограничения времени доступа к документам в выходные дни.
 
 [source,csharp]
 ----
-//Инициализация контекста объектов и получение сервиса
+<.>
+
 IRoleModelService roleModelService = objectContext.GetService<IRoleModelService>();
 
-//получение вида карточки Документ
-KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("8ACE1220-A452-455D-8EEB-9EDF9DC6E327"));
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("8ACE1220-A452-455D-8EEB-9EDF9DC6E327")); <.>
 
-//создание настроек для вида карточки
 RoleModelCardKindRoleSetting roleModelCardKindRoleSetting = roleModelService.GetOrCreatePreferredCardKindSetting(kindsCardKind);
 RoleModelRole roleModelRole = roleModelService.CreateRole(roleModelCardKindRoleSetting);
-roleModelRole.Name = "Работа по выходным";
+roleModelRole.Name = "Работа по выходным"; <.>
 
-//логическая операция между условиями -- ИЛИ
-roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or;
+roleModelRole.ConditionGroup.Operation = RoleModelRoleConditionGroupOperation.Or; <.>
 
-//создание первого условия (сегодня = суббота)
 RoleModelRoleCondition condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
 condition.Parameter = RoleModelRoleConditionParameter.Today;
 condition.Operation = RoleModelRoleConditionOperation.Equals;
-condition.Value = System.DayOfWeek.Saturday;
+condition.Value = System.DayOfWeek.Saturday; <.>
 
-//создание второго условия (сегодня = воскресенье)
 condition = roleModelService.AddCondition(roleModelRole.ConditionGroup);
 condition.Parameter = RoleModelRoleConditionParameter.Today;
 condition.Operation = RoleModelRoleConditionOperation.Equals;
-condition.Value = System.DayOfWeek.Sunday;
+condition.Value = System.DayOfWeek.Sunday; <.>
 
-//сохранение изменений
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 
-//отметим роль признаком "Общая", что позволит использовать её во всех карточках
-roleModelService.MakeRoleCommon(roleModelRole);
+roleModelService.MakeRoleCommon(roleModelRole); <.>
 ----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Получение вида карточки "Документ".
+<.> Создание настроек для вида карточки.
+<.> Логическая операция между условиями -- `ИЛИ`.
+<.> Создание первого условия (сегодня = суббота).
+<.> Создание второго условия (сегодня = воскресенье).
+<.> Сохранение изменений.
+<.> Отметим роль признаком "Общая", что позволит использовать её во всех карточках.

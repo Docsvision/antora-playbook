@@ -18,10 +18,12 @@ document:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 file:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Файл документа
+
 path:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 +
@@ -33,7 +35,7 @@ path:::
 |===
 |Исключение |Условие
 |`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `file`.
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается в случае, если не задан параметр path.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается в случае, если не задан параметр `path`.
 |`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав для чтения основного файла.
 |===
 
@@ -41,14 +43,15 @@ path:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами        
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа с основным файлом
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Сохранение первого основного файла
-documentService.DownloadMainFile(document, document.Files.FirstOrDefault(t=>t.FileType = DocumentFileType.Main), @"C:\SampleDownload.docx");
+documentService.DownloadMainFile(document, document.Files.FirstOrDefault(t=>t.FileType = DocumentFileType.Main), @"C:\SampleDownload.docx"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа с основным файлом.
+<.> Сохранение первого основного файла.

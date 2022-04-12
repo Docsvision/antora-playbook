@@ -37,16 +37,17 @@ sectionId:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
 
-//Получение всех строчек секции с идентификатором 00000000-0000-0000-0000-000000000001
-var rows = (ICollection<BaseCardSectionRow>)document.GetSection(new Guid("00000000-0000-0000-0000-000000000001"));
+var rows = (ICollection<BaseCardSectionRow>)document.GetSection(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-//Присвоение пустого строкового значения полю fieldName каждой строчки секции
 foreach (var item in rows)
 {
- item["fieldName"] = string.Empty;
+ item["fieldName"] = string.Empty; <.>
 }
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение всех строчек секции с идентификатором `00000000-0000-0000-0000-000000000001`.
+<.> Присвоение пустого строкового значения полю `fieldName` каждой строчки секции.

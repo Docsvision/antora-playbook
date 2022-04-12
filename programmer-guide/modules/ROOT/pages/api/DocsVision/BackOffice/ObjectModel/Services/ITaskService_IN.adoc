@@ -98,36 +98,37 @@ public interface ITaskService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
-IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();          
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
 ITaskService taskService = objectContext.GetService<ITaskService>();
 IStaffService staffService = objectContext.GetService<IStaffService>();
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получаем вид карточки На исполнение
-KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
 
-// Инициализация нового задания
 Task task = taskService.CreateTask(cardKind);
 taskService.InitializeDefaults(task);
-task.MainInfo.Name = "Пример задания";
+task.MainInfo.Name = "Пример задания"; <.>
 
-// Добавление исполнителя
 taskService.AddSelectedPerformer(task.MainInfo, staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")));
-objectContext.SaveObject(task);
+objectContext.SaveObject(task); <.>
             
-// Формирование дайджеста
 CardData cardData = userSession.CardManager.GetCardData(objectContext.GetObjectRef(task).Id);
 string digest = baseCardService.GenerateDigest(task, cardData, "Задание на исполнение");
-task.Description = digest;
+task.Description = digest; <.>
 
-// Отправка задания
 taskService.StartTask(task);
-objectContext.SaveObject(task);
+objectContext.SaveObject(task); <.>
 
-// Изменение состояния задания
-StatesStateMachineBranch state = stateService.FindBranchByBuiltIn(Task.InitializationToStartedByStart, task.SystemInfo.State);
+StatesStateMachineBranch state = stateService.FindBranchByBuiltIn(Task.InitializationToStartedByStart, task.SystemInfo.State); <.>
 stateService.ChangeState(task, state);
 ----
+<.> Инициализация контекста объектов.
+<.> Получаем сервисы.
+<.> Получаем вид карточки "На исполнение".
+<.> Инициализируем новое задание.
+<.> Добавляем исполнителя.
+<.> Формируем дайджест.
+<.> Отправляем задание.
+<.> Изменяем состояние задания.

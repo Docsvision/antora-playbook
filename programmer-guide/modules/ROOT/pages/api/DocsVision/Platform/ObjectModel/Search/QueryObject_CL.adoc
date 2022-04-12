@@ -50,11 +50,12 @@ public class QueryObject
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Формирование поискового запроса по полю Name
-QueryObject query = new QueryObject(BaseUniversalItem.NameProperty.Name, "SyncMaster 123");
+QueryObject query = new QueryObject(BaseUniversalItem.NameProperty.Name, "SyncMaster 123"); <.>
 
-// Выполнение запроса
-BaseUniversalItem item = objectContext.FindObject<BaseUniversalItem>(query);
+BaseUniversalItem item = objectContext.FindObject<BaseUniversalItem>(query); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Формирование поискового запроса по полю `Name`.
+<.> Выполнение запроса.

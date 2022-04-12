@@ -32,7 +32,7 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр routeStage или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `routeStage` или `employee`.
 |===
 
 == Примеры
@@ -41,16 +41,17 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение группы заданий
-TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000"));
+TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление исполнителя
-TaskGroupSelectedPerformer selectedPerformer = taskGroupService.AddSelectedPerformer(taskGroup, staffService.GetCurrentEmployee());
+TaskGroupSelectedPerformer selectedPerformer = taskGroupService.AddSelectedPerformer(taskGroup, staffService.GetCurrentEmployee()); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение группы заданий.
+<.> Добавление исполнителя.

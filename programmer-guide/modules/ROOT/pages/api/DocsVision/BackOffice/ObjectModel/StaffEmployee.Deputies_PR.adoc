@@ -15,7 +15,7 @@ public ObjectCollection<StaffDeputy> Deputies { get; set; }
 Значение свойства::
 Тип: `xref:api/DocsVision/Platform/ObjectModel/ObjectCollection_CL.adoc[ObjectCollection]<StaffDeputy>`
 +
-Коллекция заместителей типа xref:api/DocsVision/BackOffice/ObjectModel/StaffDeputy_CL.adoc[StaffDeputy]
+Коллекция заместителей типа `xref:api/DocsVision/BackOffice/ObjectModel/StaffDeputy_CL.adoc[StaffDeputy]`
 
 == Примеры
 
@@ -23,11 +23,12 @@ public ObjectCollection<StaffDeputy> Deputies { get; set; }
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса         
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение заместителей
-IEnumerable<StaffEmployee> employees  = staffService.GetCurrentEmployee().Deputies.Where(t=>t.Signature = true).Select(t=>t.Employee);
+IEnumerable<StaffEmployee> employees  = staffService.GetCurrentEmployee().Deputies.Where(t=>t.Signature = true).Select(t=>t.Employee); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение заместителей.

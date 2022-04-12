@@ -32,30 +32,31 @@ comments:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
 |===
 
 == Заметки
 
-Данный метод завершает задание от имени владельца сессии; дополнительно требуется вызвать xref:api/DocsVision/BackOffice/ObjectModel/Services/IStateService.ChangeState_MT.adoc[IStateService.ChangeState] для изменения фактического состояния карточки.
+Данный метод завершает задание от имени владельца сессии; дополнительно требуется вызвать `xref:api/DocsVision/BackOffice/ObjectModel/Services/IStateService.ChangeState_MT.adoc[IStateService.ChangeState]` для изменения фактического состояния карточки.
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Завершение задания
-BuiltInState state = taskService.CompleteTask(task, "Все документы получены");
+BuiltInState state = taskService.CompleteTask(task, "Все документы получены"); <.>
 
-// Иземение состояния карточки
-IStateService stateService = objectContext.GetService<IStateService>();            
-stateService.ChangeState(task, stateService.FindStateByBuiltIn(state, task));
+IStateService stateService = objectContext.GetService<IStateService>();
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(state, task)); <.>
 objectContext.AcceptChanges();    
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания.
+<.> Завершение задания.
+<.> Изменение состояния карточки.

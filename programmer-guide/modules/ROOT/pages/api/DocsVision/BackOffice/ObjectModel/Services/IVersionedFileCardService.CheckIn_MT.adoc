@@ -56,14 +56,15 @@ userId:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
         
 IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение файла с версией из документа
-VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(document.Files[0].FileId);
+VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(document.Files[0].FileId); <.>
 
-// Снятие блокировки с повышением версии
-versionedFileCardService.CheckIn(versionedFileCard, false, 1);
+versionedFileCardService.CheckIn(versionedFileCard, false, 1); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение файла с версией из документа.
+<.> Снятие блокировки с повышением версии.

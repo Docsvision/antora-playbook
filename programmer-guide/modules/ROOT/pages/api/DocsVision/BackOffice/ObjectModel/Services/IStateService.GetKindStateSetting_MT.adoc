@@ -29,15 +29,16 @@ cardKind:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
 IStateService stateService = objectContext.GetService<IStateService>();
-KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
 
-// Получение настроек вида
-StatesCardKindStateSetting stateSetting = stateService.GetKindStateSetting(cardKind);
+StatesCardKindStateSetting stateSetting = stateService.GetKindStateSetting(cardKind); <.>
 
-// Получение начального состояния
-StatesState startState = stateSetting.FirstState;
+StatesState startState = stateSetting.FirstState; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение настроек вида.
+<.> Получение начального состояния.

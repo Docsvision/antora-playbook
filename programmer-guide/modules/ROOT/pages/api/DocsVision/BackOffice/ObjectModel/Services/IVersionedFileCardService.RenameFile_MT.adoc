@@ -2,7 +2,7 @@
 
 Переименовывает файл _карточки файла с версиями_.
 
-* **Пространство имён: xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* **Пространство имён: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
 
 == Синтаксис
@@ -27,7 +27,7 @@ newFileName:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр versionedFileCard или newFileName.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `versionedFileCard` или `newFileName`.
 |`https://msdn.microsoft.com/ru-ru/library/system.argumentexception.aspx[System.ArgumentException]` |Ошибка возвращается, если newFileName содержит только символы-разделители, либо содержит недопустимые (для названия файла) символы.
 |===
 
@@ -35,17 +35,18 @@ newFileName:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>(); <.>
 
-// Получение карточки файла с версиями
-VersionedFileCard fileCard = versionedFileCardService.OpenCard(new Guid("00000000-0000-0000-0000-000000000000"));
+VersionedFileCard fileCard = versionedFileCardService.OpenCard(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Переименовываем файл
-versionedFileCardService.RenameFile(fileCard, "Новое название файла.docx");
+versionedFileCardService.RenameFile(fileCard, "Новое название файла.docx"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение карточки файла с версиями.
+<.> Переименовываем файл.
 
 Можно указывать новое название файла без расширения, а расширение получать из оригинального файла, например, так:
 

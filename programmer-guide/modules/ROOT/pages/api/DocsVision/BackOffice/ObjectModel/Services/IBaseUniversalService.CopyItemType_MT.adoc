@@ -32,28 +32,29 @@ targetItemType:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр copiedItemType.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `copiedItemType`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
-IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
 
-//копируемый узел справочника
-BaseUniversalItemType baseUniversalItemTypeToCopy = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseUniversalItemType baseUniversalItemTypeToCopy = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
            
-//узел в который будет произведено копирование
-BaseUniversalItemType baseUniversalItemTypeParent = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000001"));
+BaseUniversalItemType baseUniversalItemTypeParent = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-//создание копии
 BaseUniversalItemType copiedItem = baseUniversalService.CopyItemType(baseUniversalItemTypeToCopy, baseUniversalItemTypeParent);
-copiedItem.Name = string.Format("Копия {0}", baseUniversalItemTypeToCopy.Name);
+copiedItem.Name = string.Format("Копия {0}", baseUniversalItemTypeToCopy.Name); <.>
 
-//сохранение
-objectContext.SaveObject<BaseUniversalItemType>(copiedItem);
+objectContext.SaveObject<BaseUniversalItemType>(copiedItem); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Копируемый узел справочника.
+<.> Узел в который будет произведено копирование.
+<.> Создание копии.
+<.> Сохранение.

@@ -32,23 +32,23 @@ public enum LayoutsLayoutAttributeVisibility
 
 [source,csharp]
 ----
-//Инициализация контекста объектов и получение сервиса
-ILayoutService layoutService = objectContext.GetService<ILayoutService>();
+ILayoutService layoutService = objectContext.GetService<ILayoutService>(); <.>
     
-//получение вида карточки
-KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение дерева дизайнов и представления из первого узла дерева
 LayoutsDesignTree layoutsDesignTree = layoutService.GetDesignTree(kindsCardKind);
-LayoutsLayout layoutsLayout = layoutsDesignTree.NodeLayouts.FirstOrDefault().Layout;
+LayoutsLayout layoutsLayout = layoutsDesignTree.NodeLayouts.FirstOrDefault().Layout; <.>
 
-//получение свойства карточки
-LayoutsProperty layoutsProperty = layoutService.GetCustomProperty(kindsCardKind, "ButtonGo", false);
+LayoutsProperty layoutsProperty = layoutService.GetCustomProperty(kindsCardKind, "ButtonGo", false); <.>
 
-//получение атрибута разметки
-LayoutsLayoutAttribute layoutsLayoutAttribute = layoutService.GetLayoutAttribute(layoutsProperty, layoutsLayout);
+LayoutsLayoutAttribute layoutsLayoutAttribute = layoutService.GetLayoutAttribute(layoutsProperty, layoutsLayout); <.>
 
-//установка видимости элемента
 layoutsLayoutAttribute.Visibility = LayoutsLayoutAttributeVisibility.Invisible;
-objectContext.SaveObject(layoutsProperty);
+objectContext.SaveObject(layoutsProperty); <.>
 ----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Получение вида карточки.
+<.> Получение дерева дизайнов и представления из первого узла дерева.
+<.> Получение свойства карточки.
+<.> Получение атрибута разметки.
+<.> Установка видимости элемента.

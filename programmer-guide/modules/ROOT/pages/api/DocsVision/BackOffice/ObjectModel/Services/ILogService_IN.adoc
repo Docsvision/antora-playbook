@@ -44,17 +44,18 @@ public interface ILogService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//Получение сервиса журналирования
-ILogService logService = objectContext.GetService<ILogService>();
+ILogService logService = objectContext.GetService<ILogService>(); <.>
 
-//Добавление в журнал сообщения
-logService.AddLogMessage(document, Document.EditOperation, "Документ был изменен из кода.");
+logService.AddLogMessage(document, Document.EditOperation, "Документ был изменен из кода."); <.>
 
-//Сохранение журнала
-logService.CommitLog();
+logService.CommitLog(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение документа.
+<.> Получение сервиса журналирования.
+<.> Добавление в журнал сообщения.
+<.> Сохранение журнала.

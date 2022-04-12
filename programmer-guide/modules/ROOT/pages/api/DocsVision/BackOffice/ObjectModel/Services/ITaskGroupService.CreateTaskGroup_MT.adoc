@@ -28,7 +28,7 @@ kind:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр kind.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `kind`.
 |===
 
 == Примеры
@@ -37,20 +37,21 @@ kind:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение вида группы заданий
 QueryObject query = new QueryObject(RefKinds.CardKinds.Name, "Группа заданий УД");
-KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query);
+KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query); <.>
 
-// Создание группы заданий
 TaskGroup taskGroup = taskGroupService.CreateTaskGroup(cardKind);
 taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
 taskGroup.Description = "Подготовить финансовый отчет";
-taskGroup.MainInfo.Name = "Подготовить финансовый отчет";
+taskGroup.MainInfo.Name = "Подготовить финансовый отчет"; <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение вида группы заданий.
+<.> Создание группы заданий.

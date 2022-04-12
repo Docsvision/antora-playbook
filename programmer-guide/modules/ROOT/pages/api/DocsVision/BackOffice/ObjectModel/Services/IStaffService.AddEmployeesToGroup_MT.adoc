@@ -20,42 +20,43 @@ group:::
 employees:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
 +
-Коллекция сотрудников xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
+Коллекция сотрудников `xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]`
 
 Возвращаемое значение::
-Тип: `https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroupItem>
+Тип: `https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroupItem>`
 +
-Список сотрудников, представленных в группе. Тип xref:api/DocsVision/BackOffice/ObjectModel/StaffGroupItem_CL.adoc[StaffGroupItem]
+Список сотрудников, представленных в группе. Тип `xref:api/DocsVision/BackOffice/ObjectModel/StaffGroupItem_CL.adoc[StaffGroupItem]`
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр group или employees.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `group` или `employees`.
 |===
 
 == Примеры
 
-Ниже приведен пример копирования всех сотрудников одной группы в другую с использованием метода AddEmployeesToGroup
+Ниже приведен пример копирования всех сотрудников одной группы в другую с использованием метода `AddEmployeesToGroup`
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получения сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение группы, из которой выбирабтся сотрудники для копирования
-StaffGroup groupSource = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffGroup groupSource = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение группы, в которую осуществляется копирование
-StaffGroup groupRecipient = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffGroup groupRecipient = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Получение всех сотрудников из первой группы
-IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(groupSource);
+IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(groupSource); <.>
 
-// Добавление сотрудников в группу-получатель
-staffService.AddEmployeesToGroup(groupRecipient, employees);
+staffService.AddEmployeesToGroup(groupRecipient, employees); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получения сервиса.
+<.> Получение группы, из которой выбираются сотрудники для копирования.
+<.> Получение группы, в которую осуществляется копирование.
+<.> Получение всех сотрудников из первой группы.
+<.> Добавление сотрудников в группу-получатель.

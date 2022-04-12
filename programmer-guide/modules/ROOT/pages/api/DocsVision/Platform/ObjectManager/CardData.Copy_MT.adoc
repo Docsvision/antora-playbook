@@ -27,12 +27,13 @@ public abstract CardData Copy()
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение карточки
-CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"), false);
+CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000"), false); <.>
 
-// Создание копии 
-CardData newCardData = userSession.CardManager.GetCardData(cardData.Id, false).Copy();
+CardData newCardData = userSession.CardManager.GetCardData(cardData.Id, false).Copy(); <.>
 newCardData.Description = newCardData.Description + " Copy";
 ----
+<.> Инициализация контекста объектов.
+<.> Получение карточки.
+<.> Создание копии.

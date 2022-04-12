@@ -32,37 +32,38 @@ taskGroup:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр taskList или taskGroup.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList` или `taskGroup`.
 |===
 
 == Заметки
 
-Данный метод, в отличии от метода AddTaskGroup, не добавляет соответствующую запись в историю карточки.
+Данный метод, в отличие от метода AddTaskGroup, не добавляет соответствующую запись в историю карточки.
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение настройки 
-IStaffService staffService = objectContext.GetService<IStaffService>();        
+IStaffService staffService = objectContext.GetService<IStaffService>();
 ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
-ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
 
-// Получение документа со списком заданий           
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
-TaskList taskList = document.MainInfo.Tasks;
+TaskList taskList = document.MainInfo.Tasks; <.>
 
-// Получение вида карточки для группы заданий (в примере -- Группа заданий УД)
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("6D76D0A7-5434-40F2-912E-6370D33C3151"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("6D76D0A7-5434-40F2-912E-6370D33C3151")); <.>
 
-// Создание новой группы заданий          
 TaskGroup taskGroup = taskGroupService.CreateTaskGroup(kind);
 taskGroup.MainInfo.Name = "Группа заданий документа";
-taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
+taskGroup.MainInfo.Author = staffService.GetCurrentEmployee(); <.>
 
-// Добавление группы в список заданий
-taskListService.CreateTaskGroup(taskList, taskGroup);
+taskListService.CreateTaskGroup(taskList, taskGroup); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение настройки.
+<.> Получение документа со списком заданий.
+<.> Получение вида карточки для группы заданий (в примере -- Группа заданий УД).
+<.> Создание новой группы заданий.
+<.> Добавление группы в список заданий.

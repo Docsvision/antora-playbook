@@ -32,23 +32,24 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр mainInfo или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `mainInfo` или `employee`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания и исполнителя для него
 Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
-StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Добавление выбранного исполнителя
-taskService.AddSelectedPerformer(task.MainInfo, employee);
+taskService.AddSelectedPerformer(task.MainInfo, employee); <.>
 objectContext.AcceptChanges();   
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания и исполнителя для него.
+<.> Добавление выбранного исполнителя.

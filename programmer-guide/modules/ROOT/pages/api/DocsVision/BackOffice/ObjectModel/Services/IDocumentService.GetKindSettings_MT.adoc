@@ -28,7 +28,7 @@ kind:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр kind.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `kind`.
 |===
 
 == Заметки
@@ -39,14 +39,15 @@ kind:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение вида карточки (в примере "Заявка")
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4")); <.>
 
-// Получение настроек вида карточки        
-DocumentSetting documentSettings = documentService.GetKindSettings(kind);
+DocumentSetting documentSettings = documentService.GetKindSettings(kind); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение вида карточки (в примере "Заявка").
+<.> Получение настроек вида карточки.

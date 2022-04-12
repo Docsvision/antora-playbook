@@ -29,14 +29,15 @@ additionalFile:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение файла с версиями
-VersionedFileCard versionedFileCard = documentService.GetAdditionalFile(document.Files.First(t => t.FileType = DocumentFileType.Additional));
+VersionedFileCard versionedFileCard = documentService.GetAdditionalFile(document.Files.First(t => t.FileType = DocumentFileType.Additional)); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение файла с версиями.

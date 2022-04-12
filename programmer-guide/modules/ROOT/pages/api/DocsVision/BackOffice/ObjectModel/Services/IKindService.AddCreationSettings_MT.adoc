@@ -48,7 +48,7 @@ operation:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр cardKind, modeId или displayName.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `cardKind`, `modeId` или `displayName`.
 |===
 
 == Заметки
@@ -69,23 +69,24 @@ foreach (INavCardCreatorExtension navCardCreatorExtension in this.CardHost.Exten
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IKindService kindService = objectContext.GetService<IKindService>();
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
 
-// Получение вида карточки, для которой производится добавление способа создания
-KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение вида карточки, из которой может быть вызвано создание данной карточки
-KindsCardKind parentCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000001"));
+KindsCardKind parentCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Идентификатор режима создания карточки
-Guid modeID = new Guid("00000000-0000-0000-0000-000000000002");
+Guid modeID = new Guid("00000000-0000-0000-0000-000000000002"); <.>
 
-// Добавление способа создания
-KindsCardCreationSetting setting = kindService.AddCreationSettings(kindsCardKind, modeID, "Создание карточки", parentCardKind, true, null);
+KindsCardCreationSetting setting = kindService.AddCreationSettings(kindsCardKind, modeID, "Создание карточки", parentCardKind, true, null); <.>
 
-// Обязательное сохранение контекста
-objectContext.SaveObject<KindsCardCreationSetting>(setting);
+objectContext.SaveObject<KindsCardCreationSetting>(setting); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение вида карточки, для которой производится добавление способа создания.
+<.> Получение вида карточки, из которой может быть вызвано создание данной карточки.
+<.> Идентификатор режима создания карточки.
+<.> Добавление способа создания.
+<.> Обязательное сохранение контекста.

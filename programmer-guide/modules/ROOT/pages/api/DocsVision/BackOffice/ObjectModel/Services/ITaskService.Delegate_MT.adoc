@@ -18,7 +18,7 @@ task:::
 +
 Задание
 delegates:::
-Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
 +
 Список сотрудников, которым делегируется задание
 noticeable:::
@@ -48,7 +48,7 @@ comment:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или delegates .
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `delegates`.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для делегирования задания.
 |`https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если запрещено делегировать задание вручную.
 |===
@@ -61,20 +61,21 @@ comment:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение делегируемого задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение сотрудника, которому выполняется делегирование, и уведомляемого сотрудника
 StaffEmployee delegEmployee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
 StaffEmployee noticEmployee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000002"));
-IEnumerable<StaffEmployee> delegates = new StaffEmployee[] { delegateEmployee };
+IEnumerable<StaffEmployee> delegates = new StaffEmployee[] { delegateEmployee }; <.>
 
-// Делегирование задания
 taskService.Delegate(task, delegates, noticEmployee, true, true, "Передано компетентному сотруднику");
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение делегируемого задания.
+<.> Получение сотрудника, которому выполняется делегирование, и уведомляемого сотрудника.
+<.> Делегирование задания.

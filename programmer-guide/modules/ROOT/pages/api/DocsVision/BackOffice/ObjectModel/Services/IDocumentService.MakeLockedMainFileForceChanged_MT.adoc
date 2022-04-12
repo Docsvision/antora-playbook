@@ -17,6 +17,7 @@ document:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 file:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
@@ -36,25 +37,27 @@ file:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение основного файла документа
-DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
+DocumentFile documentFile = document.Files.First(t => t.FileType = DocumentFileType.Main); <.>
 
-// Выгрузка файла для редактирования
-string path = documentService.EditMainFile(document, documentFile);
+string path = documentService.EditMainFile(document, documentFile); <.>
 
-/* Редактирование файла */
+<.>
 
-// Установка признака наличия изменений
-documentService.MakeLockedMainFileForceChanged(document, documentFile);
+documentService.MakeLockedMainFileForceChanged(document, documentFile); <.>
 
-// Разблокировка файла после редактирования с созданием новой версии файла
-documentService.UnlockMainFile(document, documentFile);
+documentService.UnlockMainFile(document, documentFile); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа.
+<.> Получение основного файла документа.
+<.> Выгрузка файла для редактирования.
+<.> Редактирование файла.
+<.> Установка признака наличия изменений.
+<.> Разблокировка файла после редактирования с созданием новой версии файла.

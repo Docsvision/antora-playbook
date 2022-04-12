@@ -24,7 +24,7 @@ group:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
 IStaffService staffService = objectContext.GetService<IStaffService>();
 StaffGroup staffGroup = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
@@ -39,3 +39,4 @@ foreach (var group in staffGroup.Groups)
 
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.

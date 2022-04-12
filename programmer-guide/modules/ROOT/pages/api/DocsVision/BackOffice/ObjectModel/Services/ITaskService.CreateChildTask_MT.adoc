@@ -40,23 +40,24 @@ parentCardTaskList:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр kind, parentCard или parentCardTaskList.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `kind`, `parentCard` или `parentCardTaskList`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение основного задания
-Task parentTask = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task parentTask = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Создание дочернего задания
-Task childTask = taskService.CreateChildTask(parentTask, parentTask.SystemInfo.CardKind, parentTask, parentTask.MainInfo.ChildTaskList);
+Task childTask = taskService.CreateChildTask(parentTask, parentTask.SystemInfo.CardKind, parentTask, parentTask.MainInfo.ChildTaskList); <.>
 childTask.MainInfo.Name = "Подчиненное задание";
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение основного задания.
+<.> Создание дочернего задания.

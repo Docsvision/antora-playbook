@@ -39,14 +39,15 @@ ownerName:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 ILockService lockService = objectContext.GetService<ILockService>();
 bool lockIsMy;
 string lockOwner;
 
-// Получение документа, для которого определяется блокировка
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение владельца блокировки
-bool locked = lockService.IsObjectLocked<BaseCard>(document, out lockIsMy, out lockOwner);
+bool locked = lockService.IsObjectLocked<BaseCard>(document, out lockIsMy, out lockOwner); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение документа, для которого определяется блокировка.
+<.> Получение владельца блокировки.

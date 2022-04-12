@@ -27,7 +27,7 @@ deputy:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee или deputy.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee` или `deputy`.
 |===
 
 == Примеры
@@ -36,19 +36,20 @@ deputy:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение текущего сотрудника и сотруждника, выполняющего роль заместителя
 StaffEmployee employee = staffService.GetCurrentEmployee();
-StaffEmployee deputyEmployee = objectContext.GetObject<StaffEmployee>(new Guid("21E55387-6A4A-4B86-AC0F-1A454DE1F3DD"));
+StaffEmployee deputyEmployee = objectContext.GetObject<StaffEmployee>(new Guid("21E55387-6A4A-4B86-AC0F-1A454DE1F3DD")); <.>
 
-// Получение удаляемого заместителя сотрудника
-StaffDeputy deputy = employee.Deputies.First(t => t.Employee = deputyEmployee);
+StaffDeputy deputy = employee.Deputies.First(t => t.Employee = deputyEmployee); <.>
 
-// Удаление сотрудника            
-staffService.DeleteDeputy(employee, deputy);
+staffService.DeleteDeputy(employee, deputy); <.>
 objectContext.AcceptChanges();   
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение текущего сотрудника и сотрудника, выполняющего роль заместителя.
+<.> Получение удаляемого заместителя сотрудника.
+<.> Удаление сотрудника.

@@ -28,7 +28,7 @@ kind:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр kind.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `kind`.
 |===
 
 == Примеры
@@ -37,21 +37,22 @@ kind:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskService taskService = objectContext.GetService<ITaskService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение вида На исполнение
 QueryObject query = new QueryObject(RefKinds.CardKinds.Name, "На исполнение");
-KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query);
+KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query); <.>
 
-// Создание задания
 Task newTask = taskService.CreateTask(cardKind);
-newTask.MainInfo.Name = newTask.Description = "Новое задание";
+newTask.MainInfo.Name = newTask.Description = "Новое задание"; <.>
 
-// Инициализация основных параметров задания
-taskService.InitializeDefaults(newTask);
+taskService.InitializeDefaults(newTask); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение вида На исполнение.
+<.> Создание задания.
+<.> Инициализация основных параметров задания.

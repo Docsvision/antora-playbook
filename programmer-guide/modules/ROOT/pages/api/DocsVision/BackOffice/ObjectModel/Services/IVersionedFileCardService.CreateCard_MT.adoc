@@ -31,11 +31,12 @@ filePath:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>(); <.>
 
-// Создания карточки файла с версиями
-VersionedFileCard versionedFileCard = versionedFileCardService.CreateCard(@"Z:\Sample.docx");
+VersionedFileCard versionedFileCard = versionedFileCardService.CreateCard(@"Z:\Sample.docx"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Создания карточки файла с версиями.

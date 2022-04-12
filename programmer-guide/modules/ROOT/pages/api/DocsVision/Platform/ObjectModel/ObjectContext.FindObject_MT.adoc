@@ -15,7 +15,7 @@ public T FindObject<T>(QueryObject query) where T : ObjectBase
 Параметры типа
 
 T::
-Тип объекта поиска, унаследованный от xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
+Тип объекта поиска, унаследованный от `xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]`
 
 Параметры::
 query:::
@@ -24,7 +24,7 @@ query:::
 Поисковый запрос
 
 Возвращаемое значение::
-Тип: T
+Тип: `T`
 +
 Объект, являющийся результатом поиска
 
@@ -34,11 +34,12 @@ query:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Формирование поискового запроса по полю AccountName
-QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "DOMAIN\\IvanovII");
+QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "DOMAIN\\IvanovII"); <.>
 
-// Выполнение запроса
-StaffEmployee staff = objectContext.FindObject<StaffEmployee>(query);
+StaffEmployee staff = objectContext.FindObject<StaffEmployee>(query); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Формирование поискового запроса по полю `AccountName`.
+<.> Выполнение запроса.

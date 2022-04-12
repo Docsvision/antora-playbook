@@ -28,7 +28,7 @@ cardtypeId:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр cardtypeId.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `cardtypeId`.
 |===
 
 == Заметки
@@ -39,14 +39,15 @@ cardtypeId:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником видов карточек
-IKindService kindService = objectContext.GetService<IKindService>();
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
 
-// Добавление типа карточки с идентификатором 00000000-0000-0000-0000-000000000000 в библиотеке карточек
-KindsCardType newType = kindService.AddCardType(new Guid("00000000-0000-0000-0000-000000000000"));
+KindsCardType newType = kindService.AddCardType(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Обязательное сохранение
-objectContext.SaveObject(newType);
+objectContext.SaveObject(newType); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником видов карточек.
+<.> Добавление типа карточки с идентификатором `00000000-0000-0000-0000-000000000000` в библиотеке карточек.
+<.> Обязательное сохранение.

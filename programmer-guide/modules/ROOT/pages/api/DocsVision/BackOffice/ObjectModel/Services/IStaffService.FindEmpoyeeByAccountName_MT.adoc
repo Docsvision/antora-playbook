@@ -28,18 +28,19 @@ accountName:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр accountName.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `accountName`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Поиск сотрудника по названию учетной записи
-StaffEmployee employee = staffService.FindEmpoyeeByAccountName(@"domain\ivanov_ii");
+StaffEmployee employee = staffService.FindEmpoyeeByAccountName(@"domain\ivanov_ii"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Поиск сотрудника по названию учетной записи.

@@ -40,7 +40,7 @@ controller:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр taskList или task.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList` или `task`.
 |===
 
 == Заметки
@@ -53,21 +53,17 @@ controller:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 IStaffService staffService = objectContext.GetService<IStaffService>();
 ITaskService taskService = objectContext.GetService<ITaskService>();
-ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение существующего списка заданий из документа
-TaskList taskList = document.MainInfo.Tasks;
+TaskList taskList = document.MainInfo.Tasks; <.>
 
-// Получение вида задания
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
 
 Task task = taskService.CreateTask(kind);
 task.MainInfo.Name = "Задание документа";
@@ -75,6 +71,11 @@ task.MainInfo.Author = staffService.GetCurrentEmployee();
 task.MainInfo.OnControl = true;
 task.MainInfo.Controller = task.MainInfo.Author;
 
-// Добавление задания в список заданий
-taskListService.CreateTask(taskList, task,task.MainInfo.OnControl, task.MainInfo.Controller);
+taskListService.CreateTask(taskList, task,task.MainInfo.OnControl, task.MainInfo.Controller); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа.
+<.> Получение существующего списка заданий из документа.
+<.> Получение вида задания.
+<.> Добавление задания в список заданий.

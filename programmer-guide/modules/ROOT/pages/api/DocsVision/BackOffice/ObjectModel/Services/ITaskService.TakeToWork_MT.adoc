@@ -23,7 +23,7 @@ task:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для взятия задания в работу.
 |===
 
@@ -31,17 +31,18 @@ task:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskService taskService = objectContext.GetService<ITaskService>();
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение задания
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Взятие задания в работу
 taskService.TakeToWork(task);
-stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.InWorkState, task));                    
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.InWorkState, task)); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение задания.
+<.> Взятие задания в работу.

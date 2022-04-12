@@ -31,7 +31,7 @@ comment:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `employee`.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для отзыва задания.
 |===
 
@@ -41,17 +41,18 @@ comment:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskService taskService = objectContext.GetService<ITaskService>();
 IStateService stateService = objectContext.GetService<IStateService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
             
 Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
 
-// Отклонение задания
 taskService.RejectTask(task, staffService.GetCurrentEmployee(), "Уже выполнено");
-stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.RejectedState, task));
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.RejectedState, task)); <.>
 objectContext.AcceptChanges();   
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Отклонение задания.

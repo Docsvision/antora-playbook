@@ -45,37 +45,38 @@ public interface ITaskGroupService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
 IStaffService staffService = objectContext.GetService<IStaffService>();
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение вида группы заданий 
 QueryObject query = new QueryObject(RefKinds.CardKinds.Name, "Группа заданий УД");
-KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query);
+KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query); <.>
    
    
-// Создание группы заданий с параллельным исполнением 
 TaskGroup taskGroup = taskGroupService.CreateTaskGroup(cardKind);
 taskGroup.MainInfo.ExecutionType = TaskGroupExecutionType.Parallel;
 taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
 taskGroup.Description = "Подготовить финансовый отчет";
-taskGroup.MainInfo.Name = "Подготовить финансовый отчет";
+taskGroup.MainInfo.Name = "Подготовить финансовый отчет"; <.>
 objectContext.AcceptChanges();
 
-// Добавление подразделения в число исполнителей
 query = new QueryObject(RefStaff.Units.Name, "Бухгалтерия");
 StaffUnit unit = objectContext.FindObject<StaffUnit>(query);
-taskGroupService.AddSelectedPerformer(taskGroup, unit);
+taskGroupService.AddSelectedPerformer(taskGroup, unit); <.>
 objectContext.AcceptChanges();
 
-// Получение вида задания, создаваемого по умолчанию, из настроек вида группы заданий
-Guid defaultTaskCardKindId = taskGroupService.GetKindSettings(taskGroup.SystemInfo.CardKind).DefaultTaskCardKind;
+Guid defaultTaskCardKindId = taskGroupService.GetKindSettings(taskGroup.SystemInfo.CardKind).DefaultTaskCardKind; <.>
 
-// Отправка группы заданий на исполнение
 taskGroupService.SendToPerformance(taskGroup, objectContext.GetObject<KindsCardKind>(defaultTaskCardKindId));
-stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.PerformanceState, taskGroup));
+stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.PerformanceState, taskGroup)); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение вида группы заданий.
+<.> Создание группы заданий с параллельным исполнением.
+<.> Добавление подразделения в число исполнителей.
+<.> Получение вида задания, создаваемого по умолчанию, из настроек вида группы заданий.
+<.> Отправка группы заданий на исполнение.

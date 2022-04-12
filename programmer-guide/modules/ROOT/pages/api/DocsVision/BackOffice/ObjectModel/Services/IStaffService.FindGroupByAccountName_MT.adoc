@@ -35,11 +35,12 @@ accountName:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Поиск группы с указанной учетной записью 
-StaffGroup group = staffService.FindGroupByAccountName(@"WorkDomain.com\ADGroupName");
+StaffGroup group = staffService.FindGroupByAccountName(@"WorkDomain.com\ADGroupName"); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Поиск группы с указанной учетной записью.

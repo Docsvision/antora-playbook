@@ -23,21 +23,22 @@ objectInstance:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `objectInstance`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
      
-// Получение документа с идентификатором 00000000-0000-0000-0000-000000000000
-var document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+var document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Удаление объекта
-objectContext.DeleteObject(document);
+objectContext.DeleteObject(document); <.>
 
-// Сохранение изменений в контексте
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение документа с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Удаление объекта.
+<.> Сохранение изменений в контексте.

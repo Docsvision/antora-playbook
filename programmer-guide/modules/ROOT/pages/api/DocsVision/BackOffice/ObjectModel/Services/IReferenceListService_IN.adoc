@@ -34,28 +34,29 @@ public interface IReferenceListService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
-ILinkService linkService = objectContext.GetService<ILinkService>();
+ILinkService linkService = objectContext.GetService<ILinkService>(); <.>
 
-// Получение документа, в который добавляется ссылка
-Guid documentId = new Guid("00000000-0000-0000-0000-000000000000");
+Guid documentId = new Guid("00000000-0000-0000-0000-000000000000"); <.>
             
-// Получение списка ссылок на карточки из документа
 ReferenceList referenceList;
-referenceListService.TryGetReferenceListFromCard(documentId, true, out referenceList);
+referenceListService.TryGetReferenceListFromCard(documentId, true, out referenceList); <.>
 
-// Получение папки, на которую создается ссылка
-FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001"));
+FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Получение типа ссылки
-LinksLinkType linksLinkType = linkService.FindLink("Ссылки");
+LinksLinkType linksLinkType = linkService.FindLink("Ссылки"); <.>
 
-// Добавление ссылки в список ссылок
-referenceListService.CreateReference(referenceList, linksLinkType, foldersFolder);
+referenceListService.CreateReference(referenceList, linksLinkType, foldersFolder); <.>
             
-// Сохранение изменений
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа, в который добавляется ссылка.
+<.> Получение списка ссылок на карточки из документа.
+<.> Получение папки, на которую создается ссылка.
+<.> Получение типа ссылки.
+<.> Добавление ссылки в список ссылок.
+<.> Сохранение изменений.

@@ -29,21 +29,22 @@ queryXml:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
                 
-// Поиск по секции
-SectionQuery sectionQuery = userSession.CreateSectionQuery();
+SectionQuery sectionQuery = userSession.CreateSectionQuery(); <.>
 
-// Подразделение, из которого осуществляется выборка сотрудников
-Guid departmentID = new Guid(" 00000000-0000-0000-0000-000000000000");
+Guid departmentID = new Guid(" 00000000-0000-0000-0000-000000000000"); <.>
 
-// Добавление условия поиска сотрудников в подразделении departmentId
-sectionQuery.ConditionGroup.Conditions.AddNew("ParentRowID", FieldType.UniqueId, ConditionOperation.Equals, departmentID);
+sectionQuery.ConditionGroup.Conditions.AddNew("ParentRowID", FieldType.UniqueId, ConditionOperation.Equals, departmentID); <.>
 
-// Получение Справочника сотрудников и секции Сотрудники 
 CardData staffData = userSession.CardManager.GetDictionaryData(RefStaff.ID);
-SectionData employeesSection = staffData.Sections[RefStaff.Employees.ID];
+SectionData employeesSection = staffData.Sections[RefStaff.Employees.ID]; <.>
 
-// Выполнение поиска
-RowDataCollection employees = employeesSection.FindRows(sectionQuery.GetXml());
+RowDataCollection employees = employeesSection.FindRows(sectionQuery.GetXml()); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Поиск по секции.
+<.> Подразделение, из которого осуществляется выборка сотрудников.
+<.> Добавление условия поиска сотрудников в подразделении `departmentId`.
+<.> Получение Справочника сотрудников и секции "Сотрудники".
+<.> Выполнение поиска.

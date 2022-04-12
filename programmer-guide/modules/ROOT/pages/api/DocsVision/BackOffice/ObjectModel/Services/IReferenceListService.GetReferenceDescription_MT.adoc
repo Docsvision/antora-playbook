@@ -35,12 +35,13 @@ reference:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
 
-// Получение ссылки
-ReferenceListReference reference = objectContext.GetObject<ReferenceListReference>(new Guid("00000000-0000-0000-0000-000000000000"));
+ReferenceListReference reference = objectContext.GetObject<ReferenceListReference>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//Получение описания объекта
-string description = referenceListService.GetReferenceDescription(reference); 
+string description = referenceListService.GetReferenceDescription(reference);  <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение ссылки.
+<.> Получение описания объекта.

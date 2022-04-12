@@ -32,7 +32,7 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр role или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `role` или `employee`.
 |===
 
 == Примеры
@@ -41,9 +41,9 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-IStaffService staffService = objectContext.GetService<IStaffService>();   
+IStaffService staffService = objectContext.GetService<IStaffService>();
 
 StaffRole role = objectContext.GetObject<StaffRole>(new Guid("00000000-0000-0000-0000-000000000000"));
 StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
@@ -51,3 +51,4 @@ StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("000000
 StaffContain result = staffService.AddRoleEmployee(role, employee);
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.

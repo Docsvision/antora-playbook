@@ -27,7 +27,7 @@ selection:::
 При true будут возвращены сотрудники, у которых отсутствует признак "Не показывать при выборе"
 
 Возвращаемое значение::
-Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>
+Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>`
 +
 Список сотрудников подразделения
 
@@ -37,10 +37,11 @@ selection:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
 StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000000"));
 IStaffService staffService = objectContext.GetService<IStaffService>();
 
 var employees = staffService.GetUnitEmployees(unit, true, true);
 ----
+<.> Инициализация контекста объектов.

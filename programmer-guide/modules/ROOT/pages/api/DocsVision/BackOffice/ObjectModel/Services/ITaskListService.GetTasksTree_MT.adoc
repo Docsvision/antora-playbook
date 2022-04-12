@@ -21,14 +21,14 @@ taskList:::
 Возвращаемое значение::
 Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<TaskTreeInfo>`
 +
-Коллекция информации по узлам xref:api/DocsVision/BackOffice/ObjectModel/TaskTreeInfo_CL.adoc[TaskTreeInfo] дерева заданий
+Коллекция информации по узлам `xref:api/DocsVision/BackOffice/ObjectModel/TaskTreeInfo_CL.adoc[TaskTreeInfo]` дерева заданий
 
 == Исключения
 
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр taskList.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList`.
 |===
 
 == Примеры
@@ -37,14 +37,15 @@ taskList:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
 
-// Получение документа, содержащего список заданий
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение дерева заданий из списка заданий документа
-IEnumerable<TaskTreeInfo> tree = taskListService.GetTasksTree(document.MainInfo.Tasks);
+IEnumerable<TaskTreeInfo> tree = taskListService.GetTasksTree(document.MainInfo.Tasks); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа, содержащего список заданий.
+<.> Получение дерева заданий из списка заданий документа.

@@ -32,7 +32,7 @@ type:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр unit.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `unit`.
 |===
 
 == Заметки
@@ -45,16 +45,17 @@ type:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса             
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение подразделения, которому добавляется адрес
-StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление адреса
-StaffAddresse addresse = staffService.AddNewAddress(unit, StaffAddresseAddressType.PostAddress);
+StaffAddresse addresse = staffService.AddNewAddress(unit, StaffAddresseAddressType.PostAddress); <.>
 addresse.Address = "Большой Смоленский пр, 2а";
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение подразделения, которому добавляется адрес.
+<.> Добавление адреса.

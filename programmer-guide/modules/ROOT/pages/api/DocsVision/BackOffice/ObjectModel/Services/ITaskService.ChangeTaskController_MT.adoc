@@ -31,7 +31,7 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `employee`.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для изменения контролёра.
 |===
 
@@ -39,16 +39,17 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Получение задания и нового контролёра
 Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
-StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Замена контролёра 
-taskService.ChangeTaskController(task, employee, null);
+taskService.ChangeTaskController(task, employee, null); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания и нового контролёра.
+<.> Замена контролёра.

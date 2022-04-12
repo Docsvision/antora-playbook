@@ -27,25 +27,26 @@ performer:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр task или performer.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `performer`.
 |===
 
 == Примеры
 
-Ниже приведен простой пример использования метода AddPerformer для назначения исполнителя задания.
+Ниже приведен простой пример использования метода `AddPerformer` для назначения исполнителя задания.
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение задания и сотрудника-исполнителя по идентификаторам
 Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
-StaffEmployee performer = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffEmployee performer = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Получение сервиса для работы с заданиями
-ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-// Назначение исполнителя в задание
-taskService.AddPerformer(task, performer);
+taskService.AddPerformer(task, performer); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение задания и сотрудника-исполнителя по идентификаторам.
+<.> Получение сервиса для работы с заданиями.
+<.> Назначение исполнителя в задание.

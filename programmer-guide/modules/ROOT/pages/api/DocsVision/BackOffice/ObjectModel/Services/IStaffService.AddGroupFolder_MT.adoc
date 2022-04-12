@@ -35,15 +35,16 @@ showInTab:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение группы
-StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление к группе существующей папки с идентификатором 00000000-0000-0000-0000-000000000001
-staffService.AddGroupFolder(group, new Guid("00000000-0000-0000-0000-000000000001"), true);
+staffService.AddGroupFolder(group, new Guid("00000000-0000-0000-0000-000000000001"), true); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение группы.
+<.> Добавление к группе существующей папки с идентификатором `00000000-0000-0000-0000-000000000001`.

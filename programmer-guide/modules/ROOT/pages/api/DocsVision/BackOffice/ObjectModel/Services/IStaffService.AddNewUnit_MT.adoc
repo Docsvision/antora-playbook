@@ -33,14 +33,15 @@ parentUnit:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Добавление новой организации (тип StaffUnitType.Organization)
 StaffUnit unit = staffService.AddNewUnit(null);
 unit.Type = StaffUnitType.Organization;
-unit.Name = "ООО \"Василёк\"";
+unit.Name = "ООО \"Василёк\""; <.>
 objectContext.SaveObject(unit);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Добавление новой организации (тип `StaffUnitType.Organization`).

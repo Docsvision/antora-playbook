@@ -28,7 +28,7 @@ taskGroup:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр taskGroup.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskGroup`.
 |`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для отзыва группы заданий.
 |===
 
@@ -36,17 +36,18 @@ taskGroup:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервисов
 ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение отзываемой группы заданий
-TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000"));
+TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Отзыв группы заданий
 taskGroupService.RecallTaskGroup(taskGroup);
-stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.RecalledState, taskGroup));
+stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.RecalledState, taskGroup)); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение отзываемой группы заданий.
+<.> Отзыв группы заданий.

@@ -28,23 +28,24 @@ unit:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр unit.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `unit`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с контрагентами
-IPartnersService partnersService = objectContext.GetService<IPartnersService>();
+IPartnersService partnersService = objectContext.GetService<IPartnersService>(); <.>
 
-// Получение организации, в которую добавляется сотрудник
-PartnersCompany partnersCompany = objectContext.GetObject<PartnersCompany>(new Guid("00000000-0000-0000-0000-000000000000"));
+PartnersCompany partnersCompany = objectContext.GetObject<PartnersCompany>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Добавление и сохранение сотрудника
 PartnersEmployee partnersEmployee = partnersService.AddNewEmployee(partnersCompany);
 partnersEmployee.LastName = "Иванов";
-objectContext.SaveObject(partnersEmployee);
+objectContext.SaveObject(partnersEmployee); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с контрагентами.
+<.> Получение организации, в которую добавляется сотрудник.
+<.> Добавление и сохранение сотрудника.

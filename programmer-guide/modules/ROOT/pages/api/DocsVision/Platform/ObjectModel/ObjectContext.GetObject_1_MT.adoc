@@ -18,7 +18,7 @@ objectRef:::
 +
 Ссылка на объект
 parameters:::
-Тип: `https://msdn.microsoft.com/ru-ru/library/s4ys34ea.aspx[System.Collections.Generic.IDictionary]<String, Object>
+Тип: `https://msdn.microsoft.com/ru-ru/library/s4ys34ea.aspx[System.Collections.Generic.IDictionary]<String, Object>`
 +
 Дополнительные параметры, используемые при загрузке в контекст объектов отсутствующего объекта
 
@@ -37,18 +37,19 @@ parameters:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение ссылки на объект
-IObjectRef objectRef = objectContext.GetObjectRef(typeof(Document), new Guid("00000000-0000-0000-0000-000000000000")); 
+IObjectRef objectRef = objectContext.GetObjectRef(typeof(Document), new Guid("00000000-0000-0000-0000-000000000000"));  <.>
 
-// Установка дополнительных параметров загрузки
 IDictionary<string, object> properties = new Dictionary<string, object>();
-properties.Add(Document.DescriptionProperty.Name, "OverrideDescription");
+properties.Add(Document.DescriptionProperty.Name, "OverrideDescription"); <.>
 
-// Получение документа
-Document document = (Document)objectContext.GetObject(objectRef, properties);
+Document document = (Document)objectContext.GetObject(objectRef, properties); <.>
 
-// Вывод измененного примечания
-Console.WriteLine(document.Description);
+Console.WriteLine(document.Description); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение ссылки на объект.
+<.> Установка дополнительных параметров загрузки.
+<.> Получение документа.
+<.> Вывод измененного примечания.

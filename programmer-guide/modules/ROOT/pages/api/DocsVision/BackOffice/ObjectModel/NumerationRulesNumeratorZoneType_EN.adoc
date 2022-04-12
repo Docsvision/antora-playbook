@@ -34,11 +34,12 @@ public enum NumerationRulesNumeratorZoneType
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение правила нумерации
-NumerationRulesNumerator numerationRulesRule = objectContext.GetObject<NumerationRulesNumerator>(new Guid("00000000-0000-0000-0000-000000000000"));
+NumerationRulesNumerator numerationRulesRule = objectContext.GetObject<NumerationRulesNumerator>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение типа обновления
-NumerationRulesNumeratorZoneType zoneType = numerationRulesRule.ZoneType;
+NumerationRulesNumeratorZoneType zoneType = numerationRulesRule.ZoneType; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение правила нумерации.
+<.> Получение типа обновления.

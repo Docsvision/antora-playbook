@@ -19,7 +19,7 @@ employee:::
 Сотрудник, для которого загружаются данные
 
 Возвращаемое значение::
-Тип: `https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<string>
+Тип: `https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<string>`
 +
 Список обновленных атрибутов
 
@@ -28,7 +28,7 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
 |===
 
 == Примеры
@@ -37,12 +37,13 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Загрузка данных сотрудника из AD
-staffService.LoadEmployeeFromAD(staffService.GetCurrentEmployee());
+staffService.LoadEmployeeFromAD(staffService.GetCurrentEmployee()); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Загрузка данных сотрудника из AD.

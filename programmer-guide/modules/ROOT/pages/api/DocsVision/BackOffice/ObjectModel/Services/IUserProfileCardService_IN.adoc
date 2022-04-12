@@ -33,45 +33,47 @@ public interface IUserProfileCardService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//задаем тип свойства и идентификатор
 int settingType = 999;
-Guid objectID = Guid.NewGuid();
+Guid objectID = Guid.NewGuid(); <.>
 
-//задаем значение свойства
-iUserProfileCardService.SetSetting(settingType, objectID, "Белый");
+iUserProfileCardService.SetSetting(settingType, objectID, "Белый"); <.>
 
-//получаем значение свойства, если свойство отсутствует, что в контексте примера конечно невозможно, то вернется пуста строка
-string value = (iUserProfileCardService.GetSetting(settingType, string.Empty, objectID) as string);
+string value = (iUserProfileCardService.GetSetting(settingType, string.Empty, objectID) as string); <.>
 Console.WriteLine(value);
 ----
+<.> Инициализация контекста объектов.
+<.> Задаем тип свойства и идентификатор.
+<.> Задаем значение свойства.
+<.> Получаем значение свойства, если свойство отсутствует, что в контексте примера конечно невозможно, то вернется пуста строка.
 
 Еще один пример использования сервиса -- создание и установка личной папки пользователя
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов по работе со справочником сотрудников и профилями пользователей
 IStateService stateService = objectContext.GetService<IStateService>();
-IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>();
+IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>(); <.>
 
-//получение пользователя с идентификатором 00000000-0000-0000-0000-000000000000
-StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение корневой папки "Папки"
-FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("FFFFFFFF-FFFF-0003-FFFF-000000000000"));
+FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("FFFFFFFF-FFFF-0003-FFFF-000000000000")); <.>
 
-//создание новой папки с названием "OtherFolder"
-FoldersFolder newfoldersFolder = new FoldersFolder();
+FoldersFolder newfoldersFolder = new FoldersFolder(); <.>
 newfoldersFolder.Name = "OtherFolder";
 
-//добавление к корневой созданной папки и сохранение контекста
-foldersFolder.Folders.Add(newfoldersFolder);
+foldersFolder.Folders.Add(newfoldersFolder); <.>
 objectContext.AcceptChanges();
 
-//назначение персональной папки
-iUserProfileCardService.SetPersonalFolder(staffEmployee.AccountName, newfoldersFolder);
+iUserProfileCardService.SetPersonalFolder(staffEmployee.AccountName, newfoldersFolder); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов по работе со справочником сотрудников и профилями пользователей.
+<.> Получение пользователя с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Получение корневой папки "Папки".
+<.> Создание новой папки с названием "OtherFolder".
+<.> Добавление к корневой созданной папки и сохранение контекста.
+<.> Назначение персональной папки.

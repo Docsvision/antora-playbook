@@ -34,14 +34,15 @@ objectInstance:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение строки с идентификатором 00000000-0000-0000-0000-000000000000
-BaseUniversalItem baseUniversalItem = objectContext.GetObject<BaseUniversalItem>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseUniversalItem baseUniversalItem = objectContext.GetObject<BaseUniversalItem>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//получение узла справочника в котором храниться искомая строка
-BaseUniversalItemType baseUniversalItemType = ObjectHelper.GetParent<BaseUniversalItemType>(baseUniversalItem);
+BaseUniversalItemType baseUniversalItemType = ObjectHelper.GetParent<BaseUniversalItemType>(baseUniversalItem); <.>
 
-//получение идентификатора узла
-Guid id = objectContext.GetObjectRef<BaseUniversalItemType>(baseUniversalItemType).Id;
+Guid id = objectContext.GetObjectRef<BaseUniversalItemType>(baseUniversalItemType).Id; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение строки с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Получение узла справочника в котором храниться искомая строка.
+<.> Получение идентификатора узла.

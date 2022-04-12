@@ -28,24 +28,25 @@ objectInstance:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр objectInstance.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `objectInstance`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
         
-// Получение и изменение документа       
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 document.Description = "Описание не корректно";
 
-// Флаг разрешающий откат изменений
-if (roolback)
+if (roolback) <.>
 {
 
- // Отмена изменений в документе
- objectContext.RollBackObject(document);
+ objectContext.RollBackObject(document); <.>
 }
 ----
+<.> Инициализация контекста объектов.
+<.> Получение и изменение документа.
+<.> Флаг разрешающий откат изменений.
+<.> Отмена изменений в документе.

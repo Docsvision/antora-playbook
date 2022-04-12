@@ -32,7 +32,7 @@ state:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр builtInBranch или state.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInBranch` или `state`.
 |===
 
 == Примеры
@@ -41,15 +41,16 @@ state:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
 IStateService stateService = objectContext.GetService<IStateService>();
-KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
 
-// Получение состояния Отложено
-StatesState state = stateService.FindStateByBuiltIn(Task.DeferredState, cardKind);
+StatesState state = stateService.FindStateByBuiltIn(Task.DeferredState, cardKind); <.>
 
-// Получение перехода из Отложено в Отклонено
-StatesStateMachineBranch branch = stateService.FindBranchByBuiltIn(Task.DeferredToRejectedByReject, state);
+StatesStateMachineBranch branch = stateService.FindBranchByBuiltIn(Task.DeferredToRejectedByReject, state); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение состояния "Отложено".
+<.> Получение перехода из "Отложено" в "Отклонено".

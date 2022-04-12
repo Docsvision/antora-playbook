@@ -28,7 +28,7 @@ cardType:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр cardType.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `cardType`.
 |===
 
 == Заметки
@@ -39,17 +39,18 @@ cardType:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником видов карточек
-IKindService kindService = objectContext.GetService<IKindService>();
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
 
-// Получение типа карточки "Документ"
-KindsCardType kindType = kindService.GetCardType(new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"));
+KindsCardType kindType = kindService.GetCardType(new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794")); <.>
 
-// Добавление нового вида карточки
-KindsCardKind newKind = kindService.AddCardKind(kindType);
+KindsCardKind newKind = kindService.AddCardKind(kindType); <.>
 
-// Обязательное сохранение
-objectContext.SaveObject(newKind);
+objectContext.SaveObject(newKind); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником видов карточек.
+<.> Получение типа карточки "Документ".
+<.> Добавление нового вида карточки.
+<.> Обязательное сохранение.

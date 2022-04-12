@@ -19,22 +19,23 @@ group:::
 Группа сотрудников
 
 Возвращаемое значение::
-Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
 +
-Список сотрудников типа xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]
+Список сотрудников типа `xref:api/DocsVision/BackOffice/ObjectModel/StaffEmployee_CL.adoc[StaffEmployee]`
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение группы
-StaffGroup group = staffService.FindGroupByName(null, "Бухгалтерия");
+StaffGroup group = staffService.FindGroupByName(null, "Бухгалтерия"); <.>
 
-// Получение сотрудников, входящих в группу
-IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(group);         
+IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(group); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение группы.
+<.> Получение сотрудников, входящих в группу.

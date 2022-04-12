@@ -67,7 +67,7 @@ public class BaseCard : ObjectBase
 
 == Заметки
 
-Как правило при получении объекта используется специфический тип, например xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document], а базовый класс используется при реализации объектной модели для собственного вида карточки.
+Как правило при получении объекта используется специфический тип, например `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`, а базовый класс используется при реализации объектной модели для собственного вида карточки.
 
 == Примеры
 
@@ -75,14 +75,15 @@ public class BaseCard : ObjectBase
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
             
-// Получение карточки
-BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseCard card = objectContext.GetObject<BaseCard>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение вида карточки
-KindsCardKind kindsCardKind = card.SystemInfo.CardKind;
+KindsCardKind kindsCardKind = card.SystemInfo.CardKind; <.>
 
-// Получение названия вида
-string kindName = kindsCardKind.Name;
+string kindName = kindsCardKind.Name; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение карточки.
+<.> Получение вида карточки.
+<.> Получение названия вида.

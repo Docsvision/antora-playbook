@@ -31,14 +31,15 @@ versionedFileCard:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>(); <.>
 
-// Получение существующей карточки файла с версиями
-VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(new Guid("00000000-0000-0000-0000-000000000000"));
+VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Выгрузка файла
-string path = versionedFileCardService.Download(versionedFileCard);
+string path = versionedFileCardService.Download(versionedFileCard); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение существующей карточки файла с версиями.
+<.> Выгрузка файла.

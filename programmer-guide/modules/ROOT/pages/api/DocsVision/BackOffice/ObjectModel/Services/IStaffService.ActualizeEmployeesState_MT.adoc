@@ -20,11 +20,12 @@ void ActualizeEmployeesState()
 
 [source,csharp]
 ----
-////Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Осуществление актуализации
-staffService.ActualizeEmployeesState();
+staffService.ActualizeEmployeesState(); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Осуществление актуализации.

@@ -17,14 +17,17 @@ document:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 file:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Файл документа
+
 collection:::
 Тип: `xref:api/DocsVision/Platform/ObjectManager/SystemCards/FileCommentCollection_CL.adoc[FileCommentCollection]`
 +
 Коллекция комментариев
+
 comments:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<FileComment>`
 +
@@ -35,7 +38,7 @@ comments:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`, file, collection или comments.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`, `file`, `collection` или `comments`.
 |===
 
 == Примеры
@@ -44,20 +47,21 @@ comments:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение первого основного файла
-DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main);
+DocumentFile file = document.Files.First(t => t.FileType = DocumentFileType.Main); <.>
 
-// Получение карточки файла с версией из основного файла
-VersionedFileCard versionedFileCard = documentService.GetMainFile(file);
+VersionedFileCard versionedFileCard = documentService.GetMainFile(file); <.>
 
-// Удаление комментария
-documentService.RemoveMainFileComments(document, file, versionedFileCard.Comments, versionedFileCard.Comments.Where(t => t.Comment.Contains("удалить")));
+documentService.RemoveMainFileComments(document, file, versionedFileCard.Comments, versionedFileCard.Comments.Where(t => t.Comment.Contains("удалить"))); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение первого основного файла.
+<.> Получение карточки файла с версией из основного файла.
+<.> Удаление комментария.

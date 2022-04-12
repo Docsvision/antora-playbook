@@ -37,29 +37,30 @@ public interface ITaskListService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
         
-// Получение необходимых сервисов        
 ITaskListService taskListService = objectContext.GetService<ITaskListService>();
 ITaskService taskService = objectContext.GetService<ITaskService>();
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение документа, к которому добавляется список заданий
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение вида задания (например, На исполнение)
-KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9"));
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
 
-// Создание нового задания            
 Task task = taskService.CreateTask(kind);
 task.MainInfo.Name = "Задание документа";
-task.MainInfo.Author = staffService.GetCurrentEmployee();
+task.MainInfo.Author = staffService.GetCurrentEmployee(); <.>
 
-// Создание нового списка заданий           
-TaskList taskList = taskListService.CreateTaskList();
+TaskList taskList = taskListService.CreateTaskList(); <.>
 
-// Добавление задания в список заданий            
-taskListService.AddTask(taskList, task, document);       
+taskListService.AddTask(taskList, task, document); <.>
 document.MainInfo.Tasks = taskList;
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение документа, к которому добавляется список заданий.
+<.> Получение вида задания (например, "На исполнение").
+<.> Создание нового задания.
+<.> Создание нового списка заданий.
+<.> Добавление задания в список заданий.

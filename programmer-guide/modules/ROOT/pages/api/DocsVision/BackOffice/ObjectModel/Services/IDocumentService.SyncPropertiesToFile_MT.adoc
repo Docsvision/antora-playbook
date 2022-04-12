@@ -17,12 +17,14 @@ document:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ
+
 file:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/DocumentFile_CL.adoc[DocumentFile]`
 +
 Файл документа
+
 propertySettings:::
-Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<IDocumentPropertySetting>
+Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<IDocumentPropertySetting>`
 +
 Синхронизируемые свойства документа
 
@@ -47,26 +49,27 @@ propertySettings:::
 
 == Примеры
 
-Ниже приведен пример использования метода SyncPropertiesToFile при синхронизации названия документа со свойствами основного файла, привязаного к документу
+Ниже приведен пример использования метода `SyncPropertiesToFile` при синхронизации названия документа со свойствами основного файла, привязанного к документу
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с документами
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Изменение данных
 document.MainInfo.Name = "Изменение названия и синхронизация";
-objectContext.SaveObject(document);
+objectContext.SaveObject(document); <.>
 
-// Получение настроек для вида документа и приведение к требуемому типу
 DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
-IList<IDocumentPropertySetting> setting = documentSetting.Properties.Cast<IDocumentPropertySetting>().ToList();
+IList<IDocumentPropertySetting> setting = documentSetting.Properties.Cast<IDocumentPropertySetting>().ToList(); <.>
 
-// Передача названия карточки в файл
-documentService.SyncPropertiesToFile(document, document.Files.First(t => t.FileType = DocumentFileType.Main), setting);
+documentService.SyncPropertiesToFile(document, document.Files.First(t => t.FileType = DocumentFileType.Main), setting); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа.
+<.> Изменение данных.
+<.> Получение настроек для вида документа и приведение к требуемому типу.
+<.> Передача названия карточки в файл.

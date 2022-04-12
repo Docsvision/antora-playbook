@@ -17,26 +17,31 @@ document:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]`
 +
 Документ, содержащий подписанные данные
+
 signature:::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
 ЭЦП, установленная на данной карточке
+
 certificate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
 Сертификат ЭЦП
+
 signDocument:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
 Выполнять проверку подписи, установленной на документе -- проверяется подпись, установленная на основных файлах
+
 signAttachments:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
 Выполнять проверку подписи, установленной на дополнительных файлах
+
 fields:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/92t2ye13.aspx[System.Collections.Generic.ICollection]<CardFieldSetting>`
 +
-Коллекция полей типа xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting], у которых должна быть проверена подпись. Список подписываемых полей задается в Справочнике видов карточек
+Коллекция полей типа `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/KindSetting/CardFieldSetting_CL.adoc[CardFieldSetting]`, у которых должна быть проверена подпись. Список подписываемых полей задается в Справочнике видов карточек
 
 Возвращаемое значение::
 Тип: `xref:api/DocsVision/BackOffice/ObjectModel/Services/Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
@@ -48,7 +53,7 @@ fields:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или signature.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `signature`.
 |===
 
 == Примеры
@@ -75,25 +80,19 @@ namespace BackOffice
    Document document = (base.BaseObject as Document);
    ObjectContext objectContext = base.CardControl.ObjectContext;
 
-   // Получение необходимых сервисов
    IDocumentService documentService = objectContext.GetService<IDocumentService>();
    IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>();
-   IUIService uiService = objectContext.GetService<IUIService>();
+   IUIService uiService = objectContext.GetService<IUIService>(); <.>
 
-   // Получение сертификата сотрудника
-   X509Certificate2 certificate = iUserProfileCardService.GetCertificate(base.Session.Properties["AccountName"].Value.ToString());
+   X509Certificate2 certificate = iUserProfileCardService.GetCertificate(base.Session.Properties["AccountName"].Value.ToString()); <.>
    
-   // Получение настроек вида карточки Документ
-   DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
+   DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind); <.>
 
-   // Получение последней установленной подписи, по ней будет определять подлинность документа
-   BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last();
+   BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last(); <.>
 
-   // Выполнение проверки ЭЦП, установленной на основные и дополнительные документы, а также на поля (для подписания) определённые в Справочнике видов карточек
-   var result = documentService.VerifySignature(document, lastSignature, certificate, true, true, documentSetting.DocumentSignature.Fields);
+   var result = documentService.VerifySignature(document, lastSignature, certificate, true, true, documentSetting.DocumentSignature.Fields); <.>
 
-   // Оповещение пользователя о результате проверки ЭЦП
-   if (result.IsValid)
+   if (result.IsValid) <.>
    {
     uiService.ShowMessage("Документ является надежным");
    } else {
@@ -103,3 +102,9 @@ namespace BackOffice
  }
 }
 ----
+<.> Получение необходимых сервисов.
+<.> Получение сертификата сотрудника.
+<.> Получение настроек вида карточки Документ.
+<.> Получение последней установленной подписи, по ней будет определять подлинность документа.
+<.> Выполнение проверки ЭЦП, установленной на основные и дополнительные документы, а также на поля (для подписания) определённые в Справочнике видов карточек.
+<.> Оповещение пользователя о результате проверки ЭЦП.

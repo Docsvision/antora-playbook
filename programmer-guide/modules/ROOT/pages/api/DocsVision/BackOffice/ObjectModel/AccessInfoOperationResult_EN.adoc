@@ -32,20 +32,21 @@ AccessInfoOperationResult получает значение в результа�
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
             
-//получение прав в формате XML, статус и вид карточки забираем из самой карточки
 string accessInfoString = iServerExtensionProxyService.GetAccessInfo(objectContext.GetObjectRef<Document>(document).Id,
  objectContext.GetObjectRef<KindsCardKind>(document.SystemInfo.CardKind).Id,
- objectContext.GetObjectRef<StatesState>(document.SystemInfo.State).Id);
+ objectContext.GetObjectRef<StatesState>(document.SystemInfo.State).Id); <.>
 
-//заполнение AccessInfo данными
 AccessInfo accessInfo = new AccessInfo();
-accessInfo.Load(new XmlTextReader(new StringReader(accessInfoString)));
+accessInfo.Load(new XmlTextReader(new StringReader(accessInfoString))); <.>
 
-//получение результата по первой операции
-AccessInfoOperationResult result = accessInfo.Operations.FirstOrDefault().Result;
+AccessInfoOperationResult result = accessInfo.Operations.FirstOrDefault().Result; <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение документа.
+<.> Получение прав в формате XML, статус и вид карточки забираем из самой карточки.
+<.> Заполнение `AccessInfo` данными.
+<.> Получение результата по первой операции.

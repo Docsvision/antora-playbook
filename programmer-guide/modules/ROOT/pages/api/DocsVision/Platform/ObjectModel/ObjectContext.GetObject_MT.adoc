@@ -15,7 +15,7 @@ public T GetObject<T>(object objectId) where T : ObjectBase
 Параметры типа
 
 T::
-Тип искомого объекта, унаследованный от базового класса xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]
+Тип искомого объекта, унаследованный от базового класса `xref:api/DocsVision/Platform/ObjectModel/ObjectBase_CL.adoc[ObjectBase]`
 
 Параметры::
 objectId:::
@@ -36,8 +36,9 @@ objectId:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение объекта типа Документ (Document) с идентификатором 00000000-0000-0000-0000-000000000000 
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));    
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение объекта типа Документ (Document) с идентификатором `00000000-0000-0000-0000-000000000000`.

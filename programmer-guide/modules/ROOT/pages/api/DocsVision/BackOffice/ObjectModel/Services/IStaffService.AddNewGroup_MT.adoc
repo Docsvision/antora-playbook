@@ -33,15 +33,16 @@ parentGroup:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником сотрудников
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Добавление подразделения
 StaffUnit staffUnit = staffService.AddNewUnit(null);
-staffUnit.Name = "Подразделение компании";
+staffUnit.Name = "Подразделение компании"; <.>
 
-// Сохранение изменений
-objectContext.SaveObject(staffUnit);
+objectContext.SaveObject(staffUnit); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником сотрудников.
+<.> Добавление подразделения.
+<.> Сохранение изменений.

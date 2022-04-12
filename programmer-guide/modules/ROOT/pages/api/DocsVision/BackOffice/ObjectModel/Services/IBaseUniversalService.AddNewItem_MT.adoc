@@ -28,7 +28,7 @@ itemType:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр itemType.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `itemType`.
 |===
 
 == Примеры
@@ -37,17 +37,18 @@ itemType:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
-IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>();
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
 
-//получение узла, в который будет произведено добавление строки
-BaseUniversalItemType baseUniversalItemType = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000"));
+BaseUniversalItemType baseUniversalItemType = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//добавление строки
 BaseUniversalItem baseUniversalItem = baseUniversalService.AddNewItem(baseUniversalItemType);
 baseUniversalItem.Name = "Строка справочника";
-baseUniversalItem.Description = "Строка справочника созданная из кода";
+baseUniversalItem.Description = "Строка справочника созданная из кода"; <.>
 objectContext.SaveObject<BaseUniversalItem>(baseUniversalItem);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение узла, в который будет произведено добавление строки.
+<.> Добавление строки.

@@ -37,22 +37,23 @@ rule:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-INumerationRulesService numerationRulesService = objectContext.GetService<INumerationRulesService>();
+INumerationRulesService numerationRulesService = objectContext.GetService<INumerationRulesService>(); <.>
 
-// Получение правила нумерации, по которому выделяется номер
 QueryObject query = new QueryObject(RefNumerationRules.Rules.RuleName, "УД Исходящий");
-NumerationRulesRule numerationRule = objectContext.FindObject<NumerationRulesRule>(query);
+NumerationRulesRule numerationRule = objectContext.FindObject<NumerationRulesRule>(query); <.>
 
-// Идентификатор карточки, которой выделяется номер
-Guid cardId = new Guid(new Guid("00000000-0000-0000-0000-000000000000"));
+Guid cardId = new Guid(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Выделение номера
 numerationRulesService.CreateNumber(userSession.CardManager.GetCardData(cardId),
-objectContext.GetObject<Document>(cardId), numerationRule);
+objectContext.GetObject<Document>(cardId), numerationRule); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение правила нумерации, по которому выделяется номер.
+<.> Идентификатор карточки, которой выделяется номер.
+<.> Выделение номера.
 
 Если необходимо использовать выделенный номер в качестве регистрационного номера документа, достаточно записать идентификатор выделенного номера в поле *RegNumber* карточки.

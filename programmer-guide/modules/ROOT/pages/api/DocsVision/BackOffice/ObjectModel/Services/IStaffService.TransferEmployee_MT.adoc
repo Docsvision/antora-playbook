@@ -36,7 +36,7 @@ moveFolders:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр employee или unit.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee` или `unit`.
 |===
 
 == Заметки
@@ -47,16 +47,17 @@ moveFolders:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение сотрудника и подразделения, в которое осуществляется перенос
 StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
-StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Перенос сотрудника
-StaffEmployee transferedEmployee = staffService.TransferEmployee(employee, unit, false);
+StaffEmployee transferedEmployee = staffService.TransferEmployee(employee, unit, false); <.>
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение сотрудника и подразделения, в которое осуществляется перенос.
+<.> Перенос сотрудника.

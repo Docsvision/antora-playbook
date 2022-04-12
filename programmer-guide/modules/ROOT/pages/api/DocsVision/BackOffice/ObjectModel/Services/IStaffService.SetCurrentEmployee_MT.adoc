@@ -30,14 +30,15 @@ employee:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником сотрудников
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение сотрудника, которым будет подменен текущий сотрудник
-StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Подмена сотрудника
-staffService.SetCurrentEmployee(staffEmployee);
+staffService.SetCurrentEmployee(staffEmployee); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником сотрудников.
+<.> Получение сотрудника, которым будет подменен текущий сотрудник.
+<.> Подмена сотрудника.

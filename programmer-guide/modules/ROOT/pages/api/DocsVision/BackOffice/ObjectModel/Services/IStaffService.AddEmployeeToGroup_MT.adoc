@@ -32,25 +32,26 @@ employee:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр group или employee.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `group` или `employee`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получение группы, в которую добавляется сотрудник
-StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffGroup group = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Получение сотрудника
-StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000001"));
+StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-// Добавление сотрудника
-staffService.AddEmployeeToGroup(group, employee);
+staffService.AddEmployeeToGroup(group, employee); <.>
 objectContext.SaveObject(group);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение группы, в которую добавляется сотрудник.
+<.> Получение сотрудника.
+<.> Добавление сотрудника.

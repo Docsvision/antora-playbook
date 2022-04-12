@@ -37,14 +37,15 @@ operation:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов    
+<.>
 
-// Получение сервиса 
-IAccessCheckingService accessCheckingService = objectContext.GetService<IAccessCheckingService>();
+IAccessCheckingService accessCheckingService = objectContext.GetService<IAccessCheckingService>(); <.>
 
-//получение документа
-Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//`true` -- операция редактирования разрешена
-bool allowed = accessCheckingService.IsOperationAllowed(document, Document.MainFileEditOperation);
+bool allowed = accessCheckingService.IsOperationAllowed(document, Document.MainFileEditOperation); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> `true` -- операция редактирования разрешена.

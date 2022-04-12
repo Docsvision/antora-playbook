@@ -22,7 +22,7 @@ xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр staffUnit.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `staffUnit`.
 |===
 
 == Примеры
@@ -31,7 +31,7 @@ xref:api/DocsVision/BackOffice/ObjectModel/StaffUnit_CL.adoc[StaffUnit]::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
 StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000000"));
 IStaffService staffService = objectContext.GetService<IStaffService>();
@@ -39,3 +39,4 @@ IStaffService staffService = objectContext.GetService<IStaffService>();
 staffService.PropagateNotAvailable(unit);
 objectContext.AcceptChanges();
 ----
+<.> Инициализация контекста объектов.

@@ -27,15 +27,16 @@ public StaffEmployee Manager { get; set; }
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы со Справочником сотрудников
-IStaffService staffService = objectContext.GetService<IStaffService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
 
-// Получения текущего сотрудника
-StaffEmployee employee = staffService.GetCurrentEmployee();
+StaffEmployee employee = staffService.GetCurrentEmployee(); <.>
 
-// Получение руководителя подразделения, в котором числиться сотрудник 
-StaffEmployee manager = employee.Unit.Manager;
+StaffEmployee manager = employee.Unit.Manager; <.>
 bool isManager = (employee = manager);
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником сотрудников.
+<.> Получения текущего сотрудника.
+<.> Получение руководителя подразделения, в котором числиться сотрудник.

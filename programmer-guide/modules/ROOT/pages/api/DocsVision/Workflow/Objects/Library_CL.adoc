@@ -58,22 +58,23 @@ public class Library
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
                 
-// Инициализация объекта для работы с библиотекой карточкой СУБП
-Library library = new Library(userSession);
+Library library = new Library(userSession); <.>
 
-// Получение существующего шаблона бизнес-процесса
-Process template = library.GetProcess(new Guid("00000000-0000-0000-0000-000000000000"));
+Process template = library.GetProcess(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Создание нового экземпляра бизнес-процесса
-Process process = library.CreateProcess(template);
+Process process = library.CreateProcess(template); <.>
 
-// Присвоение значения переменной бизнес-процесса
-process.Variables[new Guid("00000000-0000-0000-0000-000000000001")].Value = "Новое значение";
+process.Variables[new Guid("00000000-0000-0000-0000-000000000001")].Value = "Новое значение"; <.>
 
-// Запуск экземпляра бизнес-процесса
-process.Start(userSession.Properties["AccountName"].Value.ToString(), library.Dictionary,  ExecutionModeEnum.Automatic, true);
+process.Start(userSession.Properties["AccountName"].Value.ToString(), library.Dictionary,  ExecutionModeEnum.Automatic, true); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Инициализация объекта для работы с библиотекой карточкой СУБП.
+<.> Получение существующего шаблона бизнес-процесса.
+<.> Создание нового экземпляра бизнес-процесса.
+<.> Присвоение значения переменной бизнес-процесса.
+<.> Запуск экземпляра бизнес-процесса.
 
 Идентификатор (00000000-0000-0000-0000-000000000001) переменной бизнес-процесса, может быть получен из шаблона БП при помощи утилиты {dv} Explorer (поле "ID" секции "Переменные" карточки БП, используемой в качестве шаблона).

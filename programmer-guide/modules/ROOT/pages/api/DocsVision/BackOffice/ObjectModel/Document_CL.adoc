@@ -63,33 +63,34 @@ public class Document : BaseCard
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-//получение сервисов
 IDocumentService documentService = objectContext.GetService<IDocumentService>();
 IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>();
-INumerationRulesService iNumerationRulesService = objectContext.GetService<INumerationRulesService>();
+INumerationRulesService iNumerationRulesService = objectContext.GetService<INumerationRulesService>(); <.>
 
-//получение вида документа
-KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000"));
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
             
-//создание документа
 Document document = documentService.CreateDocument(null, kindsCardKind);
 document.MainInfo.Name = "Счет на оплату";
-objectContext.SaveObject<Document>(document);
+objectContext.SaveObject<Document>(document); <.>
 
-//генерация дайджеста
 CardData cardData = userSession.CardManager.GetCardData(objectContext.GetObjectRef(document).Id);
-document.Description = baseCardService.GenerateDigest(document, cardData, document.MainInfo.Name);
+document.Description = baseCardService.GenerateDigest(document, cardData, document.MainInfo.Name); <.>
 
-//получение правила нумерации
-NumerationRulesRule numerationRulesRule = objectContext.GetObject<NumerationRulesRule>(new Guid("00000000-0000-0000-0000-000000000001"));
+NumerationRulesRule numerationRulesRule = objectContext.GetObject<NumerationRulesRule>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
 
-//выделение номера для документа и установка даты регистрации документа 
 BaseCardNumber number = iNumerationRulesService.CreateNumber(cardData, document, numerationRulesRule);
 document.MainInfo.SetGuid("RegNumber", objectContext.GetObjectRef(number).Id);
-document.MainInfo["RegDate"] = DateTime.Now;
+document.MainInfo["RegDate"] = DateTime.Now; <.>
 
-//сохранение изменений
-objectContext.SaveObject<Document>(document);
+objectContext.SaveObject<Document>(document); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение вида документа.
+<.> Создание документа.
+<.> генерация дайджеста.
+<.> Получение правила нумерации.
+<.> Выделение номера для документа и установка даты регистрации документа.
+<.> Сохранение изменений.

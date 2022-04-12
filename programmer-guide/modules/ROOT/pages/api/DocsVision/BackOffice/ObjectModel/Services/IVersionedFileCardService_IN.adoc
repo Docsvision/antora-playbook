@@ -61,18 +61,18 @@ public interface IVersionedFileCardService
 
 [source,csharp]
 ----
-//Инициализация контекста объектов и получение сервиса
-IVersionedFileCardService iVersionedFileCardService = objectContext.GetService<IVersionedFileCardService>();
+IVersionedFileCardService iVersionedFileCardService = objectContext.GetService<IVersionedFileCardService>(); <.>
 
-//создание карточки файла с версиями (версия 1.0), загрузка в карточку файла с локальной ФС
-VersionedFileCard versionedFileCard = iVersionedFileCardService.CreateCard(@"C:\test.txt");
+VersionedFileCard versionedFileCard = iVersionedFileCardService.CreateCard(@"C:\test.txt"); <.>
 
-//блокировка файла
-iVersionedFileCardService.CheckOut(versionedFileCard);
+iVersionedFileCardService.CheckOut(versionedFileCard); <.>
 
-//принудительно сообщаем сервису, что изменения были
-iVersionedFileCardService.MakeLockedInstanceForceChanged(versionedFileCard);
+iVersionedFileCardService.MakeLockedInstanceForceChanged(versionedFileCard); <.>
 
-//разблокировка и увеличением номера версии до 1.1
-iVersionedFileCardService.CheckIn(versionedFileCard, false, 1);
+iVersionedFileCardService.CheckIn(versionedFileCard, false, 1); <.>
 ----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Создание карточки файла с версиями (версия 1.0), загрузка в карточку файла из локальной файловой системы.
+<.> Блокировка файла.
+<.> Принудительно сообщаем сервису, что изменения были.
+<.> Разблокировка и увеличением номера версии до 1.1.

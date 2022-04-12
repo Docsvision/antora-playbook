@@ -27,21 +27,22 @@ endState:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр card или endState.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `card` или `endState`.
 |===
 
 == Примеры
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса для работы с состояниями
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Получение задания
-Task card = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task card = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Смена состояния на состояние Завершено
-stateService.ChangeState(card, stateService.FindStateByBuiltIn(Task.CompletedState, card));
+stateService.ChangeState(card, stateService.FindStateByBuiltIn(Task.CompletedState, card)); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с состояниями.
+<.> Получение задания.
+<.> Смена состояния на состояние "Завершено".

@@ -28,7 +28,7 @@ versionedFileCardId:::
 [cols=",",options="header"]
 |===
 |Исключение |Условие
-|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр versionedFileCardId.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `versionedFileCardId`.
 |`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается, если карточка версионного файла была удалена или не существует.
 |===
 
@@ -38,11 +38,12 @@ versionedFileCardId:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IDocumentService documentService = objectContext.GetService<IDocumentService>();
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
 
-// Выгрузка файла по пути pathFile
-string pathFile = documentService.DownloadFile(new Guid("00000000-0000-0000-0000-000000000000"));
+string pathFile = documentService.DownloadFile(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Выгрузка файла по пути `pathFile`.

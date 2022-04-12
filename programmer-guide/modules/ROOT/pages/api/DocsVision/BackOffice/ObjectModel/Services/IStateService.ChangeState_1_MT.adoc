@@ -28,14 +28,15 @@ branch:::
 
 [source,csharp]
 ----
-//Инициализация контекста объектов
+<.>
 
-// Получение сервиса
-IStateService stateService = objectContext.GetService<IStateService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
 
-// Задание, у которого изменяется состояние
-Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-// Смена состояния
-stateService.ChangeState(task, stateService.FindBranchByBuiltIn(Task.NotStartedToCompletedByComplete, task.SystemInfo.State));
+stateService.ChangeState(task, stateService.FindBranchByBuiltIn(Task.NotStartedToCompletedByComplete, task.SystemInfo.State)); <.>
 ----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Задание, у которого изменяется состояние.
+<.> Смена состояния.
