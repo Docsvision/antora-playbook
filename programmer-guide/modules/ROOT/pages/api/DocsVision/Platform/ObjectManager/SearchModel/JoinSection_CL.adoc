@@ -33,33 +33,33 @@ public abstract class JoinSection
 
 [source,csharp]
 ----
-// Создаем поисковый запрос
-SearchQuery searchQuery = userSession.CreateSearchQuery();
+SearchQuery searchQuery = userSession.CreateSearchQuery(); <.>
 
-// Создаем поиск по типу карточки
-CardTypeQuery cardTypeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(CardDocument.ID);
+CardTypeQuery cardTypeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(CardDocument.ID); <.>
             
-// Добавляем поиск по секции карточки Основная информация
-SectionQuery sectionQuery = cardTypeQuery.SectionQueries.AddNew(CardDocument.MainInfo.ID);
+SectionQuery sectionQuery = cardTypeQuery.SectionQueries.AddNew(CardDocument.MainInfo.ID); <.>
 
-// Создаем присоединяемую секцию с псевдонимом Author1
-JoinSection joinSection = sectionQuery.JoinSections.AddNew("Author1");
+JoinSection joinSection = sectionQuery.JoinSections.AddNew("Author1"); <.>
 
-// Указываем идентификатор секции, к которой присоединяемся -- сотрудники Справочника сотрудников
-joinSection.Id = RefStaff.Employees.ID;
+joinSection.Id = RefStaff.Employees.ID; <.>
 
-// Указываем идентификатор поля, к которому присоединяемся -- идентификатор сотрудника
-joinSection.SectionField = "RowID";
+joinSection.SectionField = "RowID"; <.>
 
-// Указываем псевдоним поля основной секции, по которому выполняется присоединение -- автор документа
-joinSection.WithField = CardDocument.MainInfo.Author;
+joinSection.WithField = CardDocument.MainInfo.Author; <.>
 
-// Добавляем условие поиска по табельному номеру 
-Condition condition = sectionQuery.ConditionGroup.Conditions.AddNew(RefStaff.Employees.ClockNumber, FieldType.Unistring, ConditionOperation.Equals, "456");
+Condition condition = sectionQuery.ConditionGroup.Conditions.AddNew(RefStaff.Employees.ClockNumber, FieldType.Unistring, ConditionOperation.Equals, "456"); <.>
 
-// Указываем псевдоним секции, по которой выполняется поиск -- псевдоним присоединенной секции
-condition.SectionAlias = joinSection.Alias;
+condition.SectionAlias = joinSection.Alias; <.>
             
-// Выполняем поиск и получаем результат -- карточки, автором которых является сотрудник с таб. номером 456
-CardDataCollection result = userSession.CardManager.FindCards(searchQuery.GetXml());
+CardDataCollection result = userSession.CardManager.FindCards(searchQuery.GetXml()); <.>
 ----
+<.> Создаем поисковый запрос.
+<.> Создаем поиск по типу карточки.
+<.> Добавляем поиск по секции карточки Основная информация.
+<.> Создаем присоединяемую секцию с псевдонимом `Author1`.
+<.> Указываем идентификатор секции, к которой присоединяемся -- сотрудники Справочника сотрудников.
+<.> Указываем идентификатор поля, к которому присоединяемся -- идентификатор сотрудника.
+<.> Указываем псевдоним поля основной секции, по которому выполняется присоединение -- автор документа.
+<.> Добавляем условие поиска по табельному номеру.
+<.> Указываем псевдоним секции, по которой выполняется поиск -- псевдоним присоединенной секции.
+<.> Выполняем поиск и получаем результат -- карточки, автором которых является сотрудник с табельным номером 456.

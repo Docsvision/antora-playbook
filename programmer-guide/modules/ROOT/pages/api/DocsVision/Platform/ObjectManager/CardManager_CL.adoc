@@ -89,15 +89,15 @@ public abstract class CardManager
 
 [source,csharp]
 ----
-//Получение с сервера данных карточки с идентификатором 00000000-0000-0000-0000-000000000000
-CardData cardData = userSession.CardManager.GetCardData(new System.Guid("00000000-0000-0000-0000-000000000000"));
+CardData cardData = userSession.CardManager.GetCardData(new System.Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-//Проверка даты последнего изменения
-if (cardData.ChangeDate.Year < DateTime.Now.Year -1) 
+if (cardData.ChangeDate.Year < DateTime.Now.Year -1) <.>
 {
     cardData.Archive(ArchiveOptions.IncludeLinkedCards); 
 }
 ----
+<.> Получение с сервера данных карточки с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Проверка даты последнего изменения.
 
 * *xref:api/DocsVision/Platform/ObjectManager/CardManager.CardLibraries_PR.adoc[CardManager.CardLibraries -- свойство]* +
 * *xref:api/DocsVision/Platform/ObjectManager/CardManager.CardTypes_PR.adoc[CardManager.CardTypes -- свойство]* +
