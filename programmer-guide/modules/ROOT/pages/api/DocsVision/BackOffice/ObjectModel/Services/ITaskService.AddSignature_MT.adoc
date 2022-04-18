@@ -78,29 +78,29 @@ namespace BackOffice
    ObjectContext objectContext = base.CardControl.ObjectContext;
    Task task = (base.BaseObject as Task);
 
-   // Получение сервиса для работы с заданиями
-   ITaskService taskService = objectContext.GetService<ITaskService>();
+   ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
 
-   // Метод (EnsureSign) проверки данных карточки перед подписанием не является публичным, поэтому используем механизм отражения
    MethodInfo ensureSign = this.CardControl.GetType().GetMethod("EnsureSign", BindingFlags.NonPublic` | BindingFlags.Instance);
    bool result = (ensureSign.Invoke(this.CardControl, null) as bool?).Value;
-   if (!result) return;
+   if (!result) return; <.>
 
    bool cancel = false;
 
-   // Выбор сертификата сотрудника
    var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
-   if (cancel) return;
+   if (cancel) return; <.>
 
-   // Получение настроек вида карточки Задания, для получения настроек подписания
-   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind);
+   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind); <.>
 
-   // Выбор Вида подписи (определена в Справочнике видов карточек, в секции Подпись/Подписание операций) с названием SignOperation 
-   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation");
+   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation"); <.>
 
-   // Добавление подписи. Из настроек подписания, для примера, берем первую настройку
-   taskService.AddSignature(task, certificate, signatureSetting.SignedOperations[0], new System.Guid(signatureSetting.Name), signatureSetting.Fields);
+   taskService.AddSignature(task, certificate, signatureSetting.SignedOperations[0], new System.Guid(signatureSetting.Name), signatureSetting.Fields); <.>
   }
  }
 }
 ----
+<.> Получение сервиса для работы с заданиями.
+<.> `EnsureSign` -- метод проверки данных карточки перед подписанием не является публичным, поэтому используем механизм отражения.
+<.> Выбор сертификата сотрудника.
+<.> Получение настроек вида карточки Задания, для получения настроек подписания.
+<.> Выбор Вида подписи (определена в Справочнике видов карточек, в секции Подпись/Подписание операций) с названием `SignOperation`.
+<.> Добавление подписи. Из настроек подписания, для примера, берем первую настройку.

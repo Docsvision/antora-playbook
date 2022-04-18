@@ -42,21 +42,21 @@ public sealed class BarcodePrintSettings
 private void Button_Click(System.Object sender, System.EventArgs e)
 {
 
- //получение сервисов
  IBarcodeService iBarcodeService = CardControl.ObjectContext.GetService<IBarcodeService>();
- IStaffService staffService = CardControl.ObjectContext.GetService<IStaffService>();
+ IStaffService staffService = CardControl.ObjectContext.GetService<IStaffService>(); <.>
 
- //получение настроек печати штрих-кода, для текущего пользователя
- BarcodePrintSettingsCollection printSettingsCollection = iBarcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(), 
-            BaseObject.SystemInfo.CardKind);
+ BarcodePrintSettingsCollection printSettingsCollection = iBarcodeService.GetBarcodePrintSettings(staffService.GetCurrentEmployee(),
+            BaseObject.SystemInfo.CardKind); <.>
         
  if (printSettingsCollection.Count() > 0)
  {
-  //получение первой подходящей настройки
-  BarcodePrintSettings printSettings = printSettingsCollection.FirstOrDefault();
+  BarcodePrintSettings printSettings = printSettingsCollection.FirstOrDefault(); <.>
   
-  //если false -- установлен признак "Не печатать штрих код"
-  bool isPrinting = printSettings.IsPrinting;
+  bool isPrinting = printSettings.IsPrinting; <.>
  }
 }
 ----
+<.> Получение сервисов.
+<.> Получение настроек печати штрих-кода, для текущего пользователя.
+<.> Получение первой подходящей настройки.
+<.> Если `false` -- установлен признак "Не печатать штрих код".

@@ -40,7 +40,7 @@ public interface ISurveyService
 |`AddIssueRoleModelRoleValue(SurveyListSurveyAnswerIssue, RoleModelRole)` |Создает значение ответа в виде роли ролевой модели.
 |`AddIssueStateValue(SurveyListSurveyAnswerIssue, StatesState)` |Создает значение ответа в виде состояния.
 |`AddIssueStringValue(SurveyListSurveyAnswerIssue, String)` |Создает значение ответа в виде строки.
-|`AddIssueVariantValue(SurveyListSurveyAnswerIssue, Object)` |Создает значение ответа в виде неявного значения (тип System.Object).
+|`AddIssueVariantValue(SurveyListSurveyAnswerIssue, Object)` |Создает значение ответа в виде неявного значения (тип `System.Object`).
 |`AddQuestion(SurveyListSurvey, String, String, SurveyListSurveyQuestionDataType)` |Добавляет вопрос к опросу.
 |`AddQuestionEnumValue(SurveyListSurveyQuestion, Int32, String)` |Добавляет варианты ответов к вопросу.
 |`AddSignature(SurveyListSurvey, SurveyListSurveyAnswer, X509Certificate2)` |Подписывает ЭЦП ответ на опрос.
@@ -53,10 +53,10 @@ public interface ISurveyService
 |`FindOrCreateSurvey(SurveyList, String)` |Осуществляет поиск опроса в списке опросов. В случае отсутствия -- будет создан новый.
 |`FindQuestion(SurveyListSurvey, String)` |Осуществляет поиск вопроса в опросе.
 |`FindSurvey(SurveyList, String)` |Осуществляет поиск опроса в списке опросов.
-|`GetAnswerHash(SurveyListSurveyAnswer)` |Вычисляет хэш SHA512 для коллекции вопрос-ответ, содержащейся в ответе на опрос.
+|`GetAnswerHash(SurveyListSurveyAnswer)` |Вычисляет хэш `SHA512` для коллекции вопрос-ответ, содержащейся в ответе на опрос.
 |`GetIssueValue(SurveyListSurveyQuestionDataType, IEnumerable<SurveyListSurveyAnswerIssueValue>)` |Получает коллекцию значений из коллекции ответов.
 |`GetIssueValue(SurveyListSurveyQuestionDataType, SurveyListSurveyAnswerIssueValue)` |Получает значение из ответа.
-|`VerifySignature(SurveyListSurveyAnswer, X509Certificate2)` |Проверяет действительность установленной на ответ ЭЦП .
+|`VerifySignature(SurveyListSurveyAnswer, X509Certificate2)` |Проверяет действительность установленной на ответ ЭЦП.
 |===
 
 == Примеры

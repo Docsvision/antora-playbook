@@ -1,6 +1,6 @@
 = ITaskService.VerifySignature -- метод (Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)
 
-Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных к заданием.
+Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных с заданием.
 
 * *Пространство имён:* `xref:api/DocsVision/BackOffice/ObjectModel/Services/Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
@@ -72,31 +72,23 @@ namespace BackOffice
    ObjectContext objectContext = base.CardControl.ObjectContext;
    Task task = (base.BaseObject as Task);
 
-   // Получение сервисов для работы с заданиями и интерфесом пользователя
    ITaskService taskService = objectContext.GetService<ITaskService>();
-   IUIService uiService = objectContext.GetService<IUIService>();
+   IUIService uiService = objectContext.GetService<IUIService>(); <.>
 
    bool cancel = false;
 
-   // Получение сертификата
    var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
-   if (cancel) return;
+   if (cancel) return; <.>
 
-   // Получение настроек вида карточки
-   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind);
+   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind); <.>
 
-   // Получение настроек (с названием SignOperation) подписания операции, которые определены в Справочнике видов карточек
-   // При проверке подписей установленных на поля карточки, будет использован список полей из настроек
-   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation");
+   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation"); <.>
 
-   // Получение последней установленной подписи
-   BaseCardSignature lastSignature = task.MainInfo.SignatureList.Signatures.Last();
+   BaseCardSignature lastSignature = task.MainInfo.SignatureList.Signatures.Last(); <.>
 
-   // Проверка подписи
-   var result = taskService.VerifySignature(task, lastSignature, certificate, true, signatureSetting.Fields);
+   var result = taskService.VerifySignature(task, lastSignature, certificate, true, signatureSetting.Fields); <.>
 
-   // Оповещение пользователя о результате проверки ЭЦП
-   if (result.IsValid)
+   if (result.IsValid) <.>
    {
     uiService.ShowMessage("Задание является надежным");
    } else {
@@ -106,3 +98,13 @@ namespace BackOffice
  }
 }
 ----
+<.> Получение сервисов для работы с заданиями и интерфейсом пользователя.
+<.> Получение сертификата.
+<.> Получение настроек вида карточки.
+<.> Получение настроек (с названием `SignOperation`) подписания операции, которые определены в Справочнике видов карточек
++
+При проверке подписей установленных на поля карточки, будет использован список полей из настроек.
++
+<.> Получение последней установленной подписи.
+<.> Проверка подписи.
+<.> Оповещение пользователя о результате проверки ЭЦП.
