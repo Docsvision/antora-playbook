@@ -42,15 +42,15 @@ using DocsVision.BackOffice.ObjectModel.Services;
    
 private void Button_Click(System.Object sender, System.EventArgs e)
 {
- //получение всех значений автомата состояний для карточки
- IList<StatesStateMachineBranch> statesStateMachineBranch = CardControl.ObjectContext.GetService<IStateService>().GetStateMachineBranches(BaseObject.SystemInfo.CardKind);
+ IList<StatesStateMachineBranch> statesStateMachineBranch = CardControl.ObjectContext.GetService<IStateService>().GetStateMachineBranches(BaseObject.SystemInfo.CardKind); <.>
  
- //выбирается первый переход с начальным статусом соответствующем текущему статусу карточки, и названием "Согласован"
  StatesStateMachineBranch statesStateMachineBranchLines = statesStateMachineBranch.Where(t => t.StartState = base.BaseObject.SystemInfo.State
   && t.BranchType = StatesStateMachineBranchBranchType.Line
-  && t.EndState.DefaultName.Equals("Is approved")).FirstOrDefault();
+  && t.EndState.DefaultName.Equals("Is approved")).FirstOrDefault(); <.>
 
- //смена статуса
- this.CardControl.ChangeState(statesStateMachineBranchLines);
+ this.CardControl.ChangeState(statesStateMachineBranchLines); <.>
 }
 ----
+<.> Получение всех значений автомата состояний для карточки.
+<.> Выбирается первый переход с начальным статусом соответствующем текущему статусу карточки, и названием "Согласован".
+<.> Смена статуса.

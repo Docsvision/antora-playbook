@@ -22,18 +22,18 @@ cardSecurity:::
 
 [source,csharp]
 ----
-//Получение с сервера данных карточки с известным идентификатором
-CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
 
-//Получение описателя прав карточки
-CardDataSecurity rights = card.GetAccessControl();
+CardDataSecurity rights = card.GetAccessControl(); <.>
 
-//Создание нового разрешения -- совокупного права чтения
-CardDataAccessRule rule = new CardDataAccessRule("TESTDOMAIN\\IvanovII", CardDataRights.Read, AccessControlType.Allow);
+CardDataAccessRule rule = new CardDataAccessRule("TESTDOMAIN\\IvanovII", CardDataRights.Read, AccessControlType.Allow); <.>
 
-//Добавление нового разрешения к описателю прав
-rights.SetAccessRule(rule);
+rights.SetAccessRule(rule); <.>
 
-//Сохранение измененного описателя прав
-card.SetAccessControl(rights);
+card.SetAccessControl(rights); <.>
 ----
+<.> Получение с сервера данных карточки с известным идентификатором.
+<.> Получение описателя прав карточки.
+<.> Создание нового разрешения -- совокупного права чтения.
+<.> Добавление нового разрешения к описателю прав.
+<.> Сохранение измененного описателя прав.

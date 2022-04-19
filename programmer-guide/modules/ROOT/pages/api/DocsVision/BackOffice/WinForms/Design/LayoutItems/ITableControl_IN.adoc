@@ -47,25 +47,25 @@ public interface ITableControl
 
 == Примеры
 
-Ниже приведен пример использования интерфейса ITableControl при добавлении строки в элемент управления типа "Таблица"
+Ниже приведен пример использования интерфейса `ITableControl` при добавлении строки в элемент управления типа "Таблица"
 
 [source,csharp]
 ----
 private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
- // Получение доступа к разметке 
- ICustomizableControl customizable = CardControl as ICustomizableControl;
+ ICustomizableControl customizable = CardControl as ICustomizableControl; <.>
 
- // Поиск элемента управления типа "Таблица" с названием "Список"
- ITableControl table = customizable.FindPropertyItem<ITableControl>("Список");
+ ITableControl table = customizable.FindPropertyItem<ITableControl>("Список"); <.>
 
- // Добавление строки
- BaseCardProperty property = table.AddRow(this.BaseObject);
+ BaseCardProperty property = table.AddRow(this.BaseObject); <.>
 
- // Присвоение значения первой ячейке
- property[property.Fields[0].Alias] = "Добавленное значение";
+ property[property.Fields[0].Alias] = "Добавленное значение"; <.>
 
- // Обновление строки для отображения присвоенного значения в интерфейсе
- table.RefreshRow(table.RowCount -- 1);
+ table.RefreshRow(table.RowCount -- 1); <.>
 }
 ----
+<.> Получение доступа к разметке.
+<.>  Поиск элемента управления типа "Таблица" с названием "Список".
+<.> Добавление строки.
+<.> Присвоение значения первой ячейке.
+<.> Обновление строки для отображения присвоенного значения в интерфейсе.

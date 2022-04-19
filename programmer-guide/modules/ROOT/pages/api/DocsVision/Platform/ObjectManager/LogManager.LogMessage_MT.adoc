@@ -21,7 +21,7 @@ eventType:::
 eventOperation:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
 +
-Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код 0)
+Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код `0`)
 
 resourceName:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
@@ -56,14 +56,14 @@ eventData:::
 
 Например, для записи собственного сообщения:
 
-[source,csharp]
+[source]
 ----
 session.LogManager.LogMessage(EventType.Information, 0, "Моя карточка", data.ID, Guid.Empty, Guid.Empty, "Добавлен исполнитель");
 ----
 
 Вот как будет выглядеть такое сообщение в стандартном диалоге просмотра журнала:
 
-[source,csharp]
+[source]
 ----
 Тип сообщения: Информация.
 Операция: Не определено.

@@ -41,11 +41,11 @@ private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.Item
 {
  DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
                 
- // Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора
- p["CurrentFolderID"] =  new Guid("00000000-0000-0000-0000-000000000000");
+ p["CurrentFolderID"] =  new Guid("00000000-0000-0000-0000-000000000000"); <.>
  Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
 }
 ----
+<.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.
 
 Для приложения "Рабочее места администратора" код должен быть модифицирован
 
@@ -55,8 +55,8 @@ private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.Item
 {
  DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
                 
- // Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора
- p["Filter"] =  "00000000-0000-0000-0000-000000000000";
+ p["Filter"] =  "00000000-0000-0000-0000-000000000000"; <.>
  Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
 }
 ----
+<.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.

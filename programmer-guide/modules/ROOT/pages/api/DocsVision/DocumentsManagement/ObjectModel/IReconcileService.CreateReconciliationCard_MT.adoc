@@ -1,0 +1,28 @@
+= IReconcileService.HandleDocumentAfterReconcileCreated -- метод (Guid, KindsCardCreationSetting)
+
+Создает согласование для документа.
+
+* *Пространство имён:* `xref:api/DocsVision/DocumentsManagement/ObjectModel/ObjectModel_NS.adoc[DocsVision.DocumentsManagement.ObjectModel]`
+* *Сборка:* `DocsVision.DocumentsManagement.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Guid CreateReconciliationCard(Guid initialCardId, KindsCardCreationSetting cardCreationSetting)
+----
+
+Параметры::
+initialCardId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор карточки, инициирующей согласование
+
+cardCreationSetting:::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/KindsCardCreationSetting_CL.adoc[KindsCardCreationSetting].
++
+Настройки режима создания согласования
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+Идентификатор созданного согласования

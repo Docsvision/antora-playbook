@@ -33,18 +33,18 @@ const string ID_CARDTYPE = "{C1FED883-08DE-420F-8FB4-C16CEFFC1630}";
 const string ID_SECTION = "{8C77892A-21CC-4972-AD71-A9919BCA8187}"; 
 SearchQuery searchQuery = session.CreateSearchQuery(); 
 
-// Поиск по типу карточки 
-CardTypeQuery typeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(new Guid(ID_CARDTYPE)); 
+CardTypeQuery typeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(new Guid(ID_CARDTYPE)); <.>
 
-// Поиск по секции 
-SectionQuery sectionQuery = typeQuery.SectionQueries.AddNew(new Guid(ID_SECTION)); 
+SectionQuery sectionQuery = typeQuery.SectionQueries.AddNew(new Guid(ID_SECTION)); <.>
 
-//Поиск по значению поля 
-sectionQuery.ConditionGroup.Conditions.AddNew("Name", FieldType.Unistring, ConditionOperation.StrEquals, "Doc1"); 
+sectionQuery.ConditionGroup.Conditions.AddNew("Name", FieldType.Unistring, ConditionOperation.StrEquals, "Doc1"); <.>
 
-//Получение текста запроса 
-string query = searchQuery.GetXml(true, null); 
+string query = searchQuery.GetXml(true, null); <.>
 
-//Выполнение запроса 
-CardDataCollection coll = session.CardManager.FindCards(query);
+CardDataCollection coll = session.CardManager.FindCards(query); <.>
 ----
+<.> Поиск по типу карточки.
+<.> Поиск по секции.
+<.> Поиск по значению поля.
+<.> Получение текста запроса.
+<.> Выполнение запроса.

@@ -32,7 +32,7 @@ public interface ICardFrame
 |`Close` |При переопределении в производном классе немедленно закрывает окно.
 |`CloseAndCreateNew(Guid)` |При переопределении в производном классе закрывает окно и открывает новое в указанном режиме.
 |`Commit(ActionFlags)` |При переопределении в производном классе завершает работу карточки с сохранением изменений.
-|`xref:api/DocsVision/Platform/CardHost/ICardFrame.FinishSelection_MT.adoc[FinishSelection(Object)]` |Завершает выбор, если карточка была открыта на выбор методом SelectFromCard.
+|`xref:api/DocsVision/Platform/CardHost/ICardFrame.FinishSelection_MT.adoc[FinishSelection(Object)]` |Завершает выбор, если карточка была открыта на выбор методом `SelectFromCard`.
 |`Refresh` |При переопределении в производном классе обновляет окно.
 |`ShowMessage(String, String, String, MessageType, MessageButtons)` |Отображает сообщение в модальном окне.
 |===
@@ -42,10 +42,10 @@ public interface ICardFrame
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`CardChanged` |Происходит после изменении данных карточки.
-|`CardCloseAndCreate` |Происходит при вызове метода CloseAndCreateNew.
+|`CardChanged` |Происходит после изменения данных карточки.
+|`CardCloseAndCreate` |Происходит при вызове метода `CloseAndCreateNew`.
 |`CardClosed` |Происходит при закрытии карточки.
 |`CardOpened` |Происходит при открытии карточки.
 |===
 
-== Данный механизм возможно использовать только при работе с {wincl}ом.
+NOTE: Данный механизм возможно использовать только при работе с {wincl}ом.

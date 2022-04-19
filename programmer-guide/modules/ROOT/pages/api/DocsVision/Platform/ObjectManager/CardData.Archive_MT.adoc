@@ -24,15 +24,19 @@ archiveOptions:::
 
 [source,csharp]
 ----
-//получение с сервера данных карточки с известным идентификатором
-CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
 
-//проверка даты последнего изменения
-if (card.ChangeDate.Year < DateTime.Now.Year -1)
+if (card.ChangeDate.Year < DateTime.Now.Year -1) <.>
 {
-    //перемещние карточки в архив, с архивацией связанных карточек 
-    card.Archive(ArchiveOptions.IncludeLinkedCards);
+    card.Archive(ArchiveOptions.IncludeLinkedCards); <.>
 }
 ----
+<.> Получение с сервера данных карточки с известным идентификатором.
++
+Где `session` -- объект типа `xref:api/DocsVision/Platform/ObjectManager/UserSession_CL.adoc[UserSession]`, предоставляющий текущую открытую сессию.
++
+<.> Проверка даты последнего изменения.
+<.> Перемещние карточки в архив, с архивацией связанных карточек.
 
-где session -- объект типа `xref:api/DocsVision/Platform/ObjectManager/UserSession_CL.adoc[UserSession]`, предоставляющий текущую открытую сессию.
+
+

@@ -50,11 +50,11 @@ public abstract class UserSession : IDisposable
 
 == Заметки
 
-В рамках сессии все данные кэшируются, к которым производилось обращение, для ускорения последующего доступа к ним. Размер кэша и продолжительность пребывания в нём данных регулируются ObjectManager автоматически, на основании внутренних алгоритмов. Разработчик может только явно потребовать удаления из кэша конкретных объектов (при помощи соответствующих методов этих объектов).
+В рамках сессии все данные кэшируются, к которым производилось обращение, для ускорения последующего доступа к ним. Размер кэша и продолжительность пребывания в нём данных регулируются `ObjectManager` автоматически, на основании внутренних алгоритмов. Разработчик может только явно потребовать удаления из кэша конкретных объектов (при помощи соответствующих методов этих объектов).
 
 == Примеры
 
-В примере создается экземпляр менеджера сессий (manager), и в открытом соединении создается сессия пользователя (session).
+В примере создается экземпляр менеджера сессий (`manager`), и в открытом соединении создается сессия пользователя (`session`).
 
 [source,csharp]
 ----
@@ -63,14 +63,3 @@ manager.Connect("http://localhost/DocsVision5/StorageServer/StorageServerService
 UserSession session = manager.CreateSession();
 MessageBox.Show("IP-адрес клиента: " + session.Properties["ComputerAddress"].Value.ToString());
 ----
-
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.AccessManager_PR.adoc[UserSession.AccessManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.ExtensionManager_PR.adoc[UserSession.ExtensionManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.FileManager_PR.adoc[UserSession.FileManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.LicenseManager_PR.adoc[UserSession.LicenseManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.LockManager_PR.adoc[UserSession.LockManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.CardManager_PR.adoc[UserSession.CardManager -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.Connection_PR.adoc[UserSession.Connection -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.Properties_PR.adoc[UserSession.Properties -- свойство]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.CreateSearchQuery_MT.adoc[UserSession.CreateSearchQuery -- метод]* +
-* *xref:api/DocsVision/Platform/ObjectManager/UserSession.ReportManager_PR.adoc[UserSession.ReportManager -- свойство]* +

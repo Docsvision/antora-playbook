@@ -30,20 +30,20 @@ methodName:::
 
 == Заметки
 
-В случае отсутствия указанного в параметрах расширения или метода, GetExtensionMethod вернет ошибку.
+В случае отсутствия указанного в параметрах расширения или метода, `GetExtensionMethod` вернет ошибку.
 
 == Примеры
 
-В приведенном примере, вызывается метод GetFileContent расширения SampleExtension, с передачей в качестве параметра расположения файла на диске.
+В приведенном примере, вызывается метод `GetFileContent` расширения `SampleExtension`, с передачей в качестве параметра расположения файла на диске.
 
 [source,csharp]
 ----
-//Получаем метод расширения
-ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("SampleExtension", "GetFileContent");
+ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("SampleExtension", "GetFileContent"); <.>
 
-//Добавляем параметр метода
-method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "C:\\Test.txt";
+method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "C:\\Test.txt"; <.>
     
-//Вызов метода
-string content = method.Execute().ToString();
+string content = method.Execute().ToString(); <.>
 ----
+<.> Получаем метод расширения.
+<.> Добавляем параметр метода.
+<.> Вызов метода.

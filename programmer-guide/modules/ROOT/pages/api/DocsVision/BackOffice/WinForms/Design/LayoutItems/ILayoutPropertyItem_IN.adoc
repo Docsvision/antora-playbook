@@ -1,6 +1,6 @@
 = ILayoutPropertyItem -- интерфейс
 
-Интерфейс ILayoutPropertyItem добавляет базовую функциональность элемента разметки.
+Интерфейс `ILayoutPropertyItem` добавляет базовую функциональность элемента разметки.
 
 * *Пространство имён:* `xref:api/DocsVision/BackOffice/WinForms/Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]`
 * *Сборка:* `DocsVision.BackOffice.WinForms.dll`
@@ -39,18 +39,19 @@ private void SetDefaultThemeButton_Click(System.Object sender, System.EventArgs 
 {
  ICustomizableControl control = CardControl;
 
- // Получение элемента разметки
- ILayoutPropertyItem layoutItem = control.FindPropertyItem<ILayoutPropertyItem>("Theme");
+ ILayoutPropertyItem layoutItem = control.FindPropertyItem<ILayoutPropertyItem>("Theme");<.>
         
  if(layoutItem = null) return;
 
- // Запрос подтверждения сброса темы     
  MessageResult result = CardControl.ShowMessage(string.Format("Подтвердите изменение темы {0} на значение по умолчанию", layoutItem.ControlValue),
-  "Сброс темы карточки", MessageType.Question, MessageButtons.OkCancel);
+  "Сброс темы карточки", MessageType.Question, MessageButtons.OkCancel);<.>
                     
  if(result != MessageResult.Ok) return;
         
  layoutItem.ControlValue = "Тема по умолчанию";
- layoutItem.Commit(); // Сохранение нового значения темы
+ layoutItem.Commit(); <.>
 }
 ----
+<.> Получение элемента разметки.
+<.> Запрос подтверждения сброса темы.
+<.> Сохранение нового значения темы.

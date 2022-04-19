@@ -25,15 +25,15 @@ public Guid Rule { get; set; }
 ----
 private void ShowRuleName_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
- // Получаем элемент управления с названием "НомерДокумента"
  ICustomizableControl customizable = this.CardControl;
- NumeratorBox registrationNumber = customizable.FindPropertyItem<NumeratorBox>("НомерДокумента");
+ NumeratorBox registrationNumber = customizable.FindPropertyItem<NumeratorBox>("НомерДокумента"); <.>
  
- // Получаем идентификатор правила нумерации
- Guid ruleId = registrationNumber.Rule;
+ Guid ruleId = registrationNumber.Rule; <.>
  
- // Получаем и выводим название правила
  NumerationRulesRule numerationRule = this.CardControl.ObjectContext.GetObject<NumerationRulesRule>(ruleId);
- MessageBox.Show(numerationRule.Name);
+ MessageBox.Show(numerationRule.Name); <.>
 }
 ----
+<.> Получаем элемент управления с названием "НомерДокумента".
+<.> Получаем идентификатор правила нумерации.
+<.> Получаем и выводим название правила.

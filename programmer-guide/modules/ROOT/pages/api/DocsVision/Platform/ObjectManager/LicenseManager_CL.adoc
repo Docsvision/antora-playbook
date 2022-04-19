@@ -1,6 +1,6 @@
 = LicenseManager -- класс
 
-Класс LicenseManager содержит функциональность по работе с дополнительными опциями лицензии {dv}, в которых присутствует ограничение по количеству соединений.
+Класс `LicenseManager` содержит функциональность по работе с дополнительными опциями лицензии {dv}, в которых присутствует ограничение по количеству соединений.
 
 * *Пространство имён:* `xref:api/DocsVision/Platform/ObjectManager/ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
 * *Сборка:* `DocsVision.Platform.ObjectManager.dll`
@@ -31,7 +31,7 @@ public abstract class LicenseManager
 
 == Заметки
 
-На основе методов DecrementFeatureUsage и IncrementFeatureUsage реализуется механизм контроля числа пользователей, использующих определённый модуль {dv}, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
+На основе методов `DecrementFeatureUsage` и `IncrementFeatureUsage` реализуется механизм контроля числа пользователей, использующих определённый модуль {dv}, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
 
 == Примеры
 
@@ -39,30 +39,34 @@ public abstract class LicenseManager
 
 [source,csharp]
 ----
-// userSession -- сессия пользователя
-// featureId -- идентификатор дополнительной опции в лицензии {dv}
-private void Take(UserSession userSession, Guid featureId)
+private void Take(UserSession userSession, Guid featureId) <.>
 {
  try
  {
-  // Увеличение числа соединений с модулем
-  userSession.LicenseManager.IncrementFeatureUsage(featureId);
+  userSession.LicenseManager.IncrementFeatureUsage(featureId); <.>
   return;
  } catch (StorageServerException ex)
  {
-  // если достигнут предел подключений..
-  if (ex.ErrorCode = (int)ErrorCode.FeatureLimit)
+  if (ex.ErrorCode = (int)ErrorCode.FeatureLimit) <.>
   {
-   /* Вывод сообщения о превышении количества пользователей */
+   <.>
    return;
   } else
   {
-   /* Вывод сообщения о прочей ошибке */
+   <.>
    return;
   }
  }
 }
 ----
+<.> `userSession` -- сессия пользователя
++
+`featureId` -- идентификатор дополнительной опции в лицензии {dv}.
++
+<.> Увеличение числа соединений с модулем.
+<.> Если достигнут предел подключений, то:
+<.> Вывод сообщения о превышении количества пользователей.
+<.> Вывод сообщения о прочей ошибке.
 
 После выхода пользователя из модуля, соединение должно быть освобождено:
 
@@ -72,13 +76,14 @@ private void Release(UserSession userSession, Guid featureId)
 {
  try
  {
-  // Уменьшение числа соединений с модулем
-  userSession.LicenseManager.DecrementFeatureUsage(featureId);
+  userSession.LicenseManager.DecrementFeatureUsage(featureId); <.>
   return;
  } catch (StorageServerException ex)
  {
-  /* Вывод сообщения о прочей ошибке */
+  <.>
   return;
  }
 }
 ----
+<.> Уменьшение числа соединений с модулем.
+<.> Вывод сообщения о прочей ошибке.

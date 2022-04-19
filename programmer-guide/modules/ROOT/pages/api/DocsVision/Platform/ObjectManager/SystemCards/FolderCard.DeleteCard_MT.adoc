@@ -21,7 +21,7 @@ cardId:::
 permanently:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 +
-`true` -- производит стандартное удаление; при false -- помечает карточку к удалению
+`true` -- производит стандартное удаление; при `false` -- помечает карточку к удалению
 
 == Заметки
 
@@ -29,13 +29,13 @@ permanently:::
 
 == Примеры
 
-В примере, карточка с идентификатором 00000000-0000-0000-0000-000000000000 помечает к удалению. userSession -- текущая сессия пользователя
+В примере, карточка с идентификатором `00000000-0000-0000-0000-000000000000` помечает к удалению. `userSession` -- текущая сессия пользователя
 
 [source,csharp]
 ----
-//Получаем карточку папок
-FolderCard folderCard = (FolderCard)userSession.CardManager.GetDictionary(new Guid("DA86FABF-4DD7-4A86-B6FF-C58C24D12DE2"));
+FolderCard folderCard = (FolderCard)userSession.CardManager.GetDictionary(new Guid("DA86FABF-4DD7-4A86-B6FF-C58C24D12DE2")); <.>
 
-//Помечаем карточку к удалению
-folderCard.DeleteCard(new Guid("00000000-0000-0000-0000-000000000000"), false);
+folderCard.DeleteCard(new Guid("00000000-0000-0000-0000-000000000000"), false); <.>
 ----
+<.> Получаем карточку папок.
+<.> Помечаем карточку к удалению.

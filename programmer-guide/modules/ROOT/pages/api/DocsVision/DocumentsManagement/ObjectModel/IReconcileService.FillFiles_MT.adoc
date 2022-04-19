@@ -1,0 +1,28 @@
+= IReconcileService.FillFiles -- метод (Document, BaseCard)
+
+Копирует вложенные в инициирующий документ файлы в согласование.
+
+* *Пространство имён:* `xref:api/DocsVision/DocumentsManagement/ObjectModel/ObjectModel_NS.adoc[DocsVision.DocumentsManagement.ObjectModel]`
+* *Сборка:* `DocsVision.DocumentsManagement.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void FillFiles(Document initialDocument, BaseCard reconciliationCard)
+----
+
+Параметры::
+initialDocument:::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/Document_CL.adoc[Document]
++
+Инициирующий документ, из которого будут скопированы файлы
+
+reconciliationCard:::
+Тип: xref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]
++
+Карточка согласования
+
+== Заметки
+
+Данный метод вызывается автоматически, при создании согласования, и не требуется отдельного вызова. Может быть переопределен при реализации собственного механизма согласования.
