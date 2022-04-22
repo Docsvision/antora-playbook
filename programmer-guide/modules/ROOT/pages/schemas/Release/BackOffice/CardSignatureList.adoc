@@ -1,57 +1,70 @@
 = Список подписей
 
-* Идентификатор: CA25A38B-C65E-4A97-94EE-8E5067A6BECA
-* Псевдоним: CardSignatureList
-* Название: Список подписей
+* Идентификатор: `CA25A38B-C65E-4A97-94EE-8E5067A6BECA
+* Псевдоним: `CardSignatureList`
+* Название: _Список подписей_
 
 == Секции карточки
 
-*Секция "Подписи"*
+=== Секция "Подписи"
 
-* Идентификатор: 4A1AC881-DCBD-42C2-9C7A-E1DE7723400A
-* Псевдоним: Signatures
-* Название: Подписи
-* Тип секции: coll
+* Идентификатор: `4A1AC881-DCBD-42C2-9C7A-E1DE7723400A
+* Псевдоним: `Signatures`
+* Название: _Подписи_
+* Тип секции: `coll`
 
 .Поля секции "Подписи"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Signer |Подписант |refid | |
-|Operation |Операция |refid | |
-|State |Состояние |refid | |
-|TimeStamp |Время нанесения |datetime | |
-|SignatureType |Тип подписи |uniqueid | |
-|Certificate |Сертификат |unistring |128 |
-|Label |Метка |refid | |
-|SignedFrom |Подписано от имени |refid | |
-|SignedFromConfirmation |Текст подтверждения |unistring | |
+|`Signer` |Подписант |`refid` | |
+|`Operation` |Операция |`refid` | |
+|`State` |Состояние |`refid` | |
+|`TimeStamp` |Время нанесения |`datetime` | |
+|`SignatureType` |Тип подписи |`uniqueid` | |
+|`Certificate` |Сертификат |`unistring` |128 |
+|`Label` |Метка |`refid` | |
+|`SignedFrom` |Подписано от имени |`refid` | |
+|`SignedFromConfirmation` |Текст подтверждения |`unistring` | |
 |===
 
-*Подчиненные секции*
+=== Подчиненные секции
 
-*Секция "Части подписи"*
+=== Секция "Части подписи"
 
-* Идентификатор: 40D0D579-2A99-4E9D-B87A-6EB84B382B6F
-* Псевдоним: SignatureParts
-* Название: Части подписи
-* Тип секции: coll
+* Идентификатор: `40D0D579-2A99-4E9D-B87A-6EB84B382B6F
+* Псевдоним: `SignatureParts`
+* Название: _Части подписи_
+* Тип секции: `coll`
 
 .Поля секции "Части подписи"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Description |Описание |unistring |1024 |
-|TypeId |Идентификатор типа части |uniqueid | |
-|ObjectId |Идентификатор подписываемого объекта |uniqueid | |
-|CryptoId |Идентификатор объекта в хранилище подписей |uniqueid | |
-|FileId |Файл |refcardid | a|
-Идентификатор типа: 6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3
+|`Description` |Описание |`unistring` |1024 |
+|`TypeID` |Идентификатор типа части |`uniqueid` | |
+|`ObjectId` |Идентификатор подписываемого объекта |`uniqueid` | |
+|`CryptoId` |Идентификатор объекта в хранилище подписей |`uniqueid` | |
+|`FileId` |Файл |`refcardid` | a|
+Идентификатор типа: `6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3`
 
-Идентификатор секции: 2FDE03C2-FF87-4E42-A8C2-7CED181977FB
+Идентификатор секции: `2FDE03C2-FF87-4E42-A8C2-7CED181977FB`
 
-|FileVersion |Версия файла |uniqueid | |
-|ExpireDate |Дата экспирации подписи |datetime | |
-|Status |Статус |enum | |Значения: Неизвестно = 0, Подпись верна = 1, Подпись не верна = 2, Сертфикат просрочен = 3, Ошибка = 4, Истекает = 5
-|SignatureType |Тип подписи |enum | |Значения: Неизвестен = 0, Хэш = 1, CAdES-BES = 2, CAdES-T = 3, CAdES-X Long Type 1 = 5, CAdES-A = 6, CAdES-C = 4
+|`FileVersion` |Версия файла |`uniqueid` | |
+|`ExpireDate` |Дата экспирации подписи |`datetime` | |
+|`Status` |Статус |`enum` | a|.Значения:
+* Неизвестно = 0.
+* Подпись верна = 1.
+* Подпись не верна = 2.
+* Сертификат просрочен = 3.
+* Ошибка = 4.
+* Истекает = 5.
+|`SignatureType` |Тип подписи |`enum` | a|.Значения:
+* Неизвестен = 0.
+* Хэш = 1.
+* CAdES-BES = 2.
+* CAdES-T = 3.
+* CAdES-X Long Type 1 = 5.
+* CAdES-A = 6.
+* CAdES-C = 4.
 |===

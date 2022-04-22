@@ -1,282 +1,358 @@
 = Входящий документ
 
-* Идентификатор: C1FED883-08DE-420F-8FB4-C16CEFFC1630
-* Псевдоним: CardInc
-* Название: Входящий документ
+* Идентификатор: `C1FED883-08DE-420F-8FB4-C16CEFFC1630`
+* Псевдоним: `CardInc`
+* Название: _Входящий документ_
 
 == Секции карточки
 
-*Секция "Основная информация"*
+=== Секция "Основная информация"
 
-* Идентификатор: 8C77892A-21CC-4972-AD71-A9919BCA8187
-* Псевдоним: MainInfo
-* Название: Основная информация
-* Тип секции: struct
+* Идентификатор: `8C77892A-21CC-4972-AD71-A9919BCA8187`
+* Псевдоним: `MainInfo`
+* Название: _Основная информация_
+* Тип секции: `struct`
 
 .Поля секции "Основная информация"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Name |Тема документа |unistring |512 |
-|Type |Вид документа |refid | |Поля ссылки: DocType_Name > Name
-|NumberRef |Ссылка на номер |refid | |Поля ссылки: > Number
-|FullNumber |Полный номер документа |unistring |160 |
-|FixNumber |Номер зафиксирован |bool | |
-|Sender |Отправитель |refid | |Поля ссылки: Sender_FName > FirstName, Sender_MName > MiddleName, Sender_LName > LastName
-|Contact |Контактное лицо |refid | |Поля ссылки: Contact_FName > FirstName, Contact_MName > MiddleName, Contact_LName > LastName
-|Recipient |Ответственный получатель |refid | |Поля ссылки: Recip_FName > FirstName, Recip_MName > MiddleName, Recip_LName > LastName
-|CreationDate |Дата создания |datetime | |
-|RegistrationDate |Дата регистрации |datetime | |
-|RegisteredBy |Регистратор |refid | |Поля ссылки: Reg_FName > FirstName, Reg_MName > MiddleName, Reg_LName > LastName
-|OutgoingNumber |Исходящий номер |unistring |80 |
-|OutgoingDate |Дата исходящего |datetime | |
-|DeliveryType |Тип доставки |refid | |Поля ссылки: DeliveryType_Name > Name
-|Digest |Содержание |unitext | |
-|PageCount |Количество листов |int | |
-|AttachmentPageCount |Количество листов в приложении |int | |
-|FiledInFolder |Подшит в том |refid | |Поля ссылки: Folder_Name > Name
-|FiledInCase |Подшит в дело |refid | |Поля ссылки: Case_Name > Name
-|FilesID |Список файлов |refcardid | a|
-Идентификатор типа: BFC9D190-BCD6-411A-B9F9-3160D3F68819
+|`Name` |Тема документа |`unistring` |512 |
+|`Type` |Вид документа |`refid` | a|.Поля ссылки:
+* `DocType_Name > Name`
+|`NumberRef` |Ссылка на номер |`refid` | a|.Поля ссылки:
+* `> Number`
+|`FullNumber` |Полный номер документа |`unistring` |160 |
+|`FixNumber` |Номер зафиксирован |`bool` | |
+|`Sender` |Отправитель |`refid` | a|.Поля ссылки:
+* `Sender_FName > FirstName`
+* `Sender_MName > MiddleName`
+* `Sender_LName > LastName`
+|`Contact` |Контактное лицо |`refid` | a|.Поля ссылки:
+* `Contact_FName > FirstName`
+* `Contact_MName > MiddleName`
+* `Contact_LName > LastName`
+|`Recipient` |Ответственный получатель |`refid` | a|.Поля ссылки:
+* `Recip_FName > FirstName`
+* `Recip_MName > MiddleName`
+* `Recip_LName > LastName`
+|`CreationDate` |Дата создания |`datetime` | |
+|`RegistrationDate` |Дата регистрации |`datetime` | |
+|`RegisteredBy` |Регистратор |`refid` | a|.Поля ссылки:
+* `Reg_FName > FirstName`
+* `Reg_MName > MiddleName`
+* `Reg_LName > LastName`
+|`OutgoingNumber` |Исходящий номер |`unistring` |80 |
+|`OutgoingDate` |Дата исходящего |`datetime` | |
+|`DeliveryType` |Тип доставки |`refid` | a|.Поля ссылки:
+* `DeliveryType_Name > Name`
+|`Digest` |Содержание |`unitext` | |
+|`PageCount` |Количество листов |`int` | |
+|`AttachmentPageCount` |Количество листов в приложении |`int` | |
+|`FiledInFolder` |Подшит в том |`refid` | a|.Поля ссылки:
+* `Folder_Name > Name`
+|`FiledInCase` |Подшит в дело |`refid` | a|.Поля ссылки:
+* `Case_Name > Name`
+|`FilesID` |Список файлов |`refcardid` | a|
+Идентификатор типа: `BFC9D190-BCD6-411A-B9F9-3160D3F68819`
 
-Идентификатор секции: 3F8270DB-3603-463C-BA59-26B89EBB6CB5
+Идентификатор секции: `3F8270DB-3603-463C-BA59-26B89EBB6CB5`
 
-|SenderOrg |Организация отправителя |unistring |1024 |
-|SenderDep |Подразделение отправителя |unistring |1024 |
-|SenderPhone |Телефон отправителя |unistring |64 |
-|SenderEmail |Е-mail отправителя |unistring |64 |
-|SenderName |Имя отправителя |unistring |128 |
-|ContactName |Имя контактного лица |unistring |128 |
-|DocState |Состояние документа |refid | |Поля ссылки: StateName > Name
-|Responsible |Ответственный исполнитель |refid | |Поля ссылки: Resp_FName > FirstName, Resp_MName > MiddleName, Resp_LName > LastName
-|RecipientDep |Подразделение получателя |refid | |Поля ссылки: Recip_DepName > Name
-|ParentCardID |Родительская карточка (ID) |refcardid | |
-|PropsAsForm |Свойства в режиме формы |bool | |
-|Confidential |Конфиденциально |bool | |
-|DocProperty |Реквизит документа |unistring |128 |
-|BarcodeNumber |Номер штрих-кода |string |32 |
-|ControlledBy |Контролер |refid | |Поля ссылки: Control_FName > FirstName, Control_MName > MiddleName, Control_LName > LastName, Control_Email > Email
-|ControlDate |Дата контроля |datetime | |
+|`SenderOrg` |Организация отправителя |`unistring` |1024 |
+|`SenderDep` |Подразделение отправителя |`unistring` |1024 |
+|`SenderPhone` |Телефон отправителя |`unistring` |64 |
+|`SenderEmail` |Е-mail отправителя |`unistring` |64 |
+|`SenderName` |Имя отправителя |`unistring` |128 |
+|`ContactName` |Имя контактного лица |`unistring` |128 |
+|`DocState` |Состояние документа |`refid` | a|.Поля ссылки:
+* `StateName > Name`
+|`Responsible` |Ответственный исполнитель |`refid` | a|.Поля ссылки:
+* `Resp_FName > FirstName`
+* `Resp_MName > MiddleName`
+* `Resp_LName > LastName`
+|`RecipientDep` |Подразделение получателя |`refid` | a|.Поля ссылки:
+* `Recip_DepName > Name`
+|`ParentCardID` |Родительская карточка (ID) |`refcardid` | |
+|`PropsAsForm` |Свойства в режиме формы |`bool` | |
+|`Confidential` |Конфиденциально |`bool` | |
+|`DocProperty` |Реквизит документа |`unistring` |128 |
+|`BarcodeNumber` |Номер штрих-кода |`string` |32 |
+|`ControlledBy` |Контролер |`refid` | a|.Поля ссылки:
+* `Control_FName > FirstName`
+* `Control_MName > MiddleName`
+* `Control_LName > LastName`
+* `Control_Email > Email`
+|`ControlDate` |Дата контроля |`datetime` | |
 |===
 
-*Секция "Ссылки на карточки"*
+=== Секция "Ссылки на карточки"
 
-* Идентификатор: E0E8A2C4-FBFC-4D15-8497-074180DA08E4
-* Псевдоним: CardReferences
-* Название: Ссылки на карточки
-* Тип секции: coll
+* Идентификатор: `E0E8A2C4-FBFC-4D15-8497-074180DA08E4`
+* Псевдоним: `CardReferences`
+* Название: _Ссылки на карточки_
+* Тип секции: `coll`
 
 .Поля секции "Ссылки на карточки"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Type |Тип ссылки |refid | |Поля ссылки: > LinkName
-|Link |Карточка |refcardid | |Поля ссылки: > Description
-|Comments |Комментарии |unistring |2048 |
-|CreationDate |Дата создания |datetime | |
-|CreatedBy |Кем добавлена |refid | |Поля ссылки: Create_FName > FirstName, Create_MName > MiddleName, Create_LName > LastName
-|URL |URL |unistring |512 |
-|LinkDesc |Описание |unistring |32 |
-|FolderID |Папка |refid | |
+|`Type` |Тип ссылки |`refid` | a|.Поля ссылки:
+* `> LinkName`
+|`Link` |Карточка |`refcardid` | a|.Поля ссылки:
+* `> Description`
+|`Comments` |Комментарии |`unistring` |2048 |
+|`CreationDate` |Дата создания |`datetime` | |
+|`CreatedBy` |Кем добавлена |`refid` | a|.Поля ссылки:
+* `Create_FName > FirstName`
+* `Create_MName > MiddleName`
+* `Create_LName > LastName`
+|`URL` |URL` |`unistring` |512 |
+|`LinkDesc` |Описание |`unistring` |32 |
+|`FolderID` |Папка |`refid` | |
 |===
 
-*Секция "Свойства"*
+=== Секция "Свойства"
 
-* Идентификатор: B822D7D1-2280-4B51-AE58-A1CF757C5672
-* Псевдоним: Properties
-* Название: Свойства
-* Тип секции: coll
+* Идентификатор: `B822D7D1-2280-4B51-AE58-A1CF757C5672`
+* Псевдоним: `Properties`
+* Название: _Свойства_
+* Тип секции: `coll`
 
 .Поля секции "Свойства"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Name |Название свойства |unistring |128 |
-|Value |Значение свойства |variant | |
-|WriteToCard |Записывать в карточку |bool | |
-|Order |Порядковый номер |int | |
-|ParamType |Тип свойства |enum | |Значения: Строка = 0, Целое число = 1, Дробное число = 2, Дата / Время = 3, Да / Нет = 4, Сотрудник = 5, Подразделение = 6, Группа = 7, Роль = 8, Универсальное = 9, Контрагент = 10, Подразделение контрагента = 11, Карточка = 12, Вид документа = 13, Состояние документа = 14, Переменная шлюза = 15, Перечисление = 16, Дата = 17, Время = 18, Кнопка = 19, Нумератор = 20, Картинка = 21, Папка = 22, Тип записи универсального справочника = 23
-|ItemType |Тип записи универсального справочника |refid | |
-|ParentProp |Родительское свойство |refid | |
-|ParentFieldName |Имя родительского поля |string |128 |
-|DisplayValue |Отображаемое значение |unistring |1900 |
-|ReadOnly |Только для чтения |bool | |
-|CreationReadOnly |Только для чтения при создании |bool | |
-|Required |Обязательное |bool | |
-|GateID |Шлюз |uniqueid | |
-|VarTypeID |Тип переменной в шлюзе |int | |
-|Hidden |Скрытое |bool | |
-|IsCollection |Коллекция |bool | |
-|NumberID |Номер |refid | |
-|Image |Картинка |image | |
-|TextValue |Значение строки |unitext | |
+|`Name` |Название свойства |`unistring` |128 |
+|`Value` |Значение свойства |`variant` | |
+|`WriteToCard` |Записывать в карточку |`bool` | |
+|`Order` |Порядковый номер |`int` | |
+|`ParamType` |Тип свойства |`enum` | a|.Значения:
+* Строка = 0.
+* Целое число = 1.
+* Дробное число = 2.
+* Дата / Время = 3.
+* Да / Нет = 4.
+* Сотрудник = 5.
+* Подразделение = 6.
+* Группа = 7.
+* Роль = 8.
+* Универсальное = 9.
+* Контрагент = 10.
+* Подразделение контрагента = 11.
+* Карточка = 12.
+* Вид документа = 13.
+* Состояние документа = 14.
+* Переменная шлюза = 15.
+* Перечисление = 16.
+* Дата = 17.
+* Время = 18.
+* Кнопка = 19.
+* Нумератор = 20.
+* Картинка = 21.
+* Папка = 22.
+* Тип записи универсального справочника = 23.
+|`Item`Type` |Тип записи универсального справочника |`refid` | |
+|`ParentProp` |Родительское свойство |`refid` | |
+|`ParentFieldName` |Имя родительского поля |`string` |128 |
+|`DisplayValue` |Отображаемое значение |`unistring` |1900 |
+|`ReadOnly` |Только для чтения |`bool` | |
+|`CreationReadOnly` |Только для чтения при создании |`bool` | |
+|`Required` |Обязательное |`bool` | |
+|`GateID` |Шлюз |`uniqueid` | |
+|`VarTypeID` |Тип переменной в шлюзе |`int` | |
+|`Hidden` |Скрытое |`bool` | |
+|`IsCollection` |Коллекция |`bool` | |
+|`NumberID` |Номер |`refid` | |
+|`Image` |Картинка |image` | |
+|`TextValue` |Значение строки |`unitext` | |
 |===
 
-*Подчиненные секции*
+=== Подчиненные секции
 
-*Секция "Значения перечисления"*
+=== Секция "Значения перечисления"
 
-* Идентификатор: F65E5F15-F4F4-427E-8DFF-DED048EA6CA5
-* Псевдоним: EnumValues
-* Название: Значения перечисления
-* Тип секции: coll
+* Идентификатор: `F65E5F15-F4F4-427E-8DFF-DED048EA6CA5`
+* Псевдоним: `EnumValues`
+* Название: _Значения перечисления_
+* Тип секции: `coll`
 
 .Поля секции "Значения перечисления"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|ValueID |ID значения |int | |
-|ValueName |Название значения |unistring |128 |
+|`Value`ID` |ID значения |`int` | |
+|`Value`Name` |Название значения |`unistring` |128 |
 |===
 
-*Секция "Выбранные значения"*
+=== Секция "Выбранные значения"
 
-* Идентификатор: 55EF9765-2651-4F13-A716-4606B729881C
-* Псевдоним: SelectedValues
-* Название: Выбранные значения
-* Тип секции: coll
+* Идентификатор: `55EF9765-2651-4F13-A716-4606B729881C
+* Псевдоним: `SelectedValues`
+* Название: _Выбранные значения_
+* Тип секции: `coll`
 
 .Поля секции "Выбранные значения"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|SelectedValue |Выбранное значение |variant | |
-|Order |Порядок |int | |
-|IsResponsible |Ответственный |bool | |
+|`SelectedValue` |Выбранное значение |`variant` | |
+|`Order` |Порядок |`int` | |
+|`IsResponsible` |Ответственный |`bool` | |
 |===
 
-*Секция "Категории"*
+=== Секция "Категории"
 
-* Идентификатор: EE1AE0B3-E9AD-42B1-BF7B-B01E74208BE9
-* Псевдоним: Categories
-* Название: Категории
-* Тип секции: coll
+* Идентификатор: `EE1AE0B3-E9AD-42B1-BF7B-B01E74208BE9`
+* Псевдоним: `Categories`
+* Название: _Категории_
+* Тип секции: `coll`
 
 .Поля секции "Категории"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|CategoryID |Категория |refid | |Поля ссылки: > Name
+|`CategoryID` |Категория |`refid` | a|.Поля ссылки:
+* `> Name`
 |===
 
-*Секция "Задачи"*
+=== Секция "Задачи"
 
-* Идентификатор: D06E9F35-3B3D-4A3F-8F7A-9032DD1512FD
-* Псевдоним: Resolutions
-* Название: Задачи
-* Тип секции: coll
+* Идентификатор: `D06E9F35-3B3D-4A3F-8F7A-9032DD1512FD
+* Псевдоним: `Resolutions`
+* Название: _Задачи_
+* Тип секции: `coll`
 
 .Поля секции "Задачи"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|ResolutionID |Задача |refcardid | a|
-Идентификатор типа: 0056522E-FC72-48D2-8EBB-A60B838E36C9
+|`ResolutionID` |Задача |`refcardid` | a|
+Идентификатор типа: `0056522E-FC72-48D2-8EBB-A60B838E36C9`
 
-Идентификатор секции: 77C70C13-881A-4534-9704-C4F6B9ACDB0A
+Идентификатор секции: `77C70C13-881A-4534-9704-C4F6B9ACDB0A`
 
-Поля ссылки: > Name
+.Поля ссылки:
+* `> Name`
 
 |===
 
-*Секция "Согласования"*
+=== Секция "Согласования"
 
-* Идентификатор: F06A18E7-582E-4896-9C0C-146025E6D9DA
-* Псевдоним: Approvals
-* Название: Согласования
-* Тип секции: coll
+* Идентификатор: `F06A18E7-582E-4896-9C0C-146025E6D9DA
+* Псевдоним: `Approvals`
+* Название: _Согласования_
+* Тип секции: `coll`
 
 .Поля секции "Согласования"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|ApprovalID |Согласование |refcardid | a|
-Идентификатор типа: A231269C-6126-4C1A-9758-F55FF9571EF8
+|`ApprovalID` |Согласование |`refcardid` | a|
+Идентификатор типа: `A231269C-6126-4C1A-9758-F55FF9571EF8`
 
-Идентификатор секции: 3C2F1AC3-8D26-425F-956B-A3B0B52BAC5D
+Идентификатор секции: `3C2F1AC3-8D26-425F-956B-A3B0B52BAC5D`
 
-Поля ссылки: > Name
+.Поля ссылки:
+* `> Name`
 
 |===
 
-*Секция "Сотрудники"*
+=== Секция "Сотрудники"
 
-* Идентификатор: 47C41171-9C64-450A-A3A6-102B3156AD79
-* Псевдоним: Employees
-* Название: Сотрудники
-* Тип секции: coll
+* Идентификатор: `47C41171-9C64-450A-A3A6-102B3156AD79`
+* Псевдоним: `Employees`
+* Название: _Сотрудники_
+* Тип секции: `coll`
 
 .Поля секции "Сотрудники"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|Order |Порядковый номер |int | |
-|EmployeeID |Сотрудник |refid | |Поля ссылки: > LastName, > FirstName, > MiddleName, > DisplayString
-|Type |Тип |enum | |Значения: Исполнитель = 0, Получатель = 1, Подписано = 2, Согласующее лицо = 3
-|IsResponsible |Ответственный |bool | |
-|DepartmentID |Подразделение |refid | |Поля ссылки: DepartmentName > Name, DepartmentFullName > FullName
-|PositionID |Должность |refid | |Поля ссылки: PositionName > Name
+|`Order` |Порядковый номер |`int` | |
+|`EmployeeID` |Сотрудник |`refid` | a|.Поля ссылки:
+* `> LastName`
+* `> FirstName`
+* `> MiddleName`
+* `> DisplayString`
+|`Type` |Тип |`enum` | a|.Значения:
+* Исполнитель = 0.
+* Получатель = 1.
+* Подписано = 2.
+* Согласующее лицо = 3.
+|`IsResponsible` |Ответственный |`bool` | |
+|`DepartmentID` |Подразделение |`refid` | a|.Поля ссылки:
+* `DepartmentName > Name`
+* `DepartmentFullName > FullName`
+|`PositionID` |Должность |`refid` | a|.Поля ссылки:
+* `PositionName > Name`
 |===
 
-*Секция "Бизнес-процессы"*
+=== Секция "Бизнес-процессы"
 
-* Идентификатор: 166FBB9A-6222-4178-A0E6-D52DD177B8A1
-* Псевдоним: Processes
-* Название: Бизнес-процессы
-* Тип секции: coll
+* Идентификатор: `166FBB9A-6222-4178-A0E6-D52DD177B8A1`
+* Псевдоним: `Processes`
+* Название: _Бизнес-процессы_
+* Тип секции: `coll`
 
 ."Поля секции "Бизнес-процессы"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|ProcessID |Бизнес-процесс |refcardid | a|
-Идентификатор типа: AE82DD57-348C-4407-A50A-9F2C7D694DA8
+|`ProcessId` |Бизнес-процесс |`refcardid` | a|
+Идентификатор типа: `AE82DD57-348C-4407-A50A-9F2C7D694DA8`
 
-Идентификатор секции: 0EF6BCCA-7A09-4027-A3A2-D2EEECA1BF4D
+Идентификатор секции: `0EF6BCCA-7A09-4027-A3A2-D2EEECA1BF4D`
 
-|IsHardLink |Жесткая ссылка на процесс |bool | |
-|ProcessFolder |Папка процесса |refid | |
-|HardProcessID |Жесткая ссылка на процесс |refcardid | a|
-Идентификатор типа: AE82DD57-348C-4407-A50A-9F2C7D694DA8
+|`IsHardLink` |Жесткая ссылка на процесс |`bool` | |
+|`ProcessFolder` |Папка процесса |`refid` | |
+|`HardProcessID` |Жесткая ссылка на процесс |`refcardid` | a|
+Идентификатор типа: `AE82DD57-348C-4407-A50A-9F2C7D694DA8`
 
-Идентификатор секции: 0EF6BCCA-7A09-4027-A3A2-D2EEECA1BF4D
+Идентификатор секции: `0EF6BCCA-7A09-4027-A3A2-D2EEECA1BF4D`
 
 |===
 
-*Секция "Журнал передач"*
+=== Секция "Журнал передач"
 
-* Идентификатор: 54F5C319-29CC-4E95-9D11-45133A68291F
-* Псевдоним: TransferLog
-* Название: Журнал передач
-* Тип секции: coll
+* Идентификатор: `54F5C319-29CC-4E95-9D11-45133A68291F
+* Псевдоним: `TransferLog`
+* Название: _Журнал передач_
+* Тип секции: `coll`
 
 ."Поля секции "Журнал передач"
 [width="100%",cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|IsReceived |Принято |bool | |
-|FromEmployee |Инициатор действия |refid | |Поля ссылки: From_LName > LastName, From_FName > FirstName, From_MName > MiddleName
-|ToEmployee |Сотрудник |refid | |Поля ссылки: To_LName > LastName, To_FName > FirstName, To_MName > MiddleName
-|ToDepartment |Подразделение |refid | |Поля ссылки: To_DepName > Name
-|TransferDate |Дата передачи |datetime | |
-|IsCopy |Копия |bool | |
-|Comments |Комментарии |unistring |2048 |
+|`IsReceived` |Принято |`bool` | |
+|`FromEmployee` |Инициатор действия |`refid` | a|.Поля ссылки:
+* `From_LName > LastName`
+* `From_FName > FirstName`
+* `From_MName > MiddleName`
+|`ToEmployee` |Сотрудник |`refid` | a|.Поля ссылки:
+* `To_LName > LastName`
+* `To_FName > FirstName`
+* `To_MName > MiddleName`
+|`ToDepartment` |Подразделение |`refid` | a|.Поля ссылки:
+* `To_DepName > Name`
+|`TransferDate` |Дата передачи |`datetime` | |
+|`IsCopy` |Копия |`bool` | |
+|`Comments` |Комментарии |`unistring` |2048 |
 |===
 
 == Режимы работы карточки
 
 ."Режимы работы карточки
-[width="99%",cols="34%,33%,33%",options="header"]
+[width="100%",cols="34%,33%,33%",options="header"]
 |===
 |Псевдоним |Идентификатор |Описание
-|OpenCard |E45F4F96-4F18-47E1-9225-841F38A371ED |Открыть карточку
+|`OpenCard` |`E45F4F96-4F18-47E1-9225-841F38A371ED` |Открыть карточку
 |===
 
 == Действия карточки
 
 ."Действия карточки
-[width="99%",cols="34%,33%,33%",options="header"]
+[width="100%",cols="34%,33%,33%",options="header"]
 |===
 |Псевдоним |Идентификатор |Описание
-|OpenCard |32CFD070-842A-47AA-A223-DF1D95C8819B |Открыть карточку
+|`OpenCard` |`32CFD070-842A-47AA-A223-DF1D95C8819B` |Открыть карточку
 |===

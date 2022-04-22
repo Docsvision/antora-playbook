@@ -38,29 +38,29 @@ public sealed class StaticObjectContext
 ----
 private static void CreateStaticContext()
 {
- // Инициализация сервис-провайдера
- var sessionContainer = new System.ComponentModel.Design.ServiceContainer();
+ var sessionContainer = new System.ComponentModel.Design.ServiceContainer(); <.>
  sessionContainer.AddService(typeof(DocsVision.Platform.ObjectManager.UserSession), userSession);
  
- // Создание контекста объектов
- StaticObjectContext.Create(sessionContainer);
+ StaticObjectContext.Create(sessionContainer); <.>
 
- // Регистрация базовых (SystemCardsMapperFactory, BackOfficeMapperFactory) фабрик преобразователей данных
- BackOffice.Register(StaticObjectContext.Current);
+ BackOffice.Register(StaticObjectContext.Current); <.>
 
- // Регистрация базовых файбрик сервисов
  var serviceFactoryRegistry = StaticObjectContext.Current.GetService<IServiceFactoryRegistry>();
  serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
- serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
+ serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory)); <.>
 
- // Регистрация сервиса для работы с хранилищем {dv}
- StaticObjectContext.Current.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
+ StaticObjectContext.Current.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null)); <.>
 
- // Регистрация поставщика метаданных карточек
- IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession);
+ IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession); <.>
  StaticObjectContext.Current.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
  StaticObjectContext.Current.AddService<IMetadataProvider>(metadataProvider);
 }
 ----
+<.> Инициализация сервис-провайдера.
+<.> Создание контекста объектов.
+<.> Регистрация базовых (`SystemCardsMapperFactory`, `BackOfficeMapperFactory`) фабрик преобразователей данных.
+<.> Регистрация базовых фабрик сервисов.
+<.> Регистрация сервиса для работы с хранилищем {dv}.
+<.> Регистрация поставщика метаданных карточек.
 
-Сессия пользователя (userSession) может быть получена по аналогии с примером `xref:samples/object-model/init-context.adoc[Инициализация контекста объектов]`
+Сессия пользователя (`userSession`) может быть получена по аналогии с примером `xref:samples/object-model/init-context.adoc[Инициализация контекста объектов]`

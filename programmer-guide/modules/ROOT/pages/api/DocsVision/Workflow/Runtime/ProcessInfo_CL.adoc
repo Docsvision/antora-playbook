@@ -1,6 +1,6 @@
 = ProcessInfo -- класс
 
-Объект типа ProcessInfo выступает в качестве входного параметра функции _сценария_. С его помощью _сценарий_ может оперировать данными процесса.
+Объект типа `ProcessInfo` выступает в качестве входного параметра функции _сценария_. С его помощью _сценарий_ может оперировать данными процесса.
 
 * *Пространство имён:* `xref:api/DocsVision/Workflow/Runtime/Runtime_EN.adoc[DocsVision.Workflow.Runtime]`
 * *Сборка:* `DocsVision.Workflow.Runtime.dll`
@@ -17,8 +17,8 @@ public class ProcessInfo
 [width="100%",cols="39%,61%",options="header"]
 |===
 |Имя |Описание
-|`ProcessInfo(Process, Library)` |Инициализирует новый экземпляр типа ProcessInfo с помощью указанного значения.
-|`ProcessInfo(Process, Library, UserSession)` |Инициализирует новый экземпляр типа ProcessInfo с помощью указанного значения.
+|`ProcessInfo(Process, Library)` |Инициализирует новый экземпляр типа `ProcessInfo` с помощью указанного значения.
+|`ProcessInfo(Process, Library, UserSession)` |Инициализирует новый экземпляр типа `ProcessInfo` с помощью указанного значения.
 |===
 
 == Свойства
@@ -58,8 +58,8 @@ public class ProcessInfo
 |`GetValue(String, Guid, Int32, String)` |Возвращает из шлюза переменную с заданным идентификатором типа и названием/идентификатором.
 |`GetVariableByName(String)` |Возвращает первую переменную с заданным именем.
 |`Prepare` |Выполняет подготовку процесса к запуску -- осуществляет загрузку необходимых переменные из шлюза.
-|`PrepareExecution` |Сбрасывает состояния функций процесса, переводит начальную функцию (установлен флаг "IsStart") в состояние FuncStateEnum.Wait.
-|`Refresh` |Перегружает данные из карточки процесса в в процесс.
+|`PrepareExecution` |Сбрасывает состояния функций процесса, переводит начальную функцию (установлен флаг `IsStart`) в состояние `FuncStateEnum.Wait`.
+|`Refresh` |Перегружает данные из карточки процесса в процесс.
 |`ReleaseGates` |Освобождает все занятые объекты всех шлюзов.
 |`ReportError(String, Exception)` |Добавляет в журнал сообщение об ошибке.
 |`ReportError2(String, Exception, Object[])` |Добавляет в журнал сообщение об ошибке с передачей в шаблон сообщения дополнительных данных.

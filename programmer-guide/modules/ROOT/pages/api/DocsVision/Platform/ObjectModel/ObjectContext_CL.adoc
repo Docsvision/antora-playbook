@@ -1,6 +1,6 @@
 = ObjectContext -- класс
 
-Класс ObjectContext предоставляет методы доступа к сущностям объектной модели уровня бизнес-логики.
+Класс `ObjectContext` предоставляет методы доступа к сущностям объектной модели уровня бизнес-логики.
 
 * *Пространство имён:* `xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
 * *Сборка:* `DocsVision.Platform.ObjectModel.dll`
@@ -17,7 +17,7 @@ public sealed class ObjectContext : IDisposable, IServiceContainer, IServiceProv
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CT.adoc[ObjectContext(IServiceProvider)]` |Инициализирует новый экземпляр класса ObjectContext с помощью указанного значения.
+|`xref:api/DocsVision/Platform/ObjectModel/ObjectContext_CT.adoc[ObjectContext(IServiceProvider)]` |Инициализирует новый экземпляр класса `ObjectContext` с помощью указанного значения.
 |===
 
 == Свойства
@@ -51,7 +51,7 @@ public sealed class ObjectContext : IDisposable, IServiceContainer, IServiceProv
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.GetService_MT.adoc[GetService<T>]` |Возвращает _сервис_, реализующий переданный интерфейс.
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_MT.adoc[LockObject(IObjectRef, Boolean)]` |Блокирует объект по переданной ссылке.
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.LockObject_1_MT.adoc[LockObject(ObjectBase, Boolean)]` |Блокирует переданный объект.
-|`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollbackChanges_MT.adoc[RollbackChanges]` |Отменяет все изменения в контексте объектов, которые не были сохранены методом AcceptChanges, SaveObject<T>(T)# или SaveObjects<T>(IEnumerable<T>)#.
+|`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollbackChanges_MT.adoc[RollbackChanges]` |Отменяет все изменения в контексте объектов, которые не были сохранены методом `AcceptChanges`, `SaveObject<T>(T)` или `SaveObjects<T>(IEnumerable<T>)`.
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.RollBackObject_MT.adoc[RollBackObject(ObjectBase)]` |Отменяет несохраненные изменения в заданном объекте.
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.SaveObject_1_MT.adoc[SaveObject(ObjectBase)]` |Сохраняет изменения выбранного объекта.
 |`xref:api/DocsVision/Platform/ObjectModel/ObjectContext.SaveObject_MT.adoc[SaveObject<T>(T)]` |Сохраняет изменения выбранного объекта.
@@ -64,18 +64,18 @@ public sealed class ObjectContext : IDisposable, IServiceContainer, IServiceProv
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`Accepted` |Событие возникает после сохранения всех изменений в контексте, вызванного AcceptChanges.
-|`AcceptedObject` |Событие возникает после сохранения всех изменений в контексте, вызванного SaveObject.
-|`AcceptedObjects` |Событие возникает после сохранения всех изменений в контексте, вызванного SaveObjects.
-|`Accepting` |Событие возникает до сохранения всех изменений в контексте, вызванного AcceptChanges.
-|`AcceptingObject` |Событие возникает до сохранения всех изменений в контексте, вызванного SaveObject.
-|`AcceptingObjects` |Событие возникает до сохранения всех изменений в контексте, вызванного SaveObjects.
-|`BeforeRollback` |Событие возникает до отмены изменений, вызванной RollbackChanges.
-|`BeforeRollbackObject` |Событие возникает до отмены изменений, вызванной RollBackObject.
-|`BeforeRollbackObjects` |Событие возникает до отмены изменений, вызванной RollBackObjects.
-|`Disposed` |Событие возникает перед очисткой, вызванной методом Dispose или Dispose(true).
-|`RefreshedObject` |Событие возникает после обновления, вызванного методом RefreshObject.
-|`Rollback` |Событие возникает после отмены изменений, вызванной RollbackChanges.
-|`RollbackObject` |Событие возникает после отмены изменений, вызванной RollBackObject.
-|`RollbackObjects` |Событие возникает после отмены изменений, вызванной RollBackObjects.
+|`Accepted` |Событие возникает после сохранения всех изменений в контексте, вызванного `AcceptChanges`.
+|`AcceptedObject` |Событие возникает после сохранения всех изменений в контексте, вызванного `SaveObject`.
+|`AcceptedObjects` |Событие возникает после сохранения всех изменений в контексте, вызванного `SaveObjects`.
+|`Accepting` |Событие возникает до сохранения всех изменений в контексте, вызванного `AcceptChanges`.
+|`AcceptingObject` |Событие возникает до сохранения всех изменений в контексте, вызванного `SaveObject`.
+|`AcceptingObjects` |Событие возникает до сохранения всех изменений в контексте, вызванного `SaveObjects`.
+|`BeforeRollback` |Событие возникает до отмены изменений, вызванной `RollbackChanges`.
+|`BeforeRollbackObject` |Событие возникает до отмены изменений, вызванной `RollBackObject`.
+|`BeforeRollbackObjects` |Событие возникает до отмены изменений, вызванной `RollBackObjects`.
+|`Disposed` |Событие возникает перед очисткой, вызванной методом `Dispose` или `Dispose(true)`.
+|`RefreshedObject` |Событие возникает после обновления, вызванного методом `RefreshObject`.
+|`Rollback` |Событие возникает после отмены изменений, вызванной `RollbackChanges`.
+|`RollbackObject` |Событие возникает после отмены изменений, вызванной `RollBackObject`.
+|`RollbackObjects` |Событие возникает после отмены изменений, вызванной `RollBackObjects`.
 |===

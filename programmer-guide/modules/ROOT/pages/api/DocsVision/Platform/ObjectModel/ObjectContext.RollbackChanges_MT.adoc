@@ -1,6 +1,6 @@
 = ObjectContext.RollbackChanges -- метод
 
-Отменяет все изменения в контексте объектов, которые не были сохранены методом AcceptChanges, SaveObject<T>(T)# или SaveObjects<T>(IEnumerable<T>)#.
+Отменяет все изменения в контексте объектов, которые не были сохранены методом `AcceptChanges`, `SaveObject<T>(T)` или `SaveObjects<T>(IEnumerable<T>)`.
 
 * *Пространство имён:* `xref:api/DocsVision/Platform/ObjectModel/ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
 * *Сборка:* `DocsVision.Platform.ObjectModel.dll`
@@ -14,7 +14,7 @@ public void RollbackChanges()
 
 == Заметки
 
-Отменяются изменения объектов, имеющих следующие флаги в состояний (xref:api/DocsVision/Platform/ObjectModel/ObjectStateFlags_EN.adoc[ObjectStateFlags]): ObjectStateFlags.Modified, ObjectStateFlags.Added или ObjectStateFlags.Deleted. Перед непосредственной отменой изменений, метод взывает событие ObjectContext.BeforeRollback, которое может быть использовано для прекращения процедуры отката.
+Отменяются изменения объектов, имеющих следующие флаги в состояниях (`xref:api/DocsVision/Platform/ObjectModel/ObjectStateFlags_EN.adoc[ObjectStateFlags]`): `ObjectStateFlags.Modified`, `ObjectStateFlags.Added` или `ObjectStateFlags.Deleted`. Перед непосредственной отменой изменений, метод взывает событие `ObjectContext.BeforeRollback`, которое может быть использовано для прекращения процедуры отката.
 
 После вызова `xref:api/DocsVision/Platform/ObjectModel/ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges]` отмена принятых изменений будет невозможна.
 

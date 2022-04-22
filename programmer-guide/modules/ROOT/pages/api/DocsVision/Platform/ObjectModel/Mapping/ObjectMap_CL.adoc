@@ -29,7 +29,7 @@ public class ObjectMap
 |`Fields` |Возвращает коллекцию полей.
 |`ObjectTypeId` |Задает или возвращает идентификатор регистрируемого объекта.
 |`ParentObjectId` |Задает или возвращает идентификатор родительского, по отношению к регистрируемому, объекта.
-|`References` |Возвращает коллекцию ссылочных полей карточки (для типа refid).
+|`References` |Возвращает коллекцию ссылочных полей карточки (для типа `refid`).
 |===
 
 == Методы
@@ -44,7 +44,7 @@ public class ObjectMap
 
 == Примеры
 
-Ниже приведен пример части преобразователя данных для карточки "Документ", в котором выполняется привязка идентификатора секции к свойству Document.MainInfoProperty
+Ниже приведен пример части преобразователя данных для карточки "Документ", в котором выполняется привязка идентификатора секции к свойству `Document.MainInfoProperty`
 
 [source,csharp]
 ----
@@ -52,11 +52,11 @@ protected override ObjectMap GetObjectMap()
 {
  ObjectMap objectMap = new ObjectMap();
  
- //идентификатор объекта -- идентификатор карточки типа "Документ" (в нашем случает он уже статически присвоен объекту CardDocument.ID)
- objectMap.ObjectTypeId = CardDocument.ID;
+ objectMap.ObjectTypeId = CardDocument.ID; <.>
  
- //выполнение связки свойства Document.MainInfoProperty с секцией, имеющей идентификатор CardDocument.MainInfo.ID (статический, уже присвоен) 
- objectMap.Collection(Document.MainInfoProperty, CardDocument.MainInfo.ID);
+ objectMap.Collection(Document.MainInfoProperty, CardDocument.MainInfo.ID); <.>
  return objectMap;
 }
 ----
+<.> Идентификатор объекта -- идентификатор карточки типа "Документ" (в нашем случает он уже статически присвоен объекту `CardDocument.ID`).
+<.> Выполнение связки свойства `Document.MainInfoProperty` с секцией, имеющей идентификатор `CardDocument.MainInfo.ID` (статический, уже присвоен) .

@@ -1,6 +1,6 @@
 = AssemblyResolver -- класс
 
-Класс AssemblyResolver реализует функцию загрузки сборок Docvision из каталога установки {wincl}а в runtime программы.
+Класс `AssemblyResolver` реализует функцию загрузки сборок {dv} из каталога установки {wincl}а в `runtime` программы.
 
 * *Пространство имён:* `xref:api/DocsVision/Platform/Platform_NS.adoc[DocsVision.Platform]`
 * *Сборка:* `DocsVision.Platform.dll`
@@ -29,17 +29,17 @@ public class AssemblyResolver
 |Имя |Описание
 |`AddPath(String)` |Регистрирует указанный каталог в список каталогов, из которых могут быть загружены требуемые сборки.
 |`RemovePath(String)` |Разрегистрирует указанный каталог со сборками.
-|`StartResolve` |Активирует функцию предоставления сборок из зарегистрированных каталогов со сборками. Автоматически вызывается из конструктора класса AssemblyResolver.
+|`StartResolve` |Активирует функцию предоставления сборок из зарегистрированных каталогов со сборками. Автоматически вызывается из конструктора класса `AssemblyResolver`.
 |`StopResolve` |Останавливает функцию предоставления сборок из зарегистрированных каталогов.
 |===
 
 == Заметки
 
-Функциональность, реализуемую классом AssemblyResolver, позволяет получать сущности из клиентских сборок {dv} без необходимости загрузки этих сборок в каталог программы и GAC. {wincl} должен быть установлен.
+Функциональность, реализуемую классом `AssemblyResolver`, позволяет получать сущности из клиентских сборок {dv} без необходимости загрузки этих сборок в каталог программы и GAC. {wincl} должен быть установлен.
 
-Метод в StartResolve подписывается на событие AppDomain.CurrentDomain.AssemblyResolve и, при необходимости, предоставляет сборки, размещенные в каталоге клиента {dv} и зарегистрированных каталогах.
+Метод в `StartResolve` подписывается на событие `AppDomain.CurrentDomain.AssemblyResolve` и, при необходимости, предоставляет сборки, размещенные в каталоге клиента {dv} и зарегистрированных каталогах.
 
-Конструктор класса AssemblyResolver автоматически вызывает метод StartResolve, поэтому отдельно вызывать его не требуется.
+Конструктор класса `AssemblyResolver` автоматически вызывает метод `StartResolve`, поэтому отдельно вызывать его не требуется.
 
 В каталоги со сборками по умолчанию добавляется каталог установки {wincl}а.
 
@@ -47,7 +47,7 @@ public class AssemblyResolver
 
 == Примеры
 
-Следующие код демонстрирует пример использования AssemblyResolver.
+Следующие код демонстрирует пример использования `AssemblyResolver`.
 
 [source,csharp]
 ----
@@ -75,8 +75,7 @@ namespace ObjectContextSample
 
             try
             {
-                // создаем по CLSID
-                resolver = Activator.CreateInstance(Type.GetTypeFromCLSID(ResolverClsId));
+                resolver = Activator.CreateInstance(Type.GetTypeFromCLSID(ResolverClsId)); <.>
             }
             catch
             {
@@ -85,10 +84,9 @@ namespace ObjectContextSample
             if (resolver != null)
                 return;
 
-            // если не смогли, ищем по пути из реестра
             string basePath = GetResolverBasePath();
             if (string.IsNullOrEmpty(basePath))
-                return;
+                return; <.>
 
             try
             {
@@ -140,3 +138,5 @@ namespace ObjectContextSample
     }
 }
 ----
+<.> Создаем по CLSID.
+<.> Если не смогли, ищем по пути из реестра.

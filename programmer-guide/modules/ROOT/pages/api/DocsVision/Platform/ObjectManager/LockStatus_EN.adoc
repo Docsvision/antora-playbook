@@ -28,13 +28,10 @@ public enum LockStatus
 
 [source,csharp]
 ----
-//Получение с сервера данных карточки с известным идентификатором
-CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
-//Проверка блокировки на карточке
-if (card.LockStatus != LockStatus.Free)
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
+if (card.LockStatus != LockStatus.Free) <.>
 {
-    //Объект заблокирован -- проверка владельца
-    if (card.LockStatus = LockStatus.OwnerLocked)
+    if (card.LockStatus = LockStatus.OwnerLocked) <.>
     {
         card.RemoveLock();
     }
@@ -44,3 +41,6 @@ if (card.LockStatus != LockStatus.Free)
     }
 }
 ----
+<.> Получение с сервера данных карточки с известным идентификатором.
+<.> Проверка блокировки на карточке.
+<.> Объект заблокирован -- проверка владельца.

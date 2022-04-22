@@ -26,16 +26,16 @@ objectInstance:::
 ----
 ObjectContext objectContext = new ObjectContext(this);
 
-//получение сервиса для работы с документами
-IDocumentService docService = objectContext.GetService<IDocumentService>();
+IDocumentService docService = objectContext.GetService<IDocumentService>(); <.>
 
-//создание документа
 Document document = docService.CreateDocument(); ;
-document.Description = "Документ созданный из кода";
+document.Description = "Документ созданный из кода"; <.>
 
-//добавление документа в контекст
-objectContext.AddObject(document);
+objectContext.AddObject(document); <.>
 
-//сохранение изменений в контексте
-objectContext.AcceptChanges();
+objectContext.AcceptChanges(); <.>
 ----
+<.> Получение сервиса для работы с документами.
+<.> Создание документа.
+<.> Добавление документа в контекст.
+<.> Сохранение изменений в контексте.

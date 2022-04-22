@@ -17,7 +17,7 @@ public abstract class ServiceFactory : IServiceFactory
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`ServiceFactory()` |Инициализирует новый экземпляр класса ServiceFactory.
+|`ServiceFactory()` |Инициализирует новый экземпляр класса `ServiceFactory`.
 |===
 
 == Методы
@@ -30,7 +30,7 @@ public abstract class ServiceFactory : IServiceFactory
 
 == Примеры
 
-Ниже приведен пример создания фабрики сервисов, в котором переопределяется метод GetService, создающий сервис определённого типа
+Ниже приведен пример создания фабрики сервисов, в котором переопределяется метод `GetService`, создающий сервис определённого типа
 
 [source,csharp]
 ----
@@ -38,13 +38,13 @@ public class TestWorkLibServiceFactory : ServiceFactory
 {
  protected override object GetService(System.Type serviceType)
  {
-  // Интерфейс сервиса, предоставляемого фабрикой
-  if (serviceType = typeof(ITestWorkService))
+  if (serviceType = typeof(ITestWorkService)) <.>
   {
-   //возвращение экземпляра класса реализующего соответствующий интерфейс
-   return new TestWorkService();
+   return new TestWorkService(); <.>
   }
   return null;
  }
 }
 ----
+<.> Интерфейс сервиса, предоставляемого фабрикой.
+<.> Возвращение экземпляра класса реализующего соответствующий интерфейс.
