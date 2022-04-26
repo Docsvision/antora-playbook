@@ -223,6 +223,45 @@ CertificateSettings::
 - Сервис `$DocumentCardController` заменён на `$SignatureController`.
 - Во внутреннем классе `FileSign` удалена часть методов.
 - Для работы с подписью появился ЭУ `SignatureButton` и сервис `$DigitalSignature`.
+- Для открытия диалога подписи из скриптов в сервис `$DigitalSignature` добавлен метод `showSignatureMethodsSetupDialog`.
++
+.Например, запрос в консоли браузера:
+[source,shell]
+----
+WebClient.app.digitalSignature.showSignatureMethodsSetupDialog();
+----
++
+- Для добавления своего сообщения в диалог подписи в сервис `$DigitalSignature` добавлен метод `registerExtraSignatureDialogPropsProvider`.
++
+.Например, запрос в консоли браузера:
+[source,shell]
+----
+WebClient.app.digitalSignature.registerExtraSignatureDialogPropsProvider(() => ({ onSetupView: (view) => { view.footer = () => "Custom message"; return view; } })); <.>
+----
+<.> При необходимости функция `footer` может отрисовывать любые React-компоненты.
++
+- Для интеграции с другими облачными сервисами в сервис `$CloudSignature` добавлен метод `needsAuthorization(): boolean`. Если сервис не требует авторизации пользователя, метод возвращает `false`.
++
+.Пример работы:
+====
+. Открыть диалог настроек, авторизоваться в облачном сервисе
++
+.Пример запроса в консоли браузера:
+[source,shell]
+----
+window.certificates = await WebClient.app.cloudSignature.getCertificateList()
+----
++
+. Выйти из облачного сервиса, в консоли:
++
+[source,shell]
+----
+WebClient.app.cloudSignature.getCertificateList = () => new Promise((resolve) => resolve(window.certificates));
+WebClient.app.cloudSignature.needsAuthorization = () => false;
+----
++
+После этого если открыть диалог настроек, то флаг `*Отображать облачные сертификаты*` не будет отображаться, облачные сертификаты будут загружаться по умолчанию (через метод `getCertificateList`).
+====
 
 [#samples]
 == Новые примеры в репозитории на GitHub
