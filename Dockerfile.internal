@@ -1,0 +1,4 @@
+FROM nginx:stable-alpine
+
+COPY --chmod=644 wwwroot/ /usr/share/docsvision/html/
+COPY --chmod=644 nginx/default.conf /etc/nginx/conf.d/
