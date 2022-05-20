@@ -11,7 +11,7 @@ RUN git clone https://github.com/Docsvision/antora-playbook.git playbook \
     && ln -s ../ui/build playbook/build \
     && cd playbook \
     && npm ci --no-audit \
-    && npx antora --redirect-facility nginx antora-playbook.yml
+    && npx antora antora-playbook.yml
 
 FROM nginx:stable-alpine
 
