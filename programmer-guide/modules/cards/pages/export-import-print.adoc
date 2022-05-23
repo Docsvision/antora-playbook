@@ -6,7 +6,7 @@
 
 Платформа позволяет экспортировать любые данные (карточки, секции, наборы строк и отдельные строки) в формат XML, а также импортировать их обратно. С этой функциональностью неразрывно связана также и задача печати данных -- так как проще всего реализовать её через специальный формат экспорта.
 
-Для получения XML-представления данных карточки можно использовать метод SaveXml объектов `xref:Platform-ObjectManager:CardData_CL.adoc[CardData]`, `xref:Platform-ObjectManager:SectionData_CL.adoc[SectionData]`, `xref:Platform-ObjectManager:SubSectionData_CL.adoc[SubSectionData]`, и `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`, а также коллекций этих объектов.
+Для получения XML-представления данных карточки можно использовать метод SaveXml объектов `xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`, `xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]`, `xref:Platform-ObjectManager:SubSectionData_CL.adoc[SubSectionData]`, и `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`, а также коллекций этих объектов.
 
 [source,csharp]
 ----
@@ -14,7 +14,7 @@ FileStream file = new FileStream("C:\\MyCard.xml", FileMode.Create);
 card.SaveXml(file, ExportFlags.LinkedCards & ExportFlags.LinkedRows);
 ----
 
-Для управления логикой экспорта можно создать собственный инспектор на основе базового класса `xref:Platform-ObjectManager:ExportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ExportCardInspector]`.
+Для управления логикой экспорта можно создать собственный инспектор на основе базового класса `xref:Platform-ObjectManager-ExportCard:ExportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ExportCardInspector]`.
 
 == Импорт
 
@@ -27,7 +27,7 @@ card.SaveXml(file, ExportFlags.LinkedCards & ExportFlags.LinkedRows);
 
 Для импорта предназначен метод `xref:Platform-ObjectManager:CardManager.ImportCards_MT.adoc[ImportCards]` объекта `CardManager`. Импортируемый XML должен соответствовать стандартной схеме карточек {dv}. Проверка на соответствие этой схеме обязательно выполняется перед началом собственно загрузки данных, и в случае несоответствия менеджер объектов вернет ошибку. Таким образом, передавать на вход метода произвольный XML-документ бессмысленно.
 
-Для управления логикой работы импорта предназначен специальный тип объектов -- `xref:Platform-ObjectManager:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`. Этот объект полностью реализует процесс импорта, осуществляет контроль целостности данных и выполняет разрешение конфликтов.
+Для управления логикой работы импорта предназначен специальный тип объектов -- `xref:Platform-ObjectManager-IUpdatable:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`. Этот объект полностью реализует процесс импорта, осуществляет контроль целостности данных и выполняет разрешение конфликтов.
 
 ****
 Необходимость наличия сложного механизма разрешения конфликтов при импорте обусловлена многообразием возможных конфигураций системы. Например, даже при импорте одной отдельно взятой карточки может возникнуть ситуация, когда такая карточка с таким идентификатором уже существует в базе. Это сразу порождает несколько возможных вариантов дальнейшего поведения импортера:
@@ -62,7 +62,7 @@ ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session)
 CardDataCollection cards = session.CardManager.ImportCards(file, inspector);
 ----
 
-Если существующих типов инспекторов недостаточно для реализации необходимой логики импорта, можно разработать собственный объект-инспектор. Для этого нужно создать новый класс, унаследовав его от базового `xref:Platform-ObjectManager:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`, и переопределить методы этого класса, отвечающие за импорт отдельных структур.
+Если существующих типов инспекторов недостаточно для реализации необходимой логики импорта, можно разработать собственный объект-инспектор. Для этого нужно создать новый класс, унаследовав его от базового `xref:Platform-ObjectManager-IUpdatable:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`, и переопределить методы этого класса, отвечающие за импорт отдельных структур.
 
 == Печать
 
