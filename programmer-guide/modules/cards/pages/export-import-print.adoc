@@ -6,7 +6,7 @@
 
 Платформа позволяет экспортировать любые данные (карточки, секции, наборы строк и отдельные строки) в формат XML, а также импортировать их обратно. С этой функциональностью неразрывно связана также и задача печати данных -- так как проще всего реализовать её через специальный формат экспорта.
 
-Для получения XML-представления данных карточки можно использовать метод SaveXml объектов `xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`, `xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]`, `xref:Platform-ObjectManager:SubSectionData_CL.adoc[SubSectionData]`, и `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`, а также коллекций этих объектов.
+Для получения XML-представления данных карточки можно использовать метод SaveXml объектов `xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`, `xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]`, `xref:Platform-ObjectManager-SubSectionData:SubSectionData_CL.adoc[SubSectionData]`, и `xref:Platform-ObjectManager-Row:RowData_CL.adoc[RowData]`, а также коллекций этих объектов.
 
 [source,csharp]
 ----
@@ -25,7 +25,7 @@ card.SaveXml(file, ExportFlags.LinkedCards & ExportFlags.LinkedRows);
 Корректность импорта не гарантируется, если версия базы данных, из которой данные были экспортированы, отличается от версии базы, куда они импортируются.
 ====
 
-Для импорта предназначен метод `xref:Platform-ObjectManager:CardManager.ImportCards_MT.adoc[ImportCards]` объекта `CardManager`. Импортируемый XML должен соответствовать стандартной схеме карточек {dv}. Проверка на соответствие этой схеме обязательно выполняется перед началом собственно загрузки данных, и в случае несоответствия менеджер объектов вернет ошибку. Таким образом, передавать на вход метода произвольный XML-документ бессмысленно.
+Для импорта предназначен метод `xref:Platform-ObjectManager-CardManager:CardManager.ImportCards_MT.adoc[ImportCards]` объекта `CardManager`. Импортируемый XML должен соответствовать стандартной схеме карточек {dv}. Проверка на соответствие этой схеме обязательно выполняется перед началом собственно загрузки данных, и в случае несоответствия менеджер объектов вернет ошибку. Таким образом, передавать на вход метода произвольный XML-документ бессмысленно.
 
 Для управления логикой работы импорта предназначен специальный тип объектов -- `xref:Platform-ObjectManager-IUpdatable:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`. Этот объект полностью реализует процесс импорта, осуществляет контроль целостности данных и выполняет разрешение конфликтов.
 

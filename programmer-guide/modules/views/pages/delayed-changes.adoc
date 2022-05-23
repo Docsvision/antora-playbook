@@ -6,7 +6,7 @@
 
 Для оптимизации подобных сценариев, связанных с изменением большого количества значений, предусмотрен т.н. _режим отложенных изменений_, при котором все изменения накапливаются на клиентской стороне и передаются на сервер одним вызовом.
 
-Режим отложенных изменений устанавливается вызовом у объекта, реализующего интерфейс `xref:Platform-ObjectManager:IUpdatable_IN.adoc[IUpdatable]`, метода `BeginUpdate`:
+Режим отложенных изменений устанавливается вызовом у объекта, реализующего интерфейс `xref:Platform-ObjectManager-IUpdatable:IUpdatable_IN.adoc[IUpdatable]`, метода `BeginUpdate`:
 
 [source,csharp]
 ----
@@ -36,9 +36,9 @@ card.CancelUpdate();
 .Общий список объектов, поддерживающих режим отложенных изменений, следующий:
 * `xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`.
 * `xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]`.
-* `xref:Platform-ObjectManager:SubSectionData_CL.adoc[SubSectionData]`.
-* `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`.
-* `xref:Platform-ObjectManager:RowDataCollection_CL.adoc[RowDataCollection]`.
+* `xref:Platform-ObjectManager-SubSectionData:SubSectionData_CL.adoc[SubSectionData]`.
+* `xref:Platform-ObjectManager-Row:RowData_CL.adoc[RowData]`.
+* `xref:Platform-ObjectManager-Row:RowDataCollection_CL.adoc[RowDataCollection]`.
 * `xref:Platform-ObjectManager-ILockable:FileData_CL.adoc[FileData]`.
 * `xref:Platform-ObjectManager-SystemCards:Folder_CL.adoc[Folder]`.
 * `xref:Platform-ObjectManager-SystemCards:Shortcut_CL.adoc[Shortcut]`.
