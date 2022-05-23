@@ -1,0 +1,61 @@
+= Staff -- класс
+
+Класс Staff представляет объектную модель _Справочника сотрудников_.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class Staff : BaseDictionaryCard
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ADsMapping` |Задает или возвращает коллекцию соответствий между именем поля и атрибутом ADs.
+|`AllDepViewFields` |Задает или возвращает коллекцию отображаемых полей подразделений.
+|`AllEmplViewFields` |Задает или возвращает коллекцию отображаемых полей сотрудников.
+|`AllGrpViewFields` |Задает или возвращает коллекцию отображаемых полей групп.
+|`Groups` |Возвращает коллекцию групп из _Справочника сотрудников_.
+|`Positions` |Возвращает коллекцию должностей из _Справочника сотрудников_.
+|`Roles` |Возвращает коллекцию ролей из _Справочника сотрудников_.
+|`xref:Staff.Units_PR.adoc[Units]` |Задает или возвращает коллекцию подразделений верхнего уровня иерархии.
+|`UserSettings` |Возвращает пользовательские настройки.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Staff.AddGroup_MT.adoc[AddGroup(StaffGroup)]` |Добавляет существующую группу в _Справочник сотрудников_.
+|`AddPosition(StaffPosition)` |Добавляет должность.
+|`AddRole(StaffRole)` |Добавляет роль.
+|`AddUnit(StaffUnit)` |Добавляет подразделение.
+|`ExistGroup(StaffGroup)` |Проверяет наличие заданной группы.
+|`ExistRole(StaffRole)` |Проверяет наличие заданной роли.
+|`RemoveGroup(StaffGroup)` |Удаляет группу.
+|`RemovePosition(StaffPosition)` |Удаляет должность.
+|`RemoveRole(StaffRole)` |Удаляет роль.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ADsMappingProperty` |Представляет свойство "Соответствие полей ADs".
+|`AllDepViewFieldsProperty` |Представляет свойство "Отображаемые поля подразделений".
+|`AllEmplViewFieldsProperty` |Представляет свойство "Отображаемые поля сотрудников".
+|`AllGrpViewFieldsProperty` |Представляет свойство "Отображаемые поля группы".
+|`GroupsProperty` |Представляет свойство "Группы".
+|`PositionsProperty` |Представляет свойство "Должности".
+|`RolesProperty` |Представляет свойство "Роли".
+|`UnitsProperty` |Представляет свойство "Подразделения".
+|`UserSettingsProperty` |Представляет свойство "Пользовательские настройки".
+|===

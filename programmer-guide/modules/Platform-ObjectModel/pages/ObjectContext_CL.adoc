@@ -1,0 +1,81 @@
+= ObjectContext -- класс
+
+Класс `ObjectContext` предоставляет методы доступа к сущностям объектной модели уровня бизнес-логики.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class ObjectContext : IDisposable, IServiceContainer, IServiceProvider, IObjectContext, ILockManager
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ObjectContext_CT.adoc[ObjectContext(IServiceProvider)]` |Инициализирует новый экземпляр класса `ObjectContext` с помощью указанного значения.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ObjectContext.IsClosed_PR.adoc[IsClosed]` |Возвращает признак существования контекста объектов.
+|`xref:ObjectContext.UserAccount_PR.adoc[UserAccount]` |Возвращает название учетной записи текущего пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ObjectContext.AcceptChanges_MT.adoc[AcceptChanges]` |Применяет все изменения, которые были сделаны в контексте объектов.
+|`xref:ObjectContext.AddObject_MT.adoc[AddObject(ObjectBase)]` |Добавляет объект в контекст объектов.
+|`xref:ObjectContext.AddService_MT.adoc[AddService<T>(T)]` |Добавляет указанный сервис в контекст объектов.
+|`xref:ObjectContext.CopyObject_MT.adoc[CopyObject<T>(T, ObjectCollection<T>, Action<T>)]` |Копирует указанный объект в нового владельца.
+|`xref:ObjectContext.DeleteObject_MT.adoc[DeleteObject(ObjectBase)]` |Данный метод используется для удаления заданного объекта.
+|`Dispose` |Выполняет очистку ресурсов контекста объектов.
+|`xref:ObjectContext.FindObject_MT.adoc[FindObject<T>(QueryObject)]` |Возвращает первый результат поиска, удовлетворяющий заданным условиям.
+|`xref:ObjectContext.FindObjects_MT.adoc[FindObjects<T>(QueryObject)]` |Возвращает первый результат поиска, удовлетворяющий заданным условиям.
+|`GetObject(IObjectRef)` |Получает объект по переданной ссылки.
+|`xref:ObjectContext.GetObject_1_MT.adoc[GetObject(IObjectRef, IDictionary<String, Object>)]` |Получает объект по переданной ссылки. Также передаются дополнительные параметры получения объекта.
+|`xref:ObjectContext.GetObject_MT.adoc[GetObject<T>(Object)]` |Получает объект заданного типа с указанным идентификатором.
+|`GetObject<T>(ObjectRef<T>)` |Получает объект заданного типа из переданной ссылки.
+|`GetObjectRef<T>(Object)` |Получает ссылку на объект заданного типа с указанным идентификатором.
+|`GetObjectRef(ObjectBase)` |Получает ссылку на переданный объект.
+|`xref:ObjectContext.GetService_MT.adoc[GetService<T>]` |Возвращает _сервис_, реализующий переданный интерфейс.
+|`xref:ObjectContext.LockObject_MT.adoc[LockObject(IObjectRef, Boolean)]` |Блокирует объект по переданной ссылке.
+|`xref:ObjectContext.LockObject_1_MT.adoc[LockObject(ObjectBase, Boolean)]` |Блокирует переданный объект.
+|`xref:ObjectContext.RollbackChanges_MT.adoc[RollbackChanges]` |Отменяет все изменения в контексте объектов, которые не были сохранены методом `AcceptChanges`, `SaveObject<T>(T)` или `SaveObjects<T>(IEnumerable<T>)`.
+|`xref:ObjectContext.RollBackObject_MT.adoc[RollBackObject(ObjectBase)]` |Отменяет несохраненные изменения в заданном объекте.
+|`xref:ObjectContext.SaveObject_1_MT.adoc[SaveObject(ObjectBase)]` |Сохраняет изменения выбранного объекта.
+|`xref:ObjectContext.SaveObject_MT.adoc[SaveObject<T>(T)]` |Сохраняет изменения выбранного объекта.
+|`SaveObjects<T>(IEnumerable<T>)` |Сохраняет изменения в заданной коллекции объектов.
+|`xref:ObjectContext.UnlockObject_MT.adoc[UnlockObject(ObjectBase)]` |Снимает с объекта собственную блокировку.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Accepted` |Событие возникает после сохранения всех изменений в контексте, вызванного `AcceptChanges`.
+|`AcceptedObject` |Событие возникает после сохранения всех изменений в контексте, вызванного `SaveObject`.
+|`AcceptedObjects` |Событие возникает после сохранения всех изменений в контексте, вызванного `SaveObjects`.
+|`Accepting` |Событие возникает до сохранения всех изменений в контексте, вызванного `AcceptChanges`.
+|`AcceptingObject` |Событие возникает до сохранения всех изменений в контексте, вызванного `SaveObject`.
+|`AcceptingObjects` |Событие возникает до сохранения всех изменений в контексте, вызванного `SaveObjects`.
+|`BeforeRollback` |Событие возникает до отмены изменений, вызванной `RollbackChanges`.
+|`BeforeRollbackObject` |Событие возникает до отмены изменений, вызванной `RollBackObject`.
+|`BeforeRollbackObjects` |Событие возникает до отмены изменений, вызванной `RollBackObjects`.
+|`Disposed` |Событие возникает перед очисткой, вызванной методом `Dispose` или `Dispose(true)`.
+|`RefreshedObject` |Событие возникает после обновления, вызванного методом `RefreshObject`.
+|`Rollback` |Событие возникает после отмены изменений, вызванной `RollbackChanges`.
+|`RollbackObject` |Событие возникает после отмены изменений, вызванной `RollBackObject`.
+|`RollbackObjects` |Событие возникает после отмены изменений, вызванной `RollBackObjects`.
+|===

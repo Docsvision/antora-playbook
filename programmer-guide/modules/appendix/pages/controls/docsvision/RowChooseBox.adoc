@@ -1,0 +1,100 @@
+= Элемент управления "RowChooseBox"
+
+Элемент управления `_RowChooseBox_` предназначен для выбора значения из указанной в настройках элемента секции справочника. Соответствует элементу управления `_Значение из справочника_` _Конструктора разметок_.
+
+.Элемент управления "RowChooseBox"
+image::ROOT:universal-item-choose-box.png[Элемент управления "RowChooseBox"]
+
+.`_RowChooseBox_` содержит следующие функциональные кнопки:
+* *...* -- открывает окно выбора строки справочника.
+* *X* -- очищает результат выбора.
+
+== Свойства
+
+* `ActivateParams` -- параметры активации справочника (см. xref:directory-activation-parameters.adoc[Параметры активации справочников]).
+* `ReferenceCardTypeId` -- идентификатор (типа) справочника, из которого осуществляется выбор.
+* `ReferenceSectionTypeId` -- идентификатор секции справочника, содержащего данные для выбора.
+
+== Методы
+
+* `ChooseValue` -- открывает окно выбора элемента из справочника.
+
+== События
+
+* `*CustomChoosingValue*` -- событие вызывается при открытии окна поиска. Позволяет изменить механизм выбора значения за счет изменения:
+** `*e.Search*` -- флаг, показывающий, что это быстрый поиск, т.е. не надо показывать окно выбора значения из справочника, вместо этого надо найти все значения по `_Text_` и дать выбрать из них.
+** `*e.Chosen*` -- если `true`, то считается, что значение было выбрано.
+** `*e.ValueId*` -- идентификатор выбранной строки (`RowId`).
+* `*CustomizeSearchQuery*` -- событие срабатывает при выполнении быстрого поиска. Позволяет изменить поисковый запрос, результаты которого отображаются при вводе текста.
++
+См. дополнительную информацию в описании `CustomizeSearchQuery` в пункте xref:controls/docsvision/CommunicativeChooseBox.adoc[Элемент управления `_CommunicativeChooseBox_`].
++
+Например. Нужно ограничить поиск по определённому типу записи при выборе значения из _Конструктора справочников_.
++
+.Для этого достаточно добавить условие к существующему поисковому запросу:
+[source,csharp]
+----
+private void MyUniversalChooseBox_CustomizeSearchQuery(object sender, CustomizeSearchQueryEventArgs e)
+{ 
+ if (ItemTypeId != Guid.Empty)
+ {
+  e.SectionQuery.ConditionGroup.Conditions.AddNew(RowDataFields.ParentRow, FieldType.UniqueId, ConditionOperation.Equals, ItemTypeId); 
+ }
+}
+----
++
+* `CustomTextValue` -- событие вызывается перед преобразованием идентификатора выбранной строки справочника в текст. Позволяет установить любой текст по выбранному значению.
++
+К примеру, для отображения в элементе управления полного названия организации контрагента (при его выборе) обработчик события может быть следующим:
++
+[source,csharp]
+----
+private void Sender_CustomTextValue(System.Object sender, CustomTextValueEventArgs e)
+{ 
+ RowChooseBox control = sender as RowChooseBox;
+
+ if (control.Value = Guid.Empty) <.>
+  return;
+
+ PartnersCompany company = CardControl.ObjectContext.GetObject<PartnersCompany>(control.Value); <.>
+ 
+ if (company = null)
+  return;
+
+ e.CustomData.Text = company.FullName; <.>
+}
+----
+<.> Проверка факта выбора.
+<.> Получение организации контрагента.
+<.> Присвоение отображаемого значения.
++
+[CAUTION]
+====
+Данное событие не сработает до завершения загрузки карточки. Если нужно поддержать обработку на более раннем этапе, добавьте в `CardActivated` код вида:
+
+[source,csharp]
+----
+public override void CardActivated(CardActivatedEventArgs e)
+{
+ ICustomizableControl customizable = CardControl;
+ ILayoutPropertyItem senderItem = customizable.FindPropertyItem<ILayoutPropertyItem>("Sender"); <.>
+ senderItem.ControlValue = senderItem.ControlValue;
+}
+----
+<.> `Sender` -- название элемента управления типа `_RowChooseBox_`.
+====
++
+.Пример инициализации `_RowChooseBox_` с возможностью выбора сотрудника из справочника сотрудников:
+[source,csharp]
+----
+protected override void OnCardInitialized(EventArgs e)
+{
+ base.OnCardInitialized(e);
+ InitializeComponent(); <.>
+            
+ this.rowChooseBox.CardInstanceId = Guid.Empty;
+ this.rowChooseBox.ReferenceCardTypeId = new Guid("6710B92A-E148-4363-8A6F-1AA0EB18936C");
+ this.rowChooseBox.ReferenceSectionTypeId = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482");
+}
+----
+<.> Начало инициализации -- стандартное.

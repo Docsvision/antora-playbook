@@ -1,0 +1,28 @@
+= IBaseCardService.ExtractCertificate -- метод (BaseCardSignaturePart)
+
+Извлекает объект типа `X509Certificate2` из части подписи.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+X509Certificate2 ExtractCertificate(BaseCardSignaturePart signaturePart)
+----
+
+Параметры::
+signaturePart:::
+Тип: `xref:BackOffice-ObjectModel:BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]`
++
+Часть подписи
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
++
+Сертификат
+
+== Заметки
+
+Метод извлекает из объекта информацию по последней подписи и возвращает её вызвавшей стороне.

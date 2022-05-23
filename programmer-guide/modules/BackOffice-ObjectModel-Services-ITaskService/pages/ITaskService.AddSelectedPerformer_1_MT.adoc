@@ -1,0 +1,41 @@
+= ITaskService.AddSelectedPerformer -- метод (TaskMainInfo, Guid)
+
+Добавляет выбранного исполнителя задания в формате поискового слова.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, Guid searchWordId)
+----
+
+Параметры::
+mainInfo:::
+Тип: `xref:BackOffice-ObjectModel:TaskMainInfo_CL.adoc[TaskMainInfo]`
++
+Основная информация карточки
+
+searchWordId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор поискового слова
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]`
++
+Сущность выбранного исполнителя
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `mainInfo` или `searchWordId`.
+|===
+
+== Заметки
+
+Идентификаторы поисковых слов могут быть получены из `xref:BackOffice-ObjectModel-Services-Entities:Entities/PerformerSearchWordsManager_CL.adoc[PerformerSearchWordsManager]`.

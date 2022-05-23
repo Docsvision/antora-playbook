@@ -1,0 +1,44 @@
+= IStateService.AddOperationLocalizedDescription -- метод (StatesOperation, Int32, String)
+
+Добавляет локализованное описание операции _конструктора состояний_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StatesOperationDescription AddOperationLocalizedDescription(StatesOperation operation, int localeId, string name)
+----
+
+Параметры::
+operation:::
+Тип: `xref:BackOffice-ObjectModel:StatesOperation_CL.adoc[StatesOperation]`
++
+Операция, к которой добавляется локализованное описание
+
+localeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Номер локали
+
+name:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Локализованное описание
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StatesOperationDescription_CL.adoc[StatesOperationDescription]`
++
+Локализованное описание операции
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `operation`, либо передан пустой `name`.
+|`https://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается в случае, если передан отрицательный `localeId`.
+|`https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.PlatformNotSupportedException]` |Ошибка возвращается в случае, если локаль `localeId` не поддерживается.
+|===

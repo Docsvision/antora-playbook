@@ -1,0 +1,79 @@
+= IUserProfileCardService -- интерфейс
+
+Описывает сервис для работы с карточкой настроек пользователя.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IUserProfileCardService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GetCertificate(String)` |Получает сертификат пользователя с указанным именем учетной записи.
+|`GetSetting(Int32)` |Получает из профиля пользователя настройку указанного типа.
+|`GetSetting(Int32, Object)` |Получает из профиля пользователя настройку указанного типа, в случае её отсутствия, возвращает значение второго параметра.
+|`GetSetting(Int32, Object, Guid)` |Получает из профиля пользователя настройку указанного типа. Параметр `objectId` конкретизирует настройку, в случае присутствии нескольких однотипных настроек.
+|`SetCertificate(String, X509Certificate2)` |Задает сертификат указанному пользователю.
+|`SetPersonalFolder(String, FoldersFolder)` |Задает значение личной папки пользователя в карточке.
+|`SetSetting(Int32, Object)` |Сохраняет в профиль настройку заданного типа.
+|`SetSetting(Int32, Guid, Object)` |Сохраняет в профиль настройку с заданным идентификатором.
+|===
+
+== Примеры
+
+Приведен пример простого использования методов сервиса -- запись и чтение настроек
+
+[source,csharp]
+----
+<.>
+
+int settingType = 999;
+Guid objectID = Guid.NewGuid(); <.>
+
+iUserProfileCardService.SetSetting(settingType, objectID, "Белый"); <.>
+
+string value = (iUserProfileCardService.GetSetting(settingType, string.Empty, objectID) as string); <.>
+Console.WriteLine(value);
+----
+<.> Инициализация контекста объектов.
+<.> Задаем тип свойства и идентификатор.
+<.> Задаем значение свойства.
+<.> Получаем значение свойства, если свойство отсутствует, что в контексте примера конечно невозможно, то вернется пуста строка.
+
+Еще один пример использования сервиса -- создание и установка личной папки пользователя
+
+[source,csharp]
+----
+<.>
+
+IStateService stateService = objectContext.GetService<IStateService>();
+IUserProfileCardService iUserProfileCardService = objectContext.GetService<IUserProfileCardService>(); <.>
+
+StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("FFFFFFFF-FFFF-0003-FFFF-000000000000")); <.>
+
+FoldersFolder newfoldersFolder = new FoldersFolder(); <.>
+newfoldersFolder.Name = "OtherFolder";
+
+foldersFolder.Folders.Add(newfoldersFolder); <.>
+objectContext.AcceptChanges();
+
+iUserProfileCardService.SetPersonalFolder(staffEmployee.AccountName, newfoldersFolder); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов по работе со справочником сотрудников и профилями пользователей.
+<.> Получение пользователя с идентификатором `00000000-0000-0000-0000-000000000000`.
+<.> Получение корневой папки "Папки".
+<.> Создание новой папки с названием "OtherFolder".
+<.> Добавление к корневой созданной папки и сохранение контекста.
+<.> Назначение персональной папки.

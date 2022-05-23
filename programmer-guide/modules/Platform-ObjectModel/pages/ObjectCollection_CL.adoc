@@ -1,0 +1,49 @@
+= ObjectCollection<T> -- класс
+
+Основной класс коллекции объектов `ObjectBase`, поддерживающий функцию оповещения об изменении.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ObjectCollection<T> : ObjectCollectionBase<T>, IList, ICollection, IList<T>, ICollection<T>, IEnumerable<T>, IEnumerable where T : DocsVision.Platform.ObjectModel.ObjectBase
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ObjectCollection()` |Инициализирует экземпляр класса ObjectCollection.
+|`ObjectCollection(ObjectCollectionInitializationData)` |Инициализирует экземпляр класса `ObjectCollection` с помощью указанных значений.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Item` |Задает или возвращает элемент коллекции с указанным индексом.
+|`Items` |Возвращает все элементы коллекции.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Add(T)` |Добавляет элемент коллекции.
+|`AddRange(IEnumerable<T>)` |Добавляет несколько элементов в коллекцию.
+|`Clear` |Удаляет все элементы коллекции.
+|`Contains(T)` |Проверяет вхождение в коллекцию указанного элемента.
+|`CopyTo(T[], Int32)` |Копирует элементы коллекции в массив, начиная с указанного индекса.
+|`GetEnumerator` |Возвращает перечислитель.
+|`IndexOf(T)` |Определяет индекс заданного элемента в коллекции `ObjectCollection`.
+|`Insert(Int32, T)` |Вставляет элемент в коллекцию `ObjectCollection` с заданным индексом.
+|`Remove(T)` |Удаляет первое вхождение указанного объекта из списка `ObjectCollection`.
+|`RemoveAt(Int32)` |Удаляет элемент `ObjectCollection`, расположенный по указанному индексу.
+|`ToArray` |Возвращает массив, полученный из элементов коллекции `ObjectCollection`.
+|===

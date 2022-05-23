@@ -1,0 +1,34 @@
+= IStaffService.AddRoleFolder -- метод (StaffRole, Guid, Boolean)
+
+Добавляет новую папку в список папок роли.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffRoleFolder AddRoleFolder(StaffRole staffRole, Guid folderId, bool showInTab)
+----
+
+Параметры::
+staffRole:::
+Тип: `xref:BackOffice-ObjectModel:StaffRole_CL.adoc[StaffRole]`
++
+Роль
+
+folderId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор папки
+
+showInTab:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+true, если папка должна отображается в области моих папок, иначе -- `false`
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffRoleFolder_CL.adoc[StaffRoleFolder]`
++
+Папка роли

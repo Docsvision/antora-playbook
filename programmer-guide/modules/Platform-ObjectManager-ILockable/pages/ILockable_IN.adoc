@@ -1,0 +1,33 @@
+= ILockable -- интерфейс
+
+Разрешает для объекта управление режимом отложенной блокировки.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ILockable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ILockable.LockOwner_PR.adoc[LockOwner]` |При переопределении в производном классе возвращает учетную запись владельца блокировки.
+|`xref:ILockable.LockStatus_PR.adoc[LockStatus]` |При переопределении в производном классе возвращает статус блокировки.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ILockable.ForceUnlock_MT.adoc[ForceUnlock]` |При переопределении в производном классе принудительно снимает блокировку.
+|`xref:ILockable.PlaceLock_MT.adoc[PlaceLock]` |При переопределении в производном классе устанавливает временную блокировку.
+|`xref:ILockable.PlaceLock_1_MT.adoc[PlaceLock(Boolean)]` |При переопределении в производном классе позволяет установить постоянную блокировку.
+|`xref:ILockable.RemoveLock_MT.adoc[RemoveLock]` |При переопределении в производном классе снимает собственную установленную блокировку.
+|===

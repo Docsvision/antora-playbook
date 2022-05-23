@@ -1,0 +1,34 @@
+= ITaskService.HasCompletionParameterValue -- метод (Task, Guid, String)
+
+Проверяет наличие значения у параметра завершения задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool HasCompletionParameterValue(Task task, Guid sectionId, string fieldAlias)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание
+
+sectionId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор секции
+
+fieldAlias:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Псевдоним поля
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Если имеет значение -- `true`, иначе -- `false`

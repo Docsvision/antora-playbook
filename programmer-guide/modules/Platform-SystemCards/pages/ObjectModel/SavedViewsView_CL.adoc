@@ -1,0 +1,57 @@
+= SavedViewsView -- класс
+
+Представляет объектную модель _Карточки сохраненных представлений_.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.Platform.SystemCards.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.SystemCards.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class SavedViewsView : ObjectBase
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`SavedViewsView` |Инициализирует новый экземпляр класса SavedViewsView.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Hidden` |Задает или возвращает признак скрытого представления.
+|`Name` |Задает или возвращает название представления.
+|`Text` |Задает или возвращает описание.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`HiddenProperty` |Определяет свойство "Скрытое представление".
+|`NameProperty` |Определяет свойство "Название представления".
+|`TextProperty` |Определяет свойство "XML описание".
+|===
+
+== Заметки
+
+Представление может быть создано в _Рабочем месте администратора_ (см. документ "Справка {dv} 4.5").
+
+== Примеры
+
+Представление может быть получено по уникальному идентификатору
+
+[source,csharp]
+----
+<.>
+            
+SavedViewsView savedViewsView = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-0000-0000-000000000000"));
+----
+<.> Инициализация контекста объектов.

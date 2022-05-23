@@ -1,0 +1,33 @@
+= IAccessCheckingService.GetUserRoles -- метод (BaseCard, StaffEmployee)
+
+Получает список ролей карточки для указанного сотрудника.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<RoleModelRole> GetUserRoles(BaseCard card, StaffEmployee employee)
+----
+
+Параметры::
+card:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка библиотеки _{bo}_
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник подразделения
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<RoleModelRole>`
++
+Коллекция объектов типа `xref:BackOffice-ObjectModel:RoleModelRole_CL.adoc[RoleModelRole]`
+
+== Заметки
+
+В первую очередь производиться поиск в локальном кэше. В случае возникновения ошибки, метод вернет пустую коллекцию.

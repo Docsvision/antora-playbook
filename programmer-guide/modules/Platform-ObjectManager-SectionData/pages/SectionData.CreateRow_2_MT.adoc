@@ -1,0 +1,34 @@
+= SectionData.CreateRow -- метод (Guid, Guid, Guid)
+
+Создает в секции новую строку с заданным идентификатором, а также с конкретными значениями родительской строки секции и родительской строки дерева.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract RowData CreateRow(Guid parentTreeRowId, Guid parentRowId, Guid rowId)
+----
+
+Параметры::
+parentTreeRowId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор родительской строки дерева
+
+parentRowId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор родительской строки
+
+rowId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор присваиваемый строке
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-Row:RowData_CL.adoc[RowData]`
++
+Новая строка

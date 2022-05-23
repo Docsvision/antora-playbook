@@ -1,0 +1,44 @@
+= IStaffService.SetCurrentEmployee -- метод (StaffEmployee)
+
+Переопределяет текущего сотрудника, возвращаемого методом `GetCurrentEmployee`.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void SetCurrentEmployee(StaffEmployee employee)
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка будет возвращена, если текущий владелец сессии не входит в группу _{dv} Administrators_ или _{dv} Power Users_.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffEmployee staffEmployee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+staffService.SetCurrentEmployee(staffEmployee); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником сотрудников.
+<.> Получение сотрудника, которым будет подменен текущий сотрудник.
+<.> Подмена сотрудника.

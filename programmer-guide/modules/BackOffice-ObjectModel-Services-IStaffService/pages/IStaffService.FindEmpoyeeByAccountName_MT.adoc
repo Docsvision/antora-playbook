@@ -1,0 +1,46 @@
+= IStaffService.FindEmpoyeeByAccountName -- метод (String)
+
+Выполняет поиск сотрудника по названию учетной записи.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffEmployee FindEmpoyeeByAccountName(string accountName)
+----
+
+Параметры::
+accountName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Имя учетной записи искомого сотрудника
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `accountName`.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffEmployee employee = staffService.FindEmpoyeeByAccountName(@"domain\ivanov_ii"); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Поиск сотрудника по названию учетной записи.

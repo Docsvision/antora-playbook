@@ -1,0 +1,29 @@
+= IStaffService.FindGroupByName -- метод (StaffGroup, String)
+
+Возвращает группу с указанным названием.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffGroup FindGroupByName(StaffGroup parentGroup, string groupName)
+----
+
+Параметры::
+parentGroup:::
+Тип: `xref:BackOffice-ObjectModel:StaffGroup_CL.adoc[StaffGroup]`
++
+Группа, в которой выполняется поиск. Для поиска по верхнему уровню, нужно передать `null`
+
+groupName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Название группы
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffGroup_CL.adoc[StaffGroup]`
++
+Группа сотрудников с конкретным именем

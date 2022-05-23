@@ -1,0 +1,51 @@
+= ITaskListService.GetTasksTree -- метод (TaskList)
+
+Возвращает список узлов дерева заданий, построенного из списка заданий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<TaskTreeInfo> GetTasksTree(TaskList taskList)
+----
+
+Параметры::
+taskList:::
+Тип: `xref:BackOffice-ObjectModel:TaskList_CL.adoc[TaskList]`
++
+Список заданий
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<TaskTreeInfo>`
++
+Коллекция информации по узлам `xref:BackOffice-ObjectModel:TaskTreeInfo_CL.adoc[TaskTreeInfo]` дерева заданий
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList`.
+|===
+
+== Примеры
+
+Далее приведен пример получения дерева заданий из списка задания с использованием метода `GetTasksTree`
+
+[source,csharp]
+----
+<.>
+
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+IEnumerable<TaskTreeInfo> tree = taskListService.GetTasksTree(document.MainInfo.Tasks); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа, содержащего список заданий.
+<.> Получение дерева заданий из списка заданий документа.

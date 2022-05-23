@@ -1,0 +1,34 @@
+= ITaskService.AddChildKindSettings -- метод (KindsCardKind, ObjectCollection<TaskPresetChildKindSetting>, Boolean)
+
+Добавляет в переданную коллекцию настроек вид, доступный для выбора при создании подчинённого задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskPresetChildKindSetting AddChildKindSettings(KindsCardKind kindsCardKind, ObjectCollection<TaskPresetChildKindSetting> kindSettings, bool creatable)
+----
+
+Параметры::
+kindsCardKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид карточки
+
+kindSettings:::
+Тип: `xref:Platform-ObjectModel:ObjectCollection_CL.adoc[ObjectCollection]<TaskPresetChildKindSetting>`
++
+Коллекция настроек видов (типа `xref:BackOffice-ObjectModel:TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]`) для подчиненного задания
+
+creatable:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- данный вид может быть создан из родительского задания, иначе -- `false`
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskPresetChildKindSetting_CL.adoc[TaskPresetChildKindSetting]`
++
+Параметры создания вида подчиненного задания

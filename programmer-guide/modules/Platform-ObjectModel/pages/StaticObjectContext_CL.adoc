@@ -1,0 +1,66 @@
+= StaticObjectContext -- класс
+
+Предоставляет статические члены создания и получения контекста объектов.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class StaticObjectContext
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Current` |Задает или возвращает статическое значение контекста объектов.
+|`ObjectContext` |Возвращает контекст объектов.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Create` |Инициализирует контекст с пустым сервис-провайдером.
+|`Create(IServiceProvider)` |Инициализирует контекст с указанным сервис-провайдером.
+|===
+
+== Примеры
+
+Инициализация статического контекста объектов во многом аналогична инициализации контекста объектов, пример которой приведен в примере xref:samples:object-model/init-context.adoc[Инициализация контекста объектов]
+
+[source,csharp]
+----
+private static void CreateStaticContext()
+{
+ var sessionContainer = new System.ComponentModel.Design.ServiceContainer(); <.>
+ sessionContainer.AddService(typeof(DocsVision.Platform.ObjectManager.UserSession), userSession);
+ 
+ StaticObjectContext.Create(sessionContainer); <.>
+
+ BackOffice.Register(StaticObjectContext.Current); <.>
+
+ var serviceFactoryRegistry = StaticObjectContext.Current.GetService<IServiceFactoryRegistry>();
+ serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
+ serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory)); <.>
+
+ StaticObjectContext.Current.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null)); <.>
+
+ IMetadataProvider metadataProvider = DocsVisionObjectFactory.CreateMetadataProvider(userSession); <.>
+ StaticObjectContext.Current.AddService<IMetadataManager>(DocsVisionObjectFactory.CreateMetadataManager(metadataProvider, userSession));
+ StaticObjectContext.Current.AddService<IMetadataProvider>(metadataProvider);
+}
+----
+<.> Инициализация сервис-провайдера.
+<.> Создание контекста объектов.
+<.> Регистрация базовых (`SystemCardsMapperFactory`, `BackOfficeMapperFactory`) фабрик преобразователей данных.
+<.> Регистрация базовых фабрик сервисов.
+<.> Регистрация сервиса для работы с хранилищем {dv}.
+<.> Регистрация поставщика метаданных карточек.
+
+Сессия пользователя (`userSession`) может быть получена по аналогии с примером `xref:samples:object-model/init-context.adoc[Инициализация контекста объектов]`

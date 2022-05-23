@@ -1,0 +1,34 @@
+= IStaffService.GetGroupEmployees -- метод (StaffGroup, Boolean, Boolean)
+
+Возвращает сотрудников группы.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<StaffEmployee> GetGroupEmployees(StaffGroup group, bool useNotAvailable, bool useNotSearchable)
+----
+
+Параметры::
+group:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffGroup]`
++
+Группа сотрудников
+
+useNotAvailable:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Если true, то из результата будут исключены сотрудники с флагом `NotAvailable`
+
+useNotSearchable:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Если true, то из результата будут исключены сотрудники с флагом `NotSearchable`
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
++
+Коллекция выбранных сотрудников типа `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`

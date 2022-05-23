@@ -1,0 +1,39 @@
+= LogManager.SetLogStrategy -- метод (LogStrategy, ClearLogStrategy, Int32, Int32, Int32)
+
+Установка параметров стратегии ведения журнала событий.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void SetLogStrategy(LogStrategy logStrategy, ClearLogStrategy clearStrategy, int clearLogMaxCount, int clearLogCutCount, int clearLogCutDays);
+----
+
+Параметры::
+logStrategy:::
+Тип: `xref:LogStrategy_EN.adoc[LogStrategy]`
++
+Стратегия записи сообщений в журнал.
+
+clearStrategy:::
+Тип: `xref:Platform-ObjectManager:ClearLogStrategy_EN.adoc[ClearLogStrategy]`
++
+Стратегия очистки журнала.
+
+clearLogMaxCount:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Максимальное количество записей в журнале
+
+clearLogCutCount:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Количество сохраняемых после чистки записей
+
+clearLogCutDays:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Максимальное количество дней хранения записей в журнале

@@ -1,0 +1,89 @@
+= LicenseManager -- класс
+
+Класс `LicenseManager` содержит функциональность по работе с дополнительными опциями лицензии {dv}, в которых присутствует ограничение по количеству соединений.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class LicenseManager
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Session` |Возвращает сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`DecrementFeatureUsage(Guid)` |Уменьшает число активных соединений в счетчике дополнительной опции лицензии.
+|`IncrementFeatureUsage(Guid)` |Увеличивает число активных соединений в счетчике дополнительной опции лицензии.
+|===
+
+== Заметки
+
+На основе методов `DecrementFeatureUsage` и `IncrementFeatureUsage` реализуется механизм контроля числа пользователей, использующих определённый модуль {dv}, если для данного модуля предусмотрено лицензионное ограничение на количество одновременно работающих пользователей.
+
+== Примеры
+
+К примеру, при осуществлении доступа к дополнительному модулю {dv}, необходимо выполнить проверку того, не достигнут ли предел подключений пользователей:
+
+[source,csharp]
+----
+private void Take(UserSession userSession, Guid featureId) <.>
+{
+ try
+ {
+  userSession.LicenseManager.IncrementFeatureUsage(featureId); <.>
+  return;
+ } catch (StorageServerException ex)
+ {
+  if (ex.ErrorCode = (int)ErrorCode.FeatureLimit) <.>
+  {
+   <.>
+   return;
+  } else
+  {
+   <.>
+   return;
+  }
+ }
+}
+----
+<.> `userSession` -- сессия пользователя
++
+`featureId` -- идентификатор дополнительной опции в лицензии {dv}.
++
+<.> Увеличение числа соединений с модулем.
+<.> Если достигнут предел подключений, то:
+<.> Вывод сообщения о превышении количества пользователей.
+<.> Вывод сообщения о прочей ошибке.
+
+После выхода пользователя из модуля, соединение должно быть освобождено:
+
+[source,csharp]
+----
+private void Release(UserSession userSession, Guid featureId)
+{
+ try
+ {
+  userSession.LicenseManager.DecrementFeatureUsage(featureId); <.>
+  return;
+ } catch (StorageServerException ex)
+ {
+  <.>
+  return;
+ }
+}
+----
+<.> Уменьшение числа соединений с модулем.
+<.> Вывод сообщения о прочей ошибке.

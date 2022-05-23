@@ -1,0 +1,50 @@
+= ICategoriesService.AddCategory -- метод (CategoriesCategory)
+
+Добавляет новую категорию в _Справочник категорий_, в указанную родительскую категорию.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+CategoriesCategory AddCategory(CategoriesCategory parentCategory)
+----
+
+Параметры::
+parentCategory:::
+Тип: `xref:BackOffice-ObjectModel:CategoriesCategory_CL.adoc[CategoriesCategory]`
++
+Родительская категория
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:CategoriesCategory_CL.adoc[CategoriesCategory]`
++
+Созданная категория
+
+== Заметки
+
+Если параметр `parentCategory` не задан (имеет значение `null`), то в качестве родительской категории будет использована корневая категория _Справочника категорий_.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>(); <.>
+
+CategoriesCategory category = categoriesService.AddCategory(null); <.>
+category.Name = "Новая категория";
+category.Comment = "Пример создания категории";
+
+category.View = objectContext.GetObject<SavedViewsView>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+objectContext.SaveObject(category); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с сервисами.
+<.> Добавление категории в корневую категорию.
+<.> Получение и присвоение представления. Если представление не задано, то будет использоваться Дайджест.
+<.> Сохранение.

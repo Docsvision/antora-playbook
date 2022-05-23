@@ -1,0 +1,34 @@
+= ITaskListService.CopyTask -- метод (TaskList, Task, BaseCard)
+
+Создает копию указанного задания в списке заданий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskListTask CopyTask(TaskList taskList, Task task, BaseCard parentCard)
+----
+
+Параметры::
+taskList:::
+Тип: `xref:BackOffice-ObjectModel:TaskList_CL.adoc[TaskList]`
++
+Список заданий, в который осуществляется копирование
+
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Копируемое задание
+
+parentCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, содержащая список заданий
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskListTask_CL.adoc[TaskListTask]`
++
+Полученная копия задания

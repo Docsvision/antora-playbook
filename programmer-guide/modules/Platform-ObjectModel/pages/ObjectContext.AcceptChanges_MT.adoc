@@ -1,0 +1,17 @@
+= ObjectContext.AcceptChanges -- метод
+
+Применяет все изменения, которые были сделаны в контексте объектов.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public void AcceptChanges()
+----
+
+== Заметки
+
+Метод получает все объекты, у которых установлены флаги состояния (`ObjectStateFlags`) в значения: `Modified`, `Added`, `Deleted` или `DeletedFromParent`.

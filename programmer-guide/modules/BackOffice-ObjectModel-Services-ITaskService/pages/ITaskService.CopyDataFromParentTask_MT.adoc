@@ -1,0 +1,65 @@
+= ITaskService.CopyDataFromParentTask -- метод (Task, TaskSetting, Task)
+
+Копирует значения и ссылки из родительского задания в дочернее.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void CopyDataFromParentTask(Task task, TaskSetting taskSetting, Task parentTask)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание (подчиненное), в которое переносятся значения
+
+taskSetting:::
+Тип: `xref:BackOffice-ObjectModel-Services-Entities:Entities/KindSetting/TaskSetting_CL.adoc[TaskSetting]`
++
+Настройки вида задания, для определения параметров копирования значений
+
+parentTask:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание (родительское), из которого выполняется копирование значений
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`, `taskSetting` или `parentTask`.
+|===
+
+== Заметки
+
+При создании дочернего здания методом `CreateChildTask`, вызывать метод `CopyDataFromParentTask` не требуется -- выполняется автоматически.
+
+== Примеры
+
+В приведенном ниже примере демонстрируется использование метода `CopyDataFromParentTask` при копировании данных из основного задания в дочернее. В основном задании данные были изменены, к примеру, из объектной модели, поэтому изменения в подчиненное не попали. Настройки (_справочника видов карточек_) подчиненного вида задания подразумевают получение определённых данных из родительского.
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+Task parentTask = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+Task childTask = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+TaskSetting childTaskKindSetting = taskService.GetKindSettings(childTask.SystemInfo.CardKind); <.>
+
+taskService.CopyDataFromParentTask(childTask, childTaskKindSetting, parentTask); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение основного и подчиненного заданий.
+<.> Получение настроек вида подчиненного задания, в которое должно быть выполнено копирование значений.
+<.> Копирование данных.

@@ -1,0 +1,43 @@
+= CardManager.CreateCard -- метод (Guid)
+
+Создает карточку и возвращает ссылку на интерфейс компонента карточки.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public object CreateCard(Guid cardTypeId)
+----
+
+Параметры::
+cardTypeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор типа карточки
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.object.aspx[Object]`
++
+Интерфейс карточки
+
+== Заметки
+
+В дальнейшем возвращенное значение можно привести к конкретному типу карточки.
+
+== Примеры
+
+[source,csharp]
+----
+const string FILE_CARD_TYPE = "6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3"; <.>
+VersionedFileCard fileCard = (VersionedFileCard)session.CardManager.CreateCard(new Guid(FILE_CARD_TYPE)); <.>
+fileCard.Initialize(@"C:\Test.doc", Guid.Empty, false, false); <.>
+FileVersion fileVersion = fileCard.CurrentVersion;
+MessageBox.Show(fileVersion.VersionString); <.>
+----
+<.> Константа, идентификатор типа карточки-файла.
+<.> Создание карточки файла.
+<.> Первичная инициализация карточки файла.
+<.> Получение первой версии файла.

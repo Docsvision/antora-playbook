@@ -1,0 +1,58 @@
+= ICategoriesService.PasteCategory -- метод (CategoriesCategory, CategoriesCategory)
+
+Создает копию указанной категории с сохранением прав доступа и существующих подкатегорий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+CategoriesCategory PasteCategory(CategoriesCategory parentCategory, CategoriesCategory categoryToCopy)
+----
+
+Параметры::
+parentCategory:::
+Тип: `xref:BackOffice-ObjectModel:CategoriesCategory_CL.adoc[CategoriesCategory]`
++
+Категория, в которую будет помещена копия категории
+
+categoryToCopy:::
+Тип: `xref:BackOffice-ObjectModel:CategoriesCategory_CL.adoc[CategoriesCategory]`
++
+Копируемая категория
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:CategoriesCategory_CL.adoc[CategoriesCategory]`
++
+Готовая копия категории
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `categoryToCopy`.
+|===
+
+== Заметки
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ICategoriesService categoriesService = objectContext.GetService<ICategoriesService>(); <.>
+
+CategoriesCategory copiedCategory = categoriesService.FindCategoryByName(null, "Копируемая категория"); <.>
+CategoriesCategory parentCategory = categoriesService.FindCategoryByName(null, "Родительская категория");
+
+CategoriesCategory copy = categoriesService.PasteCategory(parentCategory, copiedCategory); <.>
+objectContext.SaveObject(copiedCategory);
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником категорий.
+<.> Получение копируемой категории и категории, в которую будет помещена копия.
+<.> Создание копии.

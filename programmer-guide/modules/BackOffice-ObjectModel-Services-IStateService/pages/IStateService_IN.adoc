@@ -1,0 +1,63 @@
+= IStateService -- интерфейс
+
+Сервис для взаимодействия с _конструктором состояний_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IStateService
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IStateService.StatesDictionary_PR.adoc[StatesDictionary]` |Возвращает ссылку на конструктор состояний.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IStateService.AddBranch_MT.adoc[AddBranch(StatesCardKindStateSetting, StatesState, StatesState, StatesOperation)]` |Создает новый переход в автомате состояний вида карточки.
+|`xref:IStateService.AddOperation_MT.adoc[AddOperation(StatesCardKindStateSetting, Boolean)]` |Добавляет операцию в настройки автомата состояний вида карточки.
+|`xref:IStateService.AddOperation_1_MT.adoc[AddOperation(StatesCardKindStateSetting, String, Boolean)]` |Добавляет операцию в настройки автомата состояний вида карточки.
+|`xref:IStateService.AddOperationLocalizedDescription_MT.adoc[AddOperationLocalizedDescription(StatesOperation, Int32, String)]` |Добавляет локализованное описание операции.
+|`AddOperationLocalizedName(StatesOperation, Int32, String)` |Добавляет локализованное название операции.
+|`xref:IStateService.AddState_MT.adoc[AddState(StatesCardKindStateSetting)]` |Добавляет новое состояние в автомат состояний вида карточки.
+|`AddStateLocalizedName(StatesState, Int32, String)` |Добавляет локализованное название состояния.
+|`xref:IStateService.AreOperationsAllowed_MT.adoc[AreOperationsAllowed(IEnumerable<BuiltInOperation>, BaseCard)]` |Проверяет возможность выполнения встроенных операций, применительно к определённой карточке.
+|`xref:IStateService.AreOperationsAllowed_1_MT.adoc[AreOperationsAllowed(IEnumerable<StatesOperation>, BaseCard)]` |Проверяет возможность выполнения операций (_конструктора состояний_), применительно к определённой карточке.
+|`xref:IStateService.AreOperationsAllowedFull_MT.adoc[AreOperationsAllowedFull(IEnumerable<BuiltInOperation>, BaseCard)]` |Проверяет возможность выполнения встроенных операций, применительно к определённой карточке, с учетом прав сотрудника.
+|`xref:IStateService.AreOperationsAllowedFull_1_MT.adoc[AreOperationsAllowedFull(IEnumerable<StatesOperation>, BaseCard)]` |Проверяет возможность выполнения операций (_конструктора состояний_), применительно к определённой карточке, с учетом прав сотрудника.
+|`CanDeleteOperation(StatesOperation)` |Проверяет возможность удаления операции из _конструктора состояний_.
+|`xref:IStateService.ChangeState_MT.adoc[ChangeState(BaseCard, StatesState)]` |Изменяет состояние карточки.
+|`xref:IStateService.ChangeState_1_MT.adoc[ChangeState(BaseCard, StatesStateMachineBranch)]` |Изменяет состояние карточки.
+|`xref:IStateService.ChangeState_2_MT.adoc[ChangeState(BaseCard, StatesState, Boolean, String)]` |Изменяет состояние карточки.
+|`xref:IStateService.ChangeState_3_MT.adoc[ChangeState(BaseCard, StatesStateMachineBranch, Boolean, String)]` |Изменяет состояние карточки.
+|`xref:IStateService.ChangeState_4_MT.adoc[ChangeState(BaseCard, StatesStateMachineBranch, IEnumerable<KindsCardProcess>, String)]` |Изменяет состояние карточки.
+|`CreateStateMachineLayout(StatesCardKindStateSetting)` |Создает разметку автомата состояний.
+|`xref:IStateService.FindBranchByBuiltIn_MT.adoc[FindBranchByBuiltIn(BuiltInBranch, StatesState)]` |Возвращает переход автомата состояний, соответствующий определённому начальному состоянию и указанному встроенному переходу.
+|`xref:IStateService.FindLineBranchesByStartState_MT.adoc[FindLineBranchesByStartState(StatesState)]` |Возвращает все допустимые переходы состояний карточки, имеющей указанное начальное состояние.
+|`xref:IStateService.FindOperationByBuiltIn_1_MT.adoc[FindOperationByBuiltIn(BuiltInOperation, BaseCard)]` |Возвращает операцию _конструктора состояний_, соответствующую указанной встроенной операции.
+|`xref:IStateService.FindOperationByBuiltIn_MT.adoc[FindOperationByBuiltIn(BuiltInOperation, KindsCardKind)]` |Возвращает операцию _конструктора состояний_, соответствующую указанной встроенной операции.
+|`FindScriptBranchesByStartState(StatesState)` |Возвращает переходы автомата состояний, в которых смена состояния осуществляется по скрипту.
+|`xref:IStateService.FindStateByBuiltIn_MT.adoc[FindStateByBuiltIn(BuiltInState, BaseCard)]` |Возвращает состояние карточки, представленное в _Конструкторе состояний_ и соответствующее переданному встроенному состоянию.
+|`xref:IStateService.GetKindStateSetting_MT.adoc[GetKindStateSetting(KindsCardKind)]` |Возвращает настройки вида карточки, заданные в _Конструкторе состояний_.
+|`xref:IStateService.GetOperations_MT.adoc[GetOperations(KindsCardKind)]` |Возвращает список операций (редактирования и перехода), определённых в _Конструкторе состояний_ для указанного вида карточки.
+|`xref:IStateService.GetOrCreatePreferredCardKindSetting_MT.adoc[GetOrCreatePreferredCardKindSetting(KindsCardKind)]` |Возвращает, а при необходимости создает, настройки автомата состояний вида карточки.
+|`xref:IStateService.GetStateMachineBranches_MT.adoc[GetStateMachineBranches(KindsCardKind)]` |Возвращает список доступных, для указанного вида карточки, переходов автомата состояний.
+|`GetStateMachineLayout(KindsCardKind)` |Возвращает разметку автомата состояний для вида карточки.
+|`xref:IStateService.GetStates_MT.adoc[GetStates(KindsCardKind)]` |Возвращает список возможных состояний карточки.
+|`xref:IStateService.IsOperationAllowed_MT.adoc[IsOperationAllowed(BuiltInOperation, BaseCard)]` |Определяет возможность выполнения встроенной операции, применительно к определённой карточке.
+|`xref:IStateService.IsOperationAllowed_1_MT.adoc[IsOperationAllowed(StatesOperation, BaseCard)]` |Определяет возможность выполнения операции (_конструктора состояний_), применительно к определённой карточке.
+|`xref:IStateService.IsOperationAllowedFull_MT.adoc[IsOperationAllowedFull(BuiltInOperation, BaseCard)]` |Определяет возможность выполнения встроенной операции, применительно к определённой карточке, с учетом прав доступа.
+|`xref:IStateService.IsOperationAllowedFull_1_MT.adoc[IsOperationAllowedFull(StatesOperation, BaseCard)]` |Определяет возможность выполнения операции (_конструктора состояний_), применительно к определённой карточке, с учетом прав доступа.
+|`RemoveKindStateSetting(KindsCardKind)` |Удаляет настройки автомата состояний вида карточки из _конструктора состояний_.
+|===

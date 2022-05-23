@@ -1,0 +1,57 @@
+= IDocumentService.DownloadMainFile -- метод (Document, DocumentFile, String)
+
+Выгружает основной файл документа в указанный каталог.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[WorkflowVisible(WorkflowVisibility.Visible)]
+void DownloadMainFile(Document document, DocumentFile file, string path)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+file:::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл документа
+
+path:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Путь для сохранения файла
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `file`.
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentoutofrangeexception.aspx[System.ArgumentOutOfRangeException]` |Ошибка возвращается в случае, если не задан параметр `path`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав для чтения основного файла.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+documentService.DownloadMainFile(document, document.Files.FirstOrDefault(t=>t.FileType = DocumentFileType.Main), @"C:\SampleDownload.docx"); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа с основным файлом.
+<.> Сохранение первого основного файла.

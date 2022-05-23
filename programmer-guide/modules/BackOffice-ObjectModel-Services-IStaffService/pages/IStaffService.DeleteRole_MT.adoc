@@ -1,0 +1,27 @@
+= IStaffService.DeleteRole -- метод (StaffRole)
+
+Удаляет роль из _справочника сотрудников_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void DeleteRole(StaffRole role)
+----
+
+Параметры::
+role:::
+Тип: `xref:BackOffice-ObjectModel:StaffRole_CL.adoc[StaffRole]`
++
+Удаляемая роль
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `role`.
+|===

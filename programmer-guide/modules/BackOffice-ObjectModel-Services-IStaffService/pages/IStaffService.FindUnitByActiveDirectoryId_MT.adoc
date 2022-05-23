@@ -1,0 +1,32 @@
+= IStaffService.FindUnitByActiveDirectoryId -- метод (String)
+
+Получает подразделение с указанным идентификатором контейнера в Active Directory.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffUnit FindUnitByActiveDirectoryId(string adId)
+----
+
+Параметры::
+adId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Идентификатор подразделения в Active Directory
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffUnit_CL.adoc[StaffUnit]`
++
+Подразделение в _справочнике сотрудников_, синхронизируемое с подразделением в Active Directory
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если передан пустой adId.
+|===

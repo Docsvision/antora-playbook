@@ -1,0 +1,23 @@
+= ISignatureLabelService -- интерфейс
+
+Описывает сервис для работы со справочником меток подписей.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ISignatureLabelService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddSignatureLabel(String)` |Инициализирует метку подписи и добавляет её в справочник.
+|`AddSignatureLabelLocalizedName(SignatureLabel, Int32, String)` |Создает метку подписи с локализованным названием. В справочник не добавляется.
+|`RemoveSignatureLabel(SignatureLabel)` |Удаляет метку подписи из справочника.
+|===

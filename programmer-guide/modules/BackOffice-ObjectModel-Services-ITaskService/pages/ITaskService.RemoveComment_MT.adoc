@@ -1,0 +1,28 @@
+= ITaskService.RemoveComment -- метод (TaskComment)
+
+Удаляет комментарий к заданию.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void RemoveComment(TaskComment comment)
+----
+
+Параметры::
+comment:::
+Тип: `xref:BackOffice-ObjectModel:TaskComment_CL.adoc[TaskComment]`
++
+Комментарий
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `comment`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для удаления комментария.
+|===

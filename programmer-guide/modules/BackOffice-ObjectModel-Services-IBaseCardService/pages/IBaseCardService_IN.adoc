@@ -1,0 +1,62 @@
+= IBaseCardService -- интерфейс
+
+Данный сервис определяет общие для всех базовых объектов методы.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IBaseCardService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IBaseCardService.AddBusinessProcess_MT.adoc[AddBusinessProcess(BaseCard, Guid, KindsCardProcess)]` |Добавляет к карточке бизнес-процесс с переданным идентификатором.
+|`xref:IBaseCardService.AddSignature_MT.adoc[AddSignature(SignatureList, X509Certificate2, String, StatesState)]` |Добавляет в переданный список подписей ЭЦП.
+|`xref:IBaseCardService.AddSignaturePart_MT.adoc[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard)]` |Инициализирует и добавляет в указанную подпись часть подписи.
+|`xref:IBaseCardService_AddSignaturePart_1_MT.adoc[AddSignaturePart(BaseCardSignature, Guid, Byte[], String, Guid, Guid, BaseCard, DateTime?, BaseCardSignaturePartStatus)]` |Инициализирует и добавляет в указанную подпись часть подписи, прошедшую проверку валидности.
+|`xref:IBaseCardService.CanStartBusinessProcess_MT.adoc[CanStartBusinessProcess(BaseCard, KindsCardProcess)]` |Проверяет допустимость запуска бизнес-процесса и возвращает объект, содержащий ошибку.
+|`xref:IBaseCardService.CanStartBusinessProcesses_MT.adoc[CanStartBusinessProcesses(BaseCard, IEnumerable<KindsCardProcess>)]` |Проверяет допустимость запуска коллекции бизнес-процессов и возвращает список ошибок.
+|`xref:IBaseCardService.ComputeSignature_MT.adoc[ComputeSignature(Stream, X509Certificate2)]` |Подписывает поток данных.
+|`xref:IBaseCardService.CopySignatures_MT.adoc[CopySignatures(SignatureList, SignatureList)]` |Создает список подписей на основе имеющегося.
+|`xref:IBaseCardService.ExtractCertificate_MT.adoc[ExtractCertificate(BaseCardSignaturePart)]` |Извлекает объект типа `X509Certificate2` из части подписи.
+|`xref:IBaseCardService.FindCardsByUniqueAttributes_MT.adoc[FindCardsByUniqueAttributes(Guid, SearchParametersInfo)]` |Возвращает список идентификаторов карточек, имеющих указанные уникальные атрибуты.
+|`xref:IBaseCardService.GenerateDigest_MT.adoc[GenerateDigest(BaseCard, IXmlExportable, String)]` |Генерирует дайджест на основе данных карточки.
+|`xref:IBaseCardService.GetActiveBusinessProcessInstances_MT.adoc[GetActiveBusinessProcessInstances(BaseCard, KindsCardProcess)]` |Получает список активных бизнес-процессов Workflow для заданной карточки.
+|`xref:IBaseCardService.GetAllBusinessProcessInstances_MT.adoc[GetAllBusinessProcessInstances(BaseCard, KindsCardProcess)]` |Получает список всех бизнес-процессов Workflow указанного вида для заданной карточки.
+|`xref:IBaseCardService.GetBaseCardSectionRow_MT.adoc[GetBaseCardSectionRow(BaseCard, CardSection)]` |Получает строку секции карточки.
+|`xref:IBaseCardService.GetBaseCardSectionRows_MT.adoc[GetBaseCardSectionRows(BaseCard, CardSection)]` |Возвращает коллекцию всех строк секции карточки.
+|`xref:IBaseCardService.GetBusinessProcessesToStart_MT.adoc[GetBusinessProcessesToStart(BaseCard)]` |Получает список бизнес-процессов, которые могут быть запущены из карточки.
+|`xref:IBaseCardService.GetBusinessProcessesToStop_MT.adoc[GetBusinessProcessesToStop(BaseCard)]` |Получает список активных бизнес-процессов для карточки.
+|`xref:IBaseCardService.GetBusinessProcessesToView_MT.adoc[GetBusinessProcessesToView(BaseCard)]` |Получает список бизнес-процессов у которых установлено разрешение на просмотр из карточки.
+|`xref:IBaseCardService.GetCardTypeIcon_MT.adoc[GetCardTypeIcon(KindsCardKind)]` |Возвращает иконку для карточки указанного вида карточки.
+|`xref:IBaseCardService.GetSignaturePartData_MT.adoc[GetSignaturePartData(BaseCardSignaturePart)]` |Извлекает данные из части подписи.
+|`xref:IBaseCardService.InitializeBusinessProcessVariables_MT.adoc[InitializeBusinessProcessVariables(Process, Dictionary<String, Object>)]` |Выполняет инициализацию переменных бизнес-процесса.
+|`xref:IBaseCardService.InitializeSystemInfo_MT.adoc[InitializeSystemInfo(BaseCard, KindsCardKind)]` |Инициализирует системную информацию карточки.
+|`IsSignaturePartOperation(BaseCardSignaturePart)` |Возвращает true, если указанной частью подписи подписана операция.
+|`xref:IBaseCardService.RemoveSignature_MT.adoc[RemoveSignature(SignatureList, BaseCardSignature)]` |Удалят указанную подпись из списка подписей.
+|`xref:IBaseCardService.RemoveSignaturePart_MT.adoc[RemoveSignaturePart(BaseCardSignaturePart)]` |Удаляет указанную часть из подписи.
+|`xref:IBaseCardService.StartBusinessProcess_MT.adoc[StartBusinessProcess(BaseCard, KindsCardProcess)]` |Запускает бизнес-процесс указанного вида
+|`xref:IBaseCardService.SendMailNotification_MT.adoc[SendMailNotification(IEnumerable<MailNotificationInfo>)]` |Отправляет оповещение по электронной почте.
+|`xref:IBaseCardService.GetPartSignatureInfo_MT.adoc[SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart, Stream contentStream, X509Certificate2 certificate)]` |Представляет информацию о части подписи.
+|`xref:IBaseCardService.StopBusinessProcess_MT.adoc[StopBusinessProcess(BaseCard, Process)]` |Останавливает выполнение бизнес-процесса.
+|`xref:IBaseCardService.UpdateBusinessProcessActiveInstancesProperties_MT.adoc[UpdateBusinessProcessActiveInstancesProperties(BaseCard)]` |Сохраняет в карточку значение переменных активных бизнес-процессов карточки.
+|`xref:IBaseCardService.UpdateBusinessProcessActiveInstancesVariables_MT.adoc[UpdateBusinessProcessActiveInstancesVariables(BaseCard)]` |Загружает из карточки значения переменных активных бизнес-процессов карточки.
+|`xref:IBaseCardService.VerifySignature_MT.adoc[VerifySignature(BaseCardSignature, IDictionary<BaseCardSignaturePart, Stream>, X509Certificate2)]` |Проверяет корректность подписи.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IBaseCardService.BeforeBusinessProcessStart_EV.adoc[BeforeBusinessProcessStart]` |Происходит перед непосредственным запуском бизнес-процесса.
+|`BusinessProcessVariableInitialized` |Предоставляет метод для обработки события, возникающего после инициализации переменных бизнес-процесса.
+|`ResolveProcessVariableBindedElement` |Предоставляет метод обработки события, возникающего перед получением названия переменной бизнес-процесса для разметки.
+|===

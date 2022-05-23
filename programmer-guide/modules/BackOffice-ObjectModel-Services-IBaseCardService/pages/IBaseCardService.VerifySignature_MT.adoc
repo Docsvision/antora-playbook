@@ -1,0 +1,46 @@
+= IBaseCardService.VerifySignature -- метод (BaseCardSignature, IDictionary<BaseCardSignaturePart, Stream>, X509Certificate2)
+
+Проверяет корректность подписи.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+BaseCardSignatureVerification VerifySignature(BaseCardSignature signature, IDictionary<BaseCardSignaturePart, Stream> contentStreams, X509Certificate2 certificate)
+----
+
+Параметры::
+signature:::
+Тип: `xref:BackOffice-ObjectModel:BaseCardSignature_CL.adoc[BaseCardSignature]`
++
+Подпись
+
+contentStreams:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/s4ys34ea.aspx[System.Collections.Generic.IDictionary]<BaseCardSignaturePart, Stream>`
++
+Пара типа `xref:BackOffice-ObjectModel:BaseCardSignaturePart_CL.adoc[BaseCardSignaturePart]` и `http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[System.IO.Stream]`, представляющая подписанный объект и соответствующую ему часть подписи
+
+certificate:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
++
+Сертификат, на основе которого проверяется корректность подписей
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel-Services-Entities:Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
++
+Результат проверки
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `signature`.
+|===
+
+== Заметки
+
+Метод последовательно проверяет соответствие сертификата (`certificate`) и подписи (`signature`), подписанной операции и всех элементов переданного словаря (`contentStreams`).

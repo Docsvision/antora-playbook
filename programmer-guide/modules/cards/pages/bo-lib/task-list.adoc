@@ -1,0 +1,50 @@
+= Список ссылок на карточки заданий
+
+[cols=","]
+|===
+|Назначение
+|Создает список заданий для последующего добавление в другую карточку (например, "Документ").
+
+|Класс карточки
+|`xref:BackOffice-ObjectModel:TaskList_CL.adoc[DocsVision.BackOffice.ObjectModel.TaskList]`
+|===
+
+Для работы с карточкой предназначен сервис `xref:BackOffice-ObjectModel-Services-ITaskListService:ITaskListService_IN.adoc[ITaskListService]`, позволяющий создавать и получать карточки списков заданий, которые прикладываются к карточкам документа.
+
+.Доступные операции:
+* Создать карточку списка заданий.
+* Добавить задание в список.
+* Удалить задание.
+* Получить дерево заданий.
+* Получить описание узла дерева заданий.
+
+В примере создается список заданий, в который добавляется отдельное задание. Список закрепляется за документом.
+
+[source,csharp]
+----
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>();
+ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
+
+TaskList taskList = taskListService.CreateTaskList();
+document.MainInfo.Tasks = taskList; <.>
+
+KindsCardKind taskKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
+
+Task task = taskService.CreateTask(taskKind);
+task.MainInfo.Name = "Задача для Иванова";
+task.MainInfo.Author = staffService.GetCurrentEmployee();
+taskService.AddSelectedPerformer(task.MainInfo, staffService.GetCurrentEmployee()); <.>
+
+taskListService.AddTask(taskList, task, document); <.>
+
+objectContext.AcceptChanges(); <.>
+----
+<.> Инициализация контекста объектов и получение документа с ID `00000000-0000-0000-0000-000000000000` для которого будет добавлено задание.
+<.> Получение сервисов для работы с сотрудниками, заданиями и списками заданий.
+<.> Создание списка заданий и присвоение его документу.
+<.> Получение вида задания. В данном случае `На исполнение`.
+<.> Инициализация задания. Автором и исполнителем назначаем текущего пользователя.
+<.> Добавление списка заданий к документу.

@@ -1,0 +1,32 @@
+= ObjectPropertyValueCollection -- класс
+
+Используется некоторыми преобразователями данных для хранения значений.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ObjectPropertyValueCollection : KeyedCollection<string, ObjectPropertyValue>
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ObjectPropertyValueCollection()` |Инициализирует новый экземпляр класса `ObjectPropertyValueCollection`.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Add(ObjectProperty, IObjectRef)` |Добавляет свойство в коллекцию свойств.
+|`Add(ObjectProperty, Object)` |Добавляет свойство в коллекцию свойств.
+|`Add(ObjectProperty, ObjectPropertyAccessorDelegate)` |Добавляет свойство в коллекцию свойств.
+|`GetKeyForItem(ObjectPropertyValue)` |Возвращает ключ по значению.
+|===

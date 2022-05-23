@@ -1,0 +1,56 @@
+= ITaskService.AddSelectedPerformer -- метод (TaskMainInfo, StaffEmployee)
+
+Добавляет указанного сотрудника в список выбранных исполнителей задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskSelectedPerformer AddSelectedPerformer(TaskMainInfo mainInfo, StaffEmployee employee)
+----
+
+Параметры::
+mainInfo:::
+Тип: `xref:BackOffice-ObjectModel:TaskMainInfo_CL.adoc[TaskMainInfo]`
++
+Основная информация карточки
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Выбранный исполнитель
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskSelectedPerformer_CL.adoc[TaskSelectedPerformer]`
++
+Сущность выбранного исполнителя
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `mainInfo` или `employee`.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+taskService.AddSelectedPerformer(task.MainInfo, employee); <.>
+objectContext.AcceptChanges();   
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания и исполнителя для него.
+<.> Добавление выбранного исполнителя.

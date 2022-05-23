@@ -1,0 +1,57 @@
+= ILayoutPropertyItem -- интерфейс
+
+Интерфейс `ILayoutPropertyItem` добавляет базовую функциональность элемента разметки.
+
+* *Пространство имён:* `xref:Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]`
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ILayoutPropertyItem
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ControlValue` |Задает или возвращает значение элемента управления.
+|`PropertyType` |Возвращает тип элемента управления.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Commit` |Сохраняет измененное значение элемента управления.
+|===
+
+== Примеры
+
+Пример скрипта карточки, который сбрасывает значение "Темы" карточки на значение по умолчанию:
+
+[source,csharp]
+----
+private void SetDefaultThemeButton_Click(System.Object sender, System.EventArgs e)
+{
+ ICustomizableControl control = CardControl;
+
+ ILayoutPropertyItem layoutItem = control.FindPropertyItem<ILayoutPropertyItem>("Theme");<.>
+        
+ if(layoutItem = null) return;
+
+ MessageResult result = CardControl.ShowMessage(string.Format("Подтвердите изменение темы {0} на значение по умолчанию", layoutItem.ControlValue),
+  "Сброс темы карточки", MessageType.Question, MessageButtons.OkCancel);<.>
+                    
+ if(result != MessageResult.Ok) return;
+        
+ layoutItem.ControlValue = "Тема по умолчанию";
+ layoutItem.Commit(); <.>
+}
+----
+<.> Получение элемента разметки.
+<.> Запрос подтверждения сброса темы.
+<.> Сохранение нового значения темы.

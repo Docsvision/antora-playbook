@@ -1,0 +1,45 @@
+= GenericMapping -- структура
+
+Обеспечивает сопоставление общих и специфических прав доступа.
+
+* *Пространство имён:* `xref:AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]`
+* *Сборка:* `DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public struct GenericMapping : IEquatable<GenericMapping>
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:AccessControl/GenericMapping.Equals_MT.adoc[Equals(GenericMapping)]` |Сравнивает значение текущих прав доступа и заданных.
+|===
+
+== Операторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:AccessControl/GenericMapping.Equality_OP.adoc[Equality]` |Определяет, равняются ли значения двух объектов содержащих права доступа.
+|`xref:AccessControl/GenericMapping.Inequality_OP.adoc[Inequality]` |Определяет, различаются ли значения двух объектов содержащих права доступа.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:AccessControl/GenericMapping.GenericAll_FL.adoc[GenericAll]` |Значение полного права доступа.
+|`xref:AccessControl/GenericMapping.GenericExecute_FL.adoc[GenericExecute]` |Значение права доступа на исполнение.
+|`xref:AccessControl/GenericMapping.GenericRead_FL.adoc[GenericRead]` |Значение права доступа на чтение.
+|`xref:AccessControl/GenericMapping.GenericWrite_FL.adoc[GenericWrite]` |Значение права доступа на запись.
+|===
+
+== Заметки
+
+Значение `GenericAll`, `GenericExecute`, `GenericRead` и `GenericWrite` может различаться для разных типов объектов, на этом и основана процедура сравнения.

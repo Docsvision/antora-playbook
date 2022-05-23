@@ -1,0 +1,23 @@
+= ITaskGroupService.ReorderSelectedPerformers -- метод (ObjectCollection<TaskGroupSelectedPerformer>)
+
+Повторно выстраивает порядок исполнения группы задания исполнителями.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ReorderSelectedPerformers(ObjectCollection<TaskGroupSelectedPerformer> selectedPerformers)
+----
+
+Параметры::
+selectedPerformers:::
+Тип: `xref:Platform-ObjectModel:ObjectCollection_CL.adoc[ObjectCollection]<TaskGroupSelectedPerformer>`
++
+Коллекция исполнителей группы заданий -- `xref:BackOffice-ObjectModel:TaskGroupSelectedPerformer_CL.adoc[TaskGroupSelectedPerformer]`
+
+== Заметки
+
+Данный метод просто заново проставляет значение `Order` у исполнителя группы заданий.

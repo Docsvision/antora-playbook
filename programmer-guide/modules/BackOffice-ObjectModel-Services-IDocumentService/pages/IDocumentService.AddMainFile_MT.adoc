@@ -1,0 +1,47 @@
+= IDocumentService.AddMainFile -- метод (Document, String)
+
+Добавляет в документ основной файл.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+DocumentFile AddMainFile(Document document, string filePath)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ, в который добавляется файл
+
+filePath:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Путь к добавляемому файлу
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл документа
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+documentService.AddMainFile(document, @"Z:\Инструкция пожарной безопасности.docx"); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Добавление основного файла.

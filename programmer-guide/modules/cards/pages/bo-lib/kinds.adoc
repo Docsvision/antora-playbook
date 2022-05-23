@@ -1,0 +1,51 @@
+= Справочник видов карточек
+
+[cols=","]
+|===
+|Назначение
+|Предназначен для управления иерархией видов для существующих типов карточек, добавление и удаление видов, а также настройка определённых параметров видов.
+
+|Класс карточки
+|`xref:BackOffice-ObjectModel:Kinds_CL.adoc[DocsVision.BackOffice.ObjectModel.Kinds]`
+|===
+
+Для работы с карточкой предназначен сервис `xref:BackOffice-ObjectModel-Services-IKindService:IKindService_IN.adoc[IKindService]`, с помощью которого можно программно создавать и удалять виды карточек, управлять настройками, кроме того, возможно добавление и удаление расширений.
+
+.Доступные операции:
+* Добавление и удаление вида карточки в справочник.
+* Добавление типа карточки.
+* Управление настройками способов создания карточек видов.
+* Добавление и удаление расширений.
+* Управление настройками расширений.
+* Управление настройками бизнес-процессов в карточке.
+
+В приведенном примере создается новый вид для xref:bo-lib/document.adoc[карточки "Документ"]
+
+[source,csharp]
+----
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
+
+KindsCardType kindsCardType = kindService.GetCardType(DocsVision.BackOffice.CardLib.CardDefs.CardDocument.ID); <.>
+
+KindsCardKind kindsCardKind = kindService.AddCardKind(kindsCardType);
+kindsCardKind.Name = "Тестовый вид карточки"; <.>
+
+kindsCardKind.UseOwnSettings = true;
+kindsCardKind.UseOwnExtendedSettings = true;
+kindsCardKind.UseOwnLayouts = true; <.>
+
+kindService.AddProcessSettings(kindsCardKind, new Guid("12345678-0000-0000-0000-000000000000"), "Отправить на согласование"); <.>
+
+objectContext.AcceptChanges(); <.>
+----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Получение типа карточки "Документ".
+<.> Создание новый вид в полученном типе, с названием "Тестовый вид карточки".
+<.> Вид будет использовать свои настройки.
+<.> Добавление БП в настройки вида.
+<.> Сохранение изменений.
+
+[NOTE]
+====
+Карточка "Справочник видов карточек" блокируется для записи при открытии справочника в {wincl}е.
+====

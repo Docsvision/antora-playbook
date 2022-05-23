@@ -1,0 +1,36 @@
+= INavCommandExtension -- интерфейс
+
+Описывает командное расширение {wincl}а.
+
+* *Пространство имён:* `xref:Extensibility_NS.adoc[DocsVision.Platform.Extensibility]`
+* *Сборка:* `DocsVision.Platform.Extensibility.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface INavCommandExtension
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество зарегистрированных команд.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GetCommand(Int32)` |Возвращает команду по индексу.
+|`InvokeCommand(Int32, NavFolderControlType, Guid, Guid[])` |Запускает команду с заданным индексом.
+|`QueryStatus(Int32, NavFolderControlType, Guid, Guid[])` |Возвращает результат выполнения команды с заданным индексом.
+|`QueryStatus(Int32, NavFolderControlType, Guid, Guid[])` |Возвращает результаты выполнения команд с указанными индексами.
+|===
+
+== Заметки
+
+Пример доступен в подразделе xref:samples:components/command-plugin.adoc[Пример реализации командного расширения {wincl}а].

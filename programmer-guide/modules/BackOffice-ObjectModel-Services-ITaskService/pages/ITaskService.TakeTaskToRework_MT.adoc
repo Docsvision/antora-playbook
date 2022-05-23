@@ -1,0 +1,48 @@
+= ITaskService.TakeTaskToRework -- метод (Task)
+
+Отправляет задание на доработку.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void TakeTaskToRework(Task task)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Возвращаемое задание
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для отправки задания на доработку.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+taskService.TakeTaskToRework(task);
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.NotAcceptedState, task)); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение задания.
+<.> Возвращение задания на доработку.

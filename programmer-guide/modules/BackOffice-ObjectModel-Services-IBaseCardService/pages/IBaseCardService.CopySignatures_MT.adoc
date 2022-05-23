@@ -1,0 +1,36 @@
+= IBaseCardService.CopySignatures -- метод (SignatureList, SignatureList)
+
+Создает список подписей на основе имеющегося.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void CopySignatures(SignatureList sourceSignatureList, SignatureList destinationSignatureList)
+----
+
+Параметры::
+sourceSignatureList:::
+Тип: `xref:BackOffice-ObjectModel:SignatureList_CL.adoc[SignatureList]`
++
+Исходный список подписей
+
+destinationSignatureList:::
+Тип: `xref:BackOffice-ObjectModel:SignatureList_CL.adoc[SignatureList]`
++
+Конечный список подписей
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `sourceSignatureList` или `destinationSignatureList`.
+|===
+
+== Заметки
+
+При копировании создаются объекты типа `BaseCardSignature` и `BaseCardSignaturePart`, которые заполняются данными существующих подписей и частей подписи.

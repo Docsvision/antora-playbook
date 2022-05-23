@@ -1,0 +1,17 @@
+= IUpdatable.UpdateNow -- метод
+
+При переопределении в производном классе позволяет отправить накопленные изменения на сервер.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void UpdateNow()
+----
+
+== Заметки
+
+Отправляет накопленные изменения на сервер, на клиенте они очищаются из кэша, режим продолжает действовать. Все изменения после этого момента также будут накапливаться.

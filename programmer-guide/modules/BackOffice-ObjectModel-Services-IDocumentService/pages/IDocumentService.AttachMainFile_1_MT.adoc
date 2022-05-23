@@ -1,0 +1,64 @@
+= IDocumentService.AttachMainFile -- метод (Document, VersionedFileCard)
+
+Добавляет в документ карточку версионного файла в качестве основного файла документа.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+DocumentFile AttachMainFile(Document document, VersionedFileCard versionedFileCard)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+versionedFileCard:::
+Тип: `xref:Platform-ObjectManager:SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]`
++
+Карточка файла с версиями
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл документа
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`https://msdn.microsoft.com/ru-ru/library/system.exception.aspx[System.Exception]` |Ошибка будет возвращена, если по каким либо причинам добавление основного файла невозможно.
+|===
+
+== Заметки
+
+Данный метод, в отличие от метода `AddMainFile`, позволяет корректно загружать подписанные файлы.
+
+== Примеры
+
+Ниже приведен пример использования метода `AttachMainFile` при добавлении существующей карточки файла с версиями в документ
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+VersionedFileCard versionedFileCard = (VersionedFileCard)userSession.CardManager.GetCard(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+documentService.AttachMainFile(document, versionedFileCard);
+objectContext.SaveObject(document); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Получение карточки файла с версиями.
+<.> Добавление файла.

@@ -1,0 +1,33 @@
+= CardManager.ImportCards -- метод (Stream, ImportCardInspector)
+
+Импортирует карточку из потока XML данных, с заданным алгоритмом импорта.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract CardDataCollection ImportCards(Stream stream, ImportCardInspector cardInspector)
+----
+
+Параметры::
+stream:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]`
++
+Поток данных
+
+cardInspector:::
+Тип: `xref:Platform-ObjectManager:ImportCardInspector_CL.adoc[ImportCardInspector]`
++
+Поток данных
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-CardData:CardDataCollection_CL.adoc[CardDataCollection]`
++
+Коллекция карточек
+
+== Заметки
+
+В потоке может быть несколько карточек.

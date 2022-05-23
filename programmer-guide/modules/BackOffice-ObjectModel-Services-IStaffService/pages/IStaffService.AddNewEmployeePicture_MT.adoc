@@ -1,0 +1,53 @@
+= IStaffService.AddNewEmployeePicture -- метод (StaffEmployee)
+
+Добавляет сотруднику новую фотографию.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffPicture AddNewEmployeePicture(StaffEmployee employee)
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffPicture_CL.adoc[StaffPicture]`
++
+Фотография сотрудника
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
+|===
+
+== Примеры
+
+Ниже приведен пример добавления фотографии текущему сотруднику. Изображение загружается с диска.
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffEmployee employee = staffService.GetCurrentEmployee(); <.>
+
+StaffPicture picture = staffService.AddNewEmployeePicture(employee); <.>
+picture.Image = new Bitmap(@"Z:\EmployeePicture.jpg");
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение текущего сотрудника.
+<.> Добавление фотографии.

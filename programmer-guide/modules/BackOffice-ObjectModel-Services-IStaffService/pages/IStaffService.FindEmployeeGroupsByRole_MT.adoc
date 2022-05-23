@@ -1,0 +1,37 @@
+= IStaffService.FindEmployeeGroupsByRole -- метод (StaffEmployee, StaffGroupRole)
+
+Возвращает рабочие группы, в которых указанный сотрудник имеет определённую роль.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+List<StaffGroup> FindEmployeeGroupsByRole(StaffEmployee employee, StaffGroupRole role)
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник
+
+role:::
+Тип: `xref:BackOffice-ObjectModel:StaffGroupRole_EN.adoc[StaffGroupRole]`
++
+Роль сотрудника в рабочей группе
+
+Возвращаемое значение::
+Тип: `https://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffGroup>`
++
+Список групп типа `xref:BackOffice-ObjectModel:StaffGroup_CL.adoc[StaffGroup]`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
+|===

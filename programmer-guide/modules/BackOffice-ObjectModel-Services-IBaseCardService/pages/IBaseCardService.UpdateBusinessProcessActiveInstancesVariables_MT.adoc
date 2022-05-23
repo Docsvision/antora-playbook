@@ -1,0 +1,31 @@
+= IBaseCardService.UpdateBusinessProcessActiveInstancesVariables -- метод (BaseCard)
+
+Загружает из карточки значения переменных активных бизнес-процессов карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void UpdateBusinessProcessActiveInstancesVariables(BaseCard baseCard)
+----
+
+Параметры::
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard`.
+|===
+
+== Заметки
+
+Системная информация карточки (`baseCard.SystemInfo`) и вид карточки не должны быть пустыми, иначе метод не отработает.

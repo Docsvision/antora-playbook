@@ -1,0 +1,62 @@
+= IReferenceListService -- интерфейс
+
+Сервис для работы со списками ссылок на карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IReferenceListService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IReferenceListService.CreateReference_MT.adoc[CreateReference(ReferenceList, LinksLinkType, FoldersFolder)]` |Добавляет ссылку на папку в _список ссылок_.
+|`xref:IReferenceListService.CreateReference_1_MT.adoc[CreateReference(ReferenceList, LinksLinkType, String)]` |Добавляет ссылку на URL-адрес в _список ссылок_.
+|`xref:IReferenceListService.CreateReference_2_MT.adoc[CreateReference(ReferenceList, LinksLinkType, BaseCard, String, Boolean)]` |Добавляет ссылку на карточку в _список ссылок_.
+|`xref:IReferenceListService.CreateReference_3_MT.adoc[CreateReference(ReferenceList, LinksLinkType, Guid, Guid, Boolean)]` |Добавляет ссылку на карточку с заданным идентификатором в _список ссылок_.
+|`xref:IReferenceListService.CreateReferenceFromReference_MT.adoc[CreateReferenceFromReference(ReferenceList, ReferenceListReference)]` |Создает ссылку на основе существующей ссылки.
+|`xref:IReferenceListService.CreateReferenceList_MT.adoc[CreateReferenceList]` |Создает пустой _список ссылок на карточки_.
+|`xref:IReferenceListService.GetReferenceDescription_MT.adoc[GetReferenceDescription(ReferenceListReference)]` |Возвращает описание для объекта, на который установлена ссылка.
+|`xref:IReferenceListService.RemoveReference_MT.adoc[RemoveReference(BaseCard, ReferenceList, ReferenceListReference)]` |Удаляет ссылку из _списка ссылок на карточки_.
+|`xref:IReferenceListService.TryGetReferenceListFromCard_MT.adoc[TryGetReferenceListFromCard(Guid, Boolean, ReferenceList)]` |Получает _список ссылок на карточки_ из карточки.
+|===
+
+== Примеры
+
+Ниже приведен пример добавления ссылки на папку в список ссылок на карточки.
+
+[source,csharp]
+----
+<.>
+
+IReferenceListService referenceListService = objectContext.GetService<IReferenceListService>();
+ILinkService linkService = objectContext.GetService<ILinkService>(); <.>
+
+Guid documentId = new Guid("00000000-0000-0000-0000-000000000000"); <.>
+            
+ReferenceList referenceList;
+referenceListService.TryGetReferenceListFromCard(documentId, true, out referenceList); <.>
+
+FoldersFolder foldersFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+LinksLinkType linksLinkType = linkService.FindLink("Ссылки"); <.>
+
+referenceListService.CreateReference(referenceList, linksLinkType, foldersFolder); <.>
+            
+objectContext.AcceptChanges(); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа, в который добавляется ссылка.
+<.> Получение списка ссылок на карточки из документа.
+<.> Получение папки, на которую создается ссылка.
+<.> Получение типа ссылки.
+<.> Добавление ссылки в список ссылок.
+<.> Сохранение изменений.

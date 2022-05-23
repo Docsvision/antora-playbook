@@ -1,0 +1,97 @@
+= IKindService.AddCreationSettings -- метод (KindsCardKind, Guid, String, KindsCardKind, Boolean, StatesOperation)
+
+Добавляет новый режим создания карточки к указанному виду карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+KindsCardCreationSetting AddCreationSettings(KindsCardKind cardKind, Guid modeId, string displayName, KindsCardKind creatorKind, bool withAllChildren, StatesOperation operation)
+----
+
+Параметры::
+cardKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид карточки, к которой будет добавлен способ создания
+
+modeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор режима создания
+
+displayName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Отображаемое название режима создания
+
+creatorKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид родительской карточки
+
+withAllChildren:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Флаг, позволяющий использовать любой доступный вид карточки в качестве создающего вида карточки
+
+operation:::
+Тип: `xref:BackOffice-ObjectModel:StatesOperation_CL.adoc[StatesOperation]`
++
+Тип операция редактирования, которая будет использована при создании карточки. Данная информация используется, в том числе при добавлении события в историю карточки.
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:KindsCardCreationSetting_CL.adoc[KindsCardCreationSetting]`
++
+Параметры создания карточки данного вида
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `cardKind`, `modeId` или `displayName`.
+|===
+
+== Заметки
+
+Список доступных идентификаторов режима создания modeId может быть получен следующим образом
+
+[source,charp]
+----
+List<NavCardCreatorInfo> cardKindCreators = new List<NavCardCreatorInfo>();
+
+foreach (INavCardCreatorExtension navCardCreatorExtension in this.CardHost.ExtensionManager.CardCreatorExtensions)
+{
+ cardKindCreators.AddRange(navCardCreatorExtension.GetCreatorsForKind(new Guid("0538E317-FAB6-4BB7-85C5-2303375A4EE1")));
+}
+----
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
+
+KindsCardKind kindsCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+KindsCardKind parentCardKind = objectContext.GetObject<KindsCardKind>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+Guid modeID = new Guid("00000000-0000-0000-0000-000000000002"); <.>
+
+KindsCardCreationSetting setting = kindService.AddCreationSettings(kindsCardKind, modeID, "Создание карточки", parentCardKind, true, null); <.>
+
+objectContext.SaveObject<KindsCardCreationSetting>(setting); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение вида карточки, для которой производится добавление способа создания.
+<.> Получение вида карточки, из которой может быть вызвано создание данной карточки.
+<.> Идентификатор режима создания карточки.
+<.> Добавление способа создания.
+<.> Обязательное сохранение контекста.

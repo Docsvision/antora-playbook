@@ -1,0 +1,53 @@
+= LogManager.FindMessages -- метод (LogSearchQuery)
+
+Получение данных из журнала согласно заданному фильтру.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public virtual InfoRowCollection FindMessages(LogSearchQuery searchQuery)
+----
+
+Параметры::
+searchQuery:::
+Тип: `xref:LogSearchQuery_CL.adoc[LogSearchQuery]`
++
+Фильтр сообщений
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-IUpdatable:InfoRowCollection_CL.adoc[InfoRowCollection]`
++
+Коллекция нетипизированных данных
+
+== Заметки
+
+Так как журнал часто содержит большое количество записей, получение данных из него может занять длительное время. Поэтому рекомендуется максимально специфицировать параметры фильтра, чтобы минимизировать число получаемых сообщений.
+
+.Состав полей в возвращаемой коллекции:
+* *ID* -- идентификатор сообщения в журнале.
+* *ResourceID* -- идентификатор объекта.
+* *TypeID* -- тип объекта.
+* *ParentID* -- идентификатор родительского объекта.
+* *Date* -- дата операции.
+* *Type* -- тип операции.
+* *Operation* -- код операции.
+* *Data* -- дополнительная информация.
+
+== Примеры
+
+[source,csharp]
+----
+LogSearchQuery search = new LogSearchQuery();
+search.ObjectId = new Guid("идентификатор_карточки");
+
+InfoRowCollection messages = session.LogManager.FindMessages(search);
+
+foreach(InfoRow row in messages)
+{
+    System.Diagnostics.Debug.Print("Дата: " + row["Date"].ToString() + "; сообщение:" + row["Data"].ToString());
+}
+----

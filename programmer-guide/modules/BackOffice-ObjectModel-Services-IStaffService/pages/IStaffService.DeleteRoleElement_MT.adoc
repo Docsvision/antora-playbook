@@ -1,0 +1,32 @@
+= IStaffService.DeleteRoleElement -- метод (StaffRole, StaffContain)
+
+Удаляет указанной элемент из роли в _справочнике сотрудников_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void DeleteRoleElement(StaffRole role, StaffContain staffContain)
+----
+
+Параметры::
+role:::
+Тип: `xref:BackOffice-ObjectModel:StaffRole_CL.adoc[StaffRole]`
++
+Роль, из которой удаляется элемент
+
+staffContain:::
+Тип: `xref:BackOffice-ObjectModel:StaffContain_CL.adoc[StaffContain]`
++
+Удаляемый элемент роли
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `role` или `staffContain`.
+|===

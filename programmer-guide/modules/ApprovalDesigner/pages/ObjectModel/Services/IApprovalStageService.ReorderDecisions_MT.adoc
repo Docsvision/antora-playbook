@@ -1,0 +1,23 @@
+= IApprovalStageService.ReorderDecisions -- метод (ObjectCollection<ApprovalStageDecision>)
+
+Сортирует список, содержащий решения по согласованию, по порядковому номеру решения.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ReorderDecisions(ObjectCollection<ApprovalStageDecision> decisions)
+----
+
+Параметры::
+decisions:::
+Тип: `xref:Platform-ObjectModel:ObjectCollection_CL.adoc[ObjectCollection]<ApprovalStageDecision>`
++
+Решения по согласованию. Тип элемента -- `xref:ObjectModel/ApprovalStageDecision_CL.adoc[ApprovalStageDecision]`
+
+== Заметки
+
+Метод `ReorderDecisions` просто сортирует коллекцию `decisions` по значению `Order` элементов коллекции.

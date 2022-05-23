@@ -1,0 +1,37 @@
+= DVGate.AddVariable -- метод (Int32, String)
+
+Добавляет новую переменную шлюза
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public IGateVariable AddVariable(int Type, string VariableInfo)
+----
+
+Параметры::
+Type:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Тип добавляемой переменной: `xref:Gates/DVVariableType_EN.adoc[DVVariableType.DOCUMENT]`, `DVVariableType.FILe` или `DVVariableType.PRINCIPAL`
+
+VariableInfo:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Зависит от типа добавляемой переменной:
++
+* `DVVariableType.DOCUMENT` -- должен быть указан идентификатор типа карточки, которая будет создана при добавлении переменной шлюза.
+* `DVVariableType.PRINCIPAL` -- должна быть указана фамилия сотрудника из Справочника сотрудников, сущность которого будет загружена в переменную шлюза
+* `DVVariableType.FILe` -- должен быть указан путь к файлу, на основе которого будет создан версионный файл.
+
+Возвращаемое значение::
+Тип: `xref:Gates/IGateVariable_IN.adoc[IGateVariable]`
++
+Реальный возвращаемый тип зависит от типа добавляемой переменной:
++
+* `DVVariableType.DOCUMENT` -- возвращает `DVCard`
+* `DVVariableType.PRINCIPAL` -- возвращает `DVPrincipal`
+* `DVVariableType.FILe` -- - возвращает `DVFileCard`

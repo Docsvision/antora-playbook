@@ -1,0 +1,49 @@
+= LogManager.LogMessageEx -- метод (EventType, Guid, String, Guid, Guid, Guid, String)
+
+Выполняет запись сообщения в журнал с указанием идентификатора соответствующей операции из описания библиотеки карточек.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void LogMessageEx(EventType eventType, Guid eventOperation, string resourceName, Guid resourceId, Guid typeId, Guid parentId, string eventData)
+----
+
+Параметры::
+eventType:::
+Тип: `xref:Platform-ObjectManager:EventType_EN.adoc[EventType]`
++
+Тип сообщения
+
+eventOperation:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор соответствующей операции из описания библиотеки карточек
+
+resourceName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Имя объекта, с которым произведена операция (формируется в зависимости от контекста -- например, при операциях с карточкой это может быть её описание)
+
+resourceId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор объекта, с которым производится операция (ID карточки, строки, файла и т.д.)
+
+typeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Тип объекта (например, для карточки -- `CardTypeID`)
+
+parentId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор родительского объекта (например, для операции со строкой -- родительским объектом будет секция)
+
+eventData:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Любые дополнительные данные, связанные с событием

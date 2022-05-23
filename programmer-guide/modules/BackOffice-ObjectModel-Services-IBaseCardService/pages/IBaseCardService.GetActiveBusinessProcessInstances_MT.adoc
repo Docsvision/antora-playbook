@@ -1,0 +1,37 @@
+= IBaseCardService.GetActiveBusinessProcessInstances -- метод (BaseCard, KindsCardProcess)
+
+Получает список активных бизнес-процессов Workflow для заданной карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<Process> GetActiveBusinessProcessInstances(BaseCard baseCard, KindsCardProcess kindsCardProcess)
+----
+
+Параметры::
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка
+
+kindsCardProcess:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardProcess_CL.adoc[KindsCardProcess]`
++
+Вид бизнес-процесса
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<Process>`
++
+Коллекция бизнес-процессов Workflow типа `xref:Workflow:Objects/Process_CL.adoc[DocsVision.Workflow.Objects.Process]`.
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или `kindsCardProcess`.
+|===

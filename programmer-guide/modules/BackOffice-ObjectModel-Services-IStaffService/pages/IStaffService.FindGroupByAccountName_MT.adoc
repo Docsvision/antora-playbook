@@ -1,0 +1,46 @@
+= IStaffService.FindGroupByAccountName -- метод (String)
+
+Возвращает группу с определённым названием учетной записи.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffGroup FindGroupByAccountName(string accountName)
+----
+
+Параметры::
+accountName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Название учетной записи
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffGroup_CL.adoc[StaffGroup]`
++
+Группа с искомым названием учетной записи
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если передан пустой accountName.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffGroup group = staffService.FindGroupByAccountName(@"WorkDomain.com\ADGroupName"); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Поиск группы с указанной учетной записью.

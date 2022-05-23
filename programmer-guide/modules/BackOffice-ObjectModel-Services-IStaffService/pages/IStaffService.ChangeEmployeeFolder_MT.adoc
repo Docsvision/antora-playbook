@@ -1,0 +1,32 @@
+= IStaffService.ChangeEmployeeFolder -- метод (StaffEmployee, FoldersFolder)
+
+Изменяет личную папку сотрудника.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ChangeEmployeeFolder(StaffEmployee employee, FoldersFolder folder)
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник, у которого изменяется личная папка
+
+folder:::
+Тип: `xxref:Platform-SystemCards:ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]`
++
+Новая личная папка
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
+|===

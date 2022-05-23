@@ -1,0 +1,49 @@
+= IStaffService.GetUnitEmployees -- метод (StaffUnit, Boolean, Boolean)
+
+Возвращает список сотрудников указанного подразделения.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IList<StaffEmployee> GetUnitEmployees(StaffUnit unit,  bool hierarchy,  bool selection)
+----
+
+Параметры::
+unit:::
+Тип: `xref:BackOffice-ObjectModel:StaffUnit_CL.adoc[StaffUnit]`
++
+Подразделение, из которого возвращается список сотрудников
+
+hierarchy:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+При `true` в итоговый список сотрудников будут включены все подчиненные сотрудники, при `false` только подчиненные непосредственно `unit`
+
+selection:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+При `true` будут возвращены сотрудники, у которых отсутствует признак "Не показывать при выборе"
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StaffEmployee>`
++
+Список сотрудников подразделения
+
+== Примеры
+
+Пример получения всего списка сотрудников, доступных для выбора, независимо от иерархии подразделения
+
+[source,csharp]
+----
+<.>
+
+StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000000"));
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+var employees = staffService.GetUnitEmployees(unit, true, true);
+----
+<.> Инициализация контекста объектов.

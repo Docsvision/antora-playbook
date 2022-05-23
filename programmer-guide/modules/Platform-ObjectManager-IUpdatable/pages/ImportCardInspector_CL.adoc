@@ -1,0 +1,62 @@
+= ImportCardInspector -- класс
+
+Инспектор, позволяющий гибко управлять логикой импорта.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class ImportCardInspector
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Session` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AfterCreateCard(Object, CardData, Boolean)` |Вызывается после создания новой карточки.
+|`AfterCreateFile(Object, FileData, Boolean)` |Вызывается после создания нового файла.
+|`AfterCreateRow(Object, FileData, RowData)` |Вызывается после создания строки.
+|`AfterCreateSection(Object, Object, SectionData)` |Вызывается после создания новой секции.
+|`AfterImport(Object, CardDataCollection)` |Вызывается после импорта всех карточек.
+|`AfterImportCard(Object, Object, CardData)` |Вызывается после импорта карточки.
+|`AfterImportField(Object, Object, Field)` |Вызывается после импорта поля.
+|`AfterImportFile(Object, FileData)` |Вызывается после импорта файла.
+|`AfterImportRow(Object, Object, RowData)` |Вызывается после импорта строки.
+|`AfterImportSection(Object, Object, SectionData)` |Вызывается после импорта секции.
+|`BeforeCreateCard(Object, Boolean)` |Вызывается перед созданием новой карточки.
+|`BeforeCreateFile(Object, Boolean)` |Вызывается перед созданием нового файла.
+|`BeforeCreateRow(Object, Object, Boolean)` |Вызывается перед созданием строки.
+|`BeforeCreateSection(Object, Object, SectionData, Guid, Boolean)` |Вызывается перед созданием новой секции.
+|`BeforeImport(Object, Boolean)` |Вызывается перед импортом карточек.
+|`BeforeImportCard(Object, Object, CardData, Boolean)` |Вызывается перед импортом карточки.
+|`BeforeImportField(Object, Object, Field, Boolean)` |Вызывается перед импортом поля.
+|`BeforeImportFile(Object, FileData, Boolean)` |Вызывается перед импортом файла.
+|`BeforeImportRow(Object, Object, Boolean)` |Вызывается перед импортом строки.
+|`BeforeImportSection(Object, Object, SectionData, Guid, Boolean)` |Вызывается перед импортом секции.
+|`GetAttributeValue(Object, String)` |Возвращает из объекта значение атрибута с заданным псевдонимом.
+|`GetXml(Object)` |Получает из заданного объекта XML-строку.
+|`GetXmlDocument(Object, XmlReaderSettings)` |Получает объект типа `XmlDocument` из заданного объекта.
+|`GetXmlSchema(Object, XmlReaderSettings, ValidationEventHandler)` |Получает объект типа `XmlSchema` из заданного объекта.
+|`OnError(Int32, String, Boolean)` |Вызывает событие `Error`.
+|`SetAttributeValue(Object, String, String)` |Задает атрибуту объекта заданное значение.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Error` |Событие получает сигнал, когда обнаружена ошибка в процессе импорта.
+|===

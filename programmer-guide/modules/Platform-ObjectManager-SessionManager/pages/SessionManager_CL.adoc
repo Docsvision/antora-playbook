@@ -1,0 +1,47 @@
+= SessionManager -- класс
+
+Представляет объектную модель *менеджера сессий*. Содержит методы управления сессиями пользователей. Этот класс является *абстрактным*.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class SessionManager
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:SessionManager.CloseSession_MT.adoc[CloseSession(Guid)]` |Принудительное закрытие сессии с указанным идентификатором.
+|`xref:SessionManager.Connect_MT.adoc[Connect(string)]` |Устанавливает соединение с сервером {dv}.
+|`xref:SessionManager.Connect_1_MT.adoc[Connect(string, string)]` |Устанавливает соединение с сервером {dv}.
+|`xref:SessionManager.Connect_2_MT.adoc[Connect(string, string, string, string)]` |Устанавливает соединение с сервером {dv}.
+|`ConnectProxy(object)` |Установка соединения с сервером используя указанное соединение.
+|`xref:SessionManager.CreateInstance_MT.adoc[CreateInstance]` |Создание экземпляра менеджера сессий.
+|`xref:SessionManager.CreateInstance_1_MT.adoc[CreateInstance(string)]` |Создание экземпляра менеджера сессий с указанием строки соединения.
+|`xref:SessionManager.CloseSession_MT.adoc[CreateSession]` |Создает пользовательскую сессию.
+|`xref:SessionManager.CloseSession_1_MT.adoc[CreateSession(SessionLoginFlags)]` |Создает пользовательскую сессию..
+|`xref:SessionManager.GetLocaleId_MT.adoc[GetLocaleId]` |Получение идентификатора языка для локализации сообщений.
+|`GetOpenSessions` |Получение списка всех открытых сессий пользователя.
+|`SetLocaleId(int)` |Установка идентификатора языка для текущей сессии.
+|===
+
+== Заметки
+
+Для вызова некоторых методов менеджера сессий требуются административные привилегии.
+
+== Примеры
+
+В примере организуется соединение с сервером localhost с указанием названия подключаемой базы данных -- "Docsvision".
+
+[source,csharp]
+----
+string connect = "ConnectAddress=http://localhost/DocsVision/StorageServer/StorageServerService.asmx;BaseName=Docsvision";
+SessionManager manager = SessionManager.CreateInstance();
+manager.Connect(connect);
+----

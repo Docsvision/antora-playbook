@@ -1,0 +1,33 @@
+= ITaskService.CancelDelegate -- метод (Task)
+
+Отменяет делегирование задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StatesState CancelDelegate(Task task)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Делегированное задание
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StatesState_CL.adoc[StatesState]`
++
+Состояние задания
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если для отмены недостаточно прав.
+|===

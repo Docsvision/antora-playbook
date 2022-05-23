@@ -1,0 +1,37 @@
+= IDocumentService.CanRemoveMainFile -- метод (Document, DocumentFile)
+
+Определяет возможность удаления указанного основного файла.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool CanRemoveMainFile(Document document, DocumentFile file)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+file:::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл документа
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- файл может быть удален, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `file`.
+|===

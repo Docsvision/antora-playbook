@@ -1,0 +1,36 @@
+= ISecureObject -- интерфейс
+
+Позволяет получить доступ к параметрам безопасности объекта.
+
+* *Пространство имён:* `xref:AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]`
+* *Сборка:* `DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ISecureObject
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`FullName` |Возвращает полное имя объекта.
+|`Id` |Возвращает идентификатор объекта.
+|`Name` |Возвращает имя/название объекта.
+|`Parent` |Возвращает родительский объект безопасности.
+|`SecurityClassId` |Возвращает идентификатор класса безопасности объекта.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AccessCheck(Int32, Int32)` |Проверяет наличие заданных прав и позволяет получить существующие права.
+|`AccessCheck(Guid, Int32, Int32)` |Проверяет наличие заданных прав для указанного типа объектов и позволяет получить существующие права.
+|`GetAccessControl(AccessControlSections)` |Возвращает параметры безопасности для объекта.
+|`SetAccessControl(Byte[], AccessControlSections, AccessControlPropagation)` |Устанавливает параметры безопасности для объекта.
+|===

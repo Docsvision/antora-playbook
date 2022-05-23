@@ -1,0 +1,54 @@
+= IStaffService.AddNewEmployee -- метод (StaffUnit)
+
+Добавляет нового сотрудника в указанное подразделение.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffEmployee AddNewEmployee(StaffUnit unit)
+----
+
+Параметры::
+unit:::
+Тип: `xref:BackOffice-ObjectModel:StaffUnit_CL.adoc[StaffUnit]`
++
+Подразделение, в которое будет добавлен сотрудник
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Добавленный сотрудник
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `unit`.
+|===
+
+== Примеры
+
+Ниже приведен пример добавления нового сотрудника с минимальными данными
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffUnit unit = staffService.GetDepartment(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+StaffEmployee employee = staffService.AddNewEmployee(unit);
+employee.LastName = "Иванов";
+employee.FirstName = "Иван"; <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение подразделения, в которое добавляется сотрудник.
+<.> Добавление сотрудника.

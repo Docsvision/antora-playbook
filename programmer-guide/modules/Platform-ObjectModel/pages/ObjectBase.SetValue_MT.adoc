@@ -1,0 +1,33 @@
+= ObjectBase.SetValue -- метод (ObjectProperty, Object)
+
+Задает значение указанного свойства.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public void SetValue(ObjectProperty property, object value)
+----
+
+Параметры::
+property:::
+Тип: `xref:ObjectProperty_CL.adoc[ObjectProperty]`
++
+Свойство
+
+value:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]`
++
+Значение свойства
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `property`.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если свойство не зарегистрировано.
+|===

@@ -1,0 +1,34 @@
+= NavigatorCard -- класс
+
+Представляет системную карточку *{wincl}*.
+
+* *Пространство имён:* `xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class NavigatorCard : SystemCard
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ChangeDate` |Дата последнего изменения данных в карточке.
+|`Settings` |Возвращает объект содержащий дополнительные настройки {wincl}а.
+|`xref:NavigatorCard.ViewSettings_PR.adoc[ViewSettings]` |Возвращает коллекцию настроек представлений.
+|`ViewTemplates` |Возвращает коллекцию шаблонов представлений.
+|`FolderRootName` |Возвращает или задает имя корневой папки.
+|`UserSettings` |Возвращает пользовательские настройки {wincl}а.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GetViewSettings(Guid)` |Возвращает настройки заданного представления.
+|===

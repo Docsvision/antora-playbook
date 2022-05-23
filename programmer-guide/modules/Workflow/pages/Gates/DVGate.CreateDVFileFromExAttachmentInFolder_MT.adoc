@@ -1,0 +1,34 @@
+= DVGate.CreateDVFileFromExAttachmentInFolder -- метод (ExAttachment, DVFolder, ProcessVariable)
+
+Создает карточку версионного файла на основе вложения письма переданного шлюзом к `Exchange`.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public DVFileCard CreateDVFileFromExAttachmentInFolder(ExAttachment Attachment, DVFolder Folder, ProcessVariable OutShortcut);
+----
+
+Параметры::
+Attachment:::
+Тип: `ExAttachment`
++
+Вложение письма
+
+Folder:::
+Тип: `DVFolder`
++
+Папка, в которую будет добавлен ярлык на карточку
+
+OutShortcut:::
+Тип: `xref:Runtime/ProcessVariable_CL.adoc[ProcessVariable]`
++
+Переменная бизнес-процесса, в значение которой будет записан созданный ярлык. Если не требуется -- передать `null`.
+
+Возвращаемое значение::
+Тип: `DVFileCard`
++
+Карточка файла с версиями

@@ -1,0 +1,50 @@
+= ITaskService.RecallTask -- метод (Task)
+
+Отзывает задание.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void RecallTask(Task task)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Отзываемое задание
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для отзыва задания.
+|===
+
+== Примеры
+
+Ниже приведен пример отзыва задания. Для фактической смены состояния карточки необходимо использовать метод `IStateService.ChangeState`.
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+taskService.RecallTask(task);
+stateService.ChangeState(task, stateService.FindStateByBuiltIn(Task.RecalledState, task)); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение задания.
+<.> Отзыв задания.

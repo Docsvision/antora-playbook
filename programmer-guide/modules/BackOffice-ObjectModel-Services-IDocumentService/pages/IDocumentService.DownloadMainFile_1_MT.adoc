@@ -1,0 +1,39 @@
+= IDocumentService.DownloadMainFile -- метод (Document, DocumentFile)
+
+Выгружает основной файл документа на диск.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+string DownloadMainFile(Document document, DocumentFile file)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+file:::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл документа
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Путь, по которому был выгружен файл
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `file`.
+|`https://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если файл документа не указывает на карточку версионного файла.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если у сотрудника недостаточно прав для чтения основного файла.
+|===

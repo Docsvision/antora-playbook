@@ -1,0 +1,55 @@
+= CardControl.ShowMessage -- метод (String, String, String, MessageType, MessageButtons)
+
+Отображает окно сообщения с заданным текстом, заголовком окна и полем дополнительной информации. Также передается список отображаемых кнопок и тип сообщения.
+
+* *Пространство имён:* `xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]`
+* *Сборка:* `DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public MessageResult ShowMessage(string text, string caption, string details, MessageType messageType, MessageButtons buttons);
+----
+
+Параметры::
+text:::
+Тип: `String`
++
+Содержимое сообщения.
+
+caption:::
+Тип: `String`
++
+Заголовок окна сообщения.
+
+messageType:::
+Тип: `xref:Platform-CardHost:CardHost/MessageType_EN.adoc[MessageType]`
++
+Тип сообщение. Влияет на оформление окна.
+
+buttons:::
+Тип: `xref:Platform-CardHost:CardHost/MessageButtons_EN.adoc[MessageButtons]`
++
+Кнопки, отображаемые в окне сообщения.
+
+Возвращаемое значение::
+Тип: `xref:Platform-CardHost:CardHost/MessageResult_EN.adoc[MessageResult]`
++
+Кнопка, которая была нажата пользователем при закрытии сообщения.
+
+== Примеры
+
+Ниже приведен пример использования функции `ShowMessage` для получения подтверждения выполнения операции от пользователя.
+
+[source,charp]
+----
+private void deleteFiles_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+ {
+    var userChoise = this.CardControl.ShowMessage("Подтвердите выполнение операции","Требуется подтверждение","При выполнении операции будут удалены все файлы.", MessageType.Question, MessageButtons.YesNo);
+        
+    if (userChoise = MessageResult.Ok){
+        DeleteAllFiles();
+    }
+}
+----

@@ -1,0 +1,24 @@
+= IStateService.GetStateMachineBranches -- метод (KindsCardKind)
+
+Возвращает список доступных, для указанного вида карточки, переходов автомата состояний.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IList<StatesStateMachineBranch> GetStateMachineBranches(KindsCardKind cardKind)
+----
+
+Параметры::
+cardKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид карточки, для которого должны быть получены переходы автомата состояний
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/5y536ey6.aspx[System.Collections.Generic.IList]<StatesStateMachineBranch>`
++
+Список переходов автомата состояний, типа `xref:BackOffice-ObjectModel:StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]`

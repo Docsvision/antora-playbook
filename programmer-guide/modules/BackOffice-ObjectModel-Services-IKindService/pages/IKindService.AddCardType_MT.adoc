@@ -1,0 +1,53 @@
+= IKindService.AddCardType -- метод (Guid)
+
+Добавляет новый тип карточки с предопределённым идентификатором.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+KindsCardType AddCardType(Guid cardtypeId)
+----
+
+Параметры::
+cardtypeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор типа карточки
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:KindsCardType_CL.adoc[KindsCardType]`
++
+Добавленный тип карточки
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `cardtypeId`.
+|===
+
+== Заметки
+
+Для типа карточки с указанным идентификатором должен быть реализован компонент, а также должна существовать соответствующая библиотека карточек.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
+
+KindsCardType newType = kindService.AddCardType(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+objectContext.SaveObject(newType); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником видов карточек.
+<.> Добавление типа карточки с идентификатором `00000000-0000-0000-0000-000000000000` в библиотеке карточек.
+<.> Обязательное сохранение.

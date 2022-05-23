@@ -1,0 +1,38 @@
+= CardManager.GetLinksToCard -- метод (Guid, LinkType, int)
+
+Возвращает коллекцию карточек, ссылающихся на данную, с заданным типом ссылки и глубиной вложенности.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract CardDataCollection GetLinksFromCard(Guid cardId, LinkType linkType, int recurseDepth)
+----
+
+Параметры::
+cardId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор карточки
+
+linkType:::
+Тип: `xref:Platform-ObjectManager:LinkType_EN.adoc[LinkType]`
++
+Тип ссылки
+
+recurseDepth:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Глубина рекурсии
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-CardData:CardDataCollection_CL.adoc[CardDataCollection]`
++
+Коллекция карточек
+
+== Заметки
+
+Параметр recurseDepth определяет на сколько шагов ссылающиеся карточки могут отстоять от данной.

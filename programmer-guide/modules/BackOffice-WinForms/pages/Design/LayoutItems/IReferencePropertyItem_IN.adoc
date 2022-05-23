@@ -1,0 +1,31 @@
+= IReferencePropertyItem -- интерфейс
+
+Интерфейс `IReferencePropertyItem` определяет параметры связанного поля.
+
+* *Пространство имён:* `xref:Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]`
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IReferencePropertyItem
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`CardTypeId` |Возвращает идентификатор типа карточки.
+|`SectionTypeId` |Возвращает идентификатор секции карточки.
+|`AllowUnresolved` |Возвращает признак, определяющий возможность сохранения в элемент управления нераспознанного значения.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GetLinkedFieldValue(String)` |Возвращает значение указанного связанного поля.
+|===

@@ -1,0 +1,53 @@
+= IDocumentService.CreateDocument -- метод (String, KindsCardKind)
+
+Создает экземпляр нового документа с указанным видом, с основным файлом.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[WorkflowVisible(WorkflowVisibility.Visible)]
+Document CreateDocument(string filePath, KindsCardKind kind)
+----
+
+Параметры::
+filePath:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Путь к основному файлу
+
+kind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид карточки
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Экземпляр карточки Документ
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("0538E317-FAB6-4BB7-85C5-2303375A4EE1")); <.>
+
+Document document = documentService.CreateDocument(@"C:\Sample.docx", kind); <.>
+
+document.Description = "Пример документа"; <.>
+
+objectContext.SaveObject(document); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение вида карточки.
+<.> Создание документа с основным файлом.
+<.> Изменение описания.
+<.> Сохранение изменений в контексте.

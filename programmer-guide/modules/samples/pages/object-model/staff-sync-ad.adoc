@@ -1,0 +1,70 @@
+= Синхронизация Справочника сотрудников с Active Directory
+
+Для синхронизации _Справочника сотрудников_ с Active Directory достаточно вызвать специальный метод сервиса для работы со xref:cards:bo-lib/staff.adoc[Справочником сотрудников]
+
+[source,csharp]
+----
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+SynchronizationDepartmentsSettings syncSettings = new SynchronizationDepartmentsSettings(); <.>
+
+LongProcessManager longProcessManager = new LongProcessManager(); <.>
+
+staffService.SynchronizeWithActiveDirectory(syncSettings, longProcessManager); <.>
+----
+<.> Инициализация контекста объектов и получение сервиса.
+<.> Инициализация параметров синхронизации.
+<.> Инициализация менеджера длительных процессов.
+<.> Выполнение синхронизации.
+
+В приведенном примере класс `SynchronizationDepartmentsSettings` должен реализовывать интерфейс `xref:BackOffice-ObjectModel-Services-Entities:Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]`, например, следующим образом:
+
+[source,csharp]
+----
+class SynchronizationDepartmentsSettings : IADSynchronizationSettings
+{
+ public bool CreateFolders { get { return false; } }
+ public bool DeleteItems { get { return false; } }
+ public bool LoadCertificates { get { return false; } }
+ public bool LoadDisabled { get { return false; } }
+ public bool NotCheckDomain { get { return false; } }
+
+ public ADSynchronizationMode SynchronizationMode
+ {
+  get { return ADSynchronizationMode.FromADToDictionary; } <.>
+ }
+ public bool SynchronizeChildren { get { return false; } }
+
+ public bool SynchronizeDepartments
+ {
+  get { return true; } <.>
+ }
+ public bool SynchronizeGroups { get { return false; } }
+ public bool SynchronizeNewMoved { get { return false; } }
+ public bool SynchronizeRoles { get { return false; } }
+}
+----
+<.> Направление синхронизации в сторону Справочника сотрудников.
+<.> Разрешить синхронизацию подразделений.
+
+Здесь класс `SynchronizationDepartmentsSettings` устанавливает требование по синхронизации подразделений в _Справочнике сотрудников_ информацией, полученной из Active Directory.
+
+[NOTE]
+====
+Полное описание свойств класса `SynchronizationDepartmentsSettings` смотрите в описании интерфейса `xref:BackOffice-ObjectModel-Services-Entities:Entities/ActiveDirectory/ADSync/IADSynchronizationSettings_IN.adoc[IADSynchronizationSettings]`.
+====
+
+Менеджер длительных процессов `longProcessManager` должен реализовывать интерфейс `xref:BackOffice-ObjectModel-Services-Entities:Entities/ILongProcessManager_IN.adoc[ILongProcessManager]`, и для простоты определим его следующим образом:
+
+[source,csharp]
+----
+class LongProcessManager : ILongProcessManager
+{
+ public void Cancel() { }
+ public bool CancellationPending { get {return false;} }
+ public bool PausePending { get { return false; } }
+ public void LogMessage(string message) { }
+}
+----
+
+Чтобы синхронизация могла быть выполнена необходимо связать элемент _Справочника сотрудников_ и объект Active Directory. Подробнее об этом читайте в разделе xref:baseobjects:desdirs:staff/active-directory-sychronization.adoc[по ссылке].

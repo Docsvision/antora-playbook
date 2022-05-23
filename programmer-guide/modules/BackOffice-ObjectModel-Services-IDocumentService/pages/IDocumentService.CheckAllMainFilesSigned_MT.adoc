@@ -1,0 +1,57 @@
+= IDocumentService.CheckAllMainFilesSigned -- метод (Document, BaseCardSignature)
+
+Определяет корректность ЭЦП, установленной на основных файлах документа.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool CheckAllMainFilesSigned(Document document, BaseCardSignature signature)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ, для которого проводится проверка
+
+signature:::
+Тип: `xref:BackOffice-ObjectModel:BaseCardSignature_CL.adoc[BaseCardSignature]`
++
+Подпись карточки, содержащая актуальные ЭЦП
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- все подписи корректны, либо документ не содержит основных файлов, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `signature`.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last(); <.>
+
+bool result = documentService.CheckAllMainFilesSigned(document, lastSignature); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с документами.
+<.> Получение документа.
+<.> Получение последней подписи.
+<.> Выполнение проверки.

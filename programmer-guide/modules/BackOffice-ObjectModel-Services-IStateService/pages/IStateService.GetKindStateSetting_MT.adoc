@@ -1,0 +1,44 @@
+= IStateService.GetKindStateSetting -- метод (KindsCardKind)
+
+Возвращает настройки вида карточки, заданные в _Конструкторе состояний_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StatesCardKindStateSetting GetKindStateSetting(KindsCardKind cardKind)
+----
+
+Параметры::
+cardKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид карточки
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StatesCardKindStateSetting_CL.adoc[StatesCardKindStateSetting]`
++
+Параметры _Конструктора состояний_ для вида карточки
+
+== Примеры
+
+Далее приведен пример использования метода `GetKindStateSetting` при получении начального состояния карточки задание вида "На исполнение".
+
+[source,csharp]
+----
+<.>
+
+IStateService stateService = objectContext.GetService<IStateService>();
+KindsCardKind cardKind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
+
+StatesCardKindStateSetting stateSetting = stateService.GetKindStateSetting(cardKind); <.>
+
+StatesState startState = stateSetting.FirstState; <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение настроек вида.
+<.> Получение начального состояния.

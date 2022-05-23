@@ -1,0 +1,42 @@
+= ITaskService.CanCompleteTask -- метод (Task, TaskSetting, String)
+
+Проверяет возможность завершения задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool CanCompleteTask(Task task, TaskSetting taskSetting, out string errorMessage)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание
+
+taskSetting:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[TaskSetting]`
++
+Задание
+
+errorMessage:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Сообщение о причине недостаточности прав
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- задание может быть завершено, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `taskSetting`.
+|===

@@ -1,0 +1,108 @@
+= Экспорт, импорт и подготовка карточек к печати
+
+Функции экспорта и импорта доступны только в базовом API.
+
+== Экспорт
+
+Платформа позволяет экспортировать любые данные (карточки, секции, наборы строк и отдельные строки) в формат XML, а также импортировать их обратно. С этой функциональностью неразрывно связана также и задача печати данных -- так как проще всего реализовать её через специальный формат экспорта.
+
+Для получения XML-представления данных карточки можно использовать метод SaveXml объектов `xref:Platform-ObjectManager:CardData_CL.adoc[CardData]`, `xref:Platform-ObjectManager:SectionData_CL.adoc[SectionData]`, `xref:Platform-ObjectManager:SubSectionData_CL.adoc[SubSectionData]`, и `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`, а также коллекций этих объектов.
+
+[source,csharp]
+----
+FileStream file = new FileStream("C:\\MyCard.xml", FileMode.Create);
+card.SaveXml(file, ExportFlags.LinkedCards & ExportFlags.LinkedRows);
+----
+
+Для управления логикой экспорта можно создать собственный инспектор на основе базового класса `xref:Platform-ObjectManager:ExportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ExportCardInspector]`.
+
+== Импорт
+
+Позволяет загрузить в систему данные на основании строки (или файла) в формате XML, ранее выгруженного из этой же (или другой) базы данных {dv}.
+
+[IMPORTANT]
+====
+Корректность импорта не гарантируется, если версия базы данных, из которой данные были экспортированы, отличается от версии базы, куда они импортируются.
+====
+
+Для импорта предназначен метод `xref:Platform-ObjectManager:CardManager.ImportCards_MT.adoc[ImportCards]` объекта `CardManager`. Импортируемый XML должен соответствовать стандартной схеме карточек {dv}. Проверка на соответствие этой схеме обязательно выполняется перед началом собственно загрузки данных, и в случае несоответствия менеджер объектов вернет ошибку. Таким образом, передавать на вход метода произвольный XML-документ бессмысленно.
+
+Для управления логикой работы импорта предназначен специальный тип объектов -- `xref:Platform-ObjectManager:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`. Этот объект полностью реализует процесс импорта, осуществляет контроль целостности данных и выполняет разрешение конфликтов.
+
+****
+Необходимость наличия сложного механизма разрешения конфликтов при импорте обусловлена многообразием возможных конфигураций системы. Например, даже при импорте одной отдельно взятой карточки может возникнуть ситуация, когда такая карточка с таким идентификатором уже существует в базе. Это сразу порождает несколько возможных вариантов дальнейшего поведения импортера:
+
+* Заменить полностью существующую в базе карточку на новую.
+* Объединить данные существующей карточки с данными импортируемой.
+* Создать новый экземпляр карточки (с другим идентификатором) и наполнить его импортируемыми данными.
+* Прервать процесс импорта.
+* Другие варианты.
+
+Однако даже объект-инспектор не всегда может гарантировать корректность импорта, так как некоторые ограничения активируются только при отправке уже импортированных данных на сервер.
+
+.К числу таких ограничений относятся:
+* Права доступа к объектам.
+* Ограничения ссылочной целостности (foreign key constraints).
+* Ограничения уникальности (unique constraints).
+
+Если импортируемые данные нарушают одно их этих ограничений, то ошибка возникнет уже на сервере при попытке сохранить импортированные данные в БД. В этом случае импорт будет отменен полностью в рамках одной транзакции.
+****
+
+По умолчанию в _менеджере объектов_ реализовано 2 типа объектов-инспекторов, обладающих разным поведением:
+
+* `ImportCardInspectorCopier` -- создаёт копию карточки (с другими идентификаторами всех строк), используя данные из XML в качестве шаблона.
+* `ImportCardInspectorReplacer` -- заменяет содержимое импортируемой карточки. Существующие строки будут заменены, отсутствующие строки буду добавлены в существующий экземпляр.
+
+Объект-инспектор нужно создавать явно, передав в его конструктор ссылку на сессию:
+
+[source,csharp]
+----
+FileStream file = new FileStream("myCard.xml", FileMode.Open);
+ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session);
+CardDataCollection cards = session.CardManager.ImportCards(file, inspector);
+----
+
+Если существующих типов инспекторов недостаточно для реализации необходимой логики импорта, можно разработать собственный объект-инспектор. Для этого нужно создать новый класс, унаследовав его от базового `xref:Platform-ObjectManager:ImportCardInspector_CL.adoc[DocsVision.Platform.ObjectManager.ImportCardInspector]`, и переопределить методы этого класса, отвечающие за импорт отдельных структур.
+
+== Печать
+
+Печать данных карточки может быть выполнена как стандартными средствами системы, так и любым другим способом на усмотрение разработчика. При использовании собственных методов печати целесообразно получить данные карточки в формате XML, а затем преобразовать их в формат, удобный для печати (либо экспортировать во внешнюю систему, осуществляющую печать).
+
+Использование стандартных средств предполагает применение к данным карточки XSLT- или InfoPath-преобразования, описание которого задается на этапе проектирования схемы данных карточки (см. xref:solutions:cards/scheme/transformations.adoc[Раздел "Transformations"]).
+
+.Получить преобразования для конкретного типа карточки можно из мета-данных:
+[source,csharp]
+----
+CardType type = session.CardManager.CardTypes[new Guid("идентфикатор_типа")];
+CardTransformationCollection trans = type.Transformations;
+----
+
+После применения XSLT-преобразования данные карточки принимают формат XML или HTML-документа, который впоследствии может быть распечатан. Для применения XSLT-преобразования можно воспользоваться стандартными методами XML-парсера:
+
+[source,csharp]
+----
+CardData card = session.CardManager.GetCardData(cardId); <.>
+MemoryStream stream = new MemoryStream();
+card.SaveXml(stream);
+stream.Position = 0;
+XmlDocument cardXML = new XmlDocument();
+cardXML.Load(stream);
+
+CardType type = session.CardManager.CardTypes[new Guid("идентфикатор_типа")]; <.>
+CardTransformation trans = type.Transformations[0];
+
+XmlDocument transformXML = new XmlDocument();
+transformXML.LoadXml(trans.Data.ToString());
+XslCompiledTransform XSLTransform = new XslCompiledTransform();
+XSLTransform.Load((IXPathNavigable)transformXML); <.>
+
+System.Text.StringBuilder builder = new System.Text.StringBuilder();
+XmlWriter html = XmlWriter.Create(builder); <.>
+XSLTransform.Transform((IXPathNavigable)cardXML, html);
+----
+<.> Получаем данные карточки получение XML карточки.
+<.> Получаем шаблон печати.
+<.> Формируем трансформацию.
+<.> Применяем преобразование.
+
+Преобразованный документ может быть передан для печати во внешнее приложение (например, Microsoft Internet Explorer или Microsoft Word), либо в элемент управления https://msdn.microsoft.com/ru-ru/library/system.windows.forms.webbrowser.aspx[WebBrowser], если создается .NET-приложение.

@@ -1,0 +1,53 @@
+= ITaskGroupService.RecallTaskGroup -- метод (TaskGroup)
+
+Отзывает группу заданий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+string RecallTaskGroup(TaskGroup taskGroup)
+----
+
+Параметры::
+taskGroup:::
+Тип: `xref:BackOffice-ObjectModel:TaskGroup_CL.adoc[TaskGroup]`
++
+Отзываемая группа заданий
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Сообщения всех заданий об отзыве
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskGroup`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для отзыва группы заданий.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+TaskGroup taskGroup = objectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+taskGroupService.RecallTaskGroup(taskGroup);
+stateService.ChangeState(taskGroup, stateService.FindStateByBuiltIn(TaskGroup.RecalledState, taskGroup)); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение отзываемой группы заданий.
+<.> Отзыв группы заданий.

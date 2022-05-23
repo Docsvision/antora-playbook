@@ -1,0 +1,29 @@
+= ExportCardInspector.BeforeExportField -- метод (RowData, Field, Boolean)
+
+Инициируется перед началом экспорта данных поля.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public virtual void BeforeExportField(RowData rowData, Field rowField, ref bool cancel)
+----
+
+Параметры::
+rowData:::
+Тип: `xref:Platform-ObjectManager:RowData_CL.adoc[RowData]`
++
+Строка секции
+
+rowField:::
+Тип: `xref:Platform-ObjectManager-Metadata:Field_CL.adoc[Field]`
++
+Поле строки секции
+
+cancel:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- отменяет экспорт

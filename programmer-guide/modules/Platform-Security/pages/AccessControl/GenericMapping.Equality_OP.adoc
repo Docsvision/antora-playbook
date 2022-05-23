@@ -1,0 +1,31 @@
+= GenericMapping.Equality -- оператор
+
+Определяет, равняются ли значения двух объектов содержащих права доступа.
+
+* *Пространство имён:* `xref:AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]`
+* *Сборка:* `DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public static bool operator ==(
+        GenericMapping left, 
+        GenericMapping right)
+----
+
+Параметры::
+left:::
+Тип: `xref:AccessControl/GenericMapping_ST.adoc[GenericMapping]`
++
+Первый объект
+
+right:::
+Тип: `xref:AccessControl/GenericMapping_ST.adoc[GenericMapping]`
++
+Второй объект
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- уровни доступа эквивалентны; `false` -- значения различаются

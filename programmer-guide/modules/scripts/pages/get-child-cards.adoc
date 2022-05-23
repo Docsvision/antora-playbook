@@ -1,0 +1,46 @@
+= Доступ к подчиненным карточкам из карточки BackOffice
+
+Функциональность класса компонента карточки типа _Задание_ позволяет получать доступ к связанным карточкам: документам или другим заданиям. Список возможностей доступа к связанным карточкам определяется интерфейсом `xref:BackOffice-WinForms:ICardView_IN.adoc[ICardView]` который добавляет следующие свойства и методы:
+
+* `SaveChildCardOnClosing` -- задает или возвращает признак сохранения подчиненных карточек при их закрытии. Если значение `true`, то при закрытии подчиненной карточки изменения будут сохранение автоматически без запроса на сохранение.
+* `ChildCardActivated` -- событие, которое срабатывает при активации компонента какой-либо подчиненной карточки.
+* `OnChildCardActivated(ActiveChildCardEventArgs)` -- обработчик события активации подчиненной карточки.
+* `GetChildCardIds` -- возвращает список идентификаторов подчиненных карточек.
+* `ActivateChildCard(Guid)` -- активирует подчиненную карточку по её идентификатору.
+* `GetActivatedChildCards` -- возвращает массив компонентов активированных карточек. Активированной считается карточка, компонент которой был загружен в память, при этом сама карточка может быть закрыта.
+
+Ниже приведен пример, в котором в подчиненной карточке (должна быть активирована) устанавливается значение поле типа "Дата/Время":
+
+[source,csharp]
+----
+private void GetActiveCardId_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICardView cardView = (this.CardControl as ICardView); <.>
+
+ BaseCardControl cardControl = cardView.GetActivatedChildCards()[0]; <.>
+        
+ ICustomizableControl customizable = cardControl;
+ ILayoutPropertyItem registrationDate = customizable.FindPropertyItem<ILayoutPropertyItem>("CreationDate");
+ registrationDate.ControlValue = DateTime.Now.AddDays(-1); <.>
+ registrationDate.Commit();
+}
+----
+<.> Получаем интерфейс `ICardView` компонента карточки "Задание".
+<.> Получаем компонент первой подчиненной карточки (должна быть активирована).
+<.> Получаем элемент управления и изменяем дату.
+
+.Следующий код активирует первую (по списку) дочернюю карточку задания:
+[source,csharp]
+----
+private void ActivateCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICardView cardView = (this.CardControl as ICardView); <.>
+ 
+ Guid cardId = (this.CardControl as ICardView).GetChildCardIds()[0]; <.>
+
+ cardView.ActivateChildCard(cardId); <.>
+}
+----
+<.> Получаем интерфейс ICardView компонента карточки Задание.
+<.> Получаем идентификатор первой дочерней карточки.
+<.> Активируем карточку.

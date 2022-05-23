@@ -1,0 +1,81 @@
+= ICardHost.SelectFromCard -- метод (Guid, String, Object)
+
+При переопределении в производном классе отображает карточку в режиме выбора строки. Позволяет использовать дополнительные параметры активации.
+
+* *Пространство имён:* `xref:CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost]`
+* *Сборка:* `DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+object SelectFromCard(Guid cardId, string caption, object activateParams)
+----
+
+Параметры::
+cardId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор открываемого справочника
+
+caption:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Заголовок окна выбора
+
+activateParams:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]`
++
+Параметры активации
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.object.aspx[System.Object]`
++
+Результат выбора
+
+== Заметки
+
+В зависимости от параметров активации, результат выбора может представлять собой строку или массив строк.
+
+== Примеры
+
+[source,csharp]
+----
+private void openRef_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+
+ Guid cardID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.ID; <.>
+
+ string sectionID = DocsVision.BackOffice.CardLib.CardDefs.RefStaff.Employees.ID.ToString("B").ToUpperInvariant(); <.>
+
+ string employeeID = new Guid("00000000-0000-0000-0000-000000000000").ToString("B").ToUpperInvariant(); <.>
+
+ string restrictionUnitID = new Guid("00000000-0000-0000-0000-000000000001").ToString("B").ToUpperInvariant(); <.>
+    
+ object activateParams = new object[] { <.>
+  sectionID,
+  employeeID,
+  System.Reflection.Missing.Value, 
+  System.Reflection.Missing.Value,
+  System.Reflection.Missing.Value, 
+  false,
+  false,
+  false,
+  1, <.>
+  restrictionUnitID,
+  false,
+  false,
+  (int)DocsVision.BackOffice.WinForms.Controls.ItemSelectionMode.Positioning <.>
+ };
+
+ string selectedItem = (string)base.CardControl.CardHost.SelectFromCard(cardID, "Выберите сотрудника", activateParams); <.>
+}
+----
+<.> Получение идентификатора Справочника сотрудников.
+<.> Идентификатор секции, выбираемой из Справочника сотрудников. В данном случае -- сотрудники..
+<.> Идентификатор сотрудника, выбранного по умолчанию. Требуется привести к строковому формату.
+<.> Идентификатор организации, в пределах которой будет ограничен выбор сотрудников.
+<.> Формирование массива параметров активации.
+<.> Включение режима ограничения выбора. Выбор сотрудников возможен только из раздела Организации.
+<.> Только позиционирование.
+<.> Открытие карточки.

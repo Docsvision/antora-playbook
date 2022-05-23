@@ -1,0 +1,43 @@
+= DocsVision.Workflow.Gates -- пространство имён
+
+Данное пространство имён содержит интерфейсы, используемые при создании шлюза Workflow, методы работы со шлюзами, а также несколько готовых объектов данного типа: шлюз к базовым типам, к {dv}, шлюз в файловую систему и в Microsoft Exchange.
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Класс |Описание
+|`xref:Gates/BasicGate_CL.adoc[BasicGate]` |Содержит методы и свойства шлюза к простым типам.
+|`xref:Gates/DVGate_CL.adoc[DVGate]` |Содержит методы и свойства шлюза к {dv}.
+|`xref:Gates/ExGate_CL.adoc[ExGate]` |Содержит методы и свойства шлюза к почте.
+|`xref:Gates/FSGate_CL.adoc[FSGate]` |Содержит методы и свойства шлюза к файловой системе.
+|`xref:Gates/FSSubscriptionInfo_CL.adoc[FSSubscriptionInfo]` |Предоставляет значения для фильтра при подписке на события шлюза файловой системы.
+|`xref:Gates/MailFilter_CL.adoc[MailFilter]` |Предоставляет значения для фильтра почтовых сообщений.
+|`xref:Gates/MessageChannel_CL.adoc[MessageChannel]` |Предоставляет методы для работы с сообщениями шлюза.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header"]
+|===
+|Интерфейс |Описание
+|`xref:Gates/ICollectionalProperty_IN.adoc[ICollectionalProperty]` |Данный интерфейс описывает способ взаимодействия с коллекционным свойством стандартной переменной шлюза.
+|`xref:Gates/IGate_IN.adoc[IGate]` |Данный интерфейс реализуется серверными компонентами шлюзов. При помощи методов, представленных в данном интерфейсе, сервис СУБП работает с переменными шлюза.
+|`xref:Gates/IGateMessageSource_IN.adoc[IGateMessageSource]` |Определяет метод инициализации механизма подписки на события шлюза, а также свойство, через которое может быть получен канал подписки на события.
+|`xref:Gates/IGateVariable_IN.adoc[IGateVariable]` |Данный интерфейс описывает свойства стандартной переменной шлюза, единые для всех типов переменных. Все переменные, уникальные для конкретного шлюза, должны реализовывать этот интерфейс.
+|`xref:Gates/IGateVariableCustomProperties_IN.adoc[IGateVariableCustomProperties]` |Данный интерфейс описывает методы для работы с пользовательскими свойствами объекта шлюза, поддерживающего обработку подобных свойств.
+|`xref:Gates/ILicensableObject_IN.adoc[ILicensableObject]` |Определяет поддержку шлюзом лицензирования, предоставляет тип лицензии.
+|`xref:Gates/ILockableObject_IN.adoc[ILockableObject]` |Данный интерфейс описывает методы и свойства объекта шлюза, поддерживающего блокировку доступа к данным объекта.
+|`xref:Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel]` |Данный интерфейс добавляет методы подписки на события, и реализуется для соответствующего шлюза Workflow.
+|===
+
+== Перечисления
+
+[cols=",",options="header"]
+|===
+|Перечисление |Описание
+|`xref:Gates/DocsVisionSubscriptionType_EN.adoc[DocsVisionSubscriptionType]` |Типы подписок на события, поддерживаемые шлюзом к {dv}.
+|`xref:Gates/DVVariableType_EN.adoc[DVVariableType]` |Типы переменных шлюза к {dv}.
+|`xref:Gates/FSSubscriptionType_EN.adoc[FSSubscriptionType]` |Типы подписок на события, поддерживаемые шлюзом к файловой системе.
+|`xref:Gates/MailSubscriptionType_EN.adoc[MailSubscriptionType]` |Типы подписок на события, поддерживаемые шлюзом к почте.
+|===

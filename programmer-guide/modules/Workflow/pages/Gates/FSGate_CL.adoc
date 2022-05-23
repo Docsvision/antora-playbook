@@ -1,0 +1,127 @@
+= FSGate -- класс
+
+Содержит методы и свойства шлюза к файловой системе.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class FSGate : IGate, IGateMessageSource
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`FSGate()` |Инициализирует новый экземпляр класса FSGate.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/IGate.Data_PR.adoc[Data]` |Задает или возвращает конфигурацию шлюза.
+|`xref:Gates/IGate.ExecutionMode_PR.adoc[ExecutionMode]` |Возвращает поддерживаемый режим исполнения процесса.
+|`xref:Gates/IGate.ID_PR.adoc[ID]` |Возвращает уникальный идентификатор шлюза.
+|`xref:Gates/IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel]` |Возвращает канал подписки на события шлюза.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/FSGate.AddVariable_MT.adoc[AddVariable(Int32, String)]` |Создает новый файл или папку в указанном каталоге.
+|`AddVariable(Int64, String)` |Создает новый файл или папку в указанном каталоге.
+|`xref:Gates/FSGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)]` |Сравнивает пути к двум файлам или папкам.
+|`CompareVariables(Int64, String, String)` |Сравнивает пути к двум файлам или папкам.
+|`CopyVariable(Int32, String, String)` |Копирование не поддерживается.
+|`CopyVariable(Int64, String, String)` |Копирование не поддерживается.
+|`xref:Gates/FSGate.CreateFile_MT.adoc[CreateFile(String)]` |Создает в файловой системе новый файл.
+|`xref:Gates/FSGate.CreateFolder_MT.adoc[CreateFolder(String)]` |Создает в файловой системе новую папку.
+|`xref:Gates/FSGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)]` |Удаляет указанный файл или папку.
+|`DeleteVariable(Int64, String)` |Удаляет указанный файл или папку.
+|`xref:Gates/FSGate.GetVariable_MT.adoc[GetVariable(Int32, String)]` |Возвращает сущность указанного файла или папки.
+|`GetVariable(Int64, String)` |Возвращает сущность указанного файла или папки.
+|`GetVariable(Int32, String, String)` |Возвращает сущность указанного файла или папки.
+|`xref:Gates/IGate.GetVariableInternalReference_MT.adoc[GetVariableInternalReference(Int32, String)]` |Возвращает ссылку на переменную шлюза во внутреннем формате.
+|`xref:Gates/IGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)]` |Возвращает внешнюю ссылку на заданную переменную шлюза.
+|`xref:Gates/IGateMessageSource.Initialize_MT.adoc[Initialize(Guid, IMessageChannel, ISubscriptionChannel)]` |Инициализирует механизм подписки на события шлюза.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/FSGate.GateID_FL.adoc[GateID]` |Предоставляет идентификатор шлюза.
+|`xref:Gates/FSGate.GateName_FL.adoc[GateName]` |Предоставляет название шлюза.
+|===
+
+== Примечание
+
+При работе с файловой системой из бизнес-процесса (особенно) в кластере СУБП необходимо учитывать, что конкретная функция может обрабатываться на любом из серверов СУБП, работающих в кластере, т.е. список файлов локального диска для одной функции может отличаться от списка файлов, полученного другой функцией.
+
+== Примеры
+
+Ниже приведен пример простого скрипта бизнес-процесса, который получает из шлюза список файлов определённой папки, содержащей новые приказы, и на их основе создает документы.
+
+[source,csharp]
+----
+public void Execute (ProcessInfo process, PassState passInfo, ObjectContext context) <.>
+{
+ try
+ {
+  FSGate fsGate = (FSGate)process.Gates[FSGate.GateID]; <.>
+
+  IDocumentService documentService = context.GetService<IDocumentService>(); <.>
+
+  string newOrderFolder = (string)process.Variables.GetVariableByName("newOrderFolder").Value;
+  string processedOrderFolder = (string)process.Variables.GetVariableByName("processedOrderFolder").Value; <.>
+
+  FSFileFolder folder = fsGate.GetVariable(0, newOrderFolder) as FSFileFolder; <.>
+  
+  string[] orders = folder.GetFiles("*.docx"); <.>
+                                
+  for(int i =0; i<orders.Length; i++)
+  {
+   FSFile currentFile = (FSFile)fsGate.GetVariable(1, orders[i]); <.>
+   
+   if(currentFile.CreationTime < DateTime.Today) <.>
+   {
+    try{
+
+     Document document = documentService.CreateDocument(currentFile.ID);
+     context.SaveObject(document); <.>
+
+     currentFile.Move(System.IO.Path.Combine(processedOrderFolder, currentFile.Name));
+     process.LogMessage ("Создан документ по файлу: " + currentFile.Name); <.>
+    } catch 
+    { 
+     throw; 
+    }   
+   }
+  }
+ } catch (Exception ex)
+ {
+  process.LogMessage("Ошибка выполнения скрипта:" + ex.Message); <.>
+ }
+ return;
+}
+----
+<.> Стандартная точка входа функции БП, дополненная параметром `context`.
+<.> Получаем шлюз к файловой системе.
+<.> Получаем сервис для работы с документами для создания документов.
+<.> Получаем из настроек БП папки: с новыми приказами и для обработанных БП приказов.
+<.> Получаем объект-папку из шлюза.
+<.> Получаем список файлов (.`docx`) из папки.
+<.> Получаем объект-файл.
+<.> Обрабатываем только приказы, выпущенные вчера (или ранее).
+<.> Создаем документ.
+<.> Убираем обработанный файл.
+<.> Записываем в журнал ошибки исполнения.

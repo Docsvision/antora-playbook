@@ -1,0 +1,33 @@
+= LockedObjectCollection -- класс
+
+Содержит методы для работы с коллекцией `LockedObject`. Этот класс является *абстрактным*.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class LockedObjectCollection : IEnumerable<LockedObject>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает размер коллекции.
+|`Item` |Возвращает элемент коллекции по идентификатору элемента.
+|`Item` |Возвращает элемент коллекции по его индексу.
+|`Session` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Contains` |Определяет вхождение в коллекцию элемента с указанным идентификатором.
+|`GetEnumerator` |Возвращает перечислитель.
+|===

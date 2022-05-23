@@ -1,0 +1,122 @@
+= Пример реализации командного расширения {wincl}а
+
+В проекте создается расширения {wincl}а, которое добавляет на ленту инструментов новую команду, организующую перевод курсора на личную папку текущего сотрудника. Личная папка должна быть задана в _Справочнике сотрудников_.
+
+Для реализации расширения {wincl}а требуется:
+
+. Создать проект (MS Visual Studio) типа "Class Library".
+. Создайте элемент управления "User Control" (Windows Forms).
+. Измените базовый класс элемента управления с UserControl на `xref:Platform-WinForms:NavExtension_CL.adoc[NavExtension]`.
+. Переопределить необходимые методы и свойства базового класса (см. пример).
+. Создать библиотеку карточек (доступна в архиве проекта), включив в неё карточку использующую созданный компонент.
+. Зарегистрировать реализованный компонент в GAC (предпочтительно) на всех клиентских машинах.
+. Зарегистрировать с использованием программы CardManager, входящей в Resource Kit, созданную библиотеку карточек на сервере {dv}.
+
+[source,csharp]
+----
+using DocsVision.Platform.Extensibility;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.ObjectManager.Metadata;
+using DocsVision.Platform.ObjectManager.SearchModel;
+using DocsVision.Platform.WinForms;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+namespace DocsVision.Test.NavPluging
+{
+ [ComVisible(true)]
+ [Guid("6A0676EE-1DAF-4A59-B5EB-E0B5B4C175E1")]
+ [ClassInterface(ClassInterfaceType.None)]
+ public partial class Plugin : NavExtension
+ {
+  public Plugin() { }
+
+  protected override NavExtensionTypes SupportedTypes <.>
+  {
+   get
+   {
+    return NavExtensionTypes.Command;
+   }
+  }
+
+  protected override string GetExtensionName(NavExtensionTypes extensionType) <.>
+  {
+   return "Быстрый выбор";
+  }
+
+  protected override IEnumerable<NavCommand> CreateCommands() <.>
+  {
+   NavCommand myCommand = new NavCommand();
+   myCommand.CommandType = NavCommandTypes.ToolBar; <.> // В данном случае -- команда размещается на ленте инструментов
+   myCommand.Name = "Выбрать папку";
+   myCommand.Description = "Команда выбирает заданную папку";
+   myCommand.Location = new NavCommandLocation()
+   {
+    RibbonTabLocations = new RibbonTabLocation[] <.>
+    { 
+     new RibbonTabLocation
+     {
+      Tab = "Доп. команды",
+      Groups = new string[] { "Группы" }
+     }
+    }
+   };
+   return new List<NavCommand> { myCommand };
+  }
+
+  protected override NavCommandStatus QueryCommandStatus(NavCommand command, NavCommandContext context) <.>
+  {
+   return NavCommandStatus.Enabled | NavCommandStatus.Supported; <.>
+  }
+  
+  protected override void InvokeCommand(NavCommand command, NavCommandContext context) <.>
+  {
+   string accountName = base.Session.Properties["AccountName"].Value.ToString();
+
+   Guid Employees = new Guid("DBC8AE9D-C1D2-4D5E-978B-339D22B32482"); <.>
+
+   SectionQuery sectionQuery = base.Session.CreateSectionQuery();
+   sectionQuery.ConditionGroup.Conditions.AddNew("AccountName", FieldType.String, ConditionOperation.Equals, accountName); <.>
+
+   CardData staffData = base.Session.CardManager.GetDictionaryData(RefStaff, false);
+   RowDataCollection users = staffData.Sections[Employees].FindRows(sectionQuery.GetXml());
+
+   if (users.Count > 0)
+   {
+
+    Guid? personalFolderID = users[0].GetGuid("PersonalFolder"); <.>
+    if (personalFolderID.HasValue)
+    {
+
+     CardFrame.CardHost.ActivateFolder(personalFolderID.Value, true); <.>
+    }
+   }
+  }
+ }
+}
+----
+<.> Тип расширения.
+<.> Название расширения.
+<.> Инициализация списка команд.
+<.> Создание вкладки на панели инструментов, для помещения в ней новой команды.
+<.> Проверка команды на доступность.
+<.> Команда всегда доступна.
+<.> Непосредственное исполнение команды расширения.
+<.> Идентификаторы Справочника сотрудников и секции Сотрудники
+   `Guid RefStaff = new Guid("6710B92A-E148-4363-8A6F-1AA0EB18936C")`.
+<.> Поиск в секции Сотрудники сотрудника с учетной записью `accountName` (учетная запись текущего сотрудника).
+<.> Получение личной папки.
+<.> Установка курсора на папку.
+
+В реализуемых методах, проверка параметра `command` не выполняется, однако в реальных проектах это может понадобиться.
+
+[IMPORTANT]
+====
+Готовая сборка должна иметь строгое имя, см. http://msdn.microsoft.com/ru-ru/library/xwb8f617.aspx[Создание и использование сборок со строгими именами].
+====
+
+[NOTE]
+====
+Полностью проект, содержащий командное расширение и библиотеку карточек, доступен по xref:ROOT:attachment$winclientPlugin.zip[ссылке].
+====

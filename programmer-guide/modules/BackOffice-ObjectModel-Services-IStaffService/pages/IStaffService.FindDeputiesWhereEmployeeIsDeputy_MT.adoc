@@ -1,0 +1,59 @@
+= IStaffService.FindDeputiesWhereEmployeeIsDeputy -- метод (StaffEmployee)
+
+Возвращает список замещений сотрудников, в которых указанный сотрудник является заместителем.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+List<StaffDeputy> FindDeputiesWhereEmployeeIsDeputy(StaffEmployee employee);
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник, для которого определяется список замещений
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<StaffDeputy>`
++
+Список замещений, представленный коллекцией объектов `xref:BackOffice-ObjectModel:StaffDeputy_CL.adoc[StaffDeputy]`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee`.
+|===
+
+== Заметки
+
+Заместители сотрудников добавляются в _Справочнике сотрудников_.
+
+== Примеры
+
+Ниже приведен пример использования сервиса для отбора прав у текущего сотрудника, позволяющих ему, как заместителю другого сотрудника, выполнять подписание документов ЭЦП.
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+List<StaffDeputy> deputy = staffService.FindDeputiesWhereEmployeeIsDeputy(staffService.GetCurrentEmployee()); <.>
+
+foreach (StaffDeputy item in deputy) <.>
+{
+ item.Signature = false;
+}
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение списка замещений в который участвует текущий сотрудник.
+<.> Сброс флага, разрешающего подписание документов, для всех замещений.

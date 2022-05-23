@@ -1,0 +1,66 @@
+= IBaseUniversalService.AddNewViewField -- метод (String, SectionField, BaseUniversalItemType)
+
+Создает отображаемое поле в коллекции полей, и возвращает на него ссылку.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+BaseUniversalItemTypeViewField AddNewViewField(string fieldName, SectionField sectionField, BaseUniversalItemType itemType)
+----
+
+Параметры::
+fieldName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Название поля для которого создается отображение
+
+sectionField:::
+Тип: `xref:Platform-Data:Metadata/CardModel/SectionField_CL.adoc[SectionField]`
++
+Поле секции для которого создается отображение
+
+itemType:::
+Тип: `xref:BackOffice-ObjectModel:BaseUniversalItemType_CL.adoc[BaseUniversalItemType]`
++
+Узел справочника к которому добавляется отображаемое поле
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:BaseUniversalItemTypeViewField_CL.adoc[BaseUniversalItemTypeViewField]`
++
+Отображаемое поле
+
+== Примеры
+
+В приведенном ниже примере создается отображаемое поле в узле конструктора справочников
+
+[source,csharp]
+----
+<.>
+         
+IBaseUniversalService baseUniversalService = objectContext.GetService<IBaseUniversalService>(); <.>
+
+IMetadataProvider iMetadataProvider = objectContext.GetService<IMetadataProvider>(); <.>
+
+CardSection cardSectionMetadata = iMetadataProvider.GetSection(new Guid("1B1A44FB-1FB1-4876-83AA-95AD38907E24")); <.>
+
+BaseUniversalItemType baseUniversalItemType = objectContext.GetObject<BaseUniversalItemType>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+SectionField sectionField = cardSectionMetadata.Fields[new Guid("8B45BC58-6831-40C1-B654-E0C0C6E36115")]; <.>
+
+BaseUniversalItemTypeViewField baseUniversalItemTypeViewField = baseUniversalService.AddNewViewField(sectionField.Name, sectionField, baseUniversalItemType);
+baseUniversalItemTypeViewField.Order = baseUniversalItemType.ViewFields.Count; <.>
+
+objectContext.SaveObject(baseUniversalItemTypeViewField); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение поставщика метаданных.
+<.> Получение секции, которая содержит отображаемое поле (в нашем случае секция "Строка справочника" карточки "Конструктор справочников").
+<.> Получение узла, для которого добавляется отображаемое поле.
+<.> Получение поля "Описание".
+<.> Создание нового отображаемого поля и установка порядкового номера.
+<.> Сохранение.

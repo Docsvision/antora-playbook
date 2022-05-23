@@ -1,0 +1,33 @@
+= IAccessCheckingService.IsOperationAllowed -- метод (BaseCard, StatesOperation)
+
+Возвращает признак разрешения выполнения операции для заданной карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool IsOperationAllowed(BaseCard card, StatesOperation operation)
+----
+
+Параметры::
+card:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка из библиотеки _{bo}_
+
+operation:::
+Тип: `xref:BackOffice-ObjectModel:StatesOperation_CL.adoc[StatesOperation]`
++
+Встроенная операция
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- операция разрешена, иначе -- `false`
+
+== Заметки
+
+Если операция не запрещена, то она отмечается разрешенной.

@@ -1,0 +1,37 @@
+= IAccessCheckingService.GetUserOperations -- метод (BaseCard, StaffEmployee)
+
+Возвращает список всех операций, доступных указанному сотруднику для карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<StatesOperation> GetUserOperations(BaseCard card, StaffEmployee employee)
+----
+
+Параметры::
+card:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, для которой запрашиваются доступные операции
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник, проверяемый на права доступа к операциям карточки
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StatesOperation>`
++
+Список доступных операций типа `xref:BackOffice-ObjectModel:StatesOperation_CL.adoc[StatesOperation]`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `card` или `employee`.
+|===

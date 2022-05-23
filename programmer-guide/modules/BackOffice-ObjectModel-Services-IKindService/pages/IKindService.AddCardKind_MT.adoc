@@ -1,0 +1,56 @@
+= IKindService.AddCardKind -- метод (KindsCardKind)
+
+Добавляет к заданному виду карточки подвид и возвращает ссылку на созданный объект.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+KindsCardKind AddCardKind(KindsCardKind parentKind)
+----
+
+Параметры::
+parentKind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Родительский вид карточки
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Созданный вид карточки
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `parentKind`.
+|===
+
+== Заметки
+
+Название создаваемого вида карточки будет сформировано на основе названия родительского вида карточки, либо на основе типа карточки.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IKindService kindService = objectContext.GetService<IKindService>(); <.>
+
+KindsCardKind parentKind = objectContext.GetObject<KindsCardKind>(new Guid("7DB9044E-91B7-447D-8CAA-5E5A4967B8D4")); <.>
+
+KindsCardKind newKind = kindService.AddCardKind(parentKind); <.>
+
+objectContext.SaveObject(newKind); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы со Справочником видов карточек.
+<.> Получение родительского вида "Заявка".
+<.> Добавление нового вида карточки.
+<.> Обязательное сохранение.

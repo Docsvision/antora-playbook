@@ -1,0 +1,33 @@
+= IBarcodeService.GenerateBarcode -- метод (Document, DateTime)
+
+Формирует штрих-код для заданной карточки документа.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+string GenerateBarcode(Document document, DateTime documentDate)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+documentDate:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
++
+Дата и время, используемые при формировании штрих-кода
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Штрих-код
+
+== Заметки
+
+Штрих-код формируется в соответствии с системными настройками. За основу берется дата и время `DateTime`.

@@ -1,0 +1,39 @@
+= NumeratorCard -- класс
+
+Содержит свойства и методы работы с экземпляром нумератора.
+
+* *Пространство имён:* `xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class NumeratorCard : SystemCard
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Available` |Признак доступности нумератора для выдачи номеров.
+|`EndNumber` |Возвращает конечный номер нумератора.
+|`Name` |Получает или задает название нумератора.
+|`Ranges` |Возвращает коллекцию диапазонов нумератора.
+|`StartNumber` |Возвращает начальный номер нумератора.
+|`Zones` |Возвращает коллекцию зон нумератора.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AllocateNumbers(Guid, String, Int32, Int32)` |Резервирует за пользователем указанный диапазон номеров.
+|`ChangeEndNumber(Int32, Boolean)` |Изменяет конечный номер нумератора.
+|`ChangeStartNumber(Int32, Boolean)` |Изменяет начальный номер нумератора.
+|`GetNumberInfo(Guid)` |Получение информации по заданному номеру нумератора.
+|`GetNumbersStatus(String, Int32, Int32)` |Возвращает статусы номеров для заданной зоны из заданного диапазона.
+|`ReleaseNumbers(String, Int32, Int32)` |Освобождение группы номеров нумератора.
+|===

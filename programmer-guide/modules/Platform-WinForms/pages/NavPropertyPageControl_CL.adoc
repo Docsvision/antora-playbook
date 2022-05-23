@@ -1,0 +1,77 @@
+= NavPropertyPageControl -- класс
+
+Базовый класс для элемента управления страницы свойств {wincl}а.
+
+* *Пространство имён:* `xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]`
+* *Сборка:* `DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[ClassInterface(ClassInterfaceType.None)]
+[ComVisible(true)]
+[DefaultEvent("PageActivated")]
+[Guid("D2329F03-D431-4169-B927-8670F72732B2")]
+[ToolboxItem(false)]
+public class NavPropertyPageControl : ContainerControl, IServiceProvider, IPropertyPageUI
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavPropertyPageControl_CT.adoc[NavPropertyPageControl]` |Инициализирует новый экземпляр класса `NavPropertyPageControl`.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavPropertyPageControl.ActivateParams_PR.adoc[ActivateParams]` |Возвращает параметры активации страницы.
+|`xref:NavPropertyPageControl.CardHost_PR.adoc[CardHost]` |Возвращает ссылку на контейнер карточки.
+|`xref:NavPropertyPageControl.PageFrame_PR.adoc[PageFrame]` |Возвращает ссылку на окно текущей страницы свойств.
+|`xref:NavPropertyPageControl.Session_PR.adoc[Session]` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavPropertyPageControl.Dispose_MT.adoc[Dispose(Boolean)]` |Освобождает ресурсы.
+|`xref:NavPropertyPageControl.GetService_MT.adoc[GetService(Type)]` |Получает сервис заданного типа.
+|`xref:NavPropertyPageControl.OnPageActivated_MT.adoc[OnPageActivated(EventArgs)]` |Создает событие `PageActivated`.
+|`xref:NavPropertyPageControl.OnPageApplied_MT.adoc[OnPageApplied(EventArgs)]` |Создает событие `PageApplied`.
+|`xref:NavPropertyPageControl.OnPageClosed_MT.adoc[OnPageClosed(EventArgs)]` |Создает событие `PageClosed`.
+|`xref:NavPropertyPageControl.OnPageDeactivated_MT.adoc[OnPageDeactivated(EventArgs)]` |Создает событие `PageDeactivated`.
+|`xref:NavPropertyPageControl.OnPageInitialized_MT.adoc[OnPageInitialized(EventArgs)]` |Создает событие `PageInitialized`.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavPropertyPageControl.PageActivated_EV.adoc[PageActivated]` |Событие вызывается при активации страницы свойства.
+|`xref:NavPropertyPageControl.PageApplied_EV.adoc[PageApplied]` |Событие вызывается при необходимости сохранить изменения.
+|`xref:NavPropertyPageControl.PageClosed_EV.adoc[PageClosed]` |Событие вызывается при закрытии страницы свойств.
+|`xref:NavPropertyPageControl.PageDeactivated_EV.adoc[PageDeactivated]` |Событие вызывается при деактивации страницы.
+|`xref:NavPropertyPageControl.PageInitialized_EV.adoc[PageInitialized]` |Событие вызывается при инициализации страницы свойств.
+|===
+
+== Заметки
+
+Объект типа `NavPropertyPageControl` используется расширением страниц свойств {wincl}а. Объект унаследованный от данного класса должен иметь идентификатор COM-интерфейса.
+
+== Примеры
+
+[source,csharp]
+----
+[ComVisible(true)]
+[Guid("572860E1-E4C6-4120-B3DC-78C0A03F7445")]
+[ClassInterface(ClassInterfaceType.None)]
+public sealed partial class TestPropertyPage : NavPropertyPageControl
+----

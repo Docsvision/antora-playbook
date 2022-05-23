@@ -1,0 +1,32 @@
+= IPartnersService.FindUnitGroups -- метод (PartnersCompany)
+
+Возвращает список всех групп, в которые входит заданное подразделение контрагента.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+List<PartnersGroup> FindUnitGroups(PartnersCompany company)
+----
+
+Параметры::
+company:::
+Тип: `xref:BackOffice-ObjectModel:PartnersCompany_CL.adoc[PartnersCompany]`
++
+Организация/подразделение контрагента
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<PartnersGroup>`
++
+Список групп, в которые входит подразделение
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `company`.
+|===

@@ -1,0 +1,66 @@
+= IDocumentService.AddMainFiles -- метод (Document document, IEnumerable<String>)
+
+Добавляет несколько основных файлов в документ.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<DocumentFile> AddMainFiles(Document document, IEnumerable<string> filePaths)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ, в который будут добавлены файлы
+
+filePaths:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<System.String>`
++
+Расположение основных файлов
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<DocumentFile>`
++
+Список файлов документа
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document` или `filePaths`.
+|`http://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается в случае, если текущее состояние документа не позволяет выполнить операцию добавления, либо у сотрудника недостаточно прав для выполнения операции.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возникает при наличии в документе файла с аналогичным добавляемому названием, либо в случае, если добавление файла недопустимо.
+|===
+
+== Заметки
+
+Перед непосредственным добавлением файлов будет выполнена проверка на возможность добавления, в результате чего может быть возвращена ошибка.
+
+== Примеры
+
+В приведенном примере к документу добавляются два основных файла с файловой системы
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+string[] filePaths = new string[] { @"X:\Document.docx", @"X:\Document2.docx" };
+documentService.AddMainFiles(document, filePaths); <.>
+
+objectContext.SaveObject(document); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа.
+<.> Добавление основных файлов.
+<.> Сохранение.

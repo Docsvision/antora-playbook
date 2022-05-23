@@ -1,0 +1,34 @@
+= IStateService.ChangeState -- метод (BaseCard, StatesStateMachineBranch, IEnumerable<KindsCardProcess>, String)
+
+Изменяет состояние карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ChangeState(BaseCard card, StatesStateMachineBranch branch, IEnumerable<KindsCardProcess> checkedProcessesToStart, out string startBusinessProcessErrors)
+----
+
+Параметры::
+card:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, для которой выполняется смена состояния
+
+branch:::
+Тип: `xref:BackOffice-ObjectModel:StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]`
++
+Переход автомата состояний
+
+checkedProcessesToStart:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<KindsCardProcess>`
++
+Список бизнес-процессов, которые должны быть запущена
+
+startBusinessProcessErrors:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Журнал ошибок запуска бизнес-процессов

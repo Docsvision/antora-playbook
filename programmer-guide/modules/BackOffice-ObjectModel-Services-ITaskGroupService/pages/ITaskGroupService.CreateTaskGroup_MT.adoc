@@ -1,0 +1,57 @@
+= ITaskGroupService.CreateTaskGroup -- метод (KindsCardKind)
+
+Создает группу заданий указанного вида.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskGroup CreateTaskGroup(KindsCardKind kind)
+----
+
+Параметры::
+kind:::
+Тип: `xref:BackOffice-ObjectModel:KindsCardKind_CL.adoc[KindsCardKind]`
++
+Вид группы заданий
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskGroup_CL.adoc[TaskGroup]`
++
+Группа заданий
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `kind`.
+|===
+
+== Примеры
+
+Ниже приведен пример создания группы вида "Группа заданий УД".
+
+[source,csharp]
+----
+<.>
+
+ITaskGroupService taskGroupService = objectContext.GetService<ITaskGroupService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+QueryObject query = new QueryObject(RefKinds.CardKinds.Name, "Группа заданий УД");
+KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query); <.>
+
+TaskGroup taskGroup = taskGroupService.CreateTaskGroup(cardKind);
+taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
+taskGroup.Description = "Подготовить финансовый отчет";
+taskGroup.MainInfo.Name = "Подготовить финансовый отчет"; <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение вида группы заданий.
+<.> Создание группы заданий.

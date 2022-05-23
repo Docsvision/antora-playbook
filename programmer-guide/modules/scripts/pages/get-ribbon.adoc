@@ -1,0 +1,49 @@
+= Доступ к элементам ленты карточки
+
+.Лента карточки -- сущность типа `https://documentation.devexpress.com/#WindowsForms/clsDevExpressXtraBarsRibbonRibbonControltopic[RibbonControl]`, доступ к которой обеспечивает одноименное свойство класса `xref:BackOffice-WinForms:ICustomizableControl_IN.adoc[ICustomizableControl]`:
+[source,csharp]
+----
+RibbonControl ribbonControl = (CardControl as ICustomizableControl).RibbonControl;
+----
+
+Класс `RibbonControl` предоставляет доступ к существующим элементам ленты (страницы, группы и элементы), а также позволяет добавлять новые.
+
+В качестве примера использования данной сущности можно рассмотреть сценарий добавления на ленту карточки новой кнопки на страницу _Документ_ в группу _Общие_.
+
+.Кнопка может добавляться, когда стандартных механизмов (например, ролевой модели) недостаточно для реализации сценария:
+- При загрузке карточки,
+- Если соблюдены определённые условия.
+- Если выполняются определённые действия с карточкой.
+- Если выполняется иная бизнес-логика. В приведенном далее примере добавление нового элемента -- кнопки, выполняется при загрузке карточки.
+
+[source,csharp]
+----
+private void CardDocument_CardLoaded(System.Object sender, System.EventArgs e) <.>
+{
+ ICustomizableControl customizable = this.CardControl as ICustomizableControl; <.>
+ if (customizable != null)
+ {
+  DevExpress.XtraBars.BarButtonItem button = new DevExpress.XtraBars.BarButtonItem(customizable.BarManager, "Новая кнопка"); <.>
+
+  button.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(MyRibbonButton_ItemClick); <.>
+
+  customizable.RibbonControl.Pages["Документ"].Groups["commonActionsRibbonPageGroup"].ItemLinks.Add(button); <.>
+ }
+}
+
+private void MyRibbonButton_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) <.>
+{
+ MessageBox.Show("Выполняется сценарий нажатия кнопки 'Новая кнопка'");
+}
+----
+<.> Обработчик загрузки карточки нужно добавить через Конструктор разметок.
+<.> Получение доступа к элементам разметки.
+<.> Создание кнопки.
+<.> Обработчик нажатия.
+<.> Добавление кнопки на ленту.
++
+Обратите внимание, что доступ к определённой странице осуществляется по отображаемому на ней тексту, а к группе элементов -- по названию.
++
+Название и текст элементов задаются при добавлении через "Конструктор разметок", а для стандартных (как в примере) сущностей данные параметры можно получить, к примеру, предварительно перебрав их через `foreach`.
++
+<.> Обработчик нажатия добавленной кнопки.

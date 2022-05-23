@@ -1,0 +1,25 @@
+= IOcspService -- интерфейс
+
+Описывает функциональность сервиса для работы с центром установления статуса сертификатов по протоколу OCSP.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IOcspService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Verify(X509Certificate2)` |Проверяет статус сертификата. Если сертификат отозван, либо недействителен, должно быть создано исключение.
+|===
+
+== Заметки
+
+Для работы с сервисом (возможно только из скрипта карточки), должны быть выполнены настройки, приведенные в xref:baseobjects:admin:system-settings.adoc#signature-cypher[документации по администрированию] модуля _Базовые объекты_.

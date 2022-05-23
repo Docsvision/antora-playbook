@@ -1,0 +1,36 @@
+= INumerationRulesService.DeleteNumerator -- метод (NumerationRulesNumerator)
+
+Удаляет нумератор из _конструктора правил нумерации_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool DeleteNumerator(NumerationRulesNumerator numerator)
+----
+
+Параметры::
+numerator:::
+Тип: `xref:BackOffice-ObjectModel:NumerationRulesNumerator_CL.adoc[NumerationRulesNumerator]`
++
+Удаляемый нумератор
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- успешно удалено, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `numerator`.
+|===
+
+== Заметки
+
+Метод не удаляет соответствующую карточку нумератора.

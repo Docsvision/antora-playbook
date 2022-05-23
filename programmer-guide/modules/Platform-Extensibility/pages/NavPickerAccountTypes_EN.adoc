@@ -1,0 +1,28 @@
+= NavPickerAccountTypes -- перечисление
+
+Определяет тип учетной записи.
+
+Это перечисление имеет атрибут `FlagsAttribute`, поддерживающий побитовое соединение составляющих его значений.
+
+* *Пространство имён:* `xref:Extensibility_NS.adoc[DocsVision.Platform.Extensibility]`
+* *Сборка:* `DocsVision.Platform.Extensibility.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[Flags]
+public enum NavPickerAccountTypes
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`None` |Неизвестный тип. Значение `0x0`.
+|`User` |Пользователь. Значение `0x1`.
+|`Group` |Группа. Значение `0x2`.
+|`Computer` |Компьютер. Значение `0x4`.
+|`Multiselect` |Множественный выбор. Значение `0x8`.
+|===

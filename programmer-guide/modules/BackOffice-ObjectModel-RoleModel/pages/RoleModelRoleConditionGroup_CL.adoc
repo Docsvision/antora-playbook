@@ -1,0 +1,47 @@
+= RoleModelRoleConditionGroup -- класс
+
+Предоставляет группу условий для ролевой модели.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class RoleModelRoleConditionGroup : ObjectBase, ICloneable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ConditionGroups` |Задает или возвращает дочернюю группу условий.
+|`Conditions` |Задает или возвращает список условий.
+|`Operation` |Задает или возвращает тип операции, применяемой на результаты выполнения условий.
+|`Parent` |Возвращает вышестоящую группу условий.
+|`Role` |Возвращает роль, которой принадлежит группа условий.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Clone` |Создает копию группы условий.
+|`Extract(IEnumerable)` |Извлекает из существующей группы условий условия, согласно переданному списку. Извлеченные условия удаляются из существующей группы условий.
+|`GetOperationDescription` |Возвращает локализованное название для свойства Operation.
+|`GetOperationDescription(RoleModelRoleConditionGroupOperation)` |Возвращает локализованное название указанной операции.
+|`Ungroup` |Извлекает группы и условия из текущей группы условий в родительскую, при условии, что таковая имеется. Возвращает родительскую группу.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ConditionGroupsProperty` |Определяет свойство "Группы условий".
+|`ConditionsProperty` |Определяет свойство "Условия".
+|`OperationProperty` |Определяет свойство "Операция группы условий".
+|===

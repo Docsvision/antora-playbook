@@ -1,0 +1,45 @@
+= ICardHost.CreateCard -- метод (Guid, Guid, ParameterCollection, Boolean)
+
+Создает карточку, используя переданные параметры.
+
+* *Пространство имён:* `xref:CardHost/CardHost_NS.adoc[DocsVision.Platform.CardHost]`
+* *Сборка:* `DocsVision.Platform.CardHost.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Guid CreateCard(Guid creatorEntryId, Guid initialCardInstanceId, ParameterCollection parameters, bool showUI)
+----
+
+Параметры::
+creatorEntryId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор режима создания карточки из _справочника видов карточек_
+
+initialCardInstanceId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор карточки, создающий карточку
+
+parameters:::
+Тип: `xref:CardHost/ParameterCollection_CL.adoc[ParameterCollection]`
++
+Параметры активации карточки
+
+showUI:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+При `true`, после создания, карточка будет открыта на редактирование
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор созданной карточки
+
+== Заметки
+
+Для корректной работы, метод необходимо вызвать из скрипта карточки.
+
+Содержимое `parameters` зависит от типа создаваемой карточки, а точнее от принимаемых ею параметров.

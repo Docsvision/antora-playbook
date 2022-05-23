@@ -1,0 +1,32 @@
+= AccessControlPropagation -- перечисление
+
+Определяет, каким образом происходит наследование прав доступа.
+
+Это перечисление имеет атрибут `FlagsAttribute`, поддерживающий побитовое соединение составляющих его значений.
+
+* *Пространство имён:* `xref:AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]`
+* *Сборка:* `DocsVision.Platform.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[Flags]
+public enum AccessControlPropagation
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`None` |Не учитывать права родителя. Значение `0x0`.
+|`OwnerRecurse` |Рекурсивное наследование прав.
+|`ResetDaclTree` |Не учитывать список `DACL`.
+|`ResetSaclTree` |Не учитывать список `SACL`.
+|`All` |Учитывать все права родителя.
+|===
+
+== Заметки
+
+На текущий момент процедура аудита не реализована.

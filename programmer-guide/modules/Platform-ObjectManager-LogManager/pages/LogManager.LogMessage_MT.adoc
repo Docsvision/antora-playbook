@@ -1,0 +1,77 @@
+= LogManager.LogMessage -- метод (EventType, Int32, String, Guid, Guid, Guid, String)
+
+Осуществляет запись сообщения в журнал.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void LogMessage(EventType eventType, int eventOperation, string resourceName, Guid resourceId, Guid typeId, Guid parentId, string eventData)
+----
+
+Параметры::
+eventType:::
+Тип: `xref:Platform-ObjectManager:EventType_EN.adoc[EventType]`
++
+Тип сообщения
+
+eventOperation:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Код операции. Может быть либо одним из стандартных кодов операций, либо собственной операцией (код `0`)
+
+resourceName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Имя объекта, с которым произведена операция (формируется в зависимости от контекста -- например, при операциях с карточкой это может быть её описание)
+
+resourceId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор объекта, с которым производится операция (ID карточки, строки, файла и т.д.)
+
+typeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Тип объекта (например, для карточки -- `CardTypeID`)
+
+parentId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор родительского объекта (например, для операции со строкой -- родительским объектом будет секция)
+
+eventData:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Любые дополнительные данные, связанные с событием
+
+== Заметки
+
+Начиная с версии {dv} 4.5, появился новый метод для записи в журнал приложений `xref:LogManager.LogMessageEx_MT.adoc[LogMessageEx]`.
+
+== Примеры
+
+Например, для записи собственного сообщения:
+
+[source]
+----
+session.LogManager.LogMessage(EventType.Information, 0, "Моя карточка", data.ID, Guid.Empty, Guid.Empty, "Добавлен исполнитель");
+----
+
+Вот как будет выглядеть такое сообщение в стандартном диалоге просмотра журнала:
+
+[source]
+----
+Тип сообщения: Информация.
+Операция: Не определено.
+Код: 0.
+Имя ресурса: Моя карточка.
+Идентификатор ресурса: {1EA06712-EBB1-4E33-B2E2-6A4AD05991E5}.
+Идентификатор типа ресурса: <Неизвестный идентификатор>.
+Идентификатор родительского объекта: <Неизвестный идентификатор>.
+Новый идентификатор: <Неизвестный идентификатор>.
+Данные сообщения: Добавлен исполнитель.
+----

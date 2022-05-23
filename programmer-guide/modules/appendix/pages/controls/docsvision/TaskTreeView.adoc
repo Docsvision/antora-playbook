@@ -1,0 +1,59 @@
+= Элемент управления "TaskTreeView"
+
+Элемент управления `_TaskTreeView_` предназначен для наглядного отображения жизненного цикла карточек _Задание_ и _Группа заданий_. Соответствует элементу управления `_Дерево исполнения_` _Конструктора разметок_.
+
+.Элемент управления "TaskTreeView"
+image::ROOT:task-tree-view.png[Элемент управления "TaskTreeView"]
+
+== Свойства
+
+* `*AllowedOperations*` -- список операций (см. описание ``xref:BackOffice-WinForms:Controls/TaskTreeViewOperation_EN.adoc[TaskTreeViewOperation] ``), доступных из контекстного меню `_TaskTreeView_`.
+* `*Columns*` -- перечисление типов (см. описание перечисления `xref:BackOffice-WinForms:Controls/TaskTreeViewColumn_EN.adoc[TaskTreeViewColumn]`) отображаемых колонок.
++
+.Например:
+[source,csharp]
+----
+this.taskTreeView.Columns = DocsVision.BackOffice.WinForms.Controls.TaskTreeViewColumn.Name| 
+DocsVision.BackOffice.WinForms.Controls.TaskTreeViewColumn.State;
+----
++
+* `*ExcludeDelegates*` -- при `true` исключает список делегирования делегированные задания списка заданий.
+* `*FocusedNodeInfo*` -- возвращает информацию по выделенному элементу.
+* `*NeedInitialize*` -- при `true`, требуется инициализация элемента управления. Используйте метод `Initialize(ObjectContext, TaskList, BaseCard)`.
+* `*ParentCard*` -- возвращает карточку, указанную при инициализации в качестве родительской.
+* `*ParentTask*` -- возвращает карточку, приведенную к типу `xref:BackOffice-ObjectModel:Task_CL.adoc[DocsVision.BackOffice.ObjectModel.Task]` и указанную при инициализации в качестве родительской.
+* `*StatesOperations*` -- список операций с признаком доступности.
+* `*TaskList*` -- возвращает список заданий, связанный с `_TaskTreeView_`.
+
+== Методы
+
+* `AddChildTaskToSelectedTask` -- создает дочернее задание у выделенного элемента списка.
+* `ClearData` -- очищает список удаленных заданий.
+* `CopyResultsToParentTask(Task)` -- копирует результат выполнения дочернего задания в родительское.
+* `CopyTask` -- копирует выделенное задание.
+* `CreateChildTask(Task, KindsCardKind)` -- создает дочернее задание, указанного вида.
+* `CreateTaskGroup(Task, KindsCardKind)` -- создает дочернюю группу заданий, указанного вида.
+* `DataBind` -- перезагружает данные в `TaskTreeView`.
+* `EnsureColumns` -- формирует список колонок для отображения основываясь на значении свойства `*Columns*`.
+* `Initialize(ObjectContext, TaskList, BaseCard)` -- инициализация элемента управления.
++
+.Пример инициализации `_TaskTreeView_` с отображением в дереве заданий, полученных из карточки:
+[source,csharp]
+----
+protected override void OnCardActivated(DocsVision.Platform.WinForms.CardActivatedEventArgs e)
+{
+ base.OnCardActivated(e);
+
+ TaskGroup taskGroup = ObjectContext.GetObject<TaskGroup>(new Guid("00000000-0000-0000-0000-000000000000"));
+ this.taskTreeView.Initialize(ObjectContext, taskGroup.MainInfo.TaskList, taskGroup);
+}
+----
+* `RemoveChildTask(Task)` -- удаляет задание.
+* `SetControlsState` -- обновляет состояние элементов управления.
+* `ShowTask` -- открывает карточку выбранного задания.
+
+== Свойства
+
+* `*NodeCustomDisplayText*` -- событие вызывается перед формированием в интерфейсе единичного узла дерева заданий.
+* `*TaskCreated*` -- событие вызывается после создания задания.
+* `*TaskGroupCreated*` -- событие вызывается после создания группы заданий.

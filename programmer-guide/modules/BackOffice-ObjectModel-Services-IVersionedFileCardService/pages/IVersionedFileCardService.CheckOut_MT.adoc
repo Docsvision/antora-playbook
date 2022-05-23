@@ -1,0 +1,45 @@
+= IVersionedFileCardService.CheckOut -- метод (VersionedFileCard)
+
+Выгружает файл на диск с установкой постоянной блокировки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+string CheckOut(VersionedFileCard versionedFileCard)
+----
+
+Параметры::
+versionedFileCard:::
+Тип: `xref:Platform-ObjectManager:SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]`
++
+Выгружаемый файл с версиями
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Расположение, выгруженного файла
+
+== Заметки
+
+Будет выгружена текущая версия файла.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IVersionedFileCardService versionedFileCardService = objectContext.GetService<IVersionedFileCardService>(); <.>
+
+VersionedFileCard versionedFileCard = versionedFileCardService.OpenCard(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+string path = versionedFileCardService.CheckOut(versionedFileCard); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение существующей карточки файла с версиями.
+<.> Выгрузка файла.

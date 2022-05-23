@@ -1,0 +1,53 @@
+= ITaskService.AddPerformer -- метод (Task, StaffEmployee)
+
+Добавляет сотрудника в список назначенных исполнителей задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void AddPerformer(Task task, StaffEmployee performer)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание, в которое назначается исполнитель
+
+performer:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Исполнитель, непосредственно взявший задание в исполнение
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `performer`.
+|===
+
+== Примеры
+
+Ниже приведен простой пример использования метода `AddPerformer` для назначения исполнителя задания.
+
+[source,csharp]
+----
+<.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee performer = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+taskService.AddPerformer(task, performer); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение задания и сотрудника-исполнителя по идентификаторам.
+<.> Получение сервиса для работы с заданиями.
+<.> Назначение исполнителя в задание.

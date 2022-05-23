@@ -1,0 +1,67 @@
+= IDocumentService.RenameAdditionalFile -- метод (Document, DocumentFile, String)
+
+Переименовывает дополнительный файл документа.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void RenameAdditionalFile(Document document, DocumentFile file, string newFileName)
+----
+
+Параметры::
+document:::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ, которому принадлежит файл
+
+file:::
+Тип: `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`
++
+Файл, название которого изменяется
+
+newFileName:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Новое название файла. Имя файла должно содержать расширение.
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `document`, `file` или `newFileName`.
+|`https://msdn.microsoft.com/ru-ru/library/system.argumentexception.aspx[System.ArgumentException]` |Ошибка возвращается, если newFileName содержит только символы-разделители, либо содержит недопустимые (`*`, `/`, `\`, `\|`, `<`, `>`, `"`, `?`, `:`) символы.
+|===
+
+== Заметки
+
+Чтобы сотрудник мог переименовывать файлы документа, ему должны быть предоставлены права в ролевой модели безопасности: Переименование файлов и Запись.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+documentService.RenameAdditionalFile(document, document.Files.First(t => t.FileType = DocumentFileType.Additional), "Новое имя файла.docx"); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение документа с дополнительным файлом.
+<.> Изменение названия первого дополнительного файла.
+
+Можно указывать новое название файла без расширения, а расширение получать из оригинального файла, например, так:
+
+[source,charp]
+----
+DocumentFile firstAdditionalFile = document.Files.First(t => t.FileType = DocumentFileType.Additional);
+string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(firstAdditionalFile.FileName));
+----

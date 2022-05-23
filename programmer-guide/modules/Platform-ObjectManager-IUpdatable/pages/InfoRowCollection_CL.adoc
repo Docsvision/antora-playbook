@@ -1,0 +1,37 @@
+= InfoRowCollection -- класс
+
+Содержит методы для работы с коллекцией `InfoRow`. Этот класс является *абстрактным*.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class InfoRowCollection : IEnumerable<InfoRow>, IEnumerable, IDisposable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает число элементов в коллекции.
+|`CurrentPage` |Возвращает текущую страницу.
+|`CursorId` |Возвращает идентификатор серверного курсора.
+|`Fields` |Возвращает названия полей строк коллекции.
+|`Item` |Возвращает элемент коллекции с заданным индексом.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Dispose` |Очищает ресурсы.
+|`Dispose(Boolean)` |Очищает неуправляемые ресурсы.
+|`GetEnumerator` |Возвращает перечислитель.
+|`SaveXml(Stream)` |Сохраняет коллекцию в поток в XML-формате.
+|`UpdateRow(Guid, ViewReadRequest)` |Обновление данных одной строки.
+|===

@@ -1,0 +1,41 @@
+= IStaffService.GetGroupEmployees -- метод (StaffGroup)
+
+Возвращает сотрудников группы.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<StaffEmployee> GetGroupEmployees(StaffGroup group)
+----
+
+Параметры::
+group:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffGroup]`
++
+Группа сотрудников
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
++
+Список сотрудников типа `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffGroup group = staffService.FindGroupByName(null, "Бухгалтерия"); <.>
+
+IEnumerable<StaffEmployee> employees = staffService.GetGroupEmployees(group); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение группы.
+<.> Получение сотрудников, входящих в группу.

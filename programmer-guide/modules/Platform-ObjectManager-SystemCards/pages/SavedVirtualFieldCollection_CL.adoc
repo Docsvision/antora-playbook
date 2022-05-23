@@ -1,0 +1,38 @@
+= SavedVirtualFieldCollection -- класс
+
+Представляет коллекцию виртуальных полей.
+
+* *Пространство имён:* `xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class SavedVirtualFieldCollection : IEnumerable<SavedVirtualField>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество элементов в коллекции.
+|`Item` |Возвращает элемент с заданным идентификатором.
+|`Item` |Возвращает элемент с указанным индексом.
+|`Item` |Возвращает элемент с заданным названием.
+|`Session` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddNew` |Создает объект типа `SavedVirtualField`.
+|`Clear` |Удаляет все элементы коллекции.
+|`Contains(Guid)` |Определяет вхождение в коллекцию элемента с заданным идентификатором.
+|`GetEnumerator` |Возвращает перечислитель.
+|`Remove(Guid)` |Удаляет элемент с заданным идентификатором.
+|`Remove(Int32)` |Удаляет элемент с указанным индексом.
+|===

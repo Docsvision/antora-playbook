@@ -1,0 +1,54 @@
+= ApprovalStageEventHandlerService -- класс
+
+Обрабатывает события этапа согласования.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ApprovalStageEventHandlerService : ApprovalDesignerEventHandlerService, IApprovalStageEventHandlerService
+----
+
+== Методы
+
+[cols="34,66",options="header"]
+|===
+|Имя |Описание
+
+|`GetApprovalStageService(ApprovalStage)`
+|Получает собственный сервис обработки этапа согласования.
+
+|`GetId() => ServiceId`
+|Получает идентификатор сервиса обработки этапа.
+
+|`GetHandlersInfo()`
+|Получает информацию об обработчиках событий.
+
+|`GetTargetObjectType()`
+|Получает тип этапа согласования.
+
+|`OnStartRequested(ApprovalStage, ApprovalStageStartRequestedEventArgs)`
+|Вызывается перед запуском согласования.
+
+|`OnNextTaskRequested(ApprovalStage, ApprovalStageNextTaskRequestedEventArgs)`
+|Вызывается перед запуском следующего задания.
+
+|`OnCompletionRequested(ApprovalStage, ApprovalStageCompletionRequestedEventArgs)`
+|Вызывается при запросе на завершение этапа.
+
+|`OnCancelRequested(ApprovalStage, ApprovalStageCancelRequestedEventArgs)`
+|Вызывается при запросе на отмену этапа.
+
+|`OnReturnRequested(ApprovalStage, ApprovalStageReturnRequestedEventArgs)`
+|Вызывается при запросе на возврат этапа.
+
+|`OnCardStateChanged(ApprovalStage, OnStateChangedEventArgs)`
+|Вызывается при изменении состояния карточки.
+|===
+
+== Примечания
+
+Если у передаваемой на обработку карточки этапа `ApprovalStage` в `MainInfo.ServiceTypeName` прописан собственный тип сервиса-обработчика, создаётся его экземпляр и используется его бизнес-логика для работы внутри `ApprovalStageEventHandlerService`.

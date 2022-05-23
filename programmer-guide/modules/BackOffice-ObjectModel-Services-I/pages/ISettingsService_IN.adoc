@@ -1,0 +1,23 @@
+= ISettingsService -- интерфейс
+
+Определяет вспомогательные методы создания и получения объектов содержащихся в значениях настроек расширений справочника видов.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ISettingsService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`CreateKindPropertyObject<T>(KindsCardExtendedSettingGroupCollection)` |Создает группу в коллекции групп настроек.
+|`GetKindPropertyObject<T>(KindsCardKind, String)` |Возвращает настройки расширения указанного вида карточки.
+|`GetPropertyObject<T>(String, String)` |Возвращает настройки указанного расширения.
+|===

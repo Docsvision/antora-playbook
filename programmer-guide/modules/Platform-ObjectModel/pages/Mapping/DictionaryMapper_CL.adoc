@@ -1,0 +1,22 @@
+= DictionaryMapper<T> -- класс
+
+Базовый класс преобразователя данных для объектной модели справочника.
+
+* *Пространство имён:* `xref:Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class DictionaryMapper<T> : ObjectMapperBase<T> where T : ObjectBase
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`CreateObject(T)` |При переопределении в производном классе должен создавать экземпляр объекта типа `T`.
+|`LoadObject(ObjectRef<T>, IDictionary<String, Object>)` |Получает данные карточки из хранилища и загружает их в новый экземпляр карточки.
+|===

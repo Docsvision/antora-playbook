@@ -1,0 +1,41 @@
+= IObjectContext.AddObject -- метод (ObjectBase)
+
+При переопределении в производном классе создает новый объект в контексте.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void AddObject(ObjectBase objectInstance)
+----
+
+Параметры::
+objectInstance:::
+Тип: `xref:ObjectBase_CL.adoc[ObjectBase]`
++
+Экземпляр создаваемого объекта
+
+== Примеры
+
+В примере создается документ с текстом дайджеста "Документ созданный из кода". Созданный документ добавляется в контекст, контекст сохраняется. После сохранения контекста, документ доступен в {wincl}е (в разделе _Cards/{bo}/Документ_)
+
+[source,csharp]
+----
+ObjectContext objectContext = new ObjectContext(this);
+
+IDocumentService docService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = docService.CreateDocument(); ;
+document.Description = "Документ созданный из кода"; <.>
+
+objectContext.AddObject(document); <.>
+
+objectContext.AcceptChanges(); <.>
+----
+<.> Получение сервиса для работы с документами.
+<.> Создание документа.
+<.> Добавление документа в контекст.
+<.> Сохранение изменений в контексте.

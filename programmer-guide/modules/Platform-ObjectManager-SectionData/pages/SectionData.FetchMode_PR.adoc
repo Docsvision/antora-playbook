@@ -1,0 +1,22 @@
+= SectionData.FetchMode -- свойство
+
+Возвращает или задает режим загрузки данных.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract FetchMode FetchMode {get; set;}
+----
+
+Значение свойства::
+Тип: `xref:Platform-ObjectManager-Metadata:FetchMode_EN.adoc[FetchMode]`
++
+Режим загрузки
+
+== Заметки
+
+Режим построчной загрузки (`FetchMode.Row`) в данный момент не реализован. Однако получить данные для отдельных строк все же можно -- для этого у объекта `xref:SectionData_CL.adoc[SectionData]` есть набор методов, работающих с одиночной строкой. Их использование позволяет не загружать на клиента ненужную информацию, что, конечно же, предпочтительнее с точки зрения производительности.

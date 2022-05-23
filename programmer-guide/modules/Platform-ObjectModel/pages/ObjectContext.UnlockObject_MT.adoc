@@ -1,0 +1,39 @@
+= ObjectContext.UnlockObject -- метод (ObjectBase)
+
+Снимает с объекта собственную блокировку.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public void UnlockObject(ObjectBase objectInstance)
+----
+
+Параметры::
+objectInstance:::
+Тип: `xref:ObjectBase_CL.adoc[ObjectBase]`
++
+Объект, с которого снимается блокировка
+
+== Примеры
+
+Приведенный далее пример демонстрирует снятие с карточки собственной блокировки.
+
+[source,csharp]
+----
+<.>
+
+BaseCard card = objectContext.GetObject<BaseCard>(cardId); <.>
+
+if(objectContext.GetObjectLockInfo(card).Status = ObjectLockStatus.OwnerLocked) <.>
+{
+ objectContext.UnlockObject(card); <.>
+}
+----
+<.> Инициализация контекста объектов.
+<.> Получаем карточку, которую требуется разблокировать.
+<.> Проверяем наличие блокировки и то, что блокировка установлена владельцем сессии.
+<.> Снимаем блокировку.

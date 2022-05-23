@@ -1,0 +1,52 @@
+= ITaskService.ChangeTaskCurrentPerformer -- метод (Task, StaffEmployee)
+
+Заменяет текущего исполнителя задания.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ChangeTaskCurrentPerformer(Task task, StaffEmployee employee)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Новый текущий исполнитель
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `employee`.
+|`https://msdn.microsoft.com/ru-ru/library/system.methodaccessexception.aspx[System.MethodAccessException]` |Ошибка возвращается, если недостаточно прав для выполнения операции.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffEmployee employee = objectContext.GetObject<StaffEmployee>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+taskService.ChangeTaskCurrentPerformer(task, employee); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания и нового исполнителя.
+<.> Замена текущего исполнителя.

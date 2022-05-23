@@ -1,0 +1,70 @@
+= IBaseCardService.GenerateDigest -- метод (BaseCard, IXmlExportable, String)
+
+Генерирует дайджест на основе данных карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+string GenerateDigest(BaseCard baseCard, IXmlExportable cardData, string defaultDigest)
+----
+
+Параметры::
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка
+
+cardData:::
+Тип: `xref:Platform-ObjectManager:IXmlExportable_IN.adoc[IXmlExportable]`
++
+Данные карточки
+
+defaultDigest:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Базовое значение, которое будет возвращено в случае невозможности создания дайджеста из данных карточки
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Дайджест
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `baseCard` или `cardData`.
+|===
+
+== Примеры
+
+В качестве примера использования данного сервиса, можно привести код, который позволяет сгенерировать описание (дайджест) карточки, на основе её данных. Это может понадобиться, например, при программном изменении имени документа (свойство `MainInfo.Name`).
+
+[source,csharp]
+----
+<.>
+        
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+CardData cardData = userSession.CardManager.GetCardData(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+string digest = baseCardService.GenerateDigest(document, cardData, "Дайджест по умолчанию"); <.>
+
+document.Description = digest; <.>
+
+objectContext.AcceptChanges(); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение базового сервиса для работы с карточками.
+<.> Получение документа для которого мы генерируем дайджест..
+<.> Получение данных документа.
+<.> При генерации метод формирует из данных карточки дайджест, согласно шаблону хранимого в базовом объекте. Если данных для генерации недостаточно, будет использован последний аргумент метода.
+<.> Дайджест Документа сохраняется в свойство `Description`.
+<.> Сохранение всего контекста.

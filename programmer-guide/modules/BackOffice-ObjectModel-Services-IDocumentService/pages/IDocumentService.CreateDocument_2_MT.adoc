@@ -1,0 +1,44 @@
+= IDocumentService.CreateDocument -- метод (String)
+
+Создает экземпляр нового документа с основным файлом.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Document CreateDocument(string filePath)
+----
+
+Параметры::
+filePath:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Путь к загружаемому файлу документа
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`
++
+Документ
+
+== Заметки
+
+В качестве вида документа будет установлен корневой вид (обычно Документ) документа в _Справочнике видов карточек_.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+
+Document document = documentService.CreateDocument(@"x:\Sample.docx"); <.>
+
+objectContext.SaveObject(document);
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Создание документа с указанием местоположения основного файла.

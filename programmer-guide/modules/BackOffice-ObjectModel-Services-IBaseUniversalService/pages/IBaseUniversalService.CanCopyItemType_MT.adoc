@@ -1,0 +1,41 @@
+= IBaseUniversalService.CanCopyItemType -- метод (BaseUniversalItemType, BaseUniversalItemType)
+
+Определяет возможность создания копии узла в заданном узле конструктора справочников.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool CanCopyItemType(BaseUniversalItemType copiedItemType, BaseUniversalItemType targetItemType)
+----
+
+Параметры::
+copiedItemType:::
+Тип: `xref:BackOffice-ObjectModel:BaseUniversalItemType_CL.adoc[BaseUniversalItemType]`
++
+Узел, который проверяется на возможность копирования
+
+targetItemType:::
+Тип: `xref:BackOffice-ObjectModel:BaseUniversalItemType_CL.adoc[BaseUniversalItemType]`
++
+Узел, который является получателем копии
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- копирование допустимо, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `copiedItemType`.
+|===
+
+== Заметки
+
+Метод проходит дерево от targetItemType до его родительского узла, проверяя наличии copiedItemType среди родительских узлов.

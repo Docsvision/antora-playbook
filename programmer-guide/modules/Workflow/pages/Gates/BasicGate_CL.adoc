@@ -1,0 +1,64 @@
+= BasicGate -- класс
+
+Содержит методы и свойства шлюза к простым типам.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class BasicGate : IGate
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`BasicGate()` |Инициализирует новый экземпляр класса BasicGate.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/IGate.Data_PR.adoc[Data]` |Задает или возвращает конфигурацию шлюза.
+|`xref:Gates/IGate.ExecutionMode_PR.adoc[ExecutionMode]` |Возвращает поддерживаемый режим исполнения процесса.
+|`xref:Gates/IGate.ID_PR.adoc[ID]` |Возвращает уникальный идентификатор шлюза.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddVariable(Int32, String)` |Добавляет переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`AddVariable(Int64, String)` |Добавляет переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`CompareVariables(Int32, String, String)` |Сравнивает две однотипных переменных шлюза.
+|`CompareVariables(Int64, String, String)` |Сравнивает две однотипных переменных шлюза.
+|`ConcatenateStrings(Array)` |Последовательно объединяет строки из строкового массива.
+|`CopyVariable(Int32, String, String)` |Копирует переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`CopyVariable(Int64, String, String)` |Копирует переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`DeleteVariable(Int32, String)` |Удаляет переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`DeleteVariable(Int64, String)` |Удаляет переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`GetCurrentDate` |Возвращает текущую дату.
+|`xref:Gates/BasicGate.GetEnumDisplayValue_MT.adoc[GetEnumDisplayValue(ProcessVariable)]` |Возвращает отображаемое значение переменной с типом "Перечисление".
+|`GetVariable(Int32, String)` |Возвращает переменную шлюза. Не поддерживается шлюзом BasicGate.
+|`GetVariable(Int64, String)` |Возвращает переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`GetVariable(Int32, String, Object)` |Возвращает переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|`GetVariableInternalReference(Int32, String)` |Возвращает ссылку на переменную шлюза во внутреннем формате. Не поддерживается шлюзом `BasicGate`.
+|`GetVariableReference(Int32, String)` |Возвращает внешнюю ссылку на заданную переменную шлюза. Не поддерживается шлюзом `BasicGate`.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GateId` |Предоставляет идентификатор шлюза.
+|`GateName` |Предоставляет название шлюза.
+|===
+

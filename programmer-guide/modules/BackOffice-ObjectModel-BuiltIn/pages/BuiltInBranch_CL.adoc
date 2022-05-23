@@ -1,0 +1,40 @@
+= BuiltInBranch -- класс
+
+Представляет встроенный переход в автомате состояний.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class BuiltInBranch
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`BranchType` |Возвращает тип перехода.
+|`EndState` |Возвращает конечное состояние.
+|`Id` |Возвращает идентификатор перехода.
+|`Operation` |Возвращает встроенную операцию при которой происходит переход.
+|`Owner` |Возвращает идентификатор владельца переходо состояния (идентификатор типа карточки).
+|`StartState` |Возвращает начальное состояние перехода.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Register(Guid, Guid, BuiltInState, BuiltInOperation, BuiltInState)` |Регистрирует встроенное состояние в объектной модели.
+|`BuiltInBranch Register(Guid, Guid, BuiltInState, BuiltInOperation, BuiltInState, StatesStateMachineBranchBranchType)` |Регистрирует встроенное состояние в объектной модели.
+|`ToString` |Возвращает специально сформированную строку, содержащую начальное и конечное состояние.
+|===
+
+== Заметки
+
+В классе `BuiltInBranch` используется статический список для хранения зарегистрированных переходов состояний, и последующего обращения к ним. Количество зарегистрированных переходов состояний ограничено и составляет `65535`.

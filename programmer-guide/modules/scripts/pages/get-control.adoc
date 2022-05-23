@@ -1,0 +1,117 @@
+= Доступ к элементам управления карточки
+
+[IMPORTANT]
+====
+Приведенная далее функциональность доступна только карточкам, компонент которых унаследован от базового класса `xref:BackOffice-WinForms:BaseCardControl_CL.adoc[BaseCardControl]`.
+====
+
+Базовый класс карточки (`xref:BackOffice-WinForms:BaseCardControl_CL.adoc[BaseCardControl]`) реализует интерфейс `xref:BackOffice-WinForms:ICustomizableControl_IN.adoc[ICustomizableControl]`, методы которого можно использовать для доступа к элементам управления карточки.
+
+К примеру, метод `xref:BackOffice-WinForms:ICustomizableControl.FindPropertyItem_MT.adoc[ICustomizableControl.FindPropertyItem]` может быть использован для поиска элементов управления с известным названием и типом:
+
+[source,csharp]
+----
+private void FindControl_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICustomizableControl customizable = CardControl as ICustomizableControl; <.>
+
+ var theme = customizable.FindPropertyItem<DevExpress.XtraEditors.TextEdit>("Theme"); <.>
+}
+----
+<.> Получение доступа к разметке карточки.
+<.> Получение элемента управления типа для работы со стройкой текста с именем `Theme`.
+
+Название элемента управления представлено в свойствах элемента управления в разметке карточки (_Конструктор разметок_).
+
+Для определения типа элемента управления можно воспользоваться таблицей, приведенной ниже.
+
+== Стандартные элементы управления
+
+[cols=",",options="header"]
+|===
+|Тип элемента управления |Тип для поиска
+
+|Вид |`DevExpress.XtraEditors.ButtonEdit`
+|Время |`DevExpress.XtraEditors.TimeEdit`
+|Выбор вида |`DocsVision.BackOffice.WinForms.Controls.RowChooseBox`
+|Выбор папки |`DocsVision.BackOffice.WinForms.Controls.FolderChooseBox`
+|Группа радио кнопок |`DevExpress.XtraEditors.RadioGroup`
+|Да / Нет |`DevExpress.XtraEditors.CheckEdit`
+|Дата |`DevExpress.XtraEditors.DateEdit`
+|Дата/Время |`DevExpress.XtraEditors.DateEdit`
+|Дерево исполнения |`DocsVision.BackOffice.WinForms.Controls.TaskTreeView`
+|Дерево связей |`DocsVision.BackOffice.WinForms.Controls.CardLinksView`
+|Значение из справочника |`DocsVision.BackOffice.WinForms.Controls.RowChooseBox`
+|Изображение |`DevExpress.XtraEditors.PictureEdit`
+|История |`DocsVision.BackOffice.WinForms.Controls.HistoryGrid`
+|Карточка |`DocsVision.BackOffice.WinForms.Controls.CardChooseBox`
+|Категории |`DocsVision.BackOffice.WinForms.Controls.CategoryListView`
+|Кнопка |`DevExpress.XtraEditors.SimpleButton`
+|Коллекция значений |`DocsVision.BackOffice.WinForms.Controls.RowMultiChooseBox`
+|Контрагент |`DocsVision.BackOffice.WinForms.Controls.RowChooseBox`
+|Нумератор |`xref:BackOffice-WinForms:Controls/NumeratorBox_CL.adoc[DocsVision.BackOffice.WinForms.Controls.NumeratorBox]`
+|Обсуждение |`DevExpress.XtraEditors.XtraUserControl`
+|Подразделение |`DocsVision.BackOffice.WinForms.Controls.RowChooseBox`
+|Подразделение контрагента |`DocsVision.BackOffice.WinForms.Controls.RowChooseBox`
+|Поле секции |`DocsVision.BackOffice.WinForms.Controls.FieldSelector`
+|Предпросмотр файла |`DocsVision.BackOffice.WinForms.Controls.Preview`
+|Просмотр состояния |`DevExpress.XtraEditors.TextEdit`
+|Радио кнопка |`System.Windows.Forms.RadioButton`
+|Сотрудник |`DocsVision.BackOffice.WinForms.Controls.CommunicativeChooseBox`
+|Сотрудники |`DocsVision.BackOffice.WinForms.Controls.CommunicativeMultiChooseBox`
+|Список |`DevExpress.XtraEditors.ComboBoxEdit`
+|Ссылки |`DocsVision.BackOffice.WinForms.Controls.ReferenceListView`
+|Строка |`DevExpress.XtraEditors.TextEdit`
+|Строка конструктора справочников |`DocsVision.BackOffice.WinForms.Controls.UniversalItemChooseBox`
+|Таблица |`https://docs.microsoft.com/ru-ru/dotnetxref:api/system.windows.forms.usercontrol[System.Windows.Forms.UserControl]`
+|Текст |`DevExpress.XtraEditors.MemoEdit`
+|Целое число |`DevExpress.XtraEditors.SpinEdit`
+|Число |`DevExpress.XtraEditors.SpinEdit`
+|===
+
+.В данной таблице:
+* Тип элемента управления -- тип, который указан в свойстве искомого элемента управления в разметки карточки, в _Конструкторе разметок_.
+* Тип для поиска -- тип, по которому можно выполнить поиск элемента управления.
+
+Для работы со значениями элементов управления, рекомендуется получать элементы управления по интерфейсу `xref:BackOffice-WinForms:Design/LayoutItems/ILayoutPropertyItem_IN.adoc[ILayoutPropertyItem]`, который предоставляет метод сохранения изменений -- `Commit`.
+
+.Пример скрипта, изменяющего дату регистрации документа по нажатию кнопки в карточке:
+[source,csharp]
+----
+private void SetPreviousDate_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICustomizableControl customizable = CardControl;
+
+ ILayoutPropertyItem registrationDate = customizable.FindPropertyItem<ILayoutPropertyItem>("RegistrationDate"); <.>
+ 
+ registrationDate.ControlValue = DateTime.Now.AddDays(-1); <.>
+ registrationDate.Commit(); <.>
+}
+----
+<.> Получение даты регистрации документа.
+<.> Предыдущий день (без анализа выходных дней).
+<.> Сохранение свойств элемента.
+
+.Другой пример -- вывод содержимого файла на просмотр в элементе управления типа "Предпросмотр файла":
+[source,csharp]
+----
+private void GetThemeButton_Click(System.Object sender, System.EventArgs e)
+{
+ ICustomizableControl control = CardControl;
+
+ DocsVision.BackOffice.WinForms.Controls.Preview previewControl = control.FindPropertyItem<DocsVision.BackOffice.WinForms.Controls.Preview>("PreviewControl"); <.>
+
+ previewControl.ShowPreview(@"c:\Sample.docx"); <.>
+}
+----
+<.> Получение элемента управления.
+<.> Отображение содержимого.
+
+Чтобы вывести содержимое файла карточки, достаточно совместить приведенный выше сценарий с механизмом выгрузки, к примеру, основного файла документа методом `xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.DownloadMainFile_MT.adoc[DownloadMainFile]` сервиса `IDocumentService`.
+
+Необходимо учитывать, что в разметке карточек библиотеки _{bo}_ имеются элементы управления, недоступные для метода `FindPropertyItem`. В качестве примера можно привести элемент управления, объединяющий _область вложений_ и _область предварительного просмотра_, в карточке "Документ". Доступ к такому элементу управления не может быть получен стандартным способом, а в _Конструкторе разметок_ данный элемент управления не имеет названия.
+
+[NOTE]
+====
+Для получения информации по элементам управления DevExpress, рекомендуем обращаться к соответствующим разделам на https://www.devexpress.com/[сайте] производителя.
+====

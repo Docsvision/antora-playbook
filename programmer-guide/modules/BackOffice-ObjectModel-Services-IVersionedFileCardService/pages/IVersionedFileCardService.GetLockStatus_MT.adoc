@@ -1,0 +1,32 @@
+= IVersionedFileCardService.GetLockStatus -- метод (VersionedFileCard)
+
+Возвращает состояние блокировки для карточки файл с версиями.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+LockStatus GetLockStatus(VersionedFileCard versionedFileCard)
+----
+
+Параметры::
+versionedFileCard:::
+Тип: `xref:Platform-ObjectManager:SystemCards/VersionedFileCard_CL.adoc[VersionedFileCard]`
++
+Версионная карточка
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager:LockStatus_EN.adoc[LockStatus]`
++
+Состояние блокировки
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `versionedFileCard`.
+|===

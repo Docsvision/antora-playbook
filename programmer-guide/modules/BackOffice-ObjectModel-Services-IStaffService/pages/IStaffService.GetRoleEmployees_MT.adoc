@@ -1,0 +1,43 @@
+= IStaffService.GetRoleEmployees -- метод (StaffRole)
+
+Возвращает список сотрудников с указанной ролью.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+System.Collections.Generic.IEnumerable<StaffEmployee> GetRoleEmployees(StaffRole role)
+----
+
+Параметры::
+role:::
+Тип: `xref:BackOffice-ObjectModel:StaffRole_CL.adoc[StaffRole]`
++
+Роль сотрудника, подразделения или группы
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StaffEmployee>`
++
+Список сотрудников типа `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
+
+== Заметки
+
+Метод `GetRoleEmployees`, помимо сотрудников непосредственно имеющих роль `role`, включает сотрудников из групп, ролей и подразделений, у которых включена роль `role`.
+
+== Примеры
+
+Пример получения списка сотрудников, имеющих роль с идентификатором `00000000-0000-0000-0000-000000000000`
+
+[source,csharp]
+----
+<.>
+
+StaffRole role = objectContext.GetObject<StaffRole>(new Guid("00000000-0000-0000-0000-000000000000"));
+IStaffService staffService = objectContext.GetService<IStaffService>();
+
+var employees = staffService.GetRoleEmployees(role);
+----
+<.> Инициализация контекста объектов.

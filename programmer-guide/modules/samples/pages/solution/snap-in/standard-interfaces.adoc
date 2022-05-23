@@ -1,0 +1,165 @@
+= Реализация стандартных интерфейсов
+
+Расширение Консоли настройки, разрабатываемое для _Модуля учета сетевых устройств_, должно регистрировать клинский пакет установки, устанавливать новую библиотеку карточек, а также загружать в базу данных {dv} заранее подготовленные данные карточек и справочников. Для этого в классе _SnapIn_ должно быть реализовано несколько интерфейсов.
+
+== Реализация интерфейса ISnapIn
+
+.Основной интерфейс расширения, который добавляет:
+* `LibraryID` -- _идентификатор библиотеки карточек_, с которой данное расширение ассоциировано. `LibraryID` требуется для регистрации пакетов установки, добавления библиотеки карточек в базу данных, удаления _решения_, а также для некоторых других сценариев работы _Консоли настройки_.
++
+[source,csharp]
+----
+public string LibraryID
+{
+ get { return "{F729F178-15DA-4BDE-82B8-DD0B2F0C0BC6}"; }
+}
+----
++
+* `Name` -- название модуля. Используется в некоторых сервисных функциях, например: при отображении названия расширения в списке зарегистрированных расширений _Консоли настройки_.
++
+[source,csharp]
+----
+public string Name
+{
+ get { return "Консоль управления модулем Проверка сети"; }
+}
+----
++
+* `Метод Initialize(IEnvironment)` -- позволяет получить переменные контекста работы Консоли настройки, которые предоставляют доступ к сервису регистрации пакетов установки клиентской части.
++
+[source,csharp]
+----
+public void Initialize(IEnvironment environment)
+{
+ _environment = environment;
+}
+----
++
+* Метод `QueryInterface(SnapInInterfacesEnum)` -- возвращает пользовательский интерфейс, если он предусмотрен, для различных режимов работы _Консоли настройки_. Подробнее см. в разделе xref:solutions:extensions/console-plugin.adoc[Модуль расширения Консоли настройки].
++
+[source,csharp]
+----
+public object QueryInterface(SnapInInterfacesEnum itf)
+{
+ object result = null;
+ switch (itf)
+ {
+  case SnapInInterfacesEnum.CONFIGURATOR:
+  case SnapInInterfacesEnum.UNINSTALL_SNAP_IN:
+  case SnapInInterfacesEnum.DB_INFORMATION:
+   result = this;
+   break;
+
+  case SnapInInterfacesEnum.CONSOLE_CONTROL:
+   result = new SnapInForm(); <.>
+   break;
+  }
+ return result;
+}
+----
+<.> Экземпляр типа, реализующего пользовательский интерфейс.
+
+== Реализация интерфейса "IConfigurator"
+
+Данный интерфейс должен быть реализован, если расширение может выполнять первоначальную настройку _решения_.
+
+Как правило, метод `Execute`, при установке расширения вызываемый последним, регистрирует пакеты установки клиентской части, для чего указываются: путь к пакету установки, _Идентификатор пакета установки_ и _Код продукта_, которые были указаны при xref:solution/card-lib/lib-metadata-scheme.adoc[разработке библиотеки карточек]:
+
+[source,csharp]
+----
+public bool Execute()
+{
+ ILog log = (ILog)_environment.QueryService(EnvironmentServiceEnum.LOG);
+
+ ICardLibConfigurator2 cardLibConfig = (ICardLibConfigurator2)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR); <.>
+
+ <.>
+ cardLibConfig.RegisterPackage(
+  "E98E531F-D34C-41D6-9BCA-9972F46EB6DF", <.>
+  "22CE4047-0BA8-4014-9BBE-7D8C43FDE907", <.>
+  Path.Combine(AssemblyFolder, "NetstatSolutionClient.msi")); <.>
+
+ log.WriteMessage("Конфигурирование завершено");
+
+ return true; <.>
+}
+----
+<.> Регистрация клиентского пакета установки.
+<.> Регистрация пакета установки.
+<.> Идентификатор пакета установки.
+<.> Код продукта.
+<.> Абсолютный путь к пакету установки клиентской части.
+<.> Если метод должен сообщить об ошибке, то необходимо вызвать исключение. В обычном случает, метод возвращает `true`.
+
+== Реализация интерфейса "IDBInformation"
+
+Данный интерфейс добавляет методы, предоставляющие _Консоли настройки_ пути к _CardPackage_ и _SqlPackage_.
+
+Метод `GetCardPackage` должен вернуть абсолютный путь к пакету _CardPackage_:
+
+[source,csharp]
+----
+public string GetCardPackage()
+{
+ return Path.Combine(AssemblyFolder, "CardPackage\\CardPackage.xml");
+}
+----
+
+Метод `GetScript(ScriptTypeEnum)` должен вернуть абсолютный путь к пакету _SqlPackage_, если запрашивается тип `ScriptTypeEnum.INSTALL_TABLES`:
+
+[source,csharp]
+----
+public string GetScript(ScriptTypeEnum type)
+{
+ string result = string.Empty;
+
+ switch (type)
+ {
+  case ScriptTypeEnum.INSTALL_TABLES:
+   result = Path.Combine(AssemblyFolder, "Database\\NetstatSolutionInstall.xml");
+   break;
+ }
+ return result;
+}
+----
+
+Также добавляется переменная `ContainsCardLib`, которая определяет наличие у _решения_ собственной библиотеки карточек.
+
+[source,csharp]
+----
+public bool ContainsCardLib
+{
+ get { return true; }
+}
+----
+
+== Реализация интерфейса IUninstallSnapIn
+
+Данный интерфейс добавляет единственный метод `Uninstall(Boolean)`, вызываемый при удалении расширения (и решения в целом).
+
+Метод `Uninstall` может, к примеру, удалять библиотеку карточек, а также настройки _решения_, как в данном случае:
+
+[source,csharp]
+----
+public void Uninstall(bool removeSettings)
+{
+ ILog log = (ILog)_environment.QueryService(EnvironmentServiceEnum.LOG);
+ ICardLibConfigurator cardLibConfig = (ICardLibConfigurator)_environment.QueryService(EnvironmentServiceEnum.CARD_LIB_CONFIGURATOR);
+ log.WriteMessage("Запущено удаление");
+
+ cardLibConfig.RemoveCardLib(LibraryID); <.>
+
+ if (removeSettings) <.>
+ { 
+  using (RegistryKey key = Common.GetSubKey(Registry.LocalMachine, Common.NetstatSolutionKey))
+  {
+   key.DeleteValue(Common.EmailAdminRegName, false);
+   key.DeleteValue(Common.CheckIsEnabledRegName, false);
+   key.DeleteValue(Common.LicenseRegName, false);
+  }
+ }
+ log.WriteMessage("Записи реестра удалены");
+}
+----
+<.> Удаление библиотеки карточек.
+<.> Удаление настроек модуля.

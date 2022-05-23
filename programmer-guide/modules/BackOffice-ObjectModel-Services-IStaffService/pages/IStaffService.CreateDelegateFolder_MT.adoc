@@ -1,0 +1,48 @@
+= IStaffService.CreateDelegateFolder -- метод (FoldersFolder, FoldersFolder)
+
+Создает папку-делегат.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+FoldersFolder CreateDelegateFolder(FoldersFolder personalFolder, FoldersFolder templateFolder);
+----
+
+Параметры::
+personalFolder:::
+Тип: `xxref:Platform-SystemCards:ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]`
++
+Папка, в которую будет добавлена папка-делегат
+
+templateFolder:::
+Тип: `xxref:Platform-SystemCards:ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]`
++
+Папка, для которой папка-делегат
+
+Возвращаемое значение::
+Тип: `xxref:Platform-SystemCards:ObjectModel/FoldersFolder_CL.adoc[FoldersFolder]`
++
+Папка делегат
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+FoldersFolder personalFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000000"));
+FoldersFolder templateFolder = objectContext.GetObject<FoldersFolder>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+FoldersFolder delegateFolder = staffService.CreateDelegateFolder(personalFolder, templateFolder); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение папки, в которой создается папка-делегат, а также папки, на которую создается делегат.
+<.> Создание папки-делегата.

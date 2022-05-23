@@ -1,0 +1,56 @@
+= IStateService.IsOperationAllowedFull -- метод (BuiltInOperation, BaseCard)
+
+Данный метод определяет возможность выполнения указанной операции с заданной карточкой, с учетом прав доступа.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool IsOperationAllowedFull(BuiltInOperation builtInOperation, BaseCard baseCard)
+----
+
+Параметры::
+builtInOperation:::
+Тип: `xref:BackOffice-ObjectModel:BuiltInOperation_CL.adoc[BuiltInOperation]`
++
+Встроенная операция
+
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, для которой выполняется проверка
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- операция допустима, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInOperation` или `baseCard`.
+|===
+
+== Примеры
+
+В примере демонстрируется использование метода `IsOperationAllowedFull` для определения возможности отклонения задания текущим сотрудником
+
+[source,csharp]
+----
+<.>
+
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+bool isValid = stateService.IsOperationAllowedFull(Task.RejectOperation, task); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания, для которого определяется возможность делегирования.
+<.> Проверка возможности отклонения сотрудником.

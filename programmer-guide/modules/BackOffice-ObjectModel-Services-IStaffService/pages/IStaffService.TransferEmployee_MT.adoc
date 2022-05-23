@@ -1,0 +1,65 @@
+= IStaffService.TransferEmployee -- метод (StaffEmployee, StaffUnit, Boolean)
+
+Переносит сотрудника в указанное подразделение.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+StaffEmployee TransferEmployee(StaffEmployee employee, StaffUnit unit, bool moveFolders)
+----
+
+Параметры::
+employee:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Сотрудник, предполагаемый к переносу
+
+unit:::
+Тип: `xref:BackOffice-ObjectModel:StaffUnit_CL.adoc[StaffUnit]`
++
+Подразделение в которое выполняется перенос сотрудника
+
+moveFolders:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+При значении `true` будет выполнен перенос персональной папки сотрудника в папку нового подразделения
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Ссылка на запись перемещенного сотрудника
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `employee` или `unit`.
+|===
+
+== Заметки
+
+При переносе создается фактическая копия записи сотрудника в новом подразделении, старая запись отмечается признаком "Переведен".
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+StaffEmployee employee = staffService.Get(new Guid("00000000-0000-0000-0000-000000000000"));
+StaffUnit unit = objectContext.GetObject<StaffUnit>(new Guid("00000000-0000-0000-0000-000000000001")); <.>
+
+StaffEmployee transferedEmployee = staffService.TransferEmployee(employee, unit, false); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение сотрудника и подразделения, в которое осуществляется перенос.
+<.> Перенос сотрудника.

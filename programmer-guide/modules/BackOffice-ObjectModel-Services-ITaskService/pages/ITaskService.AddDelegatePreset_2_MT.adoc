@@ -1,0 +1,37 @@
+= ITaskService.AddDelegatePreset -- метод (Task, StaffUnit)
+
+Добавляет подразделение в список делегатов, выбираемых из задания, при делегировании задания вручную.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskPresetDelegate AddDelegatePreset(Task task, StaffUnit unit)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание, в которое добавляется настройка выбора делегата
+
+unit:::
+Тип: `xref:BackOffice-ObjectModel:StaffUnit_CL.adoc[StaffUnit]`
++
+Подразделение для делегирования задания
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskPresetDelegate_CL.adoc[TaskPresetDelegate]`
++
+Настройки делегирования
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task`.
+|===

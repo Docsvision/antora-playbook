@@ -1,0 +1,29 @@
+= IGateMessageSource.Initialize -- метод (Guid, IMessageChannel, ISubscriptionChannel)
+
+Инициализирует механизм подписки на события шлюза.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Interfaces.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void Initialize(Guid instanceId, IMessageChannel messageChannel, ISubscriptionChannel subscriptionChannel)
+----
+
+Параметры::
+instanceId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор экземпляра шлюза
+
+messageChannel:::
+Тип: `IMessageChannel`
++
+Канал отправки сообщений
+
+subscriptionChannel:::
+Тип: `xref:Gates/ISubscriptionChannel_IN.adoc[ISubscriptionChannel]`
++
+Канал подписок на события

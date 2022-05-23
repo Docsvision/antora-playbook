@@ -1,0 +1,29 @@
+= BaseCardSignatureVerification -- класс
+
+Возвращает информацию по проверке подписи на карточке.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class BaseCardSignatureVerification
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`IsExpiredCertificate` |Срок действия сертификата истек.
+|`IsNotAllMainFilesSigned` |Не все основные файлы подписаны.
+|`IsValid` |Проверка пройдена.
+|`IsValidCertificate` |Сертификат действителен для подписи.
+|`Results` |Возвращает коллекцию результатов проверки каждой части подписи.
+|===
+
+== Заметки
+
+Результат проверки может содержать не все значения, результат заполняется на усмотрение метода, т.е. может быть не задано значение `IsValid` или `IsNotAllMainFilesSigned`, или всех.

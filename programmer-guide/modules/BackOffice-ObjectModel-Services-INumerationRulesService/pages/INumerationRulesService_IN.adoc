@@ -1,0 +1,33 @@
+= INumerationRulesService -- интерфейс
+
+Сервис для работы с _конструктором правил нумерации_.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface INumerationRulesService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:INumerationRulesService.AddNewCondition_MT.adoc[AddNewCondition(NumerationRulesRuleItem)]` |Добавляет условие в строку правила нумерации в _конструкторе правил нумерации_.
+|`xref:INumerationRulesService.AddNewNumerator_MT.adoc[AddNewNumerator]` |Создает новый нумератор.
+|`xref:INumerationRulesService.AddNewRule_MT.adoc[AddNewRule]` |Создает новое правило нумерации в _конструкторе правил нумерации_.
+|`xref:INumerationRulesService.AddNewRuleItem_MT.adoc[AddNewRuleItem(NumerationRulesRule)]` |Добавляет новую строчку в правило нумерации.
+|`xref:INumerationRulesService.CreateNumber_MT.adoc[CreateNumber(CardData, BaseCard, NumerationRulesRule)]` |Выделяет указанной карточке номер из нумератора следуя приложенному правилу нумерации.
+|`xref:INumerationRulesService.CreateTextNumber_MT.adoc[CreateTextNumber(BaseCard, String)]` |Создает объект типа `BaseCardNumber`, содержащий текстовое представление номера.
+|`xref:INumerationRulesService.DeleteCondition_MT.adoc[DeleteCondition(NumerationRulesRuleItemCondition, NumerationRulesRuleItem)]` |Удаляет условие из строки правила нумерации.
+|`xref:INumerationRulesService.DeleteNumber_MT.adoc[DeleteNumber(BaseCardNumber)]` |Удаляет указанный номер из владеющей им карточки.
+|`xref:INumerationRulesService.DeleteNumerator_MT.adoc[DeleteNumerator(NumerationRulesNumerator)]` |Удаляет нумератор из _конструктора правил нумерации_.
+|`xref:INumerationRulesService.DeleteRule_MT.adoc[DeleteRule(NumerationRulesRule)]` |Удаляет правило нумерации из _конструктора правил нумерации_.
+|`xref:INumerationRulesService.DeleteRuleItem_MT.adoc[DeleteRuleItem(NumerationRulesRuleItem, NumerationRulesRule)]` |Удаляет строку правила нумерации из _конструктора правил нумерации_.
+|`xref:INumerationRulesService.FindRuleBy_MT.adoc[FindRuleBy(NumerationRulesRuleItem)]` |Возвращает правило нумерации, которому принадлежит указанная строка.
+|`xref:INumerationRulesService.GetNumber_MT.adoc[GetNumber(BaseCard, Guid)]` |Возвращает из карточки номер с указанным идентификатором.
+|===

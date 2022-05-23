@@ -1,0 +1,71 @@
+= ITableControl -- интерфейс
+
+Определяет дополнительные возможности элемента управления типа _Таблица_ в _Конструкторе разметок_.
+
+* *Пространство имён:* `xref:Design/LayoutItems/LayoutItems_NS.adoc[DocsVision.BackOffice.WinForms.Design.LayoutItems]`
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ITableControl
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`FocusedCellIndex` |Задает или возвращает номер выделенной ячейки таблицы.
+|`FocusedRowIndex` |Задает или возвращает номер выделенной строки таблицы.
+|`FocusedRowItem` |Задает или возвращает выделенную строку таблицы.
+|`GridColumns` |Возвращает коллекцию колонок таблицы.
+|`Item` |Возвращает элемент таблицы с заданным номером строки.
+|`RowCount` |Возвращает количество строк таблицы.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddRow(BaseCard)` |Добавляет новую строку в таблицу.
+|`GetControl` |Возвращает элемент управления.
+|`RefreshRow(Int32)` |Обновляет строку с заданным идентификатором.
+|`RemoveRow(BaseCard, BaseCardProperty)` |Удаляет указанную строку.
+|`RemoveRow(BaseCard, Int32)` |Удаляет строку с указанным номером.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`CellValueChanged` |Событие вызывается при изменении значения ячейки.
+|===
+
+== Примеры
+
+Ниже приведен пример использования интерфейса `ITableControl` при добавлении строки в элемент управления типа "Таблица"
+
+[source,csharp]
+----
+private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+ ICustomizableControl customizable = CardControl as ICustomizableControl; <.>
+
+ ITableControl table = customizable.FindPropertyItem<ITableControl>("Список"); <.>
+
+ BaseCardProperty property = table.AddRow(this.BaseObject); <.>
+
+ property[property.Fields[0].Alias] = "Добавленное значение"; <.>
+
+ table.RefreshRow(table.RowCount -- 1); <.>
+}
+----
+<.> Получение доступа к разметке.
+<.>  Поиск элемента управления типа "Таблица" с названием "Список".
+<.> Добавление строки.
+<.> Присвоение значения первой ячейке.
+<.> Обновление строки для отображения присвоенного значения в интерфейсе.

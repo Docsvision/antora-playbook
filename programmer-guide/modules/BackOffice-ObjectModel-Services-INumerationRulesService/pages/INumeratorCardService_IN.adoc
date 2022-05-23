@@ -1,0 +1,29 @@
+= INumeratorCardService -- интерфейс
+
+Сервис для работы с карточкой нумератора.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface INumeratorCardService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:INumeratorCardService.AddNumeratorCard_MT.adoc[AddNumeratorCard]` |Создает экземпляр карточки нумератора.
+|`xref:INumeratorCardService.AddNumeratorRange_MT.adoc[AddNumeratorRange(NumeratorCard, Int32, Int32, Guid)]` |Добавляет в нумератор новый диапазон номеров.
+|`xref:INumeratorCardService.AddNumeratorZone_MT.adoc[AddNumeratorZone(NumeratorCard, String)]` |Создает дополнительную зону нумератора.
+|`xref:INumeratorCardService.DeleteNumeratorCard_MT.adoc[DeleteNumeratorCard(Guid)]` |Удаляет нумератор.
+|`xref:INumeratorCardService.DeleteNumeratorCard_1_MT.adoc[DeleteNumeratorCard(NumeratorCard)]` |Удаляет нумератор.
+|`xref:INumeratorCardService.DeleteNumeratorRange_MT.adoc[DeleteNumeratorRange(NumeratorRange, NumeratorCard)]` |Удаляет диапазон номеров из нумератора.
+|`xref:INumeratorCardService.DeleteNumeratorZone_MT.adoc[DeleteNumeratorZone(NumeratorZone, NumeratorCard)]` |Удаляет зону нумерации из нумератора.
+|`xref:INumeratorCardService.GetNumeratorCard_MT.adoc[GetNumeratorCard(Guid)]` |Возвращает карточку нумератора с указанным идентификатором.
+|`xref:INumeratorCardService.NumeratorCardReadOnly_MT.adoc[NumeratorCardReadOnly(NumeratorCard)]` |Возвращает признак того, что нумератор доступен только на чтение.
+|===

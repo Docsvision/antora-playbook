@@ -1,0 +1,94 @@
+= NavExtension -- класс
+
+Базовый класс для расширения {wincl}а.
+
+* *Пространство имён:* `xref:WinForms_NS.adoc[DocsVision.Platform.WinForms]`
+* *Сборка:* `DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[ClassInterface(ClassInterfaceType.None)]
+[ComVisible(true)]
+[DefaultEvent("CardLoaded")]
+[Guid("83458583-6D7E-41EE-B4D6-A3FD5D661CC9")]
+[ToolboxItem(false)]
+public class NavExtension : CardControl, INavExtension, INavCardSubTypesExtension, INavDragDropExtension, INavFolderExtTypesExtension, INavReportExtension, INavCommandExtension, INavStandardCommandExtension, INavEventExtension, INavPickerExtension, INavControlExtension, INavPropPagesExtension, INavCardCreatorExtension, INavCardCreatorEntryContainerExtension
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavExtension_CT.adoc[NavExtension()]` |Инициализирует новый экземпляр класса `NavExtension`.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Commands` |Возвращает коллекцию команд расширения.
+|`PropertyPages` |Возвращает коллекцию страниц свойств карточек и папок.
+|`StandardCommands` |Возвращает коллекцию стандартных команд поддерживаемых расширением.
+|`SupportedTypes` |Возвращает типы расширений реализуемые карточкой расширения.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:NavExtension.CreateCommands_MT.adoc[CreateCommands]` |Возвращает информацию о командах расширения {wincl}а.
+|`xref:NavExtension.CreatePropertyPages_MT.adoc[CreatePropertyPages]` |Создает и возвращает коллекцию страниц свойств.
+|`xref:NavExtension.CreateReport_MT.adoc[CreateReport(Object, InfoRowCollection, Guid)]` |Запускает механизм экспорта.
+|`GetExtensionName(NavExtensionTypes)` |Возвращает название заданного расширения.
+|`xref:NavExtension.InvokeCommand_MT.adoc[InvokeCommand(NavCommand, NavCommandContext)]` |Вызов указанной команды расширения.
+|`InvokeStandardCommand(NavStandardCommand, NavCommandContext, Object)` |Вызов стандартной команды.
+|`xref:NavExtension.LookupAccounts_MT.adoc[LookupAccounts(String[], SecurityIdentifier[], String[], NavPickerAccountTypes[])]` |Формирует коллекцию идентификаторов безопасности SID из коллекции имён учетных записей.
+|`xref:NavExtension.LookupCardTypes_MT.adoc[LookupCardTypes(Guid[], Guid[])]` |Сопоставляет заданной коллекции карточек их подтипы.
+|`xref:NavExtension.LookupNames_MT.adoc[LookupNames(NavPickerNameFormat, NavPickerNameFormat, String[], String[])]` |Формирует по заданным учетным данным коллекцию учетных данных заданного формата.
+|`xref:NavExtension.LookupSids_MT.adoc[LookupSids(SecurityIdentifier[], String[], String[], NavPickerAccountTypes[])]` |Формирует коллекцию учетных записей из заданной коллекции идентификаторов безопасности SID.
+|`OnDragEnter(DragEventArgs)` |Создает событие при перетаскивания объекта, когда курсор входит в пределы контейнера карточки.
+|`OnDragLeave(DragEventArgs)` |Создает событие, когда указатель выходит за границы контейнера карточки, в режиме перетаскивания.
+|`OnDrop(DragEventArgs, Folder)` |Создает событие завершения перетаскивания, при отпускании объекта в пределах контейнера карточки.
+|`xref:NavExtension.OnShutdown_MT.adoc[OnShutdown]` |Вызывается при завершении работы {wincl}а.
+|`xref:NavExtension.OnStartup_MT.adoc[OnStartup]` |Вызывается при загрузке {wincl}а.
+|`xref:NavExtension.PickAccounts_MT.adoc[PickAccounts(NavPickerAccountTypes)]` |Отображает интерфейс выбора учетных записей.
+|`xref:NavExtension.PopulateCardTypes_MT.adoc[PopulateCardTypes(INavCardTypeCollection)]` |Формирует коллекцию всех доступных подтипов карточек.
+|`xref:NavExtension.PopulateFolderTypes_MT.adoc[PopulateFolderTypes(INavFolderTypeCollection)]` |Формирует коллекцию описаний типов папок.
+|`xref:NavExtension.QueryCommandStatus_MT.adoc[QueryCommandStatus(NavCommand, NavCommandContext)]` |Возвращает статус заданной команды.
+|`QueryCommandStatusEx(NavCommand[], NavCommandContext)` |Возвращает статусы заданной коллекции команд.
+|`xref:NavExtension.QueryFolderControl_MT.adoc[QueryFolderControl(NavFolderControlType, Guid)]` |Возвращает для заданной папки режим работы с {wincl}ом.
+|`QueryStandardCommandStatus(NavStandardCommand, NavCommandContext, Object)` |Возвращает статус заданной стандартной команды.
+|`QueryStandardCommandStatusEx(NavStandardCommand[], NavCommandContext, Object)` |Возвращает статусы заданной коллекции стандартных команд.
+|`Reset` |Перезагружает расширение.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+[ComVisible(true)]
+[Guid("6A0676EE-1DAF-4A59-B5EB-E0B5B4C175EE")]
+[ClassInterface(ClassInterfaceType.None)]
+public sealed partial class TestExtension : NavExtension
+{
+    public TestExtension() { }
+
+    protected override NavExtensionTypes SupportedTypes
+    {
+        get
+        {
+            return NavExtensionTypes.All;
+        }
+    }
+    protected override string GetExtensionName(NavExtensionTypes extensionType)
+    {
+        return "TextExtension";
+    }
+    //...
+}
+----

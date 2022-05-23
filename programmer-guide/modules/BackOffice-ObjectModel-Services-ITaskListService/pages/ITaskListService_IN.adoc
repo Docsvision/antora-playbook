@@ -1,0 +1,66 @@
+= ITaskListService -- интерфейс
+
+Сервис `ITaskListService` предоставляет методы для работы со списками заданий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ITaskListService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ITaskListService.AddTask_MT.adoc[AddTask(TaskList, Task, BaseCard)]` |Добавляет существующее задание в предоставленный список заданий.
+|`xref:ITaskListService.AddTaskGroup_MT.adoc[AddTaskGroup(TaskList, TaskGroup, BaseCard)]` |Добавляет группу заданий в предоставленный список заданий.
+|`xref:ITaskListService.CopyTask_MT.adoc[CopyTask(TaskList, Task, BaseCard)]` |Создает копию указанного задания в списке заданий.
+|`xref:ITaskListService.CreateTask_MT.adoc[CreateTask(TaskList, Task, Boolean, StaffEmployee)]` |Добавляет существующее задание в предоставленный список заданий, без внесения изменений в историю карточки.
+|`xref:ITaskListService.CreateTaskGroup_MT.adoc[CreateTaskGroup(TaskList, TaskGroup)]` |Добавляет существующую группу заданий в предоставленный список заданий, без внесения изменений в историю карточки.
+|`xref:ITaskListService.CreateTaskList_MT.adoc[CreateTaskList()]` |Инициализирует новый пустой список заданий.
+|`xref:ITaskListService.GetTasksTree_MT.adoc[GetTasksTree(TaskList)]` |Возвращает список узлов дерева заданий, построенного из списка заданий.
+|`GetTasksTree(IEnumerable<Task>, IEnumerable<TaskGroup>)` |Возвращает список узлов дерева заданий, построенного из списка заданий.
+|`GetTasksTree(TaskList, IEnumerable<Guid>)` |Возвращает список узлов дерева заданий, построенного из списка заданий.
+|`GetTasksTree(IEnumerable<Task>, IEnumerable<TaskGroup>, IEnumerable<Guid>)` |Возвращает список узлов дерева заданий, построенного из списка заданий.
+|`xref:ITaskListService.RemoveTask_MT.adoc[RemoveTask(TaskList, Task, BaseCard)]` |Удаляет задание из переданного списка заданий.
+|`xref:ITaskListService.RemoveTaskGroup_MT.adoc[RemoveTaskGroup(TaskList, TaskGroup, BaseCard)]` |Удаляет группу заданий из списка заданий.
+|===
+
+== Примеры
+
+Приведенный далее пример демонстрирует использование сервиса ITaskListService при создании списка заданий в карточке _Документ_.
+
+[source,csharp]
+----
+<.>
+        
+ITaskListService taskListService = objectContext.GetService<ITaskListService>();
+ITaskService taskService = objectContext.GetService<ITaskService>();
+IStaffService staffService = objectContext.GetService<IStaffService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
+
+Task task = taskService.CreateTask(kind);
+task.MainInfo.Name = "Задание документа";
+task.MainInfo.Author = staffService.GetCurrentEmployee(); <.>
+
+TaskList taskList = taskListService.CreateTaskList(); <.>
+
+taskListService.AddTask(taskList, task, document); <.>
+document.MainInfo.Tasks = taskList;
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение документа, к которому добавляется список заданий.
+<.> Получение вида задания (например, "На исполнение").
+<.> Создание нового задания.
+<.> Создание нового списка заданий.
+<.> Добавление задания в список заданий.

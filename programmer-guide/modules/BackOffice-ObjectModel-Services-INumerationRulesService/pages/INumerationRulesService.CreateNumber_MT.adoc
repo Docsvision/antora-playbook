@@ -1,0 +1,61 @@
+= INumerationRulesService.CreateNumber -- метод (CardData, BaseCard, NumerationRulesRule)
+
+Выделяет указанной карточке номер из нумератора следуя приложенному правилу нумерации.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+BaseCardNumber CreateNumber(CardData cardData, BaseCard baseCard, NumerationRulesRule rule)
+----
+
+Параметры::
+cardData:::
+Тип: `xref:Platform-ObjectManager:CardData_CL.adoc[CardData]`
++
+Карточка, которой выделяется номер
+
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Объектная модель карточки, которой выделяется номер
+
+rule:::
+Тип: `xref:BackOffice-ObjectModel:NumerationRulesRule_CL.adoc[NumerationRulesRule]`
++
+Правило нумерации, по которому будет выделен номер
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:BaseCardNumber_CL.adoc[BaseCardNumber]`
++
+Выделенный номер
+
+== Примеры
+
+Ниже приведен пример выделения номера из нумератора для карточки.
+
+[source,csharp]
+----
+<.>
+
+INumerationRulesService numerationRulesService = objectContext.GetService<INumerationRulesService>(); <.>
+
+QueryObject query = new QueryObject(RefNumerationRules.Rules.RuleName, "УД Исходящий");
+NumerationRulesRule numerationRule = objectContext.FindObject<NumerationRulesRule>(query); <.>
+
+Guid cardId = new Guid(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+numerationRulesService.CreateNumber(userSession.CardManager.GetCardData(cardId),
+objectContext.GetObject<Document>(cardId), numerationRule); <.>
+objectContext.AcceptChanges();
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение правила нумерации, по которому выделяется номер.
+<.> Идентификатор карточки, которой выделяется номер.
+<.> Выделение номера.
+
+Если необходимо использовать выделенный номер в качестве регистрационного номера документа, достаточно записать идентификатор выделенного номера в поле `RegNumber` карточки.

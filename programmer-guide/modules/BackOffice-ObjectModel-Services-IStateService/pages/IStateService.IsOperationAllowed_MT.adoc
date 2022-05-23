@@ -1,0 +1,60 @@
+= IStateService.IsOperationAllowed -- метод (BuiltInOperation, BaseCard)
+
+Определяет возможность выполнения встроенной операции, применительно к определённой карточке.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool IsOperationAllowed(BuiltInOperation builtInOperation, BaseCard baseCard)
+----
+
+Параметры::
+builtInOperation:::
+Тип: `xref:BackOffice-ObjectModel:BuiltInOperation_CL.adoc[BuiltInOperation]`
++
+Встроенная операция
+
+baseCard:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, для которой выполняется проверка
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- операция допустима, иначе -- `false`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInOperation` или `baseCard`.
+|===
+
+== Заметки
+
+Доступность операции проверяется исключительно на основе данных _конструктора состояние_.
+
+== Примеры
+
+В примере демонстрируется использование метода `IsOperationAllowed` для определения возможности делегирования задания другому сотруднику
+
+[source,csharp]
+----
+<.>
+
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+bool isValid = stateService.IsOperationAllowed(Task.DelegateOperation, task); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания, для которого определяется возможность делегирования.
+<.> Проверка возможности совершения операции делегирования.

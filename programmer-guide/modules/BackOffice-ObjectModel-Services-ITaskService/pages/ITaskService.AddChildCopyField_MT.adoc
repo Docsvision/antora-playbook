@@ -1,0 +1,68 @@
+= ITaskService.AddChildCopyField -- метод (Task)
+
+Добавляет в настройки задания параметры копирования поля из родительского задания в дочернее.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskPresetChildCopyField AddChildCopyField(Task task)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание, для которого выполняется настройка
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskPresetChildCopyField_CL.adoc[TaskPresetChildCopyField]`
++
+Объектная модель копируемого поля
+
+== Заметки
+
+Данный метод позволяет добавить настройку копирования полей из родительского задания в подчиненное для отдельной карточки _Задания_. Указанные поля (дополнительно к тем, что определённы в _Справочнике видов карточек_) будут скопированы в подчиненное задание при создании из родительской карточки.
+
+== Примеры
+
+В приведенном примере демонстрируется использование метода `AddChildCopyField` при добавлении полей, копируемых в подчиненное задание.
+
+[source,csharp]
+----
+<.>
+
+IMetadataProvider metadataProvider = objectContext.GetService<IMetadataProvider>();
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+TaskPresetChildCopyField taskPresetChildCopyField = taskService.AddChildCopyField(task); <.>
+            
+DocsVision.Platform.Data.Metadata.CardModel.SectionField sectionField = metadataProvider.GetField(new Guid("F5C843C0-5CE1-4727-81BF-0C764A43243B"));
+DocsVision.Platform.Data.Metadata.CardModel.CardSection section = sectionField.GetParent<DocsVision.Platform.Data.Metadata.CardModel.CardSection>(); <.>
+
+taskPresetChildCopyField.SectionName = section.Name;
+taskPresetChildCopyField.FieldId = sectionField.Id;
+taskPresetChildCopyField.FieldName = sectionField.DisplayName.GetLocalization(System.Globalization.CultureInfo.CurrentCulture);
+taskPresetChildCopyField.FieldAlias = sectionField.Name; <.>
+
+Stack<Guid> sections = new Stack<Guid>(); <.>
+while (section != null)
+{
+ sections.Push(section.Id);
+ section = section.GetParent<DocsVision.Platform.Data.Metadata.CardModel.CardSection>();
+}
+taskPresetChildCopyField.SectionPath = CardFieldSetting.BuildSectionPath(sections);          
+objectContext.SaveObject<Task>(task);
+----
+<.> Инициализация контекста объектов.
+<.> Получение необходимых сервисов.
+<.> Получение задания.
+<.> Добавление настройки копирования поля.
+<.> Получение поля "Название" из секции "Задание".
+<.> Определение значений копируемого поля.
+<.> Формирование пути к секции.

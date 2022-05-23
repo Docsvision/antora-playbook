@@ -1,0 +1,84 @@
+= ITaskListService.CreateTask -- метод (TaskList, Task, Boolean, StaffEmployee)
+
+Добавляет существующее задание в предоставленный список заданий, без внесения изменений в историю карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskListTask CreateTask(TaskList taskList, Task task, bool onControl, StaffEmployee controller)
+----
+
+Параметры::
+taskList:::
+Тип: `xref:BackOffice-ObjectModel:TaskList_CL.adoc[TaskList]`
++
+Список заданий, в который осуществляется добавление задания
+
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Добавляемое задание
+
+onControl:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Признак постановки задания на контроль. Если `true` -- контроль установлен, иначе -- `false`
+
+controller:::
+Тип: `xref:BackOffice-ObjectModel:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Контролер задания, если `onControl` = `true`
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel:TaskListTask_CL.adoc[TaskListTask]`
++
+Добавленное задание
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `taskList` или `task`.
+|===
+
+== Заметки
+
+В отличие от метода `AddTask`, метод `CreateTask` не осуществляет записи события в историю карточки. Кроме этого, данный метод позволяет указать признак наличия контроля для задания дополнительно к тому, что указано в самом задании.
+
+== Примеры
+
+Далее приведен пример использования метода `CreateTask` при добавлении нового задания с признаком "На контроле" в существующий документ
+
+[source,csharp]
+----
+<.>
+
+IStaffService staffService = objectContext.GetService<IStaffService>();
+ITaskService taskService = objectContext.GetService<ITaskService>();
+ITaskListService taskListService = objectContext.GetService<ITaskListService>(); <.>
+
+Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+TaskList taskList = document.MainInfo.Tasks; <.>
+
+KindsCardKind kind = objectContext.GetObject<KindsCardKind>(new Guid("AB801854-70AF-4B6C-AB48-1B59B5D11AA9")); <.>
+
+Task task = taskService.CreateTask(kind);
+task.MainInfo.Name = "Задание документа";
+task.MainInfo.Author = staffService.GetCurrentEmployee();
+task.MainInfo.OnControl = true;
+task.MainInfo.Controller = task.MainInfo.Author;
+
+taskListService.CreateTask(taskList, task,task.MainInfo.OnControl, task.MainInfo.Controller); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервисов.
+<.> Получение документа.
+<.> Получение существующего списка заданий из документа.
+<.> Получение вида задания.
+<.> Добавление задания в список заданий.

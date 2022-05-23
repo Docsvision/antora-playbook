@@ -1,0 +1,103 @@
+= DVGate -- класс
+
+Содержит методы и свойства шлюза к {dv}.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class DVGate : IGate, IDisposable, IGateMessageSource
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`DVGate()` |Инициализирует новый экземпляр класса DVGate.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/DVGate.BaseURL_PR.adoc[BaseURL]` |Возвращает URL к корню WEB-сервера {dv}.
+|`xref:Gates/IGate.Data_PR.adoc[Data]` |Задает или возвращает конфигурацию шлюза.
+|`xref:Gates/IGate.ExecutionMode_PR.adoc[ExecutionMode]` |Возвращает поддерживаемый режим исполнения процесса.
+|`xref:Gates/DVGate.FoldersCard_PR.adoc[FoldersCard]` |Возвращает карточку папок.
+|`xref:Gates/IGate.ID_PR.adoc[ID]` |Возвращает уникальный идентификатор шлюза.
+|`xref:Gates/DVGate.MessageChannel_PR.adoc[MessageChannel]` |Возвращает канал сообщений шлюза.
+|`xref:Gates/DVGate.RefPartners_PR.adoc[RefPartners]` |Возвращает справочник контрагентов.
+|`xref:Gates/DVGate.RefStaff_PR.adoc[RefStaff]` |Возвращает справочник сотрудников.
+|`xref:Gates/DVGate.RefUniversal_PR.adoc[RefUniversal]` |Возвращает универсальный справочников (Делопроизводство).
+|`Session` |Задает или возвращает пользовательскую сессию.
+|`xref:Gates/IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel]` |Возвращает канал подписки на события шлюза.
+|`UserSession` |Задает или возвращает пользовательскую сессию.
+|`WorkflowUserId` |Возвращает идентификатор пользователя Workflow.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/DVGate.AddVariable_MT.adoc[AddVariable(Int32, String)]` |Добавляет новую переменную шлюза.
+|`AddVariable(Int64, String)` |Добавляет новую переменную шлюза.
+|`xref:Gates/IGate.CompareVariables_MT.adoc[CompareVariables(Int32, String, String)]` |Сравнивает значения двух однотипных переменных шлюза. Выполняется простое сравнение двух строковых переменных.
+|`CompareVariables(Int64, String, String)` |Сравнивает значения двух однотипных переменных шлюза. Выполняется простое сравнение двух строковых переменных.
+|`xref:Gates/DVGate.CopyCard_MT.adoc[CopyCard(DVCard, Boolean)]` |Создает копию переданной карточки.
+|`xref:Gates/DVGate.CopyCards_MT.adoc[CopyCards(Array, Boolean, ProcessVariable)]` |Создает копии нескольких карточек.
+|`xref:Gates/DVGate.CopyVariable_MT.adoc[CopyVariable(Int32, String, String)]` |Создает копию переменной шлюза.
+|`CopyVariable(Int64, String, String)` |Создает копию переменной шлюза.
+|`CreateCard(DVCardType)` |Создает новую карточку указанного типа.
+|`xref:Gates/DVGate.CreateCard_MT.adoc[CreateCard(String)]` |Создает новую карточку указанного типа.
+|`CreateCardInFolder(DVCardType, DVFolder)` |Создает новую карточку указанного типа и добавляет ярлык для её открытия в папку.
+|`xref:Gates/DVGate.CreateCardInFolder_MT.adoc[CreateCardInFolder(String, DVFolder)]` |Создает новую карточку указанного типа и ярлык на неё.
+|`xref:Gates/DVGate.CreateDVFileFromExAttachment_MT.adoc[CreateDVFileFromExAttachment(ExAttachment)]` |Создает карточку версионного файла на основе вложения письма переданного шлюзом к `Exchange`.
+|`xref:Gates/DVGate.CreateDVFileFromExAttachmentInFolder_MT.adoc[CreateDVFileFromExAttachmentInFolder(ExAttachment, DVFolder, ProcessVariable)]` |Создает карточку версионного файла на основе вложения письма переданного шлюзом к `Exchange`.
+|`xref:Gates/DVGate.CreateDVFileFromFSFile_MT.adoc[CreateDVFileFromFSFile(FSFile)]` |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе.
+|`xref:Gates/DVGate.CreateDVFileFromFSFileInFolder_MT.adoc[CreateDVFileFromFSFileInFolder(FSFile, DVFolder, ProcessVariable)]` |Создает карточку версионного файла на основе файла, полученного из шлюза к файловой системе, и ярлык на карточку.
+|`xref:Gates/DVGate.CreateFolder_MT.adoc[CreateFolder(DVFolder, String, DVCardRow)]` |Создает новую папку указанного типа.
+|`CreateMessage(String, String, DVCard, DVPrincipal)` |Создает карточку "Сообщение" с переданными параметрами.
+|`CreateMessage(String, String, DVCard, DVPrincipal, DVPrincipal)` |Создает карточку "Сообщение" с переданными параметрами.
+|`CreateMessage(String, String, DVCard, String, DVPrincipal)` |Создает карточку "Сообщение" с переданными параметрами.
+|`CreateMessageFrom(String, String, DVCard, DVPrincipal, DVPrincipal)` |Создает карточку "Сообщение" с переданными параметрами.
+|`CreateMessageInFolder(String, String, DVCard, DVFolder, DVPrincipal)` |Создает карточку "Сообщение" с переданными параметрами.
+|`xref:Gates/DVGate.DeleteCard_MT.adoc[DeleteCard(DVCard, Boolean)]` |Удаляет карточку.
+|`xref:Gates/DVGate.DeleteFolder_MT.adoc[DeleteFolder(DVFolder, Boolean)]` |Удаляет папку.
+|`xref:Gates/DVGate.DeleteShortcut_MT.adoc[DeleteShortcut(DVShortcut, Boolean)]` |Удаляет ярлык на карточку.
+|`xref:Gates/DVGate.DeleteVariable_MT.adoc[DeleteVariable(Int32, String)]` |Удаляет переменную шлюза.
+|`xref:Gates/DVGate.GetCard_MT.adoc[GetCard(Guid, Boolean)]` |Получает карточку.
+|`xref:Gates/DVGate.GetCardHardLink_MT.adoc[GetCardHardLink(String)]` |Получает сильный ярлык на карточку.
+|`xref:Gates/DVGate.GetCardSecurable_MT.adoc[GetCardSecurable(Guid)]` |Возвращает описатель прав для карточки.
+|`xref:Gates/DVGate.GetCardTypeByID_MT.adoc[GetCardTypeByID(Guid)]` |Получает тип карточки по его идентификатору.
+|`xref:Gates/DVGate.GetCurrentProcess_MT.adoc[GetCurrentProcess(ProcessVariable)]` |Получает текущий бизнес-процесс.
+|`xref:Gates/DVGate.GetDocStateByName_MT.adoc[GetDocStateByName(DVCardRow, String)]` |Получает строку состояния карточки по названию.
+|`xref:Gates/DVGate.GetDocStates_MT.adoc[GetDocStates(DVCardRow, ProcessVariable)]` |Получает все возможные состояния карточки и сохраняет их в переменную процесса.
+|`xref:Gates/DVGate.GetDocumentByTypeID_MT.adoc[GetDocumentByTypeID(String)]` |Получает справочник по его идентификатору.
+|`xref:Gates/DVGate.GetFunctionLinkedCard_MT.adoc[GetFunctionLinkedCard(String, Boolean, ProcessVariable)]` |Получает карточку, связанную с функцией бизнес-процесса.
+|`xref:Gates/DVGate.GetRow_MT.adoc[GetRow(Guid, Guid)]` |Получает строку секции карточки.
+|`xref:Gates/DVGate.GetVariable_MT.adoc[GetVariable(Int32, String, Object)]` |Получает переменную процесса по её идентификатору и типу.
+|`xref:Gates/DVGate.GetVariableReference_MT.adoc[GetVariableReference(Int32, String)]` |Возвращает URL (ссылку) для открытия карточки или папки.
+|`xref:Gates/DVGate.ImportCard_MT.adoc[ImportCard(String)]` |Импортирует карточку из XML.
+|`xref:Gates/DVGate.ImportCardFromFile_MT.adoc[ImportCardFromFile(FSFile)]` |Импортирует карточку из текстового файла.
+|`xref:Gates/DVGate.ImportCardIntoFolder_MT.adoc[ImportCardIntoFolder(String, DVFolder, ProcessVariable)]` |Импортирует карточку из XML и создаёт ярлык.
+|`xref:Gates/DVGate.ImportCardIntoFolderFromFile_MT.adoc[ImportCardIntoFolderFromFile(FSFile, DVFolder, ProcessVariable)]` |Импортирует карточку из текстового файла и создаёт ярлык.
+|`Initialize(Guid, IMessageChannel, ISubscriptionChannel)` |Инициализирует новый экземпляр шлюза.
+|`xref:Gates/DVGate.IsVariableExists_MT.adoc[IsVariableExists(DVVariableType, String)]` |Проверяет существование переменной шлюза
+|`xref:Gates/DVGate.SendMessageToProcess_MT.adoc[SendMessageToProcess(Guid, Guid, Int32, String, Guid)]` |Отправляет сообщение функции процесса.
+|`xref:Gates/DVGate.SendMessageToProcessFunctions_MT.adoc[SendMessageToProcessFunctions(Guid, String, Int32, String, Guid)]` |Отправляет сообщение функции процесса.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/DVGate.GateID_FL.adoc[GateID]` |Предоставляет идентификатор шлюза.
+|`xref:Gates/DVGate.GateName_FL.adoc[GateName]` |Предоставляет название шлюза.
+|===

@@ -1,0 +1,56 @@
+= IBaseCardService.SendMailNotification -- метод (IEnumerable<MailNotificationInfo>)
+
+Отправляет оповещение по электронной почте.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void SendMailNotification(IEnumerable<MailNotificationInfo> mailNotificationInfos)
+----
+
+Параметры::
+mailNotificationInfos:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<MailNotificationInfo>`
++
+Коллекция сообщений, подготовленных к отправке
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `mailNotificationInfos`.
+|===
+
+== Заметки
+
+Данный метод формирует экземпляр бизнес-процесса "УД Отправка почтовых уведомлений", который выполняет отправку электронного сообщения. Для возможности отправки сообщений должны быть произведены соответствующие настройки шлюза Workflow (см. документ "Руководство по настройке").
+
+== Примеры
+
+Ниже приведен пример отправки почтового уведомления с использованием сервиса базовых объектов
+
+[source,csharp]
+----
+<.>
+
+IBaseCardService baseCardService = objectContext.GetService<IBaseCardService>(); <.>
+
+string eMailFormat = "<root ID=\"{0}\" Email=\"{1}\" Name=\"{1}\"></root>"; <.>
+
+string eMail = string.Format(eMailFormat, Guid.NewGuid(), "sample@domain.com"); <.>
+
+MailNotificationInfo mailNotificationInfo = new MailNotificationInfo(eMail, "Уведомление", "Данное письмо является информационным"); <.>
+
+baseCardService.SendMailNotification(new MailNotificationInfo[] { mailNotificationInfo }); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с базовыми объектами.
+<.> Специальный формат для почтового адреса.
+<.> Получение допустимого почтового адреса из "sample@domain.com".
+<.> Инициализация нового информационного письма с тестовым адресом.
+<.> Отправка сообщения.

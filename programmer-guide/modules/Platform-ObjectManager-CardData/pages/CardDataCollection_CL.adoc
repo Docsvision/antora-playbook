@@ -1,0 +1,35 @@
+= CardDataCollection -- класс
+
+Предоставляет методы для работы с коллекцией `CardData`. Этот класс является *абстрактным*.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class CardDataCollection : IEnumerable<CardData>, IEnumerable, IXmlExportable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:CardDataCollection.Count_PR.adoc[Count]` |Возвращает количество элементов в коллекции.
+|`xref:CardDataCollection.Item_PR.adoc[Item]` |Возвращает элемент коллекции с заданным индексом.
+|`xref:CardDataCollection.Item_1_PR.adoc[Item]` |Возвращает элемент коллекции с заданным идентификатором карточки.
+|`xref:CardDataCollection.Session_PR.adoc[Session]` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:CardDataCollection.Contains_MT.adoc[Contains]` |Проверяет наличие в коллекции элемента с заданным идентификатором карточки.
+|`xref:CardDataCollection.SaveXml_MT.adoc[SaveXml(Stream)]` |Метод сохраняет представление данных объекта в формате XML, в поток.
+|`xref:CardDataCollection.SaveXml_1_MT.adoc[SaveXml(Stream, ExportFlags)]` |Метод сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта.
+|`xref:CardDataCollection.SaveXml_2_MT.adoc[SaveXml(Stream, ExportFlags, ExportCardInspector)]` |Метод сохраняет представление данных объекта в формате XML, в соответствии с установленными флагами экспорта и заданной логикой экспорта.
+|===

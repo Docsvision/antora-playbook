@@ -1,0 +1,191 @@
+= ApprovalStageService -- класс
+
+Класс содержит методы для работы с этапом согласования.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ApprovalStageService : ContextService, IApprovalStageService
+----
+
+== Методы
+
+[cols="34,66",options="header"]
+|===
+|Имя |Описание
+
+|`AddSelectedApprover(ApprovalStage, Guid)`
+
+|Добавляет выбранных согласующих из поискового слова.
+
+|`AddSelectedApprover(ApprovalStage, StaffEmployee)`
+
+|Добавляет выбранного согласующего из справочника сотрудников.
+
+|`ApprovalStageApprover AddSelectedApprover(ApprovalStage, StaffUnit)`
+
+|Добавляет выбранных согласующих из подразделения.
+
+|`AddSelectedApprover(ApprovalStage, StaffGroup)`
+
+|Добавляет выбранных согласующих из группы.
+
+|`AddSelectedApprover(ApprovalStage, StaffRole)`
+
+|Добавляет выбранных согласующих из роли.
+
+|`AddCurrentApprover(ApprovalStage, StaffEmployee)`
+
+|Добавляет текущего согласующего.
+
+|`InsertCurrentApproverAfter(ApprovalStage, ApprovalStageCurrentApprover, StaffEmployee)`
+
+|Добавляет текущего согласующего после другого согласующего.
+
+|`AddAdditionalApprover(ApprovalStage, StaffEmployee, StaffEmployee)`
+
+|Добавляет дополнительного согласующего.
+
+|`ReorderSelectedApprovers(ObjectCollection<ApprovalStageApprover>)`
+
+|Изменяет порядок выбранных согласующих.
+
+|`AddDecision(ApprovalStage)`
+
+|Добавляет новое решение.
+
+|`ReorderDecisions(ObjectCollection<ApprovalStageDecision>)`
+
+|Изменяет порядок решений.
+
+|`AddDecisionLocalization(ApprovalStageDecision, int, string)`
+
+|Локализация решений этапа согласования.
+
+|`AddMainInfoNameLocalization(ApprovalStage, int, string)`
+
+|Локализация решений этапа согласования.
+
+|`AddState(ApprovalStage)`
+
+|Добавляет новое состояние.
+
+|`CreateApprover(StaffEmployee)`
+
+|Создаёт согласующего по указанному сотруднику.
+
+|`CopyApproversFromDocument(ApprovalStage, Document)`
+
+|Копирует согласующих из документа в этап.
+
+|`GetStageApprovers(ApprovalStage, Document)`
+
+|Получает согласующих этапа.
+
+|`GetPossibleSemantics(ApprovalType)`
+
+|Получает набор возможных семантик решений в зависимости от типа согласования.
+
+|`StartStage(ApprovalStage, Reconcile)`
+
+|Первый этап согласования.
+
+|`OnStageStarted(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается после запуска этапа.
+
+|`CreateNextTask(ApprovalStage, Reconcile)`
+
+
+|`OnTaskCreated(ApprovalStage, ApprovalPath, Reconcile, Task)`
+
+|Вызывается после создания задания, но до его запуска.
+
+|`OnTaskStarted(ApprovalStage, ApprovalPath, Reconcile, Task)`
+
+|Вызывается после запуска задания.
+
+|`ChangeDocumentState(ApprovalStage, Document, DecisionSemantics)`
+
+|Изменяет состояние документа.
+
+|`OnDocumentStateChanging(ApprovalStage, Document, DecisionSemantics)`
+
+|Вызывается в `ChangeDocumentState` перед сменой состояния документа и передаёт вычисленное новое состояние документа, ожидая, что метод может вернуть другое состояние документа, которое и нужно установить.
+
+|`OnDocumentStateChanged(ApprovalStage, Document, DecisionSemantics)`
+
+|Вызывается в `ChangeDocumentState` после смены состояния документа.
+
+|`CompleteTask(ApprovalStage, ApprovalStageCurrentApprover)`
+
+|Завершает задание.
+
+|`OnTaskCompleting(ApprovalStage, Reconcile, ApprovalStageCurrentApprover)`
+
+|Вызывается в `CompleteTask` до отработки основной логики метода.
+
+|`OnTaskCompleted(ApprovalStage, Reconcile, ApprovalStageCurrentApprover)`
+
+|Вызывается в `CompleteTask` после отработки основной логики метода.
+
+|`RecallTask(ApprovalStage, ApprovalStageCurrentApprover)`
+
+|Отзывает задачу.
+
+|`CompleteStage(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Завершает этап.
+
+|`SkipStage(ApprovalStage, ApprovalPath, Reconcile, DecisionSemantics)`
+
+|Вызывается после пропуска этапа.
+
+|`OnStageCompleting(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `CompleteStage` до отработки основной логики метода.
+
+|`OnStageCompleted(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `CompleteStage` после отработки основной логики метода.
+
+|`CancelStage(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Отменяет этап.
+
+|`OnStageCanceling(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `CancelStage` до отработки основной логики метода.
+
+|`OnStageCanceled(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `CancelStage` после отработки основной логики метода.
+
+|`ReturnStage(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Возвращает этап.
+
+|`OnStageReturning(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `ReturnStage` до отработки основной логики метода.
+
+|`OnStageReturned(ApprovalStage, ApprovalPath, Reconcile)`
+
+|Вызывается в `ReturnStage` после отработки основной логики метода.
+
+|`CompleteInitiatorTask(ApprovalStage, ApprovalStageCurrentApprover)`
+
+|Завершает задание инициатора.
+
+|`OnCompletingInitiatorTask(ApprovalStage, Reconcile, ApprovalStageCurrentApprover)`
+
+|Вызывается в `CompleteInitiatorTask` до отработки основной логики метода.
+
+|`OnCompletedInitiatorTask(ApprovalStage, Reconcile, ApprovalStageCurrentApprover)`
+
+|Вызывается в `CompleteInitiatorTask` после отработки основной логики метода.
+|===

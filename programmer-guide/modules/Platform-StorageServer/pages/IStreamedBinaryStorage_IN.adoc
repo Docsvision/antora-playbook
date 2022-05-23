@@ -1,0 +1,22 @@
+= IStreamedBinaryStorage -- интерфейс
+
+Определяет методы прямого доступа к потокам чтения/записи в провайдере к внешнему хранилищу.
+
+* *Пространство имён:* `xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]`
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IStreamedBinaryStorage
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`OpenReadStream(String)` |Возвращает поток чтения файла из внешнего хранилища.
+|`OpenWriteStream(String)` |Возвращает поток записи файла во внешнем хранилище.
+|===

@@ -1,0 +1,28 @@
+= LogManager.GetMessageDetails -- метод (Int32)
+
+Возвращает информационную часть сообщения из журнала согласно заданному идентификатору.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract string GetMessageDetails(int messageId)
+----
+
+Параметры::
+messageId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Идентификатор сообщения
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Информативная часть сообщения
+
+== Заметки
+
+В отличие от `xref:LogManager.GetMessage_MT.adoc[GetMessage]` данный метод возвращает только информативную часть сообщения (`Data`).

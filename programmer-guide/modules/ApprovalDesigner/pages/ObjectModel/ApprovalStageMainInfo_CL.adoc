@@ -1,0 +1,63 @@
+= ApprovalStageMainInfo -- класс
+
+Содержит основную информацию карточки Этап согласования.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ApprovalStageMainInfo : BaseCardSectionRow
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ObjectModel/ApprovalStageMainInfo.AllowEditBeforeReconcilation_PR.adoc[AllowEditBeforeReconcilation]` |Задает или возвращает признак возможности изменения этапа перед запуском согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.ApproversBusinessProcess_PR.adoc[ApproversBusinessProcess]` |Задает или возвращает идентификатор бизнес-процесса для вычисления согласующих.
+|`xref:ObjectModel/ApprovalStageMainInfo.ApproversBusinessProcessSpecified_PR.adoc[ApproversBusinessProcessSpecified]` |Задает или возвращает признак того, что указан бизнес-процесс для вычисления согласующих.
+|`xref:ObjectModel/ApprovalStageMainInfo.ApproversField_PR.adoc[ApproversField]` |Задает или возвращает поле карточки, из которого будут выбираться согласующие.
+|`xref:ObjectModel/ApprovalStageMainInfo.ApproversFieldSpecified_PR.adoc[ApproversFieldSpecified]` |Задает или возвращает признак того, что указано поле карточки, из которого будут получены согласующие.
+|`xref:ObjectModel/ApprovalStageMainInfo.ApproversSpecified_PR.adoc[ApproversSpecified]` |Задает или возвращает признак того, что согласующие заданы.
+|`xref:ObjectModel/ApprovalStageMainInfo.AutoCompleteTaskAfterDeadline_PR.adoc[AutoCompleteTaskAfterDeadline]` |Задает или возвращает признак того, что задание КС должно автоматически завершаться по истечению срока исполнения.
+|`xref:ObjectModel/ApprovalStageMainInfo.DefaultDecision_PR.adoc[DefaultDecision]` |Задает или возвращает для этапа согласования семантику завершения по умолчанию при автосогласовании.
+|`xref:ObjectModel/ApprovalStageMainInfo.Duration_PR.adoc[Duration]` |Задает или возвращает длительность выполнения задания КС.
+|`xref:ObjectModel/ApprovalStageMainInfo.Hidden_PR.adoc[Hidden]` |Задает или возвращает признак скрытия этапа из маршрута согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.HierarchyLevel_PR.adoc[HierarchyLevel]` |Задает или возвращает значение уровня иерархии руководителей.
+|`xref:ObjectModel/ApprovalStageMainInfo.Mode_PR.adoc[Mode]` |Задает или возвращает режим маршрутизации этапа согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.Name_PR.adoc[Name]` |Задает или возвращает название этапа согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.NextDuration_PR.adoc[NextDuration]` |Задает или возвращает длительность завершения задания/этапа на следующем цикле.
+|`xref:ObjectModel/ApprovalStageMainInfo.NextDurationSpecified_PR.adoc[NextDurationSpecified]` |Задает или возвращает признак того, что для следующего цикла согласования установлено значение длительности завершения задания/этапа.
+|`xref:ObjectModel/ApprovalStageMainInfo.ReconcileType_PR.adoc[ReconcileType]` |Задает или возвращает тип маршрутизации этапа согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.SkipRepeated_PR.adoc[SkipRepeated]` |Задает или возвращает признак того, что этап должен пропускаться на следующем цикле согласования.
+|`xref:ObjectModel/ApprovalStageMainInfo.SpecificDuration_PR.adoc[SpecificDuration]` |Задает или возвращает признак того, что длительность завершения задания/этапа установлена.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AllowEditBeforeReconcilationProperty` |Определяет свойство "Разрешить изменение этапа перед стартом согласования".
+|`ApprovalStageModeProperty` |Определяет свойство "Режим".
+|`ApproversBusinessProcessProperty` |Определяет свойство "Бизнес-процесс для выбора согласующих".
+|`ApproversBusinessProcessSpecifiedProperty` |Определяет свойство "Бизнес-процесс для выбора согласующих задан".
+|`ApproversFieldProperty` |Определяет свойство "Поле согласующих".
+|`ApproversFieldSpecifiedProperty` |Определяет свойство "Поле согласующих задано".
+|`ApproversSpecifiedProperty` |Определяет свойство "Согласующие заданы".
+|`AutoCompleteTaskAfterDeadlineProperty` |Определяет свойство "Автоматически завершать задание по истечению срока исполнения".
+|`DefaultDecisionProperty` |Определяет свойство "Решение по умолчанию".
+|`DurationProperty` |Определяет свойство "Длительность".
+|`HiddenProperty` |Определяет свойство "Скрыть этап".
+|`HierarchyLevelProperty` |Определяет свойство "Уровень иерархии руководителей".
+|`NameProperty` |Определяет свойство "Название этапа".
+|`NextDurationProperty` |Определяет свойство "Длительность на последующих циклах".
+|`NextDurationSpecifiedProperty` |Определяет свойство "Флаг, показывающий задана ли длительность на последующих циклах".
+|`ReconcileTypeProperty` |Определяет свойство "Тип согласования".
+|`SkipRepeatedProperty` |Определяет свойство "Пропускать при повторе".
+|`SpecificDurationProperty` |Определяет свойство "Флаг, показывающий, задана ли длительность для каждого согласующего или на всем этапе".
+|===

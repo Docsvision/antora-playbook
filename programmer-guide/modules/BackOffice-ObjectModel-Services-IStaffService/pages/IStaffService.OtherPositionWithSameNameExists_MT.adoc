@@ -1,0 +1,37 @@
+= IStaffService.OtherPositionWithSameNameExists -- метод (StaffPosition, String)
+
+Определяет наличие должности с указанным названием.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool OtherPositionWithSameNameExists(StaffPosition position, string name)
+----
+
+Параметры::
+position:::
+Тип: `xref:BackOffice-ObjectModel:StaffPosition_CL.adoc[StaffPosition]`
++
+Должность, которая должна быть исключена из результатов поиска
+
+name:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Искомое название
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true`, если найдены должности (кроме `position`) с названием `name`
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `position` или `name`.
+|===

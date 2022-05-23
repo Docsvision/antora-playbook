@@ -1,0 +1,33 @@
+= ServiceError -- класс
+
+Содержит статические методы формирования исключений, возникающих при работе сервисов.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public static class ServiceError
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ArgumentNull(String)` |Возвращает исключение типа System.ArgumentNullException#.
+|`ArgumentOutOfRange(String)` |Возвращает исключение типа `System.ArgumentOutOfRangeException`.
+|`FileNotFound(String)` |Возвращает исключение типа `System.IO.FileNotFoundException`.
+|`InvalidOperation(String)` |Возвращает исключение типа `System.InvalidOperationException`.
+|`InvalidOperation(String, Object[])` |Возвращает исключение типа `System.InvalidOperationException`. Текст ошибки формируется согласно переданному шаблону.
+|`ObjectLockedException(String)` |Возвращает исключение типа `System.Exception`.
+|`OperationAccessDenied(String)` |Возвращает исключение типа `System.MethodAccessException`.
+|`PathTooLong(String)` |Возвращает исключение типа `System.IO.PathTooLongException`.
+|`ServiceNotAvailable(String)` |Возвращает исключение типа `DocsVision.Platform.ObjectModel.ServiceNotAvailableException`.
+|`SettingsForKindAreNull` |Возвращает исключение типа `System.Exception`.
+|`TaskHierarchySearchException(String)` |Возвращает исключение типа `DocsVision.BackOffice.ObjectModel.Services.Entities.TaskHierarchySearchException`.
+|`TaskInactivePerformersException(String)` |Возвращает исключение типа `DocsVision.BackOffice.ObjectModel.Services.Entities.TaskInactivePerformersException`.
+|`WrongStatePassed` |Возвращает исключение типа `System.Exception`.
+|===

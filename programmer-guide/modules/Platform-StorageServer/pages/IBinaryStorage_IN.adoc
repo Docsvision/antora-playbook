@@ -1,0 +1,53 @@
+= IBinaryStorage -- интерфейс
+
+Определяет методы провайдера к внешнему хранилищу.
+
+* *Пространство имён:* `xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]`
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IBinaryStorage
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`IsIntegratedStorage` a|
+Флаг, указывающий является ли данное хранилище интегрированным в {dv}.
+
+*Должен всегда возвращать `false`*.
+
+|`StorageId` |Задает или возвращает уникальный идентификатор хранилища.
+|`xref:IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions]` |Задает или возвращает типы разделов, поддерживаемых хранилищем.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)]` |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
+|`xref:IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)]` |Создает файл во внешнем хранилище.
+|`xref:IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)]` |Создает файл во внешнем хранилище и загружает в него данные другого файла.
+|`Delete(String)` |Удаляет файл с указанным идентификатором из внешнего хранилища.
+|`Read(String, Stream)` |Считывает данные файла из внешнего хранилища в поток.
+|`xref:IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)]` |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.
+|`xref:IBinaryStorage.SafeMove_MT.adoc[SafeMove(String, StoragePartitionType)]` |Перемещает файл в новый раздел внешнего хранилища.
+|`Write(String, Stream)` |Записывает данные из потока в файл во внешнем хранилище.
+|`xref:IBinaryStorage.Write_MT.adoc[Write(String, Stream, Int64)]` |Записывает данные из потока в файл во внешнем хранилище начиная с заданной позиции.
+|===
+
+== Заметки
+
+Список возможных ошибок, которые могут возвращаться в реализации интерфейса `IBinaryStorage`:
+
+* `DocsVision.Platform.StorageServer.BinaryNotFoundException` -- указанный файл не существует в хранилище.
+* `DocsVision.Platform.StorageServer.InvalidBinaryIdException` -- переданный идентификатор файла имеет некорректный формат.
+* `System.NotSupportedException` -- метод не поддерживается в данном хранилище.
+* `System.ArgumentNullException` -- при вызове метода передан нулевой/пустой обязательный аргумент.
+* `DocsVision.Platform.StorageServer.BinaryStorageException` -- прочая ошибка в хранилище, не относящаяся к другим типам ошибок.

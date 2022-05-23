@@ -1,0 +1,49 @@
+= IStateService.ChangeState -- метод (BaseCard, StatesState)
+
+Изменяет состояние карточки.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ChangeState(BaseCard card, StatesState endState)
+----
+
+Параметры::
+card:::
+Тип: `xref:BackOffice-ObjectModel:BaseCard_CL.adoc[BaseCard]`
++
+Карточка, для которой выполняется смена состояния
+
+endState:::
+Тип: `xref:BackOffice-ObjectModel:StatesState_CL.adoc[StatesState]`
++
+Новое состояние карточки
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `card` или `endState`.
+|===
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+IStateService stateService = objectContext.GetService<IStateService>(); <.>
+
+Task card = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+stateService.ChangeState(card, stateService.FindStateByBuiltIn(Task.CompletedState, card)); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса для работы с состояниями.
+<.> Получение задания.
+<.> Смена состояния на состояние "Завершено".

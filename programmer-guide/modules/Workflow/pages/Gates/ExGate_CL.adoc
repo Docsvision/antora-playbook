@@ -1,0 +1,51 @@
+= ExGate -- класс
+
+Содержит методы и свойства шлюза к почте.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ExGate : IGate, IGateMessageSource
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`ExGate()` |Инициализирует новый экземпляр класса ExGate.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/IGate.Data_PR.adoc[Data]` |Задает или возвращает конфигурацию шлюза.
+|`xref:Gates/IGate.ExecutionMode_PR.adoc[ExecutionMode]` |Возвращает поддерживаемый режим исполнения процесса.
+|`xref:Gates/IGate.ID_PR.adoc[ID]` |Возвращает уникальный идентификатор шлюза.
+|`xref:Gates/ExGate.ServerAddress_PR.adoc[ServerAddress]` |Возвращает e-mail адрес сервера.
+|`xref:Gates/IGateMessageSource.SubscriptionChannel_PR.adoc[SubscriptionChannel]` |Возвращает канал подписки на события шлюза.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Gates/ExGate.AddVariable_MT.adoc[AddVariable(Int32, String)]` |Создает указанного типа переменную шлюза.
+|`AddVariable(Int64, String)` |Создает указанного типа переменную шлюза
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`GateId` |Предоставляет идентификатор шлюза.
+|`GateName` |Предоставляет название шлюза.
+|===

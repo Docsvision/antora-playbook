@@ -1,0 +1,28 @@
+= LockedObjectType -- перечисление
+
+Типы блокированных объектов.
+
+Это перечисление имеет атрибут `FlagsAttribute`, поддерживающий побитовое соединение составляющих его значений.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[Flags]
+public enum LockedObjectType
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`Unknown` |Неизвестный тип. Значение `0x0`.
+|`Card` |Карточка. Значение `0x1`.
+|`File` |Файл. Значение `0x2`.
+|`Row` |Строка карточки. Значение `0x3`.
+|`All` |Все типы. Значение `0x3`.
+|===

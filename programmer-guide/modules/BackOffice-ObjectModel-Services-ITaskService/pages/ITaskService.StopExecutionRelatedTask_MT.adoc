@@ -1,0 +1,50 @@
+= ITaskService.StopExecutionRelatedTask -- метод (Task, Boolean)
+
+Прекращает исполнение подчиненных заданий.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+TaskStopExecutionInfo StopExecutionRelatedTask(Task task, bool force)
+----
+
+Параметры::
+task:::
+Тип: `xref:BackOffice-ObjectModel:Task_CL.adoc[Task]`
++
+Задание
+
+force:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Если true, то при наличии заблокированных заданий операция прекращения исполнения будет продолжена, иначе -- прервана
+
+Возвращаемое значение::
+Тип: `xref:BackOffice-ObjectModel-Services-Entities:Entities/TaskStopExecutionInfo_CL.adoc[TaskStopExecutionInfo]`
++
+Содержимое ошибки, возникшей при прекращении заданий
+
+== Заметки
+
+Заблокированные задания не завершаются.
+
+== Примеры
+
+[source,csharp]
+----
+<.>
+
+ITaskService taskService = objectContext.GetService<ITaskService>(); <.>
+
+Task task = objectContext.GetObject<Task>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+
+TaskStopExecutionInfo taskStopExecutionInfo = taskService.StopExecutionRelatedTask(task, true); <.>
+----
+<.> Инициализация контекста объектов.
+<.> Получение сервиса.
+<.> Получение задания.
+<.> Прекращение исполнения подчиненных заданий.

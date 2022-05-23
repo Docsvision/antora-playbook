@@ -1,0 +1,73 @@
+= CardData -- класс
+
+Содержит данные карточки. Этот класс является *абстрактным*.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class CardData : IUpdatable, ILockable, IXmlExportable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:CardData.ArchiveState_PR.adoc[ArchiveState]` |Возвращает признак нахождения файла в архиве.
+|`xref:CardData.Barcode_PR.adoc[Barcode]` |Выполняет получение или установку штрих-кода карточки.
+|`xref:CardData.ChangeDate_PR.adoc[ChangeDate]` |Возвращает дату последнего изменения.
+|`xref:CardData.CreateDate_PR.adoc[CreateDate]` |Возвращает дату создания карточки.
+|`xref:CardData.Description_PR.adoc[Description]` |Возвращает или задает описание экземпляра карточки (дайджест).
+|`xref:CardData.FetchMode_PR.adoc[FetchMode]` |Возвращает или задает режим загрузки данных карточки.
+|`xref:CardData.IconId_PR.adoc[IconId]` |Возвращает или задает идентификатор иконки карточки.
+|`xref:CardData.Id_PR.adoc[Id]` |Возвращает идентификатор экземпляра карточки.
+|`xref:CardData.InUpdate_PR.adoc[InUpdate]` |Признак режима отложенных изменения.
+|`xref:CardData.IsTemplate_PR.adoc[IsTemplate]` |Возвращает или задает признак того, что карточка является шаблоном.
+|`xref:CardData.Labels_PR.adoc[Labels]` |Возвращает коллекцию меток карточки.
+|`xref:CardData.LockOwner_PR.adoc[LockOwner]` |Возвращает название учетной записи субъекта заблокировавшего карточку.
+|`xref:CardData.LockStatus_PR.adoc[LockStatus]` |Возвращает состояние блокировки карточки.
+|`xref:CardData.RecordStatus_PR.adoc[RecordStatus]` |Возвращает или задает состояние карточки.
+|`xref:CardData.Sections_PR.adoc[Sections]` |Возвращает коллекцию секций карточки.
+|`xref:CardData.Session_PR.adoc[Session]` |Возвращает текущую открытую сессию пользователя.
+|`xref:CardData.Topic_PR.adoc[Topic]` |Возвращает или задает тему карточки.
+|`xref:CardData.TopicId_PR.adoc[TopicId]` |Идентификатор темы карточки.
+|`xref:CardData.TopicIndex_PR.adoc[TopicIndex]` |Индекс карточки внутри темы обработки
+|`xref:CardData.TopicOrder_PR.adoc[TopicOrder]` |Возвращает порядковый номер в теме обработки.
+|`xref:CardData.TopicParentId_PR.adoc[TopicParentId]` |Идентификатор родительской карточки в теме карточек.
+|`xref:CardData.Type_PR.adoc[Type]` |Описанию метаданных типа карточки.
+|`xref:CardData.WasRead_PR.adoc[WasRead]` |Задает или возвращает признак прочитанности ярлыка.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:CardData.AccessCheck_MT.adoc[AccessCheck(System.Int32)]` |Проверяет наличие заданного доступа у текущего пользователя.
+|`xref:CardData.AddToTopicChain_MT.adoc[AddToTopicChain(Guid)]` |Добавляет текущую карточку к теме обработки другой карточки.
+|`xref:CardData.Archive_MT.adoc[Archive(ArchiveOptions)]` |Помещает текущую карточку в архив.
+|`xref:CardData.BeginUpdate_MT.adoc[BeginUpdate]` |Включить режим отложенных изменений.
+|`xref:CardData.CancelUpdate_MT.adoc[CancelUpdate]` |Отменить несохраненные изменения и выключить режим отложенных изменений.
+|`xref:CardData.Copy_MT.adoc[Copy]` |Серверное копирование данных карточек.
+|`xref:CardData.Dearchive_MT.adoc[Dearchive(ArchiveOptions)]` |Восстанавливает карточку из архива.
+|`xref:CardData.EndUpdate_MT.adoc[EndUpdate]` |Записать изменения и выключить режим отложенных изменений.
+|`xref:CardData.ForceUnlock_MT.adoc[ForceUnlock]` |Принудительно снимает блокировку карточки.
+|`xref:CardData.GetAccessControl_MT.adoc[GetAccessControl]` |Получает описатель прав на объект.
+|`xref:CardData.GetAccessControl_1_MT.adoc[GetAccessControl(AccessControlSections)]` |Возвращает описатель прав на объект для заданного раздела дескриптора безопасности.
+|`xref:CardData.MarkCardForDeletion_MT.adoc[MarkCardForDeletion(Guid)]` |Требует удаление указанной карточки при отмене изменений, если задействован режим отложенных изменений.
+|`xref:CardData.PlaceLock_MT.adoc[PlaceLock]` |Установка временной блокировки.
+|`xref:CardData.PlaceLock_1_MT.adoc[PlaceLock(Boolean)]` |Установка постоянной или временной блокировки.
+|`xref:CardData.PurgeCache_MT.adoc[PurgeCache]` |Удаление карточек из кэша менеджера объектов.
+|`xref:CardData.Refresh_MT.adoc[Refresh]` |Принудительное обновление данных карточки с сервера.
+|`xref:CardData.Refresh_1_MT.adoc[Refresh(Boolean)]` |Принудительное обновление данных карточки с сервера, независимо от наличия или отсутствия изменений.
+|`xref:CardData.RemoveLock_MT.adoc[RemoveLock]` |Снимает блокировку сделанную в своей сессии.
+|`xref:CardData.SaveXml_MT.adoc[SaveXml(Stream)]` |Экспорт данных карточки в XML-формате.
+|`xref:CardData.SaveXml_1_MT.adoc[SaveXml(Stream, ExportFlags)]` |Экспорт данных карточки в XML-формате, с установленными флагами формата экспорта.
+|`xref:CardData.SaveXml_2_MT.adoc[SaveXml(Stream, ExportFlags, ExportCardInspector)]` |Экспорт данных карточки в XML-формате, с заданной логикой экспорта.
+|`xref:CardData.SetAccessControl_MT.adoc[SetAccessControl(CardDataSecurity)]` |Задает описатель прав на карточку.
+|`xref:CardData.UpdateNow_MT.adoc[UpdateNow]` |Отправляет накопленные изменения на сервер.
+|===

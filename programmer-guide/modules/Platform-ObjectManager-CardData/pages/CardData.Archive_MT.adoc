@@ -1,0 +1,42 @@
+= CardData.Archive -- метод (ArchiveOptions)
+
+Помещает текущую карточку в архив.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void Archive(ArchiveOptions archiveOptions)
+----
+
+Параметры::
+archiveOptions:::
+Тип: `xref:Platform-ObjectManager:ArchiveOptions_EN.adoc[ArchiveOptions]`
++
+Режим архивации карточки
+
+== Примеры
+
+В следующем примере демонстрируется возможность перемещения карточки в архив.
+
+[source,csharp]
+----
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
+
+if (card.ChangeDate.Year < DateTime.Now.Year -1) <.>
+{
+    card.Archive(ArchiveOptions.IncludeLinkedCards); <.>
+}
+----
+<.> Получение с сервера данных карточки с известным идентификатором.
++
+Где `session` -- объект типа `xref:Platform-ObjectManager:UserSession_CL.adoc[UserSession]`, предоставляющий текущую открытую сессию.
++
+<.> Проверка даты последнего изменения.
+<.> Перемещние карточки в архив, с архивацией связанных карточек.
+
+
+

@@ -1,0 +1,37 @@
+= ViewSettingsCollection -- класс
+
+Содержит методы для работы с коллекцией ViewSettings.
+
+* *Пространство имён:* `xref:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class ViewSettingsCollection : IEnumerable<ViewSettings>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество элементов массива.
+|`Item` |Возвращает элемент коллекции с заданным идентификатором.
+|`Item` |Возвращает элемент коллекции с заданным индексом.
+|`Session` |Возвращает текущую сессию пользователя.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddNew(Guid)` |Создает объект типа ViewSettings с заданным идентификатором.
+|`Clear` |Удаляет все элементы коллекции.
+|`Contains(Guid)` |Определяет вхождение в коллекцию элемента с заданным идентификатором.
+|`GetEnumerator` |Возвращает перечислитель.
+|`Remove(Guid)` |Удаляет элемент с указанным идентификатором.
+|`Remove(Int32)` |Удаляет элемент с заданным индексом.
+|===
