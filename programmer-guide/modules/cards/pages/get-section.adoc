@@ -85,7 +85,7 @@ foreach (var folderRow in row.ChildRows) <.>
 Способ получения данных из секции карточки на этом уровне API зависит от способа представления этой секции в объектной модели карточки:
 
 . Для предоставления данных отдельной секции объектная модель карточки содержит свойство, возвращающее сущность секции, а точнее коллекцию сущностей её строк. Таким образом данные секции могут быть получены из свойства класса объектной модели карточки. Такой способ реализации является основным для объектной модели карточек библиотеки _{bo}_.
-. Объектная модель карточки не содержит отдельных свойств, возвращающих сущность секции (как в первом случае), но класс объектной карточки унаследован от класса x``ref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]``. В этом случае коллекция строк секции может быть получена с помощью метода `xref:BackOffice-ObjectModel:BaseCard.GetSection_MT.adoc[GetSection]`.
+. Объектная модель карточки не содержит отдельных свойств, возвращающих сущность секции (как в первом случае), но класс объектной карточки унаследован от класса x``ref:api/DocsVision/BackOffice/ObjectModel/BaseCard_CL.adoc[BaseCard]``. В этом случае коллекция строк секции может быть получена с помощью метода `xref:BackOffice-ObjectModel-BaseCard:BaseCard.GetSection_MT.adoc[GetSection]`.
 +
 [NOTE]
 ====
@@ -94,7 +94,7 @@ foreach (var folderRow in row.ChildRows) <.>
 
 Чтобы сравнить приведенные способы получения данных секции карточки, рассмотрим сценарий, в котором нужно получить названия всех основных файлов карточки типа _Документ_.
 
-В классе объектной модели карточки типа _Документ_ -- `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]` -- объявлено свойство `xref:BackOffice-ObjectModel:Document.Files_PR.adoc[Document.Files]`, возвращающее коллекцию файлов документа (типа `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`), из коллекции файлов может быть получено название.
+В классе объектной модели карточки типа _Документ_ -- `xref:BackOffice-ObjectModel-Document:Document_CL.adoc[Document]` -- объявлено свойство `xref:BackOffice-ObjectModel-Document:Document.Files_PR.adoc[Document.Files]`, возвращающее коллекцию файлов документа (типа `xref:BackOffice-ObjectModel-Document:DocumentFile_CL.adoc[DocumentFile]`), из коллекции файлов может быть получено название.
 
 .Код, предоставляющий названия файлов, может быть следующим:
 [source,csharp]
@@ -142,7 +142,7 @@ foreach (var file in files)
 <.> Выводим название файла.
 
 .То есть, чтобы получить данные из секций, если объектная модель секции не реализована, требуется:
-. Получить строки этой секции с помощью метода `xref:BackOffice-ObjectModel:BaseCard.GetSection_MT.adoc[BaseCard.GetSection]`:
+. Получить строки этой секции с помощью метода `xref:BackOffice-ObjectModel-BaseCard:BaseCard.GetSection_MT.adoc[BaseCard.GetSection]`:
 +
 [source,csharp]
 ----
@@ -161,7 +161,7 @@ Guid fileId = file.GetGuid("FileId"); <.>
 +
 [NOTE]
 ====
-Чтобы получить родительский объект, например документ типа `xref:BackOffice-ObjectModel:Document_CL.adoc[Document]`, если есть объектная модель файла этого документа типа `xref:BackOffice-ObjectModel:DocumentFile_CL.adoc[DocumentFile]`, используйте метод `xref:Platform-ObjectModel:ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]`:
+Чтобы получить родительский объект, например документ типа `xref:BackOffice-ObjectModel-Document:Document_CL.adoc[Document]`, если есть объектная модель файла этого документа типа `xref:BackOffice-ObjectModel-Document:DocumentFile_CL.adoc[DocumentFile]`, используйте метод `xref:Platform-ObjectModel:ObjectHelper.GetParent_MT.adoc[ObjectHelper.GetParent]`:
 
 [source,csharp]
 ----
