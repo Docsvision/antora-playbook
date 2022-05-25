@@ -1,0 +1,20 @@
+[[ariaid-title1]]
+== Включение протоколирования операций Windows-клиента
+
+Журнал сообщений Windows-клиента предназначен для сбора данных о работе приложения.
+
+Чтобы включить журналирование, в файле [.ph .filepath]`Navigator.exe.config` (конфигурационный файл приложения Windows-клиент) следует в узле [.keyword]*Connection* создать атрибут [.keyword]*LogFile="путь_к_файлу_журнала"* следующим образом:
+
+[source,pre,codeblock]
+----
+<configuration>    
+ ... 
+ <navigator>
+  <connection LogFile="Путь_к_файлу_журнала" /> 
+ </navigator> 
+</configuration>
+----
+
+Просмотр списка сообщений выполняется непосредственно в файле по указанному пути.
+
+*На уровень выше:* xref:../topics/Administrator_functions.adoc[Функции администратора]

@@ -1,0 +1,25 @@
+[[ariaid-title1]]
+== Настройка UAC при возникновении ошибок Windows-клиенте или РМА
+
+При работе в Windows-клиенте/РМА можно встретиться с ошибками вида:
+
+* Unknown error;
+* ошибка при сохранении файла;
+* файл из карточки не открывается в приложении.
++
+[NOTE]
+====
+[.note__title]#Прим.:# Приложенные к карточке файлы MS Office могут не открываться, если одновременно:
+
+** включен UAC;
+** используется Microsoft Office 2007;
+** и используется браузер IE, при этом Docsvision находится в списке надежных узлов и включен защитный режим.
+====
+
+Эти ошибки могут быть вызваны, в том числе, неправильной настройкой User Account Control (UAC). В этом случае для корректной работы Windows-клиента и РМА нужно выполнить следующую настройку:
+
+. Запустить консоль [.ph .filepath]`cmd.exe` под проблемной учетной записью с правами администратора (последовательно выполнив [.ph .menucascade]#[.ph .uicontrol]*All programs* > [.ph .uicontrol]*Accessories* > [.ph .uicontrol]*cmd.exe* > [.ph .uicontrol]*контекстное меню* > [.ph .uicontrol]*Run as administrator*#).
+. Выполнить команду [.keyword .cmdname]#ICACLS "%userprofile%\AppData\Local\Temp\Low" /setintegritylevel (OI)(CI)low#.
+. Перезагрузить компьютер.
+
+*На уровень выше:* xref:../topics/Administrator_functions.adoc[Функции администратора]
