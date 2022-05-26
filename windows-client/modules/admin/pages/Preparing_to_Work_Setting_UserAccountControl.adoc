@@ -17,6 +17,6 @@
 
 Эти ошибки могут быть вызваны, в том числе, неправильной настройкой User Account Control (UAC). В этом случае для корректной работы {wincl}а и РМА нужно выполнить следующую настройку:
 
-. Запустить консоль [.ph .filepath]`cmd.exe` под проблемной учетной записью с правами администратора (последовательно выполнив [.ph .menucascade]#[.ph .uicontrol]*All programs* > [.ph .uicontrol]*Accessories* > [.ph .uicontrol]*cmd.exe* > [.ph .uicontrol]*контекстное меню* > [.ph .uicontrol]*Run as administrator*#).
-. Выполнить команду [.keyword .cmdname]#ICACLS "%userprofile%\AppData\Local\Temp\Low" /setintegritylevel (OI)(CI)low#.
+. Запустить консоль `cmd.exe` под проблемной учетной записью с правами администратора (последовательно выполнив menu:*All programs* > *Accessories* > *cmd.exe* > *контекстное меню* > *Run as administrator*).
+. Выполнить команду [.keyword .cmdname]ICACLS "%userprofile%\AppData\Local\Temp\Low" /setintegritylevel (OI)(CI)low.
 . Перезагрузить компьютер.
