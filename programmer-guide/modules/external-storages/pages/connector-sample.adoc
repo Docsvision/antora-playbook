@@ -7,7 +7,7 @@
 Данный пример не является готовым решением для использования Google Drive в качестве внешнего хранилища, а только демонстрирует способ создания провайдера к нему.
 ====
 
-Облачное хранилище Google Drive предоставляет возможность и API для работы с файлами из собственного приложения. Инструкция по работе с Google Drive API приведена на https://developers.google.com/drivexref:api/v3/about-sdk[этой] странице.
+Облачное хранилище Google Drive предоставляет возможность и API для работы с файлами из собственного приложения. Инструкция по работе с Google Drive API приведена на https://developers.google.com/drive/api/v3/about-sdk[этой] странице.
 
 Для работы с Google Drive в данном примере используется предоставляемая реализация обертки для работы с Google Drive API в .NET (https://www.nuget.org/packages/Google.Apis.Drive.v3/[NuGet пакет]).
 
@@ -34,7 +34,7 @@
 == Последовательность работы с примером
 
 . Распакуйте xref:ROOT:attachment$gDriveStorage.zip[архив] примера на локальный диск.
-. Получите файл с конфигурацией клиента (`credentials.json`) по инструкции в шаге 1 на https://developers.google.com/drivexref:api/v3/quickstart/dotnet[странице]. Потребуется авторизоваться в Google.
+. Получите файл с конфигурацией клиента (`credentials.json`) по инструкции в шаге 1 на https://developers.google.com/drive/api/v3/quickstart/dotnet[странице]. Потребуется авторизоваться в Google.
 . Загрузите файл `credentials.json` в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\` распакованного архива примера.
 . Включите в Visual Studio настройку https://docs.microsoft.com/ru-ru/nuget/consume-packages/package-restore-troubleshooting[Allow Nuget to download missing package] для автоматической загрузки необходимых пакетов библиотеки Google Drive API.
 . Повторно подключите зависимости `DocsVision.Platform.StorageServer` и `DocsVision.Platform.WinForms` в проекте `GoogleDriveStorageProvider`. К проекту должны быть подключены компоненты, используемые на сервере {dv}.
@@ -57,7 +57,7 @@ using (var stream =
             }
 ----
 +
-Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в шаге 3 https://developers.google.com/drivexref:api/v3/quickstart/dotnet[данного примера]). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
+Данный код сформирует файл с токеном, который необходим для работы с API Google Drive (см. описание в шаге 3 https://developers.google.com/drive/api/v3/quickstart/dotnet[данного примера]). Для получения токена нужно разрешить приложению (название приложения указывается при выполнении п. 2) доступ к аккаунту Google.
 +
 Токен будет сохранен в папку `GoogleDriveStorageProvider\AskToken\bin\Debug\token.json\`.
 +

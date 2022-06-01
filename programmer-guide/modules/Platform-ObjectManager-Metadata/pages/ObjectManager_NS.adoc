@@ -7,10 +7,17 @@
 [cols=",",options="header"]
 |===
 |Пространство имён |Описание
-|`xref:Platform-ObjectManager-Metadata:Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata]` |Предоставляет методы для работы с метаданными карточек.
-|`xref:Platform-ObjectManager-SearchModel:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]` |Пространство имён `DocsVision.Platform.ObjectManager.SearchModel` содержит классы предоставляющие методы доступа к серверному поиску.
-|`xref:Platform-ObjectManager-SystemCards:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]` |Содержит классы с реализацией объектов бизнес-логики для *системных карточек*.
-|`xref:Platform-ObjectManager-ViewModel:ViewModel_NS.adoc[DocsVision.Platform.ObjectManager.ViewModel]` |Содержит классы описывающие объектную модель *представлений* и методы для работы с представлениями.
+|`xref:Platform-ObjectManager-Metadata:Metadata_NS.adoc[DocsVision.Platform.ObjectManager.Metadata]`
+|Предоставляет методы для работы с метаданными карточек.
+
+|`xref:Platform-ObjectManager-SearchModel:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]`
+|Пространство имён `DocsVision.Platform.ObjectManager.SearchModel` содержит классы предоставляющие методы доступа к серверному поиску.
+
+|`xref:Platform-ObjectManager-SystemCards:SystemCards_NS.adoc[DocsVision.Platform.ObjectManager.SystemCards]`
+|Содержит классы с реализацией объектов бизнес-логики для *системных карточек*.
+
+|`xref:Platform-ObjectManager-ViewModel:ViewModel_NS.adoc[DocsVision.Platform.ObjectManager.ViewModel]`
+|Содержит классы описывающие объектную модель *представлений* и методы для работы с представлениями.
 |===
 
 == Классы
@@ -18,56 +25,165 @@
 [cols=",",options="header"]
 |===
 |Класс |Описание
-|`xref:Platform-ObjectManager-AccessManager:AccessManager_CL.adoc[AccessManager]` |Представляет объектную модель *менеджера объектов безопасности*. Содержит методы для работы с зашифрованными и подписанными объектами. Осуществляет управление правами (дескрипторами безопасности) на объекты системы.
-|`AutoLocker` |Содержит вспомогательные методы для работы с блокировкой объектов.
-|`AutoUpdater` |Содержит вспомогательные методы для работы с режимом отложенной блокировки.
-|`xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]` |Содержит данные карточки.
-|`xref:Platform-ObjectManager-CardData:CardDataCollection_CL.adoc[CardDataCollection]` |Предоставляет методы для работы с коллекцией `CardData`.
-|`xref:Platform-ObjectManager-CardData:CardLabelCollection_CL.adoc[CardLabelCollection]` |Представляет коллекцию меток карточек.
-|`xref:Platform-ObjectManager-CardManager:CardManager_CL.adoc[CardManager]` |Представляет объектную модель *менеджера карточек*. Содержит методы чтение, изменение, создание и удаление карточек.
-|`xref:Platform-ObjectManager-CardManager:Connection_CL.adoc[Connection]` |Соединение с сервером {dv}.
-|`DigestViewColumns` |Представляет колонку в представление.
-|`xref:Platform-ObjectManager-ExportCard:ExportCardErrorEventArgs_CL.adoc[ExportCardErrorEventArgs]` |Предоставляет данные для события `xref:Platform-ObjectManager-ExportCard:ExportCardInspector.Error_EV.adoc[ExportCardInspector.Error]`
-|`xref:Platform-ObjectManager-ExportCard:ExportCardInspector_CL.adoc[ExportCardInspector]` |Инспектор, позволяющий гибко управлять логикой экспорта.
-|`xref:Platform-ObjectManager-Extension:ExtensionManager_CL.adoc[ExtensionManager]` |Представляет объектную модель *менеджера расширений*. Содержит методы для работы с серверными расширениями.
-|`xref:Platform-ObjectManager-Extension:ExtensionMethod_CL.adoc[ExtensionMethod]` |Описывает структуру серверного расширения.
-|`xref:Platform-ObjectManager-Extension:ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter]` |Представляет параметр метода серверного расширения.
-|`xref:Platform-ObjectManager-Extension:ExtensionMethodParameterCollection_CL.adoc[ExtensionMethodParameterCollection]` |Содержит методы для работы с коллекцией `ExtensionMethodParameter`.
-|`xref:Platform-ObjectManager-ILockable:FileData_CL.adoc[FileData]` |Содержит методы для организации работы с простыми файлами.
-|`FileDataCollection` |Содержит методы для работы с коллекцией FileData.
-|`xref:Platform-ObjectManager-ILockable:FileManager_CL.adoc[FileManager]` |Представляет объектную модель *менеджера файлов*. Содержит методы для работы с файлами.
-|`xref:Platform-ObjectManager-IUpdatable:ImportCardInspector_CL.adoc[ImportCardInspector]` |Инспектор, позволяющий гибко управлять логикой импорта.
-|`InfoRow` |Представляет элемент коллекции поддерживающей страничное чтение.
-|`xref:Platform-ObjectManager-IUpdatable:InfoRowCollection_CL.adoc[InfoRowCollection]` |Содержит методы для работы с коллекцией InfoRow.
-|`xref:Platform-ObjectManager-Lock:LicenseManager_CL.adoc[LicenseManager]` |Класс `LicenseManager` содержит функциональность по работе с дополнительными опциями лицензии {dv}, в которых присутствует ограничение по количеству соединений.
-|`xref:Platform-ObjectManager-Lock:LockedObject_CL.adoc[LockedObject]` |Представляет объект поддерживающий блокировку.
-|`xref:Platform-ObjectManager-Lock:LockedObjectCollection_CL.adoc[LockedObjectCollection]` |Содержит методы для работы с коллекцией `LockedObject`.
-|`xref:Platform-ObjectManager-Lock:LockManager_CL.adoc[LockManager]` |Представляет объектную модель *менеджера блокировок*. Содержит методы управления блокировками на объекты.
-|`xref:Platform-ObjectManager-LogManager:LogManager_CL.adoc[LogManager]` |Представляет объектную модель *менеджера журнала*. Содержит методы работы с журналом системы.
-|`xref:Platform-ObjectManager-LogManager:LogSearchQuery_CL.adoc[LogSearchQuery]` |Представляет фильтр данных для журнала.
-|`xref:Platform-ObjectManager-Report:QueryParameter_CL.adoc[QueryParameter]` |Предоставляет хранилище для параметров запроса.
-|`xref:Platform-ObjectManager-Report:QueryParameterCollection_CL.adoc[QueryParameterCollection]` |Содержит методы для работы с коллекцией `QueryParameter`.
-|`xref:Platform-ObjectManager-Report:Report_CL.adoc[Report]` |Представляет данные для хранимой процедуры.
-|`xref:Platform-ObjectManager-Report:ReportCollection_CL.adoc[ReportCollection]` |Содержит методы для работы с коллекцией `Report`.
-|`xref:Platform-ObjectManager-Report:ReportManager_CL.adoc[ReportManager]` |Представляет объектную модель _менеджера хранимых процедур_.
-|`xref:Platform-ObjectManager-Report:ReportParameter_CL.adoc[ReportParameter]` |Осуществляет хранение параметров хранимых процедур.
-|`xref:Platform-ObjectManager-Report:ReportParameterCollection_CL.adoc[ReportParameterCollection]` |Содержит методы для работы с коллекцией `ReportParameter`.
-|`xref:Platform-ObjectManager-Row:RowData_CL.adoc[RowData]` |Представляет строку данных карточки.
-|`xref:Platform-ObjectManager-Row:RowDataCollection_CL.adoc[RowDataCollection]` |Содержит методы для работы с коллекцией `RowData`.
-|`xref:Platform-ObjectManager-Row:RowField_CL.adoc[RowField]` |Описывает поле секции карточки.
-|`xref:Platform-ObjectManager-Row:RowFieldCollection_CL.adoc[RowFieldCollection]` |Содержит методы для работы с коллекцией `RowField`.
-|`xref:Platform-ObjectManager-SectionData:SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo]` |Список объектов.
-|`xref:Platform-ObjectManager-SectionData:SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest]` |Объект запроса.
-|`xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]` |Представляет секцию карточки.
-|`xref:Platform-ObjectManager-SectionData:SectionDataCollection_CL.adoc[SectionDataCollection]` |Содержит методы для работы с коллекцией `SectionData`.
-|`xref:Platform-ObjectManager-SectionData:SectionDataReader_CL.adoc[SectionDataReader]` |Серверный курсор для чтения данных секции.
-|`xref:Platform-ObjectManager-SessionManager:SessionManager_CL.adoc[SessionManager]` |Представляет объектную модель *менеджера сессий*. Содержит методы управления сессиями пользователей.
-|`xref:Platform-ObjectManager-SubsectionData:SubSectionData_CL.adoc[SubSectionData]` |Представляет подсекцию карточки.
-|`xref:Platform-ObjectManager-Report:QueryParameter_CL.adoc[QueryParameter]` |Осуществляет хранение параметра запроса.
-|`xref:Platform-ObjectManager-Report:QueryParameterCollection_CL.adoc[QueryParameterCollection]` |Содержит методы для работы с коллекцией `QueryParameter`.
-|`xref:Platform-ObjectManager-UserSession:ViewReadRequest_CL.adoc[ViewReadRequest]` |Запрос представления.
-|`xref:Platform-ObjectManager-UserSession:ViewSource_CL.adoc[ViewSource]` |Источник данных представления.
-|`xref:Platform-ObjectManager-UserSession:UserSession_CL.adoc[UserSession]` |Содержит данные сессии пользователя, а также предоставляет доступ к менеджерам управления объектами системы
+
+|`xref:Platform-ObjectManager-AccessManager:AccessManager_CL.adoc[AccessManager]`
+|Представляет объектную модель *менеджера объектов безопасности*. Содержит методы для работы с зашифрованными и подписанными объектами. Осуществляет управление правами (дескрипторами безопасности) на объекты системы.
+
+|`AutoLocker`
+|Содержит вспомогательные методы для работы с блокировкой объектов.
+
+|`AutoUpdater`
+|Содержит вспомогательные методы для работы с режимом отложенной блокировки.
+
+|`xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`
+|Содержит данные карточки.
+
+|`xref:Platform-ObjectManager-CardData:CardDataCollection_CL.adoc[CardDataCollection]`
+|Предоставляет методы для работы с коллекцией `CardData`.
+
+|`xref:Platform-ObjectManager-CardData:CardLabelCollection_CL.adoc[CardLabelCollection]`
+|Представляет коллекцию меток карточек.
+
+|`xref:Platform-ObjectManager-CardManager:CardManager_CL.adoc[CardManager]`
+|Представляет объектную модель *менеджера карточек*. Содержит методы чтение, изменение, создание и удаление карточек.
+
+|`xref:Platform-ObjectManager-CardManager:CitationFileItem_CL.adoc[CitationFileItem]`
+|Список цитат, сгруппированных по файлам.
+
+|`xref:Platform-ObjectManager-CardManager:Connection_CL.adoc[Connection]`
+|Соединение с сервером {dv}.
+
+|`DigestViewColumns`
+|Представляет колонку в представление.
+
+|`xref:Platform-ObjectManager-ExportCard:ExportCardErrorEventArgs_CL.adoc[ExportCardErrorEventArgs]`
+|Предоставляет данные для события `xref:Platform-ObjectManager-ExportCard:ExportCardInspector.Error_EV.adoc[ExportCardInspector.Error]`
+
+|`xref:Platform-ObjectManager-ExportCard:ExportCardInspector_CL.adoc[ExportCardInspector]`
+|Инспектор, позволяющий гибко управлять логикой экспорта.
+
+|`xref:Platform-ObjectManager-Extension:ExtensionManager_CL.adoc[ExtensionManager]`
+|Представляет объектную модель *менеджера расширений*. Содержит методы для работы с серверными расширениями.
+
+|`xref:Platform-ObjectManager-Extension:ExtensionMethod_CL.adoc[ExtensionMethod]`
+|Описывает структуру серверного расширения.
+
+|`xref:Platform-ObjectManager-Extension:ExtensionMethodParameter_CL.adoc[ExtensionMethodParameter]`
+|Представляет параметр метода серверного расширения.
+
+|`xref:Platform-ObjectManager-Extension:ExtensionMethodParameterCollection_CL.adoc[ExtensionMethodParameterCollection]`
+|Содержит методы для работы с коллекцией `ExtensionMethodParameter`.
+
+|`xref:Platform-ObjectManager-CardManager:FilesCitationInfo_CL.adoc[FilesCitationInfo]`
+|Список цитат, сгруппированных по карточкам.
+
+|`xref:Platform-ObjectManager-ILockable:FileData_CL.adoc[FileData]`
+|Содержит методы для организации работы с простыми файлами.
+
+|`FileDataCollection`
+|Содержит методы для работы с коллекцией FileData.
+
+|`xref:Platform-ObjectManager-ILockable:FileManager_CL.adoc[FileManager]`
+|Представляет объектную модель *менеджера файлов*. Содержит методы для работы с файлами.
+
+|`xref:Platform-ObjectManager-IUpdatable:ImportCardInspector_CL.adoc[ImportCardInspector]`
+|Инспектор, позволяющий гибко управлять логикой импорта.
+
+|`InfoRow`
+|Представляет элемент коллекции поддерживающей страничное чтение.
+
+|`xref:Platform-ObjectManager-IUpdatable:InfoRowCollection_CL.adoc[InfoRowCollection]`
+|Содержит методы для работы с коллекцией InfoRow.
+
+|`xref:Platform-ObjectManager-Lock:LicenseManager_CL.adoc[LicenseManager]`
+|Класс `LicenseManager` содержит функциональность по работе с дополнительными опциями лицензии {dv}, в которых присутствует ограничение по количеству соединений.
+
+|`xref:Platform-ObjectManager-Lock:LockedObject_CL.adoc[LockedObject]`
+|Представляет объект поддерживающий блокировку.
+
+|`xref:Platform-ObjectManager-Lock:LockedObjectCollection_CL.adoc[LockedObjectCollection]`
+|Содержит методы для работы с коллекцией `LockedObject`.
+
+|`xref:Platform-ObjectManager-Lock:LockManager_CL.adoc[LockManager]`
+|Представляет объектную модель *менеджера блокировок*. Содержит методы управления блокировками на объекты.
+
+|`xref:Platform-ObjectManager-LogManager:LogManager_CL.adoc[LogManager]`
+|Представляет объектную модель *менеджера журнала*. Содержит методы работы с журналом системы.
+
+|`xref:Platform-ObjectManager-LogManager:LogSearchQuery_CL.adoc[LogSearchQuery]`
+|Представляет фильтр данных для журнала.
+
+|`xref:Platform-ObjectManager-Report:QueryParameter_CL.adoc[QueryParameter]`
+|Предоставляет хранилище для параметров запроса.
+
+|`xref:Platform-ObjectManager-Report:QueryParameterCollection_CL.adoc[QueryParameterCollection]`
+|Содержит методы для работы с коллекцией `QueryParameter`.
+
+|`xref:Platform-ObjectManager-Report:Report_CL.adoc[Report]`
+|Представляет данные для хранимой процедуры.
+
+|`xref:Platform-ObjectManager-Report:ReportCollection_CL.adoc[ReportCollection]`
+|Содержит методы для работы с коллекцией `Report`.
+
+|`xref:Platform-ObjectManager-Report:ReportManager_CL.adoc[ReportManager]`
+|Представляет объектную модель _менеджера хранимых процедур_.
+
+|`xref:Platform-ObjectManager-Report:ReportParameter_CL.adoc[ReportParameter]`
+|Осуществляет хранение параметров хранимых процедур.
+
+|`xref:Platform-ObjectManager-Report:ReportParameterCollection_CL.adoc[ReportParameterCollection]`
+|Содержит методы для работы с коллекцией `ReportParameter`.
+
+|`xref:Platform-ObjectManager-Row:RowData_CL.adoc[RowData]`
+|Представляет строку данных карточки.
+
+|`xref:Platform-ObjectManager-Row:RowDataCollection_CL.adoc[RowDataCollection]`
+|Содержит методы для работы с коллекцией `RowData`.
+
+|`xref:Platform-ObjectManager-Row:RowField_CL.adoc[RowField]`
+|Описывает поле секции карточки.
+
+|`xref:Platform-ObjectManager-Row:RowFieldCollection_CL.adoc[RowFieldCollection]`
+|Содержит методы для работы с коллекцией `RowField`.
+
+|`xref:Platform-ObjectManager-SectionData:SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo]`
+|Список объектов.
+
+|`xref:Platform-ObjectManager-SectionData:SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest]`
+|Объект запроса.
+
+|`xref:Platform-ObjectManager-CardManager:SearchFilesCitationsRequest_CL.adoc[SearchFilesCitationsRequest]`
+|Запрос цитируемых данных из файла.
+
+|`xref:Platform-ObjectManager-SectionData:SectionData_CL.adoc[SectionData]`
+|Представляет секцию карточки.
+
+|`xref:Platform-ObjectManager-SectionData:SectionDataCollection_CL.adoc[SectionDataCollection]`
+|Содержит методы для работы с коллекцией `SectionData`.
+
+|`xref:Platform-ObjectManager-SectionData:SectionDataReader_CL.adoc[SectionDataReader]`
+|Серверный курсор для чтения данных секции.
+
+|`xref:Platform-ObjectManager-SessionManager:SessionManager_CL.adoc[SessionManager]`
+|Представляет объектную модель *менеджера сессий*. Содержит методы управления сессиями пользователей.
+
+|`xref:Platform-ObjectManager-SubsectionData:SubSectionData_CL.adoc[SubSectionData]`
+|Представляет подсекцию карточки.
+
+|`xref:Platform-ObjectManager-Report:QueryParameter_CL.adoc[QueryParameter]`
+|Осуществляет хранение параметра запроса.
+
+|`xref:Platform-ObjectManager-Report:QueryParameterCollection_CL.adoc[QueryParameterCollection]`
+|Содержит методы для работы с коллекцией `QueryParameter`.
+
+|`xref:Platform-ObjectManager-UserSession:ViewReadRequest_CL.adoc[ViewReadRequest]`
+|Запрос представления.
+
+|`xref:Platform-ObjectManager-UserSession:ViewSource_CL.adoc[ViewSource]`
+|Источник данных представления.
+
+|`xref:Platform-ObjectManager-UserSession:UserSession_CL.adoc[UserSession]`
+|Содержит данные сессии пользователя, а также предоставляет доступ к менеджерам управления объектами системы
 |===
 
 == Интерфейсы
@@ -75,11 +191,20 @@
 [cols=",",options="header"]
 |===
 |Интерфейс |Описание
-|`xref:Platform-ObjectManager-ILockable:ILockable_IN.adoc[ILockable]` |Разрешает для объекта управление режимом отложенной блокировки.
-|`xref:Platform-ObjectManager-IUpdatable:IProcessInfo_IN.adoc[IProcessInfo]` |Определяет возможности по управлению состоянием конкретного бизнес-процесса и получению базовой информации о самом бизнес-процессе.
-|`xref:Platform-ObjectManager-IUpdatable:ISecurable_IN.adoc[ISecurable]` |Разрешает объекту реализовывать модель безопасности.
-|`xref:Platform-ObjectManager-IUpdatable:IUpdatable_IN.adoc[IUpdatable]` |Разрешает для объекта режим отложенной записи.
-|`xref:Platform-ObjectManager-IXmlExportable:IXmlExportable_IN.adoc[IXmlExportable]` |Разрешает сохранять данные объекта в XML-формате.
+|`xref:Platform-ObjectManager-ILockable:ILockable_IN.adoc[ILockable]`
+|Разрешает для объекта управление режимом отложенной блокировки.
+
+|`xref:Platform-ObjectManager-IUpdatable:IProcessInfo_IN.adoc[IProcessInfo]`
+|Определяет возможности по управлению состоянием конкретного бизнес-процесса и получению базовой информации о самом бизнес-процессе.
+
+|`xref:Platform-ObjectManager-IUpdatable:ISecurable_IN.adoc[ISecurable]`
+|Разрешает объекту реализовывать модель безопасности.
+
+|`xref:Platform-ObjectManager-IUpdatable:IUpdatable_IN.adoc[IUpdatable]`
+|Разрешает для объекта режим отложенной записи.
+
+|`xref:Platform-ObjectManager-IXmlExportable:IXmlExportable_IN.adoc[IXmlExportable]`
+|Разрешает сохранять данные объекта в XML-формате.
 |===
 
 == Перечисления
@@ -87,20 +212,51 @@
 [cols=",",options="header"]
 |===
 |Перечисление |Описание
-|`xref:Platform-ObjectManager-AccessManager:ArchiveOptions_EN.adoc[ArchiveOptions]` |Режим архивации объекта.
-|`xref:Platform-ObjectManager-AccessManager:ArchiveState_EN.adoc[ArchiveState]` |Определяет признак архивирования объекта.
-|`xref:Platform-ObjectManager-CardManager:ClearLogStrategy_EN.adoc[ClearLogStrategy]` |Определяет стратегию автоматической очистки журнала.
-|`xref:Platform-ObjectManager-CardManager:CryptObjectType_EN.adoc[CryptObjectType]` |Тип крипто-объекта.
-|`xref:Platform-ObjectManager-ExportCard:EventType_EN.adoc[EventType]` |Определяет типы записей в журнале событий.
-|`xref:Platform-ObjectManager-ExportCard:ExportFlags_EN.adoc[ExportFlags]` |Задает формат экспорта данных.
-|`xref:Platform-ObjectManager-Lock:LinkType_EN.adoc[LinkType]` |Маска типа ссылки.
-|`xref:Platform-ObjectManager-Lock:LockedObjectType_EN.adoc[LockedObjectType]` |Типы блокированных объектов.
-|`xref:Platform-ObjectManager-Lock:LockStatus_EN.adoc[LockStatus]` |Состояние блокировки объекта.
-|`xref:Platform-ObjectManager-LogManager:LogStrategy_EN.adoc[LogStrategy]` |Определяет стратегию ведения журнала.
-|`xref:Platform-ObjectManager-Metadata:ObjectState_EN.adoc[ObjectState]` |Определяет состояние объекта.
-|`xref:Platform-ObjectManager-Metadata:ObjectStatus_EN.adoc[ObjectStatus]` |Состояние объекта в режиме отложенной записи.
-|`xref:Platform-ObjectManager-Metadata:OfflineState_EN.adoc[OfflineState]` |Состояние хранения файла.
-|`xref:Platform-ObjectManager-Metadata:ParameterValueType_EN.adoc[ParameterValueType]` |Предоставляет тип для параметра метода серверного расширения.
-|`xref:Platform-ObjectManager-Report:RecordStatus_EN.adoc[RecordStatus]` |Состояние задействованности объекта.
-|`xref:Platform-ObjectManager-SessionManager:SessionLoginFlags_EN.adoc[SessionLoginFlags]` |Описывает флаги открытия новой сессии.
+|`xref:Platform-ObjectManager-AccessManager:ArchiveOptions_EN.adoc[ArchiveOptions]`
+|Режим архивации объекта.
+
+|`xref:Platform-ObjectManager-AccessManager:ArchiveState_EN.adoc[ArchiveState]`
+|Определяет признак архивирования объекта.
+
+|`xref:Platform-ObjectManager-CardManager:ClearLogStrategy_EN.adoc[ClearLogStrategy]`
+|Определяет стратегию автоматической очистки журнала.
+
+|`xref:Platform-ObjectManager-CardManager:CryptObjectType_EN.adoc[CryptObjectType]`
+|Тип крипто-объекта.
+
+|`xref:Platform-ObjectManager-ExportCard:EventType_EN.adoc[EventType]`
+|Определяет типы записей в журнале событий.
+
+|`xref:Platform-ObjectManager-ExportCard:ExportFlags_EN.adoc[ExportFlags]`
+|Задает формат экспорта данных.
+
+|`xref:Platform-ObjectManager-Lock:LinkType_EN.adoc[LinkType]`
+|Маска типа ссылки.
+
+|`xref:Platform-ObjectManager-Lock:LockedObjectType_EN.adoc[LockedObjectType]`
+|Типы блокированных объектов.
+
+|`xref:Platform-ObjectManager-Lock:LockStatus_EN.adoc[LockStatus]`
+|Состояние блокировки объекта.
+
+|`xref:Platform-ObjectManager-LogManager:LogStrategy_EN.adoc[LogStrategy]`
+|Определяет стратегию ведения журнала.
+
+|`xref:Platform-ObjectManager-Metadata:ObjectState_EN.adoc[ObjectState]`
+|Определяет состояние объекта.
+
+|`xref:Platform-ObjectManager-Metadata:ObjectStatus_EN.adoc[ObjectStatus]`
+|Состояние объекта в режиме отложенной записи.
+
+|`xref:Platform-ObjectManager-Metadata:OfflineState_EN.adoc[OfflineState]`
+|Состояние хранения файла.
+
+|`xref:Platform-ObjectManager-Metadata:ParameterValueType_EN.adoc[ParameterValueType]`
+|Предоставляет тип для параметра метода серверного расширения.
+
+|`xref:Platform-ObjectManager-Report:RecordStatus_EN.adoc[RecordStatus]`
+|Состояние задействованности объекта.
+
+|`xref:Platform-ObjectManager-SessionManager:SessionLoginFlags_EN.adoc[SessionLoginFlags]`
+|Описывает флаги открытия новой сессии.
 |===

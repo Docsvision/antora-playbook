@@ -1,0 +1,28 @@
+= FullTextSearch.Mode -- свойство
+
+Получает или задаёт режим поиска.
+
+* *Пространство имён:* `xref:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract FullTextSearchMode Mode { get; set; }
+----
+
+Значение свойства::
+Тип: `FullTextSearchMode`
++
+Режим полнотекстового поиска.
+
+== Заметки
+
+.`FullTextSearchMode` может принимать следующие значения:
+* Карточки и файлы: `CardsAndFiles = 0`
+* Карточки: `Cards = 1`
+* Файлы: `Files = 2`
+* Поиск по имени файла: `FilesByName = 3`
+
+Поиск цитат возможен только если режим поиска включает файлы, т.е. свойство `Mode` выбрано как `CardsAndFiles` или `Files`.

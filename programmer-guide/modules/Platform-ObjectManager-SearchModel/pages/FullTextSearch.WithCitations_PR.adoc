@@ -1,0 +1,49 @@
+= FullTextSearch.WithCitations -- свойство
+
+Определяет, будут ли использованы цитаты из файлов в результатах поиска.
+
+* *Пространство имён:* `xref:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public virtual bool WithCitations
+----
+
+Значение свойства::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- результаты поиска дополняются цитатами из файлов, подходящим под поисковый запрос. `false` -- не дополняются.
+
+== Заметки
+
+Поиск цитат возможен только если режим поиска включает файлы, т.е. свойство `xref:FullTextSearch.Mode_PR.adoc[Mode]` выбрано как `CardsAndFiles` или `Files`.
+
+== Пример
+
+[source,csharp]
+----
+SearchQuery searchQuery = session.CreateSearchQuery("<Search Version=\"4300\" Limit=\"100\" CombineResults=\"OR\"><Scope/><FulltextSearch Mode=\"CardsAndFiles\"><QueryString>проверить</QueryString></FulltextSearch></Search>");
+searchQuery.FullTextSearch.WithCitations = true;
+----
+
+Чтобы получить цитаты, необходимо применить представление на результаты соответствующего поиска любым доступным в платформе способом.
+
+Например, наполнить папку результатами поиска и применить представление на неё. На представление ограничений нет. +
+Цитаты будут храниться в системном поле представления `_FilesCitations`. Если цитат нет или поиск их не поддерживал, значение будет `null`, либо пустым.
+
+.Цитаты в столбце хранятся в виде `.xml` следующего формата:
+[source,xml]
+----
+<Citations HasMore="False"/>
+<File ID="GUID" HasMore = "True">
+	<Citation> ... </Citation>
+...
+</File>
+...
+</Citations>
+----
+
+Символ `<` экранируется как `\&lt;`, а символ `>` как `\&gt;`.

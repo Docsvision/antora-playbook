@@ -1,0 +1,58 @@
+= SearchFilesCitationsRequest -- класс
+
+Запрос цитируемых данных из файла.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class SearchFilesCitationsRequest
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`ParentObjects`
+|Список идентификаторов карточек или файлов (в зависимости от типа заданного в `objectsType`), для которых будет осуществлён поиск цитат.
+
+Если список пустой, будут возвращены все доступные с учётом выставленных ограничений результаты.
+
+|`FilesPerCardLimit`
+|Ограничение количества файлов для которых будут отображены цитаты в рамках одной карточки. По умолчанию: `2`.
+
+|`CitationsCount`
+|Ограничение количества цитат в рамках одного файла. По умолчанию: `1`.
+
+|`FragmentSize`
+|Количество символов, которое будет содержать выводимая цитата. По умолчанию: `200`.
+
+|`PreTags`
+a|Список HTML-тегов, которые предшествуют цитате. По умолчанию: `<mark>`.
+
+NOTE: `PreTags` является массивом, значение необходимо сохранять в https://www.newtonsoft.com/json/help/html/SerializeCollection.htm[виде стерилизованной в json-строки].
+
+|`PostTags`
+a|Список HTML-тегов, которые идут после цитаты. По умолчанию: `</mark>`.
+
+NOTE: `PostTags` является массивом, значение необходимо сохранять в https://www.newtonsoft.com/json/help/html/SerializeCollection.htm[виде стерилизованной в json-строки].
+|===
+
+== Примечание
+
+Указанные выше параметры являются необязательными. Если они не заданы, будут использованы значения из БД. Если в БД значения также не заданы, будут использованы значения по умолчанию.
+
+В рамках БД значения параметров задаются через процедуру *dvsys_setting_set 'SettingName', 'SettingValue'*, подробнее можно узнать в соответствующем разделе.
+
+.Имена настроек:
+* `FilesPerCardLimit` -- `"FullTextIndexing_CitationsFilesPerCardLimit"`
+* `CitationsCount` -- `"FullTextIndexing_CitationsCount"`
+* `FragmentSize` -- `"FullTextIndexing_CitationsFragmentSize"`
+* `PreTags` -- `"FullTextIndexing_CitationsPreTags"`
+* `PostTags` -- `"FullTextIndexing_CitationsPostTags"`
+
