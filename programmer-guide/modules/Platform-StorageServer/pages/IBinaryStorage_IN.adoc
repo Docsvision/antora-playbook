@@ -22,8 +22,8 @@ public interface IBinaryStorage
 
 *Должен всегда возвращать `false`*.
 
-|`StorageId` |Задает или возвращает уникальный идентификатор хранилища.
-|`xref:IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions]` |Задает или возвращает типы разделов, поддерживаемых хранилищем.
+|`StorageId` |Задаёт или возвращает уникальный идентификатор хранилища.
+|`xref:IBinaryStorage.SupportedPartions_PR.adoc[SupportedPartions]` |Задаёт или возвращает типы разделов, поддерживаемых хранилищем.
 |===
 
 == Методы
@@ -32,8 +32,8 @@ public interface IBinaryStorage
 |===
 |Имя |Описание
 |`xref:IBinaryStorage.CanSafelyMove_MT.adoc[CanSafelyMove(String, StoragePartitionType)]` |Проверяет возможность перемещения файла в другой раздел данного хранилища без изменения данных.
-|`xref:IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)]` |Создает файл во внешнем хранилище.
-|`xref:IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)]` |Создает файл во внешнем хранилище и загружает в него данные другого файла.
+|`xref:IBinaryStorage.Create_MT.adoc[Create(IFileInfo, StoragePartitionType)]` |Создаёт файл во внешнем хранилище.
+|`xref:IBinaryStorage.CreateFrom_MT.adoc[CreateFrom(IFileInfo, String, StoragePartitionType)]` |Создаёт файл во внешнем хранилище и загружает в него данные другого файла.
 |`Delete(String)` |Удаляет файл с указанным идентификатором из внешнего хранилища.
 |`Read(String, Stream)` |Считывает данные файла из внешнего хранилища в поток.
 |`xref:IBinaryStorage.Read_MT.adoc[Read(String, Stream, Int64, Int32)]` |Считывает данные файла из внешнего хранилища в поток начиная с заданной позиции.

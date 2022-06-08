@@ -68,7 +68,7 @@ CardDataCollection cards = session.CardManager.ImportCards(file, inspector);
 
 Печать данных карточки может быть выполнена как стандартными средствами системы, так и любым другим способом на усмотрение разработчика. При использовании собственных методов печати целесообразно получить данные карточки в формате XML, а затем преобразовать их в формат, удобный для печати (либо экспортировать во внешнюю систему, осуществляющую печать).
 
-Использование стандартных средств предполагает применение к данным карточки XSLT- или InfoPath-преобразования, описание которого задается на этапе проектирования схемы данных карточки (см. xref:solutions:cards/scheme/transformations.adoc[Раздел "Transformations"]).
+Использование стандартных средств предполагает применение к данным карточки XSLT- или InfoPath-преобразования, описание которого задаётся на этапе проектирования схемы данных карточки (см. xref:solutions:cards/scheme/transformations.adoc[Раздел "Transformations"]).
 
 .Получить преобразования для конкретного типа карточки можно из мета-данных:
 [source,csharp]
@@ -105,4 +105,4 @@ XSLTransform.Transform((IXPathNavigable)cardXML, html);
 <.> Формируем трансформацию.
 <.> Применяем преобразование.
 
-Преобразованный документ может быть передан для печати во внешнее приложение (например, Microsoft Internet Explorer или Microsoft Word), либо в элемент управления https://msdn.microsoft.com/ru-ru/library/system.windows.forms.webbrowser.aspx[WebBrowser], если создается .NET-приложение.
+Преобразованный документ может быть передан для печати во внешнее приложение (например, Microsoft Internet Explorer или Microsoft Word), либо в элемент управления https://msdn.microsoft.com/ru-ru/library/system.windows.forms.webbrowser.aspx[WebBrowser], если создаётся .NET-приложение.

@@ -31,14 +31,14 @@ public interface IStaffService
 |`xref:IStaffService.AddEmployeeToGroup_MT.adoc[AddEmployeeToGroup(StaffGroup, StaffEmployee)]` |Добавляет указанного сотрудника в группу сотрудников.
 |`xref:IStaffService.AddGroupFolder_MT.adoc[AddGroupFolder(StaffGroup, Guid, Boolean)]` |Добавляет папку группы к указанной группе сотрудников, с возможностью отображения в {wincl}е.
 |`xref:IStaffService.AddNewAddress_MT.adoc[AddNewAddress(StaffUnit, StaffAddresseAddressType)]` |Добавляет новый адрес для указанного подразделения.
-|`xref:IStaffService.AddNewADMapping_MT.adoc[AddNewADMapping]` |Создает экземпляр класса StaffADsMapping для определения соответствие между атрибутом Active Directory и полем _справочника сотрудников_.
+|`xref:IStaffService.AddNewADMapping_MT.adoc[AddNewADMapping]` |Создаёт экземпляр класса StaffADsMapping для определения соответствие между атрибутом Active Directory и полем _справочника сотрудников_.
 |`xref:IStaffService.AddNewEmployee_MT.adoc[AddNewEmployee(StaffUnit)]` |Добавляет нового сотрудника в указанное подразделение.
 |`xref:IStaffService.AddNewEmployeeFormatItem_MT.adoc[AddNewEmployeeFormatItem(StaffUnit)]` |Добавляет новый элемент к формату отображения данных сотрудника подразделения.
 |`xref:IStaffService.AddNewEmployeePicture_MT.adoc[AddNewEmployeePicture(StaffEmployee)]` |Добавляет сотруднику новую фотографию.
 |`xref:IStaffService.AddNewGroup_MT.adoc[AddNewGroup(StaffGroup)]` |Данный метод позволяет добавить новою подгруппу в существующую группу сотрудников.
 |`AddNewNameCase(StaffEmployee, StaffNameCaseNameCase)` |Добавляет новый падеж имени у заданного сотрудника.
 |`xref:IStaffService.AddNewPosition_MT.adoc[AddNewPosition]` |Добавляет новую должность в _справочник сотрудников_.
-|`xref:IStaffService.AddNewRole_MT.adoc[AddNewRole]` |Создает новую роль в _справочнике сотрудников_.
+|`xref:IStaffService.AddNewRole_MT.adoc[AddNewRole]` |Создаёт новую роль в _справочнике сотрудников_.
 |`xref:IStaffService.AddNewUnit_MT.adoc[AddNewUnit(StaffUnit)]` |Добавляет вложенное подразделение в указанную организацию.
 |`AddNewViewField(ObjectBase, GridViewFieldCollectionType)` |Добавляет отображаемое поле для подразделения, либо сотрудника.
 |`xref:IStaffService.AddRoleEmployee_MT.adoc[AddRoleEmployee(StaffRole, StaffEmployee)]` |Добавляет сотрудника в роль.
@@ -55,10 +55,10 @@ public interface IStaffService
 |`CheckSignatureAndEncryptionSetting` |Проверяет настройки криптографии.
 |`CheckUnitADPath(String)` |Проверяет узел Active Directory.
 |`xref:IStaffService.CopyGroup_MT.adoc[CopyGroup(StaffGroup, StaffGroup)]` |Копирует группу _справочника сотрудников_ в указанную группу.
-|`xref:IStaffService.CreateDelegateFolder_MT.adoc[CreateDelegateFolder(FoldersFolder, FoldersFolder)]` |Создает папку-делегат.
-|`xref:IStaffService.CreateEmployeeFolder_MT.adoc[CreateEmployeeFolder(StaffEmployee)]` |Создает персональную папку сотрудника.
-|`xref:IStaffService.CreateFolder_MT.adoc[CreateFolder(StaffUnit, String)]` |Создает папку с указанным именем в корневой папке подразделения.
-|`xref:IStaffService.CreateUnitFolder_MT.adoc[CreateUnitFolder(StaffUnit)]` |Создает корневую папку для указанного подразделения.
+|`xref:IStaffService.CreateDelegateFolder_MT.adoc[CreateDelegateFolder(FoldersFolder, FoldersFolder)]` |Создаёт папку-делегат.
+|`xref:IStaffService.CreateEmployeeFolder_MT.adoc[CreateEmployeeFolder(StaffEmployee)]` |Создаёт персональную папку сотрудника.
+|`xref:IStaffService.CreateFolder_MT.adoc[CreateFolder(StaffUnit, String)]` |Создаёт папку с указанным именем в корневой папке подразделения.
+|`xref:IStaffService.CreateUnitFolder_MT.adoc[CreateUnitFolder(StaffUnit)]` |Создаёт корневую папку для указанного подразделения.
 |`DeleteADMapping(StaffADsMapping)` |Удаляет заданное соответствие полей Active Directory.
 |`xref:IStaffService.DeleteDeputy_MT.adoc[DeleteDeputy(StaffEmployee, StaffDeputy)]` |Удаляет заместителя сотрудника.
 |`xref:IStaffService.DeleteEmployee_MT.adoc[DeleteEmployee(StaffEmployee)]` |Удаляет сотрудника из _справочника сотрудников_.
@@ -130,9 +130,9 @@ public interface IStaffService
 |`MoveGroup(StaffGroup, StaffGroup)` |Перемещает группу в указанную группу.
 |`MoveUnit(StaffUnit, StaffUnit)` |Перемещает подразделение в указанное подразделение.
 |`MoveViewField(IGridViewField, GridViewFieldCollectionType, Boolean)` |Перемещает отображаемое поле в порядке отображаемых полей.
-|`OpenOrCreateDepartmentCard(StaffUnit, Boolean)` |Создает или возвращает карточку подразделения.
-|`OpenOrCreateEmployeeCard(StaffEmployee, Boolean)` |Создает или возвращает карточку сотрудника.
-|`xref:IStaffService.OpenOrCreateEmployeeCard_MT.adoc[OpenOrCreateEmployeeCard(StaffEmployee, Boolean, Boolean)]` |Создает или возвращает карточку сотрудника.
+|`OpenOrCreateDepartmentCard(StaffUnit, Boolean)` |Создаёт или возвращает карточку подразделения.
+|`OpenOrCreateEmployeeCard(StaffEmployee, Boolean)` |Создаёт или возвращает карточку сотрудника.
+|`xref:IStaffService.OpenOrCreateEmployeeCard_MT.adoc[OpenOrCreateEmployeeCard(StaffEmployee, Boolean, Boolean)]` |Создаёт или возвращает карточку сотрудника.
 |`OtherADMappingWithSameFieldNameExists(StaffADsMapping, String)` |Проверяет наличие коллекции соответствий полей и атрибутов AD с указанным именем атрибута.
 |`xref:IStaffService.OtherEmployeeWithSameAccountExists_MT.adoc[OtherEmployeeWithSameAccountExists(StaffEmployee, String)]` |Определяет наличие сотрудников с указанной учетной записью.
 |`xref:IStaffService.OtherPositionWithSameNameExists_MT.adoc[OtherPositionWithSameNameExists(StaffPosition, String)]` |Определяет наличие должности с указанным названием.

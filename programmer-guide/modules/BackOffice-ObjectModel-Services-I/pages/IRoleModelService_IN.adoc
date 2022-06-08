@@ -25,29 +25,29 @@ public interface IRoleModelService
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`AddCondition(RoleModelRoleConditionGroup)` |Создает условие в переданной группе условий для роли.
-|`AddConditionGroup(RoleModelRoleConditionGroup)` |Создает группу условий в переданной корневой группе.
-|`AddCustomOperation(String, String)` |Создает новую пользовательскую операцию.
-|`AddCustomParameter(String, RoleModelCustomParameterType)` |Создает новый пользовательский параметр.
+|`AddCondition(RoleModelRoleConditionGroup)` |Создаёт условие в переданной группе условий для роли.
+|`AddConditionGroup(RoleModelRoleConditionGroup)` |Создаёт группу условий в переданной корневой группе.
+|`AddCustomOperation(String, String)` |Создаёт новую пользовательскую операцию.
+|`AddCustomParameter(String, RoleModelCustomParameterType)` |Создаёт новый пользовательский параметр.
 |`AddLink(RoleModelCardKindRoleSetting, StatesOperation, RoleModelRole, StatesState, RoleModelOperationStatus)` |Добавляет в настройки соответствие между операцией и состоянием.
-|`AddRootConditionGroup(RoleModelRole)` |Создает корневую группу условий.
-|`CreateCardField(String)` |Создает модель поля карточки в рамках ролевой модели.
-|`CreateDayWorkStatus(RoleModelConditionValueDayWorkStatus, Guid)` |Создает значение статуса дня для использования в условие.
+|`AddRootConditionGroup(RoleModelRole)` |Создаёт корневую группу условий.
+|`CreateCardField(String)` |Создаёт модель поля карточки в рамках ролевой модели.
+|`CreateDayWorkStatus(RoleModelConditionValueDayWorkStatus, Guid)` |Создаёт значение статуса дня для использования в условие.
 |`CreateKindRoleSettings(KindsCardKind)` |Добавляет указанный вид карточки в ролевую модель.
-|`CreateRole(RoleModelCardKindRoleSetting)` |Создает роль для вида карточки.
-|`CreateTimeWorkStatus(RoleModelConditionValueTimeWorkStatus, Guid)` |Создает значение со статусом времени для использования в условие.
+|`CreateRole(RoleModelCardKindRoleSetting)` |Создаёт роль для вида карточки.
+|`CreateTimeWorkStatus(RoleModelConditionValueTimeWorkStatus, Guid)` |Создаёт значение со статусом времени для использования в условие.
 |`DeleteRole(RoleModelRole)` |Удаление роли.
 |`FindKindCommonRoleSettings` |Предоставляет доступ к контейнеру общих ролей.
 |`GetConditionsByCardType(Guid)` |Возвращает коллекцию условий ролевой модели для указанного типа карточки.
-|`GetConditionValueDescription(RoleModelRoleCondition)` |Создает строку описания из заданного условия ролевой модели.
-|`GetDateValueDescription(Object)` |Создает строку описания для объекта содержащего дату (обычная `System.DateTime`, либо дата ролевой модели -- `DocsVision.BackOffice.ObjectModel.RoleModelConditionDayWorkStatus)`.
-|`GetDayOfWeekDescription(DayOfWeek)` |Создает стандартную строку описания для дня недели.
-|`GetDayStatusDescription(RoleModelConditionValueDayWorkStatus)` |Создает стандартную строку описания для типа рабочего дня (выходной, рабочий).
+|`GetConditionValueDescription(RoleModelRoleCondition)` |Создаёт строку описания из заданного условия ролевой модели.
+|`GetDateValueDescription(Object)` |Создаёт строку описания для объекта содержащего дату (обычная `System.DateTime`, либо дата ролевой модели -- `DocsVision.BackOffice.ObjectModel.RoleModelConditionDayWorkStatus)`.
+|`GetDayOfWeekDescription(DayOfWeek)` |Создаёт стандартную строку описания для дня недели.
+|`GetDayStatusDescription(RoleModelConditionValueDayWorkStatus)` |Создаёт стандартную строку описания для типа рабочего дня (выходной, рабочий).
 |`GetKindRoleSettings(KindsCardKind)` |Возвращает настройки ролевой модели для вида карточки.
 |`GetLinks(BaseCard)` |Возвращает соответствие между операциями и состояниями для переданной карточки.
 |`GetLinks(Guid)` |Возвращает соответствие между операциями и состояниями для карточки с указанным идентификатором.
 |`GetOperationStatus(KindsCardKind, IEnumerable<RoleModelRole>, StatesState, StatesOperation)` |Определяет статус (запрещена, разрешена, не разрешена) заданной операции для списка ролей. Приоритет имеет статус "Запрещена".
-|`GetOrCreatePreferredCardKindSetting(KindsCardKind)` |Создает или возвращает, в зависимости от существования, настройки ролевой модели для вида карточки.
+|`GetOrCreatePreferredCardKindSetting(KindsCardKind)` |Создаёт или возвращает, в зависимости от существования, настройки ролевой модели для вида карточки.
 |`GetPreferredCardKindSetting(KindsCardKind)` |Возвращает настройки ролевой модели для вида карточки.
 |`GetRoles(KindsCardKind)` |Возвращает коллекцию ролей, применимых для заданного вида карточки.
 |`GetTimeStatusDescription(RoleModelConditionValueTimeWorkStatus)` |Возвращает локализованное название для заданного статуса рабочего времени.
@@ -60,7 +60,7 @@ public interface IRoleModelService
 
 == Примеры
 
-В примере создается роль, которая может быть использована для ограничения времени доступа к документам в выходные дни.
+В примере создаётся роль, которая может быть использована для ограничения времени доступа к документам в выходные дни.
 
 [source,csharp]
 ----

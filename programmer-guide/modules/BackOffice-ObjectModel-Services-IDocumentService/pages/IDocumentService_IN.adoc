@@ -57,10 +57,10 @@ public interface IDocumentService
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.ComputeAttachmentSignature_MT.adoc[ComputeAttachmentSignature(Document, BaseCardSignature, X509Certificate2)]` |Подписывает дополнительные файлы документа.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.ComputeFieldsSignature_MT.adoc[ComputeFieldsSignature(Document, BaseCardSignature, X509Certificate2, ICollection<CardFieldSetting>)]` |Подписывает атрибуты документа.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.ComputeMainFileSignature_MT.adoc[ComputeMainFileSignature(Document, BaseCardSignature, X509Certificate2)]` |Подписывает основные файлы документа.
-|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_MT.adoc[CreateDocument]` |Создает экземпляр нового документа.
-|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_2_MT.adoc[CreateDocument(String)]` |Создает экземпляр нового документа с основным файлом.
-|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_1_MT.adoc[CreateDocument(String, KindsCardKind)]` |Создает экземпляр нового документа с указанным видом, с основным файлом.
-|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_3_MT.adoc[CreateDocument(String, KindsCardKind, DocumentVersioningType)]` |Создает документ с заданным видом карточки и добавляет основной файл с указанным типов версионинга.
+|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_MT.adoc[CreateDocument]` |Создаёт экземпляр нового документа.
+|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_2_MT.adoc[CreateDocument(String)]` |Создаёт экземпляр нового документа с основным файлом.
+|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_1_MT.adoc[CreateDocument(String, KindsCardKind)]` |Создаёт экземпляр нового документа с указанным видом, с основным файлом.
+|`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateDocument_3_MT.adoc[CreateDocument(String, KindsCardKind, DocumentVersioningType)]` |Создаёт документ с заданным видом карточки и добавляет основной файл с указанным типов версионинга.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateListCards_MT.adoc[CreateListCards(Document)]` |Инициализирует списки, используемые документом.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CreateSignatureList_MT.adoc[CreateSignatureList]` |Инициализирует новый экземпляр списка подписей документа.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.DecodeSignedDocument_MT.adoc[DecodeSignedDocument(String, Document, `SignedCms`)]` |Расшифровывает сообщение CMS/PKCS 7, которое содержится в файле, расположенном по указанному пути.
@@ -108,7 +108,7 @@ public interface IDocumentService
 |`IsFileNotEmpty(Document, DocumentFile)` |Возвращает true, если файл документа не нулевой.
 |`LockMainFile(Document, DocumentFile)` |Выгружает файл карточки и ставит постоянную блокировку.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.LockMainFile_MT.adoc[LockMainFile(Document, DocumentFile, String)]` |Выгружает файл из документа на диск с установкой постоянной блокировки.
-|`MakeCurrentMainFileVersion(Document, DocumentFile, Guid)` |Задает последнюю версию файла.
+|`MakeCurrentMainFileVersion(Document, DocumentFile, Guid)` |Задаёт последнюю версию файла.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.MakeLockedMainFileForceChanged_MT.adoc[MakeLockedMainFileForceChanged(Document, DocumentFile)]` |Устанавливает признака наличия изменений для выгруженного основного файла документа.
 |`PrepareToVerifySignature(Document, IDictionary<BaseCardSignaturePart, Stream>, IEnumerable<BaseCardSignaturePart>, Boolean, Boolean, ICollection<CardFieldSetting>)` |Заполняет коллекцию `IDictionary<BaseCardSignaturePart, Stream>`, где ключ соответствует части ЭЦП, а значение коллекции -- сопоставленные частям ЭЦП значения полей, основных или дополнительных файлов.
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.PurgeFileCache_MT.adoc[PurgeFileCache(Document)]` |Очищает кэш файлов документ.
