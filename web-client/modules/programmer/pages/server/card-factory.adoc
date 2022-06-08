@@ -71,7 +71,7 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
 
 В приведенном коде класс `DocumentCardLifeCycle` наследуется от базовой реализации интерфейса `ICardLifeCycle` -- класса `BaseCardLifeCycle` с абстрактными методами. Помимо класса `BaseCardLifeCycle` с базовой реализацией, API включает реализующий интерфейс `ICardLifeCycle` класс `DefaultCardLifeCycle` с реализацией по умолчанию методов `Create` и `CreateFromTemplate`.
 
-Метод `Create` в приведенном выше коде создает новую карточку _Документ_ с предустановленным названием (`document.MainInfo.Name`). Метод `CreateFromTemplate` создает карточку _Документа_ по шаблону. Метод `Save` изменяет значение поля `document.MainInfo.Name` при сохранении карточки.
+Метод `Create` в приведенном выше коде создаёт новую карточку _Документ_ с предустановленным названием (`document.MainInfo.Name`). Метод `CreateFromTemplate` создаёт карточку _Документа_ по шаблону. Метод `Save` изменяет значение поля `document.MainInfo.Name` при сохранении карточки.
 
 Тип с интерфейсом `ICardLifeCycle` нужно добавить в IoC-контейнер в ядре расширения:
 
