@@ -317,7 +317,7 @@ export class RefCasesImpl extends InputBasedControlImpl<Models.RefCasesCaseDispl
 * `firstPageSize` -- максимальное кол-во результатов при первом запросе, по умолчанию -- 8.
 * `nextPageSize` -- максимальное кол-во результатов при следующих запросах, по умолчанию -- 15.
 
-При выполнении первого запроса в функцию `findItems` передаётся аргумент `ITypeaheadSearchQuery` со значениями `skipCount = 0` и `maxCount = firstPageSize`. При следующем запросе -- при нажатии пользователем кнопки *Показать еще*, в `findItems` передаются значения `skipCount = firstPageSize` и `maxCount = nextPageSize`. Таким образом клиент может запросить у сервера недостающие данные, если после первого запроса сервер вернул флаг `hasMore = true`.
+При выполнении первого запроса в функцию `findItems` передаётся аргумент `ITypeaheadSearchQuery` со значениями `skipCount = 0` и `maxCount = firstPageSize`. При следующем запросе -- при нажатии пользователем кнопки *Показать ещё*, в `findItems` передаются значения `skipCount = firstPageSize` и `maxCount = nextPageSize`. Таким образом клиент может запросить у сервера недостающие данные, если после первого запроса сервер вернул флаг `hasMore = true`.
 
 == Компонент диалогового окна выбора дела из справочника
 
