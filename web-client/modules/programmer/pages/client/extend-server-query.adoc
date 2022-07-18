@@ -1,0 +1,60 @@
+= Расширение серверных вызовов
+
+Пример серверного расширения для взаимодействия с панелью настроек таблицы. Пример содержит клиентский скрипт позволяющий добавить элемент в список контекстного меню с возможностью открыть карточку в модальном окне или скрыть существующий элемент.
+
+CAUTION: Данный пример демонстрирует только изменение панели настроек в таблице с помощью скрипта.
+
+include::grid-context.adoc[tags=start]
+
+[source,typescript]
+----
+extensionManager.registerExtension({ <.>
+    name: "ExtendServerQueryData",
+    version: "5.5.17",
+    globalEventHandlers: [ExtendServerQueryData]
+});
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
+Следующим шагом необходимо клонировать и заменить собственными сервис контроллера:
+
+[source,typescript]
+----
+export function extendServerQueryData(sender: Layout) {
+    const services = cloneServices(sender.params.services);
+    replaceService(services, { tasksTreeController: new TasksTreeControllerCustom(sender.params.services)});
+    sender.params.services = services;
+}
+----
+
+Затем на основе метода базовой реализации сформировать новые данные:
+
+[source,typescript]
+----
+export class TasksTreeControllerCustom extends GenControllers.TasksTreeController {
+    constructor(services) {
+        super(services);
+    }
+    async getTasksTable(request: GenModels.TasksTableLoadOptions, options?: RequestOptions) {
+        var data = await super.getTasksTable(request, options);
+        if (data && data.rows) {
+            data.rows.forEach(row => {
+                if (row.indicators.includes(GenModels.TasksIndicators.Overdue)) {
+                    row.indicators.push(GenModels.TasksIndicators.HighPriority)
+                }
+            })
+        };
+        return data;
+    }
+}
+----
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Импортируйте решение из файла `ExtendServerQueryData.xml`.
+. Сделайте решение `ExtendServerQueryData` активным для карточки типа _Документ_ вида _ДокументУД/Исходящий_.
+. В примере используется стандартная разметка просмотра исходящего документа. На событие `*Перед открытием карточки*` ЭУ `_Layout_` разметки назначается обработчик `extendServerQueryData`.
+. Перезапустите IIS.
+. Откройте исходящий документ, создайте подчиненное задание с просроченной датой исполнения.
+. Убедитесь, что в таблице исполнения просроченные задания автоматически помечаются индикатором высокого приоритета.
