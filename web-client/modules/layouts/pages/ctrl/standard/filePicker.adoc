@@ -30,13 +30,23 @@ include::partial$properties.adoc[tags=general]
 
 include::partial$properties.adoc[tags=filler]
 
-=== Заполнитель при перетаскивании
+==== Заполнитель при перетаскивании
 
 Текст, отображаемый в элементе управления, когда файл перетаскивается с файловой системы в область ЭУ.
 
 `*Локализуемый*`
 
+==== Отображать метку без значения
+
+Регулирует отображение метки, когда сертификат не загружен.
+
 include::partial$properties.adoc[tags=hint]
+
+==== Сообщение при пустом значении
+
+Сообщение, выводимое при попытке сохранить пустое значение в поле выбора сертификата.
+
+`*Локализуемый*`
 
 ==== Текст метки
 
@@ -77,6 +87,10 @@ include::partial$properties.adoc[tags=visibility]
 
 include::partial$properties.adoc[tags=addCss]
 
+==== Доступные расширения
+
+Список разрешённых для загрузки расширений.
+
 include::partial$properties.adoc[tags=mandatory]
 
 include::partial$properties.adoc[tags=editOperationForVisibility]
@@ -84,6 +98,10 @@ include::partial$properties.adoc[tags=editOperationForVisibility]
 include::partial$properties.adoc[tags=disabled]
 
 include::partial$properties.adoc[tags=byTab]
+
+==== Показывать контекстное меню
+
+Регулирует отображение контекстного меню.
 
 ==== Режим редактирования
 
@@ -101,7 +119,7 @@ include::partial$properties.adoc[tags=stdCss]
 
 === События
 
-==== Перед добавление комментария к версии файла
+==== Перед добавлением комментария к версии файла
 
 Вызывается перед добавлением комментария к версии файла.
 
@@ -175,17 +193,21 @@ include::partial$properties.adoc[tags=onWebDAVSave]
 
 Вызывается после скачивания файла.
 
-==== После удалении комментария к версии файла
+==== После смены данных
 
-Вызывается после удалении комментария к версии файла.
+Вызывается после любого изменения (выбора, загрузки, удаления) данных элемента управления.
+
+==== После удаления комментария к версии файла
+
+Вызывается после удаления комментария к версии файла.
 
 include::partial$properties.adoc[tags=mouseOver]
 
 include::partial$properties.adoc[tags=mouseAway]
 
-==== После смены данных
+==== При сохранении файла в WebDAV
 
-Вызывается после любого изменения (выбора, загрузки, удаления) данных элемента управления.
+Вызывается при сохранении файла в WebDAV.
 
 include::partial$properties.adoc[tags=onClick]
 
