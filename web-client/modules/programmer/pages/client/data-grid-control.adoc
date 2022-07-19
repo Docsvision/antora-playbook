@@ -1,0 +1,33 @@
+= Создание плагина для наполнения контрола табличных данных
+
+ЭУ xref:layouts:ctrl/table/dataGridControl.adoc[Контрол табличных данных] отображает данные в виде таблицы, наполняемой при помощи плагина. На данной странице описан способ создания плагина.
+
+`*Название плагина*` указывается в конструкторе разметок, в свойствах элемента управления. При открытии разметки карточки в ВК, из настроек ЭУ будет считано `*Название плагина*`. Затем отправляется запрос на сервер, который обнаруживает нужную реализацию интерфейса и возвращает модель для отображения таблицы.
+
+.Чтобы реализовать собственный плагин:
+. Выполните наследование от интерфейса `IReadOnlyTablePlugin (DocsVision.Layout.WebClient.Services)`.
++
+.Наименование плагина:
+[source,typescript]
+----
+string Name { get; }
+----
++
+.Метод формирования модели таблицы:
+[source,typescript]
+----
+TableModel GetTableData(SessionContext sessionContext, List<ParamModel> parameters);
+----
++
+. Затем зарегистрируйте тип в IoC контейнере:
++
+[source,typescript]
+----
+public override void InitializeContainer(ContainerBuilder containerBuilder) {
+
+containerBuilder.RegisterType<TestTablePlugin>().As<IReadOnlyTablePlugin>().SingleInstance();
+
+}
+----
+
+В случае, если это разметка карточки, то в массив параметров будет добавлен её идентификатор (`CurrentCardId`).
