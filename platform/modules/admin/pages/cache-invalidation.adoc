@@ -42,16 +42,16 @@ TIP: Для корректной настройки TTL лучше брать и
 ----
 declare @value int = 15 * 60; -- value in seconds
 exec dvsys_setting_set N'dvbo_Operand_Document_TasktreeEmployees_ttl', @value
-exec dvsys_setting_set N'Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar', @value
-exec dvsys_setting_set N'Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList', @value
+exec dvsys_setting_set N'Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_ttl', @value
+exec dvsys_setting_set N'Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList_ttl', @value
 ----
 
 .Для {pgsql}:
 [source,pgsql]
 ----
 select * from  public."dvsys_setting_set"('dvbo_Operand_Document_TasktreeEmployees_ttl', (15*60)::integer::sql_variant); -- value in seconds
-select * from  public."dvsys_setting_set"('Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar', (10*60)::integer::sql_variant); -- value in seconds
-select * from  public."dvsys_setting_set"('Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList', (20*60)::integer::sql_variant); -- value in seconds
+select * from  public."dvsys_setting_set"('Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_ttl', (10*60)::integer::sql_variant); -- value in seconds
+select * from  public."dvsys_setting_set"('Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList_ttl', (20*60)::integer::sql_variant); -- value in seconds
 ----
 ====
 
