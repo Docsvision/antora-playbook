@@ -1,0 +1,176 @@
+= Управление диалогом подписания через API
+
+Добавлен специальный API для управления диалогом подписания.
+
+Входная точка -- сервис `$DigitalSignature`. Для настройки диалога следует использовать события `beforeSignatureDialogShown` и `afterSignatureDialogShown` указанного сервиса. В первом событии можно настроить свойства диалога, во втором получить доступ к управлению диалогом. В событиях доступна информация о карточке, из которой осуществляется подпись: вид, тип, состояние и другая информация.
+
+.Свойства диалога позволяют:
+* Скрывать выбор метки.
+* Скрывать выбор сертификата.
+* Отключать простую подпись.
+* Скрывать кнопку настройки способов подписания.
+* Скрывать сам диалог: диалог открывается, но оказывается невидим на экране для пользователя.
+* Добавлять содержимое в нижней и верхней части диалога.
+* Обрабатывать доступные способы подписания: фильтровать, модифицировать, добавлять свои.
+* Управлять отрисовкой кнопок: добавлять свои, заменять стандартные.
+
+.Управление диалогом через `IDigitalSignatureDialogManagement` позволяет получать информацию о загруженных метках и способах подписания:
+* Программно выбирать метку и способ подписания
+* Изменять видимость диалога для пользователя
+* Динамически менять свойства диалога (см. п. 3)
+* Программно подтверждать или отменять операцию подписания
+* Также событие `beforeSignatureDialogShown` позволяет подменять логику формирования подписи и прикрепления к документу. Это можно использовать для подключения сторонних провайдеров подписания.
+
+Следующий пример кода демонстрирует автоматический выбор сертификата для документов вида _Исходящий_ и подписание без показа диалога:
+
+[source,typescript]
+----
+export function initExtension(app) {
+        app.digitalSignature.beforeSignatureDialogShown.watch(args => { <.>
+            if (args.cardInfo.kindId == '8e40f327-9517-4a43-998d-bf2bd619588d') {
+                 args.dialogProps.showHidden = true;
+            }
+        });
+        app.digitalSignature.afterSignatureDialogShown.watch(async (args) => { <.>
+            let methods = await args.management.getSignatureMethods();
+            let outgoingMethod = methods.find(x => x?.certificateInfo?.friendlyName.includes('для исходящего'));
+            if (outgoingMethod) {
+                args.management.selectSignatureMethod(outgoingMethod);
+                args.management.accept();
+            } else {
+                const props = args.management.getDialogProps();
+                props.footer = "Не удалось найти сертификат для исходящих документов.";
+                args.management.update(props);
+                args.management.setDialogVisible(true);
+            }
+        });
+}
+----
+<.> По умолчанию скрываем диалог для документов вида _Исходящий_.
+<.> Автоматически выбираем сертификат и нажимаем подписать.
+
+Можно вставить в метод `init` при вызове `registerExtension`, либо просто скопировать в консоль браузера и вызвать `initExtension(WebClient.app)`.
+
+.Пример интеграции со сторонним облаком:
+[source,typescript]
+----
+export function initExtension(app) {
+    app.digitalSignature.beforeSignatureDialogShown.watch(args => {
+       args.options.onCreateSignature = (options) => { return signByCustomCloud(options); }
+    });
+}
+----
+
+.Свойства диалога:
+[source,typescript]
+----
+    hideLabelSelection?: boolean; <.>
+    hideSignatureMethodsSetup?: boolean; <.>
+    hideSimpleSign?: boolean; <.>
+    hideSignatureMethodsSelect?: boolean; <.>
+
+    showHidden?: boolean; <.>
+    footer?: React.ReactNode; <.>
+    header?: React.ReactNode; <.>
+
+    onSign?: (options: IDigitalSignOptions) => Promise<void>; <.>
+    onCancel?: () => void; <.>
+    onPrepareSignatureMethods?: (methods: GenModels.SignatureMethod[]) => GenModels.SignatureMethod[]; <.>
+    onRenderButtons?: (props: ISignatureDialogButtonsProps, defaultButtons: JSX.Element[]) => JSX.Element[]; <.>
+----
+<.> Не отображать выбор метки.
+<.> Не отображать кнопку настройки вариантов подписания.
+<.> Скрыть метод простой подписи.
+<.> Не отображать раскрывающийся список выбора способа подписания. В таком случае будет выбран первый вариант по-умолчанию.
+<.> Чтобы не отображать диалог на экране, используйте API `@link IDigitalSignatureDialogManagement`.
+<.> Сообщение, показываемое в нижней части диалога
+<.> Сообщение, показываемое в верхней части диалога
+<.> Вызывается при подписи.
+<.> Вызывается при отмене подписи.
+<.> Вызывается для обработки отображаемого списка доступных способов подписания.
+<.> Вызывается при отрисовке кнопок диалога.
+
+.Управление диалогом:
+[source,typescript]
+----
+    close(reason?: unknown): Promise<void>; <.>
+    accept?(data?: IDigitalSignOptions): Promise<void>; <.>
+    getSignatureMethods(): Promise<GenModels.SignatureMethod[]>; <.>
+    getLabels(): Promise<ISignatureLabel[]>; <.>
+    selectSignatureMethod(method: GenModels.SignatureMethod): void; <.>
+    selectLabel(label: ISignatureLabel): void; <.>
+    getDialogVisible(): boolean; <.>
+    setDialogVisible(visible: boolean): void; <.>
+    getDialogProps(): ISignatureDialogProps; <.>
+    update(props?: ISignatureDialogProps): void; <.>
+----
+<.> Закрыть диалог без сохранения данных.
+<.> Применить изменения и закрыть диалог. Параметр не обязателен.
+<.> Возвращает список доступных сертификатов и других способов подписания.
+<.> Возвращает список доступных меток подписи.
+<.> Выбирает в раскрывающемся списке указанный способ подписания.
+<.> Выбирает в раскрывающемся списке указанную метку подписи.
+<.> Возвращает значение свойства видимости диалога для пользователя.
+<.> Устанавливает видимость диалога для пользователя.
+<.> Возвращает текущие свойства диалога подписания.
+<.> Обновляет диалог с указанными свойствами. См. `@link getDialogProps`.
+
+.Примеры тестирования:
+[source,typescript]
+----
+WebClient.app.digitalSignature.beforeSignatureDialogShown.watch(args => {
+
+	if (args.cardInfo.kindId == '8e40f327-9517-4a43-998d-bf2bd619588d') {
+
+		 args.dialogProps.showHidden = true;
+
+	}
+
+});
+
+WebClient.app.digitalSignature.afterSignatureDialogShown.watch(async (args) => {
+
+	let methods = await args.management.getSignatureMethods();
+
+	let outgoingMethod = methods.find(x => x?.isSimple);
+
+	args.management.selectSignatureMethod(outgoingMethod);
+
+	args.management.accept();
+
+});
+
+WebClient.app.digitalSignature.beforeSignatureDialogShown.watch(args => {
+
+	args.dialogProps.hideLabelSelection = true;
+
+});
+
+WebClient.app.digitalSignature.afterSignatureDialogShown.watch(async (args) => {
+
+	const props = args.management.getDialogProps();
+
+	props.footer = "Привет, медвед!";
+
+	args.management.update(props);
+
+});
+
+WebClient.app.digitalSignature.afterSignatureDialogShown.watch(async (args) => {
+
+	let labels = await args.management.getLabels();
+
+	if (args.cardInfo.kindId == '8e40f327-9517-4a43-998d-bf2bd619588d') {
+
+		args.management.selectLabel(labels[1]);
+
+	}
+
+});
+
+WebClient.app.digitalSignature.beforeSignatureDialogShown.watch(args => {
+
+       args.options.onCreateSignature = (options) => { return alert('custom sign create'); }
+
+});
+----
