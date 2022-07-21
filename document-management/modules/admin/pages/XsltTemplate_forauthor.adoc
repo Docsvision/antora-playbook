@@ -1,7 +1,6 @@
-[[ariaid-title1]]
-== Приложение B. XSLT-преобразование и описание исходных данных для дополнительного почтового уведомления
+= Приложение B. XSLT-преобразование и описание исходных данных для дополнительного почтового уведомления
 
-Текст стандартного XSLT-преобразования, используемого для формирования почтовых уведомлений автору задания, размещен на ресурсе GitHub в папке https://github.com/DocsVision/DeveloperItems/tree/master/xslt-templates/email-templates, файл [.ph .filepath]`AdditionalEmailNotifications.xsl`.
+Текст стандартного XSLT-преобразования, используемого для формирования почтовых уведомлений автору задания, размещен на ресурсе GitHub в папке https://github.com/DocsVision/DeveloperItems/tree/master/xslt-templates/email-templates, файл `AdditionalEmailNotifications.xsl`.
 
 Ниже приведен пример исходных данных, к которым применяется данное преобразование, с кратким описанием.
 
@@ -9,7 +8,7 @@
 ----
 <MailInfo>
   <Title MessageType="0" Description="Для вас создано новое задание" />
-  <SendInfo Date="понедельник, 15 апреля" CardUrl="http://docsvision.company.com/Docsvision/?CardID={9421e319-cdb2-4a7c-a3bd-68dd301c3dc5}&amp;ShowPanels=2048" />
+  <SendInfo Date="понедельник, 15 апреля" CardUrl="http://docsvision.company.com/{dv}/?CardID={9421e319-cdb2-4a7c-a3bd-68dd301c3dc5}&amp;ShowPanels=2048" />
   <Data>
     <CardTask CardID="9421E319-CDB2-4A7C-A3BD-68DD301C3DC5" CardTypeID="C7B36F33-CDD4-4DA9-8444-600FE14111E4" Description="Задание на исполнение: Подготовить данные по проекту" CreationDateTime="2019-04-15T10:41:32" ChangeDateTime="2019-04-15T10:42:33" Template="0" Topic="" Barcode="">
       <MainInfo RowID="2C023862-D72F-4496-B913-8340ED2B6E3F" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" Name="23" Author="80286BE4-E221-4AC9-AFB9-6C7F184D8466" Laboriousness="0" LaboriousnessActual="0" ChildTaskList="0E73F83E-164D-4F4D-8FEC-1FA89921E070" ReferenceList="0277B53F-F6CF-40B3-81EE-CCAE9CA38082" SignatureList="E9387AF5-EAB6-4021-960F-F9608442F9FB" PercentCompleted="0" DurationActual="0" OnControl="0" RequiresAcceptance="0" PostponementCount="0" Priority="1" StartTaskDate="2019-04-15T10:42:33.000" CreateMessages="1">
@@ -97,13 +96,13 @@
 
 * Title:
 ** MessageType:
-*** 0 – уведомление о завершении задания / группы заданий;
-*** 1 – уведомление об отзыве задания;
-*** 2 – уведомление о поступление на приёмку;
-** Description – заголовок сообщения;
+*** 0 -- уведомление о завершении задания / группы заданий;
+*** 1 -- уведомление об отзыве задания;
+*** 2 -- уведомление о поступление на приёмку;
+** Description -- заголовок сообщения;
 * SendInfo:
-** Date – дата;
-** CardUrl – ссылка для открытия карточки в клиенте Docsvision;
-* Data – xml карточки.
+** Date -- дата;
+** CardUrl -- ссылка для открытия карточки в клиенте {dv};
+* Data -- xml карточки.
 
 *Parent topic:* xref:../topics/Appendixes.adoc[Приложения]
