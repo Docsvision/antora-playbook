@@ -1,0 +1,16 @@
+[[ariaid-title1]]
+== Настройка ролевой модели
+
+Настройка ролевой модели карточек договоров осуществляется с помощью [.dfn .term]_Конструктора ролей_.
+
+=== Хранимые процедуры для настройки ролевой модели карточек договоров
+
+В Приложение входит хранимая процедура [.keyword .parmname]_dvbo_Operand_GetContractGroup_, с использованием которой в [.dfn .term]_Конструкторе ролей_ настроена роль [.keyword .parmname]_Группа ознакомления_ для карточек [.dfn .term]_Договор_ и [.dfn .term]_Дополнительное соглашение_; роли даны права на чтение карточек.
+
+image::img/Roles_Builder_Stored_Procedures.png[[.fig--title-label]##Рис. 1. ##Настройки роли «Группа ознакомления»]
+
+Хранимая процедура [.keyword .parmname]_dvbo_Operand_GetContractGroup_ получает сотрудников из группы ознакомления и может быть использована при настройке ролей администратором.
+
+Путь к папке с хранимой процедурой: [.ph .filepath]`C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\DocumentManagement\Sql`.
+
+*На уровень выше:* xref:../topics/ConfigurationToWorkWithContracts.adoc[Функции администратора при работе с договорами]
