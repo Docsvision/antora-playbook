@@ -47,8 +47,8 @@ KindsCardKind cardKind = objectContext.FindObject<KindsCardKind>(query); <.>
 
 TaskGroup taskGroup = taskGroupService.CreateTaskGroup(cardKind);
 taskGroup.MainInfo.Author = staffService.GetCurrentEmployee();
-taskGroup.Description = "Подготовить финансовый отчет";
-taskGroup.MainInfo.Name = "Подготовить финансовый отчет"; <.>
+taskGroup.Description = "Подготовить финансовый отчёт";
+taskGroup.MainInfo.Name = "Подготовить финансовый отчёт"; <.>
 objectContext.AcceptChanges();
 ----
 <.> Инициализация контекста объектов.

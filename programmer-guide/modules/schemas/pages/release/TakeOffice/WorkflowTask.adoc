@@ -83,7 +83,7 @@
 .Поля ссылки:
 * `ParentRes_Description > Description`
 
-|`ReportID` |Родительский отчет |`refcardid` | a|
+|`ReportID` |Родительский отчёт |`refcardid` | a|
 Идентификатор типа: `52F3DB4D-C3D4-4C03-BFF2-D8CFDC6E6CFC`
 
 Идентификатор секции: `87A4DADA-C220-40CA-82A8-3373280BA440`
@@ -167,7 +167,7 @@
 |`ActualDuration` |Действительная длительность |`int` | |
 |`ActualDurationPID` |Параметр действительной длительности |`refid` | |
 |`RecreateShortcuts` |Пересоздать ярлыки |`bool` | |
-|`ReportPID` |Параметр отчета |`refid` | |
+|`ReportPID` |Параметр отчёта |`refid` | |
 |`IsOverdue` |Просрочено |`bool` | |
 |`TaskReferencePID` |Параметр ссылки на задание |`refid` | |
 |`CompletedByResponsible` |Завершено ответственным исполнителем |`bool` | |
@@ -203,7 +203,7 @@
 |`ControllerCanReschedule` |Право изменения сроков ответственным исполнителем |`bool` | |
 |`CanDelegate` |Право делегировать |`bool` | |
 |`DelegateToAll` |Делегировать всем |`bool` | |
-|`IsReportNeeded` |Необходим отчет |`bool` | |
+|`IsReportNeeded` |Необходим отчёт |`bool` | |
 |`CanAddDocuments` |Право добавлять документы |`bool` | |
 |`AddNewReferences` |Добавлять новые ссылки |`bool` | |
 |`CompletionText` |Текст завершения |`unistring` |512 |
@@ -222,7 +222,7 @@
 * Авто = 1.
 * Ручной = 2.
 |`FinishListOnly` |Отображать перечисление как список |`bool` | |
-|`ReportCardRequired` |Необходим детальный отчет |`bool` | |
+|`ReportCardRequired` |Необходим детальный отчёт |`bool` | |
 |`NoDialogOnFinish` |Не показывать диалог завершения |`bool` | |
 |`TemplateID` |Шаблон |`uniqueid` | |
 |`KeepTask` |Не удалять задание |`bool` | |
@@ -561,7 +561,7 @@
 * `> MiddleName`
 * `> DisplayString`
 |`Comment` |Комментарий |`unistring` |2048 |
-|`IsReport` |Отчет |`bool` | |
+|`IsReport` |Отчёт |`bool` | |
 |`IsNew` |Новый комментарий |`bool` | |
 |===
 
@@ -818,18 +818,18 @@
 * Ошибка = 4.
 |===
 
-=== Секция "Отчеты"
+=== Секция "Отчёты"
 
 * Идентификатор: `ABC12DC8-0ADF-4EFD-93A9-CB1E43D3387B
 * Псевдоним: `Reports`
-* Название: _Отчеты_
+* Название: _Отчёты_
 * Тип секции: `coll`
 
-."Поля секции "Отчеты"
+."Поля секции "Отчёты"
 [cols="20%,20%,20%,20%,20%",options="header"]
 |===
 |Псевдоним |Название |Тип поля |Размер |Дополнительная информация
-|`ReportID` |Отчет |`refcardid` | a|
+|`ReportID` |Отчёт |`refcardid` | a|
 Идентификатор типа: `52F3DB4D-C3D4-4C03-BFF2-D8CFDC6E6CFC`
 
 Идентификатор секции: `87A4DADA-C220-40CA-82A8-3373280BA440`
@@ -838,13 +838,13 @@
 * `> ChangeDate`
 * `> Description`
 
-|`ChildState` |Состояние отчета |`enum` | a|.Значения:
+|`ChildState` |Состояние отчёта |`enum` | a|.Значения:
 * Не активно = 0.
 * К исполнению = 1.
 * Исполняется = 2.
 * Завершено = 3.
 * Ошибка = 4.
-|`ChildTaskState` |Состояние задания отчета |`enum` | a|.Значения:
+|`ChildTaskState` |Состояние задания отчёта |`enum` | a|.Значения:
 * Не активно = 0.
 * К исполнению = 1.
 * Исполняется = 2.
