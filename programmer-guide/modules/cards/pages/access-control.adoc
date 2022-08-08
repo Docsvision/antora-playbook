@@ -123,7 +123,7 @@ using DocsVision.Platform.Security.AccessControl;
 . Получить объект для работы с разрешениями `xref:Platform-ObjectManager-CardData:CardData.GetAccessControl_MT.adoc[CardData.GetAccessControl]`
 . Создать новое разрешение `xref:Platform-Security:AccessControl/CardDataAccessRule_CL.adoc[CardDataAccessRule]` с необходимыми атрибутами.
 . Добавить разрешение к описателю прав `xref:Platform-Security:AccessControl/CardDataSecurity.AddAccessRule_MT.adoc[AddAccessRule]` или `xref:Platform-Security:AccessControl/CardDataSecurity.SetAccessRule_MT.adoc[SetAccessRule]`.
-. Сохранить измененный описатель прав `xref:Platform-ObjectManager-CardData:CardData.SetAccessControl_MT.adoc[SetAccessControl]`.
+. Сохранить изменённый описатель прав `xref:Platform-ObjectManager-CardData:CardData.SetAccessControl_MT.adoc[SetAccessControl]`.
 +
 В примере, для существующей карточки с идентификатором `00000000-0000-0000-0000-000000000000` добавляются права на чтение для пользователя `IvanovII`.
 +
@@ -143,7 +143,7 @@ card.SetAccessControl(cardDataSecurity); <.>
 <.> Получение описателя прав карточки.
 <.> Создание нового разрешения -- совокупного права чтения.
 <.> Добавление нового разрешения к описателю прав.
-<.> Сохранение измененного описателя прав.
+<.> Сохранение изменённого описателя прав.
 
 .Чтобы удалить разрешения на карточку, файл или процедуру, необходимо:
 [start=5]
@@ -152,7 +152,7 @@ card.SetAccessControl(cardDataSecurity); <.>
 .. Vетодом http://msdn.microsoft.com/ru-ru/library/system.security.accesscontrol.objectsecurity.purgeaccessrules.aspx[`PurgeAccessRules`], чтобы удалить *все* разрешения для субъекта
 .. Vетодом `xref:Platform-Security:AccessControl/CardDataSecurity.RemoveAccessRuleSpecific_MT.adoc[RemoveAccessRuleSpecific]`, чтобы удалить конкретное разрешение для субъекта.
 .. Методом `SetAccessRule`, чтобы удалить все разрешения для субъекта и добавить вместо них новое.
-. Сохранить измененный описатель прав `SetAccessControl`.
+. Сохранить изменённый описатель прав `SetAccessControl`.
 +
 Ниже приведён пример, в котором у пользователя `IvanovII` отбираются права на карточку с идентификатором `00000000-0000-0000-0000-000000000000`.
 +
@@ -166,7 +166,7 @@ cardDataSecurity.PurgeAccessRules(new NTAccount("DOMAIN\\IvanovII")); <.>
 card.SetAccessControl(cardDataSecurity); <.>
 ----
 <.> Удаление всех прав пользователя.
-<.> Сохранение измененного описателя прав.
+<.> Сохранение изменённого описателя прав.
 
 [NOTE]
 ====
