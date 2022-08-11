@@ -13,7 +13,7 @@
 
 * [x] в бинарном описателе -- в методе `GetBindingLoader`:
 +
-[source,charp]
+[source,csharp]
 ----
 var bindingProperty = PropertyFactory.GetBindingProperty();
 bindingProperty.GetBindingLoader = (() => new SimpleBindingLoader
@@ -59,7 +59,7 @@ internal class SuperConverter : BaseBindingConverter
 * `LayoutContextHelper.TryGetCardDataSource` -- сохраняет в `cardId` идентификатор карточки, с данными которой связан элемент управления.
 * `LayoutContextHelper.TryGetDataSource` -- сохраняет идентификаторы метаданных карточки, с которыми связан элемент управления: в `cardId` -- идентификатор карточки, в `sectionId` -- идентификатор секции, в `rowId` -- идентификатор строки.
 
-[source,charp]
+[source,csharp]
 ----
 public override BindingResult ConvertForDisplay(ControlContext controlContext, Binding binding, BindingResult bindingResult)
 {
@@ -75,7 +75,7 @@ if (LayoutContextHelper.TryGetCardDataSource(controlContext, binding, out var ca
 +
 . Конвертер нужно добавить в IoC-контейнер в ядре серверного расширения:
 +
-[source,charp]
+[source,csharp]
 ----
 public override void InitializeContainer(ContainerBuilder containerBuilder) {
     containerBuilder.RegisterOrderedType<SuperConverter, IBindingConverter>();

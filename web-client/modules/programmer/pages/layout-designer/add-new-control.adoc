@@ -16,7 +16,7 @@
 +
 Описатель элемента управления -- это объект, содержащий информацию об элементе управления: название типа, группа, перечень свойства (настроек). Описатель имеет тип `ControlTypeDescription`.
 +
-[source,charp]
+[source,csharp]
 ----
    ControlTypeDescription GetSuperControlTypeDescription () 
    {
@@ -42,21 +42,21 @@
 . Указать название типа элемента управления. Название передается непосредственно в конструктор класса `ControlTypeDescription`.
 +
 .Описатель элемента управления с типом "SuperControl"
-[source,charp]
+[source,csharp]
 ----
 var controlTypeDescription = new ControlTypeDescription ("SuperControl"){
 ----
 +
 . Указать отображаемое название типа элемента управления в DisplayName. Данное название приводится в строке `*Название ЭУ*` в блоке настроек элемента управления в программы {kvr}.
 +
-[source,charp]
+[source,csharp]
 ----
 DisplayName = "Супер элемент управления",
 ----
 +
 . Указать группу элемента управления в ControlGroupDisplayName. Группа используется для группировки элементов управления в библиотеке элементов управления программы {kvr}.
 +
-[source,charp]
+[source,csharp]
 ----
 ControlGroupDisplayName = "Примеры",
 ----
@@ -70,7 +70,7 @@ ControlGroupDisplayName = "Примеры",
 +
 . Переопределите метод `GetControlTypeDescriptions()` базового класса, чтобы он возвращал коллекцию с <<realize,реализованным>> в пункте 2 методом:
 +
-[source,charp]
+[source,csharp]
 ----
 protected override List<ControlTypeDescription> GetControlTypeDescriptions()
 {

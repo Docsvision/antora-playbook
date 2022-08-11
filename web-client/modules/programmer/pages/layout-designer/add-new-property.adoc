@@ -16,7 +16,7 @@
 +
 Описатель свойства элемента управления -- это объект с типом `PropertyDescription`, содержащий информацию о свойстве: название свойства, тип, категория, редактор, который должен использоваться для изменения значения, возможность локализации и настройки значения для определённого типа устройств.
 +
-[source,charp]
+[source,csharp]
 ----
 PropertyDescription GetSuperPropertyDescription()
 {
@@ -36,21 +36,21 @@ PropertyDescription GetSuperPropertyDescription()
 [lowerroman]
 . Указать название свойства в Name.
 +
-[source,charp]
+[source,csharp]
 ----
 propertyDescription.Name = "SuperProperty";
 ----
 +
 . Указать отображаемое название свойства в DisplayName. С данным названием свойство отображается в списке свойств элемента управления в программы {kvr}.
 +
-[source,charp]
+[source,csharp]
 ----
 +propertyDescription.DisplayName = "Супер свойство";
 ----
 +
 . Указать тип значения свойства в Type.
 +
-[source,charp]
+[source,csharp]
 ----
 propertyDescription.Type = typeof(string); <.>
 ----
@@ -58,7 +58,7 @@ propertyDescription.Type = typeof(string); <.>
 +
 . Указать категорию свойства в Category. Категория используется для группировки свойств в настройках элемента управления в программе {kvr}. Категория выбирается из перечня в классе `PropertyCategoryConstants`.
 +
-[source,charp]
+[source,csharp]
 ----
 propertyDescription.Category = PropertyCategoryConstants.DataCategory; <.>
 ----
@@ -69,7 +69,7 @@ TIP: Обратитесь к описанию класса `PropertyDescription`
 +
 . Переопределите метод `GetPropertyDescriptions` базового класса, чтобы он возвращал коллекцию с парой: ключ -- имя. Возвращаемая коллекция позволяет получить описатель данного свойства. Используйте имя, указанное в `propertyDescription.Name` и метод, предоставляющий описатель свойства в качестве значения:
 +
-[source,charp]
+[source,csharp]
 ----
 protected override Dictionary<string, PropertyDescription> GetPropertyDescriptions()
 {

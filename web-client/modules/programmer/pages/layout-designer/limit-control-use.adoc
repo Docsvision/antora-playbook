@@ -52,7 +52,7 @@ public static AllowedOperationsFlag GetPossibleOperation(IServiceProvider servic
 +
 . Переопределите метод `GetAllowedOperations` базового класса расширения, чтобы он возвращал коллекцию с парой: ключ -- имя. Метод позволяет получить функцию проверки. Значение представлено функцией проверки:
 +
-[source,charp]
+[source,csharp]
 ----
 protected override Dictionary<string, Func<AllowedOperationsFlag>> GetAllowedOperations()
 {
@@ -104,7 +104,7 @@ GetAllowedOperations = AllowedOperationsStorage.GetAllowedOperations("GetPossibl
 +
 Код получения хранилища функций проверки:
 +
-[source,charp]
+[source,csharp]
 ----
 IAllowedOperationsStorage allowedOperationsStorage;
 protected IAllowedOperationsStorage AllowedOperationsStorage
