@@ -60,7 +60,7 @@ documentService.RenameMainFile(document, document.Files.First(t => t.FileType = 
 
 Можно указывать новое название файла без расширения, а расширение получать из оригинального файла, например, так:
 
-[source,charp]
+[source,csharp]
 ----
 DocumentFile firstMainFile = document.Files.First(t => t.FileType = DocumentFileType.Main);
 string newFileName = string.Format("Новое название файла{0}", Path.GetExtension(firstMainFile.FileName));

@@ -29,7 +29,7 @@
 +
 . Вызвать {cns} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 +
-[source,charp]
+[source,csharp]
 ----
 <CustomAction Id="RegisterSnapIn" Directory='INSTALLFOLDER' Return="check" Execute='deferred' 
  ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n NetstatSolution' />
@@ -41,7 +41,7 @@
 При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n Название-решения`.
 
 .В проекте пакета установки серверной части за это отвечает сценарий:
-[source,charp]
+[source,csharp]
 ----
 <CustomAction Id="UnRegisterSnapIn" Directory='INSTALLFOLDER' Return="ignore" Execute='deferred' 
  ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n NetstatSolution' />
@@ -51,7 +51,7 @@
 ----
 
 .Чтобы серверная часть поддерживала обновление, добавляем:
-[source,charp]
+[source,csharp]
 ----
 <MajorUpgrade DowngradeErrorMessage="Более новая версия продукта [ProductName] уже установлена." />
  <Upgrade Id="$(var.UpgradeCode)">

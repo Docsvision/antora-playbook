@@ -4,7 +4,7 @@
 
 В простейшем случае, провайдер должен реализовывать два интерфейса: `xref:Platform-StorageServer:IBinaryStorage_IN.adoc[IBinaryStorage]` и `xref:Platform-StorageServer:IExtensionInitialize_IN.adoc[IExtensionInitialize]`.
 
-[source,charp]
+[source,csharp]
 ----
 public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 ----
@@ -27,7 +27,7 @@ public class ExternalStorage : IBinaryStorage,
 
 Класс провайдера должен быть помечен атрибутом `DisplayName`, содержащим название хранилища.
 
-[source,charp]
+[source,csharp]
 ----
 [DisplayName("External storage name")]
 public class ExternalStorage : IBinaryStorage, IExtensionInitialize
@@ -35,7 +35,7 @@ public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 
 Для использования локализованного отображаемого названия можно добавить дополнительный класс, возвращающий название из ресурсов:
 
-[source,charp]
+[source,csharp]
 ----
 class LocalizedDisplayNameAttribute : DisplayNameAttribute
 {
@@ -58,7 +58,7 @@ class LocalizedDisplayNameAttribute : DisplayNameAttribute
 
 Тогда класс провайдера необходимо пометить атрибутом `LocalizedDisplayName` с указанием ключа локализованного ресурса:
 
-[source,charp]
+[source,csharp]
 ----
 [LocalizedDisplayName("ExternalStorageName")]
 public class ExternalStorage : IBinaryStorage, IExtensionInitialize
@@ -66,7 +66,7 @@ public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 
 Чтобы предоставить возможность настройки провайдера с помощью Консоли настройки {dv}, должна быть разработана графическая форма. Информация о данном компоненте приведена в разделе xref:provider-gui.adoc[Графический интерфейс настройки]. Название компонента графической формы должно быть указано в атрибуте `Editor` класса провайдера:
 
-[source,charp]
+[source,csharp]
 ----
 [DisplayNameAttribute("ExternalStorageName")]
 [Editor("ExternalStorageProvider.ProviderConfigurationPropertyControl, ExternalStorageProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e955275a11279434, processorArchitecture=MSIL", 
