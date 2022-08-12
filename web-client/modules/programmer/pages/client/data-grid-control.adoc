@@ -5,7 +5,7 @@
 `*Название плагина*` указывается в конструкторе разметок, в свойствах элемента управления. При открытии разметки карточки в {wc}е из настроек ЭУ будет считано `*Название плагина*`. Затем отправляется запрос на сервер, который обнаруживает нужную реализацию интерфейса и возвращает модель для отображения таблицы.
 
 .Чтобы реализовать собственный плагин:
-. Выполните наследование от интерфейса `IReadOnlyTablePlugin (DocsVision.Layout.WebClient.Services)`.
+. Выполните наследование от интерфейса `IDataGridControlPlugin (DocsVision.Layout.WebClient.Services)`.
 +
 .Наименование плагина:
 [source,typescript]
@@ -25,7 +25,7 @@ TableModel GetTableData(SessionContext sessionContext, List<ParamModel> paramete
 ----
 public override void InitializeContainer(ContainerBuilder containerBuilder) {
 
-containerBuilder.RegisterType<TestTablePlugin>().As<IReadOnlyTablePlugin>().SingleInstance();
+containerBuilder.RegisterType<TestTablePlugin>().As<IDataGridControlPlugin>().SingleInstance();
 
 }
 ----
