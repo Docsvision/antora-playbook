@@ -1,0 +1,124 @@
+= Инструкция по разворачиванию новой документации Docsvision
+
+Новая документация Docsvision написана в формате AsciiDoc и разворачивается с помощью генератора статических сайтов Antora.
+
+Для работы с Antora подходит любая ОС, основным требованием является Node.js.
+
+== Сборка сайта
+
+. Проверьте, что Node.js установлен, введя в командную строку команду `node -v`.
++
+Рекомендованная версия Node.js для работы с Antora 3.0 -- Node.js 16.16.0. В будущих версиях Antora данное требование может быть изменено. Проверить необходимую версию можно на официальном сайте Antora, https://docs.antora.org/antora/latest/install-and-run-quickstart/[на странице "установка"].
++
+. Если в системе отсутствует установка Node.js, установите программу любым доступным способом. Для установки Node.js создатели Antora рекомендуют использовать nvm:
++
+.Для Linux и macOS
+[source]
+----
+nvm install --lts && nvm alias default 16
+----
++
+.Для Windows:
+[source]
+----
+nvm install 16.16.0 && nvm alias default 16.16.0
+----
++
+. Далее скопируйте на компьютер репозиторий antora-playbook. Репозиторий располагается в профиле компании Docsvision на GitHub по следующему адресу: https://github.com/Docsvision/antora-playbook.
+. Перейдите в каталог репозитория и выполните локальную установку Antora следующими командами:
++
+[source]
+----
+node -e "fs.writeFileSync('package.json', '{}')" && npm i -D -E @antora/cli@3.0 @antora/site-generator@3.0
+----
++
+. Проверьте правильность установки следующей командой: `npx antora -v`.
++
+Если установка успешна, в командной строке отобразится версия интерфейса командной строки Antora и генератора сайтов:
++
+[source]
+----
+npx antora -v
+@antora/cli: 3.0.3
+@antora/site-generator: 3.0.3
+----
++
+Данные версии также будут отображены в файле `package.json` в корневой папке репозитория.
++
+. Чтобы использовать пользовательский интерфейс сайта документации Docsvision:
+.. В профиле Docsvision на GitHub найдите репозиторий с проектом пользовательского интерфейса: https://github.com/Docsvision/antora-ui-default.
+.. Скопируйте проект на локальный компьютер.
+.. Выполните инструкции, указанные в README репозитория с проектом пользовательского интерфейса, чтобы собрать  пакет.
+.. Поместите папку `build\ui-bundle.zip` с архивом в корень репозитория antora-playbook.
+. Запустите Antora, выполнив следующую команду из корня репозитория:
++
+[source]
+----
+npx antora --fetch antora-playbook.yml
+----
++
+. Сгенерированные файлы сайта будут расположены в папке `wwwroot`.
+
+== Просмотр сайта
+
+Сгенерированные файлы сайта могут быть просмотрены напрямую из браузера: нажмите на сгенерированные html-файлы.
+
+Сайт может быть развёрнут на полноценном веб-сервере или на локальном сервере.
+
+.Чтобы развернуть сайт на локальном сервере:
+. Перейдите в папку репозитория `antora-playbook`.
+. Установите локальный http-сервер следующей командой:
++
+ antora-playbook $ npm i -g http-server
++
+Или при помощи yarn:
++
+ antora-playbook $ yarn global add http-server
++
+Эти команды устанавливают команду http-server на уровне системы.
++
+. Выполните команду `http-server` с указанием расположения сгенерированных файлов. Рекомендуется также добавить флаг -c-1, чтобы отключить кэширование. Полностью команда будет выглядеть так:
++
+ antora-playbook\wwwroot $ http-server build/site -c-1
++
+. После запуска команды, локальный адрес веб-сервера будет отображён в окне консоли следующим образом:
++
+[source]
+----
+Starting up http-server, serving antora-playbook\wwwroot
+Available on:
+  http://127.0.0.1:8080
+  http://192.168.1.8:8080
+Hit CTRL-C to stop the server
+----
++
+. Вставьте первый адрес из списка в адресную строку браузера, что просмотреть сайт через локальный веб-сервер.
++
+. Если при запуске сервера возникает конфликт портов (например, listen EADDRINUSE: address already in use), вы можете назначить любой порт при помощи опции -p <port>. Например, добавьте к команде -p 5000, чтобы назначить 5000 порт:
++
+ demo-site $ http-server build/site -c-1 -p 5000
+
+TIP: Чтобы развернуть просмотр сайта с помощью другой системы, ознакомьтесь с [документацией Antora](https://docs.antora.org/antora/latest/run-antora/).
+
+== Работа с исходным кодом документации
+
+При запуске Antora из https://github.com/Docsvision/antora-playbook/[репозитория antora-playbook в профиле Docsvision на GitHub] исходные документы будут получены из репозиториев Docsvision На GitHub (все репозитории с приставкой -Antora).
+
+Если доступ к сети интернет отсутствует или вы хотите изменить исходный код документации, необходимо скопировать содержимое каждого репозитория, указанного в файле `antora-playbook.yml`:
+
+[source,yml]
+----
+content:
+  branches: 'dev'
+  edit_url: ~
+  sources:
+    - url: https://github.com/Docsvision/System-Antora.git
+----
+
+Замените значение ключа `url` на собственную ссылку или локальное хранилище. См. подробнее в документации Antora: https://docs.antora.org/antora/latest/content-source-repositories/[Repositories and Content Source Roots] и https://docs.antora.org/antora/latest/playbook/content-source-url[URLs for Content Sources], в частности подпункт https://docs.antora.org/antora/latest/playbook/content-source-url/#local-urls[URLs for Content Sources | Use local content repositories].
+
+****
+Чтобы понять, как работать с исходным кодом документации в AsciiDoc, прочитайте материалы на сайте https://docs.asciidoctor.org/asciidoc/latest/[docs.asciidoctor.org].
+
+Также подробнее ознакомьтесь с https://docs.antora.org/[документацией Antora], чтобы лучше понимать, как создаётся сайт с документацией Docsvision.
+****
