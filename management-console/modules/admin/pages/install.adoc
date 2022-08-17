@@ -73,24 +73,28 @@ Microsoft SQL Server или PostgreSQL в зависимости от испол
 NOTE: Для _{of-sett-serv}_ рекомендуется использовать отдельную базу данных.
 +
 --
-Для Microsoft SQL Server: `Data Source=<sql_server>;Initial Catalog=<db_name>;Integrated Security=False;User ID=<sql_login>;Password=<sql_user_password>`.
+//tag::mssql[]
+Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз данных;Initial Catalog=Название-БД-{of-sm};Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
 
-* `<sql_server>` -- адрес сервера SQL для подключения к БД.
-* `<db_name>` -- псевдоним базы данных.
+* `Адрес-сервера-баз данных` -- адрес сервера SQL для подключения к БД.
+* `Название-БД-{of-sm}` -- псевдоним базы данных.
 * `Integrated Security=False` -- SQL-аутентификация: `true` -- используется, `false` -- не используется.
-* `<sql_login>` -- учётная запись пользователя для подключения к БД.
-* `<sql_user_password>` -- пароль учётной записи для подключения к БД.
+* `Имя-пользователя-БД` -- учётная запись пользователя для подключения к БД.
+* `Пароль-пользователя-БД` -- пароль учётной записи для подключения к БД.
 * `TrustServerCertificate=True` -- параметр обязателен, только если используется Microsoft SQL без SSL. При использовании SSL данный параметр указывать ненужно.
+//end::mssql[]
 --
 +
 --
-Для PostgreSQL: `host=<pg_server>;Port=<pg_server_port>;database=<db_name>;Username=<pg_sql_login>;Password=<sql_user_password>`.
+//tag::pgsql[]
+Для PostgreSQL: `host=Адрес-сервера-баз данных;Port=SQL-порт;database=Название-БД-{of-sm};Username=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
 
-* `<pg_server>` -- адрес сервера SQL для подключения к БД.
-* `<pg_server_port>` -- порт SQL-сервера.
-* `<db_name>` -- псевдоним базы данных.
-* `<pg_sql_login>` -- учётная запись пользователя для подключения к БД.
-* `<sql_user_password>` -- пароль учётной записи для подключения к БД.
+* `Адрес-сервера-баз данных` -- адрес сервера SQL для подключения к БД.
+* `SQL-порт` -- порт SQL-сервера.
+* `Название-БД-{of-sm}` -- псевдоним базы данных.
+* `Имя-пользователя-БД` -- учётная запись пользователя для подключения к БД.
+* `Пароль-пользователя-БД` -- пароль учётной записи для подключения к БД.
+//end::pgsql[]
 --
 ****
 +
