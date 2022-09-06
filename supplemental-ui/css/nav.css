@@ -17,6 +17,16 @@ a.nav-text:not([href]),
 .nav-item-toggle + span.nav-text {
   cursor: pointer;
 }
+
+a.nav-text:hover {
+    text-decoration: none;
+	color: #4c22f7;
+}
+
+a.nav-text:active {
+    text-decoration: none;
+	color: #4c22f7;
+}
  
 .nav-text {
   display: inline-flex;
@@ -116,7 +126,7 @@ a.nav-text:not([href]),
 }
 
 .nav-list [aria-current=page] {
-  color: #1565c0;
+  color:var(--link_hover-font-color);
   font-weight: normal;
   -webkit-text-stroke-width: 0.02em;
 }
@@ -240,7 +250,7 @@ a.nav-text:not([href]),
 }
 
 .nav-version-option:active {
-  color: #1565c0;
+  color: var(--link_hover-font-color);
 }
 
 @media screen and (min-width: 1024px) {
