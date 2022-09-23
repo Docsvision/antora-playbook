@@ -10,13 +10,13 @@
 .Чтобы изменить ограничение для максимального размера единичного файла:
 . Откройте конфигурационный файл `{webconfig}`.
 . Перейдите к элементу {setgroups} > Setting [Name="MaxUploadFileItemSize"\]].
-. Укажите новое ограничение в параметре `Value`. Значение в байтах.
+. Укажите новое ограничение в параметре `Value`. Значение в байтах (не более `2147483647`).
 . Сохраните изменения конфигурационного файла.
 
 .Чтобы изменить ограничение для максимального общего размера всех добавляемых файлов карточки:
 . Перейдите к элементу menu:configuration[system.webServer > security > requestFiltering > requestLimits].
-. Укажите новое ограничение в параметре `_maxAllowedContentLength_`. Значение в байтах.
-. Установите аналогичное значение в параметре `_maxRequestLength_` в элементах:
+. Укажите новое ограничение в параметре `_maxAllowedContentLength_`. Значение в байтах (не более `2147483647`).
+. Установите аналогичное значение в параметре `_maxRequestLength_` (не более `2147483647`) в элементах:
 +
 * menu:configuration[location[path="api/DocumentCardApi"\] > system.web > httpRuntime].
 * menu:configuration[location[path="api/LayoutFileApi"\] > system.web > httpRuntime].
