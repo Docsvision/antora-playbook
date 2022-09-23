@@ -21,11 +21,12 @@ a.nav-text:not([href]),
 a.nav-text:hover {
     text-decoration: none;
 	color: #4c22f7;
+	transition: .3s;
 }
 
 a.nav-text:active {
-    text-decoration: none;
-	color: #4c22f7;
+    text-decoration: underline;
+	color: #7555f9;
 }
  
 .nav-text {
@@ -126,7 +127,7 @@ a.nav-text:active {
 }
 
 .nav-list [aria-current=page] {
-  color:var(--link_hover-font-color);
+  color: #4c22f7;
   font-weight: normal;
   -webkit-text-stroke-width: 0.02em;
 }
@@ -137,6 +138,17 @@ a.nav-text:active {
 }
 
 .nav-item.is-active > .nav-title .nav-icon {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.nav-item:hover > .nav-title .nav-icon {
+  filter: grayscale(0);
+  opacity: 1;
+  transition: .3s;
+}
+
+.nav-item:active > .nav-title .nav-icon {
   filter: grayscale(0);
   opacity: 1;
 }
