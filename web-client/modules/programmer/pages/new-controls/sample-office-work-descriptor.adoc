@@ -9,7 +9,7 @@
 
 == Описатель элемента управления
 
-Для описание данного элемента управления сформируем xref:new-controls/create-text-descriptor.adoc[текстовый описатель] со следующим содержимым:
+Для описания данного элемента управления сформируем xref:new-controls/create-text-descriptor.adoc[текстовый описатель] со следующим содержимым:
 
 .Файл `_RefCategoriesDesignerExtension\xml\RefCasesControlDescription.xml_`
 [source,xml]
@@ -66,7 +66,7 @@
 <.> `EditOperation` -- выбор операции редактирования.
 <.> Новое свойство `RootSection` обеспечивает заявленную возможность выбора разделе _Справочника номенклатуры дел 5_, из которого пользователю будет разрешено выбирать дела.
 +
-Значение свойства будет устанавливаться с помощью специального редактора `RefCasesSectionEditor` (будет разработан далее в серверном расширение {wc}а).
+Значение свойства будет устанавливаться с помощью специального редактора `RefCasesSectionEditor` (будет разработан далее в серверном расширении {wc}а).
 <.> Также для элемента управления определены события:
 <.> При наведении курсора;
 <.> При отведении курсора;
@@ -344,7 +344,6 @@ namespace RefCasesDesignerExtension.Editors
             Years.ItemsSource = refCasesUtils.GetYears(); <.>
         }
 
-        // При выборе Года формируем дерево Разделов для данного года
         private void Years_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) <.>
         {
             if (Years.SelectedIndex == -1 || !(Years.SelectedItem is Year))
@@ -352,11 +351,9 @@ namespace RefCasesDesignerExtension.Editors
 
             Year selectedYear = Years.SelectedItem as Year;
 
-            // Получаем список Разделов из Справочника номенклатуры дел 5
             Sections.ItemsSource = refCasesUtils.GetSections(selectedYear.ID); <.>
         }
 
-        // Обработка нажатия кнопки сохранения выбора
         private void Accept_Click(object sender, RoutedEventArgs e) <.>
         {
             if (Sections.SelectedItem == null)
@@ -371,7 +368,6 @@ namespace RefCasesDesignerExtension.Editors
             this.Close();
         }
 
-        // Обработка нажатия отмены
         private void Cancel_Click(object sender, RoutedEventArgs e) <.>
         {
             this.Close();
@@ -381,6 +377,10 @@ namespace RefCasesDesignerExtension.Editors
 ----
 <.> Для формирования дерева _Разделов_ нужно получить данные из _Справочника номенклатуры дел 5_. Для этого объявляем необходимость передачи контекста сессии в конструкторе класса.
 <.> Получаем список лет из Справочника номенклатуры дел 5.
+<.> При выборе Года формируем дерево Разделов для данного года.
+<.> Получаем список Разделов из Справочника номенклатуры дел 5.
+<.> Обработка нажатия кнопки сохранения выбора.
+<.> Обработка нажатия отмены.
 
 Основная "работа" здесь выполняется методами `RefCasesUtils.GetYears`, `RefCasesUtils.GetSections`.
 
@@ -431,4 +431,4 @@ List<Node> GetNodesFromRows(RowDataCollection rows) <.>
     return nodes;
 }
 ----
-.Возвращает список Разделов для строк секции справочника
+. Возвращает список Разделов для строк секции справочника
