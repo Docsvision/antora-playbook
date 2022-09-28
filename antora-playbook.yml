@@ -3,6 +3,9 @@ antora:
   - require: ./antora-navigator-extension/
     config_file: ./antora-navigator.yml
   - ./lib/exclude-components-by-url.js
+  - id: unlisted-pages
+    enabled: true
+    require: ./lib/unlisted.js
 site:
   title: Документация Docsvision
   url: https://help.docsvision.com/
