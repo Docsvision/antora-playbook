@@ -18,5 +18,6 @@ exec dvsys_setting_set N'RoleModelDirectCardsValidation', @v
 .Для {pgsql}:
 [source,pgsql]
 ----
-select *from public.dvsys_setting_set ('RoleModelDirectCardsValidation', true::sql_variant)
+select *from public.dvsys_setting_set ('RoleModelDirectCardsValidation', true::sql_variant) <.>
 ----
+<.> `true` -- оптимизация включена, `false` -- отключена (значение по умолчанию).
