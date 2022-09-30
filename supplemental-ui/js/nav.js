@@ -159,13 +159,8 @@
     }, {})
   }
 
-  function createNavTitleForGroup (groupData) {
-    var navTitle = createElement('h3.nav-title', groupData.title)
-    if (groupData.iconId) {
-      navTitle.classList.add('has-icon')
-      navTitle.insertBefore(createSvgElement('.icon.nav-group-icon', '#' + groupData.iconId), navTitle.firstChild)
-    }
-    return navTitle
+   function createNavTitleForGroup (groupData) {
+    return createElement('h3.nav-title', groupData.title)
   }
 
   function createNavListForGroup (groupData, page) {
