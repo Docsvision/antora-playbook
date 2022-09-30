@@ -112,26 +112,20 @@ objectContext.LockObject(row, true); <.>
 * `UnlockObject` -- снимает с объекта временную блокировку.
 
 Далее приведён пример, в котором документ (карточка типа _Документ_) блокируется для изменения, после чего блокировка снимается.
-+
+
 [source,csharp]
 ----
-//
 ILockService lockService = objectContext.GetService<ILockService>(); <.>
 
-//
 Document document = objectContext.GetObject<Document>(cardId); <.>
 
-//
-if (!(lockService.IsObjectLockedByAnotherUser(document) && <.> lockService.IsObjectLockedByAnotherUser(document)))
+if (!(lockService.IsObjectLockedByAnotherUser(document)) <.>
 {
- //
  lockService.LockObject(document); <.>
  
- //
  document.MainInfo.Name = "Новое название документа"; <.>
  objectContext.SaveObject(document);
 
- //
  lockService.UnlockObject(document); <.>
 }
 ----
