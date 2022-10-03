@@ -11930,7 +11930,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
         return "";
     };
     const showIcon = (icon) => {
-      return "img:/img/" + icon + ".svg";
+      return "img:/_/img/" + icon + ".svg";
     };
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
@@ -12000,7 +12000,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                       "header-class": "hd",
                       icon: showIcon(item.icon),
                       "expand-separator": "",
-                      "expand-icon": "img:/img/chevron-down.svg",
+                      "expand-icon": "img:/_/img/chevron-down.svg",
                       "model-value": item.model,
                       onClick: ($event) => unref(myitems).toggleModel(item)
                     }, {
@@ -12073,7 +12073,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
             modelValue: filter.value,
             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filter.value = $event),
             clearable: "",
-            "clear-icon": "img:/img/close-circle-outline.svg",
+            "clear-icon": "img:/_/img/close-circle-outline.svg",
             onClear: _cache[1] || (_cache[1] = ($event) => filter.value = "")
           }, {
             prepend: withCtx(() => [
