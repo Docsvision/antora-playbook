@@ -1,5 +1,12126 @@
-var Xs=Object.defineProperty,Gs=Object.defineProperties;var ea=Object.getOwnPropertyDescriptors;var Jl=Object.getOwnPropertySymbols;var ta=Object.prototype.hasOwnProperty,na=Object.prototype.propertyIsEnumerable;var Yl=(e,t,n)=>t in e?Xs(e,t,{enumerable:!0,configurable:!0,writable:!0,value:n}):e[t]=n,ee=(e,t)=>{for(var n in t||(t={}))ta.call(t,n)&&Yl(e,n,t[n]);if(Jl)for(var n of Jl(t))na.call(t,n)&&Yl(e,n,t[n]);return e},ge=(e,t)=>Gs(e,ea(t));const ia=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const l of document.querySelectorAll('link[rel="modulepreload"]'))i(l);new MutationObserver(l=>{for(const r of l)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function n(l){const r={};return l.integrity&&(r.integrity=l.integrity),l.referrerpolicy&&(r.referrerPolicy=l.referrerpolicy),l.crossorigin==="use-credentials"?r.credentials="include":l.crossorigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(l){if(l.ep)return;l.ep=!0;const r=n(l);fetch(l.href,r)}};ia();function xl(e,t){const n=Object.create(null),i=e.split(",");for(let l=0;l<i.length;l++)n[i[l]]=!0;return t?l=>!!n[l.toLowerCase()]:l=>!!n[l]}const la="itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly",ra=xl(la);function po(e){return!!e||e===""}function wl(e){if(X(e)){const t={};for(let n=0;n<e.length;n++){const i=e[n],l=be(i)?aa(i):wl(i);if(l)for(const r in l)t[r]=l[r]}return t}else{if(be(e))return e;if(ye(e))return e}}const oa=/;(?![^(]*\))/g,sa=/:(.+)/;function aa(e){const t={};return e.split(oa).forEach(n=>{if(n){const i=n.split(sa);i.length>1&&(t[i[0].trim()]=i[1].trim())}}),t}function Zt(e){let t="";if(be(e))t=e;else if(X(e))for(let n=0;n<e.length;n++){const i=Zt(e[n]);i&&(t+=i+" ")}else if(ye(e))for(const n in e)e[n]&&(t+=n+" ");return t.trim()}const Bn=e=>be(e)?e:e==null?"":X(e)||ye(e)&&(e.toString===xo||!te(e.toString))?JSON.stringify(e,bo,2):String(e),bo=(e,t)=>t&&t.__v_isRef?bo(e,t.value):Qt(t)?{[`Map(${t.size})`]:[...t.entries()].reduce((n,[i,l])=>(n[`${i} =>`]=l,n),{})}:yo(t)?{[`Set(${t.size})`]:[...t.values()]}:ye(t)&&!X(t)&&!wo(t)?String(t):t,ce={},Kt=[],it=()=>{},ua=()=>!1,ca=/^on[^a-z]/,di=e=>ca.test(e),Cl=e=>e.startsWith("onUpdate:"),Re=Object.assign,El=(e,t)=>{const n=e.indexOf(t);n>-1&&e.splice(n,1)},fa=Object.prototype.hasOwnProperty,ne=(e,t)=>fa.call(e,t),X=Array.isArray,Qt=e=>hi(e)==="[object Map]",yo=e=>hi(e)==="[object Set]",te=e=>typeof e=="function",be=e=>typeof e=="string",Sl=e=>typeof e=="symbol",ye=e=>e!==null&&typeof e=="object",_o=e=>ye(e)&&te(e.then)&&te(e.catch),xo=Object.prototype.toString,hi=e=>xo.call(e),da=e=>hi(e).slice(8,-1),wo=e=>hi(e)==="[object Object]",kl=e=>be(e)&&e!=="NaN"&&e[0]!=="-"&&""+parseInt(e,10)===e,Qn=xl(",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"),gi=e=>{const t=Object.create(null);return n=>t[n]||(t[n]=e(n))},ha=/-(\w)/g,lt=gi(e=>e.replace(ha,(t,n)=>n?n.toUpperCase():"")),ga=/\B([A-Z])/g,Xt=gi(e=>e.replace(ga,"-$1").toLowerCase()),mi=gi(e=>e.charAt(0).toUpperCase()+e.slice(1)),Pi=gi(e=>e?`on${mi(e)}`:""),xn=(e,t)=>!Object.is(e,t),Fi=(e,t)=>{for(let n=0;n<e.length;n++)e[n](t)},Xn=(e,t,n)=>{Object.defineProperty(e,t,{configurable:!0,enumerable:!1,value:n})},Co=e=>{const t=parseFloat(e);return isNaN(t)?e:t};let Xl;const ma=()=>Xl||(Xl=typeof globalThis!="undefined"?globalThis:typeof self!="undefined"?self:typeof window!="undefined"?window:typeof global!="undefined"?global:{});let Xe;class Eo{constructor(t=!1){this.active=!0,this.effects=[],this.cleanups=[],!t&&Xe&&(this.parent=Xe,this.index=(Xe.scopes||(Xe.scopes=[])).push(this)-1)}run(t){if(this.active){const n=Xe;try{return Xe=this,t()}finally{Xe=n}}}on(){Xe=this}off(){Xe=this.parent}stop(t){if(this.active){let n,i;for(n=0,i=this.effects.length;n<i;n++)this.effects[n].stop();for(n=0,i=this.cleanups.length;n<i;n++)this.cleanups[n]();if(this.scopes)for(n=0,i=this.scopes.length;n<i;n++)this.scopes[n].stop(!0);if(this.parent&&!t){const l=this.parent.scopes.pop();l&&l!==this&&(this.parent.scopes[this.index]=l,l.index=this.index)}this.active=!1}}}function So(e){return new Eo(e)}function va(e,t=Xe){t&&t.active&&t.effects.push(e)}const Rl=e=>{const t=new Set(e);return t.w=0,t.n=0,t},ko=e=>(e.w&_t)>0,Ro=e=>(e.n&_t)>0,pa=({deps:e})=>{if(e.length)for(let t=0;t<e.length;t++)e[t].w|=_t},ba=e=>{const{deps:t}=e;if(t.length){let n=0;for(let i=0;i<t.length;i++){const l=t[i];ko(l)&&!Ro(l)?l.delete(e):t[n++]=l,l.w&=~_t,l.n&=~_t}t.length=n}},Ui=new WeakMap;let fn=0,_t=1;const Ki=30;let Ue;const It=Symbol(""),Qi=Symbol("");class Tl{constructor(t,n=null,i){this.fn=t,this.scheduler=n,this.active=!0,this.deps=[],this.parent=void 0,va(this,i)}run(){if(!this.active)return this.fn();let t=Ue,n=pt;for(;t;){if(t===this)return;t=t.parent}try{return this.parent=Ue,Ue=this,pt=!0,_t=1<<++fn,fn<=Ki?pa(this):Gl(this),this.fn()}finally{fn<=Ki&&ba(this),_t=1<<--fn,Ue=this.parent,pt=n,this.parent=void 0,this.deferStop&&this.stop()}}stop(){Ue===this?this.deferStop=!0:this.active&&(Gl(this),this.onStop&&this.onStop(),this.active=!1)}}function Gl(e){const{deps:t}=e;if(t.length){for(let n=0;n<t.length;n++)t[n].delete(e);t.length=0}}let pt=!0;const To=[];function Gt(){To.push(pt),pt=!1}function en(){const e=To.pop();pt=e===void 0?!0:e}function $e(e,t,n){if(pt&&Ue){let i=Ui.get(e);i||Ui.set(e,i=new Map);let l=i.get(n);l||i.set(n,l=Rl()),Mo(l)}}function Mo(e,t){let n=!1;fn<=Ki?Ro(e)||(e.n|=_t,n=!ko(e)):n=!e.has(Ue),n&&(e.add(Ue),Ue.deps.push(e))}function at(e,t,n,i,l,r){const o=Ui.get(e);if(!o)return;let s=[];if(t==="clear")s=[...o.values()];else if(n==="length"&&X(e))o.forEach((a,u)=>{(u==="length"||u>=i)&&s.push(a)});else switch(n!==void 0&&s.push(o.get(n)),t){case"add":X(e)?kl(n)&&s.push(o.get("length")):(s.push(o.get(It)),Qt(e)&&s.push(o.get(Qi)));break;case"delete":X(e)||(s.push(o.get(It)),Qt(e)&&s.push(o.get(Qi)));break;case"set":Qt(e)&&s.push(o.get(It));break}if(s.length===1)s[0]&&Zi(s[0]);else{const a=[];for(const u of s)u&&a.push(...u);Zi(Rl(a))}}function Zi(e,t){const n=X(e)?e:[...e];for(const i of n)i.computed&&er(i);for(const i of n)i.computed||er(i)}function er(e,t){(e!==Ue||e.allowRecurse)&&(e.scheduler?e.scheduler():e.run())}const ya=xl("__proto__,__v_isRef,__isVue"),Ao=new Set(Object.getOwnPropertyNames(Symbol).filter(e=>e!=="arguments"&&e!=="caller").map(e=>Symbol[e]).filter(Sl)),_a=Ml(),xa=Ml(!1,!0),wa=Ml(!0),tr=Ca();function Ca(){const e={};return["includes","indexOf","lastIndexOf"].forEach(t=>{e[t]=function(...n){const i=re(this);for(let r=0,o=this.length;r<o;r++)$e(i,"get",r+"");const l=i[t](...n);return l===-1||l===!1?i[t](...n.map(re)):l}}),["push","pop","shift","unshift","splice"].forEach(t=>{e[t]=function(...n){Gt();const i=re(this)[t].apply(this,n);return en(),i}}),e}function Ml(e=!1,t=!1){return function(i,l,r){if(l==="__v_isReactive")return!e;if(l==="__v_isReadonly")return e;if(l==="__v_isShallow")return t;if(l==="__v_raw"&&r===(e?t?Na:Bo:t?Fo:Po).get(i))return i;const o=X(i);if(!e&&o&&ne(tr,l))return Reflect.get(tr,l,r);const s=Reflect.get(i,l,r);return(Sl(l)?Ao.has(l):ya(l))||(e||$e(i,"get",l),t)?s:me(s)?o&&kl(l)?s:s.value:ye(s)?e?Oo(s):tn(s):s}}const Ea=qo(),Sa=qo(!0);function qo(e=!1){return function(n,i,l,r){let o=n[i];if(wn(o)&&me(o)&&!me(l))return!1;if(!e&&!wn(l)&&(Ji(l)||(l=re(l),o=re(o)),!X(n)&&me(o)&&!me(l)))return o.value=l,!0;const s=X(n)&&kl(i)?Number(i)<n.length:ne(n,i),a=Reflect.set(n,i,l,r);return n===re(r)&&(s?xn(l,o)&&at(n,"set",i,l):at(n,"add",i,l)),a}}function ka(e,t){const n=ne(e,t);e[t];const i=Reflect.deleteProperty(e,t);return i&&n&&at(e,"delete",t,void 0),i}function Ra(e,t){const n=Reflect.has(e,t);return(!Sl(t)||!Ao.has(t))&&$e(e,"has",t),n}function Ta(e){return $e(e,"iterate",X(e)?"length":It),Reflect.ownKeys(e)}const Lo={get:_a,set:Ea,deleteProperty:ka,has:Ra,ownKeys:Ta},Ma={get:wa,set(e,t){return!0},deleteProperty(e,t){return!0}},Aa=Re({},Lo,{get:xa,set:Sa}),Al=e=>e,vi=e=>Reflect.getPrototypeOf(e);function In(e,t,n=!1,i=!1){e=e.__v_raw;const l=re(e),r=re(t);n||(t!==r&&$e(l,"get",t),$e(l,"get",r));const{has:o}=vi(l),s=i?Al:n?Pl:Cn;if(o.call(l,t))return s(e.get(t));if(o.call(l,r))return s(e.get(r));e!==l&&e.get(t)}function On(e,t=!1){const n=this.__v_raw,i=re(n),l=re(e);return t||(e!==l&&$e(i,"has",e),$e(i,"has",l)),e===l?n.has(e):n.has(e)||n.has(l)}function $n(e,t=!1){return e=e.__v_raw,!t&&$e(re(e),"iterate",It),Reflect.get(e,"size",e)}function nr(e){e=re(e);const t=re(this);return vi(t).has.call(t,e)||(t.add(e),at(t,"add",e,e)),this}function ir(e,t){t=re(t);const n=re(this),{has:i,get:l}=vi(n);let r=i.call(n,e);r||(e=re(e),r=i.call(n,e));const o=l.call(n,e);return n.set(e,t),r?xn(t,o)&&at(n,"set",e,t):at(n,"add",e,t),this}function lr(e){const t=re(this),{has:n,get:i}=vi(t);let l=n.call(t,e);l||(e=re(e),l=n.call(t,e)),i&&i.call(t,e);const r=t.delete(e);return l&&at(t,"delete",e,void 0),r}function rr(){const e=re(this),t=e.size!==0,n=e.clear();return t&&at(e,"clear",void 0,void 0),n}function Nn(e,t){return function(i,l){const r=this,o=r.__v_raw,s=re(o),a=t?Al:e?Pl:Cn;return!e&&$e(s,"iterate",It),o.forEach((u,c)=>i.call(l,a(u),a(c),r))}}function jn(e,t,n){return function(...i){const l=this.__v_raw,r=re(l),o=Qt(r),s=e==="entries"||e===Symbol.iterator&&o,a=e==="keys"&&o,u=l[e](...i),c=n?Al:t?Pl:Cn;return!t&&$e(r,"iterate",a?Qi:It),{next(){const{value:v,done:g}=u.next();return g?{value:v,done:g}:{value:s?[c(v[0]),c(v[1])]:c(v),done:g}},[Symbol.iterator](){return this}}}}function ct(e){return function(...t){return e==="delete"?!1:this}}function qa(){const e={get(r){return In(this,r)},get size(){return $n(this)},has:On,add:nr,set:ir,delete:lr,clear:rr,forEach:Nn(!1,!1)},t={get(r){return In(this,r,!1,!0)},get size(){return $n(this)},has:On,add:nr,set:ir,delete:lr,clear:rr,forEach:Nn(!1,!0)},n={get(r){return In(this,r,!0)},get size(){return $n(this,!0)},has(r){return On.call(this,r,!0)},add:ct("add"),set:ct("set"),delete:ct("delete"),clear:ct("clear"),forEach:Nn(!0,!1)},i={get(r){return In(this,r,!0,!0)},get size(){return $n(this,!0)},has(r){return On.call(this,r,!0)},add:ct("add"),set:ct("set"),delete:ct("delete"),clear:ct("clear"),forEach:Nn(!0,!0)};return["keys","values","entries",Symbol.iterator].forEach(r=>{e[r]=jn(r,!1,!1),n[r]=jn(r,!0,!1),t[r]=jn(r,!1,!0),i[r]=jn(r,!0,!0)}),[e,n,t,i]}const[La,Pa,Fa,Ba]=qa();function ql(e,t){const n=t?e?Ba:Fa:e?Pa:La;return(i,l,r)=>l==="__v_isReactive"?!e:l==="__v_isReadonly"?e:l==="__v_raw"?i:Reflect.get(ne(n,l)&&l in i?n:i,l,r)}const Ia={get:ql(!1,!1)},Oa={get:ql(!1,!0)},$a={get:ql(!0,!1)},Po=new WeakMap,Fo=new WeakMap,Bo=new WeakMap,Na=new WeakMap;function ja(e){switch(e){case"Object":case"Array":return 1;case"Map":case"Set":case"WeakMap":case"WeakSet":return 2;default:return 0}}function Ha(e){return e.__v_skip||!Object.isExtensible(e)?0:ja(da(e))}function tn(e){return wn(e)?e:Ll(e,!1,Lo,Ia,Po)}function Io(e){return Ll(e,!1,Aa,Oa,Fo)}function Oo(e){return Ll(e,!0,Ma,$a,Bo)}function Ll(e,t,n,i,l){if(!ye(e)||e.__v_raw&&!(t&&e.__v_isReactive))return e;const r=l.get(e);if(r)return r;const o=Ha(e);if(o===0)return e;const s=new Proxy(e,o===2?i:n);return l.set(e,s),s}function bt(e){return wn(e)?bt(e.__v_raw):!!(e&&e.__v_isReactive)}function wn(e){return!!(e&&e.__v_isReadonly)}function Ji(e){return!!(e&&e.__v_isShallow)}function $o(e){return bt(e)||wn(e)}function re(e){const t=e&&e.__v_raw;return t?re(t):e}function xt(e){return Xn(e,"__v_skip",!0),e}const Cn=e=>ye(e)?tn(e):e,Pl=e=>ye(e)?Oo(e):e;function No(e){pt&&Ue&&(e=re(e),Mo(e.dep||(e.dep=Rl())))}function jo(e,t){e=re(e),e.dep&&Zi(e.dep)}function me(e){return!!(e&&e.__v_isRef===!0)}function le(e){return Da(e,!1)}function Da(e,t){return me(e)?e:new Va(e,t)}class Va{constructor(t,n){this.__v_isShallow=n,this.dep=void 0,this.__v_isRef=!0,this._rawValue=n?t:re(t),this._value=n?t:Cn(t)}get value(){return No(this),this._value}set value(t){t=this.__v_isShallow?t:re(t),xn(t,this._rawValue)&&(this._rawValue=t,this._value=this.__v_isShallow?t:Cn(t),jo(this))}}function At(e){return me(e)?e.value:e}const za={get:(e,t,n)=>At(Reflect.get(e,t,n)),set:(e,t,n,i)=>{const l=e[t];return me(l)&&!me(n)?(l.value=n,!0):Reflect.set(e,t,n,i)}};function Ho(e){return bt(e)?e:new Proxy(e,za)}function Wa(e){const t=X(e)?new Array(e.length):{};for(const n in e)t[n]=Ka(e,n);return t}class Ua{constructor(t,n,i){this._object=t,this._key=n,this._defaultValue=i,this.__v_isRef=!0}get value(){const t=this._object[this._key];return t===void 0?this._defaultValue:t}set value(t){this._object[this._key]=t}}function Ka(e,t,n){const i=e[t];return me(i)?i:new Ua(e,t,n)}class Qa{constructor(t,n,i,l){this._setter=n,this.dep=void 0,this.__v_isRef=!0,this._dirty=!0,this.effect=new Tl(t,()=>{this._dirty||(this._dirty=!0,jo(this))}),this.effect.computed=this,this.effect.active=this._cacheable=!l,this.__v_isReadonly=i}get value(){const t=re(this);return No(t),(t._dirty||!t._cacheable)&&(t._dirty=!1,t._value=t.effect.run()),t._value}set value(t){this._setter(t)}}function Za(e,t,n=!1){let i,l;const r=te(e);return r?(i=e,l=it):(i=e.get,l=e.set),new Qa(i,l,r||!l,n)}function yt(e,t,n,i){let l;try{l=i?e(...i):e()}catch(r){pi(r,t,n)}return l}function Ve(e,t,n,i){if(te(e)){const r=yt(e,t,n,i);return r&&_o(r)&&r.catch(o=>{pi(o,t,n)}),r}const l=[];for(let r=0;r<e.length;r++)l.push(Ve(e[r],t,n,i));return l}function pi(e,t,n,i){if(t&&t.vnode,t){let l=t.parent;const r=t.proxy,o=n;for(;l;){const a=l.ec;if(a){for(let u=0;u<a.length;u++)if(a[u](e,r,o)===!1)return}l=l.parent}const s=t.appContext.config.errorHandler;if(s){yt(s,null,10,[e,r,o]);return}}Ja(e)}function Ja(e,t,n,i){console.error(e)}let Gn=!1,Yi=!1;const Ie=[];let st=0;const gn=[];let dn=null,Wt=0;const mn=[];let ht=null,Ut=0;const Do=Promise.resolve();let Fl=null,Xi=null;function Pe(e){const t=Fl||Do;return e?t.then(this?e.bind(this):e):t}function Ya(e){let t=st+1,n=Ie.length;for(;t<n;){const i=t+n>>>1;En(Ie[i])<e?t=i+1:n=i}return t}function Vo(e){(!Ie.length||!Ie.includes(e,Gn&&e.allowRecurse?st+1:st))&&e!==Xi&&(e.id==null?Ie.push(e):Ie.splice(Ya(e.id),0,e),zo())}function zo(){!Gn&&!Yi&&(Yi=!0,Fl=Do.then(Ko))}function Xa(e){const t=Ie.indexOf(e);t>st&&Ie.splice(t,1)}function Wo(e,t,n,i){X(e)?n.push(...e):(!t||!t.includes(e,e.allowRecurse?i+1:i))&&n.push(e),zo()}function Ga(e){Wo(e,dn,gn,Wt)}function eu(e){Wo(e,ht,mn,Ut)}function bi(e,t=null){if(gn.length){for(Xi=t,dn=[...new Set(gn)],gn.length=0,Wt=0;Wt<dn.length;Wt++)dn[Wt]();dn=null,Wt=0,Xi=null,bi(e,t)}}function Uo(e){if(bi(),mn.length){const t=[...new Set(mn)];if(mn.length=0,ht){ht.push(...t);return}for(ht=t,ht.sort((n,i)=>En(n)-En(i)),Ut=0;Ut<ht.length;Ut++)ht[Ut]();ht=null,Ut=0}}const En=e=>e.id==null?1/0:e.id;function Ko(e){Yi=!1,Gn=!0,bi(e),Ie.sort((n,i)=>En(n)-En(i));const t=it;try{for(st=0;st<Ie.length;st++){const n=Ie[st];n&&n.active!==!1&&yt(n,null,14)}}finally{st=0,Ie.length=0,Uo(),Gn=!1,Fl=null,(Ie.length||gn.length||mn.length)&&Ko(e)}}function tu(e,t,...n){if(e.isUnmounted)return;const i=e.vnode.props||ce;let l=n;const r=t.startsWith("update:"),o=r&&t.slice(7);if(o&&o in i){const c=`${o==="modelValue"?"model":o}Modifiers`,{number:v,trim:g}=i[c]||ce;g&&(l=n.map(d=>d.trim())),v&&(l=n.map(Co))}let s,a=i[s=Pi(t)]||i[s=Pi(lt(t))];!a&&r&&(a=i[s=Pi(Xt(t))]),a&&Ve(a,e,6,l);const u=i[s+"Once"];if(u){if(!e.emitted)e.emitted={};else if(e.emitted[s])return;e.emitted[s]=!0,Ve(u,e,6,l)}}function Qo(e,t,n=!1){const i=t.emitsCache,l=i.get(e);if(l!==void 0)return l;const r=e.emits;let o={},s=!1;if(!te(e)){const a=u=>{const c=Qo(u,t,!0);c&&(s=!0,Re(o,c))};!n&&t.mixins.length&&t.mixins.forEach(a),e.extends&&a(e.extends),e.mixins&&e.mixins.forEach(a)}return!r&&!s?(i.set(e,null),null):(X(r)?r.forEach(a=>o[a]=null):Re(o,r),i.set(e,o),o)}function yi(e,t){return!e||!di(t)?!1:(t=t.slice(2).replace(/Once$/,""),ne(e,t[0].toLowerCase()+t.slice(1))||ne(e,Xt(t))||ne(e,t))}let De=null,_i=null;function ei(e){const t=De;return De=e,_i=e&&e.type.__scopeId||null,t}function nu(e){_i=e}function iu(){_i=null}function Ge(e,t=De,n){if(!t||e._n)return e;const i=(...l)=>{i._d&&br(-1);const r=ei(t),o=e(...l);return ei(r),i._d&&br(1),o};return i._n=!0,i._c=!0,i._d=!0,i}function Bi(e){const{type:t,vnode:n,proxy:i,withProxy:l,props:r,propsOptions:[o],slots:s,attrs:a,emit:u,render:c,renderCache:v,data:g,setupState:d,ctx:_,inheritAttrs:S}=e;let w,T;const E=ei(e);try{if(n.shapeFlag&4){const R=l||i;w=tt(c.call(R,R,v,r,d,g,_)),T=a}else{const R=t;w=tt(R.length>1?R(r,{attrs:a,slots:s,emit:u}):R(r,null)),T=t.props?a:lu(a)}}catch(R){bn.length=0,pi(R,e,1),w=xe(Ze)}let O=w;if(T&&S!==!1){const R=Object.keys(T),{shapeFlag:V}=O;R.length&&V&7&&(o&&R.some(Cl)&&(T=ru(T,o)),O=wt(O,T))}return n.dirs&&(O=wt(O),O.dirs=O.dirs?O.dirs.concat(n.dirs):n.dirs),n.transition&&(O.transition=n.transition),w=O,ei(E),w}const lu=e=>{let t;for(const n in e)(n==="class"||n==="style"||di(n))&&((t||(t={}))[n]=e[n]);return t},ru=(e,t)=>{const n={};for(const i in e)(!Cl(i)||!(i.slice(9)in t))&&(n[i]=e[i]);return n};function ou(e,t,n){const{props:i,children:l,component:r}=e,{props:o,children:s,patchFlag:a}=t,u=r.emitsOptions;if(t.dirs||t.transition)return!0;if(n&&a>=0){if(a&1024)return!0;if(a&16)return i?or(i,o,u):!!o;if(a&8){const c=t.dynamicProps;for(let v=0;v<c.length;v++){const g=c[v];if(o[g]!==i[g]&&!yi(u,g))return!0}}}else return(l||s)&&(!s||!s.$stable)?!0:i===o?!1:i?o?or(i,o,u):!0:!!o;return!1}function or(e,t,n){const i=Object.keys(t);if(i.length!==Object.keys(e).length)return!0;for(let l=0;l<i.length;l++){const r=i[l];if(t[r]!==e[r]&&!yi(n,r))return!0}return!1}function su({vnode:e,parent:t},n){for(;t&&t.subTree===e;)(e=t.vnode).el=n,t=t.parent}const au=e=>e.__isSuspense;function uu(e,t){t&&t.pendingBranch?X(e)?t.effects.push(...e):t.effects.push(e):eu(e)}function cu(e,t){if(Ee){let n=Ee.provides;const i=Ee.parent&&Ee.parent.provides;i===n&&(n=Ee.provides=Object.create(i)),n[e]=t}}function vn(e,t,n=!1){const i=Ee||De;if(i){const l=i.parent==null?i.vnode.appContext&&i.vnode.appContext.provides:i.parent.provides;if(l&&e in l)return l[e];if(arguments.length>1)return n&&te(t)?t.call(i.proxy):t}}function fu(e,t){return Bl(e,null,t)}const sr={};function se(e,t,n){return Bl(e,t,n)}function Bl(e,t,{immediate:n,deep:i,flush:l,onTrack:r,onTrigger:o}=ce){const s=Ee;let a,u=!1,c=!1;if(me(e)?(a=()=>e.value,u=Ji(e)):bt(e)?(a=()=>e,i=!0):X(e)?(c=!0,u=e.some(T=>bt(T)||Ji(T)),a=()=>e.map(T=>{if(me(T))return T.value;if(bt(T))return Ft(T);if(te(T))return yt(T,s,2)})):te(e)?t?a=()=>yt(e,s,2):a=()=>{if(!(s&&s.isUnmounted))return v&&v(),Ve(e,s,3,[g])}:a=it,t&&i){const T=a;a=()=>Ft(T())}let v,g=T=>{v=w.onStop=()=>{yt(T,s,4)}};if(kn)return g=it,t?n&&Ve(t,s,3,[a(),c?[]:void 0,g]):a(),it;let d=c?[]:sr;const _=()=>{if(!!w.active)if(t){const T=w.run();(i||u||(c?T.some((E,O)=>xn(E,d[O])):xn(T,d)))&&(v&&v(),Ve(t,s,3,[T,d===sr?void 0:d,g]),d=T)}else w.run()};_.allowRecurse=!!t;let S;l==="sync"?S=_:l==="post"?S=()=>Le(_,s&&s.suspense):S=()=>Ga(_);const w=new Tl(a,S);return t?n?_():d=w.run():l==="post"?Le(w.run.bind(w),s&&s.suspense):w.run(),()=>{w.stop(),s&&s.scope&&El(s.scope.effects,w)}}function du(e,t,n){const i=this.proxy,l=be(e)?e.includes(".")?Zo(i,e):()=>i[e]:e.bind(i,i);let r;te(t)?r=t:(r=t.handler,n=t);const o=Ee;Jt(this);const s=Bl(l,r.bind(i),n);return o?Jt(o):Ot(),s}function Zo(e,t){const n=t.split(".");return()=>{let i=e;for(let l=0;l<n.length&&i;l++)i=i[n[l]];return i}}function Ft(e,t){if(!ye(e)||e.__v_skip||(t=t||new Set,t.has(e)))return e;if(t.add(e),me(e))Ft(e.value,t);else if(X(e))for(let n=0;n<e.length;n++)Ft(e[n],t);else if(yo(e)||Qt(e))e.forEach(n=>{Ft(n,t)});else if(wo(e))for(const n in e)Ft(e[n],t);return e}function hu(){const e={isMounted:!1,isLeaving:!1,isUnmounting:!1,leavingVNodes:new Map};return nn(()=>{e.isMounted=!0}),qe(()=>{e.isUnmounting=!0}),e}const je=[Function,Array],gu={name:"BaseTransition",props:{mode:String,appear:Boolean,persisted:Boolean,onBeforeEnter:je,onEnter:je,onAfterEnter:je,onEnterCancelled:je,onBeforeLeave:je,onLeave:je,onAfterLeave:je,onLeaveCancelled:je,onBeforeAppear:je,onAppear:je,onAfterAppear:je,onAppearCancelled:je},setup(e,{slots:t}){const n=we(),i=hu();let l;return()=>{const r=t.default&&Xo(t.default(),!0);if(!r||!r.length)return;let o=r[0];if(r.length>1){for(const S of r)if(S.type!==Ze){o=S;break}}const s=re(e),{mode:a}=s;if(i.isLeaving)return Ii(o);const u=ar(o);if(!u)return Ii(o);const c=Gi(u,s,i,n);el(u,c);const v=n.subTree,g=v&&ar(v);let d=!1;const{getTransitionKey:_}=u.type;if(_){const S=_();l===void 0?l=S:S!==l&&(l=S,d=!0)}if(g&&g.type!==Ze&&(!Lt(u,g)||d)){const S=Gi(g,s,i,n);if(el(g,S),a==="out-in")return i.isLeaving=!0,S.afterLeave=()=>{i.isLeaving=!1,n.update()},Ii(o);a==="in-out"&&u.type!==Ze&&(S.delayLeave=(w,T,E)=>{const O=Yo(i,g);O[String(g.key)]=g,w._leaveCb=()=>{T(),w._leaveCb=void 0,delete c.delayedLeave},c.delayedLeave=E})}return o}}},Jo=gu;function Yo(e,t){const{leavingVNodes:n}=e;let i=n.get(t.type);return i||(i=Object.create(null),n.set(t.type,i)),i}function Gi(e,t,n,i){const{appear:l,mode:r,persisted:o=!1,onBeforeEnter:s,onEnter:a,onAfterEnter:u,onEnterCancelled:c,onBeforeLeave:v,onLeave:g,onAfterLeave:d,onLeaveCancelled:_,onBeforeAppear:S,onAppear:w,onAfterAppear:T,onAppearCancelled:E}=t,O=String(e.key),R=Yo(n,e),V=(b,M)=>{b&&Ve(b,i,9,M)},p=(b,M)=>{const F=M[1];V(b,M),X(b)?b.every(I=>I.length<=1)&&F():b.length<=1&&F()},y={mode:r,persisted:o,beforeEnter(b){let M=s;if(!n.isMounted)if(l)M=S||s;else return;b._leaveCb&&b._leaveCb(!0);const F=R[O];F&&Lt(e,F)&&F.el._leaveCb&&F.el._leaveCb(),V(M,[b])},enter(b){let M=a,F=u,I=c;if(!n.isMounted)if(l)M=w||a,F=T||u,I=E||c;else return;let A=!1;const k=b._enterCb=K=>{A||(A=!0,K?V(I,[b]):V(F,[b]),y.delayedLeave&&y.delayedLeave(),b._enterCb=void 0)};M?p(M,[b,k]):k()},leave(b,M){const F=String(e.key);if(b._enterCb&&b._enterCb(!0),n.isUnmounting)return M();V(v,[b]);let I=!1;const A=b._leaveCb=k=>{I||(I=!0,M(),k?V(_,[b]):V(d,[b]),b._leaveCb=void 0,R[F]===e&&delete R[F])};R[F]=e,g?p(g,[b,A]):A()},clone(b){return Gi(b,t,n,i)}};return y}function Ii(e){if(xi(e))return e=wt(e),e.children=null,e}function ar(e){return xi(e)?e.children?e.children[0]:void 0:e}function el(e,t){e.shapeFlag&6&&e.component?el(e.component.subTree,t):e.shapeFlag&128?(e.ssContent.transition=t.clone(e.ssContent),e.ssFallback.transition=t.clone(e.ssFallback)):e.transition=t}function Xo(e,t=!1,n){let i=[],l=0;for(let r=0;r<e.length;r++){let o=e[r];const s=n==null?o.key:String(n)+String(o.key!=null?o.key:r);o.type===Ae?(o.patchFlag&128&&l++,i=i.concat(Xo(o.children,t,s))):(t||o.type!==Ze)&&i.push(s!=null?wt(o,{key:s}):o)}if(l>1)for(let r=0;r<i.length;r++)i[r].patchFlag=-2;return i}function qn(e){return te(e)?{setup:e,name:e.name}:e}const Zn=e=>!!e.type.__asyncLoader,xi=e=>e.type.__isKeepAlive;function Go(e,t){ts(e,"a",t)}function es(e,t){ts(e,"da",t)}function ts(e,t,n=Ee){const i=e.__wdc||(e.__wdc=()=>{let l=n;for(;l;){if(l.isDeactivated)return;l=l.parent}return e()});if(wi(t,i,n),n){let l=n.parent;for(;l&&l.parent;)xi(l.parent.vnode)&&mu(i,t,n,l),l=l.parent}}function mu(e,t,n,i){const l=wi(t,e,i,!0);Ci(()=>{El(i[t],l)},n)}function wi(e,t,n=Ee,i=!1){if(n){const l=n[e]||(n[e]=[]),r=t.__weh||(t.__weh=(...o)=>{if(n.isUnmounted)return;Gt(),Jt(n);const s=Ve(t,n,e,o);return Ot(),en(),s});return i?l.unshift(r):l.push(r),r}}const ut=e=>(t,n=Ee)=>(!kn||e==="sp")&&wi(e,t,n),vu=ut("bm"),nn=ut("m"),ns=ut("bu"),pu=ut("u"),qe=ut("bum"),Ci=ut("um"),bu=ut("sp"),yu=ut("rtg"),_u=ut("rtc");function xu(e,t=Ee){wi("ec",e,t)}function Il(e,t){const n=De;if(n===null)return e;const i=Si(n)||n.proxy,l=e.dirs||(e.dirs=[]);for(let r=0;r<t.length;r++){let[o,s,a,u=ce]=t[r];te(o)&&(o={mounted:o,updated:o}),o.deep&&Ft(s),l.push({dir:o,instance:i,value:s,oldValue:void 0,arg:a,modifiers:u})}return e}function St(e,t,n,i){const l=e.dirs,r=t&&t.dirs;for(let o=0;o<l.length;o++){const s=l[o];r&&(s.oldValue=r[o].value);let a=s.dir[i];a&&(Gt(),Ve(a,n,8,[e.el,s,e,t]),en())}}const is="components",ls=Symbol();function ur(e){return be(e)?wu(is,e)||e:e||ls}function wu(e,t,n,i=!1){const l=De||Ee;if(l){const r=l.type;if(e===is){const s=ec(r);if(s&&(s===t||s===lt(t)||s===mi(lt(t))))return r}const o=cr(l[e]||r[e],t)||cr(l.appContext[e],t);return!o&&i?r:o}}function cr(e,t){return e&&(e[t]||e[lt(t)]||e[mi(lt(t))])}function Hn(e,t,n,i){let l;const r=n&&n[i];if(X(e)||be(e)){l=new Array(e.length);for(let o=0,s=e.length;o<s;o++)l[o]=t(e[o],o,void 0,r&&r[o])}else if(typeof e=="number"){l=new Array(e);for(let o=0;o<e;o++)l[o]=t(o+1,o,void 0,r&&r[o])}else if(ye(e))if(e[Symbol.iterator])l=Array.from(e,(o,s)=>t(o,s,void 0,r&&r[s]));else{const o=Object.keys(e);l=new Array(o.length);for(let s=0,a=o.length;s<a;s++){const u=o[s];l[s]=t(e[u],u,s,r&&r[s])}}else l=[];return n&&(n[i]=l),l}const tl=e=>e?ms(e)?Si(e)||e.proxy:tl(e.parent):null,ti=Re(Object.create(null),{$:e=>e,$el:e=>e.vnode.el,$data:e=>e.data,$props:e=>e.props,$attrs:e=>e.attrs,$slots:e=>e.slots,$refs:e=>e.refs,$parent:e=>tl(e.parent),$root:e=>tl(e.root),$emit:e=>e.emit,$options:e=>os(e),$forceUpdate:e=>e.f||(e.f=()=>Vo(e.update)),$nextTick:e=>e.n||(e.n=Pe.bind(e.proxy)),$watch:e=>du.bind(e)}),Cu={get({_:e},t){const{ctx:n,setupState:i,data:l,props:r,accessCache:o,type:s,appContext:a}=e;let u;if(t[0]!=="$"){const d=o[t];if(d!==void 0)switch(d){case 1:return i[t];case 2:return l[t];case 4:return n[t];case 3:return r[t]}else{if(i!==ce&&ne(i,t))return o[t]=1,i[t];if(l!==ce&&ne(l,t))return o[t]=2,l[t];if((u=e.propsOptions[0])&&ne(u,t))return o[t]=3,r[t];if(n!==ce&&ne(n,t))return o[t]=4,n[t];nl&&(o[t]=0)}}const c=ti[t];let v,g;if(c)return t==="$attrs"&&$e(e,"get",t),c(e);if((v=s.__cssModules)&&(v=v[t]))return v;if(n!==ce&&ne(n,t))return o[t]=4,n[t];if(g=a.config.globalProperties,ne(g,t))return g[t]},set({_:e},t,n){const{data:i,setupState:l,ctx:r}=e;return l!==ce&&ne(l,t)?(l[t]=n,!0):i!==ce&&ne(i,t)?(i[t]=n,!0):ne(e.props,t)||t[0]==="$"&&t.slice(1)in e?!1:(r[t]=n,!0)},has({_:{data:e,setupState:t,accessCache:n,ctx:i,appContext:l,propsOptions:r}},o){let s;return!!n[o]||e!==ce&&ne(e,o)||t!==ce&&ne(t,o)||(s=r[0])&&ne(s,o)||ne(i,o)||ne(ti,o)||ne(l.config.globalProperties,o)},defineProperty(e,t,n){return n.get!=null?e._.accessCache[t]=0:ne(n,"value")&&this.set(e,t,n.value,null),Reflect.defineProperty(e,t,n)}};let nl=!0;function Eu(e){const t=os(e),n=e.proxy,i=e.ctx;nl=!1,t.beforeCreate&&fr(t.beforeCreate,e,"bc");const{data:l,computed:r,methods:o,watch:s,provide:a,inject:u,created:c,beforeMount:v,mounted:g,beforeUpdate:d,updated:_,activated:S,deactivated:w,beforeDestroy:T,beforeUnmount:E,destroyed:O,unmounted:R,render:V,renderTracked:p,renderTriggered:y,errorCaptured:b,serverPrefetch:M,expose:F,inheritAttrs:I,components:A,directives:k,filters:K}=t;if(u&&Su(u,i,null,e.appContext.config.unwrapInjectedRef),o)for(const C in o){const U=o[C];te(U)&&(i[C]=U.bind(n))}if(l){const C=l.call(n,n);ye(C)&&(e.data=tn(C))}if(nl=!0,r)for(const C in r){const U=r[C],N=te(U)?U.bind(n,n):te(U.get)?U.get.bind(n,n):it,oe=!te(U)&&te(U.set)?U.set.bind(n):it,Ce=P({get:N,set:oe});Object.defineProperty(i,C,{enumerable:!0,configurable:!0,get:()=>Ce.value,set:Se=>Ce.value=Se})}if(s)for(const C in s)rs(s[C],i,n,C);if(a){const C=te(a)?a.call(n):a;Reflect.ownKeys(C).forEach(U=>{cu(U,C[U])})}c&&fr(c,e,"c");function Z(C,U){X(U)?U.forEach(N=>C(N.bind(n))):U&&C(U.bind(n))}if(Z(vu,v),Z(nn,g),Z(ns,d),Z(pu,_),Z(Go,S),Z(es,w),Z(xu,b),Z(_u,p),Z(yu,y),Z(qe,E),Z(Ci,R),Z(bu,M),X(F))if(F.length){const C=e.exposed||(e.exposed={});F.forEach(U=>{Object.defineProperty(C,U,{get:()=>n[U],set:N=>n[U]=N})})}else e.exposed||(e.exposed={});V&&e.render===it&&(e.render=V),I!=null&&(e.inheritAttrs=I),A&&(e.components=A),k&&(e.directives=k)}function Su(e,t,n,i=!1){X(e)&&(e=il(e));for(const l in e){const r=e[l];let o;ye(r)?"default"in r?o=vn(r.from||l,r.default,!0):o=vn(r.from||l):o=vn(r),me(o)&&i?Object.defineProperty(t,l,{enumerable:!0,configurable:!0,get:()=>o.value,set:s=>o.value=s}):t[l]=o}}function fr(e,t,n){Ve(X(e)?e.map(i=>i.bind(t.proxy)):e.bind(t.proxy),t,n)}function rs(e,t,n,i){const l=i.includes(".")?Zo(n,i):()=>n[i];if(be(e)){const r=t[e];te(r)&&se(l,r)}else if(te(e))se(l,e.bind(n));else if(ye(e))if(X(e))e.forEach(r=>rs(r,t,n,i));else{const r=te(e.handler)?e.handler.bind(n):t[e.handler];te(r)&&se(l,r,e)}}function os(e){const t=e.type,{mixins:n,extends:i}=t,{mixins:l,optionsCache:r,config:{optionMergeStrategies:o}}=e.appContext,s=r.get(t);let a;return s?a=s:!l.length&&!n&&!i?a=t:(a={},l.length&&l.forEach(u=>ni(a,u,o,!0)),ni(a,t,o)),r.set(t,a),a}function ni(e,t,n,i=!1){const{mixins:l,extends:r}=t;r&&ni(e,r,n,!0),l&&l.forEach(o=>ni(e,o,n,!0));for(const o in t)if(!(i&&o==="expose")){const s=ku[o]||n&&n[o];e[o]=s?s(e[o],t[o]):t[o]}return e}const ku={data:dr,props:qt,emits:qt,methods:qt,computed:qt,beforeCreate:Me,created:Me,beforeMount:Me,mounted:Me,beforeUpdate:Me,updated:Me,beforeDestroy:Me,beforeUnmount:Me,destroyed:Me,unmounted:Me,activated:Me,deactivated:Me,errorCaptured:Me,serverPrefetch:Me,components:qt,directives:qt,watch:Tu,provide:dr,inject:Ru};function dr(e,t){return t?e?function(){return Re(te(e)?e.call(this,this):e,te(t)?t.call(this,this):t)}:t:e}function Ru(e,t){return qt(il(e),il(t))}function il(e){if(X(e)){const t={};for(let n=0;n<e.length;n++)t[e[n]]=e[n];return t}return e}function Me(e,t){return e?[...new Set([].concat(e,t))]:t}function qt(e,t){return e?Re(Re(Object.create(null),e),t):t}function Tu(e,t){if(!e)return t;if(!t)return e;const n=Re(Object.create(null),e);for(const i in t)n[i]=Me(e[i],t[i]);return n}function Mu(e,t,n,i=!1){const l={},r={};Xn(r,Ei,1),e.propsDefaults=Object.create(null),ss(e,t,l,r);for(const o in e.propsOptions[0])o in l||(l[o]=void 0);n?e.props=i?l:Io(l):e.type.props?e.props=l:e.props=r,e.attrs=r}function Au(e,t,n,i){const{props:l,attrs:r,vnode:{patchFlag:o}}=e,s=re(l),[a]=e.propsOptions;let u=!1;if((i||o>0)&&!(o&16)){if(o&8){const c=e.vnode.dynamicProps;for(let v=0;v<c.length;v++){let g=c[v];if(yi(e.emitsOptions,g))continue;const d=t[g];if(a)if(ne(r,g))d!==r[g]&&(r[g]=d,u=!0);else{const _=lt(g);l[_]=ll(a,s,_,d,e,!1)}else d!==r[g]&&(r[g]=d,u=!0)}}}else{ss(e,t,l,r)&&(u=!0);let c;for(const v in s)(!t||!ne(t,v)&&((c=Xt(v))===v||!ne(t,c)))&&(a?n&&(n[v]!==void 0||n[c]!==void 0)&&(l[v]=ll(a,s,v,void 0,e,!0)):delete l[v]);if(r!==s)for(const v in r)(!t||!ne(t,v)&&!0)&&(delete r[v],u=!0)}u&&at(e,"set","$attrs")}function ss(e,t,n,i){const[l,r]=e.propsOptions;let o=!1,s;if(t)for(let a in t){if(Qn(a))continue;const u=t[a];let c;l&&ne(l,c=lt(a))?!r||!r.includes(c)?n[c]=u:(s||(s={}))[c]=u:yi(e.emitsOptions,a)||(!(a in i)||u!==i[a])&&(i[a]=u,o=!0)}if(r){const a=re(n),u=s||ce;for(let c=0;c<r.length;c++){const v=r[c];n[v]=ll(l,a,v,u[v],e,!ne(u,v))}}return o}function ll(e,t,n,i,l,r){const o=e[n];if(o!=null){const s=ne(o,"default");if(s&&i===void 0){const a=o.default;if(o.type!==Function&&te(a)){const{propsDefaults:u}=l;n in u?i=u[n]:(Jt(l),i=u[n]=a.call(null,t),Ot())}else i=a}o[0]&&(r&&!s?i=!1:o[1]&&(i===""||i===Xt(n))&&(i=!0))}return i}function as(e,t,n=!1){const i=t.propsCache,l=i.get(e);if(l)return l;const r=e.props,o={},s=[];let a=!1;if(!te(e)){const c=v=>{a=!0;const[g,d]=as(v,t,!0);Re(o,g),d&&s.push(...d)};!n&&t.mixins.length&&t.mixins.forEach(c),e.extends&&c(e.extends),e.mixins&&e.mixins.forEach(c)}if(!r&&!a)return i.set(e,Kt),Kt;if(X(r))for(let c=0;c<r.length;c++){const v=lt(r[c]);hr(v)&&(o[v]=ce)}else if(r)for(const c in r){const v=lt(c);if(hr(v)){const g=r[c],d=o[v]=X(g)||te(g)?{type:g}:g;if(d){const _=vr(Boolean,d.type),S=vr(String,d.type);d[0]=_>-1,d[1]=S<0||_<S,(_>-1||ne(d,"default"))&&s.push(v)}}}const u=[o,s];return i.set(e,u),u}function hr(e){return e[0]!=="$"}function gr(e){const t=e&&e.toString().match(/^\s*function (\w+)/);return t?t[1]:e===null?"null":""}function mr(e,t){return gr(e)===gr(t)}function vr(e,t){return X(t)?t.findIndex(n=>mr(n,e)):te(t)&&mr(t,e)?0:-1}const us=e=>e[0]==="_"||e==="$stable",Ol=e=>X(e)?e.map(tt):[tt(e)],qu=(e,t,n)=>{if(t._n)return t;const i=Ge((...l)=>Ol(t(...l)),n);return i._c=!1,i},cs=(e,t,n)=>{const i=e._ctx;for(const l in e){if(us(l))continue;const r=e[l];if(te(r))t[l]=qu(l,r,i);else if(r!=null){const o=Ol(r);t[l]=()=>o}}},fs=(e,t)=>{const n=Ol(t);e.slots.default=()=>n},Lu=(e,t)=>{if(e.vnode.shapeFlag&32){const n=t._;n?(e.slots=re(t),Xn(t,"_",n)):cs(t,e.slots={})}else e.slots={},t&&fs(e,t);Xn(e.slots,Ei,1)},Pu=(e,t,n)=>{const{vnode:i,slots:l}=e;let r=!0,o=ce;if(i.shapeFlag&32){const s=t._;s?n&&s===1?r=!1:(Re(l,t),!n&&s===1&&delete l._):(r=!t.$stable,cs(t,l)),o=t}else t&&(fs(e,t),o={default:1});if(r)for(const s in l)!us(s)&&!(s in o)&&delete l[s]};function ds(){return{app:null,config:{isNativeTag:ua,performance:!1,globalProperties:{},optionMergeStrategies:{},errorHandler:void 0,warnHandler:void 0,compilerOptions:{}},mixins:[],components:{},directives:{},provides:Object.create(null),optionsCache:new WeakMap,propsCache:new WeakMap,emitsCache:new WeakMap}}let Fu=0;function Bu(e,t){return function(i,l=null){te(i)||(i=Object.assign({},i)),l!=null&&!ye(l)&&(l=null);const r=ds(),o=new Set;let s=!1;const a=r.app={_uid:Fu++,_component:i,_props:l,_container:null,_context:r,_instance:null,version:nc,get config(){return r.config},set config(u){},use(u,...c){return o.has(u)||(u&&te(u.install)?(o.add(u),u.install(a,...c)):te(u)&&(o.add(u),u(a,...c))),a},mixin(u){return r.mixins.includes(u)||r.mixins.push(u),a},component(u,c){return c?(r.components[u]=c,a):r.components[u]},directive(u,c){return c?(r.directives[u]=c,a):r.directives[u]},mount(u,c,v){if(!s){const g=xe(i,l);return g.appContext=r,c&&t?t(g,u):e(g,u,v),s=!0,a._container=u,u.__vue_app__=a,Si(g.component)||g.component.proxy}},unmount(){s&&(e(null,a._container),delete a._container.__vue_app__)},provide(u,c){return r.provides[u]=c,a}};return a}}function rl(e,t,n,i,l=!1){if(X(e)){e.forEach((g,d)=>rl(g,t&&(X(t)?t[d]:t),n,i,l));return}if(Zn(i)&&!l)return;const r=i.shapeFlag&4?Si(i.component)||i.component.proxy:i.el,o=l?null:r,{i:s,r:a}=e,u=t&&t.r,c=s.refs===ce?s.refs={}:s.refs,v=s.setupState;if(u!=null&&u!==a&&(be(u)?(c[u]=null,ne(v,u)&&(v[u]=null)):me(u)&&(u.value=null)),te(a))yt(a,s,12,[o,c]);else{const g=be(a),d=me(a);if(g||d){const _=()=>{if(e.f){const S=g?c[a]:a.value;l?X(S)&&El(S,r):X(S)?S.includes(r)||S.push(r):g?(c[a]=[r],ne(v,a)&&(v[a]=c[a])):(a.value=[r],e.k&&(c[e.k]=a.value))}else g?(c[a]=o,ne(v,a)&&(v[a]=o)):me(a)&&(a.value=o,e.k&&(c[e.k]=o))};o?(_.id=-1,Le(_,n)):_()}}}const Le=uu;function Iu(e){return Ou(e)}function Ou(e,t){const n=ma();n.__VUE__=!0;const{insert:i,remove:l,patchProp:r,createElement:o,createText:s,createComment:a,setText:u,setElementText:c,parentNode:v,nextSibling:g,setScopeId:d=it,cloneNode:_,insertStaticContent:S}=e,w=(f,m,x,L=null,q=null,D=null,W=!1,j=null,z=!!m.dynamicChildren)=>{if(f===m)return;f&&!Lt(f,m)&&(L=Fn(f),de(f,q,D,!0),f=null),m.patchFlag===-2&&(z=!1,m.dynamicChildren=null);const{type:B,ref:J,shapeFlag:Q}=m;switch(B){case Nl:T(f,m,x,L);break;case Ze:E(f,m,x,L);break;case Oi:f==null&&O(m,x,L,W);break;case Ae:k(f,m,x,L,q,D,W,j,z);break;default:Q&1?p(f,m,x,L,q,D,W,j,z):Q&6?K(f,m,x,L,q,D,W,j,z):(Q&64||Q&128)&&B.process(f,m,x,L,q,D,W,j,z,Nt)}J!=null&&q&&rl(J,f&&f.ref,D,m||f,!m)},T=(f,m,x,L)=>{if(f==null)i(m.el=s(m.children),x,L);else{const q=m.el=f.el;m.children!==f.children&&u(q,m.children)}},E=(f,m,x,L)=>{f==null?i(m.el=a(m.children||""),x,L):m.el=f.el},O=(f,m,x,L)=>{[f.el,f.anchor]=S(f.children,m,x,L,f.el,f.anchor)},R=({el:f,anchor:m},x,L)=>{let q;for(;f&&f!==m;)q=g(f),i(f,x,L),f=q;i(m,x,L)},V=({el:f,anchor:m})=>{let x;for(;f&&f!==m;)x=g(f),l(f),f=x;l(m)},p=(f,m,x,L,q,D,W,j,z)=>{W=W||m.type==="svg",f==null?y(m,x,L,q,D,W,j,z):F(f,m,q,D,W,j,z)},y=(f,m,x,L,q,D,W,j)=>{let z,B;const{type:J,props:Q,shapeFlag:Y,transition:G,patchFlag:ie,dirs:ae}=f;if(f.el&&_!==void 0&&ie===-1)z=f.el=_(f.el);else{if(z=f.el=o(f.type,D,Q&&Q.is,Q),Y&8?c(z,f.children):Y&16&&M(f.children,z,null,L,q,D&&J!=="foreignObject",W,j),ae&&St(f,null,L,"created"),Q){for(const fe in Q)fe!=="value"&&!Qn(fe)&&r(z,fe,null,Q[fe],D,f.children,L,q,Ne);"value"in Q&&r(z,"value",null,Q.value),(B=Q.onVnodeBeforeMount)&&Ye(B,L,f)}b(z,f,f.scopeId,W,L)}ae&&St(f,null,L,"beforeMount");const ue=(!q||q&&!q.pendingBranch)&&G&&!G.persisted;ue&&G.beforeEnter(z),i(z,m,x),((B=Q&&Q.onVnodeMounted)||ue||ae)&&Le(()=>{B&&Ye(B,L,f),ue&&G.enter(z),ae&&St(f,null,L,"mounted")},q)},b=(f,m,x,L,q)=>{if(x&&d(f,x),L)for(let D=0;D<L.length;D++)d(f,L[D]);if(q){let D=q.subTree;if(m===D){const W=q.vnode;b(f,W,W.scopeId,W.slotScopeIds,q.parent)}}},M=(f,m,x,L,q,D,W,j,z=0)=>{for(let B=z;B<f.length;B++){const J=f[B]=j?gt(f[B]):tt(f[B]);w(null,J,m,x,L,q,D,W,j)}},F=(f,m,x,L,q,D,W)=>{const j=m.el=f.el;let{patchFlag:z,dynamicChildren:B,dirs:J}=m;z|=f.patchFlag&16;const Q=f.props||ce,Y=m.props||ce;let G;x&&kt(x,!1),(G=Y.onVnodeBeforeUpdate)&&Ye(G,x,m,f),J&&St(m,f,x,"beforeUpdate"),x&&kt(x,!0);const ie=q&&m.type!=="foreignObject";if(B?I(f.dynamicChildren,B,j,x,L,ie,D):W||N(f,m,j,null,x,L,ie,D,!1),z>0){if(z&16)A(j,m,Q,Y,x,L,q);else if(z&2&&Q.class!==Y.class&&r(j,"class",null,Y.class,q),z&4&&r(j,"style",Q.style,Y.style,q),z&8){const ae=m.dynamicProps;for(let ue=0;ue<ae.length;ue++){const fe=ae[ue],ze=Q[fe],jt=Y[fe];(jt!==ze||fe==="value")&&r(j,fe,ze,jt,q,f.children,x,L,Ne)}}z&1&&f.children!==m.children&&c(j,m.children)}else!W&&B==null&&A(j,m,Q,Y,x,L,q);((G=Y.onVnodeUpdated)||J)&&Le(()=>{G&&Ye(G,x,m,f),J&&St(m,f,x,"updated")},L)},I=(f,m,x,L,q,D,W)=>{for(let j=0;j<m.length;j++){const z=f[j],B=m[j],J=z.el&&(z.type===Ae||!Lt(z,B)||z.shapeFlag&70)?v(z.el):x;w(z,B,J,null,L,q,D,W,!0)}},A=(f,m,x,L,q,D,W)=>{if(x!==L){for(const j in L){if(Qn(j))continue;const z=L[j],B=x[j];z!==B&&j!=="value"&&r(f,j,B,z,W,m.children,q,D,Ne)}if(x!==ce)for(const j in x)!Qn(j)&&!(j in L)&&r(f,j,x[j],null,W,m.children,q,D,Ne);"value"in L&&r(f,"value",x.value,L.value)}},k=(f,m,x,L,q,D,W,j,z)=>{const B=m.el=f?f.el:s(""),J=m.anchor=f?f.anchor:s("");let{patchFlag:Q,dynamicChildren:Y,slotScopeIds:G}=m;G&&(j=j?j.concat(G):G),f==null?(i(B,x,L),i(J,x,L),M(m.children,x,J,q,D,W,j,z)):Q>0&&Q&64&&Y&&f.dynamicChildren?(I(f.dynamicChildren,Y,x,q,D,W,j),(m.key!=null||q&&m===q.subTree)&&$l(f,m,!0)):N(f,m,x,J,q,D,W,j,z)},K=(f,m,x,L,q,D,W,j,z)=>{m.slotScopeIds=j,f==null?m.shapeFlag&512?q.ctx.activate(m,x,L,W,z):$(m,x,L,q,D,W,z):Z(f,m,z)},$=(f,m,x,L,q,D,W)=>{const j=f.component=Zu(f,L,q);if(xi(f)&&(j.ctx.renderer=Nt),Ju(j),j.asyncDep){if(q&&q.registerDep(j,C),!f.el){const z=j.subTree=xe(Ze);E(null,z,m,x)}return}C(j,f,m,x,q,D,W)},Z=(f,m,x)=>{const L=m.component=f.component;if(ou(f,m,x))if(L.asyncDep&&!L.asyncResolved){U(L,m,x);return}else L.next=m,Xa(L.update),L.update();else m.el=f.el,L.vnode=m},C=(f,m,x,L,q,D,W)=>{const j=()=>{if(f.isMounted){let{next:J,bu:Q,u:Y,parent:G,vnode:ie}=f,ae=J,ue;kt(f,!1),J?(J.el=ie.el,U(f,J,W)):J=ie,Q&&Fi(Q),(ue=J.props&&J.props.onVnodeBeforeUpdate)&&Ye(ue,G,J,ie),kt(f,!0);const fe=Bi(f),ze=f.subTree;f.subTree=fe,w(ze,fe,v(ze.el),Fn(ze),f,q,D),J.el=fe.el,ae===null&&su(f,fe.el),Y&&Le(Y,q),(ue=J.props&&J.props.onVnodeUpdated)&&Le(()=>Ye(ue,G,J,ie),q)}else{let J;const{el:Q,props:Y}=m,{bm:G,m:ie,parent:ae}=f,ue=Zn(m);if(kt(f,!1),G&&Fi(G),!ue&&(J=Y&&Y.onVnodeBeforeMount)&&Ye(J,ae,m),kt(f,!0),Q&&Li){const fe=()=>{f.subTree=Bi(f),Li(Q,f.subTree,f,q,null)};ue?m.type.__asyncLoader().then(()=>!f.isUnmounted&&fe()):fe()}else{const fe=f.subTree=Bi(f);w(null,fe,x,L,f,q,D),m.el=fe.el}if(ie&&Le(ie,q),!ue&&(J=Y&&Y.onVnodeMounted)){const fe=m;Le(()=>Ye(J,ae,fe),q)}(m.shapeFlag&256||ae&&Zn(ae.vnode)&&ae.vnode.shapeFlag&256)&&f.a&&Le(f.a,q),f.isMounted=!0,m=x=L=null}},z=f.effect=new Tl(j,()=>Vo(B),f.scope),B=f.update=()=>z.run();B.id=f.uid,kt(f,!0),B()},U=(f,m,x)=>{m.component=f;const L=f.vnode.props;f.vnode=m,f.next=null,Au(f,m.props,L,x),Pu(f,m.children,x),Gt(),bi(void 0,f.update),en()},N=(f,m,x,L,q,D,W,j,z=!1)=>{const B=f&&f.children,J=f?f.shapeFlag:0,Q=m.children,{patchFlag:Y,shapeFlag:G}=m;if(Y>0){if(Y&128){Ce(B,Q,x,L,q,D,W,j,z);return}else if(Y&256){oe(B,Q,x,L,q,D,W,j,z);return}}G&8?(J&16&&Ne(B,q,D),Q!==B&&c(x,Q)):J&16?G&16?Ce(B,Q,x,L,q,D,W,j,z):Ne(B,q,D,!0):(J&8&&c(x,""),G&16&&M(Q,x,L,q,D,W,j,z))},oe=(f,m,x,L,q,D,W,j,z)=>{f=f||Kt,m=m||Kt;const B=f.length,J=m.length,Q=Math.min(B,J);let Y;for(Y=0;Y<Q;Y++){const G=m[Y]=z?gt(m[Y]):tt(m[Y]);w(f[Y],G,x,null,q,D,W,j,z)}B>J?Ne(f,q,D,!0,!1,Q):M(m,x,L,q,D,W,j,z,Q)},Ce=(f,m,x,L,q,D,W,j,z)=>{let B=0;const J=m.length;let Q=f.length-1,Y=J-1;for(;B<=Q&&B<=Y;){const G=f[B],ie=m[B]=z?gt(m[B]):tt(m[B]);if(Lt(G,ie))w(G,ie,x,null,q,D,W,j,z);else break;B++}for(;B<=Q&&B<=Y;){const G=f[Q],ie=m[Y]=z?gt(m[Y]):tt(m[Y]);if(Lt(G,ie))w(G,ie,x,null,q,D,W,j,z);else break;Q--,Y--}if(B>Q){if(B<=Y){const G=Y+1,ie=G<J?m[G].el:L;for(;B<=Y;)w(null,m[B]=z?gt(m[B]):tt(m[B]),x,ie,q,D,W,j,z),B++}}else if(B>Y)for(;B<=Q;)de(f[B],q,D,!0),B++;else{const G=B,ie=B,ae=new Map;for(B=ie;B<=Y;B++){const Be=m[B]=z?gt(m[B]):tt(m[B]);Be.key!=null&&ae.set(Be.key,B)}let ue,fe=0;const ze=Y-ie+1;let jt=!1,Kl=0;const sn=new Array(ze);for(B=0;B<ze;B++)sn[B]=0;for(B=G;B<=Q;B++){const Be=f[B];if(fe>=ze){de(Be,q,D,!0);continue}let Je;if(Be.key!=null)Je=ae.get(Be.key);else for(ue=ie;ue<=Y;ue++)if(sn[ue-ie]===0&&Lt(Be,m[ue])){Je=ue;break}Je===void 0?de(Be,q,D,!0):(sn[Je-ie]=B+1,Je>=Kl?Kl=Je:jt=!0,w(Be,m[Je],x,null,q,D,W,j,z),fe++)}const Ql=jt?$u(sn):Kt;for(ue=Ql.length-1,B=ze-1;B>=0;B--){const Be=ie+B,Je=m[Be],Zl=Be+1<J?m[Be+1].el:L;sn[B]===0?w(null,Je,x,Zl,q,D,W,j,z):jt&&(ue<0||B!==Ql[ue]?Se(Je,x,Zl,2):ue--)}}},Se=(f,m,x,L,q=null)=>{const{el:D,type:W,transition:j,children:z,shapeFlag:B}=f;if(B&6){Se(f.component.subTree,m,x,L);return}if(B&128){f.suspense.move(m,x,L);return}if(B&64){W.move(f,m,x,Nt);return}if(W===Ae){i(D,m,x);for(let Q=0;Q<z.length;Q++)Se(z[Q],m,x,L);i(f.anchor,m,x);return}if(W===Oi){R(f,m,x);return}if(L!==2&&B&1&&j)if(L===0)j.beforeEnter(D),i(D,m,x),Le(()=>j.enter(D),q);else{const{leave:Q,delayLeave:Y,afterLeave:G}=j,ie=()=>i(D,m,x),ae=()=>{Q(D,()=>{ie(),G&&G()})};Y?Y(D,ie,ae):ae()}else i(D,m,x)},de=(f,m,x,L=!1,q=!1)=>{const{type:D,props:W,ref:j,children:z,dynamicChildren:B,shapeFlag:J,patchFlag:Q,dirs:Y}=f;if(j!=null&&rl(j,null,x,f,!0),J&256){m.ctx.deactivate(f);return}const G=J&1&&Y,ie=!Zn(f);let ae;if(ie&&(ae=W&&W.onVnodeBeforeUnmount)&&Ye(ae,m,f),J&6)rt(f.component,x,L);else{if(J&128){f.suspense.unmount(x,L);return}G&&St(f,null,m,"beforeUnmount"),J&64?f.type.remove(f,m,x,q,Nt,L):B&&(D!==Ae||Q>0&&Q&64)?Ne(B,m,x,!1,!0):(D===Ae&&Q&384||!q&&J&16)&&Ne(z,m,x),L&&he(f)}(ie&&(ae=W&&W.onVnodeUnmounted)||G)&&Le(()=>{ae&&Ye(ae,m,f),G&&St(f,null,m,"unmounted")},x)},he=f=>{const{type:m,el:x,anchor:L,transition:q}=f;if(m===Ae){on(x,L);return}if(m===Oi){V(f);return}const D=()=>{l(x),q&&!q.persisted&&q.afterLeave&&q.afterLeave()};if(f.shapeFlag&1&&q&&!q.persisted){const{leave:W,delayLeave:j}=q,z=()=>W(x,D);j?j(f.el,D,z):z()}else D()},on=(f,m)=>{let x;for(;f!==m;)x=g(f),l(f),f=x;l(m)},rt=(f,m,x)=>{const{bum:L,scope:q,update:D,subTree:W,um:j}=f;L&&Fi(L),q.stop(),D&&(D.active=!1,de(W,f,m,x)),j&&Le(j,m),Le(()=>{f.isUnmounted=!0},m),m&&m.pendingBranch&&!m.isUnmounted&&f.asyncDep&&!f.asyncResolved&&f.suspenseId===m.pendingId&&(m.deps--,m.deps===0&&m.resolve())},Ne=(f,m,x,L=!1,q=!1,D=0)=>{for(let W=D;W<f.length;W++)de(f[W],m,x,L,q)},Fn=f=>f.shapeFlag&6?Fn(f.component.subTree):f.shapeFlag&128?f.suspense.next():g(f.anchor||f.el),Ul=(f,m,x)=>{f==null?m._vnode&&de(m._vnode,null,null,!0):w(m._vnode||null,f,m,null,null,null,x),Uo(),m._vnode=f},Nt={p:w,um:de,m:Se,r:he,mt:$,mc:M,pc:N,pbc:I,n:Fn,o:e};let qi,Li;return t&&([qi,Li]=t(Nt)),{render:Ul,hydrate:qi,createApp:Bu(Ul,qi)}}function kt({effect:e,update:t},n){e.allowRecurse=t.allowRecurse=n}function $l(e,t,n=!1){const i=e.children,l=t.children;if(X(i)&&X(l))for(let r=0;r<i.length;r++){const o=i[r];let s=l[r];s.shapeFlag&1&&!s.dynamicChildren&&((s.patchFlag<=0||s.patchFlag===32)&&(s=l[r]=gt(l[r]),s.el=o.el),n||$l(o,s))}}function $u(e){const t=e.slice(),n=[0];let i,l,r,o,s;const a=e.length;for(i=0;i<a;i++){const u=e[i];if(u!==0){if(l=n[n.length-1],e[l]<u){t[i]=l,n.push(i);continue}for(r=0,o=n.length-1;r<o;)s=r+o>>1,e[n[s]]<u?r=s+1:o=s;u<e[n[r]]&&(r>0&&(t[i]=n[r-1]),n[r]=i)}}for(r=n.length,o=n[r-1];r-- >0;)n[r]=o,o=t[o];return n}const Nu=e=>e.__isTeleport,pn=e=>e&&(e.disabled||e.disabled===""),pr=e=>typeof SVGElement!="undefined"&&e instanceof SVGElement,ol=(e,t)=>{const n=e&&e.to;return be(n)?t?t(n):null:n},ju={__isTeleport:!0,process(e,t,n,i,l,r,o,s,a,u){const{mc:c,pc:v,pbc:g,o:{insert:d,querySelector:_,createText:S,createComment:w}}=u,T=pn(t.props);let{shapeFlag:E,children:O,dynamicChildren:R}=t;if(e==null){const V=t.el=S(""),p=t.anchor=S("");d(V,n,i),d(p,n,i);const y=t.target=ol(t.props,_),b=t.targetAnchor=S("");y&&(d(b,y),o=o||pr(y));const M=(F,I)=>{E&16&&c(O,F,I,l,r,o,s,a)};T?M(n,p):y&&M(y,b)}else{t.el=e.el;const V=t.anchor=e.anchor,p=t.target=e.target,y=t.targetAnchor=e.targetAnchor,b=pn(e.props),M=b?n:p,F=b?V:y;if(o=o||pr(p),R?(g(e.dynamicChildren,R,M,l,r,o,s),$l(e,t,!0)):a||v(e,t,M,F,l,r,o,s,!1),T)b||Dn(t,n,V,u,1);else if((t.props&&t.props.to)!==(e.props&&e.props.to)){const I=t.target=ol(t.props,_);I&&Dn(t,I,null,u,0)}else b&&Dn(t,p,y,u,1)}},remove(e,t,n,i,{um:l,o:{remove:r}},o){const{shapeFlag:s,children:a,anchor:u,targetAnchor:c,target:v,props:g}=e;if(v&&r(c),(o||!pn(g))&&(r(u),s&16))for(let d=0;d<a.length;d++){const _=a[d];l(_,t,n,!0,!!_.dynamicChildren)}},move:Dn,hydrate:Hu};function Dn(e,t,n,{o:{insert:i},m:l},r=2){r===0&&i(e.targetAnchor,t,n);const{el:o,anchor:s,shapeFlag:a,children:u,props:c}=e,v=r===2;if(v&&i(o,t,n),(!v||pn(c))&&a&16)for(let g=0;g<u.length;g++)l(u[g],t,n,2);v&&i(s,t,n)}function Hu(e,t,n,i,l,r,{o:{nextSibling:o,parentNode:s,querySelector:a}},u){const c=t.target=ol(t.props,a);if(c){const v=c._lpa||c.firstChild;if(t.shapeFlag&16)if(pn(t.props))t.anchor=u(o(e),t,s(e),n,i,l,r),t.targetAnchor=v;else{t.anchor=o(e);let g=v;for(;g;)if(g=o(g),g&&g.nodeType===8&&g.data==="teleport anchor"){t.targetAnchor=g,c._lpa=t.targetAnchor&&o(t.targetAnchor);break}u(v,t,c,n,i,l,r)}}return t.anchor&&o(t.anchor)}const Du=ju,Ae=Symbol(void 0),Nl=Symbol(void 0),Ze=Symbol(void 0),Oi=Symbol(void 0),bn=[];let Ke=null;function ve(e=!1){bn.push(Ke=e?null:[])}function Vu(){bn.pop(),Ke=bn[bn.length-1]||null}let Sn=1;function br(e){Sn+=e}function hs(e){return e.dynamicChildren=Sn>0?Ke||Kt:null,Vu(),Sn>0&&Ke&&Ke.push(e),e}function We(e,t,n,i,l,r){return hs(pe(e,t,n,i,l,r,!0))}function et(e,t,n,i,l){return hs(xe(e,t,n,i,l,!0))}function sl(e){return e?e.__v_isVNode===!0:!1}function Lt(e,t){return e.type===t.type&&e.key===t.key}const Ei="__vInternal",gs=({key:e})=>e!=null?e:null,Jn=({ref:e,ref_key:t,ref_for:n})=>e!=null?be(e)||me(e)||te(e)?{i:De,r:e,k:t,f:!!n}:e:null;function pe(e,t=null,n=null,i=0,l=null,r=e===Ae?0:1,o=!1,s=!1){const a={__v_isVNode:!0,__v_skip:!0,type:e,props:t,key:t&&gs(t),ref:t&&Jn(t),scopeId:_i,slotScopeIds:null,children:n,component:null,suspense:null,ssContent:null,ssFallback:null,dirs:null,transition:null,el:null,anchor:null,target:null,targetAnchor:null,staticCount:0,shapeFlag:r,patchFlag:i,dynamicProps:l,dynamicChildren:null,appContext:null};return s?(jl(a,n),r&128&&e.normalize(a)):n&&(a.shapeFlag|=be(n)?8:16),Sn>0&&!o&&Ke&&(a.patchFlag>0||r&6)&&a.patchFlag!==32&&Ke.push(a),a}const xe=zu;function zu(e,t=null,n=null,i=0,l=null,r=!1){if((!e||e===ls)&&(e=Ze),sl(e)){const s=wt(e,t,!0);return n&&jl(s,n),Sn>0&&!r&&Ke&&(s.shapeFlag&6?Ke[Ke.indexOf(e)]=s:Ke.push(s)),s.patchFlag|=-2,s}if(tc(e)&&(e=e.__vccOpts),t){t=Wu(t);let{class:s,style:a}=t;s&&!be(s)&&(t.class=Zt(s)),ye(a)&&($o(a)&&!X(a)&&(a=Re({},a)),t.style=wl(a))}const o=be(e)?1:au(e)?128:Nu(e)?64:ye(e)?4:te(e)?2:0;return pe(e,t,n,i,l,o,r,!0)}function Wu(e){return e?$o(e)||Ei in e?Re({},e):e:null}function wt(e,t,n=!1){const{props:i,ref:l,patchFlag:r,children:o}=e,s=t?Uu(i||{},t):i;return{__v_isVNode:!0,__v_skip:!0,type:e.type,props:s,key:s&&gs(s),ref:t&&t.ref?n&&l?X(l)?l.concat(Jn(t)):[l,Jn(t)]:Jn(t):l,scopeId:e.scopeId,slotScopeIds:e.slotScopeIds,children:o,target:e.target,targetAnchor:e.targetAnchor,staticCount:e.staticCount,shapeFlag:e.shapeFlag,patchFlag:t&&e.type!==Ae?r===-1?16:r|16:r,dynamicProps:e.dynamicProps,dynamicChildren:e.dynamicChildren,appContext:e.appContext,dirs:e.dirs,transition:e.transition,component:e.component,suspense:e.suspense,ssContent:e.ssContent&&wt(e.ssContent),ssFallback:e.ssFallback&&wt(e.ssFallback),el:e.el,anchor:e.anchor}}function ii(e=" ",t=0){return xe(Nl,null,e,t)}function an(e,t){return t?(ve(),et(Ze,null,e)):xe(Ze,null,e)}function tt(e){return e==null||typeof e=="boolean"?xe(Ze):X(e)?xe(Ae,null,e.slice()):typeof e=="object"?gt(e):xe(Nl,null,String(e))}function gt(e){return e.el===null||e.memo?e:wt(e)}function jl(e,t){let n=0;const{shapeFlag:i}=e;if(t==null)t=null;else if(X(t))n=16;else if(typeof t=="object")if(i&65){const l=t.default;l&&(l._c&&(l._d=!1),jl(e,l()),l._c&&(l._d=!0));return}else{n=32;const l=t._;!l&&!(Ei in t)?t._ctx=De:l===3&&De&&(De.slots._===1?t._=1:(t._=2,e.patchFlag|=1024))}else te(t)?(t={default:t,_ctx:De},n=32):(t=String(t),i&64?(n=16,t=[ii(t)]):n=8);e.children=t,e.shapeFlag|=n}function Uu(...e){const t={};for(let n=0;n<e.length;n++){const i=e[n];for(const l in i)if(l==="class")t.class!==i.class&&(t.class=Zt([t.class,i.class]));else if(l==="style")t.style=wl([t.style,i.style]);else if(di(l)){const r=t[l],o=i[l];o&&r!==o&&!(X(r)&&r.includes(o))&&(t[l]=r?[].concat(r,o):o)}else l!==""&&(t[l]=i[l])}return t}function Ye(e,t,n,i=null){Ve(e,t,7,[n,i])}const Ku=ds();let Qu=0;function Zu(e,t,n){const i=e.type,l=(t?t.appContext:e.appContext)||Ku,r={uid:Qu++,vnode:e,type:i,parent:t,appContext:l,root:null,next:null,subTree:null,effect:null,update:null,scope:new Eo(!0),render:null,proxy:null,exposed:null,exposeProxy:null,withProxy:null,provides:t?t.provides:Object.create(l.provides),accessCache:null,renderCache:[],components:null,directives:null,propsOptions:as(i,l),emitsOptions:Qo(i,l),emit:null,emitted:null,propsDefaults:ce,inheritAttrs:i.inheritAttrs,ctx:ce,data:ce,props:ce,attrs:ce,slots:ce,refs:ce,setupState:ce,setupContext:null,suspense:n,suspenseId:n?n.pendingId:0,asyncDep:null,asyncResolved:!1,isMounted:!1,isUnmounted:!1,isDeactivated:!1,bc:null,c:null,bm:null,m:null,bu:null,u:null,um:null,bum:null,da:null,a:null,rtg:null,rtc:null,ec:null,sp:null};return r.ctx={_:r},r.root=t?t.root:r,r.emit=tu.bind(null,r),e.ce&&e.ce(r),r}let Ee=null;const we=()=>Ee||De,Jt=e=>{Ee=e,e.scope.on()},Ot=()=>{Ee&&Ee.scope.off(),Ee=null};function ms(e){return e.vnode.shapeFlag&4}let kn=!1;function Ju(e,t=!1){kn=t;const{props:n,children:i}=e.vnode,l=ms(e);Mu(e,n,l,t),Lu(e,i);const r=l?Yu(e,t):void 0;return kn=!1,r}function Yu(e,t){const n=e.type;e.accessCache=Object.create(null),e.proxy=xt(new Proxy(e.ctx,Cu));const{setup:i}=n;if(i){const l=e.setupContext=i.length>1?Gu(e):null;Jt(e),Gt();const r=yt(i,e,0,[e.props,l]);if(en(),Ot(),_o(r)){if(r.then(Ot,Ot),t)return r.then(o=>{yr(e,o,t)}).catch(o=>{pi(o,e,0)});e.asyncDep=r}else yr(e,r,t)}else vs(e,t)}function yr(e,t,n){te(t)?e.type.__ssrInlineRender?e.ssrRender=t:e.render=t:ye(t)&&(e.setupState=Ho(t)),vs(e,n)}let _r;function vs(e,t,n){const i=e.type;if(!e.render){if(!t&&_r&&!i.render){const l=i.template;if(l){const{isCustomElement:r,compilerOptions:o}=e.appContext.config,{delimiters:s,compilerOptions:a}=i,u=Re(Re({isCustomElement:r,delimiters:s},o),a);i.render=_r(l,u)}}e.render=i.render||it}Jt(e),Gt(),Eu(e),en(),Ot()}function Xu(e){return new Proxy(e.attrs,{get(t,n){return $e(e,"get","$attrs"),t[n]}})}function Gu(e){const t=i=>{e.exposed=i||{}};let n;return{get attrs(){return n||(n=Xu(e))},slots:e.slots,emit:e.emit,expose:t}}function Si(e){if(e.exposed)return e.exposeProxy||(e.exposeProxy=new Proxy(Ho(xt(e.exposed)),{get(t,n){if(n in t)return t[n];if(n in ti)return ti[n](e)}}))}function ec(e){return te(e)&&e.displayName||e.name}function tc(e){return te(e)&&"__vccOpts"in e}const P=(e,t)=>Za(e,t,kn);function H(e,t,n){const i=arguments.length;return i===2?ye(t)&&!X(t)?sl(t)?xe(e,null,[t]):xe(e,t):xe(e,null,t):(i>3?n=Array.prototype.slice.call(arguments,2):i===3&&sl(n)&&(n=[n]),xe(e,t,n))}const nc="3.2.36",ic="http://www.w3.org/2000/svg",Pt=typeof document!="undefined"?document:null,xr=Pt&&Pt.createElement("template"),lc={insert:(e,t,n)=>{t.insertBefore(e,n||null)},remove:e=>{const t=e.parentNode;t&&t.removeChild(e)},createElement:(e,t,n,i)=>{const l=t?Pt.createElementNS(ic,e):Pt.createElement(e,n?{is:n}:void 0);return e==="select"&&i&&i.multiple!=null&&l.setAttribute("multiple",i.multiple),l},createText:e=>Pt.createTextNode(e),createComment:e=>Pt.createComment(e),setText:(e,t)=>{e.nodeValue=t},setElementText:(e,t)=>{e.textContent=t},parentNode:e=>e.parentNode,nextSibling:e=>e.nextSibling,querySelector:e=>Pt.querySelector(e),setScopeId(e,t){e.setAttribute(t,"")},cloneNode(e){const t=e.cloneNode(!0);return"_value"in e&&(t._value=e._value),t},insertStaticContent(e,t,n,i,l,r){const o=n?n.previousSibling:t.lastChild;if(l&&(l===r||l.nextSibling))for(;t.insertBefore(l.cloneNode(!0),n),!(l===r||!(l=l.nextSibling)););else{xr.innerHTML=i?`<svg>${e}</svg>`:e;const s=xr.content;if(i){const a=s.firstChild;for(;a.firstChild;)s.appendChild(a.firstChild);s.removeChild(a)}t.insertBefore(s,n)}return[o?o.nextSibling:t.firstChild,n?n.previousSibling:t.lastChild]}};function rc(e,t,n){const i=e._vtc;i&&(t=(t?[t,...i]:[...i]).join(" ")),t==null?e.removeAttribute("class"):n?e.setAttribute("class",t):e.className=t}function oc(e,t,n){const i=e.style,l=be(n);if(n&&!l){for(const r in n)al(i,r,n[r]);if(t&&!be(t))for(const r in t)n[r]==null&&al(i,r,"")}else{const r=i.display;l?t!==n&&(i.cssText=n):t&&e.removeAttribute("style"),"_vod"in e&&(i.display=r)}}const wr=/\s*!important$/;function al(e,t,n){if(X(n))n.forEach(i=>al(e,t,i));else if(n==null&&(n=""),t.startsWith("--"))e.setProperty(t,n);else{const i=sc(e,t);wr.test(n)?e.setProperty(Xt(i),n.replace(wr,""),"important"):e[i]=n}}const Cr=["Webkit","Moz","ms"],$i={};function sc(e,t){const n=$i[t];if(n)return n;let i=lt(t);if(i!=="filter"&&i in e)return $i[t]=i;i=mi(i);for(let l=0;l<Cr.length;l++){const r=Cr[l]+i;if(r in e)return $i[t]=r}return t}const Er="http://www.w3.org/1999/xlink";function ac(e,t,n,i,l){if(i&&t.startsWith("xlink:"))n==null?e.removeAttributeNS(Er,t.slice(6,t.length)):e.setAttributeNS(Er,t,n);else{const r=ra(t);n==null||r&&!po(n)?e.removeAttribute(t):e.setAttribute(t,r?"":n)}}function uc(e,t,n,i,l,r,o){if(t==="innerHTML"||t==="textContent"){i&&o(i,l,r),e[t]=n==null?"":n;return}if(t==="value"&&e.tagName!=="PROGRESS"&&!e.tagName.includes("-")){e._value=n;const a=n==null?"":n;(e.value!==a||e.tagName==="OPTION")&&(e.value=a),n==null&&e.removeAttribute(t);return}let s=!1;if(n===""||n==null){const a=typeof e[t];a==="boolean"?n=po(n):n==null&&a==="string"?(n="",s=!0):a==="number"&&(n=0,s=!0)}try{e[t]=n}catch{}s&&e.removeAttribute(t)}const[ps,cc]=(()=>{let e=Date.now,t=!1;if(typeof window!="undefined"){Date.now()>document.createEvent("Event").timeStamp&&(e=performance.now.bind(performance));const n=navigator.userAgent.match(/firefox\/(\d+)/i);t=!!(n&&Number(n[1])<=53)}return[e,t]})();let ul=0;const fc=Promise.resolve(),dc=()=>{ul=0},hc=()=>ul||(fc.then(dc),ul=ps());function gc(e,t,n,i){e.addEventListener(t,n,i)}function mc(e,t,n,i){e.removeEventListener(t,n,i)}function vc(e,t,n,i,l=null){const r=e._vei||(e._vei={}),o=r[t];if(i&&o)o.value=i;else{const[s,a]=pc(t);if(i){const u=r[t]=bc(i,l);gc(e,s,u,a)}else o&&(mc(e,s,o,a),r[t]=void 0)}}const Sr=/(?:Once|Passive|Capture)$/;function pc(e){let t;if(Sr.test(e)){t={};let n;for(;n=e.match(Sr);)e=e.slice(0,e.length-n[0].length),t[n[0].toLowerCase()]=!0}return[Xt(e.slice(2)),t]}function bc(e,t){const n=i=>{const l=i.timeStamp||ps();(cc||l>=n.attached-1)&&Ve(yc(i,n.value),t,5,[i])};return n.value=e,n.attached=hc(),n}function yc(e,t){if(X(t)){const n=e.stopImmediatePropagation;return e.stopImmediatePropagation=()=>{n.call(e),e._stopped=!0},t.map(i=>l=>!l._stopped&&i&&i(l))}else return t}const kr=/^on[a-z]/,_c=(e,t,n,i,l=!1,r,o,s,a)=>{t==="class"?rc(e,i,l):t==="style"?oc(e,n,i):di(t)?Cl(t)||vc(e,t,n,i,o):(t[0]==="."?(t=t.slice(1),!0):t[0]==="^"?(t=t.slice(1),!1):xc(e,t,i,l))?uc(e,t,i,r,o,s,a):(t==="true-value"?e._trueValue=i:t==="false-value"&&(e._falseValue=i),ac(e,t,i,l))};function xc(e,t,n,i){return i?!!(t==="innerHTML"||t==="textContent"||t in e&&kr.test(t)&&te(n)):t==="spellcheck"||t==="draggable"||t==="translate"||t==="form"||t==="list"&&e.tagName==="INPUT"||t==="type"&&e.tagName==="TEXTAREA"||kr.test(t)&&be(n)?!1:t in e}const ft="transition",un="animation",ln=(e,{slots:t})=>H(Jo,wc(e),t);ln.displayName="Transition";const bs={name:String,type:String,css:{type:Boolean,default:!0},duration:[String,Number,Object],enterFromClass:String,enterActiveClass:String,enterToClass:String,appearFromClass:String,appearActiveClass:String,appearToClass:String,leaveFromClass:String,leaveActiveClass:String,leaveToClass:String};ln.props=Re({},Jo.props,bs);const Rt=(e,t)=>{X(e)?e.forEach(n=>n(...t)):e&&e(...t)},Rr=e=>e?X(e)?e.some(t=>t.length>1):e.length>1:!1;function wc(e){const t={};for(const A in e)A in bs||(t[A]=e[A]);if(e.css===!1)return t;const{name:n="v",type:i,duration:l,enterFromClass:r=`${n}-enter-from`,enterActiveClass:o=`${n}-enter-active`,enterToClass:s=`${n}-enter-to`,appearFromClass:a=r,appearActiveClass:u=o,appearToClass:c=s,leaveFromClass:v=`${n}-leave-from`,leaveActiveClass:g=`${n}-leave-active`,leaveToClass:d=`${n}-leave-to`}=e,_=Cc(l),S=_&&_[0],w=_&&_[1],{onBeforeEnter:T,onEnter:E,onEnterCancelled:O,onLeave:R,onLeaveCancelled:V,onBeforeAppear:p=T,onAppear:y=E,onAppearCancelled:b=O}=t,M=(A,k,K)=>{Tt(A,k?c:s),Tt(A,k?u:o),K&&K()},F=(A,k)=>{A._isLeaving=!1,Tt(A,v),Tt(A,d),Tt(A,g),k&&k()},I=A=>(k,K)=>{const $=A?y:E,Z=()=>M(k,A,K);Rt($,[k,Z]),Tr(()=>{Tt(k,A?a:r),dt(k,A?c:s),Rr($)||Mr(k,i,S,Z)})};return Re(t,{onBeforeEnter(A){Rt(T,[A]),dt(A,r),dt(A,o)},onBeforeAppear(A){Rt(p,[A]),dt(A,a),dt(A,u)},onEnter:I(!1),onAppear:I(!0),onLeave(A,k){A._isLeaving=!0;const K=()=>F(A,k);dt(A,v),kc(),dt(A,g),Tr(()=>{!A._isLeaving||(Tt(A,v),dt(A,d),Rr(R)||Mr(A,i,w,K))}),Rt(R,[A,K])},onEnterCancelled(A){M(A,!1),Rt(O,[A])},onAppearCancelled(A){M(A,!0),Rt(b,[A])},onLeaveCancelled(A){F(A),Rt(V,[A])}})}function Cc(e){if(e==null)return null;if(ye(e))return[Ni(e.enter),Ni(e.leave)];{const t=Ni(e);return[t,t]}}function Ni(e){return Co(e)}function dt(e,t){t.split(/\s+/).forEach(n=>n&&e.classList.add(n)),(e._vtc||(e._vtc=new Set)).add(t)}function Tt(e,t){t.split(/\s+/).forEach(i=>i&&e.classList.remove(i));const{_vtc:n}=e;n&&(n.delete(t),n.size||(e._vtc=void 0))}function Tr(e){requestAnimationFrame(()=>{requestAnimationFrame(e)})}let Ec=0;function Mr(e,t,n,i){const l=e._endId=++Ec,r=()=>{l===e._endId&&i()};if(n)return setTimeout(r,n);const{type:o,timeout:s,propCount:a}=Sc(e,t);if(!o)return i();const u=o+"end";let c=0;const v=()=>{e.removeEventListener(u,g),r()},g=d=>{d.target===e&&++c>=a&&v()};setTimeout(()=>{c<a&&v()},s+1),e.addEventListener(u,g)}function Sc(e,t){const n=window.getComputedStyle(e),i=_=>(n[_]||"").split(", "),l=i(ft+"Delay"),r=i(ft+"Duration"),o=Ar(l,r),s=i(un+"Delay"),a=i(un+"Duration"),u=Ar(s,a);let c=null,v=0,g=0;t===ft?o>0&&(c=ft,v=o,g=r.length):t===un?u>0&&(c=un,v=u,g=a.length):(v=Math.max(o,u),c=v>0?o>u?ft:un:null,g=c?c===ft?r.length:a.length:0);const d=c===ft&&/\b(transform|all)(,|$)/.test(n[ft+"Property"]);return{type:c,timeout:v,propCount:g,hasTransform:d}}function Ar(e,t){for(;e.length<t.length;)e=e.concat(e);return Math.max(...t.map((n,i)=>qr(n)+qr(e[i])))}function qr(e){return Number(e.slice(0,-1).replace(",","."))*1e3}function kc(){return document.body.offsetHeight}const Rc={beforeMount(e,{value:t},{transition:n}){e._vod=e.style.display==="none"?"":e.style.display,n&&t?n.beforeEnter(e):cn(e,t)},mounted(e,{value:t},{transition:n}){n&&t&&n.enter(e)},updated(e,{value:t,oldValue:n},{transition:i}){!t!=!n&&(i?t?(i.beforeEnter(e),cn(e,!0),i.enter(e)):i.leave(e,()=>{cn(e,!1)}):cn(e,t))},beforeUnmount(e,{value:t}){cn(e,t)}};function cn(e,t){e.style.display=t?e._vod:"none"}const Tc=Re({patchProp:_c},lc);let Lr;function Mc(){return Lr||(Lr=Iu(Tc))}const Ac=(...e)=>{const t=Mc().createApp(...e),{mount:n}=t;return t.mount=i=>{const l=qc(i);if(!l)return;const r=t._component;!te(r)&&!r.render&&!r.template&&(r.template=l.innerHTML),l.innerHTML="";const o=n(l,!1,l instanceof SVGElement);return l instanceof Element&&(l.removeAttribute("v-cloak"),l.setAttribute("data-v-app","")),o},t};function qc(e){return be(e)?document.querySelector(e):e}function ki(e,t,n,i){Object.defineProperty(e,t,{get:n,set:i,enumerable:!0})}const Ct=le(!1);let Ri;function Lc(e,t){const n=/(edg|edge|edga|edgios)\/([\w.]+)/.exec(e)||/(opr)[\/]([\w.]+)/.exec(e)||/(vivaldi)[\/]([\w.]+)/.exec(e)||/(chrome|crios)[\/]([\w.]+)/.exec(e)||/(version)(applewebkit)[\/]([\w.]+).*(safari)[\/]([\w.]+)/.exec(e)||/(webkit)[\/]([\w.]+).*(version)[\/]([\w.]+).*(safari)[\/]([\w.]+)/.exec(e)||/(firefox|fxios)[\/]([\w.]+)/.exec(e)||/(webkit)[\/]([\w.]+)/.exec(e)||/(opera)(?:.*version|)[\/]([\w.]+)/.exec(e)||[];return{browser:n[5]||n[3]||n[1]||"",version:n[2]||n[4]||"0",versionNumber:n[4]||n[2]||"0",platform:t[0]||""}}function Pc(e){return/(ipad)/.exec(e)||/(ipod)/.exec(e)||/(windows phone)/.exec(e)||/(iphone)/.exec(e)||/(kindle)/.exec(e)||/(silk)/.exec(e)||/(android)/.exec(e)||/(win)/.exec(e)||/(mac)/.exec(e)||/(linux)/.exec(e)||/(cros)/.exec(e)||/(playbook)/.exec(e)||/(bb)/.exec(e)||/(blackberry)/.exec(e)||[]}const ys="ontouchstart"in window||window.navigator.maxTouchPoints>0;function Fc(e){Ri={is:ee({},e)},delete e.mac,delete e.desktop;const t=Math.min(window.innerHeight,window.innerWidth)>414?"ipad":"iphone";Object.assign(e,{mobile:!0,ios:!0,platform:t,[t]:!0})}function Bc(e){const t=e.toLowerCase(),n=Pc(t),i=Lc(t,n),l={};i.browser&&(l[i.browser]=!0,l.version=i.version,l.versionNumber=parseInt(i.versionNumber,10)),i.platform&&(l[i.platform]=!0);const r=l.android||l.ios||l.bb||l.blackberry||l.ipad||l.iphone||l.ipod||l.kindle||l.playbook||l.silk||l["windows phone"];return r===!0||t.indexOf("mobile")>-1?(l.mobile=!0,l.edga||l.edgios?(l.edge=!0,i.browser="edge"):l.crios?(l.chrome=!0,i.browser="chrome"):l.fxios&&(l.firefox=!0,i.browser="firefox")):l.desktop=!0,(l.ipod||l.ipad||l.iphone)&&(l.ios=!0),l["windows phone"]&&(l.winphone=!0,delete l["windows phone"]),(l.chrome||l.opr||l.safari||l.vivaldi||l.mobile===!0&&l.ios!==!0&&r!==!0)&&(l.webkit=!0),l.edg&&(i.browser="edgechromium",l.edgeChromium=!0),(l.safari&&l.blackberry||l.bb)&&(i.browser="blackberry",l.blackberry=!0),l.safari&&l.playbook&&(i.browser="playbook",l.playbook=!0),l.opr&&(i.browser="opera",l.opera=!0),l.safari&&l.android&&(i.browser="android",l.android=!0),l.safari&&l.kindle&&(i.browser="kindle",l.kindle=!0),l.safari&&l.silk&&(i.browser="silk",l.silk=!0),l.vivaldi&&(i.browser="vivaldi",l.vivaldi=!0),l.name=i.browser,l.platform=i.platform,t.indexOf("electron")>-1?l.electron=!0:document.location.href.indexOf("-extension://")>-1?l.bex=!0:(window.Capacitor!==void 0?(l.capacitor=!0,l.nativeMobile=!0,l.nativeMobileWrapper="capacitor"):(window._cordovaNative!==void 0||window.cordova!==void 0)&&(l.cordova=!0,l.nativeMobile=!0,l.nativeMobileWrapper="cordova"),ys===!0&&l.mac===!0&&(l.desktop===!0&&l.safari===!0||l.nativeMobile===!0&&l.android!==!0&&l.ios!==!0&&l.ipad!==!0)&&Fc(l)),l}const Pr=navigator.userAgent||navigator.vendor||window.opera,Ic={has:{touch:!1,webStorage:!1},within:{iframe:!1}},Oe={userAgent:Pr,is:Bc(Pr),has:{touch:ys},within:{iframe:window.self!==window.top}},li={install(e){const{$q:t}=e;Ct.value===!0?(e.onSSRHydrated.push(()=>{Ct.value=!1,Object.assign(t.platform,Oe),Ri=void 0}),t.platform=tn(this)):t.platform=this}};{let e;ki(Oe.has,"webStorage",()=>{if(e!==void 0)return e;try{if(window.localStorage)return e=!0,!0}catch{}return e=!1,!1}),Oe.is.ios===!0&&window.navigator.vendor.toLowerCase().indexOf("apple"),Ct.value===!0?Object.assign(li,Oe,Ri,Ic):Object.assign(li,Oe)}var Ti=(e,t)=>{const n=tn(e);for(const i in e)ki(t,i,()=>n[i],l=>{n[i]=l});return t};const Et={hasPassive:!1,passiveCapture:!0,notPassiveCapture:!0};try{const e=Object.defineProperty({},"passive",{get(){Object.assign(Et,{hasPassive:!0,passive:{passive:!0},notPassive:{passive:!1},passiveCapture:{passive:!0,capture:!0},notPassiveCapture:{passive:!1,capture:!0}})}});window.addEventListener("qtest",null,e),window.removeEventListener("qtest",null,e)}catch{}function Rn(){}function Oc(e){return e.touches&&e.touches[0]?e=e.touches[0]:e.changedTouches&&e.changedTouches[0]?e=e.changedTouches[0]:e.targetTouches&&e.targetTouches[0]&&(e=e.targetTouches[0]),{top:e.clientY,left:e.clientX}}function ri(e){e.stopPropagation()}function vt(e){e.cancelable!==!1&&e.preventDefault()}function nt(e){e.cancelable!==!1&&e.preventDefault(),e.stopPropagation()}function Tn(e,t,n){const i=`__q_${t}_evt`;e[i]=e[i]!==void 0?e[i].concat(n):n,n.forEach(l=>{l[0].addEventListener(l[1],e[l[2]],Et[l[3]])})}function oi(e,t){const n=`__q_${t}_evt`;e[n]!==void 0&&(e[n].forEach(i=>{i[0].removeEventListener(i[1],e[i[2]],Et[i[3]])}),e[n]=void 0)}function _s(e,t=250,n){let i;function l(){const r=arguments,o=()=>{i=void 0,n!==!0&&e.apply(this,r)};clearTimeout(i),n===!0&&i===void 0&&e.apply(this,r),i=setTimeout(o,t)}return l.cancel=()=>{clearTimeout(i)},l}const ji=["sm","md","lg","xl"],{passive:Fr}=Et;var $c=Ti({width:0,height:0,name:"xs",sizes:{sm:600,md:1024,lg:1440,xl:1920},lt:{sm:!0,md:!0,lg:!0,xl:!0},gt:{xs:!1,sm:!1,md:!1,lg:!1},xs:!0,sm:!1,md:!1,lg:!1,xl:!1},{setSizes:Rn,setDebounce:Rn,install({$q:e,onSSRHydrated:t}){if(e.screen=this,this.__installed===!0){e.config.screen!==void 0&&(e.config.screen.bodyClasses===!1?document.body.classList.remove(`screen--${this.name}`):this.__update(!0));return}const{visualViewport:n}=window,i=n||window,l=document.scrollingElement||document.documentElement,r=n===void 0||Oe.is.mobile===!0?()=>[Math.max(window.innerWidth,l.clientWidth),Math.max(window.innerHeight,l.clientHeight)]:()=>[n.width*n.scale+window.innerWidth-l.clientWidth,n.height*n.scale+window.innerHeight-l.clientHeight],o=e.config.screen!==void 0&&e.config.screen.bodyClasses===!0;this.__update=v=>{const[g,d]=r();if(d!==this.height&&(this.height=d),g!==this.width)this.width=g;else if(v!==!0)return;let _=this.sizes;this.gt.xs=g>=_.sm,this.gt.sm=g>=_.md,this.gt.md=g>=_.lg,this.gt.lg=g>=_.xl,this.lt.sm=g<_.sm,this.lt.md=g<_.md,this.lt.lg=g<_.lg,this.lt.xl=g<_.xl,this.xs=this.lt.sm,this.sm=this.gt.xs===!0&&this.lt.md===!0,this.md=this.gt.sm===!0&&this.lt.lg===!0,this.lg=this.gt.md===!0&&this.lt.xl===!0,this.xl=this.gt.lg,_=this.xs===!0&&"xs"||this.sm===!0&&"sm"||this.md===!0&&"md"||this.lg===!0&&"lg"||"xl",_!==this.name&&(o===!0&&(document.body.classList.remove(`screen--${this.name}`),document.body.classList.add(`screen--${_}`)),this.name=_)};let s,a={},u=16;this.setSizes=v=>{ji.forEach(g=>{v[g]!==void 0&&(a[g]=v[g])})},this.setDebounce=v=>{u=v};const c=()=>{const v=getComputedStyle(document.body);v.getPropertyValue("--q-size-sm")&&ji.forEach(g=>{this.sizes[g]=parseInt(v.getPropertyValue(`--q-size-${g}`),10)}),this.setSizes=g=>{ji.forEach(d=>{g[d]&&(this.sizes[d]=g[d])}),this.__update(!0)},this.setDebounce=g=>{s!==void 0&&i.removeEventListener("resize",s,Fr),s=g>0?_s(this.__update,g):this.__update,i.addEventListener("resize",s,Fr)},this.setDebounce(u),Object.keys(a).length>0?(this.setSizes(a),a=void 0):this.__update(),o===!0&&this.name==="xs"&&document.body.classList.add("screen--xs")};Ct.value===!0?t.push(c):c()}});const Te=Ti({isActive:!1,mode:!1},{__media:void 0,set(e){Te.mode=e,e==="auto"?(Te.__media===void 0&&(Te.__media=window.matchMedia("(prefers-color-scheme: dark)"),Te.__updateMedia=()=>{Te.set("auto")},Te.__media.addListener(Te.__updateMedia)),e=Te.__media.matches):Te.__media!==void 0&&(Te.__media.removeListener(Te.__updateMedia),Te.__media=void 0),Te.isActive=e===!0,document.body.classList.remove(`body--${e===!0?"light":"dark"}`),document.body.classList.add(`body--${e===!0?"dark":"light"}`)},toggle(){Te.set(Te.isActive===!1)},install({$q:e,onSSRHydrated:t,ssrContext:n}){const{dark:i}=e.config;if(e.dark=this,this.__installed===!0&&i===void 0)return;this.isActive=i===!0;const l=i!==void 0?i:!1;if(Ct.value===!0){const r=s=>{this.__fromSSR=s},o=this.set;this.set=r,r(l),t.push(()=>{this.set=o,this.set(this.__fromSSR)})}else this.set(l)}}),xs=()=>!0;function Nc(e){return typeof e=="string"&&e!==""&&e!=="/"&&e!=="#/"}function jc(e){return e.startsWith("#")===!0&&(e=e.substring(1)),e.startsWith("/")===!1&&(e="/"+e),e.endsWith("/")===!0&&(e=e.substring(0,e.length-1)),"#"+e}function Hc(e){if(e.backButtonExit===!1)return()=>!1;if(e.backButtonExit==="*")return xs;const t=["#/"];return Array.isArray(e.backButtonExit)===!0&&t.push(...e.backButtonExit.filter(Nc).map(jc)),()=>t.includes(window.location.hash)}var Dc={__history:[],add:Rn,remove:Rn,install({$q:e}){if(this.__installed===!0)return;const{cordova:t,capacitor:n}=Oe.is;if(t!==!0&&n!==!0)return;const i=e.config[t===!0?"cordova":"capacitor"];if(i!==void 0&&i.backButton===!1||n===!0&&(window.Capacitor===void 0||window.Capacitor.Plugins.App===void 0))return;this.add=o=>{o.condition===void 0&&(o.condition=xs),this.__history.push(o)},this.remove=o=>{const s=this.__history.indexOf(o);s>=0&&this.__history.splice(s,1)};const l=Hc(Object.assign({backButtonExit:!0},i)),r=()=>{if(this.__history.length){const o=this.__history[this.__history.length-1];o.condition()===!0&&(this.__history.pop(),o.handler())}else l()===!0?navigator.app.exitApp():window.history.back()};t===!0?document.addEventListener("deviceready",()=>{document.addEventListener("backbutton",r,!1)}):window.Capacitor.Plugins.App.addListener("backButton",r)}},Br={isoName:"en-US",nativeName:"English (US)",label:{clear:"Clear",ok:"OK",cancel:"Cancel",close:"Close",set:"Set",select:"Select",reset:"Reset",remove:"Remove",update:"Update",create:"Create",search:"Search",filter:"Filter",refresh:"Refresh"},date:{days:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),daysShort:"Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_"),monthsShort:"Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),firstDayOfWeek:0,format24h:!1,pluralDay:"days"},table:{noData:"No data available",noResults:"No matching records found",loading:"Loading...",selectedRecords:e=>e===1?"1 record selected.":(e===0?"No":e)+" records selected.",recordsPerPage:"Records per page:",allRows:"All",pagination:(e,t,n)=>e+"-"+t+" of "+n,columns:"Columns"},editor:{url:"URL",bold:"Bold",italic:"Italic",strikethrough:"Strikethrough",underline:"Underline",unorderedList:"Unordered List",orderedList:"Ordered List",subscript:"Subscript",superscript:"Superscript",hyperlink:"Hyperlink",toggleFullscreen:"Toggle Fullscreen",quote:"Quote",left:"Left align",center:"Center align",right:"Right align",justify:"Justify align",print:"Print",outdent:"Decrease indentation",indent:"Increase indentation",removeFormat:"Remove formatting",formatting:"Formatting",fontSize:"Font Size",align:"Align",hr:"Insert Horizontal Rule",undo:"Undo",redo:"Redo",heading1:"Heading 1",heading2:"Heading 2",heading3:"Heading 3",heading4:"Heading 4",heading5:"Heading 5",heading6:"Heading 6",paragraph:"Paragraph",code:"Code",size1:"Very small",size2:"A bit small",size3:"Normal",size4:"Medium-large",size5:"Big",size6:"Very big",size7:"Maximum",defaultFont:"Default Font",viewSource:"View Source"},tree:{noNodes:"No nodes available",noResults:"No matching nodes found"}};function Ir(){const e=Array.isArray(navigator.languages)===!0&&navigator.languages.length>0?navigator.languages[0]:navigator.language;if(typeof e=="string")return e.split(/[-_]/).map((t,n)=>n===0?t.toLowerCase():n>1||t.length<4?t.toUpperCase():t[0].toUpperCase()+t.slice(1).toLowerCase()).join("-")}const mt=Ti({__langPack:{}},{getLocale:Ir,set(e=Br,t){const n=ge(ee({},e),{rtl:e.rtl===!0,getLocale:Ir});{const i=document.documentElement;i.setAttribute("dir",n.rtl===!0?"rtl":"ltr"),i.setAttribute("lang",n.isoName),n.set=mt.set,Object.assign(mt.__langPack,n),mt.props=n,mt.isoName=n.isoName,mt.nativeName=n.nativeName}},install({$q:e,lang:t,ssrContext:n}){e.lang=mt.__langPack,this.__installed===!0?t!==void 0&&this.set(t):this.set(t||Br)}});function Vc(e,t,n=document.body){if(typeof e!="string")throw new TypeError("Expected a string as propName");if(typeof t!="string")throw new TypeError("Expected a string as value");if(!(n instanceof Element))throw new TypeError("Expected a DOM element");n.style.setProperty(`--q-${e}`,t)}let ws=!1;function zc(e){ws=e.isComposing===!0}function Cs(e){return ws===!0||e!==Object(e)||e.isComposing===!0||e.qKeyEvent===!0}function Mn(e,t){return Cs(e)===!0?!1:[].concat(t).includes(e.keyCode)}function Wc(e){if(e.ios===!0)return"ios";if(e.android===!0)return"android"}function Uc({is:e,has:t,within:n},i){const l=[e.desktop===!0?"desktop":"mobile",`${t.touch===!1?"no-":""}touch`];if(e.mobile===!0){const r=Wc(e);r!==void 0&&l.push("platform-"+r)}if(e.nativeMobile===!0){const r=e.nativeMobileWrapper;l.push(r),l.push("native-mobile"),e.ios===!0&&(i[r]===void 0||i[r].iosStatusBarPadding!==!1)&&l.push("q-ios-padding")}else e.electron===!0?l.push("electron"):e.bex===!0&&l.push("bex");return n.iframe===!0&&l.push("within-iframe"),l}function Kc(){const e=document.body.className;let t=e;Ri!==void 0&&(t=t.replace("desktop","platform-ios mobile")),Oe.has.touch===!0&&(t=t.replace("no-touch","touch")),Oe.within.iframe===!0&&(t+=" within-iframe"),e!==t&&(document.body.className=t)}function Qc(e){for(const t in e)Vc(t,e[t])}var Zc={install(e){if(this.__installed!==!0){if(Ct.value===!0)Kc();else{const{$q:t}=e;t.config.brand!==void 0&&Qc(t.config.brand);const n=Uc(Oe,t.config);document.body.classList.add.apply(document.body.classList,n)}Oe.is.ios===!0&&document.body.addEventListener("touchstart",Rn),window.addEventListener("keydown",zc,!0)}}},Jc={name:"material-icons",type:{positive:"check_circle",negative:"warning",info:"info",warning:"priority_high"},arrow:{up:"arrow_upward",right:"arrow_forward",down:"arrow_downward",left:"arrow_back",dropdown:"arrow_drop_down"},chevron:{left:"chevron_left",right:"chevron_right"},colorPicker:{spectrum:"gradient",tune:"tune",palette:"style"},pullToRefresh:{icon:"refresh"},carousel:{left:"chevron_left",right:"chevron_right",up:"keyboard_arrow_up",down:"keyboard_arrow_down",navigationIcon:"lens"},chip:{remove:"cancel",selected:"check"},datetime:{arrowLeft:"chevron_left",arrowRight:"chevron_right",now:"access_time",today:"today"},editor:{bold:"format_bold",italic:"format_italic",strikethrough:"strikethrough_s",underline:"format_underlined",unorderedList:"format_list_bulleted",orderedList:"format_list_numbered",subscript:"vertical_align_bottom",superscript:"vertical_align_top",hyperlink:"link",toggleFullscreen:"fullscreen",quote:"format_quote",left:"format_align_left",center:"format_align_center",right:"format_align_right",justify:"format_align_justify",print:"print",outdent:"format_indent_decrease",indent:"format_indent_increase",removeFormat:"format_clear",formatting:"text_format",fontSize:"format_size",align:"format_align_left",hr:"remove",undo:"undo",redo:"redo",heading:"format_size",code:"code",size:"format_size",font:"font_download",viewSource:"code"},expansionItem:{icon:"keyboard_arrow_down",denseIcon:"arrow_drop_down"},fab:{icon:"add",activeIcon:"close"},field:{clear:"cancel",error:"error"},pagination:{first:"first_page",prev:"keyboard_arrow_left",next:"keyboard_arrow_right",last:"last_page"},rating:{icon:"grade"},stepper:{done:"check",active:"edit",error:"warning"},tabs:{left:"chevron_left",right:"chevron_right",up:"keyboard_arrow_up",down:"keyboard_arrow_down"},table:{arrowUp:"arrow_upward",warning:"warning",firstPage:"first_page",prevPage:"chevron_left",nextPage:"chevron_right",lastPage:"last_page"},tree:{icon:"play_arrow"},uploader:{done:"done",clear:"clear",add:"add_box",upload:"cloud_upload",removeQueue:"clear_all",removeUploaded:"done_all"}};const si=Ti({iconMapFn:null,__icons:{}},{set(e,t){const n=ge(ee({},e),{rtl:e.rtl===!0});n.set=si.set,Object.assign(si.__icons,n)},install({$q:e,iconSet:t,ssrContext:n}){e.config.iconMapFn!==void 0&&(this.iconMapFn=e.config.iconMapFn),e.iconSet=this.__icons,ki(e,"iconMapFn",()=>this.iconMapFn,i=>{this.iconMapFn=i}),this.__installed===!0?t!==void 0&&this.set(t):this.set(t||Jc)}}),Yc="_q_",Xc="_q_fo_",ai={};let Es=!1;function Gc(){Es=!0}const ef=typeof Map=="function",tf=typeof Set=="function",nf=typeof ArrayBuffer=="function";function Yn(e,t){if(e===t)return!0;if(e!==null&&t!==null&&typeof e=="object"&&typeof t=="object"){if(e.constructor!==t.constructor)return!1;let n,i;if(e.constructor===Array){if(n=e.length,n!==t.length)return!1;for(i=n;i--!==0;)if(Yn(e[i],t[i])!==!0)return!1;return!0}if(ef===!0&&e.constructor===Map){if(e.size!==t.size)return!1;for(i=e.entries().next();i.done!==!0;){if(t.has(i.value[0])!==!0)return!1;i=i.next()}for(i=e.entries().next();i.done!==!0;){if(Yn(i.value[1],t.get(i.value[0]))!==!0)return!1;i=i.next()}return!0}if(tf===!0&&e.constructor===Set){if(e.size!==t.size)return!1;for(i=e.entries().next();i.done!==!0;){if(t.has(i.value[0])!==!0)return!1;i=i.next()}return!0}if(nf===!0&&e.buffer!=null&&e.buffer.constructor===ArrayBuffer){if(n=e.length,n!==t.length)return!1;for(i=n;i--!==0;)if(e[i]!==t[i])return!1;return!0}if(e.constructor===RegExp)return e.source===t.source&&e.flags===t.flags;if(e.valueOf!==Object.prototype.valueOf)return e.valueOf()===t.valueOf();if(e.toString!==Object.prototype.toString)return e.toString()===t.toString();const l=Object.keys(e).filter(r=>e[r]!==void 0);if(n=l.length,n!==Object.keys(t).filter(r=>t[r]!==void 0).length)return!1;for(i=n;i--!==0;){const r=l[i];if(Yn(e[r],t[r])!==!0)return!1}return!0}return e!==e&&t!==t}function Or(e){return e!==null&&typeof e=="object"&&Array.isArray(e)!==!0}const $r=[li,Zc,Te,$c,Dc,mt,si];function Nr(e,t){t.forEach(n=>{n.install(e),n.__installed=!0})}function lf(e,t,n){e.config.globalProperties.$q=n.$q,e.provide(Yc,n.$q),Nr(n,$r),t.components!==void 0&&Object.values(t.components).forEach(i=>{Or(i)===!0&&i.name!==void 0&&e.component(i.name,i)}),t.directives!==void 0&&Object.values(t.directives).forEach(i=>{Or(i)===!0&&i.name!==void 0&&e.directive(i.name,i)}),t.plugins!==void 0&&Nr(n,Object.values(t.plugins).filter(i=>typeof i.install=="function"&&$r.includes(i)===!1)),Ct.value===!0&&(n.$q.onSSRHydrated=()=>{n.onSSRHydrated.forEach(i=>{i()}),n.$q.onSSRHydrated=()=>{}})}var rf=function(e,t={}){const n={version:"2.7.5"};Es===!1?(t.config!==void 0&&Object.assign(ai,t.config),n.config=ee({},ai),Gc()):n.config=t.config||{},lf(e,t,{parentApp:e,$q:n,lang:t.lang,iconSet:t.iconSet,onSSRHydrated:[]})},of={version:"2.7.5",install:rf,lang:mt,iconSet:si};if(typeof window!="undefined"){let e=function(){var t=document.body,n=document.getElementById("__svg__icons__dom__");n||(n=document.createElementNS("http://www.w3.org/2000/svg","svg"),n.style.position="absolute",n.style.width="0",n.style.height="0",n.id="__svg__icons__dom__",n.setAttribute("xmlns","http://www.w3.org/2000/svg"),n.setAttribute("xmlns:link","http://www.w3.org/1999/xlink")),n.innerHTML='<symbol  viewBox="0 0 24 24" id="icon-alert"><path d="M13 14h-2V9h2m0 9h-2v-2h2M1 21h22L12 2 1 21Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-application-braces-outline"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 18H3V6h18v14M9 8c-1.1 0-2 .9-2 2s-.9 2-2 2v2c1.1 0 2 .9 2 2s.9 2 2 2h2v-2H9v-1c0-1.1-.9-2-2-2 1.1 0 2-.9 2-2v-1h2V8m4 0c1.1 0 2 .9 2 2s.9 2 2 2v2c-1.1 0-2 .9-2 2s-.9 2-2 2h-2v-2h2v-1c0-1.1.9-2 2-2-1.1 0-2-.9-2-2v-1h-2V8h2Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-bookshelf"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-briefcase-outline"><path d="M20 6c.58 0 1.05.2 1.42.59.38.41.58.86.58 1.41v11c0 .55-.2 1-.58 1.41-.37.39-.84.59-1.42.59H4c-.58 0-1.05-.2-1.42-.59C2.2 20 2 19.55 2 19V8c0-.55.2-1 .58-1.41C2.95 6.2 3.42 6 4 6h4V4c0-.58.2-1.05.58-1.42C8.95 2.2 9.42 2 10 2h4c.58 0 1.05.2 1.42.58.38.37.58.84.58 1.42v2h4M4 8v11h16V8H4m10-2V4h-4v2h4Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-chevron-down"><path d="M7.41 8.58 12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-close-circle-outline"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-emoticon-cry-outline"><path d="M7.57 20c-1.34 0-2.43-1.09-2.43-2.43 0-1.07 1.18-3.07 2.43-4.76C8.82 14.5 10 16.5 10 17.57A2.43 2.43 0 0 1 7.57 20M12 2A10 10 0 0 0 2 12c0 1.75.45 3.38 1.24 4.81.16-.81.57-1.74 1.07-2.64A7.69 7.69 0 0 1 4 12a8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8c-.24 0-.47 0-.71-.04-.47.74-1.15 1.32-1.95 1.67.85.24 1.74.37 2.66.37a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 12c-.41 0-.81.04-1.19.12.35.63.66 1.28.88 1.88H12c1.25 0 2.32.5 2.77 1.23l1.42-1.42C15.29 14.72 13.75 14 12 14m3.5-6c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5S16.3 8 15.5 8M10 9.5C10 8.7 9.3 8 8.5 8S7 8.7 7 9.5 7.7 11 8.5 11s1.5-.7 1.5-1.5" /></symbol><symbol  viewBox="0 0 24 24" id="icon-github"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-magnify"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-rocket-launch"><path d="m13.13 22.19-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27l-2.77 6.1M5.64 12.5l-3.83-1.63 6.1-2.77C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39S16.66.269 11 5.93c-2.19 2.19-3.5 4.6-4.35 6.71-.28.75-.09 1.57.46 2.13l2.13 2.12c.55.56 1.37.74 2.12.46A19.1 19.1 0 0 0 18.07 13c5.66-5.66 3.54-10.61 3.54-10.61m-7.07 7.07c-.78-.78-.78-2.05 0-2.83s2.05-.78 2.83 0c.77.78.78 2.05 0 2.83-.78.78-2.05.78-2.83 0m-5.66 7.07-1.41-1.41 1.41 1.41M6.24 22l3.64-3.64c-.34-.09-.67-.24-.97-.45L4.83 22h1.41M2 22h1.41l4.77-4.76-1.42-1.41L2 20.59V22m0-2.83 4.09-4.08c-.21-.3-.36-.62-.45-.97L2 17.76v1.41Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-source-branch"><path d="M13 14c-3.36 0-4.46 1.35-4.82 2.24C9.25 16.7 10 17.76 10 19a3 3 0 0 1-3 3 3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V7.83A2.99 2.99 0 0 1 4 5a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83v5.29c.88-.65 2.16-1.12 4-1.12 2.67 0 3.56-1.34 3.85-2.23A3.006 3.006 0 0 1 14 7a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.34-.88 2.5-2.09 2.86C17.65 11.29 16.68 14 13 14m-6 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M7 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m10 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-unfold-more-horizontal"><path d="M12 18.17 8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83Z" /></symbol>',t.insertBefore(n,t.lastChild)};var loadSvg=e;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e()}var sf=!1;/*!
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a2, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a2, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a2, prop, b[prop]);
+    }
+  return a2;
+};
+var __spreadProps = (a2, b) => __defProps(a2, __getOwnPropDescs(b));
+const p$1 = function polyfill() {
+  const relList = document.createElement("link").relList;
+  if (relList && relList.supports && relList.supports("modulepreload")) {
+    return;
+  }
+  for (const link of document.querySelectorAll('link[rel="modulepreload"]')) {
+    processPreload(link);
+  }
+  new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type !== "childList") {
+        continue;
+      }
+      for (const node of mutation.addedNodes) {
+        if (node.tagName === "LINK" && node.rel === "modulepreload")
+          processPreload(node);
+      }
+    }
+  }).observe(document, { childList: true, subtree: true });
+  function getFetchOpts(script) {
+    const fetchOpts = {};
+    if (script.integrity)
+      fetchOpts.integrity = script.integrity;
+    if (script.referrerpolicy)
+      fetchOpts.referrerPolicy = script.referrerpolicy;
+    if (script.crossorigin === "use-credentials")
+      fetchOpts.credentials = "include";
+    else if (script.crossorigin === "anonymous")
+      fetchOpts.credentials = "omit";
+    else
+      fetchOpts.credentials = "same-origin";
+    return fetchOpts;
+  }
+  function processPreload(link) {
+    if (link.ep)
+      return;
+    link.ep = true;
+    const fetchOpts = getFetchOpts(link);
+    fetch(link.href, fetchOpts);
+  }
+};
+p$1();
+function makeMap(str, expectsLowerCase) {
+  const map = /* @__PURE__ */ Object.create(null);
+  const list = str.split(",");
+  for (let i = 0; i < list.length; i++) {
+    map[list[i]] = true;
+  }
+  return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
+}
+const specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
+const isSpecialBooleanAttr = /* @__PURE__ */ makeMap(specialBooleanAttrs);
+function includeBooleanAttr(value) {
+  return !!value || value === "";
+}
+function normalizeStyle(value) {
+  if (isArray(value)) {
+    const res = {};
+    for (let i = 0; i < value.length; i++) {
+      const item = value[i];
+      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
+      if (normalized) {
+        for (const key in normalized) {
+          res[key] = normalized[key];
+        }
+      }
+    }
+    return res;
+  } else if (isString(value)) {
+    return value;
+  } else if (isObject$1(value)) {
+    return value;
+  }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:(.+)/;
+function parseStringStyle(cssText) {
+  const ret = {};
+  cssText.split(listDelimiterRE).forEach((item) => {
+    if (item) {
+      const tmp = item.split(propertyDelimiterRE);
+      tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+    }
+  });
+  return ret;
+}
+function normalizeClass(value) {
+  let res = "";
+  if (isString(value)) {
+    res = value;
+  } else if (isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      const normalized = normalizeClass(value[i]);
+      if (normalized) {
+        res += normalized + " ";
+      }
+    }
+  } else if (isObject$1(value)) {
+    for (const name in value) {
+      if (value[name]) {
+        res += name + " ";
+      }
+    }
+  }
+  return res.trim();
+}
+const toDisplayString = (val) => {
+  return isString(val) ? val : val == null ? "" : isArray(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
+};
+const replacer = (_key, val) => {
+  if (val && val.__v_isRef) {
+    return replacer(_key, val.value);
+  } else if (isMap(val)) {
+    return {
+      [`Map(${val.size})`]: [...val.entries()].reduce((entries, [key, val2]) => {
+        entries[`${key} =>`] = val2;
+        return entries;
+      }, {})
+    };
+  } else if (isSet(val)) {
+    return {
+      [`Set(${val.size})`]: [...val.values()]
+    };
+  } else if (isObject$1(val) && !isArray(val) && !isPlainObject$1(val)) {
+    return String(val);
+  }
+  return val;
+};
+const EMPTY_OBJ = {};
+const EMPTY_ARR = [];
+const NOOP = () => {
+};
+const NO = () => false;
+const onRE = /^on[^a-z]/;
+const isOn = (key) => onRE.test(key);
+const isModelListener = (key) => key.startsWith("onUpdate:");
+const extend = Object.assign;
+const remove = (arr, el) => {
+  const i = arr.indexOf(el);
+  if (i > -1) {
+    arr.splice(i, 1);
+  }
+};
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+const hasOwn = (val, key) => hasOwnProperty.call(val, key);
+const isArray = Array.isArray;
+const isMap = (val) => toTypeString(val) === "[object Map]";
+const isSet = (val) => toTypeString(val) === "[object Set]";
+const isFunction = (val) => typeof val === "function";
+const isString = (val) => typeof val === "string";
+const isSymbol = (val) => typeof val === "symbol";
+const isObject$1 = (val) => val !== null && typeof val === "object";
+const isPromise = (val) => {
+  return isObject$1(val) && isFunction(val.then) && isFunction(val.catch);
+};
+const objectToString = Object.prototype.toString;
+const toTypeString = (value) => objectToString.call(value);
+const toRawType = (value) => {
+  return toTypeString(value).slice(8, -1);
+};
+const isPlainObject$1 = (val) => toTypeString(val) === "[object Object]";
+const isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+const isReservedProp = /* @__PURE__ */ makeMap(",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted");
+const cacheStringFunction = (fn) => {
+  const cache = /* @__PURE__ */ Object.create(null);
+  return (str) => {
+    const hit = cache[str];
+    return hit || (cache[str] = fn(str));
+  };
+};
+const camelizeRE = /-(\w)/g;
+const camelize = cacheStringFunction((str) => {
+  return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
+});
+const hyphenateRE = /\B([A-Z])/g;
+const hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, "-$1").toLowerCase());
+const capitalize = cacheStringFunction((str) => str.charAt(0).toUpperCase() + str.slice(1));
+const toHandlerKey = cacheStringFunction((str) => str ? `on${capitalize(str)}` : ``);
+const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
+const invokeArrayFns = (fns, arg) => {
+  for (let i = 0; i < fns.length; i++) {
+    fns[i](arg);
+  }
+};
+const def = (obj, key, value) => {
+  Object.defineProperty(obj, key, {
+    configurable: true,
+    enumerable: false,
+    value
+  });
+};
+const toNumber = (val) => {
+  const n = parseFloat(val);
+  return isNaN(n) ? val : n;
+};
+let _globalThis;
+const getGlobalThis = () => {
+  return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
+};
+let activeEffectScope;
+class EffectScope {
+  constructor(detached = false) {
+    this.active = true;
+    this.effects = [];
+    this.cleanups = [];
+    if (!detached && activeEffectScope) {
+      this.parent = activeEffectScope;
+      this.index = (activeEffectScope.scopes || (activeEffectScope.scopes = [])).push(this) - 1;
+    }
+  }
+  run(fn) {
+    if (this.active) {
+      const currentEffectScope = activeEffectScope;
+      try {
+        activeEffectScope = this;
+        return fn();
+      } finally {
+        activeEffectScope = currentEffectScope;
+      }
+    }
+  }
+  on() {
+    activeEffectScope = this;
+  }
+  off() {
+    activeEffectScope = this.parent;
+  }
+  stop(fromParent) {
+    if (this.active) {
+      let i, l2;
+      for (i = 0, l2 = this.effects.length; i < l2; i++) {
+        this.effects[i].stop();
+      }
+      for (i = 0, l2 = this.cleanups.length; i < l2; i++) {
+        this.cleanups[i]();
+      }
+      if (this.scopes) {
+        for (i = 0, l2 = this.scopes.length; i < l2; i++) {
+          this.scopes[i].stop(true);
+        }
+      }
+      if (this.parent && !fromParent) {
+        const last = this.parent.scopes.pop();
+        if (last && last !== this) {
+          this.parent.scopes[this.index] = last;
+          last.index = this.index;
+        }
+      }
+      this.active = false;
+    }
+  }
+}
+function effectScope(detached) {
+  return new EffectScope(detached);
+}
+function recordEffectScope(effect, scope = activeEffectScope) {
+  if (scope && scope.active) {
+    scope.effects.push(effect);
+  }
+}
+const createDep = (effects) => {
+  const dep = new Set(effects);
+  dep.w = 0;
+  dep.n = 0;
+  return dep;
+};
+const wasTracked = (dep) => (dep.w & trackOpBit) > 0;
+const newTracked = (dep) => (dep.n & trackOpBit) > 0;
+const initDepMarkers = ({ deps }) => {
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].w |= trackOpBit;
+    }
+  }
+};
+const finalizeDepMarkers = (effect) => {
+  const { deps } = effect;
+  if (deps.length) {
+    let ptr = 0;
+    for (let i = 0; i < deps.length; i++) {
+      const dep = deps[i];
+      if (wasTracked(dep) && !newTracked(dep)) {
+        dep.delete(effect);
+      } else {
+        deps[ptr++] = dep;
+      }
+      dep.w &= ~trackOpBit;
+      dep.n &= ~trackOpBit;
+    }
+    deps.length = ptr;
+  }
+};
+const targetMap = /* @__PURE__ */ new WeakMap();
+let effectTrackDepth = 0;
+let trackOpBit = 1;
+const maxMarkerBits = 30;
+let activeEffect;
+const ITERATE_KEY = Symbol("");
+const MAP_KEY_ITERATE_KEY = Symbol("");
+class ReactiveEffect {
+  constructor(fn, scheduler = null, scope) {
+    this.fn = fn;
+    this.scheduler = scheduler;
+    this.active = true;
+    this.deps = [];
+    this.parent = void 0;
+    recordEffectScope(this, scope);
+  }
+  run() {
+    if (!this.active) {
+      return this.fn();
+    }
+    let parent = activeEffect;
+    let lastShouldTrack = shouldTrack;
+    while (parent) {
+      if (parent === this) {
+        return;
+      }
+      parent = parent.parent;
+    }
+    try {
+      this.parent = activeEffect;
+      activeEffect = this;
+      shouldTrack = true;
+      trackOpBit = 1 << ++effectTrackDepth;
+      if (effectTrackDepth <= maxMarkerBits) {
+        initDepMarkers(this);
+      } else {
+        cleanupEffect(this);
+      }
+      return this.fn();
+    } finally {
+      if (effectTrackDepth <= maxMarkerBits) {
+        finalizeDepMarkers(this);
+      }
+      trackOpBit = 1 << --effectTrackDepth;
+      activeEffect = this.parent;
+      shouldTrack = lastShouldTrack;
+      this.parent = void 0;
+      if (this.deferStop) {
+        this.stop();
+      }
+    }
+  }
+  stop() {
+    if (activeEffect === this) {
+      this.deferStop = true;
+    } else if (this.active) {
+      cleanupEffect(this);
+      if (this.onStop) {
+        this.onStop();
+      }
+      this.active = false;
+    }
+  }
+}
+function cleanupEffect(effect) {
+  const { deps } = effect;
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].delete(effect);
+    }
+    deps.length = 0;
+  }
+}
+let shouldTrack = true;
+const trackStack = [];
+function pauseTracking() {
+  trackStack.push(shouldTrack);
+  shouldTrack = false;
+}
+function resetTracking() {
+  const last = trackStack.pop();
+  shouldTrack = last === void 0 ? true : last;
+}
+function track(target2, type, key) {
+  if (shouldTrack && activeEffect) {
+    let depsMap = targetMap.get(target2);
+    if (!depsMap) {
+      targetMap.set(target2, depsMap = /* @__PURE__ */ new Map());
+    }
+    let dep = depsMap.get(key);
+    if (!dep) {
+      depsMap.set(key, dep = createDep());
+    }
+    trackEffects(dep);
+  }
+}
+function trackEffects(dep, debuggerEventExtraInfo) {
+  let shouldTrack2 = false;
+  if (effectTrackDepth <= maxMarkerBits) {
+    if (!newTracked(dep)) {
+      dep.n |= trackOpBit;
+      shouldTrack2 = !wasTracked(dep);
+    }
+  } else {
+    shouldTrack2 = !dep.has(activeEffect);
+  }
+  if (shouldTrack2) {
+    dep.add(activeEffect);
+    activeEffect.deps.push(dep);
+  }
+}
+function trigger(target2, type, key, newValue, oldValue, oldTarget) {
+  const depsMap = targetMap.get(target2);
+  if (!depsMap) {
+    return;
+  }
+  let deps = [];
+  if (type === "clear") {
+    deps = [...depsMap.values()];
+  } else if (key === "length" && isArray(target2)) {
+    depsMap.forEach((dep, key2) => {
+      if (key2 === "length" || key2 >= newValue) {
+        deps.push(dep);
+      }
+    });
+  } else {
+    if (key !== void 0) {
+      deps.push(depsMap.get(key));
+    }
+    switch (type) {
+      case "add":
+        if (!isArray(target2)) {
+          deps.push(depsMap.get(ITERATE_KEY));
+          if (isMap(target2)) {
+            deps.push(depsMap.get(MAP_KEY_ITERATE_KEY));
+          }
+        } else if (isIntegerKey(key)) {
+          deps.push(depsMap.get("length"));
+        }
+        break;
+      case "delete":
+        if (!isArray(target2)) {
+          deps.push(depsMap.get(ITERATE_KEY));
+          if (isMap(target2)) {
+            deps.push(depsMap.get(MAP_KEY_ITERATE_KEY));
+          }
+        }
+        break;
+      case "set":
+        if (isMap(target2)) {
+          deps.push(depsMap.get(ITERATE_KEY));
+        }
+        break;
+    }
+  }
+  if (deps.length === 1) {
+    if (deps[0]) {
+      {
+        triggerEffects(deps[0]);
+      }
+    }
+  } else {
+    const effects = [];
+    for (const dep of deps) {
+      if (dep) {
+        effects.push(...dep);
+      }
+    }
+    {
+      triggerEffects(createDep(effects));
+    }
+  }
+}
+function triggerEffects(dep, debuggerEventExtraInfo) {
+  const effects = isArray(dep) ? dep : [...dep];
+  for (const effect of effects) {
+    if (effect.computed) {
+      triggerEffect(effect);
+    }
+  }
+  for (const effect of effects) {
+    if (!effect.computed) {
+      triggerEffect(effect);
+    }
+  }
+}
+function triggerEffect(effect, debuggerEventExtraInfo) {
+  if (effect !== activeEffect || effect.allowRecurse) {
+    if (effect.scheduler) {
+      effect.scheduler();
+    } else {
+      effect.run();
+    }
+  }
+}
+const isNonTrackableKeys = /* @__PURE__ */ makeMap(`__proto__,__v_isRef,__isVue`);
+const builtInSymbols = new Set(/* @__PURE__ */ Object.getOwnPropertyNames(Symbol).filter((key) => key !== "arguments" && key !== "caller").map((key) => Symbol[key]).filter(isSymbol));
+const get = /* @__PURE__ */ createGetter();
+const shallowGet = /* @__PURE__ */ createGetter(false, true);
+const readonlyGet = /* @__PURE__ */ createGetter(true);
+const arrayInstrumentations = /* @__PURE__ */ createArrayInstrumentations();
+function createArrayInstrumentations() {
+  const instrumentations = {};
+  ["includes", "indexOf", "lastIndexOf"].forEach((key) => {
+    instrumentations[key] = function(...args) {
+      const arr = toRaw(this);
+      for (let i = 0, l2 = this.length; i < l2; i++) {
+        track(arr, "get", i + "");
+      }
+      const res = arr[key](...args);
+      if (res === -1 || res === false) {
+        return arr[key](...args.map(toRaw));
+      } else {
+        return res;
+      }
+    };
+  });
+  ["push", "pop", "shift", "unshift", "splice"].forEach((key) => {
+    instrumentations[key] = function(...args) {
+      pauseTracking();
+      const res = toRaw(this)[key].apply(this, args);
+      resetTracking();
+      return res;
+    };
+  });
+  return instrumentations;
+}
+function createGetter(isReadonly2 = false, shallow = false) {
+  return function get2(target2, key, receiver) {
+    if (key === "__v_isReactive") {
+      return !isReadonly2;
+    } else if (key === "__v_isReadonly") {
+      return isReadonly2;
+    } else if (key === "__v_isShallow") {
+      return shallow;
+    } else if (key === "__v_raw" && receiver === (isReadonly2 ? shallow ? shallowReadonlyMap : readonlyMap : shallow ? shallowReactiveMap : reactiveMap).get(target2)) {
+      return target2;
+    }
+    const targetIsArray = isArray(target2);
+    if (!isReadonly2 && targetIsArray && hasOwn(arrayInstrumentations, key)) {
+      return Reflect.get(arrayInstrumentations, key, receiver);
+    }
+    const res = Reflect.get(target2, key, receiver);
+    if (isSymbol(key) ? builtInSymbols.has(key) : isNonTrackableKeys(key)) {
+      return res;
+    }
+    if (!isReadonly2) {
+      track(target2, "get", key);
+    }
+    if (shallow) {
+      return res;
+    }
+    if (isRef(res)) {
+      return targetIsArray && isIntegerKey(key) ? res : res.value;
+    }
+    if (isObject$1(res)) {
+      return isReadonly2 ? readonly(res) : reactive(res);
+    }
+    return res;
+  };
+}
+const set = /* @__PURE__ */ createSetter();
+const shallowSet = /* @__PURE__ */ createSetter(true);
+function createSetter(shallow = false) {
+  return function set2(target2, key, value, receiver) {
+    let oldValue = target2[key];
+    if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
+      return false;
+    }
+    if (!shallow && !isReadonly(value)) {
+      if (!isShallow(value)) {
+        value = toRaw(value);
+        oldValue = toRaw(oldValue);
+      }
+      if (!isArray(target2) && isRef(oldValue) && !isRef(value)) {
+        oldValue.value = value;
+        return true;
+      }
+    }
+    const hadKey = isArray(target2) && isIntegerKey(key) ? Number(key) < target2.length : hasOwn(target2, key);
+    const result = Reflect.set(target2, key, value, receiver);
+    if (target2 === toRaw(receiver)) {
+      if (!hadKey) {
+        trigger(target2, "add", key, value);
+      } else if (hasChanged(value, oldValue)) {
+        trigger(target2, "set", key, value);
+      }
+    }
+    return result;
+  };
+}
+function deleteProperty(target2, key) {
+  const hadKey = hasOwn(target2, key);
+  target2[key];
+  const result = Reflect.deleteProperty(target2, key);
+  if (result && hadKey) {
+    trigger(target2, "delete", key, void 0);
+  }
+  return result;
+}
+function has(target2, key) {
+  const result = Reflect.has(target2, key);
+  if (!isSymbol(key) || !builtInSymbols.has(key)) {
+    track(target2, "has", key);
+  }
+  return result;
+}
+function ownKeys(target2) {
+  track(target2, "iterate", isArray(target2) ? "length" : ITERATE_KEY);
+  return Reflect.ownKeys(target2);
+}
+const mutableHandlers = {
+  get,
+  set,
+  deleteProperty,
+  has,
+  ownKeys
+};
+const readonlyHandlers = {
+  get: readonlyGet,
+  set(target2, key) {
+    return true;
+  },
+  deleteProperty(target2, key) {
+    return true;
+  }
+};
+const shallowReactiveHandlers = /* @__PURE__ */ extend({}, mutableHandlers, {
+  get: shallowGet,
+  set: shallowSet
+});
+const toShallow = (value) => value;
+const getProto = (v) => Reflect.getPrototypeOf(v);
+function get$1(target2, key, isReadonly2 = false, isShallow2 = false) {
+  target2 = target2["__v_raw"];
+  const rawTarget = toRaw(target2);
+  const rawKey = toRaw(key);
+  if (!isReadonly2) {
+    if (key !== rawKey) {
+      track(rawTarget, "get", key);
+    }
+    track(rawTarget, "get", rawKey);
+  }
+  const { has: has2 } = getProto(rawTarget);
+  const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
+  if (has2.call(rawTarget, key)) {
+    return wrap(target2.get(key));
+  } else if (has2.call(rawTarget, rawKey)) {
+    return wrap(target2.get(rawKey));
+  } else if (target2 !== rawTarget) {
+    target2.get(key);
+  }
+}
+function has$1(key, isReadonly2 = false) {
+  const target2 = this["__v_raw"];
+  const rawTarget = toRaw(target2);
+  const rawKey = toRaw(key);
+  if (!isReadonly2) {
+    if (key !== rawKey) {
+      track(rawTarget, "has", key);
+    }
+    track(rawTarget, "has", rawKey);
+  }
+  return key === rawKey ? target2.has(key) : target2.has(key) || target2.has(rawKey);
+}
+function size$1(target2, isReadonly2 = false) {
+  target2 = target2["__v_raw"];
+  !isReadonly2 && track(toRaw(target2), "iterate", ITERATE_KEY);
+  return Reflect.get(target2, "size", target2);
+}
+function add(value) {
+  value = toRaw(value);
+  const target2 = toRaw(this);
+  const proto = getProto(target2);
+  const hadKey = proto.has.call(target2, value);
+  if (!hadKey) {
+    target2.add(value);
+    trigger(target2, "add", value, value);
+  }
+  return this;
+}
+function set$1(key, value) {
+  value = toRaw(value);
+  const target2 = toRaw(this);
+  const { has: has2, get: get2 } = getProto(target2);
+  let hadKey = has2.call(target2, key);
+  if (!hadKey) {
+    key = toRaw(key);
+    hadKey = has2.call(target2, key);
+  }
+  const oldValue = get2.call(target2, key);
+  target2.set(key, value);
+  if (!hadKey) {
+    trigger(target2, "add", key, value);
+  } else if (hasChanged(value, oldValue)) {
+    trigger(target2, "set", key, value);
+  }
+  return this;
+}
+function deleteEntry(key) {
+  const target2 = toRaw(this);
+  const { has: has2, get: get2 } = getProto(target2);
+  let hadKey = has2.call(target2, key);
+  if (!hadKey) {
+    key = toRaw(key);
+    hadKey = has2.call(target2, key);
+  }
+  get2 ? get2.call(target2, key) : void 0;
+  const result = target2.delete(key);
+  if (hadKey) {
+    trigger(target2, "delete", key, void 0);
+  }
+  return result;
+}
+function clear() {
+  const target2 = toRaw(this);
+  const hadItems = target2.size !== 0;
+  const result = target2.clear();
+  if (hadItems) {
+    trigger(target2, "clear", void 0, void 0);
+  }
+  return result;
+}
+function createForEach(isReadonly2, isShallow2) {
+  return function forEach(callback, thisArg) {
+    const observed = this;
+    const target2 = observed["__v_raw"];
+    const rawTarget = toRaw(target2);
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
+    !isReadonly2 && track(rawTarget, "iterate", ITERATE_KEY);
+    return target2.forEach((value, key) => {
+      return callback.call(thisArg, wrap(value), wrap(key), observed);
+    });
+  };
+}
+function createIterableMethod(method, isReadonly2, isShallow2) {
+  return function(...args) {
+    const target2 = this["__v_raw"];
+    const rawTarget = toRaw(target2);
+    const targetIsMap = isMap(rawTarget);
+    const isPair = method === "entries" || method === Symbol.iterator && targetIsMap;
+    const isKeyOnly = method === "keys" && targetIsMap;
+    const innerIterator = target2[method](...args);
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
+    !isReadonly2 && track(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
+    return {
+      next() {
+        const { value, done } = innerIterator.next();
+        return done ? { value, done } : {
+          value: isPair ? [wrap(value[0]), wrap(value[1])] : wrap(value),
+          done
+        };
+      },
+      [Symbol.iterator]() {
+        return this;
+      }
+    };
+  };
+}
+function createReadonlyMethod(type) {
+  return function(...args) {
+    return type === "delete" ? false : this;
+  };
+}
+function createInstrumentations() {
+  const mutableInstrumentations2 = {
+    get(key) {
+      return get$1(this, key);
+    },
+    get size() {
+      return size$1(this);
+    },
+    has: has$1,
+    add,
+    set: set$1,
+    delete: deleteEntry,
+    clear,
+    forEach: createForEach(false, false)
+  };
+  const shallowInstrumentations2 = {
+    get(key) {
+      return get$1(this, key, false, true);
+    },
+    get size() {
+      return size$1(this);
+    },
+    has: has$1,
+    add,
+    set: set$1,
+    delete: deleteEntry,
+    clear,
+    forEach: createForEach(false, true)
+  };
+  const readonlyInstrumentations2 = {
+    get(key) {
+      return get$1(this, key, true);
+    },
+    get size() {
+      return size$1(this, true);
+    },
+    has(key) {
+      return has$1.call(this, key, true);
+    },
+    add: createReadonlyMethod("add"),
+    set: createReadonlyMethod("set"),
+    delete: createReadonlyMethod("delete"),
+    clear: createReadonlyMethod("clear"),
+    forEach: createForEach(true, false)
+  };
+  const shallowReadonlyInstrumentations2 = {
+    get(key) {
+      return get$1(this, key, true, true);
+    },
+    get size() {
+      return size$1(this, true);
+    },
+    has(key) {
+      return has$1.call(this, key, true);
+    },
+    add: createReadonlyMethod("add"),
+    set: createReadonlyMethod("set"),
+    delete: createReadonlyMethod("delete"),
+    clear: createReadonlyMethod("clear"),
+    forEach: createForEach(true, true)
+  };
+  const iteratorMethods = ["keys", "values", "entries", Symbol.iterator];
+  iteratorMethods.forEach((method) => {
+    mutableInstrumentations2[method] = createIterableMethod(method, false, false);
+    readonlyInstrumentations2[method] = createIterableMethod(method, true, false);
+    shallowInstrumentations2[method] = createIterableMethod(method, false, true);
+    shallowReadonlyInstrumentations2[method] = createIterableMethod(method, true, true);
+  });
+  return [
+    mutableInstrumentations2,
+    readonlyInstrumentations2,
+    shallowInstrumentations2,
+    shallowReadonlyInstrumentations2
+  ];
+}
+const [mutableInstrumentations, readonlyInstrumentations, shallowInstrumentations, shallowReadonlyInstrumentations] = /* @__PURE__ */ createInstrumentations();
+function createInstrumentationGetter(isReadonly2, shallow) {
+  const instrumentations = shallow ? isReadonly2 ? shallowReadonlyInstrumentations : shallowInstrumentations : isReadonly2 ? readonlyInstrumentations : mutableInstrumentations;
+  return (target2, key, receiver) => {
+    if (key === "__v_isReactive") {
+      return !isReadonly2;
+    } else if (key === "__v_isReadonly") {
+      return isReadonly2;
+    } else if (key === "__v_raw") {
+      return target2;
+    }
+    return Reflect.get(hasOwn(instrumentations, key) && key in target2 ? instrumentations : target2, key, receiver);
+  };
+}
+const mutableCollectionHandlers = {
+  get: /* @__PURE__ */ createInstrumentationGetter(false, false)
+};
+const shallowCollectionHandlers = {
+  get: /* @__PURE__ */ createInstrumentationGetter(false, true)
+};
+const readonlyCollectionHandlers = {
+  get: /* @__PURE__ */ createInstrumentationGetter(true, false)
+};
+const reactiveMap = /* @__PURE__ */ new WeakMap();
+const shallowReactiveMap = /* @__PURE__ */ new WeakMap();
+const readonlyMap = /* @__PURE__ */ new WeakMap();
+const shallowReadonlyMap = /* @__PURE__ */ new WeakMap();
+function targetTypeMap(rawType) {
+  switch (rawType) {
+    case "Object":
+    case "Array":
+      return 1;
+    case "Map":
+    case "Set":
+    case "WeakMap":
+    case "WeakSet":
+      return 2;
+    default:
+      return 0;
+  }
+}
+function getTargetType(value) {
+  return value["__v_skip"] || !Object.isExtensible(value) ? 0 : targetTypeMap(toRawType(value));
+}
+function reactive(target2) {
+  if (isReadonly(target2)) {
+    return target2;
+  }
+  return createReactiveObject(target2, false, mutableHandlers, mutableCollectionHandlers, reactiveMap);
+}
+function shallowReactive(target2) {
+  return createReactiveObject(target2, false, shallowReactiveHandlers, shallowCollectionHandlers, shallowReactiveMap);
+}
+function readonly(target2) {
+  return createReactiveObject(target2, true, readonlyHandlers, readonlyCollectionHandlers, readonlyMap);
+}
+function createReactiveObject(target2, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
+  if (!isObject$1(target2)) {
+    return target2;
+  }
+  if (target2["__v_raw"] && !(isReadonly2 && target2["__v_isReactive"])) {
+    return target2;
+  }
+  const existingProxy = proxyMap.get(target2);
+  if (existingProxy) {
+    return existingProxy;
+  }
+  const targetType = getTargetType(target2);
+  if (targetType === 0) {
+    return target2;
+  }
+  const proxy = new Proxy(target2, targetType === 2 ? collectionHandlers : baseHandlers);
+  proxyMap.set(target2, proxy);
+  return proxy;
+}
+function isReactive(value) {
+  if (isReadonly(value)) {
+    return isReactive(value["__v_raw"]);
+  }
+  return !!(value && value["__v_isReactive"]);
+}
+function isReadonly(value) {
+  return !!(value && value["__v_isReadonly"]);
+}
+function isShallow(value) {
+  return !!(value && value["__v_isShallow"]);
+}
+function isProxy(value) {
+  return isReactive(value) || isReadonly(value);
+}
+function toRaw(observed) {
+  const raw = observed && observed["__v_raw"];
+  return raw ? toRaw(raw) : observed;
+}
+function markRaw(value) {
+  def(value, "__v_skip", true);
+  return value;
+}
+const toReactive = (value) => isObject$1(value) ? reactive(value) : value;
+const toReadonly = (value) => isObject$1(value) ? readonly(value) : value;
+function trackRefValue(ref2) {
+  if (shouldTrack && activeEffect) {
+    ref2 = toRaw(ref2);
+    {
+      trackEffects(ref2.dep || (ref2.dep = createDep()));
+    }
+  }
+}
+function triggerRefValue(ref2, newVal) {
+  ref2 = toRaw(ref2);
+  if (ref2.dep) {
+    {
+      triggerEffects(ref2.dep);
+    }
+  }
+}
+function isRef(r) {
+  return !!(r && r.__v_isRef === true);
+}
+function ref(value) {
+  return createRef(value, false);
+}
+function createRef(rawValue, shallow) {
+  if (isRef(rawValue)) {
+    return rawValue;
+  }
+  return new RefImpl(rawValue, shallow);
+}
+class RefImpl {
+  constructor(value, __v_isShallow) {
+    this.__v_isShallow = __v_isShallow;
+    this.dep = void 0;
+    this.__v_isRef = true;
+    this._rawValue = __v_isShallow ? value : toRaw(value);
+    this._value = __v_isShallow ? value : toReactive(value);
+  }
+  get value() {
+    trackRefValue(this);
+    return this._value;
+  }
+  set value(newVal) {
+    newVal = this.__v_isShallow ? newVal : toRaw(newVal);
+    if (hasChanged(newVal, this._rawValue)) {
+      this._rawValue = newVal;
+      this._value = this.__v_isShallow ? newVal : toReactive(newVal);
+      triggerRefValue(this);
+    }
+  }
+}
+function unref(ref2) {
+  return isRef(ref2) ? ref2.value : ref2;
+}
+const shallowUnwrapHandlers = {
+  get: (target2, key, receiver) => unref(Reflect.get(target2, key, receiver)),
+  set: (target2, key, value, receiver) => {
+    const oldValue = target2[key];
+    if (isRef(oldValue) && !isRef(value)) {
+      oldValue.value = value;
+      return true;
+    } else {
+      return Reflect.set(target2, key, value, receiver);
+    }
+  }
+};
+function proxyRefs(objectWithRefs) {
+  return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
+}
+function toRefs(object) {
+  const ret = isArray(object) ? new Array(object.length) : {};
+  for (const key in object) {
+    ret[key] = toRef(object, key);
+  }
+  return ret;
+}
+class ObjectRefImpl {
+  constructor(_object, _key, _defaultValue) {
+    this._object = _object;
+    this._key = _key;
+    this._defaultValue = _defaultValue;
+    this.__v_isRef = true;
+  }
+  get value() {
+    const val = this._object[this._key];
+    return val === void 0 ? this._defaultValue : val;
+  }
+  set value(newVal) {
+    this._object[this._key] = newVal;
+  }
+}
+function toRef(object, key, defaultValue) {
+  const val = object[key];
+  return isRef(val) ? val : new ObjectRefImpl(object, key, defaultValue);
+}
+class ComputedRefImpl {
+  constructor(getter, _setter, isReadonly2, isSSR) {
+    this._setter = _setter;
+    this.dep = void 0;
+    this.__v_isRef = true;
+    this._dirty = true;
+    this.effect = new ReactiveEffect(getter, () => {
+      if (!this._dirty) {
+        this._dirty = true;
+        triggerRefValue(this);
+      }
+    });
+    this.effect.computed = this;
+    this.effect.active = this._cacheable = !isSSR;
+    this["__v_isReadonly"] = isReadonly2;
+  }
+  get value() {
+    const self2 = toRaw(this);
+    trackRefValue(self2);
+    if (self2._dirty || !self2._cacheable) {
+      self2._dirty = false;
+      self2._value = self2.effect.run();
+    }
+    return self2._value;
+  }
+  set value(newValue) {
+    this._setter(newValue);
+  }
+}
+function computed$1(getterOrOptions, debugOptions, isSSR = false) {
+  let getter;
+  let setter;
+  const onlyGetter = isFunction(getterOrOptions);
+  if (onlyGetter) {
+    getter = getterOrOptions;
+    setter = NOOP;
+  } else {
+    getter = getterOrOptions.get;
+    setter = getterOrOptions.set;
+  }
+  const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter, isSSR);
+  return cRef;
+}
+function callWithErrorHandling(fn, instance, type, args) {
+  let res;
+  try {
+    res = args ? fn(...args) : fn();
+  } catch (err) {
+    handleError(err, instance, type);
+  }
+  return res;
+}
+function callWithAsyncErrorHandling(fn, instance, type, args) {
+  if (isFunction(fn)) {
+    const res = callWithErrorHandling(fn, instance, type, args);
+    if (res && isPromise(res)) {
+      res.catch((err) => {
+        handleError(err, instance, type);
+      });
+    }
+    return res;
+  }
+  const values = [];
+  for (let i = 0; i < fn.length; i++) {
+    values.push(callWithAsyncErrorHandling(fn[i], instance, type, args));
+  }
+  return values;
+}
+function handleError(err, instance, type, throwInDev) {
+  instance ? instance.vnode : null;
+  if (instance) {
+    let cur = instance.parent;
+    const exposedInstance = instance.proxy;
+    const errorInfo = type;
+    while (cur) {
+      const errorCapturedHooks = cur.ec;
+      if (errorCapturedHooks) {
+        for (let i = 0; i < errorCapturedHooks.length; i++) {
+          if (errorCapturedHooks[i](err, exposedInstance, errorInfo) === false) {
+            return;
+          }
+        }
+      }
+      cur = cur.parent;
+    }
+    const appErrorHandler = instance.appContext.config.errorHandler;
+    if (appErrorHandler) {
+      callWithErrorHandling(appErrorHandler, null, 10, [err, exposedInstance, errorInfo]);
+      return;
+    }
+  }
+  logError(err);
+}
+function logError(err, type, contextVNode, throwInDev) {
+  {
+    console.error(err);
+  }
+}
+let isFlushing = false;
+let isFlushPending = false;
+const queue$1 = [];
+let flushIndex = 0;
+const pendingPreFlushCbs = [];
+let activePreFlushCbs = null;
+let preFlushIndex = 0;
+const pendingPostFlushCbs = [];
+let activePostFlushCbs = null;
+let postFlushIndex = 0;
+const resolvedPromise = /* @__PURE__ */ Promise.resolve();
+let currentFlushPromise = null;
+let currentPreFlushParentJob = null;
+function nextTick(fn) {
+  const p2 = currentFlushPromise || resolvedPromise;
+  return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
+}
+function findInsertionIndex(id) {
+  let start = flushIndex + 1;
+  let end = queue$1.length;
+  while (start < end) {
+    const middle = start + end >>> 1;
+    const middleJobId = getId(queue$1[middle]);
+    middleJobId < id ? start = middle + 1 : end = middle;
+  }
+  return start;
+}
+function queueJob(job) {
+  if ((!queue$1.length || !queue$1.includes(job, isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex)) && job !== currentPreFlushParentJob) {
+    if (job.id == null) {
+      queue$1.push(job);
+    } else {
+      queue$1.splice(findInsertionIndex(job.id), 0, job);
+    }
+    queueFlush();
+  }
+}
+function queueFlush() {
+  if (!isFlushing && !isFlushPending) {
+    isFlushPending = true;
+    currentFlushPromise = resolvedPromise.then(flushJobs);
+  }
+}
+function invalidateJob(job) {
+  const i = queue$1.indexOf(job);
+  if (i > flushIndex) {
+    queue$1.splice(i, 1);
+  }
+}
+function queueCb(cb, activeQueue, pendingQueue, index2) {
+  if (!isArray(cb)) {
+    if (!activeQueue || !activeQueue.includes(cb, cb.allowRecurse ? index2 + 1 : index2)) {
+      pendingQueue.push(cb);
+    }
+  } else {
+    pendingQueue.push(...cb);
+  }
+  queueFlush();
+}
+function queuePreFlushCb(cb) {
+  queueCb(cb, activePreFlushCbs, pendingPreFlushCbs, preFlushIndex);
+}
+function queuePostFlushCb(cb) {
+  queueCb(cb, activePostFlushCbs, pendingPostFlushCbs, postFlushIndex);
+}
+function flushPreFlushCbs(seen, parentJob = null) {
+  if (pendingPreFlushCbs.length) {
+    currentPreFlushParentJob = parentJob;
+    activePreFlushCbs = [...new Set(pendingPreFlushCbs)];
+    pendingPreFlushCbs.length = 0;
+    for (preFlushIndex = 0; preFlushIndex < activePreFlushCbs.length; preFlushIndex++) {
+      activePreFlushCbs[preFlushIndex]();
+    }
+    activePreFlushCbs = null;
+    preFlushIndex = 0;
+    currentPreFlushParentJob = null;
+    flushPreFlushCbs(seen, parentJob);
+  }
+}
+function flushPostFlushCbs(seen) {
+  flushPreFlushCbs();
+  if (pendingPostFlushCbs.length) {
+    const deduped = [...new Set(pendingPostFlushCbs)];
+    pendingPostFlushCbs.length = 0;
+    if (activePostFlushCbs) {
+      activePostFlushCbs.push(...deduped);
+      return;
+    }
+    activePostFlushCbs = deduped;
+    activePostFlushCbs.sort((a2, b) => getId(a2) - getId(b));
+    for (postFlushIndex = 0; postFlushIndex < activePostFlushCbs.length; postFlushIndex++) {
+      activePostFlushCbs[postFlushIndex]();
+    }
+    activePostFlushCbs = null;
+    postFlushIndex = 0;
+  }
+}
+const getId = (job) => job.id == null ? Infinity : job.id;
+function flushJobs(seen) {
+  isFlushPending = false;
+  isFlushing = true;
+  flushPreFlushCbs(seen);
+  queue$1.sort((a2, b) => getId(a2) - getId(b));
+  const check = NOOP;
+  try {
+    for (flushIndex = 0; flushIndex < queue$1.length; flushIndex++) {
+      const job = queue$1[flushIndex];
+      if (job && job.active !== false) {
+        if (false)
+          ;
+        callWithErrorHandling(job, null, 14);
+      }
+    }
+  } finally {
+    flushIndex = 0;
+    queue$1.length = 0;
+    flushPostFlushCbs();
+    isFlushing = false;
+    currentFlushPromise = null;
+    if (queue$1.length || pendingPreFlushCbs.length || pendingPostFlushCbs.length) {
+      flushJobs(seen);
+    }
+  }
+}
+function emit$1(instance, event, ...rawArgs) {
+  if (instance.isUnmounted)
+    return;
+  const props = instance.vnode.props || EMPTY_OBJ;
+  let args = rawArgs;
+  const isModelListener2 = event.startsWith("update:");
+  const modelArg = isModelListener2 && event.slice(7);
+  if (modelArg && modelArg in props) {
+    const modifiersKey = `${modelArg === "modelValue" ? "model" : modelArg}Modifiers`;
+    const { number, trim } = props[modifiersKey] || EMPTY_OBJ;
+    if (trim) {
+      args = rawArgs.map((a2) => a2.trim());
+    }
+    if (number) {
+      args = rawArgs.map(toNumber);
+    }
+  }
+  let handlerName;
+  let handler = props[handlerName = toHandlerKey(event)] || props[handlerName = toHandlerKey(camelize(event))];
+  if (!handler && isModelListener2) {
+    handler = props[handlerName = toHandlerKey(hyphenate(event))];
+  }
+  if (handler) {
+    callWithAsyncErrorHandling(handler, instance, 6, args);
+  }
+  const onceHandler = props[handlerName + `Once`];
+  if (onceHandler) {
+    if (!instance.emitted) {
+      instance.emitted = {};
+    } else if (instance.emitted[handlerName]) {
+      return;
+    }
+    instance.emitted[handlerName] = true;
+    callWithAsyncErrorHandling(onceHandler, instance, 6, args);
+  }
+}
+function normalizeEmitsOptions(comp, appContext, asMixin = false) {
+  const cache = appContext.emitsCache;
+  const cached = cache.get(comp);
+  if (cached !== void 0) {
+    return cached;
+  }
+  const raw = comp.emits;
+  let normalized = {};
+  let hasExtends = false;
+  if (!isFunction(comp)) {
+    const extendEmits = (raw2) => {
+      const normalizedFromExtend = normalizeEmitsOptions(raw2, appContext, true);
+      if (normalizedFromExtend) {
+        hasExtends = true;
+        extend(normalized, normalizedFromExtend);
+      }
+    };
+    if (!asMixin && appContext.mixins.length) {
+      appContext.mixins.forEach(extendEmits);
+    }
+    if (comp.extends) {
+      extendEmits(comp.extends);
+    }
+    if (comp.mixins) {
+      comp.mixins.forEach(extendEmits);
+    }
+  }
+  if (!raw && !hasExtends) {
+    cache.set(comp, null);
+    return null;
+  }
+  if (isArray(raw)) {
+    raw.forEach((key) => normalized[key] = null);
+  } else {
+    extend(normalized, raw);
+  }
+  cache.set(comp, normalized);
+  return normalized;
+}
+function isEmitListener(options, key) {
+  if (!options || !isOn(key)) {
+    return false;
+  }
+  key = key.slice(2).replace(/Once$/, "");
+  return hasOwn(options, key[0].toLowerCase() + key.slice(1)) || hasOwn(options, hyphenate(key)) || hasOwn(options, key);
+}
+let currentRenderingInstance = null;
+let currentScopeId = null;
+function setCurrentRenderingInstance(instance) {
+  const prev = currentRenderingInstance;
+  currentRenderingInstance = instance;
+  currentScopeId = instance && instance.type.__scopeId || null;
+  return prev;
+}
+function pushScopeId(id) {
+  currentScopeId = id;
+}
+function popScopeId() {
+  currentScopeId = null;
+}
+function withCtx(fn, ctx = currentRenderingInstance, isNonScopedSlot) {
+  if (!ctx)
+    return fn;
+  if (fn._n) {
+    return fn;
+  }
+  const renderFnWithContext = (...args) => {
+    if (renderFnWithContext._d) {
+      setBlockTracking(-1);
+    }
+    const prevInstance = setCurrentRenderingInstance(ctx);
+    const res = fn(...args);
+    setCurrentRenderingInstance(prevInstance);
+    if (renderFnWithContext._d) {
+      setBlockTracking(1);
+    }
+    return res;
+  };
+  renderFnWithContext._n = true;
+  renderFnWithContext._c = true;
+  renderFnWithContext._d = true;
+  return renderFnWithContext;
+}
+function markAttrsAccessed() {
+}
+function renderComponentRoot(instance) {
+  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit, render, renderCache, data, setupState, ctx, inheritAttrs } = instance;
+  let result;
+  let fallthroughAttrs;
+  const prev = setCurrentRenderingInstance(instance);
+  try {
+    if (vnode.shapeFlag & 4) {
+      const proxyToUse = withProxy || proxy;
+      result = normalizeVNode(render.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
+      fallthroughAttrs = attrs;
+    } else {
+      const render2 = Component;
+      if (false)
+        ;
+      result = normalizeVNode(render2.length > 1 ? render2(props, false ? {
+        get attrs() {
+          markAttrsAccessed();
+          return attrs;
+        },
+        slots,
+        emit
+      } : { attrs, slots, emit }) : render2(props, null));
+      fallthroughAttrs = Component.props ? attrs : getFunctionalFallthrough(attrs);
+    }
+  } catch (err) {
+    blockStack.length = 0;
+    handleError(err, instance, 1);
+    result = createVNode(Comment);
+  }
+  let root = result;
+  if (fallthroughAttrs && inheritAttrs !== false) {
+    const keys = Object.keys(fallthroughAttrs);
+    const { shapeFlag } = root;
+    if (keys.length) {
+      if (shapeFlag & (1 | 6)) {
+        if (propsOptions && keys.some(isModelListener)) {
+          fallthroughAttrs = filterModelListeners(fallthroughAttrs, propsOptions);
+        }
+        root = cloneVNode(root, fallthroughAttrs);
+      }
+    }
+  }
+  if (vnode.dirs) {
+    root = cloneVNode(root);
+    root.dirs = root.dirs ? root.dirs.concat(vnode.dirs) : vnode.dirs;
+  }
+  if (vnode.transition) {
+    root.transition = vnode.transition;
+  }
+  {
+    result = root;
+  }
+  setCurrentRenderingInstance(prev);
+  return result;
+}
+const getFunctionalFallthrough = (attrs) => {
+  let res;
+  for (const key in attrs) {
+    if (key === "class" || key === "style" || isOn(key)) {
+      (res || (res = {}))[key] = attrs[key];
+    }
+  }
+  return res;
+};
+const filterModelListeners = (attrs, props) => {
+  const res = {};
+  for (const key in attrs) {
+    if (!isModelListener(key) || !(key.slice(9) in props)) {
+      res[key] = attrs[key];
+    }
+  }
+  return res;
+};
+function shouldUpdateComponent(prevVNode, nextVNode, optimized) {
+  const { props: prevProps, children: prevChildren, component } = prevVNode;
+  const { props: nextProps, children: nextChildren, patchFlag } = nextVNode;
+  const emits = component.emitsOptions;
+  if (nextVNode.dirs || nextVNode.transition) {
+    return true;
+  }
+  if (optimized && patchFlag >= 0) {
+    if (patchFlag & 1024) {
+      return true;
+    }
+    if (patchFlag & 16) {
+      if (!prevProps) {
+        return !!nextProps;
+      }
+      return hasPropsChanged(prevProps, nextProps, emits);
+    } else if (patchFlag & 8) {
+      const dynamicProps = nextVNode.dynamicProps;
+      for (let i = 0; i < dynamicProps.length; i++) {
+        const key = dynamicProps[i];
+        if (nextProps[key] !== prevProps[key] && !isEmitListener(emits, key)) {
+          return true;
+        }
+      }
+    }
+  } else {
+    if (prevChildren || nextChildren) {
+      if (!nextChildren || !nextChildren.$stable) {
+        return true;
+      }
+    }
+    if (prevProps === nextProps) {
+      return false;
+    }
+    if (!prevProps) {
+      return !!nextProps;
+    }
+    if (!nextProps) {
+      return true;
+    }
+    return hasPropsChanged(prevProps, nextProps, emits);
+  }
+  return false;
+}
+function hasPropsChanged(prevProps, nextProps, emitsOptions) {
+  const nextKeys = Object.keys(nextProps);
+  if (nextKeys.length !== Object.keys(prevProps).length) {
+    return true;
+  }
+  for (let i = 0; i < nextKeys.length; i++) {
+    const key = nextKeys[i];
+    if (nextProps[key] !== prevProps[key] && !isEmitListener(emitsOptions, key)) {
+      return true;
+    }
+  }
+  return false;
+}
+function updateHOCHostEl({ vnode, parent }, el) {
+  while (parent && parent.subTree === vnode) {
+    (vnode = parent.vnode).el = el;
+    parent = parent.parent;
+  }
+}
+const isSuspense = (type) => type.__isSuspense;
+function queueEffectWithSuspense(fn, suspense) {
+  if (suspense && suspense.pendingBranch) {
+    if (isArray(fn)) {
+      suspense.effects.push(...fn);
+    } else {
+      suspense.effects.push(fn);
+    }
+  } else {
+    queuePostFlushCb(fn);
+  }
+}
+function provide(key, value) {
+  if (!currentInstance)
+    ;
+  else {
+    let provides = currentInstance.provides;
+    const parentProvides = currentInstance.parent && currentInstance.parent.provides;
+    if (parentProvides === provides) {
+      provides = currentInstance.provides = Object.create(parentProvides);
+    }
+    provides[key] = value;
+  }
+}
+function inject(key, defaultValue, treatDefaultAsFactory = false) {
+  const instance = currentInstance || currentRenderingInstance;
+  if (instance) {
+    const provides = instance.parent == null ? instance.vnode.appContext && instance.vnode.appContext.provides : instance.parent.provides;
+    if (provides && key in provides) {
+      return provides[key];
+    } else if (arguments.length > 1) {
+      return treatDefaultAsFactory && isFunction(defaultValue) ? defaultValue.call(instance.proxy) : defaultValue;
+    } else
+      ;
+  }
+}
+function watchEffect(effect, options) {
+  return doWatch(effect, null, options);
+}
+const INITIAL_WATCHER_VALUE = {};
+function watch(source, cb, options) {
+  return doWatch(source, cb, options);
+}
+function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EMPTY_OBJ) {
+  const instance = currentInstance;
+  let getter;
+  let forceTrigger = false;
+  let isMultiSource = false;
+  if (isRef(source)) {
+    getter = () => source.value;
+    forceTrigger = isShallow(source);
+  } else if (isReactive(source)) {
+    getter = () => source;
+    deep = true;
+  } else if (isArray(source)) {
+    isMultiSource = true;
+    forceTrigger = source.some((s2) => isReactive(s2) || isShallow(s2));
+    getter = () => source.map((s2) => {
+      if (isRef(s2)) {
+        return s2.value;
+      } else if (isReactive(s2)) {
+        return traverse(s2);
+      } else if (isFunction(s2)) {
+        return callWithErrorHandling(s2, instance, 2);
+      } else
+        ;
+    });
+  } else if (isFunction(source)) {
+    if (cb) {
+      getter = () => callWithErrorHandling(source, instance, 2);
+    } else {
+      getter = () => {
+        if (instance && instance.isUnmounted) {
+          return;
+        }
+        if (cleanup) {
+          cleanup();
+        }
+        return callWithAsyncErrorHandling(source, instance, 3, [onCleanup]);
+      };
+    }
+  } else {
+    getter = NOOP;
+  }
+  if (cb && deep) {
+    const baseGetter = getter;
+    getter = () => traverse(baseGetter());
+  }
+  let cleanup;
+  let onCleanup = (fn) => {
+    cleanup = effect.onStop = () => {
+      callWithErrorHandling(fn, instance, 4);
+    };
+  };
+  if (isInSSRComponentSetup) {
+    onCleanup = NOOP;
+    if (!cb) {
+      getter();
+    } else if (immediate) {
+      callWithAsyncErrorHandling(cb, instance, 3, [
+        getter(),
+        isMultiSource ? [] : void 0,
+        onCleanup
+      ]);
+    }
+    return NOOP;
+  }
+  let oldValue = isMultiSource ? [] : INITIAL_WATCHER_VALUE;
+  const job = () => {
+    if (!effect.active) {
+      return;
+    }
+    if (cb) {
+      const newValue = effect.run();
+      if (deep || forceTrigger || (isMultiSource ? newValue.some((v, i) => hasChanged(v, oldValue[i])) : hasChanged(newValue, oldValue)) || false) {
+        if (cleanup) {
+          cleanup();
+        }
+        callWithAsyncErrorHandling(cb, instance, 3, [
+          newValue,
+          oldValue === INITIAL_WATCHER_VALUE ? void 0 : oldValue,
+          onCleanup
+        ]);
+        oldValue = newValue;
+      }
+    } else {
+      effect.run();
+    }
+  };
+  job.allowRecurse = !!cb;
+  let scheduler;
+  if (flush === "sync") {
+    scheduler = job;
+  } else if (flush === "post") {
+    scheduler = () => queuePostRenderEffect(job, instance && instance.suspense);
+  } else {
+    scheduler = () => queuePreFlushCb(job);
+  }
+  const effect = new ReactiveEffect(getter, scheduler);
+  if (cb) {
+    if (immediate) {
+      job();
+    } else {
+      oldValue = effect.run();
+    }
+  } else if (flush === "post") {
+    queuePostRenderEffect(effect.run.bind(effect), instance && instance.suspense);
+  } else {
+    effect.run();
+  }
+  return () => {
+    effect.stop();
+    if (instance && instance.scope) {
+      remove(instance.scope.effects, effect);
+    }
+  };
+}
+function instanceWatch(source, value, options) {
+  const publicThis = this.proxy;
+  const getter = isString(source) ? source.includes(".") ? createPathGetter(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
+  let cb;
+  if (isFunction(value)) {
+    cb = value;
+  } else {
+    cb = value.handler;
+    options = value;
+  }
+  const cur = currentInstance;
+  setCurrentInstance(this);
+  const res = doWatch(getter, cb.bind(publicThis), options);
+  if (cur) {
+    setCurrentInstance(cur);
+  } else {
+    unsetCurrentInstance();
+  }
+  return res;
+}
+function createPathGetter(ctx, path) {
+  const segments = path.split(".");
+  return () => {
+    let cur = ctx;
+    for (let i = 0; i < segments.length && cur; i++) {
+      cur = cur[segments[i]];
+    }
+    return cur;
+  };
+}
+function traverse(value, seen) {
+  if (!isObject$1(value) || value["__v_skip"]) {
+    return value;
+  }
+  seen = seen || /* @__PURE__ */ new Set();
+  if (seen.has(value)) {
+    return value;
+  }
+  seen.add(value);
+  if (isRef(value)) {
+    traverse(value.value, seen);
+  } else if (isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      traverse(value[i], seen);
+    }
+  } else if (isSet(value) || isMap(value)) {
+    value.forEach((v) => {
+      traverse(v, seen);
+    });
+  } else if (isPlainObject$1(value)) {
+    for (const key in value) {
+      traverse(value[key], seen);
+    }
+  }
+  return value;
+}
+function useTransitionState() {
+  const state = {
+    isMounted: false,
+    isLeaving: false,
+    isUnmounting: false,
+    leavingVNodes: /* @__PURE__ */ new Map()
+  };
+  onMounted(() => {
+    state.isMounted = true;
+  });
+  onBeforeUnmount(() => {
+    state.isUnmounting = true;
+  });
+  return state;
+}
+const TransitionHookValidator = [Function, Array];
+const BaseTransitionImpl = {
+  name: `BaseTransition`,
+  props: {
+    mode: String,
+    appear: Boolean,
+    persisted: Boolean,
+    onBeforeEnter: TransitionHookValidator,
+    onEnter: TransitionHookValidator,
+    onAfterEnter: TransitionHookValidator,
+    onEnterCancelled: TransitionHookValidator,
+    onBeforeLeave: TransitionHookValidator,
+    onLeave: TransitionHookValidator,
+    onAfterLeave: TransitionHookValidator,
+    onLeaveCancelled: TransitionHookValidator,
+    onBeforeAppear: TransitionHookValidator,
+    onAppear: TransitionHookValidator,
+    onAfterAppear: TransitionHookValidator,
+    onAppearCancelled: TransitionHookValidator
+  },
+  setup(props, { slots }) {
+    const instance = getCurrentInstance();
+    const state = useTransitionState();
+    let prevTransitionKey;
+    return () => {
+      const children = slots.default && getTransitionRawChildren(slots.default(), true);
+      if (!children || !children.length) {
+        return;
+      }
+      let child = children[0];
+      if (children.length > 1) {
+        for (const c of children) {
+          if (c.type !== Comment) {
+            child = c;
+            break;
+          }
+        }
+      }
+      const rawProps = toRaw(props);
+      const { mode } = rawProps;
+      if (state.isLeaving) {
+        return emptyPlaceholder(child);
+      }
+      const innerChild = getKeepAliveChild(child);
+      if (!innerChild) {
+        return emptyPlaceholder(child);
+      }
+      const enterHooks = resolveTransitionHooks(innerChild, rawProps, state, instance);
+      setTransitionHooks(innerChild, enterHooks);
+      const oldChild = instance.subTree;
+      const oldInnerChild = oldChild && getKeepAliveChild(oldChild);
+      let transitionKeyChanged = false;
+      const { getTransitionKey } = innerChild.type;
+      if (getTransitionKey) {
+        const key = getTransitionKey();
+        if (prevTransitionKey === void 0) {
+          prevTransitionKey = key;
+        } else if (key !== prevTransitionKey) {
+          prevTransitionKey = key;
+          transitionKeyChanged = true;
+        }
+      }
+      if (oldInnerChild && oldInnerChild.type !== Comment && (!isSameVNodeType(innerChild, oldInnerChild) || transitionKeyChanged)) {
+        const leavingHooks = resolveTransitionHooks(oldInnerChild, rawProps, state, instance);
+        setTransitionHooks(oldInnerChild, leavingHooks);
+        if (mode === "out-in") {
+          state.isLeaving = true;
+          leavingHooks.afterLeave = () => {
+            state.isLeaving = false;
+            instance.update();
+          };
+          return emptyPlaceholder(child);
+        } else if (mode === "in-out" && innerChild.type !== Comment) {
+          leavingHooks.delayLeave = (el, earlyRemove, delayedLeave) => {
+            const leavingVNodesCache = getLeavingNodesForType(state, oldInnerChild);
+            leavingVNodesCache[String(oldInnerChild.key)] = oldInnerChild;
+            el._leaveCb = () => {
+              earlyRemove();
+              el._leaveCb = void 0;
+              delete enterHooks.delayedLeave;
+            };
+            enterHooks.delayedLeave = delayedLeave;
+          };
+        }
+      }
+      return child;
+    };
+  }
+};
+const BaseTransition = BaseTransitionImpl;
+function getLeavingNodesForType(state, vnode) {
+  const { leavingVNodes } = state;
+  let leavingVNodesCache = leavingVNodes.get(vnode.type);
+  if (!leavingVNodesCache) {
+    leavingVNodesCache = /* @__PURE__ */ Object.create(null);
+    leavingVNodes.set(vnode.type, leavingVNodesCache);
+  }
+  return leavingVNodesCache;
+}
+function resolveTransitionHooks(vnode, props, state, instance) {
+  const { appear, mode, persisted = false, onBeforeEnter, onEnter, onAfterEnter, onEnterCancelled, onBeforeLeave, onLeave, onAfterLeave, onLeaveCancelled, onBeforeAppear, onAppear, onAfterAppear, onAppearCancelled } = props;
+  const key = String(vnode.key);
+  const leavingVNodesCache = getLeavingNodesForType(state, vnode);
+  const callHook2 = (hook, args) => {
+    hook && callWithAsyncErrorHandling(hook, instance, 9, args);
+  };
+  const callAsyncHook = (hook, args) => {
+    const done = args[1];
+    callHook2(hook, args);
+    if (isArray(hook)) {
+      if (hook.every((hook2) => hook2.length <= 1))
+        done();
+    } else if (hook.length <= 1) {
+      done();
+    }
+  };
+  const hooks = {
+    mode,
+    persisted,
+    beforeEnter(el) {
+      let hook = onBeforeEnter;
+      if (!state.isMounted) {
+        if (appear) {
+          hook = onBeforeAppear || onBeforeEnter;
+        } else {
+          return;
+        }
+      }
+      if (el._leaveCb) {
+        el._leaveCb(true);
+      }
+      const leavingVNode = leavingVNodesCache[key];
+      if (leavingVNode && isSameVNodeType(vnode, leavingVNode) && leavingVNode.el._leaveCb) {
+        leavingVNode.el._leaveCb();
+      }
+      callHook2(hook, [el]);
+    },
+    enter(el) {
+      let hook = onEnter;
+      let afterHook = onAfterEnter;
+      let cancelHook = onEnterCancelled;
+      if (!state.isMounted) {
+        if (appear) {
+          hook = onAppear || onEnter;
+          afterHook = onAfterAppear || onAfterEnter;
+          cancelHook = onAppearCancelled || onEnterCancelled;
+        } else {
+          return;
+        }
+      }
+      let called = false;
+      const done = el._enterCb = (cancelled) => {
+        if (called)
+          return;
+        called = true;
+        if (cancelled) {
+          callHook2(cancelHook, [el]);
+        } else {
+          callHook2(afterHook, [el]);
+        }
+        if (hooks.delayedLeave) {
+          hooks.delayedLeave();
+        }
+        el._enterCb = void 0;
+      };
+      if (hook) {
+        callAsyncHook(hook, [el, done]);
+      } else {
+        done();
+      }
+    },
+    leave(el, remove2) {
+      const key2 = String(vnode.key);
+      if (el._enterCb) {
+        el._enterCb(true);
+      }
+      if (state.isUnmounting) {
+        return remove2();
+      }
+      callHook2(onBeforeLeave, [el]);
+      let called = false;
+      const done = el._leaveCb = (cancelled) => {
+        if (called)
+          return;
+        called = true;
+        remove2();
+        if (cancelled) {
+          callHook2(onLeaveCancelled, [el]);
+        } else {
+          callHook2(onAfterLeave, [el]);
+        }
+        el._leaveCb = void 0;
+        if (leavingVNodesCache[key2] === vnode) {
+          delete leavingVNodesCache[key2];
+        }
+      };
+      leavingVNodesCache[key2] = vnode;
+      if (onLeave) {
+        callAsyncHook(onLeave, [el, done]);
+      } else {
+        done();
+      }
+    },
+    clone(vnode2) {
+      return resolveTransitionHooks(vnode2, props, state, instance);
+    }
+  };
+  return hooks;
+}
+function emptyPlaceholder(vnode) {
+  if (isKeepAlive(vnode)) {
+    vnode = cloneVNode(vnode);
+    vnode.children = null;
+    return vnode;
+  }
+}
+function getKeepAliveChild(vnode) {
+  return isKeepAlive(vnode) ? vnode.children ? vnode.children[0] : void 0 : vnode;
+}
+function setTransitionHooks(vnode, hooks) {
+  if (vnode.shapeFlag & 6 && vnode.component) {
+    setTransitionHooks(vnode.component.subTree, hooks);
+  } else if (vnode.shapeFlag & 128) {
+    vnode.ssContent.transition = hooks.clone(vnode.ssContent);
+    vnode.ssFallback.transition = hooks.clone(vnode.ssFallback);
+  } else {
+    vnode.transition = hooks;
+  }
+}
+function getTransitionRawChildren(children, keepComment = false, parentKey) {
+  let ret = [];
+  let keyedFragmentCount = 0;
+  for (let i = 0; i < children.length; i++) {
+    let child = children[i];
+    const key = parentKey == null ? child.key : String(parentKey) + String(child.key != null ? child.key : i);
+    if (child.type === Fragment) {
+      if (child.patchFlag & 128)
+        keyedFragmentCount++;
+      ret = ret.concat(getTransitionRawChildren(child.children, keepComment, key));
+    } else if (keepComment || child.type !== Comment) {
+      ret.push(key != null ? cloneVNode(child, { key }) : child);
+    }
+  }
+  if (keyedFragmentCount > 1) {
+    for (let i = 0; i < ret.length; i++) {
+      ret[i].patchFlag = -2;
+    }
+  }
+  return ret;
+}
+function defineComponent(options) {
+  return isFunction(options) ? { setup: options, name: options.name } : options;
+}
+const isAsyncWrapper = (i) => !!i.type.__asyncLoader;
+const isKeepAlive = (vnode) => vnode.type.__isKeepAlive;
+function onActivated(hook, target2) {
+  registerKeepAliveHook(hook, "a", target2);
+}
+function onDeactivated(hook, target2) {
+  registerKeepAliveHook(hook, "da", target2);
+}
+function registerKeepAliveHook(hook, type, target2 = currentInstance) {
+  const wrappedHook = hook.__wdc || (hook.__wdc = () => {
+    let current = target2;
+    while (current) {
+      if (current.isDeactivated) {
+        return;
+      }
+      current = current.parent;
+    }
+    return hook();
+  });
+  injectHook(type, wrappedHook, target2);
+  if (target2) {
+    let current = target2.parent;
+    while (current && current.parent) {
+      if (isKeepAlive(current.parent.vnode)) {
+        injectToKeepAliveRoot(wrappedHook, type, target2, current);
+      }
+      current = current.parent;
+    }
+  }
+}
+function injectToKeepAliveRoot(hook, type, target2, keepAliveRoot) {
+  const injected = injectHook(type, hook, keepAliveRoot, true);
+  onUnmounted(() => {
+    remove(keepAliveRoot[type], injected);
+  }, target2);
+}
+function injectHook(type, hook, target2 = currentInstance, prepend = false) {
+  if (target2) {
+    const hooks = target2[type] || (target2[type] = []);
+    const wrappedHook = hook.__weh || (hook.__weh = (...args) => {
+      if (target2.isUnmounted) {
+        return;
+      }
+      pauseTracking();
+      setCurrentInstance(target2);
+      const res = callWithAsyncErrorHandling(hook, target2, type, args);
+      unsetCurrentInstance();
+      resetTracking();
+      return res;
+    });
+    if (prepend) {
+      hooks.unshift(wrappedHook);
+    } else {
+      hooks.push(wrappedHook);
+    }
+    return wrappedHook;
+  }
+}
+const createHook = (lifecycle) => (hook, target2 = currentInstance) => (!isInSSRComponentSetup || lifecycle === "sp") && injectHook(lifecycle, hook, target2);
+const onBeforeMount = createHook("bm");
+const onMounted = createHook("m");
+const onBeforeUpdate = createHook("bu");
+const onUpdated = createHook("u");
+const onBeforeUnmount = createHook("bum");
+const onUnmounted = createHook("um");
+const onServerPrefetch = createHook("sp");
+const onRenderTriggered = createHook("rtg");
+const onRenderTracked = createHook("rtc");
+function onErrorCaptured(hook, target2 = currentInstance) {
+  injectHook("ec", hook, target2);
+}
+function withDirectives(vnode, directives) {
+  const internalInstance = currentRenderingInstance;
+  if (internalInstance === null) {
+    return vnode;
+  }
+  const instance = getExposeProxy(internalInstance) || internalInstance.proxy;
+  const bindings = vnode.dirs || (vnode.dirs = []);
+  for (let i = 0; i < directives.length; i++) {
+    let [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i];
+    if (isFunction(dir)) {
+      dir = {
+        mounted: dir,
+        updated: dir
+      };
+    }
+    if (dir.deep) {
+      traverse(value);
+    }
+    bindings.push({
+      dir,
+      instance,
+      value,
+      oldValue: void 0,
+      arg,
+      modifiers
+    });
+  }
+  return vnode;
+}
+function invokeDirectiveHook(vnode, prevVNode, instance, name) {
+  const bindings = vnode.dirs;
+  const oldBindings = prevVNode && prevVNode.dirs;
+  for (let i = 0; i < bindings.length; i++) {
+    const binding = bindings[i];
+    if (oldBindings) {
+      binding.oldValue = oldBindings[i].value;
+    }
+    let hook = binding.dir[name];
+    if (hook) {
+      pauseTracking();
+      callWithAsyncErrorHandling(hook, instance, 8, [
+        vnode.el,
+        binding,
+        vnode,
+        prevVNode
+      ]);
+      resetTracking();
+    }
+  }
+}
+const COMPONENTS = "components";
+const NULL_DYNAMIC_COMPONENT = Symbol();
+function resolveDynamicComponent(component) {
+  if (isString(component)) {
+    return resolveAsset(COMPONENTS, component) || component;
+  } else {
+    return component || NULL_DYNAMIC_COMPONENT;
+  }
+}
+function resolveAsset(type, name, warnMissing, maybeSelfReference = false) {
+  const instance = currentRenderingInstance || currentInstance;
+  if (instance) {
+    const Component = instance.type;
+    if (type === COMPONENTS) {
+      const selfName = getComponentName(Component);
+      if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
+        return Component;
+      }
+    }
+    const res = resolve(instance[type] || Component[type], name) || resolve(instance.appContext[type], name);
+    if (!res && maybeSelfReference) {
+      return Component;
+    }
+    return res;
+  }
+}
+function resolve(registry, name) {
+  return registry && (registry[name] || registry[camelize(name)] || registry[capitalize(camelize(name))]);
+}
+function renderList(source, renderItem, cache, index2) {
+  let ret;
+  const cached = cache && cache[index2];
+  if (isArray(source) || isString(source)) {
+    ret = new Array(source.length);
+    for (let i = 0, l2 = source.length; i < l2; i++) {
+      ret[i] = renderItem(source[i], i, void 0, cached && cached[i]);
+    }
+  } else if (typeof source === "number") {
+    ret = new Array(source);
+    for (let i = 0; i < source; i++) {
+      ret[i] = renderItem(i + 1, i, void 0, cached && cached[i]);
+    }
+  } else if (isObject$1(source)) {
+    if (source[Symbol.iterator]) {
+      ret = Array.from(source, (item, i) => renderItem(item, i, void 0, cached && cached[i]));
+    } else {
+      const keys = Object.keys(source);
+      ret = new Array(keys.length);
+      for (let i = 0, l2 = keys.length; i < l2; i++) {
+        const key = keys[i];
+        ret[i] = renderItem(source[key], key, i, cached && cached[i]);
+      }
+    }
+  } else {
+    ret = [];
+  }
+  if (cache) {
+    cache[index2] = ret;
+  }
+  return ret;
+}
+const getPublicInstance = (i) => {
+  if (!i)
+    return null;
+  if (isStatefulComponent(i))
+    return getExposeProxy(i) || i.proxy;
+  return getPublicInstance(i.parent);
+};
+const publicPropertiesMap = /* @__PURE__ */ extend(/* @__PURE__ */ Object.create(null), {
+  $: (i) => i,
+  $el: (i) => i.vnode.el,
+  $data: (i) => i.data,
+  $props: (i) => i.props,
+  $attrs: (i) => i.attrs,
+  $slots: (i) => i.slots,
+  $refs: (i) => i.refs,
+  $parent: (i) => getPublicInstance(i.parent),
+  $root: (i) => getPublicInstance(i.root),
+  $emit: (i) => i.emit,
+  $options: (i) => resolveMergedOptions(i),
+  $forceUpdate: (i) => i.f || (i.f = () => queueJob(i.update)),
+  $nextTick: (i) => i.n || (i.n = nextTick.bind(i.proxy)),
+  $watch: (i) => instanceWatch.bind(i)
+});
+const PublicInstanceProxyHandlers = {
+  get({ _: instance }, key) {
+    const { ctx, setupState, data, props, accessCache, type, appContext } = instance;
+    let normalizedProps;
+    if (key[0] !== "$") {
+      const n = accessCache[key];
+      if (n !== void 0) {
+        switch (n) {
+          case 1:
+            return setupState[key];
+          case 2:
+            return data[key];
+          case 4:
+            return ctx[key];
+          case 3:
+            return props[key];
+        }
+      } else if (setupState !== EMPTY_OBJ && hasOwn(setupState, key)) {
+        accessCache[key] = 1;
+        return setupState[key];
+      } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
+        accessCache[key] = 2;
+        return data[key];
+      } else if ((normalizedProps = instance.propsOptions[0]) && hasOwn(normalizedProps, key)) {
+        accessCache[key] = 3;
+        return props[key];
+      } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
+        accessCache[key] = 4;
+        return ctx[key];
+      } else if (shouldCacheAccess) {
+        accessCache[key] = 0;
+      }
+    }
+    const publicGetter = publicPropertiesMap[key];
+    let cssModule, globalProperties;
+    if (publicGetter) {
+      if (key === "$attrs") {
+        track(instance, "get", key);
+      }
+      return publicGetter(instance);
+    } else if ((cssModule = type.__cssModules) && (cssModule = cssModule[key])) {
+      return cssModule;
+    } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
+      accessCache[key] = 4;
+      return ctx[key];
+    } else if (globalProperties = appContext.config.globalProperties, hasOwn(globalProperties, key)) {
+      {
+        return globalProperties[key];
+      }
+    } else
+      ;
+  },
+  set({ _: instance }, key, value) {
+    const { data, setupState, ctx } = instance;
+    if (setupState !== EMPTY_OBJ && hasOwn(setupState, key)) {
+      setupState[key] = value;
+      return true;
+    } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
+      data[key] = value;
+      return true;
+    } else if (hasOwn(instance.props, key)) {
+      return false;
+    }
+    if (key[0] === "$" && key.slice(1) in instance) {
+      return false;
+    } else {
+      {
+        ctx[key] = value;
+      }
+    }
+    return true;
+  },
+  has({ _: { data, setupState, accessCache, ctx, appContext, propsOptions } }, key) {
+    let normalizedProps;
+    return !!accessCache[key] || data !== EMPTY_OBJ && hasOwn(data, key) || setupState !== EMPTY_OBJ && hasOwn(setupState, key) || (normalizedProps = propsOptions[0]) && hasOwn(normalizedProps, key) || hasOwn(ctx, key) || hasOwn(publicPropertiesMap, key) || hasOwn(appContext.config.globalProperties, key);
+  },
+  defineProperty(target2, key, descriptor) {
+    if (descriptor.get != null) {
+      target2._.accessCache[key] = 0;
+    } else if (hasOwn(descriptor, "value")) {
+      this.set(target2, key, descriptor.value, null);
+    }
+    return Reflect.defineProperty(target2, key, descriptor);
+  }
+};
+let shouldCacheAccess = true;
+function applyOptions(instance) {
+  const options = resolveMergedOptions(instance);
+  const publicThis = instance.proxy;
+  const ctx = instance.ctx;
+  shouldCacheAccess = false;
+  if (options.beforeCreate) {
+    callHook$1(options.beforeCreate, instance, "bc");
+  }
+  const {
+    data: dataOptions,
+    computed: computedOptions,
+    methods,
+    watch: watchOptions,
+    provide: provideOptions,
+    inject: injectOptions,
+    created,
+    beforeMount,
+    mounted,
+    beforeUpdate,
+    updated,
+    activated,
+    deactivated,
+    beforeDestroy,
+    beforeUnmount,
+    destroyed,
+    unmounted,
+    render,
+    renderTracked,
+    renderTriggered,
+    errorCaptured,
+    serverPrefetch,
+    expose,
+    inheritAttrs,
+    components,
+    directives,
+    filters
+  } = options;
+  const checkDuplicateProperties = null;
+  if (injectOptions) {
+    resolveInjections(injectOptions, ctx, checkDuplicateProperties, instance.appContext.config.unwrapInjectedRef);
+  }
+  if (methods) {
+    for (const key in methods) {
+      const methodHandler = methods[key];
+      if (isFunction(methodHandler)) {
+        {
+          ctx[key] = methodHandler.bind(publicThis);
+        }
+      }
+    }
+  }
+  if (dataOptions) {
+    const data = dataOptions.call(publicThis, publicThis);
+    if (!isObject$1(data))
+      ;
+    else {
+      instance.data = reactive(data);
+    }
+  }
+  shouldCacheAccess = true;
+  if (computedOptions) {
+    for (const key in computedOptions) {
+      const opt = computedOptions[key];
+      const get2 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
+      const set2 = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : NOOP;
+      const c = computed({
+        get: get2,
+        set: set2
+      });
+      Object.defineProperty(ctx, key, {
+        enumerable: true,
+        configurable: true,
+        get: () => c.value,
+        set: (v) => c.value = v
+      });
+    }
+  }
+  if (watchOptions) {
+    for (const key in watchOptions) {
+      createWatcher(watchOptions[key], ctx, publicThis, key);
+    }
+  }
+  if (provideOptions) {
+    const provides = isFunction(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
+    Reflect.ownKeys(provides).forEach((key) => {
+      provide(key, provides[key]);
+    });
+  }
+  if (created) {
+    callHook$1(created, instance, "c");
+  }
+  function registerLifecycleHook(register, hook) {
+    if (isArray(hook)) {
+      hook.forEach((_hook) => register(_hook.bind(publicThis)));
+    } else if (hook) {
+      register(hook.bind(publicThis));
+    }
+  }
+  registerLifecycleHook(onBeforeMount, beforeMount);
+  registerLifecycleHook(onMounted, mounted);
+  registerLifecycleHook(onBeforeUpdate, beforeUpdate);
+  registerLifecycleHook(onUpdated, updated);
+  registerLifecycleHook(onActivated, activated);
+  registerLifecycleHook(onDeactivated, deactivated);
+  registerLifecycleHook(onErrorCaptured, errorCaptured);
+  registerLifecycleHook(onRenderTracked, renderTracked);
+  registerLifecycleHook(onRenderTriggered, renderTriggered);
+  registerLifecycleHook(onBeforeUnmount, beforeUnmount);
+  registerLifecycleHook(onUnmounted, unmounted);
+  registerLifecycleHook(onServerPrefetch, serverPrefetch);
+  if (isArray(expose)) {
+    if (expose.length) {
+      const exposed = instance.exposed || (instance.exposed = {});
+      expose.forEach((key) => {
+        Object.defineProperty(exposed, key, {
+          get: () => publicThis[key],
+          set: (val) => publicThis[key] = val
+        });
+      });
+    } else if (!instance.exposed) {
+      instance.exposed = {};
+    }
+  }
+  if (render && instance.render === NOOP) {
+    instance.render = render;
+  }
+  if (inheritAttrs != null) {
+    instance.inheritAttrs = inheritAttrs;
+  }
+  if (components)
+    instance.components = components;
+  if (directives)
+    instance.directives = directives;
+}
+function resolveInjections(injectOptions, ctx, checkDuplicateProperties, unwrapRef = false) {
+  if (isArray(injectOptions)) {
+    injectOptions = normalizeInject(injectOptions);
+  }
+  for (const key in injectOptions) {
+    const opt = injectOptions[key];
+    let injected;
+    if (isObject$1(opt)) {
+      if ("default" in opt) {
+        injected = inject(opt.from || key, opt.default, true);
+      } else {
+        injected = inject(opt.from || key);
+      }
+    } else {
+      injected = inject(opt);
+    }
+    if (isRef(injected)) {
+      if (unwrapRef) {
+        Object.defineProperty(ctx, key, {
+          enumerable: true,
+          configurable: true,
+          get: () => injected.value,
+          set: (v) => injected.value = v
+        });
+      } else {
+        ctx[key] = injected;
+      }
+    } else {
+      ctx[key] = injected;
+    }
+  }
+}
+function callHook$1(hook, instance, type) {
+  callWithAsyncErrorHandling(isArray(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy), instance, type);
+}
+function createWatcher(raw, ctx, publicThis, key) {
+  const getter = key.includes(".") ? createPathGetter(publicThis, key) : () => publicThis[key];
+  if (isString(raw)) {
+    const handler = ctx[raw];
+    if (isFunction(handler)) {
+      watch(getter, handler);
+    }
+  } else if (isFunction(raw)) {
+    watch(getter, raw.bind(publicThis));
+  } else if (isObject$1(raw)) {
+    if (isArray(raw)) {
+      raw.forEach((r) => createWatcher(r, ctx, publicThis, key));
+    } else {
+      const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
+      if (isFunction(handler)) {
+        watch(getter, handler, raw);
+      }
+    }
+  } else
+    ;
+}
+function resolveMergedOptions(instance) {
+  const base = instance.type;
+  const { mixins, extends: extendsOptions } = base;
+  const { mixins: globalMixins, optionsCache: cache, config: { optionMergeStrategies } } = instance.appContext;
+  const cached = cache.get(base);
+  let resolved;
+  if (cached) {
+    resolved = cached;
+  } else if (!globalMixins.length && !mixins && !extendsOptions) {
+    {
+      resolved = base;
+    }
+  } else {
+    resolved = {};
+    if (globalMixins.length) {
+      globalMixins.forEach((m) => mergeOptions(resolved, m, optionMergeStrategies, true));
+    }
+    mergeOptions(resolved, base, optionMergeStrategies);
+  }
+  cache.set(base, resolved);
+  return resolved;
+}
+function mergeOptions(to, from, strats, asMixin = false) {
+  const { mixins, extends: extendsOptions } = from;
+  if (extendsOptions) {
+    mergeOptions(to, extendsOptions, strats, true);
+  }
+  if (mixins) {
+    mixins.forEach((m) => mergeOptions(to, m, strats, true));
+  }
+  for (const key in from) {
+    if (asMixin && key === "expose")
+      ;
+    else {
+      const strat = internalOptionMergeStrats[key] || strats && strats[key];
+      to[key] = strat ? strat(to[key], from[key]) : from[key];
+    }
+  }
+  return to;
+}
+const internalOptionMergeStrats = {
+  data: mergeDataFn,
+  props: mergeObjectOptions,
+  emits: mergeObjectOptions,
+  methods: mergeObjectOptions,
+  computed: mergeObjectOptions,
+  beforeCreate: mergeAsArray,
+  created: mergeAsArray,
+  beforeMount: mergeAsArray,
+  mounted: mergeAsArray,
+  beforeUpdate: mergeAsArray,
+  updated: mergeAsArray,
+  beforeDestroy: mergeAsArray,
+  beforeUnmount: mergeAsArray,
+  destroyed: mergeAsArray,
+  unmounted: mergeAsArray,
+  activated: mergeAsArray,
+  deactivated: mergeAsArray,
+  errorCaptured: mergeAsArray,
+  serverPrefetch: mergeAsArray,
+  components: mergeObjectOptions,
+  directives: mergeObjectOptions,
+  watch: mergeWatchOptions,
+  provide: mergeDataFn,
+  inject: mergeInject
+};
+function mergeDataFn(to, from) {
+  if (!from) {
+    return to;
+  }
+  if (!to) {
+    return from;
+  }
+  return function mergedDataFn() {
+    return extend(isFunction(to) ? to.call(this, this) : to, isFunction(from) ? from.call(this, this) : from);
+  };
+}
+function mergeInject(to, from) {
+  return mergeObjectOptions(normalizeInject(to), normalizeInject(from));
+}
+function normalizeInject(raw) {
+  if (isArray(raw)) {
+    const res = {};
+    for (let i = 0; i < raw.length; i++) {
+      res[raw[i]] = raw[i];
+    }
+    return res;
+  }
+  return raw;
+}
+function mergeAsArray(to, from) {
+  return to ? [...new Set([].concat(to, from))] : from;
+}
+function mergeObjectOptions(to, from) {
+  return to ? extend(extend(/* @__PURE__ */ Object.create(null), to), from) : from;
+}
+function mergeWatchOptions(to, from) {
+  if (!to)
+    return from;
+  if (!from)
+    return to;
+  const merged = extend(/* @__PURE__ */ Object.create(null), to);
+  for (const key in from) {
+    merged[key] = mergeAsArray(to[key], from[key]);
+  }
+  return merged;
+}
+function initProps(instance, rawProps, isStateful, isSSR = false) {
+  const props = {};
+  const attrs = {};
+  def(attrs, InternalObjectKey, 1);
+  instance.propsDefaults = /* @__PURE__ */ Object.create(null);
+  setFullProps(instance, rawProps, props, attrs);
+  for (const key in instance.propsOptions[0]) {
+    if (!(key in props)) {
+      props[key] = void 0;
+    }
+  }
+  if (isStateful) {
+    instance.props = isSSR ? props : shallowReactive(props);
+  } else {
+    if (!instance.type.props) {
+      instance.props = attrs;
+    } else {
+      instance.props = props;
+    }
+  }
+  instance.attrs = attrs;
+}
+function updateProps(instance, rawProps, rawPrevProps, optimized) {
+  const { props, attrs, vnode: { patchFlag } } = instance;
+  const rawCurrentProps = toRaw(props);
+  const [options] = instance.propsOptions;
+  let hasAttrsChanged = false;
+  if ((optimized || patchFlag > 0) && !(patchFlag & 16)) {
+    if (patchFlag & 8) {
+      const propsToUpdate = instance.vnode.dynamicProps;
+      for (let i = 0; i < propsToUpdate.length; i++) {
+        let key = propsToUpdate[i];
+        if (isEmitListener(instance.emitsOptions, key)) {
+          continue;
+        }
+        const value = rawProps[key];
+        if (options) {
+          if (hasOwn(attrs, key)) {
+            if (value !== attrs[key]) {
+              attrs[key] = value;
+              hasAttrsChanged = true;
+            }
+          } else {
+            const camelizedKey = camelize(key);
+            props[camelizedKey] = resolvePropValue(options, rawCurrentProps, camelizedKey, value, instance, false);
+          }
+        } else {
+          if (value !== attrs[key]) {
+            attrs[key] = value;
+            hasAttrsChanged = true;
+          }
+        }
+      }
+    }
+  } else {
+    if (setFullProps(instance, rawProps, props, attrs)) {
+      hasAttrsChanged = true;
+    }
+    let kebabKey;
+    for (const key in rawCurrentProps) {
+      if (!rawProps || !hasOwn(rawProps, key) && ((kebabKey = hyphenate(key)) === key || !hasOwn(rawProps, kebabKey))) {
+        if (options) {
+          if (rawPrevProps && (rawPrevProps[key] !== void 0 || rawPrevProps[kebabKey] !== void 0)) {
+            props[key] = resolvePropValue(options, rawCurrentProps, key, void 0, instance, true);
+          }
+        } else {
+          delete props[key];
+        }
+      }
+    }
+    if (attrs !== rawCurrentProps) {
+      for (const key in attrs) {
+        if (!rawProps || !hasOwn(rawProps, key) && true) {
+          delete attrs[key];
+          hasAttrsChanged = true;
+        }
+      }
+    }
+  }
+  if (hasAttrsChanged) {
+    trigger(instance, "set", "$attrs");
+  }
+}
+function setFullProps(instance, rawProps, props, attrs) {
+  const [options, needCastKeys] = instance.propsOptions;
+  let hasAttrsChanged = false;
+  let rawCastValues;
+  if (rawProps) {
+    for (let key in rawProps) {
+      if (isReservedProp(key)) {
+        continue;
+      }
+      const value = rawProps[key];
+      let camelKey;
+      if (options && hasOwn(options, camelKey = camelize(key))) {
+        if (!needCastKeys || !needCastKeys.includes(camelKey)) {
+          props[camelKey] = value;
+        } else {
+          (rawCastValues || (rawCastValues = {}))[camelKey] = value;
+        }
+      } else if (!isEmitListener(instance.emitsOptions, key)) {
+        if (!(key in attrs) || value !== attrs[key]) {
+          attrs[key] = value;
+          hasAttrsChanged = true;
+        }
+      }
+    }
+  }
+  if (needCastKeys) {
+    const rawCurrentProps = toRaw(props);
+    const castValues = rawCastValues || EMPTY_OBJ;
+    for (let i = 0; i < needCastKeys.length; i++) {
+      const key = needCastKeys[i];
+      props[key] = resolvePropValue(options, rawCurrentProps, key, castValues[key], instance, !hasOwn(castValues, key));
+    }
+  }
+  return hasAttrsChanged;
+}
+function resolvePropValue(options, props, key, value, instance, isAbsent) {
+  const opt = options[key];
+  if (opt != null) {
+    const hasDefault = hasOwn(opt, "default");
+    if (hasDefault && value === void 0) {
+      const defaultValue = opt.default;
+      if (opt.type !== Function && isFunction(defaultValue)) {
+        const { propsDefaults } = instance;
+        if (key in propsDefaults) {
+          value = propsDefaults[key];
+        } else {
+          setCurrentInstance(instance);
+          value = propsDefaults[key] = defaultValue.call(null, props);
+          unsetCurrentInstance();
+        }
+      } else {
+        value = defaultValue;
+      }
+    }
+    if (opt[0]) {
+      if (isAbsent && !hasDefault) {
+        value = false;
+      } else if (opt[1] && (value === "" || value === hyphenate(key))) {
+        value = true;
+      }
+    }
+  }
+  return value;
+}
+function normalizePropsOptions(comp, appContext, asMixin = false) {
+  const cache = appContext.propsCache;
+  const cached = cache.get(comp);
+  if (cached) {
+    return cached;
+  }
+  const raw = comp.props;
+  const normalized = {};
+  const needCastKeys = [];
+  let hasExtends = false;
+  if (!isFunction(comp)) {
+    const extendProps = (raw2) => {
+      hasExtends = true;
+      const [props, keys] = normalizePropsOptions(raw2, appContext, true);
+      extend(normalized, props);
+      if (keys)
+        needCastKeys.push(...keys);
+    };
+    if (!asMixin && appContext.mixins.length) {
+      appContext.mixins.forEach(extendProps);
+    }
+    if (comp.extends) {
+      extendProps(comp.extends);
+    }
+    if (comp.mixins) {
+      comp.mixins.forEach(extendProps);
+    }
+  }
+  if (!raw && !hasExtends) {
+    cache.set(comp, EMPTY_ARR);
+    return EMPTY_ARR;
+  }
+  if (isArray(raw)) {
+    for (let i = 0; i < raw.length; i++) {
+      const normalizedKey = camelize(raw[i]);
+      if (validatePropName(normalizedKey)) {
+        normalized[normalizedKey] = EMPTY_OBJ;
+      }
+    }
+  } else if (raw) {
+    for (const key in raw) {
+      const normalizedKey = camelize(key);
+      if (validatePropName(normalizedKey)) {
+        const opt = raw[key];
+        const prop = normalized[normalizedKey] = isArray(opt) || isFunction(opt) ? { type: opt } : opt;
+        if (prop) {
+          const booleanIndex = getTypeIndex(Boolean, prop.type);
+          const stringIndex = getTypeIndex(String, prop.type);
+          prop[0] = booleanIndex > -1;
+          prop[1] = stringIndex < 0 || booleanIndex < stringIndex;
+          if (booleanIndex > -1 || hasOwn(prop, "default")) {
+            needCastKeys.push(normalizedKey);
+          }
+        }
+      }
+    }
+  }
+  const res = [normalized, needCastKeys];
+  cache.set(comp, res);
+  return res;
+}
+function validatePropName(key) {
+  if (key[0] !== "$") {
+    return true;
+  }
+  return false;
+}
+function getType(ctor) {
+  const match = ctor && ctor.toString().match(/^\s*function (\w+)/);
+  return match ? match[1] : ctor === null ? "null" : "";
+}
+function isSameType(a2, b) {
+  return getType(a2) === getType(b);
+}
+function getTypeIndex(type, expectedTypes) {
+  if (isArray(expectedTypes)) {
+    return expectedTypes.findIndex((t) => isSameType(t, type));
+  } else if (isFunction(expectedTypes)) {
+    return isSameType(expectedTypes, type) ? 0 : -1;
+  }
+  return -1;
+}
+const isInternalKey = (key) => key[0] === "_" || key === "$stable";
+const normalizeSlotValue = (value) => isArray(value) ? value.map(normalizeVNode) : [normalizeVNode(value)];
+const normalizeSlot = (key, rawSlot, ctx) => {
+  if (rawSlot._n) {
+    return rawSlot;
+  }
+  const normalized = withCtx((...args) => {
+    return normalizeSlotValue(rawSlot(...args));
+  }, ctx);
+  normalized._c = false;
+  return normalized;
+};
+const normalizeObjectSlots = (rawSlots, slots, instance) => {
+  const ctx = rawSlots._ctx;
+  for (const key in rawSlots) {
+    if (isInternalKey(key))
+      continue;
+    const value = rawSlots[key];
+    if (isFunction(value)) {
+      slots[key] = normalizeSlot(key, value, ctx);
+    } else if (value != null) {
+      const normalized = normalizeSlotValue(value);
+      slots[key] = () => normalized;
+    }
+  }
+};
+const normalizeVNodeSlots = (instance, children) => {
+  const normalized = normalizeSlotValue(children);
+  instance.slots.default = () => normalized;
+};
+const initSlots = (instance, children) => {
+  if (instance.vnode.shapeFlag & 32) {
+    const type = children._;
+    if (type) {
+      instance.slots = toRaw(children);
+      def(children, "_", type);
+    } else {
+      normalizeObjectSlots(children, instance.slots = {});
+    }
+  } else {
+    instance.slots = {};
+    if (children) {
+      normalizeVNodeSlots(instance, children);
+    }
+  }
+  def(instance.slots, InternalObjectKey, 1);
+};
+const updateSlots = (instance, children, optimized) => {
+  const { vnode, slots } = instance;
+  let needDeletionCheck = true;
+  let deletionComparisonTarget = EMPTY_OBJ;
+  if (vnode.shapeFlag & 32) {
+    const type = children._;
+    if (type) {
+      if (optimized && type === 1) {
+        needDeletionCheck = false;
+      } else {
+        extend(slots, children);
+        if (!optimized && type === 1) {
+          delete slots._;
+        }
+      }
+    } else {
+      needDeletionCheck = !children.$stable;
+      normalizeObjectSlots(children, slots);
+    }
+    deletionComparisonTarget = children;
+  } else if (children) {
+    normalizeVNodeSlots(instance, children);
+    deletionComparisonTarget = { default: 1 };
+  }
+  if (needDeletionCheck) {
+    for (const key in slots) {
+      if (!isInternalKey(key) && !(key in deletionComparisonTarget)) {
+        delete slots[key];
+      }
+    }
+  }
+};
+function createAppContext() {
+  return {
+    app: null,
+    config: {
+      isNativeTag: NO,
+      performance: false,
+      globalProperties: {},
+      optionMergeStrategies: {},
+      errorHandler: void 0,
+      warnHandler: void 0,
+      compilerOptions: {}
+    },
+    mixins: [],
+    components: {},
+    directives: {},
+    provides: /* @__PURE__ */ Object.create(null),
+    optionsCache: /* @__PURE__ */ new WeakMap(),
+    propsCache: /* @__PURE__ */ new WeakMap(),
+    emitsCache: /* @__PURE__ */ new WeakMap()
+  };
+}
+let uid$1 = 0;
+function createAppAPI(render, hydrate) {
+  return function createApp2(rootComponent, rootProps = null) {
+    if (!isFunction(rootComponent)) {
+      rootComponent = Object.assign({}, rootComponent);
+    }
+    if (rootProps != null && !isObject$1(rootProps)) {
+      rootProps = null;
+    }
+    const context = createAppContext();
+    const installedPlugins = /* @__PURE__ */ new Set();
+    let isMounted = false;
+    const app2 = context.app = {
+      _uid: uid$1++,
+      _component: rootComponent,
+      _props: rootProps,
+      _container: null,
+      _context: context,
+      _instance: null,
+      version,
+      get config() {
+        return context.config;
+      },
+      set config(v) {
+      },
+      use(plugin, ...options) {
+        if (installedPlugins.has(plugin))
+          ;
+        else if (plugin && isFunction(plugin.install)) {
+          installedPlugins.add(plugin);
+          plugin.install(app2, ...options);
+        } else if (isFunction(plugin)) {
+          installedPlugins.add(plugin);
+          plugin(app2, ...options);
+        } else
+          ;
+        return app2;
+      },
+      mixin(mixin) {
+        {
+          if (!context.mixins.includes(mixin)) {
+            context.mixins.push(mixin);
+          }
+        }
+        return app2;
+      },
+      component(name, component) {
+        if (!component) {
+          return context.components[name];
+        }
+        context.components[name] = component;
+        return app2;
+      },
+      directive(name, directive) {
+        if (!directive) {
+          return context.directives[name];
+        }
+        context.directives[name] = directive;
+        return app2;
+      },
+      mount(rootContainer, isHydrate, isSVG) {
+        if (!isMounted) {
+          const vnode = createVNode(rootComponent, rootProps);
+          vnode.appContext = context;
+          if (isHydrate && hydrate) {
+            hydrate(vnode, rootContainer);
+          } else {
+            render(vnode, rootContainer, isSVG);
+          }
+          isMounted = true;
+          app2._container = rootContainer;
+          rootContainer.__vue_app__ = app2;
+          return getExposeProxy(vnode.component) || vnode.component.proxy;
+        }
+      },
+      unmount() {
+        if (isMounted) {
+          render(null, app2._container);
+          delete app2._container.__vue_app__;
+        }
+      },
+      provide(key, value) {
+        context.provides[key] = value;
+        return app2;
+      }
+    };
+    return app2;
+  };
+}
+function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
+  if (isArray(rawRef)) {
+    rawRef.forEach((r, i) => setRef(r, oldRawRef && (isArray(oldRawRef) ? oldRawRef[i] : oldRawRef), parentSuspense, vnode, isUnmount));
+    return;
+  }
+  if (isAsyncWrapper(vnode) && !isUnmount) {
+    return;
+  }
+  const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
+  const value = isUnmount ? null : refValue;
+  const { i: owner, r: ref2 } = rawRef;
+  const oldRef = oldRawRef && oldRawRef.r;
+  const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
+  const setupState = owner.setupState;
+  if (oldRef != null && oldRef !== ref2) {
+    if (isString(oldRef)) {
+      refs[oldRef] = null;
+      if (hasOwn(setupState, oldRef)) {
+        setupState[oldRef] = null;
+      }
+    } else if (isRef(oldRef)) {
+      oldRef.value = null;
+    }
+  }
+  if (isFunction(ref2)) {
+    callWithErrorHandling(ref2, owner, 12, [value, refs]);
+  } else {
+    const _isString = isString(ref2);
+    const _isRef = isRef(ref2);
+    if (_isString || _isRef) {
+      const doSet = () => {
+        if (rawRef.f) {
+          const existing = _isString ? refs[ref2] : ref2.value;
+          if (isUnmount) {
+            isArray(existing) && remove(existing, refValue);
+          } else {
+            if (!isArray(existing)) {
+              if (_isString) {
+                refs[ref2] = [refValue];
+                if (hasOwn(setupState, ref2)) {
+                  setupState[ref2] = refs[ref2];
+                }
+              } else {
+                ref2.value = [refValue];
+                if (rawRef.k)
+                  refs[rawRef.k] = ref2.value;
+              }
+            } else if (!existing.includes(refValue)) {
+              existing.push(refValue);
+            }
+          }
+        } else if (_isString) {
+          refs[ref2] = value;
+          if (hasOwn(setupState, ref2)) {
+            setupState[ref2] = value;
+          }
+        } else if (isRef(ref2)) {
+          ref2.value = value;
+          if (rawRef.k)
+            refs[rawRef.k] = value;
+        } else
+          ;
+      };
+      if (value) {
+        doSet.id = -1;
+        queuePostRenderEffect(doSet, parentSuspense);
+      } else {
+        doSet();
+      }
+    }
+  }
+}
+const queuePostRenderEffect = queueEffectWithSuspense;
+function createRenderer(options) {
+  return baseCreateRenderer(options);
+}
+function baseCreateRenderer(options, createHydrationFns) {
+  const target2 = getGlobalThis();
+  target2.__VUE__ = true;
+  const { insert: hostInsert, remove: hostRemove, patchProp: hostPatchProp, createElement: hostCreateElement, createText: hostCreateText, createComment: hostCreateComment, setText: hostSetText, setElementText: hostSetElementText, parentNode: hostParentNode, nextSibling: hostNextSibling, setScopeId: hostSetScopeId = NOOP, cloneNode: hostCloneNode, insertStaticContent: hostInsertStaticContent } = options;
+  const patch = (n1, n2, container, anchor = null, parentComponent = null, parentSuspense = null, isSVG = false, slotScopeIds = null, optimized = !!n2.dynamicChildren) => {
+    if (n1 === n2) {
+      return;
+    }
+    if (n1 && !isSameVNodeType(n1, n2)) {
+      anchor = getNextHostNode(n1);
+      unmount(n1, parentComponent, parentSuspense, true);
+      n1 = null;
+    }
+    if (n2.patchFlag === -2) {
+      optimized = false;
+      n2.dynamicChildren = null;
+    }
+    const { type, ref: ref2, shapeFlag } = n2;
+    switch (type) {
+      case Text:
+        processText(n1, n2, container, anchor);
+        break;
+      case Comment:
+        processCommentNode(n1, n2, container, anchor);
+        break;
+      case Static:
+        if (n1 == null) {
+          mountStaticNode(n2, container, anchor, isSVG);
+        }
+        break;
+      case Fragment:
+        processFragment(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        break;
+      default:
+        if (shapeFlag & 1) {
+          processElement(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        } else if (shapeFlag & 6) {
+          processComponent(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        } else if (shapeFlag & 64) {
+          type.process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, internals);
+        } else if (shapeFlag & 128) {
+          type.process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, internals);
+        } else
+          ;
+    }
+    if (ref2 != null && parentComponent) {
+      setRef(ref2, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    }
+  };
+  const processText = (n1, n2, container, anchor) => {
+    if (n1 == null) {
+      hostInsert(n2.el = hostCreateText(n2.children), container, anchor);
+    } else {
+      const el = n2.el = n1.el;
+      if (n2.children !== n1.children) {
+        hostSetText(el, n2.children);
+      }
+    }
+  };
+  const processCommentNode = (n1, n2, container, anchor) => {
+    if (n1 == null) {
+      hostInsert(n2.el = hostCreateComment(n2.children || ""), container, anchor);
+    } else {
+      n2.el = n1.el;
+    }
+  };
+  const mountStaticNode = (n2, container, anchor, isSVG) => {
+    [n2.el, n2.anchor] = hostInsertStaticContent(n2.children, container, anchor, isSVG, n2.el, n2.anchor);
+  };
+  const moveStaticNode = ({ el, anchor }, container, nextSibling) => {
+    let next;
+    while (el && el !== anchor) {
+      next = hostNextSibling(el);
+      hostInsert(el, container, nextSibling);
+      el = next;
+    }
+    hostInsert(anchor, container, nextSibling);
+  };
+  const removeStaticNode = ({ el, anchor }) => {
+    let next;
+    while (el && el !== anchor) {
+      next = hostNextSibling(el);
+      hostRemove(el);
+      el = next;
+    }
+    hostRemove(anchor);
+  };
+  const processElement = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    isSVG = isSVG || n2.type === "svg";
+    if (n1 == null) {
+      mountElement(n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+    } else {
+      patchElement(n1, n2, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+    }
+  };
+  const mountElement = (vnode, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    let el;
+    let vnodeHook;
+    const { type, props, shapeFlag, transition, patchFlag, dirs } = vnode;
+    if (vnode.el && hostCloneNode !== void 0 && patchFlag === -1) {
+      el = vnode.el = hostCloneNode(vnode.el);
+    } else {
+      el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is, props);
+      if (shapeFlag & 8) {
+        hostSetElementText(el, vnode.children);
+      } else if (shapeFlag & 16) {
+        mountChildren(vnode.children, el, null, parentComponent, parentSuspense, isSVG && type !== "foreignObject", slotScopeIds, optimized);
+      }
+      if (dirs) {
+        invokeDirectiveHook(vnode, null, parentComponent, "created");
+      }
+      if (props) {
+        for (const key in props) {
+          if (key !== "value" && !isReservedProp(key)) {
+            hostPatchProp(el, key, null, props[key], isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+          }
+        }
+        if ("value" in props) {
+          hostPatchProp(el, "value", null, props.value);
+        }
+        if (vnodeHook = props.onVnodeBeforeMount) {
+          invokeVNodeHook(vnodeHook, parentComponent, vnode);
+        }
+      }
+      setScopeId(el, vnode, vnode.scopeId, slotScopeIds, parentComponent);
+    }
+    if (dirs) {
+      invokeDirectiveHook(vnode, null, parentComponent, "beforeMount");
+    }
+    const needCallTransitionHooks = (!parentSuspense || parentSuspense && !parentSuspense.pendingBranch) && transition && !transition.persisted;
+    if (needCallTransitionHooks) {
+      transition.beforeEnter(el);
+    }
+    hostInsert(el, container, anchor);
+    if ((vnodeHook = props && props.onVnodeMounted) || needCallTransitionHooks || dirs) {
+      queuePostRenderEffect(() => {
+        vnodeHook && invokeVNodeHook(vnodeHook, parentComponent, vnode);
+        needCallTransitionHooks && transition.enter(el);
+        dirs && invokeDirectiveHook(vnode, null, parentComponent, "mounted");
+      }, parentSuspense);
+    }
+  };
+  const setScopeId = (el, vnode, scopeId, slotScopeIds, parentComponent) => {
+    if (scopeId) {
+      hostSetScopeId(el, scopeId);
+    }
+    if (slotScopeIds) {
+      for (let i = 0; i < slotScopeIds.length; i++) {
+        hostSetScopeId(el, slotScopeIds[i]);
+      }
+    }
+    if (parentComponent) {
+      let subTree = parentComponent.subTree;
+      if (vnode === subTree) {
+        const parentVNode = parentComponent.vnode;
+        setScopeId(el, parentVNode, parentVNode.scopeId, parentVNode.slotScopeIds, parentComponent.parent);
+      }
+    }
+  };
+  const mountChildren = (children, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, start = 0) => {
+    for (let i = start; i < children.length; i++) {
+      const child = children[i] = optimized ? cloneIfMounted(children[i]) : normalizeVNode(children[i]);
+      patch(null, child, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+    }
+  };
+  const patchElement = (n1, n2, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    const el = n2.el = n1.el;
+    let { patchFlag, dynamicChildren, dirs } = n2;
+    patchFlag |= n1.patchFlag & 16;
+    const oldProps = n1.props || EMPTY_OBJ;
+    const newProps = n2.props || EMPTY_OBJ;
+    let vnodeHook;
+    parentComponent && toggleRecurse(parentComponent, false);
+    if (vnodeHook = newProps.onVnodeBeforeUpdate) {
+      invokeVNodeHook(vnodeHook, parentComponent, n2, n1);
+    }
+    if (dirs) {
+      invokeDirectiveHook(n2, n1, parentComponent, "beforeUpdate");
+    }
+    parentComponent && toggleRecurse(parentComponent, true);
+    const areChildrenSVG = isSVG && n2.type !== "foreignObject";
+    if (dynamicChildren) {
+      patchBlockChildren(n1.dynamicChildren, dynamicChildren, el, parentComponent, parentSuspense, areChildrenSVG, slotScopeIds);
+    } else if (!optimized) {
+      patchChildren(n1, n2, el, null, parentComponent, parentSuspense, areChildrenSVG, slotScopeIds, false);
+    }
+    if (patchFlag > 0) {
+      if (patchFlag & 16) {
+        patchProps(el, n2, oldProps, newProps, parentComponent, parentSuspense, isSVG);
+      } else {
+        if (patchFlag & 2) {
+          if (oldProps.class !== newProps.class) {
+            hostPatchProp(el, "class", null, newProps.class, isSVG);
+          }
+        }
+        if (patchFlag & 4) {
+          hostPatchProp(el, "style", oldProps.style, newProps.style, isSVG);
+        }
+        if (patchFlag & 8) {
+          const propsToUpdate = n2.dynamicProps;
+          for (let i = 0; i < propsToUpdate.length; i++) {
+            const key = propsToUpdate[i];
+            const prev = oldProps[key];
+            const next = newProps[key];
+            if (next !== prev || key === "value") {
+              hostPatchProp(el, key, prev, next, isSVG, n1.children, parentComponent, parentSuspense, unmountChildren);
+            }
+          }
+        }
+      }
+      if (patchFlag & 1) {
+        if (n1.children !== n2.children) {
+          hostSetElementText(el, n2.children);
+        }
+      }
+    } else if (!optimized && dynamicChildren == null) {
+      patchProps(el, n2, oldProps, newProps, parentComponent, parentSuspense, isSVG);
+    }
+    if ((vnodeHook = newProps.onVnodeUpdated) || dirs) {
+      queuePostRenderEffect(() => {
+        vnodeHook && invokeVNodeHook(vnodeHook, parentComponent, n2, n1);
+        dirs && invokeDirectiveHook(n2, n1, parentComponent, "updated");
+      }, parentSuspense);
+    }
+  };
+  const patchBlockChildren = (oldChildren, newChildren, fallbackContainer, parentComponent, parentSuspense, isSVG, slotScopeIds) => {
+    for (let i = 0; i < newChildren.length; i++) {
+      const oldVNode = oldChildren[i];
+      const newVNode = newChildren[i];
+      const container = oldVNode.el && (oldVNode.type === Fragment || !isSameVNodeType(oldVNode, newVNode) || oldVNode.shapeFlag & (6 | 64)) ? hostParentNode(oldVNode.el) : fallbackContainer;
+      patch(oldVNode, newVNode, container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, true);
+    }
+  };
+  const patchProps = (el, vnode, oldProps, newProps, parentComponent, parentSuspense, isSVG) => {
+    if (oldProps !== newProps) {
+      for (const key in newProps) {
+        if (isReservedProp(key))
+          continue;
+        const next = newProps[key];
+        const prev = oldProps[key];
+        if (next !== prev && key !== "value") {
+          hostPatchProp(el, key, prev, next, isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+        }
+      }
+      if (oldProps !== EMPTY_OBJ) {
+        for (const key in oldProps) {
+          if (!isReservedProp(key) && !(key in newProps)) {
+            hostPatchProp(el, key, oldProps[key], null, isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+          }
+        }
+      }
+      if ("value" in newProps) {
+        hostPatchProp(el, "value", oldProps.value, newProps.value);
+      }
+    }
+  };
+  const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    const fragmentStartAnchor = n2.el = n1 ? n1.el : hostCreateText("");
+    const fragmentEndAnchor = n2.anchor = n1 ? n1.anchor : hostCreateText("");
+    let { patchFlag, dynamicChildren, slotScopeIds: fragmentSlotScopeIds } = n2;
+    if (fragmentSlotScopeIds) {
+      slotScopeIds = slotScopeIds ? slotScopeIds.concat(fragmentSlotScopeIds) : fragmentSlotScopeIds;
+    }
+    if (n1 == null) {
+      hostInsert(fragmentStartAnchor, container, anchor);
+      hostInsert(fragmentEndAnchor, container, anchor);
+      mountChildren(n2.children, container, fragmentEndAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+    } else {
+      if (patchFlag > 0 && patchFlag & 64 && dynamicChildren && n1.dynamicChildren) {
+        patchBlockChildren(n1.dynamicChildren, dynamicChildren, container, parentComponent, parentSuspense, isSVG, slotScopeIds);
+        if (n2.key != null || parentComponent && n2 === parentComponent.subTree) {
+          traverseStaticChildren(n1, n2, true);
+        }
+      } else {
+        patchChildren(n1, n2, container, fragmentEndAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+      }
+    }
+  };
+  const processComponent = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    n2.slotScopeIds = slotScopeIds;
+    if (n1 == null) {
+      if (n2.shapeFlag & 512) {
+        parentComponent.ctx.activate(n2, container, anchor, isSVG, optimized);
+      } else {
+        mountComponent(n2, container, anchor, parentComponent, parentSuspense, isSVG, optimized);
+      }
+    } else {
+      updateComponent(n1, n2, optimized);
+    }
+  };
+  const mountComponent = (initialVNode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
+    const instance = initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense);
+    if (isKeepAlive(initialVNode)) {
+      instance.ctx.renderer = internals;
+    }
+    {
+      setupComponent(instance);
+    }
+    if (instance.asyncDep) {
+      parentSuspense && parentSuspense.registerDep(instance, setupRenderEffect);
+      if (!initialVNode.el) {
+        const placeholder = instance.subTree = createVNode(Comment);
+        processCommentNode(null, placeholder, container, anchor);
+      }
+      return;
+    }
+    setupRenderEffect(instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized);
+  };
+  const updateComponent = (n1, n2, optimized) => {
+    const instance = n2.component = n1.component;
+    if (shouldUpdateComponent(n1, n2, optimized)) {
+      if (instance.asyncDep && !instance.asyncResolved) {
+        updateComponentPreRender(instance, n2, optimized);
+        return;
+      } else {
+        instance.next = n2;
+        invalidateJob(instance.update);
+        instance.update();
+      }
+    } else {
+      n2.el = n1.el;
+      instance.vnode = n2;
+    }
+  };
+  const setupRenderEffect = (instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
+    const componentUpdateFn = () => {
+      if (!instance.isMounted) {
+        let vnodeHook;
+        const { el, props } = initialVNode;
+        const { bm, m, parent } = instance;
+        const isAsyncWrapperVNode = isAsyncWrapper(initialVNode);
+        toggleRecurse(instance, false);
+        if (bm) {
+          invokeArrayFns(bm);
+        }
+        if (!isAsyncWrapperVNode && (vnodeHook = props && props.onVnodeBeforeMount)) {
+          invokeVNodeHook(vnodeHook, parent, initialVNode);
+        }
+        toggleRecurse(instance, true);
+        if (el && hydrateNode) {
+          const hydrateSubTree = () => {
+            instance.subTree = renderComponentRoot(instance);
+            hydrateNode(el, instance.subTree, instance, parentSuspense, null);
+          };
+          if (isAsyncWrapperVNode) {
+            initialVNode.type.__asyncLoader().then(() => !instance.isUnmounted && hydrateSubTree());
+          } else {
+            hydrateSubTree();
+          }
+        } else {
+          const subTree = instance.subTree = renderComponentRoot(instance);
+          patch(null, subTree, container, anchor, instance, parentSuspense, isSVG);
+          initialVNode.el = subTree.el;
+        }
+        if (m) {
+          queuePostRenderEffect(m, parentSuspense);
+        }
+        if (!isAsyncWrapperVNode && (vnodeHook = props && props.onVnodeMounted)) {
+          const scopedInitialVNode = initialVNode;
+          queuePostRenderEffect(() => invokeVNodeHook(vnodeHook, parent, scopedInitialVNode), parentSuspense);
+        }
+        if (initialVNode.shapeFlag & 256 || parent && isAsyncWrapper(parent.vnode) && parent.vnode.shapeFlag & 256) {
+          instance.a && queuePostRenderEffect(instance.a, parentSuspense);
+        }
+        instance.isMounted = true;
+        initialVNode = container = anchor = null;
+      } else {
+        let { next, bu, u, parent, vnode } = instance;
+        let originNext = next;
+        let vnodeHook;
+        toggleRecurse(instance, false);
+        if (next) {
+          next.el = vnode.el;
+          updateComponentPreRender(instance, next, optimized);
+        } else {
+          next = vnode;
+        }
+        if (bu) {
+          invokeArrayFns(bu);
+        }
+        if (vnodeHook = next.props && next.props.onVnodeBeforeUpdate) {
+          invokeVNodeHook(vnodeHook, parent, next, vnode);
+        }
+        toggleRecurse(instance, true);
+        const nextTree = renderComponentRoot(instance);
+        const prevTree = instance.subTree;
+        instance.subTree = nextTree;
+        patch(prevTree, nextTree, hostParentNode(prevTree.el), getNextHostNode(prevTree), instance, parentSuspense, isSVG);
+        next.el = nextTree.el;
+        if (originNext === null) {
+          updateHOCHostEl(instance, nextTree.el);
+        }
+        if (u) {
+          queuePostRenderEffect(u, parentSuspense);
+        }
+        if (vnodeHook = next.props && next.props.onVnodeUpdated) {
+          queuePostRenderEffect(() => invokeVNodeHook(vnodeHook, parent, next, vnode), parentSuspense);
+        }
+      }
+    };
+    const effect = instance.effect = new ReactiveEffect(componentUpdateFn, () => queueJob(update2), instance.scope);
+    const update2 = instance.update = () => effect.run();
+    update2.id = instance.uid;
+    toggleRecurse(instance, true);
+    update2();
+  };
+  const updateComponentPreRender = (instance, nextVNode, optimized) => {
+    nextVNode.component = instance;
+    const prevProps = instance.vnode.props;
+    instance.vnode = nextVNode;
+    instance.next = null;
+    updateProps(instance, nextVNode.props, prevProps, optimized);
+    updateSlots(instance, nextVNode.children, optimized);
+    pauseTracking();
+    flushPreFlushCbs(void 0, instance.update);
+    resetTracking();
+  };
+  const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized = false) => {
+    const c1 = n1 && n1.children;
+    const prevShapeFlag = n1 ? n1.shapeFlag : 0;
+    const c2 = n2.children;
+    const { patchFlag, shapeFlag } = n2;
+    if (patchFlag > 0) {
+      if (patchFlag & 128) {
+        patchKeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        return;
+      } else if (patchFlag & 256) {
+        patchUnkeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        return;
+      }
+    }
+    if (shapeFlag & 8) {
+      if (prevShapeFlag & 16) {
+        unmountChildren(c1, parentComponent, parentSuspense);
+      }
+      if (c2 !== c1) {
+        hostSetElementText(container, c2);
+      }
+    } else {
+      if (prevShapeFlag & 16) {
+        if (shapeFlag & 16) {
+          patchKeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        } else {
+          unmountChildren(c1, parentComponent, parentSuspense, true);
+        }
+      } else {
+        if (prevShapeFlag & 8) {
+          hostSetElementText(container, "");
+        }
+        if (shapeFlag & 16) {
+          mountChildren(c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        }
+      }
+    }
+  };
+  const patchUnkeyedChildren = (c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    c1 = c1 || EMPTY_ARR;
+    c2 = c2 || EMPTY_ARR;
+    const oldLength = c1.length;
+    const newLength = c2.length;
+    const commonLength = Math.min(oldLength, newLength);
+    let i;
+    for (i = 0; i < commonLength; i++) {
+      const nextChild = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
+      patch(c1[i], nextChild, container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+    }
+    if (oldLength > newLength) {
+      unmountChildren(c1, parentComponent, parentSuspense, true, false, commonLength);
+    } else {
+      mountChildren(c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, commonLength);
+    }
+  };
+  const patchKeyedChildren = (c1, c2, container, parentAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
+    let i = 0;
+    const l2 = c2.length;
+    let e1 = c1.length - 1;
+    let e2 = l2 - 1;
+    while (i <= e1 && i <= e2) {
+      const n1 = c1[i];
+      const n2 = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
+      if (isSameVNodeType(n1, n2)) {
+        patch(n1, n2, container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+      } else {
+        break;
+      }
+      i++;
+    }
+    while (i <= e1 && i <= e2) {
+      const n1 = c1[e1];
+      const n2 = c2[e2] = optimized ? cloneIfMounted(c2[e2]) : normalizeVNode(c2[e2]);
+      if (isSameVNodeType(n1, n2)) {
+        patch(n1, n2, container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+      } else {
+        break;
+      }
+      e1--;
+      e2--;
+    }
+    if (i > e1) {
+      if (i <= e2) {
+        const nextPos = e2 + 1;
+        const anchor = nextPos < l2 ? c2[nextPos].el : parentAnchor;
+        while (i <= e2) {
+          patch(null, c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]), container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+          i++;
+        }
+      }
+    } else if (i > e2) {
+      while (i <= e1) {
+        unmount(c1[i], parentComponent, parentSuspense, true);
+        i++;
+      }
+    } else {
+      const s1 = i;
+      const s2 = i;
+      const keyToNewIndexMap = /* @__PURE__ */ new Map();
+      for (i = s2; i <= e2; i++) {
+        const nextChild = c2[i] = optimized ? cloneIfMounted(c2[i]) : normalizeVNode(c2[i]);
+        if (nextChild.key != null) {
+          keyToNewIndexMap.set(nextChild.key, i);
+        }
+      }
+      let j;
+      let patched = 0;
+      const toBePatched = e2 - s2 + 1;
+      let moved = false;
+      let maxNewIndexSoFar = 0;
+      const newIndexToOldIndexMap = new Array(toBePatched);
+      for (i = 0; i < toBePatched; i++)
+        newIndexToOldIndexMap[i] = 0;
+      for (i = s1; i <= e1; i++) {
+        const prevChild = c1[i];
+        if (patched >= toBePatched) {
+          unmount(prevChild, parentComponent, parentSuspense, true);
+          continue;
+        }
+        let newIndex;
+        if (prevChild.key != null) {
+          newIndex = keyToNewIndexMap.get(prevChild.key);
+        } else {
+          for (j = s2; j <= e2; j++) {
+            if (newIndexToOldIndexMap[j - s2] === 0 && isSameVNodeType(prevChild, c2[j])) {
+              newIndex = j;
+              break;
+            }
+          }
+        }
+        if (newIndex === void 0) {
+          unmount(prevChild, parentComponent, parentSuspense, true);
+        } else {
+          newIndexToOldIndexMap[newIndex - s2] = i + 1;
+          if (newIndex >= maxNewIndexSoFar) {
+            maxNewIndexSoFar = newIndex;
+          } else {
+            moved = true;
+          }
+          patch(prevChild, c2[newIndex], container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+          patched++;
+        }
+      }
+      const increasingNewIndexSequence = moved ? getSequence(newIndexToOldIndexMap) : EMPTY_ARR;
+      j = increasingNewIndexSequence.length - 1;
+      for (i = toBePatched - 1; i >= 0; i--) {
+        const nextIndex = s2 + i;
+        const nextChild = c2[nextIndex];
+        const anchor = nextIndex + 1 < l2 ? c2[nextIndex + 1].el : parentAnchor;
+        if (newIndexToOldIndexMap[i] === 0) {
+          patch(null, nextChild, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        } else if (moved) {
+          if (j < 0 || i !== increasingNewIndexSequence[j]) {
+            move(nextChild, container, anchor, 2);
+          } else {
+            j--;
+          }
+        }
+      }
+    }
+  };
+  const move = (vnode, container, anchor, moveType, parentSuspense = null) => {
+    const { el, type, transition, children, shapeFlag } = vnode;
+    if (shapeFlag & 6) {
+      move(vnode.component.subTree, container, anchor, moveType);
+      return;
+    }
+    if (shapeFlag & 128) {
+      vnode.suspense.move(container, anchor, moveType);
+      return;
+    }
+    if (shapeFlag & 64) {
+      type.move(vnode, container, anchor, internals);
+      return;
+    }
+    if (type === Fragment) {
+      hostInsert(el, container, anchor);
+      for (let i = 0; i < children.length; i++) {
+        move(children[i], container, anchor, moveType);
+      }
+      hostInsert(vnode.anchor, container, anchor);
+      return;
+    }
+    if (type === Static) {
+      moveStaticNode(vnode, container, anchor);
+      return;
+    }
+    const needTransition = moveType !== 2 && shapeFlag & 1 && transition;
+    if (needTransition) {
+      if (moveType === 0) {
+        transition.beforeEnter(el);
+        hostInsert(el, container, anchor);
+        queuePostRenderEffect(() => transition.enter(el), parentSuspense);
+      } else {
+        const { leave, delayLeave, afterLeave } = transition;
+        const remove3 = () => hostInsert(el, container, anchor);
+        const performLeave = () => {
+          leave(el, () => {
+            remove3();
+            afterLeave && afterLeave();
+          });
+        };
+        if (delayLeave) {
+          delayLeave(el, remove3, performLeave);
+        } else {
+          performLeave();
+        }
+      }
+    } else {
+      hostInsert(el, container, anchor);
+    }
+  };
+  const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
+    const { type, props, ref: ref2, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref2 != null) {
+      setRef(ref2, null, parentSuspense, vnode, true);
+    }
+    if (shapeFlag & 256) {
+      parentComponent.ctx.deactivate(vnode);
+      return;
+    }
+    const shouldInvokeDirs = shapeFlag & 1 && dirs;
+    const shouldInvokeVnodeHook = !isAsyncWrapper(vnode);
+    let vnodeHook;
+    if (shouldInvokeVnodeHook && (vnodeHook = props && props.onVnodeBeforeUnmount)) {
+      invokeVNodeHook(vnodeHook, parentComponent, vnode);
+    }
+    if (shapeFlag & 6) {
+      unmountComponent(vnode.component, parentSuspense, doRemove);
+    } else {
+      if (shapeFlag & 128) {
+        vnode.suspense.unmount(parentSuspense, doRemove);
+        return;
+      }
+      if (shouldInvokeDirs) {
+        invokeDirectiveHook(vnode, null, parentComponent, "beforeUnmount");
+      }
+      if (shapeFlag & 64) {
+        vnode.type.remove(vnode, parentComponent, parentSuspense, optimized, internals, doRemove);
+      } else if (dynamicChildren && (type !== Fragment || patchFlag > 0 && patchFlag & 64)) {
+        unmountChildren(dynamicChildren, parentComponent, parentSuspense, false, true);
+      } else if (type === Fragment && patchFlag & (128 | 256) || !optimized && shapeFlag & 16) {
+        unmountChildren(children, parentComponent, parentSuspense);
+      }
+      if (doRemove) {
+        remove2(vnode);
+      }
+    }
+    if (shouldInvokeVnodeHook && (vnodeHook = props && props.onVnodeUnmounted) || shouldInvokeDirs) {
+      queuePostRenderEffect(() => {
+        vnodeHook && invokeVNodeHook(vnodeHook, parentComponent, vnode);
+        shouldInvokeDirs && invokeDirectiveHook(vnode, null, parentComponent, "unmounted");
+      }, parentSuspense);
+    }
+  };
+  const remove2 = (vnode) => {
+    const { type, el, anchor, transition } = vnode;
+    if (type === Fragment) {
+      {
+        removeFragment(el, anchor);
+      }
+      return;
+    }
+    if (type === Static) {
+      removeStaticNode(vnode);
+      return;
+    }
+    const performRemove = () => {
+      hostRemove(el);
+      if (transition && !transition.persisted && transition.afterLeave) {
+        transition.afterLeave();
+      }
+    };
+    if (vnode.shapeFlag & 1 && transition && !transition.persisted) {
+      const { leave, delayLeave } = transition;
+      const performLeave = () => leave(el, performRemove);
+      if (delayLeave) {
+        delayLeave(vnode.el, performRemove, performLeave);
+      } else {
+        performLeave();
+      }
+    } else {
+      performRemove();
+    }
+  };
+  const removeFragment = (cur, end) => {
+    let next;
+    while (cur !== end) {
+      next = hostNextSibling(cur);
+      hostRemove(cur);
+      cur = next;
+    }
+    hostRemove(end);
+  };
+  const unmountComponent = (instance, parentSuspense, doRemove) => {
+    const { bum, scope, update: update2, subTree, um } = instance;
+    if (bum) {
+      invokeArrayFns(bum);
+    }
+    scope.stop();
+    if (update2) {
+      update2.active = false;
+      unmount(subTree, instance, parentSuspense, doRemove);
+    }
+    if (um) {
+      queuePostRenderEffect(um, parentSuspense);
+    }
+    queuePostRenderEffect(() => {
+      instance.isUnmounted = true;
+    }, parentSuspense);
+    if (parentSuspense && parentSuspense.pendingBranch && !parentSuspense.isUnmounted && instance.asyncDep && !instance.asyncResolved && instance.suspenseId === parentSuspense.pendingId) {
+      parentSuspense.deps--;
+      if (parentSuspense.deps === 0) {
+        parentSuspense.resolve();
+      }
+    }
+  };
+  const unmountChildren = (children, parentComponent, parentSuspense, doRemove = false, optimized = false, start = 0) => {
+    for (let i = start; i < children.length; i++) {
+      unmount(children[i], parentComponent, parentSuspense, doRemove, optimized);
+    }
+  };
+  const getNextHostNode = (vnode) => {
+    if (vnode.shapeFlag & 6) {
+      return getNextHostNode(vnode.component.subTree);
+    }
+    if (vnode.shapeFlag & 128) {
+      return vnode.suspense.next();
+    }
+    return hostNextSibling(vnode.anchor || vnode.el);
+  };
+  const render = (vnode, container, isSVG) => {
+    if (vnode == null) {
+      if (container._vnode) {
+        unmount(container._vnode, null, null, true);
+      }
+    } else {
+      patch(container._vnode || null, vnode, container, null, null, null, isSVG);
+    }
+    flushPostFlushCbs();
+    container._vnode = vnode;
+  };
+  const internals = {
+    p: patch,
+    um: unmount,
+    m: move,
+    r: remove2,
+    mt: mountComponent,
+    mc: mountChildren,
+    pc: patchChildren,
+    pbc: patchBlockChildren,
+    n: getNextHostNode,
+    o: options
+  };
+  let hydrate;
+  let hydrateNode;
+  if (createHydrationFns) {
+    [hydrate, hydrateNode] = createHydrationFns(internals);
+  }
+  return {
+    render,
+    hydrate,
+    createApp: createAppAPI(render, hydrate)
+  };
+}
+function toggleRecurse({ effect, update: update2 }, allowed) {
+  effect.allowRecurse = update2.allowRecurse = allowed;
+}
+function traverseStaticChildren(n1, n2, shallow = false) {
+  const ch1 = n1.children;
+  const ch2 = n2.children;
+  if (isArray(ch1) && isArray(ch2)) {
+    for (let i = 0; i < ch1.length; i++) {
+      const c1 = ch1[i];
+      let c2 = ch2[i];
+      if (c2.shapeFlag & 1 && !c2.dynamicChildren) {
+        if (c2.patchFlag <= 0 || c2.patchFlag === 32) {
+          c2 = ch2[i] = cloneIfMounted(ch2[i]);
+          c2.el = c1.el;
+        }
+        if (!shallow)
+          traverseStaticChildren(c1, c2);
+      }
+    }
+  }
+}
+function getSequence(arr) {
+  const p2 = arr.slice();
+  const result = [0];
+  let i, j, u, v, c;
+  const len = arr.length;
+  for (i = 0; i < len; i++) {
+    const arrI = arr[i];
+    if (arrI !== 0) {
+      j = result[result.length - 1];
+      if (arr[j] < arrI) {
+        p2[i] = j;
+        result.push(i);
+        continue;
+      }
+      u = 0;
+      v = result.length - 1;
+      while (u < v) {
+        c = u + v >> 1;
+        if (arr[result[c]] < arrI) {
+          u = c + 1;
+        } else {
+          v = c;
+        }
+      }
+      if (arrI < arr[result[u]]) {
+        if (u > 0) {
+          p2[i] = result[u - 1];
+        }
+        result[u] = i;
+      }
+    }
+  }
+  u = result.length;
+  v = result[u - 1];
+  while (u-- > 0) {
+    result[u] = v;
+    v = p2[v];
+  }
+  return result;
+}
+const isTeleport = (type) => type.__isTeleport;
+const isTeleportDisabled = (props) => props && (props.disabled || props.disabled === "");
+const isTargetSVG = (target2) => typeof SVGElement !== "undefined" && target2 instanceof SVGElement;
+const resolveTarget = (props, select) => {
+  const targetSelector = props && props.to;
+  if (isString(targetSelector)) {
+    if (!select) {
+      return null;
+    } else {
+      const target2 = select(targetSelector);
+      return target2;
+    }
+  } else {
+    return targetSelector;
+  }
+};
+const TeleportImpl = {
+  __isTeleport: true,
+  process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, internals) {
+    const { mc: mountChildren, pc: patchChildren, pbc: patchBlockChildren, o: { insert, querySelector, createText, createComment } } = internals;
+    const disabled = isTeleportDisabled(n2.props);
+    let { shapeFlag, children, dynamicChildren } = n2;
+    if (n1 == null) {
+      const placeholder = n2.el = createText("");
+      const mainAnchor = n2.anchor = createText("");
+      insert(placeholder, container, anchor);
+      insert(mainAnchor, container, anchor);
+      const target2 = n2.target = resolveTarget(n2.props, querySelector);
+      const targetAnchor = n2.targetAnchor = createText("");
+      if (target2) {
+        insert(targetAnchor, target2);
+        isSVG = isSVG || isTargetSVG(target2);
+      }
+      const mount = (container2, anchor2) => {
+        if (shapeFlag & 16) {
+          mountChildren(children, container2, anchor2, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
+        }
+      };
+      if (disabled) {
+        mount(container, mainAnchor);
+      } else if (target2) {
+        mount(target2, targetAnchor);
+      }
+    } else {
+      n2.el = n1.el;
+      const mainAnchor = n2.anchor = n1.anchor;
+      const target2 = n2.target = n1.target;
+      const targetAnchor = n2.targetAnchor = n1.targetAnchor;
+      const wasDisabled = isTeleportDisabled(n1.props);
+      const currentContainer = wasDisabled ? container : target2;
+      const currentAnchor = wasDisabled ? mainAnchor : targetAnchor;
+      isSVG = isSVG || isTargetSVG(target2);
+      if (dynamicChildren) {
+        patchBlockChildren(n1.dynamicChildren, dynamicChildren, currentContainer, parentComponent, parentSuspense, isSVG, slotScopeIds);
+        traverseStaticChildren(n1, n2, true);
+      } else if (!optimized) {
+        patchChildren(n1, n2, currentContainer, currentAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, false);
+      }
+      if (disabled) {
+        if (!wasDisabled) {
+          moveTeleport(n2, container, mainAnchor, internals, 1);
+        }
+      } else {
+        if ((n2.props && n2.props.to) !== (n1.props && n1.props.to)) {
+          const nextTarget = n2.target = resolveTarget(n2.props, querySelector);
+          if (nextTarget) {
+            moveTeleport(n2, nextTarget, null, internals, 0);
+          }
+        } else if (wasDisabled) {
+          moveTeleport(n2, target2, targetAnchor, internals, 1);
+        }
+      }
+    }
+  },
+  remove(vnode, parentComponent, parentSuspense, optimized, { um: unmount, o: { remove: hostRemove } }, doRemove) {
+    const { shapeFlag, children, anchor, targetAnchor, target: target2, props } = vnode;
+    if (target2) {
+      hostRemove(targetAnchor);
+    }
+    if (doRemove || !isTeleportDisabled(props)) {
+      hostRemove(anchor);
+      if (shapeFlag & 16) {
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i];
+          unmount(child, parentComponent, parentSuspense, true, !!child.dynamicChildren);
+        }
+      }
+    }
+  },
+  move: moveTeleport,
+  hydrate: hydrateTeleport
+};
+function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }, moveType = 2) {
+  if (moveType === 0) {
+    insert(vnode.targetAnchor, container, parentAnchor);
+  }
+  const { el, anchor, shapeFlag, children, props } = vnode;
+  const isReorder = moveType === 2;
+  if (isReorder) {
+    insert(el, container, parentAnchor);
+  }
+  if (!isReorder || isTeleportDisabled(props)) {
+    if (shapeFlag & 16) {
+      for (let i = 0; i < children.length; i++) {
+        move(children[i], container, parentAnchor, 2);
+      }
+    }
+  }
+  if (isReorder) {
+    insert(anchor, container, parentAnchor);
+  }
+}
+function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized, { o: { nextSibling, parentNode, querySelector } }, hydrateChildren) {
+  const target2 = vnode.target = resolveTarget(vnode.props, querySelector);
+  if (target2) {
+    const targetNode = target2._lpa || target2.firstChild;
+    if (vnode.shapeFlag & 16) {
+      if (isTeleportDisabled(vnode.props)) {
+        vnode.anchor = hydrateChildren(nextSibling(node), vnode, parentNode(node), parentComponent, parentSuspense, slotScopeIds, optimized);
+        vnode.targetAnchor = targetNode;
+      } else {
+        vnode.anchor = nextSibling(node);
+        let targetAnchor = targetNode;
+        while (targetAnchor) {
+          targetAnchor = nextSibling(targetAnchor);
+          if (targetAnchor && targetAnchor.nodeType === 8 && targetAnchor.data === "teleport anchor") {
+            vnode.targetAnchor = targetAnchor;
+            target2._lpa = vnode.targetAnchor && nextSibling(vnode.targetAnchor);
+            break;
+          }
+        }
+        hydrateChildren(targetNode, vnode, target2, parentComponent, parentSuspense, slotScopeIds, optimized);
+      }
+    }
+  }
+  return vnode.anchor && nextSibling(vnode.anchor);
+}
+const Teleport = TeleportImpl;
+const Fragment = Symbol(void 0);
+const Text = Symbol(void 0);
+const Comment = Symbol(void 0);
+const Static = Symbol(void 0);
+const blockStack = [];
+let currentBlock = null;
+function openBlock(disableTracking = false) {
+  blockStack.push(currentBlock = disableTracking ? null : []);
+}
+function closeBlock() {
+  blockStack.pop();
+  currentBlock = blockStack[blockStack.length - 1] || null;
+}
+let isBlockTreeEnabled = 1;
+function setBlockTracking(value) {
+  isBlockTreeEnabled += value;
+}
+function setupBlock(vnode) {
+  vnode.dynamicChildren = isBlockTreeEnabled > 0 ? currentBlock || EMPTY_ARR : null;
+  closeBlock();
+  if (isBlockTreeEnabled > 0 && currentBlock) {
+    currentBlock.push(vnode);
+  }
+  return vnode;
+}
+function createElementBlock(type, props, children, patchFlag, dynamicProps, shapeFlag) {
+  return setupBlock(createBaseVNode(type, props, children, patchFlag, dynamicProps, shapeFlag, true));
+}
+function createBlock(type, props, children, patchFlag, dynamicProps) {
+  return setupBlock(createVNode(type, props, children, patchFlag, dynamicProps, true));
+}
+function isVNode(value) {
+  return value ? value.__v_isVNode === true : false;
+}
+function isSameVNodeType(n1, n2) {
+  return n1.type === n2.type && n1.key === n2.key;
+}
+const InternalObjectKey = `__vInternal`;
+const normalizeKey = ({ key }) => key != null ? key : null;
+const normalizeRef = ({ ref: ref2, ref_key, ref_for }) => {
+  return ref2 != null ? isString(ref2) || isRef(ref2) || isFunction(ref2) ? { i: currentRenderingInstance, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
+};
+function createBaseVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
+  const vnode = {
+    __v_isVNode: true,
+    __v_skip: true,
+    type,
+    props,
+    key: props && normalizeKey(props),
+    ref: props && normalizeRef(props),
+    scopeId: currentScopeId,
+    slotScopeIds: null,
+    children,
+    component: null,
+    suspense: null,
+    ssContent: null,
+    ssFallback: null,
+    dirs: null,
+    transition: null,
+    el: null,
+    anchor: null,
+    target: null,
+    targetAnchor: null,
+    staticCount: 0,
+    shapeFlag,
+    patchFlag,
+    dynamicProps,
+    dynamicChildren: null,
+    appContext: null
+  };
+  if (needFullChildrenNormalization) {
+    normalizeChildren(vnode, children);
+    if (shapeFlag & 128) {
+      type.normalize(vnode);
+    }
+  } else if (children) {
+    vnode.shapeFlag |= isString(children) ? 8 : 16;
+  }
+  if (isBlockTreeEnabled > 0 && !isBlockNode && currentBlock && (vnode.patchFlag > 0 || shapeFlag & 6) && vnode.patchFlag !== 32) {
+    currentBlock.push(vnode);
+  }
+  return vnode;
+}
+const createVNode = _createVNode;
+function _createVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, isBlockNode = false) {
+  if (!type || type === NULL_DYNAMIC_COMPONENT) {
+    type = Comment;
+  }
+  if (isVNode(type)) {
+    const cloned = cloneVNode(type, props, true);
+    if (children) {
+      normalizeChildren(cloned, children);
+    }
+    if (isBlockTreeEnabled > 0 && !isBlockNode && currentBlock) {
+      if (cloned.shapeFlag & 6) {
+        currentBlock[currentBlock.indexOf(type)] = cloned;
+      } else {
+        currentBlock.push(cloned);
+      }
+    }
+    cloned.patchFlag |= -2;
+    return cloned;
+  }
+  if (isClassComponent(type)) {
+    type = type.__vccOpts;
+  }
+  if (props) {
+    props = guardReactiveProps(props);
+    let { class: klass, style } = props;
+    if (klass && !isString(klass)) {
+      props.class = normalizeClass(klass);
+    }
+    if (isObject$1(style)) {
+      if (isProxy(style) && !isArray(style)) {
+        style = extend({}, style);
+      }
+      props.style = normalizeStyle(style);
+    }
+  }
+  const shapeFlag = isString(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject$1(type) ? 4 : isFunction(type) ? 2 : 0;
+  return createBaseVNode(type, props, children, patchFlag, dynamicProps, shapeFlag, isBlockNode, true);
+}
+function guardReactiveProps(props) {
+  if (!props)
+    return null;
+  return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
+}
+function cloneVNode(vnode, extraProps, mergeRef = false) {
+  const { props, ref: ref2, patchFlag, children } = vnode;
+  const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
+  const cloned = {
+    __v_isVNode: true,
+    __v_skip: true,
+    type: vnode.type,
+    props: mergedProps,
+    key: mergedProps && normalizeKey(mergedProps),
+    ref: extraProps && extraProps.ref ? mergeRef && ref2 ? isArray(ref2) ? ref2.concat(normalizeRef(extraProps)) : [ref2, normalizeRef(extraProps)] : normalizeRef(extraProps) : ref2,
+    scopeId: vnode.scopeId,
+    slotScopeIds: vnode.slotScopeIds,
+    children,
+    target: vnode.target,
+    targetAnchor: vnode.targetAnchor,
+    staticCount: vnode.staticCount,
+    shapeFlag: vnode.shapeFlag,
+    patchFlag: extraProps && vnode.type !== Fragment ? patchFlag === -1 ? 16 : patchFlag | 16 : patchFlag,
+    dynamicProps: vnode.dynamicProps,
+    dynamicChildren: vnode.dynamicChildren,
+    appContext: vnode.appContext,
+    dirs: vnode.dirs,
+    transition: vnode.transition,
+    component: vnode.component,
+    suspense: vnode.suspense,
+    ssContent: vnode.ssContent && cloneVNode(vnode.ssContent),
+    ssFallback: vnode.ssFallback && cloneVNode(vnode.ssFallback),
+    el: vnode.el,
+    anchor: vnode.anchor
+  };
+  return cloned;
+}
+function createTextVNode(text = " ", flag = 0) {
+  return createVNode(Text, null, text, flag);
+}
+function createCommentVNode(text, asBlock) {
+  return asBlock ? (openBlock(), createBlock(Comment, null, text)) : createVNode(Comment, null, text);
+}
+function normalizeVNode(child) {
+  if (child == null || typeof child === "boolean") {
+    return createVNode(Comment);
+  } else if (isArray(child)) {
+    return createVNode(Fragment, null, child.slice());
+  } else if (typeof child === "object") {
+    return cloneIfMounted(child);
+  } else {
+    return createVNode(Text, null, String(child));
+  }
+}
+function cloneIfMounted(child) {
+  return child.el === null || child.memo ? child : cloneVNode(child);
+}
+function normalizeChildren(vnode, children) {
+  let type = 0;
+  const { shapeFlag } = vnode;
+  if (children == null) {
+    children = null;
+  } else if (isArray(children)) {
+    type = 16;
+  } else if (typeof children === "object") {
+    if (shapeFlag & (1 | 64)) {
+      const slot = children.default;
+      if (slot) {
+        slot._c && (slot._d = false);
+        normalizeChildren(vnode, slot());
+        slot._c && (slot._d = true);
+      }
+      return;
+    } else {
+      type = 32;
+      const slotFlag = children._;
+      if (!slotFlag && !(InternalObjectKey in children)) {
+        children._ctx = currentRenderingInstance;
+      } else if (slotFlag === 3 && currentRenderingInstance) {
+        if (currentRenderingInstance.slots._ === 1) {
+          children._ = 1;
+        } else {
+          children._ = 2;
+          vnode.patchFlag |= 1024;
+        }
+      }
+    }
+  } else if (isFunction(children)) {
+    children = { default: children, _ctx: currentRenderingInstance };
+    type = 32;
+  } else {
+    children = String(children);
+    if (shapeFlag & 64) {
+      type = 16;
+      children = [createTextVNode(children)];
+    } else {
+      type = 8;
+    }
+  }
+  vnode.children = children;
+  vnode.shapeFlag |= type;
+}
+function mergeProps(...args) {
+  const ret = {};
+  for (let i = 0; i < args.length; i++) {
+    const toMerge = args[i];
+    for (const key in toMerge) {
+      if (key === "class") {
+        if (ret.class !== toMerge.class) {
+          ret.class = normalizeClass([ret.class, toMerge.class]);
+        }
+      } else if (key === "style") {
+        ret.style = normalizeStyle([ret.style, toMerge.style]);
+      } else if (isOn(key)) {
+        const existing = ret[key];
+        const incoming = toMerge[key];
+        if (incoming && existing !== incoming && !(isArray(existing) && existing.includes(incoming))) {
+          ret[key] = existing ? [].concat(existing, incoming) : incoming;
+        }
+      } else if (key !== "") {
+        ret[key] = toMerge[key];
+      }
+    }
+  }
+  return ret;
+}
+function invokeVNodeHook(hook, instance, vnode, prevVNode = null) {
+  callWithAsyncErrorHandling(hook, instance, 7, [
+    vnode,
+    prevVNode
+  ]);
+}
+const emptyAppContext = createAppContext();
+let uid$1$1 = 0;
+function createComponentInstance(vnode, parent, suspense) {
+  const type = vnode.type;
+  const appContext = (parent ? parent.appContext : vnode.appContext) || emptyAppContext;
+  const instance = {
+    uid: uid$1$1++,
+    vnode,
+    type,
+    parent,
+    appContext,
+    root: null,
+    next: null,
+    subTree: null,
+    effect: null,
+    update: null,
+    scope: new EffectScope(true),
+    render: null,
+    proxy: null,
+    exposed: null,
+    exposeProxy: null,
+    withProxy: null,
+    provides: parent ? parent.provides : Object.create(appContext.provides),
+    accessCache: null,
+    renderCache: [],
+    components: null,
+    directives: null,
+    propsOptions: normalizePropsOptions(type, appContext),
+    emitsOptions: normalizeEmitsOptions(type, appContext),
+    emit: null,
+    emitted: null,
+    propsDefaults: EMPTY_OBJ,
+    inheritAttrs: type.inheritAttrs,
+    ctx: EMPTY_OBJ,
+    data: EMPTY_OBJ,
+    props: EMPTY_OBJ,
+    attrs: EMPTY_OBJ,
+    slots: EMPTY_OBJ,
+    refs: EMPTY_OBJ,
+    setupState: EMPTY_OBJ,
+    setupContext: null,
+    suspense,
+    suspenseId: suspense ? suspense.pendingId : 0,
+    asyncDep: null,
+    asyncResolved: false,
+    isMounted: false,
+    isUnmounted: false,
+    isDeactivated: false,
+    bc: null,
+    c: null,
+    bm: null,
+    m: null,
+    bu: null,
+    u: null,
+    um: null,
+    bum: null,
+    da: null,
+    a: null,
+    rtg: null,
+    rtc: null,
+    ec: null,
+    sp: null
+  };
+  {
+    instance.ctx = { _: instance };
+  }
+  instance.root = parent ? parent.root : instance;
+  instance.emit = emit$1.bind(null, instance);
+  if (vnode.ce) {
+    vnode.ce(instance);
+  }
+  return instance;
+}
+let currentInstance = null;
+const getCurrentInstance = () => currentInstance || currentRenderingInstance;
+const setCurrentInstance = (instance) => {
+  currentInstance = instance;
+  instance.scope.on();
+};
+const unsetCurrentInstance = () => {
+  currentInstance && currentInstance.scope.off();
+  currentInstance = null;
+};
+function isStatefulComponent(instance) {
+  return instance.vnode.shapeFlag & 4;
+}
+let isInSSRComponentSetup = false;
+function setupComponent(instance, isSSR = false) {
+  isInSSRComponentSetup = isSSR;
+  const { props, children } = instance.vnode;
+  const isStateful = isStatefulComponent(instance);
+  initProps(instance, props, isStateful, isSSR);
+  initSlots(instance, children);
+  const setupResult = isStateful ? setupStatefulComponent(instance, isSSR) : void 0;
+  isInSSRComponentSetup = false;
+  return setupResult;
+}
+function setupStatefulComponent(instance, isSSR) {
+  const Component = instance.type;
+  instance.accessCache = /* @__PURE__ */ Object.create(null);
+  instance.proxy = markRaw(new Proxy(instance.ctx, PublicInstanceProxyHandlers));
+  const { setup } = Component;
+  if (setup) {
+    const setupContext = instance.setupContext = setup.length > 1 ? createSetupContext(instance) : null;
+    setCurrentInstance(instance);
+    pauseTracking();
+    const setupResult = callWithErrorHandling(setup, instance, 0, [instance.props, setupContext]);
+    resetTracking();
+    unsetCurrentInstance();
+    if (isPromise(setupResult)) {
+      setupResult.then(unsetCurrentInstance, unsetCurrentInstance);
+      if (isSSR) {
+        return setupResult.then((resolvedResult) => {
+          handleSetupResult(instance, resolvedResult, isSSR);
+        }).catch((e) => {
+          handleError(e, instance, 0);
+        });
+      } else {
+        instance.asyncDep = setupResult;
+      }
+    } else {
+      handleSetupResult(instance, setupResult, isSSR);
+    }
+  } else {
+    finishComponentSetup(instance, isSSR);
+  }
+}
+function handleSetupResult(instance, setupResult, isSSR) {
+  if (isFunction(setupResult)) {
+    if (instance.type.__ssrInlineRender) {
+      instance.ssrRender = setupResult;
+    } else {
+      instance.render = setupResult;
+    }
+  } else if (isObject$1(setupResult)) {
+    instance.setupState = proxyRefs(setupResult);
+  } else
+    ;
+  finishComponentSetup(instance, isSSR);
+}
+let compile;
+function finishComponentSetup(instance, isSSR, skipOptions) {
+  const Component = instance.type;
+  if (!instance.render) {
+    if (!isSSR && compile && !Component.render) {
+      const template = Component.template;
+      if (template) {
+        const { isCustomElement, compilerOptions } = instance.appContext.config;
+        const { delimiters, compilerOptions: componentCompilerOptions } = Component;
+        const finalCompilerOptions = extend(extend({
+          isCustomElement,
+          delimiters
+        }, compilerOptions), componentCompilerOptions);
+        Component.render = compile(template, finalCompilerOptions);
+      }
+    }
+    instance.render = Component.render || NOOP;
+  }
+  {
+    setCurrentInstance(instance);
+    pauseTracking();
+    applyOptions(instance);
+    resetTracking();
+    unsetCurrentInstance();
+  }
+}
+function createAttrsProxy(instance) {
+  return new Proxy(instance.attrs, {
+    get(target2, key) {
+      track(instance, "get", "$attrs");
+      return target2[key];
+    }
+  });
+}
+function createSetupContext(instance) {
+  const expose = (exposed) => {
+    instance.exposed = exposed || {};
+  };
+  let attrs;
+  {
+    return {
+      get attrs() {
+        return attrs || (attrs = createAttrsProxy(instance));
+      },
+      slots: instance.slots,
+      emit: instance.emit,
+      expose
+    };
+  }
+}
+function getExposeProxy(instance) {
+  if (instance.exposed) {
+    return instance.exposeProxy || (instance.exposeProxy = new Proxy(proxyRefs(markRaw(instance.exposed)), {
+      get(target2, key) {
+        if (key in target2) {
+          return target2[key];
+        } else if (key in publicPropertiesMap) {
+          return publicPropertiesMap[key](instance);
+        }
+      }
+    }));
+  }
+}
+function getComponentName(Component) {
+  return isFunction(Component) ? Component.displayName || Component.name : Component.name;
+}
+function isClassComponent(value) {
+  return isFunction(value) && "__vccOpts" in value;
+}
+const computed = (getterOrOptions, debugOptions) => {
+  return computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
+};
+function h(type, propsOrChildren, children) {
+  const l2 = arguments.length;
+  if (l2 === 2) {
+    if (isObject$1(propsOrChildren) && !isArray(propsOrChildren)) {
+      if (isVNode(propsOrChildren)) {
+        return createVNode(type, null, [propsOrChildren]);
+      }
+      return createVNode(type, propsOrChildren);
+    } else {
+      return createVNode(type, null, propsOrChildren);
+    }
+  } else {
+    if (l2 > 3) {
+      children = Array.prototype.slice.call(arguments, 2);
+    } else if (l2 === 3 && isVNode(children)) {
+      children = [children];
+    }
+    return createVNode(type, propsOrChildren, children);
+  }
+}
+const version = "3.2.36";
+const svgNS = "http://www.w3.org/2000/svg";
+const doc = typeof document !== "undefined" ? document : null;
+const templateContainer = doc && /* @__PURE__ */ doc.createElement("template");
+const nodeOps = {
+  insert: (child, parent, anchor) => {
+    parent.insertBefore(child, anchor || null);
+  },
+  remove: (child) => {
+    const parent = child.parentNode;
+    if (parent) {
+      parent.removeChild(child);
+    }
+  },
+  createElement: (tag, isSVG, is, props) => {
+    const el = isSVG ? doc.createElementNS(svgNS, tag) : doc.createElement(tag, is ? { is } : void 0);
+    if (tag === "select" && props && props.multiple != null) {
+      el.setAttribute("multiple", props.multiple);
+    }
+    return el;
+  },
+  createText: (text) => doc.createTextNode(text),
+  createComment: (text) => doc.createComment(text),
+  setText: (node, text) => {
+    node.nodeValue = text;
+  },
+  setElementText: (el, text) => {
+    el.textContent = text;
+  },
+  parentNode: (node) => node.parentNode,
+  nextSibling: (node) => node.nextSibling,
+  querySelector: (selector) => doc.querySelector(selector),
+  setScopeId(el, id) {
+    el.setAttribute(id, "");
+  },
+  cloneNode(el) {
+    const cloned = el.cloneNode(true);
+    if (`_value` in el) {
+      cloned._value = el._value;
+    }
+    return cloned;
+  },
+  insertStaticContent(content, parent, anchor, isSVG, start, end) {
+    const before = anchor ? anchor.previousSibling : parent.lastChild;
+    if (start && (start === end || start.nextSibling)) {
+      while (true) {
+        parent.insertBefore(start.cloneNode(true), anchor);
+        if (start === end || !(start = start.nextSibling))
+          break;
+      }
+    } else {
+      templateContainer.innerHTML = isSVG ? `<svg>${content}</svg>` : content;
+      const template = templateContainer.content;
+      if (isSVG) {
+        const wrapper = template.firstChild;
+        while (wrapper.firstChild) {
+          template.appendChild(wrapper.firstChild);
+        }
+        template.removeChild(wrapper);
+      }
+      parent.insertBefore(template, anchor);
+    }
+    return [
+      before ? before.nextSibling : parent.firstChild,
+      anchor ? anchor.previousSibling : parent.lastChild
+    ];
+  }
+};
+function patchClass(el, value, isSVG) {
+  const transitionClasses = el._vtc;
+  if (transitionClasses) {
+    value = (value ? [value, ...transitionClasses] : [...transitionClasses]).join(" ");
+  }
+  if (value == null) {
+    el.removeAttribute("class");
+  } else if (isSVG) {
+    el.setAttribute("class", value);
+  } else {
+    el.className = value;
+  }
+}
+function patchStyle(el, prev, next) {
+  const style = el.style;
+  const isCssString = isString(next);
+  if (next && !isCssString) {
+    for (const key in next) {
+      setStyle(style, key, next[key]);
+    }
+    if (prev && !isString(prev)) {
+      for (const key in prev) {
+        if (next[key] == null) {
+          setStyle(style, key, "");
+        }
+      }
+    }
+  } else {
+    const currentDisplay = style.display;
+    if (isCssString) {
+      if (prev !== next) {
+        style.cssText = next;
+      }
+    } else if (prev) {
+      el.removeAttribute("style");
+    }
+    if ("_vod" in el) {
+      style.display = currentDisplay;
+    }
+  }
+}
+const importantRE = /\s*!important$/;
+function setStyle(style, name, val) {
+  if (isArray(val)) {
+    val.forEach((v) => setStyle(style, name, v));
+  } else {
+    if (val == null)
+      val = "";
+    if (name.startsWith("--")) {
+      style.setProperty(name, val);
+    } else {
+      const prefixed = autoPrefix(style, name);
+      if (importantRE.test(val)) {
+        style.setProperty(hyphenate(prefixed), val.replace(importantRE, ""), "important");
+      } else {
+        style[prefixed] = val;
+      }
+    }
+  }
+}
+const prefixes = ["Webkit", "Moz", "ms"];
+const prefixCache = {};
+function autoPrefix(style, rawName) {
+  const cached = prefixCache[rawName];
+  if (cached) {
+    return cached;
+  }
+  let name = camelize(rawName);
+  if (name !== "filter" && name in style) {
+    return prefixCache[rawName] = name;
+  }
+  name = capitalize(name);
+  for (let i = 0; i < prefixes.length; i++) {
+    const prefixed = prefixes[i] + name;
+    if (prefixed in style) {
+      return prefixCache[rawName] = prefixed;
+    }
+  }
+  return rawName;
+}
+const xlinkNS = "http://www.w3.org/1999/xlink";
+function patchAttr(el, key, value, isSVG, instance) {
+  if (isSVG && key.startsWith("xlink:")) {
+    if (value == null) {
+      el.removeAttributeNS(xlinkNS, key.slice(6, key.length));
+    } else {
+      el.setAttributeNS(xlinkNS, key, value);
+    }
+  } else {
+    const isBoolean = isSpecialBooleanAttr(key);
+    if (value == null || isBoolean && !includeBooleanAttr(value)) {
+      el.removeAttribute(key);
+    } else {
+      el.setAttribute(key, isBoolean ? "" : value);
+    }
+  }
+}
+function patchDOMProp(el, key, value, prevChildren, parentComponent, parentSuspense, unmountChildren) {
+  if (key === "innerHTML" || key === "textContent") {
+    if (prevChildren) {
+      unmountChildren(prevChildren, parentComponent, parentSuspense);
+    }
+    el[key] = value == null ? "" : value;
+    return;
+  }
+  if (key === "value" && el.tagName !== "PROGRESS" && !el.tagName.includes("-")) {
+    el._value = value;
+    const newValue = value == null ? "" : value;
+    if (el.value !== newValue || el.tagName === "OPTION") {
+      el.value = newValue;
+    }
+    if (value == null) {
+      el.removeAttribute(key);
+    }
+    return;
+  }
+  let needRemove = false;
+  if (value === "" || value == null) {
+    const type = typeof el[key];
+    if (type === "boolean") {
+      value = includeBooleanAttr(value);
+    } else if (value == null && type === "string") {
+      value = "";
+      needRemove = true;
+    } else if (type === "number") {
+      value = 0;
+      needRemove = true;
+    }
+  }
+  try {
+    el[key] = value;
+  } catch (e) {
+  }
+  needRemove && el.removeAttribute(key);
+}
+const [_getNow, skipTimestampCheck] = /* @__PURE__ */ (() => {
+  let _getNow2 = Date.now;
+  let skipTimestampCheck2 = false;
+  if (typeof window !== "undefined") {
+    if (Date.now() > document.createEvent("Event").timeStamp) {
+      _getNow2 = performance.now.bind(performance);
+    }
+    const ffMatch = navigator.userAgent.match(/firefox\/(\d+)/i);
+    skipTimestampCheck2 = !!(ffMatch && Number(ffMatch[1]) <= 53);
+  }
+  return [_getNow2, skipTimestampCheck2];
+})();
+let cachedNow = 0;
+const p = /* @__PURE__ */ Promise.resolve();
+const reset = () => {
+  cachedNow = 0;
+};
+const getNow = () => cachedNow || (p.then(reset), cachedNow = _getNow());
+function addEventListener(el, event, handler, options) {
+  el.addEventListener(event, handler, options);
+}
+function removeEventListener(el, event, handler, options) {
+  el.removeEventListener(event, handler, options);
+}
+function patchEvent(el, rawName, prevValue, nextValue, instance = null) {
+  const invokers = el._vei || (el._vei = {});
+  const existingInvoker = invokers[rawName];
+  if (nextValue && existingInvoker) {
+    existingInvoker.value = nextValue;
+  } else {
+    const [name, options] = parseName(rawName);
+    if (nextValue) {
+      const invoker = invokers[rawName] = createInvoker(nextValue, instance);
+      addEventListener(el, name, invoker, options);
+    } else if (existingInvoker) {
+      removeEventListener(el, name, existingInvoker, options);
+      invokers[rawName] = void 0;
+    }
+  }
+}
+const optionsModifierRE = /(?:Once|Passive|Capture)$/;
+function parseName(name) {
+  let options;
+  if (optionsModifierRE.test(name)) {
+    options = {};
+    let m;
+    while (m = name.match(optionsModifierRE)) {
+      name = name.slice(0, name.length - m[0].length);
+      options[m[0].toLowerCase()] = true;
+    }
+  }
+  return [hyphenate(name.slice(2)), options];
+}
+function createInvoker(initialValue, instance) {
+  const invoker = (e) => {
+    const timeStamp = e.timeStamp || _getNow();
+    if (skipTimestampCheck || timeStamp >= invoker.attached - 1) {
+      callWithAsyncErrorHandling(patchStopImmediatePropagation(e, invoker.value), instance, 5, [e]);
+    }
+  };
+  invoker.value = initialValue;
+  invoker.attached = getNow();
+  return invoker;
+}
+function patchStopImmediatePropagation(e, value) {
+  if (isArray(value)) {
+    const originalStop = e.stopImmediatePropagation;
+    e.stopImmediatePropagation = () => {
+      originalStop.call(e);
+      e._stopped = true;
+    };
+    return value.map((fn) => (e2) => !e2._stopped && fn && fn(e2));
+  } else {
+    return value;
+  }
+}
+const nativeOnRE = /^on[a-z]/;
+const patchProp = (el, key, prevValue, nextValue, isSVG = false, prevChildren, parentComponent, parentSuspense, unmountChildren) => {
+  if (key === "class") {
+    patchClass(el, nextValue, isSVG);
+  } else if (key === "style") {
+    patchStyle(el, prevValue, nextValue);
+  } else if (isOn(key)) {
+    if (!isModelListener(key)) {
+      patchEvent(el, key, prevValue, nextValue, parentComponent);
+    }
+  } else if (key[0] === "." ? (key = key.slice(1), true) : key[0] === "^" ? (key = key.slice(1), false) : shouldSetAsProp(el, key, nextValue, isSVG)) {
+    patchDOMProp(el, key, nextValue, prevChildren, parentComponent, parentSuspense, unmountChildren);
+  } else {
+    if (key === "true-value") {
+      el._trueValue = nextValue;
+    } else if (key === "false-value") {
+      el._falseValue = nextValue;
+    }
+    patchAttr(el, key, nextValue, isSVG);
+  }
+};
+function shouldSetAsProp(el, key, value, isSVG) {
+  if (isSVG) {
+    if (key === "innerHTML" || key === "textContent") {
+      return true;
+    }
+    if (key in el && nativeOnRE.test(key) && isFunction(value)) {
+      return true;
+    }
+    return false;
+  }
+  if (key === "spellcheck" || key === "draggable" || key === "translate") {
+    return false;
+  }
+  if (key === "form") {
+    return false;
+  }
+  if (key === "list" && el.tagName === "INPUT") {
+    return false;
+  }
+  if (key === "type" && el.tagName === "TEXTAREA") {
+    return false;
+  }
+  if (nativeOnRE.test(key) && isString(value)) {
+    return false;
+  }
+  return key in el;
+}
+const TRANSITION = "transition";
+const ANIMATION = "animation";
+const Transition = (props, { slots }) => h(BaseTransition, resolveTransitionProps(props), slots);
+Transition.displayName = "Transition";
+const DOMTransitionPropsValidators = {
+  name: String,
+  type: String,
+  css: {
+    type: Boolean,
+    default: true
+  },
+  duration: [String, Number, Object],
+  enterFromClass: String,
+  enterActiveClass: String,
+  enterToClass: String,
+  appearFromClass: String,
+  appearActiveClass: String,
+  appearToClass: String,
+  leaveFromClass: String,
+  leaveActiveClass: String,
+  leaveToClass: String
+};
+Transition.props = /* @__PURE__ */ extend({}, BaseTransition.props, DOMTransitionPropsValidators);
+const callHook = (hook, args) => {
+  if (isArray(hook)) {
+    hook.forEach((h2) => h2(...args));
+  } else if (hook) {
+    hook(...args);
+  }
+};
+const hasExplicitCallback = (hook) => {
+  return hook ? isArray(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+};
+function resolveTransitionProps(rawProps) {
+  const baseProps = {};
+  for (const key in rawProps) {
+    if (!(key in DOMTransitionPropsValidators)) {
+      baseProps[key] = rawProps[key];
+    }
+  }
+  if (rawProps.css === false) {
+    return baseProps;
+  }
+  const { name = "v", type, duration, enterFromClass = `${name}-enter-from`, enterActiveClass = `${name}-enter-active`, enterToClass = `${name}-enter-to`, appearFromClass = enterFromClass, appearActiveClass = enterActiveClass, appearToClass = enterToClass, leaveFromClass = `${name}-leave-from`, leaveActiveClass = `${name}-leave-active`, leaveToClass = `${name}-leave-to` } = rawProps;
+  const durations = normalizeDuration(duration);
+  const enterDuration = durations && durations[0];
+  const leaveDuration = durations && durations[1];
+  const { onBeforeEnter, onEnter, onEnterCancelled, onLeave, onLeaveCancelled, onBeforeAppear = onBeforeEnter, onAppear = onEnter, onAppearCancelled = onEnterCancelled } = baseProps;
+  const finishEnter = (el, isAppear, done) => {
+    removeTransitionClass(el, isAppear ? appearToClass : enterToClass);
+    removeTransitionClass(el, isAppear ? appearActiveClass : enterActiveClass);
+    done && done();
+  };
+  const finishLeave = (el, done) => {
+    el._isLeaving = false;
+    removeTransitionClass(el, leaveFromClass);
+    removeTransitionClass(el, leaveToClass);
+    removeTransitionClass(el, leaveActiveClass);
+    done && done();
+  };
+  const makeEnterHook = (isAppear) => {
+    return (el, done) => {
+      const hook = isAppear ? onAppear : onEnter;
+      const resolve2 = () => finishEnter(el, isAppear, done);
+      callHook(hook, [el, resolve2]);
+      nextFrame(() => {
+        removeTransitionClass(el, isAppear ? appearFromClass : enterFromClass);
+        addTransitionClass(el, isAppear ? appearToClass : enterToClass);
+        if (!hasExplicitCallback(hook)) {
+          whenTransitionEnds(el, type, enterDuration, resolve2);
+        }
+      });
+    };
+  };
+  return extend(baseProps, {
+    onBeforeEnter(el) {
+      callHook(onBeforeEnter, [el]);
+      addTransitionClass(el, enterFromClass);
+      addTransitionClass(el, enterActiveClass);
+    },
+    onBeforeAppear(el) {
+      callHook(onBeforeAppear, [el]);
+      addTransitionClass(el, appearFromClass);
+      addTransitionClass(el, appearActiveClass);
+    },
+    onEnter: makeEnterHook(false),
+    onAppear: makeEnterHook(true),
+    onLeave(el, done) {
+      el._isLeaving = true;
+      const resolve2 = () => finishLeave(el, done);
+      addTransitionClass(el, leaveFromClass);
+      forceReflow();
+      addTransitionClass(el, leaveActiveClass);
+      nextFrame(() => {
+        if (!el._isLeaving) {
+          return;
+        }
+        removeTransitionClass(el, leaveFromClass);
+        addTransitionClass(el, leaveToClass);
+        if (!hasExplicitCallback(onLeave)) {
+          whenTransitionEnds(el, type, leaveDuration, resolve2);
+        }
+      });
+      callHook(onLeave, [el, resolve2]);
+    },
+    onEnterCancelled(el) {
+      finishEnter(el, false);
+      callHook(onEnterCancelled, [el]);
+    },
+    onAppearCancelled(el) {
+      finishEnter(el, true);
+      callHook(onAppearCancelled, [el]);
+    },
+    onLeaveCancelled(el) {
+      finishLeave(el);
+      callHook(onLeaveCancelled, [el]);
+    }
+  });
+}
+function normalizeDuration(duration) {
+  if (duration == null) {
+    return null;
+  } else if (isObject$1(duration)) {
+    return [NumberOf(duration.enter), NumberOf(duration.leave)];
+  } else {
+    const n = NumberOf(duration);
+    return [n, n];
+  }
+}
+function NumberOf(val) {
+  const res = toNumber(val);
+  return res;
+}
+function addTransitionClass(el, cls) {
+  cls.split(/\s+/).forEach((c) => c && el.classList.add(c));
+  (el._vtc || (el._vtc = /* @__PURE__ */ new Set())).add(cls);
+}
+function removeTransitionClass(el, cls) {
+  cls.split(/\s+/).forEach((c) => c && el.classList.remove(c));
+  const { _vtc } = el;
+  if (_vtc) {
+    _vtc.delete(cls);
+    if (!_vtc.size) {
+      el._vtc = void 0;
+    }
+  }
+}
+function nextFrame(cb) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(cb);
+  });
+}
+let endId = 0;
+function whenTransitionEnds(el, expectedType, explicitTimeout, resolve2) {
+  const id = el._endId = ++endId;
+  const resolveIfNotStale = () => {
+    if (id === el._endId) {
+      resolve2();
+    }
+  };
+  if (explicitTimeout) {
+    return setTimeout(resolveIfNotStale, explicitTimeout);
+  }
+  const { type, timeout, propCount } = getTransitionInfo(el, expectedType);
+  if (!type) {
+    return resolve2();
+  }
+  const endEvent = type + "end";
+  let ended = 0;
+  const end = () => {
+    el.removeEventListener(endEvent, onEnd);
+    resolveIfNotStale();
+  };
+  const onEnd = (e) => {
+    if (e.target === el && ++ended >= propCount) {
+      end();
+    }
+  };
+  setTimeout(() => {
+    if (ended < propCount) {
+      end();
+    }
+  }, timeout + 1);
+  el.addEventListener(endEvent, onEnd);
+}
+function getTransitionInfo(el, expectedType) {
+  const styles = window.getComputedStyle(el);
+  const getStyleProperties = (key) => (styles[key] || "").split(", ");
+  const transitionDelays = getStyleProperties(TRANSITION + "Delay");
+  const transitionDurations = getStyleProperties(TRANSITION + "Duration");
+  const transitionTimeout = getTimeout(transitionDelays, transitionDurations);
+  const animationDelays = getStyleProperties(ANIMATION + "Delay");
+  const animationDurations = getStyleProperties(ANIMATION + "Duration");
+  const animationTimeout = getTimeout(animationDelays, animationDurations);
+  let type = null;
+  let timeout = 0;
+  let propCount = 0;
+  if (expectedType === TRANSITION) {
+    if (transitionTimeout > 0) {
+      type = TRANSITION;
+      timeout = transitionTimeout;
+      propCount = transitionDurations.length;
+    }
+  } else if (expectedType === ANIMATION) {
+    if (animationTimeout > 0) {
+      type = ANIMATION;
+      timeout = animationTimeout;
+      propCount = animationDurations.length;
+    }
+  } else {
+    timeout = Math.max(transitionTimeout, animationTimeout);
+    type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION : ANIMATION : null;
+    propCount = type ? type === TRANSITION ? transitionDurations.length : animationDurations.length : 0;
+  }
+  const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(styles[TRANSITION + "Property"]);
+  return {
+    type,
+    timeout,
+    propCount,
+    hasTransform
+  };
+}
+function getTimeout(delays, durations) {
+  while (delays.length < durations.length) {
+    delays = delays.concat(delays);
+  }
+  return Math.max(...durations.map((d, i) => toMs(d) + toMs(delays[i])));
+}
+function toMs(s2) {
+  return Number(s2.slice(0, -1).replace(",", ".")) * 1e3;
+}
+function forceReflow() {
+  return document.body.offsetHeight;
+}
+const vShow = {
+  beforeMount(el, { value }, { transition }) {
+    el._vod = el.style.display === "none" ? "" : el.style.display;
+    if (transition && value) {
+      transition.beforeEnter(el);
+    } else {
+      setDisplay(el, value);
+    }
+  },
+  mounted(el, { value }, { transition }) {
+    if (transition && value) {
+      transition.enter(el);
+    }
+  },
+  updated(el, { value, oldValue }, { transition }) {
+    if (!value === !oldValue)
+      return;
+    if (transition) {
+      if (value) {
+        transition.beforeEnter(el);
+        setDisplay(el, true);
+        transition.enter(el);
+      } else {
+        transition.leave(el, () => {
+          setDisplay(el, false);
+        });
+      }
+    } else {
+      setDisplay(el, value);
+    }
+  },
+  beforeUnmount(el, { value }) {
+    setDisplay(el, value);
+  }
+};
+function setDisplay(el, value) {
+  el.style.display = value ? el._vod : "none";
+}
+const rendererOptions = /* @__PURE__ */ extend({ patchProp }, nodeOps);
+let renderer;
+function ensureRenderer() {
+  return renderer || (renderer = createRenderer(rendererOptions));
+}
+const createApp = (...args) => {
+  const app2 = ensureRenderer().createApp(...args);
+  const { mount } = app2;
+  app2.mount = (containerOrSelector) => {
+    const container = normalizeContainer(containerOrSelector);
+    if (!container)
+      return;
+    const component = app2._component;
+    if (!isFunction(component) && !component.render && !component.template) {
+      component.template = container.innerHTML;
+    }
+    container.innerHTML = "";
+    const proxy = mount(container, false, container instanceof SVGElement);
+    if (container instanceof Element) {
+      container.removeAttribute("v-cloak");
+      container.setAttribute("data-v-app", "");
+    }
+    return proxy;
+  };
+  return app2;
+};
+function normalizeContainer(container) {
+  if (isString(container)) {
+    const res = document.querySelector(container);
+    return res;
+  }
+  return container;
+}
+function injectProp(target2, propName, get2, set2) {
+  Object.defineProperty(target2, propName, {
+    get: get2,
+    set: set2,
+    enumerable: true
+  });
+}
+const isRuntimeSsrPreHydration = ref(false);
+let iosCorrection;
+function getMatch(userAgent2, platformMatch) {
+  const match = /(edg|edge|edga|edgios)\/([\w.]+)/.exec(userAgent2) || /(opr)[\/]([\w.]+)/.exec(userAgent2) || /(vivaldi)[\/]([\w.]+)/.exec(userAgent2) || /(chrome|crios)[\/]([\w.]+)/.exec(userAgent2) || /(version)(applewebkit)[\/]([\w.]+).*(safari)[\/]([\w.]+)/.exec(userAgent2) || /(webkit)[\/]([\w.]+).*(version)[\/]([\w.]+).*(safari)[\/]([\w.]+)/.exec(userAgent2) || /(firefox|fxios)[\/]([\w.]+)/.exec(userAgent2) || /(webkit)[\/]([\w.]+)/.exec(userAgent2) || /(opera)(?:.*version|)[\/]([\w.]+)/.exec(userAgent2) || [];
+  return {
+    browser: match[5] || match[3] || match[1] || "",
+    version: match[2] || match[4] || "0",
+    versionNumber: match[4] || match[2] || "0",
+    platform: platformMatch[0] || ""
+  };
+}
+function getPlatformMatch(userAgent2) {
+  return /(ipad)/.exec(userAgent2) || /(ipod)/.exec(userAgent2) || /(windows phone)/.exec(userAgent2) || /(iphone)/.exec(userAgent2) || /(kindle)/.exec(userAgent2) || /(silk)/.exec(userAgent2) || /(android)/.exec(userAgent2) || /(win)/.exec(userAgent2) || /(mac)/.exec(userAgent2) || /(linux)/.exec(userAgent2) || /(cros)/.exec(userAgent2) || /(playbook)/.exec(userAgent2) || /(bb)/.exec(userAgent2) || /(blackberry)/.exec(userAgent2) || [];
+}
+const hasTouch = "ontouchstart" in window || window.navigator.maxTouchPoints > 0;
+function applyIosCorrection(is) {
+  iosCorrection = { is: __spreadValues({}, is) };
+  delete is.mac;
+  delete is.desktop;
+  const platform = Math.min(window.innerHeight, window.innerWidth) > 414 ? "ipad" : "iphone";
+  Object.assign(is, {
+    mobile: true,
+    ios: true,
+    platform,
+    [platform]: true
+  });
+}
+function getPlatform(UA) {
+  const userAgent2 = UA.toLowerCase(), platformMatch = getPlatformMatch(userAgent2), matched = getMatch(userAgent2, platformMatch), browser = {};
+  if (matched.browser) {
+    browser[matched.browser] = true;
+    browser.version = matched.version;
+    browser.versionNumber = parseInt(matched.versionNumber, 10);
+  }
+  if (matched.platform) {
+    browser[matched.platform] = true;
+  }
+  const knownMobiles = browser.android || browser.ios || browser.bb || browser.blackberry || browser.ipad || browser.iphone || browser.ipod || browser.kindle || browser.playbook || browser.silk || browser["windows phone"];
+  if (knownMobiles === true || userAgent2.indexOf("mobile") > -1) {
+    browser.mobile = true;
+    if (browser.edga || browser.edgios) {
+      browser.edge = true;
+      matched.browser = "edge";
+    } else if (browser.crios) {
+      browser.chrome = true;
+      matched.browser = "chrome";
+    } else if (browser.fxios) {
+      browser.firefox = true;
+      matched.browser = "firefox";
+    }
+  } else {
+    browser.desktop = true;
+  }
+  if (browser.ipod || browser.ipad || browser.iphone) {
+    browser.ios = true;
+  }
+  if (browser["windows phone"]) {
+    browser.winphone = true;
+    delete browser["windows phone"];
+  }
+  if (browser.chrome || browser.opr || browser.safari || browser.vivaldi || browser.mobile === true && browser.ios !== true && knownMobiles !== true) {
+    browser.webkit = true;
+  }
+  if (browser.edg) {
+    matched.browser = "edgechromium";
+    browser.edgeChromium = true;
+  }
+  if (browser.safari && browser.blackberry || browser.bb) {
+    matched.browser = "blackberry";
+    browser.blackberry = true;
+  }
+  if (browser.safari && browser.playbook) {
+    matched.browser = "playbook";
+    browser.playbook = true;
+  }
+  if (browser.opr) {
+    matched.browser = "opera";
+    browser.opera = true;
+  }
+  if (browser.safari && browser.android) {
+    matched.browser = "android";
+    browser.android = true;
+  }
+  if (browser.safari && browser.kindle) {
+    matched.browser = "kindle";
+    browser.kindle = true;
+  }
+  if (browser.safari && browser.silk) {
+    matched.browser = "silk";
+    browser.silk = true;
+  }
+  if (browser.vivaldi) {
+    matched.browser = "vivaldi";
+    browser.vivaldi = true;
+  }
+  browser.name = matched.browser;
+  browser.platform = matched.platform;
+  {
+    if (userAgent2.indexOf("electron") > -1) {
+      browser.electron = true;
+    } else if (document.location.href.indexOf("-extension://") > -1) {
+      browser.bex = true;
+    } else {
+      if (window.Capacitor !== void 0) {
+        browser.capacitor = true;
+        browser.nativeMobile = true;
+        browser.nativeMobileWrapper = "capacitor";
+      } else if (window._cordovaNative !== void 0 || window.cordova !== void 0) {
+        browser.cordova = true;
+        browser.nativeMobile = true;
+        browser.nativeMobileWrapper = "cordova";
+      }
+      if (hasTouch === true && browser.mac === true && (browser.desktop === true && browser.safari === true || browser.nativeMobile === true && browser.android !== true && browser.ios !== true && browser.ipad !== true)) {
+        applyIosCorrection(browser);
+      }
+    }
+  }
+  return browser;
+}
+const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+const ssrClient = {
+  has: {
+    touch: false,
+    webStorage: false
+  },
+  within: { iframe: false }
+};
+const client = {
+  userAgent,
+  is: getPlatform(userAgent),
+  has: {
+    touch: hasTouch
+  },
+  within: {
+    iframe: window.self !== window.top
+  }
+};
+const Platform = {
+  install(opts) {
+    const { $q } = opts;
+    if (isRuntimeSsrPreHydration.value === true) {
+      opts.onSSRHydrated.push(() => {
+        isRuntimeSsrPreHydration.value = false;
+        Object.assign($q.platform, client);
+        iosCorrection = void 0;
+      });
+      $q.platform = reactive(this);
+    } else {
+      $q.platform = this;
+    }
+  }
+};
+{
+  let hasWebStorage;
+  injectProp(client.has, "webStorage", () => {
+    if (hasWebStorage !== void 0) {
+      return hasWebStorage;
+    }
+    try {
+      if (window.localStorage) {
+        hasWebStorage = true;
+        return true;
+      }
+    } catch (e) {
+    }
+    hasWebStorage = false;
+    return false;
+  });
+  client.is.ios === true && window.navigator.vendor.toLowerCase().indexOf("apple") === -1;
+  if (isRuntimeSsrPreHydration.value === true) {
+    Object.assign(Platform, client, iosCorrection, ssrClient);
+  } else {
+    Object.assign(Platform, client);
+  }
+}
+var defineReactivePlugin = (state, plugin) => {
+  const reactiveState = reactive(state);
+  for (const name in state) {
+    injectProp(plugin, name, () => reactiveState[name], (val) => {
+      reactiveState[name] = val;
+    });
+  }
+  return plugin;
+};
+const listenOpts = {
+  hasPassive: false,
+  passiveCapture: true,
+  notPassiveCapture: true
+};
+try {
+  const opts = Object.defineProperty({}, "passive", {
+    get() {
+      Object.assign(listenOpts, {
+        hasPassive: true,
+        passive: { passive: true },
+        notPassive: { passive: false },
+        passiveCapture: { passive: true, capture: true },
+        notPassiveCapture: { passive: false, capture: true }
+      });
+    }
+  });
+  window.addEventListener("qtest", null, opts);
+  window.removeEventListener("qtest", null, opts);
+} catch (e) {
+}
+function noop$1() {
+}
+function position(e) {
+  if (e.touches && e.touches[0]) {
+    e = e.touches[0];
+  } else if (e.changedTouches && e.changedTouches[0]) {
+    e = e.changedTouches[0];
+  } else if (e.targetTouches && e.targetTouches[0]) {
+    e = e.targetTouches[0];
+  }
+  return {
+    top: e.clientY,
+    left: e.clientX
+  };
+}
+function stop(e) {
+  e.stopPropagation();
+}
+function prevent(e) {
+  e.cancelable !== false && e.preventDefault();
+}
+function stopAndPrevent(e) {
+  e.cancelable !== false && e.preventDefault();
+  e.stopPropagation();
+}
+function addEvt(ctx, targetName, events) {
+  const name = `__q_${targetName}_evt`;
+  ctx[name] = ctx[name] !== void 0 ? ctx[name].concat(events) : events;
+  events.forEach((evt) => {
+    evt[0].addEventListener(evt[1], ctx[evt[2]], listenOpts[evt[3]]);
+  });
+}
+function cleanEvt(ctx, targetName) {
+  const name = `__q_${targetName}_evt`;
+  if (ctx[name] !== void 0) {
+    ctx[name].forEach((evt) => {
+      evt[0].removeEventListener(evt[1], ctx[evt[2]], listenOpts[evt[3]]);
+    });
+    ctx[name] = void 0;
+  }
+}
+function debounce(fn, wait = 250, immediate) {
+  let timeout;
+  function debounced() {
+    const args = arguments;
+    const later = () => {
+      timeout = void 0;
+      if (immediate !== true) {
+        fn.apply(this, args);
+      }
+    };
+    clearTimeout(timeout);
+    if (immediate === true && timeout === void 0) {
+      fn.apply(this, args);
+    }
+    timeout = setTimeout(later, wait);
+  }
+  debounced.cancel = () => {
+    clearTimeout(timeout);
+  };
+  return debounced;
+}
+const SIZE_LIST = ["sm", "md", "lg", "xl"];
+const { passive } = listenOpts;
+var Screen = defineReactivePlugin({
+  width: 0,
+  height: 0,
+  name: "xs",
+  sizes: {
+    sm: 600,
+    md: 1024,
+    lg: 1440,
+    xl: 1920
+  },
+  lt: {
+    sm: true,
+    md: true,
+    lg: true,
+    xl: true
+  },
+  gt: {
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false
+  },
+  xs: true,
+  sm: false,
+  md: false,
+  lg: false,
+  xl: false
+}, {
+  setSizes: noop$1,
+  setDebounce: noop$1,
+  install({ $q, onSSRHydrated }) {
+    $q.screen = this;
+    if (this.__installed === true) {
+      if ($q.config.screen !== void 0) {
+        if ($q.config.screen.bodyClasses === false) {
+          document.body.classList.remove(`screen--${this.name}`);
+        } else {
+          this.__update(true);
+        }
+      }
+      return;
+    }
+    const { visualViewport } = window;
+    const target2 = visualViewport || window;
+    const scrollingElement = document.scrollingElement || document.documentElement;
+    const getSize = visualViewport === void 0 || client.is.mobile === true ? () => [
+      Math.max(window.innerWidth, scrollingElement.clientWidth),
+      Math.max(window.innerHeight, scrollingElement.clientHeight)
+    ] : () => [
+      visualViewport.width * visualViewport.scale + window.innerWidth - scrollingElement.clientWidth,
+      visualViewport.height * visualViewport.scale + window.innerHeight - scrollingElement.clientHeight
+    ];
+    const classes = $q.config.screen !== void 0 && $q.config.screen.bodyClasses === true;
+    this.__update = (force) => {
+      const [w, h2] = getSize();
+      if (h2 !== this.height) {
+        this.height = h2;
+      }
+      if (w !== this.width) {
+        this.width = w;
+      } else if (force !== true) {
+        return;
+      }
+      let s2 = this.sizes;
+      this.gt.xs = w >= s2.sm;
+      this.gt.sm = w >= s2.md;
+      this.gt.md = w >= s2.lg;
+      this.gt.lg = w >= s2.xl;
+      this.lt.sm = w < s2.sm;
+      this.lt.md = w < s2.md;
+      this.lt.lg = w < s2.lg;
+      this.lt.xl = w < s2.xl;
+      this.xs = this.lt.sm;
+      this.sm = this.gt.xs === true && this.lt.md === true;
+      this.md = this.gt.sm === true && this.lt.lg === true;
+      this.lg = this.gt.md === true && this.lt.xl === true;
+      this.xl = this.gt.lg;
+      s2 = this.xs === true && "xs" || this.sm === true && "sm" || this.md === true && "md" || this.lg === true && "lg" || "xl";
+      if (s2 !== this.name) {
+        if (classes === true) {
+          document.body.classList.remove(`screen--${this.name}`);
+          document.body.classList.add(`screen--${s2}`);
+        }
+        this.name = s2;
+      }
+    };
+    let updateEvt, updateSizes = {}, updateDebounce = 16;
+    this.setSizes = (sizes) => {
+      SIZE_LIST.forEach((name) => {
+        if (sizes[name] !== void 0) {
+          updateSizes[name] = sizes[name];
+        }
+      });
+    };
+    this.setDebounce = (deb) => {
+      updateDebounce = deb;
+    };
+    const start = () => {
+      const style = getComputedStyle(document.body);
+      if (style.getPropertyValue("--q-size-sm")) {
+        SIZE_LIST.forEach((name) => {
+          this.sizes[name] = parseInt(style.getPropertyValue(`--q-size-${name}`), 10);
+        });
+      }
+      this.setSizes = (sizes) => {
+        SIZE_LIST.forEach((name) => {
+          if (sizes[name]) {
+            this.sizes[name] = sizes[name];
+          }
+        });
+        this.__update(true);
+      };
+      this.setDebounce = (delay) => {
+        updateEvt !== void 0 && target2.removeEventListener("resize", updateEvt, passive);
+        updateEvt = delay > 0 ? debounce(this.__update, delay) : this.__update;
+        target2.addEventListener("resize", updateEvt, passive);
+      };
+      this.setDebounce(updateDebounce);
+      if (Object.keys(updateSizes).length > 0) {
+        this.setSizes(updateSizes);
+        updateSizes = void 0;
+      } else {
+        this.__update();
+      }
+      classes === true && this.name === "xs" && document.body.classList.add("screen--xs");
+    };
+    if (isRuntimeSsrPreHydration.value === true) {
+      onSSRHydrated.push(start);
+    } else {
+      start();
+    }
+  }
+});
+const Plugin$2 = defineReactivePlugin({
+  isActive: false,
+  mode: false
+}, {
+  __media: void 0,
+  set(val) {
+    Plugin$2.mode = val;
+    if (val === "auto") {
+      if (Plugin$2.__media === void 0) {
+        Plugin$2.__media = window.matchMedia("(prefers-color-scheme: dark)");
+        Plugin$2.__updateMedia = () => {
+          Plugin$2.set("auto");
+        };
+        Plugin$2.__media.addListener(Plugin$2.__updateMedia);
+      }
+      val = Plugin$2.__media.matches;
+    } else if (Plugin$2.__media !== void 0) {
+      Plugin$2.__media.removeListener(Plugin$2.__updateMedia);
+      Plugin$2.__media = void 0;
+    }
+    Plugin$2.isActive = val === true;
+    document.body.classList.remove(`body--${val === true ? "light" : "dark"}`);
+    document.body.classList.add(`body--${val === true ? "dark" : "light"}`);
+  },
+  toggle() {
+    {
+      Plugin$2.set(Plugin$2.isActive === false);
+    }
+  },
+  install({ $q, onSSRHydrated, ssrContext }) {
+    const { dark } = $q.config;
+    $q.dark = this;
+    if (this.__installed === true && dark === void 0) {
+      return;
+    }
+    this.isActive = dark === true;
+    const initialVal = dark !== void 0 ? dark : false;
+    if (isRuntimeSsrPreHydration.value === true) {
+      const ssrSet = (val) => {
+        this.__fromSSR = val;
+      };
+      const originalSet = this.set;
+      this.set = ssrSet;
+      ssrSet(initialVal);
+      onSSRHydrated.push(() => {
+        this.set = originalSet;
+        this.set(this.__fromSSR);
+      });
+    } else {
+      this.set(initialVal);
+    }
+  }
+});
+const getTrue = () => true;
+function filterInvalidPath(path) {
+  return typeof path === "string" && path !== "" && path !== "/" && path !== "#/";
+}
+function normalizeExitPath(path) {
+  path.startsWith("#") === true && (path = path.substring(1));
+  path.startsWith("/") === false && (path = "/" + path);
+  path.endsWith("/") === true && (path = path.substring(0, path.length - 1));
+  return "#" + path;
+}
+function getShouldExitFn(cfg) {
+  if (cfg.backButtonExit === false) {
+    return () => false;
+  }
+  if (cfg.backButtonExit === "*") {
+    return getTrue;
+  }
+  const exitPaths = ["#/"];
+  Array.isArray(cfg.backButtonExit) === true && exitPaths.push(...cfg.backButtonExit.filter(filterInvalidPath).map(normalizeExitPath));
+  return () => exitPaths.includes(window.location.hash);
+}
+var History = {
+  __history: [],
+  add: noop$1,
+  remove: noop$1,
+  install({ $q }) {
+    if (this.__installed === true) {
+      return;
+    }
+    const { cordova, capacitor } = client.is;
+    if (cordova !== true && capacitor !== true) {
+      return;
+    }
+    const qConf = $q.config[cordova === true ? "cordova" : "capacitor"];
+    if (qConf !== void 0 && qConf.backButton === false) {
+      return;
+    }
+    if (capacitor === true && (window.Capacitor === void 0 || window.Capacitor.Plugins.App === void 0)) {
+      return;
+    }
+    this.add = (entry) => {
+      if (entry.condition === void 0) {
+        entry.condition = getTrue;
+      }
+      this.__history.push(entry);
+    };
+    this.remove = (entry) => {
+      const index2 = this.__history.indexOf(entry);
+      if (index2 >= 0) {
+        this.__history.splice(index2, 1);
+      }
+    };
+    const shouldExit = getShouldExitFn(Object.assign({ backButtonExit: true }, qConf));
+    const backHandler = () => {
+      if (this.__history.length) {
+        const entry = this.__history[this.__history.length - 1];
+        if (entry.condition() === true) {
+          this.__history.pop();
+          entry.handler();
+        }
+      } else if (shouldExit() === true) {
+        navigator.app.exitApp();
+      } else {
+        window.history.back();
+      }
+    };
+    if (cordova === true) {
+      document.addEventListener("deviceready", () => {
+        document.addEventListener("backbutton", backHandler, false);
+      });
+    } else {
+      window.Capacitor.Plugins.App.addListener("backButton", backHandler);
+    }
+  }
+};
+var defaultLang = {
+  isoName: "en-US",
+  nativeName: "English (US)",
+  label: {
+    clear: "Clear",
+    ok: "OK",
+    cancel: "Cancel",
+    close: "Close",
+    set: "Set",
+    select: "Select",
+    reset: "Reset",
+    remove: "Remove",
+    update: "Update",
+    create: "Create",
+    search: "Search",
+    filter: "Filter",
+    refresh: "Refresh"
+  },
+  date: {
+    days: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
+    daysShort: "Sun_Mon_Tue_Wed_Thu_Fri_Sat".split("_"),
+    months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
+    monthsShort: "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
+    firstDayOfWeek: 0,
+    format24h: false,
+    pluralDay: "days"
+  },
+  table: {
+    noData: "No data available",
+    noResults: "No matching records found",
+    loading: "Loading...",
+    selectedRecords: (rows) => rows === 1 ? "1 record selected." : (rows === 0 ? "No" : rows) + " records selected.",
+    recordsPerPage: "Records per page:",
+    allRows: "All",
+    pagination: (start, end, total) => start + "-" + end + " of " + total,
+    columns: "Columns"
+  },
+  editor: {
+    url: "URL",
+    bold: "Bold",
+    italic: "Italic",
+    strikethrough: "Strikethrough",
+    underline: "Underline",
+    unorderedList: "Unordered List",
+    orderedList: "Ordered List",
+    subscript: "Subscript",
+    superscript: "Superscript",
+    hyperlink: "Hyperlink",
+    toggleFullscreen: "Toggle Fullscreen",
+    quote: "Quote",
+    left: "Left align",
+    center: "Center align",
+    right: "Right align",
+    justify: "Justify align",
+    print: "Print",
+    outdent: "Decrease indentation",
+    indent: "Increase indentation",
+    removeFormat: "Remove formatting",
+    formatting: "Formatting",
+    fontSize: "Font Size",
+    align: "Align",
+    hr: "Insert Horizontal Rule",
+    undo: "Undo",
+    redo: "Redo",
+    heading1: "Heading 1",
+    heading2: "Heading 2",
+    heading3: "Heading 3",
+    heading4: "Heading 4",
+    heading5: "Heading 5",
+    heading6: "Heading 6",
+    paragraph: "Paragraph",
+    code: "Code",
+    size1: "Very small",
+    size2: "A bit small",
+    size3: "Normal",
+    size4: "Medium-large",
+    size5: "Big",
+    size6: "Very big",
+    size7: "Maximum",
+    defaultFont: "Default Font",
+    viewSource: "View Source"
+  },
+  tree: {
+    noNodes: "No nodes available",
+    noResults: "No matching nodes found"
+  }
+};
+function getLocale() {
+  const val = Array.isArray(navigator.languages) === true && navigator.languages.length > 0 ? navigator.languages[0] : navigator.language;
+  if (typeof val === "string") {
+    return val.split(/[-_]/).map((v, i) => i === 0 ? v.toLowerCase() : i > 1 || v.length < 4 ? v.toUpperCase() : v[0].toUpperCase() + v.slice(1).toLowerCase()).join("-");
+  }
+}
+const Plugin$1 = defineReactivePlugin({
+  __langPack: {}
+}, {
+  getLocale,
+  set(langObject = defaultLang, ssrContext) {
+    const lang = __spreadProps(__spreadValues({}, langObject), {
+      rtl: langObject.rtl === true,
+      getLocale
+    });
+    {
+      const el = document.documentElement;
+      el.setAttribute("dir", lang.rtl === true ? "rtl" : "ltr");
+      el.setAttribute("lang", lang.isoName);
+      lang.set = Plugin$1.set;
+      Object.assign(Plugin$1.__langPack, lang);
+      Plugin$1.props = lang;
+      Plugin$1.isoName = lang.isoName;
+      Plugin$1.nativeName = lang.nativeName;
+    }
+  },
+  install({ $q, lang, ssrContext }) {
+    {
+      $q.lang = Plugin$1.__langPack;
+      if (this.__installed === true) {
+        lang !== void 0 && this.set(lang);
+      } else {
+        this.set(lang || defaultLang);
+      }
+    }
+  }
+});
+function setCssVar(propName, value, element = document.body) {
+  if (typeof propName !== "string") {
+    throw new TypeError("Expected a string as propName");
+  }
+  if (typeof value !== "string") {
+    throw new TypeError("Expected a string as value");
+  }
+  if (!(element instanceof Element)) {
+    throw new TypeError("Expected a DOM element");
+  }
+  element.style.setProperty(`--q-${propName}`, value);
+}
+let lastKeyCompositionStatus = false;
+function onKeyDownComposition(evt) {
+  lastKeyCompositionStatus = evt.isComposing === true;
+}
+function shouldIgnoreKey(evt) {
+  return lastKeyCompositionStatus === true || evt !== Object(evt) || evt.isComposing === true || evt.qKeyEvent === true;
+}
+function isKeyCode(evt, keyCodes) {
+  return shouldIgnoreKey(evt) === true ? false : [].concat(keyCodes).includes(evt.keyCode);
+}
+function getMobilePlatform(is) {
+  if (is.ios === true)
+    return "ios";
+  if (is.android === true)
+    return "android";
+}
+function getBodyClasses({ is, has: has2, within }, cfg) {
+  const cls = [
+    is.desktop === true ? "desktop" : "mobile",
+    `${has2.touch === false ? "no-" : ""}touch`
+  ];
+  if (is.mobile === true) {
+    const mobile = getMobilePlatform(is);
+    mobile !== void 0 && cls.push("platform-" + mobile);
+  }
+  if (is.nativeMobile === true) {
+    const type = is.nativeMobileWrapper;
+    cls.push(type);
+    cls.push("native-mobile");
+    if (is.ios === true && (cfg[type] === void 0 || cfg[type].iosStatusBarPadding !== false)) {
+      cls.push("q-ios-padding");
+    }
+  } else if (is.electron === true) {
+    cls.push("electron");
+  } else if (is.bex === true) {
+    cls.push("bex");
+  }
+  within.iframe === true && cls.push("within-iframe");
+  return cls;
+}
+function applyClientSsrCorrections() {
+  const classes = document.body.className;
+  let newCls = classes;
+  if (iosCorrection !== void 0) {
+    newCls = newCls.replace("desktop", "platform-ios mobile");
+  }
+  if (client.has.touch === true) {
+    newCls = newCls.replace("no-touch", "touch");
+  }
+  if (client.within.iframe === true) {
+    newCls += " within-iframe";
+  }
+  if (classes !== newCls) {
+    document.body.className = newCls;
+  }
+}
+function setColors(brand) {
+  for (const color in brand) {
+    setCssVar(color, brand[color]);
+  }
+}
+var Body = {
+  install(opts) {
+    if (this.__installed === true) {
+      return;
+    }
+    if (isRuntimeSsrPreHydration.value === true) {
+      applyClientSsrCorrections();
+    } else {
+      const { $q } = opts;
+      $q.config.brand !== void 0 && setColors($q.config.brand);
+      const cls = getBodyClasses(client, $q.config);
+      document.body.classList.add.apply(document.body.classList, cls);
+    }
+    if (client.is.ios === true) {
+      document.body.addEventListener("touchstart", noop$1);
+    }
+    window.addEventListener("keydown", onKeyDownComposition, true);
+  }
+};
+var materialIcons = {
+  name: "material-icons",
+  type: {
+    positive: "check_circle",
+    negative: "warning",
+    info: "info",
+    warning: "priority_high"
+  },
+  arrow: {
+    up: "arrow_upward",
+    right: "arrow_forward",
+    down: "arrow_downward",
+    left: "arrow_back",
+    dropdown: "arrow_drop_down"
+  },
+  chevron: {
+    left: "chevron_left",
+    right: "chevron_right"
+  },
+  colorPicker: {
+    spectrum: "gradient",
+    tune: "tune",
+    palette: "style"
+  },
+  pullToRefresh: {
+    icon: "refresh"
+  },
+  carousel: {
+    left: "chevron_left",
+    right: "chevron_right",
+    up: "keyboard_arrow_up",
+    down: "keyboard_arrow_down",
+    navigationIcon: "lens"
+  },
+  chip: {
+    remove: "cancel",
+    selected: "check"
+  },
+  datetime: {
+    arrowLeft: "chevron_left",
+    arrowRight: "chevron_right",
+    now: "access_time",
+    today: "today"
+  },
+  editor: {
+    bold: "format_bold",
+    italic: "format_italic",
+    strikethrough: "strikethrough_s",
+    underline: "format_underlined",
+    unorderedList: "format_list_bulleted",
+    orderedList: "format_list_numbered",
+    subscript: "vertical_align_bottom",
+    superscript: "vertical_align_top",
+    hyperlink: "link",
+    toggleFullscreen: "fullscreen",
+    quote: "format_quote",
+    left: "format_align_left",
+    center: "format_align_center",
+    right: "format_align_right",
+    justify: "format_align_justify",
+    print: "print",
+    outdent: "format_indent_decrease",
+    indent: "format_indent_increase",
+    removeFormat: "format_clear",
+    formatting: "text_format",
+    fontSize: "format_size",
+    align: "format_align_left",
+    hr: "remove",
+    undo: "undo",
+    redo: "redo",
+    heading: "format_size",
+    code: "code",
+    size: "format_size",
+    font: "font_download",
+    viewSource: "code"
+  },
+  expansionItem: {
+    icon: "keyboard_arrow_down",
+    denseIcon: "arrow_drop_down"
+  },
+  fab: {
+    icon: "add",
+    activeIcon: "close"
+  },
+  field: {
+    clear: "cancel",
+    error: "error"
+  },
+  pagination: {
+    first: "first_page",
+    prev: "keyboard_arrow_left",
+    next: "keyboard_arrow_right",
+    last: "last_page"
+  },
+  rating: {
+    icon: "grade"
+  },
+  stepper: {
+    done: "check",
+    active: "edit",
+    error: "warning"
+  },
+  tabs: {
+    left: "chevron_left",
+    right: "chevron_right",
+    up: "keyboard_arrow_up",
+    down: "keyboard_arrow_down"
+  },
+  table: {
+    arrowUp: "arrow_upward",
+    warning: "warning",
+    firstPage: "first_page",
+    prevPage: "chevron_left",
+    nextPage: "chevron_right",
+    lastPage: "last_page"
+  },
+  tree: {
+    icon: "play_arrow"
+  },
+  uploader: {
+    done: "done",
+    clear: "clear",
+    add: "add_box",
+    upload: "cloud_upload",
+    removeQueue: "clear_all",
+    removeUploaded: "done_all"
+  }
+};
+const Plugin = defineReactivePlugin({
+  iconMapFn: null,
+  __icons: {}
+}, {
+  set(setObject, ssrContext) {
+    const def2 = __spreadProps(__spreadValues({}, setObject), { rtl: setObject.rtl === true });
+    {
+      def2.set = Plugin.set;
+      Object.assign(Plugin.__icons, def2);
+    }
+  },
+  install({ $q, iconSet, ssrContext }) {
+    {
+      if ($q.config.iconMapFn !== void 0) {
+        this.iconMapFn = $q.config.iconMapFn;
+      }
+      $q.iconSet = this.__icons;
+      injectProp($q, "iconMapFn", () => this.iconMapFn, (val) => {
+        this.iconMapFn = val;
+      });
+      if (this.__installed === true) {
+        iconSet !== void 0 && this.set(iconSet);
+      } else {
+        this.set(iconSet || materialIcons);
+      }
+    }
+  }
+});
+const quasarKey = "_q_";
+const formKey = "_q_fo_";
+const globalConfig = {};
+let globalConfigIsFrozen = false;
+function freezeGlobalConfig() {
+  globalConfigIsFrozen = true;
+}
+const hasMap = typeof Map === "function", hasSet = typeof Set === "function", hasArrayBuffer = typeof ArrayBuffer === "function";
+function isDeepEqual(a2, b) {
+  if (a2 === b) {
+    return true;
+  }
+  if (a2 !== null && b !== null && typeof a2 === "object" && typeof b === "object") {
+    if (a2.constructor !== b.constructor) {
+      return false;
+    }
+    let length, i;
+    if (a2.constructor === Array) {
+      length = a2.length;
+      if (length !== b.length) {
+        return false;
+      }
+      for (i = length; i-- !== 0; ) {
+        if (isDeepEqual(a2[i], b[i]) !== true) {
+          return false;
+        }
+      }
+      return true;
+    }
+    if (hasMap === true && a2.constructor === Map) {
+      if (a2.size !== b.size) {
+        return false;
+      }
+      i = a2.entries().next();
+      while (i.done !== true) {
+        if (b.has(i.value[0]) !== true) {
+          return false;
+        }
+        i = i.next();
+      }
+      i = a2.entries().next();
+      while (i.done !== true) {
+        if (isDeepEqual(i.value[1], b.get(i.value[0])) !== true) {
+          return false;
+        }
+        i = i.next();
+      }
+      return true;
+    }
+    if (hasSet === true && a2.constructor === Set) {
+      if (a2.size !== b.size) {
+        return false;
+      }
+      i = a2.entries().next();
+      while (i.done !== true) {
+        if (b.has(i.value[0]) !== true) {
+          return false;
+        }
+        i = i.next();
+      }
+      return true;
+    }
+    if (hasArrayBuffer === true && a2.buffer != null && a2.buffer.constructor === ArrayBuffer) {
+      length = a2.length;
+      if (length !== b.length) {
+        return false;
+      }
+      for (i = length; i-- !== 0; ) {
+        if (a2[i] !== b[i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+    if (a2.constructor === RegExp) {
+      return a2.source === b.source && a2.flags === b.flags;
+    }
+    if (a2.valueOf !== Object.prototype.valueOf) {
+      return a2.valueOf() === b.valueOf();
+    }
+    if (a2.toString !== Object.prototype.toString) {
+      return a2.toString() === b.toString();
+    }
+    const keys = Object.keys(a2).filter((key) => a2[key] !== void 0);
+    length = keys.length;
+    if (length !== Object.keys(b).filter((key) => b[key] !== void 0).length) {
+      return false;
+    }
+    for (i = length; i-- !== 0; ) {
+      const key = keys[i];
+      if (isDeepEqual(a2[key], b[key]) !== true) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return a2 !== a2 && b !== b;
+}
+function isObject(v) {
+  return v !== null && typeof v === "object" && Array.isArray(v) !== true;
+}
+const autoInstalledPlugins = [
+  Platform,
+  Body,
+  Plugin$2,
+  Screen,
+  History,
+  Plugin$1,
+  Plugin
+];
+function installPlugins(pluginOpts, pluginList) {
+  pluginList.forEach((Plugin2) => {
+    Plugin2.install(pluginOpts);
+    Plugin2.__installed = true;
+  });
+}
+function prepareApp(app2, uiOpts, pluginOpts) {
+  app2.config.globalProperties.$q = pluginOpts.$q;
+  app2.provide(quasarKey, pluginOpts.$q);
+  installPlugins(pluginOpts, autoInstalledPlugins);
+  uiOpts.components !== void 0 && Object.values(uiOpts.components).forEach((c) => {
+    if (isObject(c) === true && c.name !== void 0) {
+      app2.component(c.name, c);
+    }
+  });
+  uiOpts.directives !== void 0 && Object.values(uiOpts.directives).forEach((d) => {
+    if (isObject(d) === true && d.name !== void 0) {
+      app2.directive(d.name, d);
+    }
+  });
+  uiOpts.plugins !== void 0 && installPlugins(pluginOpts, Object.values(uiOpts.plugins).filter((p2) => typeof p2.install === "function" && autoInstalledPlugins.includes(p2) === false));
+  if (isRuntimeSsrPreHydration.value === true) {
+    pluginOpts.$q.onSSRHydrated = () => {
+      pluginOpts.onSSRHydrated.forEach((fn) => {
+        fn();
+      });
+      pluginOpts.$q.onSSRHydrated = () => {
+      };
+    };
+  }
+}
+var installQuasar = function(parentApp, opts = {}) {
+  const $q = { version: "2.7.5" };
+  if (globalConfigIsFrozen === false) {
+    if (opts.config !== void 0) {
+      Object.assign(globalConfig, opts.config);
+    }
+    $q.config = __spreadValues({}, globalConfig);
+    freezeGlobalConfig();
+  } else {
+    $q.config = opts.config || {};
+  }
+  prepareApp(parentApp, opts, {
+    parentApp,
+    $q,
+    lang: opts.lang,
+    iconSet: opts.iconSet,
+    onSSRHydrated: []
+  });
+};
+var Quasar = {
+  version: "2.7.5",
+  install: installQuasar,
+  lang: Plugin$1,
+  iconSet: Plugin
+};
+var index = "";
+var main = "";
+if (typeof window !== "undefined") {
+  let loadSvg2 = function() {
+    var body = document.body;
+    var svgDom = document.getElementById("__svg__icons__dom__");
+    if (!svgDom) {
+      svgDom = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svgDom.style.position = "absolute";
+      svgDom.style.width = "0";
+      svgDom.style.height = "0";
+      svgDom.id = "__svg__icons__dom__";
+      svgDom.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+      svgDom.setAttribute("xmlns:link", "http://www.w3.org/1999/xlink");
+    }
+    svgDom.innerHTML = '<symbol  viewBox="0 0 24 24" id="icon-alert"><path d="M13 14h-2V9h2m0 9h-2v-2h2M1 21h22L12 2 1 21Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-application-braces-outline"><path d="M21 2H3c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 18H3V6h18v14M9 8c-1.1 0-2 .9-2 2s-.9 2-2 2v2c1.1 0 2 .9 2 2s.9 2 2 2h2v-2H9v-1c0-1.1-.9-2-2-2 1.1 0 2-.9 2-2v-1h2V8m4 0c1.1 0 2 .9 2 2s.9 2 2 2v2c-1.1 0-2 .9-2 2s-.9 2-2 2h-2v-2h2v-1c0-1.1.9-2 2-2-1.1 0-2-.9-2-2v-1h-2V8h2Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-bookshelf"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-briefcase-outline"><path d="M20 6c.58 0 1.05.2 1.42.59.38.41.58.86.58 1.41v11c0 .55-.2 1-.58 1.41-.37.39-.84.59-1.42.59H4c-.58 0-1.05-.2-1.42-.59C2.2 20 2 19.55 2 19V8c0-.55.2-1 .58-1.41C2.95 6.2 3.42 6 4 6h4V4c0-.58.2-1.05.58-1.42C8.95 2.2 9.42 2 10 2h4c.58 0 1.05.2 1.42.58.38.37.58.84.58 1.42v2h4M4 8v11h16V8H4m10-2V4h-4v2h4Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-chevron-down"><path d="M7.41 8.58 12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-close-circle-outline"><path d="M12 20c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2m2.59 6L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-emoticon-cry-outline"><path d="M7.57 20c-1.34 0-2.43-1.09-2.43-2.43 0-1.07 1.18-3.07 2.43-4.76C8.82 14.5 10 16.5 10 17.57A2.43 2.43 0 0 1 7.57 20M12 2A10 10 0 0 0 2 12c0 1.75.45 3.38 1.24 4.81.16-.81.57-1.74 1.07-2.64A7.69 7.69 0 0 1 4 12a8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8c-.24 0-.47 0-.71-.04-.47.74-1.15 1.32-1.95 1.67.85.24 1.74.37 2.66.37a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 12c-.41 0-.81.04-1.19.12.35.63.66 1.28.88 1.88H12c1.25 0 2.32.5 2.77 1.23l1.42-1.42C15.29 14.72 13.75 14 12 14m3.5-6c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5S16.3 8 15.5 8M10 9.5C10 8.7 9.3 8 8.5 8S7 8.7 7 9.5 7.7 11 8.5 11s1.5-.7 1.5-1.5" /></symbol><symbol  viewBox="0 0 24 24" id="icon-github"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-magnify"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-rocket-launch"><path d="m13.13 22.19-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27l-2.77 6.1M5.64 12.5l-3.83-1.63 6.1-2.77C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39S16.66.269 11 5.93c-2.19 2.19-3.5 4.6-4.35 6.71-.28.75-.09 1.57.46 2.13l2.13 2.12c.55.56 1.37.74 2.12.46A19.1 19.1 0 0 0 18.07 13c5.66-5.66 3.54-10.61 3.54-10.61m-7.07 7.07c-.78-.78-.78-2.05 0-2.83s2.05-.78 2.83 0c.77.78.78 2.05 0 2.83-.78.78-2.05.78-2.83 0m-5.66 7.07-1.41-1.41 1.41 1.41M6.24 22l3.64-3.64c-.34-.09-.67-.24-.97-.45L4.83 22h1.41M2 22h1.41l4.77-4.76-1.42-1.41L2 20.59V22m0-2.83 4.09-4.08c-.21-.3-.36-.62-.45-.97L2 17.76v1.41Z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-source-branch"><path d="M13 14c-3.36 0-4.46 1.35-4.82 2.24C9.25 16.7 10 17.76 10 19a3 3 0 0 1-3 3 3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V7.83A2.99 2.99 0 0 1 4 5a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83v5.29c.88-.65 2.16-1.12 4-1.12 2.67 0 3.56-1.34 3.85-2.23A3.006 3.006 0 0 1 14 7a3 3 0 0 1 3-3 3 3 0 0 1 3 3c0 1.34-.88 2.5-2.09 2.86C17.65 11.29 16.68 14 13 14m-6 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M7 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m10 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" /></symbol><symbol  viewBox="0 0 24 24" id="icon-unfold-more-horizontal"><path d="M12 18.17 8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83Z" /></symbol>';
+    body.insertBefore(svgDom, body.lastChild);
+  };
+  var loadSvg = loadSvg2;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadSvg2);
+  } else {
+    loadSvg2();
+  }
+}
+var isVue2 = false;
+/*!
   * pinia v2.0.14
   * (c) 2022 Eduardo San Martin Morote
   * @license MIT
-  */let Ss;const Mi=e=>Ss=e,ks=Symbol();function cl(e){return e&&typeof e=="object"&&Object.prototype.toString.call(e)==="[object Object]"&&typeof e.toJSON!="function"}var yn;(function(e){e.direct="direct",e.patchObject="patch object",e.patchFunction="patch function"})(yn||(yn={}));function af(){const e=So(!0),t=e.run(()=>le({}));let n=[],i=[];const l=xt({install(r){Mi(l),l._a=r,r.provide(ks,l),r.config.globalProperties.$pinia=l,i.forEach(o=>n.push(o)),i=[]},use(r){return!this._a&&!sf?i.push(r):n.push(r),this},_p:n,_a:null,_e:e,_s:new Map,state:t});return l}const Rs=()=>{};function jr(e,t,n,i=Rs){e.push(t);const l=()=>{const r=e.indexOf(t);r>-1&&(e.splice(r,1),i())};return!n&&we()&&Ci(l),l}function Ht(e,...t){e.slice().forEach(n=>{n(...t)})}function fl(e,t){for(const n in t){if(!t.hasOwnProperty(n))continue;const i=t[n],l=e[n];cl(l)&&cl(i)&&e.hasOwnProperty(n)&&!me(i)&&!bt(i)?e[n]=fl(l,i):e[n]=i}return e}const uf=Symbol();function cf(e){return!cl(e)||!e.hasOwnProperty(uf)}const{assign:ot}=Object;function ff(e){return!!(me(e)&&e.effect)}function df(e,t,n,i){const{state:l,actions:r,getters:o}=t,s=n.state.value[e];let a;function u(){s||(n.state.value[e]=l?l():{});const c=Wa(n.state.value[e]);return ot(c,r,Object.keys(o||{}).reduce((v,g)=>(v[g]=xt(P(()=>{Mi(n);const d=n._s.get(e);return o[g].call(d,d)})),v),{}))}return a=Ts(e,u,t,n,i,!0),a.$reset=function(){const v=l?l():{};this.$patch(g=>{ot(g,v)})},a}function Ts(e,t,n={},i,l,r){let o;const s=ot({actions:{}},n),a={deep:!0};let u,c,v=xt([]),g=xt([]),d;const _=i.state.value[e];!r&&!_&&(i.state.value[e]={}),le({});let S;function w(y){let b;u=c=!1,typeof y=="function"?(y(i.state.value[e]),b={type:yn.patchFunction,storeId:e,events:d}):(fl(i.state.value[e],y),b={type:yn.patchObject,payload:y,storeId:e,events:d});const M=S=Symbol();Pe().then(()=>{S===M&&(u=!0)}),c=!0,Ht(v,b,i.state.value[e])}const T=Rs;function E(){o.stop(),v=[],g=[],i._s.delete(e)}function O(y,b){return function(){Mi(i);const M=Array.from(arguments),F=[],I=[];function A($){F.push($)}function k($){I.push($)}Ht(g,{args:M,name:y,store:V,after:A,onError:k});let K;try{K=b.apply(this&&this.$id===e?this:V,M)}catch($){throw Ht(I,$),$}return K instanceof Promise?K.then($=>(Ht(F,$),$)).catch($=>(Ht(I,$),Promise.reject($))):(Ht(F,K),K)}}const R={_p:i,$id:e,$onAction:jr.bind(null,g),$patch:w,$reset:T,$subscribe(y,b={}){const M=jr(v,y,b.detached,()=>F()),F=o.run(()=>se(()=>i.state.value[e],I=>{(b.flush==="sync"?c:u)&&y({storeId:e,type:yn.direct,events:d},I)},ot({},a,b)));return M},$dispose:E},V=tn(ot({},R));i._s.set(e,V);const p=i._e.run(()=>(o=So(),o.run(()=>t())));for(const y in p){const b=p[y];if(me(b)&&!ff(b)||bt(b))r||(_&&cf(b)&&(me(b)?b.value=_[y]:fl(b,_[y])),i.state.value[e][y]=b);else if(typeof b=="function"){const M=O(y,b);p[y]=M,s.actions[y]=b}}return ot(V,p),ot(re(V),p),Object.defineProperty(V,"$state",{get:()=>i.state.value[e],set:y=>{w(b=>{ot(b,y)})}}),i._p.forEach(y=>{ot(V,o.run(()=>y({store:V,app:i._a,pinia:i,options:s})))}),_&&r&&n.hydrate&&n.hydrate(V.$state,_),u=!0,c=!0,V}function hf(e,t,n){let i,l;const r=typeof t=="function";typeof e=="string"?(i=e,l=r?n:t):(l=e,i=e.id);function o(s,a){const u=we();return s=s||u&&vn(ks),s&&Mi(s),s=Ss,s._s.has(i)||(r?Ts(i,t,l,s):df(i,l,s)),s._s.get(i)}return o.$id=i,o}const dl={xs:18,sm:24,md:32,lg:38,xl:46},Hl={size:String};function Dl(e,t=dl){return P(()=>e.size!==void 0?{fontSize:e.size in t?`${t[e.size]}px`:e.size}:null)}const Fe=e=>xt(qn(e)),Ms=e=>xt(e);function Qe(e,t){return e!==void 0&&e()||t}function gf(e,t){if(e!==void 0){const n=e();if(n!=null)return n.slice()}return t}function hn(e,t){return e!==void 0?t.concat(e()):t}function mf(e,t){return e===void 0?t:t!==void 0?t.concat(e()):e()}const Hr="0 0 24 24",Dr=e=>e,Hi=e=>`ionicons ${e}`,As={"mdi-":e=>`mdi ${e}`,"icon-":Dr,"bt-":e=>`bt ${e}`,"eva-":e=>`eva ${e}`,"ion-md":Hi,"ion-ios":Hi,"ion-logo":Hi,"iconfont ":Dr,"ti-":e=>`themify-icon ${e}`,"bi-":e=>`bootstrap-icons ${e}`},qs={o_:"-outlined",r_:"-round",s_:"-sharp"},Ls={sym_o_:"-outlined",sym_r_:"-rounded",sym_s_:"-sharp"},vf=new RegExp("^("+Object.keys(As).join("|")+")"),pf=new RegExp("^("+Object.keys(qs).join("|")+")"),Vr=new RegExp("^("+Object.keys(Ls).join("|")+")"),bf=/^[Mm]\s?[-+]?\.?\d/,yf=/^img:/,_f=/^svguse:/,xf=/^ion-/,wf=/^(fa-(solid|regular|light|brands|duotone|thin)|[lf]a[srlbdk]?) /;var Yt=Fe({name:"QIcon",props:ge(ee({},Hl),{tag:{type:String,default:"i"},name:String,color:String,left:Boolean,right:Boolean}),setup(e,{slots:t}){const{proxy:{$q:n}}=we(),i=Dl(e),l=P(()=>"q-icon"+(e.left===!0?" on-left":"")+(e.right===!0?" on-right":"")+(e.color!==void 0?` text-${e.color}`:"")),r=P(()=>{let o,s=e.name;if(s==="none"||!s)return{none:!0};if(n.iconMapFn!==null){const c=n.iconMapFn(s);if(c!==void 0)if(c.icon!==void 0){if(s=c.icon,s==="none"||!s)return{none:!0}}else return{cls:c.cls,content:c.content!==void 0?c.content:" "}}if(bf.test(s)===!0){const[c,v=Hr]=s.split("|");return{svg:!0,viewBox:v,nodes:c.split("&&").map(g=>{const[d,_,S]=g.split("@@");return H("path",{style:_,d,transform:S})})}}if(yf.test(s)===!0)return{img:!0,src:s.substring(4)};if(_f.test(s)===!0){const[c,v=Hr]=s.split("|");return{svguse:!0,src:c.substring(7),viewBox:v}}let a=" ";const u=s.match(vf);if(u!==null)o=As[u[1]](s);else if(wf.test(s)===!0)o=s;else if(xf.test(s)===!0)o=`ionicons ion-${n.platform.is.ios===!0?"ios":"md"}${s.substring(3)}`;else if(Vr.test(s)===!0){o="notranslate material-symbols";const c=s.match(Vr);c!==null&&(s=s.substring(6),o+=Ls[c[1]]),a=s}else{o="notranslate material-icons";const c=s.match(pf);c!==null&&(s=s.substring(2),o+=qs[c[1]]),a=s}return{cls:o,content:a}});return()=>{const o={class:l.value,style:i.value,"aria-hidden":"true",role:"presentation"};return r.value.none===!0?H(e.tag,o,Qe(t.default)):r.value.img===!0?H("span",o,hn(t.default,[H("img",{src:r.value.src})])):r.value.svg===!0?H("span",o,hn(t.default,[H("svg",{viewBox:r.value.viewBox||"0 0 24 24"},r.value.nodes)])):r.value.svguse===!0?H("span",o,hn(t.default,[H("svg",{viewBox:r.value.viewBox},[H("use",{"xlink:href":r.value.src})])])):(r.value.cls!==void 0&&(o.class+=" "+r.value.cls),H(e.tag,o,hn(t.default,[r.value.content])))}}});const Cf={size:{type:[Number,String],default:"1em"},color:String};function Ef(e){return{cSize:P(()=>e.size in dl?`${dl[e.size]}px`:e.size),classes:P(()=>"q-spinner"+(e.color?` text-${e.color}`:""))}}var Ps=Fe({name:"QSpinner",props:ge(ee({},Cf),{thickness:{type:Number,default:5}}),setup(e){const{cSize:t,classes:n}=Ef(e);return()=>H("svg",{class:n.value+" q-spinner-mat",width:t.value,height:t.value,viewBox:"25 25 50 50"},[H("circle",{class:"path",cx:"50",cy:"50",r:"20",fill:"none",stroke:"currentColor","stroke-width":e.thickness,"stroke-miterlimit":"10"})])}});function hl(e,t){const n=e.style;for(const i in t)n[i]=t[i]}function Sf(e){if(e==null)return;if(typeof e=="string")try{return document.querySelector(e)||void 0}catch{return}const t=me(e)===!0?e.value:e;if(t)return t.$el||t}function kf(e,t){let n=!1,i;return function(){return n===!1&&(n=!0,setTimeout(()=>{n=!1},t),i=e.apply(this,arguments)),i}}function zr(e,t,n,i){n.modifiers.stop===!0&&ri(e);const l=n.modifiers.color;let r=n.modifiers.center;r=r===!0||i===!0;const o=document.createElement("span"),s=document.createElement("span"),a=Oc(e),{left:u,top:c,width:v,height:g}=t.getBoundingClientRect(),d=Math.sqrt(v*v+g*g),_=d/2,S=`${(v-d)/2}px`,w=r?S:`${a.left-u-_}px`,T=`${(g-d)/2}px`,E=r?T:`${a.top-c-_}px`;s.className="q-ripple__inner",hl(s,{height:`${d}px`,width:`${d}px`,transform:`translate3d(${w},${E},0) scale3d(.2,.2,1)`,opacity:0}),o.className=`q-ripple${l?" text-"+l:""}`,o.setAttribute("dir","ltr"),o.appendChild(s),t.appendChild(o);const O=()=>{o.remove(),clearTimeout(R)};n.abort.push(O);let R=setTimeout(()=>{s.classList.add("q-ripple__inner--enter"),s.style.transform=`translate3d(${S},${T},0) scale3d(1,1,1)`,s.style.opacity=.2,R=setTimeout(()=>{s.classList.remove("q-ripple__inner--enter"),s.classList.add("q-ripple__inner--leave"),s.style.opacity=0,R=setTimeout(()=>{o.remove(),n.abort.splice(n.abort.indexOf(O),1)},275)},250)},50)}function Wr(e,{modifiers:t,value:n,arg:i}){const l=Object.assign({},e.cfg.ripple,t,n);e.modifiers={early:l.early===!0,stop:l.stop===!0,center:l.center===!0,color:l.color||i,keyCodes:[].concat(l.keyCodes||13)}}var Rf=Ms({name:"ripple",beforeMount(e,t){const n={cfg:t.instance.$.appContext.config.globalProperties.$q.config,enabled:t.value!==!1,modifiers:{},abort:[],start(i){n.enabled===!0&&i.qSkipRipple!==!0&&i.type===(n.modifiers.early===!0?"pointerdown":"click")&&zr(i,e,n,i.qKeyEvent===!0)},keystart:kf(i=>{n.enabled===!0&&i.qSkipRipple!==!0&&Mn(i,n.modifiers.keyCodes)===!0&&i.type===`key${n.modifiers.early===!0?"down":"up"}`&&zr(i,e,n,!0)},300)};Wr(n,t),e.__qripple=n,Tn(n,"main",[[e,"pointerdown","start","passive"],[e,"click","start","passive"],[e,"keydown","keystart","passive"],[e,"keyup","keystart","passive"]])},updated(e,t){if(t.oldValue!==t.value){const n=e.__qripple;n.enabled=t.value!==!1,n.enabled===!0&&Object(t.value)===t.value&&Wr(n,t)}},beforeUnmount(e){const t=e.__qripple;t.abort.forEach(n=>{n()}),oi(t,"main"),delete e._qripple}});const Fs={left:"start",center:"center",right:"end",between:"between",around:"around",evenly:"evenly",stretch:"stretch"},Tf=Object.keys(Fs),Mf={align:{type:String,validator:e=>Tf.includes(e)}};function Af(e){return P(()=>{const t=e.align===void 0?e.vertical===!0?"stretch":"left":e.align;return`${e.vertical===!0?"items":"justify"}-${Fs[t]}`})}function Bs(e){return e.appContext.config.globalProperties.$router!==void 0}function Ur(e){return e?e.aliasOf?e.aliasOf.path:e.path:""}function Kr(e,t){return(e.aliasOf||e)===(t.aliasOf||t)}function qf(e,t){for(const n in t){const i=t[n],l=e[n];if(typeof i=="string"){if(i!==l)return!1}else if(Array.isArray(l)===!1||l.length!==i.length||i.some((r,o)=>r!==l[o]))return!1}return!0}function Qr(e,t){return Array.isArray(t)===!0?e.length===t.length&&e.every((n,i)=>n===t[i]):e.length===1&&e[0]===t}function Lf(e,t){return Array.isArray(e)===!0?Qr(e,t):Array.isArray(t)===!0?Qr(t,e):e===t}function Pf(e,t){if(Object.keys(e).length!==Object.keys(t).length)return!1;for(const n in e)if(Lf(e[n],t[n])===!1)return!1;return!0}const Ai={to:[String,Object],replace:Boolean,exact:Boolean,activeClass:{type:String,default:"q-router-link--active"},exactActiveClass:{type:String,default:"q-router-link--exact-active"},href:String,target:String,disable:Boolean};function Is(e){const t=we(),{props:n,proxy:i}=t,l=Bs(t),r=P(()=>n.disable!==!0&&n.href!==void 0),o=P(()=>l===!0&&n.disable!==!0&&r.value!==!0&&n.to!==void 0&&n.to!==null&&n.to!==""),s=P(()=>{if(o.value===!0)try{return i.$router.resolve(n.to)}catch{}return null}),a=P(()=>s.value!==null),u=P(()=>r.value===!0||a.value===!0),c=P(()=>n.type==="a"||u.value===!0?"a":n.tag||e||"div"),v=P(()=>r.value===!0?{href:n.href,target:n.target}:a.value===!0?{href:s.value.href,target:n.target}:{}),g=P(()=>{if(a.value===!1)return null;const{matched:T}=s.value,{length:E}=T,O=T[E-1];if(O===void 0)return-1;const R=i.$route.matched;if(R.length===0)return-1;const V=R.findIndex(Kr.bind(null,O));if(V>-1)return V;const p=Ur(T[E-2]);return E>1&&Ur(O)===p&&R[R.length-1].path!==p?R.findIndex(Kr.bind(null,T[E-2])):V}),d=P(()=>a.value===!0&&g.value>-1&&qf(i.$route.params,s.value.params)),_=P(()=>d.value===!0&&g.value===i.$route.matched.length-1&&Pf(i.$route.params,s.value.params)),S=P(()=>a.value===!0?_.value===!0?` ${n.exactActiveClass} ${n.activeClass}`:n.exact===!0?"":d.value===!0?` ${n.activeClass}`:"":"");function w(T){return n.disable===!0||T.metaKey||T.altKey||T.ctrlKey||T.shiftKey||T.__qNavigate!==!0&&T.defaultPrevented===!0||T.button!==void 0&&T.button!==0||n.target==="_blank"?!1:(vt(T),i.$router[n.replace===!0?"replace":"push"](n.to).catch(E=>E))}return{hasRouterLink:a,hasHrefLink:r,hasLink:u,linkTag:c,linkRoute:s,linkIsActive:d,linkIsExactActive:_,linkClass:S,linkProps:v,navigateToRouterLink:w}}const Zr={none:0,xs:4,sm:8,md:16,lg:24,xl:32},Ff={xs:8,sm:10,md:14,lg:20,xl:24},Bf=["button","submit","reset"],If=/[^\s]\/[^\s]/,Of=ge(ee(ee({},Hl),Ai),{type:{type:String,default:"button"},label:[Number,String],icon:String,iconRight:String,round:Boolean,outline:Boolean,flat:Boolean,unelevated:Boolean,rounded:Boolean,push:Boolean,glossy:Boolean,size:String,fab:Boolean,fabMini:Boolean,padding:String,color:String,textColor:String,noCaps:Boolean,noWrap:Boolean,dense:Boolean,tabindex:[Number,String],ripple:{type:[Boolean,Object],default:!0},align:ge(ee({},Mf.align),{default:"center"}),stack:Boolean,stretch:Boolean,loading:{type:Boolean,default:null},disable:Boolean});function $f(e){const t=Dl(e,Ff),n=Af(e),{hasRouterLink:i,hasLink:l,linkTag:r,linkProps:o,navigateToRouterLink:s}=Is("button"),a=P(()=>{const w=e.fab===!1&&e.fabMini===!1?t.value:{};return e.padding!==void 0?Object.assign({},w,{padding:e.padding.split(/\s+/).map(T=>T in Zr?Zr[T]+"px":T).join(" "),minWidth:"0",minHeight:"0"}):w}),u=P(()=>e.rounded===!0||e.fab===!0||e.fabMini===!0),c=P(()=>e.disable!==!0&&e.loading!==!0),v=P(()=>c.value===!0?e.tabindex||0:-1),g=P(()=>e.flat===!0?"flat":e.outline===!0?"outline":e.push===!0?"push":e.unelevated===!0?"unelevated":"standard"),d=P(()=>{const w={tabindex:v.value};return l.value===!0?Object.assign(w,o.value):Bf.includes(e.type)===!0&&(w.type=e.type),r.value==="a"?(e.disable===!0?w["aria-disabled"]="true":w.href===void 0&&(w.role="button"),i.value!==!0&&If.test(e.type)===!0&&(w.type=e.type)):e.disable===!0&&(w.disabled="",w["aria-disabled"]="true"),e.loading===!0&&e.percentage!==void 0&&Object.assign(w,{role:"progressbar","aria-valuemin":0,"aria-valuemax":100,"aria-valuenow":e.percentage}),w}),_=P(()=>{let w;return e.color!==void 0?e.flat===!0||e.outline===!0?w=`text-${e.textColor||e.color}`:w=`bg-${e.color} text-${e.textColor||"white"}`:e.textColor&&(w=`text-${e.textColor}`),`q-btn--${g.value} q-btn--${e.round===!0?"round":`rectangle${u.value===!0?" q-btn--rounded":""}`}`+(w!==void 0?" "+w:"")+(c.value===!0?" q-btn--actionable q-focusable q-hoverable":e.disable===!0?" disabled":"")+(e.fab===!0?" q-btn--fab":e.fabMini===!0?" q-btn--fab-mini":"")+(e.noCaps===!0?" q-btn--no-uppercase":"")+(e.dense===!0?" q-btn--dense":"")+(e.stretch===!0?" no-border-radius self-stretch":"")+(e.glossy===!0?" glossy":"")}),S=P(()=>n.value+(e.stack===!0?" column":" row")+(e.noWrap===!0?" no-wrap text-no-wrap":"")+(e.loading===!0?" q-btn__content--hidden":""));return{classes:_,style:a,innerClasses:S,attributes:d,hasRouterLink:i,hasLink:l,linkTag:r,navigateToRouterLink:s,isActionable:c}}const{passiveCapture:He}=Et;let Dt=null,Vt=null,zt=null;var Di=Fe({name:"QBtn",props:ge(ee({},Of),{percentage:Number,darkPercentage:Boolean}),emits:["click","keydown","touchstart","mousedown","keyup"],setup(e,{slots:t,emit:n}){const{proxy:i}=we(),{classes:l,style:r,innerClasses:o,attributes:s,hasRouterLink:a,hasLink:u,linkTag:c,navigateToRouterLink:v,isActionable:g}=$f(e),d=le(null),_=le(null);let S=null,w,T;const E=P(()=>e.label!==void 0&&e.label!==null&&e.label!==""),O=P(()=>e.disable===!0||e.ripple===!1?!1:ee({keyCodes:u.value===!0?[13,32]:[13]},e.ripple===!0?{}:e.ripple)),R=P(()=>({center:e.round})),V=P(()=>{const $=Math.max(0,Math.min(100,e.percentage));return $>0?{transition:"transform 0.6s",transform:`translateX(${$-100}%)`}:{}}),p=P(()=>e.loading===!0?{onMousedown:K,onTouchstartPassive:K,onClick:K,onKeydown:K,onKeyup:K}:g.value===!0?{onClick:b,onKeydown:M,onMousedown:I,onTouchstart:F}:{onClick:nt}),y=P(()=>ee(ee({ref:d,class:"q-btn q-btn-item non-selectable no-outline "+l.value,style:r.value},s.value),p.value));function b($){if(d.value!==null){if($!==void 0){if($.defaultPrevented===!0)return;const Z=document.activeElement;if(e.type==="submit"&&Z!==document.body&&d.value.contains(Z)===!1&&Z.contains(d.value)===!1){d.value.focus();const C=()=>{document.removeEventListener("keydown",nt,!0),document.removeEventListener("keyup",C,He),d.value!==null&&d.value.removeEventListener("blur",C,He)};document.addEventListener("keydown",nt,!0),document.addEventListener("keyup",C,He),d.value.addEventListener("blur",C,He)}}if(a.value===!0){const Z=()=>{$.__qNavigate=!0,v($)};n("click",$,Z),$.defaultPrevented!==!0&&Z()}else n("click",$)}}function M($){d.value!==null&&(n("keydown",$),Mn($,[13,32])===!0&&Vt!==d.value&&(Vt!==null&&k(),$.defaultPrevented!==!0&&(d.value.focus(),Vt=d.value,d.value.classList.add("q-btn--active"),document.addEventListener("keyup",A,!0),d.value.addEventListener("blur",A,He)),nt($)))}function F($){d.value!==null&&(n("touchstart",$),$.defaultPrevented!==!0&&(Dt!==d.value&&(Dt!==null&&k(),Dt=d.value,S=$.target,S.addEventListener("touchcancel",A,He),S.addEventListener("touchend",A,He)),w=!0,clearTimeout(T),T=setTimeout(()=>{w=!1},200)))}function I($){d.value!==null&&($.qSkipRipple=w===!0,n("mousedown",$),$.defaultPrevented!==!0&&zt!==d.value&&(zt!==null&&k(),zt=d.value,d.value.classList.add("q-btn--active"),document.addEventListener("mouseup",A,He)))}function A($){if(d.value!==null&&!($!==void 0&&$.type==="blur"&&document.activeElement===d.value)){if($!==void 0&&$.type==="keyup"){if(Vt===d.value&&Mn($,[13,32])===!0){const Z=new MouseEvent("click",$);Z.qKeyEvent=!0,$.defaultPrevented===!0&&vt(Z),$.cancelBubble===!0&&ri(Z),d.value.dispatchEvent(Z),nt($),$.qKeyEvent=!0}n("keyup",$)}k()}}function k($){const Z=_.value;$!==!0&&(Dt===d.value||zt===d.value)&&Z!==null&&Z!==document.activeElement&&(Z.setAttribute("tabindex",-1),Z.focus()),Dt===d.value&&(S!==null&&(S.removeEventListener("touchcancel",A,He),S.removeEventListener("touchend",A,He)),Dt=S=null),zt===d.value&&(document.removeEventListener("mouseup",A,He),zt=null),Vt===d.value&&(document.removeEventListener("keyup",A,!0),d.value!==null&&d.value.removeEventListener("blur",A,He),Vt=null),d.value!==null&&d.value.classList.remove("q-btn--active")}function K($){nt($),$.qSkipRipple=!0}return qe(()=>{k(!0)}),Object.assign(i,{click:b}),()=>{let $=[];e.icon!==void 0&&$.push(H(Yt,{name:e.icon,left:e.stack===!1&&E.value===!0,role:"img","aria-hidden":"true"})),E.value===!0&&$.push(H("span",{class:"block"},[e.label])),$=hn(t.default,$),e.iconRight!==void 0&&e.round===!1&&$.push(H(Yt,{name:e.iconRight,right:e.stack===!1&&E.value===!0,role:"img","aria-hidden":"true"}));const Z=[H("span",{class:"q-focus-helper",ref:_})];return e.loading===!0&&e.percentage!==void 0&&Z.push(H("span",{class:"q-btn__progress absolute-full overflow-hidden"+(e.darkPercentage===!0?" q-btn__progress--dark":"")},[H("span",{class:"q-btn__progress-indicator fit block",style:V.value})])),Z.push(H("span",{class:"q-btn__content text-center col items-center q-anchor--skip "+o.value},$)),e.loading!==null&&Z.push(H(ln,{name:"q-transition--fade"},()=>e.loading===!0?[H("span",{key:"loading",class:"absolute-full flex flex-center"},t.loading!==void 0?t.loading():[H(Ps)])]:null)),Il(H(c.value,y.value,Z),[[Rf,O.value,void 0,R.value]])}}});function gl(){if(window.getSelection!==void 0){const e=window.getSelection();e.empty!==void 0?e.empty():e.removeAllRanges!==void 0&&(e.removeAllRanges(),li.is.mobile!==!0&&e.addRange(document.createRange()))}else document.selection!==void 0&&document.selection.empty()}const Nf={target:{default:!0},noParentEvent:Boolean,contextMenu:Boolean};function jf({showing:e,avoidEmit:t,configureAnchorEl:n}){const{props:i,proxy:l,emit:r}=we(),o=le(null);let s;function a(d){return o.value===null?!1:d===void 0||d.touches===void 0||d.touches.length<=1}const u={};n===void 0&&(Object.assign(u,{hide(d){l.hide(d)},toggle(d){l.toggle(d),d.qAnchorHandled=!0},toggleKey(d){Mn(d,13)===!0&&u.toggle(d)},contextClick(d){l.hide(d),vt(d),Pe(()=>{l.show(d),d.qAnchorHandled=!0})},prevent:vt,mobileTouch(d){if(u.mobileCleanup(d),a(d)!==!0)return;l.hide(d),o.value.classList.add("non-selectable");const _=d.target;Tn(u,"anchor",[[_,"touchmove","mobileCleanup","passive"],[_,"touchend","mobileCleanup","passive"],[_,"touchcancel","mobileCleanup","passive"],[o.value,"contextmenu","prevent","notPassive"]]),s=setTimeout(()=>{l.show(d),d.qAnchorHandled=!0},300)},mobileCleanup(d){o.value.classList.remove("non-selectable"),clearTimeout(s),e.value===!0&&d!==void 0&&gl()}}),n=function(d=i.contextMenu){if(i.noParentEvent===!0||o.value===null)return;let _;d===!0?l.$q.platform.is.mobile===!0?_=[[o.value,"touchstart","mobileTouch","passive"]]:_=[[o.value,"mousedown","hide","passive"],[o.value,"contextmenu","contextClick","notPassive"]]:_=[[o.value,"click","toggle","passive"],[o.value,"keyup","toggleKey","passive"]],Tn(u,"anchor",_)});function c(){oi(u,"anchor")}function v(d){for(o.value=d;o.value.classList.contains("q-anchor--skip");)o.value=o.value.parentNode;n()}function g(){if(i.target===!1||i.target===""||l.$el.parentNode===null)o.value=null;else if(i.target===!0)v(l.$el.parentNode);else{let d=i.target;if(typeof i.target=="string")try{d=document.querySelector(i.target)}catch{d=void 0}d!=null?(o.value=d.$el||d,n()):(o.value=null,console.error(`Anchor: target "${i.target}" not found`))}}return se(()=>i.contextMenu,d=>{o.value!==null&&(c(),n(d))}),se(()=>i.target,()=>{o.value!==null&&c(),g()}),se(()=>i.noParentEvent,d=>{o.value!==null&&(d===!0?c():n())}),nn(()=>{g(),t!==!0&&i.modelValue===!0&&o.value===null&&r("update:modelValue",!1)}),qe(()=>{clearTimeout(s),c()}),{anchorEl:o,canShow:a,anchorEvents:u}}function Hf(e,t){const n=le(null);let i;function l(s,a){const u=`${a!==void 0?"add":"remove"}EventListener`,c=a!==void 0?a:i;s!==window&&s[u]("scroll",c,Et.passive),window[u]("scroll",c,Et.passive),i=a}function r(){n.value!==null&&(l(n.value),n.value=null)}const o=se(()=>e.noParentEvent,()=>{n.value!==null&&(r(),t())});return qe(o),{localScrollTarget:n,unconfigureScrollTarget:r,changeScrollEvent:l}}const Os={modelValue:{type:Boolean,default:null},"onUpdate:modelValue":[Function,Array]},$s=["before-show","show","before-hide","hide"];function Ns({showing:e,canShow:t,hideOnRouteChange:n,handleShow:i,handleHide:l,processOnMount:r}){const o=we(),{props:s,emit:a,proxy:u}=o;let c;function v(E){e.value===!0?_(E):g(E)}function g(E){if(s.disable===!0||E!==void 0&&E.qAnchorHandled===!0||t!==void 0&&t(E)!==!0)return;const O=s["onUpdate:modelValue"]!==void 0;O===!0&&(a("update:modelValue",!0),c=E,Pe(()=>{c===E&&(c=void 0)})),(s.modelValue===null||O===!1)&&d(E)}function d(E){e.value!==!0&&(e.value=!0,a("before-show",E),i!==void 0?i(E):a("show",E))}function _(E){if(s.disable===!0)return;const O=s["onUpdate:modelValue"]!==void 0;O===!0&&(a("update:modelValue",!1),c=E,Pe(()=>{c===E&&(c=void 0)})),(s.modelValue===null||O===!1)&&S(E)}function S(E){e.value!==!1&&(e.value=!1,a("before-hide",E),l!==void 0?l(E):a("hide",E))}function w(E){s.disable===!0&&E===!0?s["onUpdate:modelValue"]!==void 0&&a("update:modelValue",!1):E===!0!==e.value&&(E===!0?d:S)(c)}se(()=>s.modelValue,w),n!==void 0&&Bs(o)===!0&&se(()=>u.$route.fullPath,()=>{n.value===!0&&e.value===!0&&_()}),r===!0&&nn(()=>{w(s.modelValue)});const T={show:g,hide:_,toggle:v};return Object.assign(u,T),T}let Bt=[],An=[];function js(e){An=An.filter(t=>t!==e)}function Df(e){js(e),An.push(e)}function Jr(e){js(e),An.length===0&&Bt.length>0&&(Bt[Bt.length-1](),Bt=[])}function Hs(e){An.length===0?e():Bt.push(e)}function Vf(e){Bt=Bt.filter(t=>t!==e)}let zf=document.body;function Wf(e){const t=document.createElement("div");if(e!==void 0&&(t.id=e),ai.globalNodes!==void 0){const n=ai.globalNodes.class;n!==void 0&&(t.className=n)}return zf.appendChild(t),t}function Uf(e){e.remove()}const _n=[];function Kf(e){for(e=e.parent;e!=null;){if(e.type.name==="QGlobalDialog")return!0;if(e.type.name==="QDialog"||e.type.name==="QMenu")return!1;e=e.parent}return!1}function Qf(e,t,n,i){const l=le(!1),r=le(!1);let o=null;const s={},a=i===!0&&Kf(e);function u(v){if(v===!0){Jr(s),r.value=!0;return}r.value=!1,l.value===!1&&(a===!1&&o===null&&(o=Wf()),l.value=!0,_n.push(e.proxy),Df(s))}function c(v){if(r.value=!1,v!==!0)return;Jr(s),l.value=!1;const g=_n.indexOf(e.proxy);g>-1&&_n.splice(g,1),o!==null&&(Uf(o),o=null)}return Ci(()=>{c(!0)}),Object.assign(e.proxy,{__qPortalInnerRef:t}),{showPortal:u,hidePortal:c,portalIsActive:l,portalIsAccessible:r,renderPortal:()=>a===!0?n():l.value===!0?[H(Du,{to:o},n())]:void 0}}const Zf={transitionShow:{type:String,default:"fade"},transitionHide:{type:String,default:"fade"},transitionDuration:{type:[String,Number],default:300}};function Jf(e,t){const n=le(t.value);return se(t,i=>{Pe(()=>{n.value=i})}),{transition:P(()=>"q-transition--"+(n.value===!0?e.transitionHide:e.transitionShow)),transitionStyle:P(()=>`--q-transition-duration: ${e.transitionDuration}ms`)}}function Yf(){let e;return qe(()=>{e=void 0}),{registerTick(t){e=t,Pe(()=>{e===t&&(e(),e=void 0)})},removeTick(){e=void 0}}}function Xf(){let e;return qe(()=>{clearTimeout(e)}),{registerTimeout(t,n){clearTimeout(e),e=setTimeout(t,n)},removeTimeout(){clearTimeout(e)}}}const Gf=[null,document,document.body,document.scrollingElement,document.documentElement];function Ds(e,t){let n=Sf(t);if(n===void 0){if(e==null)return window;n=e.closest(".scroll,.scroll-y,.overflow-auto")}return Gf.includes(n)?window:n}function ed(e){return(e===window?document.body:e).scrollHeight}function td(e){return(e===window?document.body:e).scrollWidth}function Vs(e){return e===window?window.pageYOffset||window.scrollY||document.body.scrollTop||0:e.scrollTop}function zs(e){return e===window?window.pageXOffset||window.scrollX||document.body.scrollLeft||0:e.scrollLeft}function Vl(e,t,n=0){const i=arguments[3]===void 0?performance.now():arguments[3],l=Vs(e);if(n<=0){l!==t&&ml(e,t);return}requestAnimationFrame(r=>{const o=r-i,s=l+(t-l)/Math.max(o,n)*o;ml(e,s),s!==t&&Vl(e,t,n-o,r)})}function zl(e,t,n=0){const i=arguments[3]===void 0?performance.now():arguments[3],l=zs(e);if(n<=0){l!==t&&vl(e,t);return}requestAnimationFrame(r=>{const o=r-i,s=l+(t-l)/Math.max(o,n)*o;vl(e,s),s!==t&&zl(e,t,n-o,r)})}function ml(e,t){if(e===window){window.scrollTo(window.pageXOffset||window.scrollX||document.body.scrollLeft||0,t);return}e.scrollTop=t}function vl(e,t){if(e===window){window.scrollTo(t,window.pageYOffset||window.scrollY||document.body.scrollTop||0);return}e.scrollLeft=t}function nd(e,t,n){if(n){Vl(e,t,n);return}ml(e,t)}function id(e,t,n){if(n){zl(e,t,n);return}vl(e,t)}let Vn;function Ws(){if(Vn!==void 0)return Vn;const e=document.createElement("p"),t=document.createElement("div");hl(e,{width:"100%",height:"200px"}),hl(t,{position:"absolute",top:"0px",left:"0px",visibility:"hidden",width:"200px",height:"150px",overflow:"hidden"}),t.appendChild(e),document.body.appendChild(t);const n=e.offsetWidth;t.style.overflow="scroll";let i=e.offsetWidth;return n===i&&(i=t.clientWidth),t.remove(),Vn=n-i,Vn}function ld(e,t=!0){return!e||e.nodeType!==Node.ELEMENT_NODE?!1:t?e.scrollHeight>e.clientHeight&&(e.classList.contains("scroll")||e.classList.contains("overflow-auto")||["auto","scroll"].includes(window.getComputedStyle(e)["overflow-y"])):e.scrollWidth>e.clientWidth&&(e.classList.contains("scroll")||e.classList.contains("overflow-auto")||["auto","scroll"].includes(window.getComputedStyle(e)["overflow-x"]))}var rd={getScrollTarget:Ds,getScrollHeight:ed,getScrollWidth:td,getVerticalScrollPosition:Vs,getHorizontalScrollPosition:zs,animVerticalScrollTo:Vl,animHorizontalScrollTo:zl,setVerticalScrollPosition:nd,setHorizontalScrollPosition:id,getScrollbarWidth:Ws,hasScrollbar:ld};let Us;const{notPassiveCapture:ui}=Et,$t=[];function ci(e){clearTimeout(Us);const t=e.target;if(t===void 0||t.nodeType===8||t.classList.contains("no-pointer-events")===!0)return;let n=_n.length-1;for(;n>=0;){const i=_n[n].$;if(i.type.name!=="QDialog")break;if(i.props.seamless!==!0)return;n--}for(let i=$t.length-1;i>=0;i--){const l=$t[i];if((l.anchorEl.value===null||l.anchorEl.value.contains(t)===!1)&&(t===document.body||l.innerRef.value!==null&&l.innerRef.value.contains(t)===!1))e.qClickOutside=!0,l.onClickOutside(e);else return}}function od(e){$t.push(e),$t.length===1&&(document.addEventListener("mousedown",ci,ui),document.addEventListener("touchstart",ci,ui))}function Yr(e){const t=$t.findIndex(n=>n===e);t>-1&&($t.splice(t,1),$t.length===0&&(clearTimeout(Us),document.removeEventListener("mousedown",ci,ui),document.removeEventListener("touchstart",ci,ui)))}let Xr,Gr;function eo(e){const t=e.split(" ");return t.length!==2?!1:["top","center","bottom"].includes(t[0])!==!0?(console.error("Anchor/Self position must start with one of top/center/bottom"),!1):["left","middle","right","start","end"].includes(t[1])!==!0?(console.error("Anchor/Self position must end with one of left/middle/right/start/end"),!1):!0}function sd(e){return e?!(e.length!==2||typeof e[0]!="number"||typeof e[1]!="number"):!0}const pl={"start#ltr":"left","start#rtl":"right","end#ltr":"right","end#rtl":"left"};["left","middle","right"].forEach(e=>{pl[`${e}#ltr`]=e,pl[`${e}#rtl`]=e});function to(e,t){const n=e.split(" ");return{vertical:n[0],horizontal:pl[`${n[1]}#${t===!0?"rtl":"ltr"}`]}}function ad(e,t){let{top:n,left:i,right:l,bottom:r,width:o,height:s}=e.getBoundingClientRect();return t!==void 0&&(n-=t[1],i-=t[0],r+=t[1],l+=t[0],o+=t[0],s+=t[1]),{top:n,left:i,right:l,bottom:r,width:o,height:s,middle:i+(l-i)/2,center:n+(r-n)/2}}function ud(e){return{top:0,center:e.offsetHeight/2,bottom:e.offsetHeight,left:0,middle:e.offsetWidth/2,right:e.offsetWidth}}function cd(e){if(Oe.is.ios===!0&&window.visualViewport!==void 0){const s=document.body.style,{offsetLeft:a,offsetTop:u}=window.visualViewport;a!==Xr&&(s.setProperty("--q-pe-left",a+"px"),Xr=a),u!==Gr&&(s.setProperty("--q-pe-top",u+"px"),Gr=u)}let t;const{scrollLeft:n,scrollTop:i}=e.el;if(e.absoluteOffset===void 0)t=ad(e.anchorEl,e.cover===!0?[0,0]:e.offset);else{const{top:s,left:a}=e.anchorEl.getBoundingClientRect(),u=s+e.absoluteOffset.top,c=a+e.absoluteOffset.left;t={top:u,left:c,width:1,height:1,right:c+1,center:u,middle:c,bottom:u+1}}let l={maxHeight:e.maxHeight,maxWidth:e.maxWidth,visibility:"visible"};(e.fit===!0||e.cover===!0)&&(l.minWidth=t.width+"px",e.cover===!0&&(l.minHeight=t.height+"px")),Object.assign(e.el.style,l);const r=ud(e.el),o={top:t[e.anchorOrigin.vertical]-r[e.selfOrigin.vertical],left:t[e.anchorOrigin.horizontal]-r[e.selfOrigin.horizontal]};fd(o,t,r,e.anchorOrigin,e.selfOrigin),l={top:o.top+"px",left:o.left+"px"},o.maxHeight!==void 0&&(l.maxHeight=o.maxHeight+"px",t.height>o.maxHeight&&(l.minHeight=l.maxHeight)),o.maxWidth!==void 0&&(l.maxWidth=o.maxWidth+"px",t.width>o.maxWidth&&(l.minWidth=l.maxWidth)),Object.assign(e.el.style,l),e.el.scrollTop!==i&&(e.el.scrollTop=i),e.el.scrollLeft!==n&&(e.el.scrollLeft=n)}function fd(e,t,n,i,l){const r=n.bottom,o=n.right,s=Ws(),a=window.innerHeight-s,u=document.body.clientWidth;if(e.top<0||e.top+r>a)if(l.vertical==="center")e.top=t[i.vertical]>a/2?Math.max(0,a-r):0,e.maxHeight=Math.min(r,a);else if(t[i.vertical]>a/2){const c=Math.min(a,i.vertical==="center"?t.center:i.vertical===l.vertical?t.bottom:t.top);e.maxHeight=Math.min(r,c),e.top=Math.max(0,c-r)}else e.top=Math.max(0,i.vertical==="center"?t.center:i.vertical===l.vertical?t.top:t.bottom),e.maxHeight=Math.min(r,a-e.top);if(e.left<0||e.left+o>u)if(e.maxWidth=Math.min(o,u),l.horizontal==="middle")e.left=t[i.horizontal]>u/2?Math.max(0,u-o):0;else if(t[i.horizontal]>u/2){const c=Math.min(u,i.horizontal==="middle"?t.middle:i.horizontal===l.horizontal?t.right:t.left);e.maxWidth=Math.min(o,c),e.left=Math.max(0,c-e.maxWidth)}else e.left=Math.max(0,i.horizontal==="middle"?t.middle:i.horizontal===l.horizontal?t.left:t.right),e.maxWidth=Math.min(o,u-e.left)}var dd=Fe({name:"QTooltip",inheritAttrs:!1,props:ge(ee(ee(ee({},Nf),Os),Zf),{maxHeight:{type:String,default:null},maxWidth:{type:String,default:null},transitionShow:{default:"jump-down"},transitionHide:{default:"jump-up"},anchor:{type:String,default:"bottom middle",validator:eo},self:{type:String,default:"top middle",validator:eo},offset:{type:Array,default:()=>[14,14],validator:sd},scrollTarget:{default:void 0},delay:{type:Number,default:0},hideDelay:{type:Number,default:0}}),emits:[...$s],setup(e,{slots:t,emit:n,attrs:i}){let l,r;const o=we(),{proxy:{$q:s}}=o,a=le(null),u=le(!1),c=P(()=>to(e.anchor,s.lang.rtl)),v=P(()=>to(e.self,s.lang.rtl)),g=P(()=>e.persistent!==!0),{registerTick:d,removeTick:_}=Yf(),{registerTimeout:S,removeTimeout:w}=Xf(),{transition:T,transitionStyle:E}=Jf(e,u),{localScrollTarget:O,changeScrollEvent:R,unconfigureScrollTarget:V}=Hf(e,Ce),{anchorEl:p,canShow:y,anchorEvents:b}=jf({showing:u,configureAnchorEl:oe}),{show:M,hide:F}=Ns({showing:u,canShow:y,handleShow:K,handleHide:$,hideOnRouteChange:g,processOnMount:!0});Object.assign(b,{delayShow:U,delayHide:N});const{showPortal:I,hidePortal:A,renderPortal:k}=Qf(o,a,de);if(s.platform.is.mobile===!0){const he={anchorEl:p,innerRef:a,onClickOutside(rt){return F(rt),rt.target.classList.contains("q-dialog__backdrop")&&nt(rt),!0}},on=P(()=>e.modelValue===null&&e.persistent!==!0&&u.value===!0);se(on,rt=>{(rt===!0?od:Yr)(he)}),qe(()=>{Yr(he)})}function K(he){_(),w(),I(),d(()=>{r=new MutationObserver(()=>C()),r.observe(a.value,{attributes:!1,childList:!0,characterData:!0,subtree:!0}),C(),Ce()}),l===void 0&&(l=se(()=>s.screen.width+"|"+s.screen.height+"|"+e.self+"|"+e.anchor+"|"+s.lang.rtl,C)),S(()=>{I(!0),n("show",he)},e.transitionDuration)}function $(he){_(),w(),A(),Z(),S(()=>{A(!0),n("hide",he)},e.transitionDuration)}function Z(){r!==void 0&&(r.disconnect(),r=void 0),l!==void 0&&(l(),l=void 0),V(),oi(b,"tooltipTemp")}function C(){const he=a.value;p.value===null||!he||cd({el:he,offset:e.offset,anchorEl:p.value,anchorOrigin:c.value,selfOrigin:v.value,maxHeight:e.maxHeight,maxWidth:e.maxWidth})}function U(he){if(s.platform.is.mobile===!0){gl(),document.body.classList.add("non-selectable");const on=p.value,rt=["touchmove","touchcancel","touchend","click"].map(Ne=>[on,Ne,"delayHide","passiveCapture"]);Tn(b,"tooltipTemp",rt)}S(()=>{M(he)},e.delay)}function N(he){w(),s.platform.is.mobile===!0&&(oi(b,"tooltipTemp"),gl(),setTimeout(()=>{document.body.classList.remove("non-selectable")},10)),S(()=>{F(he)},e.hideDelay)}function oe(){if(e.noParentEvent===!0||p.value===null)return;const he=s.platform.is.mobile===!0?[[p.value,"touchstart","delayShow","passive"]]:[[p.value,"mouseenter","delayShow","passive"],[p.value,"mouseleave","delayHide","passive"]];Tn(b,"anchor",he)}function Ce(){if(p.value!==null||e.scrollTarget!==void 0){O.value=Ds(p.value,e.scrollTarget);const he=e.noParentEvent===!0?C:F;R(O.value,he)}}function Se(){return u.value===!0?H("div",ge(ee({},i),{ref:a,class:["q-tooltip q-tooltip--style q-position-engine no-pointer-events",i.class],style:[i.style,E.value],role:"complementary"}),Qe(t.default)):null}function de(){return H(ln,{name:T.value,appear:!0},Se)}return qe(Z),Object.assign(o.proxy,{updatePosition:C}),k}}),hd=Fe({name:"QCardSection",props:{tag:{type:String,default:"div"},horizontal:Boolean},setup(e,{slots:t}){const n=P(()=>`q-card__section q-card__section--${e.horizontal===!0?"horiz row no-wrap":"vert"}`);return()=>H(e.tag,{class:n.value},Qe(t.default))}});const Ln={dark:{type:Boolean,default:null}};function Pn(e,t){return P(()=>e.dark===null?t.dark.isActive:e.dark)}var gd=Fe({name:"QItem",props:ge(ee(ee({},Ln),Ai),{tag:{type:String,default:"div"},active:{type:Boolean,default:null},clickable:Boolean,dense:Boolean,insetLevel:Number,tabindex:[String,Number],focused:Boolean,manualFocus:Boolean}),emits:["click","keyup"],setup(e,{slots:t,emit:n}){const{proxy:{$q:i}}=we(),l=Pn(e,i),{hasRouterLink:r,hasLink:o,linkProps:s,linkClass:a,linkTag:u,navigateToRouterLink:c}=Is(),v=le(null),g=le(null),d=P(()=>e.clickable===!0||o.value===!0||e.tag==="label"),_=P(()=>e.disable!==!0&&d.value===!0),S=P(()=>"q-item q-item-type row no-wrap"+(e.dense===!0?" q-item--dense":"")+(l.value===!0?" q-item--dark":"")+(o.value===!0&&e.active===null?a.value:e.active===!0?`${e.activeClass!==void 0?` ${e.activeClass}`:""} q-item--active`:"")+(e.disable===!0?" disabled":"")+(_.value===!0?" q-item--clickable q-link cursor-pointer "+(e.manualFocus===!0?"q-manual-focusable":"q-focusable q-hoverable")+(e.focused===!0?" q-manual-focusable--focused":""):"")),w=P(()=>{if(e.insetLevel===void 0)return null;const R=i.lang.rtl===!0?"Right":"Left";return{["padding"+R]:16+e.insetLevel*56+"px"}});function T(R){_.value===!0&&(g.value!==null&&(R.qKeyEvent!==!0&&document.activeElement===v.value?g.value.focus():document.activeElement===g.value&&v.value.focus()),r.value===!0&&c(R),n("click",R))}function E(R){if(_.value===!0&&Mn(R,13)===!0){nt(R),R.qKeyEvent=!0;const V=new MouseEvent("click",R);V.qKeyEvent=!0,v.value.dispatchEvent(V)}n("keyup",R)}function O(){const R=gf(t.default,[]);return _.value===!0&&R.unshift(H("div",{class:"q-focus-helper",tabindex:-1,ref:g})),R}return()=>{const R={ref:v,class:S.value,style:w.value,onClick:T,onKeyup:E};return _.value===!0?(R.tabindex=e.tabindex||"0",Object.assign(R,s.value)):d.value===!0&&(R["aria-disabled"]="true"),H(u.value,R,O())}}}),Vi=Fe({name:"QItemSection",props:{avatar:Boolean,thumbnail:Boolean,side:Boolean,top:Boolean,noWrap:Boolean},setup(e,{slots:t}){const n=P(()=>`q-item__section column q-item__section--${e.avatar===!0||e.side===!0||e.thumbnail===!0?"side":"main"}`+(e.top===!0?" q-item__section--top justify-start":" justify-center")+(e.avatar===!0?" q-item__section--avatar":"")+(e.thumbnail===!0?" q-item__section--thumbnail":"")+(e.noWrap===!0?" q-item__section--nowrap":""));return()=>H("div",{class:n.value},Qe(t.default))}}),no=Fe({name:"QItemLabel",props:{overline:Boolean,caption:Boolean,header:Boolean,lines:[Number,String]},setup(e,{slots:t}){const n=P(()=>parseInt(e.lines,10)),i=P(()=>"q-item__label"+(e.overline===!0?" q-item__label--overline text-overline":"")+(e.caption===!0?" q-item__label--caption text-caption":"")+(e.header===!0?" q-item__label--header":"")+(n.value===1?" ellipsis":"")),l=P(()=>e.lines!==void 0&&n.value>1?{overflow:"hidden",display:"-webkit-box","-webkit-box-orient":"vertical","-webkit-line-clamp":n.value}:null);return()=>H("div",{style:l.value,class:i.value},Qe(t.default))}}),md=Fe({name:"QSlideTransition",props:{appear:Boolean,duration:{type:Number,default:300}},emits:["show","hide"],setup(e,{slots:t,emit:n}){let i=!1,l,r,o,s,a,u;function c(){l&&l(),l=null,i=!1,clearTimeout(o),clearTimeout(s),r!==void 0&&r.removeEventListener("transitionend",a),a=null}function v(S,w,T){S.style.overflowY="hidden",w!==void 0&&(S.style.height=`${w}px`),S.style.transition=`height ${e.duration}ms cubic-bezier(.25, .8, .50, 1)`,i=!0,l=T}function g(S,w){S.style.overflowY=null,S.style.height=null,S.style.transition=null,c(),w!==u&&n(w)}function d(S,w){let T=0;r=S,i===!0?(c(),T=S.offsetHeight===S.scrollHeight?0:void 0):u="hide",v(S,T,w),o=setTimeout(()=>{S.style.height=`${S.scrollHeight}px`,a=E=>{(Object(E)!==E||E.target===S)&&g(S,"show")},S.addEventListener("transitionend",a),s=setTimeout(a,e.duration*1.1)},100)}function _(S,w){let T;r=S,i===!0?c():(u="show",T=S.scrollHeight),v(S,T,w),o=setTimeout(()=>{S.style.height=0,a=E=>{(Object(E)!==E||E.target===S)&&g(S,"hide")},S.addEventListener("transitionend",a),s=setTimeout(a,e.duration*1.1)},100)}return qe(()=>{i===!0&&c()}),()=>H(ln,{css:!1,appear:e.appear,onEnter:d,onLeave:_},t.default)}});const vd={true:"inset",item:"item-inset","item-thumbnail":"item-thumbnail-inset"},zi={xs:2,sm:4,md:8,lg:16,xl:24};var io=Fe({name:"QSeparator",props:ge(ee({},Ln),{spaced:[Boolean,String],inset:[Boolean,String],vertical:Boolean,color:String,size:String}),setup(e){const t=we(),n=Pn(e,t.proxy.$q),i=P(()=>e.vertical===!0?"vertical":"horizontal"),l=P(()=>` q-separator--${i.value}`),r=P(()=>e.inset!==!1?`${l.value}-${vd[e.inset]}`:""),o=P(()=>`q-separator${l.value}${r.value}`+(e.color!==void 0?` bg-${e.color}`:"")+(n.value===!0?" q-separator--dark":"")),s=P(()=>{const a={};if(e.size!==void 0&&(a[e.vertical===!0?"width":"height"]=e.size),e.spaced!==!1){const u=e.spaced===!0?`${zi.md}px`:e.spaced in zi?`${zi[e.spaced]}px`:e.spaced,c=e.vertical===!0?["Left","Right"]:["Top","Bottom"];a[`margin${c[0]}`]=a[`margin${c[1]}`]=u}return a});return()=>H("hr",{class:o.value,style:s.value,"aria-orientation":i.value})}});let Wi,zn=0;const ke=new Array(256);for(let e=0;e<256;e++)ke[e]=(e+256).toString(16).substring(1);const pd=(()=>{const e=typeof crypto!="undefined"?crypto:typeof window!="undefined"?window.crypto||window.msCrypto:void 0;if(e!==void 0){if(e.randomBytes!==void 0)return e.randomBytes;if(e.getRandomValues!==void 0)return t=>{const n=new Uint8Array(t);return e.getRandomValues(n),n}}return t=>{const n=[];for(let i=t;i>0;i--)n.push(Math.floor(Math.random()*256));return n}})(),lo=4096;function h(){(Wi===void 0||zn+16>lo)&&(zn=0,Wi=pd(lo));const e=Array.prototype.slice.call(Wi,zn,zn+=16);return e[6]=e[6]&15|64,e[8]=e[8]&63|128,ke[e[0]]+ke[e[1]]+ke[e[2]]+ke[e[3]]+"-"+ke[e[4]]+ke[e[5]]+"-"+ke[e[6]]+ke[e[7]]+"-"+ke[e[8]]+ke[e[9]]+"-"+ke[e[10]]+ke[e[11]]+ke[e[12]]+ke[e[13]]+ke[e[14]]+ke[e[15]]}const Mt=Io({}),bd=Object.keys(Ai);var yd=Fe({name:"QExpansionItem",props:ge(ee(ee(ee({},Ai),Os),Ln),{icon:String,label:String,labelLines:[Number,String],caption:String,captionLines:[Number,String],dense:Boolean,expandIcon:String,expandedIcon:String,expandIconClass:[Array,String,Object],duration:Number,headerInsetLevel:Number,contentInsetLevel:Number,expandSeparator:Boolean,defaultOpened:Boolean,expandIconToggle:Boolean,switchToggleSide:Boolean,denseToggle:Boolean,group:String,popup:Boolean,headerStyle:[Array,String,Object],headerClass:[Array,String,Object]}),emits:[...$s,"click","after-show","after-hide"],setup(e,{slots:t,emit:n}){const{proxy:{$q:i}}=we(),l=Pn(e,i),r=le(e.modelValue!==null?e.modelValue:e.defaultOpened),o=le(null),{hide:s,toggle:a}=Ns({showing:r});let u,c;const v=P(()=>`q-expansion-item q-item-type q-expansion-item--${r.value===!0?"expanded":"collapsed"} q-expansion-item--${e.popup===!0?"popup":"standard"}`),g=P(()=>{if(e.contentInsetLevel===void 0)return null;const k=i.lang.rtl===!0?"Right":"Left";return{["padding"+k]:e.contentInsetLevel*56+"px"}}),d=P(()=>e.disable!==!0&&(e.href!==void 0||e.to!==void 0&&e.to!==null&&e.to!=="")),_=P(()=>{const k={};return bd.forEach(K=>{k[K]=e[K]}),k}),S=P(()=>d.value===!0||e.expandIconToggle!==!0),w=P(()=>e.expandedIcon!==void 0&&r.value===!0?e.expandedIcon:e.expandIcon||i.iconSet.expansionItem[e.denseToggle===!0?"denseIcon":"icon"]),T=P(()=>e.disable!==!0&&(d.value===!0||e.expandIconToggle===!0));se(()=>e.group,k=>{c!==void 0&&c(),k!==void 0&&y()});function E(k){d.value!==!0&&a(k),n("click",k)}function O(k){k.keyCode===13&&R(k,!0)}function R(k,K){K!==!0&&o.value!==null&&o.value.focus(),a(k),nt(k)}function V(){n("after-show")}function p(){n("after-hide")}function y(){u===void 0&&(u=h()),r.value===!0&&(Mt[e.group]=u);const k=se(r,$=>{$===!0?Mt[e.group]=u:Mt[e.group]===u&&delete Mt[e.group]}),K=se(()=>Mt[e.group],($,Z)=>{Z===u&&$!==void 0&&$!==u&&s()});c=()=>{k(),K(),Mt[e.group]===u&&delete Mt[e.group],c=void 0}}function b(){const k={class:[`q-focusable relative-position cursor-pointer${e.denseToggle===!0&&e.switchToggleSide===!0?" items-end":""}`,e.expandIconClass],side:e.switchToggleSide!==!0,avatar:e.switchToggleSide},K=[H(Yt,{class:"q-expansion-item__toggle-icon"+(e.expandedIcon===void 0&&r.value===!0?" q-expansion-item__toggle-icon--rotated":""),name:w.value})];return T.value===!0&&(Object.assign(k,{tabindex:0,onClick:R,onKeyup:O}),K.unshift(H("div",{ref:o,class:"q-expansion-item__toggle-focus q-icon q-focus-helper q-focus-helper--rounded",tabindex:-1}))),H(Vi,k,()=>K)}function M(){let k;return t.header!==void 0?k=[].concat(t.header()):(k=[H(Vi,()=>[H(no,{lines:e.labelLines},()=>e.label||""),e.caption?H(no,{lines:e.captionLines,caption:!0},()=>e.caption):null])],e.icon&&k[e.switchToggleSide===!0?"push":"unshift"](H(Vi,{side:e.switchToggleSide===!0,avatar:e.switchToggleSide!==!0},()=>H(Yt,{name:e.icon})))),e.disable!==!0&&k[e.switchToggleSide===!0?"unshift":"push"](b()),k}function F(){const k={ref:"item",style:e.headerStyle,class:e.headerClass,dark:l.value,disable:e.disable,dense:e.dense,insetLevel:e.headerInsetLevel};return S.value===!0&&(k.clickable=!0,k.onClick=E,d.value===!0&&Object.assign(k,_.value)),H(gd,k,M)}function I(){return Il(H("div",{key:"e-content",class:"q-expansion-item__content relative-position",style:g.value},Qe(t.default)),[[Rc,r.value]])}function A(){const k=[F(),H(md,{duration:e.duration,onShow:V,onHide:p},I)];return e.expandSeparator===!0&&k.push(H(io,{class:"q-expansion-item__border q-expansion-item__border--top absolute-top",dark:l.value}),H(io,{class:"q-expansion-item__border q-expansion-item__border--bottom absolute-bottom",dark:l.value})),k}return e.group!==void 0&&y(),qe(()=>{c!==void 0&&c()}),()=>H("div",{class:v.value},[H("div",{class:"q-expansion-item__container relative-position"},A())])}}),_d=Fe({name:"QList",props:ge(ee({},Ln),{bordered:Boolean,dense:Boolean,separator:Boolean,padding:Boolean}),setup(e,{slots:t}){const n=we(),i=Pn(e,n.proxy.$q),l=P(()=>"q-list"+(e.bordered===!0?" q-list--bordered":"")+(e.dense===!0?" q-list--dense":"")+(e.separator===!0?" q-list--separator":"")+(i.value===!0?" q-list--dark":"")+(e.padding===!0?" q-list--padding":""));return()=>H("div",{class:l.value},Qe(t.default))}});function xd({validate:e,resetValidation:t,requiresQForm:n}){const i=vn(Xc,!1);if(i!==!1){const{props:l,proxy:r}=we();Object.assign(r,{validate:e,resetValidation:t}),se(()=>l.disable,o=>{o===!0?(typeof t=="function"&&t(),i.unbindComponent(r)):i.bindComponent(r)}),l.disable!==!0&&i.bindComponent(r),qe(()=>{l.disable!==!0&&i.unbindComponent(r)})}else n===!0&&console.error("Parent QForm not found on useFormChild()!")}const ro=/^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/,oo=/^#[0-9a-fA-F]{4}([0-9a-fA-F]{4})?$/,so=/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/,Wn=/^rgb\(((0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),){2}(0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5])\)$/,Un=/^rgba\(((0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),){2}(0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),(0|0\.[0-9]+[1-9]|0\.[1-9]+|1)\)$/,ao={date:e=>/^-?[\d]+\/[0-1]\d\/[0-3]\d$/.test(e),time:e=>/^([0-1]?\d|2[0-3]):[0-5]\d$/.test(e),fulltime:e=>/^([0-1]?\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(e),timeOrFulltime:e=>/^([0-1]?\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/.test(e),email:e=>/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(e),hexColor:e=>ro.test(e),hexaColor:e=>oo.test(e),hexOrHexaColor:e=>so.test(e),rgbColor:e=>Wn.test(e),rgbaColor:e=>Un.test(e),rgbOrRgbaColor:e=>Wn.test(e)||Un.test(e),hexOrRgbColor:e=>ro.test(e)||Wn.test(e),hexaOrRgbaColor:e=>oo.test(e)||Un.test(e),anyColor:e=>so.test(e)||Wn.test(e)||Un.test(e)};"Boolean Number String Function Array Date RegExp Object".split(" ").forEach(e=>{e.toLowerCase()});const wd=ge(ee({},Hl),{min:{type:Number,default:0},max:{type:Number,default:100},color:String,centerColor:String,trackColor:String,fontSize:String,thickness:{type:Number,default:.2,validator:e=>e>=0&&e<=1},angle:{type:Number,default:0},showValue:Boolean,reverse:Boolean,instantFeedback:Boolean});function Cd(e,t,n){return n<=t?t:Math.min(n,Math.max(t,e))}const bl=50,Ks=2*bl,Qs=Ks*Math.PI,Ed=Math.round(Qs*1e3)/1e3;Fe({name:"QCircularProgress",props:ge(ee({},wd),{value:{type:Number,default:0},animationSpeed:{type:[String,Number],default:600},indeterminate:Boolean}),setup(e,{slots:t}){const{proxy:{$q:n}}=we(),i=Dl(e),l=P(()=>{const g=(n.lang.rtl===!0?-1:1)*e.angle;return{transform:e.reverse!==(n.lang.rtl===!0)?`scale3d(-1, 1, 1) rotate3d(0, 0, 1, ${-90-g}deg)`:`rotate3d(0, 0, 1, ${g-90}deg)`}}),r=P(()=>e.instantFeedback!==!0&&e.indeterminate!==!0?{transition:`stroke-dashoffset ${e.animationSpeed}ms ease 0s, stroke ${e.animationSpeed}ms ease`}:""),o=P(()=>Ks/(1-e.thickness/2)),s=P(()=>`${o.value/2} ${o.value/2} ${o.value} ${o.value}`),a=P(()=>Cd(e.value,e.min,e.max)),u=P(()=>Qs*(1-(a.value-e.min)/(e.max-e.min))),c=P(()=>e.thickness/2*o.value);function v({thickness:g,offset:d,color:_,cls:S}){return H("circle",{class:"q-circular-progress__"+S+(_!==void 0?` text-${_}`:""),style:r.value,fill:"transparent",stroke:"currentColor","stroke-width":g,"stroke-dasharray":Ed,"stroke-dashoffset":d,cx:o.value,cy:o.value,r:bl})}return()=>{const g=[];e.centerColor!==void 0&&e.centerColor!=="transparent"&&g.push(H("circle",{class:`q-circular-progress__center text-${e.centerColor}`,fill:"currentColor",r:bl-c.value/2,cx:o.value,cy:o.value})),e.trackColor!==void 0&&e.trackColor!=="transparent"&&g.push(v({cls:"track",thickness:c.value,offset:0,color:e.trackColor})),g.push(v({cls:"circle",thickness:c.value,offset:u.value,color:e.color}));const d=[H("svg",{class:"q-circular-progress__svg",style:l.value,viewBox:s.value,"aria-hidden":"true"},g)];return e.showValue===!0&&d.push(H("div",{class:"q-circular-progress__text absolute-full row flex-center content-center",style:{fontSize:e.fontSize}},t.default!==void 0?t.default():[H("div",a.value)])),H("div",{class:`q-circular-progress q-circular-progress--${e.indeterminate===!0?"in":""}determinate`,style:i.value,role:"progressbar","aria-valuemin":e.min,"aria-valuemax":e.max,"aria-valuenow":e.indeterminate===!0?void 0:a.value},mf(t.internal,d))}}});const Sd=["rejected"],kd=[...Sd,"start","finish","added","removed"],Rd=()=>!0;function Td(e){const t={};return e.forEach(n=>{t[n]=Rd}),t}Td(kd);const Md=[!0,!1,"ondemand"],Ad={modelValue:{},error:{type:Boolean,default:null},errorMessage:String,noErrorIcon:Boolean,rules:Array,reactiveRules:Boolean,lazyRules:{type:[Boolean,String],validator:e=>Md.includes(e)}};function qd(e,t){const{props:n,proxy:i}=we(),l=le(!1),r=le(null),o=le(null);xd({validate:_,resetValidation:d});let s=0,a;const u=P(()=>n.rules!==void 0&&n.rules!==null&&n.rules.length>0),c=P(()=>n.disable!==!0&&u.value===!0),v=P(()=>n.error===!0||l.value===!0),g=P(()=>typeof n.errorMessage=="string"&&n.errorMessage.length>0?n.errorMessage:r.value);se(()=>n.modelValue,()=>{S()}),se(()=>n.reactiveRules,T=>{T===!0?a===void 0&&(a=se(()=>n.rules,()=>{S(!0)})):a!==void 0&&(a(),a=void 0)},{immediate:!0}),se(e,T=>{T===!0?o.value===null&&(o.value=!1):o.value===!1&&(o.value=!0,c.value===!0&&n.lazyRules!=="ondemand"&&t.value===!1&&w())});function d(){s++,t.value=!1,o.value=null,l.value=!1,r.value=null,w.cancel()}function _(T=n.modelValue){if(c.value!==!0)return!0;const E=++s;t.value!==!0&&n.lazyRules!==!0&&(o.value=!0);const O=(V,p)=>{l.value!==V&&(l.value=V);const y=p||void 0;r.value!==y&&(r.value=y),t.value=!1},R=[];for(let V=0;V<n.rules.length;V++){const p=n.rules[V];let y;if(typeof p=="function"?y=p(T):typeof p=="string"&&ao[p]!==void 0&&(y=ao[p](T)),y===!1||typeof y=="string")return O(!0,y),!1;y!==!0&&y!==void 0&&R.push(y)}return R.length===0?(O(!1),!0):(t.value=!0,Promise.all(R).then(V=>{if(V===void 0||Array.isArray(V)===!1||V.length===0)return E===s&&O(!1),!0;const p=V.find(y=>y===!1||typeof y=="string");return E===s&&O(p!==void 0,p),p===void 0},V=>(E===s&&(console.error(V),O(!0)),!1)))}function S(T){c.value===!0&&n.lazyRules!=="ondemand"&&(o.value===!0||n.lazyRules!==!0&&T!==!0)&&w()}const w=_s(_,0);return qe(()=>{a!==void 0&&a(),w.cancel()}),Object.assign(i,{resetValidation:d,validate:_}),ki(i,"hasError",()=>v.value),{isDirtyModel:o,hasRules:u,hasError:v,errorMessage:g,validate:_,resetValidation:d}}const uo=/^on[A-Z]/;function Ld(e,t){const n={listeners:le({}),attributes:le({})};function i(){const l={},r={};for(const o in e)o!=="class"&&o!=="style"&&uo.test(o)===!1&&(l[o]=e[o]);for(const o in t.props)uo.test(o)===!0&&(r[o]=t.props[o]);n.attributes.value=l,n.listeners.value=r}return ns(i),i(),n}function yl(e){return e===void 0?`f_${h()}`:e}function _l(e){return e!=null&&(""+e).length>0}const Pd=ge(ee(ee({},Ln),Ad),{label:String,stackLabel:Boolean,hint:String,hideHint:Boolean,prefix:String,suffix:String,labelColor:String,color:String,bgColor:String,filled:Boolean,outlined:Boolean,borderless:Boolean,standout:[Boolean,String],square:Boolean,loading:Boolean,labelSlot:Boolean,bottomSlots:Boolean,hideBottomSpace:Boolean,rounded:Boolean,dense:Boolean,itemAligned:Boolean,counter:Boolean,clearable:Boolean,clearIcon:String,disable:Boolean,readonly:Boolean,autofocus:Boolean,for:String,maxlength:[Number,String]}),Fd=["update:modelValue","clear","focus","blur","popup-show","popup-hide"];function Bd(){const{props:e,attrs:t,proxy:n,vnode:i}=we();return{isDark:Pn(e,n.$q),editable:P(()=>e.disable!==!0&&e.readonly!==!0),innerLoading:le(!1),focused:le(!1),hasPopupOpen:!1,splitAttrs:Ld(t,i),targetUid:le(yl(e.for)),rootRef:le(null),targetRef:le(null),controlRef:le(null)}}function Id(e){const{props:t,emit:n,slots:i,attrs:l,proxy:r}=we(),{$q:o}=r;let s;e.hasValue===void 0&&(e.hasValue=P(()=>_l(t.modelValue))),e.emitValue===void 0&&(e.emitValue=C=>{n("update:modelValue",C)}),e.controlEvents===void 0&&(e.controlEvents={onFocusin:M,onFocusout:F}),Object.assign(e,{clearValue:I,onControlFocusin:M,onControlFocusout:F,focus:y}),e.computedCounter===void 0&&(e.computedCounter=P(()=>{if(t.counter!==!1){const C=typeof t.modelValue=="string"||typeof t.modelValue=="number"?(""+t.modelValue).length:Array.isArray(t.modelValue)===!0?t.modelValue.length:0,U=t.maxlength!==void 0?t.maxlength:t.maxValues;return C+(U!==void 0?" / "+U:"")}}));const{isDirtyModel:a,hasRules:u,hasError:c,errorMessage:v,resetValidation:g}=qd(e.focused,e.innerLoading),d=e.floatingLabel!==void 0?P(()=>t.stackLabel===!0||e.focused.value===!0||e.floatingLabel.value===!0):P(()=>t.stackLabel===!0||e.focused.value===!0||e.hasValue.value===!0),_=P(()=>t.bottomSlots===!0||t.hint!==void 0||u.value===!0||t.counter===!0||t.error!==null),S=P(()=>t.filled===!0?"filled":t.outlined===!0?"outlined":t.borderless===!0?"borderless":t.standout?"standout":"standard"),w=P(()=>`q-field row no-wrap items-start q-field--${S.value}`+(e.fieldClass!==void 0?` ${e.fieldClass.value}`:"")+(t.rounded===!0?" q-field--rounded":"")+(t.square===!0?" q-field--square":"")+(d.value===!0?" q-field--float":"")+(E.value===!0?" q-field--labeled":"")+(t.dense===!0?" q-field--dense":"")+(t.itemAligned===!0?" q-field--item-aligned q-item-type":"")+(e.isDark.value===!0?" q-field--dark":"")+(e.getControl===void 0?" q-field--auto-height":"")+(e.focused.value===!0?" q-field--focused":"")+(c.value===!0?" q-field--error":"")+(c.value===!0||e.focused.value===!0?" q-field--highlighted":"")+(t.hideBottomSpace!==!0&&_.value===!0?" q-field--with-bottom":"")+(t.disable===!0?" q-field--disabled":t.readonly===!0?" q-field--readonly":"")),T=P(()=>"q-field__control relative-position row no-wrap"+(t.bgColor!==void 0?` bg-${t.bgColor}`:"")+(c.value===!0?" text-negative":typeof t.standout=="string"&&t.standout.length>0&&e.focused.value===!0?` ${t.standout}`:t.color!==void 0?` text-${t.color}`:"")),E=P(()=>t.labelSlot===!0||t.label!==void 0),O=P(()=>"q-field__label no-pointer-events absolute ellipsis"+(t.labelColor!==void 0&&c.value!==!0?` text-${t.labelColor}`:"")),R=P(()=>({id:e.targetUid.value,editable:e.editable.value,focused:e.focused.value,floatingLabel:d.value,modelValue:t.modelValue,emitValue:e.emitValue})),V=P(()=>{const C={for:e.targetUid.value};return t.disable===!0?C["aria-disabled"]="true":t.readonly===!0&&(C["aria-readonly"]="true"),C});se(()=>t.for,C=>{e.targetUid.value=yl(C)});function p(){const C=document.activeElement;let U=e.targetRef!==void 0&&e.targetRef.value;U&&(C===null||C.id!==e.targetUid.value)&&(U.hasAttribute("tabindex")===!0||(U=U.querySelector("[tabindex]")),U&&U!==C&&U.focus({preventScroll:!0}))}function y(){Hs(p)}function b(){Vf(p);const C=document.activeElement;C!==null&&e.rootRef.value.contains(C)&&C.blur()}function M(C){clearTimeout(s),e.editable.value===!0&&e.focused.value===!1&&(e.focused.value=!0,n("focus",C))}function F(C,U){clearTimeout(s),s=setTimeout(()=>{document.hasFocus()===!0&&(e.hasPopupOpen===!0||e.controlRef===void 0||e.controlRef.value===null||e.controlRef.value.contains(document.activeElement)!==!1)||(e.focused.value===!0&&(e.focused.value=!1,n("blur",C)),U!==void 0&&U())})}function I(C){nt(C),o.platform.is.mobile!==!0?(e.targetRef!==void 0&&e.targetRef.value||e.rootRef.value).focus():e.rootRef.value.contains(document.activeElement)===!0&&document.activeElement.blur(),t.type==="file"&&(e.inputRef.value.value=null),n("update:modelValue",null),n("clear",t.modelValue),Pe(()=>{g(),o.platform.is.mobile!==!0&&(a.value=!1)})}function A(){const C=[];return i.prepend!==void 0&&C.push(H("div",{class:"q-field__prepend q-field__marginal row no-wrap items-center",key:"prepend",onClick:vt},i.prepend())),C.push(H("div",{class:"q-field__control-container col relative-position row no-wrap q-anchor--skip"},k())),c.value===!0&&t.noErrorIcon===!1&&C.push($("error",[H(Yt,{name:o.iconSet.field.error,color:"negative"})])),t.loading===!0||e.innerLoading.value===!0?C.push($("inner-loading-append",i.loading!==void 0?i.loading():[H(Ps,{color:t.color})])):t.clearable===!0&&e.hasValue.value===!0&&e.editable.value===!0&&C.push($("inner-clearable-append",[H(Yt,{class:"q-field__focusable-action",tag:"button",name:t.clearIcon||o.iconSet.field.clear,tabindex:0,type:"button","aria-hidden":null,role:null,onClick:I})])),i.append!==void 0&&C.push(H("div",{class:"q-field__append q-field__marginal row no-wrap items-center",key:"append",onClick:vt},i.append())),e.getInnerAppend!==void 0&&C.push($("inner-append",e.getInnerAppend())),e.getControlChild!==void 0&&C.push(e.getControlChild()),C}function k(){const C=[];return t.prefix!==void 0&&t.prefix!==null&&C.push(H("div",{class:"q-field__prefix no-pointer-events row items-center"},t.prefix)),e.getShadowControl!==void 0&&e.hasShadow.value===!0&&C.push(e.getShadowControl()),e.getControl!==void 0?C.push(e.getControl()):i.rawControl!==void 0?C.push(i.rawControl()):i.control!==void 0&&C.push(H("div",ge(ee({ref:e.targetRef,class:"q-field__native row",tabindex:-1},e.splitAttrs.attributes.value),{"data-autofocus":t.autofocus===!0||void 0}),i.control(R.value))),E.value===!0&&C.push(H("div",{class:O.value},Qe(i.label,t.label))),t.suffix!==void 0&&t.suffix!==null&&C.push(H("div",{class:"q-field__suffix no-pointer-events row items-center"},t.suffix)),C.concat(Qe(i.default))}function K(){let C,U;c.value===!0?v.value!==null?(C=[H("div",{role:"alert"},v.value)],U=`q--slot-error-${v.value}`):(C=Qe(i.error),U="q--slot-error"):(t.hideHint!==!0||e.focused.value===!0)&&(t.hint!==void 0?(C=[H("div",t.hint)],U=`q--slot-hint-${t.hint}`):(C=Qe(i.hint),U="q--slot-hint"));const N=t.counter===!0||i.counter!==void 0;if(t.hideBottomSpace===!0&&N===!1&&C===void 0)return;const oe=H("div",{key:U,class:"q-field__messages col"},C);return H("div",{class:"q-field__bottom row items-start q-field__bottom--"+(t.hideBottomSpace!==!0?"animated":"stale")},[t.hideBottomSpace===!0?oe:H(ln,{name:"q-transition--field-message"},()=>oe),N===!0?H("div",{class:"q-field__counter"},i.counter!==void 0?i.counter():e.computedCounter.value):null])}function $(C,U){return U===null?null:H("div",{key:C,class:"q-field__append q-field__marginal row no-wrap items-center q-anchor--skip"},U)}Object.assign(r,{focus:y,blur:b});let Z=!1;return es(()=>{Z=!0}),Go(()=>{Z===!0&&t.autofocus===!0&&r.focus()}),nn(()=>{Ct.value===!0&&t.for===void 0&&(e.targetUid.value=yl()),t.autofocus===!0&&r.focus()}),qe(()=>{clearTimeout(s)}),function(){const U=e.getControl===void 0&&i.control===void 0?ee(ge(ee({},e.splitAttrs.attributes.value),{"data-autofocus":t.autofocus===!0||void 0}),V.value):V.value;return H("label",ee({ref:e.rootRef,class:[w.value,l.class],style:l.style},U),[i.before!==void 0?H("div",{class:"q-field__before q-field__marginal row no-wrap items-center",onClick:vt},i.before()):null,H("div",{class:"q-field__inner relative-position col self-stretch"},[H("div",ee({ref:e.controlRef,class:T.value,tabindex:-1},e.controlEvents),A()),_.value===!0?K():null]),i.after!==void 0?H("div",{class:"q-field__after q-field__marginal row no-wrap items-center",onClick:vt},i.after()):null])}}const co={date:"####/##/##",datetime:"####/##/## ##:##",time:"##:##",fulltime:"##:##:##",phone:"(###) ### - ####",card:"#### #### #### ####"},fi={"#":{pattern:"[\\d]",negate:"[^\\d]"},S:{pattern:"[a-zA-Z]",negate:"[^a-zA-Z]"},N:{pattern:"[0-9a-zA-Z]",negate:"[^0-9a-zA-Z]"},A:{pattern:"[a-zA-Z]",negate:"[^a-zA-Z]",transform:e=>e.toLocaleUpperCase()},a:{pattern:"[a-zA-Z]",negate:"[^a-zA-Z]",transform:e=>e.toLocaleLowerCase()},X:{pattern:"[0-9a-zA-Z]",negate:"[^0-9a-zA-Z]",transform:e=>e.toLocaleUpperCase()},x:{pattern:"[0-9a-zA-Z]",negate:"[^0-9a-zA-Z]",transform:e=>e.toLocaleLowerCase()}},Zs=Object.keys(fi);Zs.forEach(e=>{fi[e].regex=new RegExp(fi[e].pattern)});const Od=new RegExp("\\\\([^.*+?^${}()|([\\]])|([.*+?^${}()|[\\]])|(["+Zs.join("")+"])|(.)","g"),fo=/[.*+?^${}()|[\]\\]/g,_e=String.fromCharCode(1),$d={mask:String,reverseFillMask:Boolean,fillMask:[Boolean,String],unmaskedValue:Boolean};function Nd(e,t,n,i){let l,r,o,s;const a=le(null),u=le(v());function c(){return e.autogrow===!0||["textarea","text","search","url","tel","password"].includes(e.type)}se(()=>e.type+e.autogrow,d),se(()=>e.mask,p=>{if(p!==void 0)_(u.value,!0);else{const y=R(u.value);d(),e.modelValue!==y&&t("update:modelValue",y)}}),se(()=>e.fillMask+e.reverseFillMask,()=>{a.value===!0&&_(u.value,!0)}),se(()=>e.unmaskedValue,()=>{a.value===!0&&_(u.value)});function v(){if(d(),a.value===!0){const p=E(R(e.modelValue));return e.fillMask!==!1?V(p):p}return e.modelValue}function g(p){if(p<l.length)return l.slice(-p);let y="",b=l;const M=b.indexOf(_e);if(M>-1){for(let F=p-b.length;F>0;F--)y+=_e;b=b.slice(0,M)+y+b.slice(M)}return b}function d(){if(a.value=e.mask!==void 0&&e.mask.length>0&&c(),a.value===!1){s=void 0,l="",r="";return}const p=co[e.mask]===void 0?e.mask:co[e.mask],y=typeof e.fillMask=="string"&&e.fillMask.length>0?e.fillMask.slice(0,1):"_",b=y.replace(fo,"\\$&"),M=[],F=[],I=[];let A=e.reverseFillMask===!0,k="",K="";p.replace(Od,(U,N,oe,Ce,Se)=>{if(Ce!==void 0){const de=fi[Ce];I.push(de),K=de.negate,A===!0&&(F.push("(?:"+K+"+)?("+de.pattern+"+)?(?:"+K+"+)?("+de.pattern+"+)?"),A=!1),F.push("(?:"+K+"+)?("+de.pattern+")?")}else if(oe!==void 0)k="\\"+(oe==="\\"?"":oe),I.push(oe),M.push("([^"+k+"]+)?"+k+"?");else{const de=N!==void 0?N:Se;k=de==="\\"?"\\\\\\\\":de.replace(fo,"\\\\$&"),I.push(de),M.push("([^"+k+"]+)?"+k+"?")}});const $=new RegExp("^"+M.join("")+"("+(k===""?".":"[^"+k+"]")+"+)?$"),Z=F.length-1,C=F.map((U,N)=>N===0&&e.reverseFillMask===!0?new RegExp("^"+b+"*"+U):N===Z?new RegExp("^"+U+"("+(K===""?".":K)+"+)?"+(e.reverseFillMask===!0?"$":b+"*")):new RegExp("^"+U));o=I,s=U=>{const N=$.exec(U);N!==null&&(U=N.slice(1).join(""));const oe=[],Ce=C.length;for(let Se=0,de=U;Se<Ce;Se++){const he=C[Se].exec(de);if(he===null)break;de=de.slice(he.shift().length),oe.push(...he)}return oe.length>0?oe.join(""):U},l=I.map(U=>typeof U=="string"?U:_e).join(""),r=l.split(_e).join(y)}function _(p,y,b){const M=i.value,F=M.selectionEnd,I=M.value.length-F,A=R(p);y===!0&&d();const k=E(A),K=e.fillMask!==!1?V(k):k,$=u.value!==K;M.value!==K&&(M.value=K),$===!0&&(u.value=K),document.activeElement===M&&Pe(()=>{if(K===r){const C=e.reverseFillMask===!0?r.length:0;M.setSelectionRange(C,C,"forward");return}if(b==="insertFromPaste"&&e.reverseFillMask!==!0){const C=F-1;w.right(M,C,C);return}if(["deleteContentBackward","deleteContentForward"].indexOf(b)>-1){const C=e.reverseFillMask===!0?F===0?K.length>k.length?1:0:Math.max(0,K.length-(K===r?0:Math.min(k.length,I)+1))+1:F;M.setSelectionRange(C,C,"forward");return}if(e.reverseFillMask===!0)if($===!0){const C=Math.max(0,K.length-(K===r?0:Math.min(k.length,I+1)));C===1&&F===1?M.setSelectionRange(C,C,"forward"):w.rightReverse(M,C,C)}else{const C=K.length-I;M.setSelectionRange(C,C,"backward")}else if($===!0){const C=Math.max(0,l.indexOf(_e),Math.min(k.length,F)-1);w.right(M,C,C)}else{const C=F-1;w.right(M,C,C)}});const Z=e.unmaskedValue===!0?R(K):K;String(e.modelValue)!==Z&&n(Z,!0)}function S(p,y,b){const M=E(R(p.value));y=Math.max(0,l.indexOf(_e),Math.min(M.length,y)),p.setSelectionRange(y,b,"forward")}const w={left(p,y,b,M){const F=l.slice(y-1).indexOf(_e)===-1;let I=Math.max(0,y-1);for(;I>=0;I--)if(l[I]===_e){y=I,F===!0&&y++;break}if(I<0&&l[y]!==void 0&&l[y]!==_e)return w.right(p,0,0);y>=0&&p.setSelectionRange(y,M===!0?b:y,"backward")},right(p,y,b,M){const F=p.value.length;let I=Math.min(F,b+1);for(;I<=F;I++)if(l[I]===_e){b=I;break}else l[I-1]===_e&&(b=I);if(I>F&&l[b-1]!==void 0&&l[b-1]!==_e)return w.left(p,F,F);p.setSelectionRange(M?y:b,b,"forward")},leftReverse(p,y,b,M){const F=g(p.value.length);let I=Math.max(0,y-1);for(;I>=0;I--)if(F[I-1]===_e){y=I;break}else if(F[I]===_e&&(y=I,I===0))break;if(I<0&&F[y]!==void 0&&F[y]!==_e)return w.rightReverse(p,0,0);y>=0&&p.setSelectionRange(y,M===!0?b:y,"backward")},rightReverse(p,y,b,M){const F=p.value.length,I=g(F),A=I.slice(0,b+1).indexOf(_e)===-1;let k=Math.min(F,b+1);for(;k<=F;k++)if(I[k-1]===_e){b=k,b>0&&A===!0&&b--;break}if(k>F&&I[b-1]!==void 0&&I[b-1]!==_e)return w.leftReverse(p,F,F);p.setSelectionRange(M===!0?y:b,b,"forward")}};function T(p){if(Cs(p)===!0)return;const y=i.value,b=y.selectionStart,M=y.selectionEnd;if(p.keyCode===37||p.keyCode===39){const F=w[(p.keyCode===39?"right":"left")+(e.reverseFillMask===!0?"Reverse":"")];p.preventDefault(),F(y,b,M,p.shiftKey)}else p.keyCode===8&&e.reverseFillMask!==!0&&b===M?w.left(y,b,M,!0):p.keyCode===46&&e.reverseFillMask===!0&&b===M&&w.rightReverse(y,b,M,!0)}function E(p){if(p==null||p==="")return"";if(e.reverseFillMask===!0)return O(p);const y=o;let b=0,M="";for(let F=0;F<y.length;F++){const I=p[b],A=y[F];if(typeof A=="string")M+=A,I===A&&b++;else if(I!==void 0&&A.regex.test(I))M+=A.transform!==void 0?A.transform(I):I,b++;else return M}return M}function O(p){const y=o,b=l.indexOf(_e);let M=p.length-1,F="";for(let I=y.length-1;I>=0&&M>-1;I--){const A=y[I];let k=p[M];if(typeof A=="string")F=A+F,k===A&&M--;else if(k!==void 0&&A.regex.test(k))do F=(A.transform!==void 0?A.transform(k):k)+F,M--,k=p[M];while(b===I&&k!==void 0&&A.regex.test(k));else return F}return F}function R(p){return typeof p!="string"||s===void 0?typeof p=="number"?s(""+p):p:s(p)}function V(p){return r.length-p.length<=0?p:e.reverseFillMask===!0&&p.length>0?r.slice(0,-p.length)+p:p+r.slice(p.length)}return{innerValue:u,hasMask:a,moveCursorForPaste:S,updateMaskValue:_,onMaskedKeydown:T}}const jd={name:String};function Hd(e){return P(()=>e.name||e.for)}function Dd(e,t){function n(){const i=e.modelValue;try{const l="DataTransfer"in window?new DataTransfer:"ClipboardEvent"in window?new ClipboardEvent("").clipboardData:void 0;return Object(i)===i&&("length"in i?Array.from(i):[i]).forEach(r=>{l.items.add(r)}),{files:l.files}}catch{return{files:void 0}}}return P(t===!0?()=>{if(e.type==="file")return n()}:n)}const Vd=/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/,zd=/[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73f}\u{2b740}-\u{2b81f}\u{2b820}-\u{2ceaf}\uf900-\ufaff\u3300-\u33ff\ufe30-\ufe4f\uf900-\ufaff\u{2f800}-\u{2fa1f}]/u,Wd=/[\u3131-\u314e\u314f-\u3163\uac00-\ud7a3]/,Ud=/[a-z0-9_ -]$/i;function Kd(e){return function(n){if(n.type==="compositionend"||n.type==="change"){if(n.target.qComposing!==!0)return;n.target.qComposing=!1,e(n)}else n.type==="compositionupdate"&&n.target.qComposing!==!0&&typeof n.data=="string"&&(Oe.is.firefox===!0?Ud.test(n.data)===!1:Vd.test(n.data)===!0||zd.test(n.data)===!0||Wd.test(n.data)===!0)===!0&&(n.target.qComposing=!0)}}var Qd=Fe({name:"QInput",inheritAttrs:!1,props:ge(ee(ee(ee({},Pd),$d),jd),{modelValue:{required:!1},shadowText:String,type:{type:String,default:"text"},debounce:[String,Number],autogrow:Boolean,inputClass:[Array,String,Object],inputStyle:[Array,String,Object]}),emits:[...Fd,"paste","change"],setup(e,{emit:t,attrs:n}){const i={};let l=NaN,r,o,s,a;const u=le(null),c=Hd(e),{innerValue:v,hasMask:g,moveCursorForPaste:d,updateMaskValue:_,onMaskedKeydown:S}=Nd(e,t,A,u),w=Dd(e,!0),T=P(()=>_l(v.value)),E=Kd(I),O=Bd(),R=P(()=>e.type==="textarea"||e.autogrow===!0),V=P(()=>R.value===!0||["text","search","url","tel","password"].includes(e.type)),p=P(()=>{const N=ge(ee({},O.splitAttrs.listeners.value),{onInput:I,onPaste:F,onChange:K,onBlur:$,onFocus:ri});return N.onCompositionstart=N.onCompositionupdate=N.onCompositionend=E,g.value===!0&&(N.onKeydown=S),e.autogrow===!0&&(N.onAnimationend=k),N}),y=P(()=>{const N=ge(ee({tabindex:0,"data-autofocus":e.autofocus===!0||void 0,rows:e.type==="textarea"?6:void 0,"aria-label":e.label,name:c.value},O.splitAttrs.attributes.value),{id:O.targetUid.value,maxlength:e.maxlength,disabled:e.disable===!0,readonly:e.readonly===!0});return R.value===!1&&(N.type=e.type),e.autogrow===!0&&(N.rows=1),N});se(()=>e.type,()=>{u.value&&(u.value.value=e.modelValue)}),se(()=>e.modelValue,N=>{if(g.value===!0){if(o===!0&&(o=!1,String(N)===l))return;_(N)}else v.value!==N&&(v.value=N,e.type==="number"&&i.hasOwnProperty("value")===!0&&(r===!0?r=!1:delete i.value));e.autogrow===!0&&Pe(k)}),se(()=>e.autogrow,N=>{N===!0?Pe(k):u.value!==null&&n.rows>0&&(u.value.style.height="auto")}),se(()=>e.dense,()=>{e.autogrow===!0&&Pe(k)});function b(){Hs(()=>{const N=document.activeElement;u.value!==null&&u.value!==N&&(N===null||N.id!==O.targetUid.value)&&u.value.focus({preventScroll:!0})})}function M(){u.value!==null&&u.value.select()}function F(N){if(g.value===!0&&e.reverseFillMask!==!0){const oe=N.target;d(oe,oe.selectionStart,oe.selectionEnd)}t("paste",N)}function I(N){if(!N||!N.target)return;if(e.type==="file"){t("update:modelValue",N.target.files);return}const oe=N.target.value;if(N.target.qComposing===!0){i.value=oe;return}if(g.value===!0)_(oe,!1,N.inputType);else if(A(oe),V.value===!0&&N.target===document.activeElement){const{selectionStart:Ce,selectionEnd:Se}=N.target;Ce!==void 0&&Se!==void 0&&Pe(()=>{N.target===document.activeElement&&oe.indexOf(N.target.value)===0&&N.target.setSelectionRange(Ce,Se)})}e.autogrow===!0&&k()}function A(N,oe){a=()=>{e.type!=="number"&&i.hasOwnProperty("value")===!0&&delete i.value,e.modelValue!==N&&l!==N&&(l=N,oe===!0&&(o=!0),t("update:modelValue",N),Pe(()=>{l===N&&(l=NaN)})),a=void 0},e.type==="number"&&(r=!0,i.value=N),e.debounce!==void 0?(clearTimeout(s),i.value=N,s=setTimeout(a,e.debounce)):a()}function k(){const N=u.value;if(N!==null){const oe=N.parentNode.style,{overflow:Ce}=N.style;oe.marginBottom=N.scrollHeight-1+"px",N.style.height="1px",N.style.overflow="hidden",N.style.height=N.scrollHeight+"px",N.style.overflow=Ce,oe.marginBottom=""}}function K(N){E(N),clearTimeout(s),a!==void 0&&a(),t("change",N.target.value)}function $(N){N!==void 0&&ri(N),clearTimeout(s),a!==void 0&&a(),r=!1,o=!1,delete i.value,e.type!=="file"&&setTimeout(()=>{u.value!==null&&(u.value.value=v.value!==void 0?v.value:"")})}function Z(){return i.hasOwnProperty("value")===!0?i.value:v.value!==void 0?v.value:""}qe(()=>{$()}),nn(()=>{e.autogrow===!0&&k()}),Object.assign(O,{innerValue:v,fieldClass:P(()=>`q-${R.value===!0?"textarea":"input"}`+(e.autogrow===!0?" q-textarea--autogrow":"")),hasShadow:P(()=>e.type!=="file"&&typeof e.shadowText=="string"&&e.shadowText.length>0),inputRef:u,emitValue:A,hasValue:T,floatingLabel:P(()=>T.value===!0||_l(e.displayValue)),getControl:()=>H(R.value===!0?"textarea":"input",ee(ee(ee({ref:u,class:["q-field__native q-placeholder",e.inputClass],style:e.inputStyle},y.value),p.value),e.type!=="file"?{value:Z()}:w.value)),getShadowControl:()=>H("div",{class:"q-field__native q-field__shadow absolute-bottom no-pointer-events"+(R.value===!0?"":" text-no-wrap")},[H("span",{class:"invisible"},Z()),H("span",e.shadowText)])});const C=Id(O),U=we();return Object.assign(U.proxy,{focus:b,select:M,getNativeElement:()=>u.value}),C}});const ho={threshold:0,root:null,rootMargin:"0px"};function go(e,t,n){let i,l,r;typeof n=="function"?(i=n,l=ho,r=t.cfg===void 0):(i=n.handler,l=Object.assign({},ho,n.cfg),r=t.cfg===void 0||Yn(t.cfg,l)===!1),t.handler!==i&&(t.handler=i),r===!0&&(t.cfg=l,t.observer!==void 0&&t.observer.unobserve(e),t.observer=new IntersectionObserver(([o])=>{if(typeof t.handler=="function"){if(o.rootBounds===null&&document.body.contains(e)===!0){t.observer.unobserve(e),t.observer.observe(e);return}(t.handler(o,t.observer)===!1||t.once===!0&&o.isIntersecting===!0)&&Js(e)}},l),t.observer.observe(e))}function Js(e){const t=e.__qvisible;t!==void 0&&(t.observer!==void 0&&t.observer.unobserve(e),delete e.__qvisible)}var Zd=Ms({name:"intersection",mounted(e,{modifiers:t,value:n}){const i={once:t.once===!0};go(e,i,n),e.__qvisible=i},updated(e,t){const n=e.__qvisible;n!==void 0&&go(e,n,t.value)},beforeUnmount:Js});const Jd=[{id:h(),ver:"\u0412\u043E\u0439\u0434\u0435\u0442 \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0443\u044E \u0432\u0435\u0440\u0441\u0438\u044E",children:[{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{label:"ERR-2514",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0412\u041A"}]}]},{id:"fuck",ver:"5.5.5957.274",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u041B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u0445 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u0441 \u043F\u043E\u0434\u0447\u0438\u043D\u0451\u043D\u043D\u044B\u043C\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u043C\u0438 \u0438 \u0433\u0440\u0443\u043F\u043F\u0430\u043C\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u0439.",children:[]},{id:h(),label:"\u0420\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u0440\u0430\u0437\u0440\u044F\u0434\u043E\u0432 \u0447\u0438\u0441\u043B\u0430",text:"\u0412 \u042D\u0423 \u0427\u0438\u0441\u043B\u043E \u0442\u0435\u043F\u0435\u0440\u044C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u0440\u0430\u0437\u0440\u044F\u0434\u043E\u0432 \u0447\u0438\u0441\u043B\u0430.",children:[]},{id:h(),label:"\u0421\u043F\u043E\u0441\u043E\u0431 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u0440\u0438 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0432\u0441\u0435\u0433\u0434\u0430 \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u0441\u043F\u043E\u0441\u043E\u0431 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F: \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443 \u0438\u043B\u0438 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E.",children:[]},{id:h(),label:"\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432",text:"\u041F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432.",children:[]},{id:h(),label:"\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043E\u0431\u043B\u0430\u0447\u043D\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u0438",text:"\u0418\u0437\u043C\u0435\u043D\u0451\u043D \u0434\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u043E\u0432 \u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043E\u0431\u043B\u0430\u0447\u043D\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E.",children:[]},{id:h(),label:"\u0418\u0437\u043C\u0435\u043D\u0438\u043B\u0441\u044F \u0434\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F",text:"\u0414\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D, \u0442\u0430\u043A\u0436\u0435 \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0441\u044F \u0430\u043B\u0433\u043E\u0440\u0438\u0442\u043C \u0432\u044B\u0431\u043E\u0440\u0430 \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442\u043E\u0432 \u0432 \u0434\u0438\u0430\u043B\u043E\u0433\u0435.",children:[]},{id:h(),label:"\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u0435\u043C \u0447\u0435\u0440\u0435\u0437 API",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u0438\u0430\u043B\u043E\u0433\u043E\u043C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u0447\u0435\u0440\u0435\u0437 API.",children:[]}]},{id:h(),head:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",icon:"bookshelf",model:!1,children:[{id:h(),label:"\u041B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F",text:"\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0430\u0445 \u0442\u0438\u043F\u0430 \u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442. \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u044B \u0441 \u043B\u0438\u0441\u0442\u043E\u043C \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0430\u0445.",children:[]},{id:h(),label:"\u041A\u043E\u043D\u0442\u0440\u043E\u043B \u0442\u0430\u0431\u043B\u0438\u0447\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445",text:"\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u0432\u0438\u0434\u0435 \u0442\u0430\u0431\u043B\u0438\u0446\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u043D\u043E \u0441\u0444\u043E\u0440\u043C\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0439 \u043C\u043E\u0434\u0435\u043B\u0438.",children:[]},{id:h(),label:'\u041D\u043E\u0432\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u042D\u0423 "\u0424\u0430\u0439\u043B"',text:'\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0424\u0430\u0439\u043B" \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430: \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043C\u0435\u0442\u043A\u0443 \u0431\u0435\u0437 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F, \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043F\u0440\u0438 \u043F\u0443\u0441\u0442\u043E\u043C \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0438, \u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u044F, \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u0435 \u043C\u0435\u043D\u044E.',children:[]},{id:h(),label:"\u0427\u0438\u0441\u043B\u043E",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438, \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u044E\u0449\u0435\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0435\u0439 \u0447\u0438\u0441\u043B\u0430. \u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E, \u0442.\u0435. \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F.",children:[]}]},{id:h(),head:"\u041E\u043F\u0442\u0438\u043C\u0438\u0437\u0430\u0446\u0438\u0438",icon:"rocket-launch",model:!1,children:[{id:h(),label:'\u0424\u0443\u043D\u043A\u0446\u0438\u044F "\u041E\u0431\u0449\u0438\u0435 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0438"',text:"\u0422\u0435\u043F\u0435\u0440\u044C \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0432 \u043E\u0431\u0449\u0435\u043C \u0440\u0435\u0436\u0438\u043C\u0435 \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439, \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u044F \u0447\u0435\u043C\u0443 \u0441\u0435\u0440\u0432\u0435\u0440 Docsvision \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442 \u043C\u0435\u043D\u044C\u0448\u0435 \u043F\u0430\u043C\u044F\u0442\u0438.",children:[]}]},{id:h(),head:"\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430",icon:"application-braces-outline",model:!1,children:[{id:h(),label:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 API",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D REST Web-API, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043D\u0430 \u0441\u0442\u043E\u0440\u043E\u043D\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430. \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B FileSignCreateDialog, FileSignSelectCertificateDialog. \u0418\u0437\u043C\u0435\u043D\u0435\u043D \u0441\u0435\u0440\u0432\u0438\u0441 $DocumentCardController.",show:!1,more:"<ul><li>\u0411\u044B\u043B \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D REST Web-API, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043D\u0430 \u0441\u0442\u043E\u0440\u043E\u043D\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u043E\u0436\u0435\u0442 \u0432\u044B\u0437\u044B\u0432\u0430\u0442\u044C \u0444\u0443\u043D\u043A\u0446\u0438\u0438 Docsvision API. REST API \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0438\u0437 \u043A\u043B\u0438\u0435\u043D\u0442\u0441\u043A\u0438\u0445 \u0441\u043A\u0440\u0438\u043F\u0442\u043E\u0432.</li> <li>\u0412\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B FileSignCreateDialog, FileSignSelectCertificateDialog \u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441 \u043D\u0438\u043C\u0438 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u043D\u0430 SignatureDialog.</li> <li>\u0421\u0435\u0440\u0432\u0438\u0441 $DocumentCardController \u0437\u0430\u043C\u0435\u043D\u0451\u043D \u043D\u0430 $SignatureController.</li> <li>\u0412\u043E \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0435\u043C \u043A\u043B\u0430\u0441\u0441\u0435 FileSign \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0447\u0430\u0441\u0442\u044C \u043C\u0435\u0442\u043E\u0434\u043E\u0432.</li></ul>",children:[]}]},{id:h(),head:"\u041D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B \u0432 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438 \u043D\u0430 github",icon:"github",model:!1,children:[{id:h(),label:"Github",text:"\u0412 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0439 WebClient-Samples \u043D\u0430 GitHub \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B",show:!1,more:"<ul><li>\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0443 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u0432 \u044F\u0447\u0435\u0439\u043A\u0435.</li> <li>\u0420\u0430\u0441\u0448\u0438\u0440\u0438\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u0435 \u043C\u0435\u043D\u044E.</li> <li>\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0432 Excel.</li> <li>\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0435\u0440\u043D\u044B\u0445 \u0432\u044B\u0437\u043E\u0432\u043E\u0432</li></ul>",children:[]}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-2464",text:"\u042D\u0423 \u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432. \u041F\u0440\u0438 \u043F\u043E\u0438\u0441\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0432\u043E\u0437\u043D\u0438\u043A\u0430\u0435\u0442 \u043E\u0448\u0438\u0431\u043A\u0430 SQLFailure.",children:[]},{id:h(),label:"ERR-958",text:"\u0412 \u043F\u0440\u0435\u0432\u044C\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0444\u0430\u0439\u043B\u0430 \u0435\u0441\u043B\u0438 \u0443 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0437\u0430\u043F\u0440\u0435\u0449\u0435\u043D\u043E \u0447\u0442\u0435\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430 \u043F\u043E \u0440\u043E\u043B\u0435\u0432\u043E\u0439.",children:[]},{id:h(),label:"ERR-2440",text:'\u041B\u043E\u043C\u0430\u0435\u0442\u0441\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0430 \u043E\u043A\u043D\u0430 \u043F\u043E\u0438\u0441\u043A\u0430 \u0443 \u043F\u0430\u043F\u043A\u0438 "\u041F\u043E\u0438\u0441\u043A \u043A\u0432\u0430\u0440\u0442\u0430\u043B\u044C\u043D\u044B\u0445 \u0446\u0435\u043B\u0435\u0439".',children:[]},{id:h(),label:"ERR-896",text:"\u041D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u043F\u0435\u0440\u0435\u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A LifeCycle \u0432 InitializeContainer \u0441\u0435\u0440\u0432\u0435\u0440\u043D\u043E\u0433\u043E \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u044F.",children:[]},{id:h(),label:"ERR-2346",text:"\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0438\u043A\u043E\u043D\u043A\u0438 (\u0440\u0435\u0448\u0435\u043D\u0438\u044F) \u043F\u0440\u0438 \u0434\u0435\u043B\u0435\u0433\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0441 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043E\u043C.",children:[]},{id:h(),label:"ERR-2390",text:"\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u043E\u0442 \u0434\u0435\u043B\u0435\u0433\u0430\u0442\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u0432 \u0445\u043E\u0434\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",children:[]},{id:h(),label:"ERR-2279",text:"\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u043F\u0443\u0441\u043A \u044D\u0442\u0430\u043F\u043E\u0432 \u043F\u043E\u0441\u043B\u0435 \u0437\u0430\u043F\u0443\u0441\u043A\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",children:[]},{id:h(),label:"ERR-0004",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 \u0444\u0430\u0439\u043B\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",children:[]},{id:h(),label:"ERR-2336",text:"\u041D\u0435 \u043A\u043E\u043F\u0438\u0440\u0443\u044E\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u043F\u0440\u0438 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",children:[]},{id:h(),label:"ERR-2183",text:"\u0412 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u0445 \u043D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0441\u044B\u043B\u043A\u0430 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442 \u0435\u0441\u043B\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u044B \u0438\u0437 \u0434\u0440\u0443\u0433\u043E\u0433\u043E \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u041A\u0421.",children:[]},{id:h(),label:"ERR-2281",text:"\u0415\u0441\u043B\u0438 \u043E\u0444\u043B\u0430\u0439\u043D \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438 \u043D\u0435 \u0443\u0431\u0438\u0440\u0430\u044E\u0442\u0441\u044F \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u043F\u0435\u0440\u0435\u0441\u0447\u0435\u0442 \u0432 childrener-e, \u0442\u043E \u0443 \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u043F\u0440\u0435\u0441\u0442\u0430\u044E\u0442 \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A\u0438 \u0432 \u043F\u0430\u043F\u043A\u0435.",children:[]},{id:h(),label:"ERR-2222",text:"\u0422\u0435\u043A\u0441\u0442 \u043C\u0435\u0442\u043A\u0438 \u042D\u0423 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u043D\u0430 \u043D\u043E\u0432\u0443\u044E \u0441\u0442\u0440\u043E\u043A\u0443 \u0441\u043F\u0440\u0430\u0432\u0430 \u043E\u0442 \u043C\u0435\u0442\u043A\u0438.",children:[]}]}]},{id:h(),ver:"5.5.5957.250",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u0421\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u042D\u041F \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430",text:"\u041F\u043E\u044F\u0432\u0438\u043B\u0430\u0441\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u0434\u043B\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",children:[]},{id:h(),label:"\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0435\u0439 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",text:"\u0412 \u043F\u0440\u043E\u0444\u0438\u043B\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043D\u043E\u0432\u0430\u044F \u0432\u043A\u043B\u0430\u0434\u043A\u0430 \u041F\u043E\u0434\u043F\u0438\u0441\u044C.",children:[]},{id:h(),label:"\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u043E \u043C\u0435\u0441\u0442\u0443",text:"\u041F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u0440\u0435\u0436\u0438\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443. \u0422\u0435\u043F\u0435\u0440\u044C \u0432\u0441\u0435 \u042D\u0423 \u0432 \u0440\u0435\u0436\u0438\u043C\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443 \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u043F\u0440\u044F\u043C\u043E \u0432 \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u043C\u044B\u0445 \u043E\u0431\u043B\u0430\u0441\u0442\u044F\u0445. \u041C\u0430\u043B\u0435\u043D\u044C\u043A\u043E\u0435 \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0435 \u043E\u043A\u043D\u043E \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u042D\u0423 \u0422\u0435\u043A\u0441\u0442.",children:[]}]},{id:h(),head:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",icon:"bookshelf",model:!1,children:[{id:h(),label:"\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432",text:'\u0414\u043B\u044F \u042D\u0423 "\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432" \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u043F\u043E\u0438\u0441\u043A \u0443\u0437\u043B\u0430, \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u044E\u0449\u0435\u0435 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E \u0443\u0437\u043B\u0430\u043C \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430.',children:[]},{id:h(),label:"\u0421\u043F\u0438\u0441\u043E\u043A \u0444\u0430\u0439\u043B\u043E\u0432",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043D\u043E\u043F\u043A\u0443 \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0432 \u0421\u043F\u0438\u0441\u043A\u0435 \u0444\u0430\u0439\u043B\u043E\u0432, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0435\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u042D\u0423 \u041A\u043D\u043E\u043F\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F.",children:[]},{id:h(),label:"\u041A\u043D\u043E\u043F\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F",text:'\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0442\u0438\u043F\u0430 "\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442". \u042D\u0423 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u043E\u0431\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u0443, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0443\u044E \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0431\u0435\u0437 \u0444\u0430\u0439\u043B\u043E\u0432 (\u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438).',children:[]},{id:h(),label:"CertificateSettings",text:"\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043E\u0442\u0432\u0435\u0447\u0430\u044E\u0449\u0438\u0439 \u0437\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442\u043E\u0432 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F.",children:[]}]},{id:h(),head:"\u041E\u043F\u0442\u0438\u043C\u0438\u0437\u0430\u0446\u0438\u0438",icon:"rocket-launch",model:!1,children:[{id:h(),label:"\u041A\u043E\u043D\u0441\u043E\u043B\u044C \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430",text:"\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0431 \u043E\u0442\u043C\u0435\u043D\u0435 \u043E\u0431\u0435\u0449\u0430\u043D\u0438\u044F (promise) \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0432\u044B\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u0432 \u043A\u043E\u043D\u0441\u043E\u043B\u044C \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430. \u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A\u043E\u043C, \u0432 \u043A\u043E\u043D\u0441\u043E\u043B\u0438 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E \u0442\u043E\u043C, \u043A\u0430\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A \u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043D\u0435\u043D \u0437\u0430 \u043E\u0442\u043C\u0435\u043D\u0443 \u043A\u043E\u043D\u043A\u0440\u0435\u0442\u043D\u043E\u0433\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u044F.",children:[]}]},{id:h(),head:"\u041D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B \u0432 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438 \u043D\u0430 github",icon:"github",model:!1,children:[{id:h(),label:"Github",text:"\u0412 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0439 WebClient-Samples \u043D\u0430 GitHub \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B.",show:!1,more:"<ul><li>\u041E\u0442\u043E\u0431\u0440\u0430\u0437\u0438\u0442\u044C \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u044B\u0445 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0446\u0432\u0435\u0442 \u0441\u0442\u0440\u043E\u043A\u0438 \u043F\u043E \u043A\u043D\u043E\u043F\u043A\u0435.</li></ul>",children:[]}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-2174",text:"\u041A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u044C \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043D\u0435 \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0438 \u0440\u0430\u0441\u0447\u0451\u0442\u0435 \u0441\u0440\u043E\u043A\u043E\u0432.",children:[]},{id:h(),label:"ERR-1630",text:"\u041E\u0448\u0438\u0431\u043E\u0447\u043D\u043E \u0441\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u0442 \u0437\u0430\u043F\u0440\u0435\u0442 \u043D\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",children:[]},{id:h(),label:"ERR-1840",text:'\u041D\u0435 \u043E\u0442\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F xlsx \u0444\u0430\u0439\u043B \u0432 "\u0445\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F".',children:[]},{id:h(),label:"ERR-1276",text:"\u041F\u0440\u0438 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0432 \u0434\u0440\u0443\u0433\u043E\u0435 \u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0447\u0430\u0441\u0442\u0438\u0447\u043D\u043E \u0441\u0431\u0440\u0430\u0441\u044B\u0432\u0430\u044E\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F.",children:[]},{id:h(),label:"ERR-1757",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043F\u043E\u0438\u0441\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 StaffDirectoryItems, \u0435\u0441\u043B\u0438 \u0432 \u0438\u043C\u0435\u043D\u0438 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u0438\u043C\u0432\u043E\u043B &.",children:[]},{id:h(),label:"ERR-1857",text:"\u041D\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u044E\u0442\u0441\u044F \u0441\u0442\u0430\u0440\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u0432 \u043D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434.",children:[]},{id:h(),label:"ERR-2094",text:"\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0430\u0440\u0445\u0438\u0432\u043D\u043E\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u0435 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430.",children:[]},{id:h(),label:"ERR-2111",text:"\u041D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u043F\u0440\u043E\u043F\u0443\u0441\u043A\u0430\u0442\u044C \u0432\u0441\u0435 \u0432\u043D\u0435\u0448\u043D\u0438\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B \u043F\u0440\u0438 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0430\u0446\u0438\u0438 \u0444\u0430\u0439\u043B\u043E\u0432 \u043F\u0440\u0438 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435.",children:[]},{id:h(),label:"ERR-2102",id:h(),text:"IFileConvertationService \u0434\u043E\u043B\u0436\u0435\u043D \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044C \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0441\u043A\u0438\u0445 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0435\u0440\u043E\u0432.",children:[]},{id:h(),label:"ERR-2060",text:"\u0412 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432 \u043D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u043A\u043E\u043B\u043E\u043D\u043A\u0438 \u0424\u0418\u041E, \u0424\u0430\u043C\u0438\u043B\u0438\u044F, \u0418\u043C\u044F, \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E.",children:[]},{id:h(),label:"ERR-2095",text:"\u041A\u043E\u0440\u0435\u043D\u044C WebFrame. \u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0443\u0441\u043B\u043E\u0432\u0438\u0435 \u0440\u043E\u043B\u0438 \u0434\u043B\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438.",children:[]},{id:h(),label:"ERR-2030",text:'Uncaught TypeError: Cannot read properties of null (reading "textContent") \u043F\u0440\u0438 \u043D\u0430\u043B\u0438\u0447\u0438\u0438 \u0444\u0430\u0439\u043B\u0430, \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0433\u043E \u0434\u043B\u044F \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430 \u0441\u0440\u0435\u0434\u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u0444\u0430\u0439\u043B\u043E\u0432 \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u0438 \u043D\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435.',children:[]},{id:h(),label:"ERR-1829",text:"\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0435 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430, \u0435\u0441\u043B\u0438 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0430\u0440\u0445\u0438\u0432.",children:[]},{id:h(),label:"ERR-2086",text:"\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0437\u043D\u044B\u0445 \u0432\u0435\u0440\u0441\u0438\u0439 \u0444\u0430\u0439\u043B\u0430 \u0432 FileChildren \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0435\u0440\u0432\u0443\u044E \u0432\u0435\u0440\u0441\u0438\u044E \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430.",children:[]}]}]},{id:h(),ver:"5.5.5957.226",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u0418\u043A\u043E\u043D\u043A\u0438",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0440\u044F\u0434 \u0438\u043A\u043E\u043D\u043E\u043A.",show:!1,more:"\u0414\u043B\u044F \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0438\u043A\u043E\u043D\u043A\u0438: <ul><li>\u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432,</li> <li>\u041F\u0430\u0440\u0442\u043D\u0435\u0440,</li> <li>\u041F\u043E\u0434\u0440\u0430\u0437\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u0430\u0433\u0435\u043D\u0442\u0430,</li> <li>\u0414\u0430\u0442\u0430/\u0432\u0440\u0435\u043C\u044F,</li> <li>\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432,</li> <li>\u041D\u0443\u043C\u0435\u0440\u0430\u0442\u043E\u0440,</li> <li>\u0414\u0435\u043B\u043E,</li></ul> \u041D\u0430\u043B\u0438\u0447\u0438\u0435 \u0438\u043B\u0438 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0438\u043A\u043E\u043D\u043A\u0438 \u0443 \u044D\u0442\u0438\u0445 \u042D\u0423 \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E\u043C \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0438\u043A\u043E\u043D\u043A\u0443. \u0418\u043A\u043E\u043D\u043A\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u0445 \u0440\u0435\u0436\u0438\u043C\u0430\u0445 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",children:[]},{id:h(),label:"\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0438 \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u043E\u0439 \u0444\u0443\u043D\u043A\u0446\u0438\u0435\u0439.",children:[]},{id:h(),label:"\u041E\u043F\u0440\u043E\u0441 \u043F\u043E \u0440\u0430\u0431\u043E\u0442\u0435 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u0447\u0435\u0440\u0435\u0437 \u0442\u0440\u0438 \u043C\u0435\u0441\u044F\u0446\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E\u0441\u043B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u0439\u0442\u0438 \u043E\u043F\u0440\u043E\u0441 \u043F\u043E \u0440\u0430\u0431\u043E\u0442\u0435 \u0441 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u043E\u043C.",children:[]},{id:h(),label:"\u0424\u0438\u043B\u044C\u0442\u0440\u0430\u0446\u0438\u044F \u043F\u043E \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u0435\u043C\u044B\u043C \u0441\u0442\u043E\u043B\u0431\u0446\u0430\u043C",text:"\u0424\u0438\u043B\u044C\u0442\u0440\u0430\u0446\u0438\u044F \u043F\u043E \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u0435\u043C\u044B\u043C \u0441\u0442\u043E\u043B\u0431\u0446\u0430\u043C \u0442\u0435\u043F\u0435\u0440\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u0445.",children:[]}]},{id:h(),head:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",icon:"bookshelf",model:!1,children:[{id:h(),label:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0440\u044F\u0434 \u0441\u0432\u043E\u0439\u0441\u0442\u0432 \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438.",show:!1,more:"<ul><li>\u0414\u043B\u044F \u042D\u0423 \u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u041F\u0430\u043D\u0435\u043B\u044C \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u042D\u0423.</li> <li>\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u0442\u0430\u043A\u0436\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u044B\u0441\u043E\u0442\u0430 \u0432 \u043F\u0438\u043A\u0441\u0435\u043B\u044F\u0445, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u044B\u0441\u043E\u0442\u0443 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F</li> <li>\u0414\u043B\u044F \u042D\u0423 layouts:page$ctrl/webFrame/webFrameContent.adoc#bg \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0437\u0430\u0434\u0430\u0442\u044C \u0444\u043E\u043D \u0434\u043B\u044F \u0433\u043B\u0430\u0432\u043D\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0438/\u0438\u043B\u0438 \u043F\u0430\u043F\u043E\u043A.</li> <li>\u0424\u043E\u043D \u0442\u0430\u043A\u0436\u0435 \u043C\u043E\u0436\u043D\u043E \u0437\u0430\u0434\u0430\u0442\u044C \u0432 \u043B\u043E\u043A\u0430\u0446\u0438\u044F\u0445 \u041F\u0430\u043F\u043A\u0430, \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430, \u0413\u043B\u0430\u0432\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0432 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0435 \u0424\u043E\u043D \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 root.</li> <li>\u0414\u043B\u044F \u042D\u0423 \u041B\u043E\u0433\u043E\u0442\u0438\u043F \u043A\u043E\u043C\u043F\u0430\u043D\u0438\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u042D\u0423.</li> <li>\u0422\u0430\u043A\u0436\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0432\u0441\u0435\u0433\u0434\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u042D\u0423 \u0432\u0441\u0435\u0433\u0434\u0430.</li></ul> \u0420\u0430\u0437\u043C\u0435\u0442\u043A\u0430 WebFrame \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0434\u043B\u044F \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0432\u0441\u0435\u0433\u0434\u0430 \u0441 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0438\u044F\u043C\u0438.",children:[]},{id:h(),label:'\u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E "\u0422\u0435\u0433" \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F',text:"\u0414\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E Tag / \u0422\u0435\u0433. \u0422\u0435\u0433\u2009\u2014\u2009\u043F\u0440\u043E\u0441\u0442\u043E\u0435 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442 \u0434\u043B\u044F \u042D\u0423 \u0432 \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0435 \u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",children:[]}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-2085",text:'\u0421\u0442\u0430\u0440\u044B\u0439 \u0433\u0440\u0438\u0434. \u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0438 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u043A\u0440\u044B\u0442\u043E\u0439".',children:[]},{id:h(),label:"ERR-2028",text:"\u0422\u0435\u043A\u0441\u0442 \u043E\u0434\u043D\u043E\u0433\u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u043D\u0430\u043A\u043B\u0430\u0434\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u043D\u0430 \u0442\u0435\u043A\u0441\u0442 \u0434\u0440\u0443\u0433\u043E\u0433\u043E \u043F\u0440\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0435 \u044D\u0442\u0430\u043F\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435, \u0435\u0441\u043B\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u043E \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",children:[]},{id:h(),label:"ERR-2073",text:"\u041D\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u043F\u0430\u043F\u043E\u043A \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E. \u041F\u0430\u043F\u043A\u0438 \u0441 \u0432\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438 \u0438\u043C\u0435\u044E\u0442 \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u043F\u0440\u0438 \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0435.",children:[]},{id:h(),label:"ERR-2036",text:"\u041D\u0435 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0432\u044B\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u043D\u0438\u0435 \u0442\u0435\u043A\u0441\u0442\u0430 \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E.",children:[]},{id:h(),label:"ERR-2003",text:"\u0412 \u044D\u0442\u0430\u043F\u0435 \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u0438\u0437\u043C\u0435\u043D\u044F\u0442\u044C \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u0435\u0441\u043B\u0438 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0449\u0438\u0435 \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u044E\u0442\u0441\u044F \u0447\u0435\u0440\u0435\u0437 \u0431\u0438\u0437\u043D\u0435\u0441-\u043F\u0440\u043E\u0446\u0435\u0441\u0441..",children:[]},{id:h(),label:"ERR-1997",text:"\u0412 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u044B\u0445 \u0432\u0440\u0443\u0447\u043D\u0443\u044E \u044D\u0442\u0430\u043F\u0430\u0445 \u043D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0442\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E.",children:[]},{id:h(),label:"ERR-1829",text:'\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0432\u043A\u043B\u0430\u0434\u043A\u0438 "\u0418\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435" \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438 \u043F\u043E\u0441\u043B\u0435 \u0430\u0440\u0445\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.',children:[]},{id:h(),label:"ERR-1842",text:"\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u043D\u043E\u0432\u043E\u043C \u0433\u0440\u0438\u0434\u0435 \u0434\u043B\u044F \u0447\u0438\u0441\u043B\u043E\u0432\u044B\u0445 \u043A\u043E\u043B\u043E\u043D\u043E\u043A.",children:[]},{id:h(),label:"ERR-1880",text:"\u0412 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 StaffDirectoryItems \u043D\u0435 \u043E\u0447\u0438\u0449\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0435\u0435 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435.",children:[]},{id:h(),label:"ERR-1863",text:"\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u0434\u0430\u043D\u043D\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432, \u0435\u0441\u043B\u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0434\u0430\u043D\u043D\u043E\u0433\u043E \u0442\u0438\u043F\u0430 \u0431\u044B\u043B\u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u044B \u0441 \u043E\u0434\u043D\u043E\u0439 \u0441\u0435\u043A\u0446\u0438\u0435\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",children:[]},{id:h(),label:"ERR-1804",text:"\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0444\u0430\u0439\u043B\u043E\u0432 \u0438\u0437 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432 \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u043E\u0434\u043D\u043E\u0439 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B.",children:[]},{id:h(),label:"ERR-1808",text:"\u0412 \u0441\u043E\u0431\u044B\u0442\u0438\u0438 cardSaved \u043D\u0435 \u043F\u0435\u0440\u0435\u0434\u0430\u044E\u0442\u0441\u044F bindings.",children:[]},{id:h(),label:"ERR-1630",text:"\u0417\u0430\u043F\u0440\u0435\u0442 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",children:[]},{id:h(),label:"ERR-1572",text:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0430 \u0434\u0430\u0442\u044B \u0432 \u0432\u0438\u0434\u0436\u0435\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0445 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.",children:[]},{id:h(),label:"ERR-1566",id:h(),text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u0438 \u043D\u043E\u043C\u0435\u0440\u0430 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 : Internal Server Error.",children:[]}]}]},{id:h(),ver:"5.5.5957.195",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C",text:"\u0414\u043B\u044F \u0440\u044F\u0434\u0430 \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C",show:!1,more:"\u0414\u043B\u044F \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0445 \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C: <ul> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u0413\u0440\u0443\u043F\u043F\u0430 \u043F\u0430\u043F\u043E\u043A</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u0418\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430</li></ul> \u0412\u044B\u0441\u043E\u0442\u0430 \u0432\u0438\u0434\u0436\u0435\u0442\u043E\u0432 \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0432\u044B\u0441\u043E\u0442\u043E\u0439 \u042D\u0423 \u0411\u043B\u043E\u043A.",children:[]},{id:h(),label:"\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C REST \u0432\u0441\u0435\u0433\u0434\u0430",text:"\u0423\u043F\u0440\u0430\u0437\u0434\u043D\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0430 \u0441 REST \u043D\u0430 COM. \u0422\u0435\u043F\u0435\u0440\u044C \u0432\u0441\u0435\u0433\u0434\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F REST.",children:[]},{id:h(),label:"\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u043E\u0435 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435",id:h(),text:"\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u043E\u0435 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u043E\u0432 WebClient.xml WebClientServerExtension.xml, \u0435\u0441\u043B\u0438 \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0432\u043A\u043B\u044E\u0447\u0435\u043D \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0439 \u0444\u043B\u0430\u0433.",children:[]},{id:h(),label:"\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430",text:"\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F.",children:[]}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-1795",text:"\u041F\u0440\u0438 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0447\u0435\u0440\u0435\u0437 WebDav \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0439 \u0444\u0430\u0439\u043B \u043F\u0438\u0448\u0435\u0442\u0441\u044F \u043F\u0440\u044F\u043C\u043E \u043D\u0430 \u0434\u0438\u0441\u043A C..",children:[]},{id:h(),label:"ERR-1694",text:'FilePicker. \u0415\u0441\u0442\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0444\u0430\u0439\u043B \u0434\u0430\u0436\u0435 \u0435\u0441\u043B\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0440\u0435\u0436\u0438\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F "\u0411\u0435\u0437 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F".',children:[]},{id:h(),label:"ERR-1639",id:h(),text:"\u041E\u0448\u0438\u0431\u043A\u0430 internal Server Error \u043F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435.",children:[]},{id:h(),label:"ERR-1673",text:"\u0412 \u043E\u043A\u043D\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430 \u0432 \u043F\u043E\u043B\u0435 \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0432\u0440\u0435\u043C\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0438\u0437 \u043A\u044D\u0448\u0430.",children:[]},{id:h(),label:"ERR-1682",text:"\u0412 \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u043E\u0431 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 Dropdown \u043F\u0440\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0442\u043E\u0433\u0434\u0430 \u043A\u0430\u043A \u0444\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043C\u0435\u043D\u044F\u043B\u043E\u0441\u044C..",children:[]},{id:h(),label:"ERR-1746",text:"\u0424\u043E\u0440\u043C\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430. \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0444\u043B\u0430\u0433\u043E\u0432 \u043D\u0435 \u043E\u0442\u0446\u0435\u043D\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u043F\u043E \u043C\u0435\u0442\u043A\u0435..",children:[]},{id:h(),label:"ERR-1050",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u043A\u043D\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043F\u0440\u0430\u0432 \u0434\u043E\u0441\u0442\u0443\u043F\u0430 \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",children:[]},{id:h(),label:"WebC-10823",text:'"\u0420\u0435\u0436\u0438\u043C \u043E\u0442\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0445 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0439 \u0443\u0436\u0435 \u0432\u043A\u043B\u044E\u0447\u0435\u043D." \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u0444\u043B\u0430\u0433\u0430.',children:[]},{id:h(),label:"ERR-1669",text:"\u041D\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0441\u0441\u044B\u043B\u043A\u0430 \u043D\u0430 \u0444\u0430\u0439\u043B \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 PartnersDepartment.",children:[]},{id:h(),label:"ERR-1360",text:'\u043F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043F\u043E\u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u043C \u0432\u044B\u0431\u043E\u0440\u0435 "\u043F\u0443\u0441\u0442\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0438" \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u043D\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0438.',children:[]},{id:h(),label:"ERR-1532",text:"\u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438 \u0438\u0437 \u0431\u043E\u043A\u043E\u0432\u043E\u0439 \u043F\u0430\u043D\u0435\u043B\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u044E\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0432 \u043F\u0430\u043D\u0435\u043B\u0438 \u043F\u043E\u0441\u043B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B.",children:[]},{id:h(),label:"ERR-1352",text:"\u042D\u041F \u043D\u0430\u043A\u043B\u0430\u0434\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E.",children:[]},{id:h(),label:"ERR-1051",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u043A\u043D\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043F\u0440\u0430\u0432 \u0434\u043E\u0441\u0442\u0443\u043F\u0430 \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",children:[]},{id:h(),label:"ERR-1529",text:"\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043F\u043E\u043F\u044B\u0442\u043A\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430 \u0447\u0435\u0440\u0435\u0437 \u043A\u043E\u043D\u0442\u0440\u043E\u043B FilePicker.",children:[]},{id:h(),label:"ERR-1260",text:"\u041D\u0435\u043B\u044C\u0437\u044F \u0441\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0438\u043B\u0438 \u043E\u0442\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u043E\u043B\u044F \u0443 \u0443\u0436\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u043E\u0433\u043E \u0432 \u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",children:[]}]}]},{id:h(),ver:"5.5.5957.174",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u0412\u044B\u0432\u043E\u0434 \u043A\u0440\u0430\u0442\u043A\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438 \u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0435",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0430\u0442\u043A\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0435 \u043C\u043E\u0436\u043D\u043E \u043F\u0440\u044F\u043C\u043E \u0438\u0437 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u0441\u043C. \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435.",children:[]},{id:h(),label:"\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434",text:"\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434, \u0440\u0430\u043D\u0435\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043A\u0430\u043A \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F \u0442\u0435\u043F\u0435\u0440\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u043D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0430\u0445 \u0438 \u043F\u043B\u0430\u043D\u0448\u0435\u0442\u0430\u0445.",children:[]},{id:h(),label:"\u0410\u0433\u0440\u0435\u0433\u0430\u0446\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0432 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u0445",text:"\u041F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u043C \u0438 \u0441\u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u043C \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u043C \u043F\u043E\u0438\u0441\u043A\u0435 Elasticsearch, \u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0439 \u0444\u0443\u043D\u043A\u0446\u0438\u044F \u0430\u0433\u0440\u0435\u0433\u0430\u0446\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0432 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0438.",children:[]},{id:h(),label:"\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043E\u043A\u043D\u043E \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u0442\u044C \u043E\u043A\u043D\u0430 \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D.",show:!1,more:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u0442\u044C \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043E\u043A\u043D\u0430 \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D: <ul><li>\u041E\u043A\u043D\u043E \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0441\u044B\u043B\u043E\u043A.</li> <li>\u041E\u043A\u043D\u043E \u0432\u044B\u0431\u043E\u0440\u0430 \u043F\u0430\u043F\u043A\u0438.</li> <li>\u041E\u043A\u043D\u043E \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u043A\u043E\u043D\u0442\u0440\u0430\u0433\u0435\u043D\u0442\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u043D\u043E\u043C\u0435\u043D\u043A\u043B\u0430\u0442\u0443\u0440\u044B \u0434\u0435\u043B.</li> <li>\u041B\u0438\u0441\u0442 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.</li> <li>\u0414\u0435\u0440\u0435\u0432\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F.</li> <li>\u041E\u043A\u043D\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430.</li> <li>\u0425\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.</li></ul> \u0427\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043E\u043A\u043D\u043E \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443 \u0432 \u043F\u0440\u0430\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443 \u043E\u043A\u043D\u0430.",children:[]}]},{id:h(),head:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",icon:"bookshelf",model:!1,children:[{id:h(),label:"\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430",text:"\u0412 \u043B\u043E\u043A\u0430\u0446\u0438\u0438 \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438 \u0438\u0437\u043C\u0435\u043D\u0451\u043D \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430\u2009\u2014\u2009\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438. \u042D\u0423 \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438 \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 \u0434\u0432\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430: \u0422\u0443\u043B\u0431\u0430\u0440 \u043F\u0430\u043F\u043A\u0438 \u0438 \u0423\u0437\u0435\u043B \u0434\u043B\u044F \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0445 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0439.",children:[]},{id:h(),label:"\u041D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438.",show:!1,more:"<ul><li>\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0440\u0430\u0437\u0443 \u0433\u0440\u0443\u043F\u043F\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043E\u043A\u043E\u043D\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u043E \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443.</li> <li>\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043A\u0430\u0447\u0430\u0442\u044C \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0438\u043B\u0438 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0430\u0439\u043B\u044B, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0444\u0430\u0439\u043B\u044B \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.</li></ul>",children:[]},{id:h(),label:"\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439",text:"\u0412 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0437\u0430\u0434\u0430\u0442\u044C \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0443 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E.",children:[]},{id:h(),label:"\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0438\u0439 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u043F\u0430\u043F\u043A\u0443 \u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435.",children:[]}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-1356",text:"TextArea HtmlEditor \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439 Scroll.",children:[]},{id:h(),label:"ERR-1421",text:'\u041E\u0448\u0438\u0431\u043A\u0430 "NullReferenceException" \u0432 StaffDirectoryItems.',children:[]},{id:h(),label:"ERR-1286",text:"\u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0432 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043D\u0435\u0442 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0435\u0439 \u0437\u0430\u043F\u0438\u0441\u0438.",children:[]},{id:h(),label:"WebC-11062",text:"\u0411\u043B\u043E\u043A \u0441 \u0444\u0430\u0439\u043B\u043E\u043C \u043E\u0442\u0447\u0435\u0442\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0432\u0451\u0440\u043D\u0443\u0442\u044B\u043C.",children:[]},{id:h(),label:"ERR-1218",text:"\u041F\u043E\u0441\u043B\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043D\u043E\u0432\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 \u0444\u0430\u0439\u043B\u0430 \u0434\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0442\u0430\u0440\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F \u0444\u0430\u0439\u043B\u0430.",children:[]},{id:h(),label:"ERR-1230",text:"\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 \u043F\u043E\u0441\u043B\u0435 \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430 \u0441 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 14 \u043D\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442 16.",children:[]},{id:h(),label:"ERR-1314",text:"\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430\u044F \u0434\u043B\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0432 StaffDirectoryItems.",children:[]},{id:h(),label:"ERR-1261",text:'\u0412 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043D\u0435 \u0444\u0438\u043A\u0441\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u044F "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435".',children:[]},{id:h(),label:"ERR-1290",text:"\u0412 \u043F\u043E\u043B\u0435 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u0410\u0432\u0442\u043E\u0440 = \u042F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0435 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C, \u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0438\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C \u043F\u043E\u0434 \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0431\u044B\u043B \u043B\u043E\u0433\u0438\u043D \u0432 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0435.",children:[]},{id:h(),label:"ERR-1070",text:"\u0421\u043E\u0437\u0434\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0448\u043D\u044F\u044F \u0441\u0435\u0441\u0441\u0438\u044F \u0443\u0447\u0451\u0442\u043D\u043E\u0439 \u0437\u0430\u043F\u0438\u0441\u0438 \u043F\u0443\u043B\u0430 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u0438 \u0430\u0443\u0442\u0435\u043D\u0442\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438 \u043F\u0440\u0438 \u0437\u0430\u043F\u0443\u0441\u043A\u0435 \u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",children:[]},{id:h(),label:"ERR-1069",text:"\u041F\u0440\u0438 \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u0438 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A \u043D\u0435 \u043E\u0441\u0432\u043E\u0431\u043E\u0436\u0434\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0446\u0435\u043D\u0437\u0438\u044F.",children:[]},{id:h(),label:"ERR-1259",text:"\u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u043F\u043E\u0438\u0441\u043A. \u041D\u0435 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u044E\u0442\u0441\u044F \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E\u0441\u043B\u0435 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u043D\u0430\u0437\u0430\u0434 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",children:[]},{id:h(),label:"ERR-0001",text:"\u0412 \u043E\u043A\u043D\u0435 \u043F\u043E\u0438\u0441\u043A\u0430 \u043D\u0435\u043B\u044C\u0437\u044F \u0431\u044B\u043B\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0441 \u0444\u043B\u0430\u0433\u043E\u043C \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u044B\u0431\u043E\u0440\u0435.",children:[]},{id:h(),label:"ERR-1217",text:"\u041F\u043E\u0441\u043B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430 \u043D\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0432\u0435\u0440\u0441\u0438\u044F.",children:[]},{id:h(),label:"ERR-1216",text:"\u041F\u043E\u0441\u043B\u0435 \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F \u0441\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F \u043F\u0430\u043F\u043A\u0438 \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u044B\u0445 \u0441\u0431\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043D\u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0435\u0435 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435.",children:[]}]}]},{id:h(),ver:"5.5.5957.141",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:'\u0414\u043E\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0422\u0435\u043A\u0441\u0442"',text:"\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0422\u0435\u043A\u0441\u0442 \u0434\u043E\u0440\u0430\u0431\u043E\u0442\u0430\u043D: \u043F\u043E\u044F\u0432\u0438\u043B\u0430\u0441\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0432\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u043A\u0441\u0442 \u0431\u0435\u0437 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0437\u043C\u0435\u0440 \u0448\u0440\u0438\u0444\u0442\u0430. \u0422\u0430\u043A\u0436\u0435 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0441 \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u043C\u0438 \u0432 \u042D\u0423 \u0442\u0430\u0431\u043B\u0438\u0446\u0430\u043C\u0438 \u0438 \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u043C \u0442\u0435\u043A\u0441\u0442\u043E\u043C."},{id:h(),label:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0441\u0442\u0440\u043E\u043A\u0430 \u043F\u043E\u0438\u0441\u043A\u0430",text:'\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434 \u0441\u0442\u0440\u043E\u043A\u0438 \u043F\u043E\u0438\u0441\u043A\u0430 \u0431\u044B\u043B \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D. \u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0430 "\u041D\u0430\u0439\u0442\u0438", \u0438\u043D\u0430\u0447\u0435 \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D \u0432\u044B\u0431\u043E\u0440 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043F\u043E\u0438\u0441\u043A\u0430.'},{id:h(),label:"\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u0422\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439",text:"\u0412 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439 \u0442\u0435\u043F\u0435\u0440\u044C \u043C\u043E\u0436\u043D\u043E \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043D\u0430 \u0441\u0442\u043E\u043B\u0431\u0435\u0446."},{id:h(),label:"\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435."},{id:h(),label:"\u041D\u043E\u0432\u044B\u0439 \u0444\u043E\u0440\u043C\u0430\u0442 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0440\u0435\u0448\u0435\u043D\u0438\u044F",text:"\u0420\u0435\u0448\u0435\u043D\u0438\u044F \u0445\u0440\u0430\u043D\u044F\u0442\u0441\u044F \u0432 \u043D\u043E\u0432\u043E\u043C \u0432\u0438\u0434\u0435. \u041F\u043E\u044F\u0432\u0438\u043B\u0441\u044F \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u043E\u0440\u043C\u0430\u0442 \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0438 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0440\u0435\u0448\u0435\u043D\u0438\u0439. \u0422\u0435\u043F\u0435\u0440\u044C \u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u043C\u043E\u0436\u043D\u043E \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0435 \u043E\u0434\u043D\u0438\u043C \u0444\u0430\u0439\u043B\u043E\u043C, \u0430 \u043F\u0430\u043A\u0435\u0442\u043E\u043C (\u043F\u0430\u043F\u043A\u043E\u0439). \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u0441\u043C. \u042D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0420\u0435\u0448\u0435\u043D\u0438\u0435 \u0438 \u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0420\u0435\u0448\u0435\u043D\u0438\u0435."},{id:h(),label:"\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430",text:"\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u043A\u0430\u043A \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430 \u0441 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430 \u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u044F\u043C\u0438 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430."}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-1229",text:"\u0421\u0435\u0441\u0441\u0438\u044F \u0441\u043E \u0441\u0447\u0451\u0442\u0447\u0438\u043A\u0430\u043C\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u0431\u044B\u0442\u044C \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0439 \u043F\u043E\u0441\u043B\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0441\u0435\u0441\u0441\u0438\u0438 \u043F\u043E \u0442\u0430\u0439\u043C\u0430\u0443\u0442\u0443 \u0435\u0449\u0435 \u043A\u0430\u043A\u043E\u0435-\u0442\u043E \u0432\u0440\u0435\u043C\u044F."},{id:h(),label:"ERR-1208",text:"\u0417\u0430\u0432\u0438\u0441\u0430\u043D\u0438\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438 args.cancel() \u0432 \u0441\u043A\u0440\u0438\u043F\u0442\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \xABOn preparing card save\xBB."},{id:h(),label:"ERR-1222",text:'\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0443\u0441\u0442\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043A\u043D\u043E\u043F\u043A\u0438 "\u041D\u0430\u0437\u0430\u0434" \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0435\u0441\u043B\u0438 \u043F\u0435\u0440\u0435\u0434 \u044D\u0442\u0438\u043C \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u0432 filePreview.'},{id:h(),label:"ERR-0002",text:"\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u043D\u0443\u043C\u0435\u0440\u0430\u0442\u043E\u0440\u0430."},{id:h(),label:"ERR-1206",text:"\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u043B\u0435\u0440 EmployeesController, \u0431\u0435\u0437 \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 EmployeesAutoComplete."},{id:h(),label:"ERR-1184",text:"\u041F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043F\u043E \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u0432 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u0430\u0439\u043B, \u0430 \u043D\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439."},{id:h(),label:"ERR-1184",text:"\u041F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043F\u043E \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u0432 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u0430\u0439\u043B, \u0430 \u043D\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439."},{id:h(),label:"ERR-1159",text:"\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434. \u041F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u043F\u0430\u043F\u043A\u0435 \u043D\u0435 \u0443\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442\u0441\u044F."},{id:h(),label:"ERR-0003",text:"\u041F\u0440\u0430\u0432\u043A\u0430 \u0434\u043B\u044F \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F \u0432\u0435\u0440\u0441\u0438\u0439."},{id:h(),label:"ERR-283",text:"\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0430 \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E \u043D\u0430 ios."},{id:h(),label:"ERR-1001",text:"\u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u043E\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043A\u043E\u0434\u0438\u0440\u043E\u0432\u043A\u0438 \u0444\u0430\u0439\u043B\u0430 \u043F\u0440\u0438 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435."},{id:h(),label:"ERR-947",text:"\u0415\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u043D\u0435\u0442 \u0444\u0430\u0439\u043B\u0430, \u0442\u043E \u0432 \u043F\u0440\u0435\u0432\u044C\u044E \u0444\u0430\u0439\u043B\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0444\u0430\u0439\u043B \u0438\u0437 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0439 \u043E\u0442\u043A\u0440\u044B\u0442\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438."},{id:h(),label:"ERR-1055",text:"\u0412\u043C\u0435\u0441\u0442\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0443\u0441\u0442\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430."},{id:h(),label:"ERR-961",text:"\u041D\u0435 \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u0435\u0442 \u043E\u043A\u043D\u043E \u0441 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u043C\u0438 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430\u043C\u0438 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438 \u0444\u043E\u043A\u0443\u0441\u0430 StaffDirectoryItems."},{id:h(),label:"ERR-909",text:"\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043F\u043E\u0440\u044F\u0434\u043E\u043A \u044D\u0442\u0430\u043F\u043E\u0432 \u0432 \u0445\u043E\u0434\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F."}]}]},{id:h(),ver:"5.5.5957.117",children:[{id:h(),head:"\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",icon:"briefcase-outline",model:!1,children:[{id:h(),label:"\u041D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438",text:"\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044E \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0441 \u043D\u043E\u0432\u044B\u043C\u0438 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u043C\u0438 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u044F\u043C\u0438.",show:!1,more:"<ul><li>\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0440\u0430\u0437\u0443 \u0433\u0440\u0443\u043F\u043F\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443 \u0438\u043B\u0438 \u043F\u0435\u0440\u043C\u0430\u043D\u0435\u043D\u0442\u043D\u043E.</li> <li>\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043A\u0430\u0447\u0430\u0442\u044C \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0438\u043B\u0438 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0430\u0439\u043B\u044B, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0444\u0430\u0439\u043B\u044B \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.</li></ul>"},{id:h(),label:"\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E email",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0439 \u043F\u043E\u0447\u0442\u0435."},{id:h(),label:"\u041F\u043E\u043B\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430",text:"\u0422\u0435\u043F\u0435\u0440\u044C, \u0435\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0435\u0434\u0432\u0430\u0440\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0444\u0430\u0439\u043B\u0430, \u043F\u043E\u043B\u044F \u043B\u044E\u0431\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438 (\u043F\u0443\u0441\u0442\u043E\u0435 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u043E \u043F\u043E \u043E\u0431\u0435 \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438) \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u044E\u0442 5 px."}]},{id:h(),head:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",icon:"bookshelf",model:!1,children:[{id:h(),label:'\u041D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u042D\u0423 "\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438"',text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u044B\u0431\u043E\u0440 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u0440\u0435\u0436\u0438\u043C\u0430 \u0421\u0438\u0441\u0442\u0435\u043C\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0442\u044C \u0432\u044B\u0431\u043E\u0440 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0445 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0432 \u043F\u0430\u043F\u043A\u0435. \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u0441\u043C. \u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438."},{id:h(),label:"\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F SignatureButton",text:"\u0414\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E."},{id:h(),label:'\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0430\u044F \u0432\u044B\u0441\u043E\u0442\u0430 \u0434\u043B\u044F \u042D\u0423 "\u0411\u043B\u043E\u043A"',text:"\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0411\u043B\u043E\u043A \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0430\u044F \u0432\u044B\u0441\u043E\u0442\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0442\u044C \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0443\u044E \u0432\u044B\u0441\u043E\u0442\u0443 \u0431\u043B\u043E\u043A\u0430. \u041F\u0440\u0438 \u043F\u0440\u0435\u0432\u044B\u0448\u0435\u043D\u0438\u0438 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0439 \u0432\u044B\u0441\u043E\u0442\u044B, \u0443 \u0431\u043B\u043E\u043A\u0430 \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043F\u043E\u043B\u043E\u0441\u0430 \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430."},{id:h(),label:"\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F emailButton",text:"\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u041A\u043D\u043E\u043F\u043A\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u043F\u0438\u0441\u044C\u043C\u043E\u043C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0438\u0439 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0439 \u043F\u043E\u0447\u0442\u0435."},{id:h(),label:"\u0423\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",text:'\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438" \u0438 "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A" \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u0447\u0438\u0442\u0430\u044E\u0442\u0441\u044F \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043C\u0438 \u0438 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B \u0434\u043B\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u042D\u0423 \u043F\u0440\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A. \u0423\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435\u043C \u044D\u0442\u0438\u0445 \u042D\u0423 \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u043A\u0430\u043A \u0440\u0430\u043D\u044C\u0448\u0435.'}]},{id:h(),head:"\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",icon:"alert",model:!1,children:[{id:h(),label:"ERR-1022",text:'\u041A\u043E\u043D\u0442\u0440\u043E\u043B\u044B Employee \u0438 MultipleEmployees. \u041F\u0440\u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E\u043C \u043A\u043B\u0438\u043A\u0435 \u043F\u043E "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435" \u0441\u043F\u0438\u0441\u043E\u043A \u043D\u0435 \u0440\u0430\u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F.'},{id:h(),label:"ERR-1026",text:"\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 FilePicker \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 - \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u043A\u043D\u043E\u043F\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430."},{id:h(),label:"ERR-906",text:"\u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0430\u043C \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0434\u043E\u043B\u0433\u0430\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0438 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043D\u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0443\u044E \u043F\u0430\u043F\u043A\u0443."},{id:h(),label:"ERR-901",text:"\u041D\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442\u0441\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u043F\u043E\u0438\u0441\u043A\u043E\u0432\u044B\u0445 \u043F\u0430\u043F\u043A\u0430\u0445 \u0432 \u0441\u0442\u0430\u0440\u043E\u043C \u0433\u0440\u0438\u0434\u0435."},{id:h(),label:"ERR-988",text:"\u041F\u0440\u043E\u0431\u043B\u0435\u043C\u044B \u0441 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435\u043C \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u0432 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0435 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430."},{id:h(),label:"ERR-921",text:"\u041F\u043E\u0441\u043B\u0435 \u0443\u0445\u043E\u0434\u0430 \u0441\u0435\u0441\u0441\u0438\u0438 \u0432 \u043E\u0444\u043B\u0430\u0439\u043D, \u0432\u0442\u043E\u0440\u0430\u044F \u0441\u0435\u0441\u0441\u0438\u044F Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u043E\u0441\u0442\u0430\u0432\u0430\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0439 \u0438 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0435\u0442 \u0440\u0430\u0441\u0447\u0451\u0442 \u0441\u0447\u0435\u0442\u0447\u0438\u043A\u043E\u0432."},{id:h(),label:"ERR-919",text:"\u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0438\u043D\u0441\u0442\u0430\u043B\u043B\u044F\u0442\u043E\u0440\u0430 \u043F\u0440\u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u043E\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A \u043E\u0442 \u0441\u0435\u0440\u0432\u0435\u0440\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430."},{id:h(),label:"WebC-10940",text:"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 \u0432\u0432\u043E\u0434\u0430 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u044F \u043F\u0440\u0438 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435 \u0441 TextBox \u043D\u0430 TextArea."},{id:h(),label:"ERR-804",text:"\u041F\u043E\u0441\u043B\u0435 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0438\u0437 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 Excel \u0432 \u043A\u043E\u043D\u0435\u0446 \u0441\u0442\u0440\u043E\u043A \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0433\u043E \u0444\u0430\u0439\u043B\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u0431\u0435\u043B."},{id:h(),label:"WebC-11191",text:"\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u043A \u0440\u0435\u0448\u0435\u043D\u0438\u044E \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u0438 \u0438 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 \u0425\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430."},{id:h(),label:"WebC-11132",text:'\u041D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 "\u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432" \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443.'},{id:h(),label:"WebC-11130",text:"\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u0443\u0441\u043B\u043E\u0432\u0438\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u043F\u043E \u0432\u0438\u0434\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0432 \u0434\u0438\u0430\u043B\u043E\u0433\u0435 \u0434\u0435\u043B\u0435\u0433\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F."},{id:h(),label:"WebC-11022",text:"\u041A\u043E\u043D\u0442\u0440\u043E\u043B \u0412\u044B\u0431\u043E\u0440 \u043F\u0430\u043F\u043A\u0438. \u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u0430\u044F \u0440\u0430\u0431\u043E\u0442\u0430 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430."},{id:h(),label:"WebC-11046",text:'\u0415\u0441\u043B\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E, \u0442\u043E \u0443 \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438\u0448\u043D\u0435\u0435 \u043F\u043E\u043B\u0435 "\u0417\u0430 \u043A\u043E\u0433\u043E" \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0442\u0430.'},{id:h(),label:"WebC-10974",text:"\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432. \u0412 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438 \u0438\u0437 \u0440\u0430\u043D\u0435\u0435 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u0438."}]}]}],mo=e=>e.replace(/[-\\^$*+?.()|[\]{}]/g,"\\$&"),Yd=(e,t)=>{if(!t.query||t.query instanceof String&&!t.query.trim())return e;const n=(i=>{let l;if(i.query instanceof RegExp)return new RegExp(String.raw`(${i.query.source})`,"g"+(i.caseSensitive?"":"i"));if(i.splitBySpace){const r=i.query.trim().replace(/\s+/g," ");l=String.raw`(${r.split(/\s/).map(mo).join("|")})`}else l=String.raw`(${mo(i.query)})`;return new RegExp(String.raw`${l}`,"g"+(i.caseSensitive?"":"i"))})({query:t.query,splitBySpace:t.splitBySpace,caseSensitive:t.caseSensitive});return e.split(n).map(i=>n.test(i)?H(t.highlightTag,{class:t.highlightClass,style:t.highlightStyle},i):i)};var vo=qn({name:"VueWordHighlighter",props:{query:{type:[String,Object],required:!0,default:""},caseSensitive:{type:Boolean,default:!1},splitBySpace:{type:Boolean,default:!1},highlightClass:{type:[Object,String,Array],default:""},highlightStyle:{type:[Object,String,Array],default:""},highlightTag:{type:String,default:"mark"},wrapperTag:{type:String,default:"span"},wrapperClass:{type:[Object,String,Array],default:""},textToHighlight:{type:String,default:""}},emits:["matches"],setup:(e,t)=>()=>{const n=e.textToHighlight?e.textToHighlight:(r=>{if(r&&r.default){const o=r.default();let s;return s=o[0].children,typeof s=="string"?s:""}return""})(t.slots),i=Yd(n,{query:e.query,splitBySpace:e.splitBySpace,caseSensitive:e.caseSensitive,highlightTag:e.highlightTag,highlightClass:e.highlightClass,highlightStyle:e.highlightStyle});var l;return t.emit("matches",typeof(l=i)=="string"?[]:l.filter(r=>typeof r!="string").map(r=>typeof r=="string"?r:r.children)),H(e.wrapperTag,{class:e.wrapperClass},i)}});const Xd=hf({id:"items",state:()=>({versions:[]}),getters:{},actions:{setVersions(e){this.versions=e},expandBlock(e){e.children.filter(n=>n.model).length<e.children.length/2?e.children.map(n=>n.model=!0):e.children.map(n=>n.model=!1)},toggleModel(e){e.model=!e.model},expandAll(){this.versions=this.versions.map(e=>{var t;return{id:e.id,ver:e.ver,children:(t=e.children)==null?void 0:t.map(n=>({id:n.id,head:n.head,label:n.label,icon:n.icon,model:!0,children:n.children}))}})},toggleMore(e){e.show=!e.show,console.log(e)},toggleAll(){this.versions=this.versions.map(e=>{var t;return{id:e.id,ver:e.ver,children:(t=e.children)==null?void 0:t.map(n=>({id:n.id,head:n.head,label:n.label,icon:n.icon,model:!n.model,children:n.children}))}})}}});var Ys=(e,t)=>{const n=e.__vccOpts||e;for(const[i,l]of t)n[i]=l;return n};const Gd=qn({name:"SvgIcon",props:{prefix:{type:String,default:"icon"},name:{type:String,required:!0},color:{type:String,default:"#333"},spin:{type:Boolean,default:!1}},setup(e){return{symbolId:P(()=>`#${e.prefix}-${e.name}`)}}}),eh=["href","fill"];function th(e,t,n,i,l,r){return ve(),We("svg",{"aria-hidden":"true",class:Zt(["icon",{"icon-spin":e.spin}])},[pe("use",{href:e.symbolId,fill:e.color},null,8,eh)],2)}var Kn=Ys(Gd,[["render",th]]);const rn=e=>(nu("data-v-23884d46"),e=e(),iu(),e),nh={class:"grid"},ih={class:"left"},lh=rn(()=>pe("div",{class:"zg"},"Release notes",-1)),rh={key:0,class:"notfound"},oh=rn(()=>pe("span",null,"\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435\u0442. \u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0437\u0430\u043F\u0440\u043E\u0441.",-1)),sh=["id"],ah={class:"row items-center"},uh={class:"row items-center q-pr-sm"},ch={key:0,class:"date q-mr-lg"},fh=ii("Shif-Click - \u0440\u0430\u0441\u043F\u0430\u0445\u043D\u0443\u0442\u044C \u0432\u0441\u0435"),dh={class:"smallgrid"},hh={class:"label"},gh={class:"text"},mh=rn(()=>pe("br",null,null,-1)),vh=["id"],ph=["innerHTML"],bh=rn(()=>pe("div",null,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed accumsan ligula, vitae feugiat nibh. Cras auctor iaculis feugiat. Mauris est tortor, dignissim eu ipsum at, dapibus condimentum neque. Fusce posuere bibendum maximus.",-1)),yh={class:"side"},_h=rn(()=>pe("br",null,null,-1)),xh=rn(()=>pe("div",{class:"sod"},"\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435",-1)),wh={class:"list"},Ch=["onClick"],Eh=qn({name:"Version",setup(e){const t=le([]),n=E=>{i(E),t.value.push(E)},i=E=>{let O;for(;(O=t.value.indexOf(E))>-1;)t.value.splice(O,1)},r={handler:E=>{E.isIntersecting===!0?n(E.target.id):i(E.target.id)},cfg:{rootMargin:"-120px"}},o=Xd();o.setVersions(Jd);const{getScrollTarget:s,setVerticalScrollPosition:a}=rd,u=le(""),c=E=>{const O=document.getElementById(E),R=s(O),V=O.offsetTop-75;a(R,V,300)},v=(E,O)=>E.reduce((R,V)=>{var y,b;const p=V.children?v(V.children,O):void 0;return((y=V.label)==null?void 0:y.toLowerCase().includes(O.toLowerCase()))||((b=V.text)==null?void 0:b.toLowerCase().includes(O.toLowerCase()))||(p==null?void 0:p.length)>0?[...R,ge(ee({},V),{children:p})]:R},[]),g=P(()=>u.value!==""?v(o.versions,u.value):o.versions);fu(()=>{u.value.length>1&&o.expandAll()});const d=(E,O)=>{E.shiftKey?o.toggleAll():o.expandBlock(O)},_=(E,O)=>E+O,S=(E,O)=>{let R=document.getElementById(E+O);R==null||R.classList.toggle("hid")},w=E=>t.value.some(O=>O===E)?"visib":"",T=E=>"img:/img/"+E+".svg";return(E,O)=>(ve(),We("div",nh,[pe("div",ih,[lh,At(g).length===0?(ve(),We("div",rh,[xe(Kn,{class:"q-mr-md",name:"emoticon-cry-outline"}),oh])):(ve(!0),We(Ae,{key:1},Hn(At(g),(R,V)=>(ve(),We(Ae,{key:R.id},[pe("div",{class:"version",id:R.ver},[pe("div",ah,[V!==0?(ve(),et(Di,{key:0,class:"q-mr-md",dense:"",unelevated:"",color:"accent"},{default:Ge(()=>[xe(Kn,{name:"source-branch",color:"white"})]),_:1})):an("",!0),pe("div",{class:Zt({link:V!==0})},Bn(R.ver),3)]),pe("div",uh,[V!==0?(ve(),We("div",ch,"23.07.2022")):an("",!0),u.value.length<1?(ve(),et(Di,{key:1,dense:"",flat:"",round:"",color:"accent",onClick:p=>d(p,R)},{default:Ge(()=>[xe(dd,{anchor:"top middle",self:"bottom middle"},{default:Ge(()=>[fh]),_:1}),xe(Kn,{name:"unfold-more-horizontal"})]),_:2},1032,["onClick"])):an("",!0)])],8,sh),Il((ve(),et(_d,{id:R.ver},{default:Ge(()=>[(ve(!0),We(Ae,null,Hn(R.children,p=>(ve(),et(yd,{key:p.id,label:p.head,"header-class":"hd",icon:T(p.icon),"expand-separator":"","expand-icon":"img:/img/chevron-down.svg","model-value":p.model,onClick:y=>At(o).toggleModel(p)},{default:Ge(()=>[(ve(!0),We(Ae,null,Hn(p.children,y=>(ve(),et(hd,{key:y.label},{default:Ge(()=>[pe("div",dh,[pe("div",hh,[(ve(),et(ur(At(vo)),{query:u.value},{default:Ge(()=>[ii(Bn(y.label),1)]),_:2},1032,["query"]))]),pe("div",gh,[(ve(),et(ur(At(vo)),{query:u.value},{default:Ge(()=>[ii(Bn(y.text),1)]),_:2},1032,["query"])),mh,y.more?(ve(),et(Di,{key:0,unelevated:"",color:"accent",label:"\u0415\u0449\u0435",size:"xs",onClick:b=>S(p.id,y.label)},null,8,["onClick"])):an("",!0)])]),y.more?(ve(),We("div",{key:0,class:"more hid",id:_(p.id,y.label)},[pe("div",{innerHTML:y.more},null,8,ph),bh],8,vh)):an("",!0)]),_:2},1024))),128))]),_:2},1032,["label","icon","model-value","onClick"]))),128))]),_:2},1032,["id"])),[[Zd,r]])],64))),128))]),pe("div",yh,[xe(Qd,{dense:"",debounce:"300",placeholder:"\u0424\u0438\u043B\u044C\u0442\u0440",autofocus:"",color:"primary",modelValue:u.value,"onUpdate:modelValue":O[0]||(O[0]=R=>u.value=R),clearable:"","clear-icon":"img:/close-circle-outline.svg",onClear:O[1]||(O[1]=R=>u.value="")},{prepend:Ge(()=>[xe(Kn,{class:"magnify",name:"magnify"})]),_:1},8,["modelValue"]),_h,xh,pe("div",wh,[(ve(!0),We(Ae,null,Hn(At(g),R=>(ve(),We("div",{class:Zt(["empt",w(R.ver)]),onClick:V=>c(R.ver),key:R.ver},Bn(R.ver),11,Ch))),128))])])]))}});var Sh=Ys(Eh,[["__scopeId","data-v-23884d46"]]);const kh=qn({name:"App",setup(e){return(t,n)=>(ve(),et(Sh))}}),Rh=af(),Wl=Ac(kh);Wl.use(of,{plugins:{},supportTS:{tsCheckerConfig:{eslint:{enabled:!0,files:"./src/**/*.{ts,tsx,js,jsx,vue}"}}}});Wl.use(Rh);Wl.mount("#app");
+  */
+let activePinia;
+const setActivePinia = (pinia2) => activePinia = pinia2;
+const piniaSymbol = Symbol();
+function isPlainObject(o) {
+  return o && typeof o === "object" && Object.prototype.toString.call(o) === "[object Object]" && typeof o.toJSON !== "function";
+}
+var MutationType;
+(function(MutationType2) {
+  MutationType2["direct"] = "direct";
+  MutationType2["patchObject"] = "patch object";
+  MutationType2["patchFunction"] = "patch function";
+})(MutationType || (MutationType = {}));
+function createPinia() {
+  const scope = effectScope(true);
+  const state = scope.run(() => ref({}));
+  let _p = [];
+  let toBeInstalled = [];
+  const pinia2 = markRaw({
+    install(app2) {
+      setActivePinia(pinia2);
+      {
+        pinia2._a = app2;
+        app2.provide(piniaSymbol, pinia2);
+        app2.config.globalProperties.$pinia = pinia2;
+        toBeInstalled.forEach((plugin) => _p.push(plugin));
+        toBeInstalled = [];
+      }
+    },
+    use(plugin) {
+      if (!this._a && !isVue2) {
+        toBeInstalled.push(plugin);
+      } else {
+        _p.push(plugin);
+      }
+      return this;
+    },
+    _p,
+    _a: null,
+    _e: scope,
+    _s: /* @__PURE__ */ new Map(),
+    state
+  });
+  return pinia2;
+}
+const noop = () => {
+};
+function addSubscription(subscriptions, callback, detached, onCleanup = noop) {
+  subscriptions.push(callback);
+  const removeSubscription = () => {
+    const idx = subscriptions.indexOf(callback);
+    if (idx > -1) {
+      subscriptions.splice(idx, 1);
+      onCleanup();
+    }
+  };
+  if (!detached && getCurrentInstance()) {
+    onUnmounted(removeSubscription);
+  }
+  return removeSubscription;
+}
+function triggerSubscriptions(subscriptions, ...args) {
+  subscriptions.slice().forEach((callback) => {
+    callback(...args);
+  });
+}
+function mergeReactiveObjects(target2, patchToApply) {
+  for (const key in patchToApply) {
+    if (!patchToApply.hasOwnProperty(key))
+      continue;
+    const subPatch = patchToApply[key];
+    const targetValue = target2[key];
+    if (isPlainObject(targetValue) && isPlainObject(subPatch) && target2.hasOwnProperty(key) && !isRef(subPatch) && !isReactive(subPatch)) {
+      target2[key] = mergeReactiveObjects(targetValue, subPatch);
+    } else {
+      target2[key] = subPatch;
+    }
+  }
+  return target2;
+}
+const skipHydrateSymbol = Symbol();
+function shouldHydrate(obj) {
+  return !isPlainObject(obj) || !obj.hasOwnProperty(skipHydrateSymbol);
+}
+const { assign } = Object;
+function isComputed(o) {
+  return !!(isRef(o) && o.effect);
+}
+function createOptionsStore(id, options, pinia2, hot) {
+  const { state, actions, getters } = options;
+  const initialState = pinia2.state.value[id];
+  let store;
+  function setup() {
+    if (!initialState && true) {
+      {
+        pinia2.state.value[id] = state ? state() : {};
+      }
+    }
+    const localState = toRefs(pinia2.state.value[id]);
+    return assign(localState, actions, Object.keys(getters || {}).reduce((computedGetters, name) => {
+      computedGetters[name] = markRaw(computed(() => {
+        setActivePinia(pinia2);
+        const store2 = pinia2._s.get(id);
+        return getters[name].call(store2, store2);
+      }));
+      return computedGetters;
+    }, {}));
+  }
+  store = createSetupStore(id, setup, options, pinia2, hot, true);
+  store.$reset = function $reset() {
+    const newState = state ? state() : {};
+    this.$patch(($state) => {
+      assign($state, newState);
+    });
+  };
+  return store;
+}
+function createSetupStore($id, setup, options = {}, pinia2, hot, isOptionsStore) {
+  let scope;
+  const optionsForPlugin = assign({ actions: {} }, options);
+  const $subscribeOptions = {
+    deep: true
+  };
+  let isListening;
+  let isSyncListening;
+  let subscriptions = markRaw([]);
+  let actionSubscriptions = markRaw([]);
+  let debuggerEvents;
+  const initialState = pinia2.state.value[$id];
+  if (!isOptionsStore && !initialState && true) {
+    {
+      pinia2.state.value[$id] = {};
+    }
+  }
+  ref({});
+  let activeListener;
+  function $patch(partialStateOrMutator) {
+    let subscriptionMutation;
+    isListening = isSyncListening = false;
+    if (typeof partialStateOrMutator === "function") {
+      partialStateOrMutator(pinia2.state.value[$id]);
+      subscriptionMutation = {
+        type: MutationType.patchFunction,
+        storeId: $id,
+        events: debuggerEvents
+      };
+    } else {
+      mergeReactiveObjects(pinia2.state.value[$id], partialStateOrMutator);
+      subscriptionMutation = {
+        type: MutationType.patchObject,
+        payload: partialStateOrMutator,
+        storeId: $id,
+        events: debuggerEvents
+      };
+    }
+    const myListenerId = activeListener = Symbol();
+    nextTick().then(() => {
+      if (activeListener === myListenerId) {
+        isListening = true;
+      }
+    });
+    isSyncListening = true;
+    triggerSubscriptions(subscriptions, subscriptionMutation, pinia2.state.value[$id]);
+  }
+  const $reset = noop;
+  function $dispose() {
+    scope.stop();
+    subscriptions = [];
+    actionSubscriptions = [];
+    pinia2._s.delete($id);
+  }
+  function wrapAction(name, action) {
+    return function() {
+      setActivePinia(pinia2);
+      const args = Array.from(arguments);
+      const afterCallbackList = [];
+      const onErrorCallbackList = [];
+      function after(callback) {
+        afterCallbackList.push(callback);
+      }
+      function onError(callback) {
+        onErrorCallbackList.push(callback);
+      }
+      triggerSubscriptions(actionSubscriptions, {
+        args,
+        name,
+        store,
+        after,
+        onError
+      });
+      let ret;
+      try {
+        ret = action.apply(this && this.$id === $id ? this : store, args);
+      } catch (error) {
+        triggerSubscriptions(onErrorCallbackList, error);
+        throw error;
+      }
+      if (ret instanceof Promise) {
+        return ret.then((value) => {
+          triggerSubscriptions(afterCallbackList, value);
+          return value;
+        }).catch((error) => {
+          triggerSubscriptions(onErrorCallbackList, error);
+          return Promise.reject(error);
+        });
+      }
+      triggerSubscriptions(afterCallbackList, ret);
+      return ret;
+    };
+  }
+  const partialStore = {
+    _p: pinia2,
+    $id,
+    $onAction: addSubscription.bind(null, actionSubscriptions),
+    $patch,
+    $reset,
+    $subscribe(callback, options2 = {}) {
+      const removeSubscription = addSubscription(subscriptions, callback, options2.detached, () => stopWatcher());
+      const stopWatcher = scope.run(() => watch(() => pinia2.state.value[$id], (state) => {
+        if (options2.flush === "sync" ? isSyncListening : isListening) {
+          callback({
+            storeId: $id,
+            type: MutationType.direct,
+            events: debuggerEvents
+          }, state);
+        }
+      }, assign({}, $subscribeOptions, options2)));
+      return removeSubscription;
+    },
+    $dispose
+  };
+  const store = reactive(assign({}, partialStore));
+  pinia2._s.set($id, store);
+  const setupStore = pinia2._e.run(() => {
+    scope = effectScope();
+    return scope.run(() => setup());
+  });
+  for (const key in setupStore) {
+    const prop = setupStore[key];
+    if (isRef(prop) && !isComputed(prop) || isReactive(prop)) {
+      if (!isOptionsStore) {
+        if (initialState && shouldHydrate(prop)) {
+          if (isRef(prop)) {
+            prop.value = initialState[key];
+          } else {
+            mergeReactiveObjects(prop, initialState[key]);
+          }
+        }
+        {
+          pinia2.state.value[$id][key] = prop;
+        }
+      }
+    } else if (typeof prop === "function") {
+      const actionValue = wrapAction(key, prop);
+      {
+        setupStore[key] = actionValue;
+      }
+      optionsForPlugin.actions[key] = prop;
+    } else
+      ;
+  }
+  {
+    assign(store, setupStore);
+    assign(toRaw(store), setupStore);
+  }
+  Object.defineProperty(store, "$state", {
+    get: () => pinia2.state.value[$id],
+    set: (state) => {
+      $patch(($state) => {
+        assign($state, state);
+      });
+    }
+  });
+  pinia2._p.forEach((extender) => {
+    {
+      assign(store, scope.run(() => extender({
+        store,
+        app: pinia2._a,
+        pinia: pinia2,
+        options: optionsForPlugin
+      })));
+    }
+  });
+  if (initialState && isOptionsStore && options.hydrate) {
+    options.hydrate(store.$state, initialState);
+  }
+  isListening = true;
+  isSyncListening = true;
+  return store;
+}
+function defineStore(idOrOptions, setup, setupOptions) {
+  let id;
+  let options;
+  const isSetupStore = typeof setup === "function";
+  if (typeof idOrOptions === "string") {
+    id = idOrOptions;
+    options = isSetupStore ? setupOptions : setup;
+  } else {
+    options = idOrOptions;
+    id = idOrOptions.id;
+  }
+  function useStore(pinia2, hot) {
+    const currentInstance2 = getCurrentInstance();
+    pinia2 = pinia2 || currentInstance2 && inject(piniaSymbol);
+    if (pinia2)
+      setActivePinia(pinia2);
+    pinia2 = activePinia;
+    if (!pinia2._s.has(id)) {
+      if (isSetupStore) {
+        createSetupStore(id, setup, options, pinia2);
+      } else {
+        createOptionsStore(id, options, pinia2);
+      }
+    }
+    const store = pinia2._s.get(id);
+    return store;
+  }
+  useStore.$id = id;
+  return useStore;
+}
+const useSizeDefaults = {
+  xs: 18,
+  sm: 24,
+  md: 32,
+  lg: 38,
+  xl: 46
+};
+const useSizeProps = {
+  size: String
+};
+function useSize(props, sizes = useSizeDefaults) {
+  return computed(() => props.size !== void 0 ? { fontSize: props.size in sizes ? `${sizes[props.size]}px` : props.size } : null);
+}
+const createComponent = (raw) => markRaw(defineComponent(raw));
+const createDirective = (raw) => markRaw(raw);
+function hSlot(slot, otherwise) {
+  return slot !== void 0 ? slot() || otherwise : otherwise;
+}
+function hUniqueSlot(slot, otherwise) {
+  if (slot !== void 0) {
+    const vnode = slot();
+    if (vnode !== void 0 && vnode !== null) {
+      return vnode.slice();
+    }
+  }
+  return otherwise;
+}
+function hMergeSlot(slot, source) {
+  return slot !== void 0 ? source.concat(slot()) : source;
+}
+function hMergeSlotSafely(slot, source) {
+  if (slot === void 0) {
+    return source;
+  }
+  return source !== void 0 ? source.concat(slot()) : slot();
+}
+const defaultViewBox = "0 0 24 24";
+const sameFn = (i) => i;
+const ionFn = (i) => `ionicons ${i}`;
+const libMap = {
+  "mdi-": (i) => `mdi ${i}`,
+  "icon-": sameFn,
+  "bt-": (i) => `bt ${i}`,
+  "eva-": (i) => `eva ${i}`,
+  "ion-md": ionFn,
+  "ion-ios": ionFn,
+  "ion-logo": ionFn,
+  "iconfont ": sameFn,
+  "ti-": (i) => `themify-icon ${i}`,
+  "bi-": (i) => `bootstrap-icons ${i}`
+};
+const matMap = {
+  o_: "-outlined",
+  r_: "-round",
+  s_: "-sharp"
+};
+const symMap = {
+  sym_o_: "-outlined",
+  sym_r_: "-rounded",
+  sym_s_: "-sharp"
+};
+const libRE = new RegExp("^(" + Object.keys(libMap).join("|") + ")");
+const matRE = new RegExp("^(" + Object.keys(matMap).join("|") + ")");
+const symRE = new RegExp("^(" + Object.keys(symMap).join("|") + ")");
+const mRE = /^[Mm]\s?[-+]?\.?\d/;
+const imgRE = /^img:/;
+const svgUseRE = /^svguse:/;
+const ionRE = /^ion-/;
+const faRE = /^(fa-(solid|regular|light|brands|duotone|thin)|[lf]a[srlbdk]?) /;
+var QIcon = createComponent({
+  name: "QIcon",
+  props: __spreadProps(__spreadValues({}, useSizeProps), {
+    tag: {
+      type: String,
+      default: "i"
+    },
+    name: String,
+    color: String,
+    left: Boolean,
+    right: Boolean
+  }),
+  setup(props, { slots }) {
+    const { proxy: { $q } } = getCurrentInstance();
+    const sizeStyle = useSize(props);
+    const classes = computed(() => "q-icon" + (props.left === true ? " on-left" : "") + (props.right === true ? " on-right" : "") + (props.color !== void 0 ? ` text-${props.color}` : ""));
+    const type = computed(() => {
+      let cls;
+      let icon = props.name;
+      if (icon === "none" || !icon) {
+        return { none: true };
+      }
+      if ($q.iconMapFn !== null) {
+        const res = $q.iconMapFn(icon);
+        if (res !== void 0) {
+          if (res.icon !== void 0) {
+            icon = res.icon;
+            if (icon === "none" || !icon) {
+              return { none: true };
+            }
+          } else {
+            return {
+              cls: res.cls,
+              content: res.content !== void 0 ? res.content : " "
+            };
+          }
+        }
+      }
+      if (mRE.test(icon) === true) {
+        const [def2, viewBox = defaultViewBox] = icon.split("|");
+        return {
+          svg: true,
+          viewBox,
+          nodes: def2.split("&&").map((path) => {
+            const [d, style, transform] = path.split("@@");
+            return h("path", { style, d, transform });
+          })
+        };
+      }
+      if (imgRE.test(icon) === true) {
+        return {
+          img: true,
+          src: icon.substring(4)
+        };
+      }
+      if (svgUseRE.test(icon) === true) {
+        const [def2, viewBox = defaultViewBox] = icon.split("|");
+        return {
+          svguse: true,
+          src: def2.substring(7),
+          viewBox
+        };
+      }
+      let content = " ";
+      const matches = icon.match(libRE);
+      if (matches !== null) {
+        cls = libMap[matches[1]](icon);
+      } else if (faRE.test(icon) === true) {
+        cls = icon;
+      } else if (ionRE.test(icon) === true) {
+        cls = `ionicons ion-${$q.platform.is.ios === true ? "ios" : "md"}${icon.substring(3)}`;
+      } else if (symRE.test(icon) === true) {
+        cls = "notranslate material-symbols";
+        const matches2 = icon.match(symRE);
+        if (matches2 !== null) {
+          icon = icon.substring(6);
+          cls += symMap[matches2[1]];
+        }
+        content = icon;
+      } else {
+        cls = "notranslate material-icons";
+        const matches2 = icon.match(matRE);
+        if (matches2 !== null) {
+          icon = icon.substring(2);
+          cls += matMap[matches2[1]];
+        }
+        content = icon;
+      }
+      return {
+        cls,
+        content
+      };
+    });
+    return () => {
+      const data = {
+        class: classes.value,
+        style: sizeStyle.value,
+        "aria-hidden": "true",
+        role: "presentation"
+      };
+      if (type.value.none === true) {
+        return h(props.tag, data, hSlot(slots.default));
+      }
+      if (type.value.img === true) {
+        return h("span", data, hMergeSlot(slots.default, [
+          h("img", { src: type.value.src })
+        ]));
+      }
+      if (type.value.svg === true) {
+        return h("span", data, hMergeSlot(slots.default, [
+          h("svg", {
+            viewBox: type.value.viewBox || "0 0 24 24"
+          }, type.value.nodes)
+        ]));
+      }
+      if (type.value.svguse === true) {
+        return h("span", data, hMergeSlot(slots.default, [
+          h("svg", {
+            viewBox: type.value.viewBox
+          }, [
+            h("use", { "xlink:href": type.value.src })
+          ])
+        ]));
+      }
+      if (type.value.cls !== void 0) {
+        data.class += " " + type.value.cls;
+      }
+      return h(props.tag, data, hMergeSlot(slots.default, [
+        type.value.content
+      ]));
+    };
+  }
+});
+const useSpinnerProps = {
+  size: {
+    type: [Number, String],
+    default: "1em"
+  },
+  color: String
+};
+function useSpinner(props) {
+  return {
+    cSize: computed(() => props.size in useSizeDefaults ? `${useSizeDefaults[props.size]}px` : props.size),
+    classes: computed(() => "q-spinner" + (props.color ? ` text-${props.color}` : ""))
+  };
+}
+var QSpinner = createComponent({
+  name: "QSpinner",
+  props: __spreadProps(__spreadValues({}, useSpinnerProps), {
+    thickness: {
+      type: Number,
+      default: 5
+    }
+  }),
+  setup(props) {
+    const { cSize, classes } = useSpinner(props);
+    return () => h("svg", {
+      class: classes.value + " q-spinner-mat",
+      width: cSize.value,
+      height: cSize.value,
+      viewBox: "25 25 50 50"
+    }, [
+      h("circle", {
+        class: "path",
+        cx: "50",
+        cy: "50",
+        r: "20",
+        fill: "none",
+        stroke: "currentColor",
+        "stroke-width": props.thickness,
+        "stroke-miterlimit": "10"
+      })
+    ]);
+  }
+});
+function css(element, css2) {
+  const style = element.style;
+  for (const prop in css2) {
+    style[prop] = css2[prop];
+  }
+}
+function getElement(el) {
+  if (el === void 0 || el === null) {
+    return void 0;
+  }
+  if (typeof el === "string") {
+    try {
+      return document.querySelector(el) || void 0;
+    } catch (err) {
+      return void 0;
+    }
+  }
+  const target2 = isRef(el) === true ? el.value : el;
+  if (target2) {
+    return target2.$el || target2;
+  }
+}
+function throttle(fn, limit) {
+  let wait = false, result;
+  return function() {
+    if (wait === false) {
+      wait = true;
+      setTimeout(() => {
+        wait = false;
+      }, limit);
+      result = fn.apply(this, arguments);
+    }
+    return result;
+  };
+}
+function showRipple(evt, el, ctx, forceCenter) {
+  ctx.modifiers.stop === true && stop(evt);
+  const color = ctx.modifiers.color;
+  let center = ctx.modifiers.center;
+  center = center === true || forceCenter === true;
+  const node = document.createElement("span"), innerNode = document.createElement("span"), pos = position(evt), { left, top, width, height } = el.getBoundingClientRect(), diameter2 = Math.sqrt(width * width + height * height), radius2 = diameter2 / 2, centerX = `${(width - diameter2) / 2}px`, x = center ? centerX : `${pos.left - left - radius2}px`, centerY = `${(height - diameter2) / 2}px`, y = center ? centerY : `${pos.top - top - radius2}px`;
+  innerNode.className = "q-ripple__inner";
+  css(innerNode, {
+    height: `${diameter2}px`,
+    width: `${diameter2}px`,
+    transform: `translate3d(${x},${y},0) scale3d(.2,.2,1)`,
+    opacity: 0
+  });
+  node.className = `q-ripple${color ? " text-" + color : ""}`;
+  node.setAttribute("dir", "ltr");
+  node.appendChild(innerNode);
+  el.appendChild(node);
+  const abort = () => {
+    node.remove();
+    clearTimeout(timer2);
+  };
+  ctx.abort.push(abort);
+  let timer2 = setTimeout(() => {
+    innerNode.classList.add("q-ripple__inner--enter");
+    innerNode.style.transform = `translate3d(${centerX},${centerY},0) scale3d(1,1,1)`;
+    innerNode.style.opacity = 0.2;
+    timer2 = setTimeout(() => {
+      innerNode.classList.remove("q-ripple__inner--enter");
+      innerNode.classList.add("q-ripple__inner--leave");
+      innerNode.style.opacity = 0;
+      timer2 = setTimeout(() => {
+        node.remove();
+        ctx.abort.splice(ctx.abort.indexOf(abort), 1);
+      }, 275);
+    }, 250);
+  }, 50);
+}
+function updateModifiers(ctx, { modifiers, value, arg }) {
+  const cfg = Object.assign({}, ctx.cfg.ripple, modifiers, value);
+  ctx.modifiers = {
+    early: cfg.early === true,
+    stop: cfg.stop === true,
+    center: cfg.center === true,
+    color: cfg.color || arg,
+    keyCodes: [].concat(cfg.keyCodes || 13)
+  };
+}
+var Ripple = createDirective({
+  name: "ripple",
+  beforeMount(el, binding) {
+    const ctx = {
+      cfg: binding.instance.$.appContext.config.globalProperties.$q.config,
+      enabled: binding.value !== false,
+      modifiers: {},
+      abort: [],
+      start(evt) {
+        if (ctx.enabled === true && evt.qSkipRipple !== true && evt.type === (ctx.modifiers.early === true ? "pointerdown" : "click")) {
+          showRipple(evt, el, ctx, evt.qKeyEvent === true);
+        }
+      },
+      keystart: throttle((evt) => {
+        if (ctx.enabled === true && evt.qSkipRipple !== true && isKeyCode(evt, ctx.modifiers.keyCodes) === true && evt.type === `key${ctx.modifiers.early === true ? "down" : "up"}`) {
+          showRipple(evt, el, ctx, true);
+        }
+      }, 300)
+    };
+    updateModifiers(ctx, binding);
+    el.__qripple = ctx;
+    addEvt(ctx, "main", [
+      [el, "pointerdown", "start", "passive"],
+      [el, "click", "start", "passive"],
+      [el, "keydown", "keystart", "passive"],
+      [el, "keyup", "keystart", "passive"]
+    ]);
+  },
+  updated(el, binding) {
+    if (binding.oldValue !== binding.value) {
+      const ctx = el.__qripple;
+      ctx.enabled = binding.value !== false;
+      if (ctx.enabled === true && Object(binding.value) === binding.value) {
+        updateModifiers(ctx, binding);
+      }
+    }
+  },
+  beforeUnmount(el) {
+    const ctx = el.__qripple;
+    ctx.abort.forEach((fn) => {
+      fn();
+    });
+    cleanEvt(ctx, "main");
+    delete el._qripple;
+  }
+});
+const alignMap = {
+  left: "start",
+  center: "center",
+  right: "end",
+  between: "between",
+  around: "around",
+  evenly: "evenly",
+  stretch: "stretch"
+};
+const alignValues = Object.keys(alignMap);
+const useAlignProps = {
+  align: {
+    type: String,
+    validator: (v) => alignValues.includes(v)
+  }
+};
+function useAlign(props) {
+  return computed(() => {
+    const align = props.align === void 0 ? props.vertical === true ? "stretch" : "left" : props.align;
+    return `${props.vertical === true ? "items" : "justify"}-${alignMap[align]}`;
+  });
+}
+function vmHasRouter(vm) {
+  return vm.appContext.config.globalProperties.$router !== void 0;
+}
+function getOriginalPath(record) {
+  return record ? record.aliasOf ? record.aliasOf.path : record.path : "";
+}
+function isSameRouteRecord(a2, b) {
+  return (a2.aliasOf || a2) === (b.aliasOf || b);
+}
+function includesParams(outer, inner) {
+  for (const key in inner) {
+    const innerValue = inner[key], outerValue = outer[key];
+    if (typeof innerValue === "string") {
+      if (innerValue !== outerValue) {
+        return false;
+      }
+    } else if (Array.isArray(outerValue) === false || outerValue.length !== innerValue.length || innerValue.some((value, i) => value !== outerValue[i])) {
+      return false;
+    }
+  }
+  return true;
+}
+function isEquivalentArray(a2, b) {
+  return Array.isArray(b) === true ? a2.length === b.length && a2.every((value, i) => value === b[i]) : a2.length === 1 && a2[0] === b;
+}
+function isSameRouteLocationParamsValue(a2, b) {
+  return Array.isArray(a2) === true ? isEquivalentArray(a2, b) : Array.isArray(b) === true ? isEquivalentArray(b, a2) : a2 === b;
+}
+function isSameRouteLocationParams(a2, b) {
+  if (Object.keys(a2).length !== Object.keys(b).length) {
+    return false;
+  }
+  for (const key in a2) {
+    if (isSameRouteLocationParamsValue(a2[key], b[key]) === false) {
+      return false;
+    }
+  }
+  return true;
+}
+const useRouterLinkProps = {
+  to: [String, Object],
+  replace: Boolean,
+  exact: Boolean,
+  activeClass: {
+    type: String,
+    default: "q-router-link--active"
+  },
+  exactActiveClass: {
+    type: String,
+    default: "q-router-link--exact-active"
+  },
+  href: String,
+  target: String,
+  disable: Boolean
+};
+function useRouterLink(fallbackTag) {
+  const vm = getCurrentInstance();
+  const { props, proxy } = vm;
+  const hasRouter = vmHasRouter(vm);
+  const hasHrefLink = computed(() => props.disable !== true && props.href !== void 0);
+  const hasRouterLinkProps = computed(() => hasRouter === true && props.disable !== true && hasHrefLink.value !== true && props.to !== void 0 && props.to !== null && props.to !== "");
+  const linkRoute = computed(() => {
+    if (hasRouterLinkProps.value === true) {
+      try {
+        return proxy.$router.resolve(props.to);
+      } catch (err) {
+      }
+    }
+    return null;
+  });
+  const hasRouterLink = computed(() => linkRoute.value !== null);
+  const hasLink = computed(() => hasHrefLink.value === true || hasRouterLink.value === true);
+  const linkTag = computed(() => props.type === "a" || hasLink.value === true ? "a" : props.tag || fallbackTag || "div");
+  const linkProps = computed(() => hasHrefLink.value === true ? {
+    href: props.href,
+    target: props.target
+  } : hasRouterLink.value === true ? {
+    href: linkRoute.value.href,
+    target: props.target
+  } : {});
+  const linkActiveIndex = computed(() => {
+    if (hasRouterLink.value === false) {
+      return null;
+    }
+    const { matched } = linkRoute.value, { length } = matched, routeMatched = matched[length - 1];
+    if (routeMatched === void 0) {
+      return -1;
+    }
+    const currentMatched = proxy.$route.matched;
+    if (currentMatched.length === 0) {
+      return -1;
+    }
+    const index2 = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
+    if (index2 > -1) {
+      return index2;
+    }
+    const parentRecordPath = getOriginalPath(matched[length - 2]);
+    return length > 1 && getOriginalPath(routeMatched) === parentRecordPath && currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index2;
+  });
+  const linkIsActive = computed(() => hasRouterLink.value === true && linkActiveIndex.value > -1 && includesParams(proxy.$route.params, linkRoute.value.params));
+  const linkIsExactActive = computed(() => linkIsActive.value === true && linkActiveIndex.value === proxy.$route.matched.length - 1 && isSameRouteLocationParams(proxy.$route.params, linkRoute.value.params));
+  const linkClass = computed(() => hasRouterLink.value === true ? linkIsExactActive.value === true ? ` ${props.exactActiveClass} ${props.activeClass}` : props.exact === true ? "" : linkIsActive.value === true ? ` ${props.activeClass}` : "" : "");
+  function navigateToRouterLink(e) {
+    if (props.disable === true || e.metaKey || e.altKey || e.ctrlKey || e.shiftKey || e.__qNavigate !== true && e.defaultPrevented === true || e.button !== void 0 && e.button !== 0 || props.target === "_blank") {
+      return false;
+    }
+    prevent(e);
+    return proxy.$router[props.replace === true ? "replace" : "push"](props.to).catch((err) => err);
+  }
+  return {
+    hasRouterLink,
+    hasHrefLink,
+    hasLink,
+    linkTag,
+    linkRoute,
+    linkIsActive,
+    linkIsExactActive,
+    linkClass,
+    linkProps,
+    navigateToRouterLink
+  };
+}
+const padding = {
+  none: 0,
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32
+};
+const defaultSizes = {
+  xs: 8,
+  sm: 10,
+  md: 14,
+  lg: 20,
+  xl: 24
+};
+const formTypes = ["button", "submit", "reset"];
+const mediaTypeRE = /[^\s]\/[^\s]/;
+const useBtnProps = __spreadProps(__spreadValues(__spreadValues({}, useSizeProps), useRouterLinkProps), {
+  type: {
+    type: String,
+    default: "button"
+  },
+  label: [Number, String],
+  icon: String,
+  iconRight: String,
+  round: Boolean,
+  outline: Boolean,
+  flat: Boolean,
+  unelevated: Boolean,
+  rounded: Boolean,
+  push: Boolean,
+  glossy: Boolean,
+  size: String,
+  fab: Boolean,
+  fabMini: Boolean,
+  padding: String,
+  color: String,
+  textColor: String,
+  noCaps: Boolean,
+  noWrap: Boolean,
+  dense: Boolean,
+  tabindex: [Number, String],
+  ripple: {
+    type: [Boolean, Object],
+    default: true
+  },
+  align: __spreadProps(__spreadValues({}, useAlignProps.align), {
+    default: "center"
+  }),
+  stack: Boolean,
+  stretch: Boolean,
+  loading: {
+    type: Boolean,
+    default: null
+  },
+  disable: Boolean
+});
+function useBtn(props) {
+  const sizeStyle = useSize(props, defaultSizes);
+  const alignClass = useAlign(props);
+  const { hasRouterLink, hasLink, linkTag, linkProps, navigateToRouterLink } = useRouterLink("button");
+  const style = computed(() => {
+    const obj = props.fab === false && props.fabMini === false ? sizeStyle.value : {};
+    return props.padding !== void 0 ? Object.assign({}, obj, {
+      padding: props.padding.split(/\s+/).map((v) => v in padding ? padding[v] + "px" : v).join(" "),
+      minWidth: "0",
+      minHeight: "0"
+    }) : obj;
+  });
+  const isRounded = computed(() => props.rounded === true || props.fab === true || props.fabMini === true);
+  const isActionable = computed(() => props.disable !== true && props.loading !== true);
+  const tabIndex = computed(() => isActionable.value === true ? props.tabindex || 0 : -1);
+  const design = computed(() => {
+    if (props.flat === true)
+      return "flat";
+    if (props.outline === true)
+      return "outline";
+    if (props.push === true)
+      return "push";
+    if (props.unelevated === true)
+      return "unelevated";
+    return "standard";
+  });
+  const attributes = computed(() => {
+    const acc = { tabindex: tabIndex.value };
+    if (hasLink.value === true) {
+      Object.assign(acc, linkProps.value);
+    } else if (formTypes.includes(props.type) === true) {
+      acc.type = props.type;
+    }
+    if (linkTag.value === "a") {
+      if (props.disable === true) {
+        acc["aria-disabled"] = "true";
+      } else if (acc.href === void 0) {
+        acc.role = "button";
+      }
+      if (hasRouterLink.value !== true && mediaTypeRE.test(props.type) === true) {
+        acc.type = props.type;
+      }
+    } else if (props.disable === true) {
+      acc.disabled = "";
+      acc["aria-disabled"] = "true";
+    }
+    if (props.loading === true && props.percentage !== void 0) {
+      Object.assign(acc, {
+        role: "progressbar",
+        "aria-valuemin": 0,
+        "aria-valuemax": 100,
+        "aria-valuenow": props.percentage
+      });
+    }
+    return acc;
+  });
+  const classes = computed(() => {
+    let colors;
+    if (props.color !== void 0) {
+      if (props.flat === true || props.outline === true) {
+        colors = `text-${props.textColor || props.color}`;
+      } else {
+        colors = `bg-${props.color} text-${props.textColor || "white"}`;
+      }
+    } else if (props.textColor) {
+      colors = `text-${props.textColor}`;
+    }
+    return `q-btn--${design.value} q-btn--${props.round === true ? "round" : `rectangle${isRounded.value === true ? " q-btn--rounded" : ""}`}` + (colors !== void 0 ? " " + colors : "") + (isActionable.value === true ? " q-btn--actionable q-focusable q-hoverable" : props.disable === true ? " disabled" : "") + (props.fab === true ? " q-btn--fab" : props.fabMini === true ? " q-btn--fab-mini" : "") + (props.noCaps === true ? " q-btn--no-uppercase" : "") + (props.dense === true ? " q-btn--dense" : "") + (props.stretch === true ? " no-border-radius self-stretch" : "") + (props.glossy === true ? " glossy" : "");
+  });
+  const innerClasses = computed(() => alignClass.value + (props.stack === true ? " column" : " row") + (props.noWrap === true ? " no-wrap text-no-wrap" : "") + (props.loading === true ? " q-btn__content--hidden" : ""));
+  return {
+    classes,
+    style,
+    innerClasses,
+    attributes,
+    hasRouterLink,
+    hasLink,
+    linkTag,
+    navigateToRouterLink,
+    isActionable
+  };
+}
+const { passiveCapture } = listenOpts;
+let touchTarget = null, keyboardTarget = null, mouseTarget = null;
+var QBtn = createComponent({
+  name: "QBtn",
+  props: __spreadProps(__spreadValues({}, useBtnProps), {
+    percentage: Number,
+    darkPercentage: Boolean
+  }),
+  emits: ["click", "keydown", "touchstart", "mousedown", "keyup"],
+  setup(props, { slots, emit }) {
+    const { proxy } = getCurrentInstance();
+    const {
+      classes,
+      style,
+      innerClasses,
+      attributes,
+      hasRouterLink,
+      hasLink,
+      linkTag,
+      navigateToRouterLink,
+      isActionable
+    } = useBtn(props);
+    const rootRef = ref(null);
+    const blurTargetRef = ref(null);
+    let localTouchTargetEl = null, avoidMouseRipple, mouseTimer;
+    const hasLabel = computed(() => props.label !== void 0 && props.label !== null && props.label !== "");
+    const ripple = computed(() => props.disable === true || props.ripple === false ? false : __spreadValues({
+      keyCodes: hasLink.value === true ? [13, 32] : [13]
+    }, props.ripple === true ? {} : props.ripple));
+    const rippleProps = computed(() => ({ center: props.round }));
+    const percentageStyle = computed(() => {
+      const val = Math.max(0, Math.min(100, props.percentage));
+      return val > 0 ? { transition: "transform 0.6s", transform: `translateX(${val - 100}%)` } : {};
+    });
+    const onEvents = computed(() => {
+      if (props.loading === true) {
+        return {
+          onMousedown: onLoadingEvt,
+          onTouchstartPassive: onLoadingEvt,
+          onClick: onLoadingEvt,
+          onKeydown: onLoadingEvt,
+          onKeyup: onLoadingEvt
+        };
+      }
+      if (isActionable.value === true) {
+        return {
+          onClick,
+          onKeydown,
+          onMousedown,
+          onTouchstart
+        };
+      }
+      return {
+        onClick: stopAndPrevent
+      };
+    });
+    const nodeProps = computed(() => __spreadValues(__spreadValues({
+      ref: rootRef,
+      class: "q-btn q-btn-item non-selectable no-outline " + classes.value,
+      style: style.value
+    }, attributes.value), onEvents.value));
+    function onClick(e) {
+      if (rootRef.value === null) {
+        return;
+      }
+      if (e !== void 0) {
+        if (e.defaultPrevented === true) {
+          return;
+        }
+        const el = document.activeElement;
+        if (props.type === "submit" && el !== document.body && rootRef.value.contains(el) === false && el.contains(rootRef.value) === false) {
+          rootRef.value.focus();
+          const onClickCleanup = () => {
+            document.removeEventListener("keydown", stopAndPrevent, true);
+            document.removeEventListener("keyup", onClickCleanup, passiveCapture);
+            rootRef.value !== null && rootRef.value.removeEventListener("blur", onClickCleanup, passiveCapture);
+          };
+          document.addEventListener("keydown", stopAndPrevent, true);
+          document.addEventListener("keyup", onClickCleanup, passiveCapture);
+          rootRef.value.addEventListener("blur", onClickCleanup, passiveCapture);
+        }
+      }
+      if (hasRouterLink.value === true) {
+        const go = () => {
+          e.__qNavigate = true;
+          navigateToRouterLink(e);
+        };
+        emit("click", e, go);
+        e.defaultPrevented !== true && go();
+      } else {
+        emit("click", e);
+      }
+    }
+    function onKeydown(e) {
+      if (rootRef.value === null) {
+        return;
+      }
+      emit("keydown", e);
+      if (isKeyCode(e, [13, 32]) === true && keyboardTarget !== rootRef.value) {
+        keyboardTarget !== null && cleanup();
+        if (e.defaultPrevented !== true) {
+          rootRef.value.focus();
+          keyboardTarget = rootRef.value;
+          rootRef.value.classList.add("q-btn--active");
+          document.addEventListener("keyup", onPressEnd, true);
+          rootRef.value.addEventListener("blur", onPressEnd, passiveCapture);
+        }
+        stopAndPrevent(e);
+      }
+    }
+    function onTouchstart(e) {
+      if (rootRef.value === null) {
+        return;
+      }
+      emit("touchstart", e);
+      if (e.defaultPrevented === true) {
+        return;
+      }
+      if (touchTarget !== rootRef.value) {
+        touchTarget !== null && cleanup();
+        touchTarget = rootRef.value;
+        localTouchTargetEl = e.target;
+        localTouchTargetEl.addEventListener("touchcancel", onPressEnd, passiveCapture);
+        localTouchTargetEl.addEventListener("touchend", onPressEnd, passiveCapture);
+      }
+      avoidMouseRipple = true;
+      clearTimeout(mouseTimer);
+      mouseTimer = setTimeout(() => {
+        avoidMouseRipple = false;
+      }, 200);
+    }
+    function onMousedown(e) {
+      if (rootRef.value === null) {
+        return;
+      }
+      e.qSkipRipple = avoidMouseRipple === true;
+      emit("mousedown", e);
+      if (e.defaultPrevented !== true && mouseTarget !== rootRef.value) {
+        mouseTarget !== null && cleanup();
+        mouseTarget = rootRef.value;
+        rootRef.value.classList.add("q-btn--active");
+        document.addEventListener("mouseup", onPressEnd, passiveCapture);
+      }
+    }
+    function onPressEnd(e) {
+      if (rootRef.value === null) {
+        return;
+      }
+      if (e !== void 0 && e.type === "blur" && document.activeElement === rootRef.value) {
+        return;
+      }
+      if (e !== void 0 && e.type === "keyup") {
+        if (keyboardTarget === rootRef.value && isKeyCode(e, [13, 32]) === true) {
+          const evt = new MouseEvent("click", e);
+          evt.qKeyEvent = true;
+          e.defaultPrevented === true && prevent(evt);
+          e.cancelBubble === true && stop(evt);
+          rootRef.value.dispatchEvent(evt);
+          stopAndPrevent(e);
+          e.qKeyEvent = true;
+        }
+        emit("keyup", e);
+      }
+      cleanup();
+    }
+    function cleanup(destroying) {
+      const blurTarget = blurTargetRef.value;
+      if (destroying !== true && (touchTarget === rootRef.value || mouseTarget === rootRef.value) && blurTarget !== null && blurTarget !== document.activeElement) {
+        blurTarget.setAttribute("tabindex", -1);
+        blurTarget.focus();
+      }
+      if (touchTarget === rootRef.value) {
+        if (localTouchTargetEl !== null) {
+          localTouchTargetEl.removeEventListener("touchcancel", onPressEnd, passiveCapture);
+          localTouchTargetEl.removeEventListener("touchend", onPressEnd, passiveCapture);
+        }
+        touchTarget = localTouchTargetEl = null;
+      }
+      if (mouseTarget === rootRef.value) {
+        document.removeEventListener("mouseup", onPressEnd, passiveCapture);
+        mouseTarget = null;
+      }
+      if (keyboardTarget === rootRef.value) {
+        document.removeEventListener("keyup", onPressEnd, true);
+        rootRef.value !== null && rootRef.value.removeEventListener("blur", onPressEnd, passiveCapture);
+        keyboardTarget = null;
+      }
+      rootRef.value !== null && rootRef.value.classList.remove("q-btn--active");
+    }
+    function onLoadingEvt(evt) {
+      stopAndPrevent(evt);
+      evt.qSkipRipple = true;
+    }
+    onBeforeUnmount(() => {
+      cleanup(true);
+    });
+    Object.assign(proxy, { click: onClick });
+    return () => {
+      let inner = [];
+      props.icon !== void 0 && inner.push(h(QIcon, {
+        name: props.icon,
+        left: props.stack === false && hasLabel.value === true,
+        role: "img",
+        "aria-hidden": "true"
+      }));
+      hasLabel.value === true && inner.push(h("span", { class: "block" }, [props.label]));
+      inner = hMergeSlot(slots.default, inner);
+      if (props.iconRight !== void 0 && props.round === false) {
+        inner.push(h(QIcon, {
+          name: props.iconRight,
+          right: props.stack === false && hasLabel.value === true,
+          role: "img",
+          "aria-hidden": "true"
+        }));
+      }
+      const child = [
+        h("span", {
+          class: "q-focus-helper",
+          ref: blurTargetRef
+        })
+      ];
+      if (props.loading === true && props.percentage !== void 0) {
+        child.push(h("span", {
+          class: "q-btn__progress absolute-full overflow-hidden" + (props.darkPercentage === true ? " q-btn__progress--dark" : "")
+        }, [
+          h("span", {
+            class: "q-btn__progress-indicator fit block",
+            style: percentageStyle.value
+          })
+        ]));
+      }
+      child.push(h("span", {
+        class: "q-btn__content text-center col items-center q-anchor--skip " + innerClasses.value
+      }, inner));
+      props.loading !== null && child.push(h(Transition, {
+        name: "q-transition--fade"
+      }, () => props.loading === true ? [
+        h("span", {
+          key: "loading",
+          class: "absolute-full flex flex-center"
+        }, slots.loading !== void 0 ? slots.loading() : [h(QSpinner)])
+      ] : null));
+      return withDirectives(h(linkTag.value, nodeProps.value, child), [[
+        Ripple,
+        ripple.value,
+        void 0,
+        rippleProps.value
+      ]]);
+    };
+  }
+});
+function clearSelection() {
+  if (window.getSelection !== void 0) {
+    const selection = window.getSelection();
+    if (selection.empty !== void 0) {
+      selection.empty();
+    } else if (selection.removeAllRanges !== void 0) {
+      selection.removeAllRanges();
+      Platform.is.mobile !== true && selection.addRange(document.createRange());
+    }
+  } else if (document.selection !== void 0) {
+    document.selection.empty();
+  }
+}
+const useAnchorProps = {
+  target: {
+    default: true
+  },
+  noParentEvent: Boolean,
+  contextMenu: Boolean
+};
+function useAnchor({
+  showing,
+  avoidEmit,
+  configureAnchorEl
+}) {
+  const { props, proxy, emit } = getCurrentInstance();
+  const anchorEl = ref(null);
+  let touchTimer;
+  function canShow(evt) {
+    return anchorEl.value === null ? false : evt === void 0 || evt.touches === void 0 || evt.touches.length <= 1;
+  }
+  const anchorEvents = {};
+  if (configureAnchorEl === void 0) {
+    Object.assign(anchorEvents, {
+      hide(evt) {
+        proxy.hide(evt);
+      },
+      toggle(evt) {
+        proxy.toggle(evt);
+        evt.qAnchorHandled = true;
+      },
+      toggleKey(evt) {
+        isKeyCode(evt, 13) === true && anchorEvents.toggle(evt);
+      },
+      contextClick(evt) {
+        proxy.hide(evt);
+        prevent(evt);
+        nextTick(() => {
+          proxy.show(evt);
+          evt.qAnchorHandled = true;
+        });
+      },
+      prevent,
+      mobileTouch(evt) {
+        anchorEvents.mobileCleanup(evt);
+        if (canShow(evt) !== true) {
+          return;
+        }
+        proxy.hide(evt);
+        anchorEl.value.classList.add("non-selectable");
+        const target2 = evt.target;
+        addEvt(anchorEvents, "anchor", [
+          [target2, "touchmove", "mobileCleanup", "passive"],
+          [target2, "touchend", "mobileCleanup", "passive"],
+          [target2, "touchcancel", "mobileCleanup", "passive"],
+          [anchorEl.value, "contextmenu", "prevent", "notPassive"]
+        ]);
+        touchTimer = setTimeout(() => {
+          proxy.show(evt);
+          evt.qAnchorHandled = true;
+        }, 300);
+      },
+      mobileCleanup(evt) {
+        anchorEl.value.classList.remove("non-selectable");
+        clearTimeout(touchTimer);
+        if (showing.value === true && evt !== void 0) {
+          clearSelection();
+        }
+      }
+    });
+    configureAnchorEl = function(context = props.contextMenu) {
+      if (props.noParentEvent === true || anchorEl.value === null) {
+        return;
+      }
+      let evts;
+      if (context === true) {
+        if (proxy.$q.platform.is.mobile === true) {
+          evts = [
+            [anchorEl.value, "touchstart", "mobileTouch", "passive"]
+          ];
+        } else {
+          evts = [
+            [anchorEl.value, "mousedown", "hide", "passive"],
+            [anchorEl.value, "contextmenu", "contextClick", "notPassive"]
+          ];
+        }
+      } else {
+        evts = [
+          [anchorEl.value, "click", "toggle", "passive"],
+          [anchorEl.value, "keyup", "toggleKey", "passive"]
+        ];
+      }
+      addEvt(anchorEvents, "anchor", evts);
+    };
+  }
+  function unconfigureAnchorEl() {
+    cleanEvt(anchorEvents, "anchor");
+  }
+  function setAnchorEl(el) {
+    anchorEl.value = el;
+    while (anchorEl.value.classList.contains("q-anchor--skip")) {
+      anchorEl.value = anchorEl.value.parentNode;
+    }
+    configureAnchorEl();
+  }
+  function pickAnchorEl() {
+    if (props.target === false || props.target === "" || proxy.$el.parentNode === null) {
+      anchorEl.value = null;
+    } else if (props.target === true) {
+      setAnchorEl(proxy.$el.parentNode);
+    } else {
+      let el = props.target;
+      if (typeof props.target === "string") {
+        try {
+          el = document.querySelector(props.target);
+        } catch (err) {
+          el = void 0;
+        }
+      }
+      if (el !== void 0 && el !== null) {
+        anchorEl.value = el.$el || el;
+        configureAnchorEl();
+      } else {
+        anchorEl.value = null;
+        console.error(`Anchor: target "${props.target}" not found`);
+      }
+    }
+  }
+  watch(() => props.contextMenu, (val) => {
+    if (anchorEl.value !== null) {
+      unconfigureAnchorEl();
+      configureAnchorEl(val);
+    }
+  });
+  watch(() => props.target, () => {
+    if (anchorEl.value !== null) {
+      unconfigureAnchorEl();
+    }
+    pickAnchorEl();
+  });
+  watch(() => props.noParentEvent, (val) => {
+    if (anchorEl.value !== null) {
+      if (val === true) {
+        unconfigureAnchorEl();
+      } else {
+        configureAnchorEl();
+      }
+    }
+  });
+  onMounted(() => {
+    pickAnchorEl();
+    if (avoidEmit !== true && props.modelValue === true && anchorEl.value === null) {
+      emit("update:modelValue", false);
+    }
+  });
+  onBeforeUnmount(() => {
+    clearTimeout(touchTimer);
+    unconfigureAnchorEl();
+  });
+  return {
+    anchorEl,
+    canShow,
+    anchorEvents
+  };
+}
+function useScrollTarget(props, configureScrollTarget) {
+  const localScrollTarget = ref(null);
+  let scrollFn;
+  function changeScrollEvent(scrollTarget, fn) {
+    const fnProp = `${fn !== void 0 ? "add" : "remove"}EventListener`;
+    const fnHandler = fn !== void 0 ? fn : scrollFn;
+    if (scrollTarget !== window) {
+      scrollTarget[fnProp]("scroll", fnHandler, listenOpts.passive);
+    }
+    window[fnProp]("scroll", fnHandler, listenOpts.passive);
+    scrollFn = fn;
+  }
+  function unconfigureScrollTarget() {
+    if (localScrollTarget.value !== null) {
+      changeScrollEvent(localScrollTarget.value);
+      localScrollTarget.value = null;
+    }
+  }
+  const noParentEventWatcher = watch(() => props.noParentEvent, () => {
+    if (localScrollTarget.value !== null) {
+      unconfigureScrollTarget();
+      configureScrollTarget();
+    }
+  });
+  onBeforeUnmount(noParentEventWatcher);
+  return {
+    localScrollTarget,
+    unconfigureScrollTarget,
+    changeScrollEvent
+  };
+}
+const useModelToggleProps = {
+  modelValue: {
+    type: Boolean,
+    default: null
+  },
+  "onUpdate:modelValue": [Function, Array]
+};
+const useModelToggleEmits = [
+  "before-show",
+  "show",
+  "before-hide",
+  "hide"
+];
+function useModelToggle({
+  showing,
+  canShow,
+  hideOnRouteChange,
+  handleShow,
+  handleHide,
+  processOnMount
+}) {
+  const vm = getCurrentInstance();
+  const { props, emit, proxy } = vm;
+  let payload;
+  function toggle(evt) {
+    if (showing.value === true) {
+      hide(evt);
+    } else {
+      show(evt);
+    }
+  }
+  function show(evt) {
+    if (props.disable === true || evt !== void 0 && evt.qAnchorHandled === true || canShow !== void 0 && canShow(evt) !== true) {
+      return;
+    }
+    const listener = props["onUpdate:modelValue"] !== void 0;
+    if (listener === true && true) {
+      emit("update:modelValue", true);
+      payload = evt;
+      nextTick(() => {
+        if (payload === evt) {
+          payload = void 0;
+        }
+      });
+    }
+    if (props.modelValue === null || listener === false || false) {
+      processShow(evt);
+    }
+  }
+  function processShow(evt) {
+    if (showing.value === true) {
+      return;
+    }
+    showing.value = true;
+    emit("before-show", evt);
+    if (handleShow !== void 0) {
+      handleShow(evt);
+    } else {
+      emit("show", evt);
+    }
+  }
+  function hide(evt) {
+    if (props.disable === true) {
+      return;
+    }
+    const listener = props["onUpdate:modelValue"] !== void 0;
+    if (listener === true && true) {
+      emit("update:modelValue", false);
+      payload = evt;
+      nextTick(() => {
+        if (payload === evt) {
+          payload = void 0;
+        }
+      });
+    }
+    if (props.modelValue === null || listener === false || false) {
+      processHide(evt);
+    }
+  }
+  function processHide(evt) {
+    if (showing.value === false) {
+      return;
+    }
+    showing.value = false;
+    emit("before-hide", evt);
+    if (handleHide !== void 0) {
+      handleHide(evt);
+    } else {
+      emit("hide", evt);
+    }
+  }
+  function processModelChange(val) {
+    if (props.disable === true && val === true) {
+      if (props["onUpdate:modelValue"] !== void 0) {
+        emit("update:modelValue", false);
+      }
+    } else if (val === true !== showing.value) {
+      const fn = val === true ? processShow : processHide;
+      fn(payload);
+    }
+  }
+  watch(() => props.modelValue, processModelChange);
+  if (hideOnRouteChange !== void 0 && vmHasRouter(vm) === true) {
+    watch(() => proxy.$route.fullPath, () => {
+      if (hideOnRouteChange.value === true && showing.value === true) {
+        hide();
+      }
+    });
+  }
+  processOnMount === true && onMounted(() => {
+    processModelChange(props.modelValue);
+  });
+  const publicMethods = { show, hide, toggle };
+  Object.assign(proxy, publicMethods);
+  return publicMethods;
+}
+let queue = [];
+let waitFlags = [];
+function clearFlag(flag) {
+  waitFlags = waitFlags.filter((entry) => entry !== flag);
+}
+function addFocusWaitFlag(flag) {
+  clearFlag(flag);
+  waitFlags.push(flag);
+}
+function removeFocusWaitFlag(flag) {
+  clearFlag(flag);
+  if (waitFlags.length === 0 && queue.length > 0) {
+    queue[queue.length - 1]();
+    queue = [];
+  }
+}
+function addFocusFn(fn) {
+  if (waitFlags.length === 0) {
+    fn();
+  } else {
+    queue.push(fn);
+  }
+}
+function removeFocusFn(fn) {
+  queue = queue.filter((entry) => entry !== fn);
+}
+let target = document.body;
+function createGlobalNode(id) {
+  const el = document.createElement("div");
+  if (id !== void 0) {
+    el.id = id;
+  }
+  if (globalConfig.globalNodes !== void 0) {
+    const cls = globalConfig.globalNodes.class;
+    if (cls !== void 0) {
+      el.className = cls;
+    }
+  }
+  target.appendChild(el);
+  return el;
+}
+function removeGlobalNode(el) {
+  el.remove();
+}
+const portalList = [];
+function isOnGlobalDialog(vm) {
+  vm = vm.parent;
+  while (vm !== void 0 && vm !== null) {
+    if (vm.type.name === "QGlobalDialog") {
+      return true;
+    }
+    if (vm.type.name === "QDialog" || vm.type.name === "QMenu") {
+      return false;
+    }
+    vm = vm.parent;
+  }
+  return false;
+}
+function usePortal(vm, innerRef, renderPortalContent, checkGlobalDialog) {
+  const portalIsActive = ref(false);
+  const portalIsAccessible = ref(false);
+  let portalEl = null;
+  const focusObj = {};
+  const onGlobalDialog = checkGlobalDialog === true && isOnGlobalDialog(vm);
+  function showPortal(isReady) {
+    if (isReady === true) {
+      removeFocusWaitFlag(focusObj);
+      portalIsAccessible.value = true;
+      return;
+    }
+    portalIsAccessible.value = false;
+    if (portalIsActive.value === false) {
+      if (onGlobalDialog === false && portalEl === null) {
+        portalEl = createGlobalNode();
+      }
+      portalIsActive.value = true;
+      portalList.push(vm.proxy);
+      addFocusWaitFlag(focusObj);
+    }
+  }
+  function hidePortal(isReady) {
+    portalIsAccessible.value = false;
+    if (isReady !== true) {
+      return;
+    }
+    removeFocusWaitFlag(focusObj);
+    portalIsActive.value = false;
+    const index2 = portalList.indexOf(vm.proxy);
+    if (index2 > -1) {
+      portalList.splice(index2, 1);
+    }
+    if (portalEl !== null) {
+      removeGlobalNode(portalEl);
+      portalEl = null;
+    }
+  }
+  onUnmounted(() => {
+    hidePortal(true);
+  });
+  Object.assign(vm.proxy, { __qPortalInnerRef: innerRef });
+  return {
+    showPortal,
+    hidePortal,
+    portalIsActive,
+    portalIsAccessible,
+    renderPortal: () => onGlobalDialog === true ? renderPortalContent() : portalIsActive.value === true ? [h(Teleport, { to: portalEl }, renderPortalContent())] : void 0
+  };
+}
+const useTransitionProps = {
+  transitionShow: {
+    type: String,
+    default: "fade"
+  },
+  transitionHide: {
+    type: String,
+    default: "fade"
+  },
+  transitionDuration: {
+    type: [String, Number],
+    default: 300
+  }
+};
+function useTransition(props, showing) {
+  const transitionState = ref(showing.value);
+  watch(showing, (val) => {
+    nextTick(() => {
+      transitionState.value = val;
+    });
+  });
+  return {
+    transition: computed(() => "q-transition--" + (transitionState.value === true ? props.transitionHide : props.transitionShow)),
+    transitionStyle: computed(() => `--q-transition-duration: ${props.transitionDuration}ms`)
+  };
+}
+function useTick() {
+  let tickFn;
+  onBeforeUnmount(() => {
+    tickFn = void 0;
+  });
+  return {
+    registerTick(fn) {
+      tickFn = fn;
+      nextTick(() => {
+        if (tickFn === fn) {
+          tickFn();
+          tickFn = void 0;
+        }
+      });
+    },
+    removeTick() {
+      tickFn = void 0;
+    }
+  };
+}
+function useTimeout() {
+  let timer2;
+  onBeforeUnmount(() => {
+    clearTimeout(timer2);
+  });
+  return {
+    registerTimeout(fn, delay) {
+      clearTimeout(timer2);
+      timer2 = setTimeout(fn, delay);
+    },
+    removeTimeout() {
+      clearTimeout(timer2);
+    }
+  };
+}
+const scrollTargets = [null, document, document.body, document.scrollingElement, document.documentElement];
+function getScrollTarget(el, targetEl) {
+  let target2 = getElement(targetEl);
+  if (target2 === void 0) {
+    if (el === void 0 || el === null) {
+      return window;
+    }
+    target2 = el.closest(".scroll,.scroll-y,.overflow-auto");
+  }
+  return scrollTargets.includes(target2) ? window : target2;
+}
+function getScrollHeight(el) {
+  return (el === window ? document.body : el).scrollHeight;
+}
+function getScrollWidth(el) {
+  return (el === window ? document.body : el).scrollWidth;
+}
+function getVerticalScrollPosition(scrollTarget) {
+  return scrollTarget === window ? window.pageYOffset || window.scrollY || document.body.scrollTop || 0 : scrollTarget.scrollTop;
+}
+function getHorizontalScrollPosition(scrollTarget) {
+  return scrollTarget === window ? window.pageXOffset || window.scrollX || document.body.scrollLeft || 0 : scrollTarget.scrollLeft;
+}
+function animVerticalScrollTo(el, to, duration = 0) {
+  const prevTime = arguments[3] === void 0 ? performance.now() : arguments[3];
+  const pos = getVerticalScrollPosition(el);
+  if (duration <= 0) {
+    if (pos !== to) {
+      setScroll(el, to);
+    }
+    return;
+  }
+  requestAnimationFrame((nowTime) => {
+    const frameTime = nowTime - prevTime;
+    const newPos = pos + (to - pos) / Math.max(frameTime, duration) * frameTime;
+    setScroll(el, newPos);
+    if (newPos !== to) {
+      animVerticalScrollTo(el, to, duration - frameTime, nowTime);
+    }
+  });
+}
+function animHorizontalScrollTo(el, to, duration = 0) {
+  const prevTime = arguments[3] === void 0 ? performance.now() : arguments[3];
+  const pos = getHorizontalScrollPosition(el);
+  if (duration <= 0) {
+    if (pos !== to) {
+      setHorizontalScroll(el, to);
+    }
+    return;
+  }
+  requestAnimationFrame((nowTime) => {
+    const frameTime = nowTime - prevTime;
+    const newPos = pos + (to - pos) / Math.max(frameTime, duration) * frameTime;
+    setHorizontalScroll(el, newPos);
+    if (newPos !== to) {
+      animHorizontalScrollTo(el, to, duration - frameTime, nowTime);
+    }
+  });
+}
+function setScroll(scrollTarget, offset) {
+  if (scrollTarget === window) {
+    window.scrollTo(window.pageXOffset || window.scrollX || document.body.scrollLeft || 0, offset);
+    return;
+  }
+  scrollTarget.scrollTop = offset;
+}
+function setHorizontalScroll(scrollTarget, offset) {
+  if (scrollTarget === window) {
+    window.scrollTo(offset, window.pageYOffset || window.scrollY || document.body.scrollTop || 0);
+    return;
+  }
+  scrollTarget.scrollLeft = offset;
+}
+function setVerticalScrollPosition(scrollTarget, offset, duration) {
+  if (duration) {
+    animVerticalScrollTo(scrollTarget, offset, duration);
+    return;
+  }
+  setScroll(scrollTarget, offset);
+}
+function setHorizontalScrollPosition(scrollTarget, offset, duration) {
+  if (duration) {
+    animHorizontalScrollTo(scrollTarget, offset, duration);
+    return;
+  }
+  setHorizontalScroll(scrollTarget, offset);
+}
+let size;
+function getScrollbarWidth() {
+  if (size !== void 0) {
+    return size;
+  }
+  const inner = document.createElement("p"), outer = document.createElement("div");
+  css(inner, {
+    width: "100%",
+    height: "200px"
+  });
+  css(outer, {
+    position: "absolute",
+    top: "0px",
+    left: "0px",
+    visibility: "hidden",
+    width: "200px",
+    height: "150px",
+    overflow: "hidden"
+  });
+  outer.appendChild(inner);
+  document.body.appendChild(outer);
+  const w1 = inner.offsetWidth;
+  outer.style.overflow = "scroll";
+  let w2 = inner.offsetWidth;
+  if (w1 === w2) {
+    w2 = outer.clientWidth;
+  }
+  outer.remove();
+  size = w1 - w2;
+  return size;
+}
+function hasScrollbar(el, onY = true) {
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) {
+    return false;
+  }
+  return onY ? el.scrollHeight > el.clientHeight && (el.classList.contains("scroll") || el.classList.contains("overflow-auto") || ["auto", "scroll"].includes(window.getComputedStyle(el)["overflow-y"])) : el.scrollWidth > el.clientWidth && (el.classList.contains("scroll") || el.classList.contains("overflow-auto") || ["auto", "scroll"].includes(window.getComputedStyle(el)["overflow-x"]));
+}
+var scroll = {
+  getScrollTarget,
+  getScrollHeight,
+  getScrollWidth,
+  getVerticalScrollPosition,
+  getHorizontalScrollPosition,
+  animVerticalScrollTo,
+  animHorizontalScrollTo,
+  setVerticalScrollPosition,
+  setHorizontalScrollPosition,
+  getScrollbarWidth,
+  hasScrollbar
+};
+let timer;
+const { notPassiveCapture } = listenOpts, registeredList = [];
+function globalHandler(evt) {
+  clearTimeout(timer);
+  const target2 = evt.target;
+  if (target2 === void 0 || target2.nodeType === 8 || target2.classList.contains("no-pointer-events") === true) {
+    return;
+  }
+  let portalIndex = portalList.length - 1;
+  while (portalIndex >= 0) {
+    const proxy = portalList[portalIndex].$;
+    if (proxy.type.name !== "QDialog") {
+      break;
+    }
+    if (proxy.props.seamless !== true) {
+      return;
+    }
+    portalIndex--;
+  }
+  for (let i = registeredList.length - 1; i >= 0; i--) {
+    const state = registeredList[i];
+    if ((state.anchorEl.value === null || state.anchorEl.value.contains(target2) === false) && (target2 === document.body || state.innerRef.value !== null && state.innerRef.value.contains(target2) === false)) {
+      evt.qClickOutside = true;
+      state.onClickOutside(evt);
+    } else {
+      return;
+    }
+  }
+}
+function addClickOutside(clickOutsideProps) {
+  registeredList.push(clickOutsideProps);
+  if (registeredList.length === 1) {
+    document.addEventListener("mousedown", globalHandler, notPassiveCapture);
+    document.addEventListener("touchstart", globalHandler, notPassiveCapture);
+  }
+}
+function removeClickOutside(clickOutsideProps) {
+  const index2 = registeredList.findIndex((h2) => h2 === clickOutsideProps);
+  if (index2 > -1) {
+    registeredList.splice(index2, 1);
+    if (registeredList.length === 0) {
+      clearTimeout(timer);
+      document.removeEventListener("mousedown", globalHandler, notPassiveCapture);
+      document.removeEventListener("touchstart", globalHandler, notPassiveCapture);
+    }
+  }
+}
+let vpLeft, vpTop;
+function validatePosition(pos) {
+  const parts = pos.split(" ");
+  if (parts.length !== 2) {
+    return false;
+  }
+  if (["top", "center", "bottom"].includes(parts[0]) !== true) {
+    console.error("Anchor/Self position must start with one of top/center/bottom");
+    return false;
+  }
+  if (["left", "middle", "right", "start", "end"].includes(parts[1]) !== true) {
+    console.error("Anchor/Self position must end with one of left/middle/right/start/end");
+    return false;
+  }
+  return true;
+}
+function validateOffset(val) {
+  if (!val) {
+    return true;
+  }
+  if (val.length !== 2) {
+    return false;
+  }
+  if (typeof val[0] !== "number" || typeof val[1] !== "number") {
+    return false;
+  }
+  return true;
+}
+const horizontalPos = {
+  "start#ltr": "left",
+  "start#rtl": "right",
+  "end#ltr": "right",
+  "end#rtl": "left"
+};
+["left", "middle", "right"].forEach((pos) => {
+  horizontalPos[`${pos}#ltr`] = pos;
+  horizontalPos[`${pos}#rtl`] = pos;
+});
+function parsePosition(pos, rtl) {
+  const parts = pos.split(" ");
+  return {
+    vertical: parts[0],
+    horizontal: horizontalPos[`${parts[1]}#${rtl === true ? "rtl" : "ltr"}`]
+  };
+}
+function getAnchorProps(el, offset) {
+  let { top, left, right, bottom, width, height } = el.getBoundingClientRect();
+  if (offset !== void 0) {
+    top -= offset[1];
+    left -= offset[0];
+    bottom += offset[1];
+    right += offset[0];
+    width += offset[0];
+    height += offset[1];
+  }
+  return {
+    top,
+    left,
+    right,
+    bottom,
+    width,
+    height,
+    middle: left + (right - left) / 2,
+    center: top + (bottom - top) / 2
+  };
+}
+function getTargetProps(el) {
+  return {
+    top: 0,
+    center: el.offsetHeight / 2,
+    bottom: el.offsetHeight,
+    left: 0,
+    middle: el.offsetWidth / 2,
+    right: el.offsetWidth
+  };
+}
+function setPosition(cfg) {
+  if (client.is.ios === true && window.visualViewport !== void 0) {
+    const el = document.body.style;
+    const { offsetLeft: left, offsetTop: top } = window.visualViewport;
+    if (left !== vpLeft) {
+      el.setProperty("--q-pe-left", left + "px");
+      vpLeft = left;
+    }
+    if (top !== vpTop) {
+      el.setProperty("--q-pe-top", top + "px");
+      vpTop = top;
+    }
+  }
+  let anchorProps;
+  const { scrollLeft, scrollTop } = cfg.el;
+  if (cfg.absoluteOffset === void 0) {
+    anchorProps = getAnchorProps(cfg.anchorEl, cfg.cover === true ? [0, 0] : cfg.offset);
+  } else {
+    const { top: anchorTop, left: anchorLeft } = cfg.anchorEl.getBoundingClientRect(), top = anchorTop + cfg.absoluteOffset.top, left = anchorLeft + cfg.absoluteOffset.left;
+    anchorProps = { top, left, width: 1, height: 1, right: left + 1, center: top, middle: left, bottom: top + 1 };
+  }
+  let elStyle = {
+    maxHeight: cfg.maxHeight,
+    maxWidth: cfg.maxWidth,
+    visibility: "visible"
+  };
+  if (cfg.fit === true || cfg.cover === true) {
+    elStyle.minWidth = anchorProps.width + "px";
+    if (cfg.cover === true) {
+      elStyle.minHeight = anchorProps.height + "px";
+    }
+  }
+  Object.assign(cfg.el.style, elStyle);
+  const targetProps = getTargetProps(cfg.el), props = {
+    top: anchorProps[cfg.anchorOrigin.vertical] - targetProps[cfg.selfOrigin.vertical],
+    left: anchorProps[cfg.anchorOrigin.horizontal] - targetProps[cfg.selfOrigin.horizontal]
+  };
+  applyBoundaries(props, anchorProps, targetProps, cfg.anchorOrigin, cfg.selfOrigin);
+  elStyle = {
+    top: props.top + "px",
+    left: props.left + "px"
+  };
+  if (props.maxHeight !== void 0) {
+    elStyle.maxHeight = props.maxHeight + "px";
+    if (anchorProps.height > props.maxHeight) {
+      elStyle.minHeight = elStyle.maxHeight;
+    }
+  }
+  if (props.maxWidth !== void 0) {
+    elStyle.maxWidth = props.maxWidth + "px";
+    if (anchorProps.width > props.maxWidth) {
+      elStyle.minWidth = elStyle.maxWidth;
+    }
+  }
+  Object.assign(cfg.el.style, elStyle);
+  if (cfg.el.scrollTop !== scrollTop) {
+    cfg.el.scrollTop = scrollTop;
+  }
+  if (cfg.el.scrollLeft !== scrollLeft) {
+    cfg.el.scrollLeft = scrollLeft;
+  }
+}
+function applyBoundaries(props, anchorProps, targetProps, anchorOrigin, selfOrigin) {
+  const currentHeight = targetProps.bottom, currentWidth = targetProps.right, margin = getScrollbarWidth(), innerHeight = window.innerHeight - margin, innerWidth = document.body.clientWidth;
+  if (props.top < 0 || props.top + currentHeight > innerHeight) {
+    if (selfOrigin.vertical === "center") {
+      props.top = anchorProps[anchorOrigin.vertical] > innerHeight / 2 ? Math.max(0, innerHeight - currentHeight) : 0;
+      props.maxHeight = Math.min(currentHeight, innerHeight);
+    } else if (anchorProps[anchorOrigin.vertical] > innerHeight / 2) {
+      const anchorY = Math.min(innerHeight, anchorOrigin.vertical === "center" ? anchorProps.center : anchorOrigin.vertical === selfOrigin.vertical ? anchorProps.bottom : anchorProps.top);
+      props.maxHeight = Math.min(currentHeight, anchorY);
+      props.top = Math.max(0, anchorY - currentHeight);
+    } else {
+      props.top = Math.max(0, anchorOrigin.vertical === "center" ? anchorProps.center : anchorOrigin.vertical === selfOrigin.vertical ? anchorProps.top : anchorProps.bottom);
+      props.maxHeight = Math.min(currentHeight, innerHeight - props.top);
+    }
+  }
+  if (props.left < 0 || props.left + currentWidth > innerWidth) {
+    props.maxWidth = Math.min(currentWidth, innerWidth);
+    if (selfOrigin.horizontal === "middle") {
+      props.left = anchorProps[anchorOrigin.horizontal] > innerWidth / 2 ? Math.max(0, innerWidth - currentWidth) : 0;
+    } else if (anchorProps[anchorOrigin.horizontal] > innerWidth / 2) {
+      const anchorX = Math.min(innerWidth, anchorOrigin.horizontal === "middle" ? anchorProps.middle : anchorOrigin.horizontal === selfOrigin.horizontal ? anchorProps.right : anchorProps.left);
+      props.maxWidth = Math.min(currentWidth, anchorX);
+      props.left = Math.max(0, anchorX - props.maxWidth);
+    } else {
+      props.left = Math.max(0, anchorOrigin.horizontal === "middle" ? anchorProps.middle : anchorOrigin.horizontal === selfOrigin.horizontal ? anchorProps.left : anchorProps.right);
+      props.maxWidth = Math.min(currentWidth, innerWidth - props.left);
+    }
+  }
+}
+var QTooltip = createComponent({
+  name: "QTooltip",
+  inheritAttrs: false,
+  props: __spreadProps(__spreadValues(__spreadValues(__spreadValues({}, useAnchorProps), useModelToggleProps), useTransitionProps), {
+    maxHeight: {
+      type: String,
+      default: null
+    },
+    maxWidth: {
+      type: String,
+      default: null
+    },
+    transitionShow: {
+      default: "jump-down"
+    },
+    transitionHide: {
+      default: "jump-up"
+    },
+    anchor: {
+      type: String,
+      default: "bottom middle",
+      validator: validatePosition
+    },
+    self: {
+      type: String,
+      default: "top middle",
+      validator: validatePosition
+    },
+    offset: {
+      type: Array,
+      default: () => [14, 14],
+      validator: validateOffset
+    },
+    scrollTarget: {
+      default: void 0
+    },
+    delay: {
+      type: Number,
+      default: 0
+    },
+    hideDelay: {
+      type: Number,
+      default: 0
+    }
+  }),
+  emits: [
+    ...useModelToggleEmits
+  ],
+  setup(props, { slots, emit, attrs }) {
+    let unwatchPosition, observer;
+    const vm = getCurrentInstance();
+    const { proxy: { $q } } = vm;
+    const innerRef = ref(null);
+    const showing = ref(false);
+    const anchorOrigin = computed(() => parsePosition(props.anchor, $q.lang.rtl));
+    const selfOrigin = computed(() => parsePosition(props.self, $q.lang.rtl));
+    const hideOnRouteChange = computed(() => props.persistent !== true);
+    const { registerTick, removeTick } = useTick();
+    const { registerTimeout, removeTimeout } = useTimeout();
+    const { transition, transitionStyle } = useTransition(props, showing);
+    const { localScrollTarget, changeScrollEvent, unconfigureScrollTarget } = useScrollTarget(props, configureScrollTarget);
+    const { anchorEl, canShow, anchorEvents } = useAnchor({ showing, configureAnchorEl });
+    const { show, hide } = useModelToggle({
+      showing,
+      canShow,
+      handleShow,
+      handleHide,
+      hideOnRouteChange,
+      processOnMount: true
+    });
+    Object.assign(anchorEvents, { delayShow, delayHide });
+    const { showPortal, hidePortal, renderPortal } = usePortal(vm, innerRef, renderPortalContent);
+    if ($q.platform.is.mobile === true) {
+      const clickOutsideProps = {
+        anchorEl,
+        innerRef,
+        onClickOutside(e) {
+          hide(e);
+          if (e.target.classList.contains("q-dialog__backdrop")) {
+            stopAndPrevent(e);
+          }
+          return true;
+        }
+      };
+      const hasClickOutside = computed(() => props.modelValue === null && props.persistent !== true && showing.value === true);
+      watch(hasClickOutside, (val) => {
+        const fn = val === true ? addClickOutside : removeClickOutside;
+        fn(clickOutsideProps);
+      });
+      onBeforeUnmount(() => {
+        removeClickOutside(clickOutsideProps);
+      });
+    }
+    function handleShow(evt) {
+      removeTick();
+      removeTimeout();
+      showPortal();
+      registerTick(() => {
+        observer = new MutationObserver(() => updatePosition());
+        observer.observe(innerRef.value, { attributes: false, childList: true, characterData: true, subtree: true });
+        updatePosition();
+        configureScrollTarget();
+      });
+      if (unwatchPosition === void 0) {
+        unwatchPosition = watch(() => $q.screen.width + "|" + $q.screen.height + "|" + props.self + "|" + props.anchor + "|" + $q.lang.rtl, updatePosition);
+      }
+      registerTimeout(() => {
+        showPortal(true);
+        emit("show", evt);
+      }, props.transitionDuration);
+    }
+    function handleHide(evt) {
+      removeTick();
+      removeTimeout();
+      hidePortal();
+      anchorCleanup();
+      registerTimeout(() => {
+        hidePortal(true);
+        emit("hide", evt);
+      }, props.transitionDuration);
+    }
+    function anchorCleanup() {
+      if (observer !== void 0) {
+        observer.disconnect();
+        observer = void 0;
+      }
+      if (unwatchPosition !== void 0) {
+        unwatchPosition();
+        unwatchPosition = void 0;
+      }
+      unconfigureScrollTarget();
+      cleanEvt(anchorEvents, "tooltipTemp");
+    }
+    function updatePosition() {
+      const el = innerRef.value;
+      if (anchorEl.value === null || !el) {
+        return;
+      }
+      setPosition({
+        el,
+        offset: props.offset,
+        anchorEl: anchorEl.value,
+        anchorOrigin: anchorOrigin.value,
+        selfOrigin: selfOrigin.value,
+        maxHeight: props.maxHeight,
+        maxWidth: props.maxWidth
+      });
+    }
+    function delayShow(evt) {
+      if ($q.platform.is.mobile === true) {
+        clearSelection();
+        document.body.classList.add("non-selectable");
+        const target2 = anchorEl.value;
+        const evts = ["touchmove", "touchcancel", "touchend", "click"].map((e) => [target2, e, "delayHide", "passiveCapture"]);
+        addEvt(anchorEvents, "tooltipTemp", evts);
+      }
+      registerTimeout(() => {
+        show(evt);
+      }, props.delay);
+    }
+    function delayHide(evt) {
+      removeTimeout();
+      if ($q.platform.is.mobile === true) {
+        cleanEvt(anchorEvents, "tooltipTemp");
+        clearSelection();
+        setTimeout(() => {
+          document.body.classList.remove("non-selectable");
+        }, 10);
+      }
+      registerTimeout(() => {
+        hide(evt);
+      }, props.hideDelay);
+    }
+    function configureAnchorEl() {
+      if (props.noParentEvent === true || anchorEl.value === null) {
+        return;
+      }
+      const evts = $q.platform.is.mobile === true ? [
+        [anchorEl.value, "touchstart", "delayShow", "passive"]
+      ] : [
+        [anchorEl.value, "mouseenter", "delayShow", "passive"],
+        [anchorEl.value, "mouseleave", "delayHide", "passive"]
+      ];
+      addEvt(anchorEvents, "anchor", evts);
+    }
+    function configureScrollTarget() {
+      if (anchorEl.value !== null || props.scrollTarget !== void 0) {
+        localScrollTarget.value = getScrollTarget(anchorEl.value, props.scrollTarget);
+        const fn = props.noParentEvent === true ? updatePosition : hide;
+        changeScrollEvent(localScrollTarget.value, fn);
+      }
+    }
+    function getTooltipContent() {
+      return showing.value === true ? h("div", __spreadProps(__spreadValues({}, attrs), {
+        ref: innerRef,
+        class: [
+          "q-tooltip q-tooltip--style q-position-engine no-pointer-events",
+          attrs.class
+        ],
+        style: [
+          attrs.style,
+          transitionStyle.value
+        ],
+        role: "complementary"
+      }), hSlot(slots.default)) : null;
+    }
+    function renderPortalContent() {
+      return h(Transition, {
+        name: transition.value,
+        appear: true
+      }, getTooltipContent);
+    }
+    onBeforeUnmount(anchorCleanup);
+    Object.assign(vm.proxy, { updatePosition });
+    return renderPortal;
+  }
+});
+var QCardSection = createComponent({
+  name: "QCardSection",
+  props: {
+    tag: {
+      type: String,
+      default: "div"
+    },
+    horizontal: Boolean
+  },
+  setup(props, { slots }) {
+    const classes = computed(() => `q-card__section q-card__section--${props.horizontal === true ? "horiz row no-wrap" : "vert"}`);
+    return () => h(props.tag, { class: classes.value }, hSlot(slots.default));
+  }
+});
+const useDarkProps = {
+  dark: {
+    type: Boolean,
+    default: null
+  }
+};
+function useDark(props, $q) {
+  return computed(() => props.dark === null ? $q.dark.isActive : props.dark);
+}
+var QItem = createComponent({
+  name: "QItem",
+  props: __spreadProps(__spreadValues(__spreadValues({}, useDarkProps), useRouterLinkProps), {
+    tag: {
+      type: String,
+      default: "div"
+    },
+    active: {
+      type: Boolean,
+      default: null
+    },
+    clickable: Boolean,
+    dense: Boolean,
+    insetLevel: Number,
+    tabindex: [String, Number],
+    focused: Boolean,
+    manualFocus: Boolean
+  }),
+  emits: ["click", "keyup"],
+  setup(props, { slots, emit }) {
+    const { proxy: { $q } } = getCurrentInstance();
+    const isDark = useDark(props, $q);
+    const { hasRouterLink, hasLink, linkProps, linkClass, linkTag, navigateToRouterLink } = useRouterLink();
+    const rootRef = ref(null);
+    const blurTargetRef = ref(null);
+    const isActionable = computed(() => props.clickable === true || hasLink.value === true || props.tag === "label");
+    const isClickable = computed(() => props.disable !== true && isActionable.value === true);
+    const classes = computed(() => "q-item q-item-type row no-wrap" + (props.dense === true ? " q-item--dense" : "") + (isDark.value === true ? " q-item--dark" : "") + (hasLink.value === true && props.active === null ? linkClass.value : props.active === true ? `${props.activeClass !== void 0 ? ` ${props.activeClass}` : ""} q-item--active` : "") + (props.disable === true ? " disabled" : "") + (isClickable.value === true ? " q-item--clickable q-link cursor-pointer " + (props.manualFocus === true ? "q-manual-focusable" : "q-focusable q-hoverable") + (props.focused === true ? " q-manual-focusable--focused" : "") : ""));
+    const style = computed(() => {
+      if (props.insetLevel === void 0) {
+        return null;
+      }
+      const dir = $q.lang.rtl === true ? "Right" : "Left";
+      return {
+        ["padding" + dir]: 16 + props.insetLevel * 56 + "px"
+      };
+    });
+    function onClick(e) {
+      if (isClickable.value === true) {
+        if (blurTargetRef.value !== null) {
+          if (e.qKeyEvent !== true && document.activeElement === rootRef.value) {
+            blurTargetRef.value.focus();
+          } else if (document.activeElement === blurTargetRef.value) {
+            rootRef.value.focus();
+          }
+        }
+        hasRouterLink.value === true && navigateToRouterLink(e);
+        emit("click", e);
+      }
+    }
+    function onKeyup(e) {
+      if (isClickable.value === true && isKeyCode(e, 13) === true) {
+        stopAndPrevent(e);
+        e.qKeyEvent = true;
+        const evt = new MouseEvent("click", e);
+        evt.qKeyEvent = true;
+        rootRef.value.dispatchEvent(evt);
+      }
+      emit("keyup", e);
+    }
+    function getContent() {
+      const child = hUniqueSlot(slots.default, []);
+      isClickable.value === true && child.unshift(h("div", { class: "q-focus-helper", tabindex: -1, ref: blurTargetRef }));
+      return child;
+    }
+    return () => {
+      const data = {
+        ref: rootRef,
+        class: classes.value,
+        style: style.value,
+        onClick,
+        onKeyup
+      };
+      if (isClickable.value === true) {
+        data.tabindex = props.tabindex || "0";
+        Object.assign(data, linkProps.value);
+      } else if (isActionable.value === true) {
+        data["aria-disabled"] = "true";
+      }
+      return h(linkTag.value, data, getContent());
+    };
+  }
+});
+var QItemSection = createComponent({
+  name: "QItemSection",
+  props: {
+    avatar: Boolean,
+    thumbnail: Boolean,
+    side: Boolean,
+    top: Boolean,
+    noWrap: Boolean
+  },
+  setup(props, { slots }) {
+    const classes = computed(() => `q-item__section column q-item__section--${props.avatar === true || props.side === true || props.thumbnail === true ? "side" : "main"}` + (props.top === true ? " q-item__section--top justify-start" : " justify-center") + (props.avatar === true ? " q-item__section--avatar" : "") + (props.thumbnail === true ? " q-item__section--thumbnail" : "") + (props.noWrap === true ? " q-item__section--nowrap" : ""));
+    return () => h("div", { class: classes.value }, hSlot(slots.default));
+  }
+});
+var QItemLabel = createComponent({
+  name: "QItemLabel",
+  props: {
+    overline: Boolean,
+    caption: Boolean,
+    header: Boolean,
+    lines: [Number, String]
+  },
+  setup(props, { slots }) {
+    const parsedLines = computed(() => parseInt(props.lines, 10));
+    const classes = computed(() => "q-item__label" + (props.overline === true ? " q-item__label--overline text-overline" : "") + (props.caption === true ? " q-item__label--caption text-caption" : "") + (props.header === true ? " q-item__label--header" : "") + (parsedLines.value === 1 ? " ellipsis" : ""));
+    const style = computed(() => {
+      return props.lines !== void 0 && parsedLines.value > 1 ? {
+        overflow: "hidden",
+        display: "-webkit-box",
+        "-webkit-box-orient": "vertical",
+        "-webkit-line-clamp": parsedLines.value
+      } : null;
+    });
+    return () => h("div", {
+      style: style.value,
+      class: classes.value
+    }, hSlot(slots.default));
+  }
+});
+var QSlideTransition = createComponent({
+  name: "QSlideTransition",
+  props: {
+    appear: Boolean,
+    duration: {
+      type: Number,
+      default: 300
+    }
+  },
+  emits: ["show", "hide"],
+  setup(props, { slots, emit }) {
+    let animating = false, doneFn, element;
+    let timer2, timerFallback, animListener, lastEvent;
+    function cleanup() {
+      doneFn && doneFn();
+      doneFn = null;
+      animating = false;
+      clearTimeout(timer2);
+      clearTimeout(timerFallback);
+      element !== void 0 && element.removeEventListener("transitionend", animListener);
+      animListener = null;
+    }
+    function begin(el, height, done) {
+      el.style.overflowY = "hidden";
+      if (height !== void 0) {
+        el.style.height = `${height}px`;
+      }
+      el.style.transition = `height ${props.duration}ms cubic-bezier(.25, .8, .50, 1)`;
+      animating = true;
+      doneFn = done;
+    }
+    function end(el, event) {
+      el.style.overflowY = null;
+      el.style.height = null;
+      el.style.transition = null;
+      cleanup();
+      event !== lastEvent && emit(event);
+    }
+    function onEnter(el, done) {
+      let pos = 0;
+      element = el;
+      if (animating === true) {
+        cleanup();
+        pos = el.offsetHeight === el.scrollHeight ? 0 : void 0;
+      } else {
+        lastEvent = "hide";
+      }
+      begin(el, pos, done);
+      timer2 = setTimeout(() => {
+        el.style.height = `${el.scrollHeight}px`;
+        animListener = (evt) => {
+          if (Object(evt) !== evt || evt.target === el) {
+            end(el, "show");
+          }
+        };
+        el.addEventListener("transitionend", animListener);
+        timerFallback = setTimeout(animListener, props.duration * 1.1);
+      }, 100);
+    }
+    function onLeave(el, done) {
+      let pos;
+      element = el;
+      if (animating === true) {
+        cleanup();
+      } else {
+        lastEvent = "show";
+        pos = el.scrollHeight;
+      }
+      begin(el, pos, done);
+      timer2 = setTimeout(() => {
+        el.style.height = 0;
+        animListener = (evt) => {
+          if (Object(evt) !== evt || evt.target === el) {
+            end(el, "hide");
+          }
+        };
+        el.addEventListener("transitionend", animListener);
+        timerFallback = setTimeout(animListener, props.duration * 1.1);
+      }, 100);
+    }
+    onBeforeUnmount(() => {
+      animating === true && cleanup();
+    });
+    return () => h(Transition, {
+      css: false,
+      appear: props.appear,
+      onEnter,
+      onLeave
+    }, slots.default);
+  }
+});
+const insetMap = {
+  true: "inset",
+  item: "item-inset",
+  "item-thumbnail": "item-thumbnail-inset"
+};
+const margins = {
+  xs: 2,
+  sm: 4,
+  md: 8,
+  lg: 16,
+  xl: 24
+};
+var QSeparator = createComponent({
+  name: "QSeparator",
+  props: __spreadProps(__spreadValues({}, useDarkProps), {
+    spaced: [Boolean, String],
+    inset: [Boolean, String],
+    vertical: Boolean,
+    color: String,
+    size: String
+  }),
+  setup(props) {
+    const vm = getCurrentInstance();
+    const isDark = useDark(props, vm.proxy.$q);
+    const orientation = computed(() => props.vertical === true ? "vertical" : "horizontal");
+    const orientClass = computed(() => ` q-separator--${orientation.value}`);
+    const insetClass = computed(() => props.inset !== false ? `${orientClass.value}-${insetMap[props.inset]}` : "");
+    const classes = computed(() => `q-separator${orientClass.value}${insetClass.value}` + (props.color !== void 0 ? ` bg-${props.color}` : "") + (isDark.value === true ? " q-separator--dark" : ""));
+    const style = computed(() => {
+      const acc = {};
+      if (props.size !== void 0) {
+        acc[props.vertical === true ? "width" : "height"] = props.size;
+      }
+      if (props.spaced !== false) {
+        const size2 = props.spaced === true ? `${margins.md}px` : props.spaced in margins ? `${margins[props.spaced]}px` : props.spaced;
+        const dir = props.vertical === true ? ["Left", "Right"] : ["Top", "Bottom"];
+        acc[`margin${dir[0]}`] = acc[`margin${dir[1]}`] = size2;
+      }
+      return acc;
+    });
+    return () => h("hr", {
+      class: classes.value,
+      style: style.value,
+      "aria-orientation": orientation.value
+    });
+  }
+});
+let buf, bufIdx = 0;
+const hexBytes = new Array(256);
+for (let i = 0; i < 256; i++) {
+  hexBytes[i] = (i + 256).toString(16).substring(1);
+}
+const randomBytes = (() => {
+  const lib = typeof crypto !== "undefined" ? crypto : typeof window !== "undefined" ? window.crypto || window.msCrypto : void 0;
+  if (lib !== void 0) {
+    if (lib.randomBytes !== void 0) {
+      return lib.randomBytes;
+    }
+    if (lib.getRandomValues !== void 0) {
+      return (n) => {
+        const bytes = new Uint8Array(n);
+        lib.getRandomValues(bytes);
+        return bytes;
+      };
+    }
+  }
+  return (n) => {
+    const r = [];
+    for (let i = n; i > 0; i--) {
+      r.push(Math.floor(Math.random() * 256));
+    }
+    return r;
+  };
+})();
+const BUFFER_SIZE = 4096;
+function uid() {
+  if (buf === void 0 || bufIdx + 16 > BUFFER_SIZE) {
+    bufIdx = 0;
+    buf = randomBytes(BUFFER_SIZE);
+  }
+  const b = Array.prototype.slice.call(buf, bufIdx, bufIdx += 16);
+  b[6] = b[6] & 15 | 64;
+  b[8] = b[8] & 63 | 128;
+  return hexBytes[b[0]] + hexBytes[b[1]] + hexBytes[b[2]] + hexBytes[b[3]] + "-" + hexBytes[b[4]] + hexBytes[b[5]] + "-" + hexBytes[b[6]] + hexBytes[b[7]] + "-" + hexBytes[b[8]] + hexBytes[b[9]] + "-" + hexBytes[b[10]] + hexBytes[b[11]] + hexBytes[b[12]] + hexBytes[b[13]] + hexBytes[b[14]] + hexBytes[b[15]];
+}
+const itemGroups = shallowReactive({});
+const LINK_PROPS = Object.keys(useRouterLinkProps);
+var QExpansionItem = createComponent({
+  name: "QExpansionItem",
+  props: __spreadProps(__spreadValues(__spreadValues(__spreadValues({}, useRouterLinkProps), useModelToggleProps), useDarkProps), {
+    icon: String,
+    label: String,
+    labelLines: [Number, String],
+    caption: String,
+    captionLines: [Number, String],
+    dense: Boolean,
+    expandIcon: String,
+    expandedIcon: String,
+    expandIconClass: [Array, String, Object],
+    duration: Number,
+    headerInsetLevel: Number,
+    contentInsetLevel: Number,
+    expandSeparator: Boolean,
+    defaultOpened: Boolean,
+    expandIconToggle: Boolean,
+    switchToggleSide: Boolean,
+    denseToggle: Boolean,
+    group: String,
+    popup: Boolean,
+    headerStyle: [Array, String, Object],
+    headerClass: [Array, String, Object]
+  }),
+  emits: [
+    ...useModelToggleEmits,
+    "click",
+    "after-show",
+    "after-hide"
+  ],
+  setup(props, { slots, emit }) {
+    const { proxy: { $q } } = getCurrentInstance();
+    const isDark = useDark(props, $q);
+    const showing = ref(props.modelValue !== null ? props.modelValue : props.defaultOpened);
+    const blurTargetRef = ref(null);
+    const { hide, toggle } = useModelToggle({ showing });
+    let uniqueId, exitGroup;
+    const classes = computed(() => `q-expansion-item q-item-type q-expansion-item--${showing.value === true ? "expanded" : "collapsed"} q-expansion-item--${props.popup === true ? "popup" : "standard"}`);
+    const contentStyle = computed(() => {
+      if (props.contentInsetLevel === void 0) {
+        return null;
+      }
+      const dir = $q.lang.rtl === true ? "Right" : "Left";
+      return {
+        ["padding" + dir]: props.contentInsetLevel * 56 + "px"
+      };
+    });
+    const hasLink = computed(() => props.disable !== true && (props.href !== void 0 || props.to !== void 0 && props.to !== null && props.to !== ""));
+    const linkProps = computed(() => {
+      const acc = {};
+      LINK_PROPS.forEach((key) => {
+        acc[key] = props[key];
+      });
+      return acc;
+    });
+    const isClickable = computed(() => hasLink.value === true || props.expandIconToggle !== true);
+    const expansionIcon = computed(() => props.expandedIcon !== void 0 && showing.value === true ? props.expandedIcon : props.expandIcon || $q.iconSet.expansionItem[props.denseToggle === true ? "denseIcon" : "icon"]);
+    const activeToggleIcon = computed(() => props.disable !== true && (hasLink.value === true || props.expandIconToggle === true));
+    watch(() => props.group, (name) => {
+      exitGroup !== void 0 && exitGroup();
+      name !== void 0 && enterGroup();
+    });
+    function onHeaderClick(e) {
+      hasLink.value !== true && toggle(e);
+      emit("click", e);
+    }
+    function toggleIconKeyboard(e) {
+      e.keyCode === 13 && toggleIcon(e, true);
+    }
+    function toggleIcon(e, keyboard) {
+      keyboard !== true && blurTargetRef.value !== null && blurTargetRef.value.focus();
+      toggle(e);
+      stopAndPrevent(e);
+    }
+    function onShow() {
+      emit("after-show");
+    }
+    function onHide() {
+      emit("after-hide");
+    }
+    function enterGroup() {
+      if (uniqueId === void 0) {
+        uniqueId = uid();
+      }
+      if (showing.value === true) {
+        itemGroups[props.group] = uniqueId;
+      }
+      const show = watch(showing, (val) => {
+        if (val === true) {
+          itemGroups[props.group] = uniqueId;
+        } else if (itemGroups[props.group] === uniqueId) {
+          delete itemGroups[props.group];
+        }
+      });
+      const group = watch(() => itemGroups[props.group], (val, oldVal) => {
+        if (oldVal === uniqueId && val !== void 0 && val !== uniqueId) {
+          hide();
+        }
+      });
+      exitGroup = () => {
+        show();
+        group();
+        if (itemGroups[props.group] === uniqueId) {
+          delete itemGroups[props.group];
+        }
+        exitGroup = void 0;
+      };
+    }
+    function getToggleIcon() {
+      const data = {
+        class: [
+          `q-focusable relative-position cursor-pointer${props.denseToggle === true && props.switchToggleSide === true ? " items-end" : ""}`,
+          props.expandIconClass
+        ],
+        side: props.switchToggleSide !== true,
+        avatar: props.switchToggleSide
+      };
+      const child = [
+        h(QIcon, {
+          class: "q-expansion-item__toggle-icon" + (props.expandedIcon === void 0 && showing.value === true ? " q-expansion-item__toggle-icon--rotated" : ""),
+          name: expansionIcon.value
+        })
+      ];
+      if (activeToggleIcon.value === true) {
+        Object.assign(data, {
+          tabindex: 0,
+          onClick: toggleIcon,
+          onKeyup: toggleIconKeyboard
+        });
+        child.unshift(h("div", {
+          ref: blurTargetRef,
+          class: "q-expansion-item__toggle-focus q-icon q-focus-helper q-focus-helper--rounded",
+          tabindex: -1
+        }));
+      }
+      return h(QItemSection, data, () => child);
+    }
+    function getHeaderChild() {
+      let child;
+      if (slots.header !== void 0) {
+        child = [].concat(slots.header());
+      } else {
+        child = [
+          h(QItemSection, () => [
+            h(QItemLabel, { lines: props.labelLines }, () => props.label || ""),
+            props.caption ? h(QItemLabel, { lines: props.captionLines, caption: true }, () => props.caption) : null
+          ])
+        ];
+        props.icon && child[props.switchToggleSide === true ? "push" : "unshift"](h(QItemSection, {
+          side: props.switchToggleSide === true,
+          avatar: props.switchToggleSide !== true
+        }, () => h(QIcon, { name: props.icon })));
+      }
+      props.disable !== true && child[props.switchToggleSide === true ? "unshift" : "push"](getToggleIcon());
+      return child;
+    }
+    function getHeader() {
+      const data = {
+        ref: "item",
+        style: props.headerStyle,
+        class: props.headerClass,
+        dark: isDark.value,
+        disable: props.disable,
+        dense: props.dense,
+        insetLevel: props.headerInsetLevel
+      };
+      if (isClickable.value === true) {
+        data.clickable = true;
+        data.onClick = onHeaderClick;
+        hasLink.value === true && Object.assign(data, linkProps.value);
+      }
+      return h(QItem, data, getHeaderChild);
+    }
+    function getTransitionChild() {
+      return withDirectives(h("div", {
+        key: "e-content",
+        class: "q-expansion-item__content relative-position",
+        style: contentStyle.value
+      }, hSlot(slots.default)), [[
+        vShow,
+        showing.value
+      ]]);
+    }
+    function getContent() {
+      const node = [
+        getHeader(),
+        h(QSlideTransition, {
+          duration: props.duration,
+          onShow,
+          onHide
+        }, getTransitionChild)
+      ];
+      if (props.expandSeparator === true) {
+        node.push(h(QSeparator, {
+          class: "q-expansion-item__border q-expansion-item__border--top absolute-top",
+          dark: isDark.value
+        }), h(QSeparator, {
+          class: "q-expansion-item__border q-expansion-item__border--bottom absolute-bottom",
+          dark: isDark.value
+        }));
+      }
+      return node;
+    }
+    props.group !== void 0 && enterGroup();
+    onBeforeUnmount(() => {
+      exitGroup !== void 0 && exitGroup();
+    });
+    return () => h("div", { class: classes.value }, [
+      h("div", { class: "q-expansion-item__container relative-position" }, getContent())
+    ]);
+  }
+});
+var QList = createComponent({
+  name: "QList",
+  props: __spreadProps(__spreadValues({}, useDarkProps), {
+    bordered: Boolean,
+    dense: Boolean,
+    separator: Boolean,
+    padding: Boolean
+  }),
+  setup(props, { slots }) {
+    const vm = getCurrentInstance();
+    const isDark = useDark(props, vm.proxy.$q);
+    const classes = computed(() => "q-list" + (props.bordered === true ? " q-list--bordered" : "") + (props.dense === true ? " q-list--dense" : "") + (props.separator === true ? " q-list--separator" : "") + (isDark.value === true ? " q-list--dark" : "") + (props.padding === true ? " q-list--padding" : ""));
+    return () => h("div", { class: classes.value }, hSlot(slots.default));
+  }
+});
+function useFormChild({ validate, resetValidation, requiresQForm }) {
+  const $form = inject(formKey, false);
+  if ($form !== false) {
+    const { props, proxy } = getCurrentInstance();
+    Object.assign(proxy, { validate, resetValidation });
+    watch(() => props.disable, (val) => {
+      if (val === true) {
+        typeof resetValidation === "function" && resetValidation();
+        $form.unbindComponent(proxy);
+      } else {
+        $form.bindComponent(proxy);
+      }
+    });
+    props.disable !== true && $form.bindComponent(proxy);
+    onBeforeUnmount(() => {
+      props.disable !== true && $form.unbindComponent(proxy);
+    });
+  } else if (requiresQForm === true) {
+    console.error("Parent QForm not found on useFormChild()!");
+  }
+}
+const hex = /^#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?$/, hexa = /^#[0-9a-fA-F]{4}([0-9a-fA-F]{4})?$/, hexOrHexa = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/, rgb = /^rgb\(((0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),){2}(0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5])\)$/, rgba = /^rgba\(((0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),){2}(0|[1-9][\d]?|1[\d]{0,2}|2[\d]?|2[0-4][\d]|25[0-5]),(0|0\.[0-9]+[1-9]|0\.[1-9]+|1)\)$/;
+const testPattern = {
+  date: (v) => /^-?[\d]+\/[0-1]\d\/[0-3]\d$/.test(v),
+  time: (v) => /^([0-1]?\d|2[0-3]):[0-5]\d$/.test(v),
+  fulltime: (v) => /^([0-1]?\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(v),
+  timeOrFulltime: (v) => /^([0-1]?\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/.test(v),
+  email: (v) => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v),
+  hexColor: (v) => hex.test(v),
+  hexaColor: (v) => hexa.test(v),
+  hexOrHexaColor: (v) => hexOrHexa.test(v),
+  rgbColor: (v) => rgb.test(v),
+  rgbaColor: (v) => rgba.test(v),
+  rgbOrRgbaColor: (v) => rgb.test(v) || rgba.test(v),
+  hexOrRgbColor: (v) => hex.test(v) || rgb.test(v),
+  hexaOrRgbaColor: (v) => hexa.test(v) || rgba.test(v),
+  anyColor: (v) => hexOrHexa.test(v) || rgb.test(v) || rgba.test(v)
+};
+"Boolean Number String Function Array Date RegExp Object".split(" ").forEach((name) => {
+  name.toLowerCase();
+});
+const useCircularCommonProps = __spreadProps(__spreadValues({}, useSizeProps), {
+  min: {
+    type: Number,
+    default: 0
+  },
+  max: {
+    type: Number,
+    default: 100
+  },
+  color: String,
+  centerColor: String,
+  trackColor: String,
+  fontSize: String,
+  thickness: {
+    type: Number,
+    default: 0.2,
+    validator: (v) => v >= 0 && v <= 1
+  },
+  angle: {
+    type: Number,
+    default: 0
+  },
+  showValue: Boolean,
+  reverse: Boolean,
+  instantFeedback: Boolean
+});
+function between(v, min, max) {
+  return max <= min ? min : Math.min(max, Math.max(min, v));
+}
+const radius = 50, diameter = 2 * radius, circumference = diameter * Math.PI, strokeDashArray = Math.round(circumference * 1e3) / 1e3;
+createComponent({
+  name: "QCircularProgress",
+  props: __spreadProps(__spreadValues({}, useCircularCommonProps), {
+    value: {
+      type: Number,
+      default: 0
+    },
+    animationSpeed: {
+      type: [String, Number],
+      default: 600
+    },
+    indeterminate: Boolean
+  }),
+  setup(props, { slots }) {
+    const { proxy: { $q } } = getCurrentInstance();
+    const sizeStyle = useSize(props);
+    const svgStyle = computed(() => {
+      const angle = ($q.lang.rtl === true ? -1 : 1) * props.angle;
+      return {
+        transform: props.reverse !== ($q.lang.rtl === true) ? `scale3d(-1, 1, 1) rotate3d(0, 0, 1, ${-90 - angle}deg)` : `rotate3d(0, 0, 1, ${angle - 90}deg)`
+      };
+    });
+    const circleStyle = computed(() => props.instantFeedback !== true && props.indeterminate !== true ? { transition: `stroke-dashoffset ${props.animationSpeed}ms ease 0s, stroke ${props.animationSpeed}ms ease` } : "");
+    const viewBox = computed(() => diameter / (1 - props.thickness / 2));
+    const viewBoxAttr = computed(() => `${viewBox.value / 2} ${viewBox.value / 2} ${viewBox.value} ${viewBox.value}`);
+    const normalized = computed(() => between(props.value, props.min, props.max));
+    const strokeDashOffset = computed(() => circumference * (1 - (normalized.value - props.min) / (props.max - props.min)));
+    const strokeWidth = computed(() => props.thickness / 2 * viewBox.value);
+    function getCircle({ thickness, offset, color, cls }) {
+      return h("circle", {
+        class: "q-circular-progress__" + cls + (color !== void 0 ? ` text-${color}` : ""),
+        style: circleStyle.value,
+        fill: "transparent",
+        stroke: "currentColor",
+        "stroke-width": thickness,
+        "stroke-dasharray": strokeDashArray,
+        "stroke-dashoffset": offset,
+        cx: viewBox.value,
+        cy: viewBox.value,
+        r: radius
+      });
+    }
+    return () => {
+      const svgChild = [];
+      props.centerColor !== void 0 && props.centerColor !== "transparent" && svgChild.push(h("circle", {
+        class: `q-circular-progress__center text-${props.centerColor}`,
+        fill: "currentColor",
+        r: radius - strokeWidth.value / 2,
+        cx: viewBox.value,
+        cy: viewBox.value
+      }));
+      props.trackColor !== void 0 && props.trackColor !== "transparent" && svgChild.push(getCircle({
+        cls: "track",
+        thickness: strokeWidth.value,
+        offset: 0,
+        color: props.trackColor
+      }));
+      svgChild.push(getCircle({
+        cls: "circle",
+        thickness: strokeWidth.value,
+        offset: strokeDashOffset.value,
+        color: props.color
+      }));
+      const child = [
+        h("svg", {
+          class: "q-circular-progress__svg",
+          style: svgStyle.value,
+          viewBox: viewBoxAttr.value,
+          "aria-hidden": "true"
+        }, svgChild)
+      ];
+      props.showValue === true && child.push(h("div", {
+        class: "q-circular-progress__text absolute-full row flex-center content-center",
+        style: { fontSize: props.fontSize }
+      }, slots.default !== void 0 ? slots.default() : [h("div", normalized.value)]));
+      return h("div", {
+        class: `q-circular-progress q-circular-progress--${props.indeterminate === true ? "in" : ""}determinate`,
+        style: sizeStyle.value,
+        role: "progressbar",
+        "aria-valuemin": props.min,
+        "aria-valuemax": props.max,
+        "aria-valuenow": props.indeterminate === true ? void 0 : normalized.value
+      }, hMergeSlotSafely(slots.internal, child));
+    };
+  }
+});
+const useFileEmits = ["rejected"];
+const coreEmits = [
+  ...useFileEmits,
+  "start",
+  "finish",
+  "added",
+  "removed"
+];
+const trueFn = () => true;
+function getEmitsObject(emitsArray) {
+  const emitsObject = {};
+  emitsArray.forEach((val) => {
+    emitsObject[val] = trueFn;
+  });
+  return emitsObject;
+}
+getEmitsObject(coreEmits);
+const lazyRulesValues = [true, false, "ondemand"];
+const useValidateProps = {
+  modelValue: {},
+  error: {
+    type: Boolean,
+    default: null
+  },
+  errorMessage: String,
+  noErrorIcon: Boolean,
+  rules: Array,
+  reactiveRules: Boolean,
+  lazyRules: {
+    type: [Boolean, String],
+    validator: (v) => lazyRulesValues.includes(v)
+  }
+};
+function useValidate(focused, innerLoading) {
+  const { props, proxy } = getCurrentInstance();
+  const innerError = ref(false);
+  const innerErrorMessage = ref(null);
+  const isDirtyModel = ref(null);
+  useFormChild({ validate, resetValidation });
+  let validateIndex = 0, unwatchRules;
+  const hasRules = computed(() => props.rules !== void 0 && props.rules !== null && props.rules.length > 0);
+  const hasActiveRules = computed(() => props.disable !== true && hasRules.value === true);
+  const hasError = computed(() => props.error === true || innerError.value === true);
+  const errorMessage = computed(() => typeof props.errorMessage === "string" && props.errorMessage.length > 0 ? props.errorMessage : innerErrorMessage.value);
+  watch(() => props.modelValue, () => {
+    validateIfNeeded();
+  });
+  watch(() => props.reactiveRules, (val) => {
+    if (val === true) {
+      if (unwatchRules === void 0) {
+        unwatchRules = watch(() => props.rules, () => {
+          validateIfNeeded(true);
+        });
+      }
+    } else if (unwatchRules !== void 0) {
+      unwatchRules();
+      unwatchRules = void 0;
+    }
+  }, { immediate: true });
+  watch(focused, (val) => {
+    if (val === true) {
+      if (isDirtyModel.value === null) {
+        isDirtyModel.value = false;
+      }
+    } else if (isDirtyModel.value === false) {
+      isDirtyModel.value = true;
+      if (hasActiveRules.value === true && props.lazyRules !== "ondemand" && innerLoading.value === false) {
+        debouncedValidate();
+      }
+    }
+  });
+  function resetValidation() {
+    validateIndex++;
+    innerLoading.value = false;
+    isDirtyModel.value = null;
+    innerError.value = false;
+    innerErrorMessage.value = null;
+    debouncedValidate.cancel();
+  }
+  function validate(val = props.modelValue) {
+    if (hasActiveRules.value !== true) {
+      return true;
+    }
+    const index2 = ++validateIndex;
+    if (innerLoading.value !== true && props.lazyRules !== true) {
+      isDirtyModel.value = true;
+    }
+    const update2 = (err, msg) => {
+      if (innerError.value !== err) {
+        innerError.value = err;
+      }
+      const m = msg || void 0;
+      if (innerErrorMessage.value !== m) {
+        innerErrorMessage.value = m;
+      }
+      innerLoading.value = false;
+    };
+    const promises = [];
+    for (let i = 0; i < props.rules.length; i++) {
+      const rule = props.rules[i];
+      let res;
+      if (typeof rule === "function") {
+        res = rule(val);
+      } else if (typeof rule === "string" && testPattern[rule] !== void 0) {
+        res = testPattern[rule](val);
+      }
+      if (res === false || typeof res === "string") {
+        update2(true, res);
+        return false;
+      } else if (res !== true && res !== void 0) {
+        promises.push(res);
+      }
+    }
+    if (promises.length === 0) {
+      update2(false);
+      return true;
+    }
+    innerLoading.value = true;
+    return Promise.all(promises).then((res) => {
+      if (res === void 0 || Array.isArray(res) === false || res.length === 0) {
+        index2 === validateIndex && update2(false);
+        return true;
+      }
+      const msg = res.find((r) => r === false || typeof r === "string");
+      index2 === validateIndex && update2(msg !== void 0, msg);
+      return msg === void 0;
+    }, (e) => {
+      if (index2 === validateIndex) {
+        console.error(e);
+        update2(true);
+      }
+      return false;
+    });
+  }
+  function validateIfNeeded(changedRules) {
+    if (hasActiveRules.value === true && props.lazyRules !== "ondemand" && (isDirtyModel.value === true || props.lazyRules !== true && changedRules !== true)) {
+      debouncedValidate();
+    }
+  }
+  const debouncedValidate = debounce(validate, 0);
+  onBeforeUnmount(() => {
+    unwatchRules !== void 0 && unwatchRules();
+    debouncedValidate.cancel();
+  });
+  Object.assign(proxy, { resetValidation, validate });
+  injectProp(proxy, "hasError", () => hasError.value);
+  return {
+    isDirtyModel,
+    hasRules,
+    hasError,
+    errorMessage,
+    validate,
+    resetValidation
+  };
+}
+const listenerRE = /^on[A-Z]/;
+function useSplitAttrs(attrs, vnode) {
+  const acc = {
+    listeners: ref({}),
+    attributes: ref({})
+  };
+  function update2() {
+    const attributes = {};
+    const listeners = {};
+    for (const key in attrs) {
+      if (key !== "class" && key !== "style" && listenerRE.test(key) === false) {
+        attributes[key] = attrs[key];
+      }
+    }
+    for (const key in vnode.props) {
+      if (listenerRE.test(key) === true) {
+        listeners[key] = vnode.props[key];
+      }
+    }
+    acc.attributes.value = attributes;
+    acc.listeners.value = listeners;
+  }
+  onBeforeUpdate(update2);
+  update2();
+  return acc;
+}
+function getTargetUid(val) {
+  return val === void 0 ? `f_${uid()}` : val;
+}
+function fieldValueIsFilled(val) {
+  return val !== void 0 && val !== null && ("" + val).length > 0;
+}
+const useFieldProps = __spreadProps(__spreadValues(__spreadValues({}, useDarkProps), useValidateProps), {
+  label: String,
+  stackLabel: Boolean,
+  hint: String,
+  hideHint: Boolean,
+  prefix: String,
+  suffix: String,
+  labelColor: String,
+  color: String,
+  bgColor: String,
+  filled: Boolean,
+  outlined: Boolean,
+  borderless: Boolean,
+  standout: [Boolean, String],
+  square: Boolean,
+  loading: Boolean,
+  labelSlot: Boolean,
+  bottomSlots: Boolean,
+  hideBottomSpace: Boolean,
+  rounded: Boolean,
+  dense: Boolean,
+  itemAligned: Boolean,
+  counter: Boolean,
+  clearable: Boolean,
+  clearIcon: String,
+  disable: Boolean,
+  readonly: Boolean,
+  autofocus: Boolean,
+  for: String,
+  maxlength: [Number, String]
+});
+const useFieldEmits = ["update:modelValue", "clear", "focus", "blur", "popup-show", "popup-hide"];
+function useFieldState() {
+  const { props, attrs, proxy, vnode } = getCurrentInstance();
+  const isDark = useDark(props, proxy.$q);
+  return {
+    isDark,
+    editable: computed(() => props.disable !== true && props.readonly !== true),
+    innerLoading: ref(false),
+    focused: ref(false),
+    hasPopupOpen: false,
+    splitAttrs: useSplitAttrs(attrs, vnode),
+    targetUid: ref(getTargetUid(props.for)),
+    rootRef: ref(null),
+    targetRef: ref(null),
+    controlRef: ref(null)
+  };
+}
+function useField(state) {
+  const { props, emit, slots, attrs, proxy } = getCurrentInstance();
+  const { $q } = proxy;
+  let focusoutTimer;
+  if (state.hasValue === void 0) {
+    state.hasValue = computed(() => fieldValueIsFilled(props.modelValue));
+  }
+  if (state.emitValue === void 0) {
+    state.emitValue = (value) => {
+      emit("update:modelValue", value);
+    };
+  }
+  if (state.controlEvents === void 0) {
+    state.controlEvents = {
+      onFocusin: onControlFocusin,
+      onFocusout: onControlFocusout
+    };
+  }
+  Object.assign(state, {
+    clearValue,
+    onControlFocusin,
+    onControlFocusout,
+    focus
+  });
+  if (state.computedCounter === void 0) {
+    state.computedCounter = computed(() => {
+      if (props.counter !== false) {
+        const len = typeof props.modelValue === "string" || typeof props.modelValue === "number" ? ("" + props.modelValue).length : Array.isArray(props.modelValue) === true ? props.modelValue.length : 0;
+        const max = props.maxlength !== void 0 ? props.maxlength : props.maxValues;
+        return len + (max !== void 0 ? " / " + max : "");
+      }
+    });
+  }
+  const {
+    isDirtyModel,
+    hasRules,
+    hasError,
+    errorMessage,
+    resetValidation
+  } = useValidate(state.focused, state.innerLoading);
+  const floatingLabel = state.floatingLabel !== void 0 ? computed(() => props.stackLabel === true || state.focused.value === true || state.floatingLabel.value === true) : computed(() => props.stackLabel === true || state.focused.value === true || state.hasValue.value === true);
+  const shouldRenderBottom = computed(() => props.bottomSlots === true || props.hint !== void 0 || hasRules.value === true || props.counter === true || props.error !== null);
+  const styleType = computed(() => {
+    if (props.filled === true) {
+      return "filled";
+    }
+    if (props.outlined === true) {
+      return "outlined";
+    }
+    if (props.borderless === true) {
+      return "borderless";
+    }
+    if (props.standout) {
+      return "standout";
+    }
+    return "standard";
+  });
+  const classes = computed(() => `q-field row no-wrap items-start q-field--${styleType.value}` + (state.fieldClass !== void 0 ? ` ${state.fieldClass.value}` : "") + (props.rounded === true ? " q-field--rounded" : "") + (props.square === true ? " q-field--square" : "") + (floatingLabel.value === true ? " q-field--float" : "") + (hasLabel.value === true ? " q-field--labeled" : "") + (props.dense === true ? " q-field--dense" : "") + (props.itemAligned === true ? " q-field--item-aligned q-item-type" : "") + (state.isDark.value === true ? " q-field--dark" : "") + (state.getControl === void 0 ? " q-field--auto-height" : "") + (state.focused.value === true ? " q-field--focused" : "") + (hasError.value === true ? " q-field--error" : "") + (hasError.value === true || state.focused.value === true ? " q-field--highlighted" : "") + (props.hideBottomSpace !== true && shouldRenderBottom.value === true ? " q-field--with-bottom" : "") + (props.disable === true ? " q-field--disabled" : props.readonly === true ? " q-field--readonly" : ""));
+  const contentClass = computed(() => "q-field__control relative-position row no-wrap" + (props.bgColor !== void 0 ? ` bg-${props.bgColor}` : "") + (hasError.value === true ? " text-negative" : typeof props.standout === "string" && props.standout.length > 0 && state.focused.value === true ? ` ${props.standout}` : props.color !== void 0 ? ` text-${props.color}` : ""));
+  const hasLabel = computed(() => props.labelSlot === true || props.label !== void 0);
+  const labelClass = computed(() => "q-field__label no-pointer-events absolute ellipsis" + (props.labelColor !== void 0 && hasError.value !== true ? ` text-${props.labelColor}` : ""));
+  const controlSlotScope = computed(() => ({
+    id: state.targetUid.value,
+    editable: state.editable.value,
+    focused: state.focused.value,
+    floatingLabel: floatingLabel.value,
+    modelValue: props.modelValue,
+    emitValue: state.emitValue
+  }));
+  const attributes = computed(() => {
+    const acc = {
+      for: state.targetUid.value
+    };
+    if (props.disable === true) {
+      acc["aria-disabled"] = "true";
+    } else if (props.readonly === true) {
+      acc["aria-readonly"] = "true";
+    }
+    return acc;
+  });
+  watch(() => props.for, (val) => {
+    state.targetUid.value = getTargetUid(val);
+  });
+  function focusHandler() {
+    const el = document.activeElement;
+    let target2 = state.targetRef !== void 0 && state.targetRef.value;
+    if (target2 && (el === null || el.id !== state.targetUid.value)) {
+      target2.hasAttribute("tabindex") === true || (target2 = target2.querySelector("[tabindex]"));
+      if (target2 && target2 !== el) {
+        target2.focus({ preventScroll: true });
+      }
+    }
+  }
+  function focus() {
+    addFocusFn(focusHandler);
+  }
+  function blur() {
+    removeFocusFn(focusHandler);
+    const el = document.activeElement;
+    if (el !== null && state.rootRef.value.contains(el)) {
+      el.blur();
+    }
+  }
+  function onControlFocusin(e) {
+    clearTimeout(focusoutTimer);
+    if (state.editable.value === true && state.focused.value === false) {
+      state.focused.value = true;
+      emit("focus", e);
+    }
+  }
+  function onControlFocusout(e, then) {
+    clearTimeout(focusoutTimer);
+    focusoutTimer = setTimeout(() => {
+      if (document.hasFocus() === true && (state.hasPopupOpen === true || state.controlRef === void 0 || state.controlRef.value === null || state.controlRef.value.contains(document.activeElement) !== false)) {
+        return;
+      }
+      if (state.focused.value === true) {
+        state.focused.value = false;
+        emit("blur", e);
+      }
+      then !== void 0 && then();
+    });
+  }
+  function clearValue(e) {
+    stopAndPrevent(e);
+    if ($q.platform.is.mobile !== true) {
+      const el = state.targetRef !== void 0 && state.targetRef.value || state.rootRef.value;
+      el.focus();
+    } else if (state.rootRef.value.contains(document.activeElement) === true) {
+      document.activeElement.blur();
+    }
+    if (props.type === "file") {
+      state.inputRef.value.value = null;
+    }
+    emit("update:modelValue", null);
+    emit("clear", props.modelValue);
+    nextTick(() => {
+      resetValidation();
+      if ($q.platform.is.mobile !== true) {
+        isDirtyModel.value = false;
+      }
+    });
+  }
+  function getContent() {
+    const node = [];
+    slots.prepend !== void 0 && node.push(h("div", {
+      class: "q-field__prepend q-field__marginal row no-wrap items-center",
+      key: "prepend",
+      onClick: prevent
+    }, slots.prepend()));
+    node.push(h("div", {
+      class: "q-field__control-container col relative-position row no-wrap q-anchor--skip"
+    }, getControlContainer()));
+    hasError.value === true && props.noErrorIcon === false && node.push(getInnerAppendNode("error", [
+      h(QIcon, { name: $q.iconSet.field.error, color: "negative" })
+    ]));
+    if (props.loading === true || state.innerLoading.value === true) {
+      node.push(getInnerAppendNode("inner-loading-append", slots.loading !== void 0 ? slots.loading() : [h(QSpinner, { color: props.color })]));
+    } else if (props.clearable === true && state.hasValue.value === true && state.editable.value === true) {
+      node.push(getInnerAppendNode("inner-clearable-append", [
+        h(QIcon, {
+          class: "q-field__focusable-action",
+          tag: "button",
+          name: props.clearIcon || $q.iconSet.field.clear,
+          tabindex: 0,
+          type: "button",
+          "aria-hidden": null,
+          role: null,
+          onClick: clearValue
+        })
+      ]));
+    }
+    slots.append !== void 0 && node.push(h("div", {
+      class: "q-field__append q-field__marginal row no-wrap items-center",
+      key: "append",
+      onClick: prevent
+    }, slots.append()));
+    state.getInnerAppend !== void 0 && node.push(getInnerAppendNode("inner-append", state.getInnerAppend()));
+    state.getControlChild !== void 0 && node.push(state.getControlChild());
+    return node;
+  }
+  function getControlContainer() {
+    const node = [];
+    props.prefix !== void 0 && props.prefix !== null && node.push(h("div", {
+      class: "q-field__prefix no-pointer-events row items-center"
+    }, props.prefix));
+    if (state.getShadowControl !== void 0 && state.hasShadow.value === true) {
+      node.push(state.getShadowControl());
+    }
+    if (state.getControl !== void 0) {
+      node.push(state.getControl());
+    } else if (slots.rawControl !== void 0) {
+      node.push(slots.rawControl());
+    } else if (slots.control !== void 0) {
+      node.push(h("div", __spreadProps(__spreadValues({
+        ref: state.targetRef,
+        class: "q-field__native row",
+        tabindex: -1
+      }, state.splitAttrs.attributes.value), {
+        "data-autofocus": props.autofocus === true || void 0
+      }), slots.control(controlSlotScope.value)));
+    }
+    hasLabel.value === true && node.push(h("div", {
+      class: labelClass.value
+    }, hSlot(slots.label, props.label)));
+    props.suffix !== void 0 && props.suffix !== null && node.push(h("div", {
+      class: "q-field__suffix no-pointer-events row items-center"
+    }, props.suffix));
+    return node.concat(hSlot(slots.default));
+  }
+  function getBottom() {
+    let msg, key;
+    if (hasError.value === true) {
+      if (errorMessage.value !== null) {
+        msg = [h("div", { role: "alert" }, errorMessage.value)];
+        key = `q--slot-error-${errorMessage.value}`;
+      } else {
+        msg = hSlot(slots.error);
+        key = "q--slot-error";
+      }
+    } else if (props.hideHint !== true || state.focused.value === true) {
+      if (props.hint !== void 0) {
+        msg = [h("div", props.hint)];
+        key = `q--slot-hint-${props.hint}`;
+      } else {
+        msg = hSlot(slots.hint);
+        key = "q--slot-hint";
+      }
+    }
+    const hasCounter = props.counter === true || slots.counter !== void 0;
+    if (props.hideBottomSpace === true && hasCounter === false && msg === void 0) {
+      return;
+    }
+    const main2 = h("div", {
+      key,
+      class: "q-field__messages col"
+    }, msg);
+    return h("div", {
+      class: "q-field__bottom row items-start q-field__bottom--" + (props.hideBottomSpace !== true ? "animated" : "stale")
+    }, [
+      props.hideBottomSpace === true ? main2 : h(Transition, { name: "q-transition--field-message" }, () => main2),
+      hasCounter === true ? h("div", {
+        class: "q-field__counter"
+      }, slots.counter !== void 0 ? slots.counter() : state.computedCounter.value) : null
+    ]);
+  }
+  function getInnerAppendNode(key, content) {
+    return content === null ? null : h("div", {
+      key,
+      class: "q-field__append q-field__marginal row no-wrap items-center q-anchor--skip"
+    }, content);
+  }
+  Object.assign(proxy, { focus, blur });
+  let shouldActivate = false;
+  onDeactivated(() => {
+    shouldActivate = true;
+  });
+  onActivated(() => {
+    shouldActivate === true && props.autofocus === true && proxy.focus();
+  });
+  onMounted(() => {
+    if (isRuntimeSsrPreHydration.value === true && props.for === void 0) {
+      state.targetUid.value = getTargetUid();
+    }
+    props.autofocus === true && proxy.focus();
+  });
+  onBeforeUnmount(() => {
+    clearTimeout(focusoutTimer);
+  });
+  return function renderField() {
+    const labelAttrs = state.getControl === void 0 && slots.control === void 0 ? __spreadValues(__spreadProps(__spreadValues({}, state.splitAttrs.attributes.value), {
+      "data-autofocus": props.autofocus === true || void 0
+    }), attributes.value) : attributes.value;
+    return h("label", __spreadValues({
+      ref: state.rootRef,
+      class: [
+        classes.value,
+        attrs.class
+      ],
+      style: attrs.style
+    }, labelAttrs), [
+      slots.before !== void 0 ? h("div", {
+        class: "q-field__before q-field__marginal row no-wrap items-center",
+        onClick: prevent
+      }, slots.before()) : null,
+      h("div", {
+        class: "q-field__inner relative-position col self-stretch"
+      }, [
+        h("div", __spreadValues({
+          ref: state.controlRef,
+          class: contentClass.value,
+          tabindex: -1
+        }, state.controlEvents), getContent()),
+        shouldRenderBottom.value === true ? getBottom() : null
+      ]),
+      slots.after !== void 0 ? h("div", {
+        class: "q-field__after q-field__marginal row no-wrap items-center",
+        onClick: prevent
+      }, slots.after()) : null
+    ]);
+  };
+}
+const NAMED_MASKS = {
+  date: "####/##/##",
+  datetime: "####/##/## ##:##",
+  time: "##:##",
+  fulltime: "##:##:##",
+  phone: "(###) ### - ####",
+  card: "#### #### #### ####"
+};
+const TOKENS = {
+  "#": { pattern: "[\\d]", negate: "[^\\d]" },
+  S: { pattern: "[a-zA-Z]", negate: "[^a-zA-Z]" },
+  N: { pattern: "[0-9a-zA-Z]", negate: "[^0-9a-zA-Z]" },
+  A: { pattern: "[a-zA-Z]", negate: "[^a-zA-Z]", transform: (v) => v.toLocaleUpperCase() },
+  a: { pattern: "[a-zA-Z]", negate: "[^a-zA-Z]", transform: (v) => v.toLocaleLowerCase() },
+  X: { pattern: "[0-9a-zA-Z]", negate: "[^0-9a-zA-Z]", transform: (v) => v.toLocaleUpperCase() },
+  x: { pattern: "[0-9a-zA-Z]", negate: "[^0-9a-zA-Z]", transform: (v) => v.toLocaleLowerCase() }
+};
+const KEYS = Object.keys(TOKENS);
+KEYS.forEach((key) => {
+  TOKENS[key].regex = new RegExp(TOKENS[key].pattern);
+});
+const tokenRegexMask = new RegExp("\\\\([^.*+?^${}()|([\\]])|([.*+?^${}()|[\\]])|([" + KEYS.join("") + "])|(.)", "g"), escRegex = /[.*+?^${}()|[\]\\]/g;
+const MARKER = String.fromCharCode(1);
+const useMaskProps = {
+  mask: String,
+  reverseFillMask: Boolean,
+  fillMask: [Boolean, String],
+  unmaskedValue: Boolean
+};
+function useMask(props, emit, emitValue, inputRef) {
+  let maskMarked, maskReplaced, computedMask, computedUnmask;
+  const hasMask = ref(null);
+  const innerValue = ref(getInitialMaskedValue());
+  function getIsTypeText() {
+    return props.autogrow === true || ["textarea", "text", "search", "url", "tel", "password"].includes(props.type);
+  }
+  watch(() => props.type + props.autogrow, updateMaskInternals);
+  watch(() => props.mask, (v) => {
+    if (v !== void 0) {
+      updateMaskValue(innerValue.value, true);
+    } else {
+      const val = unmaskValue(innerValue.value);
+      updateMaskInternals();
+      props.modelValue !== val && emit("update:modelValue", val);
+    }
+  });
+  watch(() => props.fillMask + props.reverseFillMask, () => {
+    hasMask.value === true && updateMaskValue(innerValue.value, true);
+  });
+  watch(() => props.unmaskedValue, () => {
+    hasMask.value === true && updateMaskValue(innerValue.value);
+  });
+  function getInitialMaskedValue() {
+    updateMaskInternals();
+    if (hasMask.value === true) {
+      const masked = maskValue(unmaskValue(props.modelValue));
+      return props.fillMask !== false ? fillWithMask(masked) : masked;
+    }
+    return props.modelValue;
+  }
+  function getPaddedMaskMarked(size2) {
+    if (size2 < maskMarked.length) {
+      return maskMarked.slice(-size2);
+    }
+    let pad = "", localMaskMarked = maskMarked;
+    const padPos = localMaskMarked.indexOf(MARKER);
+    if (padPos > -1) {
+      for (let i = size2 - localMaskMarked.length; i > 0; i--) {
+        pad += MARKER;
+      }
+      localMaskMarked = localMaskMarked.slice(0, padPos) + pad + localMaskMarked.slice(padPos);
+    }
+    return localMaskMarked;
+  }
+  function updateMaskInternals() {
+    hasMask.value = props.mask !== void 0 && props.mask.length > 0 && getIsTypeText();
+    if (hasMask.value === false) {
+      computedUnmask = void 0;
+      maskMarked = "";
+      maskReplaced = "";
+      return;
+    }
+    const localComputedMask = NAMED_MASKS[props.mask] === void 0 ? props.mask : NAMED_MASKS[props.mask], fillChar = typeof props.fillMask === "string" && props.fillMask.length > 0 ? props.fillMask.slice(0, 1) : "_", fillCharEscaped = fillChar.replace(escRegex, "\\$&"), unmask = [], extract = [], mask = [];
+    let firstMatch = props.reverseFillMask === true, unmaskChar = "", negateChar = "";
+    localComputedMask.replace(tokenRegexMask, (_, char1, esc, token, char2) => {
+      if (token !== void 0) {
+        const c = TOKENS[token];
+        mask.push(c);
+        negateChar = c.negate;
+        if (firstMatch === true) {
+          extract.push("(?:" + negateChar + "+)?(" + c.pattern + "+)?(?:" + negateChar + "+)?(" + c.pattern + "+)?");
+          firstMatch = false;
+        }
+        extract.push("(?:" + negateChar + "+)?(" + c.pattern + ")?");
+      } else if (esc !== void 0) {
+        unmaskChar = "\\" + (esc === "\\" ? "" : esc);
+        mask.push(esc);
+        unmask.push("([^" + unmaskChar + "]+)?" + unmaskChar + "?");
+      } else {
+        const c = char1 !== void 0 ? char1 : char2;
+        unmaskChar = c === "\\" ? "\\\\\\\\" : c.replace(escRegex, "\\\\$&");
+        mask.push(c);
+        unmask.push("([^" + unmaskChar + "]+)?" + unmaskChar + "?");
+      }
+    });
+    const unmaskMatcher = new RegExp("^" + unmask.join("") + "(" + (unmaskChar === "" ? "." : "[^" + unmaskChar + "]") + "+)?$"), extractLast = extract.length - 1, extractMatcher = extract.map((re, index2) => {
+      if (index2 === 0 && props.reverseFillMask === true) {
+        return new RegExp("^" + fillCharEscaped + "*" + re);
+      } else if (index2 === extractLast) {
+        return new RegExp("^" + re + "(" + (negateChar === "" ? "." : negateChar) + "+)?" + (props.reverseFillMask === true ? "$" : fillCharEscaped + "*"));
+      }
+      return new RegExp("^" + re);
+    });
+    computedMask = mask;
+    computedUnmask = (val) => {
+      const unmaskMatch = unmaskMatcher.exec(val);
+      if (unmaskMatch !== null) {
+        val = unmaskMatch.slice(1).join("");
+      }
+      const extractMatch = [], extractMatcherLength = extractMatcher.length;
+      for (let i = 0, str = val; i < extractMatcherLength; i++) {
+        const m = extractMatcher[i].exec(str);
+        if (m === null) {
+          break;
+        }
+        str = str.slice(m.shift().length);
+        extractMatch.push(...m);
+      }
+      if (extractMatch.length > 0) {
+        return extractMatch.join("");
+      }
+      return val;
+    };
+    maskMarked = mask.map((v) => typeof v === "string" ? v : MARKER).join("");
+    maskReplaced = maskMarked.split(MARKER).join(fillChar);
+  }
+  function updateMaskValue(rawVal, updateMaskInternalsFlag, inputType) {
+    const inp = inputRef.value, end = inp.selectionEnd, endReverse = inp.value.length - end, unmasked = unmaskValue(rawVal);
+    updateMaskInternalsFlag === true && updateMaskInternals();
+    const preMasked = maskValue(unmasked), masked = props.fillMask !== false ? fillWithMask(preMasked) : preMasked, changed = innerValue.value !== masked;
+    inp.value !== masked && (inp.value = masked);
+    changed === true && (innerValue.value = masked);
+    document.activeElement === inp && nextTick(() => {
+      if (masked === maskReplaced) {
+        const cursor = props.reverseFillMask === true ? maskReplaced.length : 0;
+        inp.setSelectionRange(cursor, cursor, "forward");
+        return;
+      }
+      if (inputType === "insertFromPaste" && props.reverseFillMask !== true) {
+        const cursor = end - 1;
+        moveCursor.right(inp, cursor, cursor);
+        return;
+      }
+      if (["deleteContentBackward", "deleteContentForward"].indexOf(inputType) > -1) {
+        const cursor = props.reverseFillMask === true ? end === 0 ? masked.length > preMasked.length ? 1 : 0 : Math.max(0, masked.length - (masked === maskReplaced ? 0 : Math.min(preMasked.length, endReverse) + 1)) + 1 : end;
+        inp.setSelectionRange(cursor, cursor, "forward");
+        return;
+      }
+      if (props.reverseFillMask === true) {
+        if (changed === true) {
+          const cursor = Math.max(0, masked.length - (masked === maskReplaced ? 0 : Math.min(preMasked.length, endReverse + 1)));
+          if (cursor === 1 && end === 1) {
+            inp.setSelectionRange(cursor, cursor, "forward");
+          } else {
+            moveCursor.rightReverse(inp, cursor, cursor);
+          }
+        } else {
+          const cursor = masked.length - endReverse;
+          inp.setSelectionRange(cursor, cursor, "backward");
+        }
+      } else {
+        if (changed === true) {
+          const cursor = Math.max(0, maskMarked.indexOf(MARKER), Math.min(preMasked.length, end) - 1);
+          moveCursor.right(inp, cursor, cursor);
+        } else {
+          const cursor = end - 1;
+          moveCursor.right(inp, cursor, cursor);
+        }
+      }
+    });
+    const val = props.unmaskedValue === true ? unmaskValue(masked) : masked;
+    String(props.modelValue) !== val && emitValue(val, true);
+  }
+  function moveCursorForPaste(inp, start, end) {
+    const preMasked = maskValue(unmaskValue(inp.value));
+    start = Math.max(0, maskMarked.indexOf(MARKER), Math.min(preMasked.length, start));
+    inp.setSelectionRange(start, end, "forward");
+  }
+  const moveCursor = {
+    left(inp, start, end, selection) {
+      const noMarkBefore = maskMarked.slice(start - 1).indexOf(MARKER) === -1;
+      let i = Math.max(0, start - 1);
+      for (; i >= 0; i--) {
+        if (maskMarked[i] === MARKER) {
+          start = i;
+          noMarkBefore === true && start++;
+          break;
+        }
+      }
+      if (i < 0 && maskMarked[start] !== void 0 && maskMarked[start] !== MARKER) {
+        return moveCursor.right(inp, 0, 0);
+      }
+      start >= 0 && inp.setSelectionRange(start, selection === true ? end : start, "backward");
+    },
+    right(inp, start, end, selection) {
+      const limit = inp.value.length;
+      let i = Math.min(limit, end + 1);
+      for (; i <= limit; i++) {
+        if (maskMarked[i] === MARKER) {
+          end = i;
+          break;
+        } else if (maskMarked[i - 1] === MARKER) {
+          end = i;
+        }
+      }
+      if (i > limit && maskMarked[end - 1] !== void 0 && maskMarked[end - 1] !== MARKER) {
+        return moveCursor.left(inp, limit, limit);
+      }
+      inp.setSelectionRange(selection ? start : end, end, "forward");
+    },
+    leftReverse(inp, start, end, selection) {
+      const localMaskMarked = getPaddedMaskMarked(inp.value.length);
+      let i = Math.max(0, start - 1);
+      for (; i >= 0; i--) {
+        if (localMaskMarked[i - 1] === MARKER) {
+          start = i;
+          break;
+        } else if (localMaskMarked[i] === MARKER) {
+          start = i;
+          if (i === 0) {
+            break;
+          }
+        }
+      }
+      if (i < 0 && localMaskMarked[start] !== void 0 && localMaskMarked[start] !== MARKER) {
+        return moveCursor.rightReverse(inp, 0, 0);
+      }
+      start >= 0 && inp.setSelectionRange(start, selection === true ? end : start, "backward");
+    },
+    rightReverse(inp, start, end, selection) {
+      const limit = inp.value.length, localMaskMarked = getPaddedMaskMarked(limit), noMarkBefore = localMaskMarked.slice(0, end + 1).indexOf(MARKER) === -1;
+      let i = Math.min(limit, end + 1);
+      for (; i <= limit; i++) {
+        if (localMaskMarked[i - 1] === MARKER) {
+          end = i;
+          end > 0 && noMarkBefore === true && end--;
+          break;
+        }
+      }
+      if (i > limit && localMaskMarked[end - 1] !== void 0 && localMaskMarked[end - 1] !== MARKER) {
+        return moveCursor.leftReverse(inp, limit, limit);
+      }
+      inp.setSelectionRange(selection === true ? start : end, end, "forward");
+    }
+  };
+  function onMaskedKeydown(e) {
+    if (shouldIgnoreKey(e) === true) {
+      return;
+    }
+    const inp = inputRef.value, start = inp.selectionStart, end = inp.selectionEnd;
+    if (e.keyCode === 37 || e.keyCode === 39) {
+      const fn = moveCursor[(e.keyCode === 39 ? "right" : "left") + (props.reverseFillMask === true ? "Reverse" : "")];
+      e.preventDefault();
+      fn(inp, start, end, e.shiftKey);
+    } else if (e.keyCode === 8 && props.reverseFillMask !== true && start === end) {
+      moveCursor.left(inp, start, end, true);
+    } else if (e.keyCode === 46 && props.reverseFillMask === true && start === end) {
+      moveCursor.rightReverse(inp, start, end, true);
+    }
+  }
+  function maskValue(val) {
+    if (val === void 0 || val === null || val === "") {
+      return "";
+    }
+    if (props.reverseFillMask === true) {
+      return maskValueReverse(val);
+    }
+    const mask = computedMask;
+    let valIndex = 0, output = "";
+    for (let maskIndex = 0; maskIndex < mask.length; maskIndex++) {
+      const valChar = val[valIndex], maskDef = mask[maskIndex];
+      if (typeof maskDef === "string") {
+        output += maskDef;
+        valChar === maskDef && valIndex++;
+      } else if (valChar !== void 0 && maskDef.regex.test(valChar)) {
+        output += maskDef.transform !== void 0 ? maskDef.transform(valChar) : valChar;
+        valIndex++;
+      } else {
+        return output;
+      }
+    }
+    return output;
+  }
+  function maskValueReverse(val) {
+    const mask = computedMask, firstTokenIndex = maskMarked.indexOf(MARKER);
+    let valIndex = val.length - 1, output = "";
+    for (let maskIndex = mask.length - 1; maskIndex >= 0 && valIndex > -1; maskIndex--) {
+      const maskDef = mask[maskIndex];
+      let valChar = val[valIndex];
+      if (typeof maskDef === "string") {
+        output = maskDef + output;
+        valChar === maskDef && valIndex--;
+      } else if (valChar !== void 0 && maskDef.regex.test(valChar)) {
+        do {
+          output = (maskDef.transform !== void 0 ? maskDef.transform(valChar) : valChar) + output;
+          valIndex--;
+          valChar = val[valIndex];
+        } while (firstTokenIndex === maskIndex && valChar !== void 0 && maskDef.regex.test(valChar));
+      } else {
+        return output;
+      }
+    }
+    return output;
+  }
+  function unmaskValue(val) {
+    return typeof val !== "string" || computedUnmask === void 0 ? typeof val === "number" ? computedUnmask("" + val) : val : computedUnmask(val);
+  }
+  function fillWithMask(val) {
+    if (maskReplaced.length - val.length <= 0) {
+      return val;
+    }
+    return props.reverseFillMask === true && val.length > 0 ? maskReplaced.slice(0, -val.length) + val : val + maskReplaced.slice(val.length);
+  }
+  return {
+    innerValue,
+    hasMask,
+    moveCursorForPaste,
+    updateMaskValue,
+    onMaskedKeydown
+  };
+}
+const useFormProps = {
+  name: String
+};
+function useFormInputNameAttr(props) {
+  return computed(() => props.name || props.for);
+}
+function useFileFormDomProps(props, typeGuard) {
+  function getFormDomProps() {
+    const model = props.modelValue;
+    try {
+      const dt = "DataTransfer" in window ? new DataTransfer() : "ClipboardEvent" in window ? new ClipboardEvent("").clipboardData : void 0;
+      if (Object(model) === model) {
+        ("length" in model ? Array.from(model) : [model]).forEach((file) => {
+          dt.items.add(file);
+        });
+      }
+      return {
+        files: dt.files
+      };
+    } catch (e) {
+      return {
+        files: void 0
+      };
+    }
+  }
+  return typeGuard === true ? computed(() => {
+    if (props.type !== "file") {
+      return;
+    }
+    return getFormDomProps();
+  }) : computed(getFormDomProps);
+}
+const isJapanese = /[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf]/;
+const isChinese = /[\u4e00-\u9fff\u3400-\u4dbf\u{20000}-\u{2a6df}\u{2a700}-\u{2b73f}\u{2b740}-\u{2b81f}\u{2b820}-\u{2ceaf}\uf900-\ufaff\u3300-\u33ff\ufe30-\ufe4f\uf900-\ufaff\u{2f800}-\u{2fa1f}]/u;
+const isKorean = /[\u3131-\u314e\u314f-\u3163\uac00-\ud7a3]/;
+const isPlainText = /[a-z0-9_ -]$/i;
+function useKeyComposition(onInput) {
+  return function onComposition(e) {
+    if (e.type === "compositionend" || e.type === "change") {
+      if (e.target.qComposing !== true) {
+        return;
+      }
+      e.target.qComposing = false;
+      onInput(e);
+    } else if (e.type === "compositionupdate" && e.target.qComposing !== true && typeof e.data === "string") {
+      const isComposing = client.is.firefox === true ? isPlainText.test(e.data) === false : isJapanese.test(e.data) === true || isChinese.test(e.data) === true || isKorean.test(e.data) === true;
+      if (isComposing === true) {
+        e.target.qComposing = true;
+      }
+    }
+  };
+}
+var QInput = createComponent({
+  name: "QInput",
+  inheritAttrs: false,
+  props: __spreadProps(__spreadValues(__spreadValues(__spreadValues({}, useFieldProps), useMaskProps), useFormProps), {
+    modelValue: { required: false },
+    shadowText: String,
+    type: {
+      type: String,
+      default: "text"
+    },
+    debounce: [String, Number],
+    autogrow: Boolean,
+    inputClass: [Array, String, Object],
+    inputStyle: [Array, String, Object]
+  }),
+  emits: [
+    ...useFieldEmits,
+    "paste",
+    "change"
+  ],
+  setup(props, { emit, attrs }) {
+    const temp = {};
+    let emitCachedValue = NaN, typedNumber, stopValueWatcher, emitTimer, emitValueFn;
+    const inputRef = ref(null);
+    const nameProp = useFormInputNameAttr(props);
+    const {
+      innerValue,
+      hasMask,
+      moveCursorForPaste,
+      updateMaskValue,
+      onMaskedKeydown
+    } = useMask(props, emit, emitValue, inputRef);
+    const formDomProps = useFileFormDomProps(props, true);
+    const hasValue = computed(() => fieldValueIsFilled(innerValue.value));
+    const onComposition = useKeyComposition(onInput);
+    const state = useFieldState();
+    const isTextarea = computed(() => props.type === "textarea" || props.autogrow === true);
+    const isTypeText = computed(() => isTextarea.value === true || ["text", "search", "url", "tel", "password"].includes(props.type));
+    const onEvents = computed(() => {
+      const evt = __spreadProps(__spreadValues({}, state.splitAttrs.listeners.value), {
+        onInput,
+        onPaste,
+        onChange,
+        onBlur: onFinishEditing,
+        onFocus: stop
+      });
+      evt.onCompositionstart = evt.onCompositionupdate = evt.onCompositionend = onComposition;
+      if (hasMask.value === true) {
+        evt.onKeydown = onMaskedKeydown;
+      }
+      if (props.autogrow === true) {
+        evt.onAnimationend = adjustHeight;
+      }
+      return evt;
+    });
+    const inputAttrs = computed(() => {
+      const attrs2 = __spreadProps(__spreadValues({
+        tabindex: 0,
+        "data-autofocus": props.autofocus === true || void 0,
+        rows: props.type === "textarea" ? 6 : void 0,
+        "aria-label": props.label,
+        name: nameProp.value
+      }, state.splitAttrs.attributes.value), {
+        id: state.targetUid.value,
+        maxlength: props.maxlength,
+        disabled: props.disable === true,
+        readonly: props.readonly === true
+      });
+      if (isTextarea.value === false) {
+        attrs2.type = props.type;
+      }
+      if (props.autogrow === true) {
+        attrs2.rows = 1;
+      }
+      return attrs2;
+    });
+    watch(() => props.type, () => {
+      if (inputRef.value) {
+        inputRef.value.value = props.modelValue;
+      }
+    });
+    watch(() => props.modelValue, (v) => {
+      if (hasMask.value === true) {
+        if (stopValueWatcher === true) {
+          stopValueWatcher = false;
+          if (String(v) === emitCachedValue) {
+            return;
+          }
+        }
+        updateMaskValue(v);
+      } else if (innerValue.value !== v) {
+        innerValue.value = v;
+        if (props.type === "number" && temp.hasOwnProperty("value") === true) {
+          if (typedNumber === true) {
+            typedNumber = false;
+          } else {
+            delete temp.value;
+          }
+        }
+      }
+      props.autogrow === true && nextTick(adjustHeight);
+    });
+    watch(() => props.autogrow, (val) => {
+      if (val === true) {
+        nextTick(adjustHeight);
+      } else if (inputRef.value !== null && attrs.rows > 0) {
+        inputRef.value.style.height = "auto";
+      }
+    });
+    watch(() => props.dense, () => {
+      props.autogrow === true && nextTick(adjustHeight);
+    });
+    function focus() {
+      addFocusFn(() => {
+        const el = document.activeElement;
+        if (inputRef.value !== null && inputRef.value !== el && (el === null || el.id !== state.targetUid.value)) {
+          inputRef.value.focus({ preventScroll: true });
+        }
+      });
+    }
+    function select() {
+      inputRef.value !== null && inputRef.value.select();
+    }
+    function onPaste(e) {
+      if (hasMask.value === true && props.reverseFillMask !== true) {
+        const inp = e.target;
+        moveCursorForPaste(inp, inp.selectionStart, inp.selectionEnd);
+      }
+      emit("paste", e);
+    }
+    function onInput(e) {
+      if (!e || !e.target) {
+        return;
+      }
+      if (props.type === "file") {
+        emit("update:modelValue", e.target.files);
+        return;
+      }
+      const val = e.target.value;
+      if (e.target.qComposing === true) {
+        temp.value = val;
+        return;
+      }
+      if (hasMask.value === true) {
+        updateMaskValue(val, false, e.inputType);
+      } else {
+        emitValue(val);
+        if (isTypeText.value === true && e.target === document.activeElement) {
+          const { selectionStart, selectionEnd } = e.target;
+          if (selectionStart !== void 0 && selectionEnd !== void 0) {
+            nextTick(() => {
+              if (e.target === document.activeElement && val.indexOf(e.target.value) === 0) {
+                e.target.setSelectionRange(selectionStart, selectionEnd);
+              }
+            });
+          }
+        }
+      }
+      props.autogrow === true && adjustHeight();
+    }
+    function emitValue(val, stopWatcher) {
+      emitValueFn = () => {
+        if (props.type !== "number" && temp.hasOwnProperty("value") === true) {
+          delete temp.value;
+        }
+        if (props.modelValue !== val && emitCachedValue !== val) {
+          emitCachedValue = val;
+          stopWatcher === true && (stopValueWatcher = true);
+          emit("update:modelValue", val);
+          nextTick(() => {
+            emitCachedValue === val && (emitCachedValue = NaN);
+          });
+        }
+        emitValueFn = void 0;
+      };
+      if (props.type === "number") {
+        typedNumber = true;
+        temp.value = val;
+      }
+      if (props.debounce !== void 0) {
+        clearTimeout(emitTimer);
+        temp.value = val;
+        emitTimer = setTimeout(emitValueFn, props.debounce);
+      } else {
+        emitValueFn();
+      }
+    }
+    function adjustHeight() {
+      const inp = inputRef.value;
+      if (inp !== null) {
+        const parentStyle = inp.parentNode.style;
+        const { overflow } = inp.style;
+        parentStyle.marginBottom = inp.scrollHeight - 1 + "px";
+        inp.style.height = "1px";
+        inp.style.overflow = "hidden";
+        inp.style.height = inp.scrollHeight + "px";
+        inp.style.overflow = overflow;
+        parentStyle.marginBottom = "";
+      }
+    }
+    function onChange(e) {
+      onComposition(e);
+      clearTimeout(emitTimer);
+      emitValueFn !== void 0 && emitValueFn();
+      emit("change", e.target.value);
+    }
+    function onFinishEditing(e) {
+      e !== void 0 && stop(e);
+      clearTimeout(emitTimer);
+      emitValueFn !== void 0 && emitValueFn();
+      typedNumber = false;
+      stopValueWatcher = false;
+      delete temp.value;
+      props.type !== "file" && setTimeout(() => {
+        if (inputRef.value !== null) {
+          inputRef.value.value = innerValue.value !== void 0 ? innerValue.value : "";
+        }
+      });
+    }
+    function getCurValue() {
+      return temp.hasOwnProperty("value") === true ? temp.value : innerValue.value !== void 0 ? innerValue.value : "";
+    }
+    onBeforeUnmount(() => {
+      onFinishEditing();
+    });
+    onMounted(() => {
+      props.autogrow === true && adjustHeight();
+    });
+    Object.assign(state, {
+      innerValue,
+      fieldClass: computed(() => `q-${isTextarea.value === true ? "textarea" : "input"}` + (props.autogrow === true ? " q-textarea--autogrow" : "")),
+      hasShadow: computed(() => props.type !== "file" && typeof props.shadowText === "string" && props.shadowText.length > 0),
+      inputRef,
+      emitValue,
+      hasValue,
+      floatingLabel: computed(() => hasValue.value === true || fieldValueIsFilled(props.displayValue)),
+      getControl: () => {
+        return h(isTextarea.value === true ? "textarea" : "input", __spreadValues(__spreadValues(__spreadValues({
+          ref: inputRef,
+          class: [
+            "q-field__native q-placeholder",
+            props.inputClass
+          ],
+          style: props.inputStyle
+        }, inputAttrs.value), onEvents.value), props.type !== "file" ? { value: getCurValue() } : formDomProps.value));
+      },
+      getShadowControl: () => {
+        return h("div", {
+          class: "q-field__native q-field__shadow absolute-bottom no-pointer-events" + (isTextarea.value === true ? "" : " text-no-wrap")
+        }, [
+          h("span", { class: "invisible" }, getCurValue()),
+          h("span", props.shadowText)
+        ]);
+      }
+    });
+    const renderFn = useField(state);
+    const vm = getCurrentInstance();
+    Object.assign(vm.proxy, {
+      focus,
+      select,
+      getNativeElement: () => inputRef.value
+    });
+    return renderFn;
+  }
+});
+const defaultCfg = {
+  threshold: 0,
+  root: null,
+  rootMargin: "0px"
+};
+function update(el, ctx, value) {
+  let handler, cfg, changed;
+  if (typeof value === "function") {
+    handler = value;
+    cfg = defaultCfg;
+    changed = ctx.cfg === void 0;
+  } else {
+    handler = value.handler;
+    cfg = Object.assign({}, defaultCfg, value.cfg);
+    changed = ctx.cfg === void 0 || isDeepEqual(ctx.cfg, cfg) === false;
+  }
+  if (ctx.handler !== handler) {
+    ctx.handler = handler;
+  }
+  if (changed === true) {
+    ctx.cfg = cfg;
+    ctx.observer !== void 0 && ctx.observer.unobserve(el);
+    ctx.observer = new IntersectionObserver(([entry]) => {
+      if (typeof ctx.handler === "function") {
+        if (entry.rootBounds === null && document.body.contains(el) === true) {
+          ctx.observer.unobserve(el);
+          ctx.observer.observe(el);
+          return;
+        }
+        const res = ctx.handler(entry, ctx.observer);
+        if (res === false || ctx.once === true && entry.isIntersecting === true) {
+          destroy(el);
+        }
+      }
+    }, cfg);
+    ctx.observer.observe(el);
+  }
+}
+function destroy(el) {
+  const ctx = el.__qvisible;
+  if (ctx !== void 0) {
+    ctx.observer !== void 0 && ctx.observer.unobserve(el);
+    delete el.__qvisible;
+  }
+}
+var Intersection = createDirective({
+  name: "intersection",
+  mounted(el, { modifiers, value }) {
+    const ctx = {
+      once: modifiers.once === true
+    };
+    update(el, ctx, value);
+    el.__qvisible = ctx;
+  },
+  updated(el, binding) {
+    const ctx = el.__qvisible;
+    ctx !== void 0 && update(el, ctx, binding.value);
+  },
+  beforeUnmount: destroy
+});
+const versions = [
+  {
+    id: uid(),
+    ver: "\u0412\u043E\u0439\u0434\u0435\u0442 \u0432 \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0443\u044E \u0432\u0435\u0440\u0441\u0438\u044E",
+    children: [
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [{ label: "ERR-2514", text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0412\u041A" }]
+      }
+    ]
+  },
+  {
+    id: "fuck",
+    ver: "5.5.5957.274",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u041B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u0445 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F \u0441 \u043F\u043E\u0434\u0447\u0438\u043D\u0451\u043D\u043D\u044B\u043C\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u043C\u0438 \u0438 \u0433\u0440\u0443\u043F\u043F\u0430\u043C\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u0439.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0420\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u0440\u0430\u0437\u0440\u044F\u0434\u043E\u0432 \u0447\u0438\u0441\u043B\u0430",
+            text: "\u0412 \u042D\u0423 \u0427\u0438\u0441\u043B\u043E \u0442\u0435\u043F\u0435\u0440\u044C \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u0440\u0430\u0437\u0440\u044F\u0434\u043E\u0432 \u0447\u0438\u0441\u043B\u0430.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0421\u043F\u043E\u0441\u043E\u0431 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u0440\u0438 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0432\u0441\u0435\u0433\u0434\u0430 \u0443\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u0441\u043F\u043E\u0441\u043E\u0431 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F: \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443 \u0438\u043B\u0438 \u0431\u0435\u0437\u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043D\u043E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
+            text: "\u041F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u0438\u043D\u0442\u0435\u0440\u0444\u0435\u0439\u0441 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043E\u0431\u043B\u0430\u0447\u043D\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u0438",
+            text: "\u0418\u0437\u043C\u0435\u043D\u0451\u043D \u0434\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u043E\u0432 \u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043E\u0431\u043B\u0430\u0447\u043D\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0437\u043C\u0435\u043D\u0438\u043B\u0441\u044F \u0434\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F",
+            text: "\u0414\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D, \u0442\u0430\u043A\u0436\u0435 \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u0441\u044F \u0430\u043B\u0433\u043E\u0440\u0438\u0442\u043C \u0432\u044B\u0431\u043E\u0440\u0430 \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442\u043E\u0432 \u0432 \u0434\u0438\u0430\u043B\u043E\u0433\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u0435\u043C \u0447\u0435\u0440\u0435\u0437 API",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u0438\u0430\u043B\u043E\u0433\u043E\u043C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u0447\u0435\u0440\u0435\u0437 API.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+        icon: "bookshelf",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u041B\u0438\u0441\u0442 \u043E\u0437\u043D\u0430\u043A\u043E\u043C\u043B\u0435\u043D\u0438\u044F",
+            text: "\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0430\u0445 \u0442\u0438\u043F\u0430 \u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442. \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u044B \u0441 \u043B\u0438\u0441\u0442\u043E\u043C \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0430\u0445.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041A\u043E\u043D\u0442\u0440\u043E\u043B \u0442\u0430\u0431\u043B\u0438\u0447\u043D\u044B\u0445 \u0434\u0430\u043D\u043D\u044B\u0445",
+            text: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442 \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u0432\u0438\u0434\u0435 \u0442\u0430\u0431\u043B\u0438\u0446\u044B \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u043D\u043E \u0441\u0444\u043E\u0440\u043C\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0439 \u043C\u043E\u0434\u0435\u043B\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: '\u041D\u043E\u0432\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430 \u042D\u0423 "\u0424\u0430\u0439\u043B"',
+            text: '\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0424\u0430\u0439\u043B" \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0430: \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u043C\u0435\u0442\u043A\u0443 \u0431\u0435\u0437 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F, \u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043F\u0440\u0438 \u043F\u0443\u0441\u0442\u043E\u043C \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0438, \u0414\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u044F, \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u0435 \u043C\u0435\u043D\u044E.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0427\u0438\u0441\u043B\u043E",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C \u0441\u0438\u0441\u0442\u0435\u043C\u043D\u044B\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438, \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u044E\u0449\u0435\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0435\u0439 \u0447\u0438\u0441\u043B\u0430. \u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0430\u043A\u0442\u0438\u0432\u043D\u043E, \u0442.\u0435. \u0440\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u041E\u043F\u0442\u0438\u043C\u0438\u0437\u0430\u0446\u0438\u0438",
+        icon: "rocket-launch",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: '\u0424\u0443\u043D\u043A\u0446\u0438\u044F "\u041E\u0431\u0449\u0438\u0435 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0438"',
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0432 \u043E\u0431\u0449\u0435\u043C \u0440\u0435\u0436\u0438\u043C\u0435 \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439, \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u044F \u0447\u0435\u043C\u0443 \u0441\u0435\u0440\u0432\u0435\u0440 Docsvision \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442 \u043C\u0435\u043D\u044C\u0448\u0435 \u043F\u0430\u043C\u044F\u0442\u0438.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0420\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0430",
+        icon: "application-braces-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 API",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D REST Web-API, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043D\u0430 \u0441\u0442\u043E\u0440\u043E\u043D\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430. \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B FileSignCreateDialog, FileSignSelectCertificateDialog. \u0418\u0437\u043C\u0435\u043D\u0435\u043D \u0441\u0435\u0440\u0432\u0438\u0441 $DocumentCardController.",
+            show: false,
+            more: "<ul><li>\u0411\u044B\u043B \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D REST Web-API, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043D\u0430 \u0441\u0442\u043E\u0440\u043E\u043D\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u043E\u0436\u0435\u0442 \u0432\u044B\u0437\u044B\u0432\u0430\u0442\u044C \u0444\u0443\u043D\u043A\u0446\u0438\u0438 Docsvision API. REST API \u043F\u0440\u0435\u0434\u043D\u0430\u0437\u043D\u0430\u0447\u0430\u0435\u0442\u0441\u044F \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0438\u0437 \u043A\u043B\u0438\u0435\u043D\u0442\u0441\u043A\u0438\u0445 \u0441\u043A\u0440\u0438\u043F\u0442\u043E\u0432.</li> <li>\u0412\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B FileSignCreateDialog, FileSignSelectCertificateDialog \u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u044B\u0435 \u0441 \u043D\u0438\u043C\u0438 \u0437\u0430\u043C\u0435\u043D\u0435\u043D\u044B \u043D\u0430 SignatureDialog.</li> <li>\u0421\u0435\u0440\u0432\u0438\u0441 $DocumentCardController \u0437\u0430\u043C\u0435\u043D\u0451\u043D \u043D\u0430 $SignatureController.</li> <li>\u0412\u043E \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0435\u043C \u043A\u043B\u0430\u0441\u0441\u0435 FileSign \u0443\u0434\u0430\u043B\u0435\u043D\u0430 \u0447\u0430\u0441\u0442\u044C \u043C\u0435\u0442\u043E\u0434\u043E\u0432.</li></ul>",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u041D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B \u0432 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438 \u043D\u0430 github",
+        icon: "github",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "Github",
+            text: "\u0412 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0439 WebClient-Samples \u043D\u0430 GitHub \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B",
+            show: false,
+            more: "<ul><li>\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0443 \u043A\u043D\u043E\u043F\u043A\u043E\u0439 \u0432 \u044F\u0447\u0435\u0439\u043A\u0435.</li> <li>\u0420\u0430\u0441\u0448\u0438\u0440\u0438\u0442\u044C \u043A\u043E\u043D\u0442\u0435\u043A\u0441\u0442\u043D\u043E\u0435 \u043C\u0435\u043D\u044E.</li> <li>\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0432 Excel.</li> <li>\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435 \u0441\u0435\u0440\u0432\u0435\u0440\u043D\u044B\u0445 \u0432\u044B\u0437\u043E\u0432\u043E\u0432</li></ul>",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-2464",
+            text: "\u042D\u0423 \u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432. \u041F\u0440\u0438 \u043F\u043E\u0438\u0441\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0432\u043E\u0437\u043D\u0438\u043A\u0430\u0435\u0442 \u043E\u0448\u0438\u0431\u043A\u0430 SQLFailure.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-958",
+            text: "\u0412 \u043F\u0440\u0435\u0432\u044C\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0444\u0430\u0439\u043B\u0430 \u0435\u0441\u043B\u0438 \u0443 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0437\u0430\u043F\u0440\u0435\u0449\u0435\u043D\u043E \u0447\u0442\u0435\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u0430 \u043F\u043E \u0440\u043E\u043B\u0435\u0432\u043E\u0439.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2440",
+            text: '\u041B\u043E\u043C\u0430\u0435\u0442\u0441\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0430 \u043E\u043A\u043D\u0430 \u043F\u043E\u0438\u0441\u043A\u0430 \u0443 \u043F\u0430\u043F\u043A\u0438 "\u041F\u043E\u0438\u0441\u043A \u043A\u0432\u0430\u0440\u0442\u0430\u043B\u044C\u043D\u044B\u0445 \u0446\u0435\u043B\u0435\u0439".',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-896",
+            text: "\u041D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u043F\u0435\u0440\u0435\u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A LifeCycle \u0432 InitializeContainer \u0441\u0435\u0440\u0432\u0435\u0440\u043D\u043E\u0433\u043E \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2346",
+            text: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0438\u043A\u043E\u043D\u043A\u0438 (\u0440\u0435\u0448\u0435\u043D\u0438\u044F) \u043F\u0440\u0438 \u0434\u0435\u043B\u0435\u0433\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0441 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u043E\u043C.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2390",
+            text: "\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u043E\u0442 \u0434\u0435\u043B\u0435\u0433\u0430\u0442\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u0432 \u0445\u043E\u0434\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2279",
+            text: "\u0418\u0433\u043D\u043E\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u043F\u0443\u0441\u043A \u044D\u0442\u0430\u043F\u043E\u0432 \u043F\u043E\u0441\u043B\u0435 \u0437\u0430\u043F\u0443\u0441\u043A\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-0004",
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 \u0444\u0430\u0439\u043B\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2336",
+            text: "\u041D\u0435 \u043A\u043E\u043F\u0438\u0440\u0443\u044E\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u043F\u0440\u0438 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2183",
+            text: "\u0412 \u0437\u0430\u0434\u0430\u043D\u0438\u044F\u0445 \u043D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0441\u044B\u043B\u043A\u0430 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442 \u0435\u0441\u043B\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u0441\u043E\u0437\u0434\u0430\u043D\u044B \u0438\u0437 \u0434\u0440\u0443\u0433\u043E\u0433\u043E \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u041A\u0421.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2281",
+            text: "\u0415\u0441\u043B\u0438 \u043E\u0444\u043B\u0430\u0439\u043D \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0438 \u043D\u0435 \u0443\u0431\u0438\u0440\u0430\u044E\u0442\u0441\u044F \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430 \u0437\u0430\u0434\u0430\u0447 \u043D\u0430 \u043F\u0435\u0440\u0435\u0441\u0447\u0435\u0442 \u0432 childrener-e, \u0442\u043E \u0443 \u043E\u043D\u043B\u0430\u0439\u043D \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 \u043F\u0440\u0435\u0441\u0442\u0430\u044E\u0442 \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C \u0441\u0447\u0435\u0442\u0447\u0438\u043A\u0438 \u0432 \u043F\u0430\u043F\u043A\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2222",
+            text: "\u0422\u0435\u043A\u0441\u0442 \u043C\u0435\u0442\u043A\u0438 \u042D\u0423 \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u0442\u0441\u044F \u043D\u0430 \u043D\u043E\u0432\u0443\u044E \u0441\u0442\u0440\u043E\u043A\u0443 \u0441\u043F\u0440\u0430\u0432\u0430 \u043E\u0442 \u043C\u0435\u0442\u043A\u0438.",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.250",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0421\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u042D\u041F \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430",
+            text: "\u041F\u043E\u044F\u0432\u0438\u043B\u0430\u0441\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442 \u0434\u043B\u044F \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0435\u0439 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F",
+            text: "\u0412 \u043F\u0440\u043E\u0444\u0438\u043B\u044C \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043D\u043E\u0432\u0430\u044F \u0432\u043A\u043B\u0430\u0434\u043A\u0430 \u041F\u043E\u0434\u043F\u0438\u0441\u044C.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u043F\u043E \u043C\u0435\u0441\u0442\u0443",
+            text: "\u041F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u0440\u0435\u0436\u0438\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443. \u0422\u0435\u043F\u0435\u0440\u044C \u0432\u0441\u0435 \u042D\u0423 \u0432 \u0440\u0435\u0436\u0438\u043C\u0435 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443 \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u043F\u0440\u044F\u043C\u043E \u0432 \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u043C\u044B\u0445 \u043E\u0431\u043B\u0430\u0441\u0442\u044F\u0445. \u041C\u0430\u043B\u0435\u043D\u044C\u043A\u043E\u0435 \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u044E\u0449\u0435\u0435 \u043E\u043A\u043D\u043E \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0434\u043B\u044F \u042D\u0423 \u0422\u0435\u043A\u0441\u0442.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+        icon: "bookshelf",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432",
+            text: '\u0414\u043B\u044F \u042D\u0423 "\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432" \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u043F\u043E\u0438\u0441\u043A \u0443\u0437\u043B\u0430, \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u044E\u0449\u0435\u0435 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E \u0443\u0437\u043B\u0430\u043C \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0421\u043F\u0438\u0441\u043E\u043A \u0444\u0430\u0439\u043B\u043E\u0432",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043D\u043E\u043F\u043A\u0443 \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0432 \u0421\u043F\u0438\u0441\u043A\u0435 \u0444\u0430\u0439\u043B\u043E\u0432, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0435\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u042D\u0423 \u041A\u043D\u043E\u043F\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041A\u043D\u043E\u043F\u043A\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u044F",
+            text: '\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0442\u0438\u043F\u0430 "\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442". \u042D\u0423 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u043E\u0431\u043E\u0439 \u043A\u043D\u043E\u043F\u043A\u0443, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0443\u044E \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0431\u0435\u0437 \u0444\u0430\u0439\u043B\u043E\u0432 (\u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u0442\u043E\u043B\u044C\u043A\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438).',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "CertificateSettings",
+            text: "\u041D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u043E\u0442\u0432\u0435\u0447\u0430\u044E\u0449\u0438\u0439 \u0437\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0443 \u0441\u0435\u0440\u0442\u0438\u0444\u0438\u043A\u0430\u0442\u043E\u0432 \u0432 \u043F\u0440\u043E\u0444\u0438\u043B\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u041E\u043F\u0442\u0438\u043C\u0438\u0437\u0430\u0446\u0438\u0438",
+        icon: "rocket-launch",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u041A\u043E\u043D\u0441\u043E\u043B\u044C \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430",
+            text: "\u0421\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u044F \u043E\u0431 \u043E\u0442\u043C\u0435\u043D\u0435 \u043E\u0431\u0435\u0449\u0430\u043D\u0438\u044F (promise) \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0432\u044B\u0432\u043E\u0434\u044F\u0442\u0441\u044F \u0432 \u043A\u043E\u043D\u0441\u043E\u043B\u044C \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430. \u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A\u043E\u043C, \u0432 \u043A\u043E\u043D\u0441\u043E\u043B\u0438 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u043E \u0442\u043E\u043C, \u043A\u0430\u043A\u043E\u0439 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A \u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043D\u0435\u043D \u0437\u0430 \u043E\u0442\u043C\u0435\u043D\u0443 \u043A\u043E\u043D\u043A\u0440\u0435\u0442\u043D\u043E\u0433\u043E \u0441\u043E\u0431\u044B\u0442\u0438\u044F.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u041D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B \u0432 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0438 \u043D\u0430 github",
+        icon: "github",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "Github",
+            text: "\u0412 \u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u0439 WebClient-Samples \u043D\u0430 GitHub \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u043F\u0440\u0438\u043C\u0435\u0440\u044B.",
+            show: false,
+            more: "<ul><li>\u041E\u0442\u043E\u0431\u0440\u0430\u0437\u0438\u0442\u044C \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u044B\u0445 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0446\u0432\u0435\u0442 \u0441\u0442\u0440\u043E\u043A\u0438 \u043F\u043E \u043A\u043D\u043E\u043F\u043A\u0435.</li></ul>",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-2174",
+            text: "\u041A\u0430\u043B\u0435\u043D\u0434\u0430\u0440\u044C \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043D\u0435 \u0443\u0447\u0438\u0442\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0438 \u0440\u0430\u0441\u0447\u0451\u0442\u0435 \u0441\u0440\u043E\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1630",
+            text: "\u041E\u0448\u0438\u0431\u043E\u0447\u043D\u043E \u0441\u0440\u0430\u0431\u0430\u0442\u044B\u0432\u0430\u0435\u0442 \u0437\u0430\u043F\u0440\u0435\u0442 \u043D\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1840",
+            text: '\u041D\u0435 \u043E\u0442\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F xlsx \u0444\u0430\u0439\u043B \u0432 "\u0445\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F".',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1276",
+            text: "\u041F\u0440\u0438 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0432 \u0434\u0440\u0443\u0433\u043E\u0435 \u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0447\u0430\u0441\u0442\u0438\u0447\u043D\u043E \u0441\u0431\u0440\u0430\u0441\u044B\u0432\u0430\u044E\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1757",
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043F\u043E\u0438\u0441\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 StaffDirectoryItems, \u0435\u0441\u043B\u0438 \u0432 \u0438\u043C\u0435\u043D\u0438 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u0438 \u043F\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u0438\u043C\u0432\u043E\u043B &.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1857",
+            text: "\u041D\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u044E\u0442\u0441\u044F \u0441\u0442\u0430\u0440\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438 \u0432 \u043D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2094",
+            text: "\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0430\u0440\u0445\u0438\u0432\u043D\u043E\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u0435 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2111",
+            text: "\u041D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u043F\u0440\u043E\u043F\u0443\u0441\u043A\u0430\u0442\u044C \u0432\u0441\u0435 \u0432\u043D\u0435\u0448\u043D\u0438\u0435 \u0440\u0435\u0441\u0443\u0440\u0441\u044B \u043F\u0440\u0438 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0430\u0446\u0438\u0438 \u0444\u0430\u0439\u043B\u043E\u0432 \u043F\u0440\u0438 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2102",
+            id: uid(),
+            text: "IFileConvertationService \u0434\u043E\u043B\u0436\u0435\u043D \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044C \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435 \u043A\u043B\u0438\u0435\u043D\u0442\u0441\u043A\u0438\u0445 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0435\u0440\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2060",
+            text: "\u0412 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432 \u043D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u043A\u043E\u043B\u043E\u043D\u043A\u0438 \u0424\u0418\u041E, \u0424\u0430\u043C\u0438\u043B\u0438\u044F, \u0418\u043C\u044F, \u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2095",
+            text: "\u041A\u043E\u0440\u0435\u043D\u044C WebFrame. \u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0443\u0441\u043B\u043E\u0432\u0438\u0435 \u0440\u043E\u043B\u0438 \u0434\u043B\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2030",
+            text: 'Uncaught TypeError: Cannot read properties of null (reading "textContent") \u043F\u0440\u0438 \u043D\u0430\u043B\u0438\u0447\u0438\u0438 \u0444\u0430\u0439\u043B\u0430, \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0433\u043E \u0434\u043B\u044F \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430 \u0441\u0440\u0435\u0434\u0438 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u0444\u0430\u0439\u043B\u043E\u0432 \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u0438 \u043D\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1829",
+            text: "\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0435 \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430, \u0435\u0441\u043B\u0438 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0432 \u0430\u0440\u0445\u0438\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2086",
+            text: "\u041F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0440\u0430\u0437\u043D\u044B\u0445 \u0432\u0435\u0440\u0441\u0438\u0439 \u0444\u0430\u0439\u043B\u0430 \u0432 FileChildren \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0435\u0440\u0432\u0443\u044E \u0432\u0435\u0440\u0441\u0438\u044E \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430.",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.226",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0418\u043A\u043E\u043D\u043A\u0438",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0440\u044F\u0434 \u0438\u043A\u043E\u043D\u043E\u043A.",
+            show: false,
+            more: "\u0414\u043B\u044F \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0438\u043A\u043E\u043D\u043A\u0438: <ul><li>\u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432,</li> <li>\u041F\u0430\u0440\u0442\u043D\u0435\u0440,</li> <li>\u041F\u043E\u0434\u0440\u0430\u0437\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u0430\u0433\u0435\u043D\u0442\u0430,</li> <li>\u0414\u0430\u0442\u0430/\u0432\u0440\u0435\u043C\u044F,</li> <li>\u0421\u0442\u0440\u043E\u043A\u0430 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432,</li> <li>\u041D\u0443\u043C\u0435\u0440\u0430\u0442\u043E\u0440,</li> <li>\u0414\u0435\u043B\u043E,</li></ul> \u041D\u0430\u043B\u0438\u0447\u0438\u0435 \u0438\u043B\u0438 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0438\u0435 \u0438\u043A\u043E\u043D\u043A\u0438 \u0443 \u044D\u0442\u0438\u0445 \u042D\u0423 \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E\u043C \u041F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0438\u043A\u043E\u043D\u043A\u0443. \u0418\u043A\u043E\u043D\u043A\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0432\u043E \u0432\u0441\u0435\u0445 \u0440\u0435\u0436\u0438\u043C\u0430\u0445 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame \u0432\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0438 \u0431\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u043E\u0439 \u0444\u0443\u043D\u043A\u0446\u0438\u0435\u0439.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041E\u043F\u0440\u043E\u0441 \u043F\u043E \u0440\u0430\u0431\u043E\u0442\u0435 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u0447\u0435\u0440\u0435\u0437 \u0442\u0440\u0438 \u043C\u0435\u0441\u044F\u0446\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E\u0441\u043B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u0439\u0442\u0438 \u043E\u043F\u0440\u043E\u0441 \u043F\u043E \u0440\u0430\u0431\u043E\u0442\u0435 \u0441 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u043E\u043C.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0424\u0438\u043B\u044C\u0442\u0440\u0430\u0446\u0438\u044F \u043F\u043E \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u0435\u043C\u044B\u043C \u0441\u0442\u043E\u043B\u0431\u0446\u0430\u043C",
+            text: "\u0424\u0438\u043B\u044C\u0442\u0440\u0430\u0446\u0438\u044F \u043F\u043E \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u0435\u043C\u044B\u043C \u0441\u0442\u043E\u043B\u0431\u0446\u0430\u043C \u0442\u0435\u043F\u0435\u0440\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0432\u043E \u0432\u0441\u0435\u0445 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u0445.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+        icon: "bookshelf",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 WebFrame",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0440\u044F\u0434 \u0441\u0432\u043E\u0439\u0441\u0442\u0432 \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438.",
+            show: false,
+            more: "<ul><li>\u0414\u043B\u044F \u042D\u0423 \u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u041F\u0430\u043D\u0435\u043B\u044C \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u042D\u0423.</li> <li>\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 \u0442\u0430\u043A\u0436\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u044B\u0441\u043E\u0442\u0430 \u0432 \u043F\u0438\u043A\u0441\u0435\u043B\u044F\u0445, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0443\u043A\u0430\u0437\u0430\u0442\u044C \u0432\u044B\u0441\u043E\u0442\u0443 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F</li> <li>\u0414\u043B\u044F \u042D\u0423 layouts:page$ctrl/webFrame/webFrameContent.adoc#bg \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0437\u0430\u0434\u0430\u0442\u044C \u0444\u043E\u043D \u0434\u043B\u044F \u0433\u043B\u0430\u0432\u043D\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0438/\u0438\u043B\u0438 \u043F\u0430\u043F\u043E\u043A.</li> <li>\u0424\u043E\u043D \u0442\u0430\u043A\u0436\u0435 \u043C\u043E\u0436\u043D\u043E \u0437\u0430\u0434\u0430\u0442\u044C \u0432 \u043B\u043E\u043A\u0430\u0446\u0438\u044F\u0445 \u041F\u0430\u043F\u043A\u0430, \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430, \u0413\u043B\u0430\u0432\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u0432 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u0435 \u0424\u043E\u043D \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 root.</li> <li>\u0414\u043B\u044F \u042D\u0423 \u041B\u043E\u0433\u043E\u0442\u0438\u043F \u043A\u043E\u043C\u043F\u0430\u043D\u0438\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u0438\u0434\u0438\u043C\u043E\u0441\u0442\u044C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0441\u043A\u0440\u044B\u0442\u044C \u042D\u0423.</li> <li>\u0422\u0430\u043A\u0436\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0432\u0441\u0435\u0433\u0434\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C \u042D\u0423 \u0432\u0441\u0435\u0433\u0434\u0430.</li></ul> \u0420\u0430\u0437\u043C\u0435\u0442\u043A\u0430 WebFrame \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0434\u043B\u044F \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0432\u0441\u0435\u0433\u0434\u0430 \u0441 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u043C\u0438 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u0438\u044F\u043C\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: '\u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E "\u0422\u0435\u0433" \u0434\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F',
+            text: "\u0414\u043B\u044F \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E Tag / \u0422\u0435\u0433. \u0422\u0435\u0433\u2009\u2014\u2009\u043F\u0440\u043E\u0441\u0442\u043E\u0435 \u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442 \u0434\u043B\u044F \u042D\u0423 \u0432 \u043F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0435 \u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-2085",
+            text: '\u0421\u0442\u0430\u0440\u044B\u0439 \u0433\u0440\u0438\u0434. \u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430 \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0438 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u0440\u0430\u0441\u043A\u0440\u044B\u0442\u043E\u0439".',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2028",
+            text: "\u0422\u0435\u043A\u0441\u0442 \u043E\u0434\u043D\u043E\u0433\u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u043D\u0430\u043A\u043B\u0430\u0434\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u043D\u0430 \u0442\u0435\u043A\u0441\u0442 \u0434\u0440\u0443\u0433\u043E\u0433\u043E \u043F\u0440\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0435 \u044D\u0442\u0430\u043F\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435, \u0435\u0441\u043B\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u043E \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2073",
+            text: "\u041D\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u043F\u0430\u043F\u043E\u043A \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E. \u041F\u0430\u043F\u043A\u0438 \u0441 \u0432\u043B\u043E\u0436\u0435\u043D\u0438\u044F\u043C\u0438 \u0438\u043C\u0435\u044E\u0442 \u043F\u0440\u0438\u043E\u0440\u0438\u0442\u0435\u0442 \u043F\u0440\u0438 \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2036",
+            text: "\u041D\u0435 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0432\u044B\u0440\u0430\u0432\u043D\u0438\u0432\u0430\u043D\u0438\u0435 \u0442\u0435\u043A\u0441\u0442\u0430 \u043F\u043E \u043F\u0440\u0430\u0432\u043E\u043C\u0443 \u043A\u0440\u0430\u044E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-2003",
+            text: "\u0412 \u044D\u0442\u0430\u043F\u0435 \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u0438\u0437\u043C\u0435\u043D\u044F\u0442\u044C \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B \u0435\u0441\u043B\u0438 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0449\u0438\u0435 \u0432\u044B\u0447\u0438\u0441\u043B\u044F\u044E\u0442\u0441\u044F \u0447\u0435\u0440\u0435\u0437 \u0431\u0438\u0437\u043D\u0435\u0441-\u043F\u0440\u043E\u0446\u0435\u0441\u0441..",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1997",
+            text: "\u0412 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u044B\u0445 \u0432\u0440\u0443\u0447\u043D\u0443\u044E \u044D\u0442\u0430\u043F\u0430\u0445 \u043D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0442\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1829",
+            text: '\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435 \u0432\u043A\u043B\u0430\u0434\u043A\u0438 "\u0418\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435" \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0440\u0435\u0437\u043E\u043B\u044E\u0446\u0438\u0438 \u043F\u043E\u0441\u043B\u0435 \u0430\u0440\u0445\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1842",
+            text: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0433\u0440\u0443\u043F\u043F\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u043D\u043E\u0432\u043E\u043C \u0433\u0440\u0438\u0434\u0435 \u0434\u043B\u044F \u0447\u0438\u0441\u043B\u043E\u0432\u044B\u0445 \u043A\u043E\u043B\u043E\u043D\u043E\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1880",
+            text: "\u0412 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 StaffDirectoryItems \u043D\u0435 \u043E\u0447\u0438\u0449\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0435\u0435 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1863",
+            text: "\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u0434\u0430\u043D\u043D\u044B\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432, \u0435\u0441\u043B\u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0434\u0430\u043D\u043D\u043E\u0433\u043E \u0442\u0438\u043F\u0430 \u0431\u044B\u043B\u0438 \u0441\u0432\u044F\u0437\u0430\u043D\u044B \u0441 \u043E\u0434\u043D\u043E\u0439 \u0441\u0435\u043A\u0446\u0438\u0435\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1804",
+            text: "\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0444\u0430\u0439\u043B\u043E\u0432 \u0438\u0437 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432 \u0432 \u043F\u0440\u0435\u0434\u0435\u043B\u0430\u0445 \u043E\u0434\u043D\u043E\u0439 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1808",
+            text: "\u0412 \u0441\u043E\u0431\u044B\u0442\u0438\u0438 cardSaved \u043D\u0435 \u043F\u0435\u0440\u0435\u0434\u0430\u044E\u0442\u0441\u044F bindings.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1630",
+            text: "\u0417\u0430\u043F\u0440\u0435\u0442 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1572",
+            text: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0444\u043E\u0440\u043C\u0430\u0442\u0430 \u0434\u0430\u0442\u044B \u0432 \u0432\u0438\u0434\u0436\u0435\u0442\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0445 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1566",
+            id: uid(),
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u0438 \u043D\u043E\u043C\u0435\u0440\u0430 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 : Internal Server Error.",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.195",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0421\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C",
+            text: "\u0414\u043B\u044F \u0440\u044F\u0434\u0430 \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C",
+            show: false,
+            more: "\u0414\u043B\u044F \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0445 \u042D\u0423 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u043F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u043E\u0441\u0442\u044C: <ul> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u0413\u0440\u0443\u043F\u043F\u0430 \u043F\u0430\u043F\u043E\u043A</li> <li>\u0412\u0438\u0434\u0436\u0435\u0442 / \u0418\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430</li></ul> \u0412\u044B\u0441\u043E\u0442\u0430 \u0432\u0438\u0434\u0436\u0435\u0442\u043E\u0432 \u0440\u0435\u0433\u0443\u043B\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u0432\u044B\u0441\u043E\u0442\u043E\u0439 \u042D\u0423 \u0411\u043B\u043E\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C REST \u0432\u0441\u0435\u0433\u0434\u0430",
+            text: "\u0423\u043F\u0440\u0430\u0437\u0434\u043D\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u044F \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0430 \u0441 REST \u043D\u0430 COM. \u0422\u0435\u043F\u0435\u0440\u044C \u0432\u0441\u0435\u0433\u0434\u0430 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F REST.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u043E\u0435 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435",
+            id: uid(),
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u043E\u0435 \u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0444\u0430\u0439\u043B\u043E\u0432 WebClient.xml WebClientServerExtension.xml, \u0435\u0441\u043B\u0438 \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0432\u043A\u043B\u044E\u0447\u0435\u043D \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0439 \u0444\u043B\u0430\u0433.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430",
+            text: "\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u043F\u0440\u0438 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0438 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-1795",
+            text: "\u041F\u0440\u0438 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0438 \u0447\u0435\u0440\u0435\u0437 WebDav \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0439 \u0444\u0430\u0439\u043B \u043F\u0438\u0448\u0435\u0442\u0441\u044F \u043F\u0440\u044F\u043C\u043E \u043D\u0430 \u0434\u0438\u0441\u043A C..",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1694",
+            text: 'FilePicker. \u0415\u0441\u0442\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0444\u0430\u0439\u043B \u0434\u0430\u0436\u0435 \u0435\u0441\u043B\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0440\u0435\u0436\u0438\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F "\u0411\u0435\u0437 \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F".',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1639",
+            id: uid(),
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 internal Server Error \u043F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1673",
+            text: "\u0412 \u043E\u043A\u043D\u0435 \u043F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430 \u0432 \u043F\u043E\u043B\u0435 \u0442\u0435\u043A\u0443\u0449\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0432\u0440\u0435\u043C\u044F \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0438\u0437 \u043A\u044D\u0448\u0430.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1682",
+            text: "\u0412 \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u043E\u0431 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u044F \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 Dropdown \u043F\u0440\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0442\u043E\u0433\u0434\u0430 \u043A\u0430\u043A \u0444\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u043D\u0435 \u043C\u0435\u043D\u044F\u043B\u043E\u0441\u044C..",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1746",
+            text: "\u0424\u043E\u0440\u043C\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430. \u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0444\u043B\u0430\u0433\u043E\u0432 \u043D\u0435 \u043E\u0442\u0446\u0435\u043D\u0442\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u043F\u043E \u043C\u0435\u0442\u043A\u0435..",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1050",
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u043A\u043D\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043F\u0440\u0430\u0432 \u0434\u043E\u0441\u0442\u0443\u043F\u0430 \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "WebC-10823",
+            text: '"\u0420\u0435\u0436\u0438\u043C \u043E\u0442\u043B\u043E\u0436\u0435\u043D\u043D\u044B\u0445 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0439 \u0443\u0436\u0435 \u0432\u043A\u043B\u044E\u0447\u0435\u043D." \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u0444\u043B\u0430\u0433\u0430.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1669",
+            text: "\u041D\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0441\u0441\u044B\u043B\u043A\u0430 \u043D\u0430 \u0444\u0430\u0439\u043B \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 PartnersDepartment.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1360",
+            text: '\u043F\u043E\u0441\u043B\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0441\u0441\u044B\u043B\u043A\u0438 \u0438 \u043F\u043E\u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0435\u043C \u0432\u044B\u0431\u043E\u0440\u0435 "\u043F\u0443\u0441\u0442\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0438" \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0443\u0434\u0430\u043B\u0435\u043D\u043D\u043E\u0439 \u0441\u0441\u044B\u043B\u043A\u0438.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1532",
+            text: "\u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438 \u0438\u0437 \u0431\u043E\u043A\u043E\u0432\u043E\u0439 \u043F\u0430\u043D\u0435\u043B\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u044E\u0442 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0442\u044C\u0441\u044F \u0432 \u043F\u0430\u043D\u0435\u043B\u0438 \u043F\u043E\u0441\u043B\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1352",
+            text: "\u042D\u041F \u043D\u0430\u043A\u043B\u0430\u0434\u044B\u0432\u0430\u0435\u0442\u0441\u044F \u0432\u0435\u0440\u0442\u0438\u043A\u0430\u043B\u044C\u043D\u043E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1051",
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u043E\u043A\u043D\u0430 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u043F\u0440\u0430\u0432 \u0434\u043E\u0441\u0442\u0443\u043F\u0430 \u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1529",
+            text: "\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u043F\u043E\u043F\u044B\u0442\u043A\u0435 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430 \u0447\u0435\u0440\u0435\u0437 \u043A\u043E\u043D\u0442\u0440\u043E\u043B FilePicker.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1260",
+            text: "\u041D\u0435\u043B\u044C\u0437\u044F \u0441\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0438\u043B\u0438 \u043E\u0442\u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u043E\u043B\u044F \u0443 \u0443\u0436\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u043D\u043E\u0433\u043E \u0432 \u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.174",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u0412\u044B\u0432\u043E\u0434 \u043A\u0440\u0430\u0442\u043A\u043E\u0439 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438 \u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0435",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0440\u0430\u0442\u043A\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E \u043E \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0435 \u043C\u043E\u0436\u043D\u043E \u043F\u0440\u044F\u043C\u043E \u0438\u0437 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F, \u0441\u043C. \u043F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434",
+            text: "\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434, \u0440\u0430\u043D\u0435\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0439 \u043A\u0430\u043A \u044D\u043A\u0441\u043F\u0435\u0440\u0438\u043C\u0435\u043D\u0442\u0430\u043B\u044C\u043D\u0430\u044F \u0444\u0443\u043D\u043A\u0446\u0438\u044F \u0442\u0435\u043F\u0435\u0440\u044C \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u043D\u0430 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440\u0430\u0445 \u0438 \u043F\u043B\u0430\u043D\u0448\u0435\u0442\u0430\u0445.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0410\u0433\u0440\u0435\u0433\u0430\u0446\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0432 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u0445",
+            text: "\u041F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u043E\u043C \u0438 \u0441\u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u043C \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u043C \u043F\u043E\u0438\u0441\u043A\u0435 Elasticsearch, \u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u0441\u044F \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0439 \u0444\u0443\u043D\u043A\u0446\u0438\u044F \u0430\u0433\u0440\u0435\u0433\u0430\u0446\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0432 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0420\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043E\u043A\u043D\u043E \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u0442\u044C \u043E\u043A\u043D\u0430 \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D.",
+            show: false,
+            more: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u0442\u044C \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0435 \u043E\u043A\u043D\u0430 \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D: <ul><li>\u041E\u043A\u043D\u043E \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0441\u044B\u043B\u043E\u043A.</li> <li>\u041E\u043A\u043D\u043E \u0432\u044B\u0431\u043E\u0440\u0430 \u043F\u0430\u043F\u043A\u0438.</li> <li>\u041E\u043A\u043D\u043E \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u043A\u043E\u043D\u0442\u0440\u0430\u0433\u0435\u043D\u0442\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432.</li> <li>\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u043D\u043E\u043C\u0435\u043D\u043A\u043B\u0430\u0442\u0443\u0440\u044B \u0434\u0435\u043B.</li> <li>\u041B\u0438\u0441\u0442 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.</li> <li>\u0414\u0435\u0440\u0435\u0432\u043E \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F.</li> <li>\u041E\u043A\u043D\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430.</li> <li>\u0425\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F.</li></ul> \u0427\u0442\u043E\u0431\u044B \u0440\u0430\u0437\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u043E\u043A\u043D\u043E \u043D\u0430 \u0432\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D, \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443 \u0432 \u043F\u0440\u0430\u0432\u043E\u043C \u0432\u0435\u0440\u0445\u043D\u0435\u043C \u0443\u0433\u043B\u0443 \u043E\u043A\u043D\u0430.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+        icon: "bookshelf",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430",
+            text: "\u0412 \u043B\u043E\u043A\u0430\u0446\u0438\u0438 \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438 \u0438\u0437\u043C\u0435\u043D\u0451\u043D \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430\u2009\u2014\u2009\u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438. \u042D\u0423 \u041A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0430\u043F\u043A\u0438 \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 \u0434\u0432\u0430 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430: \u0422\u0443\u043B\u0431\u0430\u0440 \u043F\u0430\u043F\u043A\u0438 \u0438 \u0423\u0437\u0435\u043B \u0434\u043B\u044F \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0445 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0439.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u041D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u043D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438.",
+            show: false,
+            more: "<ul><li>\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0440\u0430\u0437\u0443 \u0433\u0440\u0443\u043F\u043F\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043E\u043A\u043E\u043D\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u043E \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443.</li> <li>\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043A\u0430\u0447\u0430\u0442\u044C \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0438\u043B\u0438 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0430\u0439\u043B\u044B, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0444\u0430\u0439\u043B\u044B \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.</li></ul>",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439",
+            text: "\u0412 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u0437\u0430\u0434\u0430\u0442\u044C \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0443 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u043D\u043E\u0432\u044B\u0439 \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0438\u0439 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u043F\u0430\u043F\u043A\u0443 \u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435.",
+            children: []
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-1356",
+            text: "TextArea HtmlEditor \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0439 Scroll.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1421",
+            text: '\u041E\u0448\u0438\u0431\u043A\u0430 "NullReferenceException" \u0432 StaffDirectoryItems.',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1286",
+            text: "\u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0432 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043D\u0435\u0442 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0435\u0439 \u0437\u0430\u043F\u0438\u0441\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "WebC-11062",
+            text: "\u0411\u043B\u043E\u043A \u0441 \u0444\u0430\u0439\u043B\u043E\u043C \u043E\u0442\u0447\u0435\u0442\u0430 \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0432\u0451\u0440\u043D\u0443\u0442\u044B\u043C.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1218",
+            text: "\u041F\u043E\u0441\u043B\u0435 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043D\u043E\u0432\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 \u0444\u0430\u0439\u043B\u0430 \u0434\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0441\u0442\u0430\u0440\u0430\u044F \u0432\u0435\u0440\u0441\u0438\u044F \u0444\u0430\u0439\u043B\u0430.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1230",
+            text: "\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u044E\u0442\u0441\u044F \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 \u043F\u043E\u0441\u043B\u0435 \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430 \u0441 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 14 \u043D\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442 16.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1314",
+            text: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430\u044F \u0434\u043B\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u043E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0432 StaffDirectoryItems.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1261",
+            text: '\u0412 \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043D\u0435 \u0444\u0438\u043A\u0441\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u044F "\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435".',
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1290",
+            text: "\u0412 \u043F\u043E\u043B\u0435 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0438\u0432\u043D\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u0410\u0432\u0442\u043E\u0440 = \u042F \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043D\u0435 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C, \u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0438\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C \u043F\u043E\u0434 \u043A\u043E\u0442\u043E\u0440\u044B\u043C \u0431\u044B\u043B \u043B\u043E\u0433\u0438\u043D \u0432 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1070",
+            text: "\u0421\u043E\u0437\u0434\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0448\u043D\u044F\u044F \u0441\u0435\u0441\u0441\u0438\u044F \u0443\u0447\u0451\u0442\u043D\u043E\u0439 \u0437\u0430\u043F\u0438\u0441\u0438 \u043F\u0443\u043B\u0430 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u0438 \u0430\u0443\u0442\u0435\u043D\u0442\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F \u0438 \u043F\u0440\u0438 \u0437\u0430\u043F\u0443\u0441\u043A\u0435 \u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1069",
+            text: "\u041F\u0440\u0438 \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u0438 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A \u043D\u0435 \u043E\u0441\u0432\u043E\u0431\u043E\u0436\u0434\u0430\u0435\u0442\u0441\u044F \u043B\u0438\u0446\u0435\u043D\u0437\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1259",
+            text: "\u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u043F\u043E\u0438\u0441\u043A. \u041D\u0435 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u044E\u0442\u0441\u044F \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E\u0441\u043B\u0435 \u0432\u043E\u0437\u0432\u0440\u0430\u0442\u0430 \u043D\u0430\u0437\u0430\u0434 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-0001",
+            text: "\u0412 \u043E\u043A\u043D\u0435 \u043F\u043E\u0438\u0441\u043A\u0430 \u043D\u0435\u043B\u044C\u0437\u044F \u0431\u044B\u043B\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430 \u0441 \u0444\u043B\u0430\u0433\u043E\u043C \u041D\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C \u043F\u0440\u0438 \u0432\u044B\u0431\u043E\u0440\u0435.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1217",
+            text: "\u041F\u043E\u0441\u043B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430 \u043D\u0435 \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0432\u0435\u0440\u0441\u0438\u044F.",
+            children: []
+          },
+          {
+            id: uid(),
+            label: "ERR-1216",
+            text: "\u041F\u043E\u0441\u043B\u0435 \u0440\u0430\u0437\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F \u0441\u0432\u043E\u0440\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F \u043F\u0430\u043F\u043A\u0438 \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u044B\u0445 \u0441\u0431\u0438\u0432\u0430\u0435\u0442\u0441\u044F \u043D\u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0435\u0435 \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435.",
+            children: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.141",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: '\u0414\u043E\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0422\u0435\u043A\u0441\u0442"',
+            text: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0422\u0435\u043A\u0441\u0442 \u0434\u043E\u0440\u0430\u0431\u043E\u0442\u0430\u043D: \u043F\u043E\u044F\u0432\u0438\u043B\u0430\u0441\u044C \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0432\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0442\u0435\u043A\u0441\u0442 \u0431\u0435\u0437 \u0444\u043E\u0440\u043C\u0430\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u0438 \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0440\u0430\u0437\u043C\u0435\u0440 \u0448\u0440\u0438\u0444\u0442\u0430. \u0422\u0430\u043A\u0436\u0435 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0441 \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u043C\u0438 \u0432 \u042D\u0423 \u0442\u0430\u0431\u043B\u0438\u0446\u0430\u043C\u0438 \u0438 \u0432\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u043C\u044B\u043C \u0442\u0435\u043A\u0441\u0442\u043E\u043C."
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u0441\u0442\u0440\u043E\u043A\u0430 \u043F\u043E\u0438\u0441\u043A\u0430",
+            text: '\u0412\u043D\u0435\u0448\u043D\u0438\u0439 \u0432\u0438\u0434 \u0441\u0442\u0440\u043E\u043A\u0438 \u043F\u043E\u0438\u0441\u043A\u0430 \u0431\u044B\u043B \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D. \u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0430 "\u041D\u0430\u0439\u0442\u0438", \u0438\u043D\u0430\u0447\u0435 \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D \u0432\u044B\u0431\u043E\u0440 \u043E\u0431\u043B\u0430\u0441\u0442\u0438 \u043F\u043E\u0438\u0441\u043A\u0430.'
+          },
+          {
+            id: uid(),
+            label: "\u0421\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u0422\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439",
+            text: "\u0412 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u0438\u0441\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F \u0437\u0430\u0434\u0430\u043D\u0438\u0439 \u0442\u0435\u043F\u0435\u0440\u044C \u043C\u043E\u0436\u043D\u043E \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430\u0436\u0430\u0442\u0438\u0435\u043C \u043D\u0430 \u0441\u0442\u043E\u043B\u0431\u0435\u0446."
+          },
+          {
+            id: uid(),
+            label: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435."
+          },
+          {
+            id: uid(),
+            label: "\u041D\u043E\u0432\u044B\u0439 \u0444\u043E\u0440\u043C\u0430\u0442 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0440\u0435\u0448\u0435\u043D\u0438\u044F",
+            text: "\u0420\u0435\u0448\u0435\u043D\u0438\u044F \u0445\u0440\u0430\u043D\u044F\u0442\u0441\u044F \u0432 \u043D\u043E\u0432\u043E\u043C \u0432\u0438\u0434\u0435. \u041F\u043E\u044F\u0432\u0438\u043B\u0441\u044F \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u043E\u0440\u043C\u0430\u0442 \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0438 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u0440\u0435\u0448\u0435\u043D\u0438\u0439. \u0422\u0435\u043F\u0435\u0440\u044C \u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u043C\u043E\u0436\u043D\u043E \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043D\u0435 \u043E\u0434\u043D\u0438\u043C \u0444\u0430\u0439\u043B\u043E\u043C, \u0430 \u043F\u0430\u043A\u0435\u0442\u043E\u043C (\u043F\u0430\u043F\u043A\u043E\u0439). \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u0441\u043C. \u042D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0420\u0435\u0448\u0435\u043D\u0438\u0435 \u0438 \u0418\u043C\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0420\u0435\u0448\u0435\u043D\u0438\u0435."
+          },
+          {
+            id: uid(),
+            label: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C \u043F\u043E\u043B\u043D\u043E\u0442\u0435\u043A\u0441\u0442\u043E\u0432\u043E\u0433\u043E \u043F\u043E\u0438\u0441\u043A\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u043A\u0430\u043A \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430 \u0441 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435\u043C \u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u044B \u043F\u043E\u0438\u0441\u043A\u0430 \u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u044F\u043C\u0438 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430."
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-1229",
+            text: "\u0421\u0435\u0441\u0441\u0438\u044F \u0441\u043E \u0441\u0447\u0451\u0442\u0447\u0438\u043A\u0430\u043C\u0438 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u0431\u044B\u0442\u044C \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0439 \u043F\u043E\u0441\u043B\u0435 \u0437\u0430\u043A\u0440\u044B\u0442\u0438\u044F \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0441\u0435\u0441\u0441\u0438\u0438 \u043F\u043E \u0442\u0430\u0439\u043C\u0430\u0443\u0442\u0443 \u0435\u0449\u0435 \u043A\u0430\u043A\u043E\u0435-\u0442\u043E \u0432\u0440\u0435\u043C\u044F."
+          },
+          {
+            id: uid(),
+            label: "ERR-1208",
+            text: "\u0417\u0430\u0432\u0438\u0441\u0430\u043D\u0438\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u043F\u0440\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0438 args.cancel() \u0432 \u0441\u043A\u0440\u0438\u043F\u0442\u0435 \u0441\u043E\u0431\u044B\u0442\u0438\u044F \xABOn preparing card save\xBB."
+          },
+          {
+            id: uid(),
+            label: "ERR-1222",
+            text: '\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0443\u0441\u0442\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430 \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u043A\u043D\u043E\u043F\u043A\u0438 "\u041D\u0430\u0437\u0430\u0434" \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438, \u0435\u0441\u043B\u0438 \u043F\u0435\u0440\u0435\u0434 \u044D\u0442\u0438\u043C \u043F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u0432 filePreview.'
+          },
+          {
+            id: uid(),
+            label: "ERR-0002",
+            text: "\u041D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u043D\u0443\u043C\u0435\u0440\u0430\u0442\u043E\u0440\u0430."
+          },
+          {
+            id: uid(),
+            label: "ERR-1206",
+            text: "\u041E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u043B\u0435\u0440 EmployeesController, \u0431\u0435\u0437 \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 EmployeesAutoComplete."
+          },
+          {
+            id: uid(),
+            label: "ERR-1184",
+            text: "\u041F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043F\u043E \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u0432 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u0430\u0439\u043B, \u0430 \u043D\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439."
+          },
+          {
+            id: uid(),
+            label: "ERR-1184",
+            text: "\u041F\u0440\u0438 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043F\u043E \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u0432 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u043E \u0443\u043C\u043E\u043B\u0447\u0430\u043D\u0438\u044E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0444\u0430\u0439\u043B, \u0430 \u043D\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439."
+          },
+          {
+            id: uid(),
+            label: "ERR-1159",
+            text: "\u041D\u043E\u0432\u044B\u0439 \u0433\u0440\u0438\u0434. \u041F\u0440\u0438 \u043E\u0442\u043A\u0440\u044B\u0442\u0438\u0438 \u043D\u0435\u043F\u0440\u043E\u0447\u0438\u0442\u0430\u043D\u043D\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0441\u0447\u0435\u0442\u0447\u0438\u043A \u0432 \u043F\u0430\u043F\u043A\u0435 \u043D\u0435 \u0443\u043C\u0435\u043D\u044C\u0448\u0430\u0435\u0442\u0441\u044F."
+          },
+          {
+            id: uid(),
+            label: "ERR-0003",
+            text: "\u041F\u0440\u0430\u0432\u043A\u0430 \u0434\u043B\u044F \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F \u0432\u0435\u0440\u0441\u0438\u0439."
+          },
+          {
+            id: uid(),
+            label: "ERR-283",
+            text: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0430 \u0432 \u0431\u043E\u043A\u043E\u0432\u043E\u043C \u043C\u0435\u043D\u044E \u043D\u0430 ios."
+          },
+          {
+            id: uid(),
+            label: "ERR-1001",
+            text: "\u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u043E\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043A\u043E\u0434\u0438\u0440\u043E\u0432\u043A\u0438 \u0444\u0430\u0439\u043B\u0430 \u043F\u0440\u0438 \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0435."
+          },
+          {
+            id: uid(),
+            label: "ERR-947",
+            text: "\u0415\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u043D\u0435\u0442 \u0444\u0430\u0439\u043B\u0430, \u0442\u043E \u0432 \u043F\u0440\u0435\u0432\u044C\u044E \u0444\u0430\u0439\u043B\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u0444\u0430\u0439\u043B \u0438\u0437 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0439 \u043E\u0442\u043A\u0440\u044B\u0442\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438."
+          },
+          {
+            id: uid(),
+            label: "ERR-1055",
+            text: "\u0412\u043C\u0435\u0441\u0442\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u043E\u0432 \u043F\u043E\u0438\u0441\u043A\u0430 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0443\u0441\u0442\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430."
+          },
+          {
+            id: uid(),
+            label: "ERR-961",
+            text: "\u041D\u0435 \u0432\u0441\u043F\u043B\u044B\u0432\u0430\u0435\u0442 \u043E\u043A\u043D\u043E \u0441 \u0438\u0437\u0431\u0440\u0430\u043D\u043D\u044B\u043C\u0438 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0430\u043C\u0438 \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438 \u0444\u043E\u043A\u0443\u0441\u0430 StaffDirectoryItems."
+          },
+          {
+            id: uid(),
+            label: "ERR-909",
+            text: "\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439 \u043F\u043E\u0440\u044F\u0434\u043E\u043A \u044D\u0442\u0430\u043F\u043E\u0432 \u0432 \u0445\u043E\u0434\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: uid(),
+    ver: "5.5.5957.117",
+    children: [
+      {
+        id: uid(),
+        head: "\u0424\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F",
+        icon: "briefcase-outline",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "\u041D\u043E\u0432\u044B\u0435 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u0435 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u0438",
+            text: "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044E \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0441 \u043D\u043E\u0432\u044B\u043C\u0438 \u0433\u0440\u0443\u043F\u043F\u043E\u0432\u044B\u043C\u0438 \u043E\u043F\u0435\u0440\u0430\u0446\u0438\u044F\u043C\u0438.",
+            show: false,
+            more: "<ul><li>\u041F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u043F\u0440\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0440\u0430\u0437\u0443 \u0433\u0440\u0443\u043F\u043F\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A.</li> <li>\u0423\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443 \u0438\u043B\u0438 \u043F\u0435\u0440\u043C\u0430\u043D\u0435\u043D\u0442\u043D\u043E.</li> <li>\u0421\u043A\u0430\u0447\u0430\u0442\u044C \u0444\u0430\u0439\u043B\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438\u2009\u2014\u2009\u043F\u043E\u0437\u0432\u043E\u043B\u044F\u0435\u0442 \u0441\u043A\u0430\u0447\u0430\u0442\u044C \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u0438\u043B\u0438 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0444\u0430\u0439\u043B\u044B, \u0430 \u0442\u0430\u043A\u0436\u0435 \u0444\u0430\u0439\u043B\u044B \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0438\u0437 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438.</li></ul>"
+          },
+          {
+            id: uid(),
+            label: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E email",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0439 \u043F\u043E\u0447\u0442\u0435."
+          },
+          {
+            id: uid(),
+            label: "\u041F\u043E\u043B\u044F \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \u043F\u0440\u0435\u0434\u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430",
+            text: "\u0422\u0435\u043F\u0435\u0440\u044C, \u0435\u0441\u043B\u0438 \u0432 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0435\u0434\u0432\u0430\u0440\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440 \u0444\u0430\u0439\u043B\u0430, \u043F\u043E\u043B\u044F \u043B\u044E\u0431\u043E\u0439 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u043C\u0438 (\u043F\u0443\u0441\u0442\u043E\u0435 \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u043E \u043F\u043E \u043E\u0431\u0435 \u0441\u0442\u043E\u0440\u043E\u043D\u044B \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438) \u0441\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u044E\u0442 5 px."
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0430\u0445 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u043E\u0432 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+        icon: "bookshelf",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: '\u041D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u042D\u0423 "\u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438"',
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u043D\u043E\u0432\u043E\u0435 \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u0412\u044B\u0431\u043E\u0440 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0434\u043B\u044F \u0440\u0435\u0436\u0438\u043C\u0430 \u0421\u0438\u0441\u0442\u0435\u043C\u043D\u0430\u044F \u043F\u0430\u043F\u043A\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0442\u044C \u0432\u044B\u0431\u043E\u0440 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B\u0445 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0439 \u0432 \u043F\u0430\u043F\u043A\u0435. \u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435 \u0441\u043C. \u0414\u0430\u043D\u043D\u044B\u0435 \u043F\u0430\u043F\u043A\u0438."
+          },
+          {
+            id: uid(),
+            label: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F SignatureButton",
+            text: "\u0414\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u0441 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E."
+          },
+          {
+            id: uid(),
+            label: '\u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0430\u044F \u0432\u044B\u0441\u043E\u0442\u0430 \u0434\u043B\u044F \u042D\u0423 "\u0411\u043B\u043E\u043A"',
+            text: "\u0414\u043B\u044F \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u0430 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0411\u043B\u043E\u043A \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u0432\u043E\u0439\u0441\u0442\u0432\u043E \u041C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0430\u044F \u0432\u044B\u0441\u043E\u0442\u0430, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0435\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0442\u044C \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u0443\u044E \u0432\u044B\u0441\u043E\u0442\u0443 \u0431\u043B\u043E\u043A\u0430. \u041F\u0440\u0438 \u043F\u0440\u0435\u0432\u044B\u0448\u0435\u043D\u0438\u0438 \u043C\u0430\u043A\u0441\u0438\u043C\u0430\u043B\u044C\u043D\u043E\u0439 \u0432\u044B\u0441\u043E\u0442\u044B, \u0443 \u0431\u043B\u043E\u043A\u0430 \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043F\u043E\u043B\u043E\u0441\u0430 \u043F\u0440\u043E\u043A\u0440\u0443\u0442\u043A\u0438 \u043D\u043E\u0432\u043E\u0433\u043E \u0433\u0440\u0438\u0434\u0430."
+          },
+          {
+            id: uid(),
+            label: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F emailButton",
+            text: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u044D\u043B\u0435\u043C\u0435\u043D\u0442 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u041A\u043D\u043E\u043F\u043A\u0430 \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438 \u043F\u0438\u0441\u044C\u043C\u043E\u043C, \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0449\u0438\u0439 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u043E\u0439 \u043F\u043E\u0447\u0442\u0435."
+          },
+          {
+            id: uid(),
+            label: "\u0423\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u0435 \u044D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F",
+            text: '\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438" \u0438 "\u0421\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A" \u0442\u0435\u043F\u0435\u0440\u044C \u0441\u0447\u0438\u0442\u0430\u044E\u0442\u0441\u044F \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u043C\u0438 \u0438 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B \u0434\u043B\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u0432 \u0431\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0435 \u042D\u0423 \u043F\u0440\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A. \u0423\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0435 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0438 \u0441 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u0435\u043C \u044D\u0442\u0438\u0445 \u042D\u0423 \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u043A\u0430\u043A \u0440\u0430\u043D\u044C\u0448\u0435.'
+          }
+        ]
+      },
+      {
+        id: uid(),
+        head: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044B\u0435 \u043E\u0448\u0438\u0431\u043A\u0438",
+        icon: "alert",
+        model: false,
+        children: [
+          {
+            id: uid(),
+            label: "ERR-1022",
+            text: '\u041A\u043E\u043D\u0442\u0440\u043E\u043B\u044B Employee \u0438 MultipleEmployees. \u041F\u0440\u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E\u043C \u043A\u043B\u0438\u043A\u0435 \u043F\u043E "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435" \u0441\u043F\u0438\u0441\u043E\u043A \u043D\u0435 \u0440\u0430\u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F.'
+          },
+          {
+            id: uid(),
+            label: "ERR-1026",
+            text: "\u041E\u0442\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 FilePicker \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 - \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u043A\u043D\u043E\u043F\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0444\u0430\u0439\u043B\u0430."
+          },
+          {
+            id: uid(),
+            label: "ERR-906",
+            text: "\u041F\u0440\u0438 \u043E\u0442\u043C\u0435\u043D\u0435 \u043F\u043E\u0438\u0441\u043A\u0430 \u043F\u043E \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0430\u043C \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442 \u0434\u043E\u043B\u0433\u0430\u044F \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u044B \u0438 \u043F\u0435\u0440\u0435\u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043D\u0430 \u043F\u0440\u0435\u0434\u044B\u0434\u0443\u0449\u0443\u044E \u043F\u0430\u043F\u043A\u0443."
+          },
+          {
+            id: uid(),
+            label: "ERR-901",
+            text: "\u041D\u0435 \u043F\u0440\u0438\u043C\u0435\u043D\u044F\u0435\u0442\u0441\u044F \u0441\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u043A\u0430 \u0432 \u043F\u043E\u0438\u0441\u043A\u043E\u0432\u044B\u0445 \u043F\u0430\u043F\u043A\u0430\u0445 \u0432 \u0441\u0442\u0430\u0440\u043E\u043C \u0433\u0440\u0438\u0434\u0435."
+          },
+          {
+            id: uid(),
+            label: "ERR-988",
+            text: "\u041F\u0440\u043E\u0431\u043B\u0435\u043C\u044B \u0441 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435\u043C \u043A\u0430\u0440\u0442\u043E\u0447\u0435\u043A \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u0432 \u0440\u0430\u0437\u043C\u0435\u0442\u043A\u0435 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u0430."
+          },
+          {
+            id: uid(),
+            label: "ERR-921",
+            text: "\u041F\u043E\u0441\u043B\u0435 \u0443\u0445\u043E\u0434\u0430 \u0441\u0435\u0441\u0441\u0438\u0438 \u0432 \u043E\u0444\u043B\u0430\u0439\u043D, \u0432\u0442\u043E\u0440\u0430\u044F \u0441\u0435\u0441\u0441\u0438\u044F Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u043E\u0441\u0442\u0430\u0432\u0430\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0438\u0432\u043D\u043E\u0439 \u0438 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0435\u0442 \u0440\u0430\u0441\u0447\u0451\u0442 \u0441\u0447\u0435\u0442\u0447\u0438\u043A\u043E\u0432."
+          },
+          {
+            id: uid(),
+            label: "ERR-919",
+            text: "\u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u0430 \u0440\u0430\u0431\u043E\u0442\u0430 \u0438\u043D\u0441\u0442\u0430\u043B\u043B\u044F\u0442\u043E\u0440\u0430 \u043F\u0440\u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u043E\u0439 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435 \u043A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440\u0430 Web-\u0440\u0430\u0437\u043C\u0435\u0442\u043E\u043A \u043E\u0442 \u0441\u0435\u0440\u0432\u0435\u0440\u0430 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430."
+          },
+          {
+            id: uid(),
+            label: "WebC-10940",
+            text: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430 \u0432\u0432\u043E\u0434\u0430 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u044F \u043F\u0440\u0438 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u0438 \u0437\u0430\u0434\u0430\u043D\u0438\u044F \u043D\u0430 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u0435 \u0441 TextBox \u043D\u0430 TextArea."
+          },
+          {
+            id: uid(),
+            label: "ERR-804",
+            text: "\u041F\u043E\u0441\u043B\u0435 \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0430 \u043F\u0440\u0435\u0434\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0438\u0437 Web-\u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 Excel \u0432 \u043A\u043E\u043D\u0435\u0446 \u0441\u0442\u0440\u043E\u043A \u044D\u043A\u0441\u043F\u043E\u0440\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u0433\u043E \u0444\u0430\u0439\u043B\u0430 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043F\u0440\u043E\u0431\u0435\u043B."
+          },
+          {
+            id: uid(),
+            label: "WebC-11191",
+            text: "\u041D\u0435 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u0435\u0442\u0441\u044F \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439 \u043A \u0440\u0435\u0448\u0435\u043D\u0438\u044E \u0432 \u0437\u0430\u0434\u0430\u043D\u0438\u0438 \u0438 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 \u0425\u043E\u0434 \u0441\u043E\u0433\u043B\u0430\u0441\u043E\u0432\u0430\u043D\u0438\u044F \u0441\u0432\u044F\u0437\u0430\u043D\u043D\u043E\u0433\u043E \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430."
+          },
+          {
+            id: uid(),
+            label: "WebC-11132",
+            text: '\u041D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442\u0441\u044F \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u0432 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435 "\u0417\u0430\u043F\u0438\u0441\u0438 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A\u0430 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432" \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \u0440\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u043E \u043C\u0435\u0441\u0442\u0443.'
+          },
+          {
+            id: uid(),
+            label: "WebC-11130",
+            text: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0442 \u0443\u0441\u043B\u043E\u0432\u0438\u044F \u0432\u044B\u0431\u043E\u0440\u0430 \u043F\u043E \u0432\u0438\u0434\u0443 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438 \u0432 \u0434\u0438\u0430\u043B\u043E\u0433\u0435 \u0434\u0435\u043B\u0435\u0433\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F."
+          },
+          {
+            id: uid(),
+            label: "WebC-11022",
+            text: "\u041A\u043E\u043D\u0442\u0440\u043E\u043B \u0412\u044B\u0431\u043E\u0440 \u043F\u0430\u043F\u043A\u0438. \u041D\u0435\u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u0430\u044F \u0440\u0430\u0431\u043E\u0442\u0430 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0430."
+          },
+          {
+            id: uid(),
+            label: "WebC-11046",
+            text: '\u0415\u0441\u043B\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430 \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u0442\u044C \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u043F\u043E\u0434\u043F\u0438\u0441\u044C\u044E, \u0442\u043E \u0443 \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043B\u0438\u0448\u043D\u0435\u0435 \u043F\u043E\u043B\u0435 "\u0417\u0430 \u043A\u043E\u0433\u043E" \u0438 \u0444\u0430\u043C\u0438\u043B\u0438\u044F \u043F\u043E\u0434\u043F\u0438\u0441\u0430\u043D\u0442\u0430.'
+          },
+          {
+            id: uid(),
+            label: "WebC-10974",
+            text: "\u0421\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u0438\u043A \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432. \u0412 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u0438 \u043E\u0442\u043E\u0431\u0440\u0430\u0436\u0430\u044E\u0442\u0441\u044F \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u0438 \u0438\u0437 \u0440\u0430\u043D\u0435\u0435 \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u0434\u043E\u043B\u0436\u043D\u043E\u0441\u0442\u0438."
+          }
+        ]
+      }
+    ]
+  }
+];
+const s = (e) => e.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&"), a = (e, i) => {
+  if (!i.query || i.query instanceof String && !i.query.trim())
+    return e;
+  const r = ((e2) => {
+    let t;
+    if (e2.query instanceof RegExp)
+      return new RegExp(String.raw`(${e2.query.source})`, "g" + (e2.caseSensitive ? "" : "i"));
+    if (e2.splitBySpace) {
+      const i2 = e2.query.trim().replace(/\s+/g, " ");
+      t = String.raw`(${i2.split(/\s/).map(s).join("|")})`;
+    } else
+      t = String.raw`(${s(e2.query)})`;
+    return new RegExp(String.raw`${t}`, "g" + (e2.caseSensitive ? "" : "i"));
+  })({ query: i.query, splitBySpace: i.splitBySpace, caseSensitive: i.caseSensitive });
+  return e.split(r).map((e2) => r.test(e2) ? h(i.highlightTag, { class: i.highlightClass, style: i.highlightStyle }, e2) : e2);
+};
+var l = defineComponent({ name: "VueWordHighlighter", props: { query: { type: [String, Object], required: true, default: "" }, caseSensitive: { type: Boolean, default: false }, splitBySpace: { type: Boolean, default: false }, highlightClass: { type: [Object, String, Array], default: "" }, highlightStyle: { type: [Object, String, Array], default: "" }, highlightTag: { type: String, default: "mark" }, wrapperTag: { type: String, default: "span" }, wrapperClass: { type: [Object, String, Array], default: "" }, textToHighlight: { type: String, default: "" } }, emits: ["matches"], setup: (i, r) => () => {
+  const s2 = i.textToHighlight ? i.textToHighlight : ((t) => {
+    if (t && t.default) {
+      const i2 = t.default();
+      let r2;
+      return r2 = i2[0].children, typeof r2 == "string" ? r2 : "";
+    }
+    return "";
+  })(r.slots), l2 = a(s2, { query: i.query, splitBySpace: i.splitBySpace, caseSensitive: i.caseSensitive, highlightTag: i.highlightTag, highlightClass: i.highlightClass, highlightStyle: i.highlightStyle });
+  var g;
+  return r.emit("matches", typeof (g = l2) == "string" ? [] : g.filter((e) => typeof e != "string").map((t) => typeof t == "string" ? t : t.children)), h(i.wrapperTag, { class: i.wrapperClass }, l2);
+} });
+const useItems = defineStore({
+  id: "items",
+  state: () => ({
+    versions: []
+  }),
+  getters: {},
+  actions: {
+    setVersions(payload) {
+      this.versions = payload;
+    },
+    expandBlock(version2) {
+      let opened = version2.children.filter((item) => item.model);
+      if (opened.length < version2.children.length / 2) {
+        version2.children.map((item) => item.model = true);
+      } else
+        version2.children.map((item) => item.model = false);
+    },
+    toggleModel(item) {
+      item.model = !item.model;
+    },
+    expandAll() {
+      this.versions = this.versions.map((item) => {
+        var _a;
+        return {
+          id: item.id,
+          ver: item.ver,
+          children: (_a = item.children) == null ? void 0 : _a.map((el) => {
+            return {
+              id: el.id,
+              head: el.head,
+              label: el.label,
+              icon: el.icon,
+              model: true,
+              children: el.children
+            };
+          })
+        };
+      });
+    },
+    toggleMore(item) {
+      item.show = !item.show;
+      console.log(item);
+    },
+    toggleAll() {
+      this.versions = this.versions.map((item) => {
+        var _a;
+        return {
+          id: item.id,
+          ver: item.ver,
+          children: (_a = item.children) == null ? void 0 : _a.map((el) => {
+            return {
+              id: el.id,
+              head: el.head,
+              label: el.label,
+              icon: el.icon,
+              model: !el.model,
+              children: el.children
+            };
+          })
+        };
+      });
+    }
+  }
+});
+var SvgIcon_vue_vue_type_style_index_0_lang = "";
+var _export_sfc = (sfc, props) => {
+  const target2 = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target2[key] = val;
+  }
+  return target2;
+};
+const _sfc_main$2 = defineComponent({
+  name: "SvgIcon",
+  props: {
+    prefix: {
+      type: String,
+      default: "icon"
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    color: {
+      type: String,
+      default: "#333"
+    },
+    spin: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props) {
+    const symbolId = computed(() => `#${props.prefix}-${props.name}`);
+    return { symbolId };
+  }
+});
+const _hoisted_1$1 = ["href", "fill"];
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("svg", {
+    "aria-hidden": "true",
+    class: normalizeClass(["icon", { "icon-spin": _ctx.spin }])
+  }, [
+    createBaseVNode("use", {
+      href: _ctx.symbolId,
+      fill: _ctx.color
+    }, null, 8, _hoisted_1$1)
+  ], 2);
+}
+var SvgIcon = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
+var Version_vue_vue_type_style_index_0_scoped_true_lang = "";
+const _withScopeId = (n) => (pushScopeId("data-v-7a500400"), n = n(), popScopeId(), n);
+const _hoisted_1 = { class: "grid" };
+const _hoisted_2 = { class: "left" };
+const _hoisted_3 = {
+  key: 0,
+  class: "notfound"
+};
+const _hoisted_4 = ["id"];
+const _hoisted_5 = { class: "row items-center" };
+const _hoisted_6 = { class: "row items-center q-pr-sm" };
+const _hoisted_7 = {
+  key: 0,
+  class: "date q-mr-lg"
+};
+const _hoisted_8 = /* @__PURE__ */ createTextVNode("Shif-Click - \u0440\u0430\u0441\u043F\u0430\u0445\u043D\u0443\u0442\u044C \u0432\u0441\u0435");
+const _hoisted_9 = { class: "smallgrid" };
+const _hoisted_10 = { class: "label" };
+const _hoisted_11 = { class: "text" };
+const _hoisted_12 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("br", null, null, -1));
+const _hoisted_13 = ["id"];
+const _hoisted_14 = ["innerHTML"];
+const _hoisted_15 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed accumsan ligula, vitae feugiat nibh. Cras auctor iaculis feugiat. Mauris est tortor, dignissim eu ipsum at, dapibus condimentum neque. Fusce posuere bibendum maximus.", -1));
+const _hoisted_16 = { class: "side" };
+const _hoisted_17 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("br", null, null, -1));
+const _hoisted_18 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "sod" }, "\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435", -1));
+const _hoisted_19 = { class: "list" };
+const _hoisted_20 = ["onClick"];
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
+  name: "Version",
+  setup(__props) {
+    const inView = ref([]);
+    const add2 = (e) => {
+      remove2(e);
+      inView.value.push(e);
+    };
+    const remove2 = (e) => {
+      let index2;
+      while ((index2 = inView.value.indexOf(e)) > -1) {
+        inView.value.splice(index2, 1);
+      }
+    };
+    const intersection = (entry) => {
+      if (entry.isIntersecting === true) {
+        add2(entry.target.id);
+      } else {
+        remove2(entry.target.id);
+      }
+    };
+    const intersectionObject = {
+      handler: intersection,
+      cfg: {
+        rootMargin: "-120px"
+      }
+    };
+    const myitems = useItems();
+    myitems.setVersions(versions);
+    const { getScrollTarget: getScrollTarget2, setVerticalScrollPosition: setVerticalScrollPosition2 } = scroll;
+    const filter = ref("");
+    const handleScroll = (e) => {
+      const ele = document.getElementById(e);
+      const target2 = getScrollTarget2(ele);
+      const offset = ele.offsetTop - 75;
+      const duration = 300;
+      setVerticalScrollPosition2(target2, offset, duration);
+    };
+    const filterByLabel = (array, searchTerm) => {
+      return array.reduce((prev, curr) => {
+        var _a, _b;
+        const children = curr.children ? filterByLabel(curr.children, searchTerm) : void 0;
+        return ((_a = curr.label) == null ? void 0 : _a.toLowerCase().includes(searchTerm.toLowerCase())) || ((_b = curr.text) == null ? void 0 : _b.toLowerCase().includes(searchTerm.toLowerCase())) || (children == null ? void 0 : children.length) > 0 ? [...prev, __spreadProps(__spreadValues({}, curr), { children })] : prev;
+      }, []);
+    };
+    const filtered = computed(() => {
+      if (filter.value !== "") {
+        return filterByLabel(myitems.versions, filter.value);
+      }
+      return myitems.versions;
+    });
+    watchEffect(() => {
+      if (filter.value.length > 1) {
+        myitems.expandAll();
+      }
+    });
+    const handleClick = (e, version2) => {
+      if (e.shiftKey) {
+        myitems.toggleAll();
+      } else
+        myitems.expandBlock(version2);
+    };
+    const setId = (id, label) => {
+      return id + label;
+    };
+    const more = (id, label) => {
+      let el = document.getElementById(id + label);
+      el == null ? void 0 : el.classList.toggle("hid");
+    };
+    const calcClass = (e) => {
+      if (inView.value.some((el) => el === e)) {
+        return "visib";
+      } else
+        return "";
+    };
+    const showIcon = (icon) => {
+      return "img:/img/" + icon + ".svg";
+    };
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createBaseVNode("div", _hoisted_2, [
+          unref(filtered).length === 0 ? (openBlock(), createElementBlock("div", _hoisted_3, "\u041D\u0438\u0447\u0435\u0433\u043E \u043D\u0435\u0442. \u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439\u0442\u0435 \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0437\u0430\u043F\u0440\u043E\u0441.")) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(unref(filtered), (version2, index2) => {
+            return openBlock(), createElementBlock(Fragment, {
+              key: version2.id
+            }, [
+              createBaseVNode("div", {
+                class: "version",
+                id: version2.ver
+              }, [
+                createBaseVNode("div", _hoisted_5, [
+                  index2 !== 0 ? (openBlock(), createBlock(QBtn, {
+                    key: 0,
+                    class: "q-mr-md",
+                    dense: "",
+                    unelevated: "",
+                    color: "accent"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(SvgIcon, {
+                        name: "source-branch",
+                        color: "white"
+                      })
+                    ]),
+                    _: 1
+                  })) : createCommentVNode("", true),
+                  createBaseVNode("div", {
+                    class: normalizeClass({ link: index2 !== 0 })
+                  }, toDisplayString(version2.ver), 3)
+                ]),
+                createBaseVNode("div", _hoisted_6, [
+                  index2 !== 0 ? (openBlock(), createElementBlock("div", _hoisted_7, "23.07.2022")) : createCommentVNode("", true),
+                  filter.value.length < 1 ? (openBlock(), createBlock(QBtn, {
+                    key: 1,
+                    dense: "",
+                    flat: "",
+                    round: "",
+                    color: "accent",
+                    onClick: ($event) => handleClick($event, version2)
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(QTooltip, {
+                        anchor: "top middle",
+                        self: "bottom middle"
+                      }, {
+                        default: withCtx(() => [
+                          _hoisted_8
+                        ]),
+                        _: 1
+                      }),
+                      createVNode(SvgIcon, { name: "unfold-more-horizontal" })
+                    ]),
+                    _: 2
+                  }, 1032, ["onClick"])) : createCommentVNode("", true)
+                ])
+              ], 8, _hoisted_4),
+              withDirectives((openBlock(), createBlock(QList, {
+                id: version2.ver
+              }, {
+                default: withCtx(() => [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(version2.children, (item) => {
+                    return openBlock(), createBlock(QExpansionItem, {
+                      key: item.id,
+                      label: item.head,
+                      "header-class": "hd",
+                      icon: showIcon(item.icon),
+                      "expand-separator": "",
+                      "expand-icon": "img:/img/chevron-down.svg",
+                      "model-value": item.model,
+                      onClick: ($event) => unref(myitems).toggleModel(item)
+                    }, {
+                      default: withCtx(() => [
+                        (openBlock(true), createElementBlock(Fragment, null, renderList(item.children, (el) => {
+                          return openBlock(), createBlock(QCardSection, {
+                            key: el.label
+                          }, {
+                            default: withCtx(() => [
+                              createBaseVNode("div", _hoisted_9, [
+                                createBaseVNode("div", _hoisted_10, [
+                                  (openBlock(), createBlock(resolveDynamicComponent(unref(l)), { query: filter.value }, {
+                                    default: withCtx(() => [
+                                      createTextVNode(toDisplayString(el.label), 1)
+                                    ]),
+                                    _: 2
+                                  }, 1032, ["query"]))
+                                ]),
+                                createBaseVNode("div", _hoisted_11, [
+                                  (openBlock(), createBlock(resolveDynamicComponent(unref(l)), { query: filter.value }, {
+                                    default: withCtx(() => [
+                                      createTextVNode(toDisplayString(el.text), 1)
+                                    ]),
+                                    _: 2
+                                  }, 1032, ["query"])),
+                                  _hoisted_12,
+                                  el.more ? (openBlock(), createBlock(QBtn, {
+                                    key: 0,
+                                    unelevated: "",
+                                    color: "accent",
+                                    label: "\u0415\u0449\u0435",
+                                    size: "xs",
+                                    onClick: ($event) => more(item.id, el.label)
+                                  }, null, 8, ["onClick"])) : createCommentVNode("", true)
+                                ])
+                              ]),
+                              el.more ? (openBlock(), createElementBlock("div", {
+                                key: 0,
+                                class: "more hid",
+                                id: setId(item.id, el.label)
+                              }, [
+                                createBaseVNode("div", {
+                                  innerHTML: el.more
+                                }, null, 8, _hoisted_14),
+                                _hoisted_15
+                              ], 8, _hoisted_13)) : createCommentVNode("", true)
+                            ]),
+                            _: 2
+                          }, 1024);
+                        }), 128))
+                      ]),
+                      _: 2
+                    }, 1032, ["label", "icon", "model-value", "onClick"]);
+                  }), 128))
+                ]),
+                _: 2
+              }, 1032, ["id"])), [
+                [Intersection, intersectionObject]
+              ])
+            ], 64);
+          }), 128))
+        ]),
+        createBaseVNode("div", _hoisted_16, [
+          createVNode(QInput, {
+            dense: "",
+            debounce: "300",
+            placeholder: "\u0424\u0438\u043B\u044C\u0442\u0440",
+            autofocus: "",
+            color: "primary",
+            modelValue: filter.value,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => filter.value = $event),
+            clearable: "",
+            "clear-icon": "img:/img/close-circle-outline.svg",
+            onClear: _cache[1] || (_cache[1] = ($event) => filter.value = "")
+          }, {
+            prepend: withCtx(() => [
+              createVNode(SvgIcon, {
+                class: "magnify",
+                name: "magnify"
+              })
+            ]),
+            _: 1
+          }, 8, ["modelValue"]),
+          _hoisted_17,
+          _hoisted_18,
+          createBaseVNode("div", _hoisted_19, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(unref(filtered), (item) => {
+              return openBlock(), createElementBlock("div", {
+                class: normalizeClass(["empt", calcClass(item.ver)]),
+                onClick: ($event) => handleScroll(item.ver),
+                key: item.ver
+              }, toDisplayString(item.ver), 11, _hoisted_20);
+            }), 128))
+          ])
+        ])
+      ]);
+    };
+  }
+});
+var Version = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-7a500400"]]);
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  name: "App",
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createBlock(Version);
+    };
+  }
+});
+const pinia = createPinia();
+const app = createApp(_sfc_main);
+app.use(Quasar, {
+  plugins: {},
+  supportTS: {
+    tsCheckerConfig: {
+      eslint: {
+        enabled: true,
+        files: "./src/**/*.{ts,tsx,js,jsx,vue}"
+      }
+    }
+  }
+});
+app.use(pinia);
+app.mount("#app");
