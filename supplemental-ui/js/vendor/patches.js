@@ -11813,21 +11813,22 @@ const _sfc_main$2 = defineComponent({
     return { symbolId };
   }
 });
-const _hoisted_1$1 = ["href", "fill"];
+const _hoisted_1$1 = {
+  "aria-hidden": "true",
+  class: "q-icon"
+};
+const _hoisted_2$1 = ["href", "fill"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("svg", {
-    "aria-hidden": "true",
-    class: normalizeClass(["icon", { "icon-spin": _ctx.spin }])
-  }, [
+  return openBlock(), createElementBlock("svg", _hoisted_1$1, [
     createBaseVNode("use", {
       href: _ctx.symbolId,
       fill: _ctx.color
-    }, null, 8, _hoisted_1$1)
-  ], 2);
+    }, null, 8, _hoisted_2$1)
+  ]);
 }
 var SvgIcon = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
 var Version_vue_vue_type_style_index_0_scoped_true_lang = "";
-const _withScopeId = (n) => (pushScopeId("data-v-7a500400"), n = n(), popScopeId(), n);
+const _withScopeId = (n) => (pushScopeId("data-v-36c8277c"), n = n(), popScopeId(), n);
 const _hoisted_1 = { class: "grid" };
 const _hoisted_2 = { class: "left" };
 const _hoisted_3 = {
@@ -11852,7 +11853,7 @@ const _hoisted_15 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBas
 const _hoisted_16 = { class: "side" };
 const _hoisted_17 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("br", null, null, -1));
 const _hoisted_18 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode("div", { class: "sod" }, "\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435", -1));
-const _hoisted_19 = { class: "list" };
+const _hoisted_19 = { class: "mylist" };
 const _hoisted_20 = ["onClick"];
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   name: "Version",
@@ -12100,7 +12101,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var Version = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-7a500400"]]);
+var Version = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-36c8277c"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
   name: "App",
   setup(__props) {
