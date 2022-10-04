@@ -1,6 +1,6 @@
 antora:
   extensions:
-  - require: ./antora-navigator-extension/
+  - require: antora-navigator-extension
     config_file: ./antora-navigator.yml
   - id: unlisted-pages
     enabled: true
@@ -37,7 +37,7 @@ content:
 ui:
   bundle:
     url: ./build/ui-bundle.zip
-  supplemental_files: ./supplemental-ui
+  supplemental_files: ./node_modules/antora-navigator-extension/data
 asciidoc:
   attributes:
     sectids: ''
