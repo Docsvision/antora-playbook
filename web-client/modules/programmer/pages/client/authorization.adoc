@@ -1,3 +1,164 @@
 = Добавление сторонних сервисов на страницу авторизации
 
-http://ddsm-tfs02:8080/tfs/DocsVision/FutureGit/_git/WebClient-Samples?path=%2FClientScripts%2FJS%2FLoginPage%2FREADME.md&version=GBdevelop
+Данное расширение содержит пример добавления дополнительных сервисов авторизации на страницу входа в {wc}.
+
+.Чтобы добавить расширение авторизации, необходимо:
+. Выполнить код при определённых событиях (объект `LoginEvents`).
+. Подменить текст на странице (объект `defaultLoginResources`).
+. Заменить компоненты страницы(объект `LoginView`)
+. Добавить стили на страницу.
+
+Чтобы добавить свой скрипт, нужно создать файл или файлы с расширением `.js` в папке `DocsVision\WebClient\5.5\Site\Content\Account\Scripts`. Код будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`.
+
+Чтобы добавить стили, нужно создать файл или файлы с расширением `.сss` в папке `DocsVision\WebClient\5.5\Site\Content\Account\Styles`, стили загружаются после основных стилей.
+
+Входной точкой для внедрения является объект `loginExtensionManager` доступный глобально через объект Windows.
+
+Возможные ресурсы, компоненты и события для замены обозначены ниже и в файле `Types.ts` в репозитории примеров {wc}а.
+
+[source,typescript]
+----
+export class LoginView {
+    form;
+    changeMethodButton;
+    divider;
+    errorBox;
+    errorBlock;
+    authBox;
+    box;
+    greeting;
+    providers;
+    contactBox;
+    providerButton;
+    logo;
+    input;
+    button; <.>
+    authBoxBefore;
+    authBoxAfter;
+    formBefore;
+    formAfter;
+    providersBefore;
+    providersAfter; <.>
+}
+
+export enum LoginEvents {
+    LogicEventConstructor = 'LogicEventConstructor',
+    LogicEventBeforeFormSubmit = 'LogicEventBeforeFormSubmit',
+    LogicEventAfterFormSubmit = 'LogicEventAfterFormSubmit',
+    LogicEventBeforeGetProviders = 'LogicEventBeforeGetProviders',
+    LogicEventAfterGetProviders = 'LogicEventAfterGetProviders',
+    EventLoginPageUseEffect = 'EventLoginPageUseEffect',
+    EventContainerUseEffect = 'EventContainerUseEffect',
+}
+
+export interface LoginPlugin {
+    name?: string;
+    order?: number;
+    fn: (data: object) => any;
+    eventName: string;
+}
+
+export type LoginLogic = {};
+
+export interface ILoginExtensionManager {
+    currentLocale: string;
+    getResources?: () => { [key: string]: string };
+    setResources?: (resources: { [key: string]: string }) => void;
+    addPlugin: (plugin: LoginPlugin) => void;
+    addPlugins: (plugins: LoginPlugin[]) => void;
+    removePlugin: (name: string) => void;
+    onSetupView: (view: LoginView) => void;
+
+    logicEventConstructor: (data: { logic: LoginLogic }) => void;
+    logicEventBeforeFormSubmit: (data: { logic: LoginLogic; data: FormData }) => void;
+    logicEventAfterFormSubmit: (data: { logic: LoginLogic; data: object }) => void;
+    eventContainerUseEffect: (data: { logic: LoginLogic; view: LoginView }) => void;
+    logicEventBeforeGetProviders: (data: { body: any }) => void;
+    logicEventAfterGetProviders: (data: { logic: LoginLogic; data: any }) => void;
+    eventLoginPageUseEffect: (data: { loginPageRef: { current: HTMLDivElement } }) => void; <.>
+}
+
+export type DefaultLoginResources = {
+    Or: string; <.>
+    Login_ChangeMethod: string; <.>
+    Login_EnterText: string; <.>
+    Login_SubmitText: string; <.>
+    Login_PlaceholderLogin: string; <.>
+    Login_PlaceholderPassword: string; <.>
+    Login_Greeting: string; <.>
+    Login_AuthenticationErrorText_Problem: string; <.>
+    Login_AuthenticationErrorText_Help: string; <.>
+    Login_HelpText: string; <.>
+    Login_AdminMail: string; <.>
+};
+----
+<.> Стандартные элементы представления.
+<.> Клиентские точки расширения.
+<.> События.
+<.> Текст разделителя. Значение по умолчанию: `или`.
+<.> Текст кнопки смены формы. Значение по умолчанию: `Другой способ входа`.
+<.> Текст кнопки сервиса. Значение по умолчанию: `войти с`.
+<.> Текст кнопки отправки формы. Значение по умолчанию: `войти`.
+<.> Placeholder поля логина. Значение по умолчанию: `Логин`
+<.> Placeholder поля пароля. Значение по умолчанию: `Пароль`.
+<.> Текст приветствия. Значение по умолчанию: `Привет,`.
+<.> Текст формы с ошибкой. Значение по умолчанию: `В процессе аутентификации возникли проблемы.`
+<.> Текст формы с ошибкой. Значение по умолчанию: `Пожалуйста, обратитесь к администратору системы`
+<.> Текст основной формы. Значение по умолчанию: `Если у вас возникли сложности - обратитесь к администратору`
+<.> Контакты администратора. По умолчанию пустое значение.
+
+.Пример кода расширения:
+[source,typescript]
+----
+window.loginExtensionManager.setResources({ Login_AdminMail: 'admin@docsvision.com' }); <.>
+if (loginExtensionManager.currentLocale === 'ru') {
+    window.loginExtensionManager.setResources({ Login_Greeting: 'Приветствуем,' });
+} else {
+    window.loginExtensionManager.setResources({ Login_Greeting: 'Hello,' });
+}
+
+const plugin = {
+    order: 1,
+    eventName: 'LogicEventConstructor',
+    fn: (data) => {
+<.>
+    },
+    name: 'myPlugin',
+};
+const plugin2 = {
+    order: 2,
+    eventName: 'EventContainerUseEffect',
+    fn: (data) => {
+<.>
+    },
+    name: 'myPlugin2',
+};
+
+loginExtensionManager.addPlugin(plugin);
+loginExtensionManager.addPlugins([plugin2]); <.>
+
+loginExtensionManager.onSetupView = function (view) { <.>
+
+    view.logo = () => { <.>
+        return React.createElement('img', {
+            src: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png',
+            className: 'my-custom-logo',
+        });
+    };
+
+<.>
+    view.authBoxBefore = () => null;
+    view.authBoxAfter = () => null;
+    view.formBefore = () => null;
+    view.formAfter = () => React.createElement('a', { className: 'forgot-email-link', href: "#" }, 'Забыли пароль?');;
+    view.providersBefore = () => null;
+    view.providersAfter = () => null;
+};
+----
+<.> Заменяем текст.
+<.> Выполняем действие.
+<.> Выполняем действие.
+<.> Добавляем события.
+<.> Меняем компоненты представления.
+<.> Заменяем элемент.
+<.> Точки расширения.
