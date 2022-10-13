@@ -67,24 +67,19 @@ namespace BackOffice
   {
    bool cancel = false;
 
-   //
    X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext); <.>
    if (cancel) return;
 
-   //
    ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
    IStaffService staffService = base.CardControl.ObjectContext.GetService<IStaffService>();
    
-   //
    IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
 
-   //
    StaffGroup staffGroup = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
    foreach (DocumentFile item in mainFiles)
    {
 
-    //
     foreach (StaffEmployee employee in staffGroup.Employees) <.>
     {
      cryptService.AddCryptAccount(certificate, item.FileVersionRowId, employee.AccountName);

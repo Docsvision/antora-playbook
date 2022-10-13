@@ -64,33 +64,26 @@ namespace BackOffice
    Document document = (base.BaseObject as Document);
    ObjectContext objectContext = base.CardControl.ObjectContext;
       
-   //
    IDocumentService documentService = objectContext.GetService<IDocumentService>();
    IUIService uiService = objectContext.GetService<IUIService>(); <.>
 
-   //
    OpenFileDialog openFileDialog = new OpenFileDialog();
    openFileDialog.Multiselect = false;
    openFileDialog.Filter = "Все файлы (*.*)|*.*";
    DialogResult result = openFileDialog.ShowDialog();
    if (result != DialogResult.OK) return; <.>
    
-   //
    string fileName = openFileDialog.FileName;
    string p7sFileName = fileName + ".p7s"; <.>
    
-   //
    if (!System.IO.File.Exists(p7sFileName)) return; <.>
 
-   //
    DocumentFile mainFile = documentService.AttachMainFile(document, fileName); <.>
 
    SignedCms signedCms;
    
-   //
    documentService.DecodeSignedDocument(p7sFileName, document, out signedCms); <.>
 
-   //
    try
    {
     signedCms.CheckSignature(false);
@@ -101,7 +94,6 @@ namespace BackOffice
     return; <.>
    }
    
-   //
    documentService.AddSignatures(document, signedCms); <.>
   }
  }

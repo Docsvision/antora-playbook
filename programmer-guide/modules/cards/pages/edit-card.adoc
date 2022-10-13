@@ -7,13 +7,10 @@
 .Изменение данных карточки в обычном режиме:
 [source,csharp]
 ----
-//
 CardData card = userSession.CardManager.GetCardData(cardId); <.>
 
-//
 RowData sectionRow = card.Sections[sectionId].FirstRow; <.>
 
-//
 sectionRow["Field"] = "Новое значение поля"; <.>
 ----
 <.> Получаем данные карточки с идентификатором `cardId`.

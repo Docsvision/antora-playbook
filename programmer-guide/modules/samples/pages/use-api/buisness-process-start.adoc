@@ -5,25 +5,19 @@
 --
 [source,csharp]
 ----
-//
+
 private void Button_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e) <.>
 {
- //
  Library library = new Library(base.Session); <.>
  
- //
  Process template = library.GetProcess(new Guid("00000000-0000-0000-0000-000000000000")); <.>
  
- //
  Process process = library.CreateProcess(template); <.>
 
- //
  process.InitialDocument = base.CardData.Id.ToString("B"); <.>
 
- //
  process.Variables[new Guid("00000000-0000-0000-0000-000000000001")].Value = (base.BaseObject as Document).MainInfo.Author.DisplayName; <.>
  
- //
  process.Start(base.Session.Properties["AccountName"].Value.ToString(), library.Dictionary,  ExecutionModeEnum.Automatic, true); <.>
 }
 ----
