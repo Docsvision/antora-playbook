@@ -16,7 +16,7 @@
 
 [source,csharp]
 ----
-private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, ref object cache); <.> <.> <.> <.>
+private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, ref object cache); <.> <.> <.>
 {
     var labels = new StringBuilder();
     
@@ -32,7 +32,6 @@ private string GetReferenceForLink(SessionContext sessionContext, ReferenceListR
 ----
 <.> `sessionContext` -- контекст сессии, из которого могут быть получены сервисы или другие функции. Сервисы или другие функции могут быть полезны при формировании описания ссылки.
 <.> `reference` -- ссылка, для которой формируется описание.
-<.> `allowedReferences` -- все ссылки элемента "Ссылки";
 <.> `cache` -- кэш, содержащий результаты формирования описаний ссылок.
 <.> Формируем строку из меток карточки `reference.Card`. Переменная `reference.Card` содержит в себе идентификатор карточки, на которую указывает ссылка.
 <.> Формируем описание ссылки. Если меток нет, в описание добавляем только название карточки.
