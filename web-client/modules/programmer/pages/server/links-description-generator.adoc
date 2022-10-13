@@ -6,7 +6,7 @@
 * Разметка -- используется специальная разметка, в которой выводятся требуемые данные карточки.
 * Расширение -- для формирования описаний ссылок используется расширение {wc}а.
 
-Особенности использования стандартного способа формирования описаний, а также формирования описаний с помощью разметок рассмотрены см. в описании элемента управления xref:layouts:ctrl/special/links.adoc[Ссылки] в xref:layouts:Руководстве пользователя программы {kvr}.
+Особенности использования стандартного способа формирования описаний, а также формирования описаний с помощью разметок рассмотрены см. в описании элемента управления xref:layouts:ctrl/special/links.adoc[Ссылки] в xref:layouts:info-install.adoc[Руководстве пользователя программы {kvr}].
 
 В данном пункте рассмотрен пример разработки расширения для формирования описаний.
 
@@ -88,12 +88,8 @@ Report report = sessionContext.Session.ReportManager.Reports[ReportID]; <.>
 ----
  public override void OnLoad(ILifetimeScope lifetimeScope)
  {
- //
  var linksService = lifetimeScope.Resolve<ILinksService>(); <.>
 
-   //
-   //
-   //
    linksService.RegisterDescriptionColumnGenerator("SomeLinkGenerator", GetReferenceDocumentManagementDelegate); <.>
 
    base.OnLoad(lifetimeScope);
