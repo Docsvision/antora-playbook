@@ -16,7 +16,7 @@
 
 [source,csharp]
 ----
-private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, List<ReferenceListReference> allowedReferences, ref object cache) <.> <.> <.> <.>
+private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, ref object cache); <.> <.> <.> <.>
 {
     var labels = new StringBuilder();
     
@@ -41,7 +41,7 @@ private string GetReferenceForLink(SessionContext sessionContext, ReferenceListR
 
 [source,csharp]
 ----
-private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, List<ReferenceListReference> allowedReferences, ref object cache)
+private string GetReferenceForLink(SessionContext sessionContext, ReferenceListReference reference, ref object cache);
 {
     var dictionary = cache != null ? cache as ConcurrentDictionary<Guid, string> : new ConcurrentDictionary<Guid, string>();
 
@@ -90,7 +90,7 @@ Report report = sessionContext.Session.ReportManager.Reports[ReportID]; <.>
  {
  var linksService = lifetimeScope.Resolve<ILinksService>(); <.>
 
-   linksService.RegisterDescriptionColumnGenerator("SomeLinkGenerator", GetReferenceDocumentManagementDelegate); <.>
+   linksService.RegisterDescriptionColumnGenerator("SomeLinkGenerator", GetReferenceForLink); <.>
 
    base.OnLoad(lifetimeScope);
 }
