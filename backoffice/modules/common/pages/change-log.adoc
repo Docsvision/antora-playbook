@@ -23,3 +23,4 @@ include::user:partial$excerpts.adoc[tags=notify]
 
 * Оптимизирована xref:desdirs:layouts/edit-extended-metadata.adoc#loading[загрузка расширенных метаданных] в базу данных, теперь обновляются только секции с метаданными, изменёнными в текущем сеансе
 * Оптимизировано xref:admin:cache-invalidation.adoc[кэширование операндов] ролевой модели из связанных карточек.
+* В `RoleModelLink` добавлены get-свойства типа Guid: `StateId`, `OperationId`, `RoleId`, чтобы позволило ускорить работу при считывании ссылок на эти объекты.
