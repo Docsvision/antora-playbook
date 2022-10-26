@@ -2,7 +2,7 @@
 
 Базовые модули -- содержат функциональность, которая обеспечивает возможность работы других модулей и системы в целом.
 
-К данному типу относятся модули: _xref:platform::index.adoc[{pl}]_, _{bo}_, _{dm}_, _Конструктор согласование_, _{wf}_, _{wincl}_, _Служба {ws}_ и _Делопроизводство 4.5_.
+К данному типу относятся модули: _xref:platform::index.adoc[{pl}]_, _xref:workerservice::index.adoc[Служба {ws}]_, _xref:backoffice::index.adoc[{bo}]_, _xref:documentmgmt::index.adoc[{dm}]_, _xref:approval::index.adoc[{ad}]_, _{wf}_, _xref:winclient::index.adoc[{wincl}]_ и _Делопроизводство 4.5_.
 
 .На рисунке ниже представлена схема зависимостей базовых модулей:
 * Все базовые модули зависят от модуля "{pl}".
@@ -11,7 +11,7 @@
 
 // .Базовые модули
 // image::base-modules.png[Базовые модули]
-
+//
 // .Базовые модули
 // [plantuml, svg]
 // ....
@@ -54,6 +54,10 @@
 // windowsclient -up-> baseobjects
 // windowsclient -up-> takeoffice
 // windowsclient -up-> workflow
+//
+// takeoffice <-left[hidden]- baseobjects
+// baseobjects <-down[hidden]- documentmanagement
+// approvaldesigner <-up[hidden]- documentmanagement
 //
 // @enduml
 // ....
