@@ -40,24 +40,22 @@ skinparam monochrome true
 State "Базовые модули" as base {
 
 State "Платформа" as platform
-State "Базовые объекты" as baseobjects
-State "Управление процессами" as workflow
-State "Управление документами" as documentmanagement
-State "Конструктор согласований" as approvaldesigner
+State "Базовые\nобъекты" as baseobjects
+State "Управление\nпроцессами" as workflow
+State "Управление\nдокументами" as documentmanagement
+State "Конструктор\nсогласований" as approvaldesigner
 State "Делопроизводство 4.5" as takeoffice
 State "Windows-клиент" as windowsclient
 State "Служба\nфоновых операций" as workerservice
 }
 
-platform ---> baseobjects
+platform --> baseobjects
 platform --> workflow
 platform --> takeoffice
-platform ---> windowsclient
-platform ----> documentmanagement
-platform ----> approvaldesigner
-platform ---down-> workerservice
-documentmanagement -[hidden]right-> workerservice
-approvaldesigner -[hidden]left-> workerservice
+platform --> windowsclient
+platform ---> documentmanagement
+platform --> approvaldesigner
+platform --> workerservice
 
 State "Дополнительные модули" as additional {
 
