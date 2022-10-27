@@ -49,13 +49,21 @@ State "Windows-клиент" as windowsclient
 State "Служба\nфоновых операций" as workerservice
 }
 
-platform --> baseobjects
-platform --> workflow
-platform --> takeoffice
-platform --> windowsclient
-platform ---> documentmanagement
-platform --> approvaldesigner
-platform --> workerservice
+baseobjects --> platform
+workflow --> platform
+takeoffice --> platform
+windowsclient --> platform
+documentmanagement --> platform
+approvaldesigner --> platform
+workerservice --> platform
+
+platform -[hidden]-> baseobjects
+platform -[hidden]-> workflow
+platform -[hidden]-> takeoffice
+platform -[hidden]-> windowsclient
+platform -[hidden]-> documentmanagement
+platform -[hidden]-> approvaldesigner
+platform -[hidden]-> workerservice
 
 State "Дополнительные модули" as additional {
 
