@@ -31,3 +31,169 @@ containerBuilder.RegisterType<TestTablePlugin>().As<IDataGridControlPlugin>().Si
 ----
 
 В случае, если это разметка карточки, то в массив параметров будет добавлен её идентификатор (`CurrentCardId`).
+
+[#api]
+== API для работы со строками табличных данных
+
+Для работы с контролами табличных данных доступны метода и события, перечисленные ниже.
+
+=== Список файлов (fileList)
+
+Метод *toggleRowClass*::
+Добавляет или удаляет CSS класс строки таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+toggleRowClass(fileItem: FileListItem, style: string)
+----
+
+Событие *fileVersionExpanding?*::
+Событие возникает при разворачивании списка версий.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent fileVersionExpanding?: CancelableApiEvent<IExtraFileDeletingArgs>;
+----
+
+Событие *fileNameClicking?*::
+Событие возникает при клике на имя файла.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent fileNameClicking?: CancelableApiEvent<IFileOpeningArgs>;
+----
+
+Событие *fileMenuOpening?*::
+Событие возникает при открытии меню файла.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent fileMenuOpening?: CancelableApiEvent<IFileMenuOpeningArgs>;
+----
+
+=== Ссылки (links)
+
+Метод *toggleRowClass*::
+Добавляет или удаляет CSS класс строки таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+toggleRowClass(link: LinkItem, style: string)
+----
+
+Событие *rowClick?*::
+Событие возникает при клике на строку таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent rowClick?: BasicApiEvent<ILinkEventArgs>;
+----
+
+Событие *nameLinkClicking?*::
+Событие возникает при клике на имя ссылки.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent nameLinkClicking?: CancelableApiEvent<ILinkEventArgs>;
+----
+
+Событие *linkMenuOpening?*::
+Событие возникает при открытии меню ссылки.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent linkMenuOpening?: CancelableApiEvent<ILinkEventArgs>;
+----
+
+Событие *linkMenuOpened?*::
+Событие возникает после открытия меню ссылки.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent linkMenuOpened?: BasicApiEvent<ILinkEventArgs>;
+----
+
+=== Задания (tasks)
+
+Метод *toggleRowClass*::
+Добавляет или удаляет CSS класс строки таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+toggleRowClass(task: ITaskDataModel, style: string)
+----
+
+Событие *rowClick?*::
+Событие возникает при клике на строку таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent rowClick?: BasicApiEvent<ITaskRowClickEventArgs>;
+----
+
+Событие *nameTaskClicking?*::
+Событие возникает при клике на имя задания.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent nameTaskClicking?: CancelableApiEvent<ITaskRowClickEventArgs>;
+----
+
+=== Таблица исполнения (tasksTable)
+
+Метод *toggleRowClass*::
+Добавляет или удаляет CSS класс строки таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+toggleRowClass(row: ITasksTableRow, style: string)
+----
+
+Событие *helpBoxShowing?*::
+Событие возникает перед показом диалога с информацией о задании.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent helpBoxShowing?: CancelableApiEvent<{ row: ITasksTableRow }>;
+----
+
+Событие *taskLinkClicking?*::
+Событие возникает при клике ссылку задания.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent taskLinkClicking?: CancelableApiEvent<{ row: ITasksTableRow }>;
+----
+
+Событие *toggleRowClicking?*::
+Событие возникает при сворачивании или разворачивании строки таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent toggleRowClicking?: CancelableApiEvent<{ row: ITasksTableRow }>;
+----
+
+Событие *rowClick?*::
+Событие возникает при клике на строку таблицы.
++
+.Синтаксис
+[source,typescript]
+----
+@apiEvent rowClick?: BasicApiEvent<{ row: ITasksTableRow }>;
+----

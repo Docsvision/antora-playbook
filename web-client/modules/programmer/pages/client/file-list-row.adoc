@@ -1,0 +1,53 @@
+= Работа со строкой данных элемента управления "Список файлов" (fileList)
+
+Пример взаимодействия со строками элемента управления "Список файлов" (fileList). Расширение добавляет к строке элемента управления красную обводку при скачивании файла.
+
+.Перечень необходимых инструментов:
+* https://nodejs.org/en/[NodeJS v14.17.0+]
+
+== Сборка и установка
+
+. Откройте консоль в папке `FileListHighlightRow` и выполните последовательно команды:
++
+ $ npm install
+ $ npm update
+ $ npm run build:prod
++
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\FileListHighlightRow` в каталог `Путь-к-установленному-Web-клиент\Site\Content\Modules`.
+. Перезапустите IIS.
+. Добавьте скрипт `fileListHighlightRow` в качестве обработчика события. `On file version downloaded` элемента управления `fileList` в конструкторе разметок.
+
+include::page$client/grid-context.adoc[tags=start]
+
+[source,typescript]
+----
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+import * as EventHandler from "./EventHandlers/EventHandler";
+
+extensionManager.registerExtension({ <.>
+    name: "FileListHighlightRow",
+    version: "1.0",
+    globalEventHandlers: [ EventHandler ]
+})
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
+[source,typescript]
+----
+import { FileListControl } from "@docsvision/webclient/BackOffice/FileListControl";
+import { IRowClickArgs } from "@docsvision/webclient/BackOffice/IRowClickArgs";
+
+export async function fileListHighlightRow(sender: FileListControl, event) {
+    const fileItem = event.fileItem;
+	const customClass = "file-list-row_red-border";
+
+    if (!event.fileItem?.cssClasses?.includes(customClass)) {
+        sender.toggleRowClass(fileItem, customClass);
+    }
+}
+----
+
+== Проверка примера
+
+. Откройте папку с элементом управления и добавленным обработчиком события.
+. Скачайте версию файла.

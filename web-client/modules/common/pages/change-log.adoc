@@ -294,17 +294,16 @@ CertificateSettings::
 Управление кэшем папок::
 Теперь при изменении настроек папок счётчик непрочитанных карточек можно обновить вручную или он обновится автоматически через 10 минут. См. подробнее xref:admin:cache-folders.adoc[].
 
-[#development]
-== Разработка
-
 [#api]
-Изменения в API::
-- Был xref:programmer:how-to-use-rest.adoc[добавлен REST Web-API], доступный на стороне клиента Web-клиента, который может вызывать функции {dv} API. REST API предназначается для работы из клиентских скриптов.
-- Внутренние компоненты `FileSignCreateDialog`, `FileSignSelectCertificateDialog` и связанные с ними заменены на `SignatureDialog`.
-- Сервис `$DocumentCardController` заменён на `$SignatureController`.
-- Во внутреннем классе `FileSign` удалена часть методов.
-- Для работы с подписью появился ЭУ `SignatureButton` и сервис `$DigitalSignature`.
-- Для открытия диалога подписи из скриптов в сервис `$DigitalSignature` добавлен метод `showSignatureMethodsSetupDialog`.
+== Изменения в API
+
+* xref:programmer:client/data-grid-control.adoc#api[Добавлены] новые методы и события API для контролов с табличным UI.
+* Был xref:programmer:how-to-use-rest.adoc[добавлен REST Web-API], доступный на стороне клиента Web-клиента, который может вызывать функции {dv} API. REST API предназначается для работы из клиентских скриптов.
+* Внутренние компоненты `FileSignCreateDialog`, `FileSignSelectCertificateDialog` и связанные с ними заменены на `SignatureDialog`.
+* Сервис `$DocumentCardController` заменён на `$SignatureController`.
+* Во внутреннем классе `FileSign` удалена часть методов.
+* Для работы с подписью появился ЭУ `SignatureButton` и сервис `$DigitalSignature`.
+* Для открытия диалога подписи из скриптов в сервис `$DigitalSignature` добавлен метод `showSignatureMethodsSetupDialog`.
 +
 .Например, запрос в консоли браузера:
 [source,shell]
@@ -312,7 +311,7 @@ CertificateSettings::
 WebClient.app.digitalSignature.showSignatureMethodsSetupDialog();
 ----
 +
-- Для добавления своего сообщения в диалог подписи в сервис `$DigitalSignature` добавлен метод `registerExtraSignatureDialogPropsProvider`.
+* Для добавления своего сообщения в диалог подписи в сервис `$DigitalSignature` добавлен метод `registerExtraSignatureDialogPropsProvider`.
 +
 .Например, запрос в консоли браузера:
 [source,shell]
@@ -321,7 +320,7 @@ WebClient.app.digitalSignature.registerExtraSignatureDialogPropsProvider(() => (
 ----
 <.> При необходимости функция `footer` может отрисовывать любые React-компоненты.
 +
-- Для интеграции с другими облачными сервисами в сервис `$CloudSignature` добавлен метод `needsAuthorization(): boolean`. Если сервис не требует авторизации пользователя, метод возвращает `false`.
+* Для интеграции с другими облачными сервисами в сервис `$CloudSignature` добавлен метод `needsAuthorization(): boolean`. Если сервис не требует авторизации пользователя, метод возвращает `false`.
 +
 .Пример работы:
 ====
@@ -356,7 +355,8 @@ WebClient.app.cloudSignature.needsAuthorization = () => false;
 * xref:programmer:client/grid-group-by-icon.adoc[].
 * xref:programmer:client/grid-context.adoc[].
 * xref:programmer:server/excel-export.adoc[].
-* xref:programmer:client/extend-server-query.adoc[]
+* xref:programmer:client/extend-server-query.adoc[].
+* xref:programmer:client/file-list-row.adoc[].
 
 == Оптимизации
 
