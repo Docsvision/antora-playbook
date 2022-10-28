@@ -24,7 +24,7 @@
 +
 В этом случае в переменной окружения `DocsvisionWebClientSDK` содержится путь к его папке, например, `C:\Program Files (x86)\Docsvision\WebClient\5.5\SDK`.
 +
-. Создайте в Visual Studio новый проект с типом `TemplateServerExtension`.
+. Установите шаблон серверного расширения и создайте на его основе новый проект с названием `LearnDocvisionServerExtension`.
 +
 . Обновите в проекте ссылки на зависимости.
 +
@@ -41,7 +41,7 @@ include::ROOT:partial$excerpts.adoc[tags=versions]
 . Настройте ядро серверного расширения.
 +
 ****
-Ядром серверного расширения называется файл `TemplateServerExtension.cs` в проекте расширения. Ядро является производным от `WebClientExtension` классом, содержащим ссылки на реализуемые функции расширения.
+Ядром серверного расширения называется файл `ServerExtension.cs` в проекте расширения. Ядро является производным от `WebClientExtension` классом, содержащим ссылки на реализуемые функции расширения.
 
 [source,csharp]
 ----
@@ -99,9 +99,14 @@ public class TemplateServerExtension : WebClientExtension
 В результате будет получен файл DLL с ядром серверного расширения и реализуемыми функциями, а также файлы DLL с локализованными ресурсами.
 ****
 +
-. Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки `bin\WebClientBin` в `Каталог-установки-Web-клиента\Site\bin`.
+. Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки menu:bin[WebClient > Bin] в menu:Каталог-установки-Web-клиента[Site > bin].
 +
-Ресурсные сборки нужно скопировать в папки `{wcd}\Site\Extensions\ru\` (для русской локализации), `{wcd}\Site\Extensions\uk\` (для английской локализации) и т. д.
+[CAUTION]
+====
+Расширения можно устанавливать в папки menu:Site[Extensions] и menu:Site[bin]. В ходе разработки расширения можно удобнее устанавливать в папку menu:Site[bin], т.к. это избавляет от необходимости перезапускать IIS при установке сборок.
+
+В ресурсной поставке рекомендуется устанавливать сборки в папку menu:Site[Extensions], чтобы проще было видеть, какие расширения установлены в Web-клиенте. Однако этот способ требует перезапуска IIS при установке или обновлении сборки.
+====
 +
 . Перезапустите сервер IIS.
 
