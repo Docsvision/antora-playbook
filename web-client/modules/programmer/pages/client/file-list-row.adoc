@@ -5,6 +5,23 @@
 .Перечень необходимых инструментов:
 * https://nodejs.org/en/[NodeJS v14.17.0+]
 
+== Описание файлов проекта
+
+.В папке "FileListHighlightRow" расположены файлы:
+* `copy-path.js` -- содержит константы с названием расширения и параметрами сборки; в данном файле указывается каталог, в который выгружаются файлы при сборке.
+* `gulpfile.js` -- файл конфигурации https://www.npmjs.com/package/gulp[Gulp] (используется для сборки стилей);
+* `package.json` -- файл конфигурации https://www.npmjs.com/[NPM] с командами сборки и списком зависимостей.
+* `package-lock.json` -- служебный файл NPM.
+* `rollup.config.js` -- файл конфигурации https://www.npmjs.com/package/rollup[Rollup]. Используется для сборки скриптов в один файл -- "бандл".
+* `tsconfig.json` -- файл конфигурации https://ru.wikipedia.org/wiki/TypeScript[TypeScript].
+* `node_modules` -- служебная папка NPM, в которую при выполнении команды npm `install` загружаются npm-зависимости.
+* `src` -- папка для размещения исходных файлы расширения.
+
+.Папка src содержит файлы:
+* `EventHandlers.tsx` -- пример файла с обработчиком события.
+* `Index.ts`-- файл с обязательной функцией регистрации клиентского расширения.
+* `Template.scss` -- пример файла стилей.
+
 == Сборка и установка
 
 . Откройте консоль в папке `FileListHighlightRow` и выполните последовательно команды:
@@ -19,6 +36,7 @@
 
 include::page$client/grid-context.adoc[tags=start]
 
+.Index.ts
 [source,typescript]
 ----
 import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
@@ -32,6 +50,7 @@ extensionManager.registerExtension({ <.>
 ----
 <.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
 
+.EventHandler.ts
 [source,typescript]
 ----
 import { FileListControl } from "@docsvision/webclient/BackOffice/FileListControl";
