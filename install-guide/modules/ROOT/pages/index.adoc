@@ -26,88 +26,36 @@
 * Базовые модули {dv} -- образуют систему {dv}, предоставляют ключевые функции и API {dv}.
 * Дополнительные модули {dv} -- расширяют существующие функциональные возможности системы {dv}.
 
-.Модули {dv}
-[plantuml, svg]
-....
-@startuml
-hide empty description
-'!pragma layout elk
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-skinparam lifelineStrategy solid
-skinparam monochrome true
-
-State "Базовые модули" as base {
-
-State "Платформа" as platform
-State "Базовые\nобъекты" as baseobjects
-State "Управление\nпроцессами" as workflow
-State "Управление\nдокументами" as documentmanagement
-State "Конструктор\nсогласований" as approvaldesigner
-State "Делопроизводство 4.5" as takeoffice
-State "Windows-клиент" as windowsclient
-State "Служба\nфоновых операций" as workerservice
-}
-
-baseobjects --> platform
-workflow --> platform
-takeoffice --> platform
-windowsclient --> platform
-documentmanagement --> platform
-approvaldesigner --> platform
-workerservice --> platform
-
-platform -[hidden]-> baseobjects
-platform -[hidden]-> workflow
-platform -[hidden]-> takeoffice
-platform -[hidden]-> windowsclient
-platform -[hidden]-> documentmanagement
-platform -[hidden]-> approvaldesigner
-platform -[hidden]-> workerservice
-
-State "Дополнительные модули" as additional {
-
-State "Web-клиент" as webclient
-State "Другие модули" as other
-}
-
-base --> webclient
-base --> other
-
-@enduml
-....
-
+// .Модули {dv}
 // [plantuml, svg]
 // ....
 // @startuml
+// hide empty description
 // '!pragma layout elk
+// skinparam rectangleBorderThickness 1
 // skinparam defaultTextAlignment center
+// skinparam lifelineStrategy solid
+// skinparam monochrome true
 //
-// package "Базовые модули" as base {
+// State "Базовые модули" as base {
 //
-// ["Платформа"] as platform
-// ["Базовые объекты"] as baseobjects
-// ["Управление процессами"] as workflow
-// ["Управление документами"] as documentmanagement
-// ["Конструктор согласований"] as approvaldesigner
-// ["Делопроизводство 4.5"] as takeoffice
-// ["Windows-клиент"] as windowsclient
-// ["Служба фоновых операций"] as workerservice
+// State "Платформа" as platform
+// State "Базовые\nобъекты" as baseobjects
+// State "Управление\nпроцессами" as workflow
+// State "Управление\nдокументами" as documentmanagement
+// State "Конструктор\nсогласований" as approvaldesigner
+// State "Делопроизводство 4.5" as takeoffice
+// State "Windows-клиент" as windowsclient
+// State "Служба\nфоновых операций" as workerservice
 // }
 //
-// [baseobjects] -- [platform]
-// [workflow] -- [platform]
-// [takeoffice] -- [platform]
-// [windowsclient] -- [platform]
-// [documentmanagement] -- [platform]
-// [approvaldesigner] -- [platform]
-// [workerservice] -- [platform]
-//
-// package "Дополнительные модули" as additional {
-//
-// ["Web-клиент"] as webclient
-// ["Другие модули"] as other
-// }
+// baseobjects --> platform
+// workflow --> platform
+// takeoffice --> platform
+// windowsclient --> platform
+// documentmanagement --> platform
+// approvaldesigner --> platform
+// workerservice --> platform
 //
 // platform -[hidden]-> baseobjects
 // platform -[hidden]-> workflow
@@ -117,18 +65,69 @@ base --> other
 // platform -[hidden]-> approvaldesigner
 // platform -[hidden]-> workerservice
 //
-// package "Дополнительные модули" as additional {
+// State "Дополнительные модули" as additional {
 //
-// ["Web-клиент"] as webclient
-// ["Другие модули"] as other
+// State "Web-клиент" as webclient
+// State "Другие модули" as other
 // }
 //
-// base -down-> other
-// base ---[hidden]down--> other
-// base -down-> webclient
+// base --> webclient
+// base --> other
+// base --> additional
 //
 // @enduml
 // ....
+
+.Модули {dv}
+[plantuml, svg]
+....
+@startuml
+left to right direction
+
+package "Базовые модули" as base {
+
+["Платформа"] as platform
+["Базовые объекты"] as baseobjects
+["Управление процессами"] as workflow
+["Управление документами"] as documentmanagement
+["Конструктор согласований"] as approvaldesigner
+["Делопроизводство 4.5"] as takeoffice
+["Windows-клиент"] as windowsclient
+["Служба фоновых операций"] as workerservice
+}
+
+[baseobjects] -- [platform]
+[workflow] -- [platform]
+[takeoffice] -- [platform]
+[windowsclient] -- [platform]
+[documentmanagement] -- [platform]
+[approvaldesigner] -- [platform]
+[workerservice] -- [platform]
+
+package "Дополнительные модули" as additional {
+
+["Web-клиент"] as webclient
+["Другие модули"] as other
+}
+
+platform -[hidden]-> baseobjects
+platform -[hidden]-> workflow
+platform -[hidden]-> takeoffice
+platform -[hidden]-> windowsclient
+platform -[hidden]-> documentmanagement
+platform -[hidden]-> approvaldesigner
+platform -[hidden]-> workerservice
+
+package "Дополнительные модули" as additional {
+
+["Web-клиент"] as webclient
+["Другие модули"] as other
+}
+
+base -down-> additional
+
+@enduml
+....
 
 .К базовым модулям относятся:
 * {pl} -- центральное звено модульной структуры {dv}.
