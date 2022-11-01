@@ -1,0 +1,16 @@
+= Протоколирование событий
+
+. При остановке пула {wc}а или IIS в файл журнала {wc}а добавляется запись о завершении {wc}а, например:
++
+ [2022-10-26 17:38:08.1840][Error][DocsVision.Platform.WebClient.Diagnostics.Trace.TraceError]  Application end: HostingEnvironment
++
+. При старте пула {wc}а или IIS создается новый файл журнала {wc}а.
+. К названию файла журнала добавляется ID процесса и дата запуска {wc}а: 
++
+ WebClient${event-properties:item=Tenant} PID $\{processId} $\{shortdate}.log
++
+Например: `WebClient PID 4592 2022-10-26.log`
++
+. В созданный файл добавляется сообщение о старте {wc}а, например:
++
+ [2022-10-26 17:11:56.8774][Error][DocsVision.Platform.WebClient.Diagnostics.Trace.TraceError]  Application start
