@@ -34,9 +34,9 @@ public interface ITaskService
 |`xref:ITaskService.AddSelectedPerformer_2_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffGroup)]` |Добавляет выбранного исполнителя задания в формате группы сотрудников.
 |`xref:ITaskService.AddSelectedPerformer_3_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffRole)]` |Добавляет выбранного исполнителя задания в формате роли.
 |`xref:ITaskService.AddSelectedPerformer_4_MT.adoc[AddSelectedPerformer(TaskMainInfo, StaffUnit)]` |Добавляет выбранного исполнителя задания в формате подразделения.
-|`xref:ITaskService.AddSignature_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)]` |Данный метод добавляет новую подпись в список подписей карточки _Задание_, и устанавливает ЭЦП на указанные поля карточки.
-|`xref:ITaskService.AddSignature_1_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>, IEnumerable<Document>)]` |Данный метод добавляет новую подпись в список подписей карточки _Задание_, и устанавливает ЭЦП на указанные поля карточки, а также на указанные документы.
-|`xref:ITaskService.AddSignatureToCardReconcileLog_MT.adoc[AddSignatureToCardReconcileLog(Task, X509Certificate2)]` |Подписывает ЭЦП карточку хода согласования.
+|`xref:ITaskService.AddSignature_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>)]` |Данный метод добавляет новую подпись в список подписей карточки _Задание_, и устанавливает ЭП на указанные поля карточки.
+|`xref:ITaskService.AddSignature_1_MT.adoc[AddSignature(Task, X509Certificate2, StatesOperation, Guid, IEnumerable<CardFieldSetting>, IEnumerable<Document>)]` |Данный метод добавляет новую подпись в список подписей карточки _Задание_, и устанавливает ЭП на указанные поля карточки, а также на указанные документы.
+|`xref:ITaskService.AddSignatureToCardReconcileLog_MT.adoc[AddSignatureToCardReconcileLog(Task, X509Certificate2)]` |Подписывает ЭП карточку хода согласования.
 |`xref:ITaskService.CancelDelegate_MT.adoc[CancelDelegate(Task)]` |Отменяет делегирование задания.
 |`xref:ITaskService.CanCompleteTask_MT.adoc[CanCompleteTask(Task, TaskSetting, String)]` |Проверяет возможность завершения задания.
 |`xref:ITaskService.CanCompleteTaskByCompletionParameter_MT.adoc[CanCompleteTaskByCompletionParameter(Task, StatesStateMachineBranch)]` |Проверяет возможность завершения задания.
@@ -88,7 +88,7 @@ public interface ITaskService
 |`xref:ITaskService.UpdateComment_MT.adoc[UpdateComment(TaskComment, String)]` |Обновляет содержимое комментария.
 |`xref:ITaskService.ValidateForBegin_MT.adoc[ValidateForBegin(Task, String)]` |Определяет готовность задания к отправке на исполнение.
 |`xref:ITaskService.ValidateInactivePerformers_MT.adoc[ValidateInactivePerformers(Task, String)]` |Определяет наличие в задании активных исполнителей.
-|`xref:ITaskService.VerifySignature_MT.adoc[VerifySignature(Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)]` |Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных к заданием.
+|`xref:ITaskService.VerifySignature_MT.adoc[VerifySignature(Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)]` |Выполняет проверку подлинности ЭП, установленной на полях карточки Задание, а также на Документах, связанных к заданием.
 |`xref:ITaskService.GetPartSignatureInfo_MT.adoc[ITaskService.SignatureInfo GetPartSignatureInfo(BaseCardSignaturePart signaturePart)]` |Метод для получения информации о подписи
 |===
 

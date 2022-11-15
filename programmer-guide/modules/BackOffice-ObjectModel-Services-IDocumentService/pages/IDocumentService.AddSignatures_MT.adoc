@@ -1,6 +1,6 @@
 = IDocumentService.AddSignatures -- метод (Document, SignedCms)
 
-Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭЦП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа SignedCms.
+Данный метод добавляет коллекцию новых подписей в список подписей карточки, и устанавливает ЭП на поля, основные и дополнительные файлы документа. Позволяет использовать для подписания криптографическое сообщение типа SignedCms.
 
 * *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
@@ -90,7 +90,7 @@ namespace BackOffice
    } catch (CryptographicException)
    {
     documentService.RemoveMainFile(document, mainFile);
-    uiService.ShowError("ЭЦП недействительна");
+    uiService.ShowError("ЭП недействительна");
     return; <.>
    }
    

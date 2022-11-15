@@ -43,7 +43,7 @@ public interface ISurveyService
 |`AddIssueVariantValue(SurveyListSurveyAnswerIssue, Object)` |Создаёт значение ответа в виде неявного значения (тип `System.Object`).
 |`AddQuestion(SurveyListSurvey, String, String, SurveyListSurveyQuestionDataType)` |Добавляет вопрос к опросу.
 |`AddQuestionEnumValue(SurveyListSurveyQuestion, Int32, String)` |Добавляет варианты ответов к вопросу.
-|`AddSignature(SurveyListSurvey, SurveyListSurveyAnswer, X509Certificate2)` |Подписывает ЭЦП ответ на опрос.
+|`AddSignature(SurveyListSurvey, SurveyListSurveyAnswer, X509Certificate2)` |Подписывает ЭП ответ на опрос.
 |`AddSurvey(SurveyList, String)` |Создаёт опрос в списке опросов.
 |`CreateSignatureList` |Создаёт карточку списка подписей. Объект автоматически сохраняется в контексте.
 |`CreateSurveyList` |Создаёт карточку списка опросов.
@@ -56,7 +56,7 @@ public interface ISurveyService
 |`GetAnswerHash(SurveyListSurveyAnswer)` |Вычисляет хэш `SHA512` для коллекции вопрос-ответ, содержащейся в ответе на опрос.
 |`GetIssueValue(SurveyListSurveyQuestionDataType, IEnumerable<SurveyListSurveyAnswerIssueValue>)` |Получает коллекцию значений из коллекции ответов.
 |`GetIssueValue(SurveyListSurveyQuestionDataType, SurveyListSurveyAnswerIssueValue)` |Получает значение из ответа.
-|`VerifySignature(SurveyListSurveyAnswer, X509Certificate2)` |Проверяет действительность установленной на ответ ЭЦП.
+|`VerifySignature(SurveyListSurveyAnswer, X509Certificate2)` |Проверяет действительность установленной на ответ ЭП.
 |===
 
 == Примеры

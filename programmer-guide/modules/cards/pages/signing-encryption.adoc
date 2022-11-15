@@ -33,7 +33,7 @@
 * `DeleteCryptObjects` -- удаляет все крипто-объекты заданного типа для конкретного файла.
 * `GetKey` -- получает ключ шифрования заданного объекта.
 * `StoreKey` -- сохраняет ключ шифрования.
-* `StoreSignature` -- сохраняет ключ ЭЦП.
+* `StoreSignature` -- сохраняет ключ ЭП.
 
 [IMPORTANT]
 ====
@@ -66,10 +66,10 @@ foreach (InfoRow cryptrow in coll)
 |===
 |Метод |Назначение
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.AddSignature_MT.adoc[IDocumentService.AddSignature(Document, X509Certificate2, Boolean, ICollection<CardFieldSetting>)]`
-|Данный метод используется для инициализации и добавления подписи в список подписей карточки _Документ_, и устанавливает ЭЦП на поля карточки, а также основные и дополнительные файлы.
+|Данный метод используется для инициализации и добавления подписи в список подписей карточки _Документ_, и устанавливает ЭП на поля карточки, а также основные и дополнительные файлы.
 
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.AddSignatures_MT.adoc[IDocumentService.AddSignatures(Document, SignedCms)]`
-|Данный метод используется для добавления коллекции подписей в список подписей карточки _Документ_. Позволяет использовать при подписании криптографическое сообщение вместо сертификата. Непосредственно выполняет установку ЭЦП на поля карточки, основные и дополнительные файлы.
+|Данный метод используется для добавления коллекции подписей в список подписей карточки _Документ_. Позволяет использовать при подписании криптографическое сообщение вместо сертификата. Непосредственно выполняет установку ЭП на поля карточки, основные и дополнительные файлы.
 
 |`xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.CheckActualSignature_MT.adoc[IDocumentService.CheckActualSignature(Document, ICollection<CardFieldSetting>, BaseCardSignature)]`
 |Данный метод позволяет определить актуальность подписи по отношению к данным карточки. Например, путем сравнения версии основного файла с версией, приведенной в подписи.
@@ -78,7 +78,7 @@ foreach (InfoRow cryptrow in coll)
 |Метод DecodeSignedDocument позволяет получить из файла `.p7s` сообщение CMS/PKCS 7, используемое в других методах (например, `IDocumentService.AddSignatures`).
 
 `|xref:BackOffice-ObjectModel-Services-IDocumentService:IDocumentService.VerifySignature_MT.adoc[IDocumentService.VerifySignature(Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)]`
-|Данный метод используется для проверки ЭЦП, установленной на полях и файлах карточки _Документ_.
+|Данный метод используется для проверки ЭП, установленной на полях и файлах карточки _Документ_.
 
 |`xref:BackOffice-ObjectModel-Services-ICryptService:ICryptService_IN.adoc[ICryptService]`
 |Сервис `ICryptService` предоставляет методы шифрования и дешифровки файлов.
@@ -90,5 +90,5 @@ foreach (InfoRow cryptrow in coll)
 |Данный метод используется при подписании карточки _Задание_ и основного документа.
 
 |`xref:BackOffice-ObjectModel-Services-ITaskService:ITaskService.VerifySignature_MT.adoc[ITaskService.VerifySignature(Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)]`
-|Данный метод используется для проверки ЭЦП, установленной на полях и файлах карточки _Задание_.
+|Данный метод используется для проверки ЭП, установленной на полях и файлах карточки _Задание_.
 |===

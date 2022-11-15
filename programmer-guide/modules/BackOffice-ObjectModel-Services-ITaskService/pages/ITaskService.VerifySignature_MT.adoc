@@ -1,6 +1,6 @@
 = ITaskService.VerifySignature -- метод (Task, BaseCardSignature, X509Certificate2, Boolean, IEnumerable<CardFieldSetting>)
 
-Выполняет верификацию ЭЦП, установленной на полях карточки Задание, а также на Документах, связанных с заданием.
+Выполняет верификацию ЭП, установленной на полях карточки Задание, а также на Документах, связанных с заданием.
 
 * *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
@@ -26,7 +26,7 @@ signature:::
 certificate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
-Сертификат ЭЦП сотрудника, чей сертификат использовался при подписании
+Сертификат ЭП сотрудника, чей сертификат использовался при подписании
 
 signDocument:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
@@ -41,7 +41,7 @@ fields:::
 Возвращаемое значение::
 Тип: `xref:BackOffice-ObjectModel-Services-Entities:Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
 +
-Результат проверки ЭЦП
+Результат проверки ЭП
 
 == Исключения
 
@@ -107,4 +107,4 @@ namespace BackOffice
 +
 <.> Получение последней установленной подписи.
 <.> Проверка подписи.
-<.> Оповещение пользователя о результате проверки ЭЦП.
+<.> Оповещение пользователя о результате проверки ЭП.

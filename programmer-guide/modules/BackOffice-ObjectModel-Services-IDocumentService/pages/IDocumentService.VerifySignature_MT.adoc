@@ -1,6 +1,6 @@
 = IDocumentService.VerifySignature -- метод (Document, BaseCardSignature, X509Certificate2, Boolean, Boolean, ICollection<CardFieldSetting>)
 
-Выполняет проверку ЭЦП, установленной на документе, файлах документа или полях, и возвращает результат проверки.
+Выполняет проверку ЭП, установленной на документе, файлах документа или полях, и возвращает результат проверки.
 
 * *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
 * *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
@@ -21,12 +21,12 @@ document:::
 signature:::
 Тип: `xref:BackOffice-ObjectModel-BaseCard:BaseCardSignature_CL.adoc[BaseCardSignature]`
 +
-ЭЦП, установленная на данной карточке
+ЭП, установленная на данной карточке
 
 certificate:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
 +
-Сертификат ЭЦП
+Сертификат ЭП
 
 signDocument:::
 Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
@@ -46,7 +46,7 @@ fields:::
 Возвращаемое значение::
 Тип: `xref:BackOffice-ObjectModel-Services-Entities:Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]`
 +
-Результат проверки ЭЦП
+Результат проверки ЭП
 
 == Исключения
 
@@ -58,7 +58,7 @@ fields:::
 
 == Примеры
 
-Ниже приведён пример скрипта карточки, определяющий действительность ЭЦП, установленных на основным и дополнительных файлах карточки, а также действительность подписи установленной на контролируемые поля
+Ниже приведён пример скрипта карточки, определяющий действительность ЭП, установленных на основным и дополнительных файлах карточки, а также действительность подписи установленной на контролируемые поля
 
 [source,csharp]
 ----
@@ -106,5 +106,5 @@ namespace BackOffice
 <.> Получение сертификата сотрудника.
 <.> Получение настроек вида карточки Документ.
 <.> Получение последней установленной подписи, по ней будет определять подлинность документа.
-<.> Выполнение проверки ЭЦП, установленной на основные и дополнительные документы, а также на поля (для подписания) определённые в Справочнике видов карточек.
-<.> Оповещение пользователя о результате проверки ЭЦП.
+<.> Выполнение проверки ЭП, установленной на основные и дополнительные документы, а также на поля (для подписания) определённые в Справочнике видов карточек.
+<.> Оповещение пользователя о результате проверки ЭП.
