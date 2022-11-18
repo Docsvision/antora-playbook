@@ -80,7 +80,7 @@ propertyDescription.Category = PropertyCategoryConstants.DataCategory; <.>
 <.> Указывает категорию свойства (`DataCategory` -- Данные).
 ****
 +
-TIP: Обратитесь к описанию класса `PropertyDescription`, чтобы получить полный перечень возможностей описателя свойства элементов управления.
+NOTE: Обратитесь к описанию класса `PropertyDescription`, чтобы получить полный перечень возможностей описателя свойства элементов управления.
 +
 . Переопределите метод `GetPropertyDescriptions` базового класса, чтобы он возвращал коллекцию с парой: ключ -- имя. Возвращаемая коллекция позволяет получить описатель данного свойства. Используйте имя, указанное в `propertyDescription.Name` и метод, предоставляющий описатель свойства в качестве значения:
 +
@@ -109,7 +109,7 @@ protected override Dictionary<string, PropertyDescription> GetPropertyDescriptio
 
 . Добавьте `*Супер свойство*` в список свойств элемента управления (в `PropertyDescriptions`).
 +
-TIP: Для получения описателя свойства используйте метод `PropertyFactory.Create`, передав в него имя свойства, указанное при его регистрации в методе `GetPropertyDescriptions`.
+NOTE: Для получения описателя свойства используйте метод `PropertyFactory.Create`, передав в него имя свойства, указанное при его регистрации в методе `GetPropertyDescriptions`.
 +
 [source,csharp]
 ----
