@@ -1,0 +1,34 @@
+=  Создание базы данных
+
+Card Manager может быть использован для создания БД {dv} и загрузки в неё необходимых библиотек карточек.
+
+*При создании БД с помощью Card Manager, в ней будут созданы таблицы для хранения данных карточек, а также некоторые хранимые процедуры, загружаемые с библиотеками карточек, но из-за отсутствия данных, загружаемых Консолью администратора {dv} (например, заданий SQL, данные приложения "Управление документами" и др.), полученная БД не является полноценной базой системы {dv}.*
+
+Для создания базы данных:
+
+. xref:cardmanager_loadlibrary.adoc[Загрузите в программу библиотеки карточек] базовых модулей {dv}:
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\ApprovalDesigner\ApprovalDesignerCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\BackOffice\BackOfficeCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\Core\SystemCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\DocumentManagement\DocumentManagementCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\TakeOffice\TakeOfficeCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\WindowsClient\WindowsClientCardLib.xml`;
+* [.ph .filepath]`C:\Program Files (x86)\{dv}\Platform\5.5\Tools\Database\Workflow\WorkflowCardLib.xml`.
++
+Здесь "C:\Program Files (x86)\{dv}\Platform\5.5" – каталог установки сервера {dv}.
++
+Также можно добавить другие библиотеки карточек, которые нужно загрузить при создании БД, или их можно xref:cardmanager_loadshemastodatabase.adoc[загрузить] после создания БД.
+. В дереве объектов выберете узел [.keyword]*Databases*.
+. Вызовите команду *New Database* из контекстного меню выбранного узла. Будет открыта форма:
++
+image::cardmanager_newdatabase.png[CardManager. Регистрация базы данных в утилите]
+. Выберите тип СУБД: PostgreSQL или Microsoft SQL Server.
+. Укажите данные для подключения к СУБД (адрес сервера, данные пользователя, имя базы данных).
++
+У пользователя должны быть права, достаточные для создания БД.
+. Введите имя базы данных.
+. Нажмите кнопку *ОК*.
++
+На указанном сервере будет создана новая БД; в список подключенных БД будет добавлена новая запись. Если данные для подключения указаны не верно, будет показана ошибка.
+
+*Parent topic:* xref:../pages/CardManager.adoc[{dv} 5 CardManager]
