@@ -1,0 +1,43 @@
+= Загрузка библиотеки карточек в базу данных {dv}
+
+Прежде чем загружать в БД собственную библиотеку карточек, нужно xref:cardmanager/import-library-metadata.adoc[загрузить в программу CardManager] следующие библиотеки карточек базовых модулей {dv}:
+
+* _Platform_ -- файл `SystemCardLib.xml`.
+* _BackOffice_ -- файл `BackOfficeCardLib.xml`.
+* _ApprovalDesigner_ -- файл `ApprovalDesignerCardLib.xml`.
+* _TakeOffice_ -- файл `TakeOfficeCardLib.xml`.
+* _Workflow_ -- файл `WorkflowCardLib.xml`.
+* _WorkerService_ -- файл `WorkerServiceCardLib.xml`.
+
+[NOTE]
+====
+Файлы со схемами метаданных перечисленных выше библиотек карточек размещаются на сервере {dv} в папке `\Каталог-установки-сервера-{dv}\5.5\Tools\Database`.
+====
+
+При загрузке стандартных библиотек карточек следует соблюдать зависимости модулей друг от друга.
+
+.В общем случае порядок загрузки стандартных библиотек карточек следующий:
+. _Platform_ -- файл `SystemCardLib.xml`.
+. _WindowsClient_ -- файл `WindowsClientCardLib.xml`.
+. _WorkerService_ -- файл `WorkerServiceCardLib.xml`.
+. _BackOffice_ -- файл `BackOfficeCardLib.xml`.
+. _DocumentManagement_ -- файл `DocumentManagementCardLib.xml`.
+. _ApprovalDesigner_ -- файл `ApprovalDesignerCardLib.xml`.
+. _TakeOffice_ -- файл `TakeOfficeCardLib.xml`.
+. _Workflow_ -- файл `WorkflowCardLib.xml`.
+
+.Чтобы загрузить библиотеки карточек в БД {dv}:
+. xref:cardmanager/connect-db.adoc[Подключите] БД {dv}, в которую загружается библиотека карточек.
+. Выберите подключенную БД в дереве объектов.
+. Вызовите команду _Load library to database_ из контекстного меню выбранной базы данных.
++
+.CardManager -- Выбор выгружаемой библиотеки карточек
+image::user:cardmanager_registerdatabase_selectlibrary.png[CardManager -- Выбор выгружаемой библиотеки карточек]
++
+. Выберите в списке библиотеку карточек, которую нужно загрузить в БД и нажмите *ОК*.
++
+Операция выгрузки может занять продолжительное время.
++
+После завершения операции, выгруженная библиотека карточек появится в узле базы данных.
++
+. Перезагрузите сервер {dv} и клиентские приложения, чтобы получить доступ к карточкам библиотеки.

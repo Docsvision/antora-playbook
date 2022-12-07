@@ -1,0 +1,42 @@
+= Создание базы данных
+
+CardManager может использоваться для создания БД {dv} и загрузки в неё необходимых библиотек карточек.
+
+[WARNING]
+====
+При создании БД с помощью CardManager, в ней будут созданы таблицы для хранения данных карточек, а также некоторые хранимые процедуры, загружаемые с библиотеками карточек.
+
+Полученная БД не является полноценной базой системы {dv} из-за отсутствия данных, загружаемых Консолью администратора {dv}, например, заданий SQL, данных приложения "Управление документами" и других данных.
+====
+
+.Чтобы создать базу данных:
+. xref:cardmanager/import-library-metadata.adoc[Загрузите в программу библиотеки карточек] базовых модулей {dv}:
++
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\ApprovalDesigner\ApprovalDesignerCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\BackOffice\BackOfficeCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\Core\SystemCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\DocumentManagement\DocumentManagementCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\TakeOffice\TakeOfficeCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\WindowsClient\WindowsClientCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\Workflow\WorkflowCardLib.xml`.
+* `C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\Database\WorkerService\WorkerServiceCardLib.xml`.
++
+Здесь `C:\Program Files (x86)\Docsvision\Platform\5.5` -- каталог установки сервера {dv}.
++
+Также можно добавить другие библиотеки карточек, которые нужно загрузить при создании БД, или их можно xref:cardmanager/load-library.adoc[загрузить] после создания БД.
++
+. В дереве объектов выберете узел _Databases_.
+. Вызовите команду _New Database_ из контекстного меню выбранного узла. Будет открыта форма:
++
+.CardManager -- Регистрация базы данных в утилите
+image::user:new-db.png[CardManager -- Регистрация базы данных в утилите]
++
+. Выберите тип СУБД: PostgreSQL или Microsoft SQL Server.
+. Укажите данные для подключения к СУБД (адрес сервера, данные пользователя, имя базы данных).
++
+У пользователя должны быть права, достаточные для создания БД.
++
+. Введите имя базы данных.
+. Нажмите кнопку *ОК*.
++
+На указанном сервере будет создана новая БД; в список подключенных БД будет добавлена новая запись. Если данные для подключения указаны не верно, будет показана ошибка.
