@@ -33,55 +33,55 @@
 ifdef::root-cert[{root-cert}]
 в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
 
-[#check]
-== Настройка сервиса проверки подписи
-
-// tag::webconfig[]
-[WARNING]
-====
-Запросы к облачному сервису электронной подписи отправляются через сервер {wc}а. Это означает, что {wc} должен иметь доступ к сервису ЭП для отправки запросов на проверку подписи и для авторизации.
-====
-
-Проверка подлинности подписи может осуществляться локально или через облачный сервис электронной подписи. Способ проверки подписи зависит от настроек в файле конфигурации {wc}а.
-
-.Чтобы изменить способ проверки подлинности подписи:
-. Откройте файл конфигурации {wc}а по адресу `{webconfig}`.
-. Найдите следующие настройки:
-+
-[source]
-----
-<SettingGroup Name="CloudSignature">
-    <Setting Name="Address" Value="https://адрес-облачного-сервиса-DSS" /> <.>
-    <Setting Name="ClientId" Value="CryptoClient" /> <.>
-    <Setting Name="SignServerAppName" Value="SignServer" />
-    <Setting Name="STSAppName" Value="STS" />
-    <Setting Name="DocumentStoreAppName" Value="stenddssds" /> <.>
-    <Setting Name="VerifyUrl" Value="https://dss.cryptopro.ru/verify/rest/api/signatures" /> <.>
-    <Setting Name="TSPServiceAddress" Value="" /> <.>
-    <Setting Name="SignatureType" Value="BES" /> <.>
-    <Setting Name="EnableCloudVerify" Value="True" /> <.>
-    <Setting Name="AuthorizeRedirectUrl" Value="http://localhost/DocsvisionWebClient/api/CryptoProDss/AcceptAuthorization" /> <.>
-    <Setting Name="TokenStorageMode" Value="InMemory" /> <.>
-</SettingGroup>
-----
-<.> Адрес сервиса облачной подписи.
-<.> Идентификатор клиента. Настраивается в сервисе облачной подписи КриптоПро.
-<.> `SignServerAppName`, `STSAppName` и `DocumentStoreAppName` -- имена сайтов в IIS на сервере КриптоПро DSS. Настраиваются при установке сервиса электронной подписи КриптоПро DSS.
-<.> URL для проверки подлинности подписи.
-<.> Адрес сервиса штампа времени для XLT1.
-<.> Тип подписи:
-+
-* `BES` -- будет использоваться CAdES-BES.
-* `XLT1` -- будет использоваться CAdES-XLT1.
-* `T` -- будет использоваться CAdES-T.
-+
-<.> Режим проверки подлинности подписи. `True` -- проверка происходит через сервис облачной подписи. `False` -- локально.
-<.> URL, на который будет переадресован пользователь после авторизации в сервисе электронной подписи. Настраивается в сервисе электронной подписи.
-<.> Режим хранения токена авторизации.
-+
-.Возможные значения:
-* `Disabled` -- авторизация будет запрашиваться каждый раз.
-* `InSessionCache` -- авторизация будет повторно запрошена по окончании сессии.
-* `InMemory` -- авторизация будет запрошена при перезапуске IIS.
-* `InUserProfileEncrypted` -- авторизация будет запрошена по истечении срока действия токена.
-// end::webconfig[]
+// [#check]
+// == Настройка сервиса проверки подписи
+//
+// // tag::webconfig[]
+// [WARNING]
+// ====
+// Запросы к облачному сервису электронной подписи отправляются через сервер {wc}а. Это означает, что {wc} должен иметь доступ к сервису ЭП для отправки запросов на проверку подписи и для авторизации.
+// ====
+//
+// Проверка подлинности подписи может осуществляться локально или через облачный сервис электронной подписи. Способ проверки подписи зависит от настроек в файле конфигурации {wc}а.
+//
+// .Чтобы изменить способ проверки подлинности подписи:
+// . Откройте файл конфигурации {wc}а по адресу `{webconfig}`.
+// . Найдите следующие настройки:
+// +
+// [source]
+// ----
+// <SettingGroup Name="CloudSignature">
+//     <Setting Name="Address" Value="https://адрес-облачного-сервиса-DSS" /> <.>
+//     <Setting Name="ClientId" Value="CryptoClient" /> <.>
+//     <Setting Name="SignServerAppName" Value="SignServer" />
+//     <Setting Name="STSAppName" Value="STS" />
+//     <Setting Name="DocumentStoreAppName" Value="stenddssds" /> <.>
+//     <Setting Name="VerifyUrl" Value="https://dss.cryptopro.ru/verify/rest/api/signatures" /> <.>
+//     <Setting Name="TSPServiceAddress" Value="" /> <.>
+//     <Setting Name="SignatureType" Value="BES" /> <.>
+//     <Setting Name="EnableCloudVerify" Value="True" /> <.>
+//     <Setting Name="AuthorizeRedirectUrl" Value="http://localhost/DocsvisionWebClient/api/CryptoProDss/AcceptAuthorization" /> <.>
+//     <Setting Name="TokenStorageMode" Value="InMemory" /> <.>
+// </SettingGroup>
+// ----
+// <.> Адрес сервиса облачной подписи.
+// <.> Идентификатор клиента. Настраивается в сервисе облачной подписи КриптоПро.
+// <.> `SignServerAppName`, `STSAppName` и `DocumentStoreAppName` -- имена сайтов в IIS на сервере КриптоПро DSS. Настраиваются при установке сервиса электронной подписи КриптоПро DSS.
+// <.> URL для проверки подлинности подписи.
+// <.> Адрес сервиса штампа времени для XLT1.
+// <.> Тип подписи:
+// +
+// * `BES` -- будет использоваться CAdES-BES.
+// * `XLT1` -- будет использоваться CAdES-XLT1.
+// * `T` -- будет использоваться CAdES-T.
+// +
+// <.> Режим проверки подлинности подписи. `True` -- проверка происходит через сервис облачной подписи. `False` -- локально.
+// <.> URL, на который будет переадресован пользователь после авторизации в сервисе электронной подписи. Настраивается в сервисе электронной подписи.
+// <.> Режим хранения токена авторизации.
+// +
+// .Возможные значения:
+// * `Disabled` -- авторизация будет запрашиваться каждый раз.
+// * `InSessionCache` -- авторизация будет повторно запрошена по окончании сессии.
+// * `InMemory` -- авторизация будет запрошена при перезапуске IIS.
+// * `InUserProfileEncrypted` -- авторизация будет запрошена по истечении срока действия токена.
+// // end::webconfig[]
