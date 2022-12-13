@@ -1,0 +1,86 @@
+= Регистрация расширений авторизации
+
+В {dv} поддерживается авторизация с помощью сторонних расширений. Поддерживается вход при помощи учётной записи Microsoft Azure и учётной записи ЕСИА (Госуслуги).
+
+Настроить расширения можно при помощи изменения записей реестра в ветке `{hklm-dv}\Platform\5.5\Server\Authentication`.
+
+. Каждое расширение должно быть добавлено в ветке регистрации расширений аутентификации: `{hklm-dv}\Platform\5.5\Server\Authentication\Extensions`. Каждый ключ в данной ветке -- отдельное расширение аутентификации, например:
++
+[source,subs=attributes]
+----
+{hklm-dv}\Platform\5.5\Server\Authentication\Extensions\AzureAD
+----
++
+.В ветке отдельного расширения должен быть задан набор значений/свойств расширения:
+* `ID` -- строка с идентификатором расширения в виде Guid, например: `\{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}`.
+* `Name` -- строка с названием расширения, например: `AzureAD`.
+* `Settings` -- строка настроек расширения, например (для AzureAD):
++
+.Для удобочитаемости строка настроек разделена переносами и отступами:
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<AzureADAuthenticationSettings
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<WellKnownConfigurationUrl>https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+	<ClientId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</ClientId> <.>
+	<GroupMembershipCheckerSettings>
+		<GroupMappings>
+			<AzureADGroupMapping> <.>
+				<GroupId>66d9fbb8-d79e-4c8c-b8be-23635476915b</GroupId> <.>
+				<Role>Administrator</Role> <.>
+			</AzureADGroupMapping>
+			<AzureADGroupMapping>
+				<GroupId>42dbef9a-9f90-4325-8de4-d0ff824f5896</GroupId>
+				<Role>User</Role>
+			</AzureADGroupMapping>
+		</GroupMappings>
+	</GroupMembershipCheckerSettings>
+	<Tenants>
+		<guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid>
+	</Tenants>
+	<ApplicationId>70a3b7b0-2283-4a67-8a93-e6dedd693e58</ApplicationId> <.>
+</AzureADAuthenticationSettings>
+----
+<.> URL публичной конфигурации OpenID.
+<.> Идентификатор тенанта AzureAD в котором производится привязка пользователей
+<.> Задает сопоставление групп Azure AD системным xref:backoffice:desdirs:staff/groups/system-groups.adoc[группам безопасности {dv}]. Допускается на одну группу Azure AD создавать несколько групп {dv}.
+<.> Идентификатор группы Azure AD.
+<.> Имя группы {dv} (без перфикса "{dv}").
+<.> Идентификатор приложения {dv} зарегистрированного в тенанте AzureAD, для которого включено и настроено использование OpenID Connect.
++
+--
+NOTE: Пример файла настроек для ЕСИА доступен xref:attachment$ESIA_branch.reg[по ссылке].
+--
++
+* `TypeName` -- строка с именем типа, реализующего расширение, например:
++
+[source]
+----
+DocsVision.Platform.Authentication.AzureAD.AzureADRootAuthenticationExtension, DocsVision.Platform.Authentication.AzureAD, Version=5.5.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519
+----
++
+. Ветка привязки расширений аутентификации к конкретным БД (тенантам):
++
+[source,subs=attributes]
+----
+{hklm-dv}\Platform\5.5\Server\Authentication\Tenants
+----
++
+В этой ветке могут быть подчинённые ветки, названные именами БД {dv}, например:
++
+[source,subs=attributes]
+----
+{hklm-dv}\Platform\5.5\Server\Authentication\Tenants\Current55
+----
++
+.В подчинённой ветке БД должны быть следующие значения:
+* `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;`:
++
+[source]
+----
+{69B463E0-8976-457D-B828-B89B910BCB90};{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}
+----
++
+* `Name` -- строка, содержащая псевдоним БД, например: `Current55`.
