@@ -15,9 +15,9 @@
 [#temp-folder-path]
 == Настройка пути к временной папке
 
-Администратору необходимо настроить путь к папке, в которую будут сохраняться файлы со списком конфликтов, запрашиваемые пользователем. У <<launch-ws,службы {of-sm}>> должны быть полные права на данную папку.
+Администратору необходимо настроить путь к папке, в которую будут сохраняться файлы со списком конфликтов, запрашиваемые пользователем. У <<launch-sm,службы {of-sm}>> должны быть полные права на данную папку.
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\{dv}\SolutionManager\5.5\appsettings.json`.
+. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\appsettings.json`.
 . Измените путь к папке в параметре TempFolder:
 +
 [source]
@@ -35,7 +35,7 @@
 
 После установки {of-sm} подключение к БД с настройками Модуля можно изменить в конфигурационном файле:
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\{dv}\SolutionManager\5.5\appsettings.json`.
+. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\appsettings.json`.
 . Измените строку подключения к БД в параметре `ConnectionString`:
 +
 ----
@@ -54,24 +54,24 @@
 
 [start=5]
 . Откройте Редактор реестра.
-. Перейдите в ветку `HKLM\SOFTWARE\{dv}\WorkerService\5.5\Connections\SolutionManager`.
+. Перейдите в ветку `{hklm-dv}\WorkerService\5.5\Connections\SolutionManager`.
 . Измените строку подключения к БД в параметре `SolutionManagerDatabase`.
 . Перезапустите Службу {ws}.
 
 [#apply-new-license]
 == Применение новой лицензии {dv}
 
-После активации новой лицензии {dv} нужно перезапустить <<launch-ws,службу {of-sm}>>.
+После активации новой лицензии {dv} нужно перезапустить <<launch-sm,службу {of-sm}>>.
 
 [#work-log]
 == Журнал работы
 
 .Для анализа работы {of-sm} администратору доступны следующие журналы:
-* Журнал работы службы {of-sm} -- хранится в папке `C:\ProgramData\{dv}\SolutionManager\Logs` на компьютере с модулем "{sm}".
+* Журнал работы службы {of-sm} -- хранится в папке `C:\ProgramData\Docsvision\SolutionManager\Logs` на компьютере с модулем "{sm}".
 +
-Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\{dv}\SolutionManager\5.5\nlog.config`.
+Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\nlog.config`.
 +
-* Журнал обработки задач {of-sm} Службой {ws} -- файл `C:\ProgramData\{dv}\SolutionManager\Logs\ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
-* Журнал со списком загруженных (при импорте Решения) данных -- файл `C:\ProgramData\{dv}\SolutionManager\Logs\ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
+* Журнал обработки задач {of-sm} Службой {ws} -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
+* Журнал со списком загруженных (при импорте Решения) данных -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
 +
-Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\{dv}\WorkerService\5.5\SolutionManager\nlog.config`.
+Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\WorkerService\5.5\SolutionManager\nlog.config`.
