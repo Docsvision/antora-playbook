@@ -7,51 +7,54 @@
 Допускается создать общую группу для учётных записей и назначить права один раз для всей группы.
 ====
 
-. Требования на уровне ОС сервера:
+== Требования на уровне ОС сервера
+
+* Членство в группе *Perfomance Monitor Users*.
+* Полные права на системную папку для временных файлов (по умолчанию папка `c:\Windows\Temp`).
+* Права на чтение веток реестра ОС:
 +
-.. Членство в группе *Perfomance Monitor Users*.
-.. Полные права на системную папку для временных файлов (по умолчанию папка `c:\Windows\Temp`).
-.. Права на чтение веток реестра ОС:
+** `{hklm-dv}\Platform`,
+** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Security`.
 +
-* `{hklm-dv}\Platform`,
-* `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Security`.
+* Права на редактирование веток реестра ОС:
 +
-.. Права на редактирование веток реестра ОС:
+** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Application`.
 +
-* `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Application`.
+* В локальной политике безопасности:
 +
-.. В локальной политике безопасности:
-+
-* Log on as a service.
-* Log on as a batch job.
-* Adjust memory quotas for a process.
-* Generate security audits.
-* Replace а process level token.
-* Impersonate a client after authentication.
-* Allow log on locally.
-* Access this computer from the network.
+--
+** Log on as a service.
+** Log on as a batch job.
+** Adjust memory quotas for a process.
+** Generate security audits.
+** Replace а process level token.
+** Impersonate a client after authentication.
+** Allow log on locally.
+** Access this computer from the network.
+--
 +
 [NOTE]
 ====
 Указанные разрешения выдаются в оснастке "Локальные политики безопасности" (menu:Control Panel[Administrative Tools > Local security policy > User Right Assigment].
 ====
 +
-.. Права на запись в файл журнала (если он ведется).
-.. Права _serveradmin_ для отображения путей к файловым провайдерам.
+* Права на запись в файл журнала (если он ведется).
+* Права _serveradmin_ для отображения путей к файловым провайдерам.
 +
 Если у пользователя нет прав _serveradmin_, он не сможет увидеть _Пути к фильтрам индексирования_ в настройках индексирования БД.
+
+== Требования на уровне СУБД
+
+.Для СУБД Microsoft SQL Server:
+* VIEW, CREATE TABLE, CREATE PROCEDURE, CREATE FUNCTION и ALTER SERVER STATE на уровне базы данных, ALTER DATABASE, а также ALTER для схемы dbo.
+* Учётная запись для входа в СУБД должна обладать правами `sysadmin`. В противном случае не получится создать или обновить БД, также не получится использовать полнотекстовый поиск {ms} SQL.
+* На системную базу данных _master_:
 +
-. Требования на уровне СУБД (см. важное условие ниже):
-* для СУБД Microsoft SQL Server:
-+
-.. VIEW, CREATE TABLE, CREATE PROCEDURE, CREATE FUNCTION и ALTER SERVER STATE на уровне базы данных, ALTER DATABASE, а также ALTER для схемы dbo.
-.. На системную базу данных _master_:
-+
-... Разрешение EXECUTE для процедуры sp_configure.
-... Разрешение EXECUTE на расширенной хранимой процедуре *xp_cmdshell*.
-... Разрешение EXECUTE для всех пользовательских хранимых процедур и функций.
-... Роли: *db_ddladmin*, *db_datareader*.
-... Разрешение VIEW SERVER STATE.
+** Разрешение EXECUTE для процедуры sp_configure.
+** Разрешение EXECUTE на расширенной хранимой процедуре *xp_cmdshell*.
+** Разрешение EXECUTE для всех пользовательских хранимых процедур и функций.
+** Роли: *db_ddladmin*, *db_datareader*.
+** Разрешение VIEW SERVER STATE.
 +
 .Выдать права вручную можно, например, так:
 [source,sql]
@@ -63,27 +66,26 @@ GO
 GRANT VIEW SERVER STATE TO [DOMAIN\userAccount]
 ----
 +
-.. На системную базу данных _msdb_: роли db_datareader и SQLAgentOperatorRole (минимально допускается: SQLAgentUserRole).
-.. На системную базу данных _tempdb_: роль db_owner (минимально допускается комбинация: datareader, datawriter, ddladmin).
-.. На все базы данных {dv}:
+* На системную базу данных _msdb_: роли db_datareader и SQLAgentOperatorRole (минимально допускается: SQLAgentUserRole).
+* На системную базу данных _tempdb_: роль db_owner (минимально допускается комбинация: datareader, datawriter, ddladmin).
+* На все базы данных {dv}:
 +
 --
-* Роль db_owner.
-* EXECUTE для хранимых процедур, которые начинаются с префиксов *dvsys_*, *dvsp_* и *dvreport_* (используются для обработки данных).
-* SELECT, INSERT, UPDATE, DELETE для таблиц *dvsys_sessions*, *dvsys_card_group*, *dvsys_file_group* (используются для создания сессии, групповой обработки карточек и файлов).
-* SELECT на всех таблицах базы данных, которые начинаются с префиксов *dvsys_* и *dvtable_* (необходимо для подсистемы поиска и представлений).
+** Роль db_owner.
+** EXECUTE для хранимых процедур, которые начинаются с префиксов *dvsys_*, *dvsp_* и *dvreport_* (используются для обработки данных).
+** SELECT, INSERT, UPDATE, DELETE для таблиц *dvsys_sessions*, *dvsys_card_group*, *dvsys_file_group* (используются для создания сессии, групповой обработки карточек и файлов).
+** SELECT на всех таблицах базы данных, которые начинаются с префиксов *dvsys_* и *dvtable_* (необходимо для подсистемы поиска и представлений).
 --
 +
-.. Необходимые привилегии на работу с другими БД, если доступ к ним осуществляется из разработанных серверных расширений или иными способами.
-.. Полный доступ к папке FileStream, если подключено хранилище "FileStream хранилище во внешней базе данных Microsoft SQL Server" или "Filestream хранилище в базе данных {dv}".
-+
-* для СУБД PostgreSQL:
-+
-.. Права пользователя "postgres".
+* Необходимые привилегии на работу с другими БД, если доступ к ним осуществляется из разработанных серверных расширений или иными способами.
+* Полный доступ к папке FileStream, если подключено хранилище "FileStream хранилище во внешней базе данных Microsoft SQL Server" или "Filestream хранилище в базе данных {dv}".
+
+.Для СУБД PostgreSQL:
+* Права пользователя "postgres".
 +
 [WARNING]
 ====
-Требования, перечисленные в п. 2, предъявляются к учетной записи, с которой сервер {dv} обращается к БД {dv}:
+ТДанные требования предъявляются к учетной записи, с которой сервер {dv} обращается к БД {dv}:
 
 * Если БД подключена с использованием SQL-аутентификации, то данные требования предъявляются к учетной записи, которая указана при подключении БД к {dv}.
 * Если БД подключена с использованием аутентификации Windows, то данные требования предъявляются к учетной записи, от имени которой запущен пул приложений _DefaultAppPool_ и служба *{sss}*.
