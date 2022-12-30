@@ -1,11 +1,41 @@
 = Ошибки, исправленные в текущей версии
 
 include::webclient:admin:partial$table.adoc[]
+|ERR-3277 (SUP-7133)
+|При обновлении БД возникала ошибка: `Error: The ALTER TABLE statement conflicted with the FOREIGN KEY constraint`.
+
+|ERR-2999 (SUP-7045)
+|Задание *clear_old_sessions_data* снимало блокировки с файлов.
+
+|ERR-2976 (SUP-6998)
+|Возникали критические блокировки при использовании служебной сессии и расширений.
+
+|ERR-2930 (SUP-6887)
+|При установленном флаге `*Оптимизировать загрузку представления по умолчанию*` сортировка в представлении применялась некорректно.
+
+|ERR-2864 (SUP-6927)
+|При сохранении представления возникала ошибка `ErrorPublishingView. System.Data.SqlClient.SqlException: The multi-part identifier "CurrentPerformers_1.Employee" could not be bound`.
+
 |ERR-2814 (SUP-6899)
 |В документации отсутствовал раздел об особенностях разворачивания резервных копий БД с сателлитами.
 
+|ERR-2604 (SUP-6711)
+|При обновлении {dv} с версии 5.4 до 5.5.3 возникала ошибка `Error: The constraint 'dvsys_instances_pk_instanceid' is being referenced by table 'dvsys_dynamic_section_timestamp', foreign key constraint 'dvsys_dynamic_section_timestamp_fk_instanceid'`.
+
+|ERR-2568 (SUP-6667)
+|Отображались карточки УЗ пула при возвращении сессии из offline, когда AccounName в таблице *dvsys_users* указывался в верхнем регистре.
+
 |ERR-2414 (SUP-6539)
 |Когда в разметку справочника видов карточек был добавлен элемент управления `_Image_`, изображение не отображалось.
+
+|ERR-2377 (SUP-6511)
+|В журнал работы {dv} записывалась ошибка `The target database ('DatabaseName') is in an availability group and is currently accessible for connections when the application intent is set to read only`, когда настройка "Readable Secondaries" была в значении "No".
+
+|ERR-2373 (SUP-6547)
+|Возникала ошибка `Ссылка на объект не указывает на экземпляр объекта` при попытке переименовать операцию перехода.
+
+|ERR-2215 (SUP-5815)
+|Происходил перезапуск службы *{sss}* в случае недоступности внешнего сайта {dv} и открытии страницы в папке.
 
 |ERR-2083 (SUP-6339)
 |В документации ошибочно было указано, что для работы с архивными карточками нужно состоять в трёх группах, а не в любой из них: _{dv-arch-ops-dir}_, _{dv-ad-admins-dir}_, _{dv-sec-admins-dir}_.
@@ -21,6 +51,9 @@ include::webclient:admin:partial$table.adoc[]
 
 |ERR-1653 (SUP-6030)
 |При попытке добавить или создать базу на PostgreSQL Возникала ошибка `System.TypeInitializationException: Инициализатор типа "DocsVision.Platform.Data.PgSqlDatabaseConnection" выдал исключение`.
+
+|ERR-1492 (SUP-5915)
+|Возникала ошибка `ErrorPublishingView` при открытии представления, содержащего строковую константу и группу из ссылочного поля.
 
 |ERR-1451 (SUP-5943)
 |Когда для полнотекстового поиска использовалась внешняя база, создавались две пары заданий (jobs) *delete_old_files*.
@@ -66,6 +99,9 @@ include::webclient:admin:partial$table.adoc[]
 
 |ERR-884 (SUP-5552)
 |Возникала ошибка `System.InvalidCastException` при открытии карточки с помощью скрипта.
+
+|ERR-865 (SUP-5524)
+|Исправлена ошибка, при которой библиотека не загружалась из справочника компонентов.
 
 |ERR-843 (SUP-5486)
 |Исправлена ошибка при использовании атрибутивного поиска: `DocsVision.Platform.ObjectManager.ObjectManagerException: Не удалось выполнить вызов SOAP метода. Сервер не ответил в течении заданного промежутка времени.`.
@@ -131,6 +167,9 @@ DocsVision.Platform.StorageServer.SoapError: 1637, Internal exception, error cod
 |ERR-432 (SUP-4462)
 |Ошибка при использовании поиска в случае отключения службы ElasticSearch была неинформативной.
 
+|ERR-429 (GBL-2283)
+|Некорректно очищался журнал БП при заданном ограничении количества сообщений в нём.
+
 |ERR-423
 |Категория справочника категорий отображалась у пользователя, даже если у него не было доступа на весь справочник.
 
@@ -169,6 +208,9 @@ DocsVision.Platform.StorageServer.SoapError: 1637, Internal exception, error cod
 
 |ERR-374 (SUP-5402)
 |В журнал FileService записывалась ошибка переноса бинарного файла, хотя файл успешно переносился.
+
+|ERR-372 (SUP-5407)
+|В документации не были указаны используемые для подписи компоненты и отсутствовала ссылка на внешнюю документацию.
 
 |ERR-371 (SUP-5152)
 |При попытке получить данные через веб-сервис {dv} методом `RowGetDataByInstanceID` возникала ошибка SOAP сервера `1281, Internal exception, error code: SQLFailure. --\-> Internal exception, error code: SQLFailure. --\-> Must declare the scalar variable "@InstanceI".`.
