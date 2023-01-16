@@ -1,166 +1,104 @@
 = Настройка страницы авторизации
 
-Данное расширение содержит пример настройки страницы авторизации {wc}а. При настройке можно, например, изменить вид страницы входа или добавить/скрыть формы входа для авторизации с помощью сторонних сервисов.
+Данное расширение содержит пример внедрения своего кода на страницу входа {wc}а, а именно:
 
-NOTE: Данный раздел документации описывает настройку страницы авторизации. Инструкцию по добавлению расширений авторизации см. в xref:platform:admin:authorization-extensions.adoc[документации модуля _{pl}_].
+. Выполнение кода при определённых событиях -- тип `LoginEvents` в модуле `@docsvision/webclient/Account`.
+. Подмена текста на странице -- объект `defaultLoginResources` в модуле `@docsvision/webclient/Account`.
+. Замена компонентов страницы -- объект `LoginView` в модуле `@docsvision/webclient/Account/LoginContainer`.
+. Добавление стилей на страницу.
 
-.Чтобы изменить, необходимо:
-. Выполнить код при определённых событиях (объект `LoginEvents`).
-. Подменить текст на странице (объект `defaultLoginResources`).
-. Заменить компоненты страницы(объект `LoginView`)
-. Добавить стили на страницу.
+NOTE: Данный раздел документации описывает настройку страницы авторизации. Инструкцию по добавлению расширений авторизации см. в xref:platform:admin:authorization-extensions.adoc[документации модуля "{pl}"].
 
-Чтобы добавить свой скрипт, нужно создать файл или файлы с расширением `.js` в папке `DocsVision\WebClient\5.5\Site\Content\Account\Scripts`. Код будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`.
+[#additional]
+== Дополнительная информация
 
-Чтобы добавить стили, нужно создать файл или файлы с расширением `.сss` в папке `DocsVision\WebClient\5.5\Site\Content\Account\Styles`, стили загружаются после основных стилей.
+Рекомендуется осуществлять сборку в виде umd модуля.
 
-Входной точкой для внедрения является объект `loginExtensionManager` доступный глобально через объект Windows.
+Для корректной работы расширения нужно создать файл или файлы с расширением `.js` и поместить в папку `DocsVision\WebClient\5.5\Site\Content\Account\Scripts`, код будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`.
 
-Возможные ресурсы, компоненты и события для замены обозначены ниже и в файле `Types.ts` в репозитории примеров {wc}а.
+Чтобы добавить стили, нужно создать файл или файлы с расширением `.сss` и положить в папку `DocsVision\WebClient\5.5\Site\Content\Account\Styles`, стили загружаются после основных стилей страницы.
+
+Входной точкой для внедрения кода на страницу является объект `loginExtensionManager` доступный глобально через объект `windows`.
+
+Код расширения будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`, но после загрузки библиотек `React` и `ReactDOM`.
+
+Методы `loginExtensionManager`, а также возможные ресурсы, компоненты и события для замены обозначены в виде типов и интерфейсов в модуле `@docsvision/webclient/Account`.
+
+[#process]
+== Процесс настройки
+
+.Чтобы настроить вид страницы авторизации, необходимо:
+. Скопировать проект на компьютер для разработки.
+. Открыть консоль в папке `ClientScripts\TypeScript\LoginPage` и выполнить команду `npm install`, затем выполнить `npm run build:prod`.
+. Скопировать каталог `SamplesOutput\Site\Content\Account\Scripts` в каталог `Путь к установленному WebClient\5.5\Site\Content\Account\Scripts`.
+. Перезапустить IIS.
+
+Пример кода расширения указан ниже и в файле `Index.ts` в репозитории примеров {wc}а.
 
 [source,typescript]
 ----
-export class LoginView {
-    form;
-    changeMethodButton;
-    divider;
-    errorBox;
-    errorBlock;
-    authBox;
-    box;
-    greeting;
-    providers;
-    contactBox;
-    providerButton;
-    logo;
-    input;
-    button; <.>
-    authBoxBefore;
-    authBoxAfter;
-    formBefore;
-    formAfter;
-    providersBefore;
-    providersAfter; <.>
-}
+import React from 'react';
+import { windowWithLoginExtensionManager, ILoginPlugin, ILoginExtensionManager, LoginEvents } from '@docsvision/webclient/Account';
+import { LoginView } from '@docsvision/webclient/Account/LoginContainer';
+import { LoginLogic } from '@docsvision/webclient/Account/LoginLogic';
+import "index.scss"
 
-export enum LoginEvents {
-    LogicEventConstructor = 'LogicEventConstructor',
-    LogicEventBeforeFormSubmit = 'LogicEventBeforeFormSubmit',
-    LogicEventAfterFormSubmit = 'LogicEventAfterFormSubmit',
-    LogicEventBeforeGetProviders = 'LogicEventBeforeGetProviders',
-    LogicEventAfterGetProviders = 'LogicEventAfterGetProviders',
-    EventLoginPageUseEffect = 'EventLoginPageUseEffect',
-    EventContainerUseEffect = 'EventContainerUseEffect',
-}
-
-export interface LoginPlugin {
-    name?: string;
-    order?: number;
-    fn: (data: object) => any;
-    eventName: string;
-}
-
-export type LoginLogic = {};
-
-export interface ILoginExtensionManager {
-    currentLocale: string;
-    getResources?: () => { [key: string]: string };
-    setResources?: (resources: { [key: string]: string }) => void;
-    addPlugin: (plugin: LoginPlugin) => void;
-    addPlugins: (plugins: LoginPlugin[]) => void;
-    removePlugin: (name: string) => void;
-    onSetupView: (view: LoginView) => void;
-
-    logicEventConstructor: (data: { logic: LoginLogic }) => void;
-    logicEventBeforeFormSubmit: (data: { logic: LoginLogic; data: FormData }) => void;
-    logicEventAfterFormSubmit: (data: { logic: LoginLogic; data: object }) => void;
-    eventContainerUseEffect: (data: { logic: LoginLogic; view: LoginView }) => void;
-    logicEventBeforeGetProviders: (data: { body: any }) => void;
-    logicEventAfterGetProviders: (data: { logic: LoginLogic; data: any }) => void;
-    eventLoginPageUseEffect: (data: { loginPageRef: { current: HTMLDivElement } }) => void; <.>
-}
-
-export type DefaultLoginResources = {
-    Or: string; <.>
-    Login_ChangeMethod: string; <.>
-    Login_EnterText: string; <.>
-    Login_SubmitText: string; <.>
-    Login_PlaceholderLogin: string; <.>
-    Login_PlaceholderPassword: string; <.>
-    Login_Greeting: string; <.>
-    Login_AuthenticationErrorText_Problem: string; <.>
-    Login_AuthenticationErrorText_Help: string; <.>
-    Login_HelpText: string; <.>
-    Login_AdminMail: string; <.>
-};
-----
-<.> Стандартные элементы представления.
-<.> Клиентские точки расширения.
-<.> События.
-<.> Текст разделителя. Значение по умолчанию: `или`.
-<.> Текст кнопки смены формы. Значение по умолчанию: `Другой способ входа`.
-<.> Текст кнопки сервиса. Значение по умолчанию: `войти с`.
-<.> Текст кнопки отправки формы. Значение по умолчанию: `войти`.
-<.> Placeholder поля логина. Значение по умолчанию: `Логин`
-<.> Placeholder поля пароля. Значение по умолчанию: `Пароль`.
-<.> Текст приветствия. Значение по умолчанию: `Привет,`.
-<.> Текст формы с ошибкой. Значение по умолчанию: `В процессе аутентификации возникли проблемы.`
-<.> Текст формы с ошибкой. Значение по умолчанию: `Пожалуйста, обратитесь к администратору системы`
-<.> Текст основной формы. Значение по умолчанию: `Если у вас возникли сложности -- обратитесь к администратору`
-<.> Контакты администратора. По умолчанию пустое значение.
-
-.Пример кода расширения:
-[source,typescript]
-----
-window.loginExtensionManager.setResources({ Login_AdminMail: 'admin@docsvision.com' }); <.>
+const loginExtensionManager: ILoginExtensionManager = (window as windowWithLoginExtensionManager).loginExtensionManager; <.>
+loginExtensionManager.setResources({ Login_AdminMail: 'admin@docsvision.com' });
 if (loginExtensionManager.currentLocale === 'ru') {
-    window.loginExtensionManager.setResources({ Login_Greeting: 'Приветствуем,' });
+    loginExtensionManager.setResources({ Login_Greeting: 'Приветствуем,' });
 } else {
-    window.loginExtensionManager.setResources({ Login_Greeting: 'Hello,' });
+    loginExtensionManager.setResources({ Login_Greeting: 'Hello,' });
 }
 
-const plugin = {
+const plugin: ILoginPlugin = {
     order: 1,
-    eventName: 'LogicEventConstructor',
+    eventName: "LogicEventConstructor",
     fn: (data) => {
-<.>
+        <.>
     },
     name: 'myPlugin',
 };
-const plugin2 = {
+const plugin2: ILoginPlugin = {
     order: 2,
-    eventName: 'EventContainerUseEffect',
+    eventName: "EventContainerUseEffect",
     fn: (data) => {
-<.>
+        <.>
     },
     name: 'myPlugin2',
 };
 
+<.>
 loginExtensionManager.addPlugin(plugin);
-loginExtensionManager.addPlugins([plugin2]); <.>
-
-loginExtensionManager.onSetupView = function (view) { <.>
-
-    view.logo = () => { <.>
-        return React.createElement('img', {
-            src: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png',
-            className: 'my-custom-logo',
-        });
-    };
+loginExtensionManager.addPlugins([plugin2]);
 
 <.>
-    view.authBoxBefore = () => null;
-    view.authBoxAfter = () => null;
-    view.formBefore = () => null;
-    view.formAfter = () => React.createElement('a', { className: 'forgot-email-link', href: "#" }, 'Забыли пароль?');;
-    view.providersBefore = () => null;
-    view.providersAfter = () => null;
+loginExtensionManager.onSetupView = function (view: LoginView): LoginView {
+    <.>
+    view.logo = React.memo((logic: LoginLogic): React.ReactElement => {
+        return <img src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png' className="my-custom-logo" />;
+    });
+
+    <.>
+    view.authBoxBefore = (logic: LoginLogic): React.ReactElement => null;
+    view.authBoxAfter = (logic: LoginLogic): React.ReactElement => null;
+    view.formBefore = (logic: LoginLogic): React.ReactElement => null;
+    view.formAfter = (logic: LoginLogic): React.ReactElement => <a href="#" className="my-custom-element" >Забыли пароль?</a>;
+    view.providersBefore = (logic: LoginLogic): React.ReactElement => null;
+    view.providersAfter = (logic: LoginLogic): React.ReactElement => null;
+    return view;
 };
 ----
-<.> Заменяем текст.
-<.> Выполняем действие.
-<.> Выполняем действие.
-<.> Добавляем события.
-<.> Меняем компоненты представления.
-<.> Заменяем элемент.
+<.> Заменить текст.
+<.> Выполнить действие 1.
+<.> Выполнить действие 2.
+<.> Добавить события.
+<.> Изменить компоненты представления.
+<.> Заменить элемент.
 <.> Точки расширения.
+
+[#check]
+== Проверка примера
+
+. Перейти на страницу логина в браузере `\http://company.com/DocsvisionWebClient/account/login`.
+. В результате на странице входа будут изменены логотип и приветствие, а также добавлена почта администратора.
