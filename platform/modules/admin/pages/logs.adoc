@@ -23,6 +23,13 @@
 * В журнал по пути `C:\Users\%user%\AppData\Local\DocsVision\Logs\Server` будут попадать все ошибки службы *{sss}*. В данном случае `%user%` -- пользователь, от имени которого запущена служба *{sss}*.
 * В журнал по пути `C:\Windows\System32\config\systemprofile\AppData\Local\Docsvision\Logs\Server` будут попадать ошибки web-сервиса IIS.
 
+[NOTE]
+====
+В системном журнале и журнале приложений может встречаться ошибка `Unexpected error: The file '/docsvision/StorageServer/Fetch.aspx' does not exist.`
+
+Ошибка возникает из-за наличия модуля _Конструктор отчетов_, несовместимого с {dv} версии 5.5. В будущем обработка запросов от данного модуля будет отключена.
+====
+
 [#client]
 == Журналы установки клиентских компонентов
 
