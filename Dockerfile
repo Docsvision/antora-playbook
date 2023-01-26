@@ -1,19 +1,13 @@
-FROM node:lts AS builder
+FROM node:18.13.0 AS builder
 
-WORKDIR /antora
+WORKDIR /src
 
-RUN git clone https://github.com/Docsvision/antora-ui-default.git ui \
-    && cd ui \
-    && npm ci --no-audit \
-    && npx gulp bundle
+COPY package*.json .
+RUN npm ci --no-audit
+COPY . .
+RUN npx antora antora-playbook.yml
 
-RUN git clone https://github.com/Docsvision/antora-playbook.git playbook \
-    && ln -s ../ui/build playbook/build \
-    && cd playbook \
-    && npm ci --no-audit \
-    && npx antora antora-playbook.yml
+FROM nginx:1.22.1
 
-FROM nginx:stable-alpine
-
-COPY --from=builder /antora/playbook/wwwroot/ /usr/share/docsvision/html/
-COPY --chmod=644 nginx/default.conf /etc/nginx/conf.d/
+COPY --from=builder /src/wwwroot/ /usr/share/docsvision/html/
+COPY nginx/default.conf /etc/nginx/conf.d/
