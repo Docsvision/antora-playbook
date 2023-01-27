@@ -65,39 +65,51 @@ image::name-parameter.png[Редактирование значения для �
 <?xml version=\"1.0\" encoding=\"utf-16\"?>
 <ESIAAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
 <WellKnownConfigurationUrl>{
-\"token_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v3/te\",  url для получения маркера доступа
+\"token_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v3/te\", <.>
 \"token_endpoint_auth_methods_supported\":[\"client_secret_post\",\"private_key_jwt\",\"client_secret_basic\"],
 \"jwks_uri\":\"\",
 \"response_modes_supported\":[],
 \"subject_types_supported\":[],\"id_token_signing_alg_values_supported\":[],
 \"response_types_supported\":[\"code\",\"token\"],
-\"scopes_supported\":[\"openid email mobile snils fullname id_doc\"], область доступа, т.е. запрашиваемые права
-\"issuer\":\"http://esia-portal1.test.gosuslugi.ru/\", идентификатор стороны, генерирующей токен
+\"scopes_supported\":[\"openid email mobile snils fullname id_doc\"], <.>
+\"issuer\":\"http://esia-portal1.test.gosuslugi.ru/\", <.>
 \"microsoft_multi_refresh_token\":true,
-\"authorization_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v2/ac\", url для получения авторизационного кода
+\"authorization_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v2/ac\", <.>
 \"device_authorization_endpoint\":\"\",
 \"http_logout_supported\":true,
 \"frontchannel_logout_supported\":true,
-\"end_session_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/idp/ext/Logout\", url для разлогина из ЕСИА
+\"end_session_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/idp/ext/Logout\", <.>
 \"claims_supported\":[],
 \"check_session_iframe\":\"\",
-\"userinfo_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/rs/prns/\", url для получения данных пользователя
+\"userinfo_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/rs/prns/\", <.>
 \"kerberos_endpoint\":\"\",
 \"tenant_region_scope\":null,
 \"cloud_instance_name\":\"\",
 \"cloud_graph_host_name\":\"\",
 \"msgraph_host\":\"\",
 \"rbac_url\":\"\",
-\"certificate_hash\":\"B6864B005BE2E583733DAC88CC00AF1D98EE286B4E98CD7ECA03930AB303B76B\", хэш сертификата получаемый через утилиту cpverify
-\"certificate_thumbprint\":\"39D17F90BC7EA873566A1CCF1E36C23DCFFA5025\" отпечаток сертификата, используемого для формирования подписи
+\"certificate_hash\":\"B6864B005BE2E583733DAC88CC00AF1D98EE286B4E98CD7ECA03930AB303B76B\", <.>
+\"certificate_thumbprint\":\"39D17F90BC7EA873566A1CCF1E36C23DCFFA5025\", <.>
+\"ext_certificate_thumbprint\":\"9c8393817199de4364ef7569f1af8c40b120f0f7\", <.>
 }
 </WellKnownConfigurationUrl>
-<ClientId>DOCSVISION</ClientId> мнемоника системы получаемая при регистрации
+<ClientId>DOCSVISION</ClientId> <.>
 <Tenants></Tenants>
-<AccountNameClaim>snils</AccountNameClaim> параметр, который используется как ключ для авторизации. возможные значения: snils, phone, email
+<AccountNameClaim>snils</AccountNameClaim> <.>
 <ApplicationId></ApplicationId>
 </ESIAAuthenticationSettings>
 ----
+<.> URL для получения маркера доступа.
+<.> Область доступа, т.е. запрашиваемые права.
+<.> Идентификатор стороны, генерирующей токен.
+<.> URL для получения авторизационного кода.
+<.> URL для выхода из учётной записи из ЕСИА.
+<.> URL для получения данных пользователя.
+<.> Хэш сертификата получаемый через утилиту cpverify.
+<.> Отпечаток сертификата, используемого для формирования подписи.
+<.> Отпечаток сертификата площадки.
+<.> Мнемоника системы получаемая при регистрации.
+<.> Параметр, который используется как ключ для авторизации. Возможные значения: `snils`, `phone`, `email`.
 ====
 +
 --
