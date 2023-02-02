@@ -1,0 +1,278 @@
+= Разработка компонента создания документов
+
+Компонент создания документов предоставляет Модулю функцию создания карточек в системе Docsvision по поступившим от оператора ЭДО электронным документам.
+
+Компонент должен реализовывать программный интерфейс xref:IDocumentCreator.adoc[IDocumentCreator].
+
+Рекомендуется создавать свой компонент на основе класса [.keyword .apiname]#DocumentCreator# (сборка [.ph .filepath]` DocsVision.Edi.Runtime.BackOffice.dll`). Далее приведена часть класса [.keyword .apiname]#DocumentCreator# с описанием.
+
+[source,pre,codeblock,language-csharp]
+----
+public class DocumentCreator : IDocumentCreator
+{
+    //  Инициализация компонента
+    public void Initialize(ObjectContext objectContext, Guid defaultKindId)
+    {
+        ObjectContext = objectContext;
+        this.defaultKindId = defaultKindId;
+
+        UserSession = ObjectContext.GetService<UserSession>();
+
+        documentService = ObjectContext.GetService<IDocumentService>();
+        staffService = ObjectContext.GetService<IStaffService>();
+        baseCardService = ObjectContext.GetService<IBaseCardService>();
+
+        documentFilesHelper = new DocumentFilesHelper(UserSession, documentService, baseCardService, staffService);
+        parentLinksCreator = new ParentLinksCreator(ObjectContext, UserSession);
+    }
+
+    // Реализация метода создания карточки входящего документа по полученному 
+    //  от оператора ЭДО сообщению
+    public virtual bool CreateDocument(MessageData messageData, Guid partnerId, Guid partnerDepartmentId)
+    {
+        bool isSaved = false;
+        Document document = null;
+
+        try
+        {
+            // Получаем настройки вида карточек
+            KindsCardKind newCardKind = GetNewDocumentKind(messageData, partnerId);
+            if (newCardKind == null)
+            {
+                return false;
+            }
+
+            // Создаём дкоумента
+            document = documentService.CreateDocument(null, newCardKind);
+
+            if (messageData.DocumentDate.HasValue)
+            {
+                document.MainInfo.DeliveryDate = messageData.DocumentDate.Value;
+            }
+
+            document.MainInfo[CardDocument.MainInfo.ExternalNumber] = messageData.DocumentNumber;
+            document.MainInfo[CardDocument.MainInfo.Content] = messageData.DocumentComment;
+            document.MainInfo[CardDocument.MainInfo.RegDate] = DateTime.Now;
+            document.MainInfo.Name = messageData.DocumentName;
+
+            var senderRows = document.GetSection(CardDocument.SenderPartner.ID);
+            BaseCardSectionRow senderRow;
+            if (senderRows.Count == 0)
+            {
+                senderRow = new BaseCardSectionRow();
+                senderRows.Add(senderRow);
+            }
+            else
+            {
+                senderRow = (BaseCardSectionRow)senderRows[0];
+            }
+
+            PartnersCompany partnersCompany = ObjectContext.GetObject<PartnersCompany>(partnerId);
+
+            senderRow[CardDocument.SenderPartner.SenderOrg] = partnerId;
+            senderRow[CardDocument.SenderPartner.SenderDep] = partnerDepartmentId;
+
+            StaffEmployee employee = GetNewDocumentAuthor(messageData, partnerId);
+            Guid employeeId = employee == null ? Guid.Empty : ObjectContext.GetObjectRef(employee).Id;
+
+            if (employee != null)
+            {
+                document.MainInfo.Registrar = employee;
+            }
+
+            StaffUnit recipientDepartment = null;
+
+            // Группа из настроек подразделения или организации (указывается в получателях)
+            StaffEmployee recipient = null;
+            StaffGroup recipientGroup = null;
+            if (!string.IsNullOrEmpty(messageData.Recipient.DepartmentId))
+            {
+                OperatorsDepartment operatorsDepartment = ObjectContext.FindObject<OperatorsDepartment>(
+                    new QueryObject(RefOperators.Departments.DepartmentId, messageData.Recipient.DepartmentId));
+                if (operatorsDepartment != null)
+                {
+                    recipientDepartment = operatorsDepartment.Department;
+                    recipient = operatorsDepartment.Recipient;
+                    recipientGroup = operatorsDepartment.RecipientGroup;
+                }
+            }
+
+            if (recipientDepartment == null)
+            {
+                OperatorsBox organizationBox = ObjectContext.FindObject<OperatorsBox>(
+                    new QueryObject(RefOperators.Boxes.BoxId, messageData.Recipient.BoxId));
+                if (organizationBox != null)
+                {
+                    recipientDepartment = organizationBox.Unit.Unit;
+                    recipient = organizationBox.Unit.Recipient;
+                    recipientGroup = organizationBox.Unit.RecipientGroup;
+                }
+            }
+
+            if (recipientDepartment != null)
+            {
+                document.MainInfo[CardDocument.MainInfo.ResponsDepartment] = ObjectContext.GetObjectRef(recipientDepartment).Id;
+            }
+
+            if (recipientGroup != null)
+            {
+                foreach (StaffGroupItem groupItem in recipientGroup.GroupItems)
+                {
+                    BaseCardSectionRow recRow = new BaseCardSectionRow();
+                    recRow[CardDocument.ReceiversStaff.ReceiverStaff] = groupItem.EmployeeId;
+                    document.GetSection(CardDocument.ReceiversStaff.ID).Add(recRow);
+                }
+            }
+            else if (recipient != null)
+            {
+                BaseCardSectionRow recRow = new BaseCardSectionRow();
+                recRow[CardDocument.ReceiversStaff.ReceiverStaff] = ObjectContext.GetObjectRef(recipient).Id;
+                document.GetSection(CardDocument.ReceiversStaff.ID).Add(recRow);
+            }
+
+            if (!string.IsNullOrEmpty(messageData.DocumentType))
+            {
+                SetDocumentType(messageData, document);
+            }
+
+            ObjectContext.SaveObject(document);
+            isSaved = true;
+
+            // Добавление файлов из полученного сообщения в создаваемый документ
+            foreach (MessageFile messageFile in messageData.DocumentFiles)
+            {
+                AddFileToDocument(document, messageFile, employeeId, partnersCompany.Name);
+            }
+
+            SetAdditionalAttributes(messageData, document);
+
+            ObjectContext.SaveObject(document);
+
+            // Добавление ссылки на родительскую карточку, если поступило 
+            // исправление формализованного документа
+            parentLinksCreator.CreateParentLinks(document,
+                messageData.DocumentFiles.Select(item => item.OperatorParentEntityId).Where(item => !string.IsNullOrEmpty(item)).Distinct().ToList());
+
+            Guid cardId = ObjectContext.GetObjectRef(document).Id;
+
+            document.Description = baseCardService.GenerateDigest(document, UserSession.CardManager.GetCardData(cardId), null);
+
+            ObjectContext.SaveObject(document);
+
+            messageData.CardId = cardId;
+
+            return true;
+        }
+        catch (Exception)
+        {
+            SafeRollback();
+            try
+            {
+                if (isSaved)
+                {
+                    ObjectContext.DeleteObject(document);
+                    ObjectContext.AcceptChanges();
+                }
+            }
+            catch
+            {
+            }
+
+            throw;
+        }
+    }
+
+    // Добавляет в карточку документа значение типа поступившего документа
+    // В собственной реализации метод может записывать типы документов по другой логике
+    public virtual void SetDocumentType(MessageData messageData, Document document)
+    {
+        // секции и поля может не быть, если не грузили схему УПД
+        CardSection dataSection = UserSession.CardManager.CardTypes[CardDocument.ID].AllSections
+            .FirstOrDefault(item => string.Equals(item.Alias, CardDefs.UniversalDocumentData.Alias));
+        if (dataSection == null)
+        {
+            return;
+        }
+
+        if (!dataSection.Fields.Contains(CardDefs.UniversalDocumentData.DocumentType))
+        {
+            return;
+        }
+
+        Field docTypeField = dataSection.Fields[CardDefs.UniversalDocumentData.DocumentType];
+        var invoiceRows = document.GetSection(dataSection.Id);
+        BaseCardSectionRow invoiceRow;
+        if (invoiceRows.Count == 0)
+        {
+            invoiceRow = new BaseCardSectionRow();
+            invoiceRows.Add(invoiceRow);
+        }
+        else
+        {
+            invoiceRow = (BaseCardSectionRow)invoiceRows[0];
+        }
+
+        invoiceRow[CardDefs.UniversalDocumentData.DocumentType] = docTypeField.EnumValues
+            .FirstOrDefault(item => string.Equals(messageData.DocumentType, item.Alias, StringComparison.OrdinalIgnoreCase))?.Value;
+    }
+
+    // Реализация метода переноса файлов из ответа контрагента в карточку 
+    public virtual void AddReplyFilesToDocument(MessageData messageData, Guid partnerId)
+    {
+        try
+        {
+            StaffEmployee employee = GetNewDocumentAuthor(messageData, partnerId);
+            Guid employeeId = employee == null ? Guid.Empty : ObjectContext.GetObjectRef(employee).Id;
+
+            PartnersCompany partnersCompany = ObjectContext.GetObject<PartnersCompany>(partnerId);
+
+            Document document = ObjectContext.GetObject<Document>(messageData.CardId);
+            foreach (MessageFile messageFile in messageData.DocumentFiles)
+            {
+                AddFileToDocument(document, messageFile, employeeId, partnersCompany.Name);
+            }
+
+            ObjectContext.SaveObject(document);
+        }
+        catch
+        {
+            SafeRollback();
+            throw;
+        }
+    }
+
+    // Предоставляет вид создаваемого документа
+    // В собственной реализации метод может вычислять вид документа по другой логике
+    public virtual KindsCardKind GetNewDocumentKind(MessageData messageData, Guid partnerId)
+    {
+        KindsCardKind cardKind = null;
+        if (defaultKindId != Guid.Empty)
+        {
+            cardKind = ObjectContext.GetObject<KindsCardKind>(defaultKindId);
+        }
+
+        return cardKind ?? ObjectContext.GetObject<KindsCardKind>(IncomingDocumentKindId);
+    }
+
+    // Предоставляет автора создаваемого документа
+    // В собственной реализации метод может вычислять автора документа по другой логике
+    public virtual StaffEmployee GetNewDocumentAuthor(MessageData messageData, Guid partnerId)
+    {
+        return staffService.GetCurrentEmployee();
+    }
+
+    // Добавляет дополнительные атрибуты в создаваемый документ
+    // В собственной реализации метод может добавлять в карточку 
+    // требуемые данные из полученного сообщения
+    public virtual void SetAdditionalAttributes(MessageData messageData, Document document)
+    {
+    }
+
+    // Добавляет в создаваемый документ файл из полученного сообщения
+    // В собственной реализации метод может добавлять файл следуя иной логике
+    public virtual void AddFileToDocument(Document document, MessageFile messageFile, Guid authorId, string partnerName)
+    {
+        documentFilesHelper.AddSignedFileToDocument(document, messageFile, authorId, partnerName, true);
+    }
+}
+----

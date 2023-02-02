@@ -1,0 +1,93 @@
+= EdiMessageFile - класс
+
+Содержит данные файла из [.dfn .term]_Карточки обмена сообщениями_.
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.ObjectModel
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.ObjectModel.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class EdiMessageFile : BaseCardSectionRow
+----
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ContentType a|
+Задает или возвращает тип содержимого файла.
+
+Тип: xref:EdiMessageFileContentType.adoc[EdiMessageFileContentType]
+
+|FileId a|
+Задает или возвращает идентификатор файла.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|FileName a|
+Задает или возвращает название файла.
+
+Тип: [.keyword .apiname]#System.String#
+
+|FileState a|
+Задает или возвращает статус файла.
+
+Тип: xref:EdiMessageFileState.adoc[EdiMessageFileState]
+
+|FileType a|
+Задает или возвращает тип файла.
+
+Тип: xref:EdiMessageFileType.adoc[EdiMessageFileType]
+
+|OperatorFileId a|
+Задает или возвращает идентификатор файла у оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|OperatorSignatureId a|
+Задает или возвращает идентификатор подписи у оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|RejectionComment a|
+Задает или возвращает комментарий к файлу, если пользователь отказывает в подписании.
+
+Тип: xref:EdiMessageSignedComment.adoc[EdiMessageSignedComment]
+
+|ReplyFiles a|
+Возвращает
+
+Тип: xref:EdiMessageReplyFile.adoc[EdiMessageReplyFile]
+
+|ReplySignatureId a|
+Задает или возвращает идентификатор ответной подписи.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|SignatureId a|
+Задает или возвращает идентификатор подписи.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|===
+
+=== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|ContentTypeProperty |Определяет свойство "Тип содержимого".
+|FileIdProperty |Определяет свойство "Файл".
+|FileNameProperty |Определяет свойство "Имя файла".
+|FileStateProperty |Определяет свойство "Состояние файла".
+|FileTypeProperty |Определяет свойство "Тип файла".
+|OperatorFileIdProperty |Определяет свойство "Идентификатор файла у оператора".
+|OperatorSignatureIdProperty |Определяет свойство "Идентификатор подписи у оператора".
+|RejectionCommentProperty |Определяет свойство "Комментарий при отказе от подписи".
+|ReplyFilesProperty |Определяет свойство "Ответные файлы".
+|ReplySignatureIdProperty |Определяет свойство "Ответная подпись".
+|SignatureIdProperty |Определяет свойство "Подпись".
+|===

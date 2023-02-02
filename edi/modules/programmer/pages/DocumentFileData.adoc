@@ -1,0 +1,90 @@
+= DocumentFileData - класс
+
+Содержит данные файла карточки Документ.
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.Entities
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.Interfaces.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class DocumentFileData
+----
+
+=== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|DocumentFileData(Guid, String) a|
+Инициализирует новый экземпляр класса DocumentFileData.
+
+Параметры:
+
+* id - идентификатор карточки файла
+* name - название файла
+
+|DocumentFileData(Guid, String, Boolean) a|
+Инициализирует новый экземпляр класса DocumentFileData.
+
+Параметры:
+
+* id - идентификатор карточки файла
+* name - название файла
+* isMain - флаг, определяющий, является ли файл основным
+
+|DocumentFileData(Guid, String, Boolean, Guid) a|
+Инициализирует новый экземпляр класса DocumentFileData.
+
+Параметры:
+
+* id - идентификатор карточки файла
+* name - название файла
+* isMain - флаг, определяющий, является ли файл основным
+* signatureId - идентификатор подписи файла
+
+|DocumentFileData(Guid, String, Boolean, Guid, FileContentType) a|
+Инициализирует новый экземпляр класса DocumentFileData.
+
+Параметры:
+
+* id - идентификатор карточки файла
+* name - название файла
+* isMain - флаг, определяющий, является ли файл основным
+* signatureId - идентификатор подписи файла
+* fileContentType - тип содержимого файла
+
+|===
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|FileContentType a|
+Задает или возвращает тип содержимого файла.
+
+Тип: xref:FileContentType.adoc[FileContentType]
+
+|Id a|
+Возвращает идентификатор карточки версионного файла.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|IsMain a|
+Возвращает флаг, определяющий, является ли файл основным: true - основной, false - дополнительный
+
+Тип: Boolean
+
+|Name a|
+Возвращает название файла.
+
+Тип: [.keyword .apiname]#System.String#
+
+|SignatureId a|
+Задает или возвращает идентификатор подписи файла.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|===

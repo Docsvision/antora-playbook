@@ -1,0 +1,61 @@
+= Unit - класс
+
+Содержит данные организации, полученные от оператора ЭДО.
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.Entities
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.Interfaces.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class Unit
+----
+
+=== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Unit(String, String, String) a|
+Инициализирует новый экземпляр класса Unit.
+
+Параметры:
+
+* id - идентификатор организации у оператора ЭДО
+* name - название организации у оператора ЭДО
+* inn - ИНН организации у оператора ЭДО
+
+|===
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Boxes a|
+Возвращает коллекцию ящиков организации.
+
+Тип: ItemCollection<xref:Box.adoc[Box]>
+
+|Departments a|
+Возвращает коллекцию подразделений организации.
+
+Тип: ItemCollection<xref:Department.adoc[Department]>
+
+|Id a|
+Задает или возвращает идентификатор организации в системе оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|Inn a|
+Задает или возвращает идентификатор контрагента в системе оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|Name a|
+Задает или возвращает название организации в системе оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|===

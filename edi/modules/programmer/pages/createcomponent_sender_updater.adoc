@@ -1,0 +1,258 @@
+= Разработка компонента изменения данных карточки
+
+Компонент изменения данных предоставляет Модулю не зависящий от типа карточки слой изменения данных карточки, обеспечивающий возможность внесения изменения при получении ответа от контрагента.
+
+Компонент должен реализовывать программный интерфейс xref:IDocumentUpdater.adoc[IDocumentUpdater].
+
+Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseUpdater# (сборка [.ph .filepath]` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class BaseUpdater : IDocumentUpdater
+{
+    // Инициализируем компонент отправки
+    // При инициализации получаем сервисы API Docsvision, которые потребуются в дальнейшем
+    public void Initialize(ObjectContext objectContext)
+    {
+        ObjectContext = objectContext;
+        UserSession = objectContext.GetService<UserSession>();
+
+        documentService = objectContext.GetService<IDocumentService>();
+        baseCardService = objectContext.GetService<IBaseCardService>();
+        staffService = objectContext.GetService<IStaffService>();
+    }
+
+    // Реализация метода добавления подписи к указанному файлу карточки
+    public virtual Guid AddSignatureToDocument(Guid cardId, Guid fileId, MessageFile messageFile, string partnerName)
+    {
+        Document document = GetDocument(cardId);
+
+        DocumentFile documentFile = document.Files.FirstOrDefault(item => item.FileVersionRowId == fileId);
+        if (documentFile == null)
+        {
+            return Guid.Empty;
+        }
+
+        // Получаем данные подписи из сообщения
+        // Подпись может быть в сообщении или в файле, указнном в сообщении
+        byte[] signatureData = null;
+        if (messageFile.SignatureData != null && messageFile.SignatureData.Length > 0)
+        {
+            signatureData = messageFile.SignatureData;
+        }
+        else if (!string.IsNullOrEmpty(messageFile.SignatureFilePath))
+        {
+            signatureData = File.ReadAllBytes(messageFile.SignatureFilePath);
+        }
+
+        if (signatureData == null)
+        {
+            return Guid.Empty;
+        }
+
+        SignedCms signedCms = new SignedCms();
+        signedCms.Decode(signatureData);
+
+        if (signedCms.SignerInfos.Count == 0 || signedCms.Certificates.Count == 0)
+        {
+            return Guid.Empty;
+        }
+
+        // Получаем или карточку подписей
+        BaseCardSignature cardSignature = document.MainInfo.SignatureList.Signatures.FirstOrDefault(item => item.SignedFromConfirmation == partnerName);
+        if (cardSignature == null)
+        {
+            cardSignature = baseCardService.AddSignature(document.MainInfo.SignatureList, signedCms.Certificates[0], document.Description, document.SystemInfo.State);
+            cardSignature.Signer = staffService.GetCurrentEmployee();
+            cardSignature.SignedFromConfirmation = partnerName;
+            cardSignature.Certificate = signedCms.Certificates[0].Thumbprint;
+            cardSignature.Imported = true;
+        }
+
+        // Добавляем подпись в документ 
+        BaseCardSignature newSignature = baseCardService.AddSignaturePart(cardSignature, MainFileSignaturePartType, signatureData,
+            string.Format(Resources.MainFilePartnerSignature, documentFile.FileName), documentFile.FileId, documentFile.FileVersionId, document);
+
+        ObjectContext.SaveObject(document);
+
+        return ObjectContext.GetObjectRef(newSignature).Id;
+    }
+
+    // Реализация метода подписания карточки
+    public virtual Guid CreateNewSignatures(Guid cardId, X509Certificate2 certificate, bool signAdditionalFiles)
+    {
+        Document document = GetDocument(cardId);
+
+        // Если в документе не списка подписей - создаём
+        if (document.MainInfo.SignatureList == null)
+        {
+            SignatureList signatureList = documentService.CreateSignatureList();
+            ObjectContext.SaveObject(signatureList);
+            document.MainInfo.SignatureList = signatureList;
+        }
+
+
+        foreach (DocumentFile documentFile in document.Files)
+        {
+            // Обновляем информацию в титуле продавца
+            UpdateInvoiceFile(document, documentFile, certificate);
+            string validateResult = ValidateInvoiceFile(document, documentFile);
+            if (!string.IsNullOrEmpty(validateResult))
+            {
+                throw new IncompleteSignatureDataException(string.Format(Resources.UnableToValidateInvoice, documentFile.FileName, validateResult));
+            }
+        }
+
+        DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
+
+        //Добавляем подпись в документ
+        BaseCardSignature baseCardSignature = documentService.AddSignature(document, certificate, false, documentSetting.DocumentSignature.Fields);
+
+        ObjectContext.SaveObject(document);
+
+        return ObjectContext.GetObjectRef(baseCardSignature).Id;
+    }
+
+    // Реализация метода проверка сертификата подписи в карточке
+    // Для неформализованного документа реализация функциональности не требуется
+    // В стандартной реализации для УПД выполняется сравнение данных сотрудника, 
+    // подписавшего УПД с данными сотрудника-владельца указанного сертификата
+    public virtual string CheckCertificate(Guid cardId, X509Certificate2 certificate)
+    {
+        return CheckDocumentSignerForCertificate(GetDocument(cardId), certificate);
+    }
+
+    // Реализация метода изменения состояния карточки 
+    public virtual bool ChangeDocumentState(Guid cardId, Guid newStateId)
+    {
+        if (cardId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("cardId");
+        }
+
+        Document document = GetDocument(cardId);
+
+        IStateService stateService = ObjectContext.GetService<IStateService>();
+        StatesStateMachineBranch branch = stateService.FindLineBranchesByStartState(document.SystemInfo.State).FirstOrDefault(item => item.EndState.BuiltInState == newStateId);
+        if (branch == null)
+        {
+            return false;
+        }
+
+        if (!stateService.IsOperationAllowedFull(branch.Operation, document))
+        {
+            return false;
+        }
+
+        stateService.ChangeState(document, branch, true, out string processErrors);
+
+        return true;
+    }
+
+    // Реализация метода получения идентификатора состояния карточки
+    // Для неформализованного документа реализация функциональности не требуется
+    // В стандартной реализации для УПД метод возвращает идентификатор одного из 
+    //  встроенных состояний карточки УПД из Конструктора состояний
+    public virtual Guid GetNewStateId(MessageFileType messageFileType)
+    {
+        switch (messageFileType)
+        {
+            case MessageFileType.InvoiceReply:
+            case MessageFileType.ReplySignature:
+                return SignedStateId;
+
+            case MessageFileType.SignatureRejection:
+                return RejectedStateId;
+
+            case MessageFileType.InvoiceCorrectionRequest:
+                return CorrectionRequiredStateId;
+
+            case MessageFileType.RevocationRequest:
+                return RevocationRequestStateId;
+
+            case MessageFileType.RevocationReply:
+                return RevocationReplyStateId;
+
+            case MessageFileType.RevocationRejection:
+                return RevocationRejectionStateId;
+        }
+
+        return Guid.Empty;
+    }
+
+    // Реализация метода обновления данных карточки данными из файла титула продавца
+    // Для неформализованного документа реализация функциональности не требуется
+    // В стандартной реализации для УПД метод получает содержимое файла (XML-формата) 
+    //  и устанавливает значения полей карточки
+    public void UpdateDocumentDataFromFile(Guid cardId, Guid fileId)
+    {
+        if (cardId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("cardId");
+        }
+
+        if (fileId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("fileId");
+        }
+
+        Document document = GetDocument(cardId);
+
+        DocumentFile documentFile = document.Files.FirstOrDefault(item => item.FileVersionRowId == fileId);
+        if (documentFile == null)
+        {
+            throw Error.InvalidOperation(Resources.FileNotExists, fileId, cardId);
+        }
+
+        UpdateDocumentDataFromFile(document, documentFile);
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм обновления титула продавца
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater 
+    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+    protected virtual void UpdateInvoiceFile(Document document, DocumentFile documentFile, X509Certificate2 certificate)
+    {
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм проверки 
+    //  файла титула продавца
+    protected virtual string ValidateInvoiceFile(Document document, DocumentFile documentFile)
+    {
+        return null;
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм проверки подписанта
+    protected virtual string CheckDocumentSignerForCertificate(Document document, X509Certificate2 certificate)
+    {
+        CardData documentData = UserSession.CardManager.GetCardData(ObjectContext.GetObjectRef(document).Id);
+        RowData signerRow = documentData.Sections[documentData.Type.AllSections[CardDefs.UniversalDocumentSignature.Alias].Id].FirstRow;
+        Guid employeeId = signerRow.GetGuid(CardDefs.UniversalDocumentSignature.Signer).GetValueOrDefault();
+        StaffEmployee employee = (employeeId != Guid.Empty) ? ObjectContext.GetObject<StaffEmployee>(employeeId) : null;
+
+        if (employee == null)
+        {
+            return Resources.NoSignerData;
+        }
+
+        string certificateName = CertificateHelper.GetCertificateSignerName(certificate);
+        if (string.IsNullOrEmpty(certificateName))
+        {
+            return Resources.NoCertificateSignerData;
+        }
+
+        if (string.Compare($"{employee.LastName} {employee.FirstName} {employee.MiddleName}", certificateName, StringComparison.InvariantCultureIgnoreCase) != 0)
+        {
+            return Resources.DifferentSignerData;
+        }
+
+        return null;
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм загрузки данных 
+    // в карточку из приложенного файла титула продавца
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+    protected virtual void UpdateDocumentDataFromFile(Document document, DocumentFile documentFile)
+    {
+    }
+}
+----

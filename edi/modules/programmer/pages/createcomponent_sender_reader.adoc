@@ -1,0 +1,408 @@
+= Разработка компонента чтения данных карточки
+
+Компонент чтения данных предоставляет Модулю не зависящий от типа карточки слой получения данных из карточки, необходимых для формировании [.dfn .term]_Карточки обмена сообщениями_, а также вспомогательные методы, связанные с получением данных из карточек определенного типа.
+
+Компонент должен реализовывать программный интерфейс xref:IDocumentDataReader.adoc[IDocumentDataReader].
+
+Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseDataReader# (сборка [.ph .filepath]` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
+
+[source,pre,codeblock,language-csharp]
+----
+public abstract class BaseDataReaders : IDocumentDataReader
+{
+    // Инициализируем компонент чтения
+    // При инициализации получаем сервисы API Docsvision, которые потребуются в дальнейшем
+    public void Initialize(ObjectContext objectContext)
+    {
+        ObjectContext = objectContext;
+
+        UserSession = ObjectContext.GetService<UserSession>();
+
+        documentService = ObjectContext.GetService<IDocumentService>();
+    }
+
+    // Реализация метода получения дайджеста карточки
+    public string GetDigest(Guid cardId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        return document.Description;
+    }
+
+    // Реализация метода получения дайджест файла карточки
+    public string GetFileDigest(Guid cardId, Guid fileId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        DocumentFile documentFile = document.Files.FirstOrDefault(item => item.FileVersionRowId == fileId);
+        if (documentFile == null)
+        {
+            throw Error.InvalidOperation(Resources.FileNotExists, fileId, cardId);
+        }
+
+        return GetUniversalDocumentDescription(documentFile.FileVersionRowId, MessageFileType.File) ?? documentFile.FileName;
+    }
+
+    // Реализация метода получения содержимого файла карточки
+    // Для неформализованного документа реализация функциональности не требуется
+    // В стандартной реализации для УПД метод возвращает содержимое приложенного файла XML
+    public string GetFileContent(Guid cardId, Guid fileId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        DocumentFile documentFile = document.Files.FirstOrDefault(item => item.FileVersionRowId == fileId);
+        if (documentFile == null)
+        {
+            throw Error.InvalidOperation(Resources.FileNotExists, fileId, cardId);
+        }
+
+        if (!UserSession.FileManager.FileExists(documentFile.FileVersionRowId))
+        {
+            return null;
+        }
+
+        FileData fileData = UserSession.FileManager.GetFile(documentFile.FileVersionRowId);
+        using (Stream stream = fileData.OpenReadStream())
+        {
+            using (TextReader textReader = new StreamReader(stream))
+            {
+                return textReader.ReadToEnd();
+            }
+        }
+    }
+
+    // Реализация метода получения содержимое карточки для печати
+    // Для неформализованного документа реализация функциональности не требуется
+    // В стандартной реализации для УПД используется XSLT-преобразование данных карточки 
+    //  к печатной форме требуемого вида, отображаемой в карточке УПД
+    public string GetPrintFormContent(Guid cardId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        return GetUniversalDocumentPrintContent(document);
+    }
+
+    // Реализация метода получения дайджеста для файла ответа
+    public string GetReplyFileDigest(Guid cardId, Guid fileId, MessageFileType fileType)
+    {
+        return GetUniversalDocumentDescription(fileId, fileType);
+    }
+
+    public string GetReplyFileComment(Guid cardId, Guid fileId, MessageFileType fileType)
+    {
+        if (!UserSession.FileManager.FileExists(fileId))
+        {
+            return null;
+        }
+
+        try
+        {
+            FileData fileData = UserSession.FileManager.GetFile(fileId);
+            using (Stream stream = fileData.OpenReadStream())
+            {
+                switch (fileType)
+                {
+                    case MessageFileType.InvoiceCorrectionRequest:
+                    case MessageFileType.SignatureRejection:
+                        return InvoiceCorrectionNotice.GetComment(stream);
+                }
+            }
+        }
+        catch
+        {
+        }
+
+        return null;
+    }
+
+    // Реализация метода, возвращающего получателей электронного документа
+    // В качестве получателей выбираются все контрагенты из карточки Документ
+    public ItemCollection<DocumentRecipientData> GetAllRecipients(Guid cardId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        ItemCollection<DocumentRecipientData> recipients = new ItemCollection<DocumentRecipientData>();
+
+        var contractSection = document.GetSection(CardDocument.Contract.ID);
+        if (contractSection.Count == 0)
+        {
+            return recipients;
+        }
+
+        BaseCardSectionRow contractRow = (BaseCardSectionRow)contractSection[0];
+        Guid companyId = contractRow.GetGuid(CardDocument.Contract.PartnerCompany);
+        if (companyId == Guid.Empty)
+        {
+            return recipients;
+        }
+
+        PartnersCompany company = ObjectContext.GetObject<PartnersCompany>(companyId);
+        if (company != null)
+        {
+            recipients.Add(new DocumentRecipientData(ObjectContext.GetObjectRef(company).Id, company.Name));
+        }
+
+        return recipients;
+    }
+
+    // Реализация метода получения актуальных подписей (действительная подпись 
+    //  и действительный сертификат) карточки
+    public ItemCollection<DocumentSignature> GetActualSignatures(Guid cardId)
+    {
+        return null;
+    }
+
+    // Реализация метода получения всех приложенных к карточке файлов
+    public ItemCollection<DocumentFileData> GetAllFiles(Guid cardId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        return new ItemCollection<DocumentFileData>(document.Files.Where(CheckFile)
+            .Select(item => new DocumentFileData(item.FileVersionRowId, item.FileName, item.FileType == DocumentFileType.Main)));
+    }
+
+    // Реализация метода получения последних подписанных файлов
+    public ItemCollection<DocumentFileData> GetLastSignedFiles(Guid cardId)
+    {
+        return GetSignedFiles(cardId, Guid.Empty);
+    }
+
+    // Реализация метода получения файлов карточки, подписанных указанной подписью
+    public ItemCollection<DocumentFileData> GetSignedFiles(Guid cardId, Guid signatureGroupId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        if (document.MainInfo.SignatureList == null || !document.MainInfo.SignatureList.Signatures.Any())
+        {
+            return null;
+        }
+
+        BaseCardSignature lastSignature = signatureGroupId != Guid.Empty
+            ? document.MainInfo.SignatureList.Signatures.FirstOrDefault(item => ObjectContext.GetObjectRef(item).Id == signatureGroupId)
+            : document.MainInfo.SignatureList.Signatures.OrderByDescending(item => item.TimeStamp).FirstOrDefault();
+
+        if (lastSignature == null)
+        {
+            return null;
+        }
+
+        ItemCollection<DocumentFileData> result = new ItemCollection<DocumentFileData>();
+
+        foreach (DocumentFile documentFile in document.Files.Where(CheckFile))
+        {
+            if (UserSession.CardManager.GetCardState(documentFile.FileId) != ObjectState.Existing)
+            {
+                continue;
+            }
+
+            VersionedFileCard verFileCard = (VersionedFileCard)UserSession.CardManager.GetCard(documentFile.FileId);
+
+            // только подписанные отдельной подписью файлы
+            BaseCardSignaturePart filePart = lastSignature.Parts
+                .FirstOrDefault(item => item.FileVersion == verFileCard.CurrentVersion.VersionId &&
+                                                ((documentFile.FileType == DocumentFileType.Main &&
+                                                    documentService.IsDocumentSignaturePartMainFile(item)) ||
+                                                    (documentFile.FileType == DocumentFileType.Additional &&
+                                                    documentService.IsDocumentSignaturePartAttachments(item))));
+            if (filePart == null)
+            {
+                continue;
+            }
+
+            result.Add(new DocumentFileData(documentFile.FileVersionRowId, documentFile.FileName,
+                documentFile.FileType == DocumentFileType.Main, filePart.Signature));
+        }
+
+        return result;
+    }
+
+    // Реализация метода подготовки данных для создания сообщения электронного обмена
+    public MessageData PrepareMessageData(Guid cardId, string documentType, string documentVersion)
+    {
+        Document document = GetDocument(cardId);
+
+        if (document.MainInfo.SignatureList == null || !document.MainInfo.SignatureList.Signatures.Any())
+        {
+            throw Error.InvalidOperation(Resources.DocumentSignaturesNotExists, cardId);
+        }
+
+        MessageData messageData = new MessageData(cardId, documentType, documentVersion, document.MainInfo.Name);
+
+        DateTime? regDate = document.MainInfo[CardDocument.MainInfo.RegDate] as DateTime?;
+        messageData.DocumentDate = regDate ?? document.CreateDate;
+        messageData.DocumentComment = document.MainInfo[CardDocument.MainInfo.Content] as string;
+
+        Guid numberId = document.MainInfo.GetGuid(CardDocument.MainInfo.RegNumber);
+        if (numberId != Guid.Empty)
+        {
+            BaseCardNumber number = document.Numbers.FirstOrDefault(item => ObjectContext.GetObjectRef(item).Id == numberId);
+            if (number != null)
+            {
+                messageData.DocumentNumber = number.Number;
+            }
+        }
+
+        return messageData;
+    }
+
+    // Реализация метода подготовки файла сообщения электронного обмена
+    // Если метод возвращает null будет использована стандартная реализация функции 
+    //  получения MessageFile
+    // Если требуется, может быть реализован собственный метод получения MessageFile 
+    //  (см. описание класса MessageFile)
+
+    public MessageFile PrepareFileData(Guid cardId, Guid fileId, Guid signatureId, bool isMain, string tempFolder)
+    {
+        // по умолчанию выгружаем файл по Id непосредственно при создании сообщения
+        return null;
+    }
+
+    // Реализация метода проверки подписи
+    public SignatureValidation ValidateSignature(Guid cardId, Guid fileId, Guid signatureId)
+    {
+        if (cardId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("cardId");
+        }
+
+        if (fileId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("fileId");
+        }
+
+        if (signatureId == Guid.Empty)
+        {
+            throw Error.ArgumentNull("signatureId");
+        }
+
+        if (!UserSession.FileManager.FileExists(fileId))
+        {
+            return null;
+        }
+
+        byte[] signatureData = null;
+        try
+        {
+            signatureData = UserSession.AccessManager.GetCryptObject(signatureId);
+        }
+        catch
+        {
+        }
+        if (signatureData == null)
+        {
+            return null;
+        }
+
+        string signerName = null;
+        X509Certificate2 certificate = null;
+        bool isValid = false;
+        bool isCertificateValid = false;
+        string validationError = null;
+
+        try
+        {
+            FileData fileData = UserSession.FileManager.GetFile(fileId);
+            using (Stream stream = fileData.OpenReadStream())
+            {
+                using (BinaryReader reader = new BinaryReader(stream))
+                {
+                    ContentInfo contentInfo = new ContentInfo(reader.ReadBytes((int)reader.BaseStream.Length));
+                    SignedCms signedCms = new SignedCms(contentInfo, true);
+                    signedCms.Decode(signatureData);
+
+                    if (signedCms.SignerInfos.Count == 0 || signedCms.Certificates.Count == 0)
+                    {
+                        return null;
+                    }
+
+                    certificate = signedCms.Certificates[0];
+                    signerName = CertificateHelper.GetCertificateSignerName(certificate);
+
+                    signedCms.CheckSignature(false);
+                    isValid = true;
+
+                    signedCms.CheckSignature(new X509Certificate2Collection(certificate), true);
+                    isCertificateValid = true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            validationError = ex.Message;
+        }
+
+        return new SignatureValidation(isValid, isCertificateValid, certificate, signerName, validationError);
+    }
+
+
+    // Реализация метода формирования содержимого для ответного сообщения.
+    // Используется при формировании ответа на полученный формализованный документ
+    public string GetInvoiceReplyData(Guid cardId)
+    {
+        Document document = GetDocument(cardId);
+        if (document == null)
+        {
+            throw Error.InvalidOperation(Resources.DocumentNotExists, cardId);
+        }
+
+        return GetInvoiceReplyData(document);
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм проверки ЭП файла
+    protected virtual bool CheckFile(DocumentFile documentFile)
+    {
+        return false;
+    }
+
+    // В своей реализации можно переопределить метод, добавив алгоритм получения описания 
+    //  для файла fileId в зависимости от типа сообщения
+    protected virtual string GetUniversalDocumentDescription(Guid fileId, MessageFileType fileType)
+    {
+        return null;
+    }
+
+    // В своей реализации нужно переопределить метод, добавив алгоритм формирования 
+    //  печатной формы для документа document
+    protected virtual string GetUniversalDocumentPrintContent(Document document)
+    {
+        return null;
+    }
+
+    // В своей реализации нужно переопределить метода, добавив алгоритм формирования содержимого 
+    //  для ответного сообщения на полученный формализованный документ
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceDataReader 
+    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+    protected virtual string GetInvoiceReplyData(Document document)
+    {
+        return null;
+    }
+}
+----

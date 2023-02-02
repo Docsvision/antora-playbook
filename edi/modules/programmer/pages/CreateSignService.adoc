@@ -1,0 +1,55 @@
+= Разработка компонента сервиса подписей
+
+Компонент сервиса подписей предоставляет Модулю зависящий от оператора ЭДО слой подписание отправляемых электронных сообщений.
+
+Данный компонент должен реализовывать программный интерфейс xref:ISignatureService.adoc[ISignatureService]. Методы реализуемого интерфейса вызываются при подписании электронных сообщений, отправляемых оператору ЭДО.
+
+Вариант реализации данного компонента содержится в сборке [.ph .filepath]`DocsVision.Edi.Runtime.BackOffice.dll`.
+
+Далее приведена часть исходного кода стандартной реализации компонента сервиса подписей.
+
+[source,pre,codeblock]
+----
+public class SignatureService : ISignatureService
+{
+    public void Initialize(ObjectContext objectContext)
+    {
+        this.objectContext = objectContext;
+
+        baseCardService = this.objectContext.GetService<IBaseCardService>();
+    }
+
+    // Реализация метода подписания текстового комментария
+    public Guid CreateCommentSignature(string commentText, X509Certificate2 certificate)
+    {
+        using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(commentText)))
+        {
+            byte[] signature = baseCardService.ComputeSignature(stream, certificate);
+            return objectContext.GetService<UserSession>().AccessManager.StoreSignature(Guid.NewGuid(), signature, certificate.Thumbprint);
+        }
+    }
+
+    // Реализация метода подписания файла сообщения
+    public void CreateFileSignature(MessageFile messageFile, X509Certificate2 certificate)
+    {
+        // Подписываемые данные могут быть получены непосредственно из файла сообщения (messageFile.FileData) 
+        //   или с файловой системы (messageFile.FilePath)
+        if (messageFile.FileData != null && messageFile.FileData.Length > 0)
+        {
+            using (MemoryStream stream = new MemoryStream(messageFile.FileData))
+            {
+                byte[] signature = baseCardService.ComputeSignature(stream, certificate);
+                messageFile.SignatureData = signature;
+            }
+        }
+        else if (!string.IsNullOrEmpty(messageFile.FilePath))
+        {
+            using (Stream fileStream = new FileStream(messageFile.FilePath, FileMode.Open))
+            {
+                byte[] signature = baseCardService.ComputeSignature(fileStream, certificate);
+                messageFile.SignatureData = signature;
+            }
+        }
+    }
+}
+----

@@ -1,0 +1,51 @@
+= ISignatureService - интерфейс
+
+Интерфейс [.keyword .apiname]#ISignatureService# определяет методы, которые должен реализовывать компонент xref:CreateSignService.adoc[сервиса подписей].
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.Interfaces
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.Interfaces.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public interface ISignatureService
+----
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|CreateCommentSignature(String, X509Certificate2) a|
+Создаёт в Docsvision подпись для текстового сообщения. Метод должен вернуть идентификатор созданной подписи.
+
+Тип возвращаемого значения: Guid
+
+Параметры:
+
+* commentText – подписываемое текстовое сообщение
+* certificate – сертификат подписи
+
+В стандартной конфигурации Модуля метод вызывается, например, при подписании комментария к отказу в подписании полученного документа.
+
+|CreateFileSignature(MessageFile, X509Certificate2) a|
+Создаёт в Docsvision подпись для файла сообщения. Метод должен вернуть идентификатор созданной подписи.
+
+Тип возвращаемого значения: Guid
+
+Параметры:
+
+* messageFile – подписываемый файл
+* certificate – сертификат подписи
+
+В стандартной конфигурации Модуля метод вызывается, например, при подписании файла сообщения с запросом уточнения для полученного документа.
+
+|Initialize(ObjectContext) a|
+Инициализирует экземпляр компонента сервиса подписей.
+
+Параметры:
+
+* objectContext – контекст объектов
+
+|===

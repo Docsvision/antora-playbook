@@ -1,0 +1,63 @@
+= DocumentSignature - класс
+
+Содержит данные подписи документа.
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.Entities
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.Interfaces.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class DocumentSignature
+----
+
+=== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|DocumentSignature(Guid, DateTime, String, String, X509Certificate2) a|
+Инициализирует новый экземпляр класса DocumentSignature.
+
+Параметры:
+
+* id - идентификатор подписи в Docsvision
+* date - штамп времени подписи
+* signerName - отображаемое имя подписавшего
+* label - локализованное название метки подписи
+* certificate - сертификат подписи
+
+|===
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|Certificate a|
+Возвращает сертификат подписи.
+
+Тип: [.keyword .apiname]#X509Certificate2#
+
+|Date a|
+Возвращает штамп времени подписи.
+
+Тип: [.keyword .apiname]#DateTime#
+
+|Id a|
+Возвращает идентификатор подписи в Docsvision.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|Label a|
+Возвращает локализованное название метки подписи.
+
+Тип: [.keyword .apiname]#System.String#
+
+|SignerName a|
+Возвращает отображаемое имя подписавшего.
+
+Тип: [.keyword .apiname]#System.String#
+
+|===

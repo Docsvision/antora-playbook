@@ -1,0 +1,196 @@
+= Разработка компонента сервиса сообщений
+
+Компонент сервиса сообщений предоставляет Модулю не зависящий от оператора ЭДО слой отправки и получения электронных сообщений.
+
+Компонент данного типа непосредственно взаимодействует с оператором ЭДО. При взаимодействии выполняется передача и получение сообщений электронного обмена, в т.ч. содержащих электронные документы (входящие и исходящие).
+
+Данный компонент должен реализовывать программный интерфейс xref:IMessageService.adoc[IMessageService]. Методы реализуемого интерфейса вызываются при получении и отправке сообщений оператору ЭДО.
+
+Вариант реализации данного компонента содержится в сборке [.ph .filepath]`DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке "Коннектор к Диадок").
+
+Фактическая реализация компонента сервиса сообщений сильно зависит от метода взаимодействия с оператором ЭДО и предоставляемого им API.
+
+Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса [.keyword .apiname]#IMessageService# для работы с оператором Диадок.
+
+[source,pre,codeblock,language-csharp]
+----
+// Компонент сервиса сообщение 
+public class MessagesService: IMessageService
+{
+  
+    // Точка доступа к API Диадок
+    private DiadocSession DiadocSession
+    {
+        get
+        {
+            if (diadocSession != null && !diadocSession.IsAlive())
+            {
+                diadocSession = null;
+            }
+
+            if (diadocSession == null)
+            {
+                if (!settings.ContainsKey(DiadocSettings.ApiUrl))
+                {
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+                }
+
+                if (!settings.ContainsKey(DiadocSettings.Login))
+                {
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+                }
+
+                diadocSession = new DiadocSession(
+                    settings[DiadocSettings.ApiUrl],
+                    settings[DiadocSettings.Login],
+                    settings[DiadocSettings.Password],
+                    settings.ContainsKey(DiadocSettings.ProxyUrl) ? settings[DiadocSettings.ProxyUrl] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyLogin) ? settings[DiadocSettings.ProxyLogin] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyPassword) ? settings[DiadocSettings.ProxyPassword] : null);
+            }
+
+            return diadocSession;
+        }
+    }
+    /* Реализация интерфейса IMessageService */
+
+    // Инициализация компонента
+    public void Initialize(Dictionary<string, string> settings)
+    {
+        this.settings = settings;
+    }
+        
+    // Реализация метода отправки сообщения оператору ЭДО
+    public void SendMessage(MessageData messageData)
+    {
+        DiadocSession.SendMessage(messageData);
+    }
+
+    // Реализация метода отправки ответной подписи 
+    public void SendSignatureReply(MessageData messageData)
+    {
+        DiadocSession.SendSignatureReply(messageData);
+    }
+
+    // Реализация метода отправки квитанции
+    public void SendReceipt(MessageData messageData)
+    {
+        DiadocSession.SendReceipt(messageData);
+    }
+
+    // Реализация метода отправки запроса на аннулирование
+    public void SendRevocation(MessageData messageData)
+    {
+        DiadocSession.SendRevocation(messageData);
+    }
+
+    // Реализация метода отправки запроса на уточнение
+    public void SendCorrection(MessageData messageData)
+    {
+        DiadocSession.SendCorrection(messageData);
+    }
+
+    // Реализация метода получении количества новых событий
+    public int GetNewEventsCount(string boxId, string lastEventId)
+    {
+        return DiadocSession.GetNewEventsCount(boxId, lastEventId);
+    }
+
+    // Реализация метода получения идентификатора последнего события в ящике организации
+    public string GetLastEventId(string boxId)
+    {
+        return DiadocSession.GetLastEventId(boxId, null);
+    }
+
+    // Реализация метода проверки наличия события в ящике
+    public bool EventExists(string boxId, string eventId)
+    {
+        return DiadocSession.EventExists(boxId, eventId);
+    }
+
+    // Реализация метода получения новых событий из ящика
+    public ItemCollection<MessageData> GetNewEvents(string boxId, string lastEventId, DateTime? fromDate)
+    {
+        return DiadocSession.GetNewEvents(boxId, lastEventId, fromDate);
+    }
+
+    // Реализация метода формирования извещения
+    public MessageFile GenerateInvoiceReceipt(string boxId, string messageId, string entityId, X509Certificate2 certificate, string positionName)
+    {
+        return DiadocSession.GenerateInvoiceReceipt(boxId, messageId, entityId, certificate, positionName);
+    }
+
+    // Реализация метода формирования запроса на аннулирование
+    public MessageFile GenerateRevocationRequest(string boxId, string messageId, string entityId,
+        X509Certificate2 certificate, string positionName, string comment)
+    {
+        return DiadocSession.GenerateRevocationRequest(boxId, messageId, entityId, certificate, positionName, comment);
+    }
+
+    // Реализация метода формирования ответной подписи для поступившего документа
+    public MessageFile GenerateInvoiceReply(string boxId, string messageId, string entityId, X509Certificate2 certificate, string documentType, string replyData)
+    {
+        return DiadocSession.GenerateInvoiceReply(boxId, messageId, entityId, certificate, documentType, replyData);
+    }
+
+    // Реализация метода формирования сообщения с отказом в подписании
+    public MessageFile GenerateSignatureRejection(string boxId, string messageId, string entityId,
+        X509Certificate2 certificate, string positionName, string comment)
+    {
+        return DiadocSession.GenerateSignatureRejection(boxId, messageId, entityId, certificate, positionName, comment);
+    }
+
+    // Реализация метода формирования запроса на уточнение
+    public MessageFile GenerateCorrectionRequest(string boxId, string messageId, string entityId,
+        X509Certificate2 certificate, string positionName, string comment)
+    {
+        return DiadocSession.GenerateCorrectionRequest(boxId, messageId, entityId, certificate, positionName, comment);
+    }
+}
+----
+
+Далее приведена часть исходного кода класса [.keyword .apiname]#DiadocSession#, в котором показан принцип взаимодействия с оператором ЭДО через его API на примере получения идентификатора последнего сообщения.
+
+[source,pre,codeblock,language-csharp]
+----
+public class DiadocSession 
+{
+    // DiadocApi - объект API Диадок, проксирующий работу с веб-сервисом Диадок
+    // Описание API Диадок приведено на странице с документацией Диадок API>
+    private readonly DiadocApi DiadocApi;
+    private readonly string AuthToken;
+
+       public DiadocSession(string apiUrl, string login, string password, string proxyUrl, string proxyLogin, string proxyPassword)
+    {
+        WinApiCrypt diadocCrypt = new WinApiCrypt();
+        DiadocApi = new DiadocApi(DefaultClientId, apiUrl, diadocCrypt);
+
+        if (!string.IsNullOrEmpty(proxyUrl))
+        {
+            DiadocApi.DisableSystemProxyUsage();
+            DiadocApi.SetProxyUri(proxyUrl);
+            if (!string.IsNullOrEmpty(proxyLogin))
+                DiadocApi.SetProxyCredentials(proxyLogin, proxyPassword);
+        }
+
+        AuthToken = DiadocApi.Authenticate(login, password);
+    }
+
+       // Получаем идентификатор последнего события в ящике организации
+       public string GetLastEventId(string boxId, string lastEventId)
+    {
+        while (true)
+        {
+            BoxEventList eventList = DiadocApi.GetNewEvents(AuthToken, boxId, lastEventId);
+            if (eventList == null || eventList.TotalCount == 0)
+                return lastEventId;
+
+            lastEventId = eventList.Events[eventList.Events.Count - 1].EventId;
+            if (eventList.TotalCount == eventList.Events.Count)
+                return lastEventId;
+        }
+    }
+
+}
+----
+

@@ -1,0 +1,97 @@
+= Разработка компонента импорта настроек организации из системы оператора ЭДО
+
+Компонент импорта предоставляет Модулю зависящий не от оператора ЭДО слой получения списка подразделений организации, контрагентов и ящиков, зарегистрированных в системе оператора ЭДО. Информация, предоставляемая данным компонентом, требуется для определения связей между контрагентами, зарегистрированными в системе Docsvision, и контрагентами организации в системе оператора ЭДО.
+
+Данный компонент должен реализовывать программный интерфейс xref:IImportService.adoc[IImportService]. Методы реализуемого интерфейса вызываются из компонента [.dfn .term]_Справочника настроек операторов ЮЗДО_ при загрузке подразделений и ящиков организации, контрагентов и ящиков контрагентов.
+
+Реализация данного компонента, получающего информацию от оператора Диадок, содержится в сборке [.ph .filepath]`DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке "Коннектор к Диадок").
+
+Фактическая реализация компонента импорта сильно зависит от метода взаимодействия с оператором ЭДО и предоставляемого им API.
+
+Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса [.keyword .apiname]#ImportService# для работы с оператором Диадок.
+
+[source,pre,codeblock,language-csharp]
+----
+public class ImportService : IImportService
+{
+    // Точка подключения к API Диадок
+    private DiadocSession DiadocSession
+    {
+        get
+        {
+            if (diadocSession != null && !diadocSession.IsAlive())
+                diadocSession = null;
+
+            if (diadocSession == null)
+            {
+                if (!settings.ContainsKey(DiadocSettings.ApiUrl))
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+                if (!settings.ContainsKey(DiadocSettings.Login))
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+
+                diadocSession = new DiadocSession(
+                    settings[DiadocSettings.ApiUrl],
+                    settings[DiadocSettings.Login],
+                    settings[DiadocSettings.Password],
+                    settings.ContainsKey(DiadocSettings.ProxyUrl) ? settings[DiadocSettings.ProxyUrl] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyLogin) ? settings[DiadocSettings.ProxyLogin] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyPassword) ? settings[DiadocSettings.ProxyPassword] : null);
+            }
+
+            return diadocSession;
+        }
+    }
+
+
+    /* Реализация интерфейса IImportService */
+
+    // Реализация метода инициализации компонента
+    public void Initialize(Dictionary<string, string> settings)
+    {
+        // Загрузка настроек
+        this.settings = settings;
+    }
+
+
+    // Реализация метода получения от оператора ЭДО списка организаций
+    public ItemCollection<Unit> ImportUnits()
+    {
+        return DiadocSession.ImportUnits();
+    }
+
+    // Реализация метода получения от оператора ЭДО списка контраентов
+    public ItemCollection<Partner> ImportPartners()
+    {
+        return DiadocSession.ImportPartners();
+    }
+}
+----
+
+Далее приведена часть исходного кода класса [.keyword .apiname]#DiadocSession#, показывающая принцип взаимодействия с оператором ЭДО через его API на примере загрузки данных организации.
+
+[source,pre,codeblock,language-csharp]
+----
+internal class DiadocSession {
+ private readonly DiadocApi diadocApi;
+ private readonly string authToken;
+
+ public DiadocSession(string apiUrl, string login, string password) {
+  
+  // Подключаемся и авторизуемся в Диадок
+  WinApiCrypt diadocCrypt = new WinApiCrypt();
+  diadocApi = new DiadocApi(DefaultClientId, apiUrl, diadocCrypt);
+  authToken = diadocApi.Authenticate(login, password);
+ }
+
+ // Получаем данные подразделений организации
+ public ItemCollection<Unit> ImportUnits() {
+  ItemCollection<Unit> units = new ItemCollection<Unit>();
+
+  // Получаем подразделения организации с помощью метода GetMyOrganizations API Диадок метод
+  units.AddRange(diadocApi.GetMyOrganizations(authToken).Organizations.Select(GetUnit));
+  return units;
+ }
+
+ /* Часть кода пропущена */
+}
+----

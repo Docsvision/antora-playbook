@@ -1,0 +1,212 @@
+= Настройка ленты карточек для нового вида формализованных документов
+
+Администратор может настроить собственные виды карточек для работы с формализованными документами. При этом добавляемые виды должны быть дочерними видами видов "Входящий УПД" или "Исходящий УПД".
+
+Ленты карточек видов "Входящий УПД" и "Исходящий УПД" содержат команды для вызова стандартных функций обработки формализованных документов. В собственных видах могут использоваться функции, унаследованные от родительских видов, или разработаны (например, добавлена дополнительная проверки данных) собственные.
+
+Ниже приведен упрощенный код функции, вызываемых командами ленты карточек. Полный код смотрите в скриптах карточек соответствующих родительских видов.
+
+* *Входящий УПД и подвиды.*
+** "Подписать документ":
++
+[source,pre,codeblock]
+----
+private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendInvoiceReplySignature();
+}
+----
+** "Отказать в подписании":
++
+[source,pre,codeblock]
+----
+private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendInvoiceReplyRejection();
+}
+----
+** "Запросить аннулирование"
++
+[source,pre,codeblock]
+----
+private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendRevocation();
+}
+----
+** "Подтвердить аннулирование"
++
+[source,pre,codeblock]
+----
+private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationSignature();
+}
+----
+** "Отказать в аннулировании"
++
+[source,pre,codeblock]
+----
+private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationRejection();
+}
+----
+** "Запросить уточнение":
++
+[source,pre,codeblock]
+----
+private void RequestForCorrection_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendCorrection()
+}
+----
+** "Печать" – выводить на печать печатную форму формализованного документа:
++
+[source,pre,codeblock]
+----
+private void Print_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    // В параметре метода указывается название шаблона печати:
+    //  "UniInvoiceRU" – стандартный шаблон для Входящий УПД и Формализованный акт
+    //  "UniInvoiceCorrectionRU" – стандартный шаблон для Входящего УКД
+    EdiScriptHelper.PrintInvoice("UniInvoiceRU");
+}
+----
+** Обновление печатной формы (вкладка "Печатная форма"). Данная функция должна вызываться при активации карточки ("CardActivated").
++
+[source,pre,codeblock]
+----
+public virtual void FillInvoiceControl()
+{
+    // В первом параметре ("HTMLBrowser") должно быть указано название обновляемого элемента управления 
+    //   с типом HTML браузер
+    // Во втором параметре ("UniInvoiceRU") должно быть указано название шаблона печати для обновления 
+    // Названия стандартных шаблонов аналогичны приведенным для Печати
+    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU");
+}
+----
+* *Исходящий УПД и подвиды.*
+** "Подписать и отправить" – выдаёт запрос на подписание документа квалифицированной ЭП (электронной подписью) и формирует электронное сообщение с документом для отправки оператору ЭДО.
++
+[source,pre,codeblock]
+----
+private void SignedAndSent_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    CardControl.Save();
+    if (EdiScriptHelper.SignAndSendInvoice())
+    {
+        ChangeCardState("SignedAndSent");
+    }
+}
+----
+** "Заполнить данные из файла" – загружает в карточку данные из приложенного основного файла – XML-файл формализованного документа, сформированный в Диадок.
++
+[source,pre,codeblock]
+----
+private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    CardControl.Save();
+    EdiScriptHelper.UpdateDocumentDataFromInvoice();
+    RefreshControls();
+}
+----
+** "Запросить аннулирование":
++
+[source,pre,codeblock]
+----
+private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendRevocation();
+}
+----
+** "Подтвердить аннулирование":
++
+[source,pre,codeblock]
+----
+private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationSignature();
+}
+----
+** "Отказать в аннулировании":
++
+[source,pre,codeblock]
+----
+private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationRejection();
+}
+----
+** "Печать":
++
+[source,pre,codeblock]
+----
+private void PrintUPD_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    // В параметре метода указывается название шаблона печати:
+    //  "UniInvoiceRU" – стандартный шаблон для Исходящий УПД и Исправление УПД
+    //  "UniInvoiceCorrectionRu" – стандартный шаблон для Исходящий УКД
+    EdiScriptHelper.PrintInvoice("UniInvoiceRU");
+}
+----
+** Обновление печатной формы (вкладка "Печатная форма"). Данная функция должна вызываться при активации карточки ("CardActivated").
++
+[source,pre,codeblock]
+----
+public virtual void FillInvoiceControl()
+{
+    // В первом параметре ("HTMLBrowser") должно быть указано название обновляемого элемента управления 
+    //   с типом HTML браузер
+    // Во втором параметре ("UniInvoiceRU") должно быть указано название шаблона печати для обновления 
+    // Названия стандартных шаблонов аналогичны приведенным для Печати
+    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU");
+}
+----
+
+В приведенном коде EdiScriptHelper объявлен в корневом виде "УПД":
+
+[source,pre,codeblock]
+----
+public EdiScriptHelper EdiScriptHelper
+{
+    get
+    {
+        if (ediScriptHelper == null)
+            ediScriptHelper = new EdiScriptHelper(CardControl);
+
+        return ediScriptHelper;
+    }
+}
+----
+
+Для работы указанных методов к скрипту карточки должны подключены сборки [.ph .filepath]`DocsVision.Edi.DocumentScript.dll` и [.ph .filepath]`Docsvision.DocumentsManagement.dll` (располагаются в каталоге клиента Docsvision). В объявление пространств имен нужно добавить строки:
+
+[source,pre,codeblock]
+----
+using DocsVision.Edi.DocumentScript;
+using Docsvision.DocumentsManagement;
+----
+
+Для добавленных на ленту кнопок можно добавить методы их скрытия/отображения в зависимости от статуса обмена – проверяется с помощью методов:
+
+* [.keyword .apiname]#IsSignatureReplyAvailable# – проверяет возможность подписания документа или отказа в подписании, принимает значение TRUE, если документ в статусе "Получен на подпись от контрагента";
+* [.keyword .apiname]#IsRevocationReplyAvailable# – проверяет возможность аннулирования документа или отказа в аннулировании; принимает значение TRUE, если документ в статусе "Получен запрос на аннулирование";
+* [.keyword .apiname]#IsRevocationRequestAvailable# – проверяет возможность создания запроса на аннулирование документа, принимает значение TRUE, если документ в статусе "Получен от контрагента", "Отправлена ответная подпись контрагенту" или "Отправлен контрагенту";
+* [.keyword .apiname]#IsReceiptReplyAvailable# – проверяет возможность создания ответной квитанции.
+
+Методы могут вызываться при открытии карточки. Методы не изменяют состояние видимости кнопок ленты – необходимо реализовать самостоятельно.
+
+[[AddNewFormalDocumentsType__section_h3m_mqs_3jb]]
+=== Собственный вид, не унаследованный от Входящий УПД или Исходящий УПД
+
+Если требуется создать вид, не наследующий состояния от Входящий УПД или Исходящий УПД, необходимо самостоятельно добавить в его автомат состояний следующие состояния:
+
+* "Получена подпись от контрагента" c идентификатором встроенного состояния (поле BuildInState) "FF1346D7-93F0-4CA3-93F8-5AE47BCD41DD";
+* "Получен отказ от контрагента" c идентификатором встроенного состояния "D136A114-7C59-4C6E-AB12-5348B4883AB9";
+* "Требуется уточнение" c идентификатором встроенного состояния "9F8A156B-68EE-4543-9527-BF47B613330E";
+* "Запрошено аннулирование" c идентификатором встроенного состояния "E3ED8CD1-8D9E-4332-B2D3-0EE5B9FE5A10";
+* "Аннулирование подтверждено" c идентификатором встроенного состояния "D5CC4959-5E45-4F31-B630-F2C3613EDCB7";
+* "В аннулировании отказано" c идентификатором встроенного состояния "ED9B6929-BD9C-496B-B8A7-D9597B1BA5CA".
+
+Также потребуется добавить в разметку элементы управления с типами и названиями, которые используются в видах Входящий УПД или Исходящий УПД

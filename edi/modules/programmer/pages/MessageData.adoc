@@ -1,0 +1,116 @@
+= MessageData - класс
+
+Содержит данные сообщения электронного обмена с оператором ЭДО.
+
+* [.keyword]*Пространство имен:* DocsVision.Edi.Entities
+* [.keyword]*Сборка:* [.ph .filepath]`DocsVision.Edi.Interfaces.dll`
+
+=== Синтаксис
+
+[source,pre,codeblock,language-csharp]
+----
+public class MessageData
+----
+
+=== Конструкторы
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|MessageData(Guid) a|
+Инициализирует новый экземпляр класса MessageData.
+
+Параметры:
+
+* cardId - идентификатор карточки
+
+|MessageData(Guid, String) a|
+Инициализирует новый экземпляр класса MessageData.
+
+Параметры:
+
+* cardId - идентификатор карточки
+* documentName - название документа
+
+|MessageData(String, String, Boolean) a|
+Инициализирует новый экземпляр класса MessageData по данным входящего сообщения.
+
+Параметры:
+
+* operatorEventId - идентификатор события у оператора ЭДО
+* operatorMessageId - идентификатор сообщения у оператора ЭДО
+* isPatch - является дополнением к имеющемуся сообщению
+
+|===
+
+=== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+|AdditonalAttributes a|
+Возвращает коллекцию дополнительных атрибутов.
+
+Тип: ItemCollection<MessageAdditonalAttribute>
+
+|CardId a|
+Задает или возвращает идентификатор карточки, по которой получено сообщение.
+
+Тип: [.keyword .apiname]#System.Guid#
+
+|DocumentComment a|
+Задает или возвращает содержание документа.
+
+Тип: [.keyword .apiname]#System.String#
+
+|DocumentDate a|
+Задает или возвращает дату регистрации или дату создания документа.
+
+Тип: DateTime?
+
+|DocumentFiles a|
+Возвращает коллекцию файлов сообщения.
+
+Тип: ItemCollection<xref:MessageFile.adoc[MessageFile]>
+
+|DocumentName a|
+Задает или возвращает название документа.
+
+Тип: [.keyword .apiname]#System.String#
+
+|DocumentNumber a|
+Задает или возвращает регистрационный номер документа.
+
+Тип: [.keyword .apiname]#System.String#
+
+|IsPatch a|
+Задает или возвращает флаг, указывающий является ли данное сообщение дополнением к имеющемуся сообщению: true - является, false - не является.
+
+Тип: Boolean
+
+|OperatorDate a|
+Задает или возвращает штамп времени оператора ЭДО.
+
+Тип: DateTime
+
+|OperatorEventId a|
+Задает или возвращает идентификатор события у оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|OperatorMessageId a|
+Задает или возвращает идентификатор сообщения у оператора ЭДО.
+
+Тип: [.keyword .apiname]#System.String#
+
+|Recipient a|
+Задает или возвращает данные получателя сообщения.
+
+Тип: xref:MessageAddress.adoc[MessageAddress]
+
+|Sender a|
+Задает или возвращает данные отправителя сообщения.
+
+Тип: xref:MessageAddress.adoc[MessageAddress]
+
+|===
