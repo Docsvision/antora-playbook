@@ -1,17 +1,17 @@
 = Разработка компонента изменения данных карточки
 
-Компонент изменения данных предоставляет Модулю не зависящий от типа карточки слой изменения данных карточки, обеспечивающий возможность внесения изменения при получении ответа от контрагента.
+Компонент изменения данных предоставляет модулю не зависящий от типа карточки слой изменения данных карточки, обеспечивающий возможность внесения изменения при получении ответа от контрагента.
 
 Компонент должен реализовывать программный интерфейс xref:IDocumentUpdater.adoc[IDocumentUpdater].
 
-Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseUpdater# (сборка [.ph .filepath]` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
+Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseUpdater# (сборка ` {dv}.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
 
 [source,pre,codeblock,language-csharp]
 ----
 public abstract class BaseUpdater : IDocumentUpdater
 {
     // Инициализируем компонент отправки
-    // При инициализации получаем сервисы API Docsvision, которые потребуются в дальнейшем
+    // При инициализации получаем сервисы API {dv}, которые потребуются в дальнейшем
     public void Initialize(ObjectContext objectContext)
     {
         ObjectContext = objectContext;
@@ -208,8 +208,8 @@ public abstract class BaseUpdater : IDocumentUpdater
     }
 
     // В своей реализации нужно переопределить метод, добавив алгоритм обновления титула продавца
-    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater 
-    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+    // Пример реализации в классе {dv}.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater
+    //  (сборка {dv}.Edi.Runtime.UniversalDocument.dll)
     protected virtual void UpdateInvoiceFile(Document document, DocumentFile documentFile, X509Certificate2 certificate)
     {
     }
@@ -250,7 +250,7 @@ public abstract class BaseUpdater : IDocumentUpdater
 
     // В своей реализации нужно переопределить метод, добавив алгоритм загрузки данных 
     // в карточку из приложенного файла титула продавца
-    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+    // Пример реализации в классе {dv}.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка {dv}.Edi.Runtime.UniversalDocument.dll)
     protected virtual void UpdateDocumentDataFromFile(Document document, DocumentFile documentFile)
     {
     }
