@@ -4,9 +4,9 @@
 
 Компонент должен реализовывать программный интерфейс xref:IDocumentUpdater.adoc[IDocumentUpdater].
 
-Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseUpdater# (сборка ` {dv}.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
+Рекомендуется создавать свой компонент на основе абстрактного класса BaseUpdater# (сборка ` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса BaseDataReader# с описанием.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class BaseUpdater : IDocumentUpdater
 {
@@ -208,8 +208,8 @@ public abstract class BaseUpdater : IDocumentUpdater
     }
 
     // В своей реализации нужно переопределить метод, добавив алгоритм обновления титула продавца
-    // Пример реализации в классе {dv}.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater
-    //  (сборка {dv}.Edi.Runtime.UniversalDocument.dll)
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater
+    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
     protected virtual void UpdateInvoiceFile(Document document, DocumentFile documentFile, X509Certificate2 certificate)
     {
     }
@@ -250,7 +250,7 @@ public abstract class BaseUpdater : IDocumentUpdater
 
     // В своей реализации нужно переопределить метод, добавив алгоритм загрузки данных 
     // в карточку из приложенного файла титула продавца
-    // Пример реализации в классе {dv}.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка {dv}.Edi.Runtime.UniversalDocument.dll)
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
     protected virtual void UpdateDocumentDataFromFile(Document document, DocumentFile documentFile)
     {
     }

@@ -1,8 +1,8 @@
 = Разработка компонента сервиса ответных сообщений
 
-Далее приведена часть исходного кода (только публичные методы) примера реализации класса [.keyword .apiname]#OutgoingMessagesService# для отправки ответа на неформализованный документ.
+Далее приведена часть исходного кода (только публичные методы) примера реализации класса OutgoingMessagesService# для отправки ответа на неформализованный документ.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // сервис отправки исходящих событий
 OutgoingMessagesService outgoingMessagesService = new OutgoingMessagesService(cardControl.ObjectContext);
@@ -40,7 +40,7 @@ else
 
 Далее приведён пример отправки отказа от подписи, сервисы те же, что в предыдущем примере:
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 // commentText - причина отказа, X509Certificate2 certificate - сертификат
 outgoingMessagesService.CreateOutgoingRejectionReplies(cardId, commentText, certificate);
@@ -48,7 +48,7 @@ outgoingMessagesService.CreateOutgoingRejectionReplies(cardId, commentText, cert
 
 Следующий пример демонстрирует отправку положительного ответа на УПД или УКД:
 
-[source,pre,codeblock]
+[source,csharp]
 ----
 // получение данных ответа для ответа из карточки
 string invoiceReplyData = dataReaderService.GetInvoiceReplyData(cardId);

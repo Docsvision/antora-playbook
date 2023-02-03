@@ -4,9 +4,9 @@
 
 Компонент должен реализовывать программный интерфейс xref:IDocumentDataReader.adoc[IDocumentDataReader].
 
-Рекомендуется создавать свой компонент на основе абстрактного класса [.keyword .apiname]#BaseDataReader# (сборка ` {dv}.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса [.keyword .apiname]#BaseDataReader# с описанием.
+Рекомендуется создавать свой компонент на основе абстрактного класса BaseDataReader# (сборка ` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса BaseDataReader# с описанием.
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public abstract class BaseDataReaders : IDocumentDataReader
 {
@@ -398,8 +398,8 @@ public abstract class BaseDataReaders : IDocumentDataReader
 
     // В своей реализации нужно переопределить метода, добавив алгоритм формирования содержимого 
     //  для ответного сообщения на полученный формализованный документ
-    // Пример реализации в классе {dv}.Edi.Runtime.UniversalDocument.BuyerInvoiceDataReader
-    //  (сборка {dv}.Edi.Runtime.UniversalDocument.dll)
+    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceDataReader
+    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
     protected virtual string GetInvoiceReplyData(Document document)
     {
         return null;

@@ -1,13 +1,13 @@
 = IDocumentCreator - интерфейс
 
-Интерфейс [.keyword .apiname]#IDocumentCreator# определяет методы, которые должен реализовывать компонент xref:createcomponent_doccreator.adoc[создания документов].
+Интерфейс IDocumentCreator# определяет методы, которые должен реализовывать компонент xref:createcomponent_doccreator.adoc[создания документов].
 
-* [.keyword]*Пространство имен:* {dv}.Edi.Interfaces
-* [.keyword]*Сборка:* `{dv}.Edi.Interfaces.dll`
+* [.keyword]*Пространство имен:* DocsVision.Edi.Interfaces
+* [.keyword]*Сборка:* `DocsVision.Edi.Interfaces.dll`
 
 === Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IDocumentCreator
 ----
@@ -28,7 +28,7 @@ public interface IDocumentCreator
 В стандартной конфигурации модуля метод вызывается бизнес-процессом "Перенос файлов из сообщений ЮЗДО".
 
 |CreateDocument(MessageData, Guid, Guid) a|
-Создает новую карточку по полученному от оператору ЭДО сообщению. Если карточка успешно создана, возвращает True.
+Создаёт новую карточку по полученному от оператору ЭДО сообщению. Если карточка успешно создана, возвращает True.
 
 Тип возвращаемого значения: Boolean
 

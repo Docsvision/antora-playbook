@@ -1,0 +1,297 @@
+= Настройка функций обмена формализованными документами
+
+Для работы с формализованными документами предназначены карточки подвидов _Документ/УПД_:
+
+. Исходящий УПД.
+.. Исходящий УКД.
+... Исходящий УКД (736) в формате приказа ФНС 189.
+... Исходящий УКД (736) в формате приказа ФНС 736.
+.. Исходящее исправление УПД.
+... Исходящее исправление УПД (820).
+.. Исходящий УПД (820).
+. Входящий УПД.
+.. Входящий УПД (820).
+.. Формализованный акт.
+... Формализованный акт (820).
+.. Входящий УКД.
+... Входящий УКД (736) в формате приказа ФНС 189.
+... Входящий УКД (736) в формате приказа ФНС 736.
+
+Указанные виды карточек предоставляются с настроенными разметками, автоматом состояний и ролевой моделью.
+
+.Администратору необходимо:
+. Добавить <<print-forms,печатные формы для печати УПД>>.
+. Добавить виртуальные папки для работы с УПД.
+
+[#print-forms]
+== Настройка печатных форм для формализованных документов
+
+. Откройте _Рабочее место администратора_.
+. Вызовите команду _Свойства_ из контекстного меню элемента menu:Карточки[{bo} > Документ].
++
+Будет открыто окно со свойствами типа карточки _Документ_.
++
+. Перейдите на страницу _Преобразования_ и создайте преобразования:
+.. _UniInvoiceRU_ c параметрами:
+* Название: `UniInvoiceRU`.
+* Псевдоним: `UniInvoiceRU`.
+* Тип преобразование: *_Пользовательское_*.
+* Тип содержимого: *_XML_*.
+* Данные преобразования (выберите файл): `C:\Program Files (x86)\Docsvision\Edi\Xslt\UniInvoice.ru.xslt`.
+.. _UniInvoiceCorrectionRU_ c параметрами:
+* Название: `UniInvoiceCorrectionRU`.
+* Псевдоним: `UniInvoiceCorrectionRU`.
+* Тип преобразование: *_Пользовательское_*.
+* Тип содержимого: *_XML_*.
+* Данные преобразования (выберите файл): `C:\Program Files (x86)\Docsvision\Edi\Xslt\UniInvoiceCorrection.ru.xslt`.
+
+[#formalized-folders]
+== Настройка папок для формализованных документов
+
+Для удобства работы с исходящими формализованными документами можно добавить пользователям модуля виртуальные папки со следующими поисковыми запросами:
+
+* _Журнал Все УПД_ -- возвращает все виды УПД во всех статусах.
+* _Журнал Исправление УПД_ -- возвращает только исправления УПД во всех статусах.
+* _Журнал Исходящий УПД_ -- возвращает только исходящие УПД во всех статусах.
+* _Журнал Корректировочный УПД_ -- только корректировочные УПД во всех статусах.
+* _Поиск УПД_ -- выполняет поиск УПД по различным полям.
+
+В настройках данных папок рекомендуется установить представление по умолчанию -- _УПД (Все)_.
+
+Поисковые запросы и представления для папок входящих формализованных документов, если требуется, могут быть разработаны самостоятельно.
+
+[#formalized-ribbon]
+== Настройка ленты карточек для нового вида формализованных документов
+
+Администратор может настроить собственные виды карточек для работы с формализованными документами. При этом добавляемые виды должны быть дочерними видами видов _Входящий УПД_ или _Исходящий УПД_.
+
+Ленты карточек видов _Входящий УПД_ и _Исходящий УПД_ содержат команды для вызова стандартных функций обработки формализованных документов. В собственных видах могут использоваться функции, унаследованные от родительских видов, или разработаны собственные, например, дополнительная функция проверки данных.
+
+NOTE: Ниже приведен упрощенный код функций, вызываемых командами ленты карточек. Полный код смотрите в скриптах карточек соответствующих родительских видов.
+
+. _Входящий УПД и подвиды._
+.. _Подписать документ_:
++
+[source,csharp]
+----
+private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendInvoiceReplySignature();
+}
+----
++
+.. _Отказать в подписании_:
++
+[source,csharp]
+----
+private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendInvoiceReplyRejection();
+}
+----
++
+.. _Запросить аннулирование_
++
+[source,csharp]
+----
+private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendRevocation();
+}
+----
++
+.. _Подтвердить аннулирование_
++
+[source,csharp]
+----
+private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationSignature();
+}
+----
++
+.. _Отказать в аннулировании_
++
+[source,csharp]
+----
+private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationRejection();
+}
+----
++
+.. _Запросить уточнение_:
++
+[source,csharp]
+----
+private void RequestForCorrection_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendCorrection()
+}
+----
++
+.. [[print]] _Печать_ -- выводить на печать печатную форму формализованного документа:
++
+[source,csharp]
+----
+private void Print_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
+}
+----
+<.> В параметре метода указывается название шаблона печати:
++
+* `UniInvoiceRU` -- стандартный шаблон для видов _Входящий УПД_ и _Формализованный акт_.
+* `UniInvoiceCorrectionRU` -- стандартный шаблон для вида _Входящий УКД_.
++
+.. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
++
+--
+[source,csharp]
+----
+public virtual void FillInvoiceControl()
+{
+    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
+}
+----
+<.> В первом параметре (`HTMLBrowser`) должно быть указано название обновляемого элемента управления с типом HTML браузер.
++
+Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
++
+Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
+--
++
+. _Исходящий УПД и подвиды_.
+.. _Подписать и отправить_ -- выдаёт запрос на подписание документа квалифицированной ЭП (электронной подписью) и формирует электронное сообщение с документом для отправки оператору ЭДО.
++
+[source,csharp]
+----
+private void SignedAndSent_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    CardControl.Save();
+    if (EdiScriptHelper.SignAndSendInvoice())
+    {
+        ChangeCardState("SignedAndSent");
+    }
+}
+----
++
+.. _Заполнить данные из файла_ -- загружает в карточку данные из приложенного основного файла -- XML-файл формализованного документа, сформированный в Диадок.
++
+[source,csharp]
+----
+private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    CardControl.Save();
+    EdiScriptHelper.UpdateDocumentDataFromInvoice();
+    RefreshControls();
+}
+----
++
+.. _Запросить аннулирование_:
++
+[source,csharp]
+----
+private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendRevocation();
+}
+----
++
+.. _Подтвердить аннулирование_:
++
+[source,csharp]
+----
+private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationSignature();
+}
+----
++
+.. _Отказать в аннулировании_:
++
+[source,csharp]
+----
+private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.SendReplyRevocationRejection();
+}
+----
++
+.. _Печать_:
++
+[source,csharp]
+----
+private void PrintUPD_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
+}
+----
+<.> В параметре метода указывается название шаблона печати:
+* `UniInvoiceRU` -- стандартный шаблон для видов _Исходящий УПД_ и _Исправление УПД_.
+* `UniInvoiceCorrectionRu` -- стандартный шаблон для вида _Исходящий УКД_.
++
+.. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
++
+--
+[source,csharp]
+----
+public virtual void FillInvoiceControl()
+{
+    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
+}
+----
+<.> В первом параметре ("HTMLBrowser") должно быть указано название обновляемого элемента управления с типом HTML браузер.
++
+Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
++
+Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
+--
+
+В приведенном коде `EdiScriptHelper` объявлен в корневом виде _УПД_:
+
+[source,csharp]
+----
+public EdiScriptHelper EdiScriptHelper
+{
+    get
+    {
+        if (ediScriptHelper == null)
+            ediScriptHelper = new EdiScriptHelper(CardControl);
+
+        return ediScriptHelper;
+    }
+}
+----
+
+Для работы указанных методов к скрипту карточки должны подключены сборки `DocsVision.Edi.DocumentScript.dll` и `{dv}.DocumentsManagement.dll`. Сборки располагаются в каталоге клиента {dv}.
+
+.В объявление пространств имен нужно добавить строки:
+[source,csharp]
+----
+using DocsVision.Edi.DocumentScript;
+using {dv}.DocumentsManagement;
+----
+
+Для добавленных на ленту кнопок можно добавить методы их скрытия/отображения в зависимости от статуса обмена -- проверяется с помощью методов:
+
+* `IsSignatureReplyAvailable` -- проверяет возможность подписания документа или отказа в подписании, принимает значение `TRUE`, если документ в статусе `Получен на подпись от контрагента`.
+* `IsRevocationReplyAvailable` -- проверяет возможность аннулирования документа или отказа в аннулировании; принимает значение `TRUE`, если документ в статусе `Получен запрос на аннулирование`.
+* `IsRevocationRequestAvailable` -- проверяет возможность создания запроса на аннулирование документа, принимает значение `TRUE`, если документ в статусе `Получен от контрагента`, `Отправлена ответная подпись контрагенту` или `Отправлен контрагенту`.
+* `IsReceiptReplyAvailable` -- проверяет возможность создания ответной квитанции.
+
+Методы могут вызываться при открытии карточки. Методы не изменяют состояние видимости кнопок ленты -- необходимо реализовать самостоятельно.
+
+[#custom-kind]
+=== Собственный вид, не унаследованный от Входящий УПД или Исходящий УПД
+
+Если требуется создать вид, не наследующий состояния от _Входящий УПД_ или _Исходящий УПД_, необходимо самостоятельно добавить в его автомат состояний следующие состояния:
+
+* `Получена подпись от контрагента` c идентификатором встроенного состояния (поле `BuildInState`) `FF1346D7-93F0-4CA3-93F8-5AE47BCD41DD`.
+* `Получен отказ от контрагента` c идентификатором встроенного состояния `D136A114-7C59-4C6E-AB12-5348B4883AB9`.
+* `Требуется уточнение` c идентификатором встроенного состояния `9F8A156B-68EE-4543-9527-BF47B613330E`.
+* `Запрошено аннулирование` c идентификатором встроенного состояния `E3ED8CD1-8D9E-4332-B2D3-0EE5B9FE5A10`.
+* `Аннулирование подтверждено` c идентификатором встроенного состояния `D5CC4959-5E45-4F31-B630-F2C3613EDCB7`.
+* `В аннулировании отказано` c идентификатором встроенного состояния `ED9B6929-BD9C-496B-B8A7-D9597B1BA5CA`.
+
+Также потребуется добавить в разметку элементы управления с типами и названиями, которые используются в видах _Входящий УПД_ или _Исходящий УПД_.

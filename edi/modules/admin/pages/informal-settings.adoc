@@ -1,0 +1,198 @@
+= Настройка функций обмена неформализованными документами
+
+Для работы с неформализованными документами администратору нужно настроить разметки карточек {dv}, которые будут использоваться для обмена электронными документами: для отправки, получения и аннулирования.
+
+Стандартные настройки модуля предусматривают, что для получения электронных документов будет использоваться вид _Документ/Входящий_, а для отправки -- любой вид документа, например, _Документ/Исходящий_.
+
+[NOTE]
+====
+Виды _Входящий_ и _Исходящий_ являются стандартными видами для организации ЭДО неформализованными документами, но не обязательными.
+
+При организации ЭДО на других видах карточек настройте xref:sending-settings.adoc[отправку] и xref:receiving-settings.adoc[получение] с их использованием в _Справочнике настроек операторов ЮЗДО_.
+====
+
+[#incoming-layout]
+== Настройка разметки вида "Документ/Входящий"
+
+. Откройте в _Конструкторе разметок_ настройки вида _Документ/Входящий_.
+. Добавьте на ленту карточки новую группу с названием _Электронный обмен_.
+. Добавьте в группу _Электронный обмен_ команды:
++
+* *Подписание документа*.
+* *Отказ в подписании документа*.
+* *Запросить аннулирование*.
+* *Подтвердить аннулирование*.
+* *Отказать в аннулировании*.
++
+. Укажите операции доступа для добавленных команд.
+. Добавьте в скрипт карточки обработчики для новых команд.
+.. Добавьте в скрипт карточки ссылку на дополнительную сборку `DocsVision.Edi.DocumentScript.dll` располагается в каталоге клиента {dv}.
++
+[NOTE]
+====
+Рекомендуется подключать сборку по её полному имени, а не с указанием абсолютного пути.
+====
++
+.. В раздел подключаемых пространств имен добавьте:
++
+[source,csharp]
+----
+using DocsVision.Edi.DocumentScript;
+----
++
+.. Добавьте обработчики для новых команд:
++
+* Для команды _Подписание документа_:
++
+[source,csharp]
+----
+private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);           
+  ediScriptHelper.SendReplySignature();
+}
+----
++
+* Для команды _Отказ в подписании документа_:
++
+[source,csharp]
+----
+private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendReplySignatureRejection();
+}
+----
++
+* Для команды _Запросить аннулирование_:
++
+[source,csharp]
+----
+private void sendRequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendRevocation();
+}
+----
++
+* Для команды _Подтвердить аннулирование_:
++
+[source,cshap]
+----
+private void sendApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendReplyRevocationSignature();
+}
+----
++
+* Для команды _Отказать в аннулировании_:
++
+[source,csharp]
+----
+private void sendRejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendReplyRevocationRejection();
+}
+----
++
+. Добавьте в разметку карточки элемент управления _Журнал обмена сообщениями_. Рекомендуется размещать элемент управления на новой вкладке (например, _Журнал обмена ЮЗДО_). Настраивать элемент управления не требуется.
+
+[#outgoing-layout]
+== Настройка разметки вида "Документ/Исходящий"
+
+. Откройте в _Конструкторе разметок_ настройки вида _Документ/Исходящий_.
+. Добавьте на ленту карточки новую группу с названием _Электронный обмен_.
+. Добавьте в группу _Электронный обмен_ команды:
++
+* *Отправка документов*.
+* *Отправка документов с выбором файлов*.
+* *Отправка документов с подписанием*.
+* *Отправка документов с подписанием и выбором файлов*.
+* *Запросить аннулирование*.
+* *Подтвердить аннулирование*.
+* *Отказать в аннулировании*.
++
+. Укажите операции доступа для добавленных команд.
+. Добавьте в скрипт карточки обработчики для новых команд.
+.. Добавьте в скрипт карточки ссылку на дополнительную сборку `DocsVision.Edi.DocumentScript.dll`.
+.. В раздел подключаемых пространств имен добавьте:
++
+[source,csharp]
+----
+using DocsVision.Edi.DocumentScript;
+----
++
+.. Добавьте обработчики для новых команд:
++
+* Для команды _Отправка документов_:
++
+[source,csharp]
+----
+private void sendDocumentButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  if (!CardControl.Save())
+    return;
+
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendDocument();
+}
+----
++
+* Для команды _Отправка документов с выбором файлов_:
++
+[source,csharp]
+----
+private void sendDocumentFilesButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  if (!CardControl.Save())
+    return;
+                  
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SendDocumentFiles();
+}
+----
++
+* Для команды _Отправка документов с подписанием_:
++
+[source,csharp]
+----
+private void signAndSendDocumentButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  if (!CardControl.Save())
+    return;
+                  
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SignAndSendDocument();
+}
+----
++
+* Для команды _Отправка документов с подписанием и выбором файлов_:
++
+[source,csharp]
+----
+private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+  if (!CardControl.Save())
+    return;
+                  
+  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+  ediScriptHelper.SignAndSendDocumentFiles();
+}
+----
++
+* Для команд _Запросить аннулирование_, _Подтвердить аннулирование_ и _Отказать в аннулировании_ скрипты аналогичны скриптам вида _Документ/Входящий_ (см. <<incoming-layout,выше>>).
++
+. Добавьте в разметку карточки элемент управления _Журнал обмена сообщениями_. Рекомендуется размещать элемент управления на новой вкладке (например, _Журнал обмена ЮЗДО_). Настраивать элемент управления не требуется.
+
+[#informalized-card]
+== Отображение типа неформализованного документа в карточке
+
+Если требуется, в разметку карточки можно добавить текстовое поле для отображения типа неформализованного документа. Тип неформализованного документа содержится в расширенном поле _Данные УПД/Тип документа_ карточки _Документ_.
+
+[#additional-functions]
+== Дополнительные функции документа
+
+* Если модуль устанавливался ранее и версия модуля в БД была обновлена до последней, в конструкторе разметок в поле карточки документа _Данные УПД / Функция документа_ (`UniversalDocumentData / DocumentFunction`) можно добавить значения `СвРК = 3`, `СвЗК = 4`, это будет соответствовать новым значениям атрибута _Функция УПД_.
+* Если модуль устанавливается впервые или после обновления была создана новая БД, дополнительных действий не требуется.

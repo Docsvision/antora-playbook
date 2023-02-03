@@ -1,13 +1,13 @@
 = IDocumentDataReader - интерфейс
 
-Интерфейс [.keyword .apiname]#IDocumentDataReader# определяет методы, которые должен реализовывать xref:createcomponent_sender_reader.adoc[компонент чтения данных карточки].
+Интерфейс IDocumentDataReader# определяет методы, которые должен реализовывать xref:createcomponent_sender_reader.adoc[компонент чтения данных карточки].
 
-* [.keyword]*Пространство имен:* {dv}.Edi.Interfaces
-* [.keyword]*Сборка:* `{dv}.Edi.Interfaces.dll`
+* [.keyword]*Пространство имен:* DocsVision.Edi.Interfaces
+* [.keyword]*Сборка:* `DocsVision.Edi.Interfaces.dll`
 
 === Синтаксис
 
-[source,pre,codeblock,language-csharp]
+[source,csharp]
 ----
 public interface IDocumentDataReader
 ----
@@ -96,7 +96,7 @@ public interface IDocumentDataReader
 
 В стандартной конфигурации модуля метод вызывается при формировании ответной подписи.
 
-Метод GetInvoiceReplyData должен вернуть строку с данными карточки в определенном формате, который ожидается методом IMessageService.GenerateInvoiceReply коннектора к оператору ЭДО. В реализации коннектора к Диадок для ответа по УПД метод GetInvoiceReplyData должен вернуть сериализованный объект {dv}.Edi.Entities.BuyerReplyData, заполненный данными карточки УПД, по которой формируется ответ.
+Метод GetInvoiceReplyData должен вернуть строку с данными карточки в определенном формате, который ожидается методом IMessageService.GenerateInvoiceReply коннектора к оператору ЭДО. В реализации коннектора к Диадок для ответа по УПД метод GetInvoiceReplyData должен вернуть сериализованный объект DocsVision.Edi.Entities.BuyerReplyData, заполненный данными карточки УПД, по которой формируется ответ.
 
 |GetLastSignedFiles(Guid) a|
 Возвращает последние (по времени) подписанные файлы карточки.
@@ -164,7 +164,7 @@ public interface IDocumentDataReader
 * objectContext - контекст объектов.
 
 |PrepareFileData(Guid, Guid, Guid, Boolean, String) a|
-Создает экземпляр файла сообщения электронного обмена.
+Создаёт экземпляр файла сообщения электронного обмена.
 
 Тип возвращаемого значения: xref:MessageFile.adoc[MessageFile]
 
@@ -181,7 +181,7 @@ public interface IDocumentDataReader
 В большинстве случаев полностью реализовывать данный метод не требуется, т.к. принцип подготовки файла электронного сообщения стандартный. Чтобы использовать стандартны механизм формирования, достаточно вернуть из метода значение null.
 
 |PrepareMessageData(Guid, String, String) a|
-Создает экземпляр электронного сообщения электронного обмена.
+Создаёт экземпляр электронного сообщения электронного обмена.
 
 Тип возвращаемого значения: xref:MessageData.adoc[MessageData]
 
