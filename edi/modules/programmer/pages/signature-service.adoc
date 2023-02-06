@@ -19,8 +19,7 @@ public class SignatureService : ISignatureService
         baseCardService = this.objectContext.GetService<IBaseCardService>();
     }
 
-    // Реализация метода подписания текстового комментария
-    public Guid CreateCommentSignature(string commentText, X509Certificate2 certificate)
+    public Guid CreateCommentSignature(string commentText, X509Certificate2 certificate) <.>
     {
         using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(commentText)))
         {
@@ -29,12 +28,10 @@ public class SignatureService : ISignatureService
         }
     }
 
-    // Реализация метода подписания файла сообщения
-    public void CreateFileSignature(MessageFile messageFile, X509Certificate2 certificate)
+    public void CreateFileSignature(MessageFile messageFile, X509Certificate2 certificate) <.>
     {
-        // Подписываемые данные могут быть получены непосредственно из файла сообщения (messageFile.FileData) 
-        //   или с файловой системы (messageFile.FilePath)
-        if (messageFile.FileData != null && messageFile.FileData.Length > 0)
+
+        if (messageFile.FileData != null && messageFile.FileData.Length > 0) <.>
         {
             using (MemoryStream stream = new MemoryStream(messageFile.FileData))
             {
@@ -53,3 +50,6 @@ public class SignatureService : ISignatureService
     }
 }
 ----
+<.> Реализация метода подписания текстового комментария.
+<.> Реализация метода подписания файла сообщения.
+<.> Подписываемые данные могут быть получены непосредственно из файла сообщения (`messageFile.FileData`) или с файловой системы (`messageFile.FilePath`).

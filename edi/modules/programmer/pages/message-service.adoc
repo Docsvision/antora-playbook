@@ -10,16 +10,13 @@
 
 Фактическая реализация компонента сервиса сообщений сильно зависит от метода взаимодействия с оператором ЭДО и предоставляемого им API.
 
-Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса IMessageService# для работы с оператором Диадок.
+Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса `IMessageService` для работы с оператором _Диадок_.
 
 [source,csharp]
 ----
-// Компонент сервиса сообщение 
-public class MessagesService: IMessageService
+public class MessagesService: IMessageService <.>
 {
-  
-    // Точка доступа к API Диадок
-    private DiadocSession DiadocSession
+    private DiadocSession DiadocSession <.>
     {
         get
         {
@@ -52,112 +49,112 @@ public class MessagesService: IMessageService
             return diadocSession;
         }
     }
-    /* Реализация интерфейса IMessageService */
-
-    // Инициализация компонента
-    public void Initialize(Dictionary<string, string> settings)
+<.>
+    public void Initialize(Dictionary<string, string> settings) <.>
     {
         this.settings = settings;
     }
         
-    // Реализация метода отправки сообщения оператору ЭДО
-    public void SendMessage(MessageData messageData)
+    public void SendMessage(MessageData messageData) <.>
     {
         DiadocSession.SendMessage(messageData);
     }
 
-    // Реализация метода отправки ответной подписи 
-    public void SendSignatureReply(MessageData messageData)
+    public void SendSignatureReply(MessageData messageData) <.>
     {
         DiadocSession.SendSignatureReply(messageData);
     }
 
-    // Реализация метода отправки квитанции
-    public void SendReceipt(MessageData messageData)
+    public void SendReceipt(MessageData messageData) <.>
     {
         DiadocSession.SendReceipt(messageData);
     }
 
-    // Реализация метода отправки запроса на аннулирование
-    public void SendRevocation(MessageData messageData)
+    public void SendRevocation(MessageData messageData) <.>
     {
         DiadocSession.SendRevocation(messageData);
     }
 
-    // Реализация метода отправки запроса на уточнение
-    public void SendCorrection(MessageData messageData)
+    public void SendCorrection(MessageData messageData) <.>
     {
         DiadocSession.SendCorrection(messageData);
     }
 
-    // Реализация метода получении количества новых событий
-    public int GetNewEventsCount(string boxId, string lastEventId)
+    public int GetNewEventsCount(string boxId, string lastEventId) <.>
     {
         return DiadocSession.GetNewEventsCount(boxId, lastEventId);
     }
 
-    // Реализация метода получения идентификатора последнего события в ящике организации
-    public string GetLastEventId(string boxId)
+    public string GetLastEventId(string boxId) <.>
     {
         return DiadocSession.GetLastEventId(boxId, null);
     }
 
-    // Реализация метода проверки наличия события в ящике
-    public bool EventExists(string boxId, string eventId)
+    public bool EventExists(string boxId, string eventId) <.>
     {
         return DiadocSession.EventExists(boxId, eventId);
     }
 
-    // Реализация метода получения новых событий из ящика
-    public ItemCollection<MessageData> GetNewEvents(string boxId, string lastEventId, DateTime? fromDate)
+    public ItemCollection<MessageData> GetNewEvents(string boxId, string lastEventId, DateTime? fromDate) <.>
     {
         return DiadocSession.GetNewEvents(boxId, lastEventId, fromDate);
     }
 
-    // Реализация метода формирования извещения
-    public MessageFile GenerateInvoiceReceipt(string boxId, string messageId, string entityId, X509Certificate2 certificate, string positionName)
+    public MessageFile GenerateInvoiceReceipt(string boxId, string messageId, string entityId, X509Certificate2 certificate, string positionName) <.>
     {
         return DiadocSession.GenerateInvoiceReceipt(boxId, messageId, entityId, certificate, positionName);
     }
 
-    // Реализация метода формирования запроса на аннулирование
-    public MessageFile GenerateRevocationRequest(string boxId, string messageId, string entityId,
+    public MessageFile GenerateRevocationRequest(string boxId, string messageId, string entityId, <.>
         X509Certificate2 certificate, string positionName, string comment)
     {
         return DiadocSession.GenerateRevocationRequest(boxId, messageId, entityId, certificate, positionName, comment);
     }
 
-    // Реализация метода формирования ответной подписи для поступившего документа
-    public MessageFile GenerateInvoiceReply(string boxId, string messageId, string entityId, X509Certificate2 certificate, string documentType, string replyData)
+    public MessageFile GenerateInvoiceReply(string boxId, string messageId, string entityId, X509Certificate2 certificate, string documentType, string replyData) <.>
     {
         return DiadocSession.GenerateInvoiceReply(boxId, messageId, entityId, certificate, documentType, replyData);
     }
 
-    // Реализация метода формирования сообщения с отказом в подписании
-    public MessageFile GenerateSignatureRejection(string boxId, string messageId, string entityId,
+    public MessageFile GenerateSignatureRejection(string boxId, string messageId, string entityId, <.>
         X509Certificate2 certificate, string positionName, string comment)
     {
         return DiadocSession.GenerateSignatureRejection(boxId, messageId, entityId, certificate, positionName, comment);
     }
 
-    // Реализация метода формирования запроса на уточнение
-    public MessageFile GenerateCorrectionRequest(string boxId, string messageId, string entityId,
+    public MessageFile GenerateCorrectionRequest(string boxId, string messageId, string entityId, <.>
         X509Certificate2 certificate, string positionName, string comment)
     {
         return DiadocSession.GenerateCorrectionRequest(boxId, messageId, entityId, certificate, positionName, comment);
     }
 }
 ----
+<.> Компонент сервиса сообщение.
+<.> Точка доступа к API Диадок.
+<.> Реализация интерфейса IMessageService.
+<.> Инициализация компонента.
+<.> Реализация метода отправки сообщения оператору ЭДО.
+<.> Реализация метода отправки ответной подписи.
+<.> Реализация метода отправки квитанции.
+<.> Реализация метода отправки запроса на аннулирование.
+<.> Реализация метода отправки запроса на уточнение.
+<.> Реализация метода получения количества новых событий.
+<.> Реализация метода получения идентификатора последнего события в ящике организации.
+<.> Реализация метода проверки наличия события в ящике.
+<.> Реализация метода получения новых событий из ящика.
+<.> Реализация метода формирования извещения.
+<.> Реализация метода формирования запроса на аннулирование.
+<.> Реализация метода формирования ответной подписи для поступившего документа.
+<.> Реализация метода формирования сообщения с отказом в подписании.
+<.> Реализация метода формирования запроса на уточнение.
 
-Далее приведена часть исходного кода класса DiadocSession#, в котором показан принцип взаимодействия с оператором ЭДО через его API на примере получения идентификатора последнего сообщения.
+Далее приведена часть исходного кода класса `DiadocSession`, в котором показан принцип взаимодействия с оператором ЭДО через его API на примере получения идентификатора последнего сообщения.
 
 [source,csharp]
 ----
 public class DiadocSession 
 {
-    // DiadocApi - объект API Диадок, проксирующий работу с веб-сервисом Диадок
-    // Описание API Диадок приведено на странице с документацией Диадок API>
-    private readonly DiadocApi DiadocApi;
+    private readonly DiadocApi DiadocApi; <.>
     private readonly string AuthToken;
 
        public DiadocSession(string apiUrl, string login, string password, string proxyUrl, string proxyLogin, string proxyPassword)
@@ -176,8 +173,7 @@ public class DiadocSession
         AuthToken = DiadocApi.Authenticate(login, password);
     }
 
-       // Получаем идентификатор последнего события в ящике организации
-       public string GetLastEventId(string boxId, string lastEventId)
+       public string GetLastEventId(string boxId, string lastEventId) <.>
     {
         while (true)
         {
@@ -193,4 +189,7 @@ public class DiadocSession
 
 }
 ----
+<.> DiadocApi - объект API Диадок, проксирующий работу с веб-сервисом Диадок. +
+Описание API Диадок приведено на странице с документацией Диадок API.
+<.> Получаем идентификатор последнего события в ящике организации.
 

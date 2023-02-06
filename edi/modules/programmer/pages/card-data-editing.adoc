@@ -2,17 +2,16 @@
 
 Компонент изменения данных предоставляет модулю не зависящий от типа карточки слой изменения данных карточки, обеспечивающий возможность внесения изменения при получении ответа от контрагента.
 
-Компонент должен реализовывать программный интерфейс xref:IDocumentUpdater.adoc[IDocumentUpdater].
+Компонент должен реализовывать программный интерфейс `xref:IDocumentUpdater.adoc[IDocumentUpdater]`.
 
-Рекомендуется создавать свой компонент на основе абстрактного класса BaseUpdater# (сборка ` DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса BaseDataReader# с описанием.
+Рекомендуется создавать свой компонент на основе абстрактного класса `BaseUpdater` (сборка `DocsVision.Edi.Runtime.UniversalDocument.dll`). Далее приведена часть класса BaseDataReader# с описанием.
 
 [source,csharp]
 ----
 public abstract class BaseUpdater : IDocumentUpdater
 {
-    // Инициализируем компонент отправки
-    // При инициализации получаем сервисы API {dv}, которые потребуются в дальнейшем
-    public void Initialize(ObjectContext objectContext)
+
+    public void Initialize(ObjectContext objectContext) <.>
     {
         ObjectContext = objectContext;
         UserSession = objectContext.GetService<UserSession>();
@@ -22,8 +21,7 @@ public abstract class BaseUpdater : IDocumentUpdater
         staffService = objectContext.GetService<IStaffService>();
     }
 
-    // Реализация метода добавления подписи к указанному файлу карточки
-    public virtual Guid AddSignatureToDocument(Guid cardId, Guid fileId, MessageFile messageFile, string partnerName)
+    public virtual Guid AddSignatureToDocument(Guid cardId, Guid fileId, MessageFile messageFile, string partnerName) <.>
     {
         Document document = GetDocument(cardId);
 
@@ -33,10 +31,8 @@ public abstract class BaseUpdater : IDocumentUpdater
             return Guid.Empty;
         }
 
-        // Получаем данные подписи из сообщения
-        // Подпись может быть в сообщении или в файле, указнном в сообщении
         byte[] signatureData = null;
-        if (messageFile.SignatureData != null && messageFile.SignatureData.Length > 0)
+        if (messageFile.SignatureData != null && messageFile.SignatureData.Length > 0) <.>
         {
             signatureData = messageFile.SignatureData;
         }
@@ -58,8 +54,7 @@ public abstract class BaseUpdater : IDocumentUpdater
             return Guid.Empty;
         }
 
-        // Получаем или карточку подписей
-        BaseCardSignature cardSignature = document.MainInfo.SignatureList.Signatures.FirstOrDefault(item => item.SignedFromConfirmation == partnerName);
+        BaseCardSignature cardSignature = document.MainInfo.SignatureList.Signatures.FirstOrDefault(item => item.SignedFromConfirmation == partnerName); <.>
         if (cardSignature == null)
         {
             cardSignature = baseCardService.AddSignature(document.MainInfo.SignatureList, signedCms.Certificates[0], document.Description, document.SystemInfo.State);
@@ -69,7 +64,7 @@ public abstract class BaseUpdater : IDocumentUpdater
             cardSignature.Imported = true;
         }
 
-        // Добавляем подпись в документ 
+<.>
         BaseCardSignature newSignature = baseCardService.AddSignaturePart(cardSignature, MainFileSignaturePartType, signatureData,
             string.Format(Resources.MainFilePartnerSignature, documentFile.FileName), documentFile.FileId, documentFile.FileVersionId, document);
 
@@ -78,25 +73,21 @@ public abstract class BaseUpdater : IDocumentUpdater
         return ObjectContext.GetObjectRef(newSignature).Id;
     }
 
-    // Реализация метода подписания карточки
-    public virtual Guid CreateNewSignatures(Guid cardId, X509Certificate2 certificate, bool signAdditionalFiles)
+    public virtual Guid CreateNewSignatures(Guid cardId, X509Certificate2 certificate, bool signAdditionalFiles) <.>
     {
         Document document = GetDocument(cardId);
 
-        // Если в документе не списка подписей - создаём
-        if (document.MainInfo.SignatureList == null)
+        if (document.MainInfo.SignatureList == null) <.>
         {
             SignatureList signatureList = documentService.CreateSignatureList();
             ObjectContext.SaveObject(signatureList);
             document.MainInfo.SignatureList = signatureList;
         }
 
-
         foreach (DocumentFile documentFile in document.Files)
         {
-            // Обновляем информацию в титуле продавца
             UpdateInvoiceFile(document, documentFile, certificate);
-            string validateResult = ValidateInvoiceFile(document, documentFile);
+            string validateResult = ValidateInvoiceFile(document, documentFile); <.>
             if (!string.IsNullOrEmpty(validateResult))
             {
                 throw new IncompleteSignatureDataException(string.Format(Resources.UnableToValidateInvoice, documentFile.FileName, validateResult));
@@ -105,25 +96,19 @@ public abstract class BaseUpdater : IDocumentUpdater
 
         DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
 
-        //Добавляем подпись в документ
-        BaseCardSignature baseCardSignature = documentService.AddSignature(document, certificate, false, documentSetting.DocumentSignature.Fields);
+        BaseCardSignature baseCardSignature = documentService.AddSignature(document, certificate, false, documentSetting.DocumentSignature.Fields); <.>
 
         ObjectContext.SaveObject(document);
 
         return ObjectContext.GetObjectRef(baseCardSignature).Id;
     }
 
-    // Реализация метода проверка сертификата подписи в карточке
-    // Для неформализованного документа реализация функциональности не требуется
-    // В стандартной реализации для УПД выполняется сравнение данных сотрудника, 
-    // подписавшего УПД с данными сотрудника-владельца указанного сертификата
-    public virtual string CheckCertificate(Guid cardId, X509Certificate2 certificate)
+    public virtual string CheckCertificate(Guid cardId, X509Certificate2 certificate) <.>
     {
         return CheckDocumentSignerForCertificate(GetDocument(cardId), certificate);
     }
 
-    // Реализация метода изменения состояния карточки 
-    public virtual bool ChangeDocumentState(Guid cardId, Guid newStateId)
+    public virtual bool ChangeDocumentState(Guid cardId, Guid newStateId) <.>
     {
         if (cardId == Guid.Empty)
         {
@@ -149,11 +134,7 @@ public abstract class BaseUpdater : IDocumentUpdater
         return true;
     }
 
-    // Реализация метода получения идентификатора состояния карточки
-    // Для неформализованного документа реализация функциональности не требуется
-    // В стандартной реализации для УПД метод возвращает идентификатор одного из 
-    //  встроенных состояний карточки УПД из Конструктора состояний
-    public virtual Guid GetNewStateId(MessageFileType messageFileType)
+    public virtual Guid GetNewStateId(MessageFileType messageFileType) <.>
     {
         switch (messageFileType)
         {
@@ -180,11 +161,7 @@ public abstract class BaseUpdater : IDocumentUpdater
         return Guid.Empty;
     }
 
-    // Реализация метода обновления данных карточки данными из файла титула продавца
-    // Для неформализованного документа реализация функциональности не требуется
-    // В стандартной реализации для УПД метод получает содержимое файла (XML-формата) 
-    //  и устанавливает значения полей карточки
-    public void UpdateDocumentDataFromFile(Guid cardId, Guid fileId)
+    public void UpdateDocumentDataFromFile(Guid cardId, Guid fileId) <.>
     {
         if (cardId == Guid.Empty)
         {
@@ -207,22 +184,16 @@ public abstract class BaseUpdater : IDocumentUpdater
         UpdateDocumentDataFromFile(document, documentFile);
     }
 
-    // В своей реализации нужно переопределить метод, добавив алгоритм обновления титула продавца
-    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater
-    //  (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
-    protected virtual void UpdateInvoiceFile(Document document, DocumentFile documentFile, X509Certificate2 certificate)
+    protected virtual void UpdateInvoiceFile(Document document, DocumentFile documentFile, X509Certificate2 certificate) <.>
     {
     }
 
-    // В своей реализации нужно переопределить метод, добавив алгоритм проверки 
-    //  файла титула продавца
-    protected virtual string ValidateInvoiceFile(Document document, DocumentFile documentFile)
+    protected virtual string ValidateInvoiceFile(Document document, DocumentFile documentFile) <.>
     {
         return null;
     }
 
-    // В своей реализации нужно переопределить метод, добавив алгоритм проверки подписанта
-    protected virtual string CheckDocumentSignerForCertificate(Document document, X509Certificate2 certificate)
+    protected virtual string CheckDocumentSignerForCertificate(Document document, X509Certificate2 certificate) <.>
     {
         CardData documentData = UserSession.CardManager.GetCardData(ObjectContext.GetObjectRef(document).Id);
         RowData signerRow = documentData.Sections[documentData.Type.AllSections[CardDefs.UniversalDocumentSignature.Alias].Id].FirstRow;
@@ -248,11 +219,36 @@ public abstract class BaseUpdater : IDocumentUpdater
         return null;
     }
 
-    // В своей реализации нужно переопределить метод, добавив алгоритм загрузки данных 
-    // в карточку из приложенного файла титула продавца
-    // Пример реализации в классе DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater (сборка DocsVision.Edi.Runtime.UniversalDocument.dll)
+<.>
     protected virtual void UpdateDocumentDataFromFile(Document document, DocumentFile documentFile)
     {
     }
 }
 ----
+<.> Инициализируем компонент отправки. +
+При инициализации получаем сервисы API {dv}, которые потребуются в дальнейшем.
+<.> Реализация метода добавления подписи к указанному файлу карточки.
+<.> Получаем данные подписи из сообщения. +
+Подпись может быть в сообщении или в файле, указанном в сообщении.
+<.> Получаем карточку подписей.
+<.> Добавляем подпись в документ.
+<.> Реализация метода подписания карточки.
+<.> Если в документе не списка подписей -- создаём.
+<.> Обновляем информацию в титуле продавца.
+<.> Добавляем подпись в документ.
+<.> Реализация метода проверка сертификата подписи в карточке. +
+Для неформализованного документа реализация функциональности не требуется. +
+В стандартной реализации для УПД выполняется сравнение данных сотрудника, подписавшего УПД с данными сотрудника-владельца указанного сертификата.
+<.> Реализация метода изменения состояния карточки.
+<.> Реализация метода получения идентификатора состояния карточки. +
+Для неформализованного документа реализация функциональности не требуется. +
+В стандартной реализации для УПД метод возвращает идентификатор одного из встроенных состояний карточки УПД из Конструктора состояний.
+<.> Реализация метода обновления данных карточки данными из файла титула продавца. +
+Для неформализованного документа реализация функциональности не требуется. +
+В стандартной реализации для УПД метод получает содержимое файла (XML-формата) и устанавливает значения полей карточки.
+<.> В своей реализации нужно переопределить метод, добавив алгоритм обновления титула продавца. +
+Пример реализации в классе `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceUpdater` (сборка `DocsVision.Edi.Runtime.UniversalDocument.dll`).
+<.> В своей реализации нужно переопределить метод, добавив алгоритм проверки файла титула продавца.
+<.> В своей реализации нужно переопределить метод, добавив алгоритм проверки подписанта.
+<.> В своей реализации нужно переопределить метод, добавив алгоритм загрузки данных в карточку из приложенного файла титула продавца. +
+ Пример реализации в классе `DocsVision.Edi.Runtime.UniversalDocument.BuyerInvoiceUpdater` (сборка `DocsVision.Edi.Runtime.UniversalDocument.dll`).

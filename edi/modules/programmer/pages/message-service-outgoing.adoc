@@ -1,0 +1,74 @@
+= Разработка компонента сервиса ответных сообщений
+
+Далее приведена часть исходного кода (только публичные методы) примера реализации класса `OutgoingMessagesService` для отправки ответа на неформализованный документ.
+
+[source,csharp]
+----
+OutgoingMessagesService outgoingMessagesService = new OutgoingMessagesService(cardControl.ObjectContext); <.>
+
+EdiMessage messageCard = outgoingMessagesService.FindIncomingMessageCards(cardId).FirstOrDefault(); <.>
+
+<.>
+
+
+DocumentUpdaterService documentUpdaterService = new DocumentUpdaterService(objectContext); <.>
+
+Guid newSignatureGroupId = documentUpdaterService.CreateNewSignatures(cardId, certificate, false); <.>
+
+<.>
+
+DataReaderService dataReaderService = new DataReaderService(objectContext); <.>
+
+ItemCollection<DocumentFileData> signedFiles = dataReaderService.GetSignedFiles(cardId, newSignatureGroupId); <.>
+
+if (outgoingMessagesService.CreateOutgoingSignatureReplies(cardId, signedFiles).Any())
+{
+
+} <.>
+else
+{
+<.>
+}
+----
+<.> Сервис отправки исходящих событий.
+<.> Поиск карточки сообщений, для которой нужен ответ, для документа `cardId`.
+<.> Данный момент можно пропустить, если уже есть готовая ответная подпись. +
+Будьте внимательны, при пропуске существует риск отправить оригинальную подпись контрагента как ответную.
+<.> Сервис изменения документа.
+<.> `X509Certificate2 certificate` на входе - это сертификат, которым делаем новые подписи.
+<.> Конец создания новой подписи.
+<.> Сервис чтения данных из карточек.
+<.> Получаем свежеподписанные файлы. +
+При наличии готовой ответной подписи, `newSignatureGroupId` -- это `ID` подписи из списка подписей.
+<.>  Все хорошо, подписи отправили. +
+Ответные подписи успешно отправлены.
+<.> По карточке сообщения уже некому отправлять ответ -- отработал другой скрипт, кто-то отправил руками и т.п. +
+Не существует связанных писем в ящике ЮЗДО, ожидающих ответных действий по ним. Отправка произведена не будет.
+
+Далее приведён пример отправки отказа от подписи, сервисы те же, что в предыдущем примере:
+
+[source,csharp]
+----
+outgoingMessagesService.CreateOutgoingRejectionReplies(cardId, commentText, certificate); <.>
+----
+<.> `commentText` -- причина отказа, `X509Certificate2 certificate` -- сертификат.
+
+Следующий пример демонстрирует отправку положительного ответа на УПД или УКД:
+
+[source,csharp]
+----
+string invoiceReplyData = dataReaderService.GetInvoiceReplyData(cardId); <.>
+
+if (outgoingMessagesService.CreateOutgoingInvoiceReplies(cardId, certificate, invoiceReplyData).Any()) <.>
+{
+<.>
+}
+else
+{
+<.>
+}
+----
+<.> Получение данных ответа для ответа из карточки.
+<.> Генерация файла ответа, подписание его сертификатом `X509Certificate2 certificate`, отправка.
+<.> Отправили успешно.
+<.> Не отправили, то же, что и для неформализованных.

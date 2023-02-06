@@ -4,18 +4,17 @@
 
 Данный компонент должен реализовывать программный интерфейс xref:IImportService.adoc[IImportService]. Методы реализуемого интерфейса вызываются из компонента _Справочника настроек операторов ЮЗДО_ при загрузке подразделений и ящиков организации, контрагентов и ящиков контрагентов.
 
-Реализация данного компонента, получающего информацию от оператора Диадок, содержится в сборке `DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке "Коннектор к Диадок").
+Реализация данного компонента, получающего информацию от оператора Диадок, содержится в сборке `DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке _Коннектор к Диадок_).
 
 Фактическая реализация компонента импорта сильно зависит от метода взаимодействия с оператором ЭДО и предоставляемого им API.
 
-Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса ImportService# для работы с оператором Диадок.
+Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса `ImportService` для работы с оператором _Диадок_.
 
 [source,csharp]
 ----
 public class ImportService : IImportService
 {
-    // Точка подключения к API Диадок
-    private DiadocSession DiadocSession
+    private DiadocSession DiadocSession <.>
     {
         get
         {
@@ -43,31 +42,33 @@ public class ImportService : IImportService
     }
 
 
-    /* Реализация интерфейса IImportService */
+  <.>
 
-    // Реализация метода инициализации компонента
-    public void Initialize(Dictionary<string, string> settings)
+    public void Initialize(Dictionary<string, string> settings) <.>
     {
-        // Загрузка настроек
-        this.settings = settings;
+        this.settings = settings; <.>
     }
 
 
-    // Реализация метода получения от оператора ЭДО списка организаций
-    public ItemCollection<Unit> ImportUnits()
+    public ItemCollection<Unit> ImportUnits() <.>
     {
         return DiadocSession.ImportUnits();
     }
 
-    // Реализация метода получения от оператора ЭДО списка контраентов
-    public ItemCollection<Partner> ImportPartners()
+    public ItemCollection<Partner> ImportPartners() <.>
     {
         return DiadocSession.ImportPartners();
     }
 }
 ----
+<.> Точка подключения к API Диадок.
+<.> Реализация интерфейса `IImportService`.
+<.> Реализация метода инициализации компонента.
+<.> Загрузка настроек.
+<.> Реализация метода получения от оператора ЭДО списка организаций.
+<.> Реализация метода получения от оператора ЭДО списка контрагентов.
 
-Далее приведена часть исходного кода класса DiadocSession#, показывающая принцип взаимодействия с оператором ЭДО через его API на примере загрузки данных организации.
+Далее приведена часть исходного кода класса `DiadocSession`, показывающая принцип взаимодействия с оператором ЭДО через его API на примере загрузки данных организации.
 
 [source,csharp]
 ----
@@ -77,21 +78,25 @@ internal class DiadocSession {
 
  public DiadocSession(string apiUrl, string login, string password) {
   
-  // Подключаемся и авторизуемся в Диадок
+<.>
   WinApiCrypt diadocCrypt = new WinApiCrypt();
   diadocApi = new DiadocApi(DefaultClientId, apiUrl, diadocCrypt);
   authToken = diadocApi.Authenticate(login, password);
  }
 
- // Получаем данные подразделений организации
+<.>
  public ItemCollection<Unit> ImportUnits() {
   ItemCollection<Unit> units = new ItemCollection<Unit>();
 
-  // Получаем подразделения организации с помощью метода GetMyOrganizations API Диадок метод
+<.>
   units.AddRange(diadocApi.GetMyOrganizations(authToken).Organizations.Select(GetUnit));
   return units;
  }
 
- /* Часть кода пропущена */
+<.>
 }
 ----
+<.> Подключаемся и авторизуемся в _Диадок_.
+<.> Получаем данные подразделений организации.
+<.> Получаем подразделения организации с помощью метода `GetMyOrganizations` API Диадок метод.
+<.> Часть кода пропущена.
