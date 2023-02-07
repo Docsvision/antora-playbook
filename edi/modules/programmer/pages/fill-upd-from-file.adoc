@@ -1,0 +1,15 @@
+= Заполнение данных исходящего УПД из файла
+
+После загрузки основного файла и новой версии файла в карточку исходящего УПД и подвидов будет заполнены данные карточки.
+
+[source,csharp]
+----
+private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+{
+    CardControl.Save();
+    EdiScriptHelper.UpdateDocumentDataFromInvoice();
+    RefreshControls();
+}
+----
+
+Через API {wc}а можно вызывать обработчик `edi_updateDocumentFormInvoice`, обратившись к сервису `$EdiFileSync`, методу `updateDocumentDataFromInvoice(documentId: string, fileId?: string)`. На сервере можно обратится к сервису `IEdiFileSyncService.UpdateDocumentDataFromInvoice`.
