@@ -1,0 +1,66 @@
+= EdiMessage -- класс
+
+Содержит данные _Карточки обмена сообщениями_.
+
+* *Пространство имен:* `DocsVision.Edi.ObjectModel`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class EdiMessage : BaseCard
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+
+|`Files`
+a|Возвращает файлы сообщения.
+
+*Тип*: `ObjectCollection<xref:api/EdiMessageFile.adoc[EdiMessageFile]>`
+
+|`Log`
+a|Возвращает записи их журнал обмена.
+
+*Тип*: `ObjectCollection<xref:api/EdiMessageLogItem.adoc[EdiMessageLogItem]>`
+
+|`MainInfo`
+a|Возвращает основную информацию.
+
+*Тип*: xref:api/EdiMessageMainInfo.adoc[EdiMessageMainInfo]
+
+|Processes |_Не используется._
+|`SignedComments`
+a|Подписанные комментарии.
+
+*Тип*: `ObjectCollection<xref:api/EdiMessageSignedComment.adoc[EdiMessageSignedComment]>`
+
+|`SignedFiles`
+a|Подписанные файлы.
+
+*Тип*: `ObjectCollection<xref:api/EdiMessageSignedFile.adoc[EdiMessageSignedFile]>`
+
+|`SystemInfo` |_Не используется._
+|`TransferData`
+a|Данные для переноса.
+
+`ObjectCollection<xref:api/EdiMessageTransferData.adoc[EdiMessageTransferData]>`
+|===
+
+== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+
+|`FilesProperty` |Определяет свойство _Файлы_.
+|`LogProperty` |Определяет свойство ""_Журнал обмена"_".
+|`MainInfoProperty` |Определяет свойство _Основная информация_.
+|`SignedCommentsProperty` |Определяет свойство _Подписанные комментарии_.
+|`SignedFilesProperty` |Определяет свойство _Подписанные файлы_.
+|`TransferDataProperty` |Определяет свойство _Файлы для переноса_.
+|===

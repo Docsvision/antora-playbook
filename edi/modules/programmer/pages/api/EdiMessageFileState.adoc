@@ -1,0 +1,29 @@
+= EdiMessageFileState -- перечисление
+
+Определяет возможные типы содержимого в `MessageFile`.
+
+* *Пространство имен:* `DocsVision.Edi.ObjectModel`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public enum EdiMessageFileState
+----
+
+== Члены
+
+[cols=",",options="header",]
+|===
+|Имя члена |Описание
+
+|`Creating` |Создаётся.
+|`SignatureRequired` |Получен на подпись от контрагента.
+|`SentToPartner` |Отправлен на подпись контрагенту.
+|`PartnerRejected` |Получен отказ от контрагента.
+|`PartnerSigned` |Получена подпись от контрагента.
+|`Error` |Ошибка.
+|`ReplySignature` |Ответная подпись.
+|`ReplyRejection` |Ответный отказ от подписи.
+|===

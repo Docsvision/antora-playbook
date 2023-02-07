@@ -1,0 +1,57 @@
+= EdiMessageReplyFile -- класс
+
+Содержит данные ответного файла, полученного от контрагента, в карточке обмена сообщениями.
+
+* *Пространство имен:* `DocsVision.Edi.ObjectModel`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class EdiMessageReplyFile : BaseCardSectionRow
+----
+
+== Свойства
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+
+|`NeedReceipt`
+a|Задает или возвращает флаг, указывающий на необходимость подтверждения получения.
+
+*Тип*: `System.Boolean`
+
+|`ParentMessageFile`
+a|Возвращает ссылку на родительское сообщение электронного обмена.
+
+*Тип*: `xref:api/EdiMessageFile.adoc[EdiMessageFile]`
+
+|`ReplyFile`
+a|Задает или возвращает ответный файл.
+
+*Тип*: `xref:api/EdiMessageSignedFile.adoc[EdiMessageSignedFile]`
+
+|`ReplyFileType`
+a|Задает или возвращает тип ответного файла.
+
+*Тип*: `xref:api/EdiMessageReplyFileType.adoc[EdiMessageReplyFileType]`
+
+|`ReplyReceipt`
+a|Задает или возвращает ссылку на ответный файл (квитанцию).
+
+*Тип*: `xref:api/EdiMessageSignedFile.adoc[EdiMessageSignedFile]`
+|===
+
+== Поля
+
+[cols=",",options="header",]
+|===
+|Имя |Описание
+
+|`NeedReceiptProperty` |Определяет свойство _Требуется извещение_.
+|`ReplyFileProperty` |Определяет свойство _Ответный файл_.
+|`ReplyFileTypeProperty` |Определяет свойство _Тип ответного файла_.
+|`ReplyReceiptProperty` |Определяет свойство _Ответная квитанция_.
+|===

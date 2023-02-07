@@ -4,7 +4,7 @@
 
 Компонент данного типа непосредственно взаимодействует с оператором ЭДО. При взаимодействии выполняется передача и получение сообщений электронного обмена, в т.ч. содержащих электронные документы (входящие и исходящие).
 
-Данный компонент должен реализовывать программный интерфейс xref:IMessageService.adoc[IMessageService]. Методы реализуемого интерфейса вызываются при получении и отправке сообщений оператору ЭДО.
+Данный компонент должен реализовывать программный интерфейс xref:api/IMessageService.adoc[IMessageService]. Методы реализуемого интерфейса вызываются при получении и отправке сообщений оператору ЭДО.
 
 Вариант реализации данного компонента содержится в сборке `DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке "Коннектор к Диадок").
 
@@ -181,7 +181,7 @@ public class DiadocSession
             if (eventList == null || eventList.TotalCount == 0)
                 return lastEventId;
 
-            lastEventId = eventList.Events[eventList.Events.Count - 1].EventId;
+            lastEventId = eventList.Events[eventList.Events.Count -- 1].EventId;
             if (eventList.TotalCount == eventList.Events.Count)
                 return lastEventId;
         }
@@ -189,7 +189,7 @@ public class DiadocSession
 
 }
 ----
-<.> DiadocApi - объект API Диадок, проксирующий работу с веб-сервисом Диадок. +
+<.> DiadocApi -- объект API Диадок, проксирующий работу с веб-сервисом Диадок. +
 Описание API Диадок приведено на странице с документацией Диадок API.
 <.> Получаем идентификатор последнего события в ящике организации.
 
