@@ -29,7 +29,7 @@ include::5.5.17@webclient:ROOT:page$requirements-signature.adoc[tags=dss-client]
 == Использование квалифицированных сертификатов
 
 .Требования к серверу:
-. КриптоПро CSP версии {e-sign-v}.
+. КриптоПро CSP версии {csp-v}.
 . https://www.cryptopro.ru/downloads[КриптоПро CADESCOM версия {cades}].
 . {root-cert} Сертификат должен быть установлен в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
 
@@ -38,10 +38,11 @@ include::5.5.17@webclient:ROOT:page$requirements-signature.adoc[tags=dss-client]
 . Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc#browser[Необходимое программное обеспечение]).
 
 .Компоненты криптопровайдера КриптоПро:
-. КриптоПро CSP версии {e-sign-v}.
+. КриптоПро CSP версии {csp-v}.
 . xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
-. CryptoPro Extension for CAdES Browser Plug-in версии 1.2.4 или выше (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
-. КриптоПро TSPCOM версии 1.05.1379 / 1.05.1057 / 2.0.12450.
+. CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
+. КриптоПро TSPCOM версии {tspcom-v} -- компонент необходим для создания усиленной подписи Cades-X-Long-Type-1.
+. См. также xref:backoffice::requirements.adoc#crypto-pro[требования для модуля "{bo}"].
 
 .Сертификаты ЭП:
 . {root-cert} Должен быть установлен в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
