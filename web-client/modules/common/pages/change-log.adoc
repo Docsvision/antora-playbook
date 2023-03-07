@@ -3,13 +3,36 @@
 [#functional]
 == Функциональные изменения
 
-=== Изменения в обновлении 03.03.2023
+.Изменения в обновлении 03.03.2023
+[%collapsible]
+====
+[#esia]
+Аутентификация через ЕСИА::
+Добавлена возможность использовать xref:user:prepare-authenticate.adoc#extensions[расширение авторизации] ЕСИА.
++
+.Требования:
+* Минимальная версия модуля _{wc}_ 5.5.6478.56.
+* Минимальная версия модуля _{pl}_ 5.5.7821.0.
+* Дополнительная опция лицензии, см. xref:ROOT:requirements-license.adoc[].
+
+[#sample]
+Настройка страницы авторизации::
+Обновлён пример настройки страницы авторизации: "xref:programmer:client/authorization.adoc[]".
+
+[#mydss]
+Подписание из приложения::
+Стала доступной возможность работы с подписью из приложения КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client] для работы с подписью на мобильных устройствах. Приложения обладают схожей функциональностью, рекомендуется использовать DSS Client как официальное приложение КриптоПро. См. подробнее xref:user:docs-sign.adoc#mobile[].
+
+[#card-link]
+Ссылка на карточку::
+В ЭУ xref:layouts:ctrl/special/cardLink.adoc["Ссылка на карточку"] (`_cardLink_`) добавлено новое свойство `Поисковый параметр`.
++
+Для элемента управления была добавлена возможность выбрать карточку для ссылки из поля ввода.
+====
 
 [#extensions]
 Расширения аутентификации::
-Добавлена возможность использовать xref:user:prepare-authenticate.adoc#extensions[расширения авторизации] ЕСИА
-include::platform:ROOT:partial$chunks.adoc[tags=esia-v]
-и Azure.
+Добавлена возможность использовать xref:user:prepare-authenticate.adoc#extensions[расширение авторизации] Azure.
 
 [#poa]
 Справочник полномочий для доверенностей::
@@ -235,12 +258,6 @@ image::user:search-current-folder.png[Строка поиска]
 [#diagram-control]
 Диаграмма::
 Новый xref:layouts:ctrl/other/diagram.adoc[элемент управления], позволяющий добавить диаграммы на главную страницу.
-
-[#card-link]
-Ссылка на карточку::
-В ЭУ xref:layouts:ctrl/special/cardLink.adoc["Ссылка на карточку"] (`_cardLink_`) добавлено новое свойство `Поисковый параметр`.
-+
-Для элемента управления была добавлена возможность выбрать карточку для ссылки из поля ввода.
 
 [#acknowldegement-control]
 Лист ознакомления::
