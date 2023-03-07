@@ -188,6 +188,21 @@ private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.
 }
 ----
 +
+[#websettings]
+****
+В {wc}е за заполнение данных карточки отвечает обработчик `edi_updateDocumentFormInvoice`. Обработчик может быть привязан к кнопке по аналогии с {wincl}ом или быть назначен на события добавления главного файла и добавления версии файла.
+
+Обработчик проверяет расширение файла. Если формат файла не соответствует ожидаемому (`.xml`) или в файле содержатся ошибки, будет сообщение об ошибке. Проверка содержимого выполняется по аналогии с {wincl}ом.
+
+Через клиентский API обработчик можно вызвать обращением к сервису `$EdiFileSync` с помощью метода:
+
+ updateDocumentDataFromInvoice(documentId: string, fileId?: string)
+
+На сервере можно обратится к следующему сервису:
+
+ IEdiFileSyncService.UpdateDocumentDataFromInvoice
+****
++
 .. _Запросить аннулирование_:
 +
 [source,csharp]
