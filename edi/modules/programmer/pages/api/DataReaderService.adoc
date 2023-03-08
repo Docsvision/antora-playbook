@@ -1,0 +1,62 @@
+= DataReaderService -- класс
+
+Клас выполняет чтение данных карточек, обычно для чтения получателей и подписанных файлов.
+
+Класс вызывает экземпляры `IDataReader` по привязке к виду или типу карточки. Можно создать свой `IDataReader` с нуля или на основе существующего и прописать его в справочнике операторов.
+
+`DataReaderService` можно использовать в своих компонентах или скриптах для получения данных при отправке.
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+
+== Синтаксис
+
+[source,csharp]
+----
+public class DataReaderService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`public string GetDigest(Guid)`
+|Получает дайджест карточки по её ID
+|`public string GetFileDigest(Guid, Guid)`
+|Получает дайджест файла документа по ID карточки и ID файла
+|`public string GetFileContent(Guid, Guid)`
+|Получает содержимое файла документа по ID карточки и ID файла
+|`public string GetPrintFormContent(Guid)`
+|Получает печатную форму документа из содержимого по ID карточки
+|`public string GetReplyFileDigest(Guid, Guid, MessageFileType)`
+|Получает дайджест ответного файла по ID карточки и ID файла
+|`public string GetReplyFileComment(Guid, Guid, MessageFileType)`
+|Получает комментарий к ответному файлу по ID карточки и ID файла
+|`public ItemCollection<DocumentRecipientData> GetAllRecipients(Guid)`
+|Получает всех получателей для документа по ID карточки
+|`public ItemCollection<DocumentSignature> GetActualSignatures(Guid)`
+|Получает действующие подписи документа по ID карточки
+|`public ItemCollection<DocumentFileData> GetAllFiles(Guid)`
+|Получает все файлы для документа по ID карточки
+|`public ItemCollection<FileValidationResult> ValidateFiles(Guid)`
+|Проверяет структуру файлов, например, действительно ли файл является счёт-фактурой в формате XML по ID карточки
+|`public ItemCollection<DocumentFileData> GetLastSignedFiles(Guid)`
+|Получает последние подписанные файлы для документа по ID карточки
+|`public ItemCollection<DocumentFileData> GetSignedFiles(Guid, Guid)`
+|Получает подписанные файлы для документа по ID карточки и ID группы подписи
+|`public ItemCollection<Guid> GetLinkedCards(Guid)`
+|Получает ссылочные файлы для документа по ID карточки
+|`public MessageData PrepareMessageData(Guid)`
+|Подготавливает данные сообщения для документа по ID карточки
+|`public MessageFile PrepareFileData(Guid, Guid, Guid, bool, string)`
+|Подготавливает данные файла для документа по ID карточки, основного файла, подписи и временной папки.
+|`public SignatureValidation ValidateSignature(Guid, Guid, Guid)`
+|Проверяет действительность подписи ID: карточки, файла, подписи
+|`public string GetInvoiceReplyData(Guid)`
+|Получает ответный счёт-фактуру на документ по ID карточки
+// |`private IDocumentDataReader GetReaderForCard(Guid)`
+// |Чтение данных для карточки через ее вид или тип
+|===

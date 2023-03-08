@@ -1,0 +1,31 @@
+= InvitationService -- класс
+
+Сервис работы с приглашениями, может быть использован для замены стандартных БП модуля.
+
+Вызывает экземпляры `IInvitationService` для соответствующего оператора обмена.
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class InvitationService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`public void ProcessInvitationToSend(EdiInvitation, ILogWriter)`
+|Обрабатывает карточку приглашения
+|`public void CheckInvitationStatus(EdiInvitation, ILogWriter)`
+|Проверяет статус нового приглашения
+|`public ItemCollection<MessageData> GetNewInvitations(string, string, DateTime?)`
+|Получает новые приглашения с указанной даты по ID ящика и ID последнего события
+|`public void ProcessEvent(MessageData, ILogWriter)`
+|Обрабатывает событие
+|===
