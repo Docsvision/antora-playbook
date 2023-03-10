@@ -32,18 +32,22 @@
 Будет открыто окно со свойствами типа карточки _Документ_.
 +
 . Перейдите на страницу _Преобразования_ и создайте преобразования:
-.. _UniInvoiceRU_ c параметрами:
-* Название: `UniInvoiceRU`.
-* Псевдоним: `UniInvoiceRU`.
+.. _UniInvoiceRu_ c параметрами:
++
+* Название: `UniInvoiceRu`.
+* Псевдоним: `UniInvoiceRu`.
 * Тип преобразование: *_Пользовательское_*.
 * Тип содержимого: *_XML_*.
 * Данные преобразования (выберите файл): `C:\Program Files (x86)\Docsvision\Edi\Xslt\UniInvoice.ru.xslt`.
-.. _UniInvoiceCorrectionRU_ c параметрами:
-* Название: `UniInvoiceCorrectionRU`.
-* Псевдоним: `UniInvoiceCorrectionRU`.
-* Тип преобразование: *_Пользовательское_*.
-* Тип содержимого: *_XML_*.
-* Данные преобразования (выберите файл): `C:\Program Files (x86)\Docsvision\Edi\Xslt\UniInvoiceCorrection.ru.xslt`.
++
+.. Выполните аналогичные настройки со следующими преобразованиями:
++
+* `UniInvoiceActRu`
+* `UniInvoiceCorrectionRu`
+* `UniInvoiceCorrFields`
+* `UniInvoiceFields`
+* `UniInvoiceSF`
+* `UniInvoiceTorgRu`
 
 [#formalized-folders]
 == Настройка папок для формализованных документов
@@ -282,7 +286,7 @@ public EdiScriptHelper EdiScriptHelper
 Для работы указанных методов к скрипту карточки должны подключены сборки `DocsVision.Edi.DocumentScript.dll` и `{dv}.DocumentsManagement.dll`. Сборки располагаются в каталоге клиента {dv}.
 
 .В объявление пространств имен нужно добавить строки:
-[source,csharp]
+[source,csharp,subs=attributes]
 ----
 using DocsVision.Edi.DocumentScript;
 using {dv}.DocumentsManagement;
