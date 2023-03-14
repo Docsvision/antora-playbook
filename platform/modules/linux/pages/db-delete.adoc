@@ -1,0 +1,54 @@
+= Удалить базу данных {dv}
+
+Если база данных {dv} больше не используется, она может быть удалена из системы управления базами данных.
+
+.Удаление базы данных рекомендуется осуществлять в следующей последовательности:
+. Убедитесь, что удаляемая база данных {dv} действительно не используется.
+. Отключите базу данных от сервера {dv} по инструкции xref:db-detach.adoc[Отключение БД от сервера {dv}].
++
+****
+Рекомендуется отключать базу данных перед её физическим удалением. Отсутствие базы данных в СУБД может привести к задержкам до 15 секунд при выполнении операций в программе _{cns}_.
+****
++
+. Удалите базу данных из СУБД стандартным образом.
++
+Для БД Microsoft SQL воспользуйтесь SQL Server Management Studio.
++
+Для PostgreSQL воспользуйтесь dbForge Studio for PostgreSQL или аналогичной программой.
++
+. Также удалите из СУБД задания, связанные с удалённой базой данных.
++
+.Чтобы удалить задания из Microsoft SQL Server воспользуйтесь следующим скриптом:
+[source,sql]
+----
+USE [msdb]
+
+SET NOCOUNT ON
+
+DECLARE @Job TABLE (JobName SYSNAME)
+DECLARE @JobName AS SYSNAME
+DECLARE @Sql AS NVARCHAR(MAX)
+
+SET @JobName = ''
+
+INSERT INTO @Job (JobName)
+SELECT j.name
+FROM dbo.sysjobs AS j
+JOIN dbo.sysjobsteps AS js ON (js.job_id = j.job_id)
+WHERE js.database_name = 'DBName' <.>
+
+WHILE EXISTS(SELECT TOP 1 * FROM @Job)
+BEGIN
+    SELECT TOP 1 @JobName = JobName FROM @Job
+    SET @Sql = 'EXEC msdb.dbo.sp_delete_job @job_name = ' + '''' + @JobName + '''' + ';'
+    exec sp_executesql @Sql;
+    DELETE @Job WHERE JobName = @JobName
+END
+----
+<.> `DBName` замените на название БД {dv},
+которая была удалена.
+
+[NOTE]
+====
+include::admin:partial$excerpts.adoc[tags=delete-wf-settings]
+====

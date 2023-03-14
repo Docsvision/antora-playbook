@@ -1,0 +1,78 @@
+= Особые настройки кэширования операндов ролевой модели
+
+Управлять временем жизни операндов в кэше можно при помощи особого кэша операндов `CustomOperandValuesCache`.
+
+Для данного кэша предусмотрена настройка периода очистки. Через заданный интервал времени из кэша очищаются все устаревшие операнды. По умолчанию интервал составляет `15 минут`.
+
+Очистка через заданный интервал освобождает память от устаревших операндов.
+
+Изменить интервал очистки можно в таблице *dvsys_settings* и при помощи системных процедур. Например, чтобы задать для периода значение `10 минут`, в БД необходимо выполнить запрос, представленный ниже.
+
+WARNING: Значение указывается в миллисекундах.
+
+.Для {mssql}:
+[source,sql]
+----
+declare @value int = 10 * 60*1000; -- value in milliseconds
+exec dvsys_setting_set N'CustomOperandsCacheCheckTimeout', @value
+----
+
+.Для {pgsql}:
+[source,pgsql]
+----
+select * from public."dvsys_setting_set"('CustomOperandsCacheCheckTimeout', (10*60*1000)::integer::sql_variant);
+----
+
+В этот кэш попадают операнды, для которых настроен особый интервал хранения. Настраивается такой интервал (_TTL_) так же в таблице *dvsys_settings*.
+
+При настройке _TTL_ надо отталкиваться от имени операнда. Шаблон имени настройки _TTL_ следующий: `\{имя_операнда}_ttl`.
+
+* Имя операндов, реализованных в собственной хранимой процедуре совпадает с именем процедуры. Имя хранимой процедуры указывается в конструкторе ролей при настройке условия, например так: `dvbo_Operand_Document_TasktreeEmployees`.
+
+* Для операндов на основе поля секции имя формируется по шаблону `Operand_\{SectionTypeID}\_FieldAlias`, например `Operand_\{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar`.
+
+* Для ссылочных операндов на основе ссылочного поля имя формируется по шаблону `Operand_\{TargetSectionID}\_TargetSectionField_\{SourceSectionID}\_SourceSectionField`, например так: `Operand_\{568ce0a6-7096-43cc-9800-e0b268b14cc4}\_Author_\{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList`, что соответствует настройкам в конструкторе ролей.
+
+NOTE: Для корректной настройки TTL лучше брать имя операнда из журнала сервера. Имена операндов и процедур указываются в сообщении в журнале.
+
+.Установка TTL:
+====
+.Для {mssql}:
+[source,sql]
+----
+declare @value int = 15 * 60; -- value in seconds
+exec dvsys_setting_set N'dvbo_Operand_Document_TasktreeEmployees_ttl', @value
+exec dvsys_setting_set N'Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_ttl', @value
+exec dvsys_setting_set N'Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList_ttl', @value
+----
+
+.Для {pgsql}:
+[source,pgsql]
+----
+select * from  public."dvsys_setting_set"('dvbo_Operand_Document_TasktreeEmployees_ttl', (15*60)::integer::sql_variant); -- value in seconds
+select * from  public."dvsys_setting_set"('Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_ttl', (10*60)::integer::sql_variant); -- value in seconds
+select * from  public."dvsys_setting_set"('Operand_{568ce0a6-7096-43cc-9800-e0b268b14cc4}_Author_{30eb9b87-822b-4753-9a50-a1825dca1b74}_ReferenceList_ttl', (20*60)::integer::sql_variant); -- value in seconds
+----
+====
+
+Кэш `CustomOperandValuesCache` предполагает хранение и повторное использование значений операндов в течение настроенного интервала. Сбросить кэшированные значения до окончания TTL можно принудительно при помощи метода расширения `ResetRolesCache`.
+
+Принудительный сброс выполняется аналогично, через таблицу настроек. Шаблон имени настройки `\{имя_операнда}_reset_enabled`, тип `boolean`.
+
+.Сброс кэша операндов:
+====
+.Для {mssql}:
+[source,sql]
+----
+declare @on bit = 1
+exec dvsys_setting_set N'dvbo_Operand_Document_TasktreeEmployees_reset_enabled', @on
+exec dvsys_setting_set N'Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_reset_enabled', @on
+----
+
+.Для {pgsql}:
+[source,pgsql]
+----
+select * from  public."dvsys_setting_set"('dvbo_Operand_Document_TasktreeEmployees_reset_enabled', true::sql_variant);
+select * from  public."dvsys_setting_set"('Operand_{30eb9b87-822b-4753-9a50-a1825dca1b74}_Registrar_reset_enabled', true::sql_variant);
+----
+====

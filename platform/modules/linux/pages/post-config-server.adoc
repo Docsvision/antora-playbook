@@ -1,0 +1,46 @@
+= Действия после установки системы
+
+[#commands]
+== Полезные команды
+
+Ниже перечислены команды, которые могут быть полезны при установке и после неё. Команды приведены на примере модуля {pl}. Чтобы применить команду для другого модуля, замените `platform` на название модуля.
+
+. Посмотреть состояние сервиса:
++
+ $ sudo systemctl status platform
++
+. Запустить сервис:
++
+ $ sudo systemctl start platform
++
+. Остановить сервис:
++
+ $ sudo systemctl stop platform
++
+. Перезапустить сервис:
++
+ $ sudo systemctl restart platform
++
+// tag::log[]
+. Посмотреть журнал сервиса (только записи в `stdout/stderr`):
++
+ $ sudo journalctl -u platform
++
+. Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
++
+ $ sudo journalctl -f -u platform
+
+// end::log[]
+
+[start=7]
+. Установить пакет:
++
+ $ sudo apt-get install platform
++
+. Установить пакет определенной версии:
++
+ $ sudo apt-get install platform=6.0.1
++
+. Удалить пакет:
++
+ $ sudo apt-get purge platform

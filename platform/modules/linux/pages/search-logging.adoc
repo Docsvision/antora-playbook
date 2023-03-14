@@ -1,0 +1,24 @@
+= Протоколирование работы сервиса полнотекстового индексирования
+
+События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле `Каталог-установки модуля-{pl}\Platform\5.5\FullTextService.Service.exe.config` в секции `configuration/nlog`.
+
+[source,xml]
+----
+  <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nlog-project.org/schemas/NLog.xsd NLog.xsd" autoReload="true" throwExceptions="false" internalLogLevel="Off" internalLogFile="nlog-internal.log" async="true">
+    <targets>
+      <target xsi:type="ColoredConsole" name="console" />
+      <target xsi:type="Trace" name="trace" />
+      <target xsi:type="File" name="f" fileName="C:/Program Files (x86)/Docsvision/logs/FullTextService/${shortdate}.log" encoding="utf-8" layout="${longdate}|${threadid}|${level:uppercase=true}|${message} ${exception:format=tostring}" enableArchiveFileCompression="true" archiveEvery="Day" maxArchiveFiles="30" archiveFileName="C:/Program Files (x86)/Docsvision/logs/FullTextService/archive/${shortdate}.zip" concurrentWrites="true" /> <.>
+    </targets>
+    <rules>
+      <logger name="*" minlevel="Trace" writeTo="trace" />
+      <logger name="*" minlevel="Trace" writeTo="console" />
+      <logger name="*" minlevel="Trace" writeTo="f" />
+    </rules>
+  </nlog>
+----
+<.> Путь к файлу журнала указан в атрибуте `fileName` элемента `target [xsi:type="File"]`.
+
+По умолчанию файлы журнала сохраняются в директорию `Каталог-установки-модуля-{pl}\Platform\5.5\logs\`. Новый журнал создаётся после истечения заданного интервала времени. Каждый день журнал сохраняется в архив. Максимальное число сохраненных архивов 30.
+
+Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.

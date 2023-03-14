@@ -1,0 +1,94 @@
+= Установка базовых модулей на Linux
+
+Данный раздел описывает установку базовых модулей для ОС Linux. Все описанные ниже команды необходимо выполнять после завершения xref:install-platform.adoc[установки] модуля {pl}.
+
+При установке модулей {dv} в ОС Linux разделение на серверную и клиентскую части отсутствует. Установка выполняется описанными ниже командами, другие базовые модули будут установлены автоматически.
+
+[#webc]
+== Установка {wc}а
+
+. Установите службу модуля:
++
+ $ sudo apt-get install webclient
++
+. Замените или отредактируйте файл настроек модуля:
++
+ $ sudo cp ~/tech_days/WebClient/appsettings.json /usr/lib/docsvision/WebClient/appsettings.json
++
+. Запустите службу {wc}а:
++
+ $ sudo systemctl start webclient
++
+. Теперь вы можете запустить {wc}, перейдя по адресу: `\http://dv02.digdes.com:5004/Account/Login`.
+
+[#sett-serv]
+== Установка Сервиса настроек
+
+. Установите сервис:
++
+ $ sudo apt-get install settingsservice
++
+. Замените или отредактируйте файл настроек:
++
+ $ sudo cp ~/tech_days/SettingsService/appsettings.json /usr/lib/docsvision/SettingsService/appsettings.json
++
+. Запустите сервис:
++
+ $ sudo systemctl start settingsservice
+
+[#ext-api]
+== Установка Сервиса внешнего API {of-mc}
+
+. Установите сервис внешнего API:
++
+ $ sudo apt-get install externalapi
++
+. Замените или отредактируйте файл настроек:
++
+ $ sudo cp ~/tech_days/ExternalAPI/appsettings.json /usr/lib/docsvision/ExternalAPI/appsettings.json
++
+. Запустите сервис внешнего API {of-mc}:
++
+ $ sudo systemctl start externalapi
+
+include::upgrade:551-552:post-update.adoc[tags=console]
+
+. Следующей командой установите {mc}:
++
+ $ sudo apt-get install managementconsole
++
+. Замените или отредактируйте файл настроек модуля:
++
+ $ sudo cp ~/tech_days/ManagementConsole/appsettings.json /usr/lib/docsvision/ManagementConsole/appsettings.json
++
+. Запустите службу:
++
+ $ sudo systemctl start managementconsole
++
+. Теперь вы можете открыть Консоль управления из браузера по адресу `\http://dv02.digdes.com:5100`
++
+NOTE: При авторизации укажите имя в формате `user@domain.com`, вариант `domain\user` не работает.
+
+[#worker]
+== Установка Службы {ws}
+
+. Установите модуль Служба {ws} следующей командой:
++
+ $ sudo apt-get install workerservice
++
+. Замените или отредактируйте конфигурационный файл:
++
+ $ sudo cp ~/tech_days/WorkerService/Configuration.json /usr/lib/docsvision/WorkerService/Configuration.json
++
+. Запустите службу модуля:
++
+ $ sudo systemctl start workerservice
+
+[#purge]
+== Удаление ненужных пакетов
+
+. Удалите ненужные системе пакеты (зависимости, которые принесли за собой другие пакеты при установке) командой:
++
+ $ sudo apt-get autoremove
+
+Ознакомьтесь со списком полезных команд в пункте xref:post-config-server.adoc[]
