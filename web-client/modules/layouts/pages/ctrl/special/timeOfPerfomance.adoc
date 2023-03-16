@@ -7,9 +7,9 @@ image::time-of-perfomance.png[Элемент управления "Срок ис
 
 ЭУ является контейнером, в котором размещены три ЭУ:
 
-* `_startDate_timeOfPerfomance_` -- дата и время начало задания; тип xref:ctrl/standard/dateTimePicker.adoc["Дата/время"];
-* `_endDate_timeOfPerfomance_` -- дата и время завершения задания; тип xref:ctrl/standard/dateTimePicker.adoc["Дата/время"];
-* `_duration_timeOfPerfomance_` -- длительность исполнения задания; тип xref:ctrl/standard/number.adoc["Число"].
+* `_startDate_timeOfPerfomance_` -- дата и время начало задания; тип "xref:ctrl/standard/dateTimePicker.adoc[Дата/время]";
+* `_endDate_timeOfPerfomance_` -- дата и время завершения задания; тип "xref:ctrl/standard/dateTimePicker.adoc[Дата/время]";
+* `_duration_timeOfPerfomance_` -- длительность исполнения задания; тип "xref:ctrl/standard/number.adoc[Число]".
 
 Для задания расчет длительности выполняется с учетом бизнес-календаря исполнителя, если это предусмотрено настройками вида карточки _Задание_.
 
@@ -17,7 +17,7 @@ image::time-of-perfomance.png[Элемент управления "Срок ис
 
 Особенности настройки:
 
-* Элемент управления предназначен для совместной работы с ЭУ xref:ctrl/special/groupTaskCardPerformersPanel.adoc["Панель выбора исполнителей"], который должен быть добавлен на разметку.
+* Элемент управления предназначен для совместной работы с ЭУ "xref:ctrl/special/groupTaskCardPerformersPanel.adoc[Панель выбора исполнителей]", который должен быть добавлен на разметку.
 * В настройках ЭУ `_startDate_periodOfExecution_`, `_endDate_timeOfPerfomance_` и `_duration_timeOfPerfomance_` нужно указать обработчик *_timeOfPerfomanceToPerformersSync_* для события `*После смены данных*`;
 * *Необходимо самостоятельно настроить* вложенные ЭУ (`_startDate_timeOfPerfomance_`, `_endDate_timeOfPerfomance_`, `_duration_timeOfPerfomance_`) для работы: как минимум, связать элементы управления с полями карточки _Задания_ или _Группы заданий_ (_дата начала_, _дата завершения_, _длительность_).
 
