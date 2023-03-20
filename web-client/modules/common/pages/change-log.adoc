@@ -420,6 +420,24 @@ WebClient.app.cloudSignature.needsAuthorization = () => false;
 +
 * Модуль `@docsvision/webclient/BackOffice/TasksUtills` переименован в `@docsvision/webclient/BackOffice/TasksUtils`. Поддержана обратная совместимость на уровне JavaScript.
 
+[#attorney]
+== API для работы с МЧД
+
+* В `DocsVision.BackOffice.Cards.Web.Model` добавлены новые классы для работы с машиночитаемыми доверенностями:
++
+** `CreatePowerOfAttorneyFnsDovBbRequest` с полями:
+*** `PowerOfAttorneyFnsDovBbData powerOfAttorneyData` -- данные создаваемой доверенности.
+*** `Guid representative` -- представитель.
+*** `Guid signer` -- подписант.
+*** `Guid parentPowerOfAttorney` -- идентификатор родительской доверенности.
+** `SignPowerOfAttorneyRequest` с полями:
+*** `Guid PowerOfAttorneyId` -- идентификатор доверенности.
+*** `byte[] Signature` -- данные подписи.
+* В контроллер `PowerOfAttorneyApiController` добавлены новые методы:
+** `POST CreatePowerOfAttorney(CreatePowerOfAttorneyFNSDOVBBRequest request)` -- вызывает `IPowerOfAttorneyService.CreatePowerOfAttorney` (создание доверенности) с передачей полей из `CreatePowerOfAttorneyFNSDOVBBRequest`.
+** `GET GetMachineReadablePowerOfAttorney(Guid powerOfAttorneyId)` -- возвращает МЧД доверенности для подписания.
+** `POST AttachSignatureToPowerOfAttorney(AttachSignatureToPowerOfAttorneyRequest)` -- вызывает `IPowerOfAttorneyService.AttachSignature`, загружающий подпись в существующую доверенность и изменяющий статус доверенности.
+
 [#samples]
 == Новые примеры в репозитории на GitHub
 
