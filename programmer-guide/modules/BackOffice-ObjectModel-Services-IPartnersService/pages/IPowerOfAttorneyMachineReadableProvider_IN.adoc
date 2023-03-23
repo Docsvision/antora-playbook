@@ -1,0 +1,37 @@
+= IPowerOfAttorneyMachineReadableProvider -- интерфейс
+
+Определяет методы формирования и чтения машиночитаемой доверенности.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IPowerOfAttorneyMachineReadableProvider
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+
+|`string CreatePowerOfAttorneyMachineReadable(PowerOfAttorneyData);`
+a|Формирует содержимое машиночитаемой доверенности на основе данных доверенности
+
+.Параметры:
+* `powerOfAttorneyData` -- данные для формирования МЧД
+
+Возвращаемое значение: содержимое МЧД
+
+|`PowerOfAttorneyMachineReadableInfo GetPowerOfAttorneyMachineReadableInfo(string);`
+a|Возвращает информацию о машиночитаемой доверенности из содержимого машиночитаемой доверенности.
+
+.Параметры:
+* `powerOfAttorneyMachineReadableData` -- содержимое МЧД
+
+Возвращаемое значение: информация о машиночитаемой доверенности.
+|===
