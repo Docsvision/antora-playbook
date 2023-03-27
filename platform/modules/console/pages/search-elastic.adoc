@@ -1,0 +1,122 @@
+= Установить систему {es}
+
+Перед установкой ознакомьтесь с требованиями системы {es} в разделе xref:ROOT:requirements-hardware.adoc#elastic[по ссылке].
+
+.Систему полнотекстового поиска {es} нужно устанавливать в следующих случаях:
+- Планируется использовать функцию полнотекстового поиска по содержимому карточек.
+- Будет использоваться СУБД PostgreSQL.
+
+Если планируется использовать СУБД Microsoft SQL, можно также использовать {es} или встроенную функцию полнотекстового поиска Microsoft SQL.
+
+{es} может быть установлен на любой компьютер организации, который удовлетворяет требованиям данной системы полнотекстового поиска.
+
+. Загрузите систему {es} https://www.elastic.co/downloads/past-releases/elasticsearch-{es-d}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
++
+WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
++
+. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es} или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
++
+. Создайте папку `hunspell` с подпапками `en_US` и `ru_RU` в директории `C:\ProgramData\Elastic\Elasticsearch\config`.
+. Сохраните словари Hunspell для {es} версии {es-v} в папки на компьютере, созданные на предыдущем шаге. Скачать словари можно по ссылкам <<links,ниже>>.
++
+Словари необходимы для индексации с учетом морфологии.
++
+[lowerroman]
+.. Откройте указанные ниже файлы в браузере:
++
+[#links]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic]
+- https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff]
++
+.. Вызовите контекстное меню в окне браузера и выберите пункт _Сохранить как..._
++
+.Сохранить как для файла "ru_RU.aff"
+image::admin:elastic-dictionary-save-as.png[Сохранить как для файла]
++
+.. В открывшемся окне проводника проверьте путь до папки и имя файла, затем нажмите *Сохранить*.
++
+.Путь до папки:
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru_RU` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.dic[ru_RU.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/ru_RU/ru_RU.aff[ru_RU.aff]
+- `C:\ProgramData\Elastic\Elasticsearch\config\hunspell\en_US` для файлов https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic[en_US.dic] и https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff[en_US.aff].
++
+[WARNING]
+====
+Расширение файлов должно быть `.dic` и
+`.aff`, тип файла должен быть _Все
+файлы_.
+
+Не выбирайте тип файла _Текстовый
+документ_ и не указывайте в имени файла расширение
+`.txt`.
+====
++
+.Сохранение файла "ru_RU.dic"
+image::admin:elastic-dictionary-saving-as.png[Сохранение файла]
++
+. Перезапустите {es}.
++
+От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%%`.
++
+`%%path-to-ingest-attachment-{es-d}.zip%%` необходимо заменить на путь загрузки компонента.
++
+. Если система {es} установлена отдельно от сервера {dv}, настройте прослушивание публичного адреса.
++
+По умолчанию {es} прослушивает только локальный адрес `localhost`, делая невозможным подключение сервиса полнотекстового индексирования {dv}.
++
+[lowerroman]
+.Чтобы настроить прослушивание публичного адреса, выполните следующие действия:
+.. Откройте конфигурационный файл {es}: `C:\ProgramData\Elastic\Elasticsearch\config\Elasticsearch.yml`.
+.. Добавьте в конец файла строку:
++
+[source,yaml]
+----
+network.host: ${HOSTNAME}
+----
++
+.. Сохраните изменения.
++
+WARNING: Если не установлены дополнительные меры ограничения, данные полнотекстового индексирования станут публичными.
++
+. Перезапустите службу {es}.
++
+. В конфигурационный файл {es} добавьте следующую строку:
++
+ discovery.type: single-node
++
+.Добавлять строк необходимо в следующих случаях:
+* Если информация о системе {es} не отображается.
+* Если возникают ошибки подключения к серверу службы {es}.
+* Если система {es} не работает.
++
+. Проверьте доступность системы {es}.
++
+Откройте в веб-браузере (на компьютере с {es}, если прослушивается только локальный адрес, или на любом другом компьютере, если прослушивается публичный адрес) страницу `\http://{es}-address:9200`.
++
+.Должна отобразиться информация о системе {es}:
+[source,json,subs=attributes]
+----
+{
+  "name" : "elastic.company.com",
+  "cluster_name" : "{es}",
+  "cluster_uuid" : "H9LHsBYIQMeEZsCytXOIbQ",
+  "version" : {
+    "number" : "5.5.0",
+    "build_hash" : "260387d",
+    "build_date" : "2017-06-30T23:16:05.735Z",
+    "build_snapshot" : false,
+    "lucene_version" : "6.6.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+----
++
+Журнал работы системы располагается в папке `C:\ProgramData\Elastic\Elasticsearch\logs`.
++
+[NOTE]
+====
+Включение функции полнотекстового поиска в {dv} рассмотрено в пункте xref:search-full-text.adoc[Настройка полнотекстового поиска].
+====
++
+. Настройте {es} согласно инструкции в разделе xref:search-elastic-configure.adoc[].
