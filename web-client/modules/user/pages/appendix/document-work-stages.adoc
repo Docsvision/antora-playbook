@@ -5,189 +5,195 @@
 == Сценарий работы с входящей корреспонденцией
 
 .Обработка входящей корреспонденции
-[plantuml, svg]
-....
-@startuml
-skinparam rectangleBorderThickness 1
-|#orange|Регистратор|
-#lightgray:**Ввод документа в систему**;
-:Регистрация документа;
-if (Требуется работа по документу?) then (НЕТ)
-  label spacer
-  '#lightgray:**Archive document**;
-  'end
-else (ДА)
-  repeat
-  :Обработка входящей корреспонденции;
-  |#lightgreen|Исполнитель задания|
-  :**Исполнение заданий по документу**;
-  repeat while (Завершено?) is (НЕТ) not (ДА)
-  |#orange|Регистратор|
-  '#lightgray:**Перевод документа в архив**;
-endif
-#lightgray:**Перевод документа в архив**;
-end
-@enduml
-....
+image::document-incoming.png[]
+// [plantuml, svg]
+// ....
+// @startuml
+// skinparam rectangleBorderThickness 1
+// |#orange|Регистратор|
+// #lightgray:**Ввод документа в систему**;
+// :Регистрация документа;
+// if (Требуется работа по документу?) then (НЕТ)
+//   label spacer
+//   '#lightgray:**Archive document**;
+//   'end
+// else (ДА)
+//   repeat
+//   :Обработка входящей корреспонденции;
+//   |#lightgreen|Исполнитель задания|
+//   :**Исполнение заданий по документу**;
+//   repeat while (Завершено?) is (НЕТ) not (ДА)
+//   |#orange|Регистратор|
+//   '#lightgray:**Перевод документа в архив**;
+// endif
+// #lightgray:**Перевод документа в архив**;
+// end
+// @enduml
+// ....
 
 == Сценарий работы с исходящей корреспонденцией
 
 .Работа с исходящей корреспонденцией
-[plantuml, target=diagram-classes, format=svg]
-....
-@startuml
-|#lightgreen|Подписант|
-|#lightblue|Согласующий|
-|#orange|Инициатор|
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-|#orange|Инициатор|
-#lightgray:**Ввод документа,**
-**подготовка файла документа,**
-**установка связи со входящими**;
-repeat
-:Отправка на согласование;
-|#lightblue|Согласующий|
-:Получение заданий на согласование;
-|#orange|Инициатор|
-repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
-|#orange|Инициатор|
-repeat
-:Отправка на подписание;
-|#lightgreen|Подписант|
-:Получение задания на подписание;
-|#orange|Инициатор|
-repeat while (Документ подписан?) is (НЕТ) not (ДА)
-:Регистрация;
-:Отправка получателю;
-#lightgray:**Перевод документа в архив**;
-@enduml
-....
+image::document-outgoing.png[]
+// [plantuml, target=diagram-classes, format=svg]
+// ....
+// @startuml
+// |#lightgreen|Подписант|
+// |#lightblue|Согласующий|
+// |#orange|Инициатор|
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// |#orange|Инициатор|
+// #lightgray:**Ввод документа,**
+// **подготовка файла документа,**
+// **установка связи со входящими**;
+// repeat
+// :Отправка на согласование;
+// |#lightblue|Согласующий|
+// :Получение заданий на согласование;
+// |#orange|Инициатор|
+// repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
+// |#orange|Инициатор|
+// repeat
+// :Отправка на подписание;
+// |#lightgreen|Подписант|
+// :Получение задания на подписание;
+// |#orange|Инициатор|
+// repeat while (Документ подписан?) is (НЕТ) not (ДА)
+// :Регистрация;
+// :Отправка получателю;
+// #lightgray:**Перевод документа в архив**;
+// @enduml
+// ....
 
 == Сценарий работы с организационно-распорядительными документами
 
 .Работа с организационно-распорядительными документами
-[plantuml, target=diagram-classes, format=svg]
-....
-@startuml
-|#lightgreen|Подписант|
-|#lightblue|Согласующий|
-|#orange|Инициатор|
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-|#orange|Инициатор|
-#lightgray:**Ввод документа,**
-**подготовка файла документа**;
-repeat
-:Отправка на согласование;
-|#lightblue|Согласующий|
-:Получение заданий на согласование;
-|#orange|Инициатор|
-repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
-|#orange|Инициатор|
-repeat
-:Отправка на подписание;
-|#lightgreen|Подписант|
-:Получение задания на подписание
-или утверждение;
-|#orange|Инициатор|
-repeat while (Документ подписан?) is (НЕТ) not (ДА)
-:Назначить действующим;
-:Организация работ по документу;
-#lightgray:**Перевод документа в архив**;
-@enduml
-....
+image::document-ord.png[]
+// [plantuml, target=diagram-classes, format=svg]
+// ....
+// @startuml
+// |#lightgreen|Подписант|
+// |#lightblue|Согласующий|
+// |#orange|Инициатор|
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// |#orange|Инициатор|
+// #lightgray:**Ввод документа,**
+// **подготовка файла документа**;
+// repeat
+// :Отправка на согласование;
+// |#lightblue|Согласующий|
+// :Получение заданий на согласование;
+// |#orange|Инициатор|
+// repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
+// |#orange|Инициатор|
+// repeat
+// :Отправка на подписание;
+// |#lightgreen|Подписант|
+// :Получение задания на подписание
+// или утверждение;
+// |#orange|Инициатор|
+// repeat while (Документ подписан?) is (НЕТ) not (ДА)
+// :Назначить действующим;
+// :Организация работ по документу;
+// #lightgray:**Перевод документа в архив**;
+// @enduml
+// ....
 
 == Сценарий работы со служебными записками
 
 .Работа со служебными записками
-[plantuml, target=diagram-classes, format=svg]
-....
-@startuml
-|#lightgreen|Подписант|
-|#lightblue|Согласующий|
-|#orange|Инициатор|
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-|#orange|Инициатор|
-#lightgray:**Ввод документа,**
-**подготовка файла документа**;
-repeat
-:Отправка на согласование;
-|#lightblue|Согласующий|
-:Получение заданий на согласование;
-|#orange|Инициатор|
-repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
-|#orange|Инициатор|
-repeat
-:Отправка на подписание;
-|#lightgreen|Подписант|
-:Получение задания на подписание;
-|#orange|Инициатор|
-repeat while (Документ подписан?) is (НЕТ) not (ДА)
-:Регистрация документа;
-:Организация работ по документу;
-#lightgray:**Перевод документа в архив**;
-@enduml
-....
+image::document-memorandum.png[]
+// [plantuml, target=diagram-classes, format=svg]
+// ....
+// @startuml
+// |#lightgreen|Подписант|
+// |#lightblue|Согласующий|
+// |#orange|Инициатор|
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// |#orange|Инициатор|
+// #lightgray:**Ввод документа,**
+// **подготовка файла документа**;
+// repeat
+// :Отправка на согласование;
+// |#lightblue|Согласующий|
+// :Получение заданий на согласование;
+// |#orange|Инициатор|
+// repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
+// |#orange|Инициатор|
+// repeat
+// :Отправка на подписание;
+// |#lightgreen|Подписант|
+// :Получение задания на подписание;
+// |#orange|Инициатор|
+// repeat while (Документ подписан?) is (НЕТ) not (ДА)
+// :Регистрация документа;
+// :Организация работ по документу;
+// #lightgray:**Перевод документа в архив**;
+// @enduml
+// ....
 
 == Сценарий работы с заявками
 
 .Работа с заявками
-[plantuml, target=diagram-classes, format=svg]
-....
-@startuml
-|#lightgreen|Подписант|
-|#lightblue|Согласующий|
-|#orange|Инициатор|
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-|#orange|Инициатор|
-#lightgray:**Ввод документа,**
-**подготовка файла документа**;
-repeat
-:Отправка на согласование;
-|#lightblue|Согласующий|
-:Получение заданий на согласование;
-|#orange|Инициатор|
-repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
-|#orange|Инициатор|
-repeat
-:Отправка на подписание;
-|#lightgreen|Подписант|
-:Получение задания на подписание;
-|#orange|Инициатор|
-repeat while (Документ подписан?) is (НЕТ) not (ДА)
-:Регистрация документа;
-:Организация работ по документу;
-#lightgray:**Перевод документа в архив**;
-@enduml
-....
+image::document-request.png[]
+// [plantuml, target=diagram-classes, format=svg]
+// ....
+// @startuml
+// |#lightgreen|Подписант|
+// |#lightblue|Согласующий|
+// |#orange|Инициатор|
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// |#orange|Инициатор|
+// #lightgray:**Ввод документа,**
+// **подготовка файла документа**;
+// repeat
+// :Отправка на согласование;
+// |#lightblue|Согласующий|
+// :Получение заданий на согласование;
+// |#orange|Инициатор|
+// repeat while (Получены все согласующие подписи?) is (НЕТ) not (ДА)
+// |#orange|Инициатор|
+// repeat
+// :Отправка на подписание;
+// |#lightgreen|Подписант|
+// :Получение задания на подписание;
+// |#orange|Инициатор|
+// repeat while (Документ подписан?) is (НЕТ) not (ДА)
+// :Регистрация документа;
+// :Организация работ по документу;
+// #lightgray:**Перевод документа в архив**;
+// @enduml
+// ....
 
 == Сценарий обращения с рабочей документацией
 
 .Обработка рабочего документа
-[plantuml, target=diagram-classes, format=svg]
-....
-@startuml
-|#lightgreen|Исполнитель задания|
-|#lightblue|Согласующий|
-|#orange|Регистратор, Участник рабочей группы|
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-|#orange|Регистратор, Участник рабочей группы|
-#lightgray:**Ввод документа,**
-**подготовка файла документа**;
-repeat
-:Отправка на согласование;
-|#lightblue|Согласующий|
-:Получение заданий на согласование;
-|#orange|Регистратор, Участник рабочей группы|
-repeat while (Получены положительные решения?) is (НЕТ) not (ДА)
-|#orange|Регистратор, Участник рабочей группы|
-:Назначение документа действующим;
-:Организация работ по документу;
-|#lightgreen|Исполнитель задания|
-:**Исполнение заданий по документу**;
-@enduml
-....
+image::document-working.png[]
+// [plantuml, target=diagram-classes, format=svg]
+// ....
+// @startuml
+// |#lightgreen|Исполнитель задания|
+// |#lightblue|Согласующий|
+// |#orange|Регистратор, Участник рабочей группы|
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// |#orange|Регистратор, Участник рабочей группы|
+// #lightgray:**Ввод документа,**
+// **подготовка файла документа**;
+// repeat
+// :Отправка на согласование;
+// |#lightblue|Согласующий|
+// :Получение заданий на согласование;
+// |#orange|Регистратор, Участник рабочей группы|
+// repeat while (Получены положительные решения?) is (НЕТ) not (ДА)
+// |#orange|Регистратор, Участник рабочей группы|
+// :Назначение документа действующим;
+// :Организация работ по документу;
+// |#lightgreen|Исполнитель задания|
+// :**Исполнение заданий по документу**;
+// @enduml
+// ....
