@@ -1,0 +1,33 @@
+= Краткая справка по установке системы на Linux
+
+Для установки системы {dv} на ОС семейства Linux, следуйте пунктам, приведённым в данном разделе.
+
+// Обратите внимание, что здесь приведена обобщенная инструкция по установке модулей системы {dv}. За более подробной инструкцией обратитесь к документации по администрированию соответствующего устанавливаемого модуля.
+
+. Ознакомьтесь со списком требований к xref:ROOT:requirements-software.adoc[программному] и xref:ROOT:requirements-hardware.adoc[техническому] обеспечению, а также к xref:ROOT:requirements-database.adoc[СУБД].
+. Выполните xref:pre-config-server.adoc[предварительную настройку]
+// xref:pre-config-server.adoc#preconfigureSystem[операционной системы] сервера {dv}, xref:pre-config-server.adoc#preconfigure-iis[IIS] и
+СУБД xref:pre-config-server.adoc#msSql[Microsoft SQL Server] или xref:pre-config-server.adoc#pgSql[PostgreSQL].
+. Установите на Linux сначала модуль xref:install-platform.adoc[{pl}], а затем xref:install-other-linux.adoc[установите] другие базовые модули.
++
+WARNING: Модуль {pl} всегда должен устанавливаться в первую очередь.
++
+. xref:install-other-windows.adoc[Установите] базовые модули на сервер Windows.
++
+WARNING: Необходимо установить базовые модули, дополнительных настроек не требуется.
++
+. xref:config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить сервер {dv}.
+// . ?? xref:.post-config-server.adoc#disable-cache[Отключите] кэширование.
+// . xref:.post-config-server.adoc#account-rights[Предоставьте права учётным записям] сервисов {dv}.
+. xref:post-config-server.adoc#commands[Ознакомьтесь] со списком полезных команд.
+// +
+// . xref:.install-client.adoc[Установите] клиентские компоненты модулей.
+// +
+// [NOTE]
+// ====
+// Клиентские компоненты могут быть установлены при помощи xref:gpo-guide.adoc[групповых политик], автоматически с сервера или xref:.install-client.adoc[вручную]. При ручной установке соблюдайте следующий порядокfootnote:[Остальные модули будут установлены автоматически при запуске {wincl}а.]:
+//
+// [lowerroman]
+// .. {pl}.
+// .. {wincl}.
+// ====
