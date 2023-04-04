@@ -1,5 +1,46 @@
 :asp: ASP.NET 4.6
-:platform:
-:installguide:
 
-include::partial$preconfigure-server.adoc[]
+// Ранее было так:
+// :asp: ASP.NET 4.6
+// :platform:
+// :installguide:
+//
+// include::partial$preconfigure-server.adoc[]
+// partial до сих пор существует
+
+= Предварительная настройка сервера Linux
+
+****
+Инструкция по установке приведена для дистрибутива Astra Linux, при установке {dv} на других xref:ROOT:requirements-software.adoc[поддерживаемых] дистрибутивах, в командах замените `astra` на имя дистрибутива Linux.
+
+Инструкцию по предварительной настройке сервера с ОС Windows см. xref:pre-config-server.adoc[по ссылке].
+****
+
+. Установите связку ключей и зафиксируйте версию операционной системы для устанавливаемых пакетов:
++
+[source,bash]
+----
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg lsb-release
+----
++
+. Добавьте официальный репозиторий {dv} в качестве источника пакетов и ключ для доступа к нему:
++
+[source,bash]
+----
+curl -fsSL https://vdv-linux.digdes.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
+echo "deb https://vdv-linux.digdes.com/astra $(lsb_release -cs) unstable" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
++
+. Подключите репозиторий {ms}, если он не был подключен ранее. Из данного репозитория будут получены и установлены все необходимые пакеты дополнительного программного обеспечения:
++
+[source,bash]
+----
+sudo apt-get install packages-microsoft-prod
+sudo apt-get update
+----
++
+. Настройте аутентификацию в Active Directory (требуется не для всех сервисов):
++
+ $ sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab
