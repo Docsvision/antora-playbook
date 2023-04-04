@@ -4,48 +4,48 @@
 
 К данному типу относятся модули: _xref:platform::index.adoc[{pl}]_, _xref:workerservice::index.adoc[Служба {ws}]_, _xref:backoffice::index.adoc[{bo}]_, _xref:documentmgmt::index.adoc[{dm}]_, _xref:approval::index.adoc[{ad}]_, _{wf}_, _xref:winclient::index.adoc[{wincl}]_ и _{to}_.
 
-.На рисунке ниже представлена схема зависимостей базовых модулей:
-* Все базовые модули зависят от модуля _{pl}_.
-* {wincl} неявно зависит от других модулей -- полноценная работа в {wincl}е возможна только при наличии других базовых модулей.
-* Помимо представленных зависимостей существуют более сложные зависимости на уровне исходного кода.
-
+// .На рисунке ниже представлена схема зависимостей базовых модулей:
+// * Все базовые модули зависят от модуля _{pl}_.
+// * {wincl} неявно зависит от других модулей -- полноценная работа в {wincl}е возможна только при наличии других базовых модулей.
+// * Помимо представленных зависимостей существуют более сложные зависимости на уровне исходного кода.
+//
 // .Базовые модули
 // image::base-modules.png[Базовые модули]
 
-[plantuml, svg]
-....
-@startuml
-hide empty description
-'!pragma layout elk
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-skinparam lifelineStrategy solid
-skinparam monochrome true
-
-State "Платформа" as platform
-State "Базовые\nобъекты" as baseobjects
-State "Управление\nпроцессами" as workflow
-State "Управление\nдокументами" as documentmanagement
-State "Конструктор\nсогласований" as approvaldesigner
-State "Делопроизводство 4.5" as takeoffice
-State "Windows-клиент" as windowsclient
-State "Служба\nфоновых операций" as workerservice
-
-baseobjects --> platform
-workflow --> platform
-takeoffice --> platform
-windowsclient --> platform
-documentmanagement --> platform
-approvaldesigner --> platform
-workerservice --> platform
-
-platform -[hidden]-> baseobjects
-platform -[hidden]-> workflow
-platform -[hidden]-> takeoffice
-platform -[hidden]-> windowsclient
-platform -[hidden]-> documentmanagement
-platform -[hidden]-> approvaldesigner
-platform -[hidden]-> workerservice
-
-@enduml
-....
+// [plantuml, svg]
+// ....
+// @startuml
+// hide empty description
+// '!pragma layout elk
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// skinparam lifelineStrategy solid
+// skinparam monochrome true
+//
+// State "Платформа" as platform
+// State "Базовые\nобъекты" as baseobjects
+// State "Управление\nпроцессами" as workflow
+// State "Управление\nдокументами" as documentmanagement
+// State "Конструктор\nсогласований" as approvaldesigner
+// State "Делопроизводство 4.5" as takeoffice
+// State "Windows-клиент" as windowsclient
+// State "Служба\nфоновых операций" as workerservice
+//
+// baseobjects --> platform
+// workflow --> platform
+// takeoffice --> platform
+// windowsclient --> platform
+// documentmanagement --> platform
+// approvaldesigner --> platform
+// workerservice --> platform
+//
+// platform -[hidden]-> baseobjects
+// platform -[hidden]-> workflow
+// platform -[hidden]-> takeoffice
+// platform -[hidden]-> windowsclient
+// platform -[hidden]-> documentmanagement
+// platform -[hidden]-> approvaldesigner
+// platform -[hidden]-> workerservice
+//
+// @enduml
+// ....
