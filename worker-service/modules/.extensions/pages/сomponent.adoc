@@ -11,7 +11,7 @@ _Компонент_ -- расширения Службы {ws} не имеюще
 public class ComponentExt : IThreadedRuntimeComponent, ISettings
 ----
 
-Описание данных интерфейсов приведено в пункте xref:.objects.adoc#IThreadedRuntimeComponent[Типы объектов].
+Описание данных интерфейсов приведено в пункте xref:objects.adoc#IThreadedRuntimeComponent[Типы объектов].
 
 .В общем случае класс расширения должен содержать следующие методы и поля:
 * `Start` -- в методе содержится реализация требуемой функциональности расширения, например обработка карточки {dv}. Данная функция будет вызвана один раз при запуске (перезапуске) {of-ws}.
@@ -26,7 +26,7 @@ public class ComponentExt : IThreadedRuntimeComponent, ISettings
 Если хотя бы у одного из _Компонентов_ {is-ws} `Stopped` в значении `*FALSE*`, {is-ws} не завершит свою работу.
 ====
 
-Если для выполнения функций _Компонента_ нужен доступ к xref:.services.adoc[сервисам API Службы], в классе расширения нужно реализовать интерфейс `IInitializeWithServiceProvider`. См. xref:.getServiceProvider.adoc[Получение поставщика сервисов в расширении].
+Если для выполнения функций _Компонента_ нужен доступ к xref:services.adoc[сервисам API Службы], в классе расширения нужно реализовать интерфейс `IInitializeWithServiceProvider`. См. xref:getServiceProvider.adoc[Получение поставщика сервисов в расширении].
 
 == Базовый класс ThreadedRuntimeComponent
 
@@ -82,7 +82,7 @@ public class BestComponent : IThreadedRuntimeComponent, ISettings
 
 Все следующие действия выполняются на сервере Службы.
 
-. xref:.registerExtensions.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
+. xref:registerExtensions.adoc[Зарегистрируйте разработанное расширения на сервере Службы].
 +
 . Добавьте расширение `SomeComponent` в конфигурацию Службы:
 +
