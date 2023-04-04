@@ -23,50 +23,50 @@ _Справочник компонентов_ предназначен для р
 ****
 +
 . {wincl} пытается получить необходимый компонент из файловой системы компьютера пользователя стандартным путём. Например, из каталога программы, GAC или из каталога распространяемых компонентов: `%temp%\DV5.5\Deploy\`.
-+
-.Механизм распространения компонентов
-[plantuml, svg]
-....
-@startuml
-'!pragma layout elk
-skinparam rectangleBorderThickness 1
-skinparam defaultTextAlignment center
-skinparam lifelineStrategy solid
-skinparam monochrome true
-
-State "Поиск компонентов по \nстандартным путям" as base
-State "Файл не найден" as notfound
-State "Файл найден" as found
-State "Новая версия" as changed
-State "Старая версия" as notchanged
-State "Файл в Справочнике компонентов" as checkdir
-State "Компонент" as componentreg
-State "Действие" as componentnreg
-
-base -> notfound : Файлы компонентов не найдены
-base --> found : Файлы компонентов найдены
-found --> changed : Версия изменилась
-found --> notchanged : Версия не изменилась
-notfound --> checkdir : Проверка в справочнике
-checkdir --> componentreg : Компонент зарегистрирован
-checkdir --> componentnreg : Компонент не зарегистрирован
-
-base: В каталоге программы, GAC или \nв каталоге распространяемых \nкомпонентов.
-
-notfound: Механизм распространения \nкомпонентов не используется.
-found: Проверяется версия группы, \nв файле описания.
-
-changed: Возвращается и загружается \nновая версия компонента \nиз Справочника компонентов.
-notchanged: Возвращается данный компонент.
-
-checkdir: Проверяется наличие файла.
-
-componentreg: Загружается на компьютер пользователя. \nВозвращается загруженная версия компонента.
-
-componentnreg: Выполняется предусмотренное \nпрограммой действие. \nНапример, возвращается ошибка.
-
-@enduml
-....
+// +
+// .Механизм распространения компонентов
+// [plantuml, svg]
+// ....
+// @startuml
+// '!pragma layout elk
+// skinparam rectangleBorderThickness 1
+// skinparam defaultTextAlignment center
+// skinparam lifelineStrategy solid
+// skinparam monochrome true
+//
+// State "Поиск компонентов по \nстандартным путям" as base
+// State "Файл не найден" as notfound
+// State "Файл найден" as found
+// State "Новая версия" as changed
+// State "Старая версия" as notchanged
+// State "Файл в Справочнике компонентов" as checkdir
+// State "Компонент" as componentreg
+// State "Действие" as componentnreg
+//
+// base -> notfound : Файлы компонентов не найдены
+// base --> found : Файлы компонентов найдены
+// found --> changed : Версия изменилась
+// found --> notchanged : Версия не изменилась
+// notfound --> checkdir : Проверка в справочнике
+// checkdir --> componentreg : Компонент зарегистрирован
+// checkdir --> componentnreg : Компонент не зарегистрирован
+//
+// base: В каталоге программы, GAC или \nв каталоге распространяемых \nкомпонентов.
+//
+// notfound: Механизм распространения \nкомпонентов не используется.
+// found: Проверяется версия группы, \nв файле описания.
+//
+// changed: Возвращается и загружается \nновая версия компонента \nиз Справочника компонентов.
+// notchanged: Возвращается данный компонент.
+//
+// checkdir: Проверяется наличие файла.
+//
+// componentreg: Загружается на компьютер пользователя. \nВозвращается загруженная версия компонента.
+//
+// componentnreg: Выполняется предусмотренное \nпрограммой действие. \nНапример, возвращается ошибка.
+//
+// @enduml
+// ....
 
 * Если файл не найден по стандартным путям, механизм распространения компонентов не используется.
 * Если файл найден в каталоге распространяемых компонентов, проверяется версия его группы, указанная в файле описания: `%temp%\DV5.5\Deploy\Группа-компонентов\group.info`.
