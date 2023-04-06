@@ -1,11 +1,8 @@
-= Установка серверной части модуля
+= Установка модуля {pl}
 
-Система поддерживает установку на Linux с ограничениями доступной функциональности.
+Система поддерживает установку на Linux с ограничениями доступной функциональности. Подробнее см. руководство по установке, раздел "xref:6.1@install-linux::linux-limitations.adoc[]".
 
-[#limitations]
-include::6.1@install-linux::linux-limitations.adoc[leveloffset=+1]
-
-[install]
+[#install]
 == Установка модуля {pl} на Linux
 
 Установите серверные компоненты модуля.
@@ -14,21 +11,36 @@ include::6.1@install-linux::linux-limitations.adoc[leveloffset=+1]
 
 При установке модулей {dv} в ОС Linux разделение на серверную и клиентскую части отсутствует, установка выполняется описанными ниже командами.
 
-. Установите службу модуля {pl} следующей командой:
+. Установите службу модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
- $ sudo apt-get install platform
+[source,bash]
+----
+sudo apt-get update
+sudo apt-get install docsvision-platform
+----
 +
-. Добавьте файл лицензии:
+. Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
 +
- $ sudo cp ~/tech_days/Platform/docsvision.lic /usr/lib/docsvision/Platform/docsvision.lic
+[source,bash]
+----
+sudo apt-get install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online YOUR-KEY --serviceurl http://prod-service.vdv.digdes.com/Activation/ActivationService.svc
+----
 +
 . Замените или отредактируйте файл настроек модуля:
 +
- $ sudo cp ~/tech_days/Platform/appsettings.json /usr/lib/docsvision/Platform/appsettings.json
+[source,bash]
+----
+sudo cp ~/tech_days/Platform/appsettings.json /usr/lib/docsvision/Platform/appsettings.json
+----
 +
 . Запустите службу модуля командой:
 +
- $ sudo systemctl start platform
+[source,bash]
+----
+sudo systemctl start platform
+----
 
 [#windows]
 == Установка серверных компонентов на Windows

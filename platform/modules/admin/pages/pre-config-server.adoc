@@ -12,11 +12,28 @@
 
 ****
 Инструкция по установке приведена для дистрибутива Astra Linux, при установке {dv} на других xref:ROOT:requirements-software.adoc[поддерживаемых] дистрибутивах, в командах замените `astra` на имя дистрибутива Linux.
-
-Инструкцию по предварительной настройке сервера с ОС Windows см. xref:pre-config-server.adoc[по ссылке].
 ****
 
-. Установите связку ключей и зафиксируйте версию операционной системы для устанавливаемых пакетов:
+. Подключите официальный репозиторий {dv} в качестве источника пакетов. Для этого необходимо отредактировать `/etc/apt/sources.list` при помощи текстового редактора, например, _nano_:
++
+[source,bash]
+----
+sudo nano /etc/apt/sources.list
+----
++
+.. В окне редактора закомментируйте строку `deb cdrom` и раскомментируйте все остальные:
++
+[source]
+----
+#deb cdrom:[OS Astra Linux 1.7.3 1.7_x86-64 DVD ]/ 1.7_x86-64 contrib main non-free
+deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x86-64 main contrib non-free
+deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-update/ 1.7_x86-64 main contrib non-free
+
+deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-base/ 1.7_x86-64 main contrib non-free
+deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
+----
++
+.. Установите ПО, необходимое для подключения репозитория {dv} следующими командами:
 +
 [source,bash]
 ----
@@ -24,16 +41,17 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 ----
 +
-. Добавьте официальный репозиторий {dv} в качестве источника пакетов и ключ для доступа к нему:
+.. Подключите репозиторий {dv}:
 +
-[source,bash]
 ----
 curl -fsSL https://vdv-linux.digdes.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
 echo "deb https://vdv-linux.digdes.com/astra $(lsb_release -cs) unstable" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
 sudo apt-get update
 ----
 +
-. Подключите репозиторий {ms}, если он не был подключен ранее. Из данного репозитория будут получены и установлены все необходимые пакеты дополнительного программного обеспечения:
+Репозитории доступны для Astra Linux, Ubuntu или Debian. Для установки на Ubuntu и Debian необходимо в адресе заменить `/astra` на `/ubuntu` или `/debian` соответственно.
++
+. Подключите репозиторий {ms}. Из данного репозитория будут получены и установлены все необходимые пакеты дополнительного программного обеспечения:
 +
 [source,bash]
 ----
@@ -41,6 +59,19 @@ sudo apt-get install packages-microsoft-prod
 sudo apt-get update
 ----
 +
-. Настройте аутентификацию в Active Directory (требуется не для всех сервисов):
+. Настройте аутентификацию в Active Directory (требуется не для всех сервисов). Для работы Kerberos аутентификации в ActiveDirectory, необходимо получить keytab-файл.
 +
- $ sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab
+Необходимо создать отдельную учетную запись пользователя ActiveDirectory, затем привязать к ней имя сервиса (SPN). SPN используется аутентификацией Kerberos для сопоставления экземпляра сервиса с учетной записью в ActiveDirectory.
++
+Если машина доступна по определенному имени в домене и для неё зарезервирован статический IP, который не может быть выдан другой машине, или если машина сообщает свой адрес контроллеру домена, keytab-файл может быть создан для указанного имени.
++
+В противном случае необходимо убедиться, что у машины статический MAC-адрес и создать A-запись в домене. После этого можно создавать keytab-файл.
++
+Созданный keytab-файл необходимо скопировать по указанному пути:
++
+[source,bash]
+----
+sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab <.>
+----
++
+Если необходимо хранить keytab-файл в системе под другим именем, потребуется добавить переменную окружения `KRB5_KTNAME`. Подробности можно получить в документации на сайте "https://web.mit.edu/kerberos/krb5-1.12/doc/mitK5defaults.html[MIT Kerberos Documentation]".
