@@ -5,21 +5,21 @@
 // Обратите внимание, что здесь приведена обобщенная инструкция по установке модулей системы {dv}. За более подробной инструкцией обратитесь к документации по администрированию соответствующего устанавливаемого модуля.
 
 . Ознакомьтесь со списком требований к xref:ROOT:requirements-software.adoc[программному] и xref:ROOT:requirements-hardware.adoc[техническому] обеспечению, а также к xref:ROOT:requirements-database.adoc[СУБД].
-. Выполните xref:pre-config-server.adoc[предварительную настройку]
+. Выполните предварительную настройку сервера системы, см. раздел "xref:pre-config-server.adoc[]".
 // xref:pre-config-server.adoc#preconfigureSystem[операционной системы] сервера {dv}, xref:pre-config-server.adoc#preconfigure-iis[IIS] и
-СУБД xref:pre-config-server.adoc#msSql[Microsoft SQL Server] или xref:pre-config-server.adoc#pgSql[PostgreSQL].
-. Установите на Linux сначала модуль xref:install-platform.adoc[{pl}], а затем xref:install-other-linux.adoc[установите] другие базовые модули.
+. Выполните требуемые настройки СУБД xref:pre-config-db.adoc#msSql[Microsoft SQL Server] или xref:pre-config-db.adoc#pgSql[PostgreSQL].
+. Установите на Linux сначала модуль _{pl}_. Подробная инструкция приведена в разделе "xref:install-platform.adoc[]".
+. Выполните настройку модуля _{pl}_ согласно инструкции. См. раздел "xref:config-platform.adoc[]".
+. xref:install-other-linux.adoc[Установите] другие базовые модули.
 +
 WARNING: Модуль {pl} всегда должен устанавливаться в первую очередь.
 +
-. xref:install-other-windows.adoc[Установите] базовые модули на сервер Windows.
+. Установите серверные компоненты базовых модулей на Windows. Подробная инструкция приведена в разделе "xref:install-other-windows.adoc[]".
 +
-WARNING: Необходимо установить базовые модули, дополнительных настроек не требуется.
-+
-. xref:config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить сервер {dv}.
+. Воспользуйтесь мастером настройки, чтобы настроить сервер {dv}. Процесс описан подробнее в разделе "xref:config-master.adoc[]".
 // . ?? xref:.post-config-server.adoc#disable-cache[Отключите] кэширование.
 // . xref:.post-config-server.adoc#account-rights[Предоставьте права учётным записям] сервисов {dv}.
-. xref:post-config-server.adoc#commands[Ознакомьтесь] со списком полезных команд.
+. Выполните действия после установки системы и ознакомьтесь со списком полезных команд. Инструкцию см. в разделе "xref:post-config-server.adoc[]".
 // +
 // . xref:.install-client.adoc[Установите] клиентские компоненты модулей.
 // +
