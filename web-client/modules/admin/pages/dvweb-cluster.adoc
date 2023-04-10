@@ -36,16 +36,16 @@ image::mage-deployment.png[Mage Deployment Options]
 Файл `DVWebTool.pfx` содержит сгенерированный {dv} сертификат. При необходимости для подписания можно использовать собственный сертификат с назначением "Code Signing" или "All". При этом потребуется подписать два манифеста.
 
 . Запустите программу`mageui.exe`.
-. Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
+. Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
 . Не вносите изменений в файл. Нажмите menu:File[Save]. При запросе сертификата выберите собственный сертификат для подписания.
-. Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Docsvision.DVWebTool.application`.
+. Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\Docsvision.DVWebTool.application`.
 . Измените _Start Location_, <<startLocation, как указано выше>>.
 . Откройте раздел параметров _Application Reference_.
 +
 .Mage Application Reference
 image::mage-app-ref.png[Application Reference]
 +
-. Нажмите кнопку *Select Manifest* и выберите файл `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
+. Нажмите кнопку *Select Manifest* и выберите файл `C:\Program Files (x86)\Docsvision\WebClient\ite\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
 . Нажмите menu:File[Save]. При запросе сертификата выберите собственный сертификат для подписания.
 . Закройте программу *Mage*.
-. Скопируйте папку `C:\Program Files (x86)\Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\` на все узлы кластера.
+. Скопируйте папку `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\` на все узлы кластера.
