@@ -17,7 +17,7 @@
 
 Администратору необходимо настроить путь к папке, в которую будут сохраняться файлы со списком конфликтов, запрашиваемые пользователем. У <<launch-sm,службы {of-sm}>> должны быть полные права на данную папку.
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\appsettings.json`.
+. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\appsettings.json`.
 . Измените путь к папке в параметре TempFolder:
 +
 [source]
@@ -35,7 +35,7 @@
 
 После установки {of-sm} подключение к БД с настройками Модуля можно изменить в конфигурационном файле:
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\appsettings.json`.
+. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\appsettings.json`.
 . Измените строку подключения к БД в параметре `ConnectionString`:
 +
 ----
@@ -69,9 +69,9 @@
 .Для анализа работы {of-sm} администратору доступны следующие журналы:
 * Журнал работы службы {of-sm} -- хранится в папке `C:\ProgramData\Docsvision\SolutionManager\Logs` на компьютере с модулем _{sm}_.
 +
-Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\SolutionManager\5.5\nlog.config`.
+Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\SolutionManager\nlog.config`.
 +
 * Журнал обработки задач {of-sm} Службой {ws} -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
 * Журнал со списком загруженных (при импорте Решения) данных -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
 +
-Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\WorkerService\5.5\SolutionManager\nlog.config`.
+Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\WorkerService\SolutionManager\nlog.config`.
