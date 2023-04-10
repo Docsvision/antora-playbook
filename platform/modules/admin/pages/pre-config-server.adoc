@@ -14,6 +14,7 @@
 Инструкция по установке приведена для дистрибутива Astra Linux, при установке {dv} на других xref:ROOT:requirements-software.adoc[поддерживаемых] дистрибутивах, в командах замените `astra` на имя дистрибутива Linux.
 ****
 
+// tag::preconfig[]
 . Подключите официальный репозиторий {dv} в качестве источника пакетов. Для этого необходимо отредактировать `/etc/apt/sources.list` при помощи текстового редактора, например, _nano_:
 +
 [source,bash]
@@ -75,3 +76,4 @@ sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab <.>
 ----
 +
 Если необходимо хранить keytab-файл в системе под другим именем, потребуется добавить переменную окружения `KRB5_KTNAME`. Подробности можно получить в документации на сайте "https://web.mit.edu/kerberos/krb5-1.12/doc/mitK5defaults.html[MIT Kerberos Documentation]".
+// end::preconfig[]
