@@ -20,31 +20,31 @@
 [source,xml]
 ----
 <Component Id="RegistryEntries" Guid="75B4E976-5771-423C-AB7D-DC583114F893" Win64="yes">
- <RegistryKey Root="HKLM" Key="SOFTWARE\DocsVision\Platform\5.5\Console\SnapIns\NetstatSolution" ForceDeleteOnUninstall="yes" ForceCreateOnInstall="yes">
+ <RegistryKey Root="HKLM" Key="SOFTWARE\DocsVision\Platform\Console\SnapIns\NetstatSolution" ForceDeleteOnUninstall="yes" ForceCreateOnInstall="yes">
   <RegistryValue Type="string" Name="Path" Value="C:\Program Files (x86)\Docsvision\NetstatSolution\NetstatSolution.Snapin.dll"/>
   <RegistryValue Type="string" Name="TypeName" Value="NetstatSolution.Snapin.SnapIn"/>
  </RegistryKey>
 </Component>
 ----
 +
-. Вызвать {cns} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
+. Вызвать {cns} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\Tools\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
 +
 [source,csharp]
 ----
 <CustomAction Id="RegisterSnapIn" Directory='INSTALLFOLDER' Return="check" Execute='deferred' 
- ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /c /n NetstatSolution' />
+ ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\Tools\ServerConsole.exe" /c /n NetstatSolution' />
 <InstallExecuteSequence>
  <Custom Action='RegisterSnapIn' Before='InstallFinalize'>NOT Installed</Custom>
 </InstallExecuteSequence>
 ----
 
-При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n Название-решения`.
+При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\Platform\Tools\ServerConsole.exe" /rs /n Название-решения`.
 
 .В проекте пакета установки серверной части за это отвечает сценарий:
 [source,csharp]
 ----
 <CustomAction Id="UnRegisterSnapIn" Directory='INSTALLFOLDER' Return="ignore" Execute='deferred' 
- ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\5.5\Tools\ServerConsole.exe" /rs /n NetstatSolution' />
+ ExeCommand='"C:\Program Files (x86)\Docsvision\Platform\Tools\ServerConsole.exe" /rs /n NetstatSolution' />
 <InstallExecuteSequence>
  <Custom Action='UnRegisterSnapIn' After="InstallInitialize">REMOVE~="All" AND (NOT UPGRADINGPRODUCTCODE)</Custom>
 </InstallExecuteSequence>
