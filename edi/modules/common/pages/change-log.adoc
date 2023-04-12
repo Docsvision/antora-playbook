@@ -1,33 +1,7 @@
 = Изменения в релизной версии
 
+
+
 == Функциональные изменения
 
-Новые виды документов::
-Добавлены два новых вида документов: *Входящий УКД (736)* и *Исходящий УКД (736)* в соответствии с изменениями о прекращении поддержки старого формата УКД.
 
-Дополнительные функции документа::
-Добавлены новые функции документа `СвРК = 3` и `СвЗК = 4`.
-+
-Если модуль устанавливался ранее в поле карточки документа *Данные УПД / Функция документа* (`UniversalDocumentData/DocumentFunction`) можно добавить новые значения.
-+
-Если модуль устанавливается впервые или после обновления была создана новая БД, дополнительных действий не требуется.
-
-[#api]
-== Изменения в API
-
-* Добавлен новый интерфейс `IImportService2` для реализации постраничной загрузки контрагентов.
-* Описан класс `xref:programmer:api/BoxesService.adoc[BoxesService]` для выполнения стандартных операций.
-+
-.Класс дополнен новыми методами:
-** `ImportPartner(OperatorsOperator, string, string)` -- импортирует одного контрагента по ИНН и КПП.
-** `ImportPartner(OperatorsOperator, PartnersCompany)` -- импортирует одного контрагента по организации контрагента.
-** `ProcessAllNewInvitations(ILogWriter)` -- находит и обрабатывает все новые входящие приглашения.
-** `ProcessAllNewInvitationsToSend(ILogWriter)` -- находит и обрабатывает все новые исходящие приглашения.
-** `CheckInvitationsStatus(ILogWriter, DateTime?)` -- проверяет статус приглашений с указанной даты.
-* Добавлены xref:programmer:api/web-server-methods.adoc[методы] для серверного и клиентского расширения {wc}а.
-* Добавлено описание для следующих классов:
-** `xref:programmer:api/DataReaderService.adoc[DataReaderService]`
-** `xref:programmer:api/DocumentUpdaterService.adoc[DocumentUpdaterService]`
-** `xref:programmer:api/InvitationService.adoc[InvitationService]`
-** `xref:programmer:api/LoaderService.adoc[LoaderService]`
-** `xref:programmer:api/OutgoingMessagesService.adoc[OutgoingMessagesService]`
