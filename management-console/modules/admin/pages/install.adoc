@@ -14,16 +14,12 @@ include::6.1@install-linux::partial$limitation.adoc[]
 {wac} можно установить на отдельный от {dv} сервер. В таком случае, пользователь, от имени которого запускается {wac}, должен быть добавлен в группу *{dv-web-admin-cns-admins-serv}* на сервере {dv} и на сервере {of-mc}.
 ====
 
+--
 .Чтобы установить {mc}:
-. Установите службу {of-sett-serv} следующей командой, предварительно обновив индекс пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-managementconsole
-----
-+
-. Все настройки {mc} хранятся в конфигурационном файле модуля `appsettings.json`. Конфигурационный файл может быть изменён в любом текстовом редакторе, например `nano`.
+:of: {of-mc}
+:file: appsettings
+:wt: managementconsole
+include::6.1@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -57,20 +53,18 @@ sudo apt-get install docsvision-managementconsole
 ----
 sudo systemctl start dvconsole
 ----
+--
 
+
+--
 [#sett-serv]
 == Установка {of-sett-serv}
 
 .Чтобы установить {sett-serv}:
-. Установите службу {of-sett-serv} следующей командой, предварительно обновив индекс пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-settingsservice
-----
-+
-. Все настройки {of-sett-serv} хранятся в конфигурационном файле `appsettings.json`. Конфигурационный файл может быть изменён в любом текстовом редакторе, например `nano`.
+:of: {of-sett-serv}
+:file: appsettings
+:wt: settingsservice
+include::6.1@platform:admin:partial$install.adoc[]
 +
 [source,bash]
 ----
@@ -106,20 +100,17 @@ sudo nano /usr/lib/docsvision/settingsservice/appsettings.json
 ----
 sudo systemctl start dvsettings
 ----
+--
 
+--
 [#external-api]
 == Установка сервиса внешнего API
 
 .Чтобы установить Сервис внешнего API:
-. Установите службу сервиса следующей командой, предварительно обновив индекс пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-externalapi
-----
-+
-. Все настройки Сервиса внешнего API хранятся в конфигурационном файле `appsettingsappsettings.json`. Конфигурационный файл может быть изменён в любом текстовом редакторе, например `nano`.
+:of: Сервиса внешнего API
+:file: appsettings
+:wt: externalapi
+include::6.1@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -141,6 +132,7 @@ sudo apt-get install docsvision-externalapi
 ----
 sudo systemctl start dvexternalapi
 ----
+--
 
 [#package]
 == Состав установочного комплекта
