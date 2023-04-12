@@ -7,25 +7,27 @@
 [#webc]
 == Установка {wc}а
 
-. Установите службу модуля:
+. Установите пакеты модуля:
 +
 [source,bash]
 ----
-sudo apt-get install webclient
+sudo apt-get install docsvision-webclient
 ----
 +
-. Замените или отредактируйте файл настроек модуля:
+. Отредактируйте файл настроек модуля:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/WebClient/appsettings.json /usr/lib/docsvision/WebClient/appsettings.json
+sudo nano /usr/lib/docsvision/webclient/appsettings.json
 ----
++
+Информацию о файле настроек см. в документации модуля _{wc}_, раздел "xref:6.1@webclient:admin:install-server.adoc#config[Установка {wc}а]".
 +
 . Запустите службу {wc}а:
 +
 [source,bash]
 ----
-sudo systemctl start webclient
+sudo systemctl start dvwebclient
 ----
 +
 . Теперь вы можете запустить {wc}, перейдя по адресу: `\http://WebC-server.domain.com/Account/Login`.
@@ -37,21 +39,23 @@ sudo systemctl start webclient
 +
 [source,bash]
 ----
-sudo apt-get install settingsservice
+sudo apt-get install docsvision-settingsservice
 ----
 +
-. Замените или отредактируйте файл настроек:
+. Отредактируйте файл настроек:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/SettingsService/appsettings.json /usr/lib/docsvision/SettingsService/appsettings.json
+sudo nano /usr/lib/docsvision/settingsservice/appsettings.json
 ----
++
+Информацию о файле настроек см. в документации модуля _{mc}_, раздел "xref:6.1@mgmtconsole:admin:install.adoc#sett-serv[Установка {of-mc}]".
 +
 . Запустите сервис:
 +
 [source,bash]
 ----
-sudo systemctl start settingsservice
+sudo systemctl start dvsettings
 ----
 
 [#ext-api]
@@ -61,21 +65,23 @@ sudo systemctl start settingsservice
 +
 [source,bash]
 ----
-sudo apt-get install externalapi
+sudo apt-get install docsvision-externalapi
 ----
 +
-. Замените или отредактируйте файл настроек:
+. Отредактируйте файл настроек:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/ExternalAPI/appsettings.json /usr/lib/docsvision/ExternalAPI/appsettings.json
+sudo nano /usr/lib/docsvision/externalapi/appsettings.json
 ----
++
+Информацию о файле настроек см. в документации модуля _{mc}_, раздел "xref:6.1@mgmtconsole:admin:install.adoc#external-api[Установка {of-mc}]".
 +
 . Запустите сервис внешнего API {of-mc}:
 +
 [source,bash]
 ----
-sudo systemctl start externalapi
+sudo systemctl start dvexternalapi
 ----
 
 include::upgrade:551-552:post-update.adoc[tags=console]
@@ -84,21 +90,23 @@ include::upgrade:551-552:post-update.adoc[tags=console]
 +
 [source,bash]
 ----
-sudo apt-get install managementconsole
+sudo apt-get install docsvision-managementconsole
 ----
 +
-. Замените или отредактируйте файл настроек модуля:
+. Отредактируйте файл настроек модуля:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/ManagementConsole/appsettings.json /usr/lib/docsvision/ManagementConsole/appsettings.json
+sudo nano /usr/lib/docsvision/managementconsole/appsettings.json
 ----
++
+Информацию о файле настроек см. в документации модуля _{mc}_, раздел "xref:6.1@mgmtconsole:admin:install.adoc#console[Установка {of-mc}]".
 +
 . Запустите службу:
 +
 [source,bash]
 ----
-sudo systemctl start managementconsole
+sudo systemctl start dvconsole
 ----
 +
 . Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
@@ -112,21 +120,23 @@ NOTE: При авторизации укажите имя в формате `use
 +
 [source,bash]
 ----
-sudo apt-get install workerservice
+sudo apt-get install docsvision-workerservice
 ----
 +
-. Замените или отредактируйте конфигурационный файл:
+. Отредактируйте конфигурационный файл:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/WorkerService/Configuration.json /usr/lib/docsvision/WorkerService/Configuration.json
+sudo nano /usr/lib/docsvision/workerservice/Configuration.json
 ----
++
+Информацию о файле настроек см. в документации модуля _Служба {ws}_, раздел "xref:6.1@workerservice:admin:install.adoc[]".
 +
 . Запустите службу модуля:
 +
 [source,bash]
 ----
-sudo systemctl start workerservice
+sudo systemctl start dvworkerservice
 ----
 
 [#purge]
