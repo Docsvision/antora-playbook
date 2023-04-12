@@ -30,40 +30,67 @@ xref:6.1@platform::requirements-server-account.adoc[сервера {dv}], сер
 
 . Посмотреть состояние сервиса:
 +
- $ sudo systemctl status platform
+[source,bash]
+----
+sudo systemctl status dvappserver
+----
 +
 . Запустить сервис:
 +
- $ sudo systemctl start platform
+[source,bash]
+----
+sudo systemctl start dvappserver
+----
 +
 . Остановить сервис:
 +
- $ sudo systemctl stop platform
+[source,bash]
+----
+sudo systemctl stop dvappserver
+----
 +
 . Перезапустить сервис:
 +
- $ sudo systemctl restart platform
+[source,bash]
+----
+sudo systemctl restart dvappserver
+----
 +
 // tag::log[]
 . Посмотреть журнал сервиса (только записи в `stdout/stderr`):
 +
- $ sudo journalctl -u platform
+[source,bash]
+----
+sudo journalctl -u dvappserver
+----
 +
 . Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
 +
- $ sudo journalctl -f -u platform
+[source,bash]
+----
+sudo journalctl -f -u dvappserver
+----
 
 // end::log[]
 
 [start=7]
 . Установить пакет:
 +
- $ sudo apt-get install platform
+[source,bash]
+----
+sudo apt-get install docsvision-platform
+----
 +
 . Установить пакет определенной версии:
 +
- $ sudo apt-get install platform=6.0.1
+[source,bash]
+----
+sudo apt-get install docsvision-platform=6.0.1
+----
 +
 . Удалить пакет:
 +
- $ sudo apt-get purge platform
+[source,bash]
+----
+sudo apt-get purge docsvision-platform
+----

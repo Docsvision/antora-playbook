@@ -20,19 +20,7 @@
 sudo nano /etc/apt/sources.list
 ----
 +
-.. В окне редактора закомментируйте строку `deb cdrom` и раскомментируйте все остальные:
-+
-[source]
-----
-#deb cdrom:[OS Astra Linux 1.7.3 1.7_x86-64 DVD ]/ 1.7_x86-64 contrib main non-free
-deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-main/ 1.7_x86-64 main contrib non-free
-deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-update/ 1.7_x86-64 main contrib non-free
-
-deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-base/ 1.7_x86-64 main contrib non-free
-deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
-----
-+
-.. Установите ПО, необходимое для подключения репозитория {dv} следующими командами:
+. Установите ПО, необходимое для подключения репозитория {dv} следующими командами:
 +
 [source,bash]
 ----
@@ -40,7 +28,7 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 ----
 +
-.. Подключите репозиторий {dv}:
+. Подключите официальный репозиторий {dv} в качестве источника:
 +
 ----
 curl -fsSL https://packages.docsvision.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
@@ -71,7 +59,7 @@ sudo apt-get update
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab <.>
+sudo cp ~/tech_days/dv02.keytab /etc/krb5.keytab
 ----
 +
 Если необходимо хранить keytab-файл в системе под другим именем, потребуется добавить переменную окружения `KRB5_KTNAME`. Подробности можно получить в документации на сайте "https://web.mit.edu/kerberos/krb5-1.12/doc/mitK5defaults.html[MIT Kerberos Documentation]".

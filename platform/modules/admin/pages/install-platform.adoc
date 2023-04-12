@@ -16,7 +16,7 @@ endif::[]
 
 При установке модулей {dv} в ОС Linux необходимо установить модули описанными далее командами. Также потребуется установка серверных компонентов на ОС Windows для работы с программой {cns}. Установка клиентской части на ОС Windows потребуется только в случае установки {wincl}а.
 
-. Установите службу модуля {pl} следующей командой, предварительно обновив индекс пакетов:
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
 [source,bash]
 ----
@@ -35,25 +35,23 @@ endif::[]
 ----
 sudo apt-get install docsvision-activation
 cd /usr/lib/docsvision/tools/activation
-sudo ./activation online YOUR-KEY
+sudo ./activation online ВАШ-КЛЮЧ
 ----
 +
-. Замените или отредактируйте файл настроек модуля:
+. Отредактируйте файл настроек модуля:
 +
 [source,bash]
 ----
-sudo cp ~/tech_days/Platform/appsettings.json /usr/lib/docsvision/Platform/appsettings.json
+sudo nano /usr/lib/docsvision/platform/appsettings.json
 ----
 +
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
 . Запустите службу модуля командой:
 +
 [source,bash]
 ----
-sudo systemctl start platform
+sudo systemctl start dvappserver
 ----
-. После установки на сервере необходимо настроить группу безопасности: *{dv-web-admin-cns-admins-serv}*. Пользователи, входящие в эту группу, имеют право работать с xref:6.1@mgmtconsole:admin:install.adoc[Консолью управления {dv}].
-+
-Группы безопасности настраиваются в конфигурационном файле модуля {pl}. Работа с конфигурационным файлом описана в документации модуля _{pl}_, "раздел xref:6.1@platform:admin:config-platform.adoc[]".
 
 [#windows-pl]
 == Установка серверных компонентов на Windows
