@@ -1,3 +1,6 @@
+:of: модуля
+:wt: workflow
+
 = Установка и настройка
 
 include::6.1@install-linux::partial$limitation.adoc[]
@@ -5,13 +8,43 @@ include::6.1@install-linux::partial$limitation.adoc[]
 [#linux]
 == Установка на Linux
 
-. Установите службу модуля следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[]
 +
 [source,bash]
 ----
-sudo apt-get update
-sudo apt-get install docsvision-workflow
+sudo nano /usr/lib/docsvision/workflow/appsettings.json
 ----
+
+[source,json]
+----
+{
+  "Docsvision": {
+    "Workflow": {
+      "ServiceUrl": "http://dvserver.domain.com:5000/api/v1", <.>
+      "BaseName": "alias", <.>
+      "WorkflowServer": {
+        "ServerAddress": "account@domain.com",
+        "SmtpPort": "465",
+        "SmtpServer": "smtp.domain.com",
+        "SMTPAuthenticate": "1",
+        "SMTPUseSsl": "0",
+        "SmtpUsername": "account@domain.com",
+        "SmtpPassword": "password",
+        "MemorySize": "1000",
+        "UseCDOSys": "1"
+      }
+    }
+  },
+  "DataProtectCertificateThumbprint": "thumbprint", <.>
+  "SystemUserAccount": "account@domain.com",
+  "SystemUserPassword": "password", <.>
+  "ApiKey": "PlatformApiKey"
+}
+----
+<.> URL сервиса Workflow.
+<.> Псевдоним БД {dv}.
+<.> Отпечаток закрытого ключа шифрования. Указывается при настройке шифрования пароля системной учётной записи, см. подробнее в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]".
+<.> Данные системной учётной записи. Пароль рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]".
 
 [#windows]
 == Установка на Windows
@@ -68,7 +101,7 @@ image::install-confirm.png[Начало установки серверной ч
 [#client]
 == Установка клиентской части модуля
 
-Клиентская часть модуля _{wf}_ должна быть установлена на компьютеры пользователей {dv}.
+Клиентская часть модуля _{wf}_ должна быть установлена на компьютеры пользователей {dv}, если есть потребность в использовании {wincl}а.
 
 .Клиентская часть модуля может быть установлена двумя способами:
 * Автоматически -- требуемые компоненты будут загружены с сервера {dv} и установлены автоматически.
