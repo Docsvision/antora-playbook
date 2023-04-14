@@ -71,7 +71,7 @@ openssl pkcs12 -inkey docsvision.key -in docsvision.crt -export -out docsvision.
 +
 Пароль на сертификат указывать не нужно. Имена файлов ключей и пути можно указывать произвольные.
 +
-Полученный сертификат в формате `.pfx` необходимо скопировать в каталог `~/.dotnet/corefx/cryptography/x509stores/my`. Если каталог отсутствует, создайте его самостоятельно.
+[[earlier]]Полученный сертификат в формате `.pfx` необходимо скопировать в каталог `~/.dotnet/corefx/cryptography/x509stores/my`. Если каталог отсутствует, создайте его самостоятельно.
 
 Аналогичным образом сертификат можно сгенерировать в Windows и экспортировать в формате `.pfx` без пароля.
 
@@ -105,6 +105,7 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
 ****
 * `DV_SystemUserAccount` -- имя системной учётной записи.
 * `DV_SystemUserPassword` -- пароль системной учётной записи.
+* `DV_DataProtectCertificateThumbprint` -- отпечаток сертификата шифрования.
 ****
 +
 .В конфигурационном файле программы:
@@ -115,3 +116,8 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
 * `SystemUserPassword` -- пароль системной учётной записи.
 * `DataProtectPrivateKeyPath` -- отпечаток сертификата шифрования.
 ****
++
+. <<earlier,Если этого не было сделано ранее>>, установите сертификат шифрования в хранилище сертификатов текущего пользователя в ОС Windows и в каталог `~/.dotnet/corefx/cryptography/x509stores/my`.
++
+NOTE: В ОС Linux большинство сервисов запускается от имени пользователя `root`, поэтому полный путь будет: `/root/.dotnet/corefx/cryptography/x509stores/my`. +
+Если каталог отсутствует, создайте его самостоятельно.
