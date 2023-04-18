@@ -49,7 +49,7 @@ IDocumentService documentService = objectContext.GetService<IDocumentService>();
 
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000")); <.>
 
-documentService.DownloadMainFile(document, document.Files.FirstOrDefault(t=>t.FileType = DocumentFileType.Main), @"C:\SampleDownload.docx"); <.>
+documentService.DownloadMainFile(document, document.Files.FirstOrDefault(t=>t.FileType = DocumentFileType.Main), @"..\SampleDownload.docx"); <.>
 ----
 <.> Инициализация контекста объектов.
 <.> Получение сервиса для работы с документами.

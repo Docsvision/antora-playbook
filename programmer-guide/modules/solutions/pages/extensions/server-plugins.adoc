@@ -37,10 +37,10 @@ namespace DocsVision.Samples
 
 В качестве возвращаемого значения метод может вернуть либо скаляр, либо набор данных (коллекцию). Во втором случае лучше воспользоваться специальным типом возвращаемого значения -- `xref:Platform-StorageServer:CursorInfo_ST.adoc[DocsVision.Platform.StorageServer.CursorInfo]`. Этот объект позволяет создать серверный курсор, из которого потом можно читать данные на клиенте.
 
-Объект CursorInfo можно создать двумя способами:
+Объект `CursorInfo` можно создать двумя способами:
 
-* с помощью метода GetCursorBuilder, который возвращает объект CursorBuilder и позволяет программно заполнять серверный курсор.
-* с помощью метода ExecuteCursorCommand, который выполняет SQL-команду, сохраняет её результаты в курсоре, и возвращает готовый CursorInfo.
+* с помощью метода `GetCursorBuilder`, который возвращает объект `CursorBuilder` и позволяет программно заполнять серверный курсор.
+* с помощью метода `ExecuteCursorCommand`, который выполняет SQL-команду, сохраняет её результаты в курсоре, и возвращает готовый `CursorInfo`.
 
 Пример реализации серверного метода, возвращающего набор значений:
 
@@ -73,16 +73,17 @@ public CursorInfo GetSectionsSize()
 
 [source,csharp]
 ----
-//Получаем метод расширения
-// Первым параметром указывается имя расширения, вторым -- название метода
-ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("BackOfficeExtension", "GetFileContent");
+ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("BackOfficeExtension", "GetFileContent"); <.>
 
-// Добавляем параметр вызываемого метода
-// первый аргумент -- название параметра метода
-// второй -- тип параметра
-// третий -- значение параметра
-method.Parameters.AddNew("FilePath", ParameterValueType.String, "C:\\Test.txt");
+method.Parameters.AddNew("FilePath", ParameterValueType.String, ".\\Test.txt"); <.>
     
-//Вызов метода
-string content = method.Execute().ToString();
+string content = method.Execute().ToString(); <.>
 ----
+<.> Получаем метод расширения. Первым параметром указывается имя расширения, вторым -- название метода.
+<.> Добавляем параметр вызываемого метода:
++
+* Первый аргумент -- название параметра метода.
+* Второй аргумент-- тип параметра.
+* Третий аргумент -- значение параметра.
++
+<.> Вызов метода

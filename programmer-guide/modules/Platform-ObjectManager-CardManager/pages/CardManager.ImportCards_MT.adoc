@@ -31,7 +31,7 @@ stream:::
 
 [source,csharp]
 ----
-FileStream file = new FileStream(@"C:\TestCard.xml", FileMode.Open);
+FileStream file = new FileStream(@"..\TestCard.xml", FileMode.Open);
 ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session);
 CardDataCollection cards = session.CardManager.ImportCards(file);
 ----

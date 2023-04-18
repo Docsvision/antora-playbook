@@ -40,7 +40,7 @@ methodName:::
 ----
 ExtensionMethod method = session.ExtensionManager.GetExtensionMethod("SampleExtension", "GetFileContent"); <.>
 
-method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "C:\\Test.txt"; <.>
+method.Parameters.AddNew("FilePath", ParameterValueType.String).Value = "..\\Test.txt"; <.>
     
 string content = method.Execute().ToString(); <.>
 ----

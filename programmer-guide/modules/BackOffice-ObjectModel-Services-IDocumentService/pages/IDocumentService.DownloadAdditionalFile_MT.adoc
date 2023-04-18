@@ -52,7 +52,7 @@ IDocumentService documentService = objectContext.GetService<IDocumentService>();
 Document document = objectContext.GetObject<Document>(new Guid("00000000-0000-0000-0000-000000000000"));
 DocumentFile firstAdditionalFile = document.Files.First(t=>t.FileType = DocumentFileType.Additional); <.>
 
-documentService.DownloadAdditionalFile(document, firstAdditionalFile, @"c:\" + firstAdditionalFile.FileName); <.>
+documentService.DownloadAdditionalFile(document, firstAdditionalFile, @"..\" + firstAdditionalFile.FileName); <.>
 ----
 <.> Инициализация контекста объектов.
 <.> Получение сервиса для работы с документами.

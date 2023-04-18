@@ -33,7 +33,7 @@ cardTypeId:::
 ----
 const string FILE_CARD_TYPE = "6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3"; <.>
 VersionedFileCard fileCard = (VersionedFileCard)session.CardManager.CreateCard(new Guid(FILE_CARD_TYPE)); <.>
-fileCard.Initialize(@"C:\Test.doc", Guid.Empty, false, false); <.>
+fileCard.Initialize(@"..\Test.doc", Guid.Empty, false, false); <.>
 FileVersion fileVersion = fileCard.CurrentVersion;
 MessageBox.Show(fileVersion.VersionString); <.>
 ----

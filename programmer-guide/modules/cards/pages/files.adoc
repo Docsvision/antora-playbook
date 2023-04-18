@@ -21,7 +21,7 @@
 ----
 FileData file = userSession.FileManager.CreateFile("NewFile"); <.>
 
-file.Upload("C:\\NewFile.doc"); <.>
+file.Upload("..\\NewFile.doc"); <.>
 
 Guid newFileId = file.Id; <.>
 ----
@@ -81,7 +81,7 @@ Guid newFileId = file.Id; <.>
 ----
 VersionedFileCard fileCard = (VersionedFileCard)userSession.CardManager.CreateCard(new Guid("6E39AD2B-E930-4D20-AAFA-C2ECF812C2B3")); <.>
 
-fileCard.Initialize("C:\\NewFile.doc", Guid.Empty, false, false); <.>
+fileCard.Initialize("..\\NewFile.doc", Guid.Empty, false, false); <.>
 
 FileVersion fileVersion = fileCard.CurrentVersion; <.>
 
