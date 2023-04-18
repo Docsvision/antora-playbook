@@ -37,12 +37,13 @@ sudo nano /usr/lib/docsvision/workerservice/Configuration.json
   "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
   "ApiKey": "SettingsServiceApiKey", <.>
   "RestApiAddress": "http://worker.domain.com:5900/api", <.>
-  "LogFile": "/tmp/WorkerService.log"
+  "LogFile": "/var/log/docsvision/WorkerService.log" <.>
 }
 ----
 <.> Адрес Сервиса настроек.
 <.> Ключ доступа к Сервису настроек (указывается в конфигурационном файле сервиса).
 <.> Адрес Службы {ws}.
+<.> Путь к файлу журнала Службы {ws}
 +
 . Запустите службу модуля:
 +
