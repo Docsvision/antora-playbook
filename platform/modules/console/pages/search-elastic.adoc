@@ -2,6 +2,8 @@
 
 Перед установкой ознакомьтесь с требованиями системы {es} в разделе xref:ROOT:requirements-hardware.adoc#elastic[по ссылке].
 
+В данном разделе приведена инструкция по настройке {es} на Windows, при установке на Linux необходимо отредактировать пути к словарям Hunspell на соответствующие операционной системе Linux.
+
 .Систему полнотекстового поиска {es} нужно устанавливать в следующих случаях:
 - Планируется использовать функцию полнотекстового поиска по содержимому карточек.
 - Будет использоваться СУБД PostgreSQL.
@@ -57,7 +59,7 @@ image::admin:elastic-dictionary-saving-as.png[Сохранение файла]
 +
 . Перезапустите {es}.
 +
-От имени администратора выполните в консоли `"C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%%`.
+От имени администратора выполните в консоли `C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%%`.
 +
 `%%path-to-ingest-attachment-{es-d}.zip%%` необходимо заменить на путь загрузки компонента.
 +
