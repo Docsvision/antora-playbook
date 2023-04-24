@@ -150,10 +150,12 @@ image::admin:approval-designer.png[Специальная конфигураци
 // .Запрос на перезапуск сервисов {dv}
 // image::admin:db-create-reload.png[Запрос на перезапуск сервисов {dv}]
 // +
-. На сервере Linux укажите имя создаваемой БД xref:admin:config-platform.adoc[конфигурационном файле] модуля {pl} и запустите службу *{sss}* командой:
+. На сервере Linux укажите имя создаваемой БД xref:admin:config-platform.adoc[конфигурационном файле] модуля {pl}.
+. Чтобы сервис *{sss}* прочитал информацию о новой БД, перезапустите его командами:
 +
 [source,bash]
 ----
+sudo systemctl stop dvappserver
 sudo systemctl start dvappserver
 ----
 +
