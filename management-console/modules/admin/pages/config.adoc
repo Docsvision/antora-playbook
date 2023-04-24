@@ -2,6 +2,33 @@
 
 Конфигурационный файл модуля располагается по адресу `/usr/lib/docsvision/ManagementConsole/appsettings.json`. Конфигурационный файл `appsettings.json` содержит все настройки модуля.
 
+.appsettings.json
+[source,json]
+----
+{
+  "SettingsService": {
+    "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
+    "ApiKey": "SettingsServiceApiKey" <.>
+  },
+  "ExternalApiService": {
+    "ConnectionString": "Address=http://externalapi.domain.com:5300/api", <.>
+    "ApiKey": "ExternalApiServiceApiKey" <.>
+  },
+  "AdministratorGroup": {
+    "Users": [
+      "account@DOMAIN.COM" <.>
+    ]
+  }
+}
+----
+<.> Адрес {of-sett-serv}. Формат строки подключения разобран ниже, см. <<conn-string,Строка подключения>>.
+<.> Ключ доступа к Сервису настроек (указывается в конфигурационном файле сервиса).
+<.> Адрес Сервиса внешнего API. Формат строки подключения разобран ниже, см. <<conn-string,Строка подключения>>.
+<.> Ключ доступа к Сервису внешнего API (указывается в конфигурационном файле сервиса).
+<.> Пользователи, которым разрешен вход в Консоль управления.
++
+Обратите внимание, что домен указывается в верхнем регистре.
+
 .Конфигурация модуля включает:
 * Адрес подключения к _{of-mc}_.
 * Настройки _Службы {ws}_ (включая очереди, фабрики и прочие).
@@ -11,3 +38,7 @@
 * Имена типов реализаций подключаемых к _Службе {ws}_.
 * Настройки сопоставления типов реализаций.
 * Путь к файлу журнала.
+
+include::install.adoc[tags=string]
+
+include::install.adoc[tags=cert]
