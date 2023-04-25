@@ -76,7 +76,7 @@ image::admin:db-create-modules.png[Выбор модулей для загруз
 // +
 // .Запрос на перезапуск сервисов {dv}
 // image::admin:db-create-reload.png[Запрос на перезапуск сервисов {dv}]
-. На сервере Linux, в конфигурационном файле модулей укажите имя создаваемой БД xref:admin:config-platform.adoc[конфигурационном файле] модуля {pl} и перезапустите службу *{sss}* командами:
+. На сервере Linux, в конфигурационном файле модулей укажите псевдоним и строку подключения к создаваемой БД в xref:admin:config-platform.adoc[конфигурационном файле] модуля {pl} и перезапустите службу *{sss}* командами:
 +
 [source,bash]
 ----
@@ -84,6 +84,6 @@ sudo systemctl stop dvappserver
 sudo systemctl start dvappserver
 ----
 +
-include::db-update.adoc[tags=special]
-+
+// include::db-update.adoc[tags=special]
+// +
 . Предоставьте сервисам {dv} xref:admin:post-config-server.adoc#accounts[необходимые права], в т.ч. права на новую БД.
