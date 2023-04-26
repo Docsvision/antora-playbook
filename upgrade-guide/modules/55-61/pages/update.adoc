@@ -60,13 +60,12 @@ image::update-card-lib.png[Обновление баз данных]
 // .. Подтвердите настройки Workflow и выйдите из мастера.
 // +
 . Аналогичным образом обновите модули на узлах кластера {dv}, СУБП и {wc}а. Обновлять БД повторно не нужно.
-. На сервере Linux укажите имя создаваемой БД xref:a6.1@platform:dmin:config-platform.adoc[конфигурационном файле] модуля {pl}.
-. Чтобы сервис *{sss}* прочитал информацию о новой БД, перезапустите его командами:
+. На сервере Linux укажите имя создаваемой БД в xref:6.1@platform:admin:config-platform.adoc[конфигурационном файле] модуля {pl}.
+. Чтобы сервис *{sss}* прочитал информацию о новой БД, перезапустите его командой:
 +
 [source,bash]
 ----
-sudo systemctl stop dvappserver
-sudo systemctl start dvappserver
+sudo systemctl restart dvappserver
 ----
 
 // [WARNING]
