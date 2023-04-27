@@ -4,30 +4,28 @@
 Пользовательский интерфейс {wc}а адаптируется под тип клиентского устройства, который определяется по https://ru.wikipedia.org/wiki/User_Agent[User Agent], передаваемому веб-браузером клиента. Если User Agent не сопоставляется или некорректно сопоставляется с типом устройства, нужно изменить шаблон, по которому выполняется сопоставление:
 
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к элементу menu:configuration[{dv} > WebClient > SettingGroups > SettingGroup [Name="WebClient"\]].
-. Измените значение параметра:
+. Перейдите к элементу {cnf-sgrps-wc}].
+. Измените значение параметра `TabletRegExpString`:
 +
-include::partial$table.adoc[]
-|*_MobileRegExpString_*
-|Шаблон определения мобильных устройств нового поколения.
-
-|*_MobileRegExpPart2String_*
-|Шаблон определения старых мобильных устройств.
-
-|*_TabletRegExpString_*
-|Шаблон определения планшетов.
-|===
+.Определять устройство с User Agent "NEWPAD" как планшет
 +
-В значении параметра через символ `|` нужно указать User Agent соответствующего устройства.
-+
-.Определять устройство с User Agent _NEWPAD_ как планшет
-+
-====
-[source]
+[source,json]
 ----
-<Setting Name="TabletRegExpString" Value=" … |SM-T355|MediaPad|NEWPAD" />
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "TabletRegExpString": "SM-T355|MediaPad|NEWPAD" <.>
+        },
+      },
+    },
+  },
 ----
-====
+<.> В значении параметра через символ `|` нужно указать User Agent соответствующего устройства.
++
+* `MobileRegExpString` -- шаблон определения мобильных устройств нового поколения.
+* `MobileRegExpPart2String` -- шаблон определения старых мобильных устройств.
+* `TabletRegExpString` -- шаблон определения планшетов.
 // end::webconfig[]
 +
 . Сохраните изменения конфигурационного файла.
