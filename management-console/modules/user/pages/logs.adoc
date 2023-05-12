@@ -8,9 +8,13 @@
 * Принудительная перезагрузка Службы {ws} и фоновых операций.
 * Нажатие кнопки *Повторить обработку*. При нажатии кнопки фиксируется идентификатор сообщения.
 
-Журнал {of-mc} хранится по адресу: `C:\ProgramData\Docsvision\ManagementConsole\Logs\ГГГГ_ММ_ДД_ManagementConsole_UserEvents.log`. Каждый день создаётся новый журнал.
+// Журнал {of-mc} хранится по адресу: `C:\ProgramData\Docsvision\ManagementConsole\Logs\ГГГГ_ММ_ДД_ManagementConsole_UserEvents.log`. Каждый день создаётся новый журнал.
 
-Журнал сервиса настроек располагается по адресу: `C:\ProgramData\Docsvision\SettingsService\Logs`.
+Журналы консоли управления и сервиса настроек можно посмотреть в каталоге `/var/log/docsvision`.
+
+include::install-linux::commands.adoc[tags=log]
+
+// по адресу: `C:\ProgramData\Docsvision\SettingsService\Logs`.
 
 Чтобы изменить путь хранения файла журнала по умолчанию, нужно добавить в конфигурационный файл модуля (`appsettings.json`) параметр с указанием нужного пути:
 
