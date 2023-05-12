@@ -7,7 +7,7 @@
 sudo nano /usr/lib/docsvision/platform/appsettings.json
 ----
 
-.appsettings.json
+.Фрагмент конфигурационного файла `appsettings.json`:
 [source,json]
 ----
 {
@@ -76,14 +76,14 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
 
 .Пользователь, выполняющий установку и настройку системы должен входить в следующие группы:
 * *{dv-admins-serv}* и *{dv-sec-admins-serv}* -- администраторы системы и администраторы безопасности системы.
-* *{dv-web-admin-cns-admins-serv}*. Пользователи, входящие в эту группу, имеют право работать с xref:6.1@mgmtconsole:admin:install.adoc[Консолью управления {dv}].
+// * *{dv-web-admin-cns-admins-serv}*. Пользователи, входящие в эту группу, имеют право работать с xref:6.1@mgmtconsole:admin:install.adoc[Консолью управления {dv}].
 
 [#connection-string]
 == Строка подключения к БД
 
 .{mssql}
 ****
-`Initial Catalog=Имя-БД-с-FileStream; Data Source=Полное-имя-сервера-СУБД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
+`Initial Catalog=Имя-БД-{dv}; Data Source=Полное-имя-сервера-СУБД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
 
 {pgsql}
