@@ -13,12 +13,12 @@ include::ROOT:partial$excerpts.adoc[tags=dv-web-launch]
 
 == Настройка узлов кластера
 
-. Запустите программу `C:\Program Files (x86)Docsvision\WebClient\5.5\Tools\mageui.exe` от имени администратора. Будет открыто окно *Mage*.
+. Запустите программу `C:\Program Files (x86)Docsvision\WebClient\Tools\mageui.exe` от имени администратора. Будет открыто окно *Mage*.
 +
 .Главное окно программы Microsoft .NET Framework Mage
 image::mage.png[Главное окно программы Microsoft .NET Framework Mage]
 +
-. Нажмите menu:File[Open] и выберите файл `C:\Program Files (x86)Docsvision\WebClient\5.5\Site\Content\Tools\_DVWebTool_Docsvision.DVWebTool.application`. Будут загружены данные из манифеста развертывания программы _DVWebTool_.
+. Нажмите menu:File[Open] и выберите файл `C:\Program Files (x86)Docsvision\WebClient\Site\Content\Tools\_DVWebTool_Docsvision.DVWebTool.application`. Будут загружены данные из манифеста развертывания программы _DVWebTool_.
 . Откройте раздел параметров *Deployment Options*.
 +
 .Mage Deployment Options
@@ -27,9 +27,9 @@ image::mage-deployment.png[Mage Deployment Options]
 [#startLocation]
 . В строке _Start Location_ измените адрес сервера {wc}, на адрес балансировщика нагрузки или иного промежуточного устройства. Например: `\http://dv1.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application` на `\http://webclient.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application`.
 . Нажмите menu:File[Save]. Будет предложено подписать манифест.
-. Выберите файл `C:\Program Files (x86)Docsvision\WebClient\5.5\DVWebTool.pfx` и нажмите *OK*.
+. Выберите файл `C:\Program Files (x86)Docsvision\WebClient\DVWebTool.pfx` и нажмите *OK*.
 . Закройте программу *Mage*.
-. Скопируйте папку `C:\Program Files (x86)Docsvision\WebClient\5.5\Site\Content\Tools\DVWebTool\` на все узлы кластера.
+. Скопируйте папку `C:\Program Files (x86)Docsvision\WebClient\Site\Content\Tools\DVWebTool\` на все узлы кластера.
 
 == Использование собственного сертификата для подписания DVWebTool
 
