@@ -23,15 +23,7 @@ sudo nano /usr/lib/docsvision/workflow/appsettings.json
       "ServiceUrl": "http://dvserver.domain.com:5000/api/v1", <.>
       "BaseName": "alias", <.>
       "WorkflowServer": {
-        "ServerAddress": "account@domain.com",
-        "SmtpPort": "465",
-        "SmtpServer": "smtp.domain.com",
-        "SMTPAuthenticate": "1",
-        "SMTPUseSsl": "0",
-        "SmtpUsername": "account@domain.com",
-        "SmtpPassword": "password",
-        "MemorySize": "1000",
-        "UseCDOSys": "1"
+        <.>
       }
     }
   },
@@ -43,6 +35,7 @@ sudo nano /usr/lib/docsvision/workflow/appsettings.json
 ----
 <.> URL сервиса Workflow.
 <.> Псевдоним БД {dv}.
+<.> Настройки почты, подробнее см. раздел "xref:mail-settings.adoc[]".
 <.> Отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
@@ -64,12 +57,14 @@ sudo nano /usr/lib/docsvision/workflow/appsettings.json
 Администратор должен создать учетную запись для СУБП, службы *{wfs}*.
 
 .Создайте доменную учетную запись, и настройте её права:
-. На сервере Linux включите учетную запись в локальные группы _{dv-power-users-serv}_ и _Performance Monitor Users_. Группы настраиваются в конфигурационном файле модуля {pl}, подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
+. На сервере Linux включите учетную запись в локальные группы _{dv-power-users-serv}_.
+// и _Performance Monitor Users_.
+Группы настраиваются в конфигурационном файле модуля {pl}, подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 . На компьютере с серверной частью модуля:
 +
 * Включите учетную запись в локальную группу *Users*.
-* https://social.technet.microsoft.com/Forums/ie/en-US/a6fcbe72-6f75-4bd2-bb96-440e2c8913c2/how-do-i-configure-a-user-account-to-have-8216logon-as-a-service8217-permissions?forum=winserverGP[Предоставьте] право _Log on as service_ в локальной политике безопасности.
-* Предоставьте права на чтение и запись в ветку реестра `{hklm-dv}\Workflow`.
+// * https://social.technet.microsoft.com/Forums/ie/en-US/a6fcbe72-6f75-4bd2-bb96-440e2c8913c2/how-do-i-configure-a-user-account-to-have-8216logon-as-a-service8217-permissions?forum=winserverGP[Предоставьте] право _Log on as service_ в локальной политике безопасности.
+// * Предоставьте права на чтение и запись в ветку реестра `{hklm-dv}\Workflow`.
 
 [start=2]
 .После настройки системы {dv}:
