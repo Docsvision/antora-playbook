@@ -94,6 +94,14 @@ sudo nano /usr/lib/docsvision/fulltextservice/appsettings.json
 <.> Имя системной учётной записи {dv}.
 <.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:install-linux::account-protection.adoc[]".
 
+// Этот коммент предотвращает слипание блоков
+
+* Запустите сервис полнотекстового поиска следующей командой:
++
+[source,bash]
+----
+sudo systemctl start dvfulltextservice
+----
 include::admin:partial$update.adoc[tags=config]
 
 [#connection-string]

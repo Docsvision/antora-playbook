@@ -2,42 +2,48 @@
 
 Перечисленные права должны быть предоставлены системной учетной записи {dv} -- учетной записи службы *{sss}*.
 
-
 == Требования на уровне ОС сервера
 
-* Членство в группе *Perfomance Monitor Users*. Членство в группах настраивается в конфигурационном файле модуля {pl}. Подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
-* Полные права на системную папку для временных файлов (по умолчанию папка `c:\Windows\Temp`).
-* Права на чтение веток реестра ОС:
+. Добавьте данные системной учётной записи {dv} в переменные окружения.
 +
-** `{hklm-dv}\Platform`,
-** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Security`.
+Под этой учётной записью Консоль настройки будет подключаться к серверу {dv}.
 +
-* Права на редактирование веток реестра ОС:
-+
-** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Application`.
-+
-* В локальной политике безопасности:
-+
---
-** Log on as a service.
-** Log on as a batch job.
-** Adjust memory quotas for a process.
-** Generate security audits.
-** Replace а process level token.
-** Impersonate a client after authentication.
-** Allow log on locally.
-** Access this computer from the network.
---
-+
-[NOTE]
-====
-Указанные разрешения выдаются в оснастке "Локальные политики безопасности" (menu:Control Panel[Administrative Tools > Local security policy > User Right Assigment].
-====
-+
-* Права на запись в файл журнала (если он ведется).
-* Права _serveradmin_ для отображения путей к файловым провайдерам.
-+
-Если у пользователя нет прав _serveradmin_, он не сможет увидеть _Пути к фильтрам индексирования_ в настройках индексирования БД.
+ setx DV_SystemUserAccount account@domain.com
+ setx DV_SystemUserPassword password
+
+// * Членство в группе *Perfomance Monitor Users*. Членство в группах настраивается в конфигурационном файле модуля {pl}. Подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
+// * Полные права на системную папку для временных файлов (по умолчанию папка `c:\Windows\Temp`).
+// * Права на чтение веток реестра ОС:
+// +
+// ** `{hklm-dv}\Platform`,
+// ** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Security`.
+// +
+// * Права на редактирование веток реестра ОС:
+// +
+// ** `{hklm}\SYSTEM\CurrentControlSet\Services\EventLog\Application`.
+// +
+// * В локальной политике безопасности:
+// +
+// --
+// ** Log on as a service.
+// ** Log on as a batch job.
+// ** Adjust memory quotas for a process.
+// ** Generate security audits.
+// ** Replace а process level token.
+// ** Impersonate a client after authentication.
+// ** Allow log on locally.
+// ** Access this computer from the network.
+// --
+// +
+// [NOTE]
+// ====
+// Указанные разрешения выдаются в оснастке "Локальные политики безопасности" (menu:Control Panel[Administrative Tools > Local security policy > User Right Assigment].
+// ====
+// +
+// * Права на запись в файл журнала (если он ведется).
+// * Права _serveradmin_ для отображения путей к файловым провайдерам.
+// +
+// Если у пользователя нет прав _serveradmin_, он не сможет увидеть _Пути к фильтрам индексирования_ в настройках индексирования БД.
 
 == Требования на уровне СУБД
 
