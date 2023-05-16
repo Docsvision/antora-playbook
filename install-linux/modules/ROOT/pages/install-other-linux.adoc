@@ -4,6 +4,25 @@
 
 При установке модулей {dv} в ОС Linux разделение на серверную и клиентскую части отсутствует. Установка выполняется описанными ниже командами, другие базовые модули будут установлены автоматически.
 
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+[source,bash]
+----
+sudo apt-get install docsvision-fileservice
+----
++
+. Выполните конфигурацию модуля в файле настроек.
++
+. Запустите службу Файлового сервиса:
++
+[source,bash]
+----
+sudo systemctl start dvfileservice
+----
+
 [#webc]
 == Установка {wc}а
 
@@ -14,7 +33,7 @@
 sudo apt-get install docsvision-webclient
 ----
 +
-. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{wc}_, раздел "xref:6.1@webclient:admin:install-server-linux.adoc#config[Установка {wc}а]".
+. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{wc}_, раздел "xref:6.1@webclient:admin:install-server.adoc#config[Установка {wc}а]".
 +
 . Запустите службу {wc}а:
 +
@@ -101,6 +120,45 @@ sudo apt-get install docsvision-workerservice
 [source,bash]
 ----
 sudo systemctl start dvworkerservice
+----
+
+[#workflow]
+== Установка СУБП
+
+. Установите модуль _{wf}_ следующей командой:
++
+[source,bash]
+----
+sudo apt-get install docsvision-workflow
+----
++
+. Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:6.1@workflow:admin:install.adoc[]".
++
+. Запустите службу модуля:
++
+[source,bash]
+----
+sudo systemctl start dvworkflow
+----
+
+[#takeoffice]
+== Установка приложения {to}
+
+. Установите приложение _{to}_ следующей командой:
++
+[source,bash]
+----
+sudo apt-get install docsvision-takeoffice
+----
+
+[#docmgt]
+== Установка приложения {dm}
+
+. Установите приложение _{dm}_ следующей командой:
++
+[source,bash]
+----
+sudo apt-get install docsvision-documentmanagement
 ----
 
 Ознакомьтесь со списком полезных команд в пункте "xref:post-config-server.adoc[]".
