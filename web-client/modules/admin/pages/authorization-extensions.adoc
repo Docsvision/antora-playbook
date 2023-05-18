@@ -109,26 +109,7 @@ include::partial$excerpts.adoc[tags=esia-v]
           "AzureAD": {
             "Name": "AzureAD", <.>
             "TypeName": "DocsVision.Platform.Authentication.AzureAD.AzureADRootAuthenticationExtension, DocsVision.Platform.Authentication.AzureAD, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-            "Settings": " <.>
-             <?xml version=\"1.0\" encoding=\"utf-16\"?>
-             <AzureADAuthenticationSettings
-	             xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
-	             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
-	             <WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
-	             <ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId> <.>
-	             <GroupMembershipCheckerSettings>
-		             <GroupMappings>
-			             <AzureADGroupMapping> <.>
-				             <GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId> <.>
-				             <Role>User</Role> <.>
-			             </AzureADGroupMapping>
-		             </GroupMappings>
-	             </GroupMembershipCheckerSettings>
-	             <Tenants>
-		             <guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid>
-	             </Tenants>
-	             <ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId> <.>
-             </AzureADAuthenticationSettings>",
+            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><AzureADAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId><GroupMembershipCheckerSettings><GroupMappings><AzureADGroupMapping><GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId><Role>User</Role></AzureADGroupMapping></GroupMappings></GroupMembershipCheckerSettings><Tenants><guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid></Tenants><ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId></AzureADAuthenticationSettings>", <.>
               "Id": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}" <.>
           }
         },
@@ -144,17 +125,45 @@ include::partial$excerpts.adoc[tags=esia-v]
 ----
 <.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
 <.> `TypeName` -- строка с именем типа, реализующего расширение.
-<.> `Settings` -- строка настроек расширения, для AzureAD.
+<.> `Settings` -- строка настроек расширения, для AzureAD. Подробнее см. <<settings,ниже>>.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+
+[#settings]
+== Строка настроек
+
+В примере ниже строка настроек приведена в отформатированном виде для удобства чтения. Данный фрагмент кода не предназначен для копирования в конфигурационный файл.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<AzureADAuthenticationSettings
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+  <ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId> <.>
+  <GroupMembershipCheckerSettings>
+    <GroupMappings>
+      <AzureADGroupMapping> <.>
+        <GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId> <.>
+        <Role>User</Role> <.>
+      </AzureADGroupMapping>
+    </GroupMappings>
+  </GroupMembershipCheckerSettings>
+  <Tenants>
+    <guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid>
+  </Tenants>
+  <ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId> <.>
+</AzureADAuthenticationSettings>",
+----
 <.> `WellKnownConfigurationUrl` -- URL публичной конфигурации OpenID.
 <.> `ClientId` -- идентификатор тенанта AzureAD в котором производится привязка пользователей.
 <.> `AzureADGroupMapping` -- задает сопоставление групп Azure AD системным xref:6.1@backoffice:desdirs:staff/groups/system-groups.adoc[группам безопасности {dv}]. Допускается на одну группу Azure AD создавать несколько групп {dv}.
 <.> `GroupId` -- идентификатор группы Azure AD.
 <.> `Role` -- имя группы без префикса "{dv}".
 <.> `ApplicationId` -- идентификатор приложения {dv}, зарегистрированного в тенанте AzureAD, для которого включено и настроено использование OpenID Connect.
-<.> `ID` -- строка с идентификатором расширения в виде Guid.
-<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
-<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
-<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
 
 [#esia]
 == Регистрация расширения ЕСИА
