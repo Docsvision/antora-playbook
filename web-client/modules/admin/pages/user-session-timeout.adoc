@@ -5,22 +5,24 @@
 
 .Чтобы изменить таймаут пользовательской сессии:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {setgroups-sys}.
-. Измените значение параметра *_ConnectionTimeout_*.
+. Перейдите к секции {cnf-sgrps} > System].
+. Измените значение параметра `ConnectionTimeout`.
 +
-NOTE: Время ожидания задаётся в миллисекундах.
-+
-.Время ожидания пользовательской сессии равное 1 часу
-====
-[source]
+[source,json]
 ----
-<SettingGroup Name="System">
-    <Setting Name="ConnectionTimeout" Value="3600000" />
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "System": {
+          "ConnectionTimeout": 3600000 <.>
+        }
+      }
+    }
+  }
 ----
-====
+<.> Время ожидания пользовательской сессии равное 1 часу. Значение задаётся в миллисекундах.
 // end::webconfig[]
 +
-NOTE: Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+include::partial$excerpts.adoc[tags=ifabsent]
 +
 . Сохраните изменения конфигурационного файла.

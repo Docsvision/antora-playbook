@@ -2,20 +2,25 @@
 
 По умолчанию в печатной версии подписанного файла, в штампе ЭП размещается логотип "Щит". Администратор может изменить изображение.
 
+include::partial$excerpts.adoc[tags=ifabsent]
+
 // tag::webconfig[]
 .Чтобы изменить логотип для штампа ЭП:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {setgroups} > SettingGroup[Name="DefaultESImageGenerator"\]].
+. Перейдите к секции {cnf-sgrps} > "DefaultESImageGenerator"].
+. Измените значение параметра `LogoImagePath`, указав путь к PNG файлу нового логотипа (относительно каталога `{wcd}\Site\` или абсолютный).
 +
-NOTE: По умолчанию данной секции нет -- её нужно создать самостоятельно.
-+
-. Измените значение параметра *_LogoImagePath_*, указав путь к PNG файлу нового логотипа (относительно каталога `{wcd}\Site\` или абсолютный).
-+
-[source]
+[source,json]
 ----
-<SettingGroup Name="DefaultESImageGenerator">
-   <Setting Name="LogoImagePath" Value="Content/logo.png" />
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "DefaultESImageGenerator": {
+          "LogoImagePath": "Content/logo.png"
+        }
+      }
+    }
+  }
 ----
 // end::webconfig[]
 +

@@ -2,7 +2,7 @@
 
 Конфигурационный файл {wc}а располагается по адресу `{webconfig}`.
 
-Если какая-либо настройка отсутствует в конфигурационном файле, создайте её самостоятельно.
+include::partial$excerpts.adoc[tags=ifabsent]
 
 [WARNING]
 ====
@@ -119,12 +119,12 @@ include::.no-active-dir.adoc[tags=webconfig]
 //
 // Подробнее см. "xref:login-animation.adoc[]".
 
-[#auth-kerberos]
-=== Включение аутентификации Kerberos
-
-include::use-kerberos.adoc[tags=webconfig]
-
-Подробнее см. "xref:use-kerberos.adoc[]".
+// [#auth-kerberos]
+// === Включение аутентификации Kerberos
+//
+// include::.use-kerberos.adoc[tags=webconfig]
+//
+// Подробнее см. "xref:.use-kerberos.adoc[]".
 
 [#session]
 == Настройки сессии
@@ -156,6 +156,13 @@ include::clear-cache-config.adoc[tags=webconfig]
 include::close-session-config.adoc[tags=webconfig]
 
 Подробнее см. "xref:close-session-config.adoc[]".
+
+[#session-ccokie]
+=== Время жизни пользовательских cookie
+
+include::cookie-lifetime.adoc[tags=webconfig]
+
+Подробнее см. "xref:cookie-lifetime.adoc[]".
 
 [#sign]
 == Настройки электронной подписи

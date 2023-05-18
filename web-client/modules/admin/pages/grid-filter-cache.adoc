@@ -7,17 +7,27 @@
 // tag::webconfig[]
 .Чтобы отключить кэширование разметок:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {setgroups-wc}.
-. Установите значение параметра `GridFilterCache` в `false`:
+. Перейдите к секции {cnf-sgrps-wc}].
+. Измените значение параметра `GridFilterCache` в `false`:
 +
-[source]
+[source,json]
 ----
-<SettingGroup Name="WebClient">
-    <Setting Name="GridFilterCache" Value="false" />
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "GridFilterCache": "False" <.>
+        }
+      }
+    }
+  }
 ----
+<.> Возможные значения:
++
+* `False` -- кэширование разметок фильтров будет отключено.
+* `True` -- значение по умолчанию, кэширование включено.
 // end::webconfig[]
 +
-NOTE: Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
+include::partial$excerpts.adoc[tags=ifabsent]
 +
 . Сохраните изменения конфигурационного файла.

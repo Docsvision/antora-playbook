@@ -21,21 +21,31 @@
 
 .Чтобы включить счетчики:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {setgroups-wc}.
-. Измените значение параметра `EnablePerformanceCounters` на *_True_* :
+. Перейдите к секции {cnf-sgrps-wc}].
+. Измените значение параметра `EnablePerformanceCounters`:
 +
+--
 .Включение счетчиков производительности
-====
-Если указанного параметра нет в конфигурационном файле, создайте его самостоятельно.
-
-[source]
+[source,json]
 ----
-<SettingGroup Name="WebClient">
- <Setting Name="EnablePerformanceCounters" Value="True" />
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "EnablePerformanceCounters": "True" <.>
+        }
+      }
+    }
+  }
 ----
-====
+<.> Возможные значения:
++
+* `True` -- счетчики производительности включены.
+* `False` -- значение по умолчанию, счетчики производительности отключены.
+--
 // end::webconfig[]
++
+include::partial$excerpts.adoc[tags=ifabsent]
 +
 . Сохраните изменения конфигурационного файла.
 

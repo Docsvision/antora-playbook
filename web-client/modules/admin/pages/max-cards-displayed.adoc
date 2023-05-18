@@ -12,27 +12,29 @@
 
 .Чтобы изменить максимальное количество карточек на страницу представления:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к элементу {cnf-sgrps} > View] и измените параметры `UseFolderPropertyRestrictionPageSize` и `DefaultPageSize` при необходимости.
+. Перейдите к элементу {cnf-sgrps-wc} > "View"] и измените параметры `UseFolderPropertyRestrictionPageSize` и `DefaultPageSize` при необходимости.
 +
 [source,json]
 ----
   "Docsvision": {
-    "SettingGroups": {
-      "WebClient": {
-        "View": {
-          "UseFolderPropertyRestrictionPageSize": "true", <.>
-          "DefaultPageSize": "20" <.>
-        },
-      },
-    },
-  },
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "View": {
+            "UseFolderPropertyRestrictionPageSize": "True", <.>
+            "DefaultPageSize": "20" <.>
+          }
+        }
+      }
+    }
+  }
 ----
 <.> Параметр "Ограничение количества выводимых записей" отвечает за использование ограничений, установленных в свойствах папок:
-* `true` -- использовать ограничение, установленное в {dv}.
-* `false` -- использовать собственное ограничение {wc}, заданное параметром `DefaultPageSize` (значение по умолчанию).
+* `True` -- использовать ограничение, установленное в {dv}.
+* `False` -- использовать собственное ограничение {wc}, заданное параметром `DefaultPageSize` (значение по умолчанию).
 <.> Параметр `DefaultPageSize` изменяет максимальное отображаемое количество карточек на страницу. Если в настройках папки ограничение не установлено, то в представлении папки будут отображаться все карточки без разбивки на страницы.
 // end::webconfig[]
 +
 . Сохраните изменения конфигурационного файла.
 
-NOTE: Если параметр отсутствует в конфигурационном файле, создайте его.
+include::partial$excerpts.adoc[tags=ifabsent]

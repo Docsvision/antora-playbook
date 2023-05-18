@@ -18,13 +18,9 @@
 * https://docs.cryptopro.ru/cades/plugin/plugin-installation-macos[MacOS]
 +
 . Установите сертификат пользователя.
-
-.Неквалифицированный сертификат:
-. Установите в хранилище "Личное" на уровне "Текущий пользователь".
-
-.Квалифицированный сертификат КриптоПро:
-. Установите на компьютер https://www.cryptopro.ru/products/csp/downloads[СКЗИ КриптоПро CSP].
-. Установите квалифицированный сертификат пользователя в хранилище _Личное_ на уровне _Текущий пользователь_.
++
+* Установите *неквалифицированный* сертификат в хранилище "Личное" на уровне "Текущий пользователь".
+* Установите *квалифицированный* сертификат на компьютер https://www.cryptopro.ru/products/csp/downloads[СКЗИ КриптоПро CSP] в хранилище _Личное_ на уровне _Текущий пользователь_.
 . Установите
 ifdef::root-cert[{root-cert}]
 в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
@@ -42,25 +38,33 @@ ifdef::root-cert[{root-cert}]
 
 .Чтобы изменить способ проверки подлинности подписи:
 . Откройте файл конфигурации {wc}а по адресу `{webconfig}`.
-. Найдите следующие настройки:
+. Перейдите к параметру `{cnf-sgrps}` и выполните следующие настройки:
 +
-[source]
+[source,json]
 ----
-<SettingGroup Name="CloudSignature">
-    <Setting Name="Address" Value="https://адрес-облачного-сервиса-DSS" /> <.>
-    <Setting Name="ClientId" Value="" /> <.>
-    <Setting Name="SignServerAppName" Value="" />
-    <Setting Name="STSAppName" Value="" />
-    <Setting Name="DocumentStoreAppName" Value="" /> <.>
-    <Setting Name="VerifyUrl" Value="https://dss.cryptopro.ru/verify/rest/api/signatures" /> <.>
-    <Setting Name="TSPServiceAddress" Value="" /> <.>
-    <Setting Name="SignatureType" Value="BES" /> <.>
-    <Setting Name="AuthorizeRedirectUrl" Value="http://адрес-Web-клиента-Docsvision/api/CryptoProDss/AcceptAuthorization" /> <.>
-    <Setting Name="TokenStorageMode" Value="InMemory" /> <.>
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "CloudSignature": {
+          "Address": "https://адрес-облачного-сервиса-DSS" <.>
+          "ClientId": null <.>
+          "SignServerAppName": null <.>
+          "STSAppName": null <.>
+          "DocumentStoreAppName": null <.>
+          "VerifyUrl": "https://dss.cryptopro.ru/verify/rest/api/signatures" <.>
+          "TSPServiceAddress": null <.>
+          "SignatureType": "BES" <.>
+          "AuthorizeRedirectUrl": "http://адрес-Web-клиента-Docsvision/api/CryptoProDss/AcceptAuthorization" <.>
+          "TokenStorageMode": "InMemory" <.>
+        }
+      }
+    }
+  }
 ----
 <.> Адрес сервиса облачной подписи.
 <.> Идентификатор клиента. Настраивается в сервисе облачной подписи КриптоПро.
+<.> Сервис подписи, обрабатывающий создание транзакций и получение результатов, подтвержденной операции.
+<.> Сервис аутентификации, ответственный за аутентификацию пользователей для возможности обращений к сервису подписи и подтверждение транзакций.
 <.> `SignServerAppName`, `STSAppName` и `DocumentStoreAppName` -- имена сайтов в IIS на сервере КриптоПро DSS. Настраиваются при установке сервиса электронной подписи КриптоПро DSS.
 <.> URL для проверки подлинности подписи.
 <.> Адрес сервиса штампа времени для XLT1.
@@ -79,6 +83,8 @@ ifdef::root-cert[{root-cert}]
 * `InMemory` -- авторизация будет запрошена при перезапуске IIS.
 * `InUserProfileEncrypted` -- авторизация будет запрошена по истечении срока действия токена.
 // end::webconfig[]
+
+include::partial$excerpts.adoc[tags=ifabsent]
 
 [#check-cloud]
 == Проверка облачной подписи

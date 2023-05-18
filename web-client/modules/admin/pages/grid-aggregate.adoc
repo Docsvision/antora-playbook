@@ -25,18 +25,21 @@ include::user:page$grid-aggregate.adoc[tags=whatis]
 
 .Чтобы настроить автоматическое применение по таймеру:
 . Откройте файл `{webconfig}`.
-. В секции {setgroups-wc}] измените значение параметра `Grid`:
+. В секции {cnf-sgrps-wc}] измените значение параметра `Grid`:
 +
 [source,json]
 ----
   "Docsvision": {
     "WebClient": {
-      "Grid": { <.>
-        "ApplyAggregatesTimeout": "1000"
-        "ApplyAggregatesButton": "True"
-        },<.>
-    },
-  },
+      "SettingGroups": {
+        "WebClient": {
+          "Grid": {
+          "ApplyAggregatesTimeout": "1000", <.>
+          "ApplyAggregatesButton": "True" <.>
+        }
+      }
+    }
+  }
 ----
 <.> По истечении указанного количества миллисекунд будет автоматически обновлён список карточек и доступные агрегаты.
 <.> Флаг определяет, будет ли список карточек обновляться автоматически или перестраиваться по нажатию кнопки *Применить*. +
