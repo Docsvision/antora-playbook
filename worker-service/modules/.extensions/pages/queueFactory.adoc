@@ -227,7 +227,7 @@ public class FSQueueFactory : IQueueFactory
 +
 . Добавьте расширение `FSQueueFactory` в конфигурацию Службы:
 +
-.. Создайте раздел с произвольным наименованием в реестре ОС, например `{hklm-dv}\WorkerService\Queues\FSQueue`.
+.. Создайте раздел с произвольным наименованием в реестре ОС, например `{hklm-dv}WorkerService\Queues\FSQueue`.
 +
 .. В созданном разделе укажите полное имя класса `FSQueueFactory` в параметре по умолчанию.
 +
@@ -239,7 +239,7 @@ image::queueRegistry.png[Настройки реестра]
 +
 . Создайте `Роль {of-ws}`, через которую {is-ws} будет получать расширение `FSQueueFactory`:
 +
-. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\Roles\RoleWithFSQueue`.
+. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}WorkerService\Roles\RoleWithFSQueue`.
 +
 . В разделе создайте строковый параметр `Queues` со значением `FSQueueSettings` -- название строки с параметрами `FSQueueFactory`, которая была создана <<FSQueueSettings,ранее>>.
 +

@@ -116,7 +116,7 @@ public class SomeTaskFactory : IWorkerTaskFactory, IInitializeWithServiceProvide
 . Добавьте расширение `SomeTaskFactory` в конфигурацию Службы:
 +
 [#STask]
-.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\Tasks\STask`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}WorkerService\Tasks\STask`.
 +
 .. В созданном разделе укажите полное имя класса `SomeTaskFactory` в параметре по умолчанию.
 +
@@ -134,7 +134,7 @@ image::taskRoleRegistry.png[Добавление нового параметра
 +
 . Зарегистрируйте экземпляр {of-ws} с _Ролью_ `RoleWithSTask`.
 +
-.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}\WorkerService\Roles\WorkerProcesses\WpSTask`.
+.. Создайте раздел с произвольным именем в реестре ОС, например `{hklm-dv}WorkerService\Roles\WorkerProcesses\WpSTask`.
 +
 include::partial$moreChunks.adoc[tags=parameters]
 +
