@@ -5,14 +5,20 @@
 
 .Чтобы изменить стандартный порт подключения:
 . Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {setgroups-sys}.
+. Перейдите к секции {cnf-sgrps} > System].
 . Измените значение параметра *_WebServicesPort_*, указав новый номер порта подключения к программе _DVWebTool_.
 +
 [source]
 ----
-<SettingGroup Name="System">
-    <Setting Name="WebServicesPort" Value="5413" />
-</SettingGroup>
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "System": {
+          "WebServicesPort": 5413
+        }
+      }
+    }
+  }
 ----
 // end::webconfig[]
 +
