@@ -27,7 +27,7 @@
 Настройки Сервиса записываются в реестр на машине с сервером Docsvision при установке модуля.
 
 .Чтобы изменить настройки, перейдите в ветку реестра:
-. `{hklm-dv}\WorkerService\Connections\DocsVision`.
+. `{hklm-dv}WorkerService\Connections\DocsVision`.
 . В указанной ветке реестра создайте параметр для подключения к БД с произвольным именем. Это может быть, например, параметр с именем БД. В значении параметра укажите строку подключения к используемой в {dv} БД следующего вида:
 +
  ConnectAddress=http://<servername>/StorageServer/StorageServerService.asmx;BaseName=<basename>
@@ -41,7 +41,7 @@ NOTE: Один экземпляр рабочего процесса Сервис
 
 Обработка подписей Сервисом зависит от настроек записанных в ветке:
 
-`{hklm-dv}\SOFTWARE\DocsVision\WorkerService\Components\Signatures`
+`{hklm-dv}SOFTWARE\DocsVision\WorkerService\Components\Signatures`
 
 .Сервис обрабатывает подписи в следующих случаях:
 * Если срок действия сертификата подписи не больше заданного в значении `DaysOffset`.
