@@ -103,20 +103,22 @@ include::partial$excerpts.adoc[tags=esia-v]
 [source,json]
 ----
   "Docsvision": {
-    "Server": {
-      "Authentication": {
-        "Extensions": {
-          "AzureAD": {
-            "Name": "AzureAD", <.>
-            "TypeName": "DocsVision.Platform.Authentication.AzureAD.AzureADRootAuthenticationExtension, DocsVision.Platform.Authentication.AzureAD, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><AzureADAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId><GroupMembershipCheckerSettings><GroupMappings><AzureADGroupMapping><GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId><Role>User</Role></AzureADGroupMapping></GroupMappings></GroupMembershipCheckerSettings><Tenants><guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid></Tenants><ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId></AzureADAuthenticationSettings>", <.>
+    "Platform": {
+      "Server": {
+        "Authentication": {
+          "Extensions": {
+            "AzureAD": {
+              "Name": "AzureAD", <.>
+              "TypeName": "DocsVision.Platform.Authentication.AzureAD.AzureADRootAuthenticationExtension, DocsVision.Platform.Authentication.AzureAD, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><AzureADAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId><GroupMembershipCheckerSettings><GroupMappings><AzureADGroupMapping><GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId><Role>User</Role></AzureADGroupMapping></GroupMappings></GroupMembershipCheckerSettings><Tenants><guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid></Tenants><ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId></AzureADAuthenticationSettings>", <.>
               "Id": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}" <.>
           }
         },
-        "Tenants": { <.>
-          "CurrentDB": {
-            "Extensions": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}", <.>
-            "Name": "CurrentDB" <.>
+          "Tenants": { <.>
+            "CurrentDB": {
+              "Extensions": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}", <.>
+              "Name": "CurrentDB" <.>
+           }
           }
         }
       }
