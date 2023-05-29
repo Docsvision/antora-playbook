@@ -31,14 +31,14 @@ sudo nano /usr/lib/docsvision/workerservice/Configuration.json
 ----
 {
   "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
-  "ApiKey": "SettingsServiceApiKey", <.>
+  "ApiKey": "anything", <.>
   "RestApiAddress": "http://worker.domain.com:5900/api", <.>
   "LogFile": "/var/log/docsvision/WorkerService.log" <.>
 }
 ----
-<.> Адрес Сервиса настроек.
-<.> Ключ доступа к Сервису настроек (указывается в конфигурационном файле сервиса).
-<.> Адрес Службы {ws}.
+<.> Адрес подключения к Сервису настроек.
+<.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
+<.> Адрес подключения к Службе {ws}.
 <.> Путь к файлу журнала Службы {ws}
 +
 . Запустите службу модуля:
@@ -48,6 +48,7 @@ sudo nano /usr/lib/docsvision/workerservice/Configuration.json
 sudo systemctl start dvworkerservice
 ----
 
+[#windows]
 == Установка Службы {ws} на Windows
 
 Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
