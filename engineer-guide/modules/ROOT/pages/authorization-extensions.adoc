@@ -7,7 +7,7 @@
 * ЕСИА (Госуслуги) по почте, номеру телефона, номеру СНИЛС
 include::partial$excerpts.adoc[tags=esia-v]
 
-Настроить расширения можно при помощи изменения записей в секции menu:&quot;Docsvision&quot;["Platform" > "Server" > "Authentication" > "Extensions"] конфигурационного файла по адресу `nano /usr/lib/docsvision/platform/appsettings.json`.
+Настроить расширения можно при помощи изменения записей в секции menu:&quot;Docsvision&quot;["Platform" > "Server" > "Authentication" > "Extensions"] конфигурационного файла по адресу `/usr/lib/docsvision/platform/appsettings.json`.
 
 // * В реестре расширения настраиваются в ветке `{hklm-dv}Platform\Server\Authentication`.
 // * В конфигурационном файле {wc}а расширения настраиваются
@@ -112,6 +112,7 @@ include::partial$excerpts.adoc[tags=esia-v]
               "TypeName": "DocsVision.Platform.Authentication.AzureAD.AzureADRootAuthenticationExtension, DocsVision.Platform.Authentication.AzureAD, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
               "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><AzureADAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId><GroupMembershipCheckerSettings><GroupMappings><AzureADGroupMapping><GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId><Role>User</Role></AzureADGroupMapping></GroupMappings></GroupMembershipCheckerSettings><Tenants><guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid></Tenants><ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId></AzureADAuthenticationSettings>", <.>
               "Id": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}" <.>
+            }
           }
         },
         "Tenants": { <.>
@@ -275,7 +276,7 @@ https://www.cryptopro.ru/products/csp[КриптоПро CSP 5.0].
         }
       }
     }
-  },
+  }
 ----
 <.> `ID` -- строка с идентификатором расширения в виде Guid.
 <.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
