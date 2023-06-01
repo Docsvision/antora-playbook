@@ -54,43 +54,45 @@ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru
 * https://tlsca.cryptopro.ru/UI/CaCerts.aspx[Сертификаты "Крипто-Про УЦ 2.0" (TLS CA)].
 * http://cpca20.cryptopro.ru/[Сертификаты УЦ ООО "Крипто-Про"].
 
-При необходимости использования дополнительных сертификатов выполните следующие настройки:
+При необходимости использования дополнительных сертификатов выполните одну из следующих настроек:
 
-. Необходимые сертификаты сохранить в отдельную папку на диске.
-. Папку смонтировать в каталог `/var/cryptoservice/cacerts`.
-. Запустить контейнер. При запуске контейнера всё содержимое папки будет импортировано в хранилище.
+* Укажите путь к папке сертификатов:
+. Необходимые сертификаты сохраните в отдельную папку на диске.
+. Смонтируйте в каталог `/var/cryptoservice/cacerts`.
+. Запустите контейнер. При запуске контейнера всё содержимое папки будет импортировано в хранилище.
 +
 [source,bash]
 ----
 docker run -d -p 8100:8094 -v D:\Cert:/var/cryptoservice/cacerts tux.digdes.com/docsvision/cryptoservice
 ----
 +
-. Заново соберите образ:
+* Заново соберите образ:
 +
-.. Создайте Dockerfile:
+. Создайте Dockerfile:
 +
-[source,bash]
+[source,dockerfile]
 ----
 FROM tux.digdes.com/docsvision/cryptoservice
 COPY ./your/cacerts/ /var/cryptoservice/cacerts/
 ----
 +
-.. Соберите образ:
+. Соберите собственный образ:
 +
 [source,bash]
 ----
 docker build . -t cryptoservice
 ----
 +
-.. Запустите контейнер:
+. Запустите контейнер:
 +
 [source,bash]
 ----
 docker run -d -p 8100:8094 cryptoservice
 ----
-+
-. [[config]]После установки Криптосервиса, укажите его в параметре `ComplexSignatureServiceAddress` конфигурационного файла модуля {pl} по пути `/usr/lib/docsvision/platform/appsettings.json`:
-+
+
+[#config]
+После установки Криптосервиса, укажите его в параметре `ComplexSignatureServiceAddress` конфигурационного файла модуля {pl} по пути `/usr/lib/docsvision/platform/appsettings.json`:
+
 [source,json]
 ----
   "DocsVision": {
