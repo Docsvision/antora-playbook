@@ -1,5 +1,9 @@
 // tag::linux[]
-= Установка Службы {ws}
+:of: сервиса
+:wt: workerservice
+:config: Configuration
+
+= Установка и настройка Службы {ws}
 
 include::6.1@install-linux::partial$limitation.adoc[]
 
@@ -9,22 +13,9 @@ include::6.1@install-linux::partial$limitation.adoc[]
 Служба {ws} данной версии несовместима с модулем {sm}.
 // end::sm-incompat[]
 
-WARNING: Перед установкой ознакомьтесь с разделом "xref:ROOT:requirements.adoc[]".
+WARNING: Перед установкой ознакомьтесь с разделом "xref:6.1@workerservice:ROOT:requirements.adoc[]".
 
-. Установите службу модуля следующей командой, предварительно обновив индекс пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-workerservice
-----
-+
-. Все настройки модуля хранятся в конфигурационном файле модуля `Configuration.json`. Конфигурационный файл может быть изменён в любом текстовом редакторе, например `nano`.
-+
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/workerservice/Configuration.json
-----
+include::6.1@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
