@@ -1,8 +1,8 @@
+// tag::linux[]
 :of: модуля
 :wt: workflow
 
-// tag::linux[]
-= Установка и настройка
+= Установка и настройка СУБП
 
 include::6.1@install-linux::partial$limitation.adoc[]
 
@@ -11,11 +11,8 @@ include::6.1@install-linux::partial$limitation.adoc[]
 
 include::6.1@platform:admin:partial$install.adoc[]
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/workflow/appsettings.json
-----
-
+Основные настройки, которые нужно сделать:
++
 [source,json]
 ----
 {
@@ -36,7 +33,7 @@ sudo nano /usr/lib/docsvision/workflow/appsettings.json
 ----
 <.> URL сервиса Workflow.
 <.> Псевдоним БД {dv}.
-<.> Настройки почты, подробнее см. раздел "xref:mail-settings.adoc[]".
+<.> Настройки почты, подробнее см. раздел "xref:6.1@workflow:admin:mail-settings.adoc[]".
 <.> Отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
