@@ -7,40 +7,43 @@ antora:
     require: ./lib/unlisted.js
 site:
   title: Документация Docsvision
-  url: https://help.docsvision.com/beta/
-  start_page: 6.1@ROOT::index.adoc
+  url: https://help.docsvision.com/
+#  start_page: current@ROOT:ROOT:index.adoc
   robots: allow
 urls:
-#  latest_version_segment: latest
+#  latest_version_segment: current
 #  latest_version_segment_strategy: redirect:to
   latest_prerelease_version_segment: dev
   html_extension_style: indexify
 content:
   branches:
   - 'dev'
+  - '5.5.*'
+  - 'main'
   edit_url: ~
   sources:
     - url: https://github.com/Docsvision/WebC-Antora.git
     - url: https://github.com/Docsvision/Worker-Antora.git
     - url: https://github.com/Docsvision/Platform-Antora.git
     - url: https://github.com/Docsvision/WebAC-Antora.git
-#    - url: https://github.com/Docsvision/Install-Guide-Antora.git
-    - url: https://github.com/Docsvision/Install-Linux-Antora.git
-#    - url: https://github.com/Docsvision/Designers-And-Directories-Antora.git
+    - url: https://github.com/Docsvision/Install-Guide-Antora.git
+    - url: https://github.com/Docsvision/Designers-And-Directories-Antora.git
     - url: https://github.com/Docsvision/System-Antora.git
     - url: https://github.com/Docsvision/Approval-Designer-Antora.git
     - url: https://github.com/Docsvision/Base-Objects-Antora.git
     - url: https://github.com/Docsvision/Platform-Upgrade-Antora.git
-#    - url: https://github.com/Docsvision/Engineer-Antora.git
-#    - url: https://github.com/Docsvision/Programmer-Antora.git
+    - url: https://github.com/Docsvision/Engineer-Antora.git
+    - url: https://github.com/Docsvision/Programmer-Antora.git
     - url: https://github.com/Docsvision/Windows-Client-Antora.git
     - url: https://github.com/Docsvision/Document-Management-Antora.git
-#    - url: https://github.com/Docsvision/Schemas-Antora.git
-#    - url: https://github.com/Docsvision/Solution-Manager-Antora.git
+    - url: https://github.com/Docsvision/Schemas-Antora.git
+    - url: https://github.com/Docsvision/Solution-Manager-Antora.git
     - url: https://github.com/Docsvision/Workflow-Antora.git
-#    - url: https://github.com/Docsvision/Archive-Management-Antora.git
-#    - url: https://github.com/Docsvision/EDI-Antora.git
-#    - url: https://github.com/Docsvision/Resource-Kit-antora.git
+    - url: https://github.com/Docsvision/Archive-Management-Antora.git
+    - url: https://github.com/Docsvision/EDI-Antora.git
+    - url: https://github.com/Docsvision/Resource-Kit-antora.git
+    - url: https://github.com/Docsvision/Install-Linux-Antora.git
+    - url: https://github.com/Docsvision/Take-Office-Antora.git
 ui:
 #  supplemental_files:
 #    - path: js/nav.js
@@ -74,14 +77,14 @@ asciidoc:
     dispatch: 'Диспетчер служб IIS'
     dv: 'Docsvision'
     root-cert: 'Корневой сертификат удостоверяющего центра, выпустившего сертификат пользователя.footnote:[Например, корневой сертификат КриптоПро]@'
-    #    sss: 'Docsvision Storage Server'
+#    sss: 'Docsvision Storage Server'
     sss: 'dvappserver'
-    fts: 'Docsvision Full-Text indexing Service'
-    wfs: 'Docsvision Workflow Server'
-    fss: 'Docsvision File Service'
-    wss: 'Docsvision Worker Service'
-    wacs: 'Docsvision Management Console Service'
-    wacss: 'Docsvision Settings Service'
+    fts: 'dvfulltextservice'
+    wfs: 'dvworkflow'
+    fss: 'dvfileservice'
+    wss: 'dvworkerservice'
+    wacs: 'dvconsole'
+    wacss: 'dvsettings'
     wcs: 'dvwebclient'
     pl: 'Платформа'
     wincl: 'Windows-клиент'
@@ -101,7 +104,7 @@ asciidoc:
     am: 'Управление архивом'
     sm: 'Менеджер решений'
     of-sm: 'Менеджера решений'
-    hklm-dv: 'HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision'
+    hklm-dv: 'HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\'
     hklm: 'HKEY_LOCAL_MACHINE'
     service: 'специальный сервис логики этапа'
     of-service: 'специального сервиса логики этапа'
@@ -135,16 +138,14 @@ asciidoc:
     tspcom-v: '1.05.1379 / 1.05.1057 / 2.0.12450 и выше'
     ocspcom-v: '1.05.1178 / 1.05.1053 / 2.0.12261 и выше'
     cadescom-v: '2.0.13292 и выше'
-    csp-v: '4.0 и выше'
+    csp-v: '5.0 и выше'
     l-1: '1.7'
     l-2: '22.04 (LTS)'
     l-3: '20.04 (LTS)'
     l-4: '11 (stable)'
     l-5: '10 (oldstable)'
-    asp: 'ASP.NET 4.6'
-    net-v1: '4.7.2'
-    asp-bundle: '6.0.3'
-    net-r: '6.0.3'
+    asp-bundle: 'ASP.NET Core Runtime (Hosting Bundle) версии  6.0.3'
+    net-r: '.NET Desktop Runtime (x86/x64) версии 6.0.3'
   extensions:
   - asciidoctor-kroki
 output:
