@@ -1,53 +1,52 @@
 antora:
   extensions:
-  - require: antora-navigator-extension
-    config_file: ./antora-navigator.yml
-  - id: unlisted-pages
-    enabled: true
-    require: ./lib/unlisted.js
+    - require: antora-navigator-extension
+      config_file: ./antora-navigator.yml
+    - id: unlisted-pages
+      enabled: true
+      require: ./lib/unlisted.js
 site:
   title: Документация Docsvision
-  url: https://help.docsvision.com/
-#  start_page: current@ROOT:ROOT:index.adoc
+  url: https://help.docsvision.com/beta/
+  start_page: 6.1@ROOT::index.adoc
   robots: allow
 urls:
-#  latest_version_segment: current
-#  latest_version_segment_strategy: redirect:to
+  #  latest_version_segment: current
+  #  latest_version_segment_strategy: redirect:to
   latest_prerelease_version_segment: dev
   html_extension_style: indexify
 content:
   branches:
-  - 'dev'
-  - '5.5.*'
-  - 'main'
+    - 'dev'
+#    - '5.5.*'
+#    - 'main'
   edit_url: ~
   sources:
     - url: https://github.com/Docsvision/WebC-Antora.git
     - url: https://github.com/Docsvision/Worker-Antora.git
     - url: https://github.com/Docsvision/Platform-Antora.git
     - url: https://github.com/Docsvision/WebAC-Antora.git
-    - url: https://github.com/Docsvision/Install-Guide-Antora.git
-    - url: https://github.com/Docsvision/Designers-And-Directories-Antora.git
+#    - url: https://github.com/Docsvision/Install-Guide-Antora.git
+    - url: https://github.com/Docsvision/Install-Linux-Antora.git
+#    - url: https://github.com/Docsvision/Designers-And-Directories-Antora.git
     - url: https://github.com/Docsvision/System-Antora.git
     - url: https://github.com/Docsvision/Approval-Designer-Antora.git
     - url: https://github.com/Docsvision/Base-Objects-Antora.git
     - url: https://github.com/Docsvision/Platform-Upgrade-Antora.git
-    - url: https://github.com/Docsvision/Engineer-Antora.git
-    - url: https://github.com/Docsvision/Programmer-Antora.git
+#    - url: https://github.com/Docsvision/Engineer-Antora.git
+#    - url: https://github.com/Docsvision/Programmer-Antora.git
     - url: https://github.com/Docsvision/Windows-Client-Antora.git
     - url: https://github.com/Docsvision/Document-Management-Antora.git
-    - url: https://github.com/Docsvision/Schemas-Antora.git
-    - url: https://github.com/Docsvision/Solution-Manager-Antora.git
+#    - url: https://github.com/Docsvision/Schemas-Antora.git
+#    - url: https://github.com/Docsvision/Solution-Manager-Antora.git
     - url: https://github.com/Docsvision/Workflow-Antora.git
-    - url: https://github.com/Docsvision/Archive-Management-Antora.git
-    - url: https://github.com/Docsvision/EDI-Antora.git
-    - url: https://github.com/Docsvision/Resource-Kit-antora.git
-    - url: https://github.com/Docsvision/Install-Linux-Antora.git
-    - url: https://github.com/Docsvision/Take-Office-Antora.git
+#    - url: https://github.com/Docsvision/Archive-Management-Antora.git
+#    - url: https://github.com/Docsvision/EDI-Antora.git
+#    - url: https://github.com/Docsvision/Resource-Kit-antora.git
 ui:
-#  supplemental_files:
-#    - path: js/nav.js
-#      contents: ./node_modules/antora-navigator-extension/data/js/nav.js
+  #  supplemental_files:
+  #    - path: js/nav.js
+  #      contents: ./node_modules/antora-navigator-extension/data/js/nav.js
   supplemental_files: ./node_modules/antora-navigator-extension/data/
   bundle:
     url: ./build/ui-bundle.zip
