@@ -1,12 +1,6 @@
 = Создание доверенного сертификата для подключения к БД
 
-// [#iis]
-// == Создание сертификата через IIS
-//
-// include::6.1@webclient:admin:preview-r7.adoc[tags=cert-iis]
-// +
-
-Сертификат также можно сгенерировать любым удобным способом.
+Сертификат можно сгенерировать любым удобным способом.
 
 .Главные требование к SSL-сертификату на {mssql} сервере:
 * Название сертификата должно быть равно полному имени сервера равный DNS имени сервера.
@@ -19,7 +13,7 @@
 
 . Создайте сертификат следующей командой:
 +
-  $ openssl req -x509 -newkey rsa:4096 -sha256 -keyout c:\out\authservice.key -out c:\out\authservice.crt -subj "/CN=http://docsvision.com" -days 600
+ openssl req -x509 -newkey rsa:4096 -sha256 -keyout c:\out\authservice.key -out c:\out\authservice.crt -subj "/CN=http://docsvision.com" -days 600
 +
 Где `c:\out\authservice` -- место сохранения сертификата.
 +
@@ -27,7 +21,7 @@
 +
 . Экспортируйте сертификат, выполнив следующую команду:
 +
-  $ openssl pkcs12 -export -name "http://webservice.com" -out c:\out\authservice.pfx -inkey c:\out\authservice.key -in c:\out\authservice.crt
+ openssl pkcs12 -export -name "http://webservice.com" -out c:\out\authservice.pfx -inkey c:\out\authservice.key -in c:\out\authservice.crt
 +
 В `c:\out\authservice` укажите путь для сохранения сертификата. Также замените `name` на имя сервера {mssql}.
 +
