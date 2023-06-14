@@ -14,7 +14,21 @@
 sudo apt-get install docsvision-fileservice
 ----
 +
-. Выполните конфигурацию модуля в файле настроек.
+. В конфигурационном файле укажите строку подключения к БД:
++
+[source,json]
+----
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Database-connection-string" <.>
+        }
+      }
+    }
+  }
+----
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
 +
 . Запустите службу Файлового сервиса:
 +
