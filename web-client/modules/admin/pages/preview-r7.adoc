@@ -40,6 +40,7 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
  sudo update-ca-certificates -v -f.
 +
 . После установки сертификата переключите Р7 на использование HTTPS с созданным сертификатом согласно https https://support.r7-office.ru/document_server/install-document_server/document_server_linux/https_ds/[официальной инструкции на сайте Р7].
+. <<webc-config,Переведите>> {wc} на использование HTTPS.
 // +
 // [NOTE]
 // ====
@@ -49,8 +50,32 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 [#webc-config]
 == Конфигурация {wc}а
 
+Для использования "Р7-Офис. Сервер документов" требуется перевести {wc} на использование HTTPS.
+
+. Создайте самоподписанный сертификат при помощи утилиты https://slproweb.com/products/Win32OpenSSL.html[OpenSSL]:
++
+ openssl req -x509 -newkey rsa:4096 -sha256 -keyout .\out\cert.key -out .\out\certificate.crt -subj "/CN=http://WebClientDomain.com" -days 600
++
 . Откройте конфигурационный файл {wc}а по адресу `{webconfig}` в любом текстовом редакторе и отредактируйте следующие параметры:
 +
+[source,json]
+----
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "https://*:5004", <.>
+        "Certificate": {
+        "Path": "/path/to/your.crt", <.>
+        "KeyPath": "/path/to/your.key" <.>
+      }
+    }
+  }
+----
+<.> Адрес, по которому будет доступен {wc}.
+<.> Путь к сертификату.
+<.> Путь к закрытому ключу сертификата.
++
+. Следующим шагом необходимо указать адрес сервера документов Р7 в конфигурационном файле:
 // tag::webconfig[]
 +
 [source,json]
@@ -59,7 +84,7 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
     "WebClient": {
       "SettingGroups": {
         "WebClient": {
-          "ServerR7ConnectionAddress": "http://dvserver.preview.com", <.>
+          "ServerR7ConnectionAddress": "https://dvserver.preview.com", <.>
           "FilePreviewMode": "0" <.>
         }
       }
@@ -69,8 +94,3 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 <.> `ServerR7ConnectionAddress` -- url сервера документов Р7-Офис/OnlyOffice. Настройка обязательна для заполнения. Если url сервера документов Р7 не указан, вторая настройка будет проигнорирована и будет использоваться стандартный инструмент предварительного просмотра pdf.js.
 <.> `FilePreviewMode` -- определяет, какой компонент используется для предпросмотра. Значения: `0` -- предпросмотр отключен, `1` -- предпросмотр с помощью р7.
 // end::webconfig[]
-+
-. Переключите Web-клиент на использование `https://`.
-
-// [#secure]
-// include::.connect-https.adoc[leveloffset=+2]
