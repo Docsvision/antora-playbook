@@ -13,15 +13,15 @@
 
 . Создайте сертификат следующей командой:
 +
- openssl req -x509 -newkey rsa:4096 -sha256 -keyout c:\out\authservice.key -out c:\out\authservice.crt -subj "/CN=http://docsvision.com" -days 600
+ openssl req -x509 -newkey rsa:4096 -sha256 -keyout .\out\authservice.key -out .\out\authservice.crt -subj "/CN=http://docsvision.com" -days 600
 +
-Где `c:\out\authservice` -- место сохранения сертификата.
+Где `.\out\authservice` -- место сохранения сертификата.
 +
 В процессе создания сертификата будет предложено задать пароль для сертификата.
 +
 . Экспортируйте сертификат, выполнив следующую команду:
 +
- openssl pkcs12 -export -name "http://webservice.com" -out c:\out\authservice.pfx -inkey c:\out\authservice.key -in c:\out\authservice.crt
+ openssl pkcs12 -export -name "http://webservice.com" -out .\out\authservice.pfx -inkey .\out\authservice.key -in .\out\authservice.crt
 +
 В `c:\out\authservice` укажите путь для сохранения сертификата. Также замените `name` на имя сервера {mssql}.
 +
