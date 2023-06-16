@@ -7,14 +7,14 @@
 //tag::webconfig[]
 .Чтобы изменить ограничение для максимального размера файла для предпросмотра:
 . Откройте конифгурационный файл {wc}а: `{webconfig}`.
-. В категории настроек {cnf-sgrps} > "System"] измените параметр `MaxPreviewFileSize`.
+. В категории настроек {cnf-sgrps-wc}] измените параметр `MaxPreviewFileSize`.
 +
 [source,json]
 ----
   "Docsvision": {
     "WebClient": {
       "SettingGroups": {
-        "System": {
+        "WebClient": {
           "MaxPreviewFileSize": "0" <.>
         }
       }
