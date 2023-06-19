@@ -18,7 +18,6 @@ public interface IPowerOfAttorneyMachineReadableProvider
 |===
 |Имя |Описание
 
-
 |`string CreatePowerOfAttorneyMachineReadable(PowerOfAttorneyData);`
 a|Формирует содержимое машиночитаемой доверенности на основе данных доверенности
 
@@ -34,4 +33,13 @@ a|Возвращает информацию о машиночитаемой до
 * `powerOfAttorneyMachineReadableData` -- содержимое МЧД
 
 Возвращаемое значение: информация о машиночитаемой доверенности.
+
+|`Validate(string, out string)`
+a|Проверяет данные МЧД на соответствие формату
+
+.Параметры:
+* `powerOfAttorneyMachineReadableData` -- Содержимое МЧД.
+* `error` -- Информация об ошибках.
+
+Возвращаемое значение: результат проверки.
 |===
