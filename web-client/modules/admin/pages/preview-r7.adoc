@@ -24,7 +24,7 @@
 +
 [source]
 ----
-location ~* ^(/upload.)(/.)$ {
+location ~* ^(\/upload.)(\/.)$ {
   alias /tmp$1$2;
   add_header Content-Disposition "attachment; filename*=UTF-8''$arg_filename";
 }
