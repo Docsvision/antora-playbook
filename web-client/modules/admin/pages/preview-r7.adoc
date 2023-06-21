@@ -20,11 +20,15 @@
 Измените значение приоритета следующим образом: `Pin-Priority: 910` и выполните команду `sudo apt update`.
 ****
 +
-. [[consolidation]]Для включения консолидации через Р7-Офис в файл `ds-docservice.conf` добавьте локацию
+. [[consolidation]]Для включения консолидации через Р7-Офис в файл `ds-docservice.conf` после блока
++
+ location ~* ^(/cache/files.*)(/.*) { .... }
++
+Добавьте следующие строки:
 +
 [source]
 ----
-location ~* ^(\/upload.)(\/.)$
+location ~* ^(\/upload.*)(\/.*)$
   alias /tmp$1$2;
   add_header Content-Disposition "attachment; filename*=UTF-8''$arg_filename";
 }
