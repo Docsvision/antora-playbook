@@ -495,16 +495,16 @@ npm run build:prod
 [start=6]
 .Публикация компонентов на сервере {wc}.
 . Остановите *{wcs}*.
-. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `{wcd}\Content\Modules`.
-. Скопируйте папку `SamplesOutput\Site\Content\Tools\DVWebTool\Application Files\` в `{wcd}\Content\Tools\DVWebTool\`.
-. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `{wcd}\Extensions`.
+. Скопируйте папку `SamplesOutput/Site/Content/Modules/WatermarkWebExtension/` в `{wcd}/Content/Modules`.
+. Скопируйте папку `SamplesOutput/Site/Content/Tools\DVWebTool/Application Files/` в `{wcd}/Content/Tools/DVWebTool/`.
+. Скопируйте папку `SamplesOutput/Site/Extensions/WatermarkServerExtension` в `{wcd}/Extensions`.
 . Запустите *{wcs}*.
 
 [start=11]
 .Регистрация расширения _DVWebTool_ на сервере {wc}.
-. Запустите программу `{wcd}\Tools\mageui.exe`.
+. Запустите программу `{wcd}/Tools/mageui.exe`.
 . Обновите манифест программы:
-.. Нажмите menu:File[Open] и выберите файл `{wcd}\Content\Tools\DVWebTool\Application     FilesDocsvision.DVWebTool.exe.manifest`.
+.. Нажмите menu:File[Open] и выберите файл `{wcd}/Content/Tools/DVWebTool/Application     FilesDocsvision.DVWebTool.exe.manifest`.
 .. Перейдите в раздел _Name_ и в поле `Version` увеличьте номер сборки. Например, `5.5.5531.0` до `5.5.5531.1`.
 +
 WARNING: Не изменяйте мажорную и минорную версии, и версию исправления.
@@ -525,13 +525,13 @@ WARNING: Не изменяйте мажорную и минорную верси
 .. Нажмите *…* (три точки) в поле _File_, выберите файл сертификата `{wcd}/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания манифеста (пароль указывать не нужно). Файл манифеста будет подписан сертификатом `DVWebTool.pfx`.
 
 . Обновите файл развертывания программы:
-.. Нажмите menu:File[Open] и выберите файл `{wcd}\Content\Tools\DVWebToolDocsvision.DVWebTool.application`.
+.. Нажмите menu:File[Open] и выберите файл `{wcd}/Content/Tools/DVWebToolDocsvision.DVWebTool.application`.
 .. Перейдите в раздел _Name_ и в поле `Version` увеличьте номер сборки. Например, `5.5.5531.0` до `5.5.5531.1`.
 +
 WARNING: Не изменяйте мажорную и минорную версии, и версию исправления.
 +
 .. Перейдите в раздел _Update option_ и в поле `Version` введите номер версии, который был получен в разделе Name. Например, `5.5.5531.1`.
-.. Перейдите в раздел _Application Reference_, нажмите кнопку *Select Manifest* и выберите файл `{wcd}\Content\Tools\DVWebTool\Application FilesDocsvision.DVWebTool.exe.manifest`. В поле Version будет указана версия, полученная при обновлении файла манифеста.
+.. Перейдите в раздел _Application Reference_, нажмите кнопку *Select Manifest* и выберите файл `{wcd}/Content/Tools/DVWebTool/Application FilesDocsvision.DVWebTool.exe.manifest`. В поле Version будет указана версия, полученная при обновлении файла манифеста.
 .. Нажмите menu:File[Save]. Будет предложено подписать файл развёртывания.
 .. Нажмите *…* (три точки) в поле _File_, выберите файл сертификата `{wcd}/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания (пароль указывать не нужно).
 +
