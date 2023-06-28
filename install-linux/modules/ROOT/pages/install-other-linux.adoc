@@ -4,39 +4,6 @@
 
 При установке модулей {dv} в ОС Linux разделение на серверную и клиентскую части отсутствует. Установка выполняется описанными ниже командами, другие базовые модули будут установлены автоматически.
 
-[#file-service]
-== Установка файлового сервиса
-
-. Установите пакеты модуля:
-+
-[source,bash]
-----
-sudo apt-get install docsvision-fileservice
-----
-+
-. В конфигурационном файле укажите строку подключения к БД:
-+
-[source,json]
-----
-  "DocsVision": {
-    "Platform": {
-      "Server": {
-        "Databases": {
-          "alias": "Database-connection-string" <.>
-        }
-      }
-    }
-  }
-----
-<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
-+
-. Запустите службу Файлового сервиса:
-+
-[source,bash]
-----
-sudo systemctl start dvfileservice
-----
-
 [#webc]
 == Установка {wc}а
 
