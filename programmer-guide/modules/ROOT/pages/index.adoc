@@ -4,6 +4,13 @@
 
 == Изменения в API
 
+Изменён пример провайдера к внешнему хранилищу Google Drive::
+* Из решения удалён AskToken генерация токенов этой утилитой более не требуется.
+* Добавлен новый проект `GoogleDriveStorageProvider.Forms`, в который перенесён Windows-специфичный код.
+* Обновлены требования примера.
+* При настройке хранилища больше не требуется каталог для сохранения токена, вместо этого доступна настройка _Административный email_, в которой можно указать адрес почты для проверки примера.
+
+
 // .API для работы с МЧД
 // [%collapsible]
 // ====
@@ -31,60 +38,3 @@
 // ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneySignatureFormat_EN.adoc[PowerOfAttorneySignatureFormat]` -- формат подписи.
 // ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyStatus_EN.adoc[PowerOfAttorneyStatus]` -- статус доверенности.
 // ====
-
-Добавлен метод::
-Добавлено описание метода `xref:Platform-ObjectModel:ObjectContext.RefreshObject_MT.adoc[RefreshObject(IObjectRef)]` для обновления корневого объекта.
-
-Уведомления о заданиях::
-Класс `xref:BackOffice-ObjectModel-Services:TaskMessagesEventHandlerService_CL.adoc[TaskMessagesEventHandlerService]` расширен методами, позволяющими определить собственную логику по рассылке писем с CC и BCC:
-+
---
-* `xref:BackOffice-ObjectModel-Services:TaskMessagesEventHandlerService.GetNotificationCc_MT.adoc[]` -- позволяет вычислить адресатов в BCC.
-* `xref:BackOffice-ObjectModel-Services:TaskMessagesEventHandlerService.GetNotificationBcc_MT.adoc[]` -- позволяет вычислить адресатов в CC.
---
-+
-Класс `xref:BackOffice-ObjectModel-Services:TaskGroupMessagesEventHandlerService_CL.adoc[TaskGroupMessagesEventHandlerService]` также расширен методами, позволяющими определить собственную логику по рассылке писем с CC и BCC:
-+
-* `xref:BackOffice-ObjectModel-Services:TaskGroupMessagesEventHandlerService.GetNotificationBcc_MT.adoc[]` -- позволяет вычислить адресатов в BCC.
-* `xref:BackOffice-ObjectModel-Services:TaskGroupMessagesEventHandlerService.GetNotificationCc_MT.adoc[]` -- позволяет вычислить адресатов в CC.
-
-Цитаты из файла::
-* Пространство имён `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]` дополнено классами и методами для работы с цитатами файлов:
-+
---
-.Классы:
-** `xref:Platform-ObjectManager-CardManager:CitationFileItem_CL.adoc[CitationFileItem]` -- список цитат, сгруппированных по файлам.
-** `xref:Platform-ObjectManager-CardManager:FilesCitationInfo_CL.adoc[FilesCitationInfo]` -- список цитат, сгруппированных по карточкам.
-** `xref:Platform-ObjectManager-CardManager:SearchFilesCitationsRequest_CL.adoc[SearchFilesCitationsRequest]` -- запрос цитируемых данных из файла.
---
-+
---
-.Методы:
-** `xref:Platform-ObjectManager-CardManager:CardManager.GetSearchFilesCitationsRequest_MT.adoc[CardManager.GetSearchFilesCitationsRequest(SearchFilesCitationParentObjectsType, string)]` -- создаёт класс запроса, включающий параметры поиска и формирования цитат.
-** `xref:Platform-ObjectManager-CardManager:CardManager.SearchFilesCitations_MT.adoc[CardManager.SearchFilesCitations(SearchFilesCitationsRequest)]` -- осуществляет непосредственно получение данных.
---
-
-* Реализующий модель полнотекстового серверного поиска класс `xref:Platform-ObjectManager-SearchModel:FullTextSearch_CL.adoc[FullTextSearch]` дополнен следующими свойствами:
-** `xref:Platform-ObjectManager-SearchModel:FullTextSearch.Mode_PR.adoc[FullTextSearch.Mode]` -- получает или задаёт режим поиска.
-** `xref:Platform-ObjectManager-SearchModel:FullTextSearch.QueryString_PR.adoc[FullTextSearch.QueryString]` -- получает или задаёт значение поисковой строки.
-** `xref:Platform-ObjectManager-SearchModel:FullTextSearch.SearchQuery_PR.adoc[FullTextSearch.SearchQuery]` -- получает поисковый запрос.
-** `xref:Platform-ObjectManager-SearchModel:FullTextSearch.WithCitations_PR.adoc[FullTextSearch.WithCitations]` -- определяет, будут ли использованы цитаты из файлов в результатах поиска.
-
-Согласование::
-* Пространство имён `xref:ApprovalDesigner:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]` дополнено двумя классами:
-** `xref:ApprovalDesigner:ObjectModel/Services/ApprovalStageService_CL.adoc[ApprovalStageService]` -- класс содержит методы для работы с этапом согласования.
-** `xref:ApprovalDesigner:ObjectModel/Services/ApprovalStageEventHandlerService_CL.adoc[ApprovalStageEventHandlerService]` -- обрабатывает события этапа согласования.
-
-* Интерфейс `xref:ApprovalDesigner:ObjectModel/Services/IApprovalStageService_IN.adoc[IApprovalStageService]` расширен новым методом `xref:ApprovalDesigner:ObjectModel/Services/GetStageApprovers_MT.adoc[GetStageApprovers(ApprovalStage approvalStage, Document document)]`, который возвращает согласующих этапа в результате вызова `CopyApproversFromDocument`.
-
-Агрегация данных грида в {wc}е::
-* Класс `xref:Platform-ObjectManager-CardManager:CardManager_CL.adoc[CardManager]` расширен методами API для работы с агрегатами поиска:
-** `xref:Platform-ObjectManager-CardManager:CardManager.GetSearchAggregationItemsRequest_MT.adoc[GetSearchAggregationItemsRequest (SearchAggregationItemsResultType, Guid, Guid, string, int?)]` -- возвращает результат агрегации.
-** `xref:Platform-ObjectManager-CardManager:CardManager.FindAggregationCardsInfo_MT.adoc[FindAggregationCardsInfo (SearchAggregationItemsRequest)]` -- получает список агрегатов и/или результаты фильтрации.
-
-* В пространство имён `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]` добавлены новые классы:
-** `xref:Platform-ObjectManager-SectionData:SearchAggregationItemsRequest_CL.adoc[SearchAggregationItemsRequest]` -- представляет объект запроса
-** `xref:Platform-ObjectManager-SectionData:SearchAggregationItemInfo_CL.adoc[SearchAggregationItemInfo]` -- представляет список объектов.
-
-* В пространство имён `xref:Platform-ObjectManager-SearchModel:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]` добавлено перечисление:
-** `xref:Platform-ObjectManager-SearchModel:SearchAggregationItemsResultType_EN.adoc[SearchAggregationItemsResultType]` -- результат поиска агрегатов.
