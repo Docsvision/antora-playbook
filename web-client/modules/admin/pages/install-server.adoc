@@ -53,7 +53,7 @@ include::6.1@platform:admin:partial$install.adoc[]
   "SystemUserPassword": "password", <.>
 }
 ----
-<.> `DefaultDomain` -- домен по умолчанию.
+<.> `DefaultDomain` -- домен по умолчанию в формате FQDN.
 <.> `ConnectionAddress` -- адрес сервера {dv}.
 <.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory. +
 Пароль можно указывать в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]"
@@ -64,7 +64,7 @@ include::6.1@platform:admin:partial$install.adoc[]
 <.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:6.1@install-linux::account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
-<.> `SystemUserAccount` -- имя системной учётной записи {dv}
+<.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
 <.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:install-linux::account-protection.adoc[]".
 // end::linux[]
 +
