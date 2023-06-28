@@ -31,13 +31,13 @@ sudo systemctl restart dvappserver
 ----
 +
 // tag::log[]
-. Посмотреть журнал сервиса (только записи в `stdout/stderr`):
+. Посмотреть журнал службы (только записи в `stdout/stderr`):
 +
-[source,bash]
+[source,bash,subs=attributes+]
 ----
-sudo journalctl -u dvappserver <.>
+sudo journalctl -u {serv} <.>
 ----
-<.> Замените `dvappserver` на имя нужного сервиса.
+<.> `dvappserver` -- имя перезапускаемой службы.
 +
 . Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
 +
