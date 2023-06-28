@@ -7,12 +7,7 @@
 
 Установите серверные компоненты модуля.
 
-ifndef::upgrade[]
 Все описанные ниже команды необходимо выполнять после завершения xref:pre-config-server.adoc[предварительной настройки сервера].
-endif::[]
-ifdef::upgrade[]
-Все описанные ниже команды необходимо выполнять после завершения <<preconfig,предварительной настройки сервера>>.
-endif::[]
 
 При установке модулей {dv} в ОС Linux необходимо установить модуль описанными далее командами. Также потребуется установка серверных компонентов на ОС Windows для работы с программой {cns}. Установка клиентской части на ОС Windows потребуется только в случае установки {wincl}а.
 
@@ -26,12 +21,7 @@ sudo apt-get install docsvision-platform
 +
 Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
 +
-ifndef::upgrade[]
 . Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
-endif::[]
-ifdef::upgrade[]
-. Активируйте лицензию при помощи утилиты активации. См. подробнее в документации по установке системы, раздел xref:6.1@install-linux::activation.adoc[]:
-endif::[]
 +
 [source,bash]
 ----
@@ -47,6 +37,41 @@ sudo ./activation online ВАШ-КЛЮЧ
 ----
 sudo systemctl start dvappserver
 ----
+
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+[source,bash]
+----
+sudo apt-get install docsvision-fileservice
+----
++
+. В конфигурационном файле укажите строку подключения к БД:
++
+[source,json]
+----
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Database-connection-string" <.>
+        }
+      }
+    }
+  }
+----
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
++
+. Запустите службу Файлового сервиса:
++
+[source,bash]
+----
+sudo systemctl start dvfileservice
+----
+
+include::console:search-full-text.adoc[tags=install-ft]
 
 [#windows-pl]
 == Установка серверных компонентов на Windows
