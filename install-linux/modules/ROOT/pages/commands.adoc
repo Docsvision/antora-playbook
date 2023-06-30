@@ -35,19 +35,17 @@ sudo systemctl restart dvappserver
 // tag::log[]
 . Посмотреть журнал службы (только записи в `stdout/stderr`):
 +
-[source,bash,subs=attributes+]
+[source,bash,subs=attributes]
 ----
-sudo journalctl -u {serv} <.>
+sudo journalctl -u {serv}
 ----
-<.> `dvappserver` -- имя перезапускаемой службы.
 +
 . Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
 +
-[source,bash]
+[source,bash,subs=attributes]
 ----
-sudo journalctl -f -u dvappserver <.>
+sudo journalctl -f -u {serv}
 ----
-<.> Замените `dvappserver` на имя нужного сервиса.
 // end::log[]
 +
 . Установить пакет:
