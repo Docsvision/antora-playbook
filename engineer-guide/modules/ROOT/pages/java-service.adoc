@@ -33,7 +33,7 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 
 [source,bash]
 ----
-docker run -d -p 8100:8094 tux.digdes.com/docsvision/cryptoservice
+docker run -d -p 8100:8094 packages.docsvision.com/docsvision/cryptoservice
 ----
 
 Настройки криптосервиса задаются в командной строке.
@@ -44,7 +44,7 @@ docker run -d -p 8100:8094 tux.digdes.com/docsvision/cryptoservice
 
 [source,bash]
 ----
-docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf tux.digdes.com/docsvision/cryptoservice
+docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf packages.docsvision.com/docsvision/cryptoservice
 ----
 
 Контейнер поставляется в комплекте со следующими сертификатами:
@@ -63,7 +63,7 @@ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru
 +
 [source,bash]
 ----
-docker run -d -p 8100:8094 -v D:\Cert:/var/cryptoservice/cacerts tux.digdes.com/docsvision/cryptoservice
+docker run -d -p 8100:8094 -v D:\Cert:/var/cryptoservice/cacerts packages.docsvision.com/docsvision/cryptoservice
 ----
 +
 * Заново соберите образ:
@@ -72,7 +72,7 @@ docker run -d -p 8100:8094 -v D:\Cert:/var/cryptoservice/cacerts tux.digdes.com/
 +
 [source,dockerfile]
 ----
-FROM tux.digdes.com/docsvision/cryptoservice
+FROM packages.docsvision.com/docsvision/cryptoservice
 COPY ./your/cacerts/ /var/cryptoservice/cacerts/
 ----
 +
