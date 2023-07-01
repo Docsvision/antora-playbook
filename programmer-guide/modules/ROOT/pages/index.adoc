@@ -7,11 +7,12 @@
 .API для работы с МЧД
 [%collapsible]
 ====
-* Добавлен пример работы с xref:cards:attorney.adoc[системной карточкой доверенности].
+** Добавлен пример работы с xref:cards:attorney.adoc[системной карточкой доверенности].
 +
 [lowerroman]
 .. Классы:
 +
+** `xref:BackOffice-ObjectModel-BaseCard:BaseCardExternalPowerOfAttorney_CL.adoc[BaseCardExternalPowerOfAttorney]` -- Базовая карточка сторонней доверенности для хранения информации о машиночитаемых доверенностях контрагентов, поступающих от операторов ЭДО.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorney_CL.adoc[PowerOfAttorney]` -- системная карточка доверенности.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyMainInfo_CL.adoc[PowerOfAttorneyMainInfo]` -- представляет секцию "Основная информация" системной карточки доверенности.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRepresentative_CL.adoc[PowerOfAttorneyRepresentative]` -- представляет секцию "Представитель" системной карточки доверенности.
@@ -23,6 +24,55 @@
 ** `xref:BackOffice-ObjectModel-Powers:PowersPowerOfAttorneyFormat_CL.adoc[PowersPowerOfAttorneyFormat]` -- представляет типы доверенности карточки справочник полномочий МЧД.
 ** `xref:BackOffice-ObjectModel-Services-IPartnersService:IPowerOfAttorneyMachineReadableProvider_IN.adoc[IPowerOfAttorneyMachineReadableProvider]` -- определяет методы формирования и чтения машиночитаемой доверенности.
 ** `xref:BackOffice-ObjectModel-Services-IPartnersService:IPartnersService_IN.adoc[IPowerOfAttorneyServicec]` -- предоставляет методы для работы с системной карточкой доверенности.
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyData_CL.adoc[PowerOfAttorneyData]` -- Базовый класс сведений о доверенности.
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyDigest_CL.adoc[PowerOfAttorneyDigest]` -- Представляет собой сведения о доверенности
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData_CL.adoc[PowerOfAttorneyEMHCDData]` -- Сведения о доверенности в формате единой формы доверенности
+*** Внутренние классы:
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.AddressInfo_CL.adoc[AddressInfo]` -- Сведения об адресе (АдрТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.BranchOfRussianEntityInfo_CL.adoc[BranchOfRussianEntityInfo]` -- Сведения о филиале (обособленном подразделении) юридического лица (ФилПерПолн)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.ConfirmationOfAuthorityDocument_CL.adoc[ConfirmationOfAuthorityDocument]` -- Документ, подтверждающий полномочия лица, действующего без доверенности (ДокПдтвТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.DelegatedPowerOfAttorneyPrincipal_CL.adoc[DelegatedPowerOfAttorneyPrincipal]` -- Сведения о лице, передавшем полномочия (ПередПолн)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.FIO_CL.adoc[FIO]` -- Фамилия, имя, отчество (при наличии) (ФИОТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.ForeignEntityInfo_CL.adoc[ForeignEntityInfo]` -- Сведения об иностранном юридическом лице (СвИнОргТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.HandwrittenSignature_CL.adoc[HandwrittenSignature]` -- Рукописная подпись (ПодпРукопис)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.IndividualInfo_CL.adoc[IndividualInfo]` -- Сведения о физическом лице (СведФЛТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.IndividualPrincipalInfo1_CL.adoc[IndividualPrincipalInfo1]` -- Сведения о физическом лице (ФЛПерПолн)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.IndividualPrincipalInfo_CL.adoc[IndividualPrincipalInfo]` -- Сведения о физическом лице (доверителе) (ФЛДоверТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.IrrevocablePowerOfAttorneyInfo_CL.adoc[IrrevocablePowerOfAttorneyInfo]` -- Сведения о безотзывной доверенности (Безотзыв)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.LegalEntityInfo_CL.adoc[LegalEntityInfo]` -- Сведения о юридическом лице (или филиале (обособленном подразделении) юридического лица) (СвОргТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.MachineReadablePowerRestrictions_CL.adoc[MachineReadablePowerRestrictions]` -- Сведения об ограничении (ограничениях) к полномочию (ОгрСвПолн)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.MachineReadablePowersInfo_CL.adoc[MachineReadablePowersInfo]` -- Сведения о машиночитаемом полномочии (машиночитаемых полномочиях) (МашПолн)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.NotaryCertificateInfo_CL.adoc[NotaryCertificateInfo]` -- Сведения о нотариальном удостоверении (СвНотУдТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.NotaryDeputyInfo_CL.adoc[NotaryDeputyInfo]` -- ВРИО нотариуса (ВриоНотТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.NotaryInfo_CL.adoc[NotaryInfo]` -- Сведения о нотариусе, совершившем нотариальное действие (СвНотДействТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyDocument_CL.adoc[PowerOfAttorneyDocument]` -- Состав и структура документа (Документ)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyDocumentData]` -- Доверенность (Довер)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]` -- Сведения о доверенности (СвДовТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PrincipalInfo_CL.adoc[PrincipalInfo]` -- Сведения о доверителе (Доверит)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PrincipalsInfo_CL.adoc[PrincipalsInfo]` -- Сведения о доверителе (доверителях) (СвДоверит)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` -- Сведения о представителе (представителях) (СвУпПредТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.RepresentativePowersInfo_CL.adoc[RepresentativePowersInfo]` -- Сведения о полномочиях представителя (представителей) (СвПолнТип)
+**** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` -- Сведения о представителе (представителях) (СвУпПредТип)
+**** Вспомогательные перечисления:
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.AuthorityType_EN.adoc[AuthorityType]` -- Тип полномочия
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.CitizenshipType_EN.adoc[CitizenshipType]` -- Признак наличия гражданства
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.EntityType_EN.adoc[EntityType]` -- Тип лица, передавшего полномочия / тип представителя
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.Gender_EN.adoc[Gender]` -- Пол
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.JointRepresentationType_EN.adoc[JointRepresentationType]` -- Признак совместных полномочий
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.NotarialActionParticipantStatus_EN.adoc[NotarialActionParticipantStatus]` -- Статус участника нотариального действия
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyForm_EN.adoc[PowerOfAttorneyForm]` -- Форма доверенности
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyKind_EN.adoc[PowerOfAttorneyKind]` -- Вид доверенности
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyLossOfAuthorityType_EN.adoc[PowerOfAttorneyLossOfAuthorityType]` -- Признак утраты полномочий при передоверии
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PowerOfAttorneyOption_EN.adoc[PowerOfAttorneyOption]` -- Признак доверенности
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.PrincipalType_EN.adoc[PrincipalType]` -- Тип доверителя
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.RevocationCondition_EN.adoc[RevocationCondition]` -- Условие отзыва доверенности
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.RevocationPossibleType_EN.adoc[RevocationPossibleType]` -- Признак безотзывной доверенности
+***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMHCDData.SoleExecutiveAuthorityType_EN.adoc[SoleExecutiveAuthorityType]` -- Вид полномочий единоличного исполнительного органа
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSData_CL.adoc[PowerOfAttorneyFNSData]` -- 
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVBBData_CL.adoc[PowerOfAttorneyFNSDOVBBData]` -- 
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVELData_CL.adoc[PowerOfAttorneyFNSDOVELDat]` -- 
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyMachineReadableInfo_CL.adoc[PowerOfAttorneyMachineReadableInfo]` -- Содержит информацию о МЧД.
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyVerification_CL.adoc[PowerOfAttorneyVerification]` -- Содержит результат проверки действительности доверенности
 +
 .. Перечисления::
 +
