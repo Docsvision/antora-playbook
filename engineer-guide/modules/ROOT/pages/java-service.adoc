@@ -113,7 +113,7 @@ docker run -d -p 8100:8094 cryptoservice
 include::partial$excerpts.adoc[tags=java-warning]
 
 .Чтобы изменить настройки, перейдите в ветку реестра:
-. `{hklm-dv}WorkerService\Connections\DocsVision`.
+. `{hklm-dv}\WorkerService\Connections\DocsVision`.
 . В указанной ветке реестра создайте параметр для подключения к БД с произвольным именем. Это может быть, например, параметр с именем БД. В значении параметра укажите строку подключения к используемой в {dv} БД следующего вида:
 +
  ConnectAddress=http://servername/StorageServer/StorageServerService.asmx;BaseName=basename
@@ -132,7 +132,7 @@ include::partial$excerpts.adoc[tags=java-warning]
 
 Обработка подписей Сервисом зависит от настроек, записанных в ветке:
 
-`{hklm-dv}SOFTWARE\DocsVision\WorkerService\Components\Signatures`
+`{hklm-dv}\SOFTWARE\DocsVision\WorkerService\Components\Signatures`
 
 .Сервис обрабатывает подписи в следующих случаях:
 * Если срок действия сертификата подписи не больше заданного в значении `DaysOffset`.
