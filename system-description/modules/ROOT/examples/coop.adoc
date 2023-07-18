@@ -8,17 +8,17 @@ skinparam databaseBackgroundColor Aqua
 database "\nБаза Данных\n" as db
 
 package "Сервер Docsvision" as server {
-    node "Служба \nDocsvision 5.5 Storage Server" as sss
+    node "Служба \nDocsvision Storage Server" as sss
     node "Web-сервис \nDocsvision в IIS" as iis
 }
 
 storage "Внешнее файловое хранилище" as ext
 
-node "Файловый сервис (Служба \nDocsvision 5.5 File Service)" as fileservice
+node "Файловый сервис (Служба \nDocsvision File Service)" as fileservice
 
-node "Сервис полнотекстового \nиндексирования (Служба \nDocsvision 5.5 Full-text \nIndexing Service)" as fulltext
+node "Сервис полнотекстового \nиндексирования (Служба \nDocsvision Full-text \nIndexing Service)" as fulltext
 
-node "СУБП (Служба \nDocsvision 5.5 Workflow Server)" as workflow
+node "СУБП (Служба \nDocsvision Workflow Server)" as workflow
 
 person "Клиенты, \nработающие \nчерез SOAP" as soap
 
