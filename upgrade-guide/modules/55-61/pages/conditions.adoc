@@ -1,0 +1,17 @@
+include::551-552:page$conditions.adoc[]
+// +
+// . Перед обновлением убедитесь, что раздел `anonymousAuthentication` разблокирован В IIS:
+// .. Откройте Диспетчер служб IIS и выберите текущий сервер.
+// .. Выберите пункт _Редактор конфигураций_ в центральной области окна.
+// .. Укажите путь до раздела конфигурации: system.webServer/security/authentication/anonymousAuthentication.
+// .. В случае, если раздел заблокирован, разблокируйте его (см. рисунок ниже).
+// +
+// .Разблокировка раздела
+// image::unlock-anonymous.png[Разблокировка раздела]
+. Ознакомьтесь со списком требований в руководстве по установке системы:
++
+* Требования к xref:install-linux::requirements-software.adoc[программному] обеспечению.
+* Требования к xref:install-linux::requirements-hardware.adoc[техническому] обеспечению.
+* Требования к xref:install-linux::requirements-database.adoc[СУБД].
++
+include::6.1@platform:admin:pre-config-server.adoc[tags=preconfig]
