@@ -51,6 +51,9 @@
 **** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.PrincipalsInfo_CL.adoc[PrincipalsInfo]` -- Сведения о доверителе (доверителях) (СвДоверит)
 **** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` -- Сведения о представителе (представителях) (СвУпПредТип)
 **** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.RepresentativePowersInfo_CL.adoc[RepresentativePowersInfo]` -- Сведения о полномочиях представителя (представителей) (СвПолнТип)
+**** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationApplicantInfo_CL.adoc[]` -- Информация о лице, отзывающем доверенность
+**** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationData_CL.adoc[]` -- Данные отзыва доверенности.
+**** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationInfo_CL.adoc[]` -- Содержит информацию об отзыве доверенности.
 **** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` -- Сведения о представителе (представителях) (СвУпПредТип)
 **** Вспомогательные перечисления:
 ***** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.AuthorityType_EN.adoc[AuthorityType]` -- Тип полномочия
@@ -72,18 +75,29 @@
 ** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVELData_CL.adoc[PowerOfAttorneyFNSDOVELDat]` -- 
 ** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyMachineReadableInfo_CL.adoc[PowerOfAttorneyMachineReadableInfo]` -- Содержит информацию о МЧД.
 ** `xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyVerification_CL.adoc[PowerOfAttorneyVerification]` -- Содержит результат проверки действительности доверенности
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/ImportESNSIResults_CL.adoc[ImportESNSIResults]` -- Результат импорта полномочий из ЕСНИИ.
 +
 . Добавлены новые перечисления::
 +
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRegTransferStatuses_EN.adoc[PowerOfAttorneyRegTransferStatuses]` -- статус передачи доверенности в распределённый реестр ФНС.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRetrustType_EN.adoc[PowerOfAttorneyRetrustType]` -- признак возможности оформления передоверия.
+** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationApplicantType_EN.adoc[]` -- Тип заявителя отзыва доверенности.
+** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationType_EN.adoc[]` -- Тип заявления на отзыв.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneySignatureFormat_EN.adoc[PowerOfAttorneySignatureFormat]` -- формат подписи.
 ** `xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyStatus_EN.adoc[PowerOfAttorneyStatus]` -- статус доверенности.
 +
-. Добавлен новый интерфейс:
+. Добавлены новые интерфейсы:
 +
 ** `xref:BackOffice-ObjectModel-Services-I:ICompressService_IN.adoc[ICompressService]` -- сервис для работы с архивами.
 *** Интерфейс предоставляет метод `xref:BackOffice-ObjectModel-Services-I:CompressFolder_MT.adoc[]`, сжимающий содержимое папки.
+** `xref:BackOffice-ObjectModel-Services-Entities:Entities/IPowersService_IN.adoc[IPowersService]` -- Сервис справочника полномочий.
++
+. Интерфейс `xref:BackOffice-ObjectModel-Services-IBaseCardService:IBaseCardService_IN.adoc[IBaseCardService]` дополнен новыми методами, добавляющими данные МЧД в список подписей:
++
+* `AddExternalPowerOfAttorney(SignatureList, Guid, BaseCardExternalPowerOfAttorneyStatus)`
+* `AddExternalPowerOfAttorney(SignatureList, Guid, BaseCardExternalPowerOfAttorneyStatus, string)`
++
+. Класс `xref:BackOffice-ObjectModel-BaseCard:BaseCardSignature_CL.adoc[BaseCardSignature]` дополнен новым свойством `ExternalPowerOfAttorney`, позволяющим установить и прочитать стороннюю МЧД.
 ====
 
 Добавлен метод::
