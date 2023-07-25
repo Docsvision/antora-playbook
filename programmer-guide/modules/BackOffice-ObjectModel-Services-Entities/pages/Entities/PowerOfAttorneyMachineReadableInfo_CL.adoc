@@ -1,0 +1,65 @@
+= PowerOfAttorneyMachineReadableInfo -- класс
+
+Содержит информацию о МЧД.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyMachineReadableInfo
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyMachineReadableInfo(Guid,
+DateTime,
+DateTime?,
+PowerOfAttorneyRetrustType,
+string,
+string,
+string,
+string,
+Encoding,
+List<string>)` |Создаёт новый экземпляр класса
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyNumber` |Номер доверенности
+|`PowerOfAttorneyStartDate` |Дата совершения доверенности
+|`PowerOfAttorneyEndDate` |Срок действия доверенности
+|`RetrustType` |Признак возможности оформления передоверия
+|`Principal` |Доверитель
+|`PowerOfAttorneyMachineReadableFileID` |Идентификатор файла МЧД
+|`PowerOfAttorneyMachineReadableFileEncoding` |Кодировка файла МЧД
+|`RepresentativesSnils` |СНИЛСы представителей
+|`PrincipalsSnils` |СНИЛСы доверителей
+|`Representative` |Строковое представление представителя в формате ФИО (или ФИ) - для физлица, или названия организации - для юридического лица
+|`Signer` |Строковое представление подписанта в формате ФИО (или ФИ)
+|`RepresentativePowers` |Полномочия представителя
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`AddRepresentativePowers(string, bool)`
+a|Добавить полномочие.
+
+.Параметры:
+* `power` -- код или текстовое описание полномочия
+* `isTextPower` -- содержит текстовое описание полномочия
+|===

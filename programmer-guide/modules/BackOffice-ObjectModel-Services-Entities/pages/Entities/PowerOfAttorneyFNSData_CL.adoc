@@ -1,0 +1,82 @@
+= PowerOfAttorneyFNSData -- класс
+
+Базовый класс сведений о доверенности в формате ФНС
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class PowerOfAttorneyFNSData : PowerOfAttorneyData
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`RevocationCondition` a|.Условие отзыва доверенности:
+* По истечению срока действия --
+`Expiration = 1`
+* Прочие условия безотзывной доверенности --
+`Other = 2`
+|`RevocationPossibleType` a|.Признак безотзывной доверенности:
+* Отзыв возможен --
+`Possible = 1`
+* Без возможности отзыва
+`Impossible = 2`
+|`RetrustRevocationPossibleType` a|.Признак передоверия безотзывной доверенности:
+* Возможно --
+`Possible = 1`
+* Невозможно
+`Impossible = 2`
+|`CitizenshipType` a|.Признак наличия гражданства:
+* Гражданин Российской Федерации --
+`Russian = 1`
+* Иностранный гражданин
+`Foreign = 2`
+* Лицо без гражданства
+`Stateless = 3`
+
+|`PrincipalType` a|.Полномочное лицо:
+* Физическое лицо -- `Individual`
+* Индивидуальный предприниматель --
+ `SoleProprietor`
+* Российское юридическое лицо -- `RussianEntity`
+
+|`PrincipalType0` a|.Тип доверителя
+* Физическое лицо --
+`Individual`
+* Индивидуальный предприниматель --
+`SoleProprietor`
+* Российское юридическое лицо --
+`RussianEntity`
+* Иностранное юридическое лицо --
+`ForeignEntity`
+
+|`PowerOfAttorneyLossOfAuthorityType` a|.Признак утраты полномочий при передоверии:
+* Полномочия утрачиваются в процессе передоверия -- `Lost = 1`
+* Полномочия не утрачиваются в процессе передоверия -- `NotLost = 2`
+|`JointRepresentationType` a|.Признак совместных полномочий:
+* Полномочия индивидуальны --
+`Individual = 1`
+* Полномочия совместные
+`Joint = 2`
+|`Gender` a|.Пол
+* Мужской -- `Male = 1`
+* `Женский` -- `Female = 2`
+|`DocumentKindCode` a|.Код вида документа:
+* Свидетельство о рождении -- (Код 03) -- `* BirthCertificate`
+* Военный билет (Код 07) -- `MilitaryTicket`
+* Паспорт иностранного гражданина (Код 10) -- `ForeignPassport`
+* Свидетельство о рассмотрении ходатайства о признании лица беженцем на территории Российской Федерации по существу (Код 11) -- `Petitions`
+* Вид на жительство в Российской Федерации (Код 12) -- `Residence`
+* Удостоверение беженца (Код 13) -- `RefugeeCertificate`
+* Разрешение на временное проживание в Российской Федерации (Код 15) -- `TemporaryResidence`
+* Свидетельство о предоставлении временного убежища на территории Российской Федерации (Код 19) -- `TemporaryShelter`
+* Паспорт гражданина Российской Федерации (Код 21) -- `Passport`
+* Удостоверение личности военнослужащего Российской Федерации (Код 24) -- `MilitaryIdentityCard`
+|===

@@ -1,0 +1,382 @@
+= IPowerOfAttorneyService -- интерфейс
+
+Интерфейс предоставляет методы для работы с системной карточкой доверенности.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IPowerOfAttorneyService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`CreatePowerOfAttorney(PowerOfAttorneyData, StaffEmployee, StaffEmployee, PowersPowerOfAttorneyFormat);`
+a|Создаёт новую СКД для представителя -- физического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+
+Возвращаемое значение: карточка доверенности
+
+|`CreatePowerOfAttorney(PowerOfAttorneyData, StaffEmployee,
+StaffEmployee, PowersPowerOfAttorneyFormat, PowerOfAttorneyHandlingFlags)`
+a|Создаёт новую СКД для представителя -- физического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
+|`CreatePowerOfAttorney(PowerOfAttorneyData, StaffUnit, StaffEmployee, PowersPowerOfAttorneyFormat);`
+a|Создаёт новую СКД для представителя -- юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+
+Возвращаемое значение: карточка доверенности
+
+|`CreatePowerOfAttorney(PowerOfAttorneyData, StaffUnit, StaffEmployee, PowersPowerOfAttorneyFormat, PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя -- юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
+|`RetrustPowerOfAttorney(PowerOfAttorneyData, StaffEmployee, StaffEmployee, PowerOfAttorney);`
+a|Создаёт СКД в рамках передоверия для представителя -- физического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+
+Возвращаемое значение: карточка доверенности
+
+|`RetrustPowerOfAttorney(PowerOfAttorneyData,
+StaffEmployee,
+StaffEmployee,
+PowerOfAttorney,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт СКД в рамках передоверия для представителя -- физического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
+|`RetrustPowerOfAttorney(PowerOfAttorneyData, StaffUnit, StaffEmployee, PowerOfAttorney);`
+a|Создаёт СКД в рамках передоверия для представителя -- юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+
+Возвращаемое значение: карточка доверенности
+
+|`RetrustPowerOfAttorney(PowerOfAttorneyData, StaffUnit, StaffEmployee, PowerOfAttorney, PowerOfAttorneyHandlingFlags);`
+a|Создаёт СКД в рамках передоверия для представителя -- юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
+|`ImportPowerOfAttorney(byte[],
+byte[],
+StaffEmployee,
+StaffEmployee,
+PowersPowerOfAttorneyFormat,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+
+a|Создаёт новую СКД для представителя -- физического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полномочия Справочника полномочий по коду полномочия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`ImportPowerOfAttorney(byte[],
+byte[],
+StaffEmployee,
+StaffEmployee,
+PowerOfAttorney,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя -- физического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные МЧД с электронной подписью
+* `signatureData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полномочия Справочника полномочий по коду полномочия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`PowerOfAttorney ImportPowerOfAttorney(byte[],
+byte[],
+StaffUnit,
+StaffEmployee,
+PowersPowerOfAttorneyFormat,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя -- физического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные МЧД с электронной подписью
+* `signatureData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полномочия Справочника полномочий по коду полномочия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`ImportPowerOfAttorney(byte[],
+byte[],
+StaffUnit,
+StaffEmployee,
+PowerOfAttorney,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя -- юридического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные МЧД с электронной подписью
+* `signatureData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полночия Справочника полномочий по коду полночия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`SignPowerOfAttorney(PowerOfAttorney, X509Certificate2, PowerOfAttorneySignatureFormat signatureFormat);`
+a|Подписывает СКД
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `certificate` -- Сертификат подписи
+* `signatureFormat` -- Формат хранения подписи
+
+Примечание: СКД должна быть в статусе "Подготовка";
+текущий пользователь должен быть указан "Подписантом" в СКД;
+статус доверенности будет изменён на "Действует".
+
+|`SignPowerOfAttorney(PowerOfAttorney, X509Certificate2, PowerOfAttorneySignatureFormat, PowerOfAttorneyHandlingFlags);`
+a|Подписывает СКД
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `certificate` -- Сертификат подписи
+* `signatureFormat` -- Формат хранения подписи
+* `flags` -- Параметры обработки
+
+Примечание: СКД должна быть в статусе "Подготовка". +
+Текущий пользователь должен быть указан "Подписантом" в СКД. +
+Статус доверенности будет изменён на "Действует".
+
+|`AttachSignature(PowerOfAttorney, byte[]);`
+a|Загружает в СКД подпись в формате CADES
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `signature` -- Данные подписи
+
+Примечание: СКД должна быть в статусе "Подготовка";
+текущий пользователь должен быть указан "Подписантом" в СКД;
+статус доверенности будет изменён на "Действует".
+
+|`AttachSignature(PowerOfAttorney, byte[], PowerOfAttorneyHandlingFlags);`
+a|Загружает в СКД подпись в формате CADES
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `signature` -- Данные подписи
+* `flags` -- Параметры обработки
+
+Примечание: СКД должна быть в статусе "Подготовка";
+текущий пользователь должен быть указан "Подписантом" в СКД;
+статус доверенности будет изменён на "Действует".
+
+|`RequestRevocation(PowerOfAttorney, PowerOfAttorneyRevocationData);`
+a|Создаёт запрос на отзыв доверенности
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `revocationData` -- Данные заявления на отзыв
+
+Примечание: СКД должна быть в статусе "Действует"
+
+|`SignRequestRevocation(PowerOfAttorney, X509Certificate2);`
+a|Подписывает заявление на отзыв доверенности
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `certificate` -- Сертификат подписи
+
+Примечание: Заявление на отзыв должно быть сформировано
+
+|`AttachRequestRevocationSignature(PowerOfAttorney, byte[]);`
+a|Загружает сформированную подпись отзыва доверенности в СКД
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `signature` -- Данные подписи
+
+|`MarkAsRevoked(PowerOfAttorney, bool);`
+a|Помечает доверенность как отозванную без вызова `RequestRevocation` с передачей и подписью заявления на отзыв
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `withChildsPowerOfAttorney` -- Включить отзыв дочерних доверенностей
+
+|`Revoke(PowerOfAttorney, bool withChildsPowerOfAttorney);`
+a|Отзывает доверенность
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `withChildsPowerOfAttorney` -- Включить отзыв дочерних доверенностей
+
+Примечание: отзыв доверенности должен быть запрошен с помощью метода `RequestRevocation`. +
+Заявление должно быть подписано `SignRequestRevocation` или прикреплена подпись с помощью `AttachRequestRevocationSignature`. +
+Если включен отзыв дочерних доверенностей, то также будут отозваны дочерние доверенности, которые не были отозваны ранее. +
+Если дочерняя доверенность была отозвана ранее, то она, а также все её дочерние доверенности не будут отозваны повторно.
+
+|`ExportMachineReadablePowerOfAttorney(PowerOfAttorney, string, bool);`
+a|Выгружает содержимое МЧД в указанную папку
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `folder` -- Папка для сохранения
+* `withSignature` -- Включает выгрузку МЧД с подписью
+
+Примечание: при выгрузке МЧД с подписью в формате `XMLDSIG` будет выгружен архив с одним файлом подписанной МЧД
+
+|`ExportRevocationPowerOfAttorney(PowerOfAttorney, string, bool);`
+a|Выгружает содержимое заявления на отзыв доверенности в указанную папку
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `folder` -- Папка для сохранения
+* `withSignature` -- Включает выгрузку МЧД с подписью
+
+|`string GetPowerOfAttorneyDisplayString(PowerOfAttorney);`
+a|Возвращает отображаемое название СКД
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+
+Возвращаемое значение: отображаемое название
+
+|`string GetMachineReadablePowerOfAttorneyFileData(PowerOfAttorney, out string);`
+a|Возвращает данные машиночитаемой доверенности
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `fileName` -- Идентификатор файла машиночитаемой доверенности
+
+Возвращаемое значение: данные машиночитаемой доверенности
+
+|`GetRevocationPowerOfAttorneyFileData(PowerOfAttorney, out string);`
+a|Возвращает данные отзыва доверенности
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `fileName` -- Название файла отзыва доверенности
+
+Возвращаемое значение: Данные отзыва доверенности
+
+|`GetMachineReadablePowerOfAttorneyContent(PowerOfAttorney);`
+a|Возвращает содержимое машиночитаемой доверенности
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+
+Возвращаемое значение: содержимое машиночитаемой доверенности
+
+|`IEnumerable<PowerOfAttorneyDigest> SearchPowerOfAttorney(StaffEmployee, Guid?, Guid?, Func<PowerOfAttorney, bool>);`
+a|Выполняет поиск доверенностей по условиям
+
+.Параметры:
+* `employee` -- Сотрудник, для которого ищутся доверенности
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `representativePowerCode` -- Код требуемого полномочия по доверенности
+* `filter` -- Дополнительные условия фильтрации найденных доверенностей
+
+Возвращаемое значение: информация о найденных доверенностях
+|===
+
+== Перечисления
+
+[cols=",",options="header"]
+|===
+|Перечисление |Описание
+
+|`PowerOfAttorneyHandlingFlags`
+a|Флаги обработки доверенностей
+
+.Члены:
+* `None = 0` -- Нет
+* `SkipEntityMatchCheck = 1` -- Не проверять соответствие сущностей доверенности со справочниками
+|===
