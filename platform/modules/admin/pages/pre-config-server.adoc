@@ -40,7 +40,39 @@ sudo apt-get update
 Репозитории доступны для Astra Linux.
 // , Ubuntu или Debian. Для установки на Ubuntu и Debian необходимо в адресе заменить `/astra` на `/ubuntu` или `/debian` соответственно.
 +
-. Подключите репозиторий {ms}. Из данного репозитория будут получены и установлены все необходимые пакеты дополнительного программного обеспечения:
+. Подключите репозитории дополнительного ПО предпочтительным способом:
++
+* Используйте расширенный репозиторий Astra Linux:
++
+[lowerroman]
+.. В файле `/etc/apt/sources.list` раскомментируйте строку:
++
+[source]
+----
+deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
+----
++
+* Используйте репозиторий {ms}:
++
+[lowerroman]
+.. Подключите репозиторий следующими командами:
++
+[source,bash]
+----
+sudo apt-get install packages-microsoft-prod
+sudo apt-get update
+----
++
+.. Поднимите приоритет пакетов из репозитория {ms}, добавив в файл `/etc/apt/preferences.d/microsoft.pref` следующие строки:
++
+[source]
+----
+Package: dotnet* aspnet* netstandard*
+Pin: origin packages.microsoft.com
+Pin-Priority: 910
+----
++
+.. Подключите репозиторий следующими командами:
 +
 [source,bash]
 ----
