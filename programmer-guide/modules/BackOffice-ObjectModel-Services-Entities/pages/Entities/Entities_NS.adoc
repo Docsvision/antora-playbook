@@ -7,6 +7,7 @@
 [cols=",",options="header"]
 |===
 |Пространство имён |Описание
+
 |`xref:Entities/ActiveDirectory/ActiveDirectory_NS.adoc[ActiveDirectory]` |В пространстве имён `DocsVision.BackOffice.ObjectModel.Services.Entities.ActiveDirectory` представлены типы доступные для синхронизации с доменом ActiveDirectory.
 |`xref:Entities/KindSetting/KindSetting_NS.adoc[KindSetting]` |Пространство имён `DocsVision.BackOffice.ObjectModel.Services.Entities.KindSetting` содержит типы, определяющие параметры вида карточки, определённые в справочнике видов карточек.
 |===
@@ -16,6 +17,7 @@
 [cols=",",options="header"]
 |===
 |Класс |Описание
+
 |`xref:Entities/BaseCardSignatureVerification_CL.adoc[BaseCardSignatureVerification]` |Возвращает информацию по проверке подписи на карточке.
 |`BusinessProcessCancelEventArgs` |Поставляет данные для событий `BeforeBusinessProcessStart`.
 |`BusinessProcessVariableEventArgs` |Поставляет данные для событий `BusinessProcessVariableInitialized`.
@@ -41,6 +43,7 @@
 |`xref:Entities/PowerOfAttorneyData_CL.adoc[PowerOfAttorneyData]` |Базовый класс сведений о доверенности.
 |`xref:Entities/PowerOfAttorneyDigest_CL.adoc[PowerOfAttorneyDigest]` |Представляет собой сведения о доверенности
 
+|`xref:Entities/PowerOfAttorneyEMCHDData_CL.adoc[PowerOfAttorneyEMCHDData]` |Сведения о доверенности в формате единой формы доверенности
 |`xref:Entities/PowerOfAttorneyEMCHDData.AddressInfo_CL.adoc[AddressInfo]` |Сведения об адресе (АдрТип)
 |`xref:Entities/PowerOfAttorneyEMCHDData.BranchOfRussianEntityInfo_CL.adoc[BranchOfRussianEntityInfo]` |Сведения о филиале (обособленном подразделении) юридического лица (ФилПерПолн)
 |`xref:Entities/PowerOfAttorneyEMCHDData.ConfirmationOfAuthorityDocument_CL.adoc[ConfirmationOfAuthorityDocument]` |Документ, подтверждающий полномочия лица, действующего без доверенности (ДокПдтвТип)
@@ -66,11 +69,94 @@
 |`xref:Entities/PowerOfAttorneyEMCHDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` |Сведения о представителе (представителях) (СвУпПредТип)
 |`xref:Entities/PowerOfAttorneyEMCHDData.RepresentativePowersInfo_CL.adoc[RepresentativePowersInfo]` |Сведения о полномочиях представителя (представителей) (СвПолнТип)
 |`xref:Entities/PowerOfAttorneyEMCHDData.RepresentativesInfo_CL.adoc[RepresentativesInfo]` |Сведения о представителе (представителях) (СвУпПредТип)
-|`xref:Entities/PowerOfAttorneyEMCHDData_CL.adoc[PowerOfAttorneyEMCHDData]` |Сведения о доверенности в формате единой формы доверенности
 
-|`xref:Entities/PowerOfAttorneyFNSData_CL.adoc[PowerOfAttorneyFNSData]` |
-|`xref:Entities/PowerOfAttorneyFNSDOVBBData_CL.adoc[PowerOfAttorneyFNSDOVBBData]` |
-|`xref:Entities/PowerOfAttorneyFNSDOVELData_CL.adoc[PowerOfAttorneyFNSDOVELDat]` |
+|`xref:Entities/PowerOfAttorneyFNSData_CL.adoc[PowerOfAttorneyFNSData]` |Базовый класс сведений о доверенности в формате ФНС.
+
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData_CL.adoc[PowerOfAttorneyFNSDOVBBData]` |Сведения о доверенности ФНС в формате DOVBB.
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.AddressInfo_CL.adoc[AddressInfo]` |Сведения об адресе (АдрТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.BasicPowerOfAttorneyInfo_CL.adoc[BasicPowerOfAttorneyInfo]` |Сведения об Основной доверенности (СвОснДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.BasicPowerOfAttorneyPrincipalInfo_CL.adoc[BasicPowerOfAttorneyPrincipalInfo]` |Сведения о доверителе Основной доверенности (СвДовер0)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.BranchManagerInfo_CL.adoc[BranchManagerInfo]` |Сведения о руководителе обособленного подразделения (СвРукОП)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.ConfirmationOfAuthorityDocument_CL.adoc[ConfirmationOfAuthorityDocument]` |Реквизиты документа, подтверждающего полномочия (РеквДокПдтвТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.DelegatedAuthorityPrincipalInfo_CL.adoc[DelegatedAuthorityPrincipalInfo]` |Сведения о лице, передавшем полномочия (СвЛицПередПолн)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.ElectronicDocumentTransferMethod_CL.adoc[ElectronicDocumentTransferMethod]` |Способ передачи электронного нотариального документа (СпПрдЭНотДок)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.FIO_CL.adoc[FIO]` |Фамилия, имя, отчество (при наличии) (ФИОТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.ForeignEntityInfo_CL.adoc[ForeignEntityInfo]` |Сведения об иностранном юридическом лице (СвИнОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.ForeignLegalEntityPrincipalInfo_CL.adoc[ForeignLegalEntityPrincipalInfo]` |Сведения о доверителе – иностранном юридическом лице (ИнОргДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.HandwrittenSignature_CL.adoc[HandwrittenSignature]` |Рукописная подпись (ПодпРукопис)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IdentityCardOfIndividual_CL.adoc[IdentityCardOfIndividual]` |Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualDelegatedAuthorityInfo_CL.adoc[IndividualDelegatedAuthorityInfo]` |Сведения о лице, передавшем полномочия – физическом лице (ФЛПрдПолн)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualInfo0_CL.adoc[IndividualInfo0]` |Сведения по физическому лицу (СвФЛ)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualInfo1_CL.adoc[IndividualInfo1]` |Сведения по физическому лицу (СвПоФЛ)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualInfo2_CL.adoc[IndividualInfo2]` |Сведения о физическом лице (СведФизЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualInfo_CL.adoc[IndividualInfo]` |Сведения о физическом лице (СведФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualInfoBase_CL.adoc[IndividualInfoBase]` |Управляет получением сведений о физическом лице.
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IndividualPrincipalInfo_CL.adoc[IndividualPrincipalInfo]` |Сведения о доверителе – физическом лице (ФЛДоверТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.IrrevocablePowerOfAttorneyInfo_CL.adoc[IrrevocablePowerOfAttorneyInfo]` |Сведения о безотзывной доверенности (БезотзывТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.LegalEntityInfo_CL.adoc[LegalEntityInfo]` |Сведения об организации (СвОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.LegalRepresentativeInfo_CL.adoc[LegalRepresentativeInfo]` |Сведения о законном представителе физического лица (СвЗакПредТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.NotaryCertificateInfo_CL.adoc[NotaryCertificateInfo]` |Сведения о нотариальном удостоверении (СвНотУдТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.NotaryDeputyInfo_CL.adoc[NotaryDeputyInfo]` |ВРИО нотариуса (ВриоНот)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.NotaryInfo_CL.adoc[NotaryInfo]` |Сведения о нотариусе, совершившем нотариальное действие (СвНотДейств)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.NotaryPaymentInfo_CL.adoc[NotaryPaymentInfo]` |Сведения об оплате за совершение нотариального действия (ОплатНотДейст)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.OrganizationInfo_CL.adoc[OrganizationInfo]` |Сведения об организации (СвОрг)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.PowerOfAttorneyDocument_CL.adoc[PowerOfAttorneyDocument]` |Состав и структура документа (Документ)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyDocumentData]` |Доверенность (Довер)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]` |Сведения доверенности (СвДовТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.PrincipalInfo_CL.adoc[PrincipalInfo]` |Сведения о доверителе (СвДоверит)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]` |Сведения о лице, действующем от имени юридического лица без доверенности (ЛицоБезДов)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RepresentativeInfo_CL.adoc[RepresentativeInfo]` |Сведения об уполномоченном представителе (уполномоченных представителях) (СвУпПредТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RepresentativePowerInfo_CL.adoc[RepresentativePowerInfo]` |Сведения о полномочиях представителя (представителей) (СвПолнТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RetrustPowerOfAttorneyInfo_CL.adoc[RetrustPowerOfAttorneyInfo]` |Сведения доверенности, выданной в порядке передоверия (СвДовПер)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RetrustPowerOfAttorneyInfoData_CL.adoc[RetrustPowerOfAttorneyInfoData]` |Передоверие (Передов)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RussianEntityInfo_CL.adoc[RussianEntityInfo]` |Сведения о российском юридическом лице (СвРосОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.RussianLegalEntityPrincipalInfo_CL.adoc[RussianLegalEntityPrincipalInfo]` |Сведения о доверителе – российском юридическом лице (РосОргДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.SoleProprietorInfo0_CL.adoc[SoleProprietorInfo0]` |Сведения об индивидуальном предпринимателе (СведИПТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVBBData.SoleProprietorInfo1_CL.adoc[SoleProprietorInfo1]` |Сведения об индивидуальном предпринимателе (СвИПТип)
+
+|`xref:Entities/PowerOfAttorneyFNSDOVELData_CL.adoc[PowerOfAttorneyFNSDOVELDat]` |Сведения о доверенности ФНС в формате DOVEL.
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.AddressInfo_CL.adoc[AddressInfo]` |Сведения об адресе (АдрТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.BasicPowerOfAttorneyInfo_CL.adoc[BasicPowerOfAttorneyInfo]` |Сведения об Основной доверенности (СвОснДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.BasicPowerOfAttorneyPrincipalInfo_CL.adoc[BasicPowerOfAttorneyPrincipalInfo]` |Сведения о доверителе Основной доверенности (СвДовер0)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.BranchManagerInfo_CL.adoc[BranchManagerInfo]` |Сведения о руководителе обособленного подразделения (СвРукОП)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.ConfirmationOfAuthorityDocument_CL.adoc[ConfirmationOfAuthorityDocument]` |Реквизиты документа, подтверждающего полномочия (РеквДокПдтвТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.DelegatedAuthorityPrincipalInfo_CL.adoc[DelegatedAuthorityPrincipalInfo]` |Сведения о лице, передавшем полномочия (СвЛицПередПолн)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.ElectronicDocumentTransferMethod_CL.adoc[ElectronicDocumentTransferMethod]` |Способ передачи электронного нотариального документа (СпПрдЭНотДок)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.FIO_CL.adoc[FIO]` |Фамилия, имя, отчество (при наличии) (ФИОТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.ForeignEntityInfo_CL.adoc[ForeignEntityInfo]` |Сведения об иностранном юридическом лице (СвИнОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.ForeignLegalEntityPrincipalInfo_CL.adoc[ForeignLegalEntityPrincipalInfo]` |Сведения о доверителе -- иностранном юридическом лице (ИнОргДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.HandwrittenSignature_CL.adoc[HandwrittenSignature]` |Рукописная подпись (ПодпРукопис)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IdentityCardOfIndividual_CL.adoc[IdentityCardOfIndividual]` |Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualDelegatedAuthorityInfo_CL.adoc[IndividualDelegatedAuthorityInfo]` |Сведения о лице, передавшем полномочия -- физическом лице (ФЛПрдПолн)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfo0_CL.adoc[IndividualInfo0]` |Сведения по физическому лицу (СвФЛ)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfo1_CL.adoc[IndividualInfo1]` |Сведения по физическому лицу (СвПоФЛ)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfo2_CL.adoc[IndividualInfo2]` |Сведения о физическом лице (СведФизЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfo_CL.adoc[IndividualInfo]` |Сведения о физическом лице (СведФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfoBase_CL.adoc[IndividualInfoBase]` |Сведения о физическом лице
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualPrincipalInfo_CL.adoc[IndividualPrincipalInfo]` |Сведения о доверителе -- физическом лице (ФЛДоверТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IrrevocablePowerOfAttorneyInfo_CL.adoc[IrrevocablePowerOfAttorneyInfo]` |Сведения о безотзывной доверенности (БезотзывТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.LegalEntityInfo_CL.adoc[LegalEntityInfo]` |Сведения об организации (СвОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.LegalRepresentativeInfo_CL.adoc[LegalRepresentativeInfo]` |Сведения о законном представителе физического лица (СвЗакПредТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.NotaryCertificateInfo_CL.adoc[NotaryCertificateInfo]` |Сведения о нотариальном удостоверении (СвНотУдТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.NotaryDeputyInfo_CL.adoc[NotaryDeputyInfo]` |ВРИО нотариуса (ВриоНот)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.NotaryInfo_CL.adoc[NotaryInfo]` |Сведения о нотариусе, совершившем нотариальное действие (СвНотДейств)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.NotaryPaymentInfo_CL.adoc[NotaryPaymentInfo]` |Сведения об оплате за совершение нотариального действия (ОплатНотДейст)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.OrganizationInfo_CL.adoc[OrganizationInfo]` |Сведения об организации (СвОрг)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PowerOfAttorneyDocument_CL.adoc[PowerOfAttorneyDocument]` |Состав и структура документа (Документ)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyDocumentData]` |Доверенность (Довер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]` |Сведения доверенности (СвДовТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PrincipalInfo_CL.adoc[PrincipalInfo]` |Сведения о доверителе (СвДоверит)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]` |Сведения о лице, действующем от имени юридического лица без доверенности (ЛицоБезДов)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RepresentativeInfo_CL.adoc[RepresentativeInfo]` |Сведения об уполномоченном представителе (уполномоченных представителях) (СвУпПредТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RepresentativePowerInfo_CL.adoc[RepresentativePowerInfo]` |Сведения о полномочиях представителя (представителей) (СвПолнТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RetrustPowerOfAttorneyInfo_CL.adoc[RetrustPowerOfAttorneyInfo]` |Сведения доверенности, выданной в порядке передоверия (СвДовПер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RetrustPowerOfAttorneyInfoData_CL.adoc[RetrustPowerOfAttorneyInfoData]` |Передоверие (Передов)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RussianEntityInfo_CL.adoc[RussianEntityInfo]` |Сведения о российском юридическом лице (СвРосОргТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RussianLegalEntityPrincipalInfo_CL.adoc[RussianLegalEntityPrincipalInfo]` |Сведения о доверителе – российском юридическом лице (РосОргДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.SoleProprietorInfo0_CL.adoc[SoleProprietorInfo0]` |Сведения об индивидуальном предпринимателе (СведИПТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.SoleProprietorInfo1_CL.adoc[SoleProprietorInfo1]` |Сведения об индивидуальном предпринимателе (СвИПТип)
+
+
 |`xref:Entities/PowerOfAttorneyMachineReadableInfo_CL.adoc[PowerOfAttorneyMachineReadableInfo]` |Содержит информацию о МЧД.
 |`RoleModelAccessChecker` |Предоставляет методы проверки доступа в ролевой модели.
 |`xref:Entities/PowerOfAttorneyVerification_CL.adoc[PowerOfAttorneyVerification]` |Содержит результат проверки действительности доверенности.
@@ -94,6 +180,7 @@
 [cols=",",options="header"]
 |===
 |Интерфейс |Описание
+
 |`IDocumentPropertySetting` |Добавляет к производному классу возможность связывать XML-поле со свойством карточки.
 |`IDocumentPropertySyncronizer` |Добавляет к производному классу возможность загрузки и сохранение свойств в XML-документе.
 |`xref:Entities/ILongProcessManager_IN.adoc[ILongProcessManager]` |Добавляется в производный класс возможности менеджера длительных процессов.
@@ -105,6 +192,7 @@
 [cols=",",options="header"]
 |===
 |Перечисление |Описание
+
 |`xref:Entities/BusinessProcessErrorType_EN.adoc[BusinessProcessErrorType]` |Определяет типы ошибок формируемых при проверке бизнес-процесса.
 |`xref:Entities/DocumentPropertyDirection_EN.adoc[DocumentPropertyDirection]` |Определяет направление синхронизации свойств документа и полей карточки.
 |`xref:Entities/GridViewFieldCollectionType_EN.adoc[GridViewFieldCollectionType]` |Определяет тип отображаемого поля справочника сотрудников или контрагентов.
