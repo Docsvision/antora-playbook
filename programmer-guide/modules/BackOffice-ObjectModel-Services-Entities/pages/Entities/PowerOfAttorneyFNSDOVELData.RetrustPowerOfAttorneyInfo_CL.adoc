@@ -1,0 +1,34 @@
+= PowerOfAttorneyFNSDOVELData.RetrustPowerOfAttorneyInfo -- класс
+
+Сведения доверенности, выданной в порядке передоверия (СвДовПер)
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class RetrustPowerOfAttorneyInfo
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`RetrustPowerOfAttorneyInfo(BasicPowerOfAttorneyInfo, Guid, PowerOfAttorneyInfo)` |Заполняет Сведения доверенности, выданной в порядке передоверия (СвДовПер)
+
+.Параметры:
+* `basicPowerOfAttorneyInfo` -- Сведения об Основной доверенности (СвОснДовер)
+* `parentPowerOfAttorneyID` -- Единый регистрационный номер доверенности, на основании которой осуществляется передоверие
+* `powerOfAttorneyInfo` -- Сведения о доверенности, выданной в порядке передоверия
+
+|`RetrustPowerOfAttorneyInfo(string, PowerOfAttorneyInfo)` |Заполняет Сведения доверенности, выданной в порядке передоверия (СвДовПер)
+
+.Параметры:
+* `parentPowerOfAttorneySerializedData` -- родительская карточка доверенности
+* `powerOfAttorneyInfo` -- Сведения о родительской доверенности
+
+|===
