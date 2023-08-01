@@ -30,3 +30,16 @@
 // ****
 // Группы настраиваются в конфигурационном файле модуля _{pl}_. Структура файла подробно описана в документации модуля _{pl}_, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 // ****
+
+****
+Сервер {dv}, установленный на Linux, требует создание keytab-файла.
+
+Файл выпускается специальной командой `ktpass`, как правило, в Windows среде (создание keytab-файла в Linux плохо описано).
+
+.Пример команды для создания keytab-файла
+====
+ ktpass -princ HTTP/server.example.com@EXAMPLE.COM -mapuser administrator@example.com -crypto RC4-HMAC-NT -ptype KRB5_NT_PRINCIPAL -pass Password -out C:\\\dvapp.keytab
+====
+
+Для запуска {of-mc}, в связи с особенностями протокола аутентификации Kerberos, необходимо вводить адрес {mc} в браузере с доменным именем. При обращении к сайту по IP Консоль не запустится.
+****
