@@ -24,14 +24,23 @@ public class DocumentUpdaterService
 
 |`public Guid AddReplySignatureToDocument(Guid cardId, Guid fileId, MessageFile messageFile, string partnerName)`
 |Добавляет к документу ответную подпись по ID карты и ID файла
+
 |`public Guid CreateNewSignatures(Guid cardId, X509Certificate2 certificate, bool signAdditionalFiles)`
 |Создаёт новые подписи по ID карты
+
 |`public string CheckCertificate(Guid cardId, X509Certificate2 certificate)`
 |Проверяет сертификат для карточки по ID карты
+
 |`public bool ChangeDocumentState(Guid cardId, Guid newStateId)`
 |Изменяет статус документа по ID карты и ID нового статуса
+
 |`public Guid GetNewStateId(Guid cardId, MessageFileType messageFileType)`
 |Получает ID нового статуса по ID карты
+
 |`public void UpdateDocumentDataFromFile(Guid cardId, Guid fileId)`
 |Обновляет данные документа из файла по ID карты и ID файла
+
+|`public bool ChangePowerOfAttorneyState(Guid cardId, Guid powerOfAttorneyCardId, MessageFileType messageFileType)`
+|Изменяет статус МЧД
+
 |===

@@ -1,0 +1,45 @@
+= PowerOfAttorneyData -- класс
+
+Содержит данные машиночитаемой доверенности.
+
+* *Пространство имен:* `DocsVision.Edi.Entities`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyData
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`RegistrationNumber` |Задает или возвращает идентификатор карточки.
+
+*Тип*: `Guid`
+
+|`IssuerInn` |Регистрационный номер
+
+*Тип*: `string`
+
+|`IsDefault` |ИНН доверителя
+
+*Тип*: `bool`
+
+|`PowerOfAttorneyStatus` |Используется ли доверенность по умолчанию
+
+*Тип*: `xref:api/PowerOfAttorneyStatus.adoc[PowerOfAttorneyStatus]`
+
+|`ValidationStatus` |Статус доверенности
+
+*Тип*: `ValidationStatus`
+
+|`ValidationErrors` |Статус доверенности и выявленные при проверке ошибки.
+
+*Тип*: `string`
+
+|===

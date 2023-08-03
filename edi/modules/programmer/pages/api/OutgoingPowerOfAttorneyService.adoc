@@ -1,0 +1,59 @@
+= OutgoingPowerOfAttorneyService -- класс
+
+Сервис создания исходящей доверенности
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OutgoingPowerOfAttorneyService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`CreateOutgoingPowerOfAttorney(OperatorsBox, OperatorsDepartment,
+OutgoingPowerOfAttorneyData, out string)` a|Создаёт исходящую доверенность
+
+*Тип возвращаемого значения*: `xref:api/EdiPowerOfAttorney.adoc[EdiPowerOfAttorney]`
+
+.Параметры:
+* `organizationBox` -- Ящик организации
+* `organizationDepartment` -- подразделение организации
+* `powerOfAttorneyData` -- Данные МЧД
+* `sendErrors` -- отправлять ошибки
+
+|`CreateOutgoingPowerOfAttorneyRecall(OperatorsBox, OperatorsDepartment,
+OutgoingPowerOfAttorneyData, out string)` a|Создаёт отзыв исходящей доверенности
+
+*Тип возвращаемого значения*: `xref:api/EdiPowerOfAttorney.adoc[EdiPowerOfAttorney]`
+
+.Параметры:
+* `organizationBox` -- Ящик организации
+* `organizationDepartment` -- подразделение организации
+* `powerOfAttorneyData` -- Данные МЧД
+* `sendErrors` -- отправлять ошибки
+
+|`FindAnyPowerOfAttorneyCards(Guid, Guid)` a|Находит любую из карточек доверенности
+
+*Тип возвращаемого значения*: `xref:api/EdiPowerOfAttorney.adoc[EdiPowerOfAttorney]`
+
+.Параметры:
+* `cardId` -- идентификатор карточки, для которой запрашивается МЧД
+* `powerOfAttorneyCardId` -- идентификатор карточки МЧД
+
+|`FindAssignedPowerOfAttorneyCards(Guid, Guid)` a|Находит назначенные карточки доверенности
+
+*Тип возвращаемого значения*: `xref:api/EdiPowerOfAttorney.adoc[EdiPowerOfAttorney]`
+
+.Параметры:
+* `cardId` -- идентификатор карточки, для которой запрашивается МЧД
+* `powerOfAttorneyCardId` -- идентификатор карточки МЧД
+
+|===

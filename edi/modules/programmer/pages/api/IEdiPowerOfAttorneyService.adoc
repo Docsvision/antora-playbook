@@ -1,0 +1,51 @@
+= IEdiPowerOfAttorneyService -- интерфейс
+
+Сервис для работы с машиночитаемой доверенностью ЮЗДО
+
+* *Пространство имен:* `DocsVision.Edi.Services`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IEdiPowerOfAttorneyService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`CreateEdiPowerOfAttorney(Guid, OperatorsBox)` a|Создаёт Карточку обмена сообщениями для МЧД:
+
+.Параметры:
+* `cardId` -- Идентификатор карточки
+* `organizationBox` -- Ящик организации
+
+|`AddLogMessage(EdiPowerOfAttorney, EdiPowerOfAttorneyEventType, string)` a|Добавляет сообщение в журнал
+
+.Параметры:
+* `message` -- Карточка сообщения
+* `eventType` -- Тип события
+* `description` -- Описание
+
+|`AddLogMessage(EdiPowerOfAttorney, EdiPowerOfAttorneyEventType, string, string)` a|Добавляет сообщение в журнал
+
+.Параметры:
+* `message` -- Карточка сообщения
+* `eventType` -- Тип события
+* `description` -- Описание
+* `comment` -- Комментарий
+
+|`AddLogMessage(EdiPowerOfAttorney, EdiPowerOfAttorneyEventType, string, string, string)` a|Добавляет сообщение в журнал
+
+.Параметры:
+* `message` -- Карточка сообщения
+* `eventType` -- Тип события
+* `description` -- Описание
+* `comment` -- Комментарий
+* `fileName` -- Имя файла
+
+|===

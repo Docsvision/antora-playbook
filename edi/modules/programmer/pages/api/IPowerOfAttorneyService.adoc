@@ -1,0 +1,39 @@
+= IPowerOfAttorneyService -- интерфейс
+
+Интерфейс `IPowerOfAttorneyService` определяет методы для работы с МЧД.
+
+* *Пространство имен:* `DocsVision.Edi.Interfaces`
+* *Сборка:* `DocsVision.Edi.Interfaces.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IPowerOfAttorneyService
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`RegisterPowerOfAttorney(MessageData);`
+a|Регистрирует доверенность
+
+.Параметры:
+* `xref:api/MessageData.adoc[messageData]`
+
+|`RevokePowerOfAttorney(MessageData);`
+a|Отзывает доверенность
+
+.Параметры:
+* `xref:api/MessageData.adoc[messageData]`
+
+|`CheckPowerOfAttorneyStatus(MessageData);`
+a|Проверяет статус доверенности
+
+.Параметры:
+* `xref:api/MessageData.adoc[messageData]`
+
+|===

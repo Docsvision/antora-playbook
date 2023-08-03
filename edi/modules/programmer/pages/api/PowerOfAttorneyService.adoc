@@ -1,0 +1,41 @@
+= PowerOfAttorneyService -- класс
+
+Сервис машиночитаемой доверенности
+
+* *Пространство имен:* `DocsVision.Edi.Diadoc`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyService : IPowerOfAttorneyService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`Initialize(Dictionary<string, string>)` a|Создаёт экземпляр электронного сообщения электронного обмена.
+
+.Параметры:
+* `settings` -- коллекция настроек оператора ЭДО из _Справочника настроек операторов ЮЗДО_. Каждая запись содержит ключ и значение, например: `Login` и {dv}@diadoc.ru.
+
+|`RegisterPowerOfAttorney(MessageData)` a|Регистрирует доверенность
+
+.Параметры:
+* `messageData` -- сообщение типа `xref:api/MessageData.adoc[MessageData]`, содержащее запрос на регистрацию МЧД.
+
+|`RevokePowerOfAttorney(MessageData)` a|Отзывает доверенность
+
+.Параметры:
+* `messageData` -- сообщение типа `xref:api/MessageData.adoc[MessageData]`, содержащее запрос на отзыв МЧД.
+
+|`CheckPowerOfAttorneyStatus(MessageData)` a|Проверяет статус доверенности
+
+.Параметры:
+* `messageData` -- сообщение типа `xref:api/MessageData.adoc[MessageData]`, содержащее запрос на проверку статуса МЧД.
+
+|===

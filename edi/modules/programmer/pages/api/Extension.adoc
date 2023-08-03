@@ -1,0 +1,130 @@
+= Extension -- класс
+
+Расширение модуля ЮЗДО для Storage Server.
+
+* *Пространство имен:* `DocsVision.Edi.ServerExtension`
+* *Сборка:* `DocsVision.Edi.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+|`public class Extension : StorageServerExtension
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`public void ResetServices(Guid serviceId)`
+|Сбрасывает сервисы
+
+|`public void ResetAllServices()`
+|Сбрасывает все сервисы
+
+|`public void InitializeMessageService(Guid serviceId, string serviceClassName, string settingsXml)`
+|Инициализирует сообщений
+
+|`public void InitializeImportService(Guid serviceId, string serviceClassName, string settingsXml)`
+|Инициализирует сервис импорта
+
+|`public void InitializeInvitationService(Guid serviceId, string serviceClassName, string settingsXml)`
+|Инициализирует сервис приглашений
+
+|`public void InitializePowerOfAttorneyService(Guid serviceId, string serviceClassName, string settingsXml)`
+|Инициализирует сервис машиночитаемой доверенности
+
+|`public void SendMessage(Guid serviceId, string messageDataXml)`
+|Отправляет сообщение
+
+|`public void SendSignatureReply(Guid serviceId, string messageDataXml)`
+|Отправляет ответные подписи или отказ подписания
+
+|`public void SendReceipt(Guid serviceId, string messageDataXml)`
+|Отправляет квитанцию
+
+|`public void SendRevocation(Guid serviceId, string messageDataXml)`
+|Отправляет отказ
+
+|`public void SendCorrection(Guid serviceId, string messageDataXml)`
+|Отправляет исправление
+
+|`public int GetNewEventsCount(Guid serviceId, string boxId, string lastEventId)`
+|Получить счётчик новых событий
+
+|`public string GetLastEventId(Guid serviceId, string boxId)`
+|Получить идентификатор последнего события ящика
+
+|`public bool EventExists(Guid serviceId, string boxId, string eventId)`
+|Проверяет, существует ли событие ящика
+
+|`public string GetNewEvents(Guid serviceId, string boxId, string lastEventId)`
+|Получить новые события
+
+|`public string GetNewEventsFromDate(Guid serviceId, string boxId, string lastEventId, DateTime fromDate)`
+|Получит новые события с указанной даты
+
+|`public string GenerateInvoiceReceipt(Guid serviceId, string boxId, string messageId, string entityId, string certificateBytes, string positionName)`
+|Сгенерировать квитанцию по счёту
+
+|`public string GenerateRevocationRequest(Guid serviceId, string boxId, string messageId, string entityId,
+string certificateBytes, string positionName, string comment)`
+|Сгенерировать запрос на отказ
+
+|`public string GenerateInvoiceReply(Guid serviceId, string boxId, string messageId, string entityId, string certificateBytes, string documentType, string replyData)`
+|Сгенерировать ответный счёт
+
+|`public string GenerateSignatureRejection(Guid serviceId, string boxId, string messageId, string entityId,
+string certificateBytes, string positionName, string comment)`
+|Сгенерировать запрос подписи
+
+|`public string GenerateCorrectionRequest(Guid serviceId, string boxId, string messageId, string entityId,
+string certificateBytes, string positionName, string comment)`
+|Сгенерировать запрос исправления
+
+|`public string ImportUnits(Guid serviceId)`
+|Получить список зарегистрированных подразделений
+
+|`public string ImportPartners(Guid serviceId)`
+|Получить список зарегистрированных контрагентов
+
+|`public string ImportPartnersFromId(Guid serviceId, string unitId, string lastPartnerId)`
+|Получить список зарегистрированных контрагентов из идентификатора
+
+|`public string ImportPartner(Guid serviceId, string inn, string kpp)`
+|Получить одного контрагента
+
+|`public void SendInvitation(Guid serviceId, string messageDataXml)`
+|Отправить приглашение
+
+|`public void AcceptInvitation(Guid serviceId, string messageDataXml)`
+|Принять приглашение
+
+|`public void RejectInvitation(Guid serviceId, string messageDataXml)`
+|Отклонить приглашение
+
+|`public void CheckInvitationStatus(Guid serviceId, string messageDataXml)`
+|Проверяет статус приглашения
+
+|`public string GetNewInvitations(Guid serviceId, string boxId, string lastEventId)`
+|Получает новые приглашения
+
+|`public string GetNewInvitationsFromDate(Guid serviceId, string boxId, string lastEventId, DateTime fromDate)`
+|Получает новые приглашения с указанной даты
+
+|`public void RegisterPowerOfAttorney(Guid serviceId, string messageDataXml)`
+|Регистрирует доверенность
+
+|`public void RevokePowerOfAttorney(Guid serviceId, string messageDataXml)`
+|Отзывает доверенность
+
+|`public void CheckPowerOfAttorneyStatus(Guid serviceId, string messageDataXml)`
+|Проверяет статус доверенности
+
+|`public string GetLastError(string errorKey)`
+|Получает последнюю ошибку
+
+
+|===
