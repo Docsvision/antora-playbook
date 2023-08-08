@@ -2,11 +2,18 @@
 
 Данное расширение модуля позволяет использовать МЧД в диалогах подписания.
 
+.Сервис для работы с МЧД
+image::attorney-service.png[Сервис для работы с МЧД]
+
 .Чтобы настроить работу с МЧД:
-. В справочнике операторов на вкладке _Сервисы_ выберите сервис для работы с МЧД.
-. В справочнике операторов В компонентах карточки МЧД выберите `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyDataReader`, `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyUpdater`.
+. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ выберите `DocsVision.Edi.Runtime.Diadoc` в качестве сервиса для работы с МЧД.
+. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Компоненты_ для выбранного вида карточек укажите:
++
+* Имя класса компонента чтения: `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyDataReader`.
+* Имя класса компонента изменения: `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyUpdater`.
++
 . Импортируйте через DVExplorer БП для обработки отправленных МЧД: `CardPackage\SendEdiPowerOfAttorney.xml`.
-. В {wincl}е добавьте две кнопки:
+. В карточку доверенности в {wincl}е добавьте две кнопки:
 +
 * Отправить МЧД со скриптом `EdiScriptHelper.SendPowerOfAttorney(Guid)` -- подписывает и отправляет файл МЧД
 * Отозвать МЧД со скриптом `EdiScriptHelper.RevokePowerOfAttorney(Guid)` -- отзывает ранее отправленную и зарегистрированную МЧД.
@@ -14,7 +21,7 @@
 . В карточку доверенности добавьте ЭУ `_Журнал МЧД_`
 
 .Для работы с МЧД предназначены два метода:
-* Метод ` ` передает в Диадок для регистрации номер МЧД (в СКД в секция `MainInfo` поле `PowerOfAttorneyNumber`) и ИНН доверителя (в СКД в секция `MainInfo` поле `PrincipalINN`).
+* Метод `public bool SendPowerOfAttorney(Guid powerOfAttorneyCardId)` передает в Диадок для регистрации номер МЧД (в СКД в секция `MainInfo` поле `PowerOfAttorneyNumber`) и ИНН доверителя (в СКД в секция `MainInfo` поле `PrincipalINN`).
 ** При этом сценарии МЧД должна быть предварительно зарегистрирована в реестре ФНС и после передачи из ДВ в Диадок регистрационного номера МЧД и ИНН доверителя МЧД в Диадок привязывается к пользователю.
-* Метод ` ` передает в Диадок для регистрации файл МЧД (в СКД в секция `MainInfo` поле `MachineReadablePowerOfAttorney`) и файл подписи (в СКД в секция `MainInfo` поле `Signature`) и регистрирует.
+* Метод `public bool SendPowerOfAttorney(Guid powerOfAttorneyCardId, bool sendAsFile)` передает в Диадок для регистрации файл МЧД (в СКД в секция `MainInfo` поле `MachineReadablePowerOfAttorney`) и файл подписи (в СКД в секция `MainInfo` поле `Signature`) и регистрирует.
 ** При этом сценарии МЧД в Диадок привязывается к пользователю и проходит регистрацию в реестре ФНС.
