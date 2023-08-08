@@ -9,7 +9,7 @@
 
 [source,csharp]
 ----
-|`public class Extension : StorageServerExtension
+public class Extension : StorageServerExtension
 ----
 
 == Методы
@@ -25,7 +25,7 @@
 |Сбрасывает все сервисы
 
 |`public void InitializeMessageService(Guid serviceId, string serviceClassName, string settingsXml)`
-|Инициализирует сообщений
+|Инициализирует сервис сообщений
 
 |`public void InitializeImportService(Guid serviceId, string serviceClassName, string settingsXml)`
 |Инициализирует сервис импорта
@@ -67,7 +67,7 @@
 |Получит новые события с указанной даты
 
 |`public string GenerateInvoiceReceipt(Guid serviceId, string boxId, string messageId, string entityId, string certificateBytes, string positionName)`
-|Сгенерировать квитанцию по счёту
+|Генерация формализованной квитанции
 
 |`public string GenerateRevocationRequest(Guid serviceId, string boxId, string messageId, string entityId,
 string certificateBytes, string positionName, string comment)`
