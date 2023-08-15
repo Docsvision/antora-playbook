@@ -12,16 +12,34 @@
 public interface IPowersService
 ----
 
-== Свойства
+== Методы
 
 [cols=",",options="header"]
 |===
 |Имя |Описание
 
-|`ImportESNSIPowers`
-|Импорт полномочий из ЕСНСИ
+|`FindPowerOfAttorneyCardsWithPowerCodes(IEnumerable<PowersCode>)`
+a|Выполняет поиск системных карточек доверенностей, использующих указанные коды полномочий.
 
-|`ImportESNSIPowers`
-|Импорт полномочий из ЕСНСИ
+.Параметры:
+* `codes` -- коды полномочий
+
+Возвращаемое значение: `xref:Entities/FindPowerOfAttorneyCardsResults_CL.adoc[FindPowerOfAttorneyCardsResults]` -- системные карточки доверенностей, использующие указанные коды полномочий.
+
+|`ImportESNSIPowers(Stream)`
+a|Импортирует полномочия из ЕСНСИ
+
+.Параметры:
+* `stream` -- поток данных.
+
+Возвращаемое значение: `ImportESNSIResults`
+
+|`ImportESNSIPowers(string)`
+a|Импортирует полномочия из ЕСНСИ
+
+.Параметры:
+* `filePath` -- путь к файлу.
+
+Возвращаемое значение: `ImportESNSIResults`
 
 |===
