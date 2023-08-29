@@ -1,0 +1,45 @@
+= PowerOfAttorneyService -- класс
+
+Сервис машиночитаемой доверенности
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyService(OperatorsOperator)` a|Получает МЧД
+
+.Параметры:
+* `ediOperator` -- оператор ЮЗДО
+
+|`PowerOfAttorneyService(ObjectContext, OperatorsOperator, bool)` a|Получает МЧД
+
+.Параметры:
+* `objectContext` -- контекст объектов.
+* `ediOperator` -- оператор ЮЗДО
+* `useExtension` -- использовать расширение
+
+|`ProcessPowerOfAttorneyToSend(EdiPowerOfAttorney, ILogWriter)` a|Обрабатывает карточку МЧД
+
+.Параметры:
+* `ediPowerOfAttorney` -- машиночитаемая доверенность
+* `logWriter` -- запись в журнале
+
+|`CheckPowerOfAttorneyStatus(EdiPowerOfAttorney, ILogWriter)` a|Проверяет статус МЧД
+
+.Параметры:
+* `ediPowerOfAttorney` -- машиночитаемая доверенность
+* `logWriter` -- запись в журнале
+
+|===

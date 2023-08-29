@@ -3,7 +3,7 @@
 Класс запись данных в документ, обычно при получении ответов.
 Вызывает экземпляры `IDocumentUpdater` по привязке к виду или типу карточки.
 
-Можно создать собственный свой `IDocumentUpdater` с нуля или на основе нашего и прописать его в справочнике операторов.
+Можно создать собственный свой `IDocumentUpdater` с нуля или на основе нашего и прописать его в Справочнике настроек операторов ЮЗДО.
 Тут для своих скриптов или компонентов можно использовать метод CreateNewSignatures для создания новых подписей в документе, будет делать новую подпись с учетом вида документа, для примера, для неформализованного это будет просто подпись файла, для формализованного - генерация ответного титула и уже его подпись.
 
 * *Пространство имен:* `DocsVision.Edi.Runtime`
@@ -24,14 +24,23 @@ public class DocumentUpdaterService
 
 |`public Guid AddReplySignatureToDocument(Guid cardId, Guid fileId, MessageFile messageFile, string partnerName)`
 |Добавляет к документу ответную подпись по ID карты и ID файла
+
 |`public Guid CreateNewSignatures(Guid cardId, X509Certificate2 certificate, bool signAdditionalFiles)`
 |Создаёт новые подписи по ID карты
+
 |`public string CheckCertificate(Guid cardId, X509Certificate2 certificate)`
 |Проверяет сертификат для карточки по ID карты
+
 |`public bool ChangeDocumentState(Guid cardId, Guid newStateId)`
 |Изменяет статус документа по ID карты и ID нового статуса
+
 |`public Guid GetNewStateId(Guid cardId, MessageFileType messageFileType)`
 |Получает ID нового статуса по ID карты
+
 |`public void UpdateDocumentDataFromFile(Guid cardId, Guid fileId)`
 |Обновляет данные документа из файла по ID карты и ID файла
+
+|`public bool ChangePowerOfAttorneyState(Guid cardId, Guid powerOfAttorneyCardId, MessageFileType messageFileType)`
+|Изменяет статус МЧД
+
 |===

@@ -1,0 +1,95 @@
+= PowerOfAttorneyUpdater -- класс
+
+Класс обновления машиночитаемой доверенности
+
+* *Пространство имен:* `DocsVision.Edi.Runtime.BackOffice`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyUpdater : IDocumentUpdater
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyService(OperatorsOperator)` a|Получает МЧД
+
+.Параметры:
+* `ediOperator` -- оператор ЮЗДО
+
+|`PowerOfAttorneyService(ObjectContext, OperatorsOperator, bool)` a|Получает МЧД
+
+.Параметры:
+* `objectContext` -- контекст объектов.
+* `ediOperator` -- оператор ЮЗДО
+* `useExtension` -- использовать расширение
+
+|`Initialize(ObjectContext)` a|
+
+.Параметры:
+* `objectContext` -- контекст объектов.
+
+|`AddSignatureToDocument(Guid, Guid, MessageFile, string)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `fileId` -- идентификатор файла.
+* `messageFile` -- подписываемый файл.
+* `partnerName` -- название контрагента.
+
+|`CreateNewSignatures(Guid, X509Certificate2, bool)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `certificate` -- сертификат подписи.
+* `signAdditionalFiles` -- подписывать дополнительные файлы: `true` -- подписывать; `false` -- не подписывать.
+
+|`CheckCertificate(Guid, X509Certificate2)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `certificate` -- сертификат подписи.
+
+|`ChangeDocumentState(Guid, Guid)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `newStateId` -- идентификатор нового состояния.
+
+|`Guid GetNewStateId(MessageFileType)` a|
+
+.Параметры:
+* `messageFileType` -- Тип файла сообщения
+
+|`UpdateDocumentDataFromFile(Guid, Guid)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `fileId` -- идентификатор подписываемого файла.
+
+|`AddLinkToMessageCard(Guid, Guid)` a|
+
+.Параметры:
+* `messageCardId` -- Идентификатор карточки сообщения.
+* `documentCardId` -- Идентификатор карточки документа.
+
+|`UpdatePowerOfAttorneyStatus(Guid, PowerOfAttorneyData)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `powerOfAttorneyData` -- Данные МЧД.
+
+|`ChangePowerOfAttorneyState(Guid, Guid, MessageFileType)` a|
+
+.Параметры:
+* `cardId` -- идентификатор карточки.
+* `powerOfAttorneyCardId` -- идентификатор карточки МЧД.
+* `messageFileType` -- Тип файла сообщения.
+
+|===
