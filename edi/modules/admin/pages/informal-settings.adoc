@@ -52,7 +52,7 @@ private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraB
   ediScriptHelper.SendReplySignature(); <.>
 }
 ----
-<.> `EdiScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 * Для команды _Отказ в подписании документа_:
 +
@@ -281,4 +281,7 @@ private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevE
 
 При инсталляции модуля добавляется _Журнал обмена ЭДО_ для {wc}а. Журнал представлен плагином `EDIMessagesLog` для ЭУ `_Контрол табличных данных_`. Плагин преобразует элемент управления в _Журнал обмена ЮЗДО_ для {wc}.
 
-Чтобы отобразить журнал в разметке документов, добавьте ЭУ xref:5.5.17@webclient:layouts:ctrl/table/dataGridControl.adoc["Контрол табличных данных"] в разметку неформализованного документа и в свойстве `*Название плагина*` укажите `EDIMessagesLog`.
+.Чтобы отобразить журнал в разметке документов:
+. Добавьте ЭУ xref:5.5.17@webclient:layouts:ctrl/table/dataGridControl.adoc["Контрол табличных данных"] в разметку неформализованного документа.
+. В свойстве `*Название плагина*` укажите `EDIMessagesLog`.
+. Добавьте скрипт `edi_loadMessageLogSignatureStatus` для событие `После открытия карточки` для асинхронной загрузки статуса подписей и подписантов.
