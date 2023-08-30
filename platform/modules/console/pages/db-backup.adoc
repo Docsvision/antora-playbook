@@ -9,11 +9,10 @@
 
 При восстановлении БД из резервной копии под другим именем обратите внимание на рекомендации в пункте xref:db-rename.adoc[].
 
-include::db-satellite.adoc[tags=copy]
-
+[#mssql]
 == {mssql}
 
-[#mssql]
+[#mssql-create]
 === Создание резервной копии БД {ms} SQL
 
 include::admin:partial$excerpts.adoc[tags=backupDb]
@@ -24,6 +23,7 @@ include::admin:partial$excerpts.adoc[tags=backupDb]
 . Нажмите правой кнопкой на базу данных, выберите *Задачи* > *Создать резервную копию*.
 . Выберите желаемые настройки резервного копирования и нажмите *ОК*.
 
+[#mssql-restore]
 === Восстановление БД из резервной копии {ms} SQL
 
 include::admin:partial$excerpts.adoc[tags=restoreDb]
@@ -39,8 +39,10 @@ include::admin:partial$excerpts.adoc[tags=restoreDb]
 
 *Подробнее о создании резервных копий в {ms} SQL* можно почитать на сайте https://docs.microsoft.com/ru-ru/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-ver15[Docs.Microsoft.com].
 
-== {pg} SQL
 [#pgsql]
+== {pg} SQL
+
+[#pgsql-create]
 === Создание резервной копии БД {pg} SQL
 
 include::admin:partial$excerpts.adoc[tags=backupDb]
@@ -59,6 +61,7 @@ WARNING: Команду резервного копирования обычно
 
 В качестве учётных данных для подключения к БД *pg_dump* использует имя пользователя текущего пользователя операционной системы. Передать учётные данные, отличающиеся от текущих можно при помощи параметра `-U пользователь`. Для указания учётных данных можно также использовать переменную среды `PGUSER`.
 
+[#pgsql-restore]
 === Восстановление из резервной копии БД {pg} SQL
 
 include::admin:partial$excerpts.adoc[tags=restoreDb]
@@ -109,3 +112,5 @@ psql имя_базы < файл_дампа
 
 Восстанавливать БД на SQL сервере и подключать на сервере приложений обязательно под другим именем. Несоблюдение этого требования приведёт к проблемам в работе службы *{wfs-new}*.
 ****
+
+include::db-satellite.adoc[tags=copy]
