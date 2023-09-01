@@ -1,0 +1,42 @@
+= FindPowerOfAttorneyCardsResults -- класс
+
+Содержит результаты поиска использования кодов полномочий в СКД
+
+* *Пространство имён:* ``xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class FindPowerOfAttorneyCardsResults
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`IsPowerCodeUsed(Guid)`
+a|`Возвращает признак использования кода полномочия`
+
+.Параметры:
+* `powerCodeId` -- идентификатор кода полномочий.
+
+
+Возвращаемое значение: `bool`
+|`AnyPowerCodeUsed()`
+|`Возвращает признак использования любого кода полномочия из списка проверенных`
+
+Возвращаемое значение: `bool`
+
+|`GetPowerCodeUsings(Guid)`
+a|`Возвращает информацию по СКД, в которых используется код полномочий`
+
+.Параметры:
+* `powerCodeId` -- идентификатор кода полномочий.
+
+Возвращаемое значение: `IReadOnlyList`
+
+|===
