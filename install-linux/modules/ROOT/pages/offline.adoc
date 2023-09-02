@@ -1,0 +1,101 @@
+= Офлайн установка системы
+
+При необходимости можно выполнить офлайн установку системы в ОС Astra Linux. Для этого выполните шаги, описанные в инструкции ниже.
+
+. Установите пакет `apt-mirror` с помощью графического менеджера пакетов или командой:
++
+[source,bash]
+----
+sudo apt-get install apt-mirror
+----
++
+. Выполните настройку пакета. При установке автоматически создается конфигурационный файл `/etc/apt/mirror.list`. В этом файле указаны параметры, принятые по умолчанию, и пути к репозиториям.
++
+Репозитории для загрузки указываются в формате, подобном `/etc/apt/sources.list`.
++
+[source]
+----
+# sudo nano /etc/apt/mirror.list
+
+deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+
+clean https://packages.docsvision.com/astra
+Пример содержимого файла:
+
+############# config ##################
+#
+# set base_path    /var/spool/apt-mirror
+#
+# set mirror_path  $base_path/mirror
+# set skel_path    $base_path/skel
+# set var_path     $base_path/var
+# set cleanscript $var_path/clean.sh
+# set defaultarch  <running host architecture>
+# set postmirror_script $var_path/postmirror.sh
+# set run_postmirror 0
+set nthreads     20
+set _tilde 0
+#
+############# end config ##############
+
+deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+
+clean https://packages.docsvision.com/astra
+----
++
+В большинстве случаев можно использовать указанные настройки, при этом копии репозиториев будут загружаться в каталог `/var/spool/apt-mirror`.
++
+. При необходимости измените каталог, в который будут загружаться репозитории. Для этого раскомментируйте параметр `set base_path` и укажите нужный каталог.
+. Создайте зеркало репозитория. Создание и обновление копий рекомендуется выполнять от имени служебного пользователя `apt-mirror`. Этому пользователю должна быть разрешена запись в каталог, в который будет выполняться сохранение репозиториев.
++
+Создать каталог можно следующей командой:
++
+[source,bash]
+----
+sudo mkdir -p /var/spool/apt-mirror
+----
++
+. Для примера использовано принятое по умолчанию имя каталога для сохранения `/var/spool/apt-mirror`. После создания каталога его нужно передать служебному пользователю `apt-mirror`, назначить права доступа командой:
++
+[source,bash]
+----
+sudo chown apt-mirror:apt-mirror /var/spool/apt-mirror
+----
++
+. После настройки и создания каталога, создание зеркала репозиториев можно выполнить командой:
++
+[source,bash]
+----
+sudo -u apt-mirror apt-mirror
+----
++
+. Настройте регулярное обновление репозитория (опционально).
++
+При установке пакета `apt-mirror` создается шаблон службы `cron` для ежедневного автоматического обновления репозиториев. Для включения автоматического обновления следует раскомментировать последнюю строку в файле `/etc/cron.d/apt-mirror`:
++
+[source]
+----
+#
+# Regular cron jobs for the apt-mirror package
+#
+0 4    * * *   apt-mirror      /usr/bin/apt-mirror > /var/spool/apt-mirror/var/cron.log
+----
++
+. После завершения локальные копии всех репозиториев, указанных в `mirror.list`, будут сохранены в подкаталогах `mirror_path`, а имя подкаталога будет соответствовать имени репозитория. Так копия интернет-репозитория {dv}, приведенная в примере выше, будет сохранена как `mirror/packages.docsvision.com`. +
+С учетом принятого по умолчанию имени каталога для сохранения полный путь к каталогу репозитория будет `/var/spool/apt-mirror/mirror/packages.docsvision.com`, и именно этот каталог нужно будет подключать как репозиторий пакетов к другим системам.
++
+. Полученный каталог можно передать на другую машину, указав в `sources.list` локальный путь до него:
++
+[source]
+----
+deb file:/var/spool/apt-mirror/mirror/packages.docsvision.com/astra 1.7_x86-64 6.1
+----
++
+. В качестве альтернативы предыдущему пункту можно настроить HTTP-сервер для раздачи содержимого репозитория. Тогда потребуется указать адрес сервера в `sources.list`:
++
+[source]
+----
+deb http://apt.domain.com/astra 1.7_x86-64 6.1
+----
