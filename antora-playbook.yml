@@ -5,6 +5,7 @@ antora:
   - id: unlisted-pages
     enabled: true
     require: ./lib/unlisted.js
+  - require: antora/atlas-extension
 site:
   title: Документация Docsvision
   url: https://help.docsvision.com/
@@ -52,6 +53,8 @@ ui:
     url: ./build/ui-bundle.zip
 asciidoc:
   attributes:
+    primary-site-url: https://help.docsvision.com
+    primary-site-manifest-url: ./primary-site-manifest.json
     sectids: ''
     sectanchors: ''
     icons: font
