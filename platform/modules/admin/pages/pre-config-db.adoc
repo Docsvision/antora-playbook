@@ -103,8 +103,11 @@ NOTE: Если данный параметр отключен, то процед
 .Установите часовой пояс в настройках PostgreSQL.
 . Откройте конфигурационный файл `C:\Program Files\PostgresPro\12\data\postgresql.conf` (используйте свой путь установки PostgreSQL).
 . Измените значение параметров:
++
 * _timezone_ на _Europe/Moscow_,
 * _lc_messages_ на _en_US.UTF-8_.
+* _standard_conforming_strings_ переведите в значение `On`.
++
 . Сохраните изменения.
 . Установите службу <<pg-agent,PgAgent>>.
 . Если для подключения к PostgreSQL планируется использовать аутентификацию Windows, необходима <<win-auth,дополнительная настройка СУБД>>.
@@ -113,8 +116,7 @@ NOTE: Если данный параметр отключен, то процед
 [#win-auth]
 === Настройка PostgreSQL для использования аутентификации Windows
 
-[#users]
-. Создайте в PostgreSQL пользователей и назначьте для пользователей соответствующие права:
+. [[users]]Создайте в PostgreSQL пользователей и назначьте для пользователей соответствующие права:
 .. Для работы
 // xref:6.1@platform:ROOT:requirements-server-accounts.adoc[сервера {dv}], xref:6.1@platform::ROOT:requirements-server-accounts.adoc[сервера {dv}],
 сервиса xref:6.1@platform:ROOT:requirements-full-text-account.adoc[полнотекстового поиска].
