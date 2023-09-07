@@ -5,9 +5,10 @@ antora:
   - id: unlisted-pages
     enabled: true
     require: ./lib/unlisted.js
+  - '@antora/atlas-extension'
 site:
   title: Документация Docsvision
-  url: https://help.docsvision.com/
+  url: https://doc-online-vdv.digdes.com/
 #  start_page: current@system::index.adoc
   robots: allow
 urls:
@@ -52,6 +53,8 @@ ui:
     url: ./build/ui-bundle.zip
 asciidoc:
   attributes:
+    primary-site-url: https://doc-online-vdv.digdes.com/
+    primary-site-manifest-url: ./primary-site-manifest.json
     sectids: ''
     sectanchors: ''
     icons: font
