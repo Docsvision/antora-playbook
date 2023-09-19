@@ -1,0 +1,72 @@
+= IPowerOfAttorneyMachineReadableProvider -- интерфейс
+
+Определяет методы формирования и чтения машиночитаемой доверенности.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IPowerOfAttorneyMachineReadableProvider
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`PowerOfAttorneyMachineReadableEncoding`
+|Кодировка файла МЧД
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`string CreatePowerOfAttorneyMachineReadable(PowerOfAttorneyData);`
+a|Формирует содержимое машиночитаемой доверенности на основе данных доверенности
+
+.Параметры:
+* `powerOfAttorneyData` -- данные для формирования МЧД
+
+Возвращаемое значение: содержимое МЧД
+
+|`CreatePowerOfAttorneyRevokeRequest(PowerOfAttorneyRevocationData, string);`
+a|Формирует заявление на отзыв доверенности.
+
+.Параметры:
+* `revocationData` -- содержимое МЧД.
+* `powerOfAttorneyMachineReadableString` -- заявление на отзыв.
+
+Возвращаемое значение: заявление на отзыв.
+
+|`Validate(string, out string)`
+a|Проверяет данные МЧД на соответствие формату
+
+.Параметры:
+* `powerOfAttorneyMachineReadableData` -- Содержимое МЧД.
+* `error` -- Информация об ошибках.
+
+Возвращаемое значение: результат проверки.
+
+|`GetPowerOfAttorneyMachineReadableInfo(string);`
+a|Возвращает информацию о машинно-читаемой доверенности из содержимого машинно-читаемой доверенности.
+
+.Параметры:
+* `powerOfAttorneyMachineReadableString` -- Содержимое МЧД в строковом виде.
+
+Возвращаемое значение: Информация о машинно-читаемой доверенности.
+
+|`GetPowerOfAttorneyRevocationInfo(string);`
+a|Возвращает информацию об отзыве доверенности.
+
+.Параметры:
+* `powerOfAttorneyRevocationString` -- Содержимое заявления на отзыв доверенности.
+
+Возвращаемое значение: Информация об отзыве доверенности.
+
+|===

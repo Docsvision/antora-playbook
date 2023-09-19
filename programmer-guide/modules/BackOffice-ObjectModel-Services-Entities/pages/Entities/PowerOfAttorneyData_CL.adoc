@@ -1,0 +1,40 @@
+= PowerOfAttorneyData -- класс
+
+Базовый класс сведений о доверенности.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class PowerOfAttorneyData
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`GetPowerOfAttorneyNumber()`
+|Возвращает номер доверенности
+|`GetPowerOfAttorneyStartDate()`
+|Возвращает дату совершения (выдачи) доверенности
+|`GetPowerOfAttorneyEndDate()`
+|Возвращает дату окончания действия доверенности
+|`GetRetrustType()`
+|Возвращает признак возможности оформления передоверия
+|`GetPrincipal()`
+|Возвращает строковое представление поручителя
+|`GetPowerOfAttorneyMachineReadableFileID()`
+|Возвращает сформированное имя файла доверенности
+|`GetRepresentative()`
+|Возвращает строковое представление представителя в формате ФИО (или ФИ) -- для физического лица, или названия организации -- для юридического лица
+|`GetRepresentativesPowers()`
+|Возвращает полномочия представителя
+|`GetSigner()`
+|Возвращает строковое представление подписанта в формате ФИО (или ФИ)
+
+|===

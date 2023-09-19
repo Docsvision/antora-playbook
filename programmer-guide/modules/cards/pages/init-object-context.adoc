@@ -32,11 +32,13 @@ ObjectContext CreateObjectContext(UserSession userSession)
  var mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>();
  mapperFactoryRegistry.RegisterFactory(typeof(SystemCardsMapperFactory));
  mapperFactoryRegistry.RegisterFactory(typeof(BackOfficeMapperFactory));
+ mapperFactoryRegistry.RegisterFactory(typeof(Docsvision.WorkerService.ObjectModel.Mapping.WorkerServiceMapperFactory));
        
 
  var serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>();
  serviceFactoryRegistry.RegisterFactory(typeof(BackOfficeServiceFactory));
  serviceFactoryRegistry.RegisterFactory(typeof(SystemCardsServiceFactory));
+ serviceFactoryRegistry.RegisterFactory(typeof(Docsvision.WorkerService.ObjectModel.Services.WorkerServiceServiceFactory));
     
 
  objectContext.AddService<IPersistentStore>(DocsVisionObjectFactory.CreatePersistentStore(new SessionProvider(userSession), null));
