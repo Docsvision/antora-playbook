@@ -10,7 +10,7 @@
 == Общая документация
 
 [#system]
-.*_xref:system::index.adoc[Описание системы]_*
+.xref:system::index.adoc[Описание системы]
 ****
 
 Общая информация о документации, архитектуре системы и модулях.
@@ -18,27 +18,24 @@
 * xref:system::formatting.adoc[]
 * xref:system::terms.adoc[]
 * xref:system::abbreviations.adoc[]
-* xref:system::modules.adoc[]
 * xref:system::licensing.adoc[]
 
 ****
 
 [#installwindows]
-.*_xref:installguide::index.adoc[Руководство по установке на Windows]_*
+.xref:installguide::index.adoc[Руководство по установке на Windows]
 ****
 
 Обобщённая инструкция по установке и настройке базовой функциональности системы.
 
 * xref:installguide::requirements-software.adoc[Необходимое программное обеспечение]
 * xref:installguide::requirements-hardware.adoc[Необходимое техническое обеспечение]
-* xref:installguide::requirements-database.adoc[Требования к СУБД]
-* xref:installguide::pre-config-server.adoc[Предварительная настройка сервера]
 * xref:installguide::install-quick-ref.adoc[]
 
 ****
 
 [#installinux]
-.*_xref:install-linux::index.adoc[Руководство по установке на Linux]_*
+.xref:install-linux::index.adoc[Руководство по установке на Linux]
 ****
 
 Инструкция по установке и настройке базовой функциональности {dv} специальной версии -- Linux Edition.
@@ -46,33 +43,24 @@
 * xref:install-linux::requirements-software.adoc[Необходимое программное обеспечение]
 * xref:install-linux::requirements-hardware.adoc[Необходимое техническое обеспечение]
 * xref:install-linux::requirements-database.adoc[Требования к СУБД]
-* xref:install-linux::pre-config-server.adoc[Предварительная настройка сервера]
 * xref:install-linux::install-quick-ref.adoc[]
 
 ****
 
 [#upgrade]
-.*_xref:upgrade::index.adoc[Обновление системы]_*
+.xref:upgrade::index.adoc[Обновление системы]
 ****
 
 Руководство по обновлению системы до актуальной версии.
 
 * xref:upgrade:55-61:update.adoc[Обновление {dv} 5.5 до 6.1]
-** xref:upgrade:55-61:update-no-overwrite.adoc[Обновление без перезаписи стандартных настроек]
 * xref:upgrade:55-555:update.adoc[Обновление {dv} 5.5 до 5.5.5]
-** xref:upgrade:55-555:update-no-overwrite.adoc[Обновление без перезаписи стандартных настроек]
-* xref:upgrade:55-554:update.adoc[Обновление {dv} 5.5 до 5.5.4]
-** xref:upgrade:55-554:update-no-overwrite.adoc[Обновление без перезаписи стандартных настроек]
-* xref:upgrade:55-553:update.adoc[Обновление {dv} 5.5 до 5.5.3]
-** xref:upgrade:55-553:update-no-overwrite.adoc[Обновление без перезаписи стандартных настроек]
-* xref:upgrade:551-552:update.adoc[Обновление {dv} 5.5.1 до 5.5.2]
-** xref:upgrade:551-552:update-no-overwrite.adoc[Обновление без перезаписи стандартных настроек]
 * xref:upgrade:54-55:index.adoc[Обновление {dv} 5.4 до 5.5]
 
 ****
 
 [#engineer]
-.*_xref:engineer::index.adoc[Руководство по настройке]_*
+.xref:engineer::index.adoc[Руководство по настройке]
 ****
 
 Инструкция по настройке установленной системы для администраторов и инженеров.
@@ -81,8 +69,6 @@
 * xref:engineer::config-kinds.adoc[]
 * xref:engineer::config-attorney.adoc[]
 * xref:engineer::discrete.adoc[]
-* xref:engineer::roles.adoc[]
-* xref:engineer::config-scripts.adoc[]
 
 ****
 
@@ -90,246 +76,138 @@
 == Основные модули {dv}
 
 [#platform]
-.*_xref:platform::index.adoc[Модуль "{pl}"]_*
+.xref:platform::index.adoc[Модуль "{pl}"]
 ****
 
 Базовый модуль системы, обеспечивающий основные функции сервера {dv}, хранение и доступ к данным системы, контроль доступа и прочие функции.
 
-* xref:platform:common:change-log.adoc[]
-* xref:platform:common:patches-log.adoc[]
-* xref:platform::requirements-hardware.adoc[]
-* xref:platform::requirements-software.adoc[]
-* xref:platform::requirements-database.adoc[]
 * xref:platform::requirements-license.adoc[]
 * xref:platform:admin:install-platform.adoc[]
-* xref:platform:admin:update-module.adoc[]
-* xref:platform:console:settings-console.adoc[]
-* xref:platform:console:logs.adoc[]
-* xref:platform:console:security-groups.adoc[]
 * xref:platform:console:microsoft-postgre.adoc[]
 
 ****
 
 [#worker]
-.*_xref:workerservice::index.adoc[Модуль "Служба {ws}"]_*
+.xref:workerservice::index.adoc[Модуль "Служба {ws}"]
 ****
 
 Модуль "Служба {ws}" в фоновом режиме выполняет задачи разных типов, поступившие от других модулей {dv}.
 
-* xref:workerservice:common:change-log.adoc[]
-* xref:workerservice:common:patches-log.adoc[]
 * xref:workerservice::requirements.adoc[]
-* xref:workerservice::requirements-account.adoc[]
 * xref:workerservice:admin:install.adoc[]
 * xref:workerservice:admin:update-module.adoc[]
 
 ****
 
 [#backoffice]
-.*_xref:backoffice::index.adoc[Модуль "{bo}"]_*
+.xref:backoffice::index.adoc[Модуль "{bo}"]
 ****
 
 Модуль добавляет в систему базовые типы карточек, основные справочники и конструкторы, Почтовый клиент, а также системные настройки.
 
-* xref:backoffice:common:change-log.adoc[]
-* xref:backoffice:common:patches-log.adoc[]
 * xref:backoffice::requirements.adoc[]
-* xref:backoffice::limitations.adoc[]
 * xref:backoffice:admin:install.adoc[]
 * xref:backoffice:admin:update-module.adoc[]
-* xref:backoffice:admin:prepare-cryptopro.adoc[]
-* xref:backoffice:admin:task-routing.adoc[]
-* xref:backoffice:admin:cache-invalidation.adoc[]
 * xref:backoffice:admin:system-settings.adoc[]
 
 ****
 
 [#approvaldesigner]
-.*_xref:approval::index.adoc[Модуль "{ad}"]_*
+.xref:approval::index.adoc[Модуль "{ad}"]
 ****
 
-* xref:approval:common:change-log.adoc[]
-* xref:approval:common:patches-log.adoc[]
+Модуль добавляет в систему функцию согласования, настройку и управление процессом согласования документов.
+
 * xref:approval::requirements.adoc[]
 * xref:approval:admin:install.adoc[]
 * xref:approval:admin:update-module.adoc[]
-* xref:approval:admin:create-admin.adoc[]
-* xref:approval:admin:approval-settings.adoc[]
-* xref:approval:admin:stage-task.adoc[]
-* xref:approval:admin:task-decisions.adoc[]
-* xref:approval:admin:approval-route.adoc[]
 * xref:approval:admin:route-advanced.adoc[]
-* xref:approval:user:create-launch-approval.adoc[]
-* xref:approval:user:consolidation.adoc[]
-* xref:approval:user:signing.adoc[]
-* xref:approval:user:approval-decisions.adoc[]
 
 ****
 
 [#webclient]
-.*_xref:webclient::index.adoc[Модуль "{wc}"]_*
+.xref:webclient::index.adoc[Модуль "{wc}"]
 ****
 
-Модуль, предоставляющий интерфейс для работы с {dv} из web-интерфейса браузера на персональном компьютере и на мобильном устройстве в любой ОС, а также настройку web-разметок в ОС Windows.
+Модуль предоставляет интерфейс для работы с {dv} из web-интерфейса браузера на персональном компьютере и на мобильном устройстве в любой ОС, а также настройку web-разметок в ОС Windows.
 
-* xref:webclient:common:change-log.adoc[]
-* xref:webclient:common:patches-log.adoc[]
-* xref:webclient::requirements-hardware.adoc[]
 * xref:webclient::requirements-software.adoc[]
-* xref:webclient::requirements-signature.adoc[]
-* xref:webclient::requirements-dv.adoc[]
-* xref:webclient::requirements-pool.adoc[]
 * xref:webclient::requirements-license.adoc[]
 * xref:webclient:admin:install-server.adoc[]
-* xref:webclient:admin:install-client.adoc[]
-* xref:webclient:admin:update-module.adoc[]
-* xref:webclient:admin:control-panel.adoc[]
-* xref:webclient:admin:admin-functions.adoc[]
-* xref:webclient:admin:webconfig.adoc[]
-* xref:webclient:user:grid.adoc[]
-* xref:webclient:user:grid-batch.adoc[]
-* xref:webclient:user:grid-aggregate.adoc[]
-* xref:webclient:user:docs-sign.adoc[]
-* xref:webclient:user:directories/partners/directory.adoc[]
-* xref:webclient:user:directories/staff/directory.adoc[]
-// * xref:webclient:user:directories/powers/directory.adoc[]
-* xref:webclient:user:security.adoc[]
-* xref:webclient:layouts:info-install.adoc[]
 * xref:webclient:layouts:interface.adoc[]
-* xref:webclient:layouts:working-with-layouts-designer.adoc[]
-* xref:webclient:layouts:guide-general.adoc[]
-* xref:webclient:layouts:ctrl-library-standard.adoc[]
 
 ****
 
 [#documentmanagement]
-.*_xref:documentmgmt::index.adoc[Модуль "{dm}"]_*
+.xref:documentmgmt::index.adoc[Модуль "{dm}"]
 ****
 
 Приложение {dm} добавляет в систему готовое решение по работе с обычными и договорными документами. Решение предназначено для работы сотрудников и их взаимодействие в составе рабочих групп.
 
-* xref:documentmgmt:common:change-log.adoc[]
-* xref:documentmgmt:common:patches-log.adoc[]
 * xref:documentmgmt::requirements.adoc[]
 * xref:documentmgmt:admin:install.adoc[]
 * xref:documentmgmt:admin:update-module.adoc[]
-* xref:documentmgmt:admin:prepare-work.adoc[]
-* xref:documentmgmt:admin:configure-security.adoc[]
-* xref:documentmgmt:admin:employees-dir-settings.adoc[]
-* xref:documentmgmt:admin:deputies.adoc[]
-* xref:documentmgmt:admin:notifications.adoc[]
-* xref:documentmgmt:admin:states.adoc[]
-* xref:documentmgmt:admin:contracts/administrate.adoc[]
-* xref:documentmgmt:user:preparation.adoc[]
-* xref:documentmgmt:user:cards/description.adoc[]
-* xref:documentmgmt:user:tasks/work-with.adoc[]
-* xref:documentmgmt:user:contracts/work-with.adoc[]
-* xref:documentmgmt:user:work-groups.adoc[]
 
 ****
 
 [#windowsclient]
-.*_xref:winclient::index.adoc[Модуль "{wincl}"]_*
+.xref:winclient::index.adoc[Модуль "{wincl}"]
 ****
 
 Модуль, предоставляющий интерфейс для работы, администрирования и настройки {dv} в ОС Windows.
 
-* xref:winclient:common:change-log.adoc[]
-* xref:winclient:common:patches-log.adoc[]
-* xref:winclient::requirements-dv.adoc[]
-* xref:winclient::requirements-hardware.adoc[]
-* xref:winclient::requirements-software.adoc[]
 * xref:winclient:admin:install.adoc[]
 * xref:winclient:admin:update-module.adoc[]
 * xref:winclient:admin:system-settings.adoc[]
-* xref:winclient:user:interface.adoc[]
-* xref:winclient:user:settings.adoc[]
-* xref:winclient:user:views.adoc[]
-* xref:winclient:user:rma/interface.adoc[]
-* xref:winclient:user:security.adoc[]
 
 ****
 
 [#mgmtconsole]
-.*_xref:mgmtconsole::index.adoc[Модуль "{mc}"]_*
+.xref:mgmtconsole::index.adoc[Модуль "{mc}"]
 ****
 
 {mc} является инструментом администрирования системы {dv} и её компонентов, позволяет настроить конфигурацию Службы {ws}, просматривать сообщения и ошибки, связанные с работой карточек системы.
 
-* xref:mgmtconsole:common:change-log.adoc[]
-* xref:mgmtconsole:common:patches-log.adoc[]
 * xref:mgmtconsole::requirements.adoc[]
 * xref:mgmtconsole:admin:install.adoc[]
 * xref:mgmtconsole:admin:provide-access.adoc[]
-* xref:mgmtconsole:admin:update-module.adoc[]
-* xref:mgmtconsole:admin:create-cert.adoc[]
-* xref:mgmtconsole:user:initial-configuration.adoc[]
-* xref:mgmtconsole:user:user-interface.adoc[]
-* xref:mgmtconsole:user:settings.adoc[]
-* xref:mgmtconsole:user:msg-outgoing.adoc[]
-* xref:mgmtconsole:user:msg-incoming.adoc[]
-* xref:mgmtconsole:user:logs.adoc[]
 
 ****
 
 [#takeoffice]
-.*_xref:takeoffice::index.adoc[Модуль "{to}"]_*
+.xref:takeoffice::index.adoc[Модуль "{to}"]
 ****
 
 Приложение _{to}_ добавляет в систему {dv} возможность работы с (устаревшими) карточками "{dv} 4.5" и предназначено для автоматизации наиболее распространенных задач документооборота.
 
-* xref:takeoffice:common:change-log.adoc[]
-* xref:takeoffice:common:patches-log.adoc[]
 * xref:takeoffice::requirements.adoc[]
-* xref:takeoffice::requirements-signature.adoc[]
 * xref:takeoffice:admin:install-server.adoc[]
-* xref:takeoffice:admin:install-client.adoc[]
-* xref:takeoffice:admin:update-module.adoc[]
 * xref:takeoffice:admin:functions.adoc[]
-* xref:takeoffice:user:prepare.adoc[]
 
 ****
 
 [#workflow]
-.*_xref:workflow::index.adoc[Модуль "{wf}"]_*
+.xref:workflow::index.adoc[Модуль "{wf}"]
 ****
 
 Модуль "{wf}" системы {dv} обеспечивает управление бизнес-процессами и предоставляет возможности настройки и автоматизации типичных для документооборота организации бизнес-процессов.
 
-* xref:workflow:common:change-log.adoc[]
-* xref:workflow:common:patches-log.adoc[]
 * xref:workflow::requirements.adoc[]
 * xref:workflow::license.adoc[]
 * xref:workflow:admin:install.adoc[]
 * xref:workflow:admin:update-module.adoc[]
-* xref:workflow:admin:console.adoc[]
-* xref:workflow:admin:system-settings.adoc[]
-* xref:workflow:user:bp-designer.adoc[]
-* xref:workflow:user:variable-types.adoc[]
 
 ****
 
 [#edimodule]
-.*_xref:edi::index.adoc[{em}]_*
+.xref:edi::index.adoc[{em}]
 ****
 
 Модуль, предоставляющий возможности юридически значимого обмена электронными документами с контрагентами через операторов ЭДО (электронного документооборота).
 
-* xref:edi:common:change-log.adoc[]
-* xref:edi:common:patches-log.adoc[]
+* xref:edi:admin:install.adoc[]
 * xref:edi:admin:configure-directory.adoc[]
 * xref:edi:admin:configure-partners.adoc[]
-* xref:edi:admin:formal-settings.adoc[]
-* xref:edi:admin:informal-settings.adoc[]
-* xref:edi:admin:attorney-settings.adoc[]
-* xref:edi:admin:sending-settings.adoc[]
-* xref:edi:admin:receiving-settings.adoc[]
-* xref:edi:admin:web-layouts-buttons.adoc[]
-* xref:edi:webuser:index.adoc[]
-* xref:edi:winuser:index.adoc[]
-* xref:edi:diadoc:install.adoc[]
-// * xref:.sbis:install.adoc[]
-* xref:edi:programmer:development-components.adoc[]
 
 ****
 
@@ -339,29 +217,18 @@
 
 Модуль _{sm}_ предназначен для импорта и экспорта данных решений на базе {dv}.
 
-* xref:solutionmngr:common:change-log.adoc[]
-* xref:solutionmngr:common:patches-log.adoc[]
 * xref:solutionmngr::requirements.adoc[]
 * xref:solutionmngr:admin:install.adoc[]
-* xref:solutionmngr:admin:admin-functions.adoc[]
-* xref:solutionmngr:user:preparation.adoc[]
 * xref:solutionmngr:user:functions.adoc[]
-* xref:solutionmngr:user:run-manager.adoc[]
-* xref:solutionmngr:user:solution-export.adoc[]
-* xref:solutionmngr:user:solution-import.adoc[]
-* xref:solutionmngr:user:work-log.adoc[]
-* xref:solutionmngr:user:conflicts.adoc[]
 
 ****
 
 [#archivemgmt]
-.*_xref:archivemgmt::index.adoc[Модуль "{am}"]_*
+.xref:archivemgmt::index.adoc[Модуль "{am}"]
 ****
 
 Комплект инструментов, предназначенный для выполнения административных задач в организациях, эксплуатирующих систему {dv}.
 
-* xref:archivemgmt:common:change-log.adoc[]
-* xref:archivemgmt:common:patches-log.adoc[]
 * xref:archivemgmt::requirements.adoc[]
 * xref:archivemgmt:admin:install.adoc[]
 * xref:archivemgmt:admin:update-module.adoc[]
@@ -373,45 +240,39 @@
 == Дополнительная документация
 
 [#programmer]
-.*_xref:programmer::index.adoc[Руководство разработчика]_*
+.xref:programmer::index.adoc[Руководство разработчика]
 ****
 
 Руководство по разработке решений на основе программного кода {dv}, описание публичного API системы.
 
 * xref:programmer::development.adoc[]
 * xref:programmer:cards:connect-to-dv-server.adoc[]
-* xref:programmer:views:views.adoc[]
-* xref:programmer:solutions:cards/develop-solution.adoc[]
-* xref:programmer:scripts:develop-scripts.adoc[]
-* xref:programmer:bpms:develop-environment.adoc[]
-* xref:programmer:samples:object-model/init-context.adoc[]
 * xref:programmer:DocsVisionObjectModel:class-lib.adoc[]
 
 ****
 
-[#schemas]
-.*_xref:schemas::index.adoc[Описание схем карточек]_*
-****
-
-Описание схем метаданных карточек модулей {dv}.
-
-* xref:schemas::ApprovalDesigner.adoc[]
-* xref:schemas::ArchiveManagement.adoc[]
-* xref:schemas::BackOffice.adoc[]
-* xref:schemas::Platform.adoc[]
-* xref:schemas::TakeOffice.adoc[]
-* xref:schemas::WorkerService.adoc[]
-* xref:schemas::Workflow.adoc[]
-
-****
+// [#schemas]
+// .xref:schemas::index.adoc[Описание схем карточек]
+// ****
+//
+// Описание схем метаданных карточек модулей {dv}.
+//
+// * xref:schemas::ApprovalDesigner.adoc[]
+// * xref:schemas::ArchiveManagement.adoc[]
+// * xref:schemas::BackOffice.adoc[]
+// * xref:schemas::Platform.adoc[]
+// * xref:schemas::TakeOffice.adoc[]
+// * xref:schemas::WorkerService.adoc[]
+// * xref:schemas::Workflow.adoc[]
+//
+// ****
 
 [#resourcekit]
-.*_xref:resource-kit::index.adoc[Комплект утилит {rk}]_*
+.xref:resource-kit::index.adoc[Комплект утилит {rk}]
 ****
 
 Комплект инструментов, предназначенный для выполнения административных задач в организациях, эксплуатирующих систему {dv}.
 
-* xref:resource-kit:ROOT:index.adoc[]
 * xref:resource-kit:admin:install.adoc[]
 * xref:resource-kit:cardmanager:util.adoc[]
 * xref:resource-kit:dvexplorer:util.adoc[]
@@ -419,26 +280,12 @@
 ****
 
 [#desdirs]
-.*_xref:desdirs::index.adoc[Конструкторы и справочники]_*
+.xref:desdirs::index.adoc[Конструкторы и справочники]
 ****
 
 Документация конструкторов и справочников -- инструментов администрирования и настройки системы.
 
-* xref:desdirs:foldertypes:directory.adoc[]
-* xref:desdirs:components:directory.adoc[]
-* xref:desdirs:systemsettings:directory.adoc[]
-* xref:backoffice:desdirs:card-kinds/directory.adoc[]
-* xref:backoffice:desdirs:categories/directory.adoc[]
-* xref:backoffice:desdirs:links/directory.adoc[]
-* xref:backoffice:desdirs:partners/directory.adoc[]
-* xref:backoffice:desdirs:servers/directory.adoc[]
-* xref:backoffice:desdirs:signatures/directory.adoc[]
-* xref:backoffice:desdirs:staff/directory.adoc[]
-* xref:backoffice:desdirs:directories/designer.adoc[]
-* xref:backoffice:desdirs:layouts/designer.adoc[]
-* xref:backoffice:desdirs:numeration/designer.adoc[]
-* xref:backoffice:desdirs:roles/designer.adoc[]
-* xref:backoffice:desdirs:scripts/designer.adoc[]
-* xref:backoffice:desdirs:states/designer.adoc[]
+* xref:desdirs::index.adoc[Конструкторы и справочники модуля {pl}]
+* xref:backoffice:desdirs:conditions.adoc[Конструкторы и справочники модуля {bo}]
 
 ****
