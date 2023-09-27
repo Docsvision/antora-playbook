@@ -26,11 +26,11 @@ include::dev@platform:admin:partial$install.adoc[]
 {
   "SettingsService": {
     "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
-    "ApiKey": "SettingsServiceApiKey" <.>
+    "ApiKey": "ExternalApiServiceApiKey" <.>
   },
   "ExternalApiService": {
     "ConnectionString": "Address=http://externalapi.domain.com:5300/api", <.>
-    "ApiKey": "test-apikey-settingsservice" <.>
+    "ApiKey": "ExternalApiServiceApiKey" <.>
   },
   "System": {
     "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
@@ -71,7 +71,7 @@ include::dev@platform:admin:partial$install.adoc[]
 [source,json]
 ----
 {
-  "ApiKey": "anything", <.>
+  "ApiKey": "SettingsServiceApiKey", <.>
   "StorageOptions": {
     "Providers": [
       {
@@ -85,7 +85,7 @@ include::dev@platform:admin:partial$install.adoc[]
   }
 }
 ----
-<.> Ключ доступа к Сервису настроек -- "пароль", который необходимо указать в конфигурационном файле Сервиса внешнего API и конфигурационном файле {of-mc}.
+<.> Ключ доступа к Сервису настроек -- "пароль", который также необходимо указать в конфигурационном файле Сервиса внешнего API и конфигурационном файле {of-mc}.
 <.> Тип БД: `MsSql` или `PgSql`.
 <.> Строка подключения к БД.  См. подробнее <<conn-string,ниже>>.
 +
@@ -108,16 +108,16 @@ include::dev@platform:admin:partial$install.adoc[]
 [source,json]
 ----
 {
-  "ApiKey": "anything", <.>
+  "ApiKey": "ExternalApiServiceApiKey", <.>
   "SettingsService": {
     "ConnectionString": "address", <.>
-    "ApiKey": "test-apikey-settingsservice" <.>
+    "ApiKey": "SettingsServiceApiKey" <.>
   }
 }
 ----
 <.> Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
 <.> Адрес сервиса настроек. Например, `ConnectAddress=http://settings.domain.com:5200/api`.
-<.> Ключ доступа к Сервису настроек -- "пароль", который нужно указать в конфигурационном файле Сервиса настроек и конфигурационном файле {of-mc}.
+<.> Ключ доступа к Сервису настроек -- "пароль", который также нужно указать в конфигурационном файле Сервиса настроек и конфигурационном файле {of-mc} и конфигурационном файле Сервиса внешнего API.
 +
 . Запустите службу сервиса:
 +
@@ -213,10 +213,10 @@ sudo systemctl start dvexternalapi
 NOTE: Для _{of-sett-serv}_ рекомендуется использовать отдельную базу данных.
 
 //tag::mssql[]
-Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-Службы-фоновых-операций;Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
+Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-Сервиса-настроек;Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
 
 * `Data Source` -- адрес сервера SQL для подключения к БД. В качестве `Data Source` может быть указан экземпляр SQL-сервера, например так: `Data Source=DVDatabse\\Server1`.
-* `Название-БД-Службы-фоновых-операций` -- псевдоним базы данных.
+* `Название-БД-Сервиса-настроек` -- псевдоним базы данных.
 * `Integrated Security` -- задает логическое значение, определяющее способ проверки подлинности:
 ** `False` -- при подключении в строке должны быть указаны идентификатор пользователя и пароль.
 ** `True` -- при подключении будут использованы учетные данные текущей учетной записи Windows.
@@ -232,11 +232,11 @@ endif::sm-page[]
 //end::mssql[]
 
 //tag::pgsql[]
-Для PostgreSQL: `host=Адрес-сервера-баз данных;Port=SQL-порт;database=Название-БД-{of-sm};Username=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
+Для PostgreSQL: `host=Адрес-сервера-баз данных;Port=SQL-порт;database=Название-БД-{of-sett-serv};Username=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
 
 * `Адрес-сервера-баз данных` -- адрес сервера SQL для подключения к БД.
 * `SQL-порт` -- порт SQL-сервера.
-* `Название-БД-{of-sm}` -- псевдоним базы данных.
+* `Название-БД-{of-sett-serv}` -- псевдоним базы данных.
 * `Имя-пользователя-БД` -- учётная запись пользователя для подключения к БД.
 * `Пароль-пользователя-БД` -- пароль учётной записи для подключения к БД.
 //end::pgsql[]
