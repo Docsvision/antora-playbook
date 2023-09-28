@@ -30,11 +30,6 @@ include::platform:admin:partial$doNotStart.adoc[]
 +
  reg add HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\Platform\Site /v ServerURL /t REG_SZ /d http://dvserver.domain.com:5000/api/v1
 +
-. Добавьте данные системной учётной записи {dv} в переменные окружения.
-+
-Под этой учётной записью Консоль настройки будет подключаться к серверу {dv}.
-+
- setx DV_SystemUserAccount account@domain.com
- setx DV_SystemUserPassword password
+include::platform:admin:partial$vars.adoc[]
 
 // end::other-windows[]
