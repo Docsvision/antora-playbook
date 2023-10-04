@@ -107,8 +107,13 @@ NOTE: Если данный параметр отключен, то процед
 * _timezone_ на _Europe/Moscow_,
 * _lc_messages_ на _en_US.UTF-8_.
 * _standard_conforming_strings_ переведите в значение `On`.
+* Значения параметров _shared_buffers_, _temp_buffers_, _work_mem_, _maintenance_work_mem_ увеличьте соразмерно имеющемуся дисковому пространству и размеру доступной оперативной памяти. С документацией по параметрам можно ознакомиться https://www.postgresql.org/docs/9.1/runtime-config-resource.html[на сайте {pgsql}].
+* Аналогичным образом увеличьте значение параметра _effective_cache_size_, см. подробнее https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE[на сайте {pgsql}].
+* Установите параметр _plan_cache_mode_ в значение `force_generic_plan`. Подробнее о параметре см. https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-PLAN-CACHE-MODE[на сайте {pgsql}].
+* Добавьте параметр _checkpoint_completion_target_ со значением `0.9`. Подробнее о параметре см. https://pgpedia.info/c/checkpoint_completion_target.html[в сети интернет].
+* При необходимости выполните `VACUUM FULL` базы данных.
 +
-. Сохраните изменения.
+. Сохраните изменения и перезапустите {pgsql}.
 . Установите службу <<pg-agent,PgAgent>>.
 . Если для подключения к PostgreSQL планируется использовать аутентификацию Windows, необходима <<win-auth,дополнительная настройка СУБД>>.
 . Для пользователя, от имени которого будет выполняться инициализация БД при первоначальной настройке {dv} и последующее управление, необходимы права `SUPERUSER`.
