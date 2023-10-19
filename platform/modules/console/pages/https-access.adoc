@@ -1,0 +1,47 @@
+= Доступ к Storage Server по HTTPS
+
+При необходимости можно настроить доступ к *{sss-new}* по протоколу HTTPS, для этого потребуется выполнить настройки, описанные далее.
+
+. Установите пакет `openssl` командой:
++
+[source,bash]
+----
+sudo apt install openssl
+----
++
+. [[before]]Создайте самопидписанный сертификат SSL.
++
+[source,bash]
+----
+openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" <.>
+----
+<.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux.
++
+NOTE: Подробный пример создания сертификата приведён в документации {of-mc}, раздел "xref:6.1@mgmtconsole:admin:create-cert.adoc[]".
++
+. Добавьте сертификат в доверенный, скопировав его в директорию `/usr/local/share/ca-certificates/`.
+. Обновите список доверенных сертификатов: `sudo update-ca-certificates`
+. Отредактируйте конфигурационный файл `appsettings.json`:
++
+[source,bash]
+----
+sudo nano /usr/lib/docsvision/platform/appsettings.json
+----
++
+.Фрагмент конфигурационного файла:
+----
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "https://*:5000"
+      }
+    }
+  }
+----
++
+. Измените также конфигурационный файл {wc} по адресу `/usr/lib/docsvision/webclient/appsettings.json`. Измените параметр `"ConnectionAddress"`, в котором необходимо указать адрес с `https`.
+. Перезапустите службы *{sss-new}* и *{wcs-new}*.
++
+. На машине с Windows, где планируется работа в {wincl}е, необходимо добавить созданный <<before,ранее>> сертификат в доверенные корневые сертификаты.
+. Откройте {cns} на вкладке "xref:manage-access.adoc[]" и укажите адрес с `https` в полях _Адрес сервера при подключении_ и _Адрес сайта при подключении через внешнюю сеть или по HTTP_.
+. Проверьте подключение. Если настройки выполнены корректно, {wc}, {wincl} и программа DVExplorer должны работать без ошибок, обновление БД также должно проходить без ошибок.
