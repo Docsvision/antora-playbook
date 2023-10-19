@@ -1,4 +1,4 @@
-= Получение информации из справочника сотрудников
+= Получение информации из ЭУ "Записи справочника сотрудников"
 
 Для выбора записей из _Справочника сотрудников_ предназначен элемент управления "xref:layouts:ctrl/directories/staffDirectoryItems.adoc[Записи справочника сотрудников]". В зависимости от настроек пользователь может выбирать сотрудников, организации, подразделения, группы, роли и должности, а также поисковые слова.
 
@@ -15,14 +15,14 @@
 
 [source,typescript]
 ----
-sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel>> ("название элемента управления");
+sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel>>(название ЭУ);
 ----
 
 Пример для ЭУ с множественным выбором:
 
 [source,typescript]
 ----
-sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel[]>> ("название элемента управления");
+sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel[]>>(название ЭУ);
 ----
 
 Если в области выбора указано несколько типов, необходимо написать логику,
@@ -58,8 +58,4 @@ function showName(sender: Layout) {
 <.> Логика работы с `value` типа `DepartmentModel`.
 <.> Логика работы с `value` типа `StaffDataModel`.
 
-Если установлен множественный выбор, код аналогичный. При получении элемента
-управления указываем тип значения `GenModels.IDirectoryItemData[]`, далее циклом
-проходимся по значениям и в зависимости от типа совершаем определенные действия с
-каждым из значений.
-
+Если установлен множественный выбор, код аналогичный. При получении элемента управления необходимо указать тип значения `StaffDirectoryItemsMultiple` вместо `StaffDirectoryItemsSingle`, далее циклом пройти все значения и в зависимости от типа совершить определенные действия с каждым из значений.
