@@ -1,0 +1,65 @@
+= Получение информации из справочника сотрудников
+
+Для выбора записей из _Справочника сотрудников_ предназначен элемент управления "xref:layouts:ctrl/directories/staffDirectoryItems.adoc[Записи справочника сотрудников]". В зависимости от настроек пользователь может выбирать сотрудников, организации, подразделения, группы, роли и должности, а также поисковые слова.
+
+.Каждый из этих типов имеет свою модель данных:
+* Сотрудники: `EmployeeDataModel`.
+* Организации и подразделения: `DepartmentModel`.
+* Группы, роли, должности, поисковые слова: `StaffDataModel`
+
+Поля, которые содержит каждая модель, можно посмотреть в справочнике по xref:how-to-use-js-api.adoc[JavaScript API].
+
+Чтобы корректно в коде обрабатывать полученные значения из ЭУ `_Записи справочника сотрудников_`
+нужно явно указывать тип. Если в области выбора элемента указан только один из типов, в коде достаточно
+прописать этот тип:
+
+[source,typescript]
+----
+sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel>> ("название элемента управления");
+----
+
+Пример для ЭУ с множественным выбором:
+
+[source,typescript]
+----
+sender.layout.controls.get<StaffDirectoryItems<GenModels.EmployeeDataModel[]>> ("название элемента управления");
+----
+
+Если в области выбора указано несколько типов, необходимо написать логику,
+определяющую тип элемента. Пример такой функции приведён ниже:
+
+[source,typescript]
+----
+function showName(sender: Layout) {
+    const control = sender.layout.controls.get<StaffDirectoryItemsSingle>(Название ЭУ);
+
+    if(control.value.dataType === GenModels.DirectoryDataType.Employee) {
+
+        const value = control.value as GenModels.EmployeeDataModel;
+
+        console.log(value.firstName + " " + value.lastName); <.>
+
+    } else if (control.value.dataType === GenModels.DirectoryDataType.Department
+
+        || control.value.dataType === GenModels.DirectoryDataType.Organization) {
+
+            const value = control.value as GenModels.DepartmentModel;
+
+            console.log(value.fullName); <.>
+    } else {
+
+        const value = control.value as GenModels.StaffDataModel;
+
+        console.log(value.name); <.>
+    }
+}
+----
+<.> Логика работы с `value` типа `EmployeeDataModel`.
+<.> Логика работы с `value` типа `DepartmentModel`.
+<.> Логика работы с `value` типа `StaffDataModel`.
+
+Если установлен множественный выбор, код аналогичный. При получении элемента
+управления указываем тип значения `GenModels.IDirectoryItemData[]`, далее циклом
+проходимся по значениям и в зависимости от типа совершаем определенные действия с
+каждым из значений.
+
