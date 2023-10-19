@@ -15,11 +15,11 @@ sudo apt install openssl
 ----
 openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" <.>
 ----
-<.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux.
+<.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
 +
 NOTE: Подробный пример создания сертификата приведён в документации {of-mc}, раздел "xref:6.1@mgmtconsole:admin:create-cert.adoc[]".
 +
-. Добавьте сертификат в доверенный, скопировав его в директорию `/usr/local/share/ca-certificates/`.
+. Добавьте сертификат в доверенные, скопировав его в директорию `/usr/local/share/ca-certificates/`.
 . Обновите список доверенных сертификатов: `sudo update-ca-certificates`
 . Отредактируйте конфигурационный файл `appsettings.json`:
 +
@@ -30,14 +30,22 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
 +
 .Фрагмент конфигурационного файла:
 ----
-  "Kestrel": {
-    "Endpoints": {
-      "Http": {
-        "Url": "https://*:5000"
-      }
+"AllowedHosts": "*",
+    "Kestrel": {
+        "Endpoints": {
+            "Https": {
+                "Url": "https://*:5000",
+                "Certificate": {
+                    "Path": "/folder/certificate.crt", <.>
+                    "KeyPath": "/folder/docsvision.key" <.>
+                }
+            }
+        }
     }
-  }
+}
 ----
+<.> Локальное расположение сертификата, созданного <<before,ранее>>.
+<.> Локальное расположение ключа шифрования для сертификата, созданного <<before,ранее>>.
 +
 . Измените также конфигурационный файл {wc} по адресу `/usr/lib/docsvision/webclient/appsettings.json`. Измените параметр `"ConnectionAddress"`, в котором необходимо указать адрес с `https`.
 . Перезапустите службы *{sss-new}* и *{wcs-new}*.
