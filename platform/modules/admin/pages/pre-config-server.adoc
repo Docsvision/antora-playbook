@@ -33,7 +33,7 @@ sudo apt-get install ca-certificates curl gnupg lsb-release
 +
 ----
 curl -fsSL https://packages.docsvision.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
-echo "deb https://packages.docsvision.com/astra $(lsb_release -cs) 6.1" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "deb https://packages.docsvision.com/astra $(. /etc/os-release && echo $VERSION_CODENAME) 6.1" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
 sudo apt-get update
 ----
 +
