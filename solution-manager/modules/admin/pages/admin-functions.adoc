@@ -5,58 +5,68 @@
 
 При работе с Менеджером решений выделяется единственная роль -- пользователь. Пользователям предоставляется полный доступ ко всем функциям модуля: настройка подключений, создание и настройка проектов экспорта Решений, экспорт и импорт Решений, и др.
 
-Для предоставления доступа к модулю включите пользователя в локальную группу безопасности *{dv} SolutionManager Administrators* (будет создана при установке модуля) на компьютере с модулем _{sm}_.
+Для предоставления доступа к модулю включите пользователя в локальную группу безопасности *{dv} SolutionManager Administrators* на компьютере с модулем _{sm}_.
 
 [#launch-sm]
 == Запуск службы {of-sm}
 
-Запустите службу _{dv} 5.5 SolutionManager Service_, если она не запущена.
+Запустите службу *{sms-new}*, если она не запущена:
+
+ sudo systemctl restart dvappserver
 
 [#temp-folder-path]
 == Настройка пути к временной папке
 
 Администратору необходимо настроить путь к папке, в которую будут сохраняться файлы со списком конфликтов, запрашиваемые пользователем. У <<launch-sm,службы {of-sm}>> должны быть полные права на данную папку.
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\appsettings.json`.
+. Откройте конфигурационный файл модуля:
++
+[source,bash,subs=attributes]
+----
+sudo nano {catalog}/appsettings.json
+----
++
 . Измените путь к папке в параметре TempFolder:
 +
 [source]
 ----
-"TempFolder": "C:\\Work\\Temp",
+"TempFolder": ".\\Work\\Temp",
 ----
 +
 Обратите внимание на использование двойного обратного слеша в пути к папке.
 +
 . Сохраните изменения.
-. Перезапустите службу {of-sm}.
+. Перезапустите службу *{sms-new}*.
 
 [#change-db-connection]
 == Изменение подключения к базе данных {of-sm}
 
-После установки {of-sm} подключение к БД с настройками Модуля можно изменить в конфигурационном файле:
+После установки {of-sm} подключение к БД с настройками модуля можно изменить в конфигурационном файле:
 
-. Откройте конфигурационный файл `C:\Program Files (x86)\Docsvision\SolutionManager\appsettings.json`.
-. Измените строку подключения к БД в параметре `ConnectionString`:
+. Откройте конфигурационный файл модуля в любом текстовом редакторе, например nano:
 +
+[source,bash,subs=attributes]
 ----
-"StorageSettings": {
-      "ConnectionString": "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=SolutionManagerDb",
-      "CommandTimeOut": "300"
-    },
+sudo nano {catalog}/appsettings.json
 ----
 +
-Формат строк подключения для СУБД Microsoft SQL Server и PostgreSQL приведен в пункте xref:install-classic.adoc#format[Установка {of-sm}].
+. Измените строку подключения к БД в параметре `ConnectionString`, cм. подробнее <<conn-string,ниже>>.
++
+// ----
+// "StorageSettings": {
+//       "ConnectionString": "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=SolutionManagerDb",
+//       "CommandTimeOut": "300"
+//     },
+// ----
 +
 . Сохраните изменения.
 . Перезапустите службу {of-sm}.
-
-Также строку подключения нужно изменить на сервере Службы {ws}, где был установлен компонент "xref:install-classic.adoc#extension[расширение для Службы {ws}]":
-
-[start=5]
-. Откройте Редактор реестра.
-. Перейдите в ветку `{hklm-dv}\WorkerService\Connections\SolutionManager`.
-. Измените строку подключения к БД в параметре `SolutionManagerDatabase`.
++
+. Измените строку подключения на сервере Службы {ws}, где был установлен компонент "xref:.install-classic.adoc#extension[расширение для Службы {ws}]". Подробная инструкция приведена в разделе "xref:dev@workerservice:admin:install.adoc[]"
++
 . Перезапустите Службу {ws}.
+
+include::dev@mgmtconsole:admin:install.adoc[tags=string]
 
 [#apply-new-license]
 == Применение новой лицензии {dv}
@@ -67,11 +77,11 @@
 == Журнал работы
 
 .Для анализа работы {of-sm} администратору доступны следующие журналы:
-* Журнал работы службы {of-sm} -- хранится в папке `C:\ProgramData\Docsvision\SolutionManager\Logs` на компьютере с модулем _{sm}_.
+* Журнал работы службы {of-sm} -- хранится в папке `{catalog}/SolutionManager/Logs` на компьютере с модулем _{sm}_.
 +
-Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\SolutionManager\nlog.config`.
+Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `{catalog}/nlog.config`.
 +
-* Журнал обработки задач {of-sm} Службой {ws} -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
-* Журнал со списком загруженных (при импорте Решения) данных -- файл `C:\ProgramData\Docsvision\SolutionManager\Logs\ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
+* Журнал обработки задач {of-sm} Службой {ws} -- файл `{catalog}/Logs/ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
+* Журнал со списком загруженных (при импорте Решения) данных -- файл `{catalog}/Logs/ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
 +
-Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `C:\Program Files (x86)\Docsvision\WorkerService\SolutionManager\nlog.config`.
+Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `{catalog}/nlog.config`.
