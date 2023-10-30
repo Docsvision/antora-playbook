@@ -23,7 +23,7 @@
 +
 [source,bash,subs=attributes]
 ----
-sudo nano {catalog}/appsettings.json
+sudo nano {catalog}appsettings.json
 ----
 +
 . Измените путь к папке в параметре TempFolder:
@@ -47,7 +47,7 @@ sudo nano {catalog}/appsettings.json
 +
 [source,bash,subs=attributes]
 ----
-sudo nano {catalog}/appsettings.json
+sudo nano {catalog}appsettings.json
 ----
 +
 . Измените строку подключения к БД в параметре `ConnectionString`, cм. подробнее <<conn-string,ниже>>.
@@ -61,9 +61,9 @@ sudo nano {catalog}/appsettings.json
 +
 . Сохраните изменения.
 . Перезапустите службу {of-sm}.
-+
-. Измените строку подключения на сервере Службы {ws}, где был установлен компонент "xref:install-server.adoc#extension[расширение для Службы {ws}]". Подробная инструкция приведена в разделе "xref:dev@workerservice:admin:install.adoc[]"
-+
+// +
+// . Измените строку подключения на сервере Службы {ws}, где был установлен компонент "xref:install-server.adoc#extension[расширение для Службы {ws}]". Подробная инструкция приведена в разделе "xref:dev@workerservice:admin:install.adoc[]"
+// +
 . Перезапустите Службу {ws}.
 
 include::dev@mgmtconsole:admin:install.adoc[tags=string]
@@ -77,11 +77,11 @@ include::dev@mgmtconsole:admin:install.adoc[tags=string]
 == Журнал работы
 
 .Для анализа работы {of-sm} администратору доступны следующие журналы:
-* Журнал работы службы {of-sm} -- хранится в папке `{catalog}/SolutionManager/Logs` на компьютере с модулем _{sm}_.
+* Журнал работы службы {of-sm} -- хранится в папке `{log}` на компьютере с модулем _{sm}_.
 +
-Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле `{catalog}/nlog.config`.
+Путь к журналу и уровень протоколирования настраиваются в конфигурационном файле модуля `{catalog}appsettings.json`.
 +
-* Журнал обработки задач {of-sm} Службой {ws} -- файл `{catalog}/Logs/ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
-* Журнал со списком загруженных (при импорте Решения) данных -- файл `{catalog}/Logs/ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
+* Журнал обработки задач {of-sm} Службой {ws} -- файл `{log}/ГГГ-ММ-ДД_General.log` на компьютере с модулем _Служба {ws}_.
+* Журнал со списком загруженных (при импорте Решения) данных -- файл `{log}/ГГГ-ММ-ДД_Import.log` на компьютере с модулем _Служба {ws}_.
 +
-Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `{catalog}/nlog.config`.
+Пути к журналам и уровни протоколирования настраиваются в конфигурационном файле `{catalog}appsettings.json`.
