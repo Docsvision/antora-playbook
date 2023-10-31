@@ -37,54 +37,69 @@ include::dev@platform:admin:partial$install.adoc[]
 [source,json]
 ----
 {
-  "Docsvision": {
-    "WebClient": {
-      "Authentication": {
-        "DefaultDomain": "DOMAIN.COM" <.>
-      },
-      "Server": {
-        "SessionManagerConnection": {
-          "ConnectionAddress": "http://dvserver.domain.com:5000"  <.>
-        }
+  "Urls": "http://+:5700",
+  "Logging": {
+    "LogLevel": { <.>
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "SolutionManager": {
+    "Extensions": [
+      "DocsVision.SolutionManager.Logic.BaseExtension",
+      "DocsVision.SolutionManager.WebService.BaseExtension"
+    ],
+    "TabOrders": [
+      {
+        "Id": "4EFE8B0C-7834-44AA-B1CE-2F841C27C27B",
+        "Caption": "Kind Tab",
+        "Order": 1
       }
-    }
+    ],
+    "SettingsService": {
+      "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
+      "ApiKey": "SettingsServiceApiKey" <.>
+    },
+    "StorageSettings": {
+      "ConnectionString": "CONNECTION-STRING" <.>
+      "CommandTimeOut": "300"
+    },
+
+    "DisableDatabaseUpdate": 0,
+    "CultureOptions": {
+      "SupportedCultures": [
+        "en",
+        "ru"
+      ],
+      "DefaultCulture": "ru"
+    },
+    "Storage": "Settings"
   },
-  "Ldap": { <.>
-    "AuthType": "Basic", <.>
-    "Credential": {
-      "UserName": "account@domain.com", <.>
-      "Password": "password" <.>
-    }
-  },
-  "DataProtectCertificateThumbprint": "thumbprint", <.>
-  "SystemUserAccount": "account@domain.com", <.>
-  "SystemUserPassword": "password", <.>
+  "Groups": {
+    "Docsvision SolutionManager Administrators": [
+     "account@domain.com" <.>
+    ]
+  }
 }
 ----
-<.> `DefaultDomain` -- домен по умолчанию в формате FQDN.
-<.> `ConnectionAddress` -- адрес сервера {dv}.
-<.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory. +
-Пароль можно указывать в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:dev@install-linux::account-protection.adoc[]"
-+
-<.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP, `Oauth` -- аутентификация через ЕСИА или Azure.
-<.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
-<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP.
-<.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dev@install-linux::account-protection.adoc[]". +
-Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
-<.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
-<.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:install-linux::account-protection.adoc[]".
+<.> `LogLevel` -- уровень ведения журнала.
+<.> `ConnectionString` -- адрес {of-sett-serv}.
+<.> `ApiKey` -- ключ доступа к Сервису настроек, указанный в xref:dev@mgmtconsole:admin:install.adoc#sett-serv[конфигурационном файле] {of-sett-serv}.
+<.> `ConnectionString` -- строка подключения базы данных МР, cм. подробнее <<conn-string,ниже>>.
+<.> `Docsvision SolutionManager Administrators` -- пользователи, которым разрешен вход в {sm}. Обратите внимание, что в группе массив строк, а не строка.
 // end::linux[]
 +
 . Запустите службу модуля:
 +
 [source,bash]
 ----
-sudo systemctl start dvwebclient
+sudo systemctl start dvsolutionmanager
 ----
 +
 . Ознакомьтесь с разделом "xref:admin-functions.adoc[]", чтобы предоставить пользователям доступ к модулю, настроить путь к временной папке, изменить подключение к базе данных {of-sm} и выполнить другие задачи.
 . Ознакомьтесь с разделом "<<mgmt-console,Настройки в {of-mc}>>", чтобы выполнить необходимые для работы модуля настройки системы.
+
+include::dev@mgmtconsole:admin:install.adoc[tags=string]
 
 [#uninstall]
 == Удаление модуля и расширения для Службы {ws}
@@ -102,7 +117,7 @@ sudo apt-get purge docsvision-{wt}
 // ====
 
 [#mgmt-console]
-== Настройки в {of-mc}
+== Создание процесса для обработки задач {of-sm}
 
 . После установки модуля _{sm}_ в _{sett-serv}_ Консоли автоматически появляется процесс Службы {ws} со специальным типом конфигурации.
 . В {of-mc} откройте вкладку "Служба {ws}" и подключите новый процесс. Подробнее см. "xref:dev@mgmtconsole:user:worker-service.adoc[]".

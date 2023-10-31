@@ -12,7 +12,7 @@
 
 Запустите службу *{sms-new}*, если она не запущена:
 
- sudo systemctl restart dvappserver
+ sudo systemctl start dvsolutionmanager
 
 [#temp-folder-path]
 == Настройка пути к временной папке
@@ -26,7 +26,7 @@
 sudo nano {catalog}appsettings.json
 ----
 +
-. Измените путь к папке в параметре TempFolder:
+. Измените путь к папке в параметре `"TempFolder"`:
 +
 [source]
 ----
@@ -50,7 +50,7 @@ sudo nano {catalog}appsettings.json
 sudo nano {catalog}appsettings.json
 ----
 +
-. Измените строку подключения к БД в параметре `ConnectionString`, cм. подробнее <<conn-string,ниже>>.
+. Измените строку подключения к БД в параметре `ConnectionString`, cм. подробнее в разделе "xref:install-server.adoc#conn-string[Установка и настройка]" модуля.
 +
 // ----
 // "StorageSettings": {
@@ -65,8 +65,6 @@ sudo nano {catalog}appsettings.json
 // . Измените строку подключения на сервере Службы {ws}, где был установлен компонент "xref:install-server.adoc#extension[расширение для Службы {ws}]". Подробная инструкция приведена в разделе "xref:dev@workerservice:admin:install.adoc[]"
 // +
 . Перезапустите Службу {ws}.
-
-include::dev@mgmtconsole:admin:install.adoc[tags=string]
 
 [#apply-new-license]
 == Применение новой лицензии {dv}
