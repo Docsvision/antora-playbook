@@ -45,24 +45,13 @@ include::dev@platform:admin:partial$install.adoc[]
   },
   "AllowedHosts": "*",
   "SolutionManager": {
-    "Extensions": [
-      "DocsVision.SolutionManager.Logic.BaseExtension",
-      "DocsVision.SolutionManager.WebService.BaseExtension"
-    ],
-    "TabOrders": [
-      {
-        "Id": "4EFE8B0C-7834-44AA-B1CE-2F841C27C27B",
-        "Caption": "Kind Tab",
-        "Order": 1
-      }
-    ],
     "SettingsService": {
       "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
       "ApiKey": "SettingsServiceApiKey" <.>
     },
     "StorageSettings": {
       "ConnectionString": "CONNECTION-STRING" <.>
-      "CommandTimeOut": "300"
+      "CommandTimeOut": "300" <.>
     },
 
     "DisableDatabaseUpdate": 0,
@@ -86,6 +75,7 @@ include::dev@platform:admin:partial$install.adoc[]
 <.> `ConnectionString` -- адрес {of-sett-serv}.
 <.> `ApiKey` -- ключ доступа к Сервису настроек, указанный в xref:dev@mgmtconsole:admin:install.adoc#sett-serv[конфигурационном файле] {of-sett-serv}.
 <.> `ConnectionString` -- строка подключения базы данных МР, cм. подробнее <<conn-string,ниже>>.
+<.> Время ожидания перед завершением попытки выполнить операцию и созданием ошибки.
 <.> `Docsvision SolutionManager Administrators` -- пользователи, которым разрешен вход в {sm}. Обратите внимание, что в группе массив строк, а не строка.
 // end::linux[]
 +
