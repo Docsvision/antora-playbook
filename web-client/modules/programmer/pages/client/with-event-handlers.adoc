@@ -78,3 +78,27 @@ NOTE: Инструкция по работе в программе {kvr} при�
 . Откройте локацию с настроенной разметкой (например, карточку) и выполните действие, вызывающее реализованный обработчик.
 +
 . После завершения отладки скрипта, соберите и опубликуйте на сервере {wc}а "релизную версию" клиентского расширения. "Релизная версия" собирается командой `npm run build:prod`.
+
+[#get]
+== Получить все обработчики событий
+
+При необходимости, например для поиска и исправления искать ошибок, можно получить имена всех скриптов, назначенных на разметку. Для этого выполните в консоли браузера следующий скрипт:
+
+[source,javascript]
+----
+(function getHandlers(sender) {
+    let controlsVisitor = new WebClient.ControlsRecursiveVisitor();
+    controlsVisitor.visitDeep(sender.layout, (control) => {
+        const paramsKey = Object.keys(control.params);
+        const eventsKey = paramsKey.filter(key => control.params[key] instanceof WebClient.BasicEvent);
+        const handlers = eventsKey.reduce((handlers, key) =>
+            control.props[key] && !handlers.includes(control.props[key])
+                ? `${control.props[key]}${handlers.length ? ', ' : ''}${handlers}`
+                : handlers
+            , "");
+        if (handlers !== "") {
+            console.info(`${control.props.name}: ${handlers}`);
+        }
+    });
+})(layoutManager.cardLayout);
+----
