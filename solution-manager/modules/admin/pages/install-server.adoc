@@ -53,20 +53,26 @@ include::dev@platform:admin:partial$install.adoc[]
       "ConnectionString": "CONNECTION-STRING" <.>
       "CommandTimeOut": "300" <.>
     },
-
-    "DisableDatabaseUpdate": 0,
-    "CultureOptions": {
-      "SupportedCultures": [
-        "en",
-        "ru"
-      ],
-      "DefaultCulture": "ru"
-    },
-    "Storage": "Settings"
   },
   "Groups": {
     "Docsvision SolutionManager Administrators": [
      "account@domain.com" <.>
+    ]
+  },
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/solutionmanager/${shortdate}_SolutionManager.log",
+        "layout": "[${longdate}][${level}][${callsite}] ${message} ${exception:format=tostring,Data}"
+      }
+    },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Warn",
+        "writeTo": "logFile"
+      }
     ]
   }
 }
@@ -121,5 +127,5 @@ sudo apt-get purge docsvision-{wt}
 +
 * Таймаут -- поле необязательно для заполнения, подробнее см. в разделе "xref:dev@mgmtconsole:user:worker-service.adoc#add[Добавить процесс]" документации модуля {mc}.
 * Использовать x86 -- установите флаг, чтобы переключить обработку заданий на версию {of-ws} с указанной разрядностью. Когда флаг снят, используется разрядность x64.
-+
-. Если в процессе выполнения запроса возникла ошибка, она будет отображена в {of-mc}, на странице "xref:dev@mgmtconsole:user:msg-outgoing.adoc[Очередь исходящих сообщений]".
+// +
+// . Если в процессе выполнения запроса возникла ошибка, она будет отображена в {of-mc}, на странице "xref:dev@mgmtconsole:user:msg-outgoing.adoc[Очередь исходящих сообщений]".
