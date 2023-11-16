@@ -33,8 +33,8 @@ public class Extension : StorageServerExtension
 |`public void InitializeInvitationService(Guid serviceId, string serviceClassName, string settingsXml)`
 |Инициализирует сервис приглашений
 
-|`public void InitializePowerOfAttorneyService(Guid serviceId, string serviceClassName, string settingsXml)`
-|Инициализирует сервис машиночитаемой доверенности
+// |`public void InitializePowerOfAttorneyService(Guid serviceId, string serviceClassName, string settingsXml)`
+// |Инициализирует сервис машиночитаемой доверенности
 
 |`public void SendMessage(Guid serviceId, string messageDataXml)`
 |Отправляет сообщение
@@ -114,14 +114,14 @@ string certificateBytes, string positionName, string comment)`
 |`public string GetNewInvitationsFromDate(Guid serviceId, string boxId, string lastEventId, DateTime fromDate)`
 |Получает новые приглашения с указанной даты
 
-|`public void RegisterPowerOfAttorney(Guid serviceId, string messageDataXml)`
-|Регистрирует доверенность
-
-|`public void RevokePowerOfAttorney(Guid serviceId, string messageDataXml)`
-|Отвязывает МЧД от сотрудника в Диадок, в реестре ФНС доверенность не отзывается
-
-|`public void CheckPowerOfAttorneyStatus(Guid serviceId, string messageDataXml)`
-|Проверяет статус доверенности
+// |`public void RegisterPowerOfAttorney(Guid serviceId, string messageDataXml)`
+// |Регистрирует доверенность
+//
+// |`public void RevokePowerOfAttorney(Guid serviceId, string messageDataXml)`
+// |Отвязывает МЧД от сотрудника в Диадок, в реестре ФНС доверенность не отзывается
+//
+// |`public void CheckPowerOfAttorneyStatus(Guid serviceId, string messageDataXml)`
+// |Проверяет статус доверенности
 
 |`public string GetLastError(string errorKey)`
 |Получает последнюю ошибку
