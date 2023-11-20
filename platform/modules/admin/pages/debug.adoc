@@ -1,0 +1,56 @@
+= Включение отладки ролевой модели
+
+Отладка ролевой модели представляет собой процесс тестирования настроек ролевой безопасности с последующим включением его в продуктовую среду.
+
+
+.Чтобы включить режим отладки ролевой модели:
+. Откройте конфигурационный файл модуля в любом текстовом редакторе, например, nano:
++
+[source,bash]
+----
+sudo nano /usr/lib/docsvision/platform/appsettings.json
+----
++
+. Включите отладку в параметре `"TraceLevel"`:
++
+[source,json]
+----
+  "DocsVision": {
+      "Platform": {
+        "Server": {
+          "TraceLevel": 3; <.>
+        }
+      }
+  }
+----
+<.> Отладка работает при значениях `3` и `4`.
++
+. Дополнительно обязательно нужно создавать настройку в БД при помощи скрипта:
++
+.Для {mssql}:
+[source,sql]
+----
+DECLARE @On bit =1
+EXEC dvsys_setting_set N'RoleModelTrace', @On
+----
++
+.Для {pgsql}:
+[source,pgsql]
+----
+select * from dvsys_setting_set('RoleModelTrace', true);
+----
++
+. Перезапустите *{sss-new}*.
+. После завершения исследования удалите настройку `"TraceLevel"` в БД или отключите её, установив в значение `0` для {mssql} или `false` для {pgsql}.
++
+[source,sql]
+----
+delete from dvsys_settings where [Name] = N'RoleModelTrace
+----
++
+[source,pgsql]
+----
+delete from dvsys_settings where "Name" = 'RoleModelTrace;
+----
++
+. Перезапустите *{sss-new}* ещё раз.
