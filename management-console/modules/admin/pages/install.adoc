@@ -213,7 +213,7 @@ sudo systemctl start dvexternalapi
 NOTE: Для _{of-sett-serv}_ рекомендуется использовать отдельную базу данных.
 
 //tag::mssql[]
-Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-Сервиса-настроек;Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
+Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-Сервиса-настроек;Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД;TrustServerCertificate=True`.
 
 * `Data Source` -- адрес сервера SQL для подключения к БД. В качестве `Data Source` может быть указан экземпляр SQL-сервера, например так: `Data Source=DVDatabse\\Server1`.
 * `Название-БД-Сервиса-настроек` -- псевдоним базы данных.
