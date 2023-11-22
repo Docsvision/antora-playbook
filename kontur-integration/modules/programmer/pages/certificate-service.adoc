@@ -1,0 +1,144 @@
+= Работа с сервисом выпуска сертификатов Контур
+
+Проинициализированный сервис `IKonturIssuesService` можно получить стандартным образом из
+контекста объектов. Если сервис был добавлен именно в `ObjectContent` -- не используется DI:
+
+[source,csharp]
+----
+var issuesService = context.GetService<IKonturIssuesService>();
+----
+
+== Создание заявки на выпуск сертификата
+
+Прежде всего необходимо создать заявку на выпуск сертификата:
+
+[source,csharp]
+----
+var employee = GetReceivingCertificateEmployee(); <.>
+var inn = GetReceivingCertificateInn(); <.>
+var result = issuesService.CreateCertificateIssue(employee, inn);
+----
+<.> `employee` -- сотрудник (типа `StaffEmployee`), для которого формируется заявка на выпуск сертификата.
+<.> `inn` -- ИНН сотрудника
+
+Метод `CreateCertificateIssue` вернёт результат операции с ID заявка на выпуск сертификата.
+Результат операции необходимо проверить на успешность завершения и, при необходимости,
+самостоятельно вернуть исключение, либо иным образом обработать ошибку:
+
+[source,csharp]
+----
+if (result.Success) <.>
+ return result.Data; <.>
+throw new ApplicationException(result.Message);
+----
+<.> Если успешно -- возвращается ID заявки
+<.> Иначе сгенерируем исключение с ошибкой, которую вернул {uc}
+
+Аналогичным образом необходимо обрабатывать результаты других методов сервиса
+`IKonturIssuesService`.
+
+Возврат `OperationResult` не гарантирует обработку всех ошибок внутри метода -- используйте
+`try/catch` при вызове методов.
+
+Обратите внимание, в карточке сотрудника должны быть заполнены следующие поля:
+
+* `employee.LastName`
+* `employee.FirstName`
+* `employee.MiddleName`
+* `employee.Email`
+* `employee.Phone`
+
+== Проверка статуса актуализации заявки
+
+После внесения любых изменений в заявку необходимо проверять статуса её актуализации, иначе
+следующий запрос к API {uc} может завершиться ошибкой.
+Проверка статуса актуализации выполняется следующим способом:
+
+[source,csharp]
+----
+var result = issuesService.GetIssue(GetIssueId());
+if (!result.Success)
+ throw new ApplicationException(result.Message);
+return result.Data.Actualized;
+----
+
+Метод `GetIssueId` возвращает ИД заявки, для которой выполняется операция.
+
+После выполнения любой операции с заявкой всегда проверяйте её статус `Actualized` и
+выполняйте следующий запрос только если `Actualized` в значении `true`.
+
+== Добавление подтверждающего документа в заявку
+
+После создания заявки необходимо добавить в неё подтверждающий документ, например, паспорт
+РФ:
+
+
+[source,csharp]
+----
+            var result = issuesService.AddDocumentRequisites(GetIssueId(),
+                new IdentityDocument <.>
+                {
+                    DocumentType = DocumentType.Passport,
+                    Series = PassportSeries.Text,
+                    Number = PassportNumber.Text,
+                    IssuerCode = PassportIssuer.Text,
+                    IssueDate = PassportDate.SelectedDate.Value
+                });
+
+            if (result.Success)
+                throw new ApplicationException(result.Message);
+----
+<.> Устанавливается тип документа и заполняются данные документа.
+
+== Прикладывание скан документа к заявке
+
+После добавления данных документа нужно приложить его скан:
+
+[source,csharp]
+----
+            var scanData = new SendingFileInfo <.>
+            {
+                Data = Resource.passport,
+                Name = "Паспорт.pdf",
+                FileId = Guid.NewGuid(),
+                LongSize = Resource.passport.LongLength
+            };
+
+            var result = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentType.Passport);
+            if (!result.Success)
+            else
+                throw new ApplicationException(result.Message);
+----
+<.> В `scanData` записываются бинарные данные отправляемого файла, его имя и размер.
+
+== Получение заявления на выпуск сертификата
+
+Пользователю необходимо подписать заявление на выпуск сертификата. Получить печатную
+форму заявления можно:
+
+[source,csharp]
+----
+            var result = issuesService.GenerateRequestTemplate(GetIssueId(), TemplateType.ReleaseStatement);
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Заявление_{issueId}.pdf"); <.>
+
+            if (result.Success)
+                File.WriteAllBytes(path, result.Data);
+            else
+                throw new ApplicationException(result.Message);
+----
+<.> Бинарные данные файла заявления записываются в файл `Заявление_\{issueId}.pdf`.
+
+== Отправка скана заявления на выпуск сертификата
+
+Пользователь должен подписать заявление. Далее скан документа требуется отправить в Контур
+УЦ с помощью рассмотренных ранее методов `AddDocumentRequisites` и `SendDocumentScan`:
+
+[source,csharp]
+----
+            var result = issuesService.AddDocumentRequisites(GetIssueId(), new IdentityDocument { DocumentType = DocumentType.ReleaseStatement });
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+            var sendResult = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentType.ReleaseStatement);
+            if (!sendResult.Success)
+                throw new ApplicationException(sendResult.Message);
+----

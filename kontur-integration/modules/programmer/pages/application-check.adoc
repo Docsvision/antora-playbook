@@ -1,0 +1,77 @@
+= Отправка заявки на проверку
+
+Сформированную заявку необходимо отправить на проверку:
+
+[source,csharp]
+----
+            var result = issuesService.SendRequestForValidation(GetIssueId());
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+----
+
+== Удостоверение личности
+
+Этот пункт нужен только для выпуска сертификатов на физических лиц или контрагентов.
+
+Данная операция необходима для разбора инцидентов при нарушении правил УЛ.
+
+[source,csharp]
+----
+            var confirmedEmployee = GetConfirmedEmployee(); <.>
+            var result = issuesService.SubjectIdentification(GetIssueId(), confirmedEmployee);
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+----
+<.> `confirmedEmployee` -- сотрудник, который будет указан удостоверившим личность.
+
+== Отслеживание статуса заявки
+
+После выполнения всех операций по формированию заявки, необходимо дождаться её одобрения,
+прежде чем выгружать сертификат.
+
+[source,csharp]
+----
+            var result = issuesService.GetIssue(GetIssueId());
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+
+            if (result.Data.Actualized)
+                return result.Data.Status; <.>
+----
+<.> Значение `Status` в данном случае может принимать:
++
+* `unknown` -- может быть только возвращаемым типом.
+* `preparing` -- заявку создали и готовят к проверке.
+* `validating` -- заявку проверяет оператор УЦ. В этом статусе нельзя менять заявку.
+* `correction` -- при проверке заявки были выявлены замечания. Нужно их исправить и повторно отправить заявку на проверку. Замечания можно найти в поле `Data.CorrectionInfo`.
+* `approved` -- заявка проверена, замечаний не выявлено. Нужно удостоверить личность и перенаправить заявку в личный кабинет. В этом статусе нельзя менять реквизиты и документы заявки, кроме документов для удостоверения личности.
+* `releasing` -- субъект сертификата отправил запрос на выпуск в личном кабинете. В этом статусе
+нельзя менять заявку.
+* `released` -- сертификат выпущен. В этом статусе нельзя менять заявку.
+Заявка считается выпущенной, если `result.Data.Status` в значении `released`.
+
+== Загрузка сертификата в карточку сотрудника
+
+Выпущенный сертификат Контур должен быть загружен в карточку сотрудника:
+
+[source,csharp]
+----
+            var employee = GetReceivingCertificateEmployee();
+            var result = issuesService.DownloadCertificateAndAssignToEmployee(GetIssueId(), employee);
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+----
+
+После этого пользователь может использовать сертификат с помощью облачного подписания
+Контур.
+
+== Удаление заявки на выпуск сертификата
+
+Если требуется заявку на выпуск можно удалить, но только в статусах `preparing`, `correction`, `approved`:
+
+[source,csharp]
+----
+            var result = issuesService.DeleteCertificateIssueRequest(GetIssueId());
+            if (!result.Success)
+                throw new ApplicationException(result.Message);
+----

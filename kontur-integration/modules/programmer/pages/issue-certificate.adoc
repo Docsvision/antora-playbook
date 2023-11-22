@@ -1,0 +1,105 @@
+= Выпуск сертификата {uc}
+
+Выпуск сертификата {uc} осуществляется с помощью методов, определённых в сервисе
+`DocsVision.Kontur.DssService.ObjectModel.Services.IKonturIssuesService`.
+
+Указанный сервис не добавляется в контекст объектов или DI автоматически, требуемые сервисы необходимо проинициализировать самостоятельно. Чтобы упростить процедуру регистрации сервисов API {uc}, добавьте в проект следующий вспомогательный класс, с помощью которого можно проинициализировать необходимые сервисы для стандартного контекста объектов {dv}:
+
+[source,csharp]
+----
+    internal static class ObjectContextEnrichment
+    {
+        public static ObjectContext EnrichServices(this ObjectContext context)
+        {
+            if (context is null)
+                throw new ArgumentNullException(nameof(context));
+
+            AddService(context, GetKonturOperationsLogger());
+            AddService(context, GetKonturServiceSettings(context));
+            AddService(context, GetKonturKcrService(context));
+            AddService(context, GetKonturIssuesService(context));
+
+            return context;
+        }
+
+        private static IKonturIssuesService GetKonturIssuesService(this ObjectContext context)
+        {
+            var logger = context.GetService<IKonturOperationsLogger>();
+            var kcrService = context.GetService<IKonturKcrService>();
+            return new KonturIssuesServiceImpl(context, kcrService, logger);
+        }
+
+        private static IKonturKcrService GetKonturKcrService(ObjectContext context)
+        {
+            var settingService = context.GetService<IKonturServiceSettings>();
+            var logger = context.GetService<IKonturOperationsLogger>();
+
+            return new KonturKcrServiceImpl(settingService, logger);
+        }
+
+        private static IKonturServiceSettings GetKonturServiceSettings(ObjectContext context)
+        {
+            return new KonturServiceSettingsUniversalStorageImpl(context);
+        }
+
+        private static IKonturOperationsLogger GetKonturOperationsLogger()
+        {
+            return new KonturOperationsLoggerMock();
+        }
+
+        private static void AddService<TService>(IServiceContainer container, TService serviceImpl)
+        {
+            container.AddService(typeof(TService), serviceImpl);
+        }
+
+    }
+
+    internal class KonturOperationsDiagnosticsTraceLogger : IKonturOperationsLogger
+    {
+        public void Debug(string message)
+        {
+            System.Diagnostics.Trace.WriteLine("[Debug] " + message);
+        }
+
+        public void Error(string message)
+        {
+            System.Diagnostics.Trace.WriteLine("[Error] " + message);
+        }
+
+        public void Info(string message)
+        {
+            System.Diagnostics.Trace.WriteLine("[Info] " + message);
+        }
+
+        public void Trace(string message)
+        {
+            System.Diagnostics.Trace.WriteLine("[Trace] " + message);
+        }
+
+        public void Warn(string message)
+        {
+            System.Diagnostics.Trace.WriteLine("[Warn] " + message);
+        }
+
+    }
+----
+
+`KonturOperationsDiagnosticsTraceLogger` реализует простой способ логирования в канал `System.Diagnostics.Trace`. При необходимости реализуйте собственный способ логирования.
+
+Используйте вспомогательный метод `EnrichServices` для добавления сервисов {uc} в существующий контекст объектов:
+
+[source,csharp]
+----
+var context = CreateObjectContext();
+ context.EnrichServices();
+----
+
+Приведённая выше стандартная реализация инициализации сервисов предполагает, что
+конфигурация работы с {uc} хранить в Конструкторе справочников в стандартной секции
+настроек {uc} (требуется установка модуля {uc}). Для получения такой конфигурации
+используется реализация сервиса
+`DocsVision.Kontur.DssService.ObjectModel.Services.KonturServiceSettingsUniversalStorageImpl`.
+Если требуется хранить конфигурацию в нестандартном хранилище, возможно собственная
+реализация сервиса `DocsVision.Kontur.DssService.Interfaces.IKonturServiceSettings`.
+
+
