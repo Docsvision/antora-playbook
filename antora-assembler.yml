@@ -1,0 +1,12 @@
+root_level: 1
+component_versions: '**'
+asciidoc:
+  attributes:
+    source-highlighter: rouge
+    pdf-theme: ./pdf-theme.yml
+build:
+  command: bundle exec asciidoctor-pdf --trace --sourcemap -r asciidoctor-kroki
+  publish: false
+  dir: wwwroot/pdfs
+  keep_aggregate_source: true
+section_merge_strategy: 'fuse'
