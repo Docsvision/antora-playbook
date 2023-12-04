@@ -28,7 +28,7 @@ var result = issuesService.CreateCertificateIssue(employee, inn);
 [source,csharp]
 ----
 if (result.Success) <.>
- return result.Data; <.>
+ return result.Data.Id; <.>
 throw new ApplicationException(result.Message);
 ----
 <.> Если успешно -- возвращается ID заявки
@@ -78,7 +78,7 @@ return result.Data.Actualized;
             var result = issuesService.AddDocumentRequisites(GetIssueId(),
                 new IdentityDocument <.>
                 {
-                    DocumentType = DocumentType.Passport,
+                    DocumentType = DocumentTypes.Passport,
                     Series = PassportSeries.Text,
                     Number = PassportNumber.Text,
                     IssuerCode = PassportIssuer.Text,
@@ -104,7 +104,7 @@ return result.Data.Actualized;
                 LongSize = Resource.passport.LongLength
             };
 
-            var result = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentType.Passport);
+            var result = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentTypes.Passport);
             if (!result.Success)
             else
                 throw new ApplicationException(result.Message);
@@ -135,10 +135,10 @@ return result.Data.Actualized;
 
 [source,csharp]
 ----
-            var result = issuesService.AddDocumentRequisites(GetIssueId(), new IdentityDocument { DocumentType = DocumentType.ReleaseStatement });
+            var result = issuesService.AddDocumentRequisites(GetIssueId(), new IdentityDocument { DocumentType = DocumentTypes.ReleaseStatement });
             if (!result.Success)
                 throw new ApplicationException(result.Message);
-            var sendResult = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentType.ReleaseStatement);
+            var sendResult = issuesService.SendDocumentScan(GetIssueId(), scanData, DocumentTypes.ReleaseStatement);
             if (!sendResult.Success)
                 throw new ApplicationException(sendResult.Message);
 ----
