@@ -50,7 +50,7 @@ include::dev@platform:admin:partial$install.adoc[]
       "ApiKey": "SettingsServiceApiKey" <.>
     },
     "StorageSettings": {
-      "ConnectionString": "CONNECTION-STRING" <.>
+      "ConnectionString": "CONNECTION-STRING", <.>
       "CommandTimeOut": "300" <.>
     },
   },
@@ -81,7 +81,7 @@ include::dev@platform:admin:partial$install.adoc[]
 <.> `ConnectionString` -- адрес {of-sett-serv}.
 <.> `ApiKey` -- ключ доступа к Сервису настроек, указанный в xref:dev@mgmtconsole:admin:install.adoc#sett-serv[конфигурационном файле] {of-sett-serv}.
 <.> `ConnectionString` -- строка подключения базы данных МР, cм. подробнее <<conn-string,ниже>>.
-<.> Время ожидания перед завершением попытки выполнить операцию и созданием ошибки.
+<.> `CommandTimeOut` -- время ожидания перед завершением попытки выполнить операцию и созданием ошибки.
 <.> `Docsvision SolutionManager Administrators` -- пользователи, которым разрешен вход в {sm}. Обратите внимание, что в группе массив строк, а не строка.
 // end::linux[]
 +
@@ -115,7 +115,7 @@ sudo apt-get purge docsvision-{wt}
 [#mgmt-console]
 == Создание процесса для обработки задач {of-sm}
 
-. После установки модуля _{sm}_ в _{sett-serv}_ Консоли автоматически появляется процесс Службы {ws} со специальным типом конфигурации.
+. После установки модуля _{sm}_ в {of-mc} автоматически появляется специальный тип конфигурации.
 . В {of-mc} откройте вкладку "Служба {ws}" и подключите новый процесс. Подробнее см. "xref:dev@mgmtconsole:user:worker-service.adoc[]".
 +
 // .Вкладка "Служба {ws}"
