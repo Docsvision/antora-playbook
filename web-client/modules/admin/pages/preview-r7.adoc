@@ -39,9 +39,9 @@ NOTE: Р7-Офис сервер документов может быть уст�
 +
 [source]
 ----
-location ~* ^(\/upload.*)(\/.*)$
+location \~\* ^(/upload.*)(/.*)$ {
   alias /tmp$1$2;
-  add_header Content-Disposition "attachment; filename*=UTF-8''$arg_filename";
+  add_header Content-Disposition "attachment; filename\*=UTF-8''$arg_filename";
 }
 ----
 +
