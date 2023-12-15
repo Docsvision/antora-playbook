@@ -215,10 +215,10 @@ sudo systemctl start dvexternalapi
 NOTE: Для _{of-what}_ рекомендуется использовать отдельную базу данных.
 
 //tag::mssql[]
-Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-Сервиса-настроек;Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД;TrustServerCertificate=True`.
+Для Microsoft SQL Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-{of-what};Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД;TrustServerCertificate=True`.
 
 * `Data Source` -- адрес сервера SQL для подключения к БД. В качестве `Data Source` может быть указан экземпляр SQL-сервера, например так: `Data Source=DVDatabse\\Server1`.
-* `Название-БД-Сервиса-настроек` -- псевдоним базы данных.
+* `Название-БД-{of-what}` -- псевдоним базы данных.
 * `Integrated Security` -- задает логическое значение, определяющее способ проверки подлинности:
 ** `False` -- при подключении в строке должны быть указаны идентификатор пользователя и пароль.
 ** `True` -- при подключении будут использованы учетные данные текущей учетной записи Windows.
