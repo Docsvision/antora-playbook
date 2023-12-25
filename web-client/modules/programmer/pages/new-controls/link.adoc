@@ -1,0 +1,50 @@
+= Элемент управления "Link"
+
+Данный раздел содержит описание примера реализации элемента управления `_Пример ссылки_`. Проект-расширение клиентской части {wc}а. Содержит клиентский скрипт и стили для ЭУ `_SampleLink_`.
+
+Пример требует подключенного расширения программы {kvr} `UrlPropertyDesignerExtension`.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Откройте консоль в папке `Controls > Link > LinkWebExtension` и выполните команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Plugins\LinkDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\LinkWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Импортируйте решение из файла `SampleLinkControlDescriptionLayout.xml`.
+. Сделайте решение `LinkControlDescriptionLayout` активным для карточки типа Документ вида ДокументУД/Исходящий.
+. Откройте разметку `LinkControlDescriptionLayout`.
+. Задайте желаемые параметры элемента управления `_Пример ссылки_`.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления.
+
+== Описание ЭУ "SampleLinkControlDescription.xml"
+
+Демонстрирует добавление нового ЭУ без написания расширения для конструктора разметок.
+Для этого необходимо описать ЭУ в xml-файле, используя уже подключенные к конструктору свойства и ресурсы.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16" standalone="no"?>
+<Data>
+  <SolutionsDirectory CardID="3200C1F1-6CAA-4C73-A169-78F3A12D155C" CardTypeID="3200C1F1-6CAA-4C73-A169-78F3A12D155C" Description="SolutionsDirectory" CreationDateTime="2018-12-06T12:18:50" ChangeDateTime="2019-02-21T11:44:59" Template="0" Topic="" Barcode="">
+    <Solutions>
+      <SolutionsRow RowID="958039AB-72EC-4E16-B25A-D00C97A160DE" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" SolutionID="A925F725-1D89-4FD5-900F-9A097869D479" Name="LinkClientExtensionLayout" Version="1.0" Mode="0">
+        <Layouts>
+          <LayoutsRow RowID="56BCF095-8303-4DAB-955C-CAFADBB7CDEB" OwnServerID="00000000-0000-0000-0000-000000000000" ChangeServerID="00000000-0000-0000-0000-000000000000" LayoutID="5F515439-7950-4246-8EEF-808B3D894124" Name="LinkClientExtensionLayout" LayoutFileID="DD1B7EFE-2E29-43F6-BFC9-32144861DADE" LocationID="8e40f327-9517-4a43-998d-bf2bd619588d" LayoutFileHash="F58E7A92D0A915B0CF90C4AB182A7CEE" LayoutType="1" />
+        </Layouts>
+      </SolutionsRow>
+    </Solutions>
+  </SolutionsDirectory>
+  <File FileID="DD1B7EFE-2E29-43F6-BFC9-32144861DADE" OwnerCardID="3200C1F1-6CAA-4C73-A169-78F3A12D155C" Name="LinkClientExtensionLayout" Size="2056" CreationDateTime="2019-02-21T10:10:01" ChangeDateTime="2019-02-21T11:44:59" StandardAttribs="0" ExtendedAttribs="0">![CDATA[77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTE2Ij8+PEVsZW1lbnQgSWQ9IjZjODA4M2NmLTljY2EtNDczZi05MTAxLWUwMWQyNzQ1YWYzZiIgVHlwZT0iTGF5b3V0Ij48UHJvcGVydGllcz48UHJvcGVydHkgTmFtZT0iTmFtZSIgVmFsdWU9InJvb3QiIFR5cGU9IlN5c3RlbS5TdHJpbmcsIG1zY29ybGliIiBJc0F2YWlsYWJsZT0idHJ1ZSIgLz48UHJvcGVydHkgTmFtZT0iQ2FyZE9wZW5pbmciIFZhbHVlPSIiIFR5cGU9IlN5c3RlbS5TdHJpbmcsIG1zY29ybGliIiBJc0F2YWlsYWJsZT0idHJ1ZSIgLz48UHJvcGVydHkgTmFtZT0iQ2FyZE9wZW5lZCIgVmFsdWU9IiIgVHlwZT0iU3lzdGVtLlN0cmluZywgbXNjb3JsaWIiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJDYXJkU2F2aW5nIiBWYWx1ZT0iIiBUeXBlPSJTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiIgSXNBdmFpbGFibGU9InRydWUiIC8+PFByb3BlcnR5IE5hbWU9IkNhcmRTYXZlZCIgVmFsdWU9IiIgVHlwZT0iU3lzdGVtLlN0cmluZywgbXNjb3JsaWIiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJDYXJkU3RhdGVDaGFuZ2luZyIgVmFsdWU9IiIgVHlwZT0iU3lzdGVtLlN0cmluZywgbXNjb3JsaWIiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJDYXJkTGF5b3V0U3dpdGNoaW5nIiBWYWx1ZT0iIiBUeXBlPSJTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiIgSXNBdmFpbGFibGU9InRydWUiIC8+PC9Qcm9wZXJ0aWVzPjxFbGVtZW50cz48RWxlbWVudCBJZD0iZDQ0ODg2NDUtZjM1Yi00OGE0LWIxZTYtMzU4NzZiZjY3MGNjIiBUeXBlPSJTYW1wbGVMaW5rIj48UHJvcGVydGllcz48UHJvcGVydHkgTmFtZT0iTmFtZSIgVmFsdWU9InNhbXBsZUxpbmsxIiBUeXBlPSJTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiIgSXNBdmFpbGFibGU9InRydWUiIC8+PFByb3BlcnR5IE5hbWU9IlZpc2liaWxpdHkiIFZhbHVlPSImbHQ7P3htbCB2ZXJzaW9uPSZxdW90OzEuMCZxdW90OyBlbmNvZGluZz0mcXVvdDt1dGYtMTYmcXVvdDs/Jmd0OyYjeEQ7JiN4QTsmbHQ7RGV2aWNlRGVwZW5kZW50UHJvcGVydHlPZkJvb2xlYW4geG1sbnM6eHNpPSZxdW90O2h0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlJnF1b3Q7IHhtbG5zOnhzZD0mcXVvdDtodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSZxdW90OyZndDsmI3hEOyYjeEE7ICAmbHQ7RGVza3RvcCZndDt0cnVlJmx0Oy9EZXNrdG9wJmd0OyYjeEQ7JiN4QTsgICZsdDtUYWJsZXQmZ3Q7dHJ1ZSZsdDsvVGFibGV0Jmd0OyYjeEQ7JiN4QTsgICZsdDtTbWFydHBob25lJmd0O3RydWUmbHQ7L1NtYXJ0cGhvbmUmZ3Q7JiN4RDsmI3hBOyAgJmx0O0NhbkNoYW5nZSZndDt0cnVlJmx0Oy9DYW5DaGFuZ2UmZ3Q7JiN4RDsmI3hBOyZsdDsvRGV2aWNlRGVwZW5kZW50UHJvcGVydHlPZkJvb2xlYW4mZ3Q7IiBUeXBlPSJTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiIgUmVzb2x2ZXJUeXBlPSJEZXZpY2VEZXBlbmRlbnQiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJTdGFuZGFyZENzc0NsYXNzIiBWYWx1ZT0ic2FtcGxlLWxpbmsiIFR5cGU9IlN5c3RlbS5TdHJpbmcsIG1zY29ybGliIiBJc0F2YWlsYWJsZT0idHJ1ZSIgLz48UHJvcGVydHkgTmFtZT0iVGFiU3RvcCIgVmFsdWU9ImZhbHNlIiBUeXBlPSJTeXN0ZW0uQm9vbGVhbiwgbXNjb3JsaWIiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJDbGljayIgVmFsdWU9IiIgVHlwZT0iU3lzdGVtLlN0cmluZywgbXNjb3JsaWIiIElzQXZhaWxhYmxlPSJ0cnVlIiAvPjxQcm9wZXJ0eSBOYW1lPSJNb3VzZU92ZXIiIFZhbHVlPSIiIFR5cGU9IlN5c3RlbS5TdHJpbmcsIG1zY29ybGliIiBJc0F2YWlsYWJsZT0idHJ1ZSIgLz48UHJvcGVydHkgTmFtZT0iTW91c2VPdXQiIFZhbHVlPSIiIFR5cGU9IlN5c3RlbS5TdHJpbmcsIG1zY29ybGliIiBJc0F2YWlsYWJsZT0idHJ1ZSIgLz48L1Byb3BlcnRpZXM+PC9FbGVtZW50PjwvRWxlbWVudHM+PC9FbGVtZW50Pg==]]</File>
+</Data>
+----

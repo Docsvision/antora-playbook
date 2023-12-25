@@ -1,0 +1,48 @@
+= Информация о расширенной карточке
+
+Данный раздел содержит описание примера разработки и подключения собственного серверного расширения для чтения значения полей, загруженных и не загруженных на страницу.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Собрать проект `ServerExtensions > ExtendedCardInfo > ExtendedCardInfoServerExtension`.
+. Откройте консоль в папке `ServerExtensions > ExtendedCardInfo > ExtendedCardInfoWebExtension` и выполните команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопировать каталог `SamplesOutput\Site\Extensions\ExtendedCardInfoServerExtension` в каталог `Путь к сайту Web-клиента\Extensions`.
+. Скопируйте файл `SamplesOutput\Site\Extensions\ru\ExtendedCardInfoServerExtension.resources.dll` в каталог `Путь к сайту Web-клиента\Extensions\ru`.
+. Скопируйте файл `SamplesOutput\Site\Extensions\uk\ExtendedCardInfoServerExtension.resources.dll` в каталог `Путь к сайту Web-клиента\Extensions\uk`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\ExtendedCardInfoWebExtension` в каталог `Путь к сайту Web-клиента\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку просмотра.
+. Выберите условия использования этой разметки.
+. Откройте разметку и для ЭУ `RegDate` на событие `*onChanged*` привязать функцию `extendedCardCheckDates`.
++
+NOTE: Для разных видов карточки название может варьироваться, например, `RegistrationDate`.
++
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что при изменении даты появляется сообщение.
+
+== Проект "ExtendedCardInfoServerExtension"
+
+Проект-расширение для {wc}а. Содержит бизнес-логику для чтения значения полей, загруженных и не загруженных на страницу.
+
+Демонстрирует расширение функционала с помощью добавления новых сервисов, контроллеров.
+Реализован контроллер `ExtendedCardController` с методом `Get`, который вызывает сервис `IExtendedCardService` для чтения не загружаемых на страницу полей документа:
+
+* `CreateDate`
+* `ChangeDate`
+* `Description`
+* `BarCode`
+
+== Проект "ExtendedCardInfoWebExtension"
+
+Проект-расширение клиентской части {wc}а. Содержит клиентский скрипт функции `extendedCardCheckDates`, которая вызывается на событие `*onChanged*` ЭУ `_RegDate_`.
+С помощью `requestManager.get` отправляем запрос на сервер для получения расширенной модели `IExtendedCardModel` и сравниваем поля.

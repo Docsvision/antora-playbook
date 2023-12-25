@@ -1,0 +1,39 @@
+= Проверка опции лицензии
+
+Данный раздел содержит описание примера проверки наличия дополнительной опции лицензионного ключа.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`
+. Соберите проект `ServerExtensions > LicenseCheck > LicenseCheckServerExtension`
+. Откройте консоль в папке `ServerExtensions > LicenseCheck > LicenseCheckWebExtension` и выполните команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\LicenseCheckWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\LicenseCheckServerExtension` в каталог `Путь к сайту {wc}а\Extensions`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку просмотра.
+. Выберите условия использования этой разметки.
+. Откройте разметку и добавить в нее элемент управления `_Кнопка_`.
+. На событие `onClick` задать функцию `checkLicenseFeature`.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления (кнопка).
+. Нажмите на кнопку. Должно появиться сообщение с результатом проверки.
+
+== Проект "LicenseCheckServerExtension"
+
+Проект-расширение для {wc}а. Содержит бизнес-логику и скрипт для проверки наличия дополнительной опции лицензионного ключа.
+В данном примере это опция `Docsvision Card Builder`.
+Демонстрирует расширение функционала с помощью добавления новых сервисов, контроллеров.
+Реализован контроллер `LicenseCheckController` с методом `CheckFeature`, который вызывает сервис `ILicenseCheckService`.
+
+== Проект "LicenseCheckWebExtension"
+
+Содержит скрипт, который при нажатии на кнопку с помощью сервиса `requestManager` отправляется запрос на сервер. Пользователю отображается сообщение о наличии или отсутствии опции.

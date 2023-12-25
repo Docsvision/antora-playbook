@@ -1,0 +1,54 @@
+= Элемент управления "Пример изображения"
+
+Данный раздел содержит описание примера
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Проект "ImageDesignerExtension"
+
+Проект-расширение для конструктора разметок. Содержит описание элемента управления `_Пример изображения_` для программы {kvr}. Демонстрирует описание и подключение нового ЭУ, используя класс `ControlTypeDescription`, задание ему стандартных свойств, реализованных в программе {kvr}footnote:[См. `PropertyFactory.GetNameProperty()`] и добавление кастомных свойств, используя класс `PropretyDescription`footnote:[См. свойство `Slider, ImageHeight)`].
+Для собственного свойства `Slider` реализован свой редактор, `SliderEditor.xaml`.
+
+== Проект "ImageServerExtension"
+
+Проект-расширение для {wc}а. Содержит бизнес-логику и реализацию элемента управления на сервере.
+Демонстрирует работу с собственным свойством `Slider` -- преобразование его значения `string` в рабочую модель, `List` с помощью класса `SliderConverter` и метода `ConvertForDisplay`. Эта модель дублируется на клиенте `ISliderItem[]`.
+Таким образом реализована связка `List` -- `JSON` -- `ISliderItem[]` между сервером и клиентом.
+
+С помощью `Slider` можно пролистывать несколько изображений, вешая обработчики `onClick` на соответсвующее элементы разметки.
+
+== Проект "ImageWebExtension"
+
+Содержит скрипты и стили ЭУ `Пример изображения`.
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `Controls > Image > ImageDesignerExtension`.
+. Соберите проект `Controls > Image > ImageServerExtension`.
+. Откройте консоль в папке `Controls > Image > ImageWebExtension` и выполните команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Соберите проект `ControlProperties > Url > UrlPropertyDesignerExtension`.
+. Скопируйте каталог `SamplesOutput\Plugins\ImageDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\ImageServerExtension` в каталог `Путь к сайту {wc}а\Extensions`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\ImageWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Скопируйте каталог `SamplesOutput\Plugins\UrlPropertyDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку.
+. Выберите условия использования этой разметки.
+. Откройте разметку и добавить в нее новый элемент управления `_Пример изображения_`.
+. Задайте желаемые параметры элемента управления.
++
+[WARNING]
+====
+При указании URL адрес должен быть доступен согласно политике CORS. Большинство серверов не разрешают запросы из веб-приложений, расположенных на других доменах. Политике CORS гарантированно удовлетворяют адреса внутри {wc}а, например `Content/App/Assets/Images/favorite-empty.svg`.
+====
++
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления.

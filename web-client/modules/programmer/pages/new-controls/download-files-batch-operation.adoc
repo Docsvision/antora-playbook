@@ -1,0 +1,39 @@
+= Групповая операция / Скачивание файлов
+
+Данный раздел содержит описание примера реализации элемента управления групповой операции _Групповая операция / Скачивание файлов_.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Проект "DownloadFilesGroupOperationDesignerExtension"
+
+Проект-расширение для конструктора разметок. Содержит описание элемента управления групповой операции _Групповая операция / Скачивание файлов_ для программы {kvr}.
+Демонстрирует описание и подключение нового ЭУ, используя класс `ControlTypeDescription`,
+
+== Проект "DownloadFilesGroupOperationServerExtension"
+
+Содержит контроллер, в котором формируется список файлов документа, запрашиваемый элементом управления _Групповая операция / Скачивание файлов_.
+
+== Проект "DownloadFilesGroupOperationWebExtension"
+
+Проект-расширение клиентской части {wc}. Содержит реализацию элемента управления _Групповая операция / Скачивание файлов_.
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `Controls > DownloadFilesGroupOperation > DownloadFilesGroupOperationDesignerExtension`.
+. Соберите проект `Controls > DownloadFilesGroupOperation > DownloadFilesGroupOperationServerExtension`.
+. Откройте консоль в папке `Controls > DownloadFilesGroupOperation > DownloadFilesGroupOperationWebExtension` и выполните команду `npm install` и `npm run build:prod`.
+
+. Скопируйте каталог `SamplesOutput\Plugins\DownloadFilesGroupOperationDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\DownloadFilesGroupOperationServerExtension` в каталог `Путь к сайту {wc}а\Extensions`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\DownloadFilesGroupOperation` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. В разметку menu:WebFrame[Папка] добавьте ЭУ _Групповая операция / Скачивание файлов_.
+. Сохраните разметку.
+. Откройте каталог с документами в {wc}е.
+. Включить режим групповых операций и убедиться, что появился новый элемент управления.

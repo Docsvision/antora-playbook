@@ -10,7 +10,7 @@ include::grid-context.adoc[tags=start]
 ----
 extensionManager.registerExtension({
     name: "HoverPanelGroping",
-    version: "5.5.17",
+    version: "6.1",
     initialize() {
         app.setService($HoverPanel, new CustomHoverPanelService()); <.>
     },
@@ -65,9 +65,9 @@ export const HoverPanelGroupingByColumn: HeaderHoverPanelPlugin<$Grouping & $Sid
 };
 ----
 <.> Деструктуризируем объект `props`, получая все необходимые данные для реализации группировки по столбцу
-<.> С помощью хука useStore получаем данные из хранилища `$gropingPath`.
+<.> С помощью хука useStore получаем данные из хранилища `$groupingPath`.
 +
-Хук предоставляет возможность перерисовывать компонент при изменении состояния хранилища `$gropingPath`.
+Хук предоставляет возможность перерисовывать компонент при изменении состояния хранилища `$groupingPath`.
 +
 .Так как мы следим за состоянием хранилища и перерисовываем компонент, мы можем учитывать следующую логику:
 - Если столбец уже сгруппирован, то не показывать иконку

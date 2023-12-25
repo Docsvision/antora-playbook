@@ -4,12 +4,13 @@
 
 == Перечень необходимых инструментов
 
-* https://www.visualstudio.com/[Visual Studio].
+include::ROOT:partial$excerpts.adoc[tags=wc-version]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
 * {dv} WebClient SDK (запрашивается через портал ТП).
 
 == Описание файлов проекта
 
-* В корне репозитория расположено решение для Visual Studio (`Samples.sln`) и ключ для подписания сборок примеров (`StrongNameKey.snk`).
+* В корне репозитория расположено решение для Visual Studio (`Samples.sln`) и ключ для подписания сборок примеров (`StrongNameKey.snk`). Рекомендуется использовать Visual Studio {vscode-v}.
 * `Assemblies` -- сборки, необходимые для использования примеров
 * `ServerExtension.cs` -- входная точка расширение, в которой регистрируются сервисы и прочие сущности.
 * `Sign.snk` -- файл подписи сборки. Для установки сборки должны быть подписаны. Рекомендуется сгенерировать новый файл подписи в настройках проекта.
@@ -22,7 +23,7 @@
 == Сборка и установка
 
 .Чтобы создать серверное расширение:
-. Убедитесь, что установлен Docsvision WebClient SDK.
+. Убедитесь, что установлен {dv} WebClient SDK.
 +
 В этом случае в переменной окружения `DocsvisionWebClientSDK` содержится путь к его папке, например, `C:\Program Files (x86)\Docsvision\WebClient\SDK`.
 +
@@ -101,7 +102,7 @@ public class TemplateServerExtension : WebClientExtension
 В результате будет получен файл DLL с ядром серверного расширения и реализуемыми функциями, а также файлы DLL с локализованными ресурсами.
 ****
 +
-. Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки menu:bin[WebClient > Bin] в menu:Каталог-установки-Web-клиента[Site > bin].
+. Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки menu:bin[WebClient > Bin] в menu:Каталог-установки-{wc}а[Site > bin].
 +
 [WARNING]
 ====
@@ -114,7 +115,7 @@ public class TemplateServerExtension : WebClientExtension
 
 == Проверка работы
 
-. Откройте Web-клиент.
+. Откройте {wc}.
 . Откройте диалог "О программе" и убедитесь, что расширение присутствует в списке подключенных расширений.
 . Откройте произвольный документ и в консоли браузера выполните:
 +

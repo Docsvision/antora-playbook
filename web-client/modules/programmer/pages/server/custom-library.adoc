@@ -1,0 +1,127 @@
+= Взаимодействие с пользовательским типом карточки
+
+Данный раздел содержит описание примера серверного расширения. Пример демонстрирует взаимодействие с пользовательским типом карточки {dv}.
+
+В библиотеке `Sample custom library` реализован тип карточки `Custom Directory`, который представляет справочник с полем `Counter`. Значение поля получается скриптом и выводится во всплывающем окне.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+* {dv} Resource Kit
+* {dv} DVExplorer
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проекты `ServerExtensions > CustomLibrary > CustomLibrary.ObjectModel` и `CustomLibraryServerExtension`.
+. Откройте консоль в папке `ServerExtensions > CustomLibrary > CustomLibraryWebExtension` и выполнить команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\CustomLibraryServerExtension` в каталог `Путь к сайту {wc}а\Extensions`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\CustomLibraryWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
++
+WARNING: Перед выполнением следующего шага, рекомендуется сделать резервную копию базы данных {dv}.
++
+. На сервере {dv} установите _{dv} Resource Kit_, установить обновление _DVExplorer_. С помощью утилиты _DVCardManager_ следует загрузить в БД {dv} библиотеку `CustomCardLib` из каталога `SamplesOutput\SamplesCardDefs\CustomLibrary`. Подробное описание процедуры загрузки пользовательской библиотеки карточек содержится в xref:programmer:solutions:cards/scheme/load-scheme.adoc[руководстве разработчика {dv}].
+. С помощью утилиты _DVExplorer_ подключитесь к БД, откройте карточку справочника `Custom Directory`, добавьте строку секции `MainInfo` и установите значение `777` в поле `Counter`. 
++
+Сохраните изменения. Подробное описание работы с утилитой _DVExplorer_ содержится xref:resource-kit:dvexplorer:util.adoc[в документации комплекта утилит Resource Kit].
++
+. Перезапустите *{wcs-new}* на сервере {dv}.
+. Перезапустите *{wcs-new}* на сервере {dv} {wc}.
+
+== Проверка примера
+
+. Запустить конструктор разметок.
+. Скопировать любую разметку просмотра.
+. Выбрать условия использования этой разметки.
+. В разметке просмотра на событие `OnCardOpened` элемента `root` указать обработчик с названием `getCustomData`.
+. Сохранить разметку.
+. Перезапустите *{wcs-new}*.
+. Создайте карточку документа.
+. При открытии разметки просмотра появится всплывающее сообщение: `Custom data: 777`.
+
+== Каталог "CardDefs"
+
+Содержит описание библиотеки `Sample custom library`, в которой описан тип карточки `CustomDirectory` -- справочник. В секции `MainInfo` справочника есть поле `Counter`. Подробности содержатся в документации разработчика {dv}.
+
+== Проект "CustomLibrary.ObjectModel"
+
+Проект содержит объектную модель карточки типа `CustomDirectory`. Подробности содержатся в xref:programmer:cards:edit-card.adoc[руководстве разработчика {dv}].
+
+[source,csharp]
+----
+namespace CustomLibrary.ObjectModel
+{
+
+    public class CustomDirectory : BaseCard <.>
+    {
+
+        public static readonly ObjectProperty MainInfoProperty = ObjectProperty.Register("MainInfo", typeof(ObjectCollection<MainInfo>), typeof(CustomDirectory)); <.>
+
+        [DebuggerHidden]
+        static CustomDirectory()
+        {
+        }
+
+        internal protected CustomDirectory() <.>
+            : base()
+        {
+        }
+
+        internal protected CustomDirectory(ObjectInitializationData data) <.>
+            : base(data)
+        {
+        }
+
+        #region Properties
+
+        public MainInfo MainInfo <.>
+        {
+            get
+            {
+                if (((ObjectCollection<MainInfo>)GetValue(MainInfoProperty)).Count == 0)
+                    ((ObjectCollection<MainInfo>)GetValue(MainInfoProperty)).Add(new MainInfo());
+
+                return ((ObjectCollection<MainInfo>)GetValue(MainInfoProperty)).First();
+            }
+        }
+
+        #endregion
+    }
+}
+----
+<.> Представляет собой пользовательский справочник.
+<.> Настройки базы данных.
+<.> Создаёт новый экземпляр `CustomDirectory`.
+<.> Создаёт новый экземпляр `CustomDirectory`.
+<.> Главная информация.
+
+== Проект "CustomLibraryServerExtension"
+
+Проект-расширение для {wc}. Содержит сервис по работе со справочником `CustomDirectory`, методы контроллера `CustomLibrary` для взаимодействия с клиентскими скриптами веб-приложения.
+
+[source,csharp]
+----
+namespace CustomLibraryServerExtension.Services
+{
+    public class CustomLibraryService : ICustomLibraryService <.>
+    {
+        public CustomLibraryService(IServiceProvider provider) <.>
+        {
+        }
+        public int GetCustomData(SessionContext sessionContext) <.>
+        {
+            var settingsDirectory = sessionContext.ObjectContext.GetObject<CustomDirectory>(CustomLibrary.CustomLibrary.CardLib.CardDefs.CustomDirectory.ID);
+
+            int count = settingsDirectory.MainInfo.Counter;
+
+            return count;
+        }
+    }
+}
+----
+<.> Представляет собой пример сервиса, использующего кастомную библиотеку
+<.> Создаёт новый экземпляр <see cref="CustomLibraryService"/>
+<.> Получить кастомные данные
+
+== Проект "CustomLibraryWebExtension"
+
+Содержит клиентский скрипт `getCustomData`.

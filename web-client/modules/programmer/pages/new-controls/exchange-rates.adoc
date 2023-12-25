@@ -1,0 +1,51 @@
+= Элемент управления "Обменный курс"
+
+Данный раздел содержит описание примера реализации элемента управления `_ExchangeRates_`. Проект-расширение клиентской части {wc}а. Содержит клиентский скрипт и стили для `_SampleExchangeRates_`.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Откройте консоль в папке `Controls > ExchangeRates > ExchangeRatesWebExtension` и выполните команду `npm install` и `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Plugins\SampleExchangeRatesDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\ExchangeRatesWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Импортируйте решение из файла `SampleExchangeRatesControlDescriptionLayout.xml`.
+. Сделайте решение `SampleExchangeRatesControlDescriptionLayout` активным для карточки типа Документ вида _ДокументУД/Исходящий_.
+. Откройте разметку `SampleExchangeRatesControlDescriptionLayout`
+. Зарегистрируйте бесплатный аккаунт на сайте https://fixer.io/signup/free[fixer.io].
+. Перейдите по ссылке https://fixer.io/quickstart и скопировать ключ доступа к API.
+. Задайте параметру `*Ключ доступа к API*` элемента управления `_ExchangeRates_` значение вашего ключа из шага выше.
+. Задайте остальные желаемые параметры элемента управления.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления.
+
+== Описание ЭУ "SampleExchangeRatesControlDescription.xml"
+
+Демонстрирует добавление нового ЭУ без написания расширения для конструктора разметок.
+Для этого необходимо описать ЭУ в xml-файле, используя уже подключенные к конструктору свойства и ресурсы.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8" ?>
+<Controls>
+  <Control Name="SampleExchangeRates" ControlGroupResourceKey="ControlGroup_Samples" DisplayName="Sample exchange rates">
+    <Properties> <.>
+      <Property Type="Name" />
+      <Property Type="Visibility" />
+      <Property Type="StandardCssClass" DefaultValue="sample-exchange-rates" /> <.>
+      <Property Type="CustomCssClasses" />
+    </Properties>
+  </Control>
+</Controls>
+----
+<.> Содержит перечисление свойств ЭУ.
+<.> `DefaultValue` задаёт значение поля по умолчанию.

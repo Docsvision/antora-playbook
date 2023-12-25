@@ -1,0 +1,123 @@
+= Создание карточки при помощи скрипта
+
+Данный раздел содержит описание примера создания карточки скриптом с заполнением атрибутов.
+
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `ServerExtensions > CreateCard > CreateCardServerExtension`.
+. Откройте консоль в папке `ServerExtensions > CreateCard > CreateCardWebExtension` и выполнить команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Site\Content\Modules\CreateCardWebExtension` в каталог `Путь к сайту Web-клиента\Content\Modules`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\CreateCardServerExtension` в каталог `Путь к сайту Web-клиента\Extensions`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку просмотра.
+. Выбрать условия использования этой разметки.
+. Откройте разметку и добавить в нее элемент управления `_Кнопка_`.
+. На событие `onClick` задать функцию `createOutgoingDocument`.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления -- кнопка, при нажатии на которую создается исходящий документ.
+. Должен открыться исходящий документ, с заданными атрибутами.
+
+== Проект "CreateCardServerExtension"
+
+. Проект-расширение для {wc}. Содержит бизнес-логику и скрипт для создания новой карточки.
++
+[source,csharp]
+----
+namespace CreateCardServerExtension
+{
+    public class LayoutWebClientExtension : WebClientExtension <.>
+    {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="serviceProvider">Сервис-провайдер</param>
+        public LayoutWebClientExtension(IServiceProvider serviceProvider) <.>
+            : base()
+        {
+        }
+
+        public override string ExtensionName <.>
+        {
+            get { return Assembly.GetAssembly(typeof(LayoutWebClientExtension)).GetName().Name; }
+        }
+
+        public override Version ExtensionVersion <.>
+        {
+            get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
+        }
+
+        #region WebClientExtension Overrides
+
+        public override void InitializeServiceCollection(IServiceCollection services) <.>
+        {
+            services.AddSingleton<ISampleDocumentService, SampleDocumentService>();
+        }
+
+        #endregion
+    }
+}
+----
+<.> Задаёт описание расширения для {wc}а, которое задано в текущей сборке.
+<.> Создаёт новый экземпляр `LayoutWebClientExtension`.
+<.> Получить название расширения.
+<.> Получить версию расширения.
+<.> Регистрация типов в IoC контейнере.
++
+.Параметры:
+* `containerBuilder` -- сборщик контейнеров.
++
+. Демонстрирует расширение функционала с помощью добавления новых сервисов, контроллеров.
+. Реализован контроллер `SampleDocumentController` с методом `CreateOutgoingDocument`, который вызывает сервис `ISampleDocumentService`, для создания исходящего документа и заполнения его полей:
++
+--
+* "Исходящий.Дата создания" = текущая дата.
+* "Исходящий.Регистратор" = текущий пользователь.
+* "Исходящий.Автор" = текущий пользователь.
+* "Исходящий.Организация-Контрагет" = Входящий.Организация-Отправитель.
+* "Исходящий.Название" = "В ответ на " + <Входящий.Исходящий номер>.
+* В ссылки Исходящего и исходного Входящего добавить ссылку друг на друга, тип "ответ" -- "в ответ на".
+--
++
+[source,csharp]
+----
+namespace CreateCardServerExtension.Controllers
+{
+    public class SampleDocumentController : Controller
+    {
+        private readonly ICurrentObjectContextProvider currentObjectContextProvider;
+        private readonly ISampleDocumentService sampleDocumentService;
+
+        public SampleDocumentController(ICurrentObjectContextProvider currentObjectContextProvider, ISampleDocumentService sampleDocumentService) <.>
+        {
+            this.currentObjectContextProvider = currentObjectContextProvider;
+            this.sampleDocumentService = sampleDocumentService;
+        }
+
+        public ActionResult CreateOutgoingDocument(Guid parentDocId) <.>
+        {
+            var sessionContext = this.currentObjectContextProvider.GetOrCreateCurrentSessionContext();
+            var response = sampleDocumentService.CreateOutgoingDocument(sessionContext, parentDocId);
+
+            return Content(JsonHelper.SerializeToJson(response), "application/json");
+        }
+    }
+}
+----
+<.> Создаёт новый экземпляр, см. `SampleDocumentController`.
+<.> GET: `/LayoutCreateDocumentController/SendToAcquaintance`
+
+== Проект "CreateCardWebExtension"
+
+Содержит клиентские скрипты, в которых при нажатии на кнопку с помощью сервиса `requestManager` отправляется запрос на сервер. Пользователю отображается созданная карточка Исходящего документа в режиме просмотра.

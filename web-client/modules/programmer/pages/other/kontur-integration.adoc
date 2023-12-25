@@ -1,0 +1,113 @@
+= Интеграция с сервисом Контур.Фокус
+
+Данный раздел содержит описание примера интеграции с сервисом Контур.Фокус.
+
+.Пример включает два компонента:
+* `KonturServerExtension` -- папка с серверным расширением {wc}а, в котором реализовано проксирование запросов к Контур.Фокус (для обхода ограничений CORS в браузере).
+* `KonturWebExtension` -- папка с клиентским расширением, в котором реализовано открытие отчета о контрагенте и загрузка информации.
+* `KonturSolution.xml` -- решение с разметкой для организации контрагента, содержащее разметку с необходимыми обработчиками и элементами управления.
+
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+.Перечень необходимых инструментов:
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Сборка серверной части.
+.. Откройте решение `Samples.sln`.
+.. Соберите проект `Other > Kontur > Kontur`.
+. Сборка клиентской части.
+.. Откройте в командной строке папку `Others > KonturIntergration > KonturWebExtension`.
+.. Выполните команды:
++
+[source,bash]
+----
+npm install
+npm update
+npm run build:prod
+----
++
+. Публикация компонентов на сервере {wc}а.
+.. Скопируйте папку `SamplesOutput\Site\Content\Modules\KonturWebExtension\` в  `Путь к сайту Web-клиента\Content\Modules`.
+.. Скопируйте папку `SamplesOutput\Site\Extensions\KonturServerExtension` в  `Путь к сайту Web-клиента\Extensions`.
+.. Перезапустите Web-сервис.
+
+== Проверка примера
+
+=== При создании контрагента
+
+. В программе {kvr} импортируйте решение `KonturSolution.xml`.
+. В `appsettings.json` {wc}а добавьте в корневой элемент настройку с ключом доступа к API Контур.Фокус:
++
+[source,json]
+----
+"KonturSettings": {
+  "ApiKey": "..."
+}
+----
++
+. Откройте разметку с ЭУ `PartnerDepartment`, например, создание исходящего документа, откройте окно справочника и нажмите кнопку добавления организации.
+. В открывшейся разметке введите ИНН организации, например, `6663003127`.
+. Нажмите кнопку *Просмотреть отчет о контрагенте* -- откроется окно с информацией о контрагенте.
+. Нажмите на кнопку *Загрузить информацию* -- значения элементов управления на разметке заполнятся данными из Контур.Фокус.
+
+=== В карточке документа
+
+. Добавьте разметку карточки типа документ кнопку, назначьте ей обработчик `openBriefReportAndAttachFile`.
+. В ту же разметку добавьте ЭУ с именем `INN` типа `TextBox`. Настройте его таким образом, что бы он содержал актуальный ИНН контрагента, например, через расширенные источники данных.
+. Откройте документ и нажмите на кнопку, откроется отчет в модальном окне и к документу будет прикреплен файл отчета в качестве дополнительного файла.
+
+== Компонент "KonturServerExtension"
+
+[source,csharp]
+----
+namespace Kontur
+{
+    public class KonturServerExtension : WebClientExtension <.>
+    {
+
+        public KonturServerExtension(IServiceProvider serviceProvider) <.>
+            : base()
+        {
+        }
+
+        public override string ExtensionName <.>
+        {
+            get { return Assembly.GetAssembly(typeof(KonturServerExtension)).GetName().Name; }
+        }
+
+        public override Version ExtensionVersion <.>
+        {
+            get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
+        }
+
+        #region WebClientExtension Overrides
+
+        public override void InitializeServiceCollection(IServiceCollection services)
+        {
+            services.AddSingleton<IKonturRequestService, KonturRequestService>();
+            services.AddOptions<KonturSettings>().BindConfiguration(KonturSettings.Key);
+
+        }
+
+        protected override List<ResourceManager> GetLayoutExtensionResourceManagers() <.>
+        {
+            return new List<ResourceManager>
+            {
+
+            };
+        }
+
+        #endregion
+    }
+}
+----
+<.> Задаёт описание расширения для {wc}а, которое задано в текущей сборке.
+<.> Создаёт новый экземпляр, см. `KonturServerExtension`.
++
+* `serviceProvider` -- сервис-провайдер.
++
+<.> Получить название расширения.
+<.> Получить версию расширения.
+<.> Получает менеджеры ресурсов для расширения конструктора разметок.
