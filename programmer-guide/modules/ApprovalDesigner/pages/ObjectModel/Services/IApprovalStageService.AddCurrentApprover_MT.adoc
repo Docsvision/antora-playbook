@@ -1,0 +1,29 @@
+= IApprovalStageService.AddCurrentApprover -- метод (ApprovalStage, StaffEmployee)
+
+Добавляет текущего сотрудника в этап согласования.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+ApprovalStageApprover AddSelectedApprover(ApprovalStage approvalStage, StaffRole role)
+----
+
+Параметры::
+approvalStage:::
+Тип: `xref:ObjectModel/ApprovalStage_CL.adoc[ApprovalStage]`
++
+Этап согласования
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel-Staff:StaffRole_CL.adoc[StaffRole]`
++
+Сотрудник
+
+Возвращаемое значение::
+Тип: `ApprovalStageCurrentApprover`
++
+Текущий сотрудник на этапе согласования

@@ -1,0 +1,34 @@
+= ProcessExcludedApprovers -- метод (ApprovalStage, Document, IEnumerable<ApprovalStageApprover>)
+
+Исключает согласующих.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+IEnumerable<ApprovalStageApprover> ProcessExcludedApprovers(ApprovalStage approvalStage, Document document, IEnumerable<ApprovalStageApprover> approvers)
+----
+
+Параметры::
+approvalStage:::
+Тип: `xref:ObjectModel/ApprovalStage_CL.adoc[ApprovalStage]`
++
+Этап согласования в карте этапов Маршрута согласования
+
+document:::
+Тип: `xref:BackOffice-ObjectModel-Document:Document_CL.adoc[Document]`
++
+Документ
+
+approvers:::
+Тип: `xref:ObjectModel/ApprovalStageApprover_CL.adoc[ApprovalStageApprover]`
++
+Согласующие
+
+Возвращаемое значение::
+Тип: `xref:ObjectModel/ApprovalStageApprover_CL.adoc[ApprovalStageApprover]`
++
+Согласующий
