@@ -13,7 +13,7 @@
 Для проверки зависимостей и быстрой сборки сразу всех примеров можно воспользоваться установочным пакетом {dv} Web-client SDK. При установке файлы примеров будут собраны и помещены в соответствующие каталоги. При необходимости (например, если {wc} уже установлен) вы можете изменить путь сборки через переменную окружения в node и проектах Visual Studiofootnote:[Рекомендуется использовать Visual Studio Code {vscode-v}.].
 Если в примере требуется загрузка разметки или библиотеки карточек, это необходимо произвести вручную.
 
-После установки SDK в `{wcd}\SDK\USAGE.md` указаны инструкции по разворачиванию примеров.
+После установки SDK в `C:\Program Files (x86)\Docsvision\WebClient\SDK\USAGE.md` указаны инструкции по разворачиванию примеров.
 
 . Подготовьте среду разработки.
 +
@@ -23,6 +23,8 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 * https://nodejs.org/en/[NodeJS {node-v} или выше].
 * TypeScript 3.8.
 +
+NOTE: Если указанные компоненты не установлены, при установке SDK будет предложено их автоматически загрузить и установить.
++
 . Загрузите на компьютер xref:web-client-samples.adoc[репозиторий WebClient-Samples].
 +
 . Установите шаблоны проектов из полученного репозитория:
@@ -31,7 +33,7 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 * _TemplateServerExtension_ -- шаблон проекта для разработки серверного расширения.
 
 .Чтобы установить шаблоны:
-. Скопируйте файлы `TemplateDesignerExtension.zip` и `TemplateServerExtension.zip` из каталога репозитория `ProjectTemplates\VSTemplates\` в каталог шаблонов проектов Visual Studiofootnote:[Рекомендуется использовать Visual Studio Code {vscode-v}.] (`C:\Users\\%username%\Documents\Visual Studio %version%\Templates\ProjectTemplates\Visual C#\`) .
+. Скопируйте папки `Docsvision Web-layout designer extension template` и `Docsvision Web-client server extension template` из каталога репозитория `ProjectTemplates\VSTemplates\` в каталог шаблонов проектов Visual Studiofootnote:[Рекомендуется использовать Visual Studio Code {vscode-v}.] (`C:\Users\\%username%\Documents\Visual Studio %version%\Templates\ProjectTemplates\Visual C#\`).
 . Запустите Visual Studiofootnote:[Рекомендуется использовать Visual Studio Code {vscode-v}.]. Будут добавлены новые типы проектов: _TemplateDesignerExtension_ и _TemplateServerExtension_.
 
 == Что дальше
@@ -79,12 +81,22 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 
 == Список примеров
 
+=== Примеры клиентских расширений
+
 .Примеры клиентских расширений с обработчиками событий (скриптов):
 * `ClientScripts\TypeScript\ChangeLogoAndBackground` -- демонстрирует пример реализации скрипта, изменяющего заголовок страницы и её фоновое изображение для папок и дашборда.
 * `ClientScripts\TypeScript\ChangeStateByScript` -- демонстрирует возможность использования JS API для изменения состояния карточки.
-* `ClientScripts\TypeScript\ControlsRelation` -- пример демонстрирует способ организации взаимодействия элементов разметки, через обработчики событий (в примере видимость одного элемента управления зависит от значения другого).
 * `ClientScripts\TypeScript\ControlValidation` -- пример реализации обработчика сохранения карточки, осуществляющего проверку значения текстового поля, с отменой сохранения, если поле не заполнено или количество знаков в строке больше `100`.
+* `ClientScripts\TypeScript\ControlsRelation` -- пример демонстрирует способ организации взаимодействия элементов разметки, через обработчики событий (в примере видимость одного элемента управления зависит от значения другого).
 * `ClientScripts\TypeScript\CopyValueToControl` -- пример метода, в котором выполняется копирование значения одного элемента управления в другой.
+* `ClientScripts\TypeScript\ExtendServerQueryData` -- индикатор высокого приоритета для просроченных заданий.
+* `ClientScripts\TypeScript\FileListHighlightRow` -- добавляет красную обводку при скачивании файла.
+* `ClientScripts\TypeScript\GridColumnBackgroundRows` -- новая колонка таблицы грида -- _Фон строки_.
+* `ClientScripts\TypeScript\GridContextMenuItem` -- новый пункт контекстного меню Открыть карточку в модальном окне.
+* `ClientScripts\TypeScript\GridHoverPanelGrouping` -- группировка по столбцу.
+* `ClientScripts\TypeScript\GridToolbarButton` -- кнопка в гриде отображает общее количество карточек, а также количество непрочитанных.
+* `ClientScripts\TypeScript\LoginPage` -- настройка страницы авторизации.
+* `ClientScripts\TypeScript\ShowRequiredFields` -- отображение незаполненных обязательных полей.
 * `ClientScripts\TypeScript\ValidateOnStateChanging` -- пример реализации обработчика изменения состояния карточки, осуществляющего проверку значения текстового поля, с отменой изменения состояния, если поле не заполнено или количество знаков в строке больше `100`.
 * `ClientScripts\AdvancedTypeScript` -- примеры клиентских расширений, в которых задействован React API:
 ** `ClientScripts\AdvancedTypeScript\AdaptiveMenuBar` -- пример реализации панели меню с собственным набором элементов.
@@ -94,18 +106,23 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 
 // NOTE: Папка `ClientScripts\JS` содержит исходные коды указанных примеров на языке JavaScript.
 
-.Примеры серверных расширений:
+=== Примеры серверных расширений
+
+* `ServerExtensions\CSPSignatureVisualization` --
 * `ServerExtensions\CreateCard` -- пример реализации функции создания исходящих документов, представленной в виде клиентской и серверной частей:
 ** `ServerExtensions\CreateCard\CreateCardServerExtension` -- серверное расширение, добавляющее метод WebAPI, создающий карточку исходящего документа.
 ** `ServerExtensions\CreateCard\CreateCardWebExtension` -- клиентское расширение, добавляющее клиентский сервис создания документа (вызывает метод расширения `CreateCardServerExtension`) и пример обработчика событий, использующего клиентский сервис.
 * `ServerExtensions\CreateCardDialog` -- серверное расширение, добавляющее в {wc} возможность создания карточек типа _Этап согласования_:
 ** `ServerExtensions\CreateCardDialog\CreateCardDialogServerExtension` -- серверное расширение, добавляющее фабрику карточек, позволяющую создавать карточки Этап согласования.
 ** `ServerExtensions\CreateCardDialog\CreateCardDialogWebExtension` -- клиентское расширение, регистрирующее новый тип карточек на стороне клиента.
+* `ServerExtensions\CustomConditionTypes` -- отображение разметки в соответствии с заданными условиями.
 * `ServerExtensions\CustomLibrary` -- пример демонстрирует способ добавление нового типа карточек. Пример включает несколько компонентов:
 ** `ServerExtensions\CustomLibrary\CardDefs` -- схема новой библиотеки карточек с карточкой справочника.
 ** `ServerExtensions\CustomLibrary\CustomLibrary.ObjectModel` -- классы объектной модели библиотеки карточек.
 ** `ServerExtensions\CustomLibrary\CustomLibraryServerExtension` -- серверное расширение, добавляющее в {wc} поддержку нового типа карточек и WebApi функцию получения данных карточек нового типа.
 ** `ServerExtensions\CustomLibrary\CustomLibraryWebExtension` -- клиентское расширение, добавляющее клиентский сервис для вызова функции серверного расширения `CustomLibraryServerExtension` и пример обработчика событий, использующего клиентский сервис.
+* `ServerExtensions\DataGridControlExtension` -- плагин загружает информацию о файлах для документа.
+* `ServerExtensions\ExcelExport` -- экспорт в Excel.
 * `ServerExtensions\ExtendedCardInfo` -- пример демонстрирует возможность получения данных карточки, которые по умолчанию не загружаются и не передаются клиенту. Пример представлен в виде клиентской и серверной частей:
 ** `ServerExtensions\ExtendedCardInfo\ExtendedCardInfoServerExtension` -- серверное расширение, добавляющее WebApi функцию загрузки из {dv} данных карточки.
 ** `ServerExtensions\ExtendedCardInfo\ExtendedCardInfoWebExtension` -- клиентское расширение, добавляющее клиентский сервис для вызова функции серверного расширения ExtendedCardInfoServerExtension и пример обработчика событий, использующего клиентский сервис.
@@ -119,22 +136,27 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 ** `ServerExtensions\TableControl\TableControlServerExtension` -- серверное расширение с функцией WebApi, предоставляющей данные контрагентов;
 ** `ServerExtensions\TableControl\TableControlWebExtension` -- клиентское расширение, реализующее несколько функций: добавляет клиентский сервис для вызова функции серверного расширения `TableControlServerExtension`. Предоставляет обработчик открытия карточки, использующий клиентский сервис для получения данных контрагентов. Обеспечивает загрузку данных контрагентов в таблицу.
 
-.Примеры элементов управления:
+=== Примеры элементов управления
+
 * `Controls\AcquaintancePanel` -- элемент управления `_Панель отправки на ознакомление_`, предназначен для запуска БП отправки документа на ознакомление. Пример включает несколько компонентов:
 ** `AcquaintancePanel\AcquaintancePanelDesignerExtension` -- текстовый описатель элемента управления, а также расширение программы {kvr} с новым типом свойств и локализованными ресурсами.
 ** `AcquaintancePanel\AcquaintancePanelServerExtension` -- серверное расширение, предоставляющее функцию запуска бизнес-процесса отправки документа на ознакомление.
 ** `AcquaintancePanel\AcquaintancePanelWebExtension` -- клиентское расширение с клиентским компонентом элемента управления и сервисом вызова функции запуска БП из расширения `AcquaintancePanelServerExtension`.
-* `Controls\DownloadFilesBatchOperation` -- пример реализации элемента управления группой операции -- загрузки файлов выбранных карточек Документ на компьютер. Пример включает несколько компонентов:
-** `DownloadFilesBatchOperation\DownloadFilesBatchOperationDesignerExtension` -- расширение программы {kvr} с бинарным описателем элемента управления, новыми свойствами `downloadDocumentFileMode` и `BatchOperationRestrictionFoldersPropertyDescription`, и источником данных DownloadDocumentFileModeSource для свойства `downloadDocumentFileMode`;
-** `DownloadFilesBatchOperation\DownloadFilesBatchOperationServerExtension` -- серверное расширение с функцией, возвращающей файлы карточки;
-** `DownloadFilesBatchOperation\DownloadFilesBatchOperationWebExtension` -- клиентское расширение с клиентским компонентом элемента управления и сервисом вызова функции получения файлов карточки из расширения `DownloadFilesBatchOperationServerExtension`.
 * `Controls\CheckBox` -- элемент управления "Флаг", предназначен для установки и отображения значения булева типа. Пример включает два компонента:
 ** `CheckBox\CheckBoxDesignerExtension` -- расширение программы {kvr} с бинарным описателем элемента управления, новым свойством `DefaultValue` и редактором `BooleanMetadataEditor` значения свойства `DataField`, который ограничивает список доступных для выбора полей карточки.
 ** `CheckBox\CheckBoxWebExtension` -- клиентское расширение с клиентским компонентом элемента управления.
+* `DownloadFilesGroupOperation\DocumentSignBatchOperation` -- пример реализации элемента управления `_Групповая операция / Подписание_`.
+* `Controls\DownloadFilesBatchOperation` -- пример реализации элемента управления группой операции -- загрузки файлов выбранных карточек Документ на компьютер. Пример включает несколько компонентов:
+** `DownloadFilesBatchOperation\DownloadFilesBatchOperationDesignerExtension` -- расширение программы {kvr} с бинарным описателем элемента управления, новыми свойствами `downloadDocumentFileMode` и `BatchOperationRestrictionFoldersPropertyDescription`, и источником данных DownloadDocumentFileModeSource для свойства `downloadDocumentFileMode`.
+** `DownloadFilesGroupOperation\DownloadFilesGroupOperationServerExtension` -- серверное расширение с функцией, возвращающей файлы карточки.
+** `DownloadFilesGroupOperation\DownloadFilesGroupOperationWebExtension` -- клиентское расширение с клиентским компонентом элемента управления и сервисом вызова функции получения файлов карточки из расширения `DownloadFilesGroupOperationServerExtension`.
 * `Controls\ExchangeRates` -- элемент управления `ExchangeRates`, предназначен для отображения курса валют, получаемого с внешнего ресурса. Пример включает два компонента:
 ** `ExchangeRates\ExchangeRatesDesignerExtension` -- текстовый описатель элемента управления, а также расширение программы {kvr} с локализованными ресурсами.
 ** `ExchangeRates\ExchangeRatesWebExtension` -- клиентское расширение с клиентским компонентом элемента управления.
 * `Controls\HyperComments` -- элемент управления `HyperComments`, предназначен для отображения виджета комментариев внешнего веб-приложения `HyperComments`. Пример включает два компонента:
++
+WARNING: Обратите внимание, пример устарел. Для его использования требуется лицензия.
++
 ** `HyperComments\HyperCommentsDesignerExtension` -- расширение программы {kvr} с бинарным описателем элемента управления, новым типом свойств и локализованными ресурсами.
 ** `HyperComments\HyperCommentsWebExtension` -- клиентское расширение с клиентским компонентом элемента управления.
 * `Controls\Image` -- элемент управления `_Image_`, предназначен для отображения галереи изображений. В примере демонстрируется возможность работы со значением элемента управления сложного типа и локализацией. Пример включает несколько компонентов:
@@ -145,15 +167,21 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 ** `Link\LinkDesignerExtension` -- текстовый описатель элемента управления, а также расширение программы {kvr} с локализованными ресурсами.
 ** `Link\LinkWebExtension` -- клиентское расширение с клиентским компонентом элемента управления.
 * `Controls\RefCases` -- элемент управления `RefCases`, предназначен для выбора и отображения дела из Справочника номенклатуры дел.
++
+WARNING: Обратите внимание, пример устарел. Модуль _Делопроизводство 5_ устарел и не поддерживается. Функциональность
++
 ** `RefCases\RefCasesDesignerExtension` -- текстовым описателем элемента управления, а также расширение программы {kvr} с дополнительными редакторами;
 ** `RefCases\RefCasesServerExtension` -- серверное расширение с конвертером значения RefCasesConverter, который применяется при загрузке значения элемента управления в клиент, и сервисами для получения данных из _Справочника номенклатуры дел_.
 ** `RefCases\RefCasesWebExtension` -- клиентское расширение с реализацией элемента управления.
+* `Controls\SampleCustomTables` -- демонстрационный вариант специального сервиса логики этапа согласования.
 * `Controls\TextBox` -- элемент управления `_TextBox_`, предназначен для текстового поля с меткой. Пример включает два компонента:
 ** `TextBox\TextBoxDesignerExtension` -- расширение программы {kvr} с бинарным описателем элемента управления, новым типом свойств и локализованными ресурсами.
 ** `TextBox\TextBoxWebExtension` -- клиентское расширение с клиентским компонентом элемента управления.
 * `ControlProperties\Url` -- расширение программы {kvr} с описателем нового свойства `*Url*`.
 
-.Прочие примеры:
+=== Прочие примеры
+
+* `Others\CustomStageService` --
 * `Others\ExternalWebService` -- пример отдельного веб-сервиса, предоставляющего методы для взаимодействия с платформой {dv} через WebApi:
 ** Получение информации о карточке документа по её идентификатору.
 ** Создание карточки документа по переданной модели.
@@ -163,6 +191,10 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 ** Прикрепление файла к карточке документа.
 ** Получение файла по его идентификатору.
 ** Получение результата выполнения расширенного отчёта.
+* `Others\KonturIntegration` -- пример реализации сервиса интеграции с системой Контур.Фокус, который открывает возможность:
++
+** При создании Контрагента заполнить реквизиты, полученные из Контур.Фокус на основе указанного ИНН.
+** В карточке Договора получить из Контур.Фокус отчёт о Контрагенте и приложить его в карточку Договора.
 * `Others\SignalForUsers` -- пример использования сервиса отправки оповещений пользователям {wc}а:
 ** `Others\SignalForUsers\SignalServerExtension` -- серверное расширение, предоставляющее функцию рассылки оповещений.
 ** `Others\SignalForUsers\SignalWebExtension` -- клиентское расширение с клиентским сервисом и обработчиком, вызывающим функцию рассылки оповещений.
@@ -170,7 +202,12 @@ include::ROOT:partial$excerpts.adoc[tags=vscode]
 ** `Others\Watermark\WatermarkServerExtension` -- серверное расширение, предоставляющее методы для получения и добавления файлов в документ.
 ** `Others\Watermark\WatermarkWebExtension` -- клиентское расширение, вызывающее функцию добавления водяного знака.
 ** `Others\Watermark\WatermarkWebToolExtension` -- расширение программы _DVWebTool_s, реализующее функцию добавления водяного знака в PDF-файлы на компьютере пользователя.
-* `Others\KonturIntegration` -- пример реализации сервиса интеграции с системой Контур.Фокус, который открывает возможность:
-+
-** При создании Контрагента заполнить реквизиты, полученные из Контур.Фокус на основе указанного ИНН.
-** В карточке Договора получить из Контур.Фокус отчёт о Контрагенте и приложить его в карточку Договора.
+
+=== Шаблоны проектов серверных расширений
+
+Папка `ProjectTemplates` содержит шаблоны проектов для создания серверных расширений {wc}а, программы {kvr}, а также клиентских расширений.
+
+* `ProjectTemplates\TemplateDesignerExtension` --
+* `ProjectTemplates\TemplateServerExtension` --
+* `ProjectTemplates\TemplateWebExtension` --
+* `ProjectTemplates\TemplateXmlDesignerExtension` --
