@@ -91,9 +91,10 @@ private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.It
 ----
 private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
-  EdiScriptHelper.SendInvoiceReplyRejection();
+  EdiScriptHelper.SendInvoiceReplyRejection(); <.>
 }
 ----
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 .. _Запросить аннулирование_
 +
