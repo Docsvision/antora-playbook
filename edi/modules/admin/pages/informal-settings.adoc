@@ -49,10 +49,9 @@ using DocsVision.Edi.DocumentScript;
 private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignature(); <.>
+  ediScriptHelper.SendReplySignature();
 }
 ----
-<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 * Для команды _Отказ в подписании документа_:
 +
@@ -61,9 +60,10 @@ private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraB
 private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignatureRejection();
+  ediScriptHelper.SendReplySignatureRejection(); <.>
 }
 ----
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 * Для команды _Запросить аннулирование_:
 +
