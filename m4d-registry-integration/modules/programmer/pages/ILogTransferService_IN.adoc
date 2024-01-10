@@ -1,0 +1,48 @@
+= ILogTransferService -- интерфейс
+
+Журнал обмена сообщениями `LogTransfer` -- это новый тип карточек. Для работы с карточками этого типа предусмотрен сервис `ILogTransferService`.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ILogTransferService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:CreateLogTransferCard_MT.adoc[CreateLogTransferCard]`
+|Создает карточку журнала обмена сообщениями.
+
+|`xref:FindCardByM4dId_MT.adoc[FindCardByM4dId]`
+|Находит карточку журнала обмена сообщениями по ID доверенности.
+
+|`xref:FindCardsByInn_MT.adoc[FindCardsByInn]`
+|Находит все карточки журнала обмена сообщениями.
+
+|`xref:CreateLogTransferLogItem_MT.adoc[CreateLogTransferLogItem(Guid, Guid, M4dRegistryAction)]`
+|Создает запись в журнале карточке журнала обмена сообщениями.
+
+|`xref:CreateLogTransferLogItem2_MT.adoc[CreateLogTransferLogItem(Guid, Guid, M4dRegistryAction, M4dRegistryOperationStatus)]`
+|Создает запись в журнале карточке журнала обмена сообщениями.
+
+|`xref:FindLogTransferLogItem_MT.adoc[FindLogTransferLogItem(Guid, M4dRegistryAction)]`
+|Ищет записи в карточке журнала обмена сообщениями.
+
+|`xref:FindLogTransferLogItem2_MT.adoc[FindLogTransferLogItem(Guid, M4dRegistryOperationStatus)]`
+|Ищет записи в карточке журнала обмена сообщениями.
+
+|`xref:FindLogTransferLogItem3_MT.adoc[FindLogTransferLogItem(Guid, M4dRegistryAction, M4dRegistryOperationStatus)]`
+|Ищет записи в карточке журнала обмена сообщениями.
+
+|`xref:GetAllLogTransferRows_MT.adoc[GetAllLogTransferRows(Guid)]`
+|Возвращает все строки из журнала карточки журнала обмена сообщениями.
+
+|===

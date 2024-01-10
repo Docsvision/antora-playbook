@@ -1,0 +1,34 @@
+= FindLogTransferLogItem -- метод (Guid, M4dRegistryAction, M4dRegistryOperationStatus)
+
+Ищет записи в карточке журнала обмена сообщениями.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+List<RowData> FindLogTransferLogItem(Guid cardId, M4dRegistryAction action M4dRegistryOperationStatus status)
+----
+
+Параметры::
+Guid:::
+Тип: `cardId`
++
+ID карточки? где выполняется поиск
+
+M4dRegistryAction:::
+Тип: `action`
++
+Действие, которое обрабатывает запрос.
+
+M4dRegistryAction:::
+Тип: `status`
++
+Статус операции который ищем.
+
+Возвращаемое значение::
+Тип: `List<RowData>`
++
+Список строк журнала.

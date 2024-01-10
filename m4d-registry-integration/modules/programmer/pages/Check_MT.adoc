@@ -1,0 +1,34 @@
+= Check -- метод (M4dRegistryEventArgs, string, int)
+
+Обрабатывает событие проверки.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Task<M4dRegistryCmdResult> Check(M4dRegistryEventArgs eventArgs, string apiKey, int pollingInterval = 0)
+----
+
+Параметры::
+M4dRegistryEventArgs:::
+Тип: `eventArgs`
++
+ID доверенности (СКД).
+
+string:::
+Тип: `apiKey`
++
+Ключ для доступа к сервису.
+
+int:::
+Тип: `pollingInterval`
++
+Интервал опроса сервиса.
+
+Возвращаемое значение::
+Тип: `xref:M4dRegistryCmdResult_CL.adoc[M4dRegistryCmdResult]`
++
+Объект результата обработки сообщения.
