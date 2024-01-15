@@ -125,12 +125,13 @@ namespace RefCasesDesignerExtension.Extension
 .Файл `_RefCategoriesDesignerExtension\Editors\RefCasesFieldMetadataEditor.cs_`
 [source,csharp]
 ----
-using DocsVision.BackOffice.WebLayoutsDesigner.Editors;
+using System.Windows;
 using DocsVision.Platform.Data.Metadata.CardModel;
 using System;
-using System.Windows;
 using Xceed.Wpf.Toolkit.PropertyGrid;
 using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
+using DocsVision.BackOffice.WebLayoutsDesigner.Editors;
+using DocsVision.Platform.WebLayoutsDesigner.NewEditors;
 
 namespace RefCasesDesignerExtension.Editors
 {
@@ -141,14 +142,12 @@ namespace RefCasesDesignerExtension.Editors
             var refCasesID = new Guid("246197EA-846A-44DA-9EA3-0BCAE5500388");
             var sectionCasesID = new Guid("56AF8231-B918-42D4-AC15-90EC2E9A0725");
 
-            var editor = new FieldMetadataEditor
-            {
-                FieldFilter = (field) => <.>
-                {
-                    return field.FieldType == FieldType.RefId 
-                    && field.LinkedCardTypeId == refCasesID 
-                    && field.LinkedSectionId == sectionCasesID;
-                }
+            var editor = new FieldMetadataEditor();
+
+            editor.FieldFilter = (field) => {
+                return (field.FieldType == FieldType.RefId
+                        && field.LinkedCardTypeId == refCasesID 
+                        && field.LinkedSectionId == sectionCasesID);
             };
 
             return editor.ResolveEditor(propertyItem);
@@ -166,15 +165,14 @@ namespace RefCasesDesignerExtension.Editors
 
 [source,csharp]
 ----
-var editor = new FieldMetadataEditor
-{
-    FieldFilter = (field) =>
-    {
-        return field.FieldType == FieldType.UniqueId; <.>
-    }
+var editor = new FieldMetadataEditor();
+
+editor.FieldFilter = (field) => {
+    return (field.FieldType == FieldType.RefId
+        && field.LinkedCardTypeId == refCasesID 
+        && field.LinkedSectionId == sectionCasesID);
 };
 ----
-<.> `FieldType.UniqueId` позволяет выбирать любые поля с идентификатором.
 
 == Редактор "RefCasesSectionEditor"
 
@@ -205,6 +203,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Xceed.Wpf.Toolkit.PropertyGrid;
 using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
 
 namespace RefCasesDesignerExtension.Editors
@@ -226,7 +225,7 @@ namespace RefCasesDesignerExtension.Editors
             get { return (string)GetValue(TextProperty); }
             set { 
                 SetValue(TextProperty, value);
-                Clear.Visibility = value != ""? Visibility.Visible: Visibility.Collapsed; <.>
+                Clear.Visibility = value != ""? Visibility.Visible: Visibility.Collapsed; // Кнопка очистки значения <.>
             }
         }
 
@@ -238,12 +237,12 @@ namespace RefCasesDesignerExtension.Editors
             InitializeComponent();
         }
 
-        public FrameworkElement ResolveEditor(Xceed.Wpf.Toolkit.PropertyGrid.PropertyItem propertyItem) <.>
+        public FrameworkElement ResolveEditor(PropertyItem propertyItem) <.>
         {
             var bindingObject = (IControlPropertiesObject)propertyItem.Instance;
             
             this.serviceProvider = bindingObject.ServiceProvider; <.>
-            var currentObjectContextProvider = ServiceUtil.GetService<ICurrentObjectContextProvider>(this.serviceProvider);
+            var currentObjectContextProvider = this.serviceProvider.GetService(typeof(ICurrentObjectContextProvider)) as ICurrentObjectContextProvider;
             this.sessionContext = currentObjectContextProvider.GetOrCreateCurrentSessionContext();
 
             Binding binding = new Binding("Value"); <.>
@@ -323,7 +322,7 @@ public string GetSectionTitle(Guid sectionId)
 .Файл `_RefCategoriesDesignerExtension\Editors\SectionsTree.xaml.cs_`
 [source,csharp]
 ----
-using Docsvision.Platform.WebClient;
+using DocsVision.Platform.WebClient;
 using System;
 using System.Windows;
 

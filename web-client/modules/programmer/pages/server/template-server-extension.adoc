@@ -48,39 +48,36 @@ include::ROOT:partial$excerpts.adoc[tags=versions]
 
 [source,csharp]
 ----
-public class TemplateServerExtension : WebClientExtension
+public class ServerExtension : WebClientExtension
 {
-    public TemplateServerExtension(IServiceProvider serviceProvider)
-        : base(serviceProvider)
+    public ServerExtension(IServiceProvider serviceProvider)
+        : base()
     {
     }
 
     public override string ExtensionName <.>
     {
-        get {
-            return Assembly.GetAssembly(typeof(TemplateServerExtension)).GetName().Name;
-        }
+        get { return Assembly.GetAssembly(typeof(ServerExtension)).GetName().Name; }
     }
 
     public override Version ExtensionVersion <.>
     {
-        get {
-            return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
-        }
+        get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
     }
 
-    public override void InitializeContainer(ContainerBuilder containerBuilder) { <.>
-
+    public override void InitializeServiceCollection(IServiceCollection services) <.>
+    { 
 <.>
-    // containerBuilder.RegisterType<YourService>().As<IYourService>().SingleInstance();
-    // containerBuilder.RegisterOrderedType<YourBindingConverterType, IBindingConverter>();
-    // containerBuilder.RegisterOrderedType<YourBindingResolverType, IBindingResolver>();
-    // containerBuilder.RegisterOrderedType<YourControlResolverType, IControlResolver>();
-    // containerBuilder.RegisterOrderedType<YourPropertyResolverType, IPropertyResolver>();
-    // containerBuilder.RegisterType<YourCardLifeCycle>().Keyed<ICardLifeCycle>(CardTypeID).SingleInstance();
-    // containerBuilder.RegisterType<YourRowLifeCycle>().Keyed<IRowLifeCycle>(SectionID).SingleInstance();
+        services.AddSingleton<IFeature1Service, Feature1Service>();
     }
 
+    protected override List<ResourceManager> GetLayoutExtensionResourceManagers()
+    {
+        return new List<ResourceManager>
+        {
+
+        };
+    }
 <.>
 
 }

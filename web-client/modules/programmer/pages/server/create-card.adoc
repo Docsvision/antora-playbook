@@ -39,10 +39,6 @@ namespace CreateCardServerExtension
 {
     public class LayoutWebClientExtension : WebClientExtension <.>
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="serviceProvider">Сервис-провайдер</param>
         public LayoutWebClientExtension(IServiceProvider serviceProvider) <.>
             : base()
         {
@@ -70,7 +66,7 @@ namespace CreateCardServerExtension
 }
 ----
 <.> Задаёт описание расширения для {wc}а, которое задано в текущей сборке.
-<.> Создаёт новый экземпляр `LayoutWebClientExtension`.
+<.> Создаёт новый экземпляр `LayoutWebClientExtension`. `serviceProvider` -- сервис-провайдер.
 <.> Получить название расширения.
 <.> Получить версию расширения.
 <.> Регистрация типов в IoC контейнере.

@@ -42,9 +42,9 @@ namespace RefCasesServerExtension.Services
 .Файл `_RefCasesServerExtension\Services\RefCasesService.cs_`
 [source,csharp]
 ----
-using Docsvision.Platform.ObjectManager;
-using Docsvision.Platform.WebClient;
-using Docsvision.Platform.WebClient.Managers;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.WebClient;
+using DocsVision.Platform.WebClient.Managers;
 using RefCasesServerExtension.Models;
 using System;
 using System.Collections.Generic;
@@ -246,10 +246,10 @@ namespace RefCasesServerExtension.Services
 .Файл `_RefCasesServerExtension\BindingConverters\RefCasesConverter.cs_`
 [source,csharp]
 ----
-using Docsvision.WebClientLibrary.Layout.IL;
-using Docsvision.WebClientLibrary.ObjectModel;
-using Docsvision.WebClientLibrary.ObjectModel.Services.BindingConverters;
-using Docsvision.WebClientLibrary.ObjectModel.Services.LayoutModel;
+using DocsVision.WebClientLibrary.Layout.IL;
+using DocsVision.WebClientLibrary.ObjectModel;
+using DocsVision.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using DocsVision.WebClientLibrary.ObjectModel.Services.LayoutModel;
 using RefCasesServerExtension.Models;
 using RefCasesServerExtension.Services;
 using System;
@@ -295,12 +295,14 @@ namespace RefCasesServerExtension.BindingConverters
 using RefCasesServerExtension.Models;
 using RefCasesServerExtension.Services;
 using System;
-using System.Web.Http;
 using System.Linq;
+using DocsVision.Platform.WebClient.Models;
+using DocsVision.Platform.WebClient.Models.Generic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RefCasesServerExtension.Controllers
 {
-    public class RefCasesOperationController : ApiController
+    public class RefCasesOperationController : ControllerBase
     {
         private readonly IRefCasesService refCasesService;
 
@@ -310,30 +312,30 @@ namespace RefCasesServerExtension.Controllers
         }
 
         [HttpPost]
-        public Year[] GetYears([FromUri]Guid? rootSectionID) <.>
+        public Year[] GetYears([FromQuery]Guid? rootSectionID) <.>
         {
             return refCasesService.GetYears(rootSectionID).ToArray();
         }
 
         [HttpPost]
-        public Section[] GetSections([FromUri]Guid yearID, [FromUri]Guid? rootSectionID) { <.>
+        public Section[] GetSections([FromQuery]Guid yearID, [FromQuery]Guid? rootSectionID) { <.>
             return refCasesService.GetSections(yearID, rootSectionID).ToArray();
         }
 
         [HttpPost]
-        public Case[] GetCases([FromUri]Guid sectionID) <.>
+        public Case[] GetCases([FromQuery]Guid sectionID) <.>
         {
             return refCasesService.GetCases(sectionID).ToArray();
         }
 
         [HttpPost]
-        public string GetCaseDisplayName([FromUri]Guid caseID) <.>
+        public string GetCaseDisplayName([FromQuery]Guid caseID) <.>
         {
             return refCasesService.GetCaseTitle(caseID);
         }
 
         [HttpPost]
-        public CaseSearchResult SearchCase([FromUri]string caseName, [FromUri]int skipCount, [FromUri]int maxCount, [FromUri]Guid? rootSectionID) <.>
+        public CaseSearchResult SearchCase([FromQuery]string caseName, [FromQuery]int skipCount, [FromQuery]int maxCount, [FromQuery]Guid? rootSectionID) <.>
         {
             var rows = refCasesService.SearchCases(caseName, rootSectionID); <.>
 
@@ -373,9 +375,11 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
 using Autofac;
-using {dv}.WebClient.Extensibility;
-using {dv}.WebClient.Helpers;
-using {dv}.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using Autofac.Extras.Ordering;
+using DocsVision.WebClient.Extensibility;
+using DocsVision.WebClient.Helpers;
+using DocsVision.WebClientLibrary.ObjectModel.Services.BindingConverters;
+using Microsoft.Extensions.DependencyInjection;
 using RefCasesServerExtension.BindingConverters;
 using RefCasesServerExtension.Services;
 
@@ -384,7 +388,7 @@ namespace RefCasesServerExtension
     public class RefCasesServerExtension : WebClientExtension
     {
         public RefCasesServerExtension(IServiceProvider serviceProvider)
-            : base(serviceProvider)
+            : base()
         {
         }
 
@@ -400,11 +404,10 @@ namespace RefCasesServerExtension
 
         #region WebClientExtension Overrides
 
-        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
+        public override void InitializeServiceCollection(IServiceCollection services)
         {
-            containerBuilder.RegisterOrderedType<RefCasesConverter, IBindingConverter>(); <.>
-            
-            containerBuilder.RegisterType<RefCasesService>().As<IRefCasesService>().SingleInstance(); <.>
+            services.AddSingleton<IBindingConverter, RefCasesConverter>();
+            services.AddSingleton<IRefCasesService, RefCasesService>();
         }
 
         protected override List<ResourceManager> GetLayoutExtensionResourceManagers() <.>

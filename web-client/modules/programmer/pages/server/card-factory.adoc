@@ -2,6 +2,7 @@
 
 Программисту предоставляется возможность добавить новую функциональность в механизмы создания и работы с карточками из разметок. Данная возможность реализуется с помощью специального класса с интерфейсом `ICardLifeCycle`. Интерфейс `ICardLifeCycle` предоставляет методы, которые вызываются на различных этапах работы с карточкой:
 
+// no-code-check
 [source,csharp]
 ----
 public interface ICardLifeCycle
@@ -27,6 +28,7 @@ public interface ICardLifeCycle
 
 Следующий код демонстрирует пример реализации класса, в котором определены собственные функции создания и сохранения карточки.
 
+// no-code-check
 [source,csharp]
 ----
 public class DocumentCardLifeCycle : BaseCardLifeCycle
@@ -75,6 +77,7 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
 
 Тип с интерфейсом `ICardLifeCycle` нужно добавить в IoC-контейнер в ядре расширения:
 
+// no-code-check
 [source,csharp]
 ----
 public override void InitializeContainer(ContainerBuilder containerBuilder) {

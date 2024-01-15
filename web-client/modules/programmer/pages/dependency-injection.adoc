@@ -4,6 +4,7 @@
 
 В {wc}е внедрение зависимостей связано с таким понятием, как _контейнер сервисов_, упрощенная реализация которого приведена ниже.
 
+// no-code-check
 [source,typescript]
 ----
 var serviceContainer = {
@@ -15,6 +16,7 @@ var serviceContainer = {
 
 Данный контейнер содержит три сервиса, которые могут быть переданы в метод при его вызове:
 
+// no-code-check
 [source,typescript]
 ----
 sendToAcquaintance(serviceContainer);
@@ -28,6 +30,7 @@ sendToAcquaintance(serviceContainer);
 
 Класс `ServiceContainer` предоставляет функции для создания и регистрация дескрипторов, которые в `WebClient.App.Instance` представлены в виде статически методов, пример использования которых приведён ниже.
 
+// no-code-check
 [source,typescript]
 ----
 WebClient.App.registerService("urlStore", new UrlStore()); <.>
@@ -64,6 +67,7 @@ var myUrlStore = WebClient.app.with<$UrlStore>().urlStore; <.>
 
 Некоторые сервисы, такие как `RequestManager`, должны быть созданы для каждой разметки заново. Такие сервисы регистрируются специальным образом, с передачей дополнительных метаданных:
 
+// no-code-check
 [source,typescript]
 ----
 WebClient.App.addServiceFactory<$RequestManager>( <.>
@@ -82,8 +86,14 @@ WebClient.App.addServiceFactory<$RequestManager>( <.>
 export class AcquaintancePanelParams extends PanelParams {
     @rw sendButtonText: string;
     @r standardCssClass?: string = "acquaintance-panel";
-  
-    @rw services?: $UrlStore & $RequestManager; <.>
+    @r canSend?: boolean;
+
+    @apiEvent opening?: CancelableApiEvent<IEventArgs>;
+    @apiEvent opened: BasicApiEvent<IEventArgs>;
+    @apiEvent closing: CancelableApiEvent<IEventArgs>;
+    @apiEvent closed: BasicApiEvent<IEventArgs>;
+
+    @rw services?: $EditOperationStore & $LayoutBusinessProcessController & $Layout; <.>
 }
 ----
 <.> Объявляем, что для ЭУ необходимы сервисы UrlStore и RequestManager

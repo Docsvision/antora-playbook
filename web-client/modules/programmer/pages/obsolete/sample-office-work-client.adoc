@@ -18,7 +18,7 @@ import { urlStore } from "@docsvision/webclient/System/UrlStore";
 import { Models } from "../Controls/RefCases/Data/CaseModel";
 import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
 
-export class RefCasesService  {
+export class RefCasesService {
     constructor(private services: $RequestManager) {
     }
 
@@ -170,6 +170,8 @@ export class RefCases extends InputBasedControl<Models.RefCasesCaseDisplayModel,
 <.>
 export class RefCasesImpl extends InputBasedControlImpl<Models.RefCasesCaseDisplayModel, RefCasesParams, RefCasesState>
 {
+    private typeahead: Typeahead;
+    
     constructor(props: RefCasesParams, state: RefCasesState) {
         super(props, state);
 
@@ -181,38 +183,6 @@ export class RefCasesImpl extends InputBasedControlImpl<Models.RefCasesCaseDispl
         this.showDictionary = this.showDictionary.bind(this);
         this.onSelected = this.onSelected.bind(this);
         this.attachTypeahead = this.attachTypeahead.bind(this); <.>
-    }
-
-
-    protected renderInputWithPlaceholder(): React.ReactNode { <.>
-
-        let buttons: IBoxWithButtonsButtonInfo[] = [ <.>
-            {
-                onClick: this.showDictionary,
-                name: "open-dictionary",
-                iconClassName: "open-dictionary-button-icon dv-ico dv-ico-dictionary",
-                visible: this.editAvailable,
-                title: resources.RefCases_SelectFromDirectory,
-                disabled: !this.editAvailable,
-                tabIndex: this.getTabIndex(),
-            }
-        ];
-
-        return ( <.>
-            <Typeahead className={"universal-directory-box"} extraButtons={buttons}
-                findItems={this.findItems}
-                clearButton={this.hasValue()}
-                searchText={this.state.inputText}
-                afterOpenCallback={() => this.afterOpenCallback()}
-                popoverClassName={this.state.standardCssClass}
-                popoverAttributes={{ "data-control-name": this.state.name }}
-                inputKeyDown={this.state.inputKeyDown}
-                onSelected={this.onSelected}
-                disabled={!this.editAvailable}
-                ref={this.attachTypeahead}>
-                {super.renderInputWithPlaceholder()}
-            </Typeahead>
-        );
     }
 
     async showDictionary() { <.>
@@ -272,6 +242,40 @@ export class RefCasesImpl extends InputBasedControlImpl<Models.RefCasesCaseDispl
         this.state.dialog.Show();
         this.state.dialog.OkButtonElement.classList.add("disabled");
     }
+
+
+    protected renderInputWithPlaceholder(): React.ReactNode { <.>
+
+        let buttons: IBoxWithButtonsButtonInfo[] = [ <.>
+            {
+                onClick: this.showDictionary,
+                name: "open-dictionary",
+                iconClassName: "open-dictionary-button-icon dv-ico dv-ico-dictionary",
+                visible: this.editAvailable,
+                title: resources.RefCases_SelectFromDirectory,
+                disabled: !this.editAvailable,
+                tabIndex: this.getTabIndex(),
+            }
+        ];
+
+        return ( <.>
+            <Typeahead className={"universal-directory-box"} extraButtons={buttons}
+                findItems={this.findItems}
+                clearButton={this.hasValue()}
+                searchText={this.state.inputText}
+                afterOpenCallback={() => this.afterOpenCallback()}
+                popoverClassName={this.state.standardCssClass}
+                popoverAttributes={{ "data-control-name": this.state.name }}
+                inputKeyDown={this.state.inputKeyDown}
+                onSelected={this.onSelected}
+                disabled={!this.editAvailable}
+                ref={this.attachTypeahead}>
+                {super.renderInputWithPlaceholder()}
+            </Typeahead>
+        );
+    }
+
+    
 
     protected findItems(typeaheadQuery: ITypeaheadSearchQuery): Promise<ITypeaheadSearchResult> { <.>
         return new Promise<ITypeaheadSearchResult>((resolve, reject) => {
@@ -361,6 +365,10 @@ export class RefCasesSelectDialog extends React.Component<IRefCasesSelectDialogP
         this.collectYearsList(); <.>
     }
 
+    public get selectedCase() {
+        return this.state.selectedCaseNode;
+    }
+
     protected collectYearsList() { <.>
         this.props.services.refCasesService.getYears(this.props.rootSectionId).then((items) => { <.>
             this.state.years = items.map(x => ({
@@ -433,7 +441,7 @@ export class RefCasesSelectDialog extends React.Component<IRefCasesSelectDialogP
             } />
             </div>;
 
-        let sectionsTree = <div className={"ref-cases-dialog__tree"}> <.>
+        let sectionsTree = <div className="ref-cases-dialog__tree"> <.>
             <div className="tree-block">{resources.RefCases_Sections}
                 <DynamicTree loadNodes={this.loadSectionsTree} treeHeight={300}
                 nodeSelected={this.onSectionNodeSelected} > <.>
@@ -441,7 +449,7 @@ export class RefCasesSelectDialog extends React.Component<IRefCasesSelectDialogP
             </div>
         </div>;
 
-        let casesTree = <div className={"ref-cases-dialog__tree"}> <.>
+        let casesTree = <div className="ref-cases-dialog__tree"> <.>
             <div className="tree-block">{resources.RefCases_Cases}
                 <DynamicTree loadNodes={this.loadCasesTree} treeHeight={300}
                 nodeSelected={this.onCaseNodeSelected} nodeAccepted={this.onCaseNodeAccepted} > <.>

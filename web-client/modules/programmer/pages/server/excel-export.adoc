@@ -70,7 +70,7 @@ namespace ExcelExportServerExtension.ExcelExport <.>
             }
         }
 
-        protected override string GetGridRowParamValueAsString(object paramValue) <.>
+        protected override string GetGridRowParamValueAsString(object paramValue, bool noNullValues = false) <.>
         {
             if (paramValue is DateTime dateTime) <.>
             {

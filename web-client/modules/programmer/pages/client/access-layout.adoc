@@ -4,6 +4,7 @@
 
 == Получение разметки, из которой вызван обработчик события
 
+// no-code-check
 [source,typescript]
 ----
 export function someHandler(sender: Employee, e: IEventArgs) {
@@ -13,6 +14,7 @@ export function someHandler(sender: Employee, e: IEventArgs) {
 
 == Получение разметки по имени локации
 
+// no-code-check
 [source,typescript]
 ----
 let someLayout = layoutManager.getLayout("DV.MainMenu");
@@ -30,6 +32,10 @@ let someLayout = layoutManager.getLayout("DV.MainMenu");
 
 == Получение разметки открытой карточки:
 
+// no-code-check
+
+Для быстрого доступа к разметке из консоли браузера можно использовать `layoutManger.cardLayout`. Однако использование в расширениях этого свойства не рекомендуется, следует использовать `sender.layout`.
+
 [source,typescript]
 ----
 let cardLayout = layoutManager.cardLayout;
@@ -37,6 +43,7 @@ let cardLayout = layoutManager.cardLayout;
 
 В примерах кода используются функции объекта `layoutManager` (менеджер разметок). Для импорта объекта добавьте в скрипт следующий код:
 
+[source,typescript]
 ----
 import { layoutManager } from "@Docsvision/webclient/System/LayoutManager";
 ----

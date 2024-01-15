@@ -119,15 +119,17 @@ export async function showCard(context: TableCompositions.Cell, services: $Conte
 
     <.>
 
-    modalHost.dialogProps.header = "Предпросмотр"; <.>
+    const dialogProps = modalHost.dialogProps as CommonModalDialogProps;
 
-    modalHost.dialogProps.maxWidth = "80vw"; <.>
+    dialogProps.header = "Предпросмотр"; <.>
 
-    modalHost.dialogProps.maxHeight = "80vh"; <.>
+    dialogProps.maxWidth = "80vw"; <.>
 
-    modalHost.dialogProps.maximizeButtonEnabled = true;
-    modalHost.dialogProps.onMaximize = () => {
-        modalHost.dialogProps.maximized = !modalHost.dialogProps.maximized;
+    dialogProps.maxHeight = "80vh"; <.>
+
+    dialogProps.maximizeButtonEnabled = true;
+    dialogProps.onMaximize = () => {
+        dialogProps.maximized = !dialogProps.maximized;
         modalHost.forceUpdate(); <.>
     }
 
