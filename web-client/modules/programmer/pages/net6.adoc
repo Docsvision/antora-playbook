@@ -1,0 +1,196 @@
+= Перевод решений на .NET 6.0
+
+include::ROOT:partial$excerpts.adoc[tags=n-6]
+
+== Изменение файла проекта
+
+.Конвертация существующего проекта может быть выполнена:
+* При помощи автоматических инструментов (см. https://dotnet.microsoft.com/en-us/platform/upgrade-assistant[документацию Microsoft]).
+* При помощи создания нового проекта, нацеленного на .NET 6. При создании проекта предпочтительно использовать шаблоны VisualStudio из https://github.com/Docsvision/WebClient-Samples/tree/master/ProjectTemplates[примеров разработки расширений] для версии 6.1.
+
+В проектах нового типа нет необходимости добавлять файлы с исходным кодом в `.csproj`-файл проекта. По умолчанию автоматически все файлы в папке проекта считаются частью проекта. Это существенно упрощает процесс преобразования проекта.
+
+Важной особенностью нового проекта является атрибут `Sdk` на корневом элементе `Project` файла `.csproj`, это xml-файл, который можно открыть в блокноте. Для web-расширений рекомендуется значение `Microsoft.NET.Sdk.Web`, для расширений конструктора разметок `Microsoft.NET.Sdk`.
+
+Значение тега `TargetFramework` для web-расширений должно быть `net6.0`, для расширений конструктора разметок -- `net6.0-windows`.
+
+Для проектов расширений конструктора разметок также могут быть полезны следующие элементы:
+
+[source,csharp]
+----
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+----
+
+== Особенности сборки
+
+Для сборки C# кода для .NET 6 требуется VisualStudio 2022 или старше.
+
+При использовании сторонних зависимостей требуется обновить их до версий, поддерживающих .NET 6. В случае нарушений совместимости при сборке будет выдаваться предупреждение `CA1416`. Данные предупреждения следует все устранять.
+
+При разработке расширений для программы {kvr} и другого кода, рассчитанного на работу в ОС Windows следует использовать атрибут `SupportedOSPlatform`. Его можно назначить на отдельный класс, либо на всю сборку:
+
+ [assembly: SupportedOSPlatform("windows")]
+
+Без этого атрибута также может возникать предупреждение `CA1416`, при обращении к API, рассчитанному на работу в ОС Windows.
+
+== Логика привязки параметров в запросах
+
+* Метод контроллера либо принимает несколько параметров простых типов через query-параметры, либо один параметр, значение которого читается из тела запроса.
+* Рекомендуется явно указывать, откуда читается параметр с помощью атрибутов `[FromBody]` и `[FromQuery]`. Если ранее использовался атрибут `FromUri`, то нужно заменить на `FromQuery`.
+* Рекомендуется явно помечать методы атрибутами `[HttpGet]`, `[HttpPost]`, для указания метода вызова
+
+.Например, метод может быть объявлен так:
+
+[source,csharp]
+----
+public class MathController : ControllerBase
+{
+    [HttpGet]
+    public double GetSquare([FromQuery] double value) {
+        return
+    }
+}
+----
+
+.Обращение к методу будет, соответственно, выглядеть так:
+ let result = await requestManager.get(`/Math/GetSquare?value=2`, null);
+
+.Метод может быть объявлен так:
+
+[source,csharp]
+----
+class MinValueParams {
+    public List<double> Values { get; set; };
+}
+
+public class MathController : ControllerBase
+{
+    [HttpPost]
+    public double MinValue([FromBody] MinValueParams  arg) {
+        return arg.Values.Min();
+    }
+}
+----
+
+WARNING: Если не указать `[FromBody]` для сложного параметра, его значение не привяжется.
+
+.Обращение к такому методу будет выглядеть следующим образом:
+[source,javascript]
+----
+let arg = { values: [ 1, 5, 3, 2] };
+let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(arg));
+----
+
+WARNING: При передаче параметра в теле запроса нельзя указывать имя параметра, т.к. он может быть только один.
+
+.Следующий код не будет работать:
+[source,javascript]
+----
+let data = { arg: { values: [ 1, 5, 3, 2] } }; <.>
+let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); <.>
+----
+<.> Неверный код.
+<.> Код не будет работать.
+
+== Внедрение зависимостей
+
+В {wc}е 18 вместо Autofac используется стандартный механизм внедрения зависимостей .NET. В связи с этим в классе серверного расширения нужно произвести следующие изменения:
+
+.Вместо метода `InitializeContainer` определить метод:
+[source,javascript]
+----
+     public override void InitializeServiceCollection(IServiceCollection services)
+     {
+          <.>
+     }
+----
+<.> Регистрация сервисов.
+
+.Регистрация сервисов изменяется следующим образом:
+[source,javascript]
+----
+            containerBuilder.RegisterType<YourServiceClass>().As<YourServiceInterface>().SingleInstance();
+            ->
+            services.AddSingleton<YourServiceInterface, YourServiceClass>();
+
+            containerBuilder.RegisterOrderedType<YourBindingConverterType, IBindingConverter>();
+            ->
+            services.AddSingleton<IBindingConverter, YourBindingConverterType>();
+
+            containerBuilder.RegisterOrderedType<YourBindingResolverType, IBindingResolver>();
+            ->
+            services.AddSingleton<IBindingResolver, YourBindingResolverType>();
+
+            containerBuilder.RegisterOrderedType<YourControlResolverType, IControlResolver>();
+            ->
+            services.AddSingleton<IControlResolver, YourControlResolverType>();
+
+            containerBuilder.RegisterOrderedType<YourPropertyResolverType, IPropertyResolver>();
+            ->
+            services.AddSingleton<IPropertyResolver, YourPropertyResolverType>();
+
+            containerBuilder.RegisterType<YourCardLifeCycle>().Keyed<ICardLifeCycle>(CardTypeID).SingleInstance();
+            ->
+            services.AddTransient<ICardLifeCycle, YourCardLifeCycle>();
+
+            containerBuilder.RegisterType<YourRowLifeCycle>().Keyed<IRowLifeCycle>(SectionID).SingleInstance();
+            ->
+            services.AddTransient<IRowLifeCycle, YourRowLifeCycle>();
+----
+
+== Прочие изменения
+
+.В конструкторе класса расширения при вызове базовой реализации теперь не нужно передавать `serviceProvider`:
+
+.Было
+[source,javascript]
+----
+        public ServerExtension(IServiceProvider serviceProvider)
+            : base(serviceProvider)
+        {
+        }
+----
+
+.Стало
+[source,javascript]
+----
+        public ServerExtension(IServiceProvider serviceProvider)
+            : base()
+        {
+        }
+----
+
+Классы контроллеров рекомендуется наследовать от `Microsoft.AspNetCore.Mvc.ControllerBase`.
+При переводе методы `requestManager` `get` и `post` в некоторых случаях могут изменить возвращаемое значение. В частности, ранее они могли возвращать строку, а после перевода -- объект -- результат `JSON.parse` этой строки. С примером можно ознакомиться ниже.
+
+.Было
+[source,javascript]
+----
+        const response = JSON.parse(await requestManager.get(url));
+----
+
+.Стало
+[source,javascript]
+----
+        const response = await requestManager.get(url)
+----
+
+Также в отдельных случаях может измениться регистр первой буквы в названии свойств ответа сервера. Например, следующим образом:
+
+.Было
+[source,javascript]
+----
+     const name = response.IssueName;
+----
+
+.Стало
+[source,javascript]
+----
+     const name = response.issueName;
+----
+
+* Изменился способ загрузки и скачивания файлов. Пример реализации соответствующего метода на .NET6 можно найти в примере `ExternalWebService`, в файле `DocumentsController.cs`, методах `UploadFile` и `DownloadFile`.
+* Чтение настроек из конфигурационного файла Web-сервиса изменилось. Прежние сервисы оставлены для обратной совместимости, однако рекомендуется использовать стандартный механизм работы с настройками .NET 6. В частности, использовать внедрение интерфейса `IOptions` через конструктор для получения настройки и `AddOptions` + `BindConfiguration` при регистрации сервисов для регистрации настройки. Пример работы с настройками можно найти в примере `KonturIntegration` (регистрация см. `KonturServerExtension.cs/InitializeServiceCollection`, чтение см. `KonturRequestService.cs`).
+* Библиотека `iTextSharp`, которая использовалась в примере `Watermark`, поддерживает .NET6 только в новой версии, под названием `itext7`. В этой новой версии полностью изменился API.

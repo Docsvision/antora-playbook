@@ -63,7 +63,7 @@ export async function someHandler(sender: CustomButton, e: IEventArgs) { <.>
 
     let department = sender.layout.controls.get<Department>("department"); <.>
 
-    department.params.value = await departmentModel; <.>
+    department.params.value = departmentModel; <.>
 }
 ----
 <.> Функция является асинхронной.

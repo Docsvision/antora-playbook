@@ -7,14 +7,18 @@
 export async function onStateChanging(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>) {
     <.>
     let regNumber = sender.controls.get<Numerator>("regNumber");
-    
+
     if (!regNumber.hasValue()) {
         e.wait(); <.>
-        await regNumber.generateNewNumber() <.>
-            .then(() => { console.log("Присвоен регистрационный номер"); })
-            .catch(() => MessageBox.ShowError("Ошибка при получении регистрационного номера"))
+		try {
+            await regNumber.generateNewNumber() <.>
+            console.log("Присвоен регистрационный номер");
+			e.accept(); <.>
+		} catch (err) {
+		    MessageBox.ShowError("Ошибка при получении регистрационного номера: " + err);
+			e.cancel();
+		}
    }
-   e.accept(); <.>
 }
 ----
 <.> Получаем элемент Нумератор из разметки.
