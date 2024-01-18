@@ -144,7 +144,7 @@ namespace RefCasesDesignerExtension.Editors
 
             var editor = new FieldMetadataEditor();
 
-            editor.FieldFilter = (field) => {
+            editor.FieldFilter = (field) => { <.>
                 return (field.FieldType == FieldType.RefId
                         && field.LinkedCardTypeId == refCasesID 
                         && field.LinkedSectionId == sectionCasesID);
@@ -156,7 +156,7 @@ namespace RefCasesDesignerExtension.Editors
     }
 }
 ----
-<.> Редактор для выбора поля карточки, ссылающегося на Дело в Справочника номенклатуры дел.
+<.> Редактор для выбора поля карточки, ссылающегося на Дело в Справочнике номенклатуры дел.
 <.> Устанавливаем фильтр для выбора полей только из справочника.
 
 Ограничение возможности выбора полей карточки включено с помощью фильтра `FieldFilter`, в котором проверяется тип поля (`field.FieldType`), которое должно быть ссылочным полем (`FieldType.RefId`), ссылающимся на секцию _Дела_ (`field.LinkedSectionId == sectionCasesID`) _Справочника номенклатуры дел_ (`field.LinkedCardTypeId == refCasesID`).

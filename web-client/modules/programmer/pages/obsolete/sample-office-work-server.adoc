@@ -404,10 +404,10 @@ namespace RefCasesServerExtension
 
         #region WebClientExtension Overrides
 
-        public override void InitializeServiceCollection(IServiceCollection services)
+        public override void InitializeServiceCollection(IServiceCollection services) <.>
         {
-            services.AddSingleton<IBindingConverter, RefCasesConverter>();
-            services.AddSingleton<IRefCasesService, RefCasesService>();
+            services.AddSingleton<IBindingConverter, RefCasesConverter>(); <.>
+            services.AddSingleton<IRefCasesService, RefCasesService>(); <.>
         }
 
         protected override List<ResourceManager> GetLayoutExtensionResourceManagers() <.>
