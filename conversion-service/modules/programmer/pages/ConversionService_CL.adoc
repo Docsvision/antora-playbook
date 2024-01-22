@@ -1,0 +1,100 @@
+= ConversionService -- класс
+
+Класс `ConversionService` предоставляет сервис для конвертации файлов с использованием внешнего сервиса конвертации Р7/OnlyOffice. Он предоставляет методы для преобразования файлов в различные форматы, а также содержит вспомогательные методы для работы с URL и настройками сервиса.
+
+* *Пространство имён:* `DocsVision.ConversionService.Services`
+* *Сборка:* `DocsVision.ConversionService.dll`
+
+NOTE: Для работы требуется наличие в лицензии опции _{dv} Сервис конвертации файлов_.
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ConversionService
+----
+
+== Конструкторы
+
+[cols="34,66",options="header"]
+|===
+|Имя |Описание
+
+|`ConversionService(IServiceProvider, string, string, Action<TraceLevel, string, object[]>)`
+a|Инициализирует новый экземпляр класса `ConversionService` с указанными параметрами.
+
+.Параметры:
+* `serviceProvider` -- поставщик служб для внедрения зависимостей (dependency injection).
+* `serviceUrl` -- URL-адрес сервиса конвертации.
+* `webClientUrl` -- URL-адрес Web-клиента.
+* `traceFunction` -- опциональная функция трассировки для ведения журнала.
+
+|`ConversionService(string, string, Action<TraceLevel, string, object[]>)`
+a|Инициализирует новый экземпляр класса `ConversionService` с указанными параметрами, без использования поставщика служб.
+
+.Параметры:
+* `serviceUrl` -- URL-адрес сервиса конвертации.
+* `webClientUrl` -- URL-адрес {wc}а.
+* `traceFunction` -- опциональная функция трассировки для ведения журнала.
+
+|`ConversionService(Action<TraceLevel, string, object[]>)`
+a|Инициализирует новый экземпляр класса `ConversionService` с параметрами по умолчанию, используя адрес сервиса конвертации и адрес {wc}а из справочника серверов, параметры `UniServiceConversionAPI_ServiceUrl` и `ConversionService_DVSiteAddress` соответственно.
+
+.Параметры:
+* `traceFunction` -- опциональная функция трассировки для ведения журнала.
+
+|===
+
+== Методы
+
+[cols="34,66",options="header"]
+|===
+|Имя |Описание
+
+|`ConvertToStream(ObjectContext, Guid, ConversionFormat)`
+a|Преобразует файл с указанным идентификатором в поток в целевом формате.
+
+.Параметры:
+* `context` -- контекст объекта.
+* `fileId` -- идентификатор файла.
+* `conversionFormat` -- целевой формат (по умолчанию используется формат `PDF/A`).
+
+|`ConvertToByteArray(ObjectContext, Guid, ConversionFormat)`
+a|Преобразует файл с указанным идентификатором в массив байтов в целевом формате.
+
+.Параметры:
+* `context` -- контекст объекта.
+* `fileId` -- идентификатор файла.
+* `conversionFormat` -- целевой формат (по умолчанию используется формат `PDF/A`).
+
+|`ConvertToBase64(ObjectContext, Guid, ConversionFormat)`
+a|Преобразует файл с указанным идентификатором в строку в формате Base64 в целевом формате.
+
+.Параметры:
+* `context` -- контекст объекта.
+* `fileId` -- идентификатор файла.
+* `conversionFormat` -- целевой формат (по умолчанию используется формат `PDF/A`).
+
+|`ConvertToURL(ObjectContext, Guid, ConversionFormat)`
+a|Преобразует файл с указанным идентификатором в целевом формате в URL-адрес для последующего скачивания.
+
+.Параметры:
+* `context` -- контекст объекта.
+* `fileId` -- идентификатор файла.
+* `conversionFormat` -- целевой формат (по умолчанию используется формат `PDF/A`).
+
+|`IsConvert(ObjectContext, Guid, ConversionFormat)`
+a|Проверяет возможность преобразования файла с указанным идентификатором в указанный формат.
+
+.Параметры:
+* `context` -- контекст объекта.
+* `fileId` -- идентификатор файла.
+* `conversionFormat` -- Целевой формат (по умолчанию используется формат `PDF/A`).
+
+|`GetFileName(Guid)`
+a|Получает имя файла с указанным идентификатором.
+
+.Параметры:
+* `fileId` -- идентификатор файла.
+
+|===
