@@ -4,6 +4,7 @@
 
 .Поддерживается вход при помощи следующих учётных записей:
 * Microsoft Azure
+* Active Directory Federation Services (ADFS)
 * ЕСИА (Госуслуги) по почте, номеру телефона, номеру СНИЛС
 
 Настроить расширения можно при помощи изменения записей в секции menu:&quot;Docsvision&quot;["Platform" > "Server" > "Authentication" > "Extensions"] конфигурационного файла по адресу `/usr/lib/docsvision/platform/appsettings.json`.
@@ -135,9 +136,9 @@
 <.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
 
 [#azure-settings]
-=== Строка настроек
+=== Строка настроек Azure
 
-В примере ниже строка настроек приведена в отформатированном виде для удобства чтения. Данный фрагмент кода не предназначен для копирования в конфигурационный файл.
+include::partial$excerpts.adoc[tags=pretty]
 
 [source,xml]
 ----
@@ -311,7 +312,9 @@ sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-
 После изменения параметра в конфигурационном файле необходимо перезапустить *{sss-new}* и *{wcs-new}*.
 
 [#esia-settings]
-=== Описание файла настроек для ветки ЕСИА
+=== Строка настроек для ЕСИА
+
+include::partial$excerpts.adoc[tags=pretty]
 
 [source,xml]
 ----
@@ -383,3 +386,50 @@ sudo update-ca-certificates -v -f.
 
 При возникновении трудностей с получением корневого сертификата, обратитесь в техническую поддержку ЕСИА.
 
+[#adfs]
+== Регистрация расширения ADFS
+
+[source,json]
+----
+"Authentication": {
+    "Extensions": {
+	    "ADFS": {
+            "Name": "ADFS", <.>
+            "TypeName": "DocsVision.Platform.Authentication.ADFS.ADFSRootAuthenticationExtension, DocsVision.Platform.Authentication.ADFS, Version=6.0.0.0, Culture=neutral, PublicKeyToken=AFE7148AFE997F90519", <.>
+            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><ADFSAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://551releaseVM.vmkh.org/adfs/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>8d4612ab-c258-4f0b-ba02-d6aeab59debd</ClientId></ADFSAuthenticationSettings>", <.>
+            "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF23}" <.>
+        }
+     },
+     "Tenants": { <.>
+         "docsvision-db": {
+             "Extensions":"{36351525-8FCE-48AB-8AD3-4C1FA575FF23}", <.>
+             "Name": "CurrentDB" <.>
+         }
+     }
+}
+----
+<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
+<.> `TypeName` -- строка с именем типа, реализующего расширение.
+<.> `Settings` -- строка настроек расширения, для AzureAD. Подробнее см. <<adfs-settings,ниже>>.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+
+[#adfs-settings]
+== Строка настроек для ADFS
+
+include::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<ADFSAuthenticationSettings
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WellKnownConfigurationUrl>https://domain.company.com/adfs/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+  <ClientId>8d4612ab-c258-4f0b-ba02-d6aeab59debd</ClientId> <.>
+</ADFSAuthenticationSettings>
+----
+<.> `WellKnownConfigurationUrl` -- URL публичной конфигурации ADFS.
+<.> `ClientId` -- идентификатор тенанта ADFS в котором производится привязка пользователей.
