@@ -8,20 +8,20 @@
 
 [source,typescript]
 ----
-function changeState(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>) { <.>
+async function changeState(sender: Layout, e: CancelableEventArgs<ICardStateChangingEventArgs>) {
+    e.wait();
 
-    if (CheckPossibility()){
+    if (await myCheckPossibility()){ <.>
         e.accept(); <.>
-        return;
+    } else {
+        sender.getService($MessageWindow).showWarning("Операция " + e.data.operationId  + " запрещена"); <.>
+        e.cancel(); <.>
     }
-
-    MessageBox.ShowWarning("Операция " + e.data.operationId  + " запрещена"); <.>
-    e.cancel(); <.>
 }
 ----
-<.> Функция CheckPossibility проверяет выполнение неких требований.
-<.> Подтверждаем выполнение операции. Необязательно.
+<.> Функция `myCheckPossibility` -- пользовательский код, содержащий собственную логику.
+<.> Подтверждаем выполнение операции. Обязательно, если вызвали `e.wait`.
 <.> Показываем сообщение о запрете операции с указанием идентификатора операции.
-<.> Необходимо вызвать e.cancel для отмены операции.
+<.> Для отмены операции, при необходимости, вызываем `e.cancel`.
 
 Для карточки _Задание_ после изменения состояния карточки будет вызвано событие `*После изменения состояния карточки*` элемента управления `_Кнопки операций задания_`.
