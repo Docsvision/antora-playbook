@@ -46,7 +46,7 @@ include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
 * Флаг не установлен. Сроки не проверяются, ЭУ не будет подсвечен.
 
 ЭУ предоставляет возможность изменить цвет сигнализирования о просрочке. К примеру, чтобы установить зеленый цвет сигнализирования, создайте в папке `C:\Program Files (x86)Docsvision\WebClient\Site\Content\Solutions\SampleSolution\Styles\` файл `sample.css` с содержимым:
-+
+
 [source,css]
 ----
 .system-datetimepicker.highlight-overdue.overdue:not(.edit-mode) .labeled-text-helper .text-cell .labeled-text { <.>
@@ -54,7 +54,7 @@ font-weight: bold;
 color: green;
 }
 ----
-<.> not(.edit-mode) -- Данный стиль будет использован только при просмотре карточки.
+<.> `not(.edit-mode)` -- Данный стиль будет использован только при просмотре карточки.
 
 include::partial$properties.adoc[tags=hint]
 
@@ -81,6 +81,8 @@ include::partial$properties.adoc[tags=dataSource]
 include::partial$properties.adoc[tags=editOperation]
 
 === Значение по умолчанию
+
+WARNING: Свойства из категории "Значение по умолчанию" доступны только в режиме редактирования и недоступны в режимах просмотра и редактирования по месту.
 
 [#timeByDefault]
 ==== Время по умолчанию
