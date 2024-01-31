@@ -18,7 +18,7 @@
 
 include::ROOT:partial$excerpts.adoc[tags=connector]
 . Убедитесь в присутствии необходимых опций лицензии {dv}. См. раздел xref:ROOT:requirements.adoc#license[Требования].
-. Выполните необходимые настройки подписания, см. подробнее в документации xref:6.1@backoffice:admin:system-settings.adoc#signature-cypher[модуля {bo}] и xref:dev@webclient::requirements-signature.adoc[{wc}].
+. Выполните необходимые настройки подписания, см. подробнее в документации xref:6.1@backoffice:admin:system-settings.adoc#signature-cypher[модуля {bo}] и xref:6.1@webclient::requirements-signature.adoc[{wc}].
 . Убедитесь, что в справочнике сотрудников указан руководитель организации, который должен будет подписать МЧД.
 +
 .В карточке руководителя организации обязательно должны быть заполнены следующие поля:
@@ -94,7 +94,7 @@ include::ROOT:partial$excerpts.adoc[tags=connector]
 // +
 // . Убедитесь, что в карточке сотрудника, который будет подписывать документы с МЧД, установлен флаг `*Требуется доверенность при подписании документов*`.
 // +
-// * Для {wc}а см. раздел "xref:dev@webclient:user:directories/staff/employee-fields.adoc#attorney[Поля вкладки "Основная" в карточке сотрудника]".
+// * Для {wc}а см. раздел "xref:6.1@webclient:user:directories/staff/employee-fields.adoc#attorney[Поля вкладки "Основная" в карточке сотрудника]".
 // * Для {wincl}а см. раздел "xref:6.1@backoffice:desdirs:staff/employees/main-tab.adoc#attorney[Основная информация о сотруднике]".
 // +
 // . Убедитесь, что в настройках типа документа, который будет отправляться в Диадок, в справочнике видов карточек на вкладке _Подпись_ настройка _Использовать машиночитаемую доверенность при подписании документов_ установлена в значении *_Обязательно_*. Подробнее см. раздел "xref:6.1@backoffice:desdirs:card-kinds/document/sign-card.adoc#attorney[Использовать МЧД при подписании]".
@@ -111,7 +111,7 @@ include::ROOT:partial$excerpts.adoc[tags=connector]
 .Чтобы использовать МЧД без СКД необходимо:
 . Выполнить пункты 1-10 из <<config,инструкции>> выше.
 . Используя программу DVExplorer из комплекта утилит {rk}, импортируйте файл `CardDocument_PowerOfAttorney.xml`. Файл хранится в каталоге `C:\Program Files (x86)\Docsvision\Edi\CardPackage`.
-. С помощью программы {kvr} добавьте два xref:dev@webclient:layouts:ctrl/standard/textBox.adoc[ЭУ "Строка"] в разметки формализованных и неформализованных исходящих документов со следующими источниками данных:
+. С помощью программы {kvr} добавьте два xref:6.1@webclient:layouts:ctrl/standard/textBox.adoc[ЭУ "Строка"] в разметки формализованных и неформализованных исходящих документов со следующими источниками данных:
 +
 .ЭУ "Строка" в разметках исходящих документов
 image::text-box.png[ЭУ "Строка" в разметках исходящих документов]
