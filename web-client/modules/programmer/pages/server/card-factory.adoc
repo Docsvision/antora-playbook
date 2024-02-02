@@ -1,11 +1,11 @@
 = Реализация методов для работы с карточками из разметок
 
-Программисту предоставляется возможность добавить новую функциональность в механизмы создания и работы с карточками из разметок. Данная возможность реализуется с помощью специального класса с интерфейсом `ICardLifeCycle`. Интерфейс `ICardLifeCycle` предоставляет методы, которые вызываются на различных этапах работы с карточкой:
+Программисту предоставляется возможность добавить новую функциональность в механизмы создания и работы с карточками из разметок. Данная возможность реализуется с помощью специального класса с интерфейсом `ICardLifeCycleEx`. Интерфейс `ICardLifeCycleEx` предоставляет методы, которые вызываются на различных этапах работы с карточкой:
 
 // no-code-check
 [source,csharp]
 ----
-public interface ICardLifeCycle
+public interface ICardLifeCycleEx
 {     
     Guid Create(SessionContext sessionContext, Guid? cardKindId, Guid? parentCardId); <.>
     Guid CreateFromTemplate(SessionContext sessionContext, Guid templateId, Guid? parentCardId); <.>
@@ -24,7 +24,7 @@ public interface ICardLifeCycle
 <.> `CanDelete` -- Вызывается перед удалением карточки. Позволяет прервать удаление.
 <.> `OnDelete` -- Вызывается при удалении карточки. Позволяет добавить дополнительную логику в удаление карточки, но без возможности прервать удаление.
 
-Указанные методы используются *исключительно* при выполнении стандартных операций со строками из разметок или с использованием JS WebAPI разметок. В других случаях методы интерфейса `ICardLifeCycle` не вызываются и не влияют на работу сервера {wc}а с карточками.
+Указанные методы используются *исключительно* при выполнении стандартных операций со строками из разметок или с использованием JS WebAPI разметок. В других случаях методы интерфейса `ICardLifeCycleEx` не вызываются и не влияют на работу сервера {wc}а с карточками.
 
 Следующий код демонстрирует пример реализации класса, в котором определены собственные функции создания и сохранения карточки.
 
@@ -71,18 +71,18 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
 }
 ----
 
-В приведенном коде класс `DocumentCardLifeCycle` наследуется от базовой реализации интерфейса `ICardLifeCycle` -- класса `BaseCardLifeCycle` с абстрактными методами. Помимо класса `BaseCardLifeCycle` с базовой реализацией, API включает реализующий интерфейс `ICardLifeCycle` класс `DefaultCardLifeCycle` с реализацией по умолчанию методов `Create` и `CreateFromTemplate`.
+В приведенном коде класс `DocumentCardLifeCycle` наследуется от базовой реализации интерфейса `ICardLifeCycleEx` -- класса `BaseCardLifeCycle` с абстрактными методами. Помимо класса `BaseCardLifeCycle` с базовой реализацией, API включает реализующий интерфейс `ICardLifeCycleEx` класс `DefaultCardLifeCycle` с реализацией по умолчанию методов `Create` и `CreateFromTemplate`.
 
 Метод `Create` в приведенном выше коде создаёт новую карточку _Документ_ с предустановленным названием (`document.MainInfo.Name`). Метод `CreateFromTemplate` создаёт карточку _Документа_ по шаблону. Метод `Save` изменяет значение поля `document.MainInfo.Name` при сохранении карточки.
 
-Тип с интерфейсом `ICardLifeCycle` нужно добавить в IoC-контейнер в ядре расширения:
+Тип с интерфейсом `ICardLifeCycleEx` нужно добавить в IoC-контейнер в ядре расширения:
 
 // no-code-check
 [source,csharp]
 ----
 public override void InitializeContainer(ContainerBuilder containerBuilder) {
     var cardTypeID = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"); <.>
-    containerBuilder.RegisterType<DocumentCardLifeCycle>().Keyed<ICardLifeCycle>(cardTypeID).SingleInstance();
+    containerBuilder.RegisterType<DocumentCardLifeCycle>().Keyed<ICardLifeCycleEx>(cardTypeID).SingleInstance();
 }
 ----
 <.> Идентификатор типа карточек.
