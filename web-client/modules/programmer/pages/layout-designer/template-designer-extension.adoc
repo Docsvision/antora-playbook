@@ -1,4 +1,9 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ProjectTemplates/TemplateDesignerExtension
+:name: TemplateDesignerExtension
+
 = Добавление нового свойства элементов управления
+
+include::../client/authorization.adoc[tags=link]
 
 Элементы управления обладают набором свойств, которые определяют их поведение в веб-браузере пользователя: внешний вид, получение данных (для разметки карточки), обработка событий. 
 
@@ -6,20 +11,20 @@
 
 Добавить новое свойство элементов управления в {kvr} можно с помощью _Расширения_.
 
-== Перечень необходимых инструментов
+// == Перечень необходимых инструментов
+//
+// include::ROOT:partial$excerpts.adoc[tags=wc-version]
+// include::ROOT:partial$excerpts.adoc[tags=vscode]
+// * Docsvision WebClient SDK (запрашивается через портал ТП).
 
-include::ROOT:partial$excerpts.adoc[tags=wc-version]
-include::ROOT:partial$excerpts.adoc[tags=vscode]
-* Docsvision WebClient SDK (запрашивается через портал ТП).
-
-== Описание файлов проекта
-
-* В корне репозитория расположено решение для Visual Studio (`Samples.sln`) и ключ для подписания сборок примеров (`StrongNameKey.snk`).
-* `Assemblies` -- сборки, необходимые для использования примеров
-* `ServerExtension.cs` -- входная точка расширение, в которой регистрируются описания контролов и прочие сущности.
-* `Sign.snk` -- файл подписи сборки. Для установки сборки должны быть подписаны. Рекомендуется сгенерировать новый файл подписи в настройках проекта.
-* `Resource.resx`, `Resource.ru.resx` -- локализации, используемые в расширении.
-* `Constants.cs` -- файл для объявления констант.
+// == Описание файлов проекта
+//
+// * В корне репозитория расположено решение для Visual Studio (`Samples.sln`) и ключ для подписания сборок примеров (`StrongNameKey.snk`).
+// * `Assemblies` -- сборки, необходимые для использования примеров
+// * `ServerExtension.cs` -- входная точка расширение, в которой регистрируются описания контролов и прочие сущности.
+// * `Sign.snk` -- файл подписи сборки. Для установки сборки должны быть подписаны. Рекомендуется сгенерировать новый файл подписи в настройках проекта.
+// * `Resource.resx`, `Resource.ru.resx` -- локализации, используемые в расширении.
+// * `Constants.cs` -- файл для объявления констант.
 
 == Добавление свойства
 
@@ -97,13 +102,13 @@ protected override Dictionary<string, PropertyDescription> GetPropertyDescriptio
     };
 }
 ----
-+
-. Скомпилируйте проект.
-. Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки `bin/Plugins` в `{wcd}/Plugins`.
-+
-Ресурсные сборки скопируйте в папки `{wcd}/ru/` (для русской локализации), `{wcd}/uk/` (для английской локализации) и т.д.
-+
-. Перезапустите {kvr}.
+// +
+// . Скомпилируйте проект.
+// . Скопируйте `safeprojectnamesafeprojectname.dll` и `safeprojectnamesafeprojectname.dll.pdb` из папки `bin/Plugins` в `{wcd}/Plugins`.
+// +
+// Ресурсные сборки скопируйте в папки `{wcd}/ru/` (для русской локализации), `{wcd}/uk/` (для английской локализации) и т.д.
+// +
+// . Перезапустите {kvr}.
 
 == Проверка свойства
 
