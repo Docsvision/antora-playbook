@@ -18,12 +18,13 @@ public interface IRowLifeCycleEx
 |===
 |Имя |Описание
 
-|`SectionId &#x7b;&#x7d;`
+|`SectionId &#x7b; get &#x7d;`
 |Идентификатор целевой секции для текущего жизненного цикла.
 
 *Тип:* `Guid`.
 
-|`Create(SessionContext, RowCreateLifeCycleOptions)` |Создаёт новую строку в секции и возвращает её идентификатор.
+|`Create(SessionContext, RowCreateLifeCycleOptions)`
+|Создаёт новую строку в секции и возвращает её идентификатор.
 
 *Тип:* `Guid`.
 
@@ -31,23 +32,27 @@ public interface IRowLifeCycleEx
 
 Обычно `OperationContext` является экземпляром `CreateRowOperationContext`.
 
-|`Validate(SessionContext, RowValidateLifeCycleOptions, out List<ValidationResult>)` |Проверяет данные строки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
+|`Validate(SessionContext, RowValidateLifeCycleOptions, out List<ValidationResult>)`
+|Проверяет данные строки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
 
 *Тип:* `Boolean`.
 
 *Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `validationResults` -- массив для формирования сообщения о результатах проверки.
 
-|`OnSave(SessionContext, RowValidateLifeCycleOptions)` |Обрабатывает событие сохранения строки секции.
+|`OnSave(SessionContext, RowValidateLifeCycleOptions)`
+|Обрабатывает событие сохранения строки секции.
 
 *Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
 
-|`CanDelete(SessionContext, RowDeleteLifeCycleOptions, out string)` |Проверяет возможность удаления строки из секции. Возвращает `true`, если удаление возможно, иначе -- `false`.
+|`CanDelete(SessionContext, RowDeleteLifeCycleOptions, out string)`
+|Проверяет возможность удаления строки из секции. Возвращает `true`, если удаление возможно, иначе -- `false`.
 
 *Тип:* `Boolean`.
 
 *Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `message` -- сообщение о невозможности удаления.
 
-|`OnDelete(SessionContext, RowDeleteLifeCycleOptions)` |Обрабатывает событие удаления строки из секции.
+|`OnDelete(SessionContext, RowDeleteLifeCycleOptions)`
+|Обрабатывает событие удаления строки из секции.
 
 *Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
 |===
