@@ -16,37 +16,61 @@ public interface ICardLifeCycleEx
 == Методы
 
 |===
-|Имя |Описание 
+|Имя |Описание
 
-|`Create(SessionContext, Guid?, Guid?)` |Создаёт новую карточку и возвращает её идентификатор.
-
-*Тип:* `Guid`.
-
-*Параметры:* `sessionContext` -- контекст сессии; `cardKindId` -- идентификатор вида создаваемой карточки parent; `CardId` -- идентификатор родительской карточки.
-|`CreateFromTemplate(SessionContext, Guid, Guid?)` |Создаёт новую карточку по шаблону и возвращает её идентификатор.
+|`CardTypeId &#x7b;&#x7d;`
+|Идентификатор целевой карточки для текущего жизненного цикла.
 
 *Тип:* `Guid`.
 
-*Параметры:* `sessionContext` -- контекст сессии; `templateId` -- идентификатор шаблона карточки; `parentCardId` -- идентификатор родительской карточки.
-|`GetDigest(SessionContext, Guid)` |Формирует дайджест карточки.
+|`Create(SessionContext, CardCreateLifeCycleOptions)` |Создаёт новую карточку и возвращает её идентификатор.
+
+*Тип:* `Guid`.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
+
+Обычно `OperationContext` является экземпляром `CreateRowOperationContext`.
+
+// |`CreateFromTemplate(SessionContext, Guid, Guid?)` |Создаёт новую карточку по шаблону и возвращает её идентификатор.
+//
+// *Тип:* `Guid`.
+//
+// *Параметры:* `sessionContext` -- контекст сессии; `templateId` -- идентификатор шаблона карточки; `parentCardId` -- идентификатор родительской карточки.
+// |`GetDigest(SessionContext, Guid)` |Формирует дайджест карточки.
+//
+// *Тип:* `String`.
+//
+// *Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки, для которой формирует дайджест.
+
+|`Validate(SessionContext, CardValidateLifeCycleOptions, out List<ValidationResult>)`
+|Проверяет данные карточки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
+
+*Тип:* `Boolean`.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `validationResults` -- массив для формирования сообщения о результатах проверки.
+
+|`OnSave(SessionContext, CardSaveLifeCycleOptions)`
+|Обрабатывает событие сохранения карточки.
+
+*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки.
+
+|`CanDelete(SessionContext, CardDeleteLifeCycleOptions, out String)`
+|Проверяет возможность удаления карточки. Возвращает `true`, если удаление возможно, иначе -- `false`.
+
+*Тип:* `Boolean`.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `message` -- сообщение о невозможности удаления.
+
+|`OnDelete(SessionContext, CardDeleteLifeCycleOptions)`
+|Обрабатывает событие удаления карточки.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
+
+|`GetDigest(SessionContext, CardDigestLifeCycleOptions);`
+|Метод генерации дайджеста.
 
 *Тип:* `String`.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки, для которой формирует дайджест.
-|`Validate(SessionContext, Guid, out List<ValidationResult>)` |Проверяет данные карточки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
 
-*Тип:* `Boolean`.
-
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор проверяемой карточки; `validationResults` -- массив для формирования сообщения о результатах проверки.
-|`OnSave(SessionContext, Guid)` |Обрабатывает событие сохранения карточки.
-
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки.
-|`CanDelete(SessionContext, Guid, out String)` |Проверяет возможность удаления карточки. Возвращает `true`, если удаление возможно, иначе -- `false`.
-
-*Тип:* `Boolean`.
-
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор проверяемой карточки; `message` -- сообщение о невозможности удаления.
-|`OnDelete(SessionContext, Guid)` |Обрабатывает событие удаления карточки.
-
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор удаляемой карточки.
 |===
