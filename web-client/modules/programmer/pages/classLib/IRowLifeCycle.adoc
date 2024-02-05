@@ -1,6 +1,6 @@
 = IRowLifeCycleEx -- интерфейс
 
-Интерфейс IRowLifeCycleEx определяет методы для работы со строками секций из разметок.
+Интерфейс `IRowLifeCycleEx` определяет методы для работы со строками секций из разметок.
 
 *Пространство имён*: `DocsVision.WebClientLibrary.ObjectModel.Services.EntityLifeCycle`
 
@@ -16,27 +16,36 @@ public interface IRowLifeCycleEx
 == Методы
 
 |===
-|Имя |Описание 
+|Имя |Описание
 
-|`Create(SessionContext, Guid, Guid?, Guid?)` |Создаёт новую строку в секции и возвращает её идентификатор.
+|`SectionId &#x7b;&#x7d;`
+|Идентификатор целевой секции для текущего жизненного цикла.
+
+|`Create(SessionContext, RowCreateLifeCycleOptions)` |Создаёт новую строку в секции и возвращает её идентификатор.
 
 *Тип:* `Guid`.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки, в которой создаётся строка; `parentRowId` -- идентификатор родительской строки; `parentTreeRowId` -- идентификатор родительской строки дерева в иерархической секции.
-|`Validate(SessionContext, Guid, Guid, out List<ValidationResult>)` |Проверяет данные строки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
+
+Обычно `OperationContext` является экземпляром `CreateRowOperationContext`.
+
+|`Validate(SessionContext, RowValidateLifeCycleOptions, out List<ValidationResult>)` |Проверяет данные строки перед сохранением изменений. Возвращает `true`, если ошибки не обнаружены, иначе -- `false`.
 
 *Тип:* `Boolean`.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор проверяемой карточки; `validationResults` -- массив для формирования сообщения о результатах проверки.
-|`OnSave(SessionContext, Guid, Guid)` |Обрабатывает событие сохранения строки секции.
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `validationResults` -- массив для формирования сообщения о результатах проверки.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки; `rowId` -- идентификатор строки.
-|`CanDelete(SessionContext, Guid, Guid, out String)` |Проверяет возможность удаления строки из секции. Возвращает `true`, если удаление возможно, иначе -- `false`.
+|`OnSave(SessionContext, RowValidateLifeCycleOptions)` |Обрабатывает событие сохранения строки секции.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
+
+|`CanDelete(SessionContext, RowDeleteLifeCycleOptions, out string)` |Проверяет возможность удаления строки из секции. Возвращает `true`, если удаление возможно, иначе -- `false`.
 
 *Тип:* `Boolean`.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки; `rowId` -- идентификатор проверяемой строки; message -- сообщение о невозможности удаления.
-|`OnDelete(SessionContext, Guid, Guid)` |Обрабатывает событие удаления строки из секции.
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно; `message` -- сообщение о невозможности удаления.
 
-*Параметры:* `sessionContext` -- контекст сессии; `cardId` -- идентификатор карточки; `rowId` -- идентификатор удаляемой строки.
+|`OnDelete(SessionContext, RowDeleteLifeCycleOptions)` |Обрабатывает событие удаления строки из секции.
+
+*Параметры:* `sessionContext` -- контекст сессии; `options` -- параметр формируется самостоятельно.
 |===
