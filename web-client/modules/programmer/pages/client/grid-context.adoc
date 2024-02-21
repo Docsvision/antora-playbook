@@ -175,6 +175,21 @@ export async function showCard(context: TableCompositions.Cell, services: $Conte
 <.> Тело модального окна.
 <.> Показываем модальное окно.
 
+Зарегистрируйте плагин в `GridContextMenuItemPluginFactory`:
+
+[source,typescript]
+----
+export class GridContextMenuItemPluginFactory implements IFolderPluginFactory {
+    id: string = "GridContextMenuItemPluginFactory";
+
+    getTablePlugins(): ITablePlugins[] {
+        return [
+            GridContextMenuItemPlugins
+        ]
+    }
+}
+----
+
 == Проверка примера
 
 . Откройте папку с таблицей и вызовите контекстное меню у произвольной карточки.
