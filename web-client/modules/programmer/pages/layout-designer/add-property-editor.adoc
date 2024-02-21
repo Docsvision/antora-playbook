@@ -14,7 +14,6 @@
 +
 . Добавьте в проект компонент с типом UserControl (WPF) и реализуйте в нем программный интерфейс https://xceed.com/wp-content/documentation/xceed-toolkit-plus-for-wpf/Xceed.Wpf.Toolkit~Xceed.Wpf.Toolkit.PropertyGrid.Editors.ITypeEditor.adoc[ITypeEditor].
 +
-****
 Следующий код демонстрирует пример класса редактора.
 +
 [source,csharp]
@@ -61,11 +60,11 @@ public partial class SuperEditor : UserControl, ITypeEditor
 <.> В качестве элемента управления для отображения на панели свойства используется текущий элемент управления.
 <.> Открытие диалогового окна редактирования значения свойства.
 <.> Новое значение получаем из переменной `Value`. Значение должно быть сохранено в `propertyItem.Value`.
-
++
 В данном случае редактор представляет собой кнопку *ChangeLines*, при нажатии которой открывается диалоговое окно *DialogEditor* для ввода текстового значения, а также нередактируемый блок текста *Placeholder* для отображения статичного значения `{lines …}`.
-
++
 Ниже приведён код графической части редактора.
-
++
 [source,xml]
 ----
  <UserControl x:Class="TemplateDesignerExtension1.Editors.SuperEditor"
@@ -82,9 +81,8 @@ public partial class SuperEditor : UserControl, ITypeEditor
         </Grid>
 </UserControl>
 ----
-
++
 Собственная реализация редактора может включать любые элементы управления и использоваться для отображения любых значений (с учетом рекомендуемых значений элемента управления).
-****
 +
 NOTE: Значение свойства можно получить из переменной `propertyItem.Value`. При изменении значения, его нужно сохранить в `propertyItem.Value`.
 +

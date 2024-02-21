@@ -1,11 +1,6 @@
-:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ProjectTemplates/TemplateDesignerExtension
-:name: TemplateDesignerExtension
-
 = Ограничение выполнения действий с элементом управления
 
 Программист может установить запрет на выполнение определённых действий с элементом управления в программе {kvr}.
-
-include::../client/authorization.adoc[tags=link]
 
 Ограничение устанавливается "функцией проверки", которая возвращает набор флагов, разрешающих только определённые действия с элементом управления. Например, _функция проверки_ может ограничить использование элемента управления определённым типом карточек.
 
@@ -15,7 +10,7 @@ include::../client/authorization.adoc[tags=link]
 
 . xref:layout-designer/create-publish.adoc[Создайте проект расширения программы {kvr}].
 +
-. Добавьте в ядро расширения (файл TemplateDesignerExtension.cs) функцию проверки следующего вида:
+. Добавьте в ядро расширения (файл DesignerExtension.cs) функцию проверки следующего вида:
 +
 [source,csharp]
 ----
