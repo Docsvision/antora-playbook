@@ -68,9 +68,9 @@ namespace SignalForUsersExtension
 // no-code-check
 [source,typescript]
 ----
-import { serviceName } from "@Docsvision/webclient/System/ServiceUtils";
-import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
-import { urlStore } from "@Docsvision/webclient/System/UrlStore";
+import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
+import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+import { urlStore } from "@docsvision/webclient/System/UrlStore";
 
 export class MessageService { <.>
     constructor(private services: $RequestManager) {
@@ -108,10 +108,10 @@ export enum MessageType {
 // no-code-check
 [source,typescript]
 ----
-import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
-import { Layout } from "@Docsvision/webclient/System/Layout";
+import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
+import { Layout } from "@docsvision/webclient/System/Layout";
 import { $MessageService, MessageType, MessageService } from "./MessageService";
-import { layoutManager } from "@Docsvision/webclient/System/LayoutManager";
+import { layoutManager } from "@docsvision/webclient/System/LayoutManager";
 
 export function sendMessage(sender: Layout, e: IEventArgs) { <.>
    let messageService = layoutManager.cardLayout.getService<MessageService>($MessageService);

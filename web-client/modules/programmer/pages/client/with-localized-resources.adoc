@@ -10,7 +10,7 @@
 +
 [source,typescript]
 ----
-import { ILocalizationsMap } from "@Docsvision/webclient/System/ILocalizationsMap"; <.>
+import { ILocalizationsMap } from "@docsvision/webclient/System/ILocalizationsMap"; <.>
    
 export function getLocalizedResources(): ILocalizationsMap {
     let cultureMap: ILocalizationsMap = {};
@@ -46,8 +46,8 @@ cultureMap["ru"] = {
 [source,typescript]
 ----
 import { getLocalizedResources } from "./LocalizedResource"; <.>
-import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
-import { ILocalizationsMap } from "@Docsvision/webclient/System/ILocalizationsMap";
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
+import { ILocalizationsMap } from "@docsvision/webclient/System/ILocalizationsMap";
 
 extensionManager.registerExtension({ <.>
     name: "Client extension with localization",
