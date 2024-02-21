@@ -21,9 +21,10 @@ image::message-box.png[Диалоговое окно подтверждения]
 
 [source,typescript]
 ----
-export function onButtonClick(sender: LayoutControl, args: IEventArgs) {
+export async function onButtonClick(sender: LayoutControl, args: IEventArgs) {
      const messageWindow = sender.getService($MessageWindow);
-     messageWindow.showWarning("Вы нажали кнопку!");
+     await messageWindow.showConfirmation("Вы действительно хотите удалить файл?");
+     deleteFile();
 }
 ----
 
