@@ -3,64 +3,16 @@
 
 = Работа со строкой данных элемента управления "Список файлов" (fileList)
 
-Пример взаимодействия со строками элемента управления "Список файлов" (fileList). Расширение добавляет к строке элемента управления красную обводку при скачивании файла.
-
-include::authorization.adoc[tags=link]
-
-include::ROOT:partial$excerpts.adoc[tags=wc-node]
-
-== Описание файлов проекта
-
-.В папке "FileListHighlightRow" расположены файлы:
-* `copy-path.js` -- содержит константы с названием расширения и параметрами сборки; в данном файле указывается каталог, в который выгружаются файлы при сборке.
-* `gulpfile.js` -- файл конфигурации https://www.npmjs.com/package/gulp[Gulp] (используется для сборки стилей);
-* `package.json` -- файл конфигурации https://www.npmjs.com/[NPM] с командами сборки и списком зависимостей.
-* `package-lock.json` -- служебный файл NPM.
-* `rollup.config.js` -- файл конфигурации https://www.npmjs.com/package/rollup[Rollup]. Используется для сборки скриптов в один файл -- "бандл".
-* `tsconfig.json` -- файл конфигурации https://ru.wikipedia.org/wiki/TypeScript[TypeScript].
-* `node_modules` -- служебная папка NPM, в которую при выполнении команды npm `install` загружаются npm-зависимости.
-* `src` -- папка для размещения исходных файлы расширения.
-
-.Папка src содержит файлы:
-* `EventHandlers.tsx` -- пример файла с обработчиком события.
-* `Index.ts`-- файл с обязательной функцией регистрации клиентского расширения.
-* `Template.scss` -- пример файла стилей.
-
-== Сборка и установка
-
-. Откройте консоль в папке `FileListHighlightRow` и выполните последовательно команды:
-+
- $ npm install
- $ npm update
- $ npm run build:prod
-+
-. Скопируйте каталог `SamplesOutput\Content\Modules\FileListHighlightRow` в каталог `Путь-к-установленному-{wc}\Content\Modules`.
-. Перезапустите *{wcs-new}*.
-. Добавьте скрипт `fileListHighlightRow` в качестве обработчика события. `On file version downloaded` элемента управления `fileList` в конструкторе разметок.
+Пример взаимодействия со строками элемента управления `_Список файлов_` (`fileList`). Проект представляет собой xref:client/create-publish.adoc[клиентское расширение]. Расширение добавляет к строке элемента управления красную обводку при скачивании файла.
 
 // include::page$client/grid-context.adoc[tags=start]
 
-.Index.ts
-[source,typescript]
-----
-import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
-import * as EventHandler from "./EventHandlers/EventHandler";
-
-extensionManager.registerExtension({ <.>
-    name: "FileListHighlightRow",
-    version: "1.0",
-    globalEventHandlers: [ EventHandler ]
-})
-----
-<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+Основной код расширения содержит скрипт `fileListHighlightRow` в качестве обработчика события `*После загрузки версии файла*` элемента управления `fileList` в конструкторе разметок.
 
 .EventHandler.ts
 [source,typescript]
 ----
-import { FileListControl } from "@docsvision/webclient/BackOffice/FileListControl";
-import { IRowClickArgs } from "@docsvision/webclient/BackOffice/IRowClickArgs";
-
-export async function fileListHighlightRow(sender: FileListControl, event) {
+export async function fileListHighlightRow(sender: FileListControl, event: IFileVersionDownloadingArgs) {
     const fileItem = event.fileItem;
 	const customClass = "file-list-row_red-border";
 
@@ -69,6 +21,20 @@ export async function fileListHighlightRow(sender: FileListControl, event) {
     }
 }
 ----
+
+Данный скрипт представляет пример получения объекта `fileItem`, представляющего информацию о файле из аргументов события. Выполняется исследование его свойства, после чего вызывается метод `toggleRowClass` ЭУ `FileListControl` для переключения стилей файла.
+
+.Index.ts
+[source,typescript]
+----
+extensionManager.registerExtension({ <.>
+    name: "FileListHighlightRow",
+    version: "1.0",
+    globalEventHandlers: [ EventHandler ]
+})
+----
+<.> Регистрация расширения позволяет корректно установить все обработчики событий, сервисы и прочие сущности web-приложения.
+
 
 == Проверка примера
 
