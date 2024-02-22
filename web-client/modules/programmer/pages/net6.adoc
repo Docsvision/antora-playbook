@@ -142,8 +142,8 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); 
 
 == Прочие изменения
 
-.В конструкторе класса расширения при вызове базовой реализации теперь не нужно передавать `serviceProvider`:
-
+* В конструкторе класса расширения при вызове базовой реализации теперь не нужно передавать `serviceProvider`:
++
 .Было
 [source,javascript]
 ----
@@ -152,7 +152,7 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); 
         {
         }
 ----
-
++
 .Стало
 [source,javascript]
 ----
@@ -161,36 +161,36 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); 
         {
         }
 ----
-
-Классы контроллеров рекомендуется наследовать от `Microsoft.AspNetCore.Mvc.ControllerBase`.
++
+* Классы контроллеров рекомендуется наследовать от `Microsoft.AspNetCore.Mvc.ControllerBase`.
 При переводе методы `requestManager` `get` и `post` в некоторых случаях могут изменить возвращаемое значение. В частности, ранее они могли возвращать строку, а после перевода -- объект -- результат `JSON.parse` этой строки. С примером можно ознакомиться ниже.
-
++
 .Было
 [source,javascript]
 ----
         const response = JSON.parse(await requestManager.get(url));
 ----
-
++
 .Стало
 [source,javascript]
 ----
         const response = await requestManager.get(url)
 ----
-
-Также в отдельных случаях может измениться регистр первой буквы в названии свойств ответа сервера. Например, следующим образом:
-
++
+* Также в отдельных случаях может измениться регистр первой буквы в названии свойств ответа сервера. Например, следующим образом:
++
 .Было
 [source,javascript]
 ----
      const name = response.IssueName;
 ----
-
++
 .Стало
 [source,javascript]
 ----
      const name = response.issueName;
 ----
-
++
 * Изменился способ загрузки и скачивания файлов. Пример реализации соответствующего метода на .NET6 можно найти в примере `ExternalWebService`, в файле `DocumentsController.cs`, методах `UploadFile` и `DownloadFile`.
 * Чтение настроек из конфигурационного файла Web-сервиса изменилось. Прежние сервисы оставлены для обратной совместимости, однако рекомендуется использовать стандартный механизм работы с настройками .NET 6. В частности, использовать внедрение интерфейса `IOptions` через конструктор для получения настройки и `AddOptions` + `BindConfiguration` при регистрации сервисов для регистрации настройки. Пример работы с настройками можно найти в примере `KonturIntegration` (регистрация см. `KonturServerExtension.cs/InitializeServiceCollection`, чтение см. `KonturRequestService.cs`).
 * Библиотека `iTextSharp`, которая использовалась в примере `Watermark`, поддерживает .NET6 только в новой версии, под названием `itext7`. В этой новой версии полностью изменился API.
