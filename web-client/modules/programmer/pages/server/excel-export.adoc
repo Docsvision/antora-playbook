@@ -12,23 +12,8 @@ include::ROOT:partial$excerpts.adoc[tags=wc-version]
 .Перечень необходимых инструментов:
 include::ROOT:partial$excerpts.adoc[tags=vscode]
 
-[source,vbnet]
-----
-        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
-        {
-			containerBuilder.RegisterType<ExcelExportExampleService>()
-                .As<IExcelExportService>()
-                .SingleInstance(); <.>
-        }
+Настраиваем собственные параметры экспорта:
 
-		#endregion Обработчики событий
-    }
-}
-----
-<.> Регистрируем типы в IoC контейнере.
-<.> Регистрируем тип `ExcelExportExampleService` как реализацию интерфейса `IExcelExportService` в `containerBuilder`.
-
-.Затем настраиваем собственные параметры экспорта:
 [source,csharp]
 ----
 namespace ExcelExportServerExtension.ExcelExport <.>
@@ -81,6 +66,20 @@ namespace ExcelExportServerExtension.ExcelExport <.>
 <.> Получаем строковое значение ячейки таблицы.
 <.> Для ячейки типа `DateTime` устанавливаем длинный формат.
 <.> Получаем все колонки из грида и сортируем их по параметру `Order`.
+
+В методе `InializeContainer` серверного расширения зарегистрируйте сервис.
+
+[source,vbnet]
+----
+        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
+        {
+			containerBuilder.RegisterType<ExcelExportExampleService>()
+                .As<IExcelExportService>()
+                .SingleInstance(); <.>
+        }
+----
+<.> Регистрируем типы в IoC контейнере.
+<.> Регистрируем тип `ExcelExportExampleService` как реализацию интерфейса `IExcelExportService` в `containerBuilder`.
 
 == Проверка примера
 
