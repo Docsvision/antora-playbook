@@ -61,7 +61,7 @@ export function initExtension(app) {
 }
 ----
 
-.Свойства диалога:
+.Свойства диалога объекта `dialogProps` в событии `beforeSignatureDialogShown`:
 [source,typescript]
 ----
     hideLabelSelection?: boolean; <.>
@@ -90,7 +90,7 @@ export function initExtension(app) {
 <.> Вызывается для обработки отображаемого списка доступных способов подписания.
 <.> Вызывается при отрисовке кнопок диалога.
 
-.Управление диалогом:
+.Свойства объекта `management` в событии `afterSignatureDialogShown`:
 [source,typescript]
 ----
     close(reason?: unknown): Promise<void>; <.>
