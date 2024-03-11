@@ -5,24 +5,25 @@
 // no-code-check
 [source,csharp]
 ----
-public interface ICardLifeCycleEx
-{     
-    Guid Create(SessionContext sessionContext, Guid? cardKindId, Guid? parentCardId); <.>
-    Guid CreateFromTemplate(SessionContext sessionContext, Guid templateId, Guid? parentCardId); <.>
-    string GetDigest(SessionContext sessionContext, Guid cardId); <.>
-    bool Validate(SessionContext sessionContext, Guid cardId, out List<ValidationResult> validationResults); <.>
-    void OnSave(SessionContext sessionContext, Guid cardId); <.>
-    bool CanDelete(SessionContext sessionContext, Guid cardId, out string message); <.>
-    void OnDelete(SessionContext sessionContext, Guid cardId); <.>
-}
+    public interface ICardLifeCycleEx
+    {
+        Guid CardTypeId { get; } <.>
+        Guid Create(SessionContext sessionContext, CardCreateLifeCycleOptions options); <.>
+        bool Validate(SessionContext sessionContext, CardValidateLifeCycleOptions options, out List<ValidationResult> validationResults); <.>
+        void OnSave(SessionContext sessionContext, CardSaveLifeCycleOptions options); <.>
+        bool CanDelete(SessionContext sessionContext, CardDeleteLifeCycleOptions options, out string message); <.>
+        void OnDelete(SessionContext sessionContext, CardDeleteLifeCycleOptions options); <.>
+        string GetDigest(SessionContext sessionContext, CardDigestLifeCycleOptions options); <.>
+    }
 ----
+<.> Идентификатор типа карточек.
 <.> `Create` -- Вызывается при получении разметки создания карточки.
-<.> `CreateFromTemplate` -- Вызывается при получении разметки создания карточки по шаблону.
+// <.> `CreateFromTemplate` -- Вызывается при получении разметки создания карточки по шаблону.
 <.> `Validate` -- Вызывается перед сохранением изменений карточки в БД с возможностью прервать сохранение.
-<.> `GetDigest` -- Вызывается при получении дайджеста карточки при её сохранении. Позволяет добавить собственную логику формирования дайджеста. Метод `GetDigest` используется, только когда способ формирования дайджеста не настроен в {dv} и карточка сохраняется из пользовательского интерфейса (при нажатии кнопки Сохранить, сохранении по месту или скриптом).
 <.> `OnSave` -- Вызывается при сохранении изменений карточки. Позволяет добавить дополнительную логику в сохранение карточки, но без возможности прервать сохранение.
 <.> `CanDelete` -- Вызывается перед удалением карточки. Позволяет прервать удаление.
 <.> `OnDelete` -- Вызывается при удалении карточки. Позволяет добавить дополнительную логику в удаление карточки, но без возможности прервать удаление.
+<.> `GetDigest` -- Вызывается при получении дайджеста карточки при её сохранении. Позволяет добавить собственную логику формирования дайджеста. Метод `GetDigest` используется, только когда способ формирования дайджеста не настроен в {dv} и карточка сохраняется из пользовательского интерфейса (при нажатии кнопки Сохранить, сохранении по месту или скриптом).
 
 Указанные методы используются *исключительно* при выполнении стандартных операций со строками из разметок или с использованием JS WebAPI разметок. В других случаях методы интерфейса `ICardLifeCycleEx` не вызываются и не влияют на работу сервера {wc}а с карточками.
 
@@ -31,15 +32,26 @@ public interface ICardLifeCycleEx
 // no-code-check
 [source,csharp]
 ----
-public class DocumentCardLifeCycle : BaseCardLifeCycle
+using System;
+using DocsVision.BackOffice.ObjectModel.Services;
+using DocsVision.BackOffice.ObjectModel;
+using DocsVision.Platform.WebClient;
+using DocsVision.WebClientLibrary.ObjectModel.Services.EntityLifeCycle;
+using DocsVision.WebClientLibrary.ObjectModel.Services.EntityLifeCycle.Options;
+using DocsVision.BackOffice.CardLib.CardDefs;
+
+
+internal class DocumentCardLifeCycle : BaseCardLifeCycleEx
 {
-    public override Guid Create(SessionContext sessionContext, Guid? cardKindId, Guid? parentCardId)
+    public override Guid CardTypeId => CardDocument.ID;
+
+    public override Guid Create(SessionContext sessionContext, CardCreateLifeCycleOptions options)
     {
-        if (!cardKindId.HasValue)
-            throw new ArgumentNullException(nameof(cardKindId));
+        if (!options.CardKindId.HasValue)
+            throw new ArgumentNullException(nameof(options.CardKindId));
 
         var objectContext = sessionContext.ObjectContext;
-        var kindsCardKind = objectContext.GetObject<KindsCardKind>(cardKindId);
+        var kindsCardKind = objectContext.GetObject<KindsCardKind>(options.CardKindId);
         var documentService = objectContext.GetService<IDocumentService>();
         var document = documentService.CreateDocument(null, kindsCardKind);
         document.Description = document.SystemInfo.CardKind.Name;
@@ -49,23 +61,14 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
         return document.GetObjectId();
     }
 
-    public override Guid CreateFromTemplate(SessionContext sessionContext, Guid templateId, Guid? parentCardId)
-    {
-        var objectContext = sessionContext.ObjectContext;
-        var documentService = objectContext.GetService<IDocumentService>();
-        var document = documentService.CreateDocumentFromTemplate(templateId);
 
-        objectContext.AcceptChanges();
-        return document.GetObjectId();
-    }
-
-    public override void Save(SessionContext sessionContext, Guid cardId)
+    public override void OnSave(SessionContext sessionContext, CardSaveLifeCycleOptions options)
     {
-        base.Save(sessionContext, cardId);
+        base.OnSave(sessionContext, options);
         var objectContext = sessionContext.ObjectContext;
-        var document = objectContext.GetObject<Docsvision.BackOffice.ObjectModel.Document>(cardId);
+        var document = objectContext.GetObject<Document>(options.CardId);
         document.MainInfo.Name = "Принудительно установленное наименование документа";
-        
+
         objectContext.AcceptChanges();
     }
 }
@@ -80,11 +83,10 @@ public class DocumentCardLifeCycle : BaseCardLifeCycle
 // no-code-check
 [source,csharp]
 ----
-public override void InitializeContainer(ContainerBuilder containerBuilder) {
-    var cardTypeID = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"); <.>
-    containerBuilder.RegisterType<DocumentCardLifeCycle>().Keyed<ICardLifeCycleEx>(cardTypeID).SingleInstance();
+public override void InitializeServiceCollection(IServiceCollection services)
+{
+    services.AddTransient<ICardLifeCycleEx, DocumentCardLifeCycle>();
 }
 ----
-<.> Идентификатор типа карточек.
 
 Серверное расширение должно быть опубликовано стандартным образом.
