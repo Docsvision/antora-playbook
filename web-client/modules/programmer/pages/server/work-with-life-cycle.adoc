@@ -13,24 +13,31 @@
 public class CardServiceController : ApiController
 {
     private readonly ILifeCycleServiceEx lifeCycleService;
-    
-    public CardServiceController(ILifeCycleServiceEx lifeCycleService) <.>
+    private readonly ICurrentObjectContextProvider currentObjectContextProvider;
+
+    public CardServiceController(ILifeCycleServiceEx lifeCycleService, ICurrentObjectContextProvider currentObjectContextProvider) <.>
     {
         this.lifeCycleService = lifeCycleService;
+        this.currentObjectContextProvider = currentObjectContextProvider;
     }
 
     [HttpGet]
-    public Guid CreateByTemplate(Guid cardTypeId)
+    public Guid CreateByTemplate(Guid templateId)
     {
+        var sessionContext = currentObjectContextProvider.GetOrCreateCurrentSessionContext();
         var documentCardLifeCycle = lifeCycleService.GetCardLifeCycle(CardDocument.ID); <.>
+        var newDocumentId = Guid.Empty;
         if (templateId != Guid.Empty)
         {
-            var newDocumentId = documentCardLifeCycle.CreateFromTemplate(sessionContext, templateId, null); <.>
+            newDocumentId = documentCardLifeCycle.Create(sessionContext, new CardCreateLifeCycleOptions()
+            {
+                TemplateId = templateId <.>
+            });
         }
         return newDocumentId;
     }
 }
 ----
 <.> Принимаем требуемый сервис в конструкторе.
-<.> Получаем интерфейс для работы с карточкой типа CardDocument.
+<.> Получаем интерфейс для работы с карточкой типа `CardDocument`.
 <.> Используем метод создания карточки по шаблону.
