@@ -4,7 +4,7 @@
 
 = Резервное копирование базы данных
 
-Система {dv} сохраняет информацию о карточках в SQL базе данных. Чтобы защитить данные от повреждения, удаления и в других случаях можно создать резервную копию БД. В данном разделе приведена инструкция по резервному копированию баз данных <<mssql,{ms} SQL>> и <<pgsql,{pgsql}>>, а также инструкция по <<porting,переносу БД на другой сервер>>
+Система {dv} сохраняет информацию о карточках в SQL базе данных. Чтобы защитить данные от повреждения, удаления и в других случаях можно создать резервную копию БД. В данном разделе приведена инструкция по резервному копированию баз данных <<mssql,{mssql}>> и <<pgsql,{pgsql}>>, а также инструкция по <<porting,переносу БД на другой сервер>>
 
 При восстановлении БД из резервной копии под другим именем обратите внимание на рекомендации в пункте xref:db-rename.adoc[].
 
@@ -12,7 +12,7 @@
 == {mssql}
 
 [#mssql-create]
-=== Создание резервной копии БД {ms} SQL
+=== Создание резервной копии БД {mssql}
 
 include::admin:partial$excerpts.adoc[tags=backupDb]
 
@@ -23,7 +23,7 @@ include::admin:partial$excerpts.adoc[tags=backupDb]
 . Выберите желаемые настройки резервного копирования и нажмите *ОК*.
 
 [#mssql-restore]
-=== Восстановление БД из резервной копии {ms} SQL
+=== Восстановление БД из резервной копии {mssql}
 
 include::admin:partial$excerpts.adoc[tags=restoreDb]
 
@@ -36,7 +36,7 @@ include::admin:partial$excerpts.adoc[tags=restoreDb]
 . Напротив слов *База данных* в раскрывающемся списке выберите БД, которую необходимо восстановить.
 . Затем выберите нужные настройки и нажмите *ОК*.
 
-*Подробнее о создании резервных копий в {ms} SQL* можно почитать на сайте https://docs.microsoft.com/ru-ru/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-ver15[Docs.Microsoft.com].
+*Подробнее о создании резервных копий в {mssql}* можно почитать на сайте https://docs.microsoft.com/ru-ru/sql/relational-databases/backup-restore/create-a-full-database-backup-sql-server?view=sql-server-ver15[Docs.Microsoft.com].
 
 [#pgsql]
 == {pg} SQL
