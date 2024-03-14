@@ -49,24 +49,25 @@ using DocsVision.Edi.DocumentScript;
 private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignature(); <.>
+  ediScriptHelper.SendReplySignature();
 }
 ----
-<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
-* Для команды _Отказ в подписании документа_:
+* [[reject]]Для команды _Отказ в подписании документа_:
 +
 [source,csharp]
 ----
 private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignatureRejection();
+  ediScriptHelper.SendReplySignatureRejection(); <.>
 }
 ----
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 * Для команды _Запросить аннулирование_:
 +
+.В {wincl}е:
 [source,csharp]
 ----
 private void sendRequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -75,6 +76,18 @@ private void sendRequestRevocation_ItemClick(System.Object sender, DevExpress.Xt
   ediScriptHelper.SendRevocation();
 }
 ----
++
+.В {wc}е:
+[source,csharp]
+----
+export async function customRevoke(sender: CustomButton) {
+    const result = await revoke(sender);
+    if (result.success) {
+      <.>
+    }
+}
+----
+<.> Собственная логика.
 +
 * Для команды _Подтвердить аннулирование_:
 +
@@ -226,7 +239,7 @@ private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevE
 +
 . Укажите операции доступа для добавленных команд.
 . Добавьте для новых команд в события `*При щелчке*` обработчики команд:
-
++
 [cols=",,",options="header"]
 |===
 |Обработчик
@@ -239,9 +252,17 @@ private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevE
 
 |`signAndSendOutgoing`
 |Подписать и отправить
-|При нажатии будет вызвана функция подписания документа с отправкой контрагенту.
+a|При нажатии будет вызвана функция подписания документа с отправкой контрагенту.
 
 Используется в неформализованных исходящих документах.
+
+.Для {wc}а реализация будет следующая:
+----
+export async function signAndSendOutgoing(sender: CustomButton) {
+    processOutgoing(sender, false); <.>
+}
+----
+<.> Подписать и отправить исходящий (формализованный и неформализованный).
 
 |`sendIncomingWithExistingSign`
 |Отправка документов с имеющейся подписью
@@ -249,7 +270,15 @@ private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevE
 
 |`sendOutgoingWithExistingSign`
 |Отправка документов с имеющейся подписью
-|При нажатии будет вызвана функция отправки исходящего документа с существующей подписью.
+a|При нажатии будет вызвана функция отправки исходящего документа с существующей подписью.
+
+.Для {wc}а реализация будет следующая:
+----
+export async function sendOutgoingWithExistingSign(sender: CustomButton) {
+    processOutgoing(sender, true); <.>
+}
+----
+<.> Отправить исходящий с существующей подписью (формализованный и неформализованный).
 
 |`revoke`
 |Аннулировать
@@ -275,6 +304,10 @@ private void signAndSendDocumentFilesButton_ItemClick(System.Object sender, DevE
 
 Используется в неформализованных входящих документах.
 |===
++
+. {blank}
++
+include::webuser:partial$section-inf.adoc[]
 
 [#grid-plugin]
 == Настройки "Журнала обмена ЭДО"

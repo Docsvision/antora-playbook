@@ -13,7 +13,7 @@
 .. Входящий УПД (820).
 .. Формализованный акт.
 ... Формализованный акт (820).
-// ... Формализованный акт (552).
+... Формализованный акт (552).
 .. Входящий УКД.
 ... Входящий УКД (736) в формате приказа ФНС 189.
 ... Входящий УКД (736) в формате приказа ФНС 736.
@@ -91,9 +91,10 @@ private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.It
 ----
 private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 {
-  EdiScriptHelper.SendInvoiceReplyRejection();
+  EdiScriptHelper.SendInvoiceReplyRejection(); <.>
 }
 ----
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:informal-settings.adoc#reject[по аналогии с неформализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 .. _Запросить аннулирование_
 +
