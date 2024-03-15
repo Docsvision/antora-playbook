@@ -1,0 +1,69 @@
+= Специальный сервис логики этапа согласования
+
+Данный раздел содержит описание примера реализации специального сервиса логики этапа согласования.
+
+.Сервис выполняет следующие функции:
+* Подменяет вычисление согласующих.
+* Показывает вариант настройки действий после создания задания на примере дополнения содержания задания.
+
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+.Перечень необходимых инструментов:
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `Others > CustomStageService`.
+
+.Пример переопределения сервиса этапа
+[source,csharp]
+----
+namespace CustomStageService
+{
+	public class CustomStageService : ApprovalStageService
+	{
+		public override IEnumerable<ApprovalStageApprover> GetStageApprovers(ApprovalStage approvalStage, Document document) <.>
+		{
+			List<ApprovalStageApprover> approvers = new List<ApprovalStageApprover>();
+
+			IStaffService staffService = Context.GetService<IStaffService>();
+			StaffEmployee employee = staffService.FindEmpoyeeByAccountName(@"Test\TestEmployee");
+
+			approvers.Add(CreateApprover(employee)); <.>
+
+			return approvers;
+		}
+		protected override void OnTaskCreated(ApprovalStage approvalStage, ApprovalPath approvalPath, Reconcile reconcileCard, Task task) <.>
+		{
+			task.MainInfo.Content += Environment.NewLine + "Тест расширения"; <.>
+		}
+	}
+}
+----
+<.> Переопределяем вычисления согласующих для этапа.
++
+* `approvalStage` -- текущий этап,
+* `document` -- документ.
++
+<.> `CreateApprover` -- штатный метод `ApprovalStageService` создающий запись согласующего из сотрудника.
+<.> Дополняем создание задания согласования.
++
+* `approvalStage` -- текущий этап.
+* `approvalPath` -- маршрут.
+* `reconcileCard` -- согласование.
+* `task` -- созданное задание.
++
+<.> Дополним содержание задания.
+
+== Проверка примера
+
+. В файле `WebCSamples\Others\CustomStageService\CustomStageService.cs` заменить `Test\TestEmployee` на одну из своих учётных записей, присутствующих в Docsvision.
+. Пересобрать расширение.
+. Добавить на сервере библиотеку `CustomStageService.dll` из каталога `bin\Debug\net6.0`, если в VisualStudio выбрана конфигурация сборки "Debug" или `bin\Release\net6.0`, если выбрана конфигурация "Release".
++
+* в папку common на сервер, где установлен WorkerService (`/lib/docsvision/common` на Linux)
+* в папку, где установлен Windows-клиент, с которого производится настройка (например `C:\Program Files (x86)\Docsvision\Client`).
++
+. Открыть шаблон карточки любого этапа (например, "Согласование с рецензированием" из стандартного согласования модуля "Управление документами"), перейти на вкладку "Специальная логика этапа", в поле "Имя сервиса" выбрать библиотеку.
+. Настроить и запустить согласование с данным этапом в маршруте. В результате на данном этапе в качестве согласующего будет выбран пользователь, указанный на шаге 1 (например, если используется этап согласования, то этому пользователю придет задание на согласование). Также в созданном задании в описании появится текст "Тест расширения".

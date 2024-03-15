@@ -20,15 +20,15 @@ public override void OnObjectContextCreate(ObjectContext objectContext)
  {
     base.OnObjectContextCreate(objectContext);
 
-<.>
+    <.>
 
-IObjectMapperFactoryRegistry mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>(); <.>
+    IObjectMapperFactoryRegistry mapperFactoryRegistry = objectContext.GetService<IObjectMapperFactoryRegistry>(); <.>
 
-mapperFactoryRegistry.RegisterFactory(typeof(CustomLibraryMapperFactory)); <.>
+    mapperFactoryRegistry.RegisterFactory(typeof(CustomLibraryMapperFactory)); <.>
 
-IServiceFactoryRegistry serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>(); <.>
+    IServiceFactoryRegistry serviceFactoryRegistry = objectContext.GetService<IServiceFactoryRegistry>(); <.>
 
-serviceFactoryRegistry.RegisterFactory(typeof(CustomLibraryServiceFactory)); <.>
+    serviceFactoryRegistry.RegisterFactory(typeof(CustomLibraryServiceFactory)); <.>
 }
 ----
 <.> Далее следует стандартный код добавления фабрик в контекст объектов (см. xref:programmer:samples:object-model/init-context.adoc[Руководство разработчика {dv}]).
@@ -39,6 +39,7 @@ serviceFactoryRegistry.RegisterFactory(typeof(CustomLibraryServiceFactory)); <.>
 +
 Добавленный в контекст объектов сервис можно получить стандартным образом:
 +
+// no-code-check
 [source,csharp]
 ----
 ISomeService someService = objectContext.GetService<ISomeService>();

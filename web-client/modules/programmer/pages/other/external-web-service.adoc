@@ -1,0 +1,88 @@
+= Web-сервис для взаимодействия с платформой
+
+Данный раздел содержит демонстрационный вариант Web-сервиса, содержащего пример взаимодействия с платформой {dv}.
+
+.Web-сервис позволяет выполнять следующие действия с платформой {dv}:
+. Получите информацию о карточке документа по её идентификатору.
+. Создайте карточку документа по переданной модели.
+. Обновите данные карточки документа.
+. Удалите карточку документа по её идентификатору.
+. Измените состояние карточки документа.
+. Прикрепите файл к карточке документа.
+. Получите файл по его идентификатору.
+. Получите результат выполнения расширенного отчета.
+
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+.Перечень необходимых инструментов:
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`
+. Соберите проект `Others > ExternalWebService > WebService`
+. Соберите проект `Others > ExternalWebService > WebServiceClient`
+. На сервере {dv} установите {dv} Resource Kit. С помощью утилиты DVCardManager загрузите в БД {dv} библиотеку `ReportsLibrary` из каталога `ExternalWebService\CardDefs\ReportsLibrary`.
++
+Подробное описание процедуры загрузки пользовательской библиотеки карточек содержится в xref:programmer:solutions:cards/scheme/load-scheme.adoc[руководстве разработчика {dv}].
++
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Отредактируйте в файле `SamplesOutput\ExternalWebService\WebService\appsettings.json` параметры `ServerAddress` и `BaseName` так, чтобы они указывали на рабочий сервер {dv} и базу.
+. Запустите *{wcs-new}* из папки `SamplesOutput\ExternalWebService\WebService`.
+.. На Windows запустите `WebService.exe` из под учетной записи {dv} {wc}а.
+.. На Linux запустите командой `dotnet WebService.dll`
+.. Для запуска под нужной учетной записью можно задать параметры `SystemUserAccount` и `SystemUserPassword` в `appsettings.json`.
+. Запустите приложение `SamplesOutput\ExternalWebService\WebServiceClient\WebServiceClient.exe`. В выводе консоли отобразится результат выполнения операций.
+
+== Каталог "CardDefs"
+
+Содержит описание библиотеки `ReportsLibrary` с одним расширенным отчетом, который возвращает описание карточки (поле `description`) по её идентификатору.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<CardLibrary xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="D030376C-1F99-445B-9455-01538CB11461" Alias="ReportsLibrary" ControlInfo="" IconFile="" Version="1" MsiProductCode="" MsiPackageName="">
+  <Name>
+    <LocalizedString Language="en">ReportsLibrary</LocalizedString>
+    <LocalizedString Language="ru-RU">ReportsLibrary</LocalizedString>
+  </Name>
+  <Reports>
+    <Report Alias="TestReport" ID="85701F4B-61FF-4A33-ADD1-959B471E7558" SQLFile="">
+      <Name>
+        <LocalizedString Language="en">TestReport</LocalizedString>
+      </Name>
+      <Parameter Type="uniqueidentifier" Name="CardId" />
+      <SqlFiles>
+        <SqlFile ServerType="mssql">Sql\TestReport.sql</SqlFile>
+        <SqlFile ServerType="pgsql">PgSql\TestReport.sql</SqlFile>
+      </SqlFiles>
+      <Result>
+        <ResultSet Name="dvtable_report_result_{85701f4b-61ff-4a33-add1-959b471e7558}">
+          <Column Name="Description" DataType="String" Size="255" Nullable="true" />
+        </ResultSet>
+      </Result>
+    </Report>
+  </Reports>
+  <Log>
+    <Name />
+  </Log>
+</CardLibrary>
+
+----
+
+== Проект "WebService.Interfaces"
+
+Проект содержит общие модели для веб-сервиса и клиентского приложения.
+
+== Проект "WebService"
+
+Предоставляет API для взаимодействия с сервером {dv}. Содержит сервис `DocumentService` для работы с карточками типа `Document`.
+
+Также включает в себя `ReportService`, содержащий метод для выполнения расширенного отчета.
+
+== Проект "WebServiceClient"
+
+Содержит пример консольной утилиты для взаимодействия с веб-сервисом посредством WebApi.

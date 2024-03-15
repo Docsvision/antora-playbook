@@ -39,13 +39,13 @@ interface IAgreementHistoryStageRenderer {
 
 [source,typescript]
 ----
-import { IAgreementHistoryStageRenderer } from "@Docsvision/webclient/Approval/$AgreementHistoryStageRenderer";
-import { serviceName } from "@Docsvision/webclient/System/ServiceUtils";
-import { IApprovalStageItemRowProps } from "@Docsvision/webclient/Approval/IApprovalStageItemRowProps";
+import { IAgreementHistoryStageRenderer } from "@docsvision/webclient/Approval/$AgreementHistoryStageRenderer";
+import { serviceName } from "@docsvision/webclient/System/ServiceUtils";
+import { IApprovalStageItemRowProps } from "@docsvision/webclient/Approval/IApprovalStageItemRowProps";
 import { IEventArgs } from "@{Docsvision/webclient/System/IEventArgs";
-import { AgreementHistory } from "@Docsvision/webclient/Approval/AgreementHistory";
-import { Tab } from "@Docsvision/webclient/Platform/Tab";
-import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
+import { AgreementHistory } from "@docsvision/webclient/Approval/AgreementHistory";
+import { Tab } from "@docsvision/webclient/Platform/Tab";
+import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
 
 import * as React from 'react' <.>
 
@@ -98,13 +98,13 @@ NOTE: Инструкция по разработке и регистрации �
 ----
 import * as EventHandlers from "./EventHandlers";
 import { $AgreementHistoryRenderService, AgreementHistoryRenderService } from "./EventHandlers";
-import { Service } from "@Docsvision/webclient/System/Service";
-import { $RequestManager } from "@Docsvision/webclient/System/$RequestManager";
-import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
+import { Service } from "@docsvision/webclient/System/Service";
+import { $RequestManager } from "@docsvision/webclient/System/$RequestManager";
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
 
 extensionManager.registerExtension({
     name: "Template web extension",
-    version: "5.5.15",
+    version: "6.1",
     globalEventHandlers: [ EventHandlers ],
     layoutServices: [
         Service.fromFactory($AgreementHistoryRenderService, (services: $RequestManager) => new AgreementHistoryRenderService(services)) 

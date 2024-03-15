@@ -2,32 +2,27 @@
 
 Программист может использовать в серверном расширении контекст объектов {dv} для доступа к данным системы.
 
-.Разработчику доступны два контекста объектов:
-. Пользовательский -- создаётся для каждого пользователя при его входе в {wc}. Права на работу с объектами соответствуют правам данного пользователя в системе {dv}.
-. Серверный -- создаётся для сервера {dv}. Права на работу с объектами соответствуют правам учетной записи пула приложений с {wc}ом в системе {dv}.
+Разработчику доступен пользовательский контекст объектов. Пользовательский контекст создаётся для каждого пользователя при его входе в {wc}. Права на работу с объектами соответствуют правам данного пользователя в системе {dv}.
+// . Серверный -- создаётся для сервера {dv}. Права на работу с объектами соответствуют правам учетной записи пула приложений с {wc}ом в системе {dv}.
 
 Получить контекст объектов можно используя функции сервиса `ICurrentObjectContextProvider`:
 
 * `GetOrCreateCurrentSessionContext` -- возвращает контекст объектов текущего пользователя.
-* `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
+// * `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
 
-Сервис `ICurrentObjectContextProvider` может быть получен двумя способами:
+WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой.
+
+Сервис `ICurrentObjectContextProvider` может быть получен следующим способом:
 
 [source,csharp]
 ----
-public class LayoutController : ApiController <.>
-{
-    public LayoutController(ICurrentObjectContextProvider currentObjectContextProvider) {
-        var context = currentObjectContextProvider.GetOrCreateCurrentSessionContext().ObjectContext <.>
+private readonly ICurrentObjectContextProvider _currentObjectContextProvider;
 
-    public LayoutController(IServiceProvider serviceProvider) { <.>
-            var serviceHelper = new ServiceHelper(serviceProvider);
-            var context = serviceHelper.CurrentObjectContextProvider.GetOrCreateCurrentSessionContext().ObjectContext; <.>
+public DocumentRegistrationController(ICurrentObjectContextProvider currentObjectContextProvider)
+{
+    _currentObjectContextProvider = currentObjectContextProvider;
+}
 ----
-<.> Указать сервис в качестве аргумента конструктора класса контроллера.
-<.> Получение контекста пользователя.
-<.> Получить сервис из передаваемого в конструктор поставщика сервисов serviceProvider.
-<.> Получение контекста пользователя.
 
 {wc} периодически закрывает неиспользуемые пользовательские сессии, из-за чего контекст объектов, сохранённый в статический объект класса (серверного расширения или контроллера), спустя время станет недействительным. *Всегда получайте контекст объектов заново* (с помощью функции `GetOrCreateCurrentSessionContext`).
 

@@ -1,0 +1,48 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ServerExtensions/ShiftTasksEndDate
+:name: ShiftTasksEndDate
+
+= Автоматическое изменение срока исполнения заданий
+
+Данный раздел содержит описание примера серверного расширения. Пример демонстрирует реализацию автоматических изменений данных связанных карточек.
+
+include::../client/authorization.adoc[tags=link]
+
+После сохранения карточки Документа ищутся все его связанные задания, и срок исполнения для отправленных на исполнение заданий переносится на 3 дня вперед.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `ServerExtensions > ShiftTasksEndDate > ShiftTasksEndDateServerExtension`.
+. Откройте консоль в папке `ServerExtensions > ShiftTasksEndDate > ShiftTasksEndDateWebExtension` и выполнить команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\ShiftTasksEndDateServerExtension` в каталог `Путь к сайту Web-клиента\Extensions`.
+. Скопируйте файл `SamplesOutput\Site\Extensions\ru\ShiftTasksEndDateServerExtension.resources.dll` в каталог "`Путь к сайту Web-клиента\Extensions\ru`".
+. Скопируйте файл `SamplesOutput\Site\Extensions\uk\ShiftTasksEndDateServerExtension.resources.dll` в каталог `Путь к сайту Web-клиента\Extensions\uk`.
+. Скопируйте каталог`SamplesOutput\Site\Content\Modules\ShiftTasksEndDateWebExtension` в каталог `Путь к сайту Web-клиента\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку редактирования.
+. Выберите условия использования этой разметки.
+. В разметке редактирования на событие `OnCardSaved` элемента `root` прикрепляем обработчик с названием `shiftTasksEndDate`.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Создайте карточку документа.
+. Добавьте дочерние задания (не группы заданий), отправить на исполнение.
+. Нажмите на редактирование карточки, изменить что-нибудь, сохранить.
+. Срок исполнения для отправленных на исполнение заданий сдвинулся на 3 дня.
+
+== Проект "ShiftTasksEndDateServerExtension"
+
+Проект-расширение для {wc}а. Содержит бизнес-логику изменения данных связанных карточек.
+Демонстрирует расширение функционала с помощью добавления новых сервисов, контроллеров.
+Реализован контроллер `AdvancedDocumentController` с методом `ShiftTasksEndDate`, который вызывает сервис `IShiftTasksEndDateService`.
+
+== Проект "ShiftTasksEndDateWebExtension"
+
+Проект-расширение клиентской части {wc}а. Содержит клиентский скрипт функции `shiftTasksEndDate`, которая вызывается на событие `*OnCardSaved*`.
+С помощью `requestManager.post` отправляем запрос на сервер для изменения даты.

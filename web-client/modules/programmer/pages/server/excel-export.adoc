@@ -1,50 +1,19 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ServerExtensions/ExcelExport
+:name: ExcelExport
+
 = Изменение экспорта в Excel
 
 Пример серверного расширения, позволяющего вмешаться в процесс экспорта представления в Excel.
 
-[source,vbnet]
-----
-namespace ExcelExportServerExtension
-{
-	public class ExcelExportServerExtension : WebClientExtension <.>
-	{
-        private readonly IServiceProvider _serviceProvider;
+include::../client/authorization.adoc[tags=link]
 
-		public ExcelExportServerExtension(IServiceProvider serviceProvider) <.>
-			: base(serviceProvider)
-		{
-            this._serviceProvider = serviceProvider;
-		}
+include::ROOT:partial$excerpts.adoc[tags=wc-version]
 
-		#region Свойства
+.Перечень необходимых инструментов:
+include::ROOT:partial$excerpts.adoc[tags=vscode]
 
-		public override string ExtensionName => Assembly.GetAssembly(typeof(ExcelExportServerExtension)).GetName().Name; <.>
+Настраиваем собственные параметры экспорта:
 
-		public override Version ExtensionVersion => new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); <.>
-
-		#endregion Свойства
-
-		#region Обработчики событий
-
-        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
-        {
-			containerBuilder.RegisterType<ExcelExportExampleService>()
-                .As<IExcelExportService>()
-                .SingleInstance(); <.>
-        }
-
-		#endregion Обработчики событий
-    }
-}
-----
-<.> Задаём описание расширения для WebClient, которое задано в текущей сборке.
-<.> Создаём новый экземпляр класса.
-<.> Получаем название расширения.
-<.> Получаем версию расширения.
-<.> Регистрируем типы в IoC контейнере.
-<.> Регистрируем тип `ExcelExportExampleService` как реализацию интерфейса `IExcelExportService` в `containerBuilder`.
-
-.Затем настраиваем собственные параметры экспорта:
 [source,csharp]
 ----
 namespace ExcelExportServerExtension.ExcelExport <.>
@@ -65,7 +34,7 @@ namespace ExcelExportServerExtension.ExcelExport <.>
             }
         }
 
-        protected override string GetGridRowParamValueAsString(object paramValue) <.>
+        protected override string GetGridRowParamValueAsString(object paramValue, bool noNullValues = false) <.>
         {
             if (paramValue is DateTime dateTime) <.>
             {
@@ -98,8 +67,22 @@ namespace ExcelExportServerExtension.ExcelExport <.>
 <.> Для ячейки типа `DateTime` устанавливаем длинный формат.
 <.> Получаем все колонки из грида и сортируем их по параметру `Order`.
 
+В методе `InializeContainer` серверного расширения зарегистрируйте сервис.
+
+[source,vbnet]
+----
+        public override void InitializeContainer(ContainerBuilder containerBuilder) <.>
+        {
+			containerBuilder.RegisterType<ExcelExportExampleService>()
+                .As<IExcelExportService>()
+                .SingleInstance(); <.>
+        }
+----
+<.> Регистрируем типы в IoC контейнере.
+<.> Регистрируем тип `ExcelExportExampleService` как реализацию интерфейса `IExcelExportService` в `containerBuilder`.
+
 == Проверка примера
 
-. Откройте папку в Веб-клиенте Docsvision.
-. Нажмите кнопку "Экспортировать в Excel".
+. Откройте папку в {wc}е {dv}.
+. Нажмите кнопку *Экспортировать в Excel*.
 . Загрузится документ в формате `.xlsx`, содержащий выгрузку представления со всеми колонками и выделенными цветом нечетными строками.

@@ -11,11 +11,12 @@
 ****
 Следующий код демонстрирует пример функции-обработчика.
 
+// no-code-check
 [source,typescript]
 ----
-import { Employee } from "@Docsvision/webclient/BackOffice/Employee";
-import { IEventArgs } from "@Docsvision/webclient/System/IEventArgs";
-import { MessageBox } from "@Docsvision/webclient/Helpers/MessageBox/MessageBox";
+import { Employee } from "@docsvision/webclient/BackOffice/Employee";
+import { IEventArgs } from "@docsvision/webclient/System/IEventArgs";
+import { MessageBox } from "@docsvision/webclient/Helpers/MessageBox/MessageBox";
 
 export function someHandler(sender: Employee, e: IEventArgs) { <.>
 
@@ -26,7 +27,7 @@ export function someHandler(sender: Employee, e: IEventArgs) { <.>
 <.> Пример обработчика.
 <.> Отображает сообщение с именем сотрудника.
 
-В первых строчках кода выполняется импорт внешних сущностей, типы которых используются в коде, из JS-модулей {wc}а. При использовании Visual Studio Code редактор автоматически подключит необходимые модули. При использовании другого редактора -- обратитесь к справочнику по JS API, в котором указаны названия JS-модулей.
+В первых строчках кода выполняется импорт внешних сущностей, типы которых используются в коде, из JS-модулей {wc}а. При использовании Visual Studio Codefootnote:[Рекомендуется использовать Visual Studio Code {vscode-v}.] редактор автоматически подключит необходимые модули. При использовании другого редактора -- обратитесь к справочнику по JS API, в котором указаны названия JS-модулей.
 
 .Функция `someHandler` -- реализация обработчика
 * В определении функции должно быть указано ключевое слово `export`.
@@ -39,10 +40,11 @@ export function someHandler(sender: Employee, e: IEventArgs) { <.>
 . Если на шаге 2 был создан новый tsx файл, добавьте в файле `src/Index.ts` строку импорта его сущностей.
 +
 ****
+// no-code-check
 [source,typescript]
 ----
 import * as Handlers from "./FileWithHandlers"; <.>
-import { extensionManager } from "@Docsvision/webclient/System/ExtensionManager";
+import { extensionManager } from "@docsvision/webclient/System/ExtensionManager";
 
 extensionManager.registerExtension({
  name: "My web Extension",

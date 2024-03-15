@@ -8,6 +8,7 @@
 
 == Синтаксис
 
+// no-code-check
 [source,csharp]
 ----
 public class PropertyDescription : ICloneable
@@ -82,7 +83,7 @@ private PropertyDescription GetSliderPropertyDescription()
      keys.Add(item.DescriptionLocalizationKey);
    }
   },
-  ChangeLocalizaionKeys = args => <.>
+  ChangeLocalizationKeys = args => <.>
   {
    var value = (string)args.ControlInfo.GetProperty(args.PropertyDescription.Name);
    

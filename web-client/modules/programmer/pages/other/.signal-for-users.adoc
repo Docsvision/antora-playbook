@@ -1,0 +1,97 @@
+= Уведомления для пользователей
+
+Данный раздел содержит описание примера с демонстрацией возможности отправки оповещения всем активным пользователям {wc}а.
+
+.Пример включает два компонента:
+. `SignalServerExtension` -- папка с серверным расширением {wc}а, в котором реализована функция отправки сообщений с использованием сервиса `IRealtimeCommunicationService` API {wc}а для работы с подсистемой оповещений.
+. `SignalWebExtension` -- папка с клиентским расширением, в котором реализован клиентский сервис, взаимодействующий с методами расширения `SignalServerExtension`, а также обработчик события нажатия кнопки, использующий данный клиентский сервис.
+
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Сборка и установка
+
+. Сборка серверной части.
+.. Откройте решение `Samples.sln`.
+.. Соберите проект `Other > SignalForUsers > SignalForUsersExtension`.
+. Сборка клиентской части.
+.. Откройте в командной строке папку `Others > SignalForUsers > SignalWebExtension`.
+.. Выполните команды:
++
+[source,bash]
+----
+npm install
+npm update
+npm run build:prod
+----
++
+. Публикация компонентов на сервере {wc}а.
+.. Скопируйте папку `SamplesOutput\Site\Content\Modules\SignalForUsersWebExtension\` в `Путь к сайту Web-клиента\Content\Modules`.
+.. Скопируйте папку `SamplesOutput\Site\Extensions\SignalForUsersExtension` в `Путь к сайту Web-клиента\Extensions`.
+.. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. В программе {kvr} добавьте элемент *Кнопка* в любую разметку.
+. Укажите для события `*При щелчке`* обработчик `sendMessage`.
+. Сохраните разметку.
+. Откройте любую карточку с данной настроенной разметкой.
+. Нажмите на добавленную кнопку.
+. У всех пользователей, работающих в данный момент в {wc}а, появится сообщение `В 12:00 планируется перезагрузка {wc}а. Сохраните данные.`.
+
+== Компонент "SignalServerExtension"
+
+[source,csharp]
+----
+namespace SignalForUsersExtension
+{
+    public class SignalForUsersExtension : WebClientExtension <.>
+    {
+
+        public SignalForUsersExtension(IServiceProvider serviceProvider) <.>
+            : base()
+        {
+        }
+
+        public override string ExtensionName <.>
+        {
+            get { return Assembly.GetAssembly(typeof(SignalForUsersExtension)).GetName().Name; }
+        }
+
+        public override Version ExtensionVersion <.>
+        {
+            get { return new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion); }
+        }
+
+        #region WebClientExtension Overrides
+
+        public override void InitializeServiceCollection(IServiceCollection services) <.>
+        {
+        }
+
+        protected override List<ResourceManager> GetLayoutExtensionResourceManagers() <.>
+        {
+            return new List<ResourceManager>
+            {
+
+            };
+        }
+
+        #endregion
+    }
+}
+----
+<.> Задаёт описание расширения для WebClient, которое задано в текущей сборке
+<.> Создаёт новый экземпляр, см. `SignalForUsersExtension`.
++
+* `serviceProvider` -- `Сервис-провайдер`.
++
+<.> Получить название расширения
+<.> Получить версию расширения
+<.> Регистрация типов в IoC контейнере
++
+* `containerBuilder` -- провайдер контейнеров.
++
+<.> Получает менеджеры ресурсов для расширения конструктора разметок.

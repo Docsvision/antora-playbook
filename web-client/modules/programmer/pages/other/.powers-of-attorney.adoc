@@ -2,15 +2,17 @@
 
 Данный пример содержит методы работы с МЧД через API {wc}а.
 
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
 .Перечень необходимых инструментов:
 * Visual Studio 2017/2019
-* NodeJS v14.17.0+
+* https://nodejs.org/en/[NodeJS {node-v}]
 
 [#description]
 == Описание примера
 
 .Пример включает два компонента:
-* `PowersOfAttorneyServerExtension` -- папка с серверным расширением Web-клиента, в котором реализованы функции создания СКД из демонстрационной карточки доверенностей.
+* `PowersOfAttorneyServerExtension` -- папка с серверным расширением {wc}а, в котором реализованы функции создания СКД из демонстрационной карточки доверенностей.
 * `PowersOfAttorneyWebExtension` -- папка с клиентским расширением, в котором реализованы обработчики смены состояния ПКД и управления МЧД, видимостью и обязательностью полей.
 * `PowersOfAttorneySolution.zip` -- архив с решением, включающим разметки тестовой карточки доверенности.
 * `PowersOfAttorneyCardsMetadata.zip` -- архив с данными карточек, добавляющие в систему новые виды карточки _Документ_ (_Доверенность_ и _Передоверие_) и необходимые расширенные метаданные.
@@ -31,10 +33,10 @@
  $ npm update
  $ npm run build:prod
 +
-. Публикация компонентов на сервере Web-клиент.
+. Публикация компонентов на сервере {wc}.
 [arabic]
-.. Скопируйте папку `SamplesOutput\Site\Content\Modules\PowersOfAttorneyWebExtension\` в  `Каталог-установки-{wc}а\Site\Content\Modules`.
-.. Скопируйте папку `SamplesOutput\Site\Extensions\PowersOfAttorneyServerExtension` в  `Каталог-установки-{wc}а\Site\Extensions`.
+.. Скопируйте папку `SamplesOutput\Content\Modules\PowersOfAttorneyWebExtension\` в  `Каталог-установки-{wc}а\Content\Modules`.
+.. Скопируйте папку `SamplesOutput\Extensions\PowersOfAttorneyServerExtension` в  `Каталог-установки-{wc}а\Extensions`.
 . Перезапустите *{wcs-new}*.
 
 [#check]

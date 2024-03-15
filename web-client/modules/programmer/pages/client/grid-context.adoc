@@ -1,8 +1,13 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ClientScripts/TypeScript/GridContextMenuItem
+:name: GridContextMenuItem
+
 = Расширить контекстное меню
 
-Грид позволяет расширить функциональность контекстного меню при помощи расширений. Данное расширение представляет собой клиентский скрипт, позволяющий добавить новый пункт контекстного меню. Новый пункт контекстного меню позволяет открыть карточку в модальном окне или скрыть существующий элемент.
+Грид позволяет расширить функциональность контекстного меню при помощи расширений. Данный раздел описывает пример добавления нового пункта контекстного меню. Новый пункт контекстного меню позволяет открыть карточку в модальном окне или скрыть существующий элемент.
 
-WARNING: Данный пример демонстрирует только изменение контекстного меню в таблице с помощью скрипта.
+include::authorization.adoc[tags=link]
+
+// WARNING: Данный пример демонстрирует только изменение контекстного меню в таблице с помощью скрипта.
 
 //tag::start[]
 Начальный код расширения должен импортировать прямо или косвенно все остальные строки, чтобы затем объединить код в один пакет.
@@ -12,7 +17,7 @@ WARNING: Данный пример демонстрирует только из�
 ----
 extensionManager.registerExtension({ <.>
     name: "GridContextMenuItem",
-    version: "5.5.17",
+    version: "6.1",
     initialize() {
         app.folderPluginProvider.addFactory(new GridContextMenuItemPluginFactory());
     },
@@ -119,15 +124,17 @@ export async function showCard(context: TableCompositions.Cell, services: $Conte
 
     <.>
 
-    modalHost.dialogProps.header = "Предпросмотр"; <.>
+    const dialogProps = modalHost.dialogProps as CommonModalDialogProps;
 
-    modalHost.dialogProps.maxWidth = "80vw"; <.>
+    dialogProps.header = "Предпросмотр"; <.>
 
-    modalHost.dialogProps.maxHeight = "80vh"; <.>
+    dialogProps.maxWidth = "80vw"; <.>
 
-    modalHost.dialogProps.maximizeButtonEnabled = true;
-    modalHost.dialogProps.onMaximize = () => {
-        modalHost.dialogProps.maximized = !modalHost.dialogProps.maximized;
+    dialogProps.maxHeight = "80vh"; <.>
+
+    dialogProps.maximizeButtonEnabled = true;
+    dialogProps.onMaximize = () => {
+        dialogProps.maximized = !dialogProps.maximized;
         modalHost.forceUpdate(); <.>
     }
 
@@ -167,6 +174,21 @@ export async function showCard(context: TableCompositions.Cell, services: $Conte
 <.> Сервисы модального окна.
 <.> Тело модального окна.
 <.> Показываем модальное окно.
+
+Зарегистрируйте плагин в `GridContextMenuItemPluginFactory`:
+
+[source,typescript]
+----
+export class GridContextMenuItemPluginFactory implements IFolderPluginFactory {
+    id: string = "GridContextMenuItemPluginFactory";
+
+    getTablePlugins(): ITablePlugins[] {
+        return [
+            GridContextMenuItemPlugins
+        ]
+    }
+}
+----
 
 == Проверка примера
 

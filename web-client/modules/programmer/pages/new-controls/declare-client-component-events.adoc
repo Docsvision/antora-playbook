@@ -2,11 +2,11 @@
 
 .Чтобы корректно объявить обрабатываемое событие в клиентском компоненте элемента управления, нужно выполнить два условия:
 - [x] Генерируемые элементом управления события должны быть проинициализированы.
-- [x] Обработчики событий, используемые в классе реализации, должны быть связаны с контекстом.
+- [x] Событие должно быть сгенерировано.
 
 == Инициализация событий
 
-Для примера рассмотрим инициализацию события onShowed, поддерживаемого элементом управления:
+Для примера рассмотрим инициализацию события `*onShowed*`, поддерживаемого элементом управления:
 
 [source,typescript]
 ----
@@ -40,6 +40,15 @@ construct() {
     this.state.onShowed = SimpleEvent.Create<IEventArgs>(this.state.wrapper);
     this.state.onShowing = CancelableEvent.Create<IEventArgs>(this.state.wrapper);
 }
+----
+
+== Генерация события
+
+[source,typescript]
+----
+SimpleEvent.cast(this.state.onShowed).trigger({} as IEventArgs);
+
+await CancelableEvent.cast(this.state.onShowing).trigger({} as IEventArgs).promise;
 ----
 
 == Связать обработчики с контекстом

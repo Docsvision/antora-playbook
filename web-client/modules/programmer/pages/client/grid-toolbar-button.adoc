@@ -1,16 +1,21 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ClientScripts/TypeScript/GridToolbarButton
+:name: GridToolbarButton
+
 = Отобразить количество непрочитанных карточек
 
 Расширение в данном примере предназначено для добавления кнопки на панель инструментов грида. Расширение получает список карточек и по нажатию на кнопку отображает общее количество карточек, а также количество непрочитанных.
 
-WARNING: Данный пример демонстрирует только изменение панели настроек в таблице с помощью скрипта.
+include::authorization.adoc[tags=link]
 
-include::grid-context.adoc[tags=start]
+// WARNING: Данный пример демонстрирует только изменение панели настроек в таблице с помощью скрипта.
+//
+// include::grid-context.adoc[tags=start]
 
 [source,typescript]
 ----
 extensionManager.registerExtension({ <.>
     name: "GridToolbarButton",
-    version: "5.5.17",
+    version: "6.1",
     initialize() {
         app.folderPluginProvider.addFactory(new ToolbarButtonPluginFactory());
     },

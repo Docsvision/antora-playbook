@@ -11,8 +11,7 @@ class BooleanMetadataEditor : ITypeEditor
     public FrameworkElement ResolveEditor(PropertyItem propertyItem)
     {
         var editor = new FieldMetadataEditor();
-        
-        //
+
         editor.FieldFilter = (field) => { return field.FieldType == FieldType.Bool; }; <.>
         return editor.ResolveEditor(propertyItem);
     }

@@ -50,7 +50,7 @@ construct() {
 ----
 protected internalEventHandler = async () => {
     try {
-        await CancelableEvent.cast(this.state.someEventing).trigger().deferred;
+        await CancelableEvent.cast(this.state.someEventing).trigger().promise;
 
         console.log("Выполнение операции ..."); <.>
     } catch {

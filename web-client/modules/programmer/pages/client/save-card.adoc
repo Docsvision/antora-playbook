@@ -14,10 +14,10 @@ export async function saveCard(sender: CustomButton, e: IEventArgs) {
 .Чтобы сохранить изменения определённого элемента управления, используйте его метод save:
 [source,typescript]
 ----
-export function saveDescription(sender: CustomButton, e: IEventArgs) {
+export async function saveDescription(sender: CustomButton, e: IEventArgs) {
     let cardDescription = sender.layout.controls.get<TextArea>("Description"); <.>
 
-    cardDescription.save(); <.>
+    await cardDescription.save(); <.>
 }
 ----
 <.> Получаем элемент управления Description, данные которого сохраняются.
@@ -41,7 +41,7 @@ export async function onChangeState(sender: Layout, e: CancelableEventArgs<ICard
         description.value = description.value + "\nЗарегистрировано"; <.>
     
         e.wait(); <.>
-        await sender.saveCard(); <.>
+        await sender.layout.saveCard(); <.>
         e.accept(); <.>
 }
 ----

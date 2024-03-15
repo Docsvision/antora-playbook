@@ -2,15 +2,15 @@
 
 В данном примере создаётся новая колонка таблицы грида. В новую колонку добавляется элемент, нажатие на который открывает диалог выбора цвета. При изменении цвета в диалоге, будет изменяться фон строки, в которой находится ячейка.
 
-WARNING: Данный пример демонстрирует только взаимодействие новой колонки, её ячеек и фона строки, в которой они находятся
-
-include::grid-context.adoc[tags=start]
+// WARNING: Данный пример демонстрирует только взаимодействие новой колонки, её ячеек и фона строки, в которой они находятся
+//
+// include::grid-context.adoc[tags=start]
 
 [source,typescript]
 ----
 extensionManager.registerExtension({ <.>
     name: "BackgroundRows",
-    version: "5.5.17",
+    version: "6.1",
     initialize() {
         app.folderPluginProvider.addFactory(new BackgroundRowsPluginFactory());
     },

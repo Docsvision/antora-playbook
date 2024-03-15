@@ -1,9 +1,12 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ClientScripts/TypeScript/LoginPage
+:name: LoginPage
+
 = Настройка страницы авторизации
 
 .Страница входа с указанным адресом электронной почты администратора
 image::admin:authentication-email.png[Страница входа с указанным адресом электронной почты администратора]
 
-Данное расширение содержит пример внедрения своего кода на страницу входа {wc}а, а именно:
+Данный раздел описывает расширение, которое содержит пример внедрения своего кода на страницу входа {wc}а, а именно:
 
 . Выполнение кода при определённых событиях -- тип `LoginEvents` в модуле `@docsvision/webclient/Account`.
 . Подмена текста на странице -- объект `defaultLoginResources` в модуле `@docsvision/webclient/Account`.
@@ -14,12 +17,16 @@ NOTE: Данный раздел документации описывает на
 
 Чтобы изменить вид страницы входа, разработайте собственные скрипты По инструкции ниже и поместите их в папку `{wcd}/Content/Account/Scripts`.
 
+// tag::link[]
+Ссылка на пример на GitHub: {link}[{name}].
+// end::link[]
+
 [#additional]
 == Дополнительная информация
 
-Рекомендуется осуществлять сборку в виде umd модуля.
+В примере используется UMD система модулей.
 
-Для корректной работы расширения нужно создать файл или файлы с расширением `.js` и поместить в папку `DocsVision/WebClient/Content/Account/Scripts`, код будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`.
+в результате сборки получается файл с расширением `.js`, который нужно поместить в папку `DocsVision/WebClient/Content/Account/Scripts`, код будет выполнен перед загрузкой приложения и выполнением `ReactDOM.render()`.
 
 Чтобы добавить стили, нужно создать файл или файлы с расширением `.сss` и положить в папку `DocsVision/WebClient/Content/Account/Styles`, стили загружаются после основных стилей страницы.
 
@@ -33,9 +40,9 @@ NOTE: Данный раздел документации описывает на
 == Процесс настройки
 
 .Чтобы настроить вид страницы авторизации, необходимо:
-. Скопировать проект на компьютер для разработки.
-. Открыть консоль в папке `ClientScripts/TypeScript/LoginPage` и выполнить команду `npm install`, затем выполнить `npm run build:prod`.
-. Скопировать каталог `SamplesOutput/Site/Content/Account/Scripts` в каталог `{wcd}/Content/Account/Scripts`.
+. Скопируйте проект на компьютер для разработки.
+. Откройте консоль в папке `ClientScripts/TypeScript/LoginPage` и выполните команду `npm install`, затем выполнить `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput/Content/Account/Scripts` в каталог `{wcd}/Content/Account/Scripts`.
 . Перезапустите *{wcs-new}*.
 
 Пример кода расширения указан ниже и в файле `Index.ts` в репозитории примеров {wc}а.
@@ -48,8 +55,8 @@ import { LoginView } from '@docsvision/webclient/Account/LoginContainer';
 import { LoginLogic } from '@docsvision/webclient/Account/LoginLogic';
 import "index.scss"
 
-const loginExtensionManager: ILoginExtensionManager = (window as windowWithLoginExtensionManager).loginExtensionManager; <.>
-loginExtensionManager.setResources({ Login_AdminMail: 'admin@docsvision.com' });
+const loginExtensionManager: ILoginExtensionManager = (window as windowWithLoginExtensionManager).loginExtensionManager;
+loginExtensionManager.setResources({ Login_AdminMail: 'admin@docsvision.com' }); <.>
 if (loginExtensionManager.currentLocale === 'ru') {
     loginExtensionManager.setResources({ Login_Greeting: 'Приветствуем,' });
 } else {
@@ -95,11 +102,11 @@ loginExtensionManager.onSetupView = function (view: LoginView): LoginView {
 };
 ----
 <.> Замените текст.
-<.> Выполните действие 1.
-<.> Выполните действие 2.
+<.> Добавьте код выполнения некоторого действия.
+<.> Добавьте код выполнения ещё одного действия.
 <.> Добавьте события.
 <.> Измените компоненты представления.
-<.> Замените элемент.
+<.> Замените логотип.
 <.> Точки расширения.
 
 [#check]
