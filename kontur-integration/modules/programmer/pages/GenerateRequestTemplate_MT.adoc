@@ -1,0 +1,29 @@
+= GenerateRequestTemplate -- метод (Guid, TemplateType)
+
+Запрос заявки на сертификат (проверка актуализации).
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+OperationResult<byte[]> GenerateRequestTemplate(Guid issueId, TemplateType templateType);
+----
+
+Параметры::
+issueId:::
+Тип: `Guid`
++
+Идентификатор заявки.
+
+templateType:::
+Тип: `TemplateType`
++
+Тип документа получаемый от УЦ Контур.
+
+Возвращаемое значение::
+Тип: `OperationResult`
++
+Результат выполнения операции.

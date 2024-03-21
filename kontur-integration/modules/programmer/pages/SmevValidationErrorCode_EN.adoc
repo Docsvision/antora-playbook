@@ -1,0 +1,69 @@
+= SmevValidationErrorCode -- перечисление
+
+Код ошибки проверки СМЭВ.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ApiClient.Issues.Models`
+* *Сборка:* `DocsVision.Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public enum SmevValidationErrorCode
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+
+|`Unknown`
+|Код ошибки проверки СМЭВ.
+
+|`PassportExpired`
+|Неизвестная ошибка, напишите о ней в техническую поддержку.
+
+|`PassportReplaced`
+|Срок действия паспорта истек.
+
+|`PassportIssuedWithViolation`
+|Паспорт заменен на новый.
+
+|`PassportIsSearched`
+|Паспорт выдан с нарушением.
+
+|`PassportDestroyed`
+|Паспорт числится в розыске.
+
+|`PassportOwnerDied`
+|Паспорт числится как изъятый или уничтоженный.
+
+|`PassportDefect`
+|Паспорт недействителен в связи со смертью владельца.
+
+|`PassportLost`
+|У паспорта стоит отметка о техническом браке, его использование запрещено.
+
+|`SnilsNotMatchWithPfr`
+|Паспорт утрачен.
+
+|`InnNotMatchWithFns`
+|По предоставленному номеру СНИЛС, ФИО и дате рождения нет данных в ПФР или данные не совпадают.
+
+|`NotValidSnilsChecksum`
+|Паспортные данные, указанные в ФНС для этого ИНН, не совпадают с предоставленными.
+
+|`PfrNotAvailable`
+|Неверное контрольное число у номера СНИЛС.
+
+|`FnsNotAvailable`
+|Не удалось проверить документ в ПФР.
+
+|`FmsNotAvailable`
+|Не удалось проверить документ в ФНС.
+
+|`OrganizationNotFoundInFns`
+|Не удалось проверить документ в ФМС.
+
+|===
