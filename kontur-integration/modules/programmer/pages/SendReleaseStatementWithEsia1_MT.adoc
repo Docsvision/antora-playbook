@@ -1,0 +1,34 @@
+= SendReleaseStatementWithEsia -- метод (Guid, StaffEmployee, string)
+
+Создает запрос на подтверждение через госуслуги.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+OperationResult<string> SendReleaseStatementWithEsia(Guid issueId, StaffEmployee employee, string snils);
+----
+
+Параметры::
+issueId::
+Тип: `Guid`
++
+Идентификатор документа.
+
+employee::
+Тип: `StaffEmployee`
++
+Сотрудник.
+
+snils::
+Тип: `string`
++
+СНИЛС сотрудника.
+
+Возвращаемое значение::
+Тип: `OperationResult`
++
+Результат выполнения операции.

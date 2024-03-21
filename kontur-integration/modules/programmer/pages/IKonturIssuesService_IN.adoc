@@ -1,0 +1,85 @@
+= IKonturIssuesService -- интерфейс
+
+Сервис выпуска сертификатов Контур.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IKonturIssuesService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:CreateCertificateIssue_MT.adoc[CreateCertificateIssue(CertificateApplicantInfo)]`
+|Создание заявки на выпуск сертификата.
+
+|`xref:CreateCertificateIssue1_MT.adoc[CreateCertificateIssue(StaffEmployee, string)]`
+|Создание заявки на выпуск сертификата.
+
+|`xref:AddDocumentRequisites_MT.adoc[AddDocumentRequisites(Guid, IdentityDocument)]`
+|Добавляет документы в заявку.
+
+|`xref:SendDocumentScan_MT.adoc[SendDocumentScan(Guid, SendingFileInfo, DocumentTypes)]`
+|Отправка скана документа.
+
+|`xref:SendReleaseStatement_MT.adoc[SendReleaseStatement(Guid)]`
+|Запрос на подтверждение операции.
+
+|`xref:SendReleaseStatementWithEsia_MT.adoc[SendReleaseStatementWithEsia(Guid, CertificateConfirmationApplicantInfo)]`
+|Создает запрос на подтверждение через госуслуги.
+
+|`xref:SendReleaseStatementWithEsia1_MT.adoc[SendReleaseStatementWithEsia(Guid, StaffEmployee, string)]`
+|Создает запрос на подтверждение через госуслуги.
+
+|`xref:SignReleaseStatement_MT.adoc[SignReleaseStatement(Guid, string)]`
+|Подпись заявления на выпуск сертификата НЭП.
+
+|`xref:SignReleaseStatement1_MT.adoc[SignReleaseStatement(Guid)]`
+|Подпись заявления на выпуск сертификата НЭП через госуслуги.
+
+|`xref:SendRequestForValidation_MT.adoc[SendRequestForValidation(Guid)]`
+|Отправляет заявку на проверку.
+
+|`xref:DeleteCertificateIssueRequest_MT.adoc[DeleteCertificateIssueRequest(Guid)]`
+|Удаление заявки на сертификат.
+
+|`xref:DownloadCertificate_MT.adoc[DownloadCertificate(Guid)]`
+|Запрос файла сертификата УНЭП и загрузка его в карточку сотрудника.
+
+|`xref:DownloadCertificateAndAssignToEmployee_MT.adoc[DownloadCertificateAndAssignToEmployee(Guid, StaffEmployee)]`
+|Запрос файла сертификата УНЭП и загрузка его в карточку сотрудника.
+
+|`xref:GetIssue_MT.adoc[GetIssue(Guid)]`
+|Запрос заявки на сертификат, проверка актуализации.
+
+|`xref:GenerateRequestTemplate_MT.adoc[GenerateRequestTemplate(Guid, TemplateType)]`
+|Генерация шаблона документа для заявления на выпуск сертификата.
+
+|`xref:EditCertificateIssueRequest_MT.adoc[EditCertificateIssueRequest(Guid, CertificateUpdateApplicantInfo)]`
+|Изменение заявки на сертификат.
+
+|`xref:EditCertificateIssueRequest1_MT.adoc[EditCertificateIssueRequest(Guid, CertificateUpdateApplicantInfo)]`
+|Изменение заявки на сертификат.
+
+|`xref:GetEventList_MT.adoc[GetEventList(int)]`
+|Запрос ленты событий заявок.
+
+|`xref:GetEventList1_MT.adoc[GetEventList(int, string)]`
+|Запрос ленты событий заявок.
+
+|`xref:SubjectIdentification_MT.adoc[SubjectIdentification(Guid, StaffEmployee)]`
+|Добавить или изменить удостоверение личности.
+
+|`xref:ForwardToCabinet_MT.adoc[ForwardToCabinet(Guid)]`
+|Перенаправить заявку в личный кабинет.
+
+|===
+
