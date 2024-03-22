@@ -77,7 +77,7 @@ public class MathController : ControllerBase
 WARNING: Если не указать `[FromBody]` для сложного параметра, его значение не привяжется.
 
 .Обращение к такому методу будет выглядеть следующим образом:
-[source,javascript]
+[source]
 ----
 let arg = { values: [ 1, 5, 3, 2] };
 let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(arg));
@@ -86,7 +86,7 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(arg));
 WARNING: При передаче параметра в теле запроса нельзя указывать имя параметра, т.к. он может быть только один.
 
 .Следующий код не будет работать:
-[source,javascript]
+[source]
 ----
 let data = { arg: { values: [ 1, 5, 3, 2] } }; <.>
 let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); <.>
@@ -99,45 +99,45 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); 
 В {wc}е 18 вместо Autofac используется стандартный механизм внедрения зависимостей .NET. В связи с этим в классе серверного расширения нужно произвести следующие изменения:
 
 .Вместо метода `InitializeContainer` определить метод:
-[source,javascript]
+[source]
 ----
-     public override void InitializeServiceCollection(IServiceCollection services)
-     {
-          <.>
-     }
+public override void InitializeServiceCollection(IServiceCollection services)
+{
+  <.>
+}
 ----
 <.> Регистрация сервисов.
 
 .Регистрация сервисов изменяется следующим образом:
-[source,javascript]
+[source,csharp]
 ----
-            containerBuilder.RegisterType<YourServiceClass>().As<YourServiceInterface>().SingleInstance();
-            ->
-            services.AddSingleton<YourServiceInterface, YourServiceClass>();
+  containerBuilder.RegisterType<YourServiceClass>().As<YourServiceInterface>().SingleInstance();
+  ->
+  services.AddSingleton<YourServiceInterface, YourServiceClass>();
 
-            containerBuilder.RegisterOrderedType<YourBindingConverterType, IBindingConverter>();
-            ->
-            services.AddSingleton<IBindingConverter, YourBindingConverterType>();
+  containerBuilder.RegisterOrderedType<YourBindingConverterType, IBindingConverter>();
+  ->
+  services.AddSingleton<IBindingConverter, YourBindingConverterType>();
 
-            containerBuilder.RegisterOrderedType<YourBindingResolverType, IBindingResolver>();
-            ->
-            services.AddSingleton<IBindingResolver, YourBindingResolverType>();
+  containerBuilder.RegisterOrderedType<YourBindingResolverType, IBindingResolver>();
+  ->
+  services.AddSingleton<IBindingResolver, YourBindingResolverType>();
 
-            containerBuilder.RegisterOrderedType<YourControlResolverType, IControlResolver>();
-            ->
-            services.AddSingleton<IControlResolver, YourControlResolverType>();
+  containerBuilder.RegisterOrderedType<YourControlResolverType, IControlResolver>();
+  ->
+  services.AddSingleton<IControlResolver, YourControlResolverType>();
 
-            containerBuilder.RegisterOrderedType<YourPropertyResolverType, IPropertyResolver>();
-            ->
-            services.AddSingleton<IPropertyResolver, YourPropertyResolverType>();
+  containerBuilder.RegisterOrderedType<YourPropertyResolverType, IPropertyResolver>();
+  ->
+  services.AddSingleton<IPropertyResolver, YourPropertyResolverType>();
 
-            containerBuilder.RegisterType<YourCardLifeCycle>().Keyed<ICardLifeCycle>(CardTypeID).SingleInstance();
-            ->
-            services.AddTransient<ICardLifeCycle, YourCardLifeCycle>();
+  containerBuilder.RegisterType<YourCardLifeCycle>().Keyed<ICardLifeCycle>(CardTypeID).SingleInstance();
+  ->
+  services.AddTransient<ICardLifeCycle, YourCardLifeCycle>();
 
-            containerBuilder.RegisterType<YourRowLifeCycle>().Keyed<IRowLifeCycle>(SectionID).SingleInstance();
-            ->
-            services.AddTransient<IRowLifeCycle, YourRowLifeCycle>();
+  containerBuilder.RegisterType<YourRowLifeCycle>().Keyed<IRowLifeCycle>(SectionID).SingleInstance();
+  ->
+  services.AddTransient<IRowLifeCycle, YourRowLifeCycle>();
 ----
 
 == Прочие изменения
@@ -145,50 +145,50 @@ let result = await requestManager.post(`/Math/MinValue`, JSON.stringify(data)); 
 * В конструкторе класса расширения при вызове базовой реализации теперь не нужно передавать `serviceProvider`:
 +
 .Было
-[source,javascript]
+[source]
 ----
-        public ServerExtension(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
-        }
+public ServerExtension(IServiceProvider serviceProvider)
+  : base(serviceProvider)
+{
+}
 ----
 +
 .Стало
-[source,javascript]
+[source]
 ----
-        public ServerExtension(IServiceProvider serviceProvider)
-            : base()
-        {
-        }
+public ServerExtension(IServiceProvider serviceProvider)
+  : base()
+{
+}
 ----
 +
 * Классы контроллеров рекомендуется наследовать от `Microsoft.AspNetCore.Mvc.ControllerBase`.
 При переводе методы `requestManager` `get` и `post` в некоторых случаях могут изменить возвращаемое значение. В частности, ранее они могли возвращать строку, а после перевода -- объект -- результат `JSON.parse` этой строки. С примером можно ознакомиться ниже.
 +
 .Было
-[source,javascript]
+[source]
 ----
-        const response = JSON.parse(await requestManager.get(url));
+  const response = JSON.parse(await requestManager.get(url));
 ----
 +
 .Стало
-[source,javascript]
+[source]
 ----
-        const response = await requestManager.get(url)
+  const response = await requestManager.get(url)
 ----
 +
 * Также в отдельных случаях может измениться регистр первой буквы в названии свойств ответа сервера. Например, следующим образом:
 +
 .Было
-[source,javascript]
+[source]
 ----
-     const name = response.IssueName;
+  const name = response.IssueName;
 ----
 +
 .Стало
-[source,javascript]
+[source]
 ----
-     const name = response.issueName;
+  const name = response.issueName;
 ----
 +
 * Изменился способ загрузки и скачивания файлов. Пример реализации соответствующего метода на .NET6 можно найти в примере `ExternalWebService`, в файле `DocumentsController.cs`, методах `UploadFile` и `DownloadFile`.
