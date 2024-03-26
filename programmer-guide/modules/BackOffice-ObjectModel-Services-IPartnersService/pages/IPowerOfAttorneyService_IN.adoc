@@ -277,12 +277,28 @@ a|Подписывает заявление на отзыв довереннос
 
 Примечание: Заявление на отзыв должно быть сформировано
 
+|`SignRequestRevocation(PowerOfAttorney, X509Certificate2, PowerOfAttorneyHandlingFlags);`
+a|Подписывает заявление на отзыв доверенности. Заявление на отзыв должно быть сформировано.
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `certificate` -- Сертификат подписи
+* `flags` -- Параметры обработки
+
 |`AttachRequestRevocationSignature(PowerOfAttorney, byte[]);`
 a|Загружает сформированную подпись отзыва доверенности в СКД. При добавлении подписи проверяется что в её сертификате у владельца СНИЛС соответствует тому, что в МЧД. Проверка выполняется по доверителю и представителю, `PowerOfAttorneyMachineReadableInfo.RepresentativesSnils` и `PowerOfAttorneyMachineReadableInfo.PrincipalsSnils`. Если СНИЛС из сертификата не соответствует указанному для доверителя или представителя, будет возвращена ошибка.
 
 .Параметры:
 * `powerOfAttorney` -- СКД
 * `signature` -- Данные подписи
+
+|`AttachRequestRevocationSignature(PowerOfAttorney, byte[], PowerOfAttorneyHandlingFlags);`
+a|Загружает сформированную подпись отзыва доверенности в СКД.
+
+.Параметры:
+* `powerOfAttorney` -- СКД
+* `signature` -- Данные подписи
+* `flags` -- Параметры обработки
 
 |`MarkAsRevoked(PowerOfAttorney, bool);`
 a|Помечает доверенность как отозванную без вызова `RequestRevocation` с передачей и подписью заявления на отзыв
