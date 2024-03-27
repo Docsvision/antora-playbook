@@ -7,17 +7,17 @@
 
 Пользователь, выполняющий установку {of-em}, должен обладать правами локального администратора.
 
-[NOTE]
-====
 Администратор {dv} -- пользователь, включенный в группу безопасности *{dv-admins-serv}* в конфигурационном файле модуля {pl}.
-====
+
+include::ROOT:partial$excerpts.adoc[tags=settings]
 
 // tag::install[]
-[#connector]
+[#diadoc]
 == Установка серверной части Коннектора к Диадок на Linux
 
 Серверная часть _Коннектора к Диадок_ устанавливается на компьютеры с установленной серверной частью _{of-em}_.
 
+include::ROOT:partial$excerpts.adoc[tags=install-edi]
 . При xref:admin:install.adoc[установке {of-em}] будет предложено установить также:
 +
 * `docsivision-edi-diadoc-server` -- дополнительный компонент модуля, добавляющий поддержку работы с оператором Диадок.
@@ -29,6 +29,8 @@
 sudo apt-get update
 sudo apt-get install docsvision-edi-diadoc-server
 ----
++
+include::ROOT:partial$excerpts.adoc[tags=db-select]
 // end::install[]
 
 [#client]
