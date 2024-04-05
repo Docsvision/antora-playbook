@@ -2,7 +2,7 @@
 
 БД системы {dv} может функционировать под управлением одной из следующих СУБД:
 
-* Microsoft SQL Server.
+* {mssql} Server.
 * {pgsql}.
 
 СУБД и сервер {dv} должны быть установлены раздельно, на разных компьютерах.
@@ -10,28 +10,28 @@
 
 Пользователь, от имени которого будет выполняться подключение к СУБД, должен обладать следующими привилегиями:
 
-* В Microsoft SQL Server: `public`, `dbcreator`, `sysadmin` на создаваемую БД и полные права на подключаемую БД.
+* В {mssql} Server: `public`, `dbcreator`, `sysadmin` на создаваемую БД и полные права на подключаемую БД.
 * В {pgsql}: пользователь `postgres` или эквивалентные права, а также полные права на подключаемую БД.
 
 WARNING: Обратите внимание на ограничения функциональности {dv} при работе с Postgre SQL, перечисленные в xref:6.1@platform:console:appendix/microsoft-postgre.adoc[Приложении C].
 
 [#microsoft]
-== Требования к СУБД Microsoft SQL Server
+== Требования к СУБД {mssql} Server
 
 Поддерживаются следующие версии ПО на сервере СУБД {mssql} Server.
 
 .СУБД:
-* Microsoft SQL Server 2019, редакции: Enterprise, Standard, Developer Edition.
-* Microsoft SQL Server 2017, редакции: Enterprise, Standard, Developer Edition.
-* Microsoft SQL Server 2016, редакции: Enterprise, Standard, Developer Edition.
-** для Microsoft SQL Server 2016 должно быть установлено обновление https://support.microsoft.com/en-us/help/3205052/cumulative-update-4-for-sql-server-2016[Cumulative Update 4 for SQL Server] или более новое.
-** для Microsoft SQL Server 2016 SP1 должно быть установлено обновление https://support.microsoft.com/en-us/help/4013106/cumulative-update-2-for-sql-server-2016-sp1[Cumulative Update 2 for SQL Server 2016 SP1] или более новое.
+* {mssql} Server 2019, редакции: Enterprise, Standard, Developer Edition.
+* {mssql} Server 2017, редакции: Enterprise, Standard, Developer Edition.
+* {mssql} Server 2016, редакции: Enterprise, Standard, Developer Edition.
+** для {mssql} Server 2016 должно быть установлено обновление https://support.microsoft.com/en-us/help/3205052/cumulative-update-4-for-sql-server-2016[Cumulative Update 4 for SQL Server] или более новое.
+** для {mssql} Server 2016 SP1 должно быть установлено обновление https://support.microsoft.com/en-us/help/4013106/cumulative-update-2-for-sql-server-2016-sp1[Cumulative Update 2 for SQL Server 2016 SP1] или более новое.
 *Служба агента SQL Server (SQL Server Agent) -- установлена и запущена*.
 
 [#microsoftHardware]
-=== Рекомендации к аппаратному обеспечению сервера Microsoft SQL
+=== Рекомендации к аппаратному обеспечению сервера {mssql}
 
-В таблице приведены рекомендации к аппаратному обеспечению сервера Microsoft SQL в зависимости от планируемого числа одновременно работающих с системой {dv} пользователей.
+В таблице приведены рекомендации к аппаратному обеспечению сервера {mssql} в зависимости от планируемого числа одновременно работающих с системой {dv} пользователей.
 
 .Рекомендуемые аппаратные характеристики сервера СУБД
 [cols="30%,70%",options="header"]

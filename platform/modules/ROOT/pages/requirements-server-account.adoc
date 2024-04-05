@@ -44,7 +44,7 @@ include::admin:partial$vars.adoc[]
 
 == Требования на уровне СУБД
 
-.Для СУБД Microsoft SQL Server:
+.Для СУБД {mssql} Server:
 * CREATE VIEW, CREATE TABLE, CREATE PROCEDURE, CREATE FUNCTION и ALTER SERVER STATE на уровне базы данных, ALTER DATABASE, а также ALTER для схемы dbo.
 * Учётная запись для входа в СУБД должна обладать правами `sysadmin`. В противном случае не получится создать или обновить БД, также не получится использовать полнотекстовый поиск {mssql}.
 * На системную базу данных _master_:
@@ -77,7 +77,7 @@ GRANT VIEW SERVER STATE TO [DOMAIN\userAccount]
 --
 +
 * Необходимые привилегии на работу с другими БД, если доступ к ним осуществляется из разработанных серверных расширений или иными способами.
-* Полный доступ к папке FileStream, если подключено хранилище "FileStream хранилище во внешней базе данных Microsoft SQL Server" или "Filestream хранилище в базе данных {dv}".
+* Полный доступ к папке FileStream, если подключено хранилище "FileStream хранилище во внешней базе данных {mssql} Server" или "Filestream хранилище в базе данных {dv}".
 
 .Для СУБД {pgsql}:
 * Права пользователя "postgres".

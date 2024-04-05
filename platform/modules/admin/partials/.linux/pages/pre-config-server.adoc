@@ -164,14 +164,14 @@ C:\PROGRA~2\pgAgent\bin\pgagent.exe RUN pgAgent host=localhost port=5432 user=po
 ====
 
 [#msSql]
-== Настройка СУБД Microsoft SQL Server
+== Настройка СУБД {mssql} Server
 
-Сервер Microsoft SQL Server, на котором будет размещаться база данных {dv}, должен быть настроен специальным образом.
+Сервер {mssql} Server, на котором будет размещаться база данных {dv}, должен быть настроен специальным образом.
 
 . Переключите режим аутентификации (Authentication) СУБД в положение _SQL Server and Windows_ или _Windows_.
 . Отключите опцию _Case sensitive collation_.
 . Убедитесь, что на компьютере с СУБД и на предназначенном для установки серверной части компьютере, синхронизированы время и часовой пояс.
-. В настройках Microsoft SQL Server установите параметры _remote access_ и _remote admin connections_ в значение `1`.
+. В настройках {mssql} Server установите параметры _remote access_ и _remote admin connections_ в значение `1`.
 +
 [NOTE]
 ====
@@ -182,4 +182,4 @@ C:\PROGRA~2\pgAgent\bin\pgagent.exe RUN pgAgent host=localhost port=5432 user=po
 +
 NOTE: Если данный параметр отключен, то процедура очистки журнала проводиться не будет.
 +
-. Убедитесь, что на сервере с Microsoft SQL Server открыт порт `1433` для подключения к СУБД.
+. Убедитесь, что на сервере с {mssql} Server открыт порт `1433` для подключения к СУБД.
