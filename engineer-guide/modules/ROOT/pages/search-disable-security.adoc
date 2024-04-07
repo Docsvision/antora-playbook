@@ -13,14 +13,14 @@
 . В базе данных выполните настройки `DisableSecurityOnSearchAllowed = 1` и/или `DisableSecurityOnParameterSearchAllowed = 1` для таблицы `dvsys_settings`, чтобы запустить хранимую процедуру `dvsys_setting_set` с требуемыми параметрами. +
 Выполните следующий запрос:
 +
-.Для Microsoft SQL:
+.Для {mssql}:
 [source,sql]
 ----
 declare @on bit = 1
 exec dvsys_setting_set N'DisableSecurityOnSearchAllowed', @on
 ----
 +
-.Для PostgreSQL:
+.Для {pgsql}:
 [source,sql]
 ----
 DO $$
