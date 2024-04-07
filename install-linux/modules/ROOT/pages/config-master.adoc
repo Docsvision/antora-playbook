@@ -81,8 +81,8 @@ image::install-linux::config-sql-server.png[Создание новой БД {dv
 +
 [NOTE]
 ====
-* Для БД PostgreSQL адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP адрес.
-* Порт указывается только для PostgreSQL (по умолчанию -- `5432`).
+* Для БД {pgsql} адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP адрес.
+* Порт указывается только для {pgsql} (по умолчанию -- `5432`).
 * Особенности работы через SQL- и Windows-аутентификацию см. в документации модуля {pl}, раздел "xref:platform:console:db-authentication.adoc[]".
 ====
 +
@@ -92,8 +92,8 @@ image::install-linux::config-sql-server.png[Создание новой БД {dv
 image::install-linux::config-sql-create.png[Создание новой БД {dv}]
 +
 * Не используйте кириллицу, пробелы и спецсимволы в имени БД.
-* Для БД Microsoft SQL Server в поле _Язык_ выберите локаль БД, установленную в параметре `Server Collation ()` экземпляра Microsoft SQL Server. Рекомендуемое значение: Русский (Cyrillic_General_CI_AS).
-* При выборе СУБД Microsoft SQL Server также можно настроить сателлитные БД. Больше информации о сателлитных БД в документации модуля {pl}, раздел "xref:platform:console:db-satellite.adoc[]".
+* Для БД {mssql} Server в поле _Язык_ выберите локаль БД, установленную в параметре `Server Collation ()` экземпляра {mssql} Server. Рекомендуемое значение: Русский (Cyrillic_General_CI_AS).
+* При выборе СУБД {mssql} Server также можно настроить сателлитные БД. Больше информации о сателлитных БД в документации модуля {pl}, раздел "xref:platform:console:db-satellite.adoc[]".
 +
 WARNING: После создания БД изменять конфигурацию сателлитных БД не рекомендуется. Это может привести к потере данных.
 +
