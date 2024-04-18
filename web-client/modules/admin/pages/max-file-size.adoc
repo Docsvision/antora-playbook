@@ -25,52 +25,17 @@
 <.> Укажите новое ограничение для максимального размера единичного файла в байтах, не превышающее `2147483647`.
 +
 
-. Чтобы изменить ограничение для максимального общего размера всех добавляемых файлов карточки, перейдите к элементу menu:configuration[system.webServer > security > requestFiltering > requestLimits].
+. Чтобы изменить ограничение для максимального общего размера всех добавляемых файлов карточки, перейдите к элементу menu:Kestrel[Limits].
 +
 [source,json]
 ----
-  "system.webServer": {
-    "security": {
-      "requestFiltering": {
-        "requestLimits": {
-          "maxAllowedContentLength": "0" <.>
-        },
-      },
-    },
-  },
+  "Kestrel": {
+    "Limits": {
+      "MaxRequestBodySize": "0" <.>
+    }
+  }
 ----
 <.> Укажите новое ограничение максимального общего размера всех добавляемых файлов карточки в байтах, не превышающее `4294967295`.
-+
-. Установите аналогичное значение в параметре `_maxRequestLength_`, тип int, значение в байтах не более `2147483647` в элементах:
-+
-* menu:configuration[location[path="api/DocumentCardApi"\] > system.web > httpRuntime].
-* menu:configuration[location[path="api/LayoutFileApi"\] > system.web > httpRuntime].
-+
-[source,json]
-----
-  "location[path="api/LayoutFileApi"\]": {
-    "system.web": {
-      "httpRuntime": {
-        "maxRequestLength": "0" <.>
-      },
-    },
-  },
-  "location[path="api/LayoutFileApi"\]": {
-    "system.web": {
-      "httpRuntime": {
-        "maxRequestLength": "0" <.>
-      },
-    },
-  },
-----
-+
-[NOTE]
-====
-Указанные параметры ограничивают общий размер файлов только для элемента управления _Список файлов_. Для элемента управления _Файл_ данные ограничения действуют на единичный файл.
-
-Значения указанных параметров должны быть не меньше, чем значение параметра `_MaxUploadFileItemSize_` (см. выше).
-
-====
 // end::webconfig[]
 +
 . Сохраните изменения конфигурационного файла.
