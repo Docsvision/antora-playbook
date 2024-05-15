@@ -32,3 +32,39 @@
 ====
 Учетная запись файлового сервиса {dv} должна обладать правами на создание, изменение и чтение файла журнала.
 ====
+
+Журнал формируется, если в конфигурационном файле службы *{fss-new}* указана строка подключения к БД {dv} в параметре `"Databases":`. Уровни журналирования настраиваются внутри секции `nlog`. Ниже приведён пример, где уровень журналирования указывается словом, а не цифрой, `minlevel="Warn"`:
+
+.Фрагмент конфигурационного файла службы {fss-new}:
+[source,json]
+----
+{
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Initial Catalog=DBname; Data Source=database.server.com; User ID=user; Password=qwerty" <.>
+        }
+      }
+    }
+  },
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/fileservice/${shortdate}.log",
+        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
+      }
+    },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Warn", <.>
+        "writeTo": "logFile"
+      }
+    ]
+  },
+}
+----
+<.> Строка подключения к базе данных {dv}.
+<.> Уровень журналирования "Warn".
