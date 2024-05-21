@@ -7,9 +7,10 @@ asciidoc:
     allow-uri-read: ''
     kroki-fetch-diagram: ~
 build:
-  command: bundle exec asciidoctor-pdf --trace --sourcemap -r asciidoctor-kroki -r prawn-gmagick
+  command: bundle exec asciidoctor-pdf --trace --sourcemap -r asciidoctor-kroki
+# -r prawn-gmagick
 #если нужно указать директорию до шрифтовЁ добавить в команду выше: "-a pdf-fontsdir=resources/"
   publish: false
-  dir: wwwroot/pdfs
+  dir: pdfs
   keep_aggregate_source: true
 section_merge_strategy: 'fuse'
