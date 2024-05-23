@@ -1,0 +1,34 @@
+= IApprovalStageService.InsertCurrentApproverAfter -- метод (ApprovalStage,ApprovalStageCurrentApprover, StaffEmployee)
+
+Вставляет текущего сотрудника после другого сотрудника.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+ApprovalStageCurrentApprover InsertCurrentApproverAfter(ApprovalStage approvalStage, ApprovalStageCurrentApprover insertAfter, StaffEmployee employee)
+----
+
+Параметры::
+approvalStage:::
+Тип: `xref:ObjectModel/ApprovalStage_CL.adoc[ApprovalStage]`
++
+Этап согласования
+
+insertAfter:::
+Тип: `ApprovalStageCurrentApprover`
++
+Текущий сотрудник на этапе согласования
+
+employee:::
+Тип: `xref:BackOffice-ObjectModel-Staff:StaffEmployee_CL.adoc[StaffEmployee]`
++
+Согласующий сотрудник
+
+Возвращаемое значение::
+Тип: `ApprovalStageCurrentApprover`
++
+Текущий сотрудник на этапе согласования

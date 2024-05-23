@@ -17,19 +17,92 @@ public interface IApprovalStageService
 [cols="34,66",options="header"]
 |===
 |Имя |Описание
-|`xref:ObjectModel/Services/IApprovalStageService.AddDecision_MT.adoc[AddDecision(ApprovalStage)]` |Добавляет решение для этапа маршрута согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_MT.adoc[AddSelectedApprover(ApprovalStage, Guid)]` |Добавляет согласующего по поисковому слову в этап согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_1_MT.adoc[AddSelectedApprover(ApprovalStage, StaffEmployee)]` |Добавляет согласующего сотрудника в этап согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_2_MT.adoc[AddSelectedApprover(ApprovalStage, StaffGroup)]` |Добавляет согласующих из группы в этап согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_3_MT.adoc[AddSelectedApprover(ApprovalStage, StaffRole)]` |Добавляет согласующих из роли в этап согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_4_MT.adoc[AddSelectedApprover(ApprovalStage, StaffUnit)]` |Добавляет согласующих из подразделения в этап согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.AddState_MT.adoc[AddState(ApprovalStage)]` |Добавляет состояние для этапа согласования.
-|`xref:ObjectModel/Services/IApprovalStageService.CopyApproversFromDocument_MT.adoc[CopyApproversFromDocument(ApprovalStage, Document)]` |Получает согласующих из согласуемого документа.
-|`xref:ObjectModel/Services/IApprovalStageService.CreateApprover_MT.adoc[CreateApprover(StaffEmployee)]` |Создаёт согласующего без добавления в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_MT.adoc[AddSelectedApprover(ApprovalStage, Guid)]`
+|Добавляет согласующего по поисковому слову в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_1_MT.adoc[AddSelectedApprover(ApprovalStage, StaffEmployee)]`
+|Добавляет согласующего сотрудника в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_4_MT.adoc[AddSelectedApprover(ApprovalStage, StaffUnit)]`
+|Добавляет согласующих из подразделения в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_2_MT.adoc[AddSelectedApprover(ApprovalStage, StaffGroup)]`
+|Добавляет согласующих из группы в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddSelectedApprover_3_MT.adoc[AddSelectedApprover(ApprovalStage, StaffRole)]`
+|Добавляет согласующих из роли в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddCurrentApprover_MT.adoc[AddCurrentApprover(ApprovalStage, StaffEmployee)]`
+|Добавляет текущего сотрудника в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.InsertCurrentApproverAfter_MT.adoc[InsertCurrentApproverAfter(ApprovalStage, ApprovalStageCurrentApprover, StaffEmployee)]`
+|Вставляет текущего сотрудника после другого сотрудника.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddAdditionalApprover_MT.adoc[AddAdditionalApprover(ApprovalStage approvalStage, StaffEmployee employee, StaffEmployee addedBy)]`
+|Добавляет дополнительного согласующего.
+
+|`xref:ObjectModel/Services/IApprovalStageService.ReorderSelectedApprovers_MT.adoc[ReorderSelectedApprovers(ObjectCollection<ApprovalStageApprover>)]`
+|Сортирует список, содержащий согласующих, по порядковому номеру согласующего.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddDecision_MT.adoc[AddDecision(ApprovalStage)]`
+|Добавляет решение для этапа маршрута согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.ReorderDecisions_MT.adoc[ReorderDecisions(ObjectCollection<ApprovalStageDecision>)]`
+|Сортирует список, содержащий решения по согласованию, по порядковому номеру решения.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddDecisionLocalization_MT.adoc[AddDecisionLocalization(ApprovalStageDecision, int, string)]`
+|Добавляет новую локализацию решения.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddMainInfoNameLocalization_MT.adoc[AddMainInfoNameLocalization(ApprovalStage, int, string)]`
+|Добавляет новую локализацию названия основной информации.
+
+|`xref:ObjectModel/Services/IApprovalStageService.AddState_MT.adoc[AddState(ApprovalStage)]`
+|Добавляет состояние для этапа согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CreateApprover_MT.adoc[CreateApprover(StaffEmployee)]`
+|Создаёт согласующего без добавления в этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CopyApproversFromDocument_MT.adoc[CopyApproversFromDocument(ApprovalStage, Document)]`
+|Получает согласующих из согласуемого документа.
 
 |`xref:ObjectModel/Services/GetStageApprovers_MT.adoc[GetStageApprovers(ApprovalStage approvalStage, Document document)]`
 |Возвращает согласующих этапа в результате вызова `CopyApproversFromDocument`.
 
-|`xref:ObjectModel/Services/IApprovalStageService.ReorderDecisions_MT.adoc[ReorderDecisions(ObjectCollection<ApprovalStageDecision>)]` |Сортирует список, содержащий решения по согласованию, по порядковому номеру решения.
-|`xref:ObjectModel/Services/IApprovalStageService.ReorderSelectedApprovers_MT.adoc[ReorderSelectedApprovers(ObjectCollection<ApprovalStageApprover>)]` |Сортирует список, содержащий согласующих, по порядковому номеру согласующего.
+|`xref:ObjectModel/Services/IApprovalStageService.ProcessExcludedApprovers_MT.adoc[ProcessExcludedApprovers(ApprovalStage approvalStage, Document document, IEnumerable<ApprovalStageApprover> approvers)]`
+|Исключает согласующих.
+
+|`xref:ObjectModel/Services/IApprovalStageService.GetPossibleSemantics_MT.adoc[GetPossibleSemantics(ApprovalType approvalStageType)]`
+|Получает список возможных семантик решения в зависимости от типа согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.StartStage_MT.adoc[StartStage(ApprovalStage approvalStage, Reconcile reconcileCard)]`
+|Начальный этап согласования.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CreateNextTask_MT.adoc[CreateNextTask(ApprovalStage approvalStage, Reconcile reconcileCard)]`
+|Создаёт следующее задание.
+
+|`xref:ObjectModel/Services/IApprovalStageService.ChangeDocumentState_MT.adoc[ChangeDocumentState(ApprovalStage approvalStage, Document document, DecisionSemantics decisionSemantics)]`
+|Изменяет состояние документа.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CompleteTask_MT.adoc[CompleteTask(ApprovalStage approvalStage, ApprovalStageCurrentApprover approverWithTask)]`
+|Завершает задание.
+
+|`xref:ObjectModel/Services/IApprovalStageService.RecallTask_MT.adoc[RecallTask(ApprovalStage approvalStage, ApprovalStageCurrentApprover approverWithTask)]`
+|Отзывает задание.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CompleteStage_MT.adoc[CompleteStage(ApprovalStage approvalStage, ApprovalPath approvalPath, Reconcile reconcileCard)]`
+|Завершает этап.
+
+|`xref:ObjectModel/Services/IApprovalStageService.SkipStage_MT.adoc[SkipStage(ApprovalStage approvalStage, ApprovalPath approvalPath, Reconcile reconcileCard, DecisionSemantics stageDecision)]`
+|Пропускает этап.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CancelStage_MT.adoc[CancelStage(ApprovalStage approvalStage, ApprovalPath approvalPath, Reconcile reconcileCard)]`
+|Отменяет этап.
+
+|`xref:ObjectModel/Services/IApprovalStageService.ReturnStage_MT.adoc[ReturnStage(ApprovalStage approvalStage, ApprovalPath approvalPath, Reconcile reconcileCard)]`
+|Повторяет этап.
+
+|`xref:ObjectModel/Services/IApprovalStageService.CompleteInitiatorTask_MT.adoc[CompleteInitiatorTask(ApprovalStage approvalStage, ApprovalStageCurrentApprover approverWithInitiatorTask)]`
+|Завершает задание инициатора.
+
 |===
