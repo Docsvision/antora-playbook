@@ -52,7 +52,7 @@ include::ROOT:partial$excerpts.adoc[tags=connector]
 * ИНН.
 +
 . Выполните загрузку контрагентов в xref:operators-directory.adoc[Справочнике настроек операторов ЮЗДО].
-. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ выберите `DocsVision.Edi.Runtime.Diadoc` в качестве сервиса для работы с МЧД.
+. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ выберите `DocsVision.Edi.Runtime.Diadoc` по пути `C:\Program Files (x86)\Docsvision\Edi\5.5` в качестве сервиса для работы с МЧД.
 +
 .Сервис для работы с МЧД
 image::attorney-service.png[Сервис для работы с МЧД]
@@ -60,7 +60,6 @@ image::attorney-service.png[Сервис для работы с МЧД]
 . Создайте вид карточки для работы с МЧД. Для Web-клиента можно воспользоваться готовым примером. Для этого нужно импортировать вид карточки документа ПКД menu:PowersOfAttorney[Data > SolutionOfPOA.sol] из примера "xref:6.1@webclient:programmer:other/powers-of-attorney.adoc[]". +
 Для работы с _Модулем интеграции с реестром МЧД_ в примере доступны специальные разметки. После загрузки решения становятся доступными новые разметки, для работы с _Модулем интеграции с реестром МЧД_  используются соответствующие разметки.
 +
-. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ для _Сервиса работы с МЧД_ укажите библиотеку `DocsVision.Edi.Runtime.Diadoc.dll` по пути `C:\Program Files (x86)\Docsvision\Edi`.
 . На вкладке _Компоненты_:
 +
 * Для вида карточки для работы с МЧД вида карточек укажите _Имя класса компонента чтения_ `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyDataReader` и _Имя класса компонента изменения_ `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyUpdater`.
