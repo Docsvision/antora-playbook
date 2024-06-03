@@ -2,8 +2,7 @@
 
 Сервис обслуживания ЭП -- компонент модуля {bo}. Сервис указывает в журнале подписей {wc}а актуальный статус подписи, тип и дату окончания срока действия сертификата. Сервис обслуживания ЭП может работать в сочетании с Криптосервисом -- Docker-контейнером, выполняющим функции обслуживания ЭП.
 
-Для использования криптосервиса ЭП требуется https://www.docker.com/[Docker] актуальной версии и опция лицензии {dv} _Сервис обслуживания электронной подписи_ (только для добавления архивного штампа времени).
-// Криптосервис может быть получен из общего реестра образов Docker Hub -- `docsvision/cryptoservice` или реестра образов {dv} -- `packages.docsvision.com/cryptoservice`.
+Для использования криптосервиса ЭП требуется https://www.docker.com/[Docker] актуальной версии и опция лицензии {dv} _Сервис обслуживания электронной подписи_ (только для добавления архивного штампа времени). Криптосервис может быть получен из общего реестра образов Docker Hub -- `docsvision/cryptoservice` или реестра образов {dv} -- `packages.docsvision.com/cryptoservice`.
 // Для формирования подписи лицензия не требуется, см. требования GBL-3116, GBL-3074, GBL-3326 и GBL-2865
 
 [#functions]
@@ -36,9 +35,9 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 
 [source]
 ----
-docker run -d -p 8100:8094 packages.docsvision.com/cryptoservice
+docker run -d -p 8100:8094 packages.docsvision.com/cryptoservice <.>
 ----
-// <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
+<.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 
 Настройки криптосервиса задаются в командной строке.
 
@@ -67,9 +66,9 @@ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru
 +
 [source,bash]
 ----
-docker run -d -p 8100:8094 -v ./Cert:/var/cryptoservice/cacerts packages.docsvision.com/cryptoservice
+docker run -d -p 8100:8094 -v ./Cert:/var/cryptoservice/cacerts packages.docsvision.com/cryptoservice <.>
 ----
-// <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
+<.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 +
 * Заново соберите образ:
 +
@@ -78,9 +77,9 @@ docker run -d -p 8100:8094 -v ./Cert:/var/cryptoservice/cacerts packages.docsvis
 [source,dockerfile]
 ----
 FROM packages.docsvision.com/cryptoservice
-COPY ./your/cacerts/ /var/cryptoservice/cacerts/
+COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 ----
-// <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`
+<.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`
 +
 . Соберите собственный образ:
 +
