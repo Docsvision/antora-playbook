@@ -414,7 +414,6 @@ export async function addWatermark(sender: LayoutControl) {
 [#buildProject]
 == Сборка проекта
 
-// tag::build[]
 .Сборка серверного расширения {wc}а и расширения _DVWebTool_.
 . Откройте решение `Samples.sln`.
 . Соберите проект menu:Other[Watermark > DVWebToolExtension].
@@ -431,56 +430,21 @@ npm install
 npm update
 npm run build:prod
 ----
-// end::build[]
 
-[start=6]
-.Публикация компонентов на сервере {wc}.
+== Публикация компонентов на сервере {wc}а
+
 . Остановите *{wcs-new}*.
-. Скопируйте папку `SamplesOutput/Content/Modules/WatermarkWebExtension/` в `{wcd}/Content/Modules`.
-. Скопируйте папку `SamplesOutput/Content/Tools/DVWebTool/Application Files/` в `{wcd}/Content/Tools/DVWebTool/`.
-. Скопируйте папку `SamplesOutput/Extensions/WatermarkServerExtension` в `{wcd}/Extensions`.
+. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `{wcd}\Content\Modules` на Linux.
+. Скопируйте папку `SamplesOutput\Site\Content\Tools\DVWebTool\Application Files\` в `Путь-к-папке-с панелью-управления-Web-клиентом\Site\Content\Tools\DVWebTool\` на Windows.
+. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `{wcd-win}\Extensions` на Windows.
 . Запустите *{wcs-new}*.
 
 [start=11]
 .Регистрация расширения _DVWebTool_ на сервере {wc}.
-. Запустите программу `{wcd}/Tools/Mage/mageui.exe`.
-. Обновите манифест программы:
-.. Нажмите menu:File[Open] и выберите файл `{wcd-win}/Tools/DVWebTool/ApplicationFiles/Docsvision.DVWebTool.exe.manifest`.
-.. Перейдите в раздел _Name_ и в поле `Version` измените номер сборки. Например, `6.1.505+7cea24b736` до `6.1.505+7cea24b737`.
-+
-WARNING: Не изменяйте мажорную и минорную версии, и версию исправления.
-+
-.. Перейдите в раздел _Files_.
-.. Нажмите кнопку *Populate*.
-+
-****
-В манифест будут добавлены файлы разработанного расширения _DVWebTool_.
-****
-+
-.. Нажмите menu:File[Save].
-+
-****
-Будет предложено подписать манифест.
-****
-+
-.. Нажмите *…* (три точки) в поле _File_, выберите файл сертификата `{wcd}/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания манифеста (пароль указывать не нужно). Файл манифеста будет подписан сертификатом `DVWebTool.pfx`.
-
-. Обновите файл развертывания программы:
-.. Нажмите menu:File[Open] и выберите файл `{wcd}/Content/Tools/DVWebToolDocsvision.DVWebTool.application`.
-.. Перейдите в раздел _Name_ и в поле `Version` измените номер сборки. Например, `6.1.505+7cea24b736` до `6.1.505+7cea24b737`.
-+
-WARNING: Не изменяйте мажорную и минорную версии, и версию исправления.
-+
-.. Перейдите в раздел _Update option_ и в поле `Version` введите номер версии, который был получен в разделе Name. Например, `6.1.505+7cea24b736`.
-.. Перейдите в раздел _Application Reference_, нажмите кнопку *Select Manifest* и выберите файл `{wcd-win}/Tools/DVWebTool/Application FilesDocsvision.DVWebTool.exe.manifest`. В поле Version будет указана версия, полученная при обновлении файла манифеста.
-.. Нажмите menu:File[Save]. Будет предложено подписать файл развёртывания.
-.. Нажмите *…* (три точки) в поле _File_, выберите файл сертификата `{wcd}/DVWebTool.pfx`, затем нажмите *OK* в основном окне подписания (пароль указывать не нужно).
-+
-****
-Файл развертывания будет подписан сертификатом `DVWebTool.pfx`.
-****
-+
-. Закройте программу `mageui.exe`.
+. Запустите "{pu}".
+. Нажмите кнопку *Собрать DVWebTool*
+. В диалоге введите адрес публикации {wc}а, при необходимости установите другие опции, нажмите кнопку *ОК*.
+. Установите собранную программу DVWebTool на сервер {wc}, см. подробнее "xref:user:prepare-add-components.adoc#dvWebTool[Установка и запуск службы DVWebTool]".
 . Рекомендуется перезапустить *{wcs-new}*.
 
 == Проверка примера

@@ -251,4 +251,18 @@ include::./dv-web-extensions.adoc[tags=eventhandler]
 
 == Сборка проекта
 
-Разделы, посвящённые сборке, проверке и особенностям обновления аналогичны тем же разделам в документации _DVWebTool_, см. "xref:./dv-web-extensions.adoc[]"
+Разделы, посвящённые сборке, проверке и особенностям обновления аналогичны тем же разделам в документации _DVWebTool_, см. "xref:./dv-web-extensions.adoc#buildProject[]".
+
+== Публикация компонентов на сервере Web-клиента
+
+. Запустите DVSupService, чтобы создалась папка `Extensions`.
+. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `{wcd}/Content/Modules`.
+. Скопируйте в папку `Путь-к-сервису-DvSupService/Extensions` следующие папки:
++
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Assemblies`.
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Fonts`.
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Services`.
++
+. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `Путь к сайту Web-клиента/Extensions`.
+. Перезапустите *{wcs-new}*.
+. Перезапустите *DvSupService*.
