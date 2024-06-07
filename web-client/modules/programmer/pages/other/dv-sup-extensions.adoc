@@ -240,7 +240,54 @@ include::./dv-web-extensions.adoc[tags=fileservice]
 
 Прежде всего реализуем сервис, получающий список идентификаторов файлов, в которые нужно добавить водяной знак и передавать его в метод `AddWatermarkToFiles` расширения _Watermark to PDF_. Ниже приведёна часть исходного кода данного сервиса, отвечающая за работу с _DvSupService_.
 
-include::./dv-web-extensions.adoc[tags=watermarkservice]
+.Файл `_Others\Watermark\WatermarkWebExtension\src\WatermarkService.tsx_`
+[source,typescript]
+----
+export class WatermarkService {
+
+    constructor(private services: $RequestManager & $WebServices & $ApplicationSettings & $MessageBox & $SiteUrl & $CurrentEmployeeId) {
+    }
+
+    async AddWatermarkToFilesWithToken(cardID: string, tokens: string[]): Promise<IWebServicesResponse<any>> { <.>
+        const urlWatermark = this.addressConnect + "Watermark" + "/" + "AddWatermarkToFiles";
+        const data: Object = {
+            cardID: cardID,
+            tokens: tokens,
+            serverAddress: this.services.siteUrl
+        };
+        const options: RequestOptions = {
+            returnRawResponse: true,
+        }
+
+        let response: any = await this.services.requestManager.post(urlWatermark, JSON.stringify(data), options);
+
+        return JSON.parse(response);
+    }
+
+    async GetTokensByIds(tokenRequests: Array<TokenRequestModel>): Promise<string[]> {
+        const urlFileOperationsWithToken = this.services.siteUrl + "/FileOperationsWithToken" + "/" + "GetAccessToken?"; <.>
+        let tokens: string[] = [];
+
+        await Promise.all(tokenRequests.map(async (element) => {
+            const url = urlFileOperationsWithToken + "fileCardId=" + element.fileCardId + "&versionId=" + element.versionId + "&ownerCardId=" + element.ownerCardId;
+            try {
+                const response = await this.services.requestManager.get(url);
+                tokens.push(response as string);
+            } catch (ex) {
+                showError("Ошибка при запросе токена");
+            }
+        }));
+
+        return tokens;
+    }
+
+    private get addressConnect() {
+        return `http://localhost:${this.services.applicationSettings.environment.dvSupServiceConnectionPort}/`;
+    }
+}
+----
+<.> Метод принимает идентификатор карточки и идентификатор её конвертируемых файлов.
+<.> Метод принимает массив моделей `TokenRequestModel` и возвращает массив токенов.
 
 Сервис `$WatermarkService` предоставляет метод `AddWatermarkToFilesWithToken`, который вызывает функцию программы _DvSupService_. При вызове данного метода нужно передать url-адрес с названием контроллера и метода.
 
@@ -251,7 +298,7 @@ include::./dv-web-extensions.adoc[tags=eventhandler]
 
 == Сборка проекта
 
-Разделы, посвящённые сборке, проверке и особенностям обновления аналогичны тем же разделам в документации _DVWebTool_, см. "xref:./dv-web-extensions.adoc#buildProject[]".
+Разделы, посвящённые сборке, проверке и особенностям обновления аналогичны тем же разделам в документации _DVWebTool_, см. "xref:./dv-web-extensions.adoc#buildProject[Сборка проекта]".
 
 == Публикация компонентов на сервере Web-клиента
 
@@ -265,4 +312,6 @@ include::./dv-web-extensions.adoc[tags=eventhandler]
 +
 . Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `Путь к сайту Web-клиента/Extensions`.
 . Перезапустите *{wcs-new}*.
-. Перезапустите *DvSupService*.
+. Перезапустите службу командой:
++
+ sudo systemctl restart dvsupservice
