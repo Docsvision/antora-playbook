@@ -120,7 +120,13 @@ docker run -d -p 8100:8094 cryptoservice
 +
 [WARNING]
 ====
+* {blank}
++
 include::workerservice:admin:launch.adoc[tags=cpus]
++
+* {blank}
++
+include:::partial$excerpts.adoc[tags=one-ws]
 ====
 +
 . В соединении {dv} выберите сервер, на котором указан адрес Криптосервиса в конфигурационном файле из примера выше.
@@ -135,6 +141,12 @@ include::workerservice:admin:launch.adoc[tags=cpus]
 Например, так: параметр `ComplexSignatureServiceAddress` со значением `ConnectAddress=http://server.domain.com:8094/cryptoservice/api/v1`.
 +
 . Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
++
+[WARNING]
+====
+include:::partial$excerpts.adoc[tags=one-ws]
+====
++
 . В соединении {dv} выберите сервер, на котором выполнен <<one,пункт 1>>.
 
 // [#registry]
