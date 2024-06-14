@@ -1,3 +1,34 @@
+// tag::icon-css[]
+[#icon-css]
+==== CSS класс иконки
+
+Название CSS класса, предоставляющего иконку для отображения на
+ifeval::["{thing}" == "btn"]
+кнопке.
+endif::[]
+ifeval::["{thing}" == "fld"]
+папке.
+endif::[]
+ifeval::["{thing}" == "lnk"]
+ссылке.
+endif::[]
+ifeval::["{thing}" == "sbt"]
+кнопке открытия строки поиска.
+endif::[]
+Если класс не указан, отображается только подпись без иконки.
+
+Пример класса для предоставления иконки:
+
+[source,css]
+----
+.button-icon {
+  background-image: url('../../Solutions/SampleSolution/Images/ico-button.png');
+  width: 24px;
+  height: 24px;
+}
+----
+// end::icon-css[]
+
 // tag::btn-txt[]
 ==== Текст кнопки
 
@@ -568,12 +599,6 @@ NOTE: Данная настройка предназначена только д
 
 Включает или выключает использование анимации при раскрытии папки.
 // end::folderAnimation[]
-
-// tag::iconCss[]
-==== CSS класс иконки
-
-Название CSS класса с иконкой папки.
-// end::iconCss[]
 
 // tag::onExpand[]
 ==== При разворачивании
