@@ -15,7 +15,7 @@
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 
 Модуль _Служба {ws}_ является _базовым модулем_ системы {dv}.
 // , который реализует функции СУБП и предоставляет инструментарий для настройки БП.
@@ -42,7 +42,7 @@
 . <<admin:install:::>> -- раздел содержит инструкцию по установке модуля.
 . <<admin:work-log:::>> -- в данном разделе описаны настройки журналирования работы модуля.
 
-[#__object-id-502822]
+[#__object-id-41099922]
 == Общие сведения о модуле
 
 :docname: functions
@@ -52,7 +52,7 @@
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#functions:::]
 === Назначение и функции модуля
 
@@ -80,7 +80,7 @@
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#module-structure:::]
 === Структура модуля
 
@@ -131,7 +131,7 @@
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#requirements:::]
 == Необходимые ресурсы
 
@@ -174,7 +174,7 @@
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#requirements-account:::]
 === Требования к учетной записи Службы фоновых операций
 
@@ -196,7 +196,7 @@ WARNING: Используйте учётную запись, которая бу
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#common:index:::]
 == Изменения, обновления и исправленные ошибки
 :page-layout: home
@@ -213,7 +213,7 @@ WARNING: Используйте учётную запись, которая бу
 
 * <<common:change-log:::>>
 * <<common:bugs:::>>
-* <<common:patches-log:::,Накопительные обновления>>
+* <<common:patches-log:::>>
 ****
 ====
 
@@ -226,7 +226,7 @@ WARNING: Используйте учётную запись, которая бу
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#common:change-log:::]
 === Изменения в релизной версии
 
@@ -240,7 +240,7 @@ WARNING: Используйте учётную запись, которая бу
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#common:bugs:::]
 ==== Исправленные ошибки
 
@@ -260,11 +260,15 @@ WARNING: Используйте учётную запись, которая бу
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#common:patches-log:::]
 === Накопительные обновления
+:page-layout: patches
 
-[#__object-id-510586]
+
+:!page-layout:
+
+[#__object-id-41107712]
 == Администрирование модуля
 
 :docname: install
@@ -274,7 +278,7 @@ WARNING: Используйте учётную запись, которая бу
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#admin:install:::]
 === Установка и настройка Службы фоновых операций
 // tag::linux[]
@@ -283,6 +287,9 @@ WARNING: Используйте учётную запись, которая бу
 :config: Configuration
 
 
+****
+На данный момент при установке в ОС семейства Linux существует ограничение, требующее устанавливать серверные компоненты модулей из инсталляторов `.msi` на машину с ОС Windows. Это ограничение обусловлено необходимостью работы с Консолью настройки {dv} и настройкой БД. Подробнее про имеющиеся ограничения можно прочитать в руководстве по установке системы, раздел "xref:install-linux::linux-limitations.adoc[]".
+****
 
 Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
 
@@ -292,6 +299,20 @@ WARNING: Используйте учётную запись, которая бу
 
 WARNING: Перед установкой ознакомьтесь с разделом "xref:6.1@workerservice:ROOT:requirements.adoc[]".
 
+. Установите службу {of} следующей командой, предварительно обновив индекс пакетов:
++
+[source,bash,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install docsvision-{wt}
+----
++
+. Все настройки {of} хранятся в конфигурационном файле `{config}.json`. Конфигурационный файл может быть изменён в любом текстовом редакторе, например `nano`.
++
+[source,bash,subs=attributes]
+----
+sudo nano /usr/lib/docsvision/{wt}/{config}.json
+----
 +
 Основные настройки, которые нужно сделать:
 +
@@ -369,6 +390,17 @@ image::workerservice/6.1/admin/_images/install-check.png[Продолжить у
 . Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 //end::finish[]
 +
+. Если данный модуль устанавливается последним, запустите {cns} и выполните обновление базы данных, следуя инструкции в документации по администрированию модуля "{pl}":
++
+* "xref:6.1@platform:console:db-connect.adoc[]"
+* "xref:6.1@platform:console:db-create.adoc[]"
++
+. На сервере Linux, укажите псевдоним и строку подключения к существующей или новой БД в конфигурационном файле модуля {pl} и перезапустите службу *{sss-new}* командой:
++
+[source,bash]
+----
+sudo systemctl restart dvappserver
+----
 +
 . Запустите {wincl}. При подключении к серверу {dv} с установленной серверной частью модуля, клиентская часть модуля будет установлена автоматически.
 
@@ -396,12 +428,13 @@ image::workerservice/6.1/admin/_images/install-check.png[Продолжить у
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#admin:update-module:::]
 === Обновление модуля
 :update: workerservice-*
 
 
+Список изменений в текущей версии см. здесь: <<common:change-log:::>>.
 
 * Установка новой версии должна выполняться в нерабочее время.
 * Создайте резервную копию БД {dv}.
@@ -410,7 +443,80 @@ image::workerservice/6.1/admin/_images/install-check.png[Продолжить у
 * Если к новой версии модуля приложена инструкция по обновлению, следуйте ей.
 * *Если комплект обновления включает обновление для модуля "{pl}"*, перейдите к инструкции, приведенной xref:6.1@platform:admin:update-module.adoc[в документации] модуля {pl}.
 
+// tag::noimage[]
+// tag::bare-minimum[]
+Если к новой версии модуля прилагается отдельная инструкция по обновлению, следуйте ей.
+
+.Чтобы установить новую версию модуля:
+// end::bare-minimum[]
+. Создайте резервную копию БД.
+// . Остановите сервис `dvappserver` все сервисы {dv}. Также остановите экземпляры Службы {ws} и все сервисы в кластере {dv} или СУБП, если таковые используются.
+// tag::bare-minimum[]
+. Устанавливать обновление рекомендуется на отдельную машину во избежание случаев, когда остаются старые файлы и папки системы.
+. Обновите серверные компоненты на сервере Linux командой:
 +
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install --only-upgrade docsvision-{update}
+----
++
+// tag::config[]
+. На сервере Linux при обновлении сервиса будет предложено перезаписать текущий конфигурационный файл `appsettings.json`. Доступные варианты:
++
+* Перезаписать текущий конфигурационный файл `appsettings.json`.
+** Текущий файл будет перезаписан стандартным, все выполненные настройки будут сохранены в файле `appsettings.json.dpkg-old`. Существующие настройки, включая псевдонимы и строки подключения к БД, потребуется перенести в новый файл `appsettings.json`.
+* Сохранить текущий `appsettings.json`.
+** Все выполненные настройки останутся без изменений, стандартный файл конфигурации будет сохранён как `appsettings.json.dpkg-dist`.
+* Показать различия между версиями.
+** В окне командной строки будут отображены отличия между старой и новой версией. Знаком `+` обозначаются добавленные строки, знаком `-` обозначаются удалённые строки.
+* Запустить оболочку командной строки для проверки ситуации.
+** Возвращает в окно командной строки, дальнейшие действия зависят от администратора.
+// end::config[]
+// end::bare-minimum[]
++
+. Затем установите серверные компоненты на машину с Windows, запустив инсталлятор `.msi` серверной части модуля.
++
+. Перезапустите *{sss-new}* и все сервисы {dv} на Linux.
++
+. Запустите программу _{cns}_ и перейдите в раздел _Базы данных_.
++
+****
+Пользователь, от имени которого запускается _{cns}_:
+
+* Должен являться администратором {dv} -- быть добавленным в группу *{dv-admins-serv}* в конфигурационном файле модуля _{pl}_, см. раздел "xref:6.1@platform:admin:config-platform.adoc[]".
+* Входить в группы {dv} в Справочнике сотрудников:
++
+- _{dv-dm-admins-dir}_.
+- _{dv-ad-admins-dir}_.
+- _{dv-sys-wf-dir}_.
+- __Системные группы_.
+****
++
+. Обновите существующую БД по инструкции, приведённой в документации модуля _{pl}_, раздел "xref:6.1@platform:console:db-update.adoc[]".
++
+NOTE: Установка флагов в диалогах выбора обновляемых библиотек карточек и настроек модулей может оказаться недоступной, если изменений в библиотеке карточек между обновлениями не было.
++
+. Дойдите до выбора обновляемых библиотек карточек. Выберите библиотеки и нажмите *Далее*.
++
+.Обновление библиотек карточек
+image::platform/6.1/admin/_images/db-update-libs.png[Обновление библиотек карточек]
++
+. Перезапустите *{sss-new}* и все сервисы {dv} на Linux ещё раз.
+. Выберите модули {dv}, настройки которых должны быть загружены в БД и нажмите *Завершить*.
++
+// end::noimage[]
+.Шаг загрузки настроек модулей
+image::platform/6.1/admin/_images/db-create-modules.png[Шаг загрузки настроек модулей]
++
+// . Установите новую версию модуля, не обновляя БД (флаг `*Обновить базу данных*` должен быть снят):
+// +
+// * На оставшихся узлах кластера {dv}.
+// * На сервере СУБП, {wc}а и других модулей, использующих компоненты модуля _{bo}_.
+// +
+. Клиентские компоненты модуля необходимо устанавливать на компьютерах пользователей, если был установлен {wincl}. Компоненты будут обновлены автоматически при запуске {wincl}а.
++
+Самостоятельно обновить клиентские компоненты можно из пакета установки
 `{dv} Worker service client.msi`.
 +
 // [#multiple-modules]
@@ -447,7 +553,7 @@ image::workerservice/6.1/admin/_images/install-check.png[Продолжить у
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#admin:launch:::]
 === Запуск Службы фоновых операций
 
@@ -482,7 +588,7 @@ _Cлужба {ws}_ может использовать сервис перешт
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#admin:work-log:::]
 === Журнал работы
 :serv: {wss-new}
@@ -490,8 +596,21 @@ _Cлужба {ws}_ может использовать сервис перешт
 
 Журнал работы модуля в локальной файловой системе располагается в каталоге `/var/log/docsvision`.
 
+. Посмотреть журнал службы (только записи в `stdout/stderr`):
++
+[source,bash,subs=attributes]
+----
+sudo journalctl -u {serv}
+----
++
+. Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
++
+[source,bash,subs=attributes]
+----
+sudo journalctl -f -u {serv}
+----
 
-Пути к журналам и уровень журналирования настраиваются в конфигурационом файле `/usr/lib/docsvision/workerservice/Configuration.json` в параметрах:
+Пути к журналам и уровень журналирования настраиваются в конфигурационном файле `/usr/lib/docsvision/workerservice/Configuration.json` в параметрах:
 
 * `LogFile` -- путь к журналу работы.
 * `LogTraceLevel` -- уровень журналирования.
@@ -507,6 +626,55 @@ _Cлужба {ws}_ может использовать сервис перешт
 
 :!serv:
 
+:docname: msg-autoremove
+:page-module: admin
+:page-relative-src-path: msg-autoremove.adoc
+:page-origin-url: https://github.com/Docsvision/Worker-Antora.git
+:page-origin-start-path:
+:page-origin-refname: 6.1
+:page-origin-reftype: branch
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
+[#admin:msg-autoremove:::]
+=== Автоматическая очистка сообщений в карточках сообщений
+
+В процессе работы в карточках сообщений может накапливаться большое число входящих и исходящих сообщений, что может существенно замедлять работу с такими карточками, отправка исходящих сообщений особенно подвержена негативному влиянию. Негативное влияние призвана снизить возможность автоматической очистки исходящих и входящих сообщений.
+
+[#admin:msg-autoremove:::настройка-автоматической-очистки]
+==== Настройка автоматической очистки
+
+. Автоматическая очистка регламентируется настройками в таблице БД *dvsys_settings*:
++
+--
+* Для входящих сообщений:
+** *WorkerService_ClearIncomingMessages* -- политика очистки входящих сообщений. `0` -- не очищать, `1` -- по дням, `2` -- по количеству. Очищаются только сообщения в состоянии _Обработано_.
+** *WorkerService_ClearIncomingMessages_Days* -- ограничение устанавливает срок в днях, после которого входящих сообщения будут удаляться. Например, если установлено ограничение в `3` дня, будут удалены все сообщения старше `3` дней.
+Если значение меньше `1`, очистка производиться не будет.
++
+** *WorkerService_ClearIncomingMessages_Count* -- максимальное количество входящих сообщений, которые останутся в очереди. Если значение меньше `1`, очистка производиться не будет.
+* Для исходящих сообщений:
+** *WorkerService_ClearOutgoingMessages* -- политика очистки исходящих сообщений. `0` -- не очищать, `1` -- по дням, `2` -- по количеству.
+** *WorkerService_ClearOutgoingMessages_Days* -- ограничение устанавливает срок в днях, после которого исходящие сообщения будут удаляться. Например, если установлено ограничение в `3` дня, будут удалены все сообщения старше `3` дней.
+Если значение меньше `3`, очистка производиться не будет.
++
+** *WorkerService_ClearOutgoingMessages_Count* -- максимальное количество исходящих сообщений, которые останутся в очереди. Если значение меньше `3000`, очистка производиться не будет.
+--
++
+.Значения по умолчанию:
+[cols="66%,34%",options="header"]
+|===
+|Настройка  |Значение по умолчанию
+
+|`WorkerService_ClearIncomingMessages` |`0`
+|`WorkerService_ClearOutgoingMessages` |`0`
+|`WorkerService_ClearIncomingMessages_Days` |`7`
+|`WorkerService_ClearOutgoingMessages_Days` |`7`
+|`WorkerService_ClearIncomingMessages_Count` |`-1`
+|`WorkerService_ClearOutgoingMessages_Count` |`-1`
+|===
++
+. Раз в сутки в 2 часа ночи запускается служебная задача *dvjob_workerservice_clear_old_messages*, выполняющая хранимую процедуру *dvws_clear_old_messages* для удаления сообщений согласно указанным настройкам.
+// Например, удалять входящие сообщения через `15` дней, а исходящие сообщения, если их количество достигло `3000`.
+
 :docname: introduction
 :page-module: extensions
 :page-relative-src-path: introduction.adoc
@@ -514,7 +682,7 @@ _Cлужба {ws}_ может использовать сервис перешт
 :page-origin-start-path:
 :page-origin-refname: 6.1
 :page-origin-reftype: branch
-:page-origin-refhash: 0d5cadd3daebde21bfc76e6f8e6b90260f0d4e84
+:page-origin-refhash: 9739871b5a381f6018b316ad738174227c7ff59e
 [#extensions:introduction:::]
 == Разработка расширений службы фоновых операций
 
