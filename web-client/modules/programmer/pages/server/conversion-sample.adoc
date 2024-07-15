@@ -1,0 +1,27 @@
+= Пример взаимодействия с сервисом конвертации
+
+Этот пример серверного расширения демонстрирует взаимодействие с сервисом конвертации.
+
+== Необходимое ПО
+
+* https://nodejs.org/en/[NodeJS версии v14.17.0].
+* https://code.visualstudio.com/[VSCode] или любой другой редактор.
+
+NOTE: Для работы расширения требуется наличие в лицензии опции _{dv} Сервис конвертации файлов_.
+
+== Сборка
+
+. Откройте `/Samples.sln`
+. Соберите проект menu:ServerExtensions[ConversionSample > ConversionSampleServerExtension].
+. Откройте консоль в папке menu:ServerExtensions[ConversionSample > ConversionSampleWebExtension], выполните `npm install`, `npm update` и `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Content\Modules\ConversionSampleWebExtension` в каталог `Путь-к-установленному-{wc}у\Content\Modules`.
+. Скопируйте каталог `SamplesOutput\Extensions\ConversionSampleServerExtension` в каталог `Путь к установленному {wc}у\Extensions`.
+. Перезапустите *{sss-new}*.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Откройте {kvr}.
+. В разметке просмотра документа на событие `*Перед стартом согласования*` элемента управления `_agreementManagement_` назначьте обработчик `attachPdfa`.
+. Создайте карточку документа, приложите к ней `.docx`-файл и отправьте на согласование.
+. К документу будет добавлен файл, конвертированный в PDF/A.
