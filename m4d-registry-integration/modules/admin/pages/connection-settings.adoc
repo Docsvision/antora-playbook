@@ -44,6 +44,21 @@ include::ROOT:requirements.adoc[tags=url]
 +
 NOTE: В {of-mc}, в разделах Очередь "xref:6.1@mgmtconsole:user:msg-incoming.adoc[входящих]" и "xref:6.1@mgmtconsole:user:msg-outgoing.adoc[исходящих]" сообщений отображаются все действия с МЧД. Если в процессе выполнения запроса возникла ошибка, она будет отображена в {of-mc}, на странице "xref:6.1@mgmtconsole:user:msg-outgoing.adoc[Очередь исходящих сообщений]".
 
+[#config-services]
+== Настройки конфигурации сервисов
+
+После установки модуля в {of-mc} вместо названия _Сервиса обработки_ и _Типа сообщений_ отображается идентификатор. Чтобы вместо идентификаторов отображались локализованные названия, необходимо в конфигурационном файле по адресу `/usr/lib/docsvision/externalapi/appsettings.json` добавить следующие строки:
+
+[source,json]
+----
+"FactoriesSettings": {
+  "Libraries": [
+    "DocsVision.BackOffice.ObjectModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519",
+    "DocsVision.M4dRegistry.WorkerService, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519"
+  ]
+}
+----
+
 [#register]
 == Настройки регистрации МЧД
 
