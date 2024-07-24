@@ -17,7 +17,7 @@ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificat
 ----
 <.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
 +
-NOTE: Подробный пример создания сертификата приведён в документации {of-mc}, раздел "xref:6.1@mgmtconsole:admin:create-cert.adoc[]".
+NOTE: Подробный пример создания сертификата приведён в документации {of-mc}, раздел "xref:engineer:ROOT:create-cert.adoc[]".
 +
 . Добавьте сертификат в доверенные, скопировав его в директорию `/usr/local/share/ca-certificates/`.
 . Обновите список доверенных сертификатов: `sudo update-ca-certificates`
