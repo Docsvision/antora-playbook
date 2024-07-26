@@ -4,11 +4,14 @@ asciidoc:
   attributes:
     source-highlighter: rouge
     pdf-theme: ./theme/pdf-theme.yml
+    pdf-fontsdir: ./theme/
     allow-uri-read: ''
     kroki-fetch-diagram: ~
     pdf: ''
+    version-label: "Версия и дата сборки:"
 build:
   command: bundle exec asciidoctor-pdf --trace --sourcemap -r asciidoctor-kroki
+# -a pdf-fontsdir=./theme/
 # -r prawn-gmagick
 #если нужно указать директорию до шрифтовЁ добавить в команду выше: "-a pdf-fontsdir=resources/"
   publish: false
