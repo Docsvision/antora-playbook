@@ -1,4 +1,4 @@
-extends: default
+extends: default-with-font-fallbacks
 page:
   size: Letter
   margin-inner: 15mm
@@ -7,18 +7,19 @@ page:
   margin-bottom: 20mm
 base:
   font-color: #222
-  #font-family: Times Roman
-  #font-size: 12
-  #line-height-length: 17
-  #line-height: $base-line-height-length / $base-font-size
-#font:
-#  catalog:
-#    merge: false
-#    Verdana:
-#      normal: verdana-normal.ttf
-#      bold: verdana-bold.ttf
-#      italic: verdana-itallic.ttf
-#      bold_italic: verdana-bold_italic.ttf
+  font-family: Verdana
+  font-size: 12
+  line-height-length: 17
+  line-height: $base-line-height-length / $base-font-size
+font:
+  catalog:
+    merge: true
+    Verdana:
+      normal: verdana-normal.ttf
+      bold: verdana-bold.ttf
+      italic: verdana-itallic.ttf
+      bold_italic: verdana-bold_italic.ttf
+#  fallbacks: 
 #    M+ 1mn:
 #      normal: GEM_FONTS_DIR/mplus1mn-regular-subset.ttf
 #      bold: GEM_FONTS_DIR/mplus1mn-bold-subset.ttf
