@@ -1,4 +1,4 @@
-= PowerOfAttorneyDocument -- класс
+= PowerOfAttorneyFNSDOVEL502Data.PowerOfAttorneyDocument -- класс
 
 Состав и структура документа (Документ). Код формы по КНД принимает значение 1110310 в соответствии с форматом и не может быть изменён.
 
@@ -18,19 +18,19 @@ public class PowerOfAttorneyDocument
 |===
 |Имя |Описание
 
-|`PowerOfAttorneyNumber`
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[PowerOfAttorneyNumber]`
 |Единый регистрационный номер доверенности (Обязательный).
 
-|`TaxAuthorityCode`
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[TaxAuthorityCode]`
 |Код налогового органа, в который представляется доверенность, созданная в электронной форме (Обязательный). При оформлении доверенности в отношении одного налогового органа принимает значение кода этого налогового органа. При оформлении доверенности в отношении нескольких налоговых органов принимает значение кода налогового органа постановки налогоплательщика на учет по месту нахождения (месту жительства).
 
-|`PowerOfAttorneyData`
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL502Data.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyData]`
 |Доверенность (Обязательный с условием).
 
-|`RetrustPowerOfAttorneyData`
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL502Data.RetrustPowerOfAttorneyDocumentData_CL.adoc[RetrustPowerOfAttorneyData]`
 |Передоверие (Обязательный с условием). Обязательный при создании доверенности в рамках передоверия.
 
-|`Signer`
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL502Data.FIO_CL.adoc[Signer]`
 |Сведения о физическом лице, подписывающем доверенность от имени доверителя (российской организации / иностранной организации) без доверенности или подписывающем доверенность от своего имени, в том числе при передаче полномочий другому лицу в порядке передоверия (Обязательный).
 
 |===
