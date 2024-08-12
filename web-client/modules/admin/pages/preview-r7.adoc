@@ -160,11 +160,10 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 
 .Чтобы настроить авторизацию с помощью токена:
 . В конфигурационном файле Р7-Офис по адресу `/etc/r7-office/documentserver/local.json` установите параметры `inbox`, `outbox` и `browser` в значение `true` для использования токенов.
-. В том же конфигурационном фйле `local.json` укажите секретное слово в параметре `secretString`, используя цифры и буквы латинского алфавита, пример конфигурационного файла см. ниже.
+. В том же конфигурационном фйле `local.json` укажите секретное слово для параметров `inbox`, `outbox`, `session`, используя цифры и буквы латинского алфавита, фрагмент конфигурационного файла см. ниже.
 +
 [source,json]
 ----
-{
   "services": {
     "CoAuthoring": {
       "sql": {
@@ -195,28 +194,21 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
       },
       "secret": {
         "inbox": {
-          "string": "verysecretstring"
+          "string": "verysecretstring" <.>
         },
         "outbox": {
-          "string": "verysecretstring"
+          "string": "verysecretstring" <.>
         },
         "session": {
-          "string": "verysecretstring"
+          "string": "verysecretstring" <.>
         }
       }
     }
   },
-  "rabbitmq": {
-    "url": "amqp://guest:guest@localhost"
-  },
-  "storage": {
-    "fs": {
-      "secretString": "DQwe5jFGXFxvdOXRQlx9" <.>
-    }
-  }
-}
 ----
-<.> Секретное слово.
+<.> Секретное слово для параметра `inbox`.
+<.> Секретное слово для параметра `outbox`.
+<.> Секретное слово для параметра `session`.
 +
 . Перезапустите сервер документов Р7.
 . В конфигурационном файле {wc}а по адресу `{webconfig}` в разделе `{cnf-sgrps-wc}]` укажите параметр `ServerR7SecretToken` со значением секретного слова.
