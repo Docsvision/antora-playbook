@@ -27,9 +27,16 @@ include::partial$excerpts.adoc[tags=ifabsent]
             "encoding": "UTF-8",
             "archiveOldFileOnStartup": "true",
             "fileName": "${basedir}/../Logs/WebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.log", <.>
-            "layout": "[${longdate}][${level}][${callsite}] ${action-info} ${message} ${exception:format=tostring,Data}" <.>
+            "layout": "[${longdate}][${level}][${callsite}] ${action-info} ${message} ${exception:format=tostring,Data}"
           }
         }
+      }
+    ]
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Trace",
+        "writeTo": "File,Console" <.>
       }
     ]
   }
