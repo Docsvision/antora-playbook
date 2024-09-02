@@ -21,17 +21,17 @@ public virtual bool Save()
 
 Данный метод может быть вызван из скрипта карточки, и по своему действию эквивалентен нажатию кнопки *Сохранить* в карточке.
 
-== Примеры
-
-К примеру, метод который по нажатию кнопки устанавливает название темы документа в значение по умолчанию и сохраняет карточку.
-
-[source,csharp]
-----
-private void DefaultTheme_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- ICustomizableControl customizableControl = CardControl;
- ILayoutPropertyItem layoutPropertyItem = customizableControl.FindPropertyItem<ILayoutPropertyItem>("Theme");
- layoutPropertyItem.ControlValue = "Default value";
- CardControl.Save();
-}
-----
+// == Примеры
+//
+// К примеру, метод который по нажатию кнопки устанавливает название темы документа в значение по умолчанию и сохраняет карточку.
+//
+// [source,csharp]
+// ----
+// private void DefaultTheme_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  ICustomizableControl customizableControl = CardControl;
+//  ILayoutPropertyItem layoutPropertyItem = customizableControl.FindPropertyItem<ILayoutPropertyItem>("Theme");
+//  layoutPropertyItem.ControlValue = "Default value";
+//  CardControl.Save();
+// }
+// ----

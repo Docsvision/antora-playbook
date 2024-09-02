@@ -31,32 +31,32 @@ selectParams:::
 
 Позиционирование на папке "Результаты поиска" (Search results) возможно в {wincl}е версии 5.4 и выше.
 
-== Примеры
-
-Ниже приведён пример вызова окна выбора карточки с предварительным позиционированием на папке с идентификатором 00000000-0000-0000-0000-000000000000
-
-[source,csharp]
-----
-private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
-                
- p["CurrentFolderID"] =  new Guid("00000000-0000-0000-0000-000000000000"); <.>
- Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
-}
-----
-<.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.
-
-Для приложения "Рабочее места администратора" код должен быть модифицирован
-
-[source,csharp]
-----
-private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();  
-                
- p["Filter"] =  "00000000-0000-0000-0000-000000000000"; <.>
- Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
-}
-----
-<.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.
+// == Примеры
+//
+// Ниже приведён пример вызова окна выбора карточки с предварительным позиционированием на папке с идентификатором 00000000-0000-0000-0000-000000000000
+//
+// [source,csharp]
+// ----
+// private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();
+//
+//  p["CurrentFolderID"] =  new Guid("00000000-0000-0000-0000-000000000000"); <.>
+//  Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
+// }
+// ----
+// <.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.
+//
+// Для приложения "Рабочее места администратора" код должен быть модифицирован
+//
+// [source,csharp]
+// ----
+// private void SelectCard_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  DocsVision.Platform.CardHost.ParameterCollection p = new DocsVision.Platform.CardHost.ParameterCollection();
+//
+//  p["Filter"] =  "00000000-0000-0000-0000-000000000000"; <.>
+//  Guid selectedID = base.CardFrame.CardHost.SelectCard("Выберите карточку", p);
+// }
+// ----
+// <.> Идентификатор папки, на которую будет произведено предварительное позиционирование курсора выбора.

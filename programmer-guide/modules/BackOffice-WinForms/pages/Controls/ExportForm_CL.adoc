@@ -5,12 +5,12 @@
 * *Пространство имён:* `xref:Controls/Controls_NS.adoc[DocsVision.BackOffice.WinForms.Controls]`
 * *Сборка:* `DocsVision.BackOffice.WinForms.dll`
 
-== Синтаксис
-
-[source,csharp]
-----
-public class ExportForm : DevExpress.XtraEditors.XtraForm
-----
+// == Синтаксис
+//
+// [source,csharp]
+// ----
+// public class ExportForm : DevExpress.XtraEditors.XtraForm
+// ----
 
 == Конструкторы
 
@@ -45,54 +45,54 @@ public class ExportForm : DevExpress.XtraEditors.XtraForm
 
 Не рекомендуется задавать значения `CardData` и `CardXml` одновременно, так как при этом возможно формирование некорректного списка преобразований.
 
-== Примеры
-
-Ниже приведён пример скрипта, вызываемого из карточки, который открывает окно экспорта и печати
-
-[source,csharp]
-----
-private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- using (ExportForm exportForm = new ExportForm())
- {
-  exportForm.Session = base.Session;
-  exportForm.CardHost = base.CardFrame.CardHost;
-  exportForm.CardData = base.CardData; <.>
-
-  exportForm.ShowDialog(); <.>
- }
-}
-----
-<.> Сессия, контейнер карточки и её данные получаем из базового класса `ScriptClassBase`.
-<.> Вывод окна печати.
-
-Далее приведён пример использования класса `ExportForm` при выводе на печать/экспорт собственного XML-документа
-
-[source,csharp]
-----
-private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- using (ExportForm exportForm = new ExportForm())
- {
-
-  exportForm.Session = base.Session;
-  exportForm.CardHost = base.CardFrame.CardHost; <.>
-
-  exportForm.CardXml = System.IO.File.ReadAllText("CardXMLDocument.xml"); <.>
-
-  exportForm.CardTypeId = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"); <.>
-
-  exportForm.Caption = "Произвольный XML-документ"; <.>
-
-  exportForm.TemplateAlias = "CustomTransformation"; <.>
-
-  exportForm.ShowDialog(); <.>
- }
-}       
-----
-<.> Сессия и контейнер карточки получаем из базового класса `ScriptClassBase`.
-<.> В данном случае XML-документ получен из файла `CardXMLDocument.xml`, также он может быть сформирован, например, при помощи `XmlDocument`.
-<.> Идентификатор типа карточки, который используется при получении разрешённых преобразований (`Transformation`).
-<.> Будет использован при создании электронного письма.
-<.> Если в списке доступных преобразований присутствует преобразование с псевдонимом `CustomTransformation`, то оно будет выбрано по умолчанию.
-<.> Вывод окна печати.
+// == Примеры
+//
+// Ниже приведён пример скрипта, вызываемого из карточки, который открывает окно экспорта и печати
+//
+// [source,csharp]
+// ----
+// private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  using (ExportForm exportForm = new ExportForm())
+//  {
+//   exportForm.Session = base.Session;
+//   exportForm.CardHost = base.CardFrame.CardHost;
+//   exportForm.CardData = base.CardData; <.>
+//
+//   exportForm.ShowDialog(); <.>
+//  }
+// }
+// ----
+// <.> Сессия, контейнер карточки и её данные получаем из базового класса `ScriptClassBase`.
+// <.> Вывод окна печати.
+//
+// Далее приведён пример использования класса `ExportForm` при выводе на печать/экспорт собственного XML-документа
+//
+// [source,csharp]
+// ----
+// private void ExportButton_Click(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  using (ExportForm exportForm = new ExportForm())
+//  {
+//
+//   exportForm.Session = base.Session;
+//   exportForm.CardHost = base.CardFrame.CardHost; <.>
+//
+//   exportForm.CardXml = System.IO.File.ReadAllText("CardXMLDocument.xml"); <.>
+//
+//   exportForm.CardTypeId = new Guid("B9F7BFD7-7429-455E-A3F1-94FFB569C794"); <.>
+//
+//   exportForm.Caption = "Произвольный XML-документ"; <.>
+//
+//   exportForm.TemplateAlias = "CustomTransformation"; <.>
+//
+//   exportForm.ShowDialog(); <.>
+//  }
+// }
+// ----
+// <.> Сессия и контейнер карточки получаем из базового класса `ScriptClassBase`.
+// <.> В данном случае XML-документ получен из файла `CardXMLDocument.xml`, также он может быть сформирован, например, при помощи `XmlDocument`.
+// <.> Идентификатор типа карточки, который используется при получении разрешённых преобразований (`Transformation`).
+// <.> Будет использован при создании электронного письма.
+// <.> Если в списке доступных преобразований присутствует преобразование с псевдонимом `CustomTransformation`, то оно будет выбрано по умолчанию.
+// <.> Вывод окна печати.

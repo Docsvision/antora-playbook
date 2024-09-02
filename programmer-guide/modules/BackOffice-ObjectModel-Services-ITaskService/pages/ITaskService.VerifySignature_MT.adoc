@@ -51,60 +51,60 @@ fields:::
 |`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `task` или `signature`.
 |===
 
-== Примеры
-
-[source,csharp]
-----
-using System.Linq;
-using System.Windows.Forms.Design;
-
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-using DocsVision.BackOffice.WinForms.Controls;
-using DocsVision.Platform.ObjectModel;
-
-namespace BackOffice
-{
- public class CardTaskТестScript : CardTaskНа_ознакомлениеScript
- {
-  private void VerifySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-   ObjectContext objectContext = base.CardControl.ObjectContext;
-   Task task = (base.BaseObject as Task);
-
-   ITaskService taskService = objectContext.GetService<ITaskService>();
-   IUIService uiService = objectContext.GetService<IUIService>(); <.>
-
-   bool cancel = false;
-
-   var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
-   if (cancel) return; <.>
-
-   var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind); <.>
-
-   var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation"); <.>
-
-   BaseCardSignature lastSignature = task.MainInfo.SignatureList.Signatures.Last(); <.>
-
-   var result = taskService.VerifySignature(task, lastSignature, certificate, true, signatureSetting.Fields); <.>
-
-   if (result.IsValid) <.>
-   {
-    uiService.ShowMessage("Задание является надежным");
-   } else {
-    uiService.ShowError("Задание не является надежным");
-   }
-  }
- }
-}
-----
-<.> Получение сервисов для работы с заданиями и интерфейсом пользователя.
-<.> Получение сертификата.
-<.> Получение настроек вида карточки.
-<.> Получение настроек (с названием `SignOperation`) подписания операции, которые определены в Справочнике видов карточек
-+
-При проверке подписей установленных на поля карточки, будет использован список полей из настроек.
-+
-<.> Получение последней установленной подписи.
-<.> Проверка подписи.
-<.> Оповещение пользователя о результате проверки ЭП.
+// == Примеры
+//
+// [source,csharp]
+// ----
+// using System.Linq;
+// using System.Windows.Forms.Design;
+//
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+// using DocsVision.BackOffice.WinForms.Controls;
+// using DocsVision.Platform.ObjectModel;
+//
+// namespace BackOffice
+// {
+//  public class CardTaskТестScript : CardTaskНа_ознакомлениеScript
+//  {
+//   private void VerifySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//    ObjectContext objectContext = base.CardControl.ObjectContext;
+//    Task task = (base.BaseObject as Task);
+//
+//    ITaskService taskService = objectContext.GetService<ITaskService>();
+//    IUIService uiService = objectContext.GetService<IUIService>(); <.>
+//
+//    bool cancel = false;
+//
+//    var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
+//    if (cancel) return; <.>
+//
+//    var taskSetting = taskService.GetKindSettings(task.SystemInfo.CardKind); <.>
+//
+//    var signatureSetting = taskSetting.OperationSignatures.First(t => t.SignatureName = "SignOperation"); <.>
+//
+//    BaseCardSignature lastSignature = task.MainInfo.SignatureList.Signatures.Last(); <.>
+//
+//    var result = taskService.VerifySignature(task, lastSignature, certificate, true, signatureSetting.Fields); <.>
+//
+//    if (result.IsValid) <.>
+//    {
+//     uiService.ShowMessage("Задание является надежным");
+//    } else {
+//     uiService.ShowError("Задание не является надежным");
+//    }
+//   }
+//  }
+// }
+// ----
+// <.> Получение сервисов для работы с заданиями и интерфейсом пользователя.
+// <.> Получение сертификата.
+// <.> Получение настроек вида карточки.
+// <.> Получение настроек (с названием `SignOperation`) подписания операции, которые определены в Справочнике видов карточек
+// +
+// При проверке подписей установленных на поля карточки, будет использован список полей из настроек.
+// +
+// <.> Получение последней установленной подписи.
+// <.> Проверка подписи.
+// <.> Оповещение пользователя о результате проверки ЭП.

@@ -19,7 +19,7 @@ public interface ICustomizableControl
 |Имя |Описание
 |`CardData` |Возвращает данные карточки.
 |`LayoutControl` |Возвращает разметку карточки.
-|`xref:ICustomizableControl.RibbonControl_PR.adoc[RibbonControl]` |Предоставляет доступ к свойствам ленты карточки.
+// |`xref:.ICustomizableControl.RibbonControl_PR.adoc[RibbonControl]` |Предоставляет доступ к свойствам ленты карточки.
 |===
 
 == Методы
@@ -33,16 +33,16 @@ public interface ICustomizableControl
 |`RefreshLayoutItems(IEnumerable<LayoutsProperty>)` |Обновляет свойства элементов представления, полученных из переданного списка.
 |===
 
-== Примеры
-
-Ниже приведён пример скрипта, скрывающего кнопку "Сохранить".
-
-[source,csharp]
-----
-using DevExpress.XtraBars;
-
-private void Button_Click(System.Object sender, System.EventArgs e)
-{       
- (this.CardControl as ICustomizableControl).RibbonControl.Items["saveRibbonButtonItem"].Visibility = BarItemVisibility.Never;
-}
-----
+// == Примеры
+//
+// Ниже приведён пример скрипта, скрывающего кнопку "Сохранить".
+//
+// [source,csharp]
+// ----
+// using DevExpress.XtraBars;
+//
+// private void Button_Click(System.Object sender, System.EventArgs e)
+// {
+//  (this.CardControl as ICustomizableControl).RibbonControl.Items["saveRibbonButtonItem"].Visibility = BarItemVisibility.Never;
+// }
+// ----
