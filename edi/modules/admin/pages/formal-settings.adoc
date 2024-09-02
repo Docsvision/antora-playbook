@@ -72,238 +72,238 @@
 
 Ленты карточек видов _Входящий УПД_ и _Исходящий УПД_ содержат команды для вызова стандартных функций обработки формализованных документов. В собственных видах могут использоваться функции, унаследованные от родительских видов, или разработаны собственные, например, дополнительная функция проверки данных.
 
-NOTE: Ниже приведен упрощенный код функций, вызываемых командами ленты карточек. Полный код смотрите в скриптах карточек соответствующих родительских видов.
+NOTE: Упрощенный код функций, вызываемых командами ленты карточек, можно получить по запросу в xref:system:ROOT:technical-support.adoc[техническую поддержку]. Полный код смотрите в скриптах карточек соответствующих родительских видов.
 
-. _Входящий УПД и подвиды._
-.. _Подписать документ_:
-+
-[source,csharp]
-----
-private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendInvoiceReplySignature();
-}
-----
-+
-.. [[reject]]_Отказать в подписании_:
-+
-[source,csharp]
-----
-private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper.SendInvoiceReplyRejection(); <.>
-}
-----
-<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:informal-settings.adoc#reject[по аналогии с неформализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
-+
-.. _Запросить аннулирование_
-+
-[source,csharp]
-----
-private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendRevocation();
-}
-----
-+
-.. _Подтвердить аннулирование_
-+
-[source,csharp]
-----
-private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendReplyRevocationSignature();
-}
-----
-+
-.. _Отказать в аннулировании_
-+
-[source,csharp]
-----
-private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendReplyRevocationRejection();
-}
-----
-+
-.. _Запросить уточнение_:
-+
-[source,csharp]
-----
-private void RequestForCorrection_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendCorrection()
-}
-----
-+
-.. [[print]] _Печать_ -- выводить на печать печатную форму формализованного документа:
-+
-[source,csharp]
-----
-private void Print_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
-}
-----
-<.> В параметре метода указывается название шаблона печати:
-+
-* `UniInvoiceRU` -- стандартный шаблон для видов _Входящий УПД_ и _Формализованный акт_.
-* `UniInvoiceCorrectionRU` -- стандартный шаблон для вида _Входящий УКД_.
-+
-.. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
-+
---
-[source,csharp]
-----
-public virtual void FillInvoiceControl()
-{
-    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
-}
-----
-<.> В первом параметре (`HTMLBrowser`) должно быть указано название обновляемого элемента управления с типом HTML браузер.
-+
-Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
-+
-Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
---
-+
-. _Исходящий УПД и подвиды_.
-.. _Подписать и отправить_ -- выдаёт запрос на подписание документа квалифицированной ЭП (электронной подписью) и формирует электронное сообщение с документом для отправки оператору ЭДО.
-+
-[source,csharp]
-----
-private void SignedAndSent_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    CardControl.Save();
-    if (EdiScriptHelper.SignAndSendInvoice())
-    {
-        ChangeCardState("SignedAndSent");
-    }
-}
-----
-+
-// include::webuser:partial$section-f.adoc[]
+// . _Входящий УПД и подвиды._
+// .. _Подписать документ_:
 // +
-.. _Заполнить данные из файла_ -- загружает в карточку данные из приложенного основного файла -- XML-файл формализованного документа, сформированный у оператора ЭДО.
-+
-[source,csharp]
-----
-private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    CardControl.Save();
-    EdiScriptHelper.UpdateDocumentDataFromInvoice();
-    RefreshControls();
-}
-----
-+
-[#websettings]
-****
-В {wc}е за заполнение данных карточки отвечает обработчик `edi_updateDocumentFormInvoice`. Обработчик может быть привязан к кнопке по аналогии с {wincl}ом или быть назначен на события добавления главного файла и добавления версии файла.
-
-Обработчик проверяет расширение файла. Если формат файла не соответствует ожидаемому (`.xml`) или в файле содержатся ошибки, будет сообщение об ошибке. Проверка содержимого выполняется по аналогии с {wincl}ом.
-
-Через клиентский API обработчик можно вызвать обращением к сервису `$EdiFileSync` с помощью метода:
-
- updateDocumentDataFromInvoice(documentId: string, fileId?: string)
-
-На сервере можно обратится к следующему сервису:
-
- IEdiFileSyncService.UpdateDocumentDataFromInvoice
-****
-+
-.. _Запросить аннулирование_:
-+
-[source,csharp]
-----
-private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendRevocation();
-}
-----
-+
-.. _Подтвердить аннулирование_:
-+
-[source,csharp]
-----
-private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendReplyRevocationSignature();
-}
-----
-+
-.. _Отказать в аннулировании_:
-+
-[source,csharp]
-----
-private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.SendReplyRevocationRejection();
-}
-----
-+
-.. _Печать_:
-+
-[source,csharp]
-----
-private void PrintUPD_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-    EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
-}
-----
-<.> В параметре метода указывается название шаблона печати:
-* `UniInvoiceRU` -- стандартный шаблон для видов _Исходящий УПД_ и _Исправление УПД_.
-* `UniInvoiceCorrectionRu` -- стандартный шаблон для вида _Исходящий УКД_.
-+
-.. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
-+
---
-[source,csharp]
-----
-public virtual void FillInvoiceControl()
-{
-    EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
-}
-----
-<.> В первом параметре ("HTMLBrowser") должно быть указано название обновляемого элемента управления с типом HTML браузер.
-+
-Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
-+
-Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
---
-
-В приведенном коде `EdiScriptHelper` объявлен в корневом виде _УПД_:
-
-[source,csharp]
-----
-public EdiScriptHelper EdiScriptHelper
-{
-    get
-    {
-        if (ediScriptHelper == null)
-            ediScriptHelper = new EdiScriptHelper(CardControl);
-
-        return ediScriptHelper;
-    }
-}
-----
-
-Для работы указанных методов к скрипту карточки должны подключены сборки `DocsVision.Edi.DocumentScript.dll` и `{dv}.DocumentsManagement.dll`. Сборки располагаются в каталоге клиента {dv}.
-
-.В объявление пространств имен нужно добавить строки:
-[source,csharp,subs=attributes]
-----
-using DocsVision.Edi.DocumentScript;
-using {dv}.DocumentsManagement;
-----
-
-Для добавленных на ленту кнопок можно добавить методы их скрытия/отображения в зависимости от статуса обмена -- проверяется с помощью методов:
-
-* `IsSignatureReplyAvailable` -- проверяет возможность подписания документа или отказа в подписании, принимает значение `TRUE`, если документ в статусе `Получен на подпись от контрагента`.
-* `IsRevocationReplyAvailable` -- проверяет возможность аннулирования документа или отказа в аннулировании; принимает значение `TRUE`, если документ в статусе `Получен запрос на аннулирование`.
-* `IsRevocationRequestAvailable` -- проверяет возможность создания запроса на аннулирование документа, принимает значение `TRUE`, если документ в статусе `Получен от контрагента`, `Отправлена ответная подпись контрагенту` или `Отправлен контрагенту`.
-* `IsReceiptReplyAvailable` -- проверяет возможность создания ответной квитанции.
-
-Методы могут вызываться при открытии карточки. Методы не изменяют состояние видимости кнопок ленты -- необходимо реализовать самостоятельно.
+// [source,csharp]
+// ----
+// private void SignDocument_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendInvoiceReplySignature();
+// }
+// ----
+// +
+// .. [[reject]]_Отказать в подписании_:
+// +
+// [source,csharp]
+// ----
+// private void RejectSingning_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper.SendInvoiceReplyRejection(); <.>
+// }
+// ----
+// <.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:informal-settings.adoc#reject[по аналогии с неформализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
+// +
+// .. _Запросить аннулирование_
+// +
+// [source,csharp]
+// ----
+// private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendRevocation();
+// }
+// ----
+// +
+// .. _Подтвердить аннулирование_
+// +
+// [source,csharp]
+// ----
+// private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendReplyRevocationSignature();
+// }
+// ----
+// +
+// .. _Отказать в аннулировании_
+// +
+// [source,csharp]
+// ----
+// private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendReplyRevocationRejection();
+// }
+// ----
+// +
+// .. _Запросить уточнение_:
+// +
+// [source,csharp]
+// ----
+// private void RequestForCorrection_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendCorrection()
+// }
+// ----
+// +
+// .. [[print]] _Печать_ -- выводить на печать печатную форму формализованного документа:
+// +
+// [source,csharp]
+// ----
+// private void Print_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
+// }
+// ----
+// <.> В параметре метода указывается название шаблона печати:
+// +
+// * `UniInvoiceRU` -- стандартный шаблон для видов _Входящий УПД_ и _Формализованный акт_.
+// * `UniInvoiceCorrectionRU` -- стандартный шаблон для вида _Входящий УКД_.
+// +
+// .. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
+// +
+// --
+// [source,csharp]
+// ----
+// public virtual void FillInvoiceControl()
+// {
+//     EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
+// }
+// ----
+// <.> В первом параметре (`HTMLBrowser`) должно быть указано название обновляемого элемента управления с типом HTML браузер.
+// +
+// Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
+// +
+// Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
+// --
+// +
+// . _Исходящий УПД и подвиды_.
+// .. _Подписать и отправить_ -- выдаёт запрос на подписание документа квалифицированной ЭП (электронной подписью) и формирует электронное сообщение с документом для отправки оператору ЭДО.
+// +
+// [source,csharp]
+// ----
+// private void SignedAndSent_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     CardControl.Save();
+//     if (EdiScriptHelper.SignAndSendInvoice())
+//     {
+//         ChangeCardState("SignedAndSent");
+//     }
+// }
+// ----
+// +
+// // include::webuser:partial$section-f.adoc[]
+// // +
+// .. _Заполнить данные из файла_ -- загружает в карточку данные из приложенного основного файла -- XML-файл формализованного документа, сформированный у оператора ЭДО.
+// +
+// [source,csharp]
+// ----
+// private void FillingOutData_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     CardControl.Save();
+//     EdiScriptHelper.UpdateDocumentDataFromInvoice();
+//     RefreshControls();
+// }
+// ----
+// +
+// [#websettings]
+// ****
+// В {wc}е за заполнение данных карточки отвечает обработчик `edi_updateDocumentFormInvoice`. Обработчик может быть привязан к кнопке по аналогии с {wincl}ом или быть назначен на события добавления главного файла и добавления версии файла.
+//
+// Обработчик проверяет расширение файла. Если формат файла не соответствует ожидаемому (`.xml`) или в файле содержатся ошибки, будет сообщение об ошибке. Проверка содержимого выполняется по аналогии с {wincl}ом.
+//
+// Через клиентский API обработчик можно вызвать обращением к сервису `$EdiFileSync` с помощью метода:
+//
+//  updateDocumentDataFromInvoice(documentId: string, fileId?: string)
+//
+// На сервере можно обратится к следующему сервису:
+//
+//  IEdiFileSyncService.UpdateDocumentDataFromInvoice
+// ****
+// +
+// .. _Запросить аннулирование_:
+// +
+// [source,csharp]
+// ----
+// private void RequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendRevocation();
+// }
+// ----
+// +
+// .. _Подтвердить аннулирование_:
+// +
+// [source,csharp]
+// ----
+// private void ApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendReplyRevocationSignature();
+// }
+// ----
+// +
+// .. _Отказать в аннулировании_:
+// +
+// [source,csharp]
+// ----
+// private void RejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.SendReplyRevocationRejection();
+// }
+// ----
+// +
+// .. _Печать_:
+// +
+// [source,csharp]
+// ----
+// private void PrintUPD_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//     EdiScriptHelper.PrintInvoice("UniInvoiceRU"); <.>
+// }
+// ----
+// <.> В параметре метода указывается название шаблона печати:
+// * `UniInvoiceRU` -- стандартный шаблон для видов _Исходящий УПД_ и _Исправление УПД_.
+// * `UniInvoiceCorrectionRu` -- стандартный шаблон для вида _Исходящий УКД_.
+// +
+// .. Обновление печатной формы (вкладка _Печатная форма_). Данная функция должна вызываться при активации карточки (_CardActivated_).
+// +
+// --
+// [source,csharp]
+// ----
+// public virtual void FillInvoiceControl()
+// {
+//     EdiScriptHelper.FillInvoiceHtmlControl("HTMLBrowser", "UniInvoiceRU"); <.>
+// }
+// ----
+// <.> В первом параметре ("HTMLBrowser") должно быть указано название обновляемого элемента управления с типом HTML браузер.
+// +
+// Во втором параметре (`UniInvoiceRU`) должно быть указано название шаблона печати для обновления.
+// +
+// Названия стандартных шаблонов аналогичны приведенным для <<print,Печати>>.
+// --
+//
+// В приведенном коде `EdiScriptHelper` объявлен в корневом виде _УПД_:
+//
+// [source,csharp]
+// ----
+// public EdiScriptHelper EdiScriptHelper
+// {
+//     get
+//     {
+//         if (ediScriptHelper == null)
+//             ediScriptHelper = new EdiScriptHelper(CardControl);
+//
+//         return ediScriptHelper;
+//     }
+// }
+// ----
+//
+// Для работы указанных методов к скрипту карточки должны подключены сборки `DocsVision.Edi.DocumentScript.dll` и `{dv}.DocumentsManagement.dll`. Сборки располагаются в каталоге клиента {dv}.
+//
+// .В объявление пространств имен нужно добавить строки:
+// [source,csharp,subs=attributes]
+// ----
+// using DocsVision.Edi.DocumentScript;
+// using {dv}.DocumentsManagement;
+// ----
+//
+// Для добавленных на ленту кнопок можно добавить методы их скрытия/отображения в зависимости от статуса обмена -- проверяется с помощью методов:
+//
+// * `IsSignatureReplyAvailable` -- проверяет возможность подписания документа или отказа в подписании, принимает значение `TRUE`, если документ в статусе `Получен на подпись от контрагента`.
+// * `IsRevocationReplyAvailable` -- проверяет возможность аннулирования документа или отказа в аннулировании; принимает значение `TRUE`, если документ в статусе `Получен запрос на аннулирование`.
+// * `IsRevocationRequestAvailable` -- проверяет возможность создания запроса на аннулирование документа, принимает значение `TRUE`, если документ в статусе `Получен от контрагента`, `Отправлена ответная подпись контрагенту` или `Отправлен контрагенту`.
+// * `IsReceiptReplyAvailable` -- проверяет возможность создания ответной квитанции.
+//
+// Методы могут вызываться при открытии карточки. Методы не изменяют состояние видимости кнопок ленты -- необходимо реализовать самостоятельно.
 
 [#custom-kind]
 === Собственный вид, не унаследованный от Входящий УПД или Исходящий УПД
