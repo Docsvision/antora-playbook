@@ -474,7 +474,7 @@ npm run build:prod
 . Остановите *{wcs-new}*.
 . Скопируйте папку `SamplesOutput/Content/Modules/WatermarkWebExtension/` в `{wcd}/Content/Modules`.
 . Скопируйте папку `SamplesOutput/Extensions/WatermarkServerExtension` в `{wcd}/Extensions`.
-. Для работы пользователей на Windows скопируйте папку `SamplesOutput/Site/Content/Tools/DVWebTool/Application Files/` в  `Путь к папке с панелью управления Web-клиентом/Site/Content/Tools/DVWebTool/`, например `C:/Program Files (x86)/Docsvision6/WebClient/Site/Content/Tools/DVWebTool`.
+. Для работы пользователей на Windows скопируйте файлы из папки `SamplesOutput/Site/Content/Tools/DVWebTool/Application Files/` в `Путь к папке с панелью управления Web-клиентом/Site/Content/Tools/DVWebTool/`, например `C:/Program Files (x86)/Docsvision6/WebClient/Site/Content/Tools/DVWebTool`.
 . Запустите *{wcs-new}*.
 
 [start=11]
@@ -490,7 +490,7 @@ npm run build:prod
 
 Для работы пользователей на Linux нужно обеспечить копирование файлов расширения в папку установки DvSupService -- `/lib/docsvision/dvsupservice`. Рекомендуемый способ это сделать -- собрать deb-пакетfootnote:[Репозиторий {dv} с примерами пакетов Debian расположен https://github.com/Docsvision/deb-sample[на GitHub].] и распространить его любым удобным способом:
 
-. Убедитесь, что собран проект `Other > Watermark > WatermarkWebToolExtension`. В результате в папке `Others/Watermark/DebPackage/Build/DvSupServiceExtension` должны оказаться файлы расширения в папках `Assemblies` и `Services`.
+. Убедитесь, что собран проект `Other > Watermark > WatermarkWebToolExtension`. В результате в папке `Others/Watermark/DebPackage/Build/DvSupServiceExtension` должны оказаться файлы расширения в папках `Assemblies` и `Services`. Параметр `ExtensionsPath` в конфигурационном файле DVSupService позволяет изменять папку для расширений, по-умолчанию это `Assemblies`.
 . Скопируйте папку `Others/Watermark/DebPackage` на Linux.
 . Установите необходимые для сборки компоненты следующей командой:
 +
