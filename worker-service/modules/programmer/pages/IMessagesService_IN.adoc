@@ -1,0 +1,81 @@
+= IMessagesService -- интерфейс
+
+Сервис для работы с сообщениями
+
+* *Пространство имён:* `Docsvision.WorkerService.ObjectModel.Services`
+* *Сборка:* `DocsVision.WorkerService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IMessagesService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`SendMessage(Messages, MessagesOutgoingMessage);`
+a|Отправляет сообщение
+
+.Параметры:
+* `messages` -- сообщения
+* `message` -- сообщение
+
+|`CreateSubscription(Messages, MessagesSubscription);`
+a|Создаёт подписку на сообщения
+
+.Параметры:
+* `messages` -- сообщения
+* `subscription` -- подписка
+
+|`RemoveSubscription(Messages, MessagesSubscription);`
+a|Удаляет подписку на сообщения
+
+.Параметры:
+* `messages` -- сообщения
+* `subscription` -- подписка
+
+|`CreateMessagesCard(Guid, Guid);`
+a|Создаёт карточку сообщения
+
+.Параметры:
+* `objectId` -- идентификатор объекта
+* `typeId` -- идентификатор типа
+
+Возвращаемое значение::
+Тип: `Messages`
++
+Карточка сообщения
+
+|`CreateWaitingLock(MessagesIncomingMessage, MessagesIncomingMessageWaitingLock);`
+a|Создаёт блокировку ожидания
+
+.Параметры:
+* `messagesIncomingMessage` -- входящее сообщение
+* `messageWaitingLock` -- блокировка ожидания
+
+|`RemoveWaitingLock(MessagesIncomingMessage , MessagesIncomingMessageWaitingLock);`
+a|Удаляет блокировку ожидания
+
+.Параметры:
+* `messagesIncomingMessage` -- входящее сообщение
+* `messageWaitingLock` -- блокировка ожидания
+
+|`ResumePausedMessages(Messages);`
+a|Возобновляет приостановленные сообщения
+
+.Параметры:
+* `messages` -- сообщения
+
+|`SendMessageImmediate(Messages, MessagesOutgoingMessage);`
+a|Отправляет сообщения немедленно
+
+.Параметры:
+* `messages` -- сообщения
+* `message` -- сообщение
+
+|===
