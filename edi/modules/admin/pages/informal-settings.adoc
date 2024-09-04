@@ -63,7 +63,7 @@ private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, D
   ediScriptHelper.SendReplySignatureRejection(); <.>
 }
 ----
-<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:.formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
+<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
 +
 * Для команды _Запросить аннулирование_:
 +
