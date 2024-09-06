@@ -66,7 +66,7 @@
       "AuthType": "Basic", <.>
       "Credential": { <.>
         "UserName": "user@example1.com",
-        "Password": "Password"
+        "Password": "Password" <.>
       }
     }
  },
@@ -82,6 +82,7 @@
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
 <.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
 
@@ -96,7 +97,7 @@
       "AuthType": "Basic", <.>
       "Port": 389, <.>
       "Credential": { <.>
-        "UserName": "user@example.com",
+        "UserName": "user@example.com", <.>
         "Password": "Password"
       }
     }
@@ -109,5 +110,6 @@
 <.> `AuthType` -- тип аутентификации в LDAP.
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
 
 include::6.1@platform:admin:config-domains.adoc[tags=chalto]
