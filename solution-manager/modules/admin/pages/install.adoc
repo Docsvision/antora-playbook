@@ -56,7 +56,7 @@ include::6.1@platform:admin:partial$install.adoc[]
     },
   },
   "Groups": {
-    "Docsvision SolutionManager Administrators": [
+    "Docsvision SolutionManager Administrators": [ <.>
      "account@domain.com" <.>
     ]
   },
@@ -64,14 +64,14 @@ include::6.1@platform:admin:partial$install.adoc[]
     "targets": {
       "logFile": {
         "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/solutionmanager/${shortdate}_SolutionManager.log",
+        "fileName": "${gdc:baseLogFolder}/docsvision/solutionmanager/${shortdate}_SolutionManager.log", <.>
         "layout": "[${longdate}][${level}][${callsite}] ${message} ${exception:format=tostring,Data}"
       }
     },
     "rules": [
       {
         "logger": "*",
-        "minLevel": "Warn",
+        "minLevel": "Warn", <.>
         "writeTo": "logFile"
       }
     ]
@@ -84,7 +84,12 @@ include::6.1@platform:admin:partial$install.adoc[]
 <.> `ConnectionString` -- строка подключения базы данных МР, cм. подробнее <<conn-string,ниже>>.
 <.> `CommandTimeOut` -- время ожидания перед завершением попытки выполнить операцию и созданием ошибки.
 <.> `Docsvision SolutionManager Administrators` -- пользователи, которым разрешен вход в {sm}. Обратите внимание, что в группе массив строк, а не строка.
+<.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
+<.> `fileName` -- путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/solutionmanager`.
+<.> `minLevel` -- уровень журналирования, по умолчанию используется `Warn`.
 // end::linux[]
++
+Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.
 +
 . Запустите службу модуля:
 +
