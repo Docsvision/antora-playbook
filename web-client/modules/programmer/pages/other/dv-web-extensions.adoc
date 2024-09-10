@@ -491,7 +491,7 @@ npm run build:prod
 Для работы пользователей на Linux нужно обеспечить копирование файлов расширения в папку установки DvSupService -- `/lib/docsvision/dvsupservice`. Рекомендуемый способ это сделать -- собрать deb-пакетfootnote:[Репозиторий {dv} с примерами пакетов Debian расположен https://github.com/Docsvision/deb-sample[на GitHub].] и распространить его любым удобным способом:
 
 . Убедитесь, что собран проект `Other > Watermark > WatermarkWebToolExtension`. В результате в папке `Others/Watermark/DebPackage/Build/DvSupServiceExtension` должны оказаться файлы расширения в папках `Assemblies` и `Services`. Параметр `ExtensionsPath` в конфигурационном файле DVSupService позволяет изменять папку для расширений, по-умолчанию это `Assemblies`.
-. Скопируйте папку `Others/Watermark/DebPackage` на Linux.
+. Скопировать папку `Others\Watermark\DebPackage` на Linux в каталог, где планируется выполнять сборку пакета (расположение папки значения не имеет).
 . Установите необходимые для сборки компоненты следующей командой:
 +
  sudo apt-get install make debhelper dpkg-dev
@@ -529,8 +529,8 @@ npm run build:prod
 . В {wc}е перейдите в раздел _О программе_.
 +
 .В разделе _Подключенные расширения_ должны быть указаны расширения:
-- _WatermarkServerExtension_ (Сборка %номер сборки%).
-- _Watermark to PDF %номер сборки%_ -- web-расширение.
+- _WatermarkServerExtension_ (Сборка <номер сборки>).
+- _Watermark to PDF <номер сборки>_ -- web-расширение.
 +
 . Откройте панель _About_ из меню {dv} _DVWebTool_.
 +
