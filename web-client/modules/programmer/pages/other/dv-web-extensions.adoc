@@ -429,7 +429,7 @@ export async function addWatermark(sender: LayoutControl) { <.>
 [#token]
 == Настройка времени действия токена
 
-Срок жизни токена зависит от значений параметров `JwtAccessTokenLifetime` и `JwtClockSkew` в конфигурационном файле модуля.
+Время жизни токена доступа зависит от значений параметров `JwtAccessTokenLifetime` и `JwtClockSkew` в конфигурационном файле модуля.
 
 [source,json]
 ----
@@ -444,7 +444,7 @@ export async function addWatermark(sender: LayoutControl) { <.>
     }
   }
 ----
-<.> Время жизни access token. По умолчанию `5` минут (`300` секунд).
+<.> Время жизни токена. По умолчанию `5` минут (`300` секунд).
 <.> Допустимая погрешность часов при проверке времени жизни токена. Значение прибавляется к `JwtAccessTokenLifetime`. По умолчанию `5` минут (`300` секунд).
 
 [#buildProject]
