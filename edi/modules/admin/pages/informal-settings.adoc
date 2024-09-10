@@ -40,76 +40,76 @@
 using DocsVision.Edi.DocumentScript;
 ----
 +
-.. Добавьте обработчики для новых команд:
-+
-* Для команды _Подписание документа_:
-+
-[source,csharp]
-----
-private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignature();
-}
-----
-+
-* [[reject]]Для команды _Отказ в подписании документа_:
-+
-[source,csharp]
-----
-private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplySignatureRejection(); <.>
-}
-----
-<.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
-+
-* Для команды _Запросить аннулирование_:
-+
-.В {wincl}е:
-[source,csharp]
-----
-private void sendRequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendRevocation();
-}
-----
-+
-.В {wc}е:
-[source,csharp]
-----
-export async function customRevoke(sender: CustomButton) {
-    const result = await revoke(sender);
-    if (result.success) {
-      <.>
-    }
-}
-----
-<.> Собственная логика.
-+
-* Для команды _Подтвердить аннулирование_:
-+
-[source,cshap]
-----
-private void sendApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplyRevocationSignature();
-}
-----
-+
-* Для команды _Отказать в аннулировании_:
-+
-[source,csharp]
-----
-private void sendRejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
-  EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
-  ediScriptHelper.SendReplyRevocationRejection();
-}
-----
+.. Добавьте обработчики для новых команд. Обратитесь в xref:system:ROOT:technical-support.adoc[техническую поддержку], чтобы узнать подробности.
+// +
+// * Для команды _Подписание документа_:
+// +
+// [source,csharp]
+// ----
+// private void sendReplySignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+//   ediScriptHelper.SendReplySignature();
+// }
+// ----
+// +
+// * [[reject]]Для команды _Отказ в подписании документа_:
+// +
+// [source,csharp]
+// ----
+// private void sendReplySignatureRejectionButton_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+//   ediScriptHelper.SendReplySignatureRejection(); <.>
+// }
+// ----
+// <.> `ediScriptHelper.SendReplySignatureRejection();` следует использовать только, если точно известно, что ответ делается внутри Диадок. Для надежности проще всегда использовать `EdiScriptHelper.SendInvoiceReplyRejection();` для неформализованных документов xref:formal-settings.adoc#reject[по аналогии с формализованными]. {wc} работает похожим образом: `SendInvoiceReplyRejection` через `boxesService.GenerateSignatureRejection`.
+// +
+// * Для команды _Запросить аннулирование_:
+// +
+// .В {wincl}е:
+// [source,csharp]
+// ----
+// private void sendRequestRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+//   ediScriptHelper.SendRevocation();
+// }
+// ----
+// +
+// .В {wc}е:
+// [source,csharp]
+// ----
+// export async function customRevoke(sender: CustomButton) {
+//     const result = await revoke(sender);
+//     if (result.success) {
+//       <.>
+//     }
+// }
+// ----
+// <.> Собственная логика.
+// +
+// * Для команды _Подтвердить аннулирование_:
+// +
+// [source,cshap]
+// ----
+// private void sendApproveRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+//   ediScriptHelper.SendReplyRevocationSignature();
+// }
+// ----
+// +
+// * Для команды _Отказать в аннулировании_:
+// +
+// [source,csharp]
+// ----
+// private void sendRejectRevocation_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//   EdiScriptHelper ediScriptHelper = new EdiScriptHelper(CardControl);
+//   ediScriptHelper.SendReplyRevocationRejection();
+// }
+// ----
 +
 . Добавьте в разметку карточки элемент управления _Журнал обмена сообщениями_. Рекомендуется размещать элемент управления на новой вкладке (например, _Журнал обмена ЮЗДО_). Настраивать элемент управления не требуется.
 
