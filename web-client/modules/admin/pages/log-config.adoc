@@ -16,35 +16,29 @@ include::partial$excerpts.adoc[tags=ifabsent]
 [source,json]
 ----
   "NLog": {
-    "targets": [
-      {
-        "target": {
-          "name": "DefaultLogFileAsync",
-          "xsi:type": "AsyncWrapper",
-          "target": {
-            "name": "DefaultLogFile",
-            "xsi:type": "File",
-            "encoding": "UTF-8",
-            "archiveOldFileOnStartup": "true",
-            "fileName": "${basedir}/../Logs/WebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.log", <.>
-            "layout": "[${longdate}][${level}][${callsite}] ${action-info} ${message} ${exception:format=tostring,Data}"
-          }
+    "targets": {
+        "async": true,
+        "logFile": {
+            "type": "File",
+            "fileName": "${basedir}\\..\\Logs\\WebLayoutsDesigner${event-properties:item=Tenant} PID ${processId} ${shortdate}.log", <.>
+            "layout": "[${longdate}][${level}][${callsite}] ${message} ${onexception:${newline}${exception:maxInnerExceptionLevel=10:format=shortType,message,stacktrace:separator=*:innerExceptionSeparator=&#xD;&#xA;&#x9;}}"
         }
-      }
-    ]
+    },
     "rules": [ <.>
-      {
-        "logger": "*",
-        "minLevel": "Trace",
-        "writeTo": "logconsole" <.>
-      },
-      {
-        "logger": "*",
-        "minLevel": "Error",
-        "writeTo": "logfile" <.>
-      }
+        {
+            "logger": "Microsoft.*",
+            "minLevel": "Trace",
+            "maxLevel": "Info",
+            "final": true
+            "writeTo": "logconsole" <.>
+        },
+        {
+            "logger": "*",
+            "minLevel": "Error",
+            "writeTo": "logFile" <.>
+        }
     ]
-  }
+}
 ----
 <.> Измените значение параметра `fileName`, чтобы настроить путь для сохранения журнала работы: +
 В `fileName` можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные], например: `\Logs\$\{level}\WebClient_$\{shortdate}.log`.
@@ -52,7 +46,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 <.> Измените значение параметров `minLevel` и `maxLevel`, например, на `trace`, чтобы включить протоколирование всех типов событий. +
 Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
 Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
-<.> Настройки журнала {pu}.
+<.> Настройки журнала программы {pu}.
 <.> Настройки журнала {wc}а.
 // end::webconfig[]
 +
