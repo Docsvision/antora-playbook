@@ -1,5 +1,3 @@
-:page-layout: home
-
 = Установка модуля {pl}
 
 Система поддерживает установку на Linux с ограничениями доступной функциональности. Подробнее см. руководство по установке, раздел "xref:install-linux::linux-limitations.adoc[]".
@@ -15,32 +13,15 @@
 
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
-[tabs]
-====
-Astra Linux::
-+
 [source,bash]
 ----
 sudo apt-get update
 sudo apt-get install docsvision-platform
 ----
-
-РЕД ОС::
-+
-[source,bash]
-----
-dnf check-update --refresh
-sudo dnf install -y docsvision-platform
-----
-====
 +
 Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
 +
 . Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
-+
-[tabs]
-====
-Astra Linux::
 +
 [source,bash]
 ----
@@ -48,16 +29,6 @@ sudo apt-get install docsvision-activation
 cd /usr/lib/docsvision/tools/activation
 sudo ./activation online ВАШ-КЛЮЧ
 ----
-
-РЕД ОС::
-+
-[source,bash]
-----
-sudo dnf install -y docsvision-activation
-cd /usr/lib/docsvision/tools/activation
-sudo ./activation online ВАШ-КЛЮЧ
-----
-====
 +
 . Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
 . Запустите службу модуля командой:
@@ -72,22 +43,10 @@ sudo systemctl start dvappserver
 
 . Установите пакеты модуля:
 +
-[tabs]
-====
-Astra Linux::
-+
 [source,bash]
 ----
 sudo apt-get install docsvision-fileservice
 ----
-
-РЕД ОС::
-+
-[source,bash]
-----
-sudo dnf install -y docsvision-fileservice
-----
-====
 +
 . В конфигурационном файле укажите строку подключения к БД:
 +
