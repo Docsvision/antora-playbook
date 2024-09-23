@@ -1,3 +1,5 @@
+:wt: dvsupservice
+
 = Настройки запуска программы DVWebTool
 
 Поведение программы по умолчанию: программа запускается при загрузке системы и не закрывается после выполнения действия. Данное поведение можно изменить в конфигурационном файле {wc}а, расположенном по пути: `{webconfig}`. Настройки располагаются в группе:  menu:Docsvision[WebClient > SettingGroups > SettingGroup Name="WebClient"].
@@ -29,6 +31,7 @@ include::user:prepare-add-components.adoc[tags=dvsup]
 
 Чтобы запустить службу DVSupService, выполните следующую команду:
 
- sudo systemctl start dvsupservice
+[subs=attributes]
+ $ sudo systemctl start {wt}
 
 Настроить автоматический запуск и иное поведение можно при помощи системных средств, см. подробнее руководство по работе с программным пакетом `systemd` в ОС Linux.
