@@ -1,10 +1,12 @@
 :of-what: {of-sett-serv}
+:mancons:
+:page-layout: home
 
 = Установка и настройка {of-mc}
 
 WARNING: В данной версии установка {mc} предусмотрена только в ОС Linux.
 
-Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:6.1@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:CU3@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
 
 Требуется установить {mc} и сервис настроек. Установка должна выполняться на одной машине, установка на разные серверы не поддерживается.
 
@@ -21,7 +23,7 @@ WARNING: В данной версии установка {mc} предусмот
 :of: {of-mc}
 :file: appsettings
 :wt: managementconsole
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU3@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -68,7 +70,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 :of: {of-sett-serv}
 :file: appsettings
 :wt: settingsservice
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU3@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -109,7 +111,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 :of: Сервиса внешнего API
 :file: appsettings
 :wt: externalapi
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU3@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -263,7 +265,7 @@ endif::sm-page[]
 * Не будут создаваться и отправляться группы заданий.
 * Не будут отправляться почтовые уведомления исполнителям.
 
-См. подробнее в руководстве пользователя Консоли управления "xref:6.1@mgmtconsole:user:initial-configuration.adoc[]".
+См. подробнее в руководстве пользователя Консоли управления "xref:CU3@mgmtconsole:user:initial-configuration.adoc[]".
 
 // tag::cert[]
 [#cert]
@@ -290,9 +292,7 @@ endif::sm-page[]
 // запустите инсталлятор в режиме удаления.
 выполните команду:
 
-[source,bash]
-----
-sudo apt-get purge docsvision-managementconsole
-----
+:wt: managementconsole
+include::CU3@platform:admin:partial$delete.adoc[]
 
 Созданные группы и службы будут удалены, _{sett-serv}_ станет недоступен.
