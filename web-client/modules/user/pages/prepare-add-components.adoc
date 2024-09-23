@@ -1,4 +1,6 @@
 :root-cert: корневой сертификат удостоверяющего центраfootnote:[Например, корневой сертификат КриптоПро]
+:wt: dvsupservice
+:page-layout: home
 
 = Установка дополнительных компонентов
 
@@ -104,7 +106,18 @@ WARNING: Служба _DVSupService_ работает только в ОС Linux
 .Чтобы установить "DVSupService":
 . [[install-dvsup]]Выполните следующую команду:
 +
- sudo apt-get install docsvision-dvsupservice
+[tabs]
+====
+Astra Linux::
++
+[subs=attributes]
+ $ sudo apt install docsvision-{wt}
+
+РЕД ОС::
++
+[subs=attributes]
+ $ sudo dnf install docsvision-{wt}
+====
 +
 Служба будет установлена в каталог `/lib/docsvision/dvsupservice` от имени суперпользователя. Если на компьютере работает несколько пользователей, службу нужно установить один раз.
 +
@@ -112,7 +125,8 @@ WARNING: Служба _DVSupService_ работает только в ОС Linux
 +
 . [[launch-dvsup]]Запустите службу следующей командой:
 +
- sudo systemctl start dvsupservice
+[subs=attributes]
+ $ sudo systemctl start {wt}
 +
 .Диалог сохранения в Р7-Офис
 image::user:r7-notice.png[Диалог сохранения в Р7-Офис]
@@ -129,15 +143,49 @@ WARNING: При работе _DVSupService_ с Р7-Офис может появ�
 +
 . [[about-dvsup]]Чтобы просмотреть информацию о службе, выполните команду:
 +
- apt list docsvision-dvsupservice
+[tabs]
+====
+Astra Linux::
++
+[subs=attributes]
+ $ apt list docsvision-{wt}
+
+РЕД ОС::
++
+[subs=attributes]
+ $ dnf list docsvision-{wt}
+====
 +
 . [[update-dvsup]]Обновить службу можно, выполнив следующие команды:
 +
- sudo apt-get update
- sudo apt-get install docsvision-dvsupservice
+[tabs]
+====
+Astra Linux::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install docsvision-{wt}
+----
+
+РЕД ОС::
++
+[subs=attributes]
+ $ sudo dnf update docsvision-{wt}
+====
 +
 . Удалить службу можно с помощью следующей команды:
 +
- sudo apt-get purge --autoremove docsvision-dvsupservice
+[tabs]
+====
+Astra Linux::
++
+[subs=attributes]
+ $ sudo apt-get purge --autoremove docsvision-{wt}
 
+РЕД ОС::
++
+[subs=attributes]
+ $ dnf remove package docsvision-{wt}
+====
 // end::dvsup[]
