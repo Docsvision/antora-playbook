@@ -1,0 +1,23 @@
+[tabs]
+====
+Astra Linux::
++
+[subs=attributes]
+ $ sudo apt-get purge docsvision-{wt}
+
+ifndef::mancons[]
+РЕД ОС::
++
+ $ dnf remove package docsvision-{wt}
+
+endif::[]
+
+ifdef::mancons[]
+РЕД ОС::
++
+ $ sudo dnf remove package docsvision-managementconsole-* && sudo dnf remove package docsvision-settingsservice-* && sudo dnf remove package docsvision-externalapi-*
+
+endif::[]
+====
+
+

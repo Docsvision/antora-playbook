@@ -1,6 +1,7 @@
 :pg: Postgres
 :something: {sss-new}
 :page-aliases: console:ms-pg-migration.adoc
+:page-layout: home
 
 = Утилита миграции с БД {ms} на {pg}
 
@@ -91,11 +92,21 @@ docsvision-сlonedb [@argfile] [/ms:] [/pg:] [/p:]
 
 . Установите пакеты утилиты на сервер {dv} следующей командой, предварительно обновив индекс пакетов:
 +
-[source,bash]
+[tabs]
+====
+Astra Linux::
++
+[source]
 ----
 sudo apt-get update
 sudo apt-get install docsvision-сlonedb
 ----
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-сlonedb
+====
+
 
 [#prepare]
 == Подготовка исходной БД

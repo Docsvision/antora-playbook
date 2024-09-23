@@ -1,17 +1,41 @@
 // tag::noimage[]
+// tag::bare-minimum[]
 Если к новой версии модуля прилагается отдельная инструкция по обновлению, следуйте ей.
 
 .Чтобы установить новую версию модуля:
+// end::bare-minimum[]
 . Создайте резервную копию БД.
 // . Остановите сервис `dvappserver` все сервисы {dv}. Также остановите экземпляры Службы {ws} и все сервисы в кластере {dv} или СУБП, если таковые используются.
+// tag::bare-minimum[]
 . Устанавливать обновление рекомендуется на отдельную машину во избежание случаев, когда остаются старые файлы и папки системы.
 . Обновите серверные компоненты на сервере Linux командой:
++
+[tabs]
+====
+Astra Linux::
 +
 [source,subs=attributes]
 ----
 sudo apt-get update
 sudo apt-get install --only-upgrade docsvision-{update}
 ----
+ifndef::mancons[]
+РЕД ОС::
++
+[source,subs=attributes]
+----
+sudo dnf install --only-upgrade docsvision-{update}
+----
+endif::[]
+ifdef::mancons[]
+РЕД ОС::
++
+[source,subs=attributes]
+----
+sudo dnf install --only-upgrade docsvision-managementconsole-* && sudo dnf install --only-upgrade docsvision-settingsservice-* && sudo dnf install --only-upgrade docsvision-externalapi-*
+----
+endif::[]
+====
 +
 // tag::config[]
 ifdef::is-service[]
@@ -27,6 +51,7 @@ ifdef::is-service[]
 ** Возвращает в окно командной строки, дальнейшие действия зависят от администратора.
 // end::config[]
 endif::[]
+// end::bare-minimum[]
 +
 ifndef::mancons[]
 . Затем установите серверные компоненты на машину с Windows, запустив инсталлятор `.msi` серверной части модуля.

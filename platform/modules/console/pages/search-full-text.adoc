@@ -1,3 +1,5 @@
+:page-layout: home
+
 = Настройка полнотекстового поиска
 
 Полнотекстовый поиск в системе {dv} -- это поиск карточек, содержащих заданную строку в данных и/или в связанных файлах.
@@ -70,11 +72,7 @@ sudo apt-get install docsvision-fulltextservice
 
 РЕД ОС::
 +
-[source,bash]
-----
-dnf check-update --refresh
-sudo dnf install -y docsvision-fulltextservice
-----
+ $ sudo dnf install docsvision-fulltextservice
 ====
 +
 . Все настройки сервиса полнотекстового индексирования хранятся в конфигурационном файле `appsettings.json`. Откройте конфигурационный файл в любом текстовом редакторе, например `nano`:
@@ -119,10 +117,8 @@ include::ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 . Запустите сервис полнотекстового поиска следующей командой:
 +
-[source,bash]
-----
-sudo systemctl start dvfulltextservice
-----
+ $ sudo systemctl start dvfulltextservice
+
 // end::install-ft[]
 // include::admin:partial$update.adoc[tags=config]
 
@@ -134,7 +130,7 @@ sudo systemctl start dvfulltextservice
 `Initial Catalog=Имя-БД; Data Source=Полное-имя-сервера-СУБД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
 
-{pgsql}
+.{pgsql}
 ****
 `Server=Адрес-сервера-базы-данных; Port=SQL-порт; Database=Название-БД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
