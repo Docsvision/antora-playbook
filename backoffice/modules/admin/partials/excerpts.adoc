@@ -1,7 +1,22 @@
 // tag::mail-mon[]
 При запуске БП Мониторинг почты в журнале может появляться сообщение: `Cannot map account name: domain\username`. Для устранения ошибки потребуется установить дополнительный компонент `gss-ntlmssp` командой:
 
- sudo apt-get install gss-ntlmssp
+[tabs]
+====
+Astra Linux::
++
+[source,bash]
+----
+sudo apt-get install gss-ntlmssp
+----
+
+РЕД ОС::
++
+[source,bash]
+----
+sudo dnf install gss-ntlmssp
+----
+====
 
 // end::mail-mon[]
 
