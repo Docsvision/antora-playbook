@@ -1,3 +1,6 @@
+:wt: edi-diadoc-server
+:page-layout: home
+
 = Установка и удаление Коннектора
 
 [#requirements]
@@ -23,12 +26,7 @@
 * `docsvision-edi-diadoc-server` -- дополнительный компонент модуля, добавляющий поддержку работы с оператором Диадок.
 +
 . _Коннектор к Диадок_ может быть установлен следующей командой с предварительным обновлением индекса пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-edi-diadoc-server
-----
+include::CU3@platform:admin:partial$install.adoc[tags=commands]
 // end::install[]
 
 [#client]
@@ -56,7 +54,7 @@ sudo apt-get install docsvision-edi-diadoc-server
 == Удаление Коннектора
 
 . Удалите настройки оператора Диадок из _Справочника настроек операторов ЮЗДО_.
-.. Откройте карточку _Справочник настроек операторов ЮЗДО_ в утилите _{dv} Explorer_ (входит в _{rk}_). Инструкция по работе с утилитой _{dv} Explorer_ приведена в документации _{rk}_, разделе "xref:dev@resource-kit:dvexplorer:util.adoc[]".
+.. Откройте карточку _Справочник настроек операторов ЮЗДО_ в утилите _{dv} Explorer_ (входит в _{rk}_). Инструкция по работе с утилитой _{dv} Explorer_ приведена в документации _{rk}_, разделе "xref:6.1@resource-kit:dvexplorer:util.adoc[]".
 .. Удалите из секции _Операторы_ строку оператора "Диадок".
 . Удалите компоненты коннектора в ОС Windows через изменение инсталлятора:
 +
@@ -65,4 +63,5 @@ sudo apt-get install docsvision-edi-diadoc-server
 +
 . В ОС Linux удалить компоненты можно командой:
 +
- $ sudo apt-get purge docsvision-edi-diadoc-server
+include::CU3@platform:admin:partial$delete.adoc[]
++
