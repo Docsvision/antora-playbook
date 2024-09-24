@@ -1,5 +1,3 @@
-:page-layout: home
-
 = Установка модуля {pl}
 
 Система поддерживает установку на Linux с ограничениями доступной функциональности. Подробнее см. руководство по установке, раздел "xref:install-linux::linux-limitations.adoc[]".
@@ -15,23 +13,8 @@
 
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
-[tabs]
-====
-Astra Linux::
-+
-[source]
-----
-sudo apt-get update
-sudo apt-get install docsvision-platform
-----
-
-РЕД ОС::
-+
-[source]
-----
-sudo dnf install docsvision-platform
-----
-====
+:wt: platform
+include::CU3@platform:admin:partial$install.adoc[tags=commands]
 +
 Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
 +
@@ -52,7 +35,7 @@ sudo ./activation online ВАШ-КЛЮЧ
 +
 [source]
 ----
-sudo dnf install -y docsvision-activation
+sudo dnf install docsvision-activation
 cd /usr/lib/docsvision/tools/activation
 sudo ./activation online ВАШ-КЛЮЧ
 ----
@@ -68,16 +51,8 @@ sudo ./activation online ВАШ-КЛЮЧ
 
 . Установите пакеты модуля:
 +
-[tabs]
-====
-Astra Linux::
-+
- $ sudo apt-get install docsvision-fileservice
-
-РЕД ОС::
-+
- $ sudo dnf install -y docsvision-fileservice
-====
+:wt: fileservice
+include::CU3@platform:admin:partial$install.adoc[tags=commands]
 +
 . В конфигурационном файле укажите строку подключения к БД:
 +

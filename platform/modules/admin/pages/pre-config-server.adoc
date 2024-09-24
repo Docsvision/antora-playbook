@@ -5,7 +5,6 @@
 //
 // include::partial$preconfigure-server.adoc[]
 // partial до сих пор существует
-:page-layout: home
 
 = Предварительная настройка сервера Linux
 
@@ -17,12 +16,19 @@
 // sudo nano /etc/apt/sources.list
 // ----
 // +
-. Установите ПО, необходимое для подключения репозитория {dv} следующими командами:
+. В Astra Linux установите ПО, необходимое для подключения репозитория {dv} следующими командами:
 +
 [source]
 ----
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
+----
++
+В РЕД ОС создайте файл для указания адреса репозитория:
++
+[source]
+----
+sudo nano /etc/yum.repos.d/docsvision.repo
 ----
 +
 . Подключите официальный репозиторий {dv} в качестве источника:
