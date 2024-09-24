@@ -12,16 +12,41 @@
 public class ForeignLegalEntityPrincipalInfo
 ----
 
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[name]` |Название
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[inn]` |ИНН
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[kpp]` |КПП
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[country]` |Страна регистрации
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[registrationAuthority]` |Регистрирующий орган
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[registrationNumber]` |Регистрационный номер
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[taxCode]` |Код налогоплательщика в стране регистрации
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.AddressInfo_CL.adoc[address]` |Полный адрес иностранной организации в стране регистрации
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.HeadOfSeparateDivisionInfo_CL.adoc[headOfSeparateDivision]` |Сведения о руководителе обособленного подразделения (СвРукОП)
+
+|===
+
 == Методы
 
 [cols=",",options="header"]
 |===
 |Имя |Описание
 
-|`ForeignLegalEntityPrincipalInfo(ForeignEntityInfo, BranchManagerInfo)` |Заполняет Сведения о доверителе -- иностранном юридическом лице
+|`ForeignLegalEntityPrincipalInfo(string, string, string, string, string, AddressInfo, HeadOfSeparateDivisionInfo, string, string)` a|Заполняет Сведения об иностранной организации (ИО)
 
 .Параметры:
-* `foreignEntityInfo` -- Сведения об иностранном юридическом лице
-* `branchManagerInfo` -- Сведения о руководителе обособленного подразделения
+* `name` -- Наименование иностранной организации
+* `inn` -- ИНН организации
+* `kpp` -- КПП обособленного подразделения
+* `country` -- Страна регистрации(инкорпорации)
+* `registrationNumber` -- Регистрационный номер
+* `address` -- Полный адрес иностранной организации в стране регистрации(инкорпорации)
+* `headOfSeparateDivision` -- Сведения о руководителе обособленного подразделения
+* `registrationAuthority` -- Наименование регистрирующего органа
+* `taxCode` -- Код налогоплательщика в стране регистрации(инкорпорации) или аналог
 
 |===

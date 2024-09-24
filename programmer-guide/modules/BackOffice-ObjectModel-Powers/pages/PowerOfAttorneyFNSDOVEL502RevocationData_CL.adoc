@@ -1,0 +1,69 @@
+= PowerOfAttorneyFNSDOVEL502RevocationData -- класс
+
+Данные отзыва доверенности версии 5.02 для взаимодействия с ФНС.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyFNSDOVEL502RevocationData : PowerOfAttorneyRevocationData
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationDocument_CL.adoc[Document]` |Состав и структура документа (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[RecipientID]` |Идентификатор получателя файла заявления (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[FinalRecipientID]` |Идентификатор конечного получателя файла заявления (Обязательный). В случае передачи файла от отправителя к конечному получателю при отсутствии налоговых органов, осуществляющих передачу на промежуточных этапах, значения `RecipientID` и `FinalRecipientID` совпадают.
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[SenderID]` a|Идентификатор отправителя информации (Обязательный).
+
+.Значение:
+* Для организаций -- 19-разрядный код (ИНН и КПП организации).
+* Для физических лиц -- 12-разрядный код (ИНН физического лица, при наличии. При отсутствии ИНН -- последовательность из двенадцати нулей).
+|===
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.FIO_CL.adoc[FIO]`
+|Фамилия, имя, отчество (ФИОТип). Таблица 4.16.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.ForeignCompanyInfo_CL.adoc[ForeignCompanyInfo]`
+|Сведения об иностранной организации (при отзыве основной доверенности) (ИО). Таблица 4.8.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.IdentityCardInfo_CL.adoc[IdentityCardInfo]`
+|Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип). Таблица 4.15.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.IndividualInfo1_CL.adoc[IndividualInfo1]`
+|Сведения о физическом лице (СведФЛТип). Таблица 4.12.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.IndividualInfo_CL.adoc[IndividualInfo]`
+|Сведения о физическом лице, в том числе индивидуальном предпринимателе (СвФизЛицТип). Таблица 4.14.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.OrganizationInfo_CL.adoc[OrganizationInfo]`
+|Сведения об организации (СвОргТип). Таблица 4.13.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]`
+|Сведения для доверенности, подтверждающей полномочия нескольких уполномоченных представителей (СвПдтвУП). Таблица 4.4.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.PrincipalInfo_CL.adoc[PrincipalInfo]`
+|Сведения о доверителе (СвДоверит). Таблица 4.5.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]`
+|Сведения о лице, действующем от имени юридического лица без доверенности (СвРукОрг). Таблица 4.7.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.RetrustPrincipalInfo_CL.adoc[RetrustPrincipalInfo]`
+|Сведения о доверителе при отзыве доверенности, совершенной (выданной) в порядке передоверия (СвДоверщП).
+Таблица 4.10.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationDocument_CL.adoc[RevocationDocument]`
+|Состав и структура документа (Документ). Таблица 4.2.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationInfo_CL.adoc[RevocationInfo]`
+|Сведения заявления об отзыве доверенности (СвЗаяв). Таблица 4.3.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.RussianCompanyInfo_CL.adoc[RussianCompanyInfo]`
+|Сведения о российской организации (при отзыве основной доверенности) (НПЮЛ). Таблица 4.6.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.SeparateSubdivisionManagerInfo_CL.adoc[SeparateSubdivisionManagerInfo]`
+|Сведения о руководителе обособленного подразделения (СвРукОП). Таблица 4.9.
+|`xref:PowerOfAttorneyFNSDOVEL502RevocationData.SignerInfo_CL.adoc[SignerInfo]`
+|Сведения о физическом лице, подписывающем заявление об отзыве доверенности от имени доверителя (российской организации / иностранной организации) без доверенности, или сведения о физическом лице, подписывающем заявление об отзыве доверенности от своего имени, в том числе при передаче полномочий другому лицу в порядке передоверия (Подписант). Таблица 4.11.
+
+|===

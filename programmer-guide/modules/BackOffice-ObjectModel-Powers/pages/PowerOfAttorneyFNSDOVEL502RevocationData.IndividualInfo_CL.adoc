@@ -1,0 +1,29 @@
+= IndividualInfo -- класс
+
+Сведения о физическом лице, в том числе индивидуальном предпринимателе (СвФизЛицТип). Таблица 4.14.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class IndividualInfo
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Inn]` |ИНН физического лица.
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Ogrnip]` |ОГРНИП (Обязательный с условием). Обязателен, если лицо является индивидуальным предпринимателем.
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Snils]` |СНИЛС (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Citizenship]` |Гражданство. Принимает значение в соответствии с Общероссийским классификатором стран мира.
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[BirthDate]` |Дата рождения.
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Fio]` |Фамилия, имя, отчество физического лица (Обязательный).
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL502Data.IdentityCardInfo_CL.adoc[IdentityCard]` |Сведения о документе, удостоверяющем личность физического лица (Обязательный).
+
+|===

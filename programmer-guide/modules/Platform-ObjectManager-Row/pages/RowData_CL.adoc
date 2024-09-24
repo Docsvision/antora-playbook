@@ -95,18 +95,18 @@ public abstract class RowData : IUpdatable, ILockable, IXmlExportable
 
 [source,csharp]
 ----
-// Получение с сервера данных карточки с известным идентификатором
-CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки"));
+CardData card = session.CardManager.GetCardData(new System.Guid("идентификатор_карточки")); <.>
 
-// Получение данных секции с именем "MainInfo"
-SectionData section = card.Sections[card.Type.Sections["MainInfo"].Id];
+SectionData section = card.Sections[card.Type.Sections["MainInfo"].Id]; <.>
 
-// Получение первой строки секции (если строки нет -- она будет создана)
-RowData row = section.FirstRow;
+RowData row = section.FirstRow; <.>
 
-// Запись значения в поле "Number"          
-if (row.GetValueType("Number") = FieldType.Int)
+if (row.GetValueType("Number") = FieldType.Int) <.>
 {
     row.SetInt32("Number", 10);
 }
 ----
+<.> Получение с сервера данных карточки с известным идентификатором.
+<.> Получение данных секции с именем `MainInfo`.
+<.> Получение первой строки секции (если строки нет -- она будет создана).
+<.> Запись значения в поле `Number`.

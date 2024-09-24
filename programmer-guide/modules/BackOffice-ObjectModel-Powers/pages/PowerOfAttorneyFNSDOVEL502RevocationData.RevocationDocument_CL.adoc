@@ -1,0 +1,26 @@
+= RevocationDocument -- класс
+
+Состав и структура документа (Документ). Таблица 4.2.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class RevocationDocument
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[TaxAuthorityCode]` |Код налогового органа, в который представляется доверенность, созданная в электронной форме (Обязательный)
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationInfo_CL.adoc[Revocation]` |Сведения заявления об отзыве доверенности (Обязательный)
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.PrincipalInfo_CL.adoc[Principal]` |Сведения о доверителе (Обязательный). Сведения о лице, доверявшем представителю выступать от своего имени в отношениях, регулируемых законодательством Российской Федерации о налогах и сборах.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.SignerInfo_CL.adoc[Signer]` |Сведения о физическом лице, подписывающем заявление об отзыве доверенности от имени доверителя (российской организации / иностранной организации) без доверенности, или сведения о физическом лице, подписывающем заявление об отзыве доверенности от своего имени, в том числе при передаче полномочий другому лицу в порядке передоверия (Обязательный).
+
+|===

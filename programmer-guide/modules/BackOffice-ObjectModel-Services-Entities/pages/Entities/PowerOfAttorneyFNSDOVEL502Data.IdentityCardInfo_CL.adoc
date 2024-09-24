@@ -1,0 +1,36 @@
+= PowerOfAttorneyFNSDOVEL502Data.IdentityCardInfo -- класс
+
+Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип) -- 4.24.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class IdentityCardInfo
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`DocumentKindCode`
+|Код вида документа (Обязательный).
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[DocumentSerialNumber]`
+|Серия и номер документа (Обязательный).
+
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[IssueDate]`
+|Дата выдачи документа (Обязательный).
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Issuer]`
+|Наименование органа, выдавшего документ (Обязательный с условием). Обязательный, если вид документа - Паспорт гражданина Российской Федерации.
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[IssuerCode]`
+|Код подразделения органа, выдавшего документ.
+
+|===
