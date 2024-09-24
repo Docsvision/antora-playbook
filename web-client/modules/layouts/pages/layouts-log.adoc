@@ -1,6 +1,6 @@
 = Журнал программы {kvr}
 
-Для программы {kvr} предусмотрен журнал работы. Журнал хранится по пути `C:/Program Files (x86)/Docsvision/WebClient/Logs/`. Имя файла журнала имеет следующий формат: `LayoutEditor_ГГГ-ММ-ДД`.
+Для программы {kvr} предусмотрен журнал работы. Журнал хранится по пути `C:/Program Files (x86)/Docsvision/WebClient/Logs/`. Имя файла журнала имеет следующий формат: `WebLayoutsDesigner PID \#\### ГГГГ-ММ-ДД`, где `\####` -- номер процесса.
 
 .Журнал содержит следующую информацию:
 . Вход/выход пользователя.
@@ -12,4 +12,40 @@
 
 .Чтобы включить или отключить журнал программы {kvr}:
 . Найдите конфигурационный файл, расположенный в папке по адресу `C:/Program Files (x86)/Docsvision/WebClient/WebLayoutsDesigner.appsettings.json`.
-. Выполните настройку журналирования аналогично настройкам журнала {wc}а, xref:admin:log-config.adoc[описанным] в разделе "администрирование".
+. Выполните настройку журналирования:
++
+[source,json]
+----
+  "NLog": {
+    "targets": {
+        "async": true,
+        "logFile": {
+            "type": "File",
+            "fileName": "${basedir}\\..\\Logs\\WebLayoutsDesigner${event-properties:item=Tenant} PID ${processId} ${shortdate}.log", <.>
+            "layout": "[${longdate}][${level}][${callsite}] ${message} ${onexception:${newline}${exception:maxInnerExceptionLevel=10:format=shortType,message,stacktrace:separator=*:innerExceptionSeparator=&#xD;&#xA;&#x9;}}"
+        }
+    },
+    "rules": [ <.>
+        {
+            "logger": "Microsoft.*",
+            "minLevel": "Trace",
+            "maxLevel": "Info",
+            "final": true
+            "writeTo": "logconsole" <.>
+        },
+        {
+            "logger": "*",
+            "minLevel": "Error",
+            "writeTo": "logFile" <.>
+        }
+    ]
+}
+----
+<.> Измените значение параметра `fileName`, чтобы настроить путь для сохранения журнала работы: +
+В `fileName` можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные], например: `\Logs\$\{level}\WebClient_$\{shortdate}.log`.
++
+<.> Измените значение параметров `minLevel` и `maxLevel`, например, на `trace`, чтобы включить протоколирование всех типов событий. +
+Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
+Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
+<.> Настройки журнала программы {pu}.
+<.> Настройки журнала {wc}а.
