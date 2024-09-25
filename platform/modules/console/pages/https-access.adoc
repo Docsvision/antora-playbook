@@ -17,11 +17,11 @@ Astra Linux::
 +
 . [[before]]Создайте самопидписанный сертификат SSL.
 +
-[source,bash]
-----
-openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" <.>
-----
+--
+ $ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" <.>
+
 <.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
+--
 +
 NOTE: Подробный пример создания сертификата приведён в документации {of-mc}, раздел "xref:engineer:ROOT:create-cert.adoc[]".
 +
@@ -36,7 +36,7 @@ Astra Linux::
 
 РЕД ОС::
 +
- $ update-ca-trust
+ $ sudo update-ca-trust
 ====
 +
 . Отредактируйте конфигурационный файл `appsettings.json`:
