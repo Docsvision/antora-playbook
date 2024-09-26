@@ -15,22 +15,23 @@
 +
  [2022-10-26 17:11:56.8774][Error][DocsVision.Platform.WebClient.Diagnostics.Trace.TraceError]  Application start
 
-[#requests]
-== Протоколирование запросов
+[#webc-requests]
+== Протоколирование запросов сервера {wc}а
 
-Протоколирование запросов полезно для анализа входящих запросов и ответов на них, заголовков и т.д.
+Протоколирование запросов полезно для анализа входящих запросов сервера {wc}а и ответов на них, заголовков и т.д.
 
 .Журнал запросов содержит следующую информацию:
 * HTTP запросы и ответы.
 * Дата и время запросов и ответов.
 * Заголовки
 
-Протоколирование запросов настраивается в конфигурационном файле модуля по адресу `{webconfig}`, за настройку отвечает параметр `W3CLogging`:
+// tag::webconfig-webc[]
+Протоколирование запросов сервера {wc}а настраивается в конфигурационном файле модуля по адресу `{webconfig}`, за настройку отвечает параметр `W3CLogging`:
 
 [source,json]
 ----
 "W3CLogging": {
-	"IsEnabled": false <.>
+	"IsEnabled": true <.>
 	"LogDirectory": "/var/log/docsvision/webclient/", <.>
 	"LoggingFields": "Date,Time,ServerName,Method,UriStem,UriQuery,ProtocolStatus,TimeTaken,ProtocolVersion,Host,UserAgent,Referer,ConnectionInfoFields", <.>
 	"FileSizeLimit": 10485760, <.>
@@ -38,9 +39,46 @@
 	"FileName": "webclient-w3c.log" <.>
 }
 ----
-<.> Включение/отключение протоколирования событий.
+<.> Включение/отключение протоколирования событий. Значение по умолчанию: `false`.
 <.> Путь к журналу.
-<.> Журналируемые поля. По умолчанию указываются запросы, ответы, заголовки, дата/время и имя сервера.
+<.> Журналируемые поля. По умолчанию указываются запросы, ответы, заголовки, дата/время и имя сервера. Со всеми допустимыми значениями можно ознакомиться в https://github.com/dotnet/aspnetcore/blob/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Middleware/HttpLogging/src/W3CLoggingFields.cs[документации Microsoft].
 <.> Максимальный размер файла журнала, после которого будет создаваться новый. Значение в байтах, по умолчания 10 Мб.
 <.> Количество сохраняемых файлов журнала. Допустимые значения от 1 до 10000.
 <.> Имя файла журнала.
+
+Запросы будут записаны в файл `/var/log/docsvision/webclient/webclient-w3c-&#x7b;YYYYMMDD.X&#x7d;.log`
+// end::webconfig-webc[]
+
+[#appserv-requests]
+== Протоколирование запросов сервера приложений
+
+Протоколирование запросов полезно для анализа входящих запросов на сервере приложений и ответов на них, заголовков и т.д.
+
+.Журнал запросов содержит следующую информацию:
+* HTTP запросы и ответы.
+* Дата и время запросов и ответов.
+* Заголовки
+
+// tag::webconfig-serv[]
+Протоколирование запросов сервера приложений настраивается в конфигурационном файле модуля по адресу `{webconfig}`, за настройку отвечает параметр `W3CLogging`:
+
+[source,json]
+----
+"W3CLogging": {
+	"IsEnabled": true <.>
+	"LogDirectory": "/var/log/docsvision/appserver", <.>
+	"LoggingFields": "Date,Time,ServerName,Method,UriStem,UriQuery,ProtocolStatus,TimeTaken,ProtocolVersion,Host,UserAgent,Referer,ConnectionInfoFields", <.>
+	"FileSizeLimit": 10485760, <.>
+	"RetainedFileCountLimit": 4, <.>
+	"FileName": "webclient-w3c.log" <.>
+}
+----
+<.> Включение/отключение протоколирования событий. Значение по умолчанию: `false`.
+<.> Путь к журналу.
+<.> Журналируемые поля. По умолчанию указываются запросы, ответы, заголовки, дата/время и имя сервера. Со всеми допустимыми значениями можно ознакомиться в https://github.com/dotnet/aspnetcore/blob/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Middleware/HttpLogging/src/W3CLoggingFields.cs[документации Microsoft].
+<.> Максимальный размер файла журнала, после которого будет создаваться новый. Значение в байтах, по умолчания 10 Мб.
+<.> Количество сохраняемых файлов журнала. Допустимые значения от 1 до 10000.
+<.> Имя файла журнала.
+
+Запросы будут записаны в файл `/var/log/docsvision/appserver/appserver-w3c-&#x7b;YYYYMMDD.X&#x7d;.log`
+// end::webconfig-serv[]
