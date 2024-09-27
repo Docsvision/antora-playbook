@@ -37,9 +37,21 @@ query:::
 <.>
 
 QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "DOMAIN\\IvanovII"); <.>
-
-StaffEmployee staff = objectContext.FindObject<StaffEmployee>(query); <.>
+StaffEmployee staff = context.FindObject<StaffEmployee>(query); <.>
 ----
 <.> Инициализация контекста объектов.
 <.> Формирование поискового запроса по полю `AccountName`.
 <.> Выполнение запроса.
+
+Если сотрудника с учетной записью `DOMAIN\IvanovII` нет в справочнике, поиск вернет `null`. Можно проверить, добавив скрипт на кнопку:
+
+[source,csharp]
+----
+    ObjectContext context = this.CardControl.ObjectContext;
+		QueryObject query = new QueryObject(StaffEmployee.AccountNameProperty.Name, "DOMAIN\\IvanovII");
+		StaffEmployee staff = context.FindObject<StaffEmployee>(query);
+		if (staff == null)
+			MessageBox.Show("Не найдено");
+		else
+			MessageBox.Show(staff.DisplayString);
+----
