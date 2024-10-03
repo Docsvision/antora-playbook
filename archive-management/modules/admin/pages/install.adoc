@@ -59,14 +59,16 @@ image::install-server-license.png[Условия лицензионного со
 // image::install-client-confirm.png[Мастер установки расширения {am} {wc}а]
 // +
 . Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
-+
-// include::install-linux:ROOT:partial$restart-and-db.adoc[]
-+
-. [[libs]]Перезапустите *{sss-new}*.
-. Выполните загрузку библиотек карточек модуля в БД.
-. Перезапустите *{sss-new}*.
-. Выполните загрузку настроек модуля в БД.
-. [[solution]]Импортируйте решения с помощью панели управления {wc}ом, подробнее см. в разделе "xref:6.1@webclient:admin:control-panel-solutions.adoc[]".
+
+[#libs]
+=== Обновление базы данных
+
+include::install-linux:ROOT:partial$restart-and-db.adoc[]
+
+[#solution]
+== Импорт решений
+
+. Импортируйте решения с помощью панели управления {wc}ом, подробнее см. в разделе "xref:6.1@webclient:admin:control-panel-solutions.adoc[]".
 . После импорта стандартных решений перезапустите сервис *{wcs-new}*. В противном случае при создании карточки с ЭУ `_Дело_` блок, в который ЭУ добавлен, может быть скрыт.
 . Для работы с модулем {am} в программе {kvr} выберите разметку меню _DocumentManagement_Nomenclature_.
 
