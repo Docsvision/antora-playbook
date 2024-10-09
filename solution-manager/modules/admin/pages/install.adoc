@@ -98,10 +98,79 @@ include::6.1@platform:admin:partial$install.adoc[]
 sudo systemctl start dvsolutionmanager
 ----
 +
-. Ознакомьтесь с разделом "xref:admin-functions.adoc[]", чтобы предоставить пользователям доступ к модулю, настроить путь к временной папке, изменить подключение к базе данных {of-sm} и выполнить другие задачи.
+. Выполните настройки для работы в домене, описанные в пункте <<domain,ниже>>. В противном случае аутентификация в модуле не будет доступна.
+. Ознакомьтесь с разделом "xref:admin-functions.adoc[]", чтобы предоставить пользователям доступ к модулю, настроить путь к временной папке, изменить подключение к базе данных {of-sm} и выполнить другие действия.
 . Ознакомьтесь с разделом "<<mgmt-console,Настройки в {of-mc}>>", чтобы выполнить необходимые для работы модуля настройки системы.
 
 include::6.1@mgmtconsole:admin:install.adoc[tags=string]
+
+[#domain]
+== Настройка работы в домене
+
+{mc} поддерживает работу в одном или нескольких доменах. Для этого в конфигурационном файле модуля необходимо выполнить настройку доменных каталогов -- параметр `"Catalogs"`.
+
+В конфигурационном файле настройка представлена следующим массивом: `"Catalogs": []`. Настройки вступают в работу, если в массиве присутствует хотя бы одно описание каталога.
+
+WARNING: Без выполнения данных настроек аутентификация в модуле будет недоступна!
+
+[source,json]
+----
+ "Catalogs": [
+  {
+   "FullDomainName": "example1.com", <.>
+    "NetBiosDomainName": "example1", <.>
+    "LdapOptions": { <.>
+      "LdapServerAddresses": [ "example1.com" ], <.>
+      "AuthType": "Basic", <.>
+      "Credential": { <.>
+        "UserName": "user@example1.com",
+        "Password": "Password" <.>
+      }
+    }
+ },
+  {
+    "FullDomainName": "example2.com", <.>
+    "ChallengeTo": "example1.com" <.>
+  }
+],
+----
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
+<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
+<.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
+
+.Раздел `Catalogs` может содержать массив настроек вида:
+[source,json]
+----
+ {
+    "FullDomainName": "example.com", <.>
+    "NetBiosDomainName": "EXAMPLE", <.>
+    "LdapOptions": { <.>
+      "LdapServerAddresses": [ "example.com" ], <.>
+      "AuthType": "Basic", <.>
+      "Port": 389, <.>
+      "Credential": { <.>
+        "UserName": "user@example.com", <.>
+        "Password": "Password"
+      }
+    }
+}
+----
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
+<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
+<.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
+
+include::6.1@platform:admin:config-domains.adoc[tags=chalto]
 
 [#uninstall]
 == Удаление модуля и расширения для Службы {ws}
