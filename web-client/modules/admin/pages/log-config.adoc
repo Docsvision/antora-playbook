@@ -27,9 +27,21 @@ include::partial$excerpts.adoc[tags=ifabsent]
             "encoding": "UTF-8",
             "archiveOldFileOnStartup": "true",
             "fileName": "${basedir}/../Logs/WebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.log", <.>
-            "layout": "[${longdate}][${level}][${callsite}] ${action-info} ${message} ${exception:format=tostring,Data}" <.>
+            "layout": "[${longdate}][${level}][${callsite}] ${action-info} ${message} ${exception:format=tostring,Data}"
           }
         }
+      }
+    ]
+    "rules": [ <.>
+      {
+        "logger": "*",
+        "minLevel": "Trace",
+        "writeTo": "logconsole" <.>
+      },
+      {
+        "logger": "*",
+        "minLevel": "Error",
+        "writeTo": "logfile" <.>
       }
     ]
   }
@@ -37,9 +49,11 @@ include::partial$excerpts.adoc[tags=ifabsent]
 <.> Измените значение параметра `fileName`, чтобы настроить путь для сохранения журнала работы: +
 В `fileName` можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные], например: `\Logs\$\{level}\WebClient_$\{shortdate}.log`.
 +
-<.> Измените значение атрибута `level` элемента menu:rules[logger], например, на `trace`, чтобы включить протоколирование всех типов событий. +
+<.> Измените значение параметров `minLevel` и `maxLevel`, например, на `trace`, чтобы включить протоколирование всех типов событий. +
 Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
 Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
+<.> Настройки журнала {pu}.
+<.> Настройки журнала {wc}а.
 // end::webconfig[]
 +
 . Сохраните изменения конфигурационного файла.
@@ -48,5 +62,6 @@ include::partial$excerpts.adoc[tags=ifabsent]
 ====
 Уровень журналирования может быть изменён методом `/api/Log/SetLogLevel`, если пользователь, который вызывает метод, состоит в группе *{dv-admins-serv}*. Методом можно задать следующие уровни: *_Trace = 0_*, *_Debug = 1_*, *_Info = 2_*, *_Warn = 3_*, *_Error = 4_* (любое другое значение будет распознано как *_Error_*).
 
-Данный способ применим для случая, когда есть потребность не перезагружать пул {wc}а. После перезапуска *{wcs-new}* уровень журналирования будет возвращён в исходное состояние в соответствии с конфигурационным файлом.
+// Данный способ применим для случая, когда есть потребность не перезагружать пул {wc}а.
+После перезапуска *{wcs-new}* уровень журналирования будет возвращён в исходное состояние в соответствии с конфигурационным файлом.
 ====
