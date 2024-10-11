@@ -1,0 +1,77 @@
+= Настройка прозрачной аутентификации
+
+[#server]
+== Серверные настройки
+
+Сервер {dv}, установленный на Linux, требует настройки Kerberos-аутентификации. Настройка необходима для использования технологии единого входа (также известная как прозрачная аутентификация, когда пользователь уже аутентифицирован в другом модуле системы). В данном разделе приводится инструкция по настройке аутентификации Kerberos в системе {dv}.
+
+. На первом этапе необходимо создать keytab-файл с именем `krb5.keytab` и настроить конфигурационный файл `krb5.conf` в папке `/etc` сервера {dv}.
+. Файл создаётся командой в ОС Windows или в ОС Linux при вводе сервера в домен.
++
+* Создание keytab-файла командой в ОС Windows и последующий перенос его на сервер {dv} является предпочтительным способом настройки
++
+.Пример команды для создания keytab-файла
+====
+ ktpass -princ HTTP/company.example.com@EXAMPLE.COM -mapuser administrator@example.com -crypto RC4-HMAC-NT -ptype KRB5_NT_PRINCIPAL -pass Password -out C:\krb5.keytab
+====
++
+* Создание keytab-файла в ОС Linux предполагает ввод сервера {dv} в домен, после чего файл создаётся автоматически. Подробная инструкция по вводу в домен приведена в документации https://wiki.astralinux.ru/pages/viewpage.action?pageId=27361515[Astra Linux] или https://redos.red-soft.ru/base/redos-7_3/7_3-administation/7_3-domain-redos/7_3-domain-config/7_3-redos-in-samba/?nocache=1728635604875[РЕД ОС].
+. Сгенерированный `krb5.keytab` файл необходимо поместить в каталог `/etc/` на сервере Linux.
+
+[#client]
+== Клиентские настройки (опционально)
+
+Следующие настройки являются опциональными и требуются в случае, когда требуется выполнять аутентификацию от имени пользователя вне домена (может быть полезно в диагностических целях).
+
+. На сервере {dv} установите пакет Kerberos-утилит следующей командой:
++
+[tabs]
+====
+Astra Linux::
++
+[subs=attributes]
+ $ sudo apt-get install krb5-user
+
+РЕД ОС::
++
+[subs=attributes]
+ $ sudo dnf install krb5-workstation
+====
++
+. Заполните настройки в файле `krb5.conf`, расположенном в каталоге `/etc/`:
++
+.Минимально необходимые настройки в файле `krb5.conf`:
+[source]
+----
+[libdefaults]
+    default_realm = EXAMPLE.COM
+
+[realms]
+    EXAMPLE.COM = {
+        kdc = COMPANY.EXAMPLE.COM
+        admin_server = COMPANY.EXAMPLE.COM
+    }
+
+[domain_realm]
+    .example.com = EXAMPLE.COM
+    example.com = EXAMPLE.COM
+----
++
+. Следующий шаг -- получение тикета для пользователя, которой имеет право входить в {dv}, пример команды приведён ниже:
++
+ $ kinit DocsvisionUser
++
+. После успешного получения тикета, его можно просмотреть командой:
++
+ $ klist
++
+Если в процессе получения тикета возникли ошибки, выполните следующую команду, чтобы при выполнении `kinit` выводился журнала отладки Kerberos:
++
+ $ export KRB5_TRACE=/dev/stderr
++
+. Следующий шаг -- настройка клиентского браузера. Для Google Chrome и браузеров на его основе требуется в параметрах политик `https://chromeenterprise.google/policies/#AuthNegotiateDelegateAllowlist[AuthNegotiateDelegateAllowlist]`, `https://chromeenterprise.google/policies/#AuthServerAllowlist[AuthServerAllowlist]`, доступных по адресу `chrome://policy`, указать домен компании в формате `&#x2a;.example.com`. +
+Для ОС Linux значения задаются в файле `/etc/chromium/policies/managed/test_policy.json`, для ОС Windows -- в реестре или через управление групповыми политиками, если браузер клиента получает настройки Chrome с контроллера домена, подробнее см. по ссылкам выше и в разделе https://www.chromium.org/administrators/complex-policies-on-windows/[Комплексные политики Windows].
++
+. Перезапустите браузер.
+
+WARNING: После выполнения описанных настроек запуск, в связи с особенностями протокола аутентификации Kerberos, при обращении к модулям {dv} необходимо вводить адрес с доменным именем. При обращении к сайту по IP вход не удастся.
