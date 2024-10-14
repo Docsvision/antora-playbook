@@ -4,7 +4,7 @@
 
 WARNING: В данной версии установка {mc} предусмотрена только в ОС Linux.
 
-Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:CU3@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:6.1workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
 
 Требуется установить {mc} и сервис настроек. Установка должна выполняться на одной машине, установка на разные серверы не поддерживается.
 
@@ -21,7 +21,7 @@ WARNING: В данной версии установка {mc} предусмот
 :of: {of-mc}
 :file: appsettings
 :wt: managementconsole
-include::CU3@platform:admin:partial$install.adoc[]
+include::6.1platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -68,7 +68,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 :of: {of-sett-serv}
 :file: appsettings
 :wt: settingsservice
-include::CU3@platform:admin:partial$install.adoc[]
+include::6.1platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -109,7 +109,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 :of: Сервиса внешнего API
 :file: appsettings
 :wt: externalapi
-include::CU3@platform:admin:partial$install.adoc[]
+include::6.1platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -263,7 +263,7 @@ endif::sm-page[]
 * Не будут создаваться и отправляться группы заданий.
 * Не будут отправляться почтовые уведомления исполнителям.
 
-См. подробнее в руководстве пользователя Консоли управления "xref:CU3@mgmtconsole:user:initial-configuration.adoc[]".
+См. подробнее в руководстве пользователя Консоли управления "xref:6.1mgmtconsole:user:initial-configuration.adoc[]".
 
 // tag::cert[]
 [#cert]
@@ -357,6 +357,6 @@ include::6.1@platform:admin:config-domains.adoc[tags=chalto]
 выполните команду:
 
 :wt: managementconsole
-include::CU3@platform:admin:partial$delete.adoc[]
+include::6.1platform:admin:partial$delete.adoc[]
 
 Созданные группы и службы будут удалены, _{sett-serv}_ станет недоступен.
