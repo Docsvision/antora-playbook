@@ -122,6 +122,72 @@
 }
 ----
 <.> Обязательный параметр, если он не указан, NLog не будет записывать обычные сообщения в журнал.
-<.> Секции задаёт собственный набор колонок. Если список колонок не указан, в журнал будут включены только колонки по умолчанию `date`, `time`, `c-ip`, `s-ip`, `cs-username`, `s-computername`, `cs-method`, `cs-uri-stem`, `cs-uri-query`, `sc-statuscode`, `sc-bytes`, `cs-bytes`, `time-taken`, `cs-host`, `cs(User-Agent)`.
+<.> Секция задаёт собственный набор колонок. Если список колонок не указан, в журнал будут включены только колонки по умолчанию `date`, `time`, `c-ip`, `s-ip`, `cs-username`, `s-computername`, `cs-method`, `cs-uri-stem`, `cs-uri-query`, `sc-statuscode`, `sc-bytes`, `cs-bytes`, `time-taken`, `cs-host`, `cs(User-Agent)`.
 <.> Формат представления данных колонки может быть изменён. Если формат не указан, будут использоваться значения по умолчанию. В `layout` можно использовать любые переменные NLog, подробнее см. в https://nlog-project.org/config/?tab=layout-renderers[документации NLog].
 // end::nlo[]
+
+.Полный список колонок и допустимых значений для журналирования:
+[%collapsible]
+====
+* `date` -- Дата начала обработки запроса. Значение по умолчанию: `$&#x7b;date:format=yyyy-MM-dd&#x7d;`.
+* `time` -- Время начала обработки запроса. Значение по умолчанию: `$&#x7b;date:format=HH:mm:ss.fff&#x7d;`.
+* `webclient-version` -- Версия {wc}а. Например `6.1.725+a4c9b271d7`. Значение по умолчанию: `$&#x7b;webclient-version&#x7d;`. Для протоколирования запросов сервера приложений аналогичная колонка называется `appserver-version`.
+* `c-ip` -- IP-адрес клиента. Значение по умолчанию: `$&#x7b;aspnet-request-ip&#x7d;`.
+* `cs(Auth-Type)` -- Тип используемой аутентификации (например, Cookie). Значение по умолчанию: `$&#x7b;aspnet-user-authtype&#x7d;`.
+* `cs(Certificate)` -- Сертификат клиента текущего запроса. Значение по умолчанию: `$&#x7b;aspnet-request-client-certificate&#x7d;`.
+* `cs(Content-Type)` -- Тип контента: `text/html`, `multipart/form-data` и т.д.. Значение по умолчанию: `$&#x7b;aspnet-request-contenttype&#x7d;`.
+* `cs(Cookie)` -- Cookie, подробнее о допустимых параметрах https://github.com/NLog/NLog/wiki/AspNet-Response-Cookie-Layout-Renderer[в документации NLog]. Значение по умолчанию: `$&#x7b;aspnet-request-cookie&#x7d;`.
+* `cs(Referer)` -- Значение поля `Referer` из заголовка запроса. Значение по умолчанию: `$&#x7b;aspnet-request-referrer&#x7d;`.
+* `cs(User-Agent)` -- User agent. Значение по умолчанию: `$&#x7b;aspnet-request-useragent&#x7d;`.
+* `cs-bytes` -- Получено байтов. Значение по умолчанию: `$&#x7b;aspnet-request-contentlength&#x7d;`.
+* `cs-connectionid` -- Идентификатор соединения, см. https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.connectioninfo.id?view=aspnetcore-8.0[в документации Microsoft]. Значение по умолчанию: `$&#x7b;aspnet-request-connection-id&#x7d;`.
+* `cs-form` -- Данные формы из запроса. Подробнее о параметрах https://github.com/NLog/NLog/wiki/AspNetRequest-Form-Layout-Renderer[в документации NLog]. Значение по умолчанию: `$&#x7b;aspnet-request-form&#x7d;`.
+* `cs-headers` -- Заголовок запроса. Если нужно взять только определенные заголовки, можно воспользоваться параметрами, подробнее см. https://github.com/NLog/NLog/wiki/AspNetRequest-Headers-Layout-Renderer[в документации NLog]. Значение по умолчанию: `$&#x7b;aspnet-request-headers&#x7d;`.
+* `cs-host` -- Значение `Host` из заголовка запроса. Значение по умолчанию: `$&#x7b;aspnet-request-url:includeScheme=false:includeHost=true:includePath=false&#x7d;`.
+* `cs-fullhostname` -- Полное имя хоста (с портом). Значение по умолчанию: `$&#x7b;aspnet-request-host&#x7d;`.
+* `cs-isauthenticated` -- Состояние аутентификации (значения `0` или `1`). Значение по умолчанию: `$&#x7b;aspnet-user-isAuthenticated&#x7d;`.
+* `cs-method` -- Метод (`get`/`post` и т.п.). Значение по умолчанию: `$&#x7b;aspnet-request-method&#x7d;`.
+* `cs-mvc-action` -- Вызываемое действие. Значение по умолчанию: `$&#x7b;aspnet-mvc-action&#x7d;`.
+* `cs-mvc-controller` -- Вызываемый контроллер. Значение по умолчанию: `$&#x7b;aspnet-mvc-controller&#x7d;`.
+* `cs-posted-body` -- Значение по умолчанию`` $&#x7b;aspnet-request-posted-body&#x7d;``.
++
+.Значения:
+** `1`, если:
+*** Это запрос HTTP/1.x с ненулевым значением Content-Length или заголовком "Transfer-Encoding: chunked".
+*** Это запрос HTTP/2, который не установил флаг END_STREAM на исходном фрейме заголовка.
+** `0`, если:
+*** Это запрос HTTP/1.x без заголовка Content-Length или "Transfer-Encoding: chunked", или Content-Length равен 0.
+*** Это запрос HTTP/1.x с Connection: Upgrade (например, WebSockets). Для этих запросов не существует тела HTTP-запроса, и никакие данные не должны быть получены до тех пор, пока не будет выполнено обновление.
+*** Это запрос HTTP/2, который устанавливает END_STREAM на начальном фрейме заголовка.
++
+* `cs-tracking-consent` -- Согласие на отслеживание (значения `0` или `1`). Значение по умолчанию: `$&#x7b;aspnet-request-tracking-consent&#x7d;`.
++
+--
+.Возможные параметры:
+** `property`.
++
+.Допустимые значения:
+*** `CanTrack` --  Указывает, было ли дано согласие, или если согласие не требуется (1 или 0);
+*** `HasConsent` --  было ли дано согласие;
+*** `IsConsentNeeded` --  требуется ли согласие для данного запроса.
+--
++
+Пример вызова в собственном формате: `$&#x7b;aspnet-request-tracking-consent:property=CanTrack&#x7d;`.
++
+* `cs-uri-query` -- Значение по умолчанию: `$&#x7b;aspnet-request-url:includeScheme=false:includeHost=false:includePath=false:includeQueryString=true&#x7d;`. Запрос URI.
+* `cs-uri-stem` -- Ресурс URI. Значение по умолчанию: `$&#x7b;aspnet-request-url:includeScheme=false:includeHost=false&#x7d;`.
+* `cs-username` -- Имя пользователя. Значение по умолчанию: `$&#x7b;aspnet-user-identity&#x7d;`.
+* `is-websocket` -- Является ли запрос запросом на установку WebSocket (`0` или `1`). Значение по умолчанию: `$&#x7b;aspnet-request-is-web-socket&#x7d;`.
+* `s-basepath` -- Значение `ContentRootPath`. Значение по умолчанию: `$&#x7b;aspnet-appbasepath&#x7d;`.
+* `s-computername` --Имя сервера. Значение по умолчанию: `$&#x7b;machinename&#x7d;`.
+* `s-environment` -- Значение `ASPNETCORE_ENVIRONMENT`. Значение по умолчанию: `$&#x7b;aspnet-environment&#x7d;`.
+* `s-ip` -- IP-адрес сервера. Значение по умолчанию: `$&#x7b;aspnet-request-local-ip&#x7d;`.
+* `s-port` -- Порт. Значение по умолчанию: `$&#x7b;aspnet-request-local-port&#x7d;`.
+* `s-sitename` -- Имя сайта. Значение по умолчанию: `$&#x7b;iis-site-name&#x7d;`.
+* `s-webrootpath` -- `WebRootPath`. Значение по умолчанию: `$&#x7b;aspnet-webrootpath&#x7d;`.
+* `sc(Content-Type)` -- Тип контента ответа. Значение по умолчанию: `$&#x7b;aspnet-response-contenttype&#x7d;`.
+* `sc-bytes` -- Отправлено байт. Значение по умолчанию: `$&#x7b;aspnet-response-contentlength&#x7d;`.
+* `sc-response-has-started` -- Были ли отправлены заголовки ответа, т.е. начался ли уже ответ или нет. Значения `0` или `1`. Значение по умолчанию: `$&#x7b;aspnet-response-has-started&#x7d;`.
+* `sc-status` -- Код статуса ответа (`200`, `404` и т.д.). Значение по умолчанию: `$&#x7b;aspnet-response-statuscode&#x7d;`.
+* `time-taken` -- Сколько времени заняла обработка запроса (в миллисекундах). Значение по умолчанию: `$&#x7b;aspnet-request-duration&#x7d;`.
+====
