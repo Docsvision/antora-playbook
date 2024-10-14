@@ -8,11 +8,6 @@
 
 = Предварительная настройка сервера Linux
 
-****
-Инструкция по установке приведена для дистрибутива Astra Linux.
-// , при установке {dv} на других xref:ROOT:requirements-software.adoc[поддерживаемых] дистрибутивах, в командах замените `astra` на имя дистрибутива Linux.
-****
-
 // tag::preconfig[]
 // . Подключите официальный репозиторий {dv} в качестве источника пакетов. Для этого необходимо отредактировать `/etc/apt/sources.list` при помощи текстового редактора, например, _nano_:
 // +
@@ -21,26 +16,48 @@
 // sudo nano /etc/apt/sources.list
 // ----
 // +
-. Установите ПО, необходимое для подключения репозитория {dv} следующими командами:
+. В Astra Linux установите ПО, необходимое для подключения репозитория {dv} следующими командами:
 +
-[source,bash]
+[source]
 ----
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 ----
 +
+В РЕД ОС создайте файл для указания адреса репозитория:
++
+[source]
+----
+sudo nano /etc/yum.repos.d/docsvision.repo
+----
++
 . Подключите официальный репозиторий {dv} в качестве источника:
 +
+[tabs]
+====
+Astra Linux::
++
+[source,bash]
 ----
 curl -fsSL https://packages.docsvision.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
 echo "deb https://packages.docsvision.com/astra $(. /etc/os-release && echo $VERSION_CODENAME) 6.1" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
 sudo apt-get update
 ----
+
+РЕД ОС::
 +
-Репозитории доступны для Astra Linux.
-// , Ubuntu или Debian. Для установки на Ubuntu и Debian необходимо в адресе заменить `/astra` на `/ubuntu` или `/debian` соответственно.
+[source,bash]
+----
+[docsvision]
+name=Docsvision for RED OS $releasever
+baseurl=https://packages.docsvision.com/linux/6.1/redos/8.0/$basearch/main
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
+----
+====
 +
-. Подключите репозитории дополнительного ПО предпочтительным способом:
+. Подключите репозитории дополнительного ПО предпочтительным способом. Для РЕД ОС перейдите сразу к <<kerb,пункту 4>>.
 +
 * Используйте расширенный репозиторий Astra Linux:
 +
@@ -72,5 +89,5 @@ Pin: origin packages.microsoft.com
 Pin-Priority: 910
 ----
 +
-. Чтобы иметь возможность использования сквозной аутентификации в {wc}е, {wincl}е, РМА и {of-mc} в Linux необходимо выполнить специальные настройки Kerberos и используемого браузера.
+. [[kerb]]Чтобы иметь возможность использования сквозной аутентификации в {wc}е, {wincl}е, РМА и {of-mc} в Linux необходимо выполнить специальные настройки Kerberos и используемого браузера.
 // end::preconfig[]

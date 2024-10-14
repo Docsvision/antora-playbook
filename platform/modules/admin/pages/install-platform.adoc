@@ -13,40 +13,46 @@
 
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-platform
-----
+:wt: platform
+include::CU3@platform:admin:partial$install.adoc[tags=commands]
 +
 Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
 +
 . Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
 +
-[source,bash]
+[tabs]
+====
+Astra Linux::
++
+[source]
 ----
 sudo apt-get install docsvision-activation
 cd /usr/lib/docsvision/tools/activation
 sudo ./activation online ВАШ-КЛЮЧ
 ----
+
+РЕД ОС::
++
+[source]
+----
+sudo dnf install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+====
 +
 . Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
 . Запустите службу модуля командой:
 +
-[source,bash]
-----
-sudo systemctl start dvappserver
-----
+ $ sudo systemctl start dvappserver
 
 [#file-service]
 == Установка файлового сервиса
 
 . Установите пакеты модуля:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-fileservice
-----
+:wt: fileservice
+include::CU3@platform:admin:partial$install.adoc[tags=commands]
 +
 . В конфигурационном файле укажите строку подключения к БД:
 +
@@ -66,10 +72,7 @@ sudo apt-get install docsvision-fileservice
 +
 . Запустите службу Файлового сервиса:
 +
-[source,bash]
-----
-sudo systemctl start dvfileservice
-----
+ $ sudo systemctl start dvfileservice
 
 include::console:search-full-text.adoc[tags=install-ft]
 

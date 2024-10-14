@@ -9,24 +9,24 @@
 
 . Установите пакеты модуля:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-webclient
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-webclient
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-webclient
+====
 +
 . Отредактируйте файл настроек модуля:
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/webclient/appsettings.json
-----
+ $ sudo nano /usr/lib/docsvision/webclient/appsettings.json
 +
 . Запустите службу {wc}а:
 +
-[source,bash]
-----
-sudo systemctl start dvwebclient
-----
+ $ sudo systemctl start dvwebclient
 +
 . Теперь вы можете запустить {wc}, перейдя по адресу: `\http://WebC-server.domain.com/Account/Login`.
 
@@ -35,71 +35,71 @@ sudo systemctl start dvwebclient
 
 . Установите сервис:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-settingsservice
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-settingsservice
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-settingsservice
+====
 +
 . Отредактируйте файл настроек:
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/SettingsService/appsettings.json
-----
+ $ sudo nano /usr/lib/docsvision/SettingsService/appsettings.json
 +
 . Запустите сервис:
 +
-[source,bash]
-----
-sudo systemctl start dvsettings
-----
+ $ sudo systemctl start dvsettings
 
 [#ext-api]
 == Установка Сервиса внешнего API {of-mc}
 
 . Установите сервис внешнего API:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-externalapi
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-externalapi
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-externalapi
+====
 +
 . Отредактируйте файл настроек:
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/externalapi/appsettings.json
-----
+ $ sudo nano /usr/lib/docsvision/externalapi/appsettings.json
 +
 . Запустите сервис внешнего API {of-mc}:
 +
-[source,bash]
-----
-sudo systemctl start dvexternalapi
-----
+ $ sudo systemctl start dvexternalapi
 
 include::upgrade:551-552:post-update.adoc[tags=console]
 
 . Следующей командой установите {mc}:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-managementconsole
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-managementconsole
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-managementconsole
+====
 +
 . Отредактируйте файл настроек модуля:
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/managementconsole/appsettings.json
-----
+ $ sudo nano /usr/lib/docsvision/managementconsole/appsettings.json
 +
 . Запустите службу:
 +
-[source,bash]
-----
-sudo systemctl start dvconsole
-----
+ $ sudo systemctl start dvconsole
 +
 . Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
 +
@@ -110,33 +110,39 @@ NOTE: При авторизации укажите имя в формате `use
 
 . Установите модуль Служба {ws} следующей командой:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-workerservice
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-workerservice
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-workerservice
+====
 +
 . Отредактируйте конфигурационный файл:
 +
-[source,bash]
-----
-sudo nano /usr/lib/docsvision/workerservice/Configuration.json
-----
+ $ sudo nano /usr/lib/docsvision/workerservice/Configuration.json
 +
 . Запустите службу модуля:
 +
-[source,bash]
-----
-sudo systemctl start dvworkerservice
-----
+ $ sudo systemctl start dvworkerservice
 
 [#purge]
 == Удаление ненужных пакетов
 
 . Удалите ненужные системе пакеты (зависимости, которые принесли за собой другие пакеты при установке) командой:
 +
-[source,bash]
-----
-sudo apt-get autoremove
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get autoremove
+
+РЕД ОС::
++
+ $ sudo dnf autoremove
+====
 
 Ознакомьтесь со списком полезных команд в пункте xref:admin:post-config-server.adoc[]

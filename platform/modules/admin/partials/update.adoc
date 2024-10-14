@@ -10,11 +10,32 @@
 . Устанавливать обновление рекомендуется на отдельную машину во избежание случаев, когда остаются старые файлы и папки системы.
 . Обновите серверные компоненты на сервере Linux командой:
 +
+[tabs]
+====
+Astra Linux::
++
 [source,subs=attributes]
 ----
 sudo apt-get update
-sudo apt-get install --only-upgrade docsvision-{update}
+sudo apt-get install --only-upgrade docsvision-{update}*
 ----
+ifndef::mancons[]
+РЕД ОС::
++
+[source,subs=attributes]
+----
+sudo dnf update docsvision-{update}*
+----
+endif::[]
+ifdef::mancons[]
+РЕД ОС::
++
+[source,subs=attributes]
+----
+sudo dnf update docsvision-managementconsole* && sudo dnf update docsvision-settingsservice* && sudo dnf update docsvision-externalapi*
+----
+endif::[]
+====
 +
 // tag::config[]
 ifdef::is-service[]
