@@ -9,76 +9,88 @@
 
 . Установите пакеты модуля:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-webclient
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-webclient
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-webclient
+====
 +
 . Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{wc}_, раздел "xref:dvwebclient.adoc[Установка {wc}а]".
 +
 . Запустите службу {wc}а:
 +
-[source,bash]
-----
-sudo systemctl start dvwebclient
-----
+ $ sudo systemctl start dvwebclient
 
 [#sett-serv]
 == Установка Сервиса настроек
 
 . Установите сервис:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-settingsservice
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-settingsservice
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-settingsservice
+====
 +
 . Выполните конфигурацию сервиса настроек в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#sett-serv[Установка {of-mc}]".
 +
 . Запустите сервис:
 +
-[source,bash]
-----
-sudo systemctl start dvsettings
-----
+ $ sudo systemctl start dvsettings
 
 [#ext-api]
 == Установка Сервиса внешнего API {of-mc}
 
 . Установите сервис внешнего API:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-externalapi
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-externalapi
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-externalapi
+====
 +
 . Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
 +
 . Запустите сервис внешнего API {of-mc}:
 +
-[source,bash]
-----
-sudo systemctl start dvexternalapi
-----
+ $ sudo systemctl start dvexternalapi
 
 [#manconsole]
 == Установка {of-mc}
 
 . Следующей командой установите {mc}:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-managementconsole
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-managementconsole
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-managementconsole
+====
 +
 . Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#console[Установка {of-mc}]".
 +
 . Запустите службу:
 +
-[source,bash]
-----
-sudo systemctl start dvconsole
-----
+ $ sudo systemctl start dvconsole
 +
 . Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
 +
@@ -89,57 +101,86 @@ NOTE: При авторизации укажите имя в формате `use
 
 . Установите модуль Служба {ws} следующей командой:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-workerservice
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-workerservice
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-workerservice
+====
 +
 . Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _Служба {ws}_, раздел "xref:dvworkerservice.adoc[]".
 +
 . Запустите службу модуля:
 +
-[source,bash]
-----
-sudo systemctl start dvworkerservice
-----
+ $ sudo systemctl start dvworkerservice
 
 [#workflow]
 == Установка СУБП
 
 . Установите модуль _{wf}_ следующей командой:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-workflow
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-workflow
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-workflow
+====
 +
 . Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:dvworkflow.adoc[]".
 +
 . Запустите службу модуля:
 +
-[source,bash]
-----
-sudo systemctl start dvworkflow
-----
+ $ sudo systemctl start dvworkflow
 
 // [#takeoffice]
 // == Установка приложения {to}
 //
 // . Установите приложение _{to}_ следующей командой:
 // +
-// [source,bash]
+// [tabs]
+// ====
+// Astra Linux::
+// +
+// [source,bash,subs=attributes]
 // ----
 // sudo apt-get install docsvision-takeoffice-server
 // ----
+//
+// РЕД ОС::
+// +
+// [source,bash,subs=attributes]
+// ----
+// sudo dnf install docsvision-takeoffice-server
+// ----
+// ====
 //
 // [#docmgt]
 // == Установка приложения {dm}
 //
 // . Установите приложение _{dm}_ следующей командой:
 // +
-// [source,bash]
+// [tabs]
+// ====
+// Astra Linux::
+// +
+// [source,bash,subs=attributes]
 // ----
 // sudo apt-get install docsvision-documentmanagement-server
 // ----
 //
+// РЕД ОС::
+// +
+// [source,bash,subs=attributes]
+// ----
+// sudo dnf install docsvision-documentmanagement-server
+// ----
+// ====
 // Ознакомьтесь со списком полезных команд в пункте "xref:post-config-section-server.adoc[]".

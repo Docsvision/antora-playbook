@@ -2,23 +2,22 @@
 
 Данный раздел описывает альтернативные способы установки {dv}: создание зеркала репозитория {dv} и создание собственного простого репозитория из предоставленного архива пакетов.
 
-[#mirror]
-== Создание зеркала репозитория {dv}
+[#astra]
+== Создание зеркала репозитория {dv} Astra Linux
 
 При необходимости можно выполнить установку системы в ОС Astra Linux с подключением к собственной копии репозитория {dv}. Для этого выполните шаги, описанные в инструкции ниже.
 
 . Установите пакет `apt-mirror` с помощью графического менеджера пакетов или командой:
 +
-[source,bash]
-----
-sudo apt-get install apt-mirror
-----
+.Astra Linux
+ $ sudo apt-get install apt-mirror
 +
 . Выполните настройку пакета в конфигурационном файле `/etc/apt/mirror.list`. В этом файле указаны параметры, принятые по умолчанию, и пути к репозиториям. Файл создается автоматически, убедитесь, что содержимое соответствует примеру ниже.
 +
 Добавьте в конфигурационный файл адреса репозиториев {dv} в формате, подобном `/etc/apt/sources.list`:
 +
-[source]
+.Astra Linux
+[source,bash]
 ----
 # sudo nano /etc/apt/mirror.list
 
@@ -57,17 +56,11 @@ clean https://packages.docsvision.com/astra
 +
 Создать каталог можно командой ниже. Для примера использовано принятое по умолчанию имя каталога для сохранения `/var/spool/apt-mirror`:
 +
-[source,bash]
-----
-sudo mkdir -p /var/spool/apt-mirror/{mirror,skel,var}
-----
+ $ sudo mkdir -p /var/spool/apt-mirror/{mirror,skel,var}
 +
 . После создания каталог нужно передать служебному пользователю `apt-mirror`, назначив права доступа командой:
 +
-[source,bash]
-----
-sudo chown -R apt-mirror:apt-mirror /var/spool/apt-mirror
-----
+ $ sudo chown -R apt-mirror:apt-mirror /var/spool/apt-mirror
 +
 . Создайте скрипт `postmirror` для автоматической загрузки ключа проверки подлинности репозитория командой ниже:
 +
@@ -78,10 +71,7 @@ echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/
 +
 . После настройки и создания каталога, создание зеркала репозиториев можно выполнить командой:
 +
-[source,bash]
-----
-sudo -u apt-mirror apt-mirror
-----
+ $ sudo -u apt-mirror apt-mirror
 +
 . Настройте регулярное обновление репозитория (опционально).
 +
@@ -100,19 +90,40 @@ sudo -u apt-mirror apt-mirror
 +
 . Полученный каталог можно передать на другую машину, указав в `sources.list` локальный путь до него:
 +
-[source,bash]
-----
-deb file:/var/spool/apt-mirror/mirror/packages.docsvision.com/astra 1.7_x86-64 6.1
-----
+ $ deb file:/var/spool/apt-mirror/mirror/packages.docsvision.com/astra 1.7_x86-64 6.1
 +
 . [[http]]В качестве альтернативы предыдущему пункту можно настроить HTTP-сервер для раздачи содержимого репозитория. Тогда потребуется указать адрес сервера в `sources.list`:
 +
-[source,bash]
-----
-deb http://apt.domain.com/astra 1.7_x86-64 6.1
-----
+ $ deb http://apt.domain.com/astra 1.7_x86-64 6.1
 +
 .. После добавления адреса HTTP-сервера в `/etc/apt/sources.list` выполните шаги в инструкции "xref:pre-config-server.adoc[]", но в качестве источника вместо официального репозитория {dv} укажите адрес развернутого http-сервера.
+
+[#red]
+== Создание зеркала репозитория {dv} РЕД ОС
+
+При необходимости можно выполнить установку системы в РЕД ОС с подключением к собственной копии репозитория {dv}. Для этого выполните шаги, описанные в инструкции ниже.
+
+. Установите пакет `reposync` с помощью графического менеджера пакетов или командой:
++
+. Создайте зеркало репозитория. Способ наполнения каталога, ручной или автоматический, не имеет значения.
++
+.РЕД ОС
+ $ sudo dnf install reposync
++
+.Полное зеркало, сохранится в рабочий каталог:
+[source]
+----
+sudo dnf install yum-utils
+reposync --repoid=docsvision --download-metadata
+----
++
+.Только последние версии:
+[source]
+----
+sudo dnf install yum-utils createrepo
+reposync --repoid=docsvision --newest-only
+createrepo docsvision
+----
 
 [#http-server]
 == Настройка HTTP-сервера (опционально)
@@ -123,10 +134,7 @@ deb http://apt.domain.com/astra 1.7_x86-64 6.1
 
 . Установите пакет apache2 можно с помощью графического менеджера пакетов или следующей командой:
 +
-[source,bash]
-----
-sudo apt-get install apache2
-----
+ $ sudo apt-get install apache2
 +
 При установке пакета apache2, по пути `/etc/apache2/sites-available/000-default.conf`, создается конфигурация сайта со страницей приветствия. Можно использовать уже существующую конфигурацию или создать новую. Во втором случае необходимо удалить символьную ссылку на `000-default.conf` в `sites-enabled`.
 +
@@ -151,17 +159,11 @@ sudo apt-get install apache2
 +
 Если конфигурация по умолчанию была изменена, необходимо создать символьную ссылку на новую в `sites-enabled`:
 +
-[source,bash]
-----
-sudo ln -s ../sites-available/001-apt-mirror.conf /etc/apache2/sites-enabled/001-apt-mirror.conf
-----
+ $ sudo ln -s ../sites-available/001-apt-mirror.conf /etc/apache2/sites-enabled/001-apt-mirror.conf
 +
 . Выполните перезагрузку конфигурации командой:
 +
-[source,bash]
-----
-sudo systemctl reload apache2
-----
+ $ sudo systemctl reload apache2
 
 [#simple-repo]
 == Создание простого репозитория (опционально)
@@ -170,14 +172,11 @@ sudo systemctl reload apache2
 
 . Установите пакеты командой:
 +
-[source,bash]
-----
-sudo apt-get install apt-utils gnupg zip unzip
-----
+ $ sudo apt-get install apt-utils gnupg zip unzip
 +
 . Распакуйте архив с примером и выдайте права на запуск:
 +
-[source,bash]
+[source]
 ----
 unzip simplerepo.zip <.>
 chmod +x simplerepo.sh
@@ -186,10 +185,7 @@ chmod +x simplerepo.sh
 +
 . Сгенерируйте GPG-ключ для подписания репозитория:
 +
-[source,bash]
-----
-gpg --full-generate-key
-----
+ $ gpg --full-generate-key
 +
 Не изменяйте тип ключа по умолчанию (DSA и RSA). При успешном исходе результат окажется примерно следующий:
 +
@@ -205,10 +201,7 @@ sub   rsa3072 2023-09-18 [E]
 +
 . Переместите архивы с пакетами в каталог `pending` и создайте репозиторий следующей командой:
 +
-[source,bash]
-----
-./simplerepo.sh
-----
+ $ ./simplerepo.sh
 +
 * Пакеты хранятся в `wwwroot/pool/<component>`, их можно перемещать между компонентами вручную.
 * По умолчанию пакеты из архива попадают в компонент `unstable`. После тестирования их можно переместить в `stable`.
