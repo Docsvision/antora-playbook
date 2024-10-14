@@ -26,10 +26,19 @@ WARNING: Перед установкой ознакомьтесь с разде�
 
 Серверная часть _{of-mir}_ устанавливается на компьютер с сервером {dv}.
 
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU3@platform:admin:partial$install.adoc[]
 . Установите расширение _{of-mir}_ {wc}а следующей командой:
 +
- sudo apt-get install docsvision-ext-m4dregistry-webc
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-ext-m4dregistry-webc
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-ext-m4dregistry-webc
+====
 +
 . <<windows,Установите>> серверные компоненты модуля в ОС Windows.
 
@@ -119,8 +128,7 @@ NOTE: Доступен для установки, если установлен 
 
 . Чтобы удалить модуль, выполните команду:
 +
-[subs=attributes]
- $ sudo apt-get purge docsvision-{wt}
+include::CU3@platform:admin:partial$delete.adoc[]
 +
 . Удалите настройки модуля из _{of-mc}_.
 . Удалите серверный компонент _{of-mir}_ в ОС Windows стандартным способом.
