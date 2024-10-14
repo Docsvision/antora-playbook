@@ -38,18 +38,18 @@ buttons:::
 +
 Кнопка, которая была нажата пользователем при закрытии сообщения.
 
-== Примеры
-
-Ниже приведён пример использования функции `ShowMessage` для получения подтверждения выполнения операции от пользователя.
-
-[source,csharp]
-----
-private void deleteFiles_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
- {
-    var userChoise = this.CardControl.ShowMessage("Подтвердите выполнение операции","Требуется подтверждение","При выполнении операции будут удалены все файлы.", MessageType.Question, MessageButtons.YesNo);
-        
-    if (userChoise = MessageResult.Ok){
-        DeleteAllFiles();
-    }
-}
-----
+// == Примеры
+//
+// Ниже приведён пример использования функции `ShowMessage` для получения подтверждения выполнения операции от пользователя.
+//
+// [source,csharp]
+// ----
+// private void deleteFiles_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//  {
+//     var userChoise = this.CardControl.ShowMessage("Подтвердите выполнение операции","Требуется подтверждение","При выполнении операции будут удалены все файлы.", MessageType.Question, MessageButtons.YesNo);
+//
+//     if (userChoise = MessageResult.Ok){
+//         DeleteAllFiles();
+//     }
+// }
+// ----

@@ -17,23 +17,23 @@ public Guid Rule { get; set; }
 +
 Идентификатор правила нумерации
 
-== Примеры
-
-Ниже приведён пример кода, который выводит на экран название правила нумерации, используемого элементом управления "Нумератор".
-
-[source,csharp]
-----
-private void ShowRuleName_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- ICustomizableControl customizable = this.CardControl;
- NumeratorBox registrationNumber = customizable.FindPropertyItem<NumeratorBox>("НомерДокумента"); <.>
- 
- Guid ruleId = registrationNumber.Rule; <.>
- 
- NumerationRulesRule numerationRule = this.CardControl.ObjectContext.GetObject<NumerationRulesRule>(ruleId);
- MessageBox.Show(numerationRule.Name); <.>
-}
-----
-<.> Получаем элемент управления с названием "НомерДокумента".
-<.> Получаем идентификатор правила нумерации.
-<.> Получаем и выводим название правила.
+// == Примеры
+//
+// Ниже приведён пример кода, который выводит на экран название правила нумерации, используемого элементом управления "Нумератор".
+//
+// [source,csharp]
+// ----
+// private void ShowRuleName_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  ICustomizableControl customizable = this.CardControl;
+//  NumeratorBox registrationNumber = customizable.FindPropertyItem<NumeratorBox>("НомерДокумента"); <.>
+//
+//  Guid ruleId = registrationNumber.Rule; <.>
+//
+//  NumerationRulesRule numerationRule = this.CardControl.ObjectContext.GetObject<NumerationRulesRule>(ruleId);
+//  MessageBox.Show(numerationRule.Name); <.>
+// }
+// ----
+// <.> Получаем элемент управления с названием "НомерДокумента".
+// <.> Получаем идентификатор правила нумерации.
+// <.> Получаем и выводим название правила.

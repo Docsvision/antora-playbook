@@ -50,37 +50,37 @@ fields:::
 
 Сертификат сотрудника может быть получен из карточки Настроек пользователя. Данный метод инициализирует новую подпись в виде объекта типа `BaseCardSignature`, которую использует при непосредственном подписании данных карточки _Документ_.
 
-== Примеры
-
-Ниже приведён пример подписания документа, осуществляемое из скрипта самой карточки
-
-[source,csharp]
-----
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-using DocsVision.BackOffice.WinForms.Controls;
-
-namespace BackOffice
-{
- public class CardDocumentПримерScript : CardDocumentДокументУДScript
- {
-  private void addSignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-
-   IDocumentService documentService = base.CardControl.ObjectContext.GetService<IDocumentService>(); <.>
-   bool cancel = false;
-
-   var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext); <.>
-   if(cancel) return;
-
-   var fields = documentService.GetKindSettings(base.BaseObject.SystemInfo.CardKind).DocumentSignature.Fields; <.>
-   
-   documentService.AddSignature((base.BaseObject as Document), certificate, false, fields); <.>
-  }
- }
-}
-----
-<.> Получение сервиса для работы с карточкой Документ.
-<.> Отображение окна выбора сертификата. Простой сертификат может быть установлен, если присвоить `certificate` значение `null`.
-<.> Получение из параметров вида карточки полей, для которых предусмотрено подписание.
-<.> Осуществление подписания.
+// == Примеры
+//
+// Ниже приведён пример подписания документа, осуществляемое из скрипта самой карточки
+//
+// [source,csharp]
+// ----
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+// using DocsVision.BackOffice.WinForms.Controls;
+//
+// namespace BackOffice
+// {
+//  public class CardDocumentПримерScript : CardDocumentДокументУДScript
+//  {
+//   private void addSignature_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//
+//    IDocumentService documentService = base.CardControl.ObjectContext.GetService<IDocumentService>(); <.>
+//    bool cancel = false;
+//
+//    var certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext); <.>
+//    if(cancel) return;
+//
+//    var fields = documentService.GetKindSettings(base.BaseObject.SystemInfo.CardKind).DocumentSignature.Fields; <.>
+//
+//    documentService.AddSignature((base.BaseObject as Document), certificate, false, fields); <.>
+//   }
+//  }
+// }
+// ----
+// <.> Получение сервиса для работы с карточкой Документ.
+// <.> Отображение окна выбора сертификата. Простой сертификат может быть установлен, если присвоить `certificate` значение `null`.
+// <.> Получение из параметров вида карточки полей, для которых предусмотрено подписание.
+// <.> Осуществление подписания.

@@ -37,45 +37,45 @@ signature:::
 
 Данный метод проверяет части указанной подписи на соответствие текущим данным (версия основного файла) документа, без проверки подлинности самой ЭП.
 
-== Примеры
-
-Ниже приведён пример использования данного метода в скрипте карточки
-
-[source,csharp]
-----
-using System.Linq;
-using System.Windows.Forms.Design;
-
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-using DocsVision.BackOffice.ObjectModel.Services.Entities.KindSetting;
-using DocsVision.Platform.ObjectModel;
-
-namespace BackOffice
-{
- public class CardDocumentПримерScript : CardDocumentДокументУДScript
- {
-  private void checkActual_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-   Document document = (base.BaseObject as Document);
-   ObjectContext objectContext = base.CardControl.ObjectContext;
-
-   IDocumentService documentService = objectContext.GetService<IDocumentService>();
-   IUIService uiService = objectContext.GetService<IUIService>();
-
-   DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
-
-   BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last();
-
-   bool result = documentService.CheckActualSignature(document, documentSetting.DocumentSignature.Fields, lastSignature);
-
-   if (result)
-   {
-    uiService.ShowMessage("Последняя подпись является актуальной");
-   } else {
-    uiService.ShowError("Последняя подпись неактуальна");
-   }
-  }
- }
-}
-----
+// == Примеры
+//
+// Ниже приведён пример использования данного метода в скрипте карточки
+//
+// [source,csharp]
+// ----
+// using System.Linq;
+// using System.Windows.Forms.Design;
+//
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+// using DocsVision.BackOffice.ObjectModel.Services.Entities.KindSetting;
+// using DocsVision.Platform.ObjectModel;
+//
+// namespace BackOffice
+// {
+//  public class CardDocumentПримерScript : CardDocumentДокументУДScript
+//  {
+//   private void checkActual_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//    Document document = (base.BaseObject as Document);
+//    ObjectContext objectContext = base.CardControl.ObjectContext;
+//
+//    IDocumentService documentService = objectContext.GetService<IDocumentService>();
+//    IUIService uiService = objectContext.GetService<IUIService>();
+//
+//    DocumentSetting documentSetting = documentService.GetKindSettings(document.SystemInfo.CardKind);
+//
+//    BaseCardSignature lastSignature = document.MainInfo.SignatureList.Signatures.Last();
+//
+//    bool result = documentService.CheckActualSignature(document, documentSetting.DocumentSignature.Fields, lastSignature);
+//
+//    if (result)
+//    {
+//     uiService.ShowMessage("Последняя подпись является актуальной");
+//    } else {
+//     uiService.ShowError("Последняя подпись неактуальна");
+//    }
+//   }
+//  }
+// }
+// ----

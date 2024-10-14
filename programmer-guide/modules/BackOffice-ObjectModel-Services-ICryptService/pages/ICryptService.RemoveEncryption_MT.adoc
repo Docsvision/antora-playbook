@@ -36,53 +36,53 @@ fileId:::
 
 Данный метод, в отличие от метода `ICryptService.DecryptFile`, удаляет крипто-объекты, используемые для расшифровки файла сотрудниками, которым предоставлен соответствующий доступ.
 
-== Примеры
-
-Приведенный ниже пример содержит код скрипта карточки типа _Документ_, который расшифровывает основные файла текущей карточки. В ходе работы скрипта будет вызвана при необходимости форма для выбора сертификата шифрования.
-
-[source,csharp]
-----
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
-
-using DocsVision.Platform.ObjectManager;
-using DocsVision.Platform.ObjectModel;
-using DocsVision.BackOffice.WinForms;
-using DocsVision.BackOffice.WinForms.Controls;
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-
-namespace BackOffice
-{
- public class CardDocumentПримерScript : CardDocumentДокументУДScript
- {
-  private void RemoveEncryption_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-   bool cancel = false;
-            
-   X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
-   if(cancel) return; <.>
-            
-   ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
-
-   IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
-   foreach (DocumentFile item in mainFiles)
-   {
-    FileData fileData = base.Session.FileManager.GetFile(item.FileVersionRowId);
-                
-    if(fileData.Encrypted) <.>
-    {
-     cryptService.RemoveEncryption(certificate, item.FileVersionRowId);
-    }
-   }
-  }
- }
-}
-----
-<.> Вызов формы выбора сертификата.
-<.> Получения сервиса шифрования базовых объектов.
-<.> Получение основных файлов.
-<.> Проверка наличия зашифрованного файла.
+// == Примеры
+//
+// Приведенный ниже пример содержит код скрипта карточки типа _Документ_, который расшифровывает основные файла текущей карточки. В ходе работы скрипта будет вызвана при необходимости форма для выбора сертификата шифрования.
+//
+// [source,csharp]
+// ----
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Windows.Forms;
+// using System.Security.Cryptography.X509Certificates;
+//
+// using DocsVision.Platform.ObjectManager;
+// using DocsVision.Platform.ObjectModel;
+// using DocsVision.BackOffice.WinForms;
+// using DocsVision.BackOffice.WinForms.Controls;
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+//
+// namespace BackOffice
+// {
+//  public class CardDocumentПримерScript : CardDocumentДокументУДScript
+//  {
+//   private void RemoveEncryption_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//    bool cancel = false;
+//
+//    X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext);
+//    if(cancel) return; <.>
+//
+//    ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
+//
+//    IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
+//    foreach (DocumentFile item in mainFiles)
+//    {
+//     FileData fileData = base.Session.FileManager.GetFile(item.FileVersionRowId);
+//
+//     if(fileData.Encrypted) <.>
+//     {
+//      cryptService.RemoveEncryption(certificate, item.FileVersionRowId);
+//     }
+//    }
+//   }
+//  }
+// }
+// ----
+// <.> Вызов формы выбора сертификата.
+// <.> Получения сервиса шифрования базовых объектов.
+// <.> Получение основных файлов.
+// <.> Проверка наличия зашифрованного файла.

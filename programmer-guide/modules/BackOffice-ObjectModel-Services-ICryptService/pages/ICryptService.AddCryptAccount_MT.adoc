@@ -41,56 +41,56 @@ accountName:::
 
 В том случае, если файл не является зашифрованным, будет произведено шифрование сертификатом `certificate`, поэтому вызывать метод `ICryptService.EncryptFile` не требуется.
 
-== Примеры
-
-В приведенном ниже примере (скрипт вызываемый из карточки приложения "{dm}"), выполняется шифрование основных файлов текущей карточки ключами сотрудников предопределённой группы
-
-[source,csharp]
-----
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
-
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-using DocsVision.BackOffice.WinForms;
-using DocsVision.BackOffice.WinForms.Controls;
-using DocsVision.Platform.ObjectManager;
-
-namespace BackOffice
-{
- public class CardDocumentТестScript : CardDocumentДокументУДScript
- {
-  private void ЗашифроватьДляГруппы_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-   bool cancel = false;
-
-   X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext); <.>
-   if (cancel) return;
-
-   ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
-   IStaffService staffService = base.CardControl.ObjectContext.GetService<IStaffService>();
-   
-   IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
-
-   StaffGroup staffGroup = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
-
-   foreach (DocumentFile item in mainFiles)
-   {
-
-    foreach (StaffEmployee employee in staffGroup.Employees) <.>
-    {
-     cryptService.AddCryptAccount(certificate, item.FileVersionRowId, employee.AccountName);
-    }
-   }
-  }
- }
-}
-----
-<.> Вызов формы для получения сертификата текущего сотрудника.
-<.> Получения сервиса шифрования базовых объектов и сервиса для работы со справочником сотрудников.
-<.> Получение основных файлов карточки.
-<.> Получение группы с идентификатором.
-<.> Предоставление доступа к текущему файлу сотрудникам, входящих в группу сотрудников. Отдельного вызова шифрования файла не требуется, т.к. при в том случае, если файл не зашифрован, шифрование будет произведено автоматически.
+// == Примеры
+//
+// В приведенном ниже примере (скрипт вызываемый из карточки приложения "{dm}"), выполняется шифрование основных файлов текущей карточки ключами сотрудников предопределённой группы
+//
+// [source,csharp]
+// ----
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Security.Cryptography.X509Certificates;
+// using System.Windows.Forms;
+//
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+// using DocsVision.BackOffice.WinForms;
+// using DocsVision.BackOffice.WinForms.Controls;
+// using DocsVision.Platform.ObjectManager;
+//
+// namespace BackOffice
+// {
+//  public class CardDocumentТестScript : CardDocumentДокументУДScript
+//  {
+//   private void ЗашифроватьДляГруппы_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//    bool cancel = false;
+//
+//    X509Certificate2 certificate = SelectCertificateForm.SelectCertificate(ref cancel, base.CardControl.ObjectContext); <.>
+//    if (cancel) return;
+//
+//    ICryptService cryptService = base.CardControl.ObjectContext.GetService<ICryptService>(); <.>
+//    IStaffService staffService = base.CardControl.ObjectContext.GetService<IStaffService>();
+//
+//    IEnumerable<DocumentFile> mainFiles = (base.BaseObject as Document).Files.Where<DocumentFile>(t => t.FileType = DocumentFileType.Main); <.>
+//
+//    StaffGroup staffGroup = staffService.GetGroup(new Guid("00000000-0000-0000-0000-000000000000")); <.>
+//
+//    foreach (DocumentFile item in mainFiles)
+//    {
+//
+//     foreach (StaffEmployee employee in staffGroup.Employees) <.>
+//     {
+//      cryptService.AddCryptAccount(certificate, item.FileVersionRowId, employee.AccountName);
+//     }
+//    }
+//   }
+//  }
+// }
+// ----
+// <.> Вызов формы для получения сертификата текущего сотрудника.
+// <.> Получения сервиса шифрования базовых объектов и сервиса для работы со справочником сотрудников.
+// <.> Получение основных файлов карточки.
+// <.> Получение группы с идентификатором.
+// <.> Предоставление доступа к текущему файлу сотрудникам, входящих в группу сотрудников. Отдельного вызова шифрования файла не требуется, т.к. при в том случае, если файл не зашифрован, шифрование будет произведено автоматически.

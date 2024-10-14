@@ -45,27 +45,27 @@ public interface ITableControl
 |`CellValueChanged` |Событие вызывается при изменении значения ячейки.
 |===
 
-== Примеры
-
-Ниже приведён пример использования интерфейса `ITableControl` при добавлении строки в элемент управления типа "Таблица"
-
-[source,csharp]
-----
-private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-{
- ICustomizableControl customizable = CardControl as ICustomizableControl; <.>
-
- ITableControl table = customizable.FindPropertyItem<ITableControl>("Список"); <.>
-
- BaseCardProperty property = table.AddRow(this.BaseObject); <.>
-
- property[property.Fields[0].Alias] = "Добавленное значение"; <.>
-
- table.RefreshRow(table.RowCount -- 1); <.>
-}
-----
-<.> Получение доступа к разметке.
-<.>  Поиск элемента управления типа "Таблица" с названием "Список".
-<.> Добавление строки.
-<.> Присвоение значения первой ячейке.
-<.> Обновление строки для отображения присвоенного значения в интерфейсе.
+// == Примеры
+//
+// Ниже приведён пример использования интерфейса `ITableControl` при добавлении строки в элемент управления типа "Таблица"
+//
+// [source,csharp]
+// ----
+// private void Add_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+// {
+//  ICustomizableControl customizable = CardControl as ICustomizableControl; <.>
+//
+//  ITableControl table = customizable.FindPropertyItem<ITableControl>("Список"); <.>
+//
+//  BaseCardProperty property = table.AddRow(this.BaseObject); <.>
+//
+//  property[property.Fields[0].Alias] = "Добавленное значение"; <.>
+//
+//  table.RefreshRow(table.RowCount -- 1); <.>
+// }
+// ----
+// <.> Получение доступа к разметке.
+// <.>  Поиск элемента управления типа "Таблица" с названием "Список".
+// <.> Добавление строки.
+// <.> Присвоение значения первой ячейке.
+// <.> Обновление строки для отображения присвоенного значения в интерфейсе.

@@ -33,46 +33,46 @@ signedCms:::
 +
 Расположение временного файла, содержащего расшифрованный объект
 
-== Примеры
-
-Ниже приведён пример скрипта карточки, который запускает загрузку основного файла упакованного с подписью в криптографическое сообщение.
-
-[source,csharp]
-----
-using System.Security.Cryptography.Pkcs;
-using System.Windows.Forms;
-using DocsVision.BackOffice.ObjectModel;
-using DocsVision.BackOffice.ObjectModel.Services;
-using DocsVision.Platform.ObjectModel;
-
-namespace BackOffice
-{
- public class CardDocumentПримерScript : CardDocumentДокументУДScript
- {
-  private void importMainFile_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-  {
-   Document document = (base.BaseObject as Document);
-   ObjectContext objectContext = base.CardControl.ObjectContext;
-   
-   IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
-
-   OpenFileDialog openFileDialog = new OpenFileDialog();
-   openFileDialog.Multiselect = false;
-   openFileDialog.Filter = "Файлы p7s (*.p7s)|*.p7s";
-   DialogResult result = openFileDialog.ShowDialog();
-   if (result != DialogResult.OK) return;
-   string fileName = openFileDialog.FileName; <.>
-
-   SignedCms signedCms = null;
-
-   string decodedFileName = documentService.DecodeSignedDocument(fileName, document, out signedCms); <.>
-
-   documentService.AttachMainFile(document, decodedFileName, signedCms); <.>
-  }
- }
-}
-----
-<.> Получение сервиса для работы с документами.
-<.> Организация выбора файла с криптографическим сообщением.
-<.> Расшифровка (распаковка) файла `.p7s`, сообщение CMS/PKCS 7 записывается в `signedCms`.
-<.> Загрузка основного файла и подписи к нему в документ.
+// == Примеры
+//
+// Ниже приведён пример скрипта карточки, который запускает загрузку основного файла упакованного с подписью в криптографическое сообщение.
+//
+// [source,csharp]
+// ----
+// using System.Security.Cryptography.Pkcs;
+// using System.Windows.Forms;
+// using DocsVision.BackOffice.ObjectModel;
+// using DocsVision.BackOffice.ObjectModel.Services;
+// using DocsVision.Platform.ObjectModel;
+//
+// namespace BackOffice
+// {
+//  public class CardDocumentПримерScript : CardDocumentДокументУДScript
+//  {
+//   private void importMainFile_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+//   {
+//    Document document = (base.BaseObject as Document);
+//    ObjectContext objectContext = base.CardControl.ObjectContext;
+//
+//    IDocumentService documentService = objectContext.GetService<IDocumentService>(); <.>
+//
+//    OpenFileDialog openFileDialog = new OpenFileDialog();
+//    openFileDialog.Multiselect = false;
+//    openFileDialog.Filter = "Файлы p7s (*.p7s)|*.p7s";
+//    DialogResult result = openFileDialog.ShowDialog();
+//    if (result != DialogResult.OK) return;
+//    string fileName = openFileDialog.FileName; <.>
+//
+//    SignedCms signedCms = null;
+//
+//    string decodedFileName = documentService.DecodeSignedDocument(fileName, document, out signedCms); <.>
+//
+//    documentService.AttachMainFile(document, decodedFileName, signedCms); <.>
+//   }
+//  }
+// }
+// ----
+// <.> Получение сервиса для работы с документами.
+// <.> Организация выбора файла с криптографическим сообщением.
+// <.> Расшифровка (распаковка) файла `.p7s`, сообщение CMS/PKCS 7 записывается в `signedCms`.
+// <.> Загрузка основного файла и подписи к нему в документ.
