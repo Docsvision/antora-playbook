@@ -39,8 +39,8 @@ Astra Linux::
 +
 [source,bash]
 ----
-curl -fsSL https://packages.docsvision.com/astra/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docsvision.gpg
-echo "deb https://packages.docsvision.com/astra $(. /etc/os-release && echo $VERSION_CODENAME) 6.1" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
+echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
 sudo apt-get update
 ----
 
