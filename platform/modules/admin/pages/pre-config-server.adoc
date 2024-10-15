@@ -57,37 +57,35 @@ gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
 ----
 ====
 +
-. Подключите репозитории дополнительного ПО предпочтительным способом. Для РЕД ОС перейдите сразу к <<kerb,пункту 4>>.
+. Подключите репозитории дополнительного ПО (.NET) предпочтительным способом. Для РЕД ОС перейдите сразу к <<kerb,пункту 4>>.
 +
-* Используйте расширенный репозиторий Astra Linux:
+* Используйте расширенный репозиторий Astra Linux (предпочтительный способ).
+// , раскомментировав следующую строку в файле `/etc/apt/sources.list`
+// +
+// [source]
+// ----
+// deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
+// ----
 +
-[lowerroman]
-.. В файле `/etc/apt/sources.list` раскомментируйте строку:
-+
-[source]
-----
-deb https://download.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free
-----
-+
-* Используйте репозиторий {ms}:
-+
-[lowerroman]
-.. Подключите репозиторий следующими командами:
-+
-[source,bash]
-----
-sudo apt-get install packages-microsoft-prod
-sudo apt-get update
-----
-+
-.. Поднимите приоритет пакетов из репозитория {ms}, для этого создайте файл `/etc/apt/preferences.d/microsoft.pref` и добавьте в него следующие строки:
-+
-[source]
-----
-Package: dotnet* aspnet* netstandard*
-Pin: origin packages.microsoft.com
-Pin-Priority: 910
-----
+* Получите необходимое ПО из репозитория {ms}.
+// +
+// [lowerroman]
+// .. Подключите репозиторий следующими командами:
+// +
+// [source,bash]
+// ----
+// sudo apt-get install packages-microsoft-prod
+// sudo apt-get update
+// ----
+// +
+// .. Поднимите приоритет пакетов из репозитория {ms}, для этого создайте файл `/etc/apt/preferences.d/microsoft.pref` и добавьте в него следующие строки:
+// +
+// [source]
+// ----
+// Package: dotnet* aspnet* netstandard*
+// Pin: origin packages.microsoft.com
+// Pin-Priority: 910
+// ----
 +
 . [[kerb]]Чтобы иметь возможность использования сквозной аутентификации в {wc}е, {wincl}е, РМА и {of-mc} в Linux необходимо выполнить специальные настройки Kerberos и используемого браузера.
 // end::preconfig[]
