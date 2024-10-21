@@ -7,4 +7,79 @@
 * Инструкция для https://wiki.astralinux.ru/pages/viewpage.action?pageId=27362929[Astra Linux]
 * Инструкция для https://redos.red-soft.ru/base/redos-7_3/7_3-administation/7_3-domain-redos/7_3-domain-config/7_3-samba-dns-backend-bind9-dlz/7_3-install-samba-dc-bind/?nocache=1728989583495[РЕД ОС]
 
-Особенность конфигурации Samba при использовании с {dv} заключается в том, что необходимо выполнить настройку в файле `smb.conf`. Найдите секцию `[global]` и для параметра `ldap server require strong auth` установите значение `no`, в противном случае подключение не будет установлено. По умолчанию значение параметра `yes`, что требует подключения через SSL/TLS, это вызывает ошибку `The supplied credential is invalid`.
+. Убедитесь, что у сервера статический IP и файл `/etc/hosts` корректно разрешает FQDN контроллера домена. Имя хоста не должно разрешаться в IP-адрес `127.0.0.1` или в любой другой IP-адрес, кроме используемого на внешнем сетевом интерфейсе.
+. Добавьте запись следующего вида в `/etc/hosts`:
++
+ 172.16.6.25 dc1.dv.com dc1
++
+. Задайте имя хосту:
++
+ hostnamectl set-hostname dc1.dv.com
++
+. Установите пакеты Samba:
++
+[tabs]
+====
+Astra Linux::
+ $ apt-get update && apt-get install samba
++
+РЕД ОС::
++
+ $ dnf install samba*
+====
++
+. Выполните инициализацию контроллера домена:
++
+[source]
+----
+sudo systemctl stop winbind smbd nmbd krb5-kdc
+sudo systemctl mask winbind smbd nmbd krb5-kdc
+
+rm -rf /etc/samba/* /var/lib/samba/* /usr/local/samba/*
+samba-tool domain provision --realm=DV.COM --domain=DV --adminpass='P@$$w0rd ' --option='dns forwarder=1.1.1.1' <.>
+----
+<.> Если сервер имеет несколько сетевых интерфейсов, укажите их следующим образом:
++
+ --option="interfaces=lo eth0" --option="bind interfaces only=yes"
++
+Если не `dns backend` по умолчанию не изменяется, замените `dns forwarder` на свой `dns` (при наличии).
++
+. Измените конфигурацию контроллера домена. В файле `smb.conf` найдите секцию `[global]` и для параметра `ldap server require strong auth` установите значение `no`, в противном случае подключение не будет установлено. По умолчанию значение параметра `yes`, что требует подключения через SSL/TLS, это вызывает ошибку `The supplied credential is invalid`.
+. Измените файл настроек DNS `/etc/resolv.conf`.
++
+[source]
+----
+search dv.com
+nameserver 172.16.6.25
+----
++
+. Запустите контроллер домена:
++
+[source]
+----
+sudo cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+sudo cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+----
++
+. Создайте пользователей:
++
+[source]
+----
+samba-tool user create Docsvision 'P@$$w0rd' <.>
+samba-tool user create Orlov 'P@$$w0rd ' --given-name=Игорь --surname=Орлов --description='Генеральный директор' <.>
+----
+<.> Использовать УЗ `Administrator` в `SystemUserAccount` и других местах нельзя, это не будет
+работать, для {dv} нужно создать отдельную УЗ.
+<.> Создание обычного пользователя.
++
+. При необходимости можно выпустить keytab файл следующим образом:
++
+[source]
+----
+samba-tool user create --random-password webauth <.>
+samba-tool user setexpiry webauth --noexpiry
+samba-tool spn add HTTP/webclient.dv.com webauth <.>
+samba-tool domain exportkeytab /tmp/krb5.keytab --principal=HTTP/webclient.dv.com
+----
+<.> Создание пользователя.
+<.> Создание keytab файла.
