@@ -1,0 +1,323 @@
+:dvsup:
+
+= Разработка расширения для программы DVSupService
+
+NOTE: Программа _DVSupService_ устанавливается на клиентскую машину только в ОС семейства Linux. Для ОС {ms} Windows используется _DVWebTool_, см. подробнее "xref:user:prepare-add-components.adoc#dvWebTool[Установка и запуск службы DVWebTool]".
+
+_DVSupService_ является аналогом _DVWebTool_ в ОС семейства Linux, программа так же поддерживает расширяемость. Код расширений двух программ частично пересекается по используемым классам и методам, но имеются и существенные различия, в данном разделе приведён пример расширения программы _DVSupService_.
+
+== Расширение {wc}а
+
+Полный код примера доступен в https://github.com/Docsvision/WebClient-Samples/tree/master/Others/Watermark[репозитории {dv} на GitHub].
+
+Для работы DvSupService использует `FileOperationsWithTokenController` вместо `FileOperationsController`.
+
+.Файл `_Others\Watermark\DvSupServiceExtension.WatermarkServerExtension\Controllers\FileOperationsWithTokenController.cs_`
+[source,csharp]
+----
+    public class FileOperationsWithTokenController : ControllerBase
+    {
+        private readonly ICurrentObjectContextProvider currentObjectContextProvider;
+        private readonly ISessionContextProvider sessionContextProvider;
+        private readonly IHttpContextAccessor contextAccessor;
+        private readonly ITokenService tokenService;
+        private readonly IFileService fileService;
+
+        public FileOperationsWithTokenController(ICurrentObjectContextProvider currentObjectContextProvider,
+            ISessionContextProvider sessionContextProvider, IHttpContextAccessor contextAccessor,
+            ITokenService tokenService, IFileService fileService)
+        {
+            this.currentObjectContextProvider = currentObjectContextProvider;
+            this.sessionContextProvider = sessionContextProvider;
+            this.contextAccessor = contextAccessor;
+            this.tokenService = tokenService;
+            this.fileService = fileService;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public HttpResponseMessage GetAccessToken(Guid fileCardId, Guid versionId, Guid ownerCardId) <.>
+        {
+            var sessionContext = currentObjectContextProvider.GetOrCreateCurrentSessionContext();
+            var token = tokenService.GetAccessToken(sessionContext, fileCardId, versionId, ownerCardId);
+            return Request.CreateResponse(HttpStatusCode.OK, token);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public HttpResponseMessage GetFile(Guid accessToken) <.>
+        {
+            var tokenData = tokenService.GetTokenData(accessToken, false);
+            if (tokenData == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+
+            var sessionContext = sessionContextProvider.GetOrCreateSessionContext(tokenData.AccountName);
+            var fileData = sessionContext.Session.FileManager.GetFile(tokenData.VersionId);
+
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StreamContent(fileData.OpenReadStream());
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = fileData.Name.NormalizeFileName(contextAccessor.HttpContext),
+            };
+            return response;
+        }
+<.>
+----
+<.> Получает токен доступа для файла.
+<.> Получение файла с поддержкой AllowAnonymous. AccessToken не удаляется автоматически.
+<.> Код дополнительных методов смотрите в полном примере на GitHub.
+
+В контроллере используется сервис `IFileService`, реализация которого приведена ниже.
+
+include::./.dv-web-extensions.adoc[tags=fileservice]
+
+== Расширение программы DvSupService
+
+Когда реализовано расширение {wc}а, предоставляющее и записывающее файлы карточек, может быть реализовано расширение _DvSupService_, использующее данные функции.
+
+Расширение _DvSupService_ представляет собой сборку, в которой реализован класс `DvSupService.Extensibility.SubServiceExtension`. Данный класс определяет метод `RegisterService`, который регистрирует сервисы с необходимыми функциями во внутреннем веб-сервере _DvSupService_.
+
+Ниже приведена часть реализация класса `SubServiceExtension`, содержащего методы обработки входящих запросов на добавление водяного знака.
+
+.Файл `_Others\Watermark\DvSupServiceExtension.WatermarkWebToolExtension\WatermarkRegistrar.cs_`
+[source,csharp]
+----
+    public class WatermarkRegistrar : SubServiceExtension
+    {
+        public override void RegisterService(IServiceCollection services) <.>
+        {
+            services.AddSingleton<IWatermarkService, WatermarkService>();
+            services.AddTransient<IConnectionToWebClientService, ConnectionToWebClientService>();
+        }
+    }
+----
+<.> Регистрация сервиса.
++
+.Параметры:
+* `services` -- коллекция сервиса.
+
+В данном примере выполняется регистрация сервисов `WatermarkService` и `ConnectionToWebClientService`.
+
+Контроллеры в проекте регистрируются автоматически, если унаследованы от класса `Controller`.
+После регистрации методы контроллеров будут доступны по адресу `ws://localhost:port/%Адрес контроллера%/%Название метода%`.
+
+Ниже приведена часть реализации контроллера `WatermarkController`, содержащего методы обработки входящих запросов на добавление водяного знака.
+
+.Файл `_Others\Watermark\DvSupServiceExtension.WatermarkWebToolExtension\Controllers\WatermarkController.cs_`
+[source,csharp]
+----
+    public class WatermarkController : Controller
+    {
+        private readonly IWatermarkService watermarkService;
+        private readonly IConnectionToWebClientService connectionService;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        private const string WATERMARK = ""; <.>
+
+        public WatermarkController(IWatermarkService watermarkService, IConnectionToWebClientService connectionService)
+        {
+            this.watermarkService = watermarkService;
+            this.connectionService = connectionService;
+        }
+
+        [HttpPost]
+        [Route("AddWatermarkToFiles")]
+        [EnableCors(ServiceHelper.PolicyName)]
+        public WebServiceResponse AddWatermarkToFiles([FromBody] AddWatermarkRequest data) <.>
+        {
+            Logger.Info("     ");
+
+            if (data == null)
+            {
+                return CreateBadResponse("      ");
+            }
+
+            string doneInfo;
+
+            try
+            {
+                doneInfo = HandleRequest(data).Result;
+            }
+            catch (Exception ex)
+            {
+                return CreateBadResponse(ex.Message);
+            }
+
+            return CreateEndProcessResponse(data.CardId, $"    : {doneInfo}");
+        }
+
+        private async Task<string> HandleRequest(AddWatermarkRequest request) <.>
+        {
+            List<string> files = new List<string>();
+
+            foreach (var token in request.Tokens) <.>
+            {
+                try
+                {
+                    string pathToFile = await connectionService.DownloadFileAsync(request.ServerAddress, token);
+                    files.Add(pathToFile);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex.ToString());
+                    throw;
+                }
+            }
+
+            List<Task<string>> processes = new List<Task<string>>(); <.>
+            string doneInfo = "";
+
+            foreach (var file in files)
+            {
+                try
+                {
+                    processes.Add(watermarkService.AddWatermark(file, WATERMARK));
+                    doneInfo += $" {Path.GetFileName(file)}";
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex.ToString());
+                    throw;
+                }
+            }
+
+            var filesWithWatermark = await Task.WhenAll(processes); <.>
+            int index = 0;
+            foreach (var token in request.Tokens)
+            {
+                try
+                {
+                    await connectionService.SetNewVersionAsync(request.ServerAddress, token, request.CardId, filesWithWatermark[index]);
+                    index++;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex.ToString());
+                    throw;
+                }
+            }
+
+            return doneInfo;
+        }
+----
+<.> Текст водяного знака.
+<.> Web-метод для добавления водяного знака.
++
+.Параметры:
+* `data` -- данные
++
+*Возвращаемое значение*: WebServiceResponse -- ответ web-сервиса.
++
+<.> Обработчик запроса водяного знака.
++
+.Параметры:
+* `request` -- данные запроса.
++
+*Возвращаемое значение*: строка с именами файлов, к которым были добавлены запросы.
++
+<.> Загружает файлы {wc}а, идентификаторы которых переданы в запросе.
+<.> Добавляет водяные знаки к файлам из списка файлов.
+<.> Отправляет файлы на сервер.
+
+.Контроллер `WatermarkController` использует функции двух сервисов:
+* `ConnectionToWebClient` для получения файлов из карточек _Файл_ с версиями и загрузки файлов в карточки _Документ_. Данный сервис использует функции реализованного серверного расширения {wc}а.
+* `WatermarkService` для добавления водяных знаков в PDF-файлы.
+
+Полный код реализации сервисов смотрите в примере на GitHub.
+
+== Клиентское расширение
+
+В качестве примера использования функций расширения _Watermark to PDF_ программы _DvSupService_ было разработано клиентское расширение, которое выполняет три задачи:
+
+* Получает из текущей открытой карточки _Документа_ идентификаторы основных файлов формата PDF.
+* Запрашивает токен у серверной части по данным пользователя и файла.
+* Отправляет токены расширению _Watermark to PDF_.
+
+Общие требования к реализации клиентских расширений приведены в пункте "xref:client/client-extensions.adoc[Расширение возможностей клиентской части {wc}а]".
+
+Прежде всего необходимо реализовать сервис, получающий список идентификаторов файлов, в которые в будущем будет добавлен водяной знак. Список идентификаторов нужно передавать в метод `AddWatermarkToFiles` расширения _Watermark to PDF_. Ниже приведён исходный код данного сервиса.
+
+.Файл `_Others\Watermark\WatermarkWebExtension\src\WatermarkService.tsx_`
+[source,typescript]
+----
+export class WatermarkService {
+
+    constructor(private services: $RequestManager & $WebServices & $ApplicationSettings & $MessageBox & $SiteUrl & $CurrentEmployeeId) {
+    }
+
+    async AddWatermarkToFilesWithToken(cardID: string, tokens: string[]): Promise<IWebServicesResponse<any>> { <.>
+        const urlWatermark = this.addressConnect + "Watermark" + "/" + "AddWatermarkToFiles";
+        const data: Object = {
+            cardID: cardID,
+            tokens: tokens,
+            serverAddress: this.services.siteUrl
+        };
+        const options: RequestOptions = {
+            returnRawResponse: true,
+        }
+
+        let response: any = await this.services.requestManager.post(urlWatermark, JSON.stringify(data), options);
+
+        return JSON.parse(response);
+    }
+
+    async GetTokensByIds(tokenRequests: Array<TokenRequestModel>): Promise<string[]> {
+        const urlFileOperationsWithToken = this.services.siteUrl + "/FileOperationsWithToken" + "/" + "GetAccessToken?"; <.>
+        let tokens: string[] = [];
+
+        await Promise.all(tokenRequests.map(async (element) => {
+            const url = urlFileOperationsWithToken + "fileCardId=" + element.fileCardId + "&versionId=" + element.versionId + "&ownerCardId=" + element.ownerCardId;
+            try {
+                const response = await this.services.requestManager.get(url);
+                tokens.push(response as string);
+            } catch (ex) {
+                showError("Ошибка при запросе токена");
+            }
+        }));
+
+        return tokens;
+    }
+
+    private get addressConnect() {
+        return `http://localhost:${this.services.applicationSettings.environment.dvSupServiceConnectionPort}/`;
+    }
+}
+----
+<.> Метод принимает идентификатор карточки и идентификатор её конвертируемых файлов.
+<.> Метод принимает массив моделей `TokenRequestModel` и возвращает массив токенов.
+
+Сервис `$WatermarkService` предоставляет метод `AddWatermarkToFilesWithToken`, который вызывает функцию программы _DvSupService_. При вызове данного метода нужно передать url-адрес с названием контроллера и метода.
+
+В качестве метода, использующего сервис `$WatermarkService`, реализуем обработчик нажатия кнопки разметки карточки _Документ_, который будет получать идентификаторы основных PDF-файлов карточки, вызывать метод `$WatermarkService.GetTokensByIds`, чтобы получить токены, которые нужно будет передать
+методу `$WatermarkService.AddWatermarkToFilesWithToken`. После завершения работы метода `$WatermarkService.AddWatermarkToFilesWithToken` документ будет обновлять содержимое элемента управления _Список файлов_ или отображать ошибку.
+
+include::./.dv-web-extensions.adoc[tags=eventhandler]
+
+== Сборка проекта
+
+Сборка производится по аналогии со сборкой _DVWebTool_, см. "xref:./.dv-web-extensions.adoc#buildProject[Сборка проекта]".
+
+Расширения для _DVSupService_ можно распространять с помощью пакетов Debian, с подробной инструкцией и необходимыми материалами можно ознакомиться в https://github.com/Docsvision/deb-sample[репозитории на GitHub].
+
+== Публикация компонентов на сервере Web-клиента
+
+. Запустите DVSupService, чтобы создалась папка `Extensions`.
+. Скопируйте папку `SamplesOutput\Site\Content\Modules\WatermarkWebExtension\` в `{wcd}/Content/Modules`.
+. Скопируйте в папку `Путь-к-сервису-DvSupService/Extensions` следующие папки:
++
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Assemblies`.
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Fonts`.
+- `SamplesOutput\Site\Content\Tools\DvSupService\Application Files\Services`.
++
+. Скопируйте папку `SamplesOutput\Site\Extensions\WatermarkServerExtension` в `Путь к сайту Web-клиента/Extensions`.
+. Перезапустите *{wcs-new}*.
+. Перезапустите службу командой:
++
+ sudo systemctl restart dvsupservice
+
+== Проверка примера
+
+См. "xref:./.dv-web-extensions.adoc#check[Проверка примера]".
