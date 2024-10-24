@@ -1,0 +1,46 @@
+extends: default-with-font-fallbacks
+page:
+  size: Letter
+  margin-inner: 15mm
+  margin-outer: 15mm
+  margin-top: 24mm
+  margin-bottom: 20mm
+base:
+  font-color: #222
+  font-family: Verdana
+  font-size: 12
+  line-height-length: 17
+  line-height: $base-line-height-length / $base-font-size
+font:
+  catalog:
+    merge: true
+    Verdana:
+      normal: verdana-normal.ttf
+      bold: verdana-bold.ttf
+      italic: verdana-italic.ttf
+      bold_italic: verdana-bold_italic.ttf
+#  fallbacks: 
+#    M+ 1mn:
+#      normal: GEM_FONTS_DIR/mplus1mn-regular-subset.ttf
+#      bold: GEM_FONTS_DIR/mplus1mn-bold-subset.ttf
+#      italic: GEM_FONTS_DIR/mplus1mn-italic-subset.ttf
+#      bold_italic: GEM_FONTS_DIR/mplus1mn-bold_italic-subset.ttf
+#code:
+#  font-family: M+ 1mn
+#codespan:
+#  font-family: $code-font-family
+#kbd:
+#  font-family: $code-font-family
+#button:
+#  font-family: $base-font-family
+title-page:
+  margin-right: 15mm
+  margin-bottom: 20mm
+  background-color: #FFFFFF
+  background-image: cover.png
+  font-color: #FFFFFF
+  title:
+    font-color: #FFFFFF
+    top: 30%
+  subtitle:
+    font-color: #FFFFFF
