@@ -30,10 +30,6 @@ include::dev@platform:admin:partial$install.adoc[]
     "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
     "ApiKey": "SettingsServiceApiKey" <.>
   },
-  "ExternalApiService": {
-    "ConnectionString": "Address=http://externalapi.domain.com:5300/api", <.>
-    "ApiKey": "ExternalApiServiceApiKey" <.>
-  },
   "System": {
     "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
   },
@@ -46,8 +42,6 @@ include::dev@platform:admin:partial$install.adoc[]
 ----
 <.> Адрес {of-sett-serv}.
 <.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
-<.> Адрес Сервиса внешнего API.
-<.> Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
 <.> Адрес {of-mc}.
 <.> Пользователи, которым разрешен вход в Консоль управления.
 +
@@ -89,7 +83,7 @@ include::dev@platform:admin:partial$install.adoc[]
   }
 }
 ----
-<.> Ключ доступа к Сервису настроек -- "пароль", который также необходимо указать в конфигурационном файле Сервиса внешнего API и конфигурационном файле {of-mc}.
+<.> Ключ доступа к Сервису настроек -- "пароль", который также необходимо указать в конфигурационном файле {of-mc}.
 <.> Тип БД: `MsSql` или `PgSql`.
 <.> Строка подключения к БД. См. подробнее <<conn-string,ниже>>.
 +
@@ -105,34 +99,35 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 [#external-api]
 == Установка сервиса внешнего API
 
-.Чтобы установить Сервис внешнего API:
-:of: Сервиса внешнего API
-:file: appsettings
-:wt: externalapi
-include::dev@platform:admin:partial$install.adoc[]
-+
-[source,json]
-----
-{
-  "ApiKey": "ExternalApiServiceApiKey", <.>
-  "SettingsService": {
-    "ConnectionString": "address", <.>
-    "ApiKey": "SettingsServiceApiKey" <.>
-  }
-}
-----
-<.> Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле {of-mc}.
-<.> Адрес сервиса настроек. Например, `ConnectAddress=http://settings.domain.com:5200/api`.
-<.> Ключ доступа к Сервису настроек -- "пароль", который также нужно указать в конфигурационном файле Сервиса настроек и конфигурационном файле {of-mc}.
-+
-. Запустите службу сервиса:
-+
-[source,bash]
-----
-sudo systemctl start dvexternalapi
-----
-+
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
+Установка Сервиса внешнего API не требуется в версиях {of-mc} 6.2 и выше.
+// .Чтобы установить Сервис внешнего API:
+// :of: Сервиса внешнего API
+// :file: appsettings
+// :wt: externalapi
+// include::dev@platform:admin:partial$install.adoc[]
+// +
+// [source,json]
+// ----
+// {
+//   "ApiKey": "ExternalApiServiceApiKey", <.>
+//   "SettingsService": {
+//     "ConnectionString": "address", <.>
+//     "ApiKey": "SettingsServiceApiKey" <.>
+//   }
+// }
+// ----
+// <.> Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле {of-mc}.
+// <.> Адрес сервиса настроек. Например, `ConnectAddress=http://settings.domain.com:5200/api`.
+// <.> Ключ доступа к Сервису настроек -- "пароль", который также нужно указать в конфигурационном файле Сервиса настроек и конфигурационном файле {of-mc}.
+// +
+// . Запустите службу сервиса:
+// +
+// [source,bash]
+// ----
+// sudo systemctl start dvexternalapi
+// ----
+// +
+// include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 // [#win]
 // == Установка {of-mc} на Windows
@@ -211,6 +206,26 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 // . Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 //
 // После установки на сервере необходимо настроить группу пользователей, имеющих право работать с Консолью управления. Чтобы предоставить доступ к Консоли управления, выполните инструкцию в пункте xref:provide-access.adoc[].
+
+[#ws-ext]
+== Установка расширения Службы {ws} для {of-mc}
+
+Расширение Службы {ws} для {of-mc} добавляет функциональность для работы со Службой {ws}: настройка службы в Консоли, просмотр сообщений. Расширение обязательно для установки в версии {of-mc} 6.2 и выше.
+
+:of: Расширение Службы {ws} для {of-mc}
+// :file: appsettings конфига нет?
+:wt: docsvision-ext-ws-mc
+.Чтобы установить расширение Службы {ws} для {of-mc}:
+. Выполните следующие команды, чтобы установить {of}:
+include::dev@platform:admin:partial$install.adoc[tags=commands]
+. Запустите службу сервиса:
++
+[source,bash,subs=attributes]
+----
+sudo systemctl start {wt}
+----
++
+include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 // tag::string[]
 [#conn-string]
