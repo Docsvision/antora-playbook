@@ -51,24 +51,27 @@ Astra Linux::
 [#ext-api]
 == Установка Сервиса внешнего API {of-mc}
 
-. Установите сервис внешнего API:
+Установка Сервиса внешнего API не требуется в самой новой версии {of-mc}.
+
+[#ws-ext]
+== Установка расширения Службы {ws} для {of-mc}
+
+. Расширение Службы {ws} для {of-mc}:
 +
 [tabs]
 ====
 Astra Linux::
 +
- $ sudo apt-get install docsvision-externalapi
+ $ sudo apt-get install docsvision-ext-ws-mc
 
 РЕД ОС::
 +
- $ sudo dnf install docsvision-externalapi
+ $ sudo dnf install docsvision-ext-ws-mc
 ====
 +
-. Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
+. Запустите Расширение Службы {ws} для {of-mc}:
 +
-. Запустите сервис внешнего API {of-mc}:
-+
- $ sudo systemctl start dvexternalapi
+ $ sudo systemctl start docsvision-ext-ws-mc
 
 [#manconsole]
 == Установка {of-mc}
@@ -139,48 +142,3 @@ Astra Linux::
 . Запустите службу модуля:
 +
  $ sudo systemctl start dvworkflow
-
-// [#takeoffice]
-// == Установка приложения {to}
-//
-// . Установите приложение _{to}_ следующей командой:
-// +
-// [tabs]
-// ====
-// Astra Linux::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo apt-get install docsvision-takeoffice-server
-// ----
-//
-// РЕД ОС::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo dnf install docsvision-takeoffice-server
-// ----
-// ====
-//
-// [#docmgt]
-// == Установка приложения {dm}
-//
-// . Установите приложение _{dm}_ следующей командой:
-// +
-// [tabs]
-// ====
-// Astra Linux::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo apt-get install docsvision-documentmanagement-server
-// ----
-//
-// РЕД ОС::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo dnf install docsvision-documentmanagement-server
-// ----
-// ====
-// Ознакомьтесь со списком полезных команд в пункте "xref:post-config-section-server.adoc[]".
