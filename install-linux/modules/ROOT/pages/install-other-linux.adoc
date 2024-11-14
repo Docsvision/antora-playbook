@@ -45,20 +45,25 @@ sudo systemctl start dvsettings
 [#ext-api]
 == Установка Сервиса внешнего API {of-mc}
 
-. Установите сервис внешнего API:
+Установка Сервиса внешнего API не требуется в версиях {of-mc} 6.2 и выше.
+
+[#ws-ext]
+== Установка расширения Службы {ws} для {of-mc}
+
+. Расширение Службы {ws} для {of-mc}:
 +
 [source,bash]
 ----
-sudo apt-get install docsvision-externalapi
+sudo apt-get install docsvision-ext-ws-mc
 ----
-+
-. Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
-+
-. Запустите сервис внешнего API {of-mc}:
+// +
+// . Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
+// +
+. Запустите Расширение Службы {ws} для {of-mc}:
 +
 [source,bash]
 ----
-sudo systemctl start dvexternalapi
+sudo systemctl start docsvision-ext-ws-mc
 ----
 
 [#manconsole]
