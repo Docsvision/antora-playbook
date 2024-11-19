@@ -119,7 +119,6 @@
 * Дата и время запросов и ответов.
 * Заголовки
 
-// tag::webconfig-serv[]
 Протоколирование запросов сервера приложений настраивается в конфигурационном файле модуля по адресу `/usr/lib/docsvision/platform/appsettings.json`, за настройку отвечает параметр `W3CLogging`:
 
 [source,json]
@@ -141,7 +140,6 @@
 <.> Префикс имени файла журнала.
 
 Запросы будут записаны в файл `/var/log/docsvision/appserver/appserver-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt`. Настройка альтернативного расширения поддерживается только при протоколировании с NLog, см. подробнее <<nlog,ниже>>.
-// end::webconfig-serv[]
 
 [#nlog]
 === Протоколирование запросов с помощью NLog
@@ -156,7 +154,7 @@
 ----
 "NLog": {
    "extensions": [
-    { "assembly": "DocsVision.Platform" } <.>
+    { "assembly": "DocsVision.AppServer" } <.>
    ],
    "targets": {
     "w3cFile": {
