@@ -173,14 +173,17 @@ include:::partial$excerpts.adoc[tags=one-ws]
     "ocspSettings": [
         {
             "ocspUrl": "http://ocsp-service.ru/ocspn/ocsp.srf", <.>
+            "serial": "17192b01038046a1649b8a076964699c4" <.>
         },
         {
             "ocspUrl": "http://ocsp-service.example.ru/ocspn1000000/ocsp.srf",
+            "serial": "1f409aa452fd10ee11500ea83ca0f3ce2"
         }
     ]
 }
 ----
 <.> `"ocspUrl"` -- адрес OCSP сервиса.
+<.> `"serial"` -- серийный номер корневого сертификата улучшаемой подписи.
 
 Конфигурационный файл `settings.json` должен располагаться в контейнере криптосервиса по пути `/etc/cryptoservice/`. Если в файле задана хотя бы одна группа настроек `ocspSettings`, то при улучшении подписи криптосервис будет проверять цепочку родительских сертификатов сертификата улучшаемой подписи.
 
