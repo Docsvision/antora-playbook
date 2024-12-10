@@ -1,0 +1,217 @@
+= Расширенная аутентификация
+
+{dv} {wc} поддерживает авторизацию с помощью сторонних расширений. Необходимые ресурсы для работы расширений авторизации в {wc}е поставляются с модулем {pl} и настраиваются в конфигурационном файле модуля или в {of-mc}.
+
+.Поддерживается вход при помощи следующих учётных записей:
+* Microsoft Azure
+// * Active Directory Federation Services (ADFS)
+* ЕСИА (Госуслуги) по почте, номеру телефона, номеру СНИЛС
+
+****
+* Данный раздел посвящён регистрации расширений авторизации в Linux с помощью {of-mc} версии 6.2.
+* Создание собственных расширений {dv} описывается в разделе "xref:programmer:solutions:extensions/extensions.adoc[]" руководства по разработке.
+* Настройка расширений в конфигурационном файле модуля {pl} описана в разделе "xref:engineer::authorization-extensions.adoc[]".
+****
+
+[#azure]
+== Регистрация расширений аутентификации
+
+Настроить расширения можно на странице menu:Серверы[Имя-сервера > Сервер приложений > Расширенная аутентификация]. Чтобы добавить расширение, необходимо заполнить настройки в соответствующих полях:
+
+* Идентификатор расширения -- строка с идентификатором расширения в виде Guid.
+* Название расширения -- задаёт отображаемое имя сервиса аутентификации в xref:webclient:user:directories/staff/employee-fields.adoc#security[справочнике сотрудников].
++
+.Редактирование значения для параметра "Name"
+image::engineer::name-parameter.png[Редактирование значения для параметра "Name"]
++
+* Настройки -- строка настроек расширения. Подробнее см. <<azure-settings,AzureAD>> и <<esia,ЕСИА>>.
+* Тип -- строка с именем типа, реализующего расширение.
+
+[#azure-settings]
+=== Строка настроек Azure
+
+include::engineer::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<AzureADAuthenticationSettings
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WellKnownConfigurationUrl>https://login.microsoftonline.com/common/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+  <ClientId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ClientId> <.>
+  <GroupMembershipCheckerSettings>
+    <GroupMappings>
+      <AzureADGroupMapping> <.>
+        <GroupId>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</GroupId> <.>
+        <Role>User</Role> <.>
+      </AzureADGroupMapping>
+    </GroupMappings>
+  </GroupMembershipCheckerSettings>
+  <Tenants>
+    <guid>94e14c7f-dbe9-42f4-8895-ac95c3dc8910</guid>
+  </Tenants>
+  <ApplicationId>c6c5c5e8-c320-4221-bbdf-205f8ff9610e</ApplicationId> <.>
+</AzureADAuthenticationSettings>",
+----
+<.> `WellKnownConfigurationUrl` -- URL публичной конфигурации OpenID.
+<.> `ClientId` -- идентификатор тенанта AzureAD в котором производится привязка пользователей.
+<.> `AzureADGroupMapping` -- задает сопоставление групп Azure AD системным xref:dev@backoffice:desdirs:staff/groups/system-groups.adoc[группам безопасности {dv}]. Допускается на одну группу Azure AD создавать несколько групп {dv}.
+<.> `GroupId` -- идентификатор группы Azure AD.
+<.> `Role` -- имя группы без префикса "{dv}".
+<.> `ApplicationId` -- идентификатор приложения {dv}, зарегистрированного в тенанте AzureAD, для которого включено и настроено использование OpenID Connect.
+
+[#esia]
+== Регистрация расширения ЕСИА
+
+[#requirements]
+.Требования для расширения ЕСИА:
+. Компания должна быть зарегистрирована в ЕСИА.
+. Необходимо получить сертификат для работы с ЕСИА. Можно использовать https://www.nalog.gov.ru/rn77/related_activities/ucfns/anonymized_certificate/[неперсонифицированный сертификат].
+. Сертификат с открытым ключом необходимо добавить https://esia-portal1.test.gosuslugi.ru/console/tech[на портале ЕСИА].
+. Необходимо скачать сертификат площадки, которая подписывает токены http://esia.gosuslugi.ru/public/esia.zip[esia.zip] (архив содержит сертификаты тестовой и рабочей площадок).
+. Необходимо выполнить обязательные настройки на сервере {dv}:
+.. Установить КриптоПро CSP {csp-v}.
+.. Установить сертификат для работы с ЕСИА. Для этого можно воспользоваться утилитой _certmgr_, входящей в состав КриптоПро CSP 5.0, например так:
++
+[source,bash]
+----
+sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-сертификата -pfx -pin пин-код <.>
+----
+<.> По умолчанию служба *{sss-new}* работает от имени пользователя ROOT, поэтому сертификат необходимо устанавливать с повышением привилегий.
++
+.. Установить сертификат площадки из архива http://esia.gosuslugi.ru/public/esia.zip[esia.zip]. Сертификат тестовой площадки -- `TESIA GOST 2012.cer`/ Например, так:
++
+[source,bash]
+----
+sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-GOST-2012.cer <.>
+----
+<.> С повышением привилегий пользователя.
++
+.. Добавить настройки для аутентификации через ЕСИА на страницу {of-mc}.
++
+Расширение аутентификации для ЕСИА настраивается по аналогии с Azure за исключением параметра `Settings` -- строки настроек расширения. Строка настроек для ЕСИА описана ниже.
+
+[#esia-settings]
+=== Строка настроек для ЕСИА
+
+include::engineer::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version=\"1.0\" encoding=\"utf-16\"?>
+<ESIAAuthenticationSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema\" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance\">
+<WellKnownConfigurationUrl>{
+\"token_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v3/te\", <.>
+\"token_endpoint_auth_methods_supported\":[\"client_secret_post\",\"private_key_jwt\",\"client_secret_basic\"],
+\"jwks_uri\":\"\",
+\"response_modes_supported\":[],
+\"subject_types_supported\":[],\"id_token_signing_alg_values_supported\":[],
+\"response_types_supported\":[\"code\",\"token\"],
+\"scopes_supported\":[\"openid email mobile snils fullname id_doc\"], <.>
+\"issuer\":\"http://esia-portal1.test.gosuslugi.ru/\", <.>
+\"microsoft_multi_refresh_token\":true,
+\"authorization_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/aas/oauth2/v2/ac\", <.>
+\"device_authorization_endpoint\":\"\",
+\"http_logout_supported\":true,
+\"frontchannel_logout_supported\":true,
+\"end_session_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/idp/ext/Logout\", <.>
+\"claims_supported\":[],
+\"check_session_iframe\":\"\",
+\"userinfo_endpoint\":\"https://esia-portal1.test.gosuslugi.ru/rs/prns/\", <.>
+\"kerberos_endpoint\":\"\",
+\"tenant_region_scope\":null,
+\"cloud_instance_name\":\"\",
+\"cloud_graph_host_name\":\"\",
+\"msgraph_host\":\"\",
+\"rbac_url\":\"\",
+\"certificate_hash\":\"B6864B005BE2E583733DAC88CC00AF1D98EE286B4E98CD7ECA03930AB303B76B\", <.>
+\"certificate_thumbprint\":\"39D17F90BC7EA873566A1CCF1E36C23DCFFA5025\", <.>
+\"certificate_password\":\"Password\", <.>
+\"ext_certificate_thumbprint\":\"9c8393817199de4364ef7569f1af8c40b120f0f7\", <.>
+}
+</WellKnownConfigurationUrl>
+<ClientId>DOCSVISION</ClientId> <.>
+<Tenants></Tenants>
+<AccountNameClaim>snils</AccountNameClaim> <.>
+<ApplicationId></ApplicationId>
+</ESIAAuthenticationSettings>
+----
+<.> `token_endpoint` -- URL для получения маркера доступа.
+<.> `scopes_supported` -- область доступа, т.е. запрашиваемые права.
+<.> `issuer` -- идентификатор стороны, генерирующей токен.
+<.> `authorization_endpoint` -- URL для получения авторизационного кода.
+<.> `end_session_endpoint` -- URL для выхода из учётной записи из ЕСИА.
+<.> `userinfo_endpoint` -- URL для получения данных пользователя.
+<.> `certificate_hash` -- хэш сертификата получаемый через утилиту cpverify.
+<.> `certificate_thumbprint` -- отпечаток сертификата, используемого для формирования подписи.
+<.> `certificate_password` -- пароль сертификата для работы с ЕСИА. Пароль обычно устанавливается при импорте файла `.pfx` в Linux. Если пароль на сертификат не установлен, этот параметр можно удалить.
+<.> `ext_certificate_thumbprint` -- отпечаток сертификата площадки. Можно посмотреть при выполнении `sudo /opt/cprocsp/bin/amd64/certmgr -list`.
+<.> `ClientId` -- мнемоника системы получаемая при регистрации.
+<.> `AccountNameClaim` -- параметр, который используется как ключ для авторизации. Возможные значения: `snils`, `phone`, `email`.
+
+[#error]
+==== Ошибки при авторизации ЕСИА
+
+При попытке авторизации в системе с использованием расширения ЕСИА может возникать следующая ошибка в журнале модуля:
+
+ [Error][DocsVision.Platform.WebClient.Diagnostics.Trace.TraceError] System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
+   ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid because of errors in the certificate chain: UntrustedRoot
+
+Для исправления ошибки на сервере {dv} необходимо установить корневой сертификат удостоверяющего центра, выдавшего сертификат портала ЕСИА. Корневой сертификат должен быть в формате PEM с расширением файла `.crt`. Установить сертификат можно поместив его в папку `/usr/local/share/ca-certificates/`, после чего необходимо будет выполнить команду:
+
+[source,bash]
+----
+sudo update-ca-certificates -v -f.
+----
+
+При возникновении трудностей с получением корневого сертификата, обратитесь в техническую поддержку ЕСИА.
+
+// [#adfs]
+// == Регистрация расширения ADFS
+//
+// [source,json]
+// ----
+// "Authentication": {
+//     "Extensions": {
+// 	    "ADFS": {
+//             "Name": "ADFS", <.>
+//             "TypeName": "DocsVision.Platform.Authentication.ADFS.ADFSRootAuthenticationExtension, DocsVision.Platform.Authentication.ADFS, Version=6.0.0.0, Culture=neutral, PublicKeyToken=AFE7148AFE997F90519", <.>
+//             "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><ADFSAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://551releaseVM.vmkh.org/adfs/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>8d4612ab-c258-4f0b-ba02-d6aeab59debd</ClientId></ADFSAuthenticationSettings>", <.>
+//             "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF23}" <.>
+//         }
+//      },
+//      "Tenants": { <.>
+//          "docsvision-db": {
+//              "Extensions":"{36351525-8FCE-48AB-8AD3-4C1FA575FF23}", <.>
+//              "Name": "CurrentDB" <.>
+//          }
+//      }
+// }
+// ----
+// <.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
+// <.> `TypeName` -- строка с именем типа, реализующего расширение.
+// <.> `Settings` -- строка настроек расширения, для AzureAD. Подробнее см. <<adfs-settings,ниже>>.
+// <.> `ID` -- строка с идентификатором расширения в виде Guid.
+// <.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+// <.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+// <.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+//
+// [#adfs-settings]
+// == Строка настроек для ADFS
+//
+// include::engineer::partial$excerpts.adoc[tags=pretty]
+//
+// [source,xml]
+// ----
+// <?xml version="1.0" encoding="utf-16"?>
+// <ADFSAuthenticationSettings
+//   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+//   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+//   <WellKnownConfigurationUrl>https://domain.company.com/adfs/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+//   <ClientId>8d4612ab-c258-4f0b-ba02-d6aeab59debd</ClientId> <.>
+// </ADFSAuthenticationSettings>
+// ----
+// <.> `WellKnownConfigurationUrl` -- URL публичной конфигурации ADFS.
+// <.> `ClientId` -- идентификатор тенанта ADFS в котором производится привязка пользователей.
+
