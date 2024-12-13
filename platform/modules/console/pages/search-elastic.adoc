@@ -14,7 +14,7 @@
 
 . Загрузите систему {es}.
 +
-* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-d}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
 WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
@@ -127,10 +127,11 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 [tabs]
 ====
 ОС Windows::
+[source,subs=attributes+]
 ----
-"C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%% <.>
+"C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install file:///%%path-to-ingest-attachment-{es-v}.zip%% <.>
 ----
-<.> `%%path-to-ingest-attachment-{es-d}.zip%%` необходимо заменить на путь загрузки компонента.
+<.> `%%path-to-ingest-attachment-{es-v}.zip%%` необходимо заменить на путь загрузки компонента.
 
 ОС Linux::
 ----
@@ -169,7 +170,7 @@ network.host: ${HOSTNAME}
 +
 WARNING: Если не установлены дополнительные меры ограничения, данные полнотекстового индексирования станут публичными.
 +
-. При установке на Linux убедитесь, что значение `vm.max_map_count` больше или равно `262144`. При установке на Windows пункт можно проигнорировать.
+. При установке на Linux убедитесь, что значение `vm.max_map_count` больше или равно `262144` командой `sysctl vm.max_map_count`. При установке на Windows пункт можно проигнорировать.
 +
 .Задать значение можно следующим образом:
 [source]
@@ -245,7 +246,7 @@ volumes:
     driver: local
 ----
 +
-. Перед запуском нужно убедиться, что `vm.max_map_count` больше или равно `262144`. Задать значение можно следующим образом:
+. Перед запуском нужно убедиться, что `vm.max_map_count` больше или равно `262144` командой `sysctl vm.max_map_count`. Задать значение можно следующим образом:
 +
 [source]
 ----
