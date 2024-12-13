@@ -33,7 +33,7 @@ Astra Linux::
  $ sudo rpm -i elasticsearch-7.14.0-x86_64.rpm
 ====
 +
-При желании можно настроить xref:install-linux:ROOT:alternative.adoc#mirror[зеркало репозитория].
+При желании можно использовать настроенное зеркало репозитория с пакетами {es}.
 +
 . Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es} или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
 +
@@ -47,7 +47,7 @@ Astra Linux::
 
 ОС Linux::
 +
- /etc/elasticsearch/config
+ /etc/elasticsearch/
 ====
 +
 . Сохраните словари Hunspell для {es} версии {es-v} в папки на компьютере, созданные на предыдущем шаге. Скачать словари можно по ссылкам <<links,ниже>>.
@@ -130,7 +130,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 ====
 ОС Windows::
 ----
-C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru_RU <.>
+"C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install \file:///%%path-to-ingest-attachment-{es-d}.zip%% <.>
 ----
 <.> `%%path-to-ingest-attachment-{es-d}.zip%%` необходимо заменить на путь загрузки компонента.
 
@@ -157,7 +157,7 @@ sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch "file://$
 
 ОС Linux::
 +
- /etc/elasticsearch/hunspell/config/Elasticsearch.yml
+ /etc/elasticsearch/elasticsearch.yml
 ====
 +
 .. Добавьте в конец файла строку:
@@ -171,7 +171,7 @@ network.host: ${HOSTNAME}
 +
 WARNING: Если не установлены дополнительные меры ограничения, данные полнотекстового индексирования станут публичными.
 +
-. При установке на Linux убедитесь, что значение `vm.max_map_count` больше или равен `262144`. При установке на Windows пункт можно проигнорировать.
+. При установке на Linux убедитесь, что значение `vm.max_map_count` больше или равно `262144`. При установке на Windows пункт можно проигнорировать.
 +
 .Задать значение можно следующим образом:
 [source]
@@ -196,7 +196,7 @@ sudo sysctl --system
 [#docker]
 == Установка с помощью Docker
 
-. Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или собрать его самостоятельно:
+. Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или соберите его самостоятельно:
 +
 [source,dockerfile]
 ----
@@ -247,7 +247,7 @@ volumes:
     driver: local
 ----
 +
-. Перед запуском нужно убедиться, что `vm.max_map_count` больше или равен `262144`. Задать значение можно следующим образом:
+. Перед запуском нужно убедиться, что `vm.max_map_count` больше или равно `262144`. Задать значение можно следующим образом:
 +
 [source]
 ----
