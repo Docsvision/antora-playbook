@@ -67,6 +67,19 @@ a|Создаёт новую СКД для представителя -- юрид
 
 Возвращаемое значение: карточка доверенности
 
+|`CreatePowerOfAttorney(PowerOfAttorneyData, StaffUnit, StaffEmployee, StaffEmployee, PowersPowerOfAttorneyFormat, PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя -- юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представитель
+* `representativeManager` -- Руководитель организации-представителя
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
 |`RetrustPowerOfAttorney(PowerOfAttorneyData, StaffEmployee, StaffEmployee, PowerOfAttorney);`
 a|Создаёт СКД в рамках передоверия для представителя -- физического лица
 
@@ -111,6 +124,25 @@ a|Создаёт СКД в рамках передоверия для предс
 .Параметры:
 * `powerOfAttorneyData` -- Данные доверенности
 * `representative` -- Представитель
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: карточка доверенности
+
+|`RetrustPowerOfAttorney(PowerOfAttorneyData,
+StaffUnit,
+StaffEmployee,
+StaffEmployee,
+PowerOfAttorney,
+PowerOfAttorneyHandlingFlags);`
+
+a|Создаёт СКД в рамках передоверия для представителя - юридического лица
+
+.Параметры:
+* `powerOfAttorneyData` -- Данные доверенности
+* `representative` -- Представител
+* `representativeManager` -- Руководитель организации-представителя
 * `signer` -- Подписант
 * `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
 * `flags` -- Параметры обработки
@@ -166,7 +198,7 @@ a|Создаёт новую СКД для представителя -- физи
 
 Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
 
-|`PowerOfAttorney ImportPowerOfAttorney(byte[],
+|`ImportPowerOfAttorney(byte[],
 byte[],
 StaffUnit,
 StaffEmployee,
@@ -180,6 +212,32 @@ a|Создаёт новую СКД для представителя -- юрид
 * `machineReadableData` -- Данные МЧД с электронной подписью
 * `signatureData` -- Данные электронной подписи для формата CADES
 * `representative` -- Представитель
+* `signer` -- Подписант
+* `powerOfAttorneyFormat` -- Формат доверенности
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полномочия Справочника полномочий по коду полномочия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`PowerOfAttorney ImportPowerOfAttorney(byte[],
+byte[],
+StaffUnit,
+StaffEmployee,
+StaffEmployee,
+PowersPowerOfAttorneyFormat,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя - юридического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные МЧД с электронной подписью
+* `signatureData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `representativeManager` -- Руководитель организации-представителя
 * `signer` -- Подписант
 * `powerOfAttorneyFormat` -- Формат доверенности
 * `signatureFormat` -- Формат подписи
@@ -208,6 +266,32 @@ a|Создаёт новую СКД для представителя -- юрид
 * `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
 * `signatureFormat` -- Формат подписи
 * `powersCodeResolve` -- Функция получения кода полночия Справочника полномочий по коду полночия из МЧД
+* `flags` -- Параметры обработки
+
+Возвращаемое значение: Карточка доверенности
+
+Примечание: при формате подписи XMLSIG, `signatureData` не передаётся
+
+|`PowerOfAttorney ImportPowerOfAttorney(byte[],
+byte[],
+StaffUnit,
+StaffEmployee,
+StaffEmployee,
+PowerOfAttorney,
+PowerOfAttorneySignatureFormat,
+Func<string, ObjectContext, PowersCode>,
+PowerOfAttorneyHandlingFlags);`
+a|Создаёт новую СКД для представителя - юридического лица из файла МЧД
+
+.Параметры:
+* `machineReadableData` -- Данные МЧД с электронной подписью
+* `signatureData` -- Данные электронной подписи для формата CADES
+* `representative` -- Представитель
+* `representativeManager` -- Руководитель организации-представителя
+* `signer` -- Подписант
+* `parentPowerOfAttorney` -- Доверенность, на основании которой осуществляется передоверие
+* `signatureFormat` -- Формат подписи
+* `powersCodeResolve` -- Функция получения кода полномочия Справочника полномочий по коду полномочия из МЧД
 * `flags` -- Параметры обработки
 
 Возвращаемое значение: Карточка доверенности
@@ -389,18 +473,5 @@ a|Выполняет поиск доверенностей по условиям
 a|Получает родительские доверенности от заданной.
 
 * `powerOfAttorney` -- СКД
-|===
 
-// == Перечисления
-//
-// [cols=",",options="header"]
-// |===
-// |Перечисление |Описание
-//
-// |`PowerOfAttorneyHandlingFlags`
-// a|Флаги обработки доверенностей
-//
-// .Члены:
-// * `None = 0` -- Нет
-// * `SkipEntityMatchCheck = 1` -- Не проверять соответствие сущностей доверенности со справочниками
-// |===
+|===
