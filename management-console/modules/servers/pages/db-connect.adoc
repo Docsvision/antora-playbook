@@ -1,3 +1,5 @@
+:process: обновления
+
 = Подключение существующей БД
 
 [WARNING]
@@ -29,6 +31,8 @@ include::partial$excerpts.adoc[tags=options]
 +
 . На следующей странице мастера нужно выбрать обновляемые библиотеки карточек модулей. По умолчанию будут выбраны все библиотеки, требующие обновления. Если необходимо, измените выбор и нажмите *Далее*, чтобы продолжить.
 +
+include::partial$excerpts.adoc[tags=lib-flags]
++
 .Выбор модулей для обновления
 image::dev@platform:admin:db-connect-update.png[Выбор модулей для обновления]
 +
@@ -37,6 +41,8 @@ image::dev@platform:admin:db-connect-update.png[Выбор модулей для
  $ sudo systemctl restart dvappserver
 +
 . Подтвердите параметры подключения базы данных.
++
+include::partial$excerpts.adoc[tags=break-master]
 +
 .Подтверждение параметров подключения БД
 image::dev@platform:admin:db-connect-check.png[Подтверждение параметров подключения БД]
