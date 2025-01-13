@@ -7,72 +7,80 @@
 
 . Посмотреть состояние сервиса:
 +
-[source,bash]
-----
-sudo systemctl status dvappserver
-----
+ $ sudo systemctl status dvappserver
 +
 . Запустить сервис:
 +
-[source,bash]
-----
-sudo systemctl start dvappserver
-----
+ $ sudo systemctl start dvappserver
 +
 . Остановить сервис:
 +
-[source,bash]
-----
-sudo systemctl stop dvappserver
-----
+ $ sudo systemctl stop dvappserver
 +
 . Перезапустить сервис:
 +
-[source,bash]
-----
-sudo systemctl restart dvappserver
-----
+ $ sudo systemctl restart dvappserver
 +
 // tag::log[]
 . Посмотреть журнал службы (только записи в `stdout/stderr`):
 +
-[source,bash,subs=attributes]
-----
-sudo journalctl -u {serv}
-----
+[subs=attributes]
+ $ sudo journalctl -u {serv}
 +
 . Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
 +
-[source,bash,subs=attributes]
-----
-sudo journalctl -f -u {serv}
-----
+ $ sudo journalctl -f -u {serv}
++
 // end::log[]
 +
 . Установить пакет:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-platform
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-platform
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-platform
+====
 +
 . Установить пакет определенной версии:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-platform=6.0.1
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get install docsvision-platform=6.0.1
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-platform=6.0.1
+====
 +
 . Удалить пакет:
 +
-[source,bash]
-----
-sudo apt-get purge docsvision-platform
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get purge docsvision-platform
+
+РЕД ОС::
++
+ $ sudo dnf remove docsvision-platform
+====
 +
 . Удалить ненужные системе пакеты (зависимости, которые принесли за собой другие пакеты при установке) командой:
 +
-[source,bash]
-----
-sudo apt-get autoremove
-----
+[tabs]
+====
+Astra Linux::
++
+ $ sudo apt-get autoremove
+
+РЕД ОС::
++
+ $ sudo dnf autoremove
+====
