@@ -51,6 +51,8 @@ Astra Linux::
 [#ext-api]
 == Установка Сервиса внешнего API {of-mc}
 
+WARNING: Установка Сервиса внешнего API не требуется в версиях {of-mc} 6.2 и выше.
+
 . Установите сервис внешнего API:
 +
 [tabs]
@@ -69,6 +71,31 @@ Astra Linux::
 . Запустите сервис внешнего API {of-mc}:
 +
  $ sudo systemctl start dvexternalapi
+
+[#wc-ext]
+== Установка расширения {wc}а для {of-mc}
+
+Расширение {wc}а для {of-mc} необходимо для импорта решений {wc}а в версиях {of-mc} 6.2 и выше, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
+
+. Установите серверные компоненты Расширения {wc}а для {of-mc}:
++
+[tabs]
+====
+Astra Linux::
++
+[source,bash,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install docsvision-ext-console-webc
+----
+
+РЕД ОС::
++
+[source,bash,subs=attributes]
+----
+sudo dnf install docsvision-ext-console-webc
+----
+====
 
 [#manconsole]
 == Установка {of-mc}
