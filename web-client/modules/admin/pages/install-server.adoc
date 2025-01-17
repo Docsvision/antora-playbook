@@ -34,9 +34,14 @@ include::6.1@platform:admin:partial$install.adoc[]
       },
       "Server": {
         "SessionManagerConnection": {
-          "ConnectionAddress": "http://dvserver.domain.com:5000"  <.>
+          "ConnectionAddress": "http://dvserver.domain.com:5000" <.>
         }
       }
+    },
+    "ServiceId": "3ed2fd20-eaf9-8846-7089-b34dd8192328", <.>
+    "SettingsService": {
+      "ConnectionString": "http://storage-server.com:5200/api", <.>
+      "ApiKey": "dvwebclientapikey" <.>
     }
   },
   "Ldap": { <.>
@@ -59,6 +64,9 @@ include::6.1@platform:admin:partial$install.adoc[]
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP (подробнее см. в документации модуля {pl} xref:6.1@platform:admin:config-domains.adoc[]), `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
 <.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP.
+<.> `ServiceId` -- уникальный идентификатор данного экземпляра модуля, генерируется и записывается автоматически.
+<.> `ConnectionString` -- адрес подключения к сервису настроек.
+<.> `ApiKey` -- ключ приложения для подключения к сервису настроек.
 <.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
