@@ -18,6 +18,7 @@
 * `CardDefs\Xslt\UniInvoiceFields.xslt` -- шаблон преобразования для УПД.
 * `CardDefs\Xslt\UniInvoiceSF.xslt` -- шаблон преобразования для Счета-фактуры.
 * `CardDefs\Xslt\UniInvoiceTorgRu.xslt` -- шаблон преобразования для Товарной накладной ТОРГ-12.
+* `CardDefs\Xslt\UniInvoice970.ru.xslt` -- шаблон преобразования для УПД формата 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
 --
 +
 .Шаблоны построены по следующей логике:
@@ -104,6 +105,7 @@ image::attributes-check.png[Пример проверки загрузки ат�
 +
 .По умолчанию это:
 * `DocsVision.Edi.Runtime.BackOffice.OutgoingDocumentCreator` для неформализованных документов.
+* `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoice970Creator` для УПД 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
 * `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoice820Creator` для УПД 820.
 * `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceCreator` для УПД старого формата.
 * `DocsVision.Edi.Runtime.BackOffice.InvitationDataReader` для приглашений к обмену ЭДО.
