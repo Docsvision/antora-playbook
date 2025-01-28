@@ -1,0 +1,70 @@
+:noindex:
+
+= Установка и запуск Windows-программ {dv} через Wine
+
+. Распакуйте архив на машине с Astra Linux {l-1-1} и перейти в каталог с файлами:
++
+[source,bash]
+----
+# wget https://domain.example.com/share/winekit-1.0-astra.tar.xz
+tar -xf winekit-1.0-astra.tar.xz
+cd wine
+----
++
+. Разместите требуемые клиентские и серверные инсталляторы `.msi` в каталоге `assets/docsvision`, например:
++
+----
+assets/docsvision/Docsvision ApprovalDesigner client.msi
+assets/docsvision/Docsvision ApprovalDesigner server.msi
+assets/docsvision/Docsvision BackOffice client.msi
+assets/docsvision/Docsvision BackOffice server.msi
+assets/docsvision/Docsvision DocumentManagement client.msi
+assets/docsvision/Docsvision DocumentManagement server.msi
+assets/docsvision/Docsvision Platform client.msi
+assets/docsvision/Docsvision Platform server.msi
+assets/docsvision/Docsvision ResourceKit.msi
+assets/docsvision/Docsvision TakeOffice client.msi
+assets/docsvision/Docsvision TakeOffice server.msi
+assets/docsvision/Docsvision web-client server extension.msi
+assets/docsvision/Docsvision web-client.msi
+assets/docsvision/Docsvision WindowsClient extension.msi
+assets/docsvision/Docsvision WindowsClient server.msi
+assets/docsvision/Docsvision WindowsClient.msi
+assets/docsvision/Docsvision Worker service client.msi
+assets/docsvision/Docsvision Worker service.msi
+assets/docsvision/Docsvision Workflow client.msi
+assets/docsvision/Docsvision Workflow server.msi
+----
++
+. Установите WINE и настройте префиксы:
++
+[source,bash]
+----
+sudo ./run.sh wine --install
+./run.sh wine --setup
+----
++
+Во время настройки префиксов могут возникать ошибки, их можно игнорировать.
++
+. Задайте адрес сервера {dv}, учетную запись пользователя и пароль:
++
+[source,bash]
+----
+./run.sh docsvision --setup
+----
++
+Переданные значения будут сохранены, их можно будет изменить позже.
++
+. Установите программы:
++
+[source,bash]
+----
+./run.sh docsvision --install
+----
++
+. Если на рабочем столе появились ярлыки без иконок, нужно перезапустить интерфейс FLY следующей командой:
++
+[source,bash]
+----
+fly-wmfunc FLYWM_RESTART
+----
