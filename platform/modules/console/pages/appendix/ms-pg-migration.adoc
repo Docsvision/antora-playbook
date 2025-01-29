@@ -41,13 +41,13 @@
 .Проверка подключения к БД {pgsql}
 [source,bash]
 ----
-docsvision-сlonedb /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /test
+/usr/lib/docsvision/tools/clonedb/clonedbutil /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /test
 ----
 
 .Проверка подключения к БД {mssql}
 [source,bash]
 ----
-docsvision-сlonedb /ms:"Initial Catalog=source_db; Data Source=server; Integrated Security = SSPI;" /test
+/usr/lib/docsvision/tools/clonedb/clonedbutil /ms:"Initial Catalog=source_db; Data Source=server; Integrated Security = SSPI;" /test
 ----
 
 Работа утилиты сопровождается сообщениями в окне консоли, также утилита ведет текстовый файл журнала, который сохраняется рядом с файлом утилиты. Для каждого запуска создается отдельный файл журнала, с указанием идентификатора процесса и времени запуска.
@@ -59,7 +59,7 @@ WARNING: Утилита должна запускаться исключител
 ====
 [source,bash]
 ----
-docsvision-сlonedb [@argfile] [/ms:] [/pg:] [/p:]
+/usr/lib/docsvision/tools/clonedb/clonedbutil [@argfile] [/ms:] [/pg:] [/p:]
 [/install[+|-]] [/clone[+|-]] [/export|e[+|-]] [/l:] [/import[+|-]]
 [/test[+|-]] [/f[+|-]] [/in:] [/out:] [/infolder:]
 [/outfolder:] [/s[+|-]] [/m:] [/help|?|h]
@@ -188,7 +188,7 @@ update f set [StorageState] = 0 from dvsys_files f where [StorageState] = 1;
 +
 [source,bash]
 ----
-docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /install
+/usr/lib/docsvision/tools/clonedb/clonedbutil /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /install
 ----
 +
 . Создайте папку для экспорта таблицы в `.csv` файлы на сервере {mssql}. +
@@ -196,7 +196,7 @@ docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integra
 +
 [source,bash]
 ----
-docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"D:\clone_db_data" /export /l:10
+/usr/lib/docsvision/tools/clonedb/clonedbutil /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"D:\clone_db_data" /export /l:10
 ----
 +
 Ключ `/l:10` может использоваться для ограничения количества таблиц, выгружаемых за раз. Если ключ не указан, выгружаются все таблицы. Рекомендуется использовать этот ключ для порционного выполнения, контролируя доступное дисковое пространство.
@@ -260,7 +260,7 @@ GO
 +
 [source,bash]
 ----
-docsvision-сlonedb /f /infolder:"./clone_db_data" /outfolder:"./clone_db_data2"
+/usr/lib/docsvision/tools/clonedb/clonedbutil /f /infolder:"./clone_db_data" /outfolder:"./clone_db_data2"
 ----
 +
 Команда выше перекодирует и нормализует каждый `.csv` файл в директории `./clone_db_data`. Папка, в которой будут храниться перекодированные файлы, должна быть создана. Обработанные файлы сохраняются в директории `./clone_db_data2`. Для работы этого этапа необходимо предусмотреть дисковое пространство.
@@ -269,7 +269,7 @@ docsvision-сlonedb /f /infolder:"./clone_db_data" /outfolder:"./clone_db_data2"
 +
 [source,bash]
 ----
-docsvision-сlonedb /f /in:"./clone_db_data/dvsys_instances.csv" /out:"./clone_db_data2/dvsys_instances.csv"
+/usr/lib/docsvision/tools/clonedb/clonedbutil /f /in:"./clone_db_data/dvsys_instances.csv" /out:"./clone_db_data2/dvsys_instances.csv"
 ----
 +
 ****
@@ -281,14 +281,14 @@ docsvision-сlonedb /f /in:"./clone_db_data/dvsys_instances.csv" /out:"./clone_d
 +
 [source,bash]
 ----
-docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /clone
+/usr/lib/docsvision/tools/clonedb/clonedbutil /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /clone
 ----
 +
 . Выполните импорт `.csv` файлов:
 +
 [source,bash]
 ----
-docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /import /p:"./clone_db_data2" /l:25
+/usr/lib/docsvision/tools/clonedb/clonedbutil /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /import /p:"./clone_db_data2" /l:25
 ----
 +
 Список таблиц для обработки хранится в базе-источнике в таблице `dvexport_commands`. В ней же записаны команды для импорта и экспорта. При необходимости текст команд может быть исправлен SQL-запросом, и уже исправленные команды будут выполняться утилитой в режимах `/export` или `/import`. Кроме того, в столбце `Status` для каждой таблицы предусмотрен статус обработки. Всего их пять:
