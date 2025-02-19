@@ -70,3 +70,119 @@ include::partial$excerpts.adoc[tags=ifabsent]
 // Данный способ применим для случая, когда есть потребность не перезагружать пул {wc}а.
 После перезапуска *{wcs-new}* уровень журналирования будет возвращён в исходное состояние в соответствии с конфигурационным файлом.
 ====
+
+[#advanced-logging]
+== Расширенное журналирование
+
+{wc} поддерживает расширенное журналирование параметров производительности. Сюда входит точное логирование времени выполнения запросов {wc}а, время выполнения запросов к *{sss}* с привязкой к запросу {wc}а.
+
+Для настройки доступно три фильтра журнала: По пользователю, По конкретному адресу, По времени запроса.
+
+После включения диагностического логирования можно делать запросы. Если в параметре будет слеш (`\` или `/`), его необходимо переводить в URL код. Иными словами, заменять `example\usr01` на `example%5Cusr01`.
+
+.Для отдельного запроса {wc}а можно посмотреть:
+* Какие запросы к *{sss}* выполнялись.
+* Время, потраченное на выполнение каждого из них.
+* Время, проведённое запросами на стороне *{sss}* и на стороне {wc}а.
+* Параметры запросов.
+
+.Эта информация позволяет:
+* Устанавливать причины аномально быстрого или медленного выполнения запроса {wc}а.
+* Выявлять ошибки и неоптимальные места в работе {wc}а и Object Manager.
+* Обнаруживать блокировки {wc}а и Object Manager.
+* Выявлять проблемные запросы на сервере.
+
+Чтобы включить диагностическое логирование, нужно в конфигурационном файле {wc}а для параметра `EnableDiagnosticsLogger` в разделе {cnf-sgrps} > "System"] указать значение `1`:
+
+[source,json]
+----
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "System": {
+          "EnableDiagnosticsLogger": "1" <.>
+        }
+      }
+    }
+  }
+----
+<.> Включить расширенное журналирование.
+
+Настроить параметры журналирования можно в конфигурационном файле следующим образом:
+
+[source,json]
+----
+"targets": {
+    "async": true,
+    "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/webclient.log",
+        "layout": "[${longdate}][${level}][${callsite}] ${message} ${onexception:${newline}${exception:maxInnerExceptionLevel=10:format=shortType,message,stacktrace:separator=*:innerExceptionSeparator=&#xD;&#xA;&#x9;}}"
+    },
+    "logConsole": {
+        "type": "Console"
+    },
+    "diagnosticsLogWebClient": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticsLogWebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.csv" <.>
+    },
+    "diagnosticLogStorageServer": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.csv" <.>
+    }
+},
+----
+<.> Адрес хранения журнала {wc}а. В параметре важно добавить в имя файла `$\{processId}, например WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
+<.> Адрес хранения журнала *{sss-new}*. В параметре важно добавить в имя файла `$\{processId}`, например `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
+
+Журнал ведётся в формате `.csv` и в дальнейшем может быть проанализирован через приложение для работы с журналами, например Log Parser Studio. Расширенный журнал по умолчанию сохраняется в стандартный каталог журналов {wc}а, но при помощи параметров конфигурации NLog можно записать в иной каталог.
+
+Чтобы включить ведение расширенного журнала с требуемым фильтром, нужно выполнить в браузере запрос. Примеры запросов приведены далее.
+
+[#query-sample]
+=== Примеры запросов
+
+. Запрос включения журнала для всех пользователей:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogUser?user=*
++
+Журналируются все запросы `example\usr01`:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogUser?user=example%5Cusr01
++
+. Запрос включения журнала по адресу:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogAddress?address=Grid%2FGetGridDataEx
++
+Журналируются все запросы, в имени которых содержится подстрока `Grid/GetGridDataEx`. При необходимости можно журналировать все запросы конкретного контроллера:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogAddress?address=Grid
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogAddress?address=*
++
+. Запрос включения журнала по времени:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogRequestTime?milliseconds=500
++
+. Запрос включения журнала с указанием времени работы 1 минута:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/SetIntervalTimer?minutes=1
++
+По умолчанию, если `SetIntervalTimer` не указывается, таймер работает 1 час.
++
+. Фильтры можно комбинировать. Ниже приведён пример включения фильтра для пользователя `example\usr01`, адреса `Grid/GetGridDataEx`, времени выполнения запросов `50` мс:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogUser?user=example%5Cusr01
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogAddress?address=Grid%2FGetGridDataEx
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/AddLogRequestTime?milliseconds=50
++
+. Чтобы отключить ведение расширенного журнала, нужно выполнить запрос в браузере:
++
+[subs=attributes]
+ http://адрес-сервера-{wc}а:ПОРТ/DiagnosticsLog/Reset
