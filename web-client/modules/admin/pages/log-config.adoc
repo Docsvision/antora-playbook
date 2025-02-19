@@ -124,18 +124,18 @@ include::partial$excerpts.adoc[tags=ifabsent]
     },
     "diagnosticsLogWebClient": {
         "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticsLogWebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.csv" <.>
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticsLogWebClient${event-properties:item=Tenant} PID ${processId} ${shortdate}.tsv" <.>
     },
     "diagnosticLogStorageServer": {
         "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.csv" <.>
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.tsv" <.>
     }
 },
 ----
 <.> Адрес хранения журнала {wc}а. В параметре важно добавить в имя файла `$\{processId}, например WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
 <.> Адрес хранения журнала *{sss-new}*. В параметре важно добавить в имя файла `$\{processId}`, например `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
 
-Журнал ведётся в формате `.csv` и в дальнейшем может быть проанализирован через приложение для работы с журналами, например Log Parser Studio. Расширенный журнал по умолчанию сохраняется в стандартный каталог журналов {wc}а, но при помощи параметров конфигурации NLog можно записать в иной каталог.
+Журнал ведётся в формате `.tsv` и в дальнейшем может быть проанализирован через приложение для работы с журналами, например Log Parser Studio. Расширенный журнал по умолчанию сохраняется в стандартный каталог журналов {wc}а, но при помощи параметров конфигурации NLog можно записать в иной каталог.
 
 Чтобы включить ведение расширенного журнала с требуемым фильтром, нужно выполнить в браузере запрос. Примеры запросов приведены далее.
 
