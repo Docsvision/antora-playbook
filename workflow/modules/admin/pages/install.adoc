@@ -18,6 +18,11 @@ include::6.1@platform:admin:partial$install.adoc[]
 ----
 {
   "Docsvision": {
+    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
+    "SettingsService": {
+      "ConnectionString": "http://localhost:5200/api", <.>
+      "ApiKey": "anything" <.>
+    },
     "Workflow": {
       "ServiceUrl": "http://dvserver.domain.com:5000/api/v1", <.>
       "BaseName": "alias", <.>
@@ -32,6 +37,9 @@ include::6.1@platform:admin:partial$install.adoc[]
   "APIKEY": "api-key" <.>
 }
 ----
+<.> `ServiceId` -- уникальный идентификатор данного экземпляра модуля, генерируется и записывается автоматически.
+<.> `ConnectionString` -- полный адрес {of-sett-serv}.
+<.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}.
 <.> Адрес сервера {dv}. Обратите внимание на api/v1 в адресе.
 <.> Псевдоним БД {dv}.
 <.> Настройки почты, подробнее см. раздел "xref:6.1@workflow:admin:mail-settings.adoc[]".
