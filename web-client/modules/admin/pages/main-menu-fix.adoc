@@ -4,28 +4,9 @@
 
 // tag::webconfig[]
 .Чтобы изменить режим закрепления основного меню:
-. Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {cnf-sgrps-wc}].
-. Измените значение параметра `UXMainMenuBehavior`.
+. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc}> "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]] и измените следующий параметр:
 +
-[source,json]
-----
-  "Docsvision": {
-    "WebClient": {
-      "SettingGroups": {
-        "WebClient": {
-          "UXMainMenuBehavior": "0" <.>
-        }
-      }
-    }
-  }
-----
-<.> Возможные значения:
-+
-* `0` -- для использования режима переключения кнопками image:buttons/pin-menu.png[Закрепить меню]/image:buttons/unpin-menu.png[Открепить меню].
-* `1` -- для использования режима переключения кнопкой image:buttons/open-menu.png[Открыть меню].
+* Закрепление основного меню
 // end::webconfig[]
 +
-include::partial$excerpts.adoc[tags=ifabsent]
-+
-. Сохраните изменения конфигурационного файла.
+. Сохраните изменения.

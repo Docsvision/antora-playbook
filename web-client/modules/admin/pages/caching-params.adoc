@@ -8,34 +8,10 @@
 
 // tag::webconfig[]
 .Чтобы отключить кэширование настроек:
-. Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {cnf-sgrps} > "DirectoryCache"].
-. Измените значение параметров:
+. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > Группа настроек "Производительность"].
+. Перейдите к настройкам "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширования]" и настройте параметр:
 +
-[source,json]
-----
-  "Docsvision": {
-    "WebClient": {
-      "SettingGroups": {
-        "DirectoryCache": {
-          "AdvancedLayouts": "False", <.>
-          "Folders": "True", <.>
-          "SearchCard": "True" <.>
-        }
-      }
-    }
-  }
-----
-<.> `AdvancedLayouts` -- отключает кэширование разметок.
-<.> `Folders` -- отключает кэширование настроек папок.
-<.> `SearchCard` -- отключает кэширование сохранённых поисковых запросов.
+* Кэширование поисковых запросов
 +
-[WARNING]
-====
-Параметр `AdvancedLayouts` не используется, рекомендуется использовать актуальную настройку *_SharedDictionaryRefreshPeriod_*, см. подробнее в разделе "xref:directory-read-only.adoc[]".
-
-Параметр `Folders` является дублирующим для параметра `ShortCacheRefreshPeriod`, см. подробнее в разделе "xref:directory-refresh.adoc[]".
-====
+. Сохраните изменения.
 // end::webconfig[]
-+
-. Сохраните изменения конфигурационного файла.

@@ -6,25 +6,10 @@
 
 // tag::webconfig[]
 .Чтобы изменить период обновления кэша:
-. Откройте конфигурационный файл `{webconfig}`.
-. Перейдите к секции {cnf-sgrps} > System].
-. Измените значение параметра `MinCheckDirectoryTimestampsInterval`.
+. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > Группа настроек "Производительность"].
+. Перейдите к настройкам "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширования]" и настройте параметр:
 +
-[source,json]
-----
-  "Docsvision": {
-    "WebClient": {
-      "SettingGroups": {
-        "System": {
-          "MinCheckDirectoryTimestampsInterval": "1000" <.>
-        }
-      }
-    }
-  }
-----
-<.> Время ожидания задаётся в миллисекундах.
+* Минимальное время обновления кэша справочника представлений, мс
 // end::webconfig[]
 +
-include::partial$excerpts.adoc[tags=ifabsent]
-+
-. Сохраните изменения конфигурационного файла.
+. Сохраните изменения.

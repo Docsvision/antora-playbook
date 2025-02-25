@@ -16,23 +16,9 @@ NOTE: Вместо подключения большого числа папок
 // tag::webconfig[]
 Проверка непрочитанных карточек может быть отключена для группы пользователей.
 
-. Создайте новую группу в справочнике сотрудников.
-. Скопируйте RowID группы в утилите DVExplorer.
-. Добавьте в конфигурационный файл `{webconfig}` настройку `DisableUnreadCountersGroup`:
+. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc}> "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]] и измените следующий параметр:
 +
-[source,json]
-----
-  "Docsvision": {
-    "WebClient": {
-      "SettingGroups": {
-        "WebClient": {
-          "DisableUnreadCountersGroup": "RowID" <.>
-        }
-      }
-    }
-  }
-----
-<.> RowID группы, скопированный в утилите DVExplorer.
+* Отключить счётчик непрочитанных карточек
 +
 . Перезапустите *{wcs-new}*.
 // end::webconfig[]
