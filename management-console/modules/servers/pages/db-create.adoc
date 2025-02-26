@@ -1,16 +1,17 @@
 :process: создания
+:finished: создана успешно
 
 = Создание БД
 
 . Откройте страницу menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] и нажмите кнопку *Создать* под таблицей со списком подключенных БД, чтобы запустить Мастер БД {dv}.
 +
 .Мастер БД {dv}
-image::platform:admin:database-master.png[Мастер БД {dv}]
+image::db-master.png[Мастер БД {dv}]
 +
 . Укажите информацию для создания БД. Нажмите *Далее*.
 +
 .Настройка подключения к СУБД
-image::platform:admin:db-create-start.png[Настройка подключения к СУБД]
+image::db-create-start.png[Настройка подключения к СУБД]
 +
 --
 include::partial$excerpts.adoc[tags=dbSettings]
@@ -19,26 +20,20 @@ include::partial$excerpts.adoc[tags=dbSettings]
 . Укажите параметры создания БД и нажмите *Далее*.
 +
 .Настройка создания БД в {mssql} Server
-image::platform:admin:db-create-name.png[Настройка создания БД в {mssql} Server]
+image::db-create-name.png[Настройка создания БД в {mssql} Server]
 +
 ****
 include::partial$excerpts.adoc[tags=name]
 
+include::partial$excerpts.adoc[tags=location]
+
 include::partial$excerpts.adoc[tags=options]
 ****
 +
-// . Если требуется, выберите собственный SQL-скрипт, используемый для создания базы данных. Нажмите *Далее*.
-// +
-// .Выбор SQL-скрипта для создания базы данных
-// image::admin:db-create-script.png[Выбор SQL-скрипта для создания базы данных]
-// +
-// * *Стандартный* -- использовать стандартные скрипты {dv} для создания БД.
-// * *Другой* -- использовать собственный скрипт для создания БД.
-// +
 . Выберите библиотеки карточек для загрузки в новую БД. По умолчанию будут выбраны все библиотеки, которые можно загрузить. Нажмите *Далее*.
 +
 .Выбор модулей для загрузки
-image::platform:admin:db-create-libs.png[Выбор модулей для загрузки]
+image::db-create-libs.png[Выбор модулей для загрузки]
 +
 include::partial$excerpts.adoc[tags=lib-flags]
 +
@@ -47,14 +42,10 @@ include::partial$excerpts.adoc[tags=lib-flags]
 Чтобы работать с модулем и зависимыми от него модулями, необходимо загрузить библиотеки карточек.
 ====
 +
-. Перезапустите службу *{sss-new}* командой:
-+
- $ sudo systemctl restart dvappserver
-+
-. Подтвердите параметры, которые будут использованы при создании базы данных и нажмите *Далее*.
+. Подтвердите параметры, которые будут использованы при создании базы данных и нажмите *Создать*.
 +
 .Подтверждение параметров создания БД
-image::platform:admin:db-create-check.png[Подтверждение параметров создания БД]
+image::db-create-check.png[Подтверждение параметров создания БД]
 +
 ****
 include::partial$excerpts.adoc[tags=atomic]
@@ -63,6 +54,9 @@ include::partial$excerpts.adoc[tags=atomic]
 include::partial$excerpts.adoc[tags=break-master]
 +
 . Дождитесь завершения инициализации БД и загрузки SQL объектов.
++
+include::partial$excerpts.adoc[tags=and-restart]
++
 . Выберите модули {dv}, данные которых должны быть загружены в БД и нажмите *Старт*.
 +
 .Выбор модулей, настройки которых будут загружены в БД
@@ -97,5 +91,5 @@ WARNING: Если настройки модуля {dv} не загружены �
 +
 include::partial$excerpts.adoc[tags=maindb]
 +
-. Предоставьте сервисам {dv} xxref:appserver-access.adoc[необходимые] права.
+. Предоставьте сервисам {dv} xref:appserver-access.adoc[необходимые] права.
 
