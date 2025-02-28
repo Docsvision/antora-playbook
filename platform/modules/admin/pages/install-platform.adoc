@@ -19,7 +19,6 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
 +
 . Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
-// GBL-4070 -- активация отдельным требованием
 +
 [tabs]
 ====
@@ -53,9 +52,24 @@ sudo ./activation online ВАШ-КЛЮЧ
 . Установите пакеты модуля:
 +
 :wt: fileservice
-include::GBL-3644@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Подключите или создайте БД через {mc}, подробнее см. xref:dev@mgmtconsole:servers:db-settings.adoc[].
+. В конфигурационном файле укажите строку подключения к БД:
++
+[source,json]
+----
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Database-connection-string" <.>
+        }
+      }
+    }
+  }
+----
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
++
 . Запустите службу Файлового сервиса:
 +
  $ sudo systemctl start dvfileservice
