@@ -102,8 +102,8 @@ include::webservices-port.adoc[tags=webconfig]
 
 Подробнее см. "xref:webservices-port.adoc[]".
 
-[#auth]
-== Настройки аутентификации
+// [#auth]
+// == Настройки аутентификации
 
 // [#auth-ad]
 // === {wc} в сети без Active Directory
@@ -253,29 +253,19 @@ include::log-router.adoc[tags=webconfig]
 
 Подробнее см. "xref:log-router.adoc[]".
 
-[#counters]
-== Настройки аналитических счётчиков
+[#webc-log]
+=== Включить протоколирование запросов сервера {wc}а
 
-[#counters-on]
-=== Активация счетчиков производительности
+include::log.adoc[tags=webconfig]
 
-include::performance-counters.adoc[tags=webconfig]
+Подробнее см. "xref:log.adoc#webc-requests[Протоколирование запросов сервера {wc}а]".
 
-Подробнее см. "xref:performance-counters.adoc[]".
+[#nlog-request]
+=== Протоколирование запросов с помощью NLog
 
-[#counters-check]
-=== Проверка счётчиков производительности
+include::log.adoc[tags=nlo]
 
-.Параметры:
-* `*UnreadCountersHealthCheckInterval*`
-* `*UnreadCountersMonitoringSettings*`
-* `*UnreadCountersMonitoring*`
-* `*WarnTimeout*`
-* `*AlertTimeout*`
-* `*AutoDiagnosticLogTime*`
-* `*AutoDiagnosticLogEnableMinInterval*`
-
-Подробнее см. "xref:counter-monitor.adoc[]".
+Подробнее см. "xref:log.adoc#nlog[Протоколирование запросов с помощью NLog]".
 
 [#other]
 == Прочие настройки
@@ -302,3 +292,10 @@ include::user-agent.adoc[tags=webconfig]
 include::preview-r7.adoc[tags=webconfig]
 
 Подробнее см. "xref:preview-r7.adoc[]".
+
+[#add-formats]
+=== Открытие файлов на редактирование
+
+include::add-edit-formats.adoc[tags=webconfig]
+
+Подробнее см. "xref:add-edit-formats.adoc[]".
