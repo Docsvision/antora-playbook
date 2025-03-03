@@ -7,11 +7,32 @@ include::user:partial$extensions.adoc[tags=long-ppt]
 
 Администратор может добавить в список новые расширения файлов или удалить существующие.
 
+****
+Начиная с модуля {wc} версии {wc-cu5}, поддерживается два способа изменить список разрешённых для добавления файлов:
+
+* При помощи настройки в конфигурационном файле модуля, см. подробнее ниже
+* Из интерфейса {of-mc} без необходимости работы с форматом `.json`: "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]"
+****
+
 // tag::webconfig[]
 .Чтобы изменить список разрешённых для добавления файлов:
-. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc}> "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]] и измените следующий параметр:
+. Откройте конфигурационный файл `{webconfig}`.
+. Перейдите к секции {cnf-sgrps-wc}].
+. Измените значение параметра `AcceptableFileExtensions`. Значение содержит строку регулярного выражения. Новые расширения файлов нужно добавлять во вторые скобки, через символ `|`.
 +
-* Разрешённые для добавления файлы
+.Список разрешённых файлов и добавление `.dwg` в допустимые расширения:
+[source,json]
+----
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "AcceptableFileExtensions": "(\b)(rtf|dot|doc|dotx|ods|docx|odt|csv|xlt|xls|xltx|xlsx|pdf|jpg|jpeg|gif|png|bmp|tiff|tif|emf|wmf|xslt|xsl|xml|htm|html|txt|log|cs|asmx|ascx|aspx|js|cpp|h|css|idl|ini|java|rc|rc2|shtm|shtml|sql|zip|rar|7z|vsd|vsdx|msg|one|pptx|ppt|avi|wav|docm|xltm|dotm|xlsm|p7s|sign|sig|sgn|dwg)$"
+        }
+      }
+    }
+  }
+----
 // end::webconfig[]
 +
-. Сохраните изменения.
+. Сохраните изменения конфигурационного файла.

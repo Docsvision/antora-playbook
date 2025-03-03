@@ -1,6 +1,8 @@
-= Параметры конфигурации {wc}а
+= Параметры конфигурационного файла {wc}а
 
-Основная конфигурация {wc}а выполняется при помощи {of-mc}, но некоторые параметры всё ещё могут настраиваться в конфигурационном файле по адресу `{webconfig}`.
+Конфигурация {wc}а выполняется при помощи конфигурационного файла {wc}а, расположенного по адресу `{webconfig}`. Однако некоторые параметры может быть удобнее настраивать в {of-mc}, дополнительные сведения приведены в разделах соответствующих параметров по ссылкам.
+
+include::partial$excerpts.adoc[tags=ifabsent]
 
 [WARNING]
 ====
@@ -139,7 +141,7 @@ include::cookie-lifetime.adoc[tags=webconfig]
 
 include::digital-sign-stamp.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-signature.adoc#stamp[Штамп ЭП]".
+Подробнее см. "xref:digital-sign-stamp.adoc[]".
 
 [#sign-check]
 === Включение облачной подписи
@@ -156,7 +158,7 @@ include::install-cryptopro.adoc[tags=webconfig]
 
 include::grid-aggregate.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-interface.adoc[]".
+Подробнее см. "xref:grid-aggregate.adoc[]".
 
 [#cache]
 == Настройки кэширования
@@ -166,42 +168,42 @@ include::grid-aggregate.adoc[tags=webconfig]
 
 include::caching-params.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+Подробнее см. "xref:caching-params.adoc[]".
 
 [#cache-views]
 === Время обновления кэша представлений
 
 include::cache-refresh.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+Подробнее см. "xref:cache-refresh.adoc[]".
 
 [#cache-layouts]
 === Кэширование разметок фильтров данных
 
 include::grid-filter-cache.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+Подробнее см. "xref:grid-filter-cache.adoc[]".
 
 [#cache-folders]
 === Управление кэшем папок
 
 include::cache-folders.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Интерфейс]".
+Подробнее см. "xref:cache-folders.adoc[]".
 
 [#cache-refresh]
 === Кэширование обращений к объектам
 
 include::directory-refresh.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+Подробнее см. "xref:directory-refresh.adoc[]".
 
 [#cache-readonly]
 === Обновление справочников в режиме "только чтение"
 
 include::directory-read-only.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-performance.adoc#dir-cache[Кэширование]".
+Подробнее см. "xref:directory-read-only.adoc[]".
 
 [#log]
 == Настройки журналирования
@@ -218,7 +220,7 @@ include::log-config.adoc[tags=webconfig]
 
 include::log-router.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-logging.adoc[]".
+Подробнее см. "xref:log-router.adoc[]".
 
 [#other]
 == Прочие настройки
@@ -235,7 +237,7 @@ include::cluster-create.adoc[tags=webconfig]
 
 include::user-agent.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-site.adoc#devices[Устройства]".
+Подробнее см. "xref:user-agent.adoc[]".
 
 [#other-r7]
 === Предпросмотр с помощью Р7-Офис/OnlyOffice
@@ -244,4 +246,4 @@ include::user-agent.adoc[tags=webconfig]
 
 include::preview-r7.adoc[tags=webconfig]
 
-Подробнее см. "xref:dev@mgmtconsole:servers:webclient-r7.adoc[]".
+Подробнее см. "xref:preview-r7.adoc[]".
