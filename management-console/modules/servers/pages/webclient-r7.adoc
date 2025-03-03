@@ -44,10 +44,7 @@ location ~* ^(\/upload.*)(\/.*) {
 ----
 +
 . В файле `/etc/r7-office/documentserver/local.json` задайте для параметров `inbox`, `outbox` и `browser` значение `false`.
-// следующей командой:
-// +
-//  echo r7-office-documentserver-ee ds/jwt-enabled select false | sudo debconf-set-selections
-// +
++
 Затем перезапустите службу сервера документов:
 +
  sudo systemctl restart ds-docservice.service
@@ -86,11 +83,6 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 +
 . После установки сертификата переключите Р7 на использование HTTPS с созданным сертификатом согласно https https://support.r7-office.ru/document_server/install-document_server/document_server_linux/https_ds/[официальной инструкции на сайте Р7].
 . <<webc-config,Переведите>> {wc} на использование HTTPS.
-// +
-// [NOTE]
-// ====
-// Чтобы избежать ошибки с сертификатом на пользовательских машинах, потребуется либо локально установить сгенерированный сертификат, либо перейти на URL сервера документов, например, `\https://r7team.com:8083/` и там выбрать перейти на сайт.
-// ====
 
 [#webc-config]
 == Конфигурация {wc}а
