@@ -2,7 +2,7 @@
 
 Входящие сообщения для владельца карточки.
 
-* *Пространство имён:* `Docsvision.WorkerService.ObjectModel.Services`
+* *Пространство имён:* `Docsvision.WorkerService.ObjectModel`
 * *Сборка:* `DocsVision.WorkerService.ObjectModel.dll`
 
 == Синтаксис
@@ -21,25 +21,41 @@ public sealed class MessagesIncomingMessage : ObjectBase
 |`CreateDate`
 |Дата создания сообщения
 
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
+
 |`TypeId`
 |Идентификатор типа сервиса сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
 
 |`SubTypeId`
 |Идентификатор типа сообщения высокого уровня
 
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
 |`Data`
 |Данные сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
 
 |`State`
 |Состояние обработки сообщения
 
+Тип: `xref:Interfaces/MessageState_EN.adoc[MessageState]`
+
 |`Concurrent`
 |Сообщение может обрабатываться одновременно с другими сообщениями для целевого объекта\службы.
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
 
 |`ErrorCount`
 |Количество ошибок во время обработки сообщения
 
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
+
 |`WaitingLocks`
-|Ожидание блокировок
+|Блокировки ожидания
+
+Тип: `xref:ObjectModel/MessagesIncomingMessageWaitingLock_CL.adoc[MessagesIncomingMessageWaitingLock]`
 
 |===
