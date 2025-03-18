@@ -1,5 +1,11 @@
 = Группа настроек "Журналирование"
 
+Настройки журналирования {wc}а частично перенесены в интерфейс консоли:
+
+* Файл журнала
+* Логирование в консоль
+* Логирование в файл
+
 Файл журнала::
 Путь к файлу журнала, в котором регистрируются операции, выполняемые {wc}ом.
 
@@ -50,3 +56,32 @@
 
 Префикс имени файла журнала::
 Префикс имени файла журнала. Запросы будут записаны в файл `/var/log/docsvision/webclient/webclient-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt`.
+
+[#config]
+== Настройка в конфигурационном файле
+
+Возможность настроить журналирование с помощью конфигурационного файла поддерживается в качестве обратной совместимости. Однако если настройки заданы в `appsetings.json` и в интерфейсе консоли, конфигурационный файл будет иметь приоритет. Чтобы значения, выполненные в интерфейсе корректно применялись, убрерите из конфигурационного файла следующие поля:
+
+[source,json]
+----
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/webclient.log",
+        "layout": "[${longdate}][${level}][${callsite}] ${message} ${onexception:${newline}${exception:maxInnerExceptionLevel=10:format=shortType,message,stacktrace:separator=*:innerExceptionSeparator=&#xD;&#xA;&#x9;}}"
+      },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Error",
+        "writeTo": "logFile"
+      },
+      {
+        "logger": "*",
+        "minLevel": "Trace",
+        "writeTo": "logConsole"
+      }
+    ]
+  }
+----
