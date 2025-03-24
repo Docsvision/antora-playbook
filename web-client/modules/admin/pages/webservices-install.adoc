@@ -1,0 +1,132 @@
+= Работа с программой WebToolUtil
+
+Программа _WebToolUtil_ предназначается для сборки _DVWebTool_, минуя {pu}. Так как в будущем _DVWebTool_ планируется упразднить и перенести функциональность утилиты в _DVSupService_, задача по сборке _DVWebTool_ была делегирована _WebToolUtil_.
+
+.WebToolUtil необходимо запускать для сборки DVWebTool в следующих случаях:
+. Когда DVWebTool устанавливается впервые на версии системы без программы {pu}
+. Когда изменились файлы DVWebTool или вышла новая версия
+. Когда изменился адрес или порт вервера {wc}а
+. Когда изменились внутренние расширения DVWebTool
+
+Программа _WebToolUtil_ устанавливается из инсталлятора `WebToolUtil.msi` и запускается в ОС Windows. Программа может быть запущена с минимальным пользовательским интерфейсом или как консольное приложение.
+
+Новая версия WebToolUtil выпускается при каждом исправлении DVWebTool в накопительных обновлениях. Для распространения WebToolUtil могут использоваться групповые политики.
+
+[#ui]
+== Запуск в режиме окна
+
+.Окно программы "WebToolUtil"
+image::webtoolutil.png[Окно программы "WebToolUtil"]
+
+.В окне приложения отображается следующий набор элементов:
+* Файл -- поле для выбора файла манифеста `DocsVision.DVWebTool.application`
+* Адрес -- адрес DVWebTool на сервере {wc}а
+* Порт -- порт для подключения к DVWebTool
+* Флаг `*Автозапуск*`, отвечающий за автоматический запуск DVWebTool при загрузке системы
+* Кнопка *Собрать* или *Пересобрать* неактивна, пока не выбран файл манифеста и не заполнены поля _Адрес_ и _Порт_
+* Поле _Журнал_, в котором записываются действия при работе с программой
+
+// tag::webtool[]
+Программа _DVWebTool_ необходима для выполнения сканирования документов и открытия файлов в офисном редакторе в ОС {ms} Windows.
+
+WARNING: Программа _DVWebTool_ работает только в ОС {ms} Windows. Для работы требуется установить {net-r}.
+// end::webtool[]
+
+.Чтобы установить "DVWebTool":
+. [[install-dvweb]]Для установки _DVWebTool_ на сервер Linux необходимо создать образ утилиты. Для этого запустите _WebToolUtil_ на Windows.
+. В поле _Файл_ выберите файл манифеста `DocsVision.DVWebTool.application`. Файл можно получить на вкладке xref:user:interface-user-profile.adoc#install["Установки" профиля пользователя] скачанный из профиля пользователя {wc}а. После выбора файла автоматически будут заполнены другие поля.
++
+NOTE: Файл является уникальным для каждого пользователя.
++
+* В поле _Адрес_ указывается адрес DVWebTool на сервере {wc}а
+* В поле _Порт_ указывается порт для подключения к DVWebTool (по умолчанию `5413`)
++
+. При необходимости установите флаг `*Автозапуск*`, чтобы _DVWebTool_ запускалась автоматически при загрузке системы.
+. Нажмите кнопку *Собрать*, чтобы открыть каталог.
++
+.Успешное завершение сборки
+image::admin:dvweb-final-window.png[Успешное завершение сборки]
++
+После завершения сборки появится окно об успешном завершении операции. При нажатии на кнопку *ОК* будет открыта папка в файловой системе с собранными файлами DVWebTool.
++
+. Скопируйте открытую папку _DVWebTool_ на сервер Linux по пути `/lib/docsvision/webclient/Content/Tools` (если папка отсутствует, создайте её самостоятельно).
+. В зависимости от предпочитаемого способа убедитесь, что:
++
+* В конфигурационном файле `/usr/lib/docsvision/webclient/appsettings.json`, в параметре `DVWebToolInstallerUri`: указан адрес каталога: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
+* В {of-mc}, в параметре "xref:dev@mgmtconsole:servers:webclient-tools.adoc#webtool[Адрес установщика утилиты DVWebTool]" указан адрес папки: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
++
+. Перезапустите службу *{wcs-new}*.
+. _DVWebTool_ будет установлена при первом открытии файла из карточки в ОС Windows. Программу также можно установить вручную из menu:Профиля пользователя[Установки > Установить DVWebTool].
++
+После завершения установки программа _DVWebTool_ будет запущена автоматически, а в области уведомлений Windows появится значок программы (image:user:buttons/dv-web-ico.png[Две стрелочки в зелёном круге]).
++
+Программа устанавливается только для текущего пользователя. Если на компьютере работает несколько пользователей (несколько профилей Windows), программу нужно установить каждому пользователю.
+
+[#noui]
+== Запуск в консольном режиме
+
+. Перейдите в каталог с WebToolUtil и запустите утилиту командой с указанием пути к файлу манифеста:
++
+ ./webtoolutil http://example.com:5004/Content/Tools/DVWebTool/DocsVision.DVWebTool.application
++
+. Чтобы получить справку по работе с утилитой в консольном режиме, введите `-h` при нахождении в папке утилиты:
++
+.Доступные опции:
+* `-u` -- URL развёртывания манифеста приложения на сервере (обязательная опция)
+* `-p` -- Порт для работы DVWebTool (записывается в конфигурационный файл DVWebTool)
+* `-a` -- Флаг, отвечающий за автоматический запуск DVWebTool при загрузке системы
+* `-c` -- Путь к файлу сертификата для подписания манифеста приложения и манифеста развёртывания
+* `--version` -- Узнать версию приложения
+* `-h` -- Показать справку
+
+// == Кластер DVWebTool
+
+// Следующие действия необходимо выполнить, если {wc} работает в кластере и сервера {wc}а недоступны пользователям напрямую.
+//
+// Инструкция выполняется после установки и настройки кластера {wc}, а также после обновления версии {wc}а на узлах кластера.
+//
+// Все действия выполняются на одном из узлов кластера {wc}.
+//
+// [NOTE]
+// ====
+// include::ROOT:partial$excerpts.adoc[tags=dv-web-launch]
+// ====
+//
+// == Настройка узлов кластера
+//
+// . Запустите программу `C:\Program Files (x86)Docsvision\WebClient\Tools\mageui.exe` от имени администратора. Будет открыто окно *Mage*.
+// +
+// .Главное окно программы Microsoft .NET Framework Mage
+// image::mage.png[Главное окно программы Microsoft .NET Framework Mage]
+// +
+// . Нажмите menu:File[Open] и выберите файл `C:\Program Files (x86)Docsvision\WebClient\Site\Content\Tools\_DVWebTool_Docsvision.DVWebTool.application`. Будут загружены данные из манифеста развертывания программы _DVWebTool_.
+// . Откройте раздел параметров *Deployment Options*.
+// +
+// .Mage Deployment Options
+// image::mage-deployment.png[Mage Deployment Options]
+// +
+// [#startLocation]
+// . В строке _Start Location_ измените адрес сервера {wc}, на адрес балансировщика нагрузки или иного промежуточного устройства. Например: `\http://dv1.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application` на `\http://webclient.company.com/{dv}WebClient/Content/Tools/DVWebTool/{dv}.DVWebTool.application`.
+// . Нажмите menu:File[Save]. Будет предложено подписать манифест.
+// . Выберите файл `C:\Program Files (x86)Docsvision\WebClient\DVWebTool.pfx` и нажмите *OK*.
+// . Закройте программу *Mage*.
+// . Скопируйте папку `C:\Program Files (x86)Docsvision\WebClient\Site\Content\Tools\DVWebTool\` на все узлы кластера.
+//
+// == Использование собственного сертификата для подписания DVWebTool
+//
+// Файл `DVWebTool.pfx` содержит сгенерированный {dv} сертификат. При необходимости для подписания можно использовать собственный сертификат с назначением "Code Signing" или "All". При этом потребуется подписать два манифеста.
+//
+// . Запустите программу`mageui.exe`.
+// . Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
+// . Не вносите изменений в файл. Нажмите menu:File[Save]. При запросе сертификата выберите собственный сертификат для подписания.
+// . Откройте файл `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\Docsvision.DVWebTool.application`.
+// . Измените _Start Location_, <<startLocation, как указано выше>>.
+// . Откройте раздел параметров _Application Reference_.
+// +
+// .Mage Application Reference
+// image::mage-app-ref.png[Application Reference]
+// +
+// . Нажмите кнопку *Select Manifest* и выберите файл `C:\Program Files (x86)\Docsvision\WebClient\ite\Content\Tools\DVWebTool\Application Files\Docsvision.DVWebTool.exe.manifest`.
+// . Нажмите menu:File[Save]. При запросе сертификата выберите собственный сертификат для подписания.
+// . Закройте программу *Mage*.
+// . Скопируйте папку `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\` на все узлы кластера.
