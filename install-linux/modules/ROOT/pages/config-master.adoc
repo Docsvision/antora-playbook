@@ -160,3 +160,22 @@ image::platform:admin:db-create-modules.png[Загрузка библиотек 
 include::install-linux::partial$takesTime.adoc[]
 +
 . Нажмите на кнопку *Завершить*.
+
+[#errors]
+== Возможные ошибки при создании БД
+
+[cols="34%,33%,33%",options="header"]
+|===
+
+|Ошибка
+|Возможные причины
+|Способ решения
+
+
+|При создании БД в дистрибутивах на базе Red Hat Enterprise Linux 9 возникает ошибка
+|По умолчанию недоступна функция `uuid_generate_v4()`.
+|Установите расширение `uuid-ossp` и убедитесь, что схема присутствует в `search_path`.
+
+Проверить можно запросом `select uuid_generate_v4();`.
+
+|===
