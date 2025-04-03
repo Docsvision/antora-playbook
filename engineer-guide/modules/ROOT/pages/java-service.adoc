@@ -181,6 +181,6 @@ packages.docsvision.com/cryptoservice \
 java org.springframework.boot.loader.JarLauncher \
 --spring.config.additional-location=/application.properties <.>
 ----
-<.> `-v $(realpath application.properties):/application.properties` -- монтирование файла конфигурации `хост:контейнер`
-<.> `-v $(realpath keystore.p12):/keystore.p12` -- монтирование PKCS12-файла `хост:контейнер`
-<.> `--spring.config.additional-location=/application.properties` -- путь до файла конфигурации в контейнере
+<.> Монтирование файла конфигурации `хост:контейнер`
+<.> Монтирование PKCS12-файла `хост:контейнер`
+<.> Путь до файла конфигурации в контейнере
