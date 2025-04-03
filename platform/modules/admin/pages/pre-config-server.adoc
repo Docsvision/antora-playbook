@@ -16,7 +16,7 @@
 // sudo nano /etc/apt/sources.list
 // ----
 // +
-. В Astra Linux установите ПО, необходимое для подключения репозитория {dv} следующими командами:
+. В {os1} установите ПО, необходимое для подключения репозитория {dv} следующими командами:
 +
 [source]
 ----
@@ -24,7 +24,7 @@ sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 ----
 +
-В РЕД ОС создайте файл для указания адреса репозитория:
+В {os2} создайте файл для указания адреса репозитория:
 +
 [source]
 ----
@@ -35,7 +35,7 @@ sudo nano /etc/yum.repos.d/docsvision.repo
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
 +
 [source,bash]
 ----
@@ -44,7 +44,7 @@ echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo 
 sudo apt-get update
 ----
 
-РЕД ОС::
+{os2}::
 +
 [source,bash]
 ----
@@ -57,7 +57,7 @@ gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
 ----
 ====
 +
-. Подключите репозиторий дополнительного ПО ({asp-bundle}) предпочтительным способом. Для РЕД ОС перейдите сразу к <<kerb,пункту 4>>.
+. Подключите репозиторий дополнительного ПО ({asp-bundle}) предпочтительным способом. Для {os2} перейдите сразу к <<kerb,пункту 4>>.
 +
 * Используйте расширенный репозиторий Astra Linux (предпочтительный способ).
 // , раскомментировав следующую строку в файле `/etc/apt/sources.list`
