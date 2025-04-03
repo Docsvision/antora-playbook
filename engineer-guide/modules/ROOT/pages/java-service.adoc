@@ -146,14 +146,16 @@ include:::partial$excerpts.adoc[tags=one-ws]
 +
 [source,bash]
 ----
-openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -passout pass:MyP@ssw0rd <.>
+openssl pkcs12 -export \ <.>
+-in fullchain.pem \ <.>
+-inkey privkey.pem \ <.>
+-out keystore.p12 \ <.>
+-passout pass:MyP@ssw0rd <.>
 ----
-<.> Параметры:
-+
-* `-in fullchain.pem` - промежуточный и конечный сертификат
-* `-inkey privkey.pem` - приватный ключ
-* `-out keystore.p12` - имя выходного PKCS12-файла
-* `-passout pass:MyP@ssw0rd` - пароль для защиты PKCS12-файла
+<.> `-in fullchain.pem` - промежуточный и конечный сертификат
+<.> `-inkey privkey.pem` - приватный ключ
+<.> `-out keystore.p12` - имя выходного PKCS12-файла
+<.> `-passout pass:MyP@ssw0rd` - пароль для защиты PKCS12-файла
 +
 . Создайте файл конфигурации.
 +
@@ -165,8 +167,8 @@ server.ssl.key-store-password=MyP@ssw0rd <.>
 server.ssl.keyStoreType=PKCS12
 EOF
 ----
-<.> `server.ssl.key-store=/keystore.p12` -- путь до PKCS12-файла в контейнере
-<.> `server.ssl.key-store-password=MyP@ssw0rd` -- пароль от PKCS12-файла
+<.> Путь до PKCS12-файла в контейнере
+<.> Пароль от PKCS12-файла
 +
 . Запустите криптосервис:
 +
