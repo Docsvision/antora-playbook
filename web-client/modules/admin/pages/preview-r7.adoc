@@ -112,6 +112,7 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 +
  openssl req -x509 -newkey rsa:4096 -sha256 -keyout .\out\cert.key -out .\out\certificate.crt -subj "/CN=http://WebClientDomain.com" -days 600
 +
+// tag::webconfig[]
 . Откройте конфигурационный файл {wc}а по адресу `{webconfig}` в любом текстовом редакторе и отредактируйте следующие параметры:
 +
 [source,json]
@@ -134,7 +135,6 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 . [[address]]Следующим шагом в том же конфигурационном файле необходимо указать адрес сервера документов Р7 и определить режим предварительного просмотра:
 +
 --
-// tag::webconfig[]
 NOTE: Для корректной работы предварительного просмотра убедитесь, что URL сервера документов Р7-Офис/OnlyOffice доступен с клиентских рабочих мест.
 
 [source,json]
