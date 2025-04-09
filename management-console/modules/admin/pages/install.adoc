@@ -4,7 +4,7 @@
 
 WARNING: В данной версии установка {mc} предусмотрена только в ОС Linux.
 
-Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:6.1@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:CU5@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
 
 Требуется установить {mc} и сервис настроек. Установка должна выполняться на одной машине, установка на разные серверы не поддерживается.
 
@@ -21,7 +21,7 @@ WARNING: В данной версии установка {mc} предусмот
 :of: {of-mc}
 :file: appsettings
 :wt: managementconsole
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU5@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -62,7 +62,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 :of: {of-sett-serv}
 :file: appsettings
 :wt: settingsservice
-include::6.1@platform:admin:partial$install.adoc[]
+include::CU5@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -172,7 +172,7 @@ endif::sm-page[]
 * Не будут создаваться и отправляться группы заданий.
 * Не будут отправляться почтовые уведомления исполнителям.
 
-См. подробнее в руководстве пользователя Консоли управления "xref:6.1@mgmtconsole:user:initial-configuration.adoc[]".
+См. подробнее в руководстве пользователя Консоли управления "xref:CU5@mgmtconsole:user:initial-configuration.adoc[]".
 
 // tag::cert[]
 [#cert]
@@ -256,7 +256,7 @@ WARNING: Без выполнения данных настроек аутент�
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
 
-include::6.1@platform:admin:config-domains.adoc[tags=chalto]
+include::CU5@platform:admin:config-domains.adoc[tags=chalto]
 
 [#deletion]
 == Удаление {of-mc}
