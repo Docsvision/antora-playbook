@@ -56,12 +56,23 @@ public CursorInfo GetSectionsSize()
 }
 ----
 
-Готовый модуль расширения необходимо зарегистрировать на сервере. Для этого нужно в ветке реестра `{hklm}\SOFTWARE\DocsVision\Platform\\Server\Extensions` создать строковое значение с названием расширения (любое уникальное, на латинице, без пробелов и спец. знаков) и значением, представляющим полное имя класса, реализующего интерфейс расширения, к примеру:
+Готовый модуль расширения необходимо зарегистрировать в качестве расширения на сервере. Для этого нужно создать файл формата `.json` с именем `extension-уникальное-название` в каталоге `/usr/lib/docsvision/platform/config/extension-уникальное-название.json`, например:
 
-[source,csharp]
+[source,json]
 ----
-"BackOfficeExtension"="DocsVision.BackOffice.ServerExtension.Extension, DocsVision.BackOffice.ServerExtension, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519"
+{
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Extensions": {
+          "YourExtension"="DocsVision.Your.ServerExtension.Extension, DocsVision.Your.ServerExtension, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7e990517f9148af9" <.>
+        }
+      }
+    }
+  }
+}
 ----
+<.> Укажите псевдоним расширения и полное название типа.
 
 Для вызова методов модуля расширения на клиенте необходимо воспользоваться специальным объектом -- менеджером расширений (`xref:Platform-ObjectManager-Extension:ExtensionManager_CL.adoc[ExtensionManager]`). Менеджер расширений содержит метод для вызова у указанного расширения определённого метода: `xref:Platform-ObjectManager-Extension:ExtensionManager.GetExtensionMethod_MT.adoc[GetExtensionMethod]`.
 
