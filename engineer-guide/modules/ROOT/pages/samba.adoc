@@ -6,6 +6,7 @@
 .Установка и запуск Samba сводится к нескольким командам, за подробной информацией обратитесь к инструкции для вашего дистрибутива:
 * Инструкция для https://wiki.astralinux.ru/pages/viewpage.action?pageId=27362929[Astra Linux]
 * Инструкция для https://redos.red-soft.ru/base/redos-7_3/7_3-administation/7_3-domain-redos/7_3-domain-config/7_3-samba-dns-backend-bind9-dlz/7_3-install-samba-dc-bind/?nocache=1728989583495[РЕД ОС]
+* Инструкция для https://client.sbertech.ru/docs/public/SLO/8.9.0/INST/8.9.0/documents/administration-guide/index.html[SberLinux]
 --
 
 . Убедитесь, что у сервера статический IP и файл `/etc/hosts` корректно разрешает FQDN контроллера домена. Имя хоста не должно разрешаться в IP-адрес `127.0.0.1` или в любой другой IP-адрес, кроме используемого на внешнем сетевом интерфейсе.
@@ -21,10 +22,10 @@
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
  $ apt-get update && apt-get install samba
 +
-РЕД ОС::
+{os2}::
 +
  $ dnf install samba*
 ====
