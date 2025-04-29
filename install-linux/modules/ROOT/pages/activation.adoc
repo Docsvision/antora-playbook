@@ -8,11 +8,11 @@
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
 +
  $ sudo apt-get install docsvision-activation
 
-РЕД ОС::
+{os2}::
 +
  $ sudo dnf install docsvision-activation
 ====
@@ -59,3 +59,28 @@ Astra Linux::
 --
 +
 NOTE: Если ввести команду без нужных аргументов, в окне терминала будет выведена справка для использованной команды.
+
+[#errors]
+== Возможные ошибки активации
+
+[cols="34%,33%,33%",options="header"]
+|===
+
+|Ошибка
+|Возможные причины
+|Способ решения
+
+a|Не удаётся выполнить активацию {dv}. Неверный лицензионный ключ.
+
+`The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters..`
+
+|В дистрибутивах на базе Red Hat Enterprise Linux 9 подписи SHA-1 по умолчанию отключены.
+
+a|Можно включить подписи SHA-1, изменив конфигурацию OpenSSL `/etc/pki/tls/openssl.cnf`:
+
+ [evp_properties]
+ rh-allow-sha1-signatures = yes
+
+
+|===
+
