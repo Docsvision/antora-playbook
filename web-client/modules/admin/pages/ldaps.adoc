@@ -1,0 +1,64 @@
+= Настройка аутентификации LDAPS
+
+При явной аутентификации пользователя в {wc}е, со вводом логина и пароля, по умолчанию используется протокол LDAP для подключения к Active Directory и проверки указанных учётных данных. При необходимости можно использовать протокол LDAPS, если его поддержка включена на стороне сервера Active Directory.footnote:[Активация протокола LDAPS на стороне сервера Active Directory выходит за рамки документации {dv}.]
+
+NOTE: LDAPS поддерживается в системе {dv} с модулем {pl} версии {ldaps-pl-v} и модулем {wc} версии {ldaps-wc-v}.
+
+.Чтобы включить использование LDAPS:
+. В конфигурационном файле {wc}а укажите настроуки `"Catalogs"`:
++
+[source,json]
+----
+  "Catalogs": [{
+     "FullDomainName": "example.com", <.>
+     "NetBiosDomainName": "example", <.>
+     "LdapOptions": {
+       "LdapServerAddresses": [ <.>
+         "subdomain.example.com"
+       ],
+       "AuthType": "Basic", <.>
+       "Port": 636, <.>
+       "EnableLDAPS": true, <.>
+       "Credential": { <.>
+         "UserName": "EXAMPLE\\user01", <.>
+         "Password": "user001" <.>
+       }
+    }
+  }],
+----
+<.> `FullDomainName` -- полное имя домена.
+<.> `NetBiosDomainName` -- сокращённое имя домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP. См. подробнее "xref:config-domains.adoc[]".
+<.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP (подробнее см. в документации модуля {pl} "xref:6.1@platform:admin:config-domains.adoc[]"), `Oauth` -- аутентификация через ЕСИА или Azure.
+<.> `Port` -- порт подключения к серверу LDAP.
+<.> `EnableLDAPS` -- параметр определяет, будет ли использоваться LDAP с SSL/TLS (LDAPS) для безопасного обмена данными. Задайте для параметра значение `true`. По умолчанию значение `false`.
+<.> `Credential` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory.
+<.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
+<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP. Пароль можно указывать в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]"
++
+. Настройки `"Catalogs"` преобладают над настройками `"Ldap"`, поэтому блок настроек `"Ldap"` можно удалить:
++
+[source,json]
+----
+  "Ldap": {
+    "AuthType": "Basic",
+    "LookupTimeout": 2000,
+    "Port": 389,
+    "Credential": {
+      "UserName": null,
+      "Password": null
+    }
+  },
+----
++
+. Создайте самоподписанный сертификат, например, с помощью утилиты openssl или используйте уже имеющийся:
++
+ $ openssl s_client -connect example.com:636
++
+. Получившийся файл поместите на сервер Linux в папку: `/usr/local/share/ca-certificates`.
+. Выполните команду:
+
+ $ sudo update-ca-certificates -v
+
+. Установите сертификат на сервере Active Directory.
+. Перезапустите *{sss-new}*.
