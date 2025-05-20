@@ -50,11 +50,7 @@ image::admin:dvweb-final-window.png[Успешное завершение сбо
 После завершения сборки появится окно об успешном завершении операции. При нажатии на кнопку *ОК* будет открыта папка в файловой системе с собранными файлами DVWebTool.
 +
 . Скопируйте открытую папку _DVWebTool_ на сервер Linux по пути `/lib/docsvision/webclient/Content/Tools` (если папка отсутствует, создайте её самостоятельно).
-. В зависимости от предпочитаемого способа убедитесь, что:
-+
-* В конфигурационном файле `/usr/lib/docsvision/webclient/appsettings.json`, в параметре `DVWebToolInstallerUri`: указан адрес каталога: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
-* В {of-mc}, в параметре "xref:dev@mgmtconsole:servers:webclient-tools.adoc#webtool[Адрес установщика утилиты DVWebTool]" указан адрес папки: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
-+
+. Убедитесь, что в конфигурационном файле `/usr/lib/docsvision/webclient/appsettings.json`, в параметре `DVWebToolInstallerUri`: указан адрес каталога: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
 . Перезапустите службу *{wcs-new}*.
 . _DVWebTool_ будет установлена при первом открытии файла из карточки в ОС Windows. Программу также можно установить вручную из menu:Профиля пользователя[Установки > Установить DVWebTool].
 +
