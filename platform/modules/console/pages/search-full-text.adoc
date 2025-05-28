@@ -60,7 +60,7 @@
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
 +
 [source,bash]
 ----
@@ -68,7 +68,7 @@ sudo apt-get update
 sudo apt-get install docsvision-fulltextservice
 ----
 
-РЕД ОС::
+{os2}::
 +
  $ sudo dnf install docsvision-fulltextservice
 ====
@@ -89,7 +89,7 @@ sudo nano /usr/lib/docsvision/fulltextservice/appsettings.json
   "DocsVision": {
     "Platform": {
       "Server": {
-        "LogFile": "/var/log/docsvision/fulltextservice.log" <.>
+        "LogFile": "/var/log/docsvision/fulltextservice.log", <.>
         "Databases": {
           "alias": "CONNECTION-STRING" <.>
         }

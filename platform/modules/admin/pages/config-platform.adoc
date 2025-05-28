@@ -93,19 +93,15 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
           "alias": "CONNECTION-STRING"  <.>
         }
       }
+    },
+    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
     "SettingsService": {
       "ConnectionString": "ConnectAddress=http://settings.service.com:5200/api", <.>
       "ApiKey": "apikey-settingsservice" <.>
     },
-    },
-      "Workflow": {
-        "ApiKey": "api-key" <.>
-      }
-    },
-    "ServiceId": "d2f23ed0-9fea-8486-9780-b8192d334d28", <.>
-    "SettingsService": {
-      "ConnectionString": "http://storage-server.com:5200/api", <.>
-      "ApiKey": "dvappserverapikey" <.>
+    "Workflow": {
+      "ApiKey": "api-key" <.>
+    }
   },
   "Groups": {
     "DocsVision Administrators": [
@@ -140,6 +136,7 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
 <.> `WindowsSecurityServerName` -- необходимо указать имя любого компьютера в текущем домене Active Directory. Используется при получении списка доступных членов домена при настройке дискреционной безопасности в {wincl}е, РМА и DVExplorer.
 <.> `alias` -- псевдоним используемой БД, для которой задаётся строка подключения. `CONNECTION-STRING` -- строка подключения, подробное описание строки подключения см. <<connection-string,ниже>>.
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
+<.> `ServiceId` -- уникальный идентификатор данного экземпляра модуля, генерируется и записывается автоматически.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {pl} были одинаковые. Адрес и API-ключ требуется указать, если планируется переходить в {mc} из карточек {wc}а и {wincl}а.
 <.> `ApiKey` -- используется для подключения серверного расширения {wf}. Можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 <.> `Groups` -- эквивалент системных групп. Указанные в группах пользователи будут обладать соответствующими правами. Обратите внимание, что в группах массив строк, а не строка.
@@ -175,8 +172,7 @@ include::ROOT:partial$excerpts.adoc[tags=system-accounts]
 `Initial Catalog=Имя-БД-{dv}; Data Source=Полное-имя-сервера-СУБД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
 
-.{pgsql}
+.{pgsql}/{pgl}
 ****
 `Server=Адрес-сервера-базы-данных; Port=SQL-порт; Database=Название-БД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
-

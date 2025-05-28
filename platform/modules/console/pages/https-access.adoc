@@ -6,16 +6,16 @@
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
 +
  $ sudo apt-get install openssl
 
-РЕД ОС::
+{os2}::
 +
  $ sudo dnf install openssl
 ====
 +
-. [[before]]Создайте самопидписанный сертификат SSL.
+. [[before]]Создайте самоподписанный сертификат SSL.
 +
 --
  $ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" <.>
@@ -30,11 +30,11 @@ NOTE: Подробный пример создания сертификата п
 +
 [tabs]
 ====
-Astra Linux::
+{os1}::
 +
  $ sudo update-ca-certificates
 
-РЕД ОС::
+{os2}::
 +
  $ sudo update-ca-trust
 ====
