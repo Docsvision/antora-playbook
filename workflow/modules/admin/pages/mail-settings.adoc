@@ -30,6 +30,7 @@ include::dv6@system::partial$excerpts.adoc[tags=pop3]
 +
 [source,json]
 ----
+{
   "DocsVision": {
     "Workflow": {
       "ServiceUrl": "http://dvserver.domain.com:5000/api/v1", <.>
@@ -65,7 +66,8 @@ include::dv6@system::partial$excerpts.adoc[tags=pop3]
         "WebUseDefaultCredentials": 0 <.>
       }
     }
-  },
+  }
+}
 ----
 <.> `ServiceUrl` -- адрес сервера {dv}. Обратите внимание на api/v1 в адресе.
 <.> `BaseName` -- псевдоним базы данных, для обработки которой предназначается сервис. Должен совпадать с псевдонимом подключенной базы в конфигурации сервера {dv}.
@@ -140,13 +142,15 @@ WARNING: По умолчанию в конфигурационном файле 
 +
 [source,json]
 ----
+{
   "Docsvision": {
     "Workflow": {
       "WorkflowServer": {
         "WebAllowRedirect": 1
       }
     }
-  },
+  }
+}
 ----
 +
 . Перезапустите службу *{wfs-new}*.
@@ -183,6 +187,7 @@ Microsoft больше не поддерживает обычную провер
 +
 [source,json]
 ----
+{
   "Docsvision": {
     "Workflow": {
       "Tenants": {
@@ -194,7 +199,8 @@ Microsoft больше не поддерживает обычную провер
         }
       }
     }
-  },
+  }
+}
 ----
 <.> `WebUseOAuth` -- использовать авторизацию через OAuth.
 <.> `WebOauthClientId` -- идентификатор созданного приложения.
