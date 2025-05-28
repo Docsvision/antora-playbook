@@ -2,10 +2,17 @@
 :service:
 :restart: dvappserver
 :update: platform
+:with-console: yes
+:with-config: no
+:do-what: варианта обновления системной БД
+:link: "xref:dev@mgmtconsole:servers:db-update.adoc[]"
+:cns-section: "Базы данных"
 
 = Обновление модуля
 
 include::6.1@webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
+
+include::admin:partial$mancons.adoc[]
 
 [#conditions]
 == Условия обновления
@@ -33,8 +40,6 @@ include::partial$update.adoc[]
 image::db-update-select.png[Настройка баз данных {dv}]
 +
 . Выберите основную БД {dv} в списке, установите переключатель в положение *Использовать выбранную в списке базу данных* и нажмите *Далее*.
-+
-NOTE: Начиная с модуля {pl} версии {pl-cu5}, работа с БД возможна также через {mc}, см. подробнее "xref:dev@mgmtconsole:servers:db-update.adoc[]" в документации {of-mc}.
 +
 . Согласитесь с предложением обновить БД.
 +

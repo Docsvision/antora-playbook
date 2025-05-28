@@ -1,21 +1,19 @@
+:with-console: yes
+:with-config: no
+:do-what: варианта настройки БД
+
 = Настройка базы данных
 
 :page-aliases: admin:console-db-config.adoc
 
 Панель настроек базы данных {dv} -- инструмент Консоли настройки {dv}, который предназначен для настройки БД и параметров {dv}, применяемых при работе с данной БД.
 
-****
-Начиная с модуля {pl} версии {pl-cu5}, настройку БД администратор может выполнить двумя способами:
-
-* С помощью программы {cns}, настройка описана ниже.
-* С помощью параметров в интерфейсе {of-mc}: "xref:dev@mgmtconsole:servers:db-config.adoc[]".
-****
-
-.Панель настроек базы данных {dv}
-image::admin:db-properties.png[Панель настроек базы данных {dv}]
-
 [#properties]
 == Страница настроек "Свойства"
+
+:cns-section: menu:Базы данных[Настройки > Свойства]
+:link: "xref:dev@mgmtconsole:servers:db-config.adoc[]"
+include::admin:partial$mancons.adoc[]
 
 .Общие сведения о базе данных в Консоли настройки {dv}
 image::admin:db-properties.png[Общие сведения о базе данных в Консоли настройки {dv}]
@@ -31,6 +29,10 @@ image::admin:db-properties.png[Общие сведения о базе данн�
 
 [#management]
 == Страница настроек "Управление"
+
+:cns-section: menu:Базы данных[Настройки > Управление]
+:link: "xref:dev@mgmtconsole:servers:db-maintenance.adoc[]"
+include::admin:partial$mancons.adoc[]
 
 .Страница настроек "Управление" параметров базы данных {dv}
 image::admin:db-management.png[Страница настроек "Управление" параметров базы данных {dv}]
@@ -54,6 +56,10 @@ include::config-client.adoc[tags=takeoffice]
 
 [#external-storage]
 == Страница настроек "Внешние хранилища"
+
+:cns-section: menu:Базы данных[Настройки > Внешние хранилища]
+:link: "xref:dev@mgmtconsole:servers:db-storage.adoc[]"
+include::admin:partial$mancons.adoc[]
 
 .Управление внешними хранилищами в Консоли настройки {dv}
 image::admin:db-external-storage.png[Управление внешними хранилищами в Консоли настройки {dv}]
@@ -88,6 +94,10 @@ include::admin:partial$excerpts.adoc[tags=nofs]
 [#archiving]
 == Страница настроек "Архивирование"
 
+:cns-section: menu:Базы данных[Настройки > Архивирование]
+:link: "xref:dev@mgmtconsole:servers:db-archive.adoc[]"
+include::admin:partial$mancons.adoc[]
+
 .Настройка архивирования в Консоли настройки {dv}
 image::admin:create-panel-archiving.png[Настройка архивирования в Консоли настройки {dv}]
 
@@ -116,6 +126,10 @@ NOTE: Архивирование -- вытеснение редко исполь
 [#metadata]
 == Страница настроек "Метаданные"
 
+:cns-section: menu:Базы данных[Настройки > Метаданные]
+:link: "xref:dev@mgmtconsole:servers:db-service-tables.adoc[]"
+include::admin:partial$mancons.adoc[]
+
 .Настройка метаданных в Консоли настройки {dv}
 image::admin:control-panel-metadata.png[Настройка метаданных в Консоли настройки {dv}]
 
@@ -133,6 +147,10 @@ image::admin:control-panel-metadata.png[Настройка метаданных 
 
 [#log]
 == Страница настроек "Журнал"
+
+:cns-section: menu:Базы данных[Настройки > Журнал]
+:link: "xref:dev@mgmtconsole:servers:db-log.adoc[]"
+include::admin:partial$mancons.adoc[]
 
 .Настройка метаданных в Консоли настройки {dv}
 image::admin:control-panel-log.png[Настройка метаданных в Консоли настройки {dv}]
@@ -155,6 +173,8 @@ image::admin:log-settings.png[Параметры резервного копир
 [#alwaysOn]
 == Страница настроек "AlwaysOn"
 
+TIP: В данный момент не поддерживается в {of-mc}.
+
 .Настройки AlwaysOn в Консоли настройки {dv}
 image::admin:always-on-console.png[Настройки AlwaysOn в Консоли настройки {dv}]
 
@@ -167,6 +187,10 @@ image::admin:always-on-console.png[Настройки AlwaysOn в Консоли
 
 [#caching]
 == Страница настроек "Настройки кэширования"
+
+:cns-section: menu:Базы данных[Настройки > Настройки кэширования]
+:link: "xref:dev@mgmtconsole:servers:db-cache.adoc[]"
+include::admin:partial$mancons.adoc[]
 
 .Настройки кэширования в Консоли настройки {dv}
 image::admin:create-panel-caching.png[Настройки кэширования в Консоли настройки {dv}]

@@ -1,5 +1,7 @@
 = Перенести БД между серверами
 
+include::new-admin-console@platform:admin:partial$mancons.adoc[]
+
 Перенос базы данных между серверами {dv} может потребоваться, чтобы подключить БД к другому серверу {dv}, но в лицензии {dv} отсутствует опция _{dv} Concurrent Servers_, которая позволяет работать с одной БД нескольким серверам {dv}. При попытке подключить БД ко второму серверу {dv} возникнет предупреждение:
 
 ifdef::no-image[]
@@ -44,18 +46,10 @@ where tColumns.referenced_object_id = OBJECT_ID('[dbo].[dvsys_sessions]')
 ====
 После отключения БД от одного сервера, её можно подключить к другому.
 
-Начиная с модуля {pl} версии {pl-cu5}, отключеить и подключить БД можно двумя способами:
-
-* С помощью программы {cns}, см. подробнее в разделах "xref:db-detach.adoc[Отключение]" и "xref:db-connect.adoc[Подключение]".
-* Из интерфейса {of-mc}: см. подробнее в разделах xref:dev@mgmtconsole:servers:db-detach.adoc[Отключение] и xref:dev@mgmtconsole:servers:db-connect.adoc[Подключение].
-
 .Обратите внимание:
 include::admin:partial$excerpts.adoc[tags=sat-move]
 +
 * Подробнее про сателлитные БД см. в разделе:
 +
 ** "xref:db-satellite.adoc[]" для программы {cns}.
-** "xref:dev@mgmtconsole:servers:db-satellite.adoc[]" для {of-mc}.
 ====
-
-
