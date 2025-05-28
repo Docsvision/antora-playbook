@@ -1,6 +1,13 @@
+:with-console: no
+:with-config: yes
+:do-what: варианта включения отладки ролевой модели
+:link: настройка по пути "DocsVision__Platform__Server__TraceLevel__LogLevel": см. раздел "xref:dev@mgmtconsole:servers:appserver-etc.adoc[]"
+
 = Включение отладки ролевой модели
 
 Отладка ролевой модели представляет собой процесс тестирования настроек ролевой безопасности с последующим включением его в продуктовую среду.
+
+include::admin:partial$mancons.adoc[]
 
 .Чтобы включить режим отладки ролевой модели:
 . Откройте конфигурационный файл модуля в любом текстовом редакторе, например, nano:
@@ -14,6 +21,7 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
 +
 [source,json]
 ----
+{
   "DocsVision": {
       "Platform": {
         "Server": {
@@ -21,6 +29,7 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
         }
       }
   }
+}
 ----
 <.> Отладка работает при значениях `3` и `4`.
 +

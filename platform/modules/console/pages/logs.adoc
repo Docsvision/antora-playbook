@@ -92,6 +92,7 @@ include::admin:partial$mancons.adoc[]
 .Фрагмент конфигурационного файла {fss-new}:
 [source,json]
 ----
+{
   "NLog": {
     "targets": {
       "logFile": {
@@ -108,6 +109,7 @@ include::admin:partial$mancons.adoc[]
       }
     ]
   }
+}
 ----
 <.> Путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/fileservice`.
 <.> Уровень журналирования, по умолчанию используется `Warn`.
@@ -128,6 +130,7 @@ include::admin:partial$mancons.adoc[]
 
 [source,json]
 ----
+{
 "W3CLogging": {
 	"IsEnabled": true <.>
 	"LogDirectory": "/var/log/docsvision/appserver", <.>
@@ -135,6 +138,7 @@ include::admin:partial$mancons.adoc[]
 	"FileSizeLimit": 10485760, <.>
 	"RetainedFileCountLimit": 4, <.>
 	"FileName": "appserver-w3c-" <.>
+}
 }
 ----
 <.> Включение/отключение протоколирования событий. Значение по умолчанию: `false`, в стандартной конфигурации остальные настройки отсутствуют.
@@ -157,6 +161,7 @@ include::admin:partial$mancons.adoc[]
 .Чтобы активировать протоколирование запросов с помощью NLog, измените параметры журналирования в параметре menu:NLog[targets]:
 [source,json]
 ----
+{
 "NLog": {
    "extensions": [
     { "assembly": "DocsVision.AppServer" } <.>
@@ -182,6 +187,7 @@ include::admin:partial$mancons.adoc[]
       "writeTo": "w3cFile"
     }
    ]
+}
 }
 ----
 <.> Обязательный параметр, если он не указан, NLog не будет записывать обычные сообщения в журнал.
