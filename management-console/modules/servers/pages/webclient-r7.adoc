@@ -54,10 +54,12 @@ location ~* ^(\/upload.*)(\/.*) {
 
 [source,json]
 ----
+{
 "request-filtering-agent" : {
   "allowPrivateIPAddress": false,
   "allowMetaIPAddress": false
-},
+}
+}
 ----
 
 По умолчанию значение параметров установлено в `false`, необходимо изменить его на `true`.
@@ -97,6 +99,7 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
 +
 [source,json]
 ----
+{
   "Kestrel": {
     "Endpoints": {
       "Http": {
@@ -107,6 +110,7 @@ openssl req -x509 -newkey rsa:2048 -keyout test.key -nodes -out test.crt -subj "
       }
     }
   }
+}
 ----
 <.> Адрес, по которому будет доступен {wc}.
 <.> Путь к сертификату.
@@ -136,6 +140,7 @@ NOTE: Для корректной работы предварительного 
 +
 [source,json]
 ----
+{
   "services": {
     "CoAuthoring": {
       "sql": {
@@ -176,7 +181,8 @@ NOTE: Для корректной работы предварительного 
         }
       }
     }
-  },
+  }
+}
 ----
 <.> Секретное слово для параметра `inbox`.
 <.> Секретное слово для параметра `outbox`.

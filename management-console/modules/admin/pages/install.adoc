@@ -206,6 +206,7 @@ WARNING: Без выполнения данных настроек аутент�
 
 [source,json]
 ----
+{
  "Catalogs": [
   {
    "FullDomainName": "example1.com", <.>
@@ -223,7 +224,8 @@ WARNING: Без выполнения данных настроек аутент�
     "FullDomainName": "example2.com", <.>
     "ChallengeTo": "example1.com" <.>
   }
-]
+  ]
+}
 ----
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
@@ -237,7 +239,7 @@ WARNING: Без выполнения данных настроек аутент�
 .Раздел `Catalogs` может содержать массив настроек вида:
 [source,json]
 ----
- {
+{
     "FullDomainName": "example.com", <.>
     "NetBiosDomainName": "EXAMPLE", <.>
     "LdapOptions": { <.>
