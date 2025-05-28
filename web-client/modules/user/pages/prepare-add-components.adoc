@@ -35,7 +35,7 @@ ifdef::root-cert[{root-cert}]
 [#dvWebTool]
 == Запуск программы DVWebTool
 
-Сборка и установка _DVWebTool_ делегированы утилите WebToolUtil, см. подробнее в разделе "xref:admin:webservices-install.adoc[]" для администратора {wc}а.
+TIP: Сборка и установка _DVWebTool_ делегированы утилите WebToolUtil, см. подробнее в разделе "xref:admin:webservices-install.adoc[]" для администратора {wc}а.
 
 . [[launch-dvweb]]DVWebTool автоматически запускается при входе пользователя в ОС, если при xref:admin:webservices-install.adoc[сборке] был установлен флаг `*Автозапуск*`. Программу можно запустить вручную из меню menu:Пуск[Программы > {dv} > {dv} Web tool].
 +
@@ -60,6 +60,7 @@ include::ROOT:partial$excerpts.adoc[tags=dv-web-launch]
 
 // tag::dvsup[]
 Служба _DVSupService_ необходима для открытия файлов в офисном редакторе в ОС Linux.
+// end::dvsup[]
 
 WARNING: Служба _DVSupService_ работает только в ОС Linux. Для работы требуется установить {net-r}.
 
@@ -151,6 +152,7 @@ Astra Linux::
 
 .Запуск DVSupService
 ****
+// tag::dvsup[]
 По умолчанию служба _DVSupService_ запускается от имени пользователя ROOT.
 
 . Чтобы запустить службу от имени другого пользователя, необходимо выполнить следующую команду:
@@ -164,5 +166,5 @@ Astra Linux::
  Group=user
 +
 В примере выше `user` -- пользователь, от имени которого необходимо запускать _DVSupService_.
+// end::dvsup[]// end::dvsup[]
 ****
-// end::dvsup[]
