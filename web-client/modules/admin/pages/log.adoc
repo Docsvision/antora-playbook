@@ -30,6 +30,7 @@
 
 [source,json]
 ----
+{
 "W3CLogging": {
 	"IsEnabled": true, <.>
 	"LogDirectory": "/var/log/docsvision/webclient/", <.>
@@ -37,6 +38,7 @@
 	"FileSizeLimit": 10485760, <.>
 	"RetainedFileCountLimit": 4, <.>
 	"FileName": "webclient-w3c-" <.>
+}
 }
 ----
 <.> Включение/отключение протоколирования событий. Значение по умолчанию: `false`, в стандартной конфигурации остальные настройки отсутствуют.
@@ -60,6 +62,7 @@
 .Чтобы активировать протоколирование запросов с помощью NLog, измените параметры журналирования в параметре: menu:NLog[targets]:
 [source,json]
 ----
+{
 "NLog": {
    "extensions": [
     { "assembly": "DocsVision.WebClient" } <.>
@@ -85,6 +88,7 @@
       "writeTo": "w3cFile"
     }
    ]
+}
 }
 ----
 <.> Обязательный параметр, если он не указан, NLog не будет записывать обычные сообщения в журнал.

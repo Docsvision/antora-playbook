@@ -18,6 +18,7 @@ include::partial$mancons.adoc[]
 +
 [source,json]
 ----
+{
   "Docsvision": {
     "SettingGroups": {
       "WebClient": {
@@ -27,6 +28,7 @@ include::partial$mancons.adoc[]
       },
     },
   },
+}
 ----
 <.> Укажите новое ограничение для максимального размера единичного файла в байтах, не превышающее `2147483647`.
 +
@@ -35,11 +37,13 @@ include::partial$mancons.adoc[]
 --
 [source,json]
 ----
+{
   "Kestrel": {
     "Limits": {
       "MaxRequestBodySize": "0" <.>
     }
   }
+}
 ----
 <.> Укажите новое ограничение максимального размера тела запроса в байтах, не превышающее `4294967295`.
 --
