@@ -144,6 +144,7 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
 +
 [source,json]
 ----
+{
   "Ldap": {
     "AuthType": "Basic",
     "Credential": {
@@ -152,6 +153,7 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
     }
   },
   "DataProtectCertificateThumbprint": "thumbprint", <.>
+}
 ----
 <.> Имя УЗ LDAP.
 <.> Пароль системной УЗ LDAP в зашифрованном виде.
