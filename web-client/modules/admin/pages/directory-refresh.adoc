@@ -20,7 +20,7 @@ include::partial$mancons.adoc[]
     "WebClient": {
       "SettingGroups": {
         "System": {
-          "ShortCacheRefreshPeriod": "600" <.>
+          "ShortCacheRefreshPeriod": "600", <.>
           "LongCacheRefreshPeriod": "14400" <.>
         }
       }
@@ -30,7 +30,16 @@ include::partial$mancons.adoc[]
 <.> Короткий период обновления кэша и данных в разметке профиля пользователя.
 <.> Длительный период обновления кэша и данных в разметке профиля пользователя.
 
-Для папок используется `ShortCacheRefreshPeriod`. `LongCacheRefreshPeriod` -- пока не используется.
+.Настройка `ShortCacheRefreshPeriod` используется для:
+* Карточки папок
+* Справочника видов
+* Конструктора справочников
+* Справочника сотрудников
+* Справочника контрагентов
+* Справочника категорий
+
+.Настройка `LongCacheRefreshPeriod` используется для:
+* Всего остального, включая справочник разметок
 // end::webconfig[]
 
 include::partial$excerpts.adoc[tags=ifabsent]

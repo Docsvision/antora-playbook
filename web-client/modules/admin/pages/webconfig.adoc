@@ -7,6 +7,8 @@ include::partial$excerpts.adoc[tags=ifabsent]
 [TIP]
 ====
 Рекомендуемый способ конфигурации {wc}а -- при помощи {of-mc}, дополнительные сведения приведены в разделах соответствующих параметров по ссылкам.
+
+Настройки в конфигурационном файле не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
 ====
 
 [#general]
@@ -65,6 +67,15 @@ include::max-preview-size.adoc[tags=webconfig]
 .Подробнее см.:
 * {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
 * Конфигурационный файл -- "xref:max-preview-size.adoc[]".
+
+[#add-formats]
+=== Открытие файлов на редактирование
+
+include::add-edit-formats.adoc[tags=webconfig]
+
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
+* Конфигурационный файл -- "xref:add-edit-formats.adoc[]".
 
 [#look]
 == Настройки внешнего вида
@@ -171,6 +182,14 @@ include::install-cryptopro.adoc[tags=webconfig]
 * {mc} -- "xref:dev@mgmtconsole:servers:webclient-signature.adoc#cloud-sign[Облачная подпись]".
 * Конфигурационный файл -- "xref:install-cryptopro.adoc[]".
 
+[#sign-d-load]
+=== Скачивание файла в браузер
+
+include::download-signature.adoc[tags=webconfig]
+
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-signature.adoc#cloud-sign[Облачная подпись]".
+* Конфигурационный файл -- "xref:download-signature.adoc[]".
+
 [#views]
 == Настройки представлений
 
@@ -259,6 +278,22 @@ include::log-router.adoc[tags=webconfig]
 .Подробнее см.:
 * {mc} -- "xref:dev@mgmtconsole:servers:webclient-logging.adoc[Группа настроек "Журналирование"]".
 * Конфигурационный файл -- "xref:log-router.adoc[]".
+
+[#webc-log]
+=== Включить протоколирование запросов сервера {wc}а
+
+include::log.adoc[tags=webconfig]
+
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-logging.adoc[Группа настроек "Журналирование"]".
+* Конфигурационный файл -- "xref:log.adoc#webc-requests[]".
+
+[#nlog-request]
+=== Протоколирование запросов с помощью NLog
+
+include::log.adoc[tags=nlo]
+
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:log.adoc#nlog[Протоколирование запросов с помощью NLog]".
 
 [#other]
 == Прочие настройки
