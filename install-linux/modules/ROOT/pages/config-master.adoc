@@ -176,3 +176,23 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 include::install-linux::partial$takesTime.adoc[]
 +
 . Нажмите на кнопку *Завершить*.
+
+// tag::db-create-errors[]
+[#errors]
+== Возможные ошибки при создании БД
+
+[cols="34%,33%,33%",options="header"]
+|===
+
+|Ошибка
+|Возможные причины
+|Способ решения
+
+|При создании БД на базе {pgl} возникает ошибка.
+|По умолчанию недоступна функция `uuid_generate_v4()`.
+|Установите расширение `uuid-ossp` и убедитесь, что схема присутствует в `search_path`.
+
+Проверить можно запросом `select uuid_generate_v4();`.
+
+|===
+// end::db-create-errors[]
