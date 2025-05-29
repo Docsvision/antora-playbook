@@ -72,6 +72,31 @@ WARNING: Установка Сервиса внешнего API не требу�
 +
  $ sudo systemctl start dvexternalapi
 
+[#pl-ext]
+== Установка расширения сервера приложений для {of-mc}
+
+Расширение сервера приложений для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки Сервера приложений из {of-mc}.
+
+. Установите серверные компоненты расширения Сервера приложений для {of-mc}:
++
+[tabs]
+====
+{os1}::
++
+[source,bash,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install docsvision-docsvision-ext-platform-mc
+----
+
+{os2}::
++
+[source,bash,subs=attributes]
+----
+sudo dnf install docsvision-docsvision-ext-platform-mc
+----
+====
+
 [#wc-ext]
 == Установка расширения {wc}а для {of-mc}
 
@@ -97,12 +122,12 @@ sudo dnf install docsvision-ext-webc-mc
 ----
 ====
 
-[#pl-ext]
-== Установка расширения сервера приложений для {of-mc}
+[#wf-ext]
+== Установка расширения модуля {wf} для {of-mc}
 
-Расширение сервера приложений для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для {of-mc}.
+Расширение модуля {wf} для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки модуля {wf} из {of-mc}.
 
-. Установите серверные компоненты Расширения сервера приложений для {of-mc}:
+. Установите серверные компоненты расширения модуля {wf} для {of-mc}:
 +
 [tabs]
 ====
@@ -111,14 +136,14 @@ sudo dnf install docsvision-ext-webc-mc
 [source,bash,subs=attributes]
 ----
 sudo apt-get update
-sudo apt-get install docsvision-docsvision-ext-platform-mc
+sudo apt-get install docsvision-docsvision-ext-workflow-mc
 ----
 
 {os2}::
 +
 [source,bash,subs=attributes]
 ----
-sudo dnf install docsvision-docsvision-ext-platform-mc
+sudo dnf install docsvision-docsvision-ext-workflow-mc
 ----
 ====
 
