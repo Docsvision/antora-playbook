@@ -58,19 +58,21 @@
 
 . Расширение Службы {ws} для {of-mc}:
 +
-[source,bash]
-----
-sudo apt-get install docsvision-ext-ws-mc
-----
-// +
-// . Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
-// +
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-docsvision-ext-ws-mc
+
+{os2}::
++
+ $ sudo dnf install docsvision-docsvision-ext-ws-mc
+====
++
 . Запустите Расширение Службы {ws} для {of-mc}:
 +
-[source,bash]
-----
-sudo systemctl start docsvision-ext-ws-mc
-----
+ $ sudo systemctl start docsvision-ext-ws-mc
+
 
 [#pl-ext]
 == Установка расширения сервера приложений для {of-mc}
@@ -83,19 +85,16 @@ sudo systemctl start docsvision-ext-ws-mc
 ====
 {os1}::
 +
-[source,bash,subs=attributes]
-----
-sudo apt-get update
-sudo apt-get install docsvision-docsvision-ext-platform-mc
-----
+ $ sudo apt-get install docsvision-docsvision-ext-platform-mc
 
 {os2}::
 +
-[source,bash,subs=attributes]
-----
-sudo dnf install docsvision-docsvision-ext-platform-mc
-----
+ $ sudo dnf install docsvision-docsvision-ext-platform-mc
 ====
++
+. Запустите Расширение Службы {ws} для {of-mc}:
++
+ $ sudo systemctl start docsvision-ext-platform-mc
 
 [#wc-ext]
 == Установка расширения {wc}а для {of-mc}
@@ -108,19 +107,16 @@ sudo dnf install docsvision-docsvision-ext-platform-mc
 ====
 {os1}::
 +
-[source,bash,subs=attributes]
-----
-sudo apt-get update
-sudo apt-get install docsvision-ext-webc-mc
-----
+ $ sudo apt-get install docsvision-ext-webc-mc
 
 {os2}::
 +
-[source,bash,subs=attributes]
-----
-sudo dnf install docsvision-ext-webc-mc
-----
+ $ sudo dnf install docsvision-ext-webc-mc
 ====
++
+. Запустите Расширение Службы {ws} для {of-mc}:
++
+ $ sudo systemctl start docsvision-ext-webc-mc
 
 [#wf-ext]
 == Установка расширения модуля {wf} для {of-mc}
@@ -133,19 +129,16 @@ sudo dnf install docsvision-ext-webc-mc
 ====
 {os1}::
 +
-[source,bash,subs=attributes]
-----
-sudo apt-get update
-sudo apt-get install docsvision-docsvision-ext-workflow-mc
-----
+ $ sudo apt-get install docsvision-docsvision-ext-workflow-mc
 
 {os2}::
 +
-[source,bash,subs=attributes]
-----
-sudo dnf install docsvision-docsvision-ext-workflow-mc
-----
+ $ sudo dnf install docsvision-docsvision-ext-workflow-mc
 ====
++
+. Запустите Расширение Службы {ws} для {of-mc}:
++
+  $ sudo systemctl start docsvision-ext-workflow-mc
 
 [#manconsole]
 == Установка {of-mc}
