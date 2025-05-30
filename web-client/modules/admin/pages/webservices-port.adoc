@@ -1,6 +1,6 @@
-:webtoolutil: 'yes'
+:webtoolbuilder: yes
 :do-what: способа изменения порта подключения к программе DVWebTool
-:link: xref:webservices-install.adoc[Работа с программой WebToolUtil]
+:link: xref:webservices-install.adoc[Работа с программой WebToolBuilder]
 
 = Изменить порт подключения к DVWebTool
 
@@ -23,13 +23,14 @@ include::partial$mancons.adoc[]
     "WebClient": {
       "SettingGroups": {
         "System": {
-          "WebServicesPort": 5413
+          "WebServicesPort": 5413 <.>
         }
       }
     }
   }
 }
 ----
+<.> Порт подключения к утилите DVWebTool, значение в диапазоне от `1` до `65535`.
 // end::webconfig[]
 +
 include::partial$excerpts.adoc[tags=ifabsent]
