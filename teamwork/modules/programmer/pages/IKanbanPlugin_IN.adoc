@@ -1,0 +1,21 @@
+= IKanbanPlugin -- интерфейс
+
+Свойство `Name` -- уникальное имя плагина, которое указывается в соответствующем поле конкретной настройки. При наличии нескольких плагинов с одним именем будет использоваться первый из контейнера.
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`void ProcessingCollectionOfSettingsItemForBinding(SessionContext sessionContext, KanbanDataSettingsCollectionItem item)` |Обработка свойств соответствующей настройки из коллекции настроек в программе {kvr}. Вызывается в биндинг конвертере перед отправкой биндингов клиенту.
+|`List<CardModel> GetCardsModelBySetting(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting)` |Метод получения моделей карточек для соответствующей настройки для отображения на канбан-доске.
+|`CardModel ChangeCardFieldValue(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting, CardModel cardModel, string newValue, List<KanbanMetadata> metadata)` |Метод изменения значения поля карточки, которая была перенесена в другой столбец. В параметрах метода также есть `metadata` -- данные сюда можно передать с клиента в обработчике события `cardDropping`. Метод возвращает обновленную модель карточки для отображения на канбан-доске.
+|`CardModel GetActualCardInfo(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting, Guid cardId)` |Получение актуальной информации о карточке. Используется при обновлении информации на канбан-доске при изменении карточки через разметку внутри карточки на доске.
+
+NOTE: Если в результате действий в разметке изменяемое поле карточки каким-то образом перестало соответствовать хоть одному из столбцов, то необходимо это проверить и вернуть `null`, чтобы карточка была убрана с доски.
+
+|`CardModel CreateNewCard(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting, Guid? kindId, string changedFieldValue)` |Метод для создания карточки из канбан-доски. По умолчанию `MainKanbanPlugin` создает карточку через ЖЦ карточки в {wc}е. В `CustomContext` передается объект класса `CreateCardOnKanbanOperationContext`, который содержит в себе значение столбца. В значении столбца находится карточка (после создания в ЖЦ, в этом методе в соответствующее поле устанавливается значение), а также данные о настройке, из которой создается карточка. Если не был передан вид карточки (для случая, когда в настройке в поле _Тип или виды карточек_ выбран только тип), будет создаваться карточка первого доступного вида для данного типа.
+|`List<AvailableKindInfoModel> GetAvailableKindsToCreate(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting)` |Метод, который вызывается при нажатии на кнопку создания и возвращает список доступных для создания видов в данной настройке.
+
+|===
