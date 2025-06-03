@@ -1,16 +1,23 @@
 = Работа с программой WebToolBuilder
 
-Программа _WebToolBuilder_ предназначается для сборки _DVWebTool_, минуя {pu}. Так как в будущем _DVWebTool_ планируется упразднить и перенести функциональность утилиты в _DVSupService_, задача по сборке _DVWebTool_ была делегирована _WebToolBuilder_.
+Программа _WebToolBuilder_ предназначается для сборки _DVWebTool_, минуя {pu}.
 
 .WebToolBuilder необходимо запускать для сборки DVWebTool в следующих случаях:
-. Когда DVWebTool устанавливается впервые на версии системы без программы {pu}
+. Когда DVWebTool устанавливается версия {wc}а без программы {pu}
 . Когда изменились файлы DVWebTool или вышла новая версия
-. Когда изменился адрес или порт вервера {wc}а
+. Когда изменился адрес или порт сервера {wc}а
 . Когда изменились внутренние расширения DVWebTool
 
-Программа _WebToolBuilder_ устанавливается либо из инсталлятора {wc}а (`Docsvision web-client.msi`, компонент _WebToolBuilder_) или из инсталлятора утилиты `WebToolBuilder.msi`. WebToolBuilder запускается в ОС Windows. Программа может быть запущена с минимальным пользовательским интерфейсом или как консольное приложение.
+[#install-method]
+.Программа "WebToolBuilder" устанавливается:
+* Из инсталлятора {wc}а, `{dv} web-client.msi`, компонент _WebToolBuilder_, см. подробнее "xref:install-server.adoc[]".
+** Файлы утилиты будут расположены по пути: `C:\Program Files (x86)\Docsvision\WebClient\Tools\`
+** Файлы DVWebTool будут расположены по пути (в манифесте прописан `localhost`): `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\`
+* Из инсталлятора утилиты `{dv} WebToolBuilder.msi`. WebToolBuilder запускается в ОС Windows. Программа может быть запущена с минимальным пользовательским интерфейсом или как консольное приложение.
+** Файлы утилиты будут расположены по пути: `C:\Program Files (x86)\Docsvision\WebToolBuilder\`
+** Файлы DVWebTool будут расположены по пути (в манифесте прописан `localhost`): `C:\Program Files (x86)\Docsvision\WebToolBuilder\DVWebTool\`
 
-Новая версия WebToolBuilder выпускается при каждом исправлении DVWebTool в накопительных обновлениях. Для распространения WebToolBuilder могут использоваться групповые политики.
+Новая версия WebToolBuilder выпускается при каждом исправлении в {wc}е. Для распространения WebToolBuilder могут использоваться групповые политики.
 
 [#ui]
 == Запуск в режиме окна
@@ -18,15 +25,13 @@
 .Окно программы "WebToolBuilder"
 image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
 
-Путь к приложения по умолчанию: `C:\Program Files (x86)\Docsvision\WebToolBuilder\WebToolBuilderUI.exe`.
-
 .В окне приложения отображается следующий набор элементов:
 * Путь к манифесту приложения -- поле для выбора файла манифеста `DocsVision.DVWebTool.application`
-* image:layouts:buttons/three-dots.png[Три точки] -- унопка для выбора манифеста приложения из файловой системы
+* image:layouts:buttons/three-dots.png[Три точки] -- кнопка для выбора манифеста приложения из файловой системы
 * Адрес {wc}а -- полный адрес сервера {wc}а
 * Порт -- порт для подключения к DVWebTool
 * Флаг `*Автозапуск*` -- отвечает за автоматический запуск DVWebTool при загрузке системы
-* Кнопка *Собрать* или *Пересобрать* неактивна, пока не выбран файл манифеста и не заполнены поля _Адрес {wc}а_ и _Порт_
+* Кнопка *Пересобрать* неактивна, пока не выбран файл манифеста и не заполнены поля _Адрес {wc}а_ и _Порт_
 * Поле _Журнал_, в котором записываются действия при работе с программой
 
 [#noui]
@@ -34,7 +39,7 @@ image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
 
 . Перейдите в каталог с WebToolBuilder (по умолчанию `C:\Program Files (x86)\Docsvision\WebToolBuilder\WebToolBuilder.exe`) и запустите утилиту командой с указанием пути к файлу манифеста:
 +
- ./WebToolBuilder http://example.com:5004/Content/Tools/DVWebTool/DocsVision.DVWebTool.application
+ ./WebToolBuilder C:\Program Files (x86)\Docsvision\WebToolBuilder\DVWebTool\DocsVision.DVWebTool.application
 +
 . Чтобы получить справку по работе с утилитой в консольном режиме, введите `-h` при нахождении в папке утилиты:
 +
@@ -47,6 +52,7 @@ image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
 * `-?`, `-h`, `--help` -- Показать справку
 * `--whatIf` -- Отображает список параметров, которые будут использоваться при пересборке DVWebTool
 
+[#build]
 == Сборка DVWebTool через WebToolBuilder
 
 // tag::webtool[]
@@ -57,15 +63,13 @@ WARNING: Программа _DVWebTool_ работает только в ОС {m
 
 .Чтобы установить "DVWebTool":
 . [[install-dvweb]]Чтобы установить _DVWebTool_ на сервер Linux, необходимо создать образ утилиты. Для этого запустите _WebToolBuilder_ на Windows.
-. В поле _Путь к манифесту приложения_ выберите файл манифеста `DocsVision.DVWebTool.application`. Файл можно получить на вкладке xref:user:interface-user-profile.adoc#install["Установки" профиля пользователя] скачанный из профиля пользователя {wc}а. После выбора файла автоматически будут заполнены другие поля.
+. В поле _Путь к манифесту приложения_ выберите файл манифеста `DocsVision.DVWebTool.application`. Расположение файла может отличаться в зависимости от способа установки WebToolBuilder, см. <<install-method,выше>>. После выбора файла автоматически будут заполнены другие поля.
 +
-NOTE: Файл является уникальным для каждого пользователя.
-+
-* В поле _Адрес {wc}а_ указывается адрес DVWebTool на сервере {wc}а
+* В поле _Адрес {wc}а_ указывается адрес сервера {wc}а
 * В поле _Порт_ указывается порт для подключения к DVWebTool (по умолчанию `5413`)
 +
 . При необходимости установите флаг `*Автозапуск*`, чтобы _DVWebTool_ запускалась автоматически при загрузке системы.
-. Нажмите кнопку *Собрать*, чтобы открыть каталог.
+. Нажмите кнопку *Пересобрать*, чтобы открыть каталог.
 +
 .Успешное завершение сборки
 image::admin:dvweb-final-window.png[Успешное завершение сборки]
@@ -73,7 +77,7 @@ image::admin:dvweb-final-window.png[Успешное завершение сбо
 После завершения сборки появится окно об успешном завершении операции. При нажатии на кнопку *ОК* будет открыта папка в файловой системе с собранными файлами DVWebTool.
 +
 . Скопируйте открытую папку _DVWebTool_ на сервер Linux по пути `/lib/docsvision/webclient/Content/Tools` (если папка отсутствует, создайте её самостоятельно).
-. Убедитесь, что в конфигурационном файле `/usr/lib/docsvision/webclient/appsettings.json`, в параметре `DVWebToolInstallerUri`: указан адрес каталога: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
+// . Убедитесь, что в конфигурационном файле `/usr/lib/docsvision/webclient/appsettings.json`, в параметре `DVWebToolInstallerUri`: указан адрес каталога: `Content\\Tools\\DVWebTool\\DocsVision.DVWebTool.application`.
 . Перезапустите службу *{wcs-new}*.
 . _DVWebTool_ будет установлена при первом открытии файла из карточки в ОС Windows. Программу также можно установить вручную из menu:Профиля пользователя[Установки > Установить DVWebTool].
 +
