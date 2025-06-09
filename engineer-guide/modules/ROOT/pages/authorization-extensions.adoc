@@ -16,6 +16,7 @@
 
 [source,json]
 ----
+{
   "Docsvision": {
     "Platform": {
       "Server": {
@@ -38,6 +39,7 @@
       }
     }
   }
+}
 ----
 <.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
 <.> `TypeName` -- строка с именем типа, реализующего расширение.
@@ -241,6 +243,7 @@ sudo update-ca-certificates -v -f.
 
 [source,json]
 ----
+{
 "Authentication": {
     "Extensions": {
 	    "ADFS": {
@@ -256,6 +259,7 @@ sudo update-ca-certificates -v -f.
              "Name": "CurrentDB" <.>
          }
      }
+}
 }
 ----
 <.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
@@ -283,3 +287,71 @@ include::partial$excerpts.adoc[tags=pretty]
 ----
 <.> `WellKnownConfigurationUrl` -- URL публичной конфигурации ADFS.
 <.> `ClientId` -- идентификатор тенанта ADFS в котором производится привязка пользователей.
+
+[#keycloak]
+== Регистрация расширения Keycloak
+
+[NOTE]
+====
+* Для работы расширения авторизации Keycloak требуется опция лицензии _{dv} Коннектор к Keycloak_.
+* Автоизация с помощью Keycloak поддерживается в {wc}е {kc-wc-req} при установке модуля {pl} {kc-pl-req}.
+====
+
+[source,json]
+----
+{
+  "Docsvision": {
+    "Platform": {
+      "Server": {
+        "Authentication": {
+          "Extensions": {
+		    "Keycloak": {
+              "Name": "Keycloak", <.>
+              "TypeName": "DocsVision.Platform.Authentication.Keycloak.KeycloakRootAuthenticationExtension, DocsVision.Platform.Authentication.Keycloak, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519" <.>
+              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><KeycloakAuthenticationSettings  xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://vdv-keycloak.digdes.com/realms/testDv/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>test</ClientId><Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret><AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</AccountNameClaim><UniqueIdClaim>DocsvisionID</UniqueIdClaim></KeycloakAuthenticationSettings>", <.>
+              "Id": "{735EE1ED-F0D1-4D1B-90B0-B48D73BF49C0}", <.>
+            }
+          }
+        },
+        "Tenants": { <.>
+          "CurrentDB": {
+            "Extensions": "{D4A9BCC3-E897-47AE-BBA5-8F5085D231E7}", <.>
+            "Name": "CurrentDB" <.>
+          }
+        }
+      }
+    }
+  }
+}
+----
+<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
+<.> `TypeName` -- строка с именем типа, реализующего расширение.
+<.> `Settings` -- строка настроек расширения, для Keycloak. Подробнее см. <<keycloak-settings,ниже>>.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+
+[#keycloak-settings]
+=== Строка настроек Keycloak
+
+include::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version=\"1.0\" encoding=\"utf-16\"?>
+  <KeycloakAuthenticationSettings
+    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
+    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
+    <WellKnownConfigurationUrl>https://vdv-keycloak.digdes.com/realms/testDv/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+    <ClientId>test</ClientId> <.>
+    <Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret> <.>
+    <AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</AccountNameClaim> <.>
+    <UniqueIdClaim>DocsvisionID</UniqueIdClaim> <.>
+</KeycloakAuthenticationSettings>
+----
+<.> `WellKnownConfigurationUrl` -- URL публичной конфигурации OpenID.
+<.> `ClientId` -- идентификатор тенанта Keycloak в котором производится привязка пользователей.
+<.> `Secret` -- секрет приложения, настроенного для аутентификации пользователей.
+<.> `AccountNameClaim` -- имя пользователя в токене (поле в токене, используемое в качестве логина).
+<.> `UniqueIdClaim` -- уникальный идентификатор пользователя в токене.
