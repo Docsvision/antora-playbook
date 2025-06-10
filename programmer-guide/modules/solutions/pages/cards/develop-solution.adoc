@@ -8,3 +8,225 @@
 * xref:control.adoc[Разработка элемента управления для Конструктора разметок]
 * xref:distribution.adoc[Распространение решения]
 * xref:testing.adoc[Отладка и тестирование]
+
+[#rules]
+== Правила формирования решений
+
+На Linux решения должны располагаться в индивидуальных подпапках, расположенных по пути 	`/usr/lib/docsvision/solutions/CardPackage`. Основная структура решения осталась без изменений -- это всё тот же `CardPackage`. Однако, теперь чтобы система увидела их нужен не снапин, а манифест. Чтобы система смогла загрузить решение, необходимо специальное расширение.
+
+[#manifest]
+== Манифест
+
+Манифест -- это особым образом сформированный файл с раширением `.xml`, имя которого должно иметь вид `&#42;SolutionManifest.xml`.
+
+.XSD схема манифеста:
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Solution"> <.>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="LocalizedName" type="LocalizedStrings"/> <.>
+				<xs:element name="SolutionOptions" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="SolutionOption" type="SolutionOptionsType" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CheckScripts" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Script" type="CheckScriptType" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Id" type="xs:string" use="required"/> <.>
+			<xs:attribute name="ApplicationAlias" type="xs:string" use="required"/> <.>
+			<xs:attribute name="Name" type="xs:string" use="required"/> <.>
+			<xs:attribute name="Version" type="xs:int" use="required"/> <.>
+			<xs:attribute name="Extension" type="xs:string" use="required"/> <.>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="LocalizedStrings">
+		<xs:sequence>
+			<xs:element name="LocalizedString" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="Language" type="xs:language" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SolutionOptionsType"> <.>
+		<xs:attribute name="Name" type="xs:string" use="required"/> <.>
+		<xs:attribute name="Item" type="xs:string" use="required"/> <.>
+		<xs:attribute name="Option" type="xs:int" use="required"/> <.>
+	</xs:complexType>
+
+	<xs:complexType name="CheckScriptType"> <.>
+		<xs:attribute name="Path" type="xs:string" use="required"/> <.>
+		<xs:attribute name="ServerType" type="SqlServerType" use="optional" default="mssql"/> <.>
+	</xs:complexType>
+
+	<xs:simpleType name="SqlServerType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="mssql"/>
+			<xs:enumeration value="pgsql"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
+----
+<.> Элемент `Solution` и его атрибуты является обязательным.
+<.> `ID` -- уникальный идентификатор решения.
+<.> `ApplicationAlias` -- алиас приложения/модуля к которому относится решение. Лично мне смысловая нагрузка не понятна, т.к. оно по крайней мере для стандартных решений совпадает с именем самого решения и соответствующего модуля, но атрибут оставлен, т.к. использовался изначально.
+<.> `Name` -- алиас решения.
+<.> `Version` -- версия решения.
+<.> `Extension` -- имя расширения, которое способно обработать решение. В стандартных решениях указано имя `Default`, которое автоматически преобразует имя класса `DocsVision.Platform.SolutionExtension.StandartSolutionExtension, DocsVision.Platform.SolutionExtension, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519`.
++
+Если собственное решение не требует особой обработки, можно использовать стандартное расширение. В противном случае необходимо разработать собственное расширение и указать в манифесте его. Описание расширения будет изложено в следующем разделе.
++
+<.> Элемент `LocalizedName` является необязательным и определяет локализованные имена решения для их дальнейшего отображения в UI. Если данный элемент не задан, будет использоваться атрибут `Name` из элемента `Solution`.
++
+Для корректной работы данного элемента необходимо верно указывать значения атрибута `Language` -- необходимо использовать языковые сокращения соответствующие наиболее распространённым LCID (Language Code Identifier). +
+Наиболее распространёнными являются: Русский (`1049`) -- ru-RU и Английский (`1033`) -- en-US.
++
+<.> Элемент `SolutionOptions` является обязательным и определяет варианты решения. Должен быть задан как минимум 1 вариант решения. Если вариантов больше, то также обязательно должен быть заполнен элемент `CheckScripts`.
++
+Что такое вариант решения в целом. На примере представленного <<sample,ниже>> решения BackOffice имеется 2 варианта решения: `Install` и `Update`. Первое предназначено для первичной установки решения в БД, второе -- для обновления уже существующего решения. Какое из них должно быть установлено определяет результат скрипта для соответствующей БД, указанного в элементе `CheckScripts`. В данном случае скрипт проверяет наличие в БД нужных секций и наличие в них данных решения.
++
+<.> `Name` -- алиас варианта решения. На текущий момент ни на что не влияет, в дальнейшем, вероятно, будет отображаться в UI.
+<.> `Item` -- путь к варианту решения. Вариант решения - это конкретный CardPackage. Путь должен быть указан либо относительно файла манифеста, либо полный.
++
+WARNING: Если в Linux путь указывается относительно файла манифеста, он не может начинаться со знака `/`.
++
+<.> `Option` -- номер варианта решения. Он будет сопоставляться с результатом работы проверяющего скрипта.
+<.> Элемент `CheckScriptType` определяет перечень SQL скриптов, направленных на определение подходящего варианта решения.
+<.> `Path` -- путь к варианту решения. Вариант решения -- это конкретный `CardPackage`. Путь должен быть указан либо относительно файла манифеста, либо полный.
++
+WARNING: Если в Linux путь указывается относительно файла манифеста, он не может начинаться со знака `/`.
++
+<.> Атрибут `ServerType` может быть не заполнен, в таком случае он считается равным mssql.
++
+В скрипт может быть заложена любая логика, но он должен возвращать значение типа `int`, соответствующего одному из значений атрибута `Option` элемента `SolutionOptions`. Если скрипт вернул `null`, либо значение для которого не существует варианта, такое решение считается недоступным для погрузки.
+
+
+[#sample]
+.Пример манифеста BackOffice:
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution ID="DE9C2809-3207-42EF-BC32-B9AB2D1B5608" ApplicationAlias="BackOffice" Name="BackOffice" Version="9579" Extension="Default">
+	<LocalizedName>
+		<LocalizedString Language="ru-RU">Базовые Объекты</LocalizedString>
+		<LocalizedString Language="en-US">Base Objects</LocalizedString>
+	</LocalizedName>
+	<SolutionOptions>
+		<SolutionOption Name="Install" Item="CardPackage/CardPackage.xml" Option="0"/>
+		<SolutionOption Name="Update" Item="CardPackageUpdate/CardPackage.xml" Option="1"/>
+	</SolutionOptions>
+	<CheckScripts>
+		<Script Path="CheckMs.sql"/>
+		<Script Path="CheckPg.sql" ServerType="pgsql"/>
+	</CheckScripts>
+</Solution>
+----
+
+[#extension]
+== Расширение
+
+Непосредственно за выбор варианта решения и загрузку решения в БД отвечает специальное расширение, указанное в атрибуте `Extension`. По умолчанию это `DocsVision.Platform.SolutionExtension.StandartSolutionExtension`, `DocsVision.Platform.SolutionExtension, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519`, обрабатывающее манифест и решение, как описано выше. Возможно реализовать собственное расширение с особой логикой обработки, но манифест должен быть заполнен согласно правилам хотя бы случайными данными. Кроме элемента `Solution` манифест должен быть заполнен полностью по правилам.
+
+Расширение для погрузки решений является частным случаем `StorageServerExtension`, поэтому должно быть унаследовано от данного базового класса.
+
+.Также расширение должно реализовывать специальный интерфейс:
+[source,csharp]
+----
+public interface ISolutionExtension
+	{
+		#region Properties
+		IDatabaseService DatabaseService { get; set; } <.>
+
+		ISolutionFilesProvider SolutionFilesProvider { get; set; } <.>
+
+		ILog Log { get; set; } <.>
+		#endregion
+
+		#region Methods
+		public void Prepare(IDatabaseService databaseService, ISolutionFilesProvider solutionFilesProvider, ILog log);
+
+		public int? GetCurrentOption(string databaseAlias, SolutionInfo solutionInfo); <.>
+
+		public void Load(string databaseAlias, SolutionInfo solutionInfo);
+		#endregion
+	}
+----
+<.> `IDatabaseService` -- объект для доступа к БД.
+<.> `ISolutionFilesProvider` -- объект для доступа к месту хранения данных решения. На текущий момент возможно только хранение на файловой системе.
+<.> `ILog` -- объект логирования.
+<.> `SolutionInfo` -- класс манифеста, см. подробнее ниже.
+
+.Класс "SolutionInfo":
+[source,csharp]
+----
+public class SolutionInfo
+	{
+
+		public SolutionInfo()
+		{
+		}
+
+		public void InitFromInstallation(Solution solution)
+		{
+			Init(solution);
+
+			Version = solution.Version;
+		}
+
+		public void InitFromDb(Solution solution)
+		{
+			Init(solution);
+
+			DatabaseVersion = solution.Version;
+		}
+
+		public Guid Id { get; set; }
+
+		public int? Version { get; set; }
+
+		public int? DatabaseVersion { get; set; }
+
+		public string ApplicationAlias { get; set; }
+
+		public string Name { get; set; }
+
+		public string Extension { get; set; }
+
+		public int? CurrentOption { get; set; }
+
+		public bool InstallDisabled { get; set; }
+
+		public string BasePath { get; set; }
+
+		public bool CanUpdate { get; }
+
+		public Dictionary<int, string> LocalizedName { get; }
+
+		public Dictionary<int, KeyValuePair<string, string>> Options { get; }
+
+		public Dictionary<Data.SqlServerType, string> CheckScripts { get; }
+	}
+----
+
+Solution -- класс для прямого преобразования xml манифеста в объект.
+
+Экземпляры стандартных классов `IDatabaseService`, `ISolutionFilesProvider` и `ILog` создать во внешнем коде на текущий момент невозможно. Поэтому собственные реализации расширений следует наследовать от стандартного класса `DocsVision.Platform.SolutionExtension.StandartSolutionExtension` -- данные объекты попадут в расширение через метод `Prepare` при работе стандартного API платформы по работе с решениями.
+
+На текущий момент интерфейс данного расширения направлен в основном на работу с базовыми решениями и не удобен для расширения. Вероятно, в будущем это будет переработано для удобства создания собственных решений и расширений.
