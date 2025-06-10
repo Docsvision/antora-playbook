@@ -114,4 +114,51 @@ WARNING: Экземпляр {wc}а, установленный на втором
 . Повторите шаги инструкции для третьего и последующих узлов кластера {wc}а.
 // end::webconfig[]
 
+[#nginx]
+== Настройка nginx
+
+При использовании прокси-сервиса nginx, установленного на отдельной машине от {wc}а необходимо в корень конфигурационного файла {wc} добавить настройку `ForwardedHeaders/KnownProxies`, разрешающую принимать от прокси-сервиса заголовки. Если {wc} и прокси установлены на одном ПК, ничего добавлять не нужно.
+
+[source,json]
+----
+{
+  "ForwardedHeaders":
+  {
+    "KnownProxies": {
+      "proxy1": "{123.456.789}" <.>
+    }
+  }
+}
+----
+<.> Укажите IP адрес сервера nginx. Вместо `proxy1` можно использовать любое уникальное название. В значении параметра указывается только IP адрес. При необходимости можно указывать несколько прокси-сервисов.
+
+На стороне прокси-сервиса должна быть настроена передача заголовков: `X-Forwarded-Proto`, `X-Forwarded-Host`, `X-Forwarded-Port` (если порт не соответствует схеме), `X-Forwarded-For`.
+
+.Пример для nginx:
+[source]
+----
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Port $server_port;
+----
+
+Если за прокси-сервисом скрыто несколько экземпляров {wc}а, нужно установить настройку `Docsvision/WebClient/SettingGroups/WebClient/ServerR7JwtAccessToWebClientEnable` в значение `true`. Если настройка отсутствует, добавьте её самостоятельно.
+
+.Пример конфигурации:
+[source,json]
+----
+{
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "ServerR7JwtAccessToWebClientEnable": true
+        }
+      }
+    }
+  }
+}
+----
+
 См. также *xref:dvweb-cluster.adoc[Настройка утилиты DVWebTool для работы в кластере]*.
