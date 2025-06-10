@@ -15,6 +15,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 +
 [source,json]
 ----
+{
  "NLog": {
      "throwConfigExceptions": false,
      "extensions": [
@@ -50,6 +51,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
          }
      ]
  }
+}
 ----
 <.> Измените значение параметра `fileName`, чтобы настроить путь для сохранения журнала работы: +
 В `fileName` можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные], например: `\Logs\$\{level}\WebClient_$\{shortdate}.log`.
@@ -98,6 +100,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 
 [source,json]
 ----
+{
   "Docsvision": {
     "WebClient": {
       "SettingGroups": {
@@ -107,6 +110,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
       }
     }
   }
+}
 ----
 <.> Включить расширенное журналирование.
 
@@ -114,6 +118,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 
 [source,json]
 ----
+{
 "targets": {
     "async": true,
     "logFile": {
@@ -132,7 +137,8 @@ include::partial$excerpts.adoc[tags=ifabsent]
         "type": "File",
         "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.tsv" <.>
     }
-},
+}
+}
 ----
 <.> Адрес хранения журнала {wc}а. В параметре важно добавить в имя файла `$\{processId}`, например, `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
 <.> Адрес хранения журнала *{sss-new}*. В параметре важно добавить в имя файла `$\{processId}`, например, `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
