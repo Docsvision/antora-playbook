@@ -119,7 +119,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 [source,json]
 ----
 {
-"targets": {
+  "targets": {
     "async": true,
     "logFile": {
         "type": "File",
@@ -137,7 +137,19 @@ include::partial$excerpts.adoc[tags=ifabsent]
         "type": "File",
         "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.tsv" <.>
     }
-}
+  },
+  "rules": [
+      {
+        "logger": "DiagnosticsLogWebClient",
+        "minLevel": "Trace",
+        "writeTo": "diagnosticsLogWebClient"
+      },
+      {
+        "logger": "DiagnosticLogStorageServer",
+        "minLevel": "Trace",
+        "writeTo": "diagnosticLogStorageServer"
+      },
+  ]
 }
 ----
 <.> Адрес хранения журнала {wc}а. В параметре важно добавить в имя файла `$\{processId}`, например, `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
