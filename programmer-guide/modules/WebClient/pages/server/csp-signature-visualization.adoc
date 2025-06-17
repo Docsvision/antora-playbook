@@ -1,0 +1,171 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ServerExtensions/CSPSignatureVisualization
+:name: CSPSignatureVisualization
+
+= Изменение штампа электронной подписи
+
+Пример демонстрирует вставку собственных изображений штампов электронной подписи в файл, приложенный к карточке {dv}.
+
+include::../client/authorization.adoc[tags=link]
+
+include::ROOT:partial$excerpts.adoc[tags=wc-version]
+
+.Перечень необходимых инструментов:
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+Создайте описание расширения для {wc}а, которое задано в текущей сборке
+
+[source,csharp]
+----
+    public class CSPSignatureVisualizationExtension : WebClientExtension
+    {
+        public CSPSignatureVisualizationExtension() <.>
+        {
+        }
+
+        #region Свойства
+
+        public override string ExtensionName <.>
+            => Assembly.GetAssembly(typeof(CSPSignatureVisualizationExtension)).GetName().Name;
+
+        public override Version ExtensionVersion <.>
+            => new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+
+        #endregion Свойства
+
+        #region Обработчики событий
+
+        public override void InitializeServiceCollection(IServiceCollection services) <.>
+        {
+            services.AddSingleton<IImageGenerator, CSPSignatureImageGenerator>(); <.>
+
+            services.AddSingleton<IImagePositionSelector, CSPSignatureImagePositionSelector>(); <.>
+        }
+
+        #endregion Обработчики событий
+    }
+----
+<.> Создаём новый экземпляр класса `CSPSignatureVisualizationExtension`.
++
+.Параметры:
+* `serviceProvider` -- сервис-провайдер.
++
+<.> Получаем название расширения.
+<.> Получаем версию расширения.
+<.> Регистрируем типы в IoC контейнере.
++
+.Параметры:
+* `containerBuilder` -- контейнер.
++
+<.> Регистрируем тип `CSPSignatureImageGenerator` как реализацию интерфейса `IImageGenerator` в `containerBuilder`.
+<.> Регистрируем тип `CSPSignatureImagePositionSelector` как реализацию интерфейса `IImagePositionSelector` в `containerBuilder`.
+
+== Настройка штампа ЭП
+
+Описание генератора изображений штампов электронной подписи выглядит следующим образом:
+
+[source,csharp]
+----
+    public class CSPSignatureImageGenerator : IImageGenerator <.>
+    {
+        private const double ViewBoxHeight = 88; <.>
+
+        private const double ViewBoxWidth = 314; <.>
+
+        private const double ContentTop = 64; <.>
+
+        private const double FontHeight = 14; <.>
+
+        private const int MaxStringsLength = 38; <.>
+ <.>
+----
+<.> Высота изображения штампа электронной подписи.
+<.> Ширина изображения штампа электронной подписи.
+<.> Левая верхняя координата информационного содержимого штампа электронной подписи.
+<.> Высота используемого шрифта в пикселях (Используется десятый размер шрифта).
+<.> Максимальная длина используемого в изображении штампа электронной подписи текста. При стандартном интервале между символами. Используется для разбиения текста на отдельные строки.
+<.> Полный код приведён в файле menu:CSPSignatureVisualization[CSPSignatureVisualizationServerExtension > DataVisualization > CSPSignatureImageGenerator.cs] в репозитории примера на GitHub.
+
+Описание класса, вставляющего в PDF-файл изображения штампов электронной подписи:
+
+[source,csharp]
+----
+namespace CSPSignatureVisualizationServerExtension.DataVisualization
+{
+    public class CSPSignatureImagePositionSelector : IImagePositionSelector
+    {
+        private static readonly double ImageMargin = ImageHelper.PixelsToUnits(5); <.>
+
+        private static readonly int PagePadding = 30; <.>
+
+        private const int PageNumber = 0; <.>
+
+        #region Реализация интерфейса IImagePositionSelector
+
+        public GeneratedFileInfo Generate(SessionContext sessionContext, ImageGeneratorType generatorType, List<byte[]> images, Stream fileStream) <.>
+        {
+            ArgumentNullException.ThrowIfNull(images);
+            ArgumentNullException.ThrowIfNull(fileStream);
+
+            using var pdfDocument = PdfReader.Open(fileStream);
+            var page = pdfDocument.Pages[PageNumber];
+
+            var pageWidth = page.Width.Value;
+            var pageHeight = page.Height.Value;
+
+            double xIndent = PagePadding; <.>
+            double yIndent = PagePadding;
+
+            double maxImageHeight = 0; <.>
+
+            foreach (var imageHelper in images.Select(x => new ImageHelper(x)))
+            {
+                if (yIndent + imageHelper.Height > pageHeight) <.>
+                    break;
+
+                if (xIndent + imageHelper.Width > pageWidth) <.>
+                {
+                    yIndent += maxImageHeight + ImageMargin;
+                    xIndent = PagePadding;
+                    maxImageHeight = imageHelper.Height;
+                }
+                else if (imageHelper.Height > maxImageHeight) <.>
+                {
+                    maxImageHeight = imageHelper.Height;
+                }
+
+                InsertImage(pdfDocument, page, imageHelper, xIndent, yIndent); <.>
+
+                xIndent += imageHelper.Width + ImageMargin; <.>
+            }
+
+            var outputStream = new MemoryStream(); <.>
+            pdfDocument.Save(outputStream);
+            pdfDocument.Close();
+            outputStream.Seek(0, SeekOrigin.Begin);
+
+            return new GeneratedFileInfo { Stream = outputStream };
+        }
+<.>
+----
+<.> Расстояние между изображениями штампов электронной подписи.
+<.> Координаты первого изображения штампа электронной подписи. 30 миллиметров.
+<.> Номер страницы, на которую требуется вставить изображение штампа.
+<.> Вставляет изображения штампов электронной подписи на первую страницу указанного PDF-файла.
++
+.Параметры:
+* `sessionContext` -- контекст сессии.
+* `generatorType` -- тип генератора изображений штампов электронной подписи.
+* `images` -- массив изображений штампов электронной подписи.
+* `fileStream` -- поток, содержащий PDF-файл, в который необходимо вставить указанные изображения.
++
+Возвращаемое значение: модель файла со вставленными изображениями.
++
+<.> Задаём начальные координаты первого изображения штампов электронной подписи.
+<.> Максимальная высота изображения штампа в текущей строке (нужна для выравнивания изображений в строке).
+<.> Если верхняя левая координата текущего изображения больше высоты страницы PDF-документа, прекращаем вставку изображений.
+<.> Если ширина строки вставленных изображений превышает ширину страницы, переходим на следующую строку.
+<.> В противном случае вычисляем максимальную высоту изображения штампа в текущей строке.
+<.> Вставляем текущее изображение по указанным координатам.
+<.> Вычисляем горизонтальную координату следующего изображения.
+<.> Копируем в поток сформированный PDF-файл со вставленными изображениями штампов электронной подписи.
+<.> Полный код приведён в файле menu:CSPSignatureVisualization[CSPSignatureVisualizationServerExtension > DataVisualization > CSPSignatureImagePositionSelector.cs] в репозитории примера на GitHub.

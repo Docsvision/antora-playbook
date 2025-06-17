@@ -1,0 +1,43 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/Controls/CheckBox
+:name: CheckBox
+
+= Пример флага
+
+Данный раздел содержит описание примера реализации элемента управления `_Пример флага_`.
+
+include::../client/authorization.adoc[tags=link]
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+include::ROOT:partial$excerpts.adoc[tags=vscode]
+
+== Проект "CheckBoxDesignerExtension"
+
+. Проект-расширение для конструктора разметок. Содержит описание элемента управления `_Пример флага_` для программы {kvr}.
+. Демонстрирует описание и подключение нового ЭУ, используя класс `ControlTypeDescription`, задание ему стандартных свойств, реализованных в программе {kvr}. См. `PropertyFactory.GetNameProperty()` и добавление собственного свойства, используя класс `PropertyDescription`. См. свойство `DefaultValue`.
+. Для свойства `*Поле секции*`, источник данных, реализован редактор, фильтрующий поля по типу `boolean`, класс `BooleanMetadataEditor`.
+
+== Проект "CheckBoxWebExtension"
+
+Проект-расширение клиентской части {wc}а. Содержит клиентский скрипт и стили для `CheckBox`.
+
+== Сборка и установка
+
+. Откройте `/Samples.sln`.
+. Соберите проект `Controls > CheckBox > CheckBoxDesignerExtension`.
+. Откройте консоль в папке `Controls > CheckBox > CheckBoxWebExtension` и выполните команду `npm install` и `npm run build:prod`.
+
+. Скопируйте каталог `SamplesOutput\Plugins\CheckBoxDesignerExtension` в каталог `Путь к директории с исполняемым файлом конструктора Web-разметок\Plugins`.
+. Скопируйте каталог `SamplesOutput\Content\Modules\CheckBoxWebExtension` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+
+== Проверка примера
+
+. Запустите конструктор разметок.
+. Скопируйте любую разметку для карточки вида _Служебная записка_.
+. Выберите условия использования этой разметки.
+. Откройте разметку и добавить в нее новый элемент управления `_Пример флага_`.
+. Задайте желаемые параметры элемента управления.
+. Сохраните разметку.
+. Перезапустите *{wcs-new}*.
+. Откройте карточку с этой разметкой.
+. Убедитесь, что появился новый элемент управления.

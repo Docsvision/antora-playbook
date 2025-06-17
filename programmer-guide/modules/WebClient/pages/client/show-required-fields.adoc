@@ -1,0 +1,22 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/ClientScripts/TypeScript/ShowRequiredFields
+:name: ShowRequiredFields
+
+= Отображение незаполненных обязательных полей
+
+Данный раздел содержит описание примера отображения незаполненных обязательных полей. Проект-расширение клиентской части {wc}. Расширение отображает окно со списком незаполненных обязательных полей при создании или сохранении карточки.
+
+include::authorization.adoc[tags=link]
+
+include::ROOT:partial$excerpts.adoc[tags=wc-node]
+
+== Сборка и установка
+
+. Откройте консоль в папке `ShowRequiredFields` и выполните команду `npm install`, затем `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог `SamplesOutput\Content\Modules\ShowRequiredFields` в каталог `Путь к сайту {wc}а\Content\Modules`.
+. Перезапустите *{wcs-new}*.
+. Добавьте скрипт `showRequiredFields` в качестве обработчика события `*Перед сохранением карточки*` `root` для разметок создания и/или редактирования в конструкторе разметок.
+
+== Проверка примера
+
+. Создайте карточку с обязательными полями и добавленным обработчиком события.
+. Не заполняя обязательные поля, нажмите на кнопку создать.
