@@ -1,0 +1,41 @@
+= IM4dRegistryManager -- интерфейс
+
+Предоставляет методы для взаимодействия с сервисом регистрации. Содержит методы инициализации контекста и выполнения событий для регистрации, проверки, отзыва доверенностей.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IM4dRegistryManager
+----
+
+== Инициализация менеджера
+
+[source,csharp]
+----
+Initialize(ObjectContext objectContext)
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:Register_MT.adoc[Register(M4dRegistryEventArgs, string)]`
+|Обрабатывает событие регистрации доверенности.
+
+|`xref:Check_MT.adoc[Check(M4dRegistryEventArgs, string, int)]`
+|Обрабатывает событие проверки статуса доверенности.
+
+|`xref:ReCall_MT.adoc[ReCall(M4dRegistryEventArgs, string)]`
+|Обрабатывает событие отзыва доверенности.
+
+|===
+
+== Примечания
+
+Библиотека менеджера `M4dRegistry.KonturApi` отвечает непосредственно за взаимодействие с внешним сервисом регистрации {kd} и реализует интерфейс `IM4dRegistryManager`.

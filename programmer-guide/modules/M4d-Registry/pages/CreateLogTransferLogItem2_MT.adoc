@@ -1,0 +1,39 @@
+= CreateLogTransferLogItem -- метод (Guid, Guid, M4dRegistryAction, M4dRegistryOperationStatus)
+
+Создает запись в журнале карточке журнала обмена сообщениями.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Guid cardId, Guid employeeId, M4dRegistryAction action, M4dRegistryOperationStatus status
+----
+
+Параметры::
+Guid:::
+Тип: `cardId`
++
+ID карточки журнала обмена сообщениями.
+
+Guid:::
+Тип: `employeeId`
++
+ID сотрудника, выполнившего запрос.
+
+M4dRegistryAction:::
+Тип: `action`
++
+Действие, которое обрабатывает запрос.
+
+M4dRegistryOperationStatus:::
+Тип: `status`
++
+Результат выполнения действия.
+
+Возвращаемое значение::
+Тип: `Guid`
++
+ID созданной записи.
