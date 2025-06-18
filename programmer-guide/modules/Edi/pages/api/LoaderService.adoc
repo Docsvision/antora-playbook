@@ -1,0 +1,26 @@
+= LoaderService -- класс
+
+Сервис загрузки входящих и исходящих документов. Не рекомендуется использовать напрямую доступен, предпочтительнее вызывать методы через `xref:programmer:api/BoxesService.adoc[BoxesService]`.
+Вызывает экземпляры ILoaderService для соответствующего оператора обмена.
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class LoaderService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`public ItemCollection<MessageData> LoadIncomingDocuments(string, DateTime, DateTime, string)`
+|Загружает входящие документы в указанном промежутке с ... по ..., по ID ящика и ID последнего документа
+|`public ItemCollection<MessageData> LoadOutgoingDocuments(string, DateTime, DateTime, string)`
+|Загружает исходящие документы в указанном промежутке с ... по ..., по ID ящика и ID последнего документа
+|===

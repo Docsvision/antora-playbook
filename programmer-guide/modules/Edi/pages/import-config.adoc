@@ -1,0 +1,102 @@
+= Разработка компонента импорта настроек организации из системы оператора ЭДО
+
+Компонент импорта предоставляет модулю зависящий не от оператора ЭДО слой получения списка подразделений организации, контрагентов и ящиков, зарегистрированных в системе оператора ЭДО. Информация, предоставляемая данным компонентом, требуется для определения связей между контрагентами, зарегистрированными в системе {dv}, и контрагентами организации в системе оператора ЭДО.
+
+Данный компонент должен реализовывать программный интерфейс xref:api/IImportService.adoc[IImportService]. Методы реализуемого интерфейса вызываются из компонента _Справочника настроек операторов ЮЗДО_ при загрузке подразделений и ящиков организации, контрагентов и ящиков контрагентов.
+
+Реализация данного компонента, получающего информацию от оператора Диадок, содержится в сборке `DocsVision.Edi.Runtime.Diadoc.dll` (добавляется при установке _Коннектор к Диадок_).
+
+Фактическая реализация компонента импорта сильно зависит от метода взаимодействия с оператором ЭДО и предоставляемого им API.
+
+Далее приведена часть исходного кода (только публичные методы) примера реализации интерфейса `ImportService` для работы с оператором _Диадок_.
+
+[source,csharp]
+----
+public class ImportService : IImportService
+{
+    private DiadocSession DiadocSession <.>
+    {
+        get
+        {
+            if (diadocSession != null && !diadocSession.IsAlive())
+                diadocSession = null;
+
+            if (diadocSession == null)
+            {
+                if (!settings.ContainsKey(DiadocSettings.ApiUrl))
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+                if (!settings.ContainsKey(DiadocSettings.Login))
+                    throw Error.InvalidOperation(Resources.NoConnectionData);
+
+                diadocSession = new DiadocSession(
+                    settings[DiadocSettings.ApiUrl],
+                    settings[DiadocSettings.Login],
+                    settings[DiadocSettings.Password],
+                    settings.ContainsKey(DiadocSettings.ProxyUrl) ? settings[DiadocSettings.ProxyUrl] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyLogin) ? settings[DiadocSettings.ProxyLogin] : null,
+                    settings.ContainsKey(DiadocSettings.ProxyPassword) ? settings[DiadocSettings.ProxyPassword] : null);
+            }
+
+            return diadocSession;
+        }
+    }
+
+
+  <.>
+
+    public void Initialize(Dictionary<string, string> settings) <.>
+    {
+        this.settings = settings; <.>
+    }
+
+
+    public ItemCollection<Unit> ImportUnits() <.>
+    {
+        return DiadocSession.ImportUnits();
+    }
+
+    public ItemCollection<Partner> ImportPartners() <.>
+    {
+        return DiadocSession.ImportPartners();
+    }
+}
+----
+<.> Точка подключения к API Диадок.
+<.> Реализация интерфейса `IImportService`.
+<.> Реализация метода инициализации компонента.
+<.> Загрузка настроек.
+<.> Реализация метода получения от оператора ЭДО списка организаций.
+<.> Реализация метода получения от оператора ЭДО списка контрагентов.
+
+Далее приведена часть исходного кода класса `DiadocSession`, показывающая принцип взаимодействия с оператором ЭДО через его API на примере загрузки данных организации.
+
+[source,csharp]
+----
+internal class DiadocSession {
+ private readonly DiadocApi diadocApi;
+ private readonly string authToken;
+
+ public DiadocSession(string apiUrl, string login, string password) {
+  
+<.>
+  WinApiCrypt diadocCrypt = new WinApiCrypt();
+  diadocApi = new DiadocApi(DefaultClientId, apiUrl, diadocCrypt);
+  authToken = diadocApi.Authenticate(login, password);
+ }
+
+<.>
+ public ItemCollection<Unit> ImportUnits() {
+  ItemCollection<Unit> units = new ItemCollection<Unit>();
+
+<.>
+  units.AddRange(diadocApi.GetMyOrganizations(authToken).Organizations.Select(GetUnit));
+  return units;
+ }
+
+<.>
+}
+----
+<.> Подключаемся и авторизуемся в _Диадок_.
+<.> Получаем данные подразделений организации.
+<.> Получаем подразделения организации с помощью метода `GetMyOrganizations` API Диадок метод.
+<.> Часть кода пропущена.
