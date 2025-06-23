@@ -1,3 +1,5 @@
+:wt: edi-diadoc-server
+
 = Установка и удаление Коннектора
 
 [#requirements]
@@ -7,7 +9,10 @@
 
 Пользователь, выполняющий установку {of-em}, должен обладать правами локального администратора.
 
+[NOTE]
+====
 Администратор {dv} -- пользователь, включенный в группу безопасности *{dv-admins-serv}* в конфигурационном файле модуля {pl}.
+====
 
 include::ROOT:partial$excerpts.adoc[tags=settings]
 
@@ -20,18 +25,13 @@ include::ROOT:partial$excerpts.adoc[tags=settings]
 include::ROOT:partial$excerpts.adoc[tags=install-edi]
 . При xref:admin:install.adoc[установке {of-em}] будет предложено установить также:
 +
-* `docsivision-edi-diadoc-server` -- дополнительный компонент модуля, добавляющий поддержку работы с оператором Диадок.
+* `docsvision-edi-diadoc-server` -- дополнительный компонент модуля, добавляющий поддержку работы с оператором Диадок.
 +
 . _Коннектор к Диадок_ может быть установлен следующей командой с предварительным обновлением индекса пакетов:
-+
-[source,bash]
-----
-sudo apt-get update
-sudo apt-get install docsvision-edi-diadoc-server
-----
-+
-include::ROOT:partial$excerpts.adoc[tags=db-select]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 // end::install[]
++
+include::ROOT:partial$excerpts.adoc[tags=last-connector]
 
 [#client]
 == Установка клиентской части Коннектора
@@ -67,4 +67,4 @@ include::ROOT:partial$excerpts.adoc[tags=db-select]
 +
 . В ОС Linux удалить компоненты можно командой:
 +
- $ sudo apt-get purge docsivision-edi-diadoc-server
+include::6.1@platform:admin:partial$delete.adoc[]

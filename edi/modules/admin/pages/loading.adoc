@@ -14,10 +14,14 @@
 * `CardDefs\Xslt\UniInvoice.ru.xslt` -- шаблон преобразования для УПД.
 * `CardDefs\Xslt\UniInvoiceAct.ru.xslt` -- шаблон преобразования для Формализованного акта.
 * `CardDefs\Xslt\UniInvoiceCorrection.ru.xslt` -- шаблон преобразования для УКД.
-* `CardDefs\Xslt\UniInvoiceCorrFields.xslt` -- шаблон преобразования для УКД.
-* `CardDefs\Xslt\UniInvoiceFields.xslt` -- шаблон преобразования для УПД.
-* `CardDefs\Xslt\UniInvoiceSF.xslt` -- шаблон преобразования для Счета-фактуры.
-* `CardDefs\Xslt\UniInvoiceTorgRu.xslt` -- шаблон преобразования для Товарной накладной ТОРГ-12.
+* `CardDefs\Xslt\UniInvoiceCorrFields.ru.xslt` -- шаблон преобразования для УКД.
+* `CardDefs\Xslt\UniInvoiceFields.ru.xslt` -- шаблон преобразования для УПД.
+* `CardDefs\Xslt\UniInvoiceSF.ru.xslt` -- шаблон преобразования для Счета-фактуры.
+* `CardDefs\Xslt\UniInvoiceTorg.ru.xslt` -- шаблон преобразования для Товарной накладной ТОРГ-12.
+* `CardDefs\Xslt\UniInvoice970.ru.xslt` -- шаблон преобразования для УПД формата 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
+* `CardDefs\Xslt\UniInvoiceAct970.ru.xslt` -- шаблон преобразования для Формализованного Акта формата УПД 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
+* `CardDefs\Xslt\UniInvoiceSF970.ru.xslt` -- шаблон преобразования для Счета-фактуры формата УПД 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
+* `CardDefs\Xslt\UniInvoiceTorg970.ru.xslt` -- шаблон преобразования для Накладной формата УПД 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
 --
 +
 .Шаблоны построены по следующей логике:
@@ -104,13 +108,14 @@ image::attributes-check.png[Пример проверки загрузки ат�
 +
 .По умолчанию это:
 * `DocsVision.Edi.Runtime.BackOffice.OutgoingDocumentCreator` для неформализованных документов.
+* `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoice970Creator` для УПД 970footnote:[В данный момент формат поддерживается только для коннектора к Диадок.].
 * `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoice820Creator` для УПД 820.
 * `DocsVision.Edi.Runtime.UniversalDocument.SellerInvoiceCreator` для УПД старого формата.
 * `DocsVision.Edi.Runtime.BackOffice.InvitationDataReader` для приглашений к обмену ЭДО.
 +
 При добавлении двух видов "Исходящее приглашение к обмену" и "Входящее приглашение к обмену" нужно в блоке _Отправка_ прописать оба вида, а в блоке _Получение_ только входящий.
 +
-. В таблице _Загрузка исходящих_ найдите колонку _Дополнительные атрибуты_ и добавьте XSLT шаблон по аналогии с входящими документами. В папке инсталляции это шаблон `CardDefs\Xslt\UniInvoiceFields.xslt`.
+. В таблице _Загрузка исходящих_ найдите колонку _Дополнительные атрибуты_ и добавьте XSLT шаблон по аналогии с входящими документами. В папке инсталляции это шаблон `CardDefs\Xslt\UniInvoiceFields.ru.xslt`.
 . Чтобы использовать существующие виды документов, а не делать новые сразу после загрузки, для состояния УПД `SignedAndSent` можно использовать стандартный шаблон.
 +
 Для собственных видов в шаблоне необходимо прописать следующий ID состояния `BuiltInStateId = "80F6D41E-379C-44EB-B858-8A9CB1CC15F5"` самостоятельно. Допускается, например, сделать вид документа с начальным состоянием `Загружен` и переходами в остальные состояния. В таком случае состояние `Подготавливается` будет отсутствовать.
