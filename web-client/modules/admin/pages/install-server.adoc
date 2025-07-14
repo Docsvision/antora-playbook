@@ -5,6 +5,7 @@
 :init-config: yes
 :first: <<mancons,Настройки в {of-mc}>>
 :second: <<linux,Настройки в конфигурационном файле>>
+:no-config:
 
 = Установка и конфигурация сервера {wc}а
 
@@ -21,24 +22,27 @@ include::partial$mancons.adoc[]
 
 include::user:partial$excerpts.adoc[tags=noam]
 
-[#webc-ext]
-== Установка расширения {wc}а для {of-mc}
+[#linux]
+== Установка на Linux
 
-Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных. Импорт и удаление решений осуществляется с помощью расширения ВК для консоли управления
+--
+include::new-admin-console@platform:admin:partial$install.adoc[]
+--
 
-:what-mod: {wc}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
-.Чтобы установить "Расширение {wc}а для {of-mc}":
+--
 :of: Расширения {wc}а для {of-mc}
 :wt: ext-webc-mc
-. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+
+[start=2]
+. [[webc-ext]]Установите расширение {wc}а для {of-mc}
++
+Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
++
+:what-mod: {wc}
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
++
+Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
-
-[#mancons]
-== Настройки в {of-mc}
-
-include::6.1@platform:admin:partial$install.adoc[tags=install]
 +
 . Убедитесь, что в конфигурационном файле {wc}а по адресу `/usr/lib/docsvision/{wt}/{config}.json` указаны описанные ниже настройки. Файл может быть изменён в любом текстовом редакторе, например `nano` (потребуются права суперпользователя). Настройки в конфигурационном файле:
 +
@@ -59,7 +63,7 @@ include::6.1@platform:admin:partial$install.adoc[tags=install]
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {wc} были одинаковые.
 +
-. Дальнейшие настройки {of} выполяются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
+. Дальнейшие настройки модуля выполяются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
 +
 * Адрес сервера приложений
 * Имя пользователя -- имя системной учётной записи {dv}
@@ -86,9 +90,12 @@ include::6.1@platform:admin:partial$install.adoc[tags=install]
 ----
 sudo systemctl start dvwebclient
 ----
+--
 
-[#linux]
+[#config]
 == Настройки в конфигурационном файле
+
+Возможность указать настройки модуля в конфигурационном оставлена для обратной совместимости, первоначальная конфигурация должна выполняться в {of-mc}, существующие настройки также рекомендуется перенести в {mc}.
 
 include::6.1@platform:admin:partial$install.adoc[]
 +
@@ -199,6 +206,7 @@ image::install-server-confirm.png[Установка Расширения]
 
 [#kvr-pu]
 === Установка программы {kvr}
+
 [NOTE]
 ====
 Системные требования приведены в пункте xref:ROOT:separate-layouts-install.adoc[Требования отдельной установки программы {kvr}].
