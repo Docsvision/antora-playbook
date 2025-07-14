@@ -1,0 +1,33 @@
+= ICardsPresentationExtension -- интерфейс
+
+Интерфейс `ICardsPresentationExtension` представляет метод получения описания представления карточки.
+
+*Пространство имён*: `DocsVision.WebClientLibrary.ObjectModel.Services.EntityLifeCycle`
+
+*Сборка*: `DocsVision.WebClientLibrary.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ICardsPresentationExtension
+----
+
+== Методы
+
+|===
+|Имя |Описание
+
+|`ExtensionName &#x7b; get; set; &#x7d;`
+|Идентификатор целевой карточки для текущего жизненного цикла.
+
+*Тип:* `String`.
+
+|`GetPresentation(SessionContext, CardsPresentationRequest);`
+|Получает представление карточки.
+
+*Тип:* `CardPresentation`.
+
+*Параметры:* `sessionContext` -- контекст сессии; `request` -- возвращает представление.
+
+|===

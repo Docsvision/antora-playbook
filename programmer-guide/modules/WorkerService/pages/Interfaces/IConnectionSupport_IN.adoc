@@ -1,0 +1,29 @@
+= IConnectionSupport -- интерфейс
+
+Представлет фабрику, поддерживающую управление сроком жизни циклом соединения
+
+* *Пространство имён:* `Docsvision.WorkerService.Interfaces`
+* *Сборка:* `DocsVision.WorkerService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IConnectionSupport
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`SupportedTypes`
+|Получает типы для соединений, которые могут быть получены.
+
+|`CheckConnection<T>`
+|Проверяет, если соединение живое
+
+* `T` -- Тип для приведения
+
+|===

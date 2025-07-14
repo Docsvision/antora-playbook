@@ -1,0 +1,129 @@
+= OutgoingMessagesService -- класс
+
+Сервис отвечает за отправку отправка исходящих документов, ответов и прочих задач. Может быть использован в собственных скриптах и приложениях для отправки документов и прочего.
+
+* *Пространство имен:* `DocsVision.Edi.Runtime`
+* *Сборка:* `DocsVision.Edi.Runtime.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OutgoingMessagesService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`public IEnumerable<EdiMessage> CreateOutgoingMessageCards(OperatorsBox, OperatorsDepartment, IEnumerable<RecipientFiles>, out string)`
+a|Создаёт карточки исходящих сообщений
+
+.Параметры:
+* `organizationBox` -- ящик организации
+* `organizationDepartment` -- подразделение организации
+* `recipientFiles` -- коллекция файлов получателя
+* `sendErrors` -- отправлять ошибки
+
+|`public IEnumerable<EdiMessage> CreateOutgoingMessageCards(OperatorsBox, OperatorsDepartment, string, string, IEnumerable<RecipientFiles>, out string)`
+a|Создаёт карточки исходящего сообщения
+
+.Параметры:
+* `organizationBox` -- ящик организации
+* `organizationDepartment` -- подразделение организации
+* `documentType` -- тип документа
+* `documentVersion` -- версия документа
+* `recipientFiles` -- коллекция файлов получателя
+* `sendErrors` -- отправлять ошибки
+
+|`public IEnumerable<EdiMessage> CreateOutgoingRejectionReplies(Guid, string, Guid)`
+a|Создаёт исходящий ответный отказ в подписании
+
+.Параметры:
+* `cardId` -- ID карточки документа
+* `rejectionText` -- текст комментария с отказом
+* `rejectionSignatureId` -- ID отклонённой подписи
+
+|`public IEnumerable<EdiMessage> CreateOutgoingRejectionReplies(Guid, string, X509Certificate2)`
+a|Создаёт исходящий ответный отказ в подписании
+
+.Параметры:
+* `cardId` -- ID карточки документа
+* `rejectionText` -- текст комментария с отказом
+* `certificate` -- сертификат
+
+|`public IEnumerable<EdiMessage> CreateOutgoingSignatureReplies(Guid, ItemCollection<DocumentFileData>)`
+a|Создаёт исходящую ответную подпись
+
+.Параметры:
+* `cardId` -- ID карточки
+* `signedFiles` -- подписанные файлы
+
+|`public IEnumerable<EdiMessage> CreateOutgoingInvoiceReplies(Guid, X509Certificate2, string)`
+a|Создаёт ответные исходящие счёт-фактуры
+
+.Параметры:
+* `cardId` -- ID карточки документа
+* `replyData` -- ответные данные
+* `certificate` -- сертификат
+
+|`public IEnumerable<EdiMessage> CreateRevocationRequests(IEnumerable<EdiMessage>, string, X509Certificate2, out string)`
+a|Создаёт исходящие запросы на аннулирование
+
+.Параметры:
+* `messageCards` -- карточки сообщений
+* `revocationText` -- текст отказа
+* `certificate` -- сертификат
+* `sendErrors` -- отправлять ошибки
+
+|`public IEnumerable<EdiMessage> CreateOutgoingRevRejectionReplies(Guid, string, X509Certificate2)`
+a|Создаёт исходящие ответы на аннулирование подписи
+
+.Параметры:
+* `cardId` -- ID карточки документа
+* `rejectionText` -- текст комментария с отказом
+* `certificate` -- сертификат
+
+|`public IEnumerable<EdiMessage> CreateOutgoingRevSignatureReplies(Guid, X509Certificate2)`
+a|Создаёт исходящие ответы на аннулирование подписи
+
+.Параметры:
+* `cardId` -- ID карточки
+* `certificate` -- сертификат
+
+|`public IEnumerable<EdiMessage> CreateOutgoingReceipts(Guid, X509Certificate2)`
+a|Отправляет исходящие извещения
+
+.Параметры:
+* `cardId` -- карточка
+* `certificate` -- сертификат
+
+|`public IEnumerable<EdiMessage> CreateCorrectionRequests(IEnumerable<EdiMessage>, string, X509Certificate2, out string sendErrors)`
+a|Отправляет исходящие запросы на исправление
+
+.Параметры:
+* `messageCards` -- карточки сообщений
+* `comment` -- комментарий
+* `certificate` -- сертификат
+* `sendErrors` -- отправлять ошибки
+
+|`public IEnumerable<EdiMessage> FindSentMessageCards(Guid)`
+|Находит отправленные карточки сообщений по ID карточки
+
+|`public IEnumerable<EdiMessage> FindReceivedMessageCards(Guid)`
+|Находит полученные карточки сообщений по ID карточки
+
+|`public IEnumerable<EdiMessage> FindIncomingMessageCards(Guid)`
+|Находит входящие карточки сообщений по ID карточки
+
+|`public IEnumerable<EdiMessage> FindCorrectionMessageCards(Guid)`
+|Находит карточки сообщений для исправления по ID карточки
+
+|`public IEnumerable<EdiMessage> FindRevocationMessageCards(Guid)`
+|Находит карточки сообщений для  аннулирования по ID карточки
+
+|`public IEnumerable<EdiMessage> FindReceiptMessageCards(Guid)`
+|Находит карточки сообщений, по которым требуется отправить извещения по ID карточки
+|===
