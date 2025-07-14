@@ -289,7 +289,7 @@ include::partial$excerpts.adoc[tags=pretty]
 [NOTE]
 ====
 * Для работы расширения авторизации Keycloak требуется опция лицензии _{dv} Коннектор к Keycloak_.
-* Авторизация с помощью Keycloak поддерживается в {wc}е {cu252-wc-req} при установке модуля {pl} {cu252-pl-req}.
+* Авторизация с помощью Keycloak поддерживается в {wc}е {kc-wc-req} при установке модуля {pl} {kc-pl-req}.
 ====
 
 [source,json]
@@ -350,3 +350,99 @@ include::partial$excerpts.adoc[tags=pretty]
 <.> `Secret` -- секрет приложения, настроенного для аутентификации пользователей.
 <.> `AccountNameClaim` -- имя пользователя в токене (поле в токене, используемое в качестве логина).
 <.> `UniqueIdClaim` -- уникальный идентификатор пользователя в токене.
+
+[#ldaps]
+== Регистрация расширения LDAPS
+
+[NOTE]
+====
+* Для работы расширения авторизации LDAPS требуется опция лицензии _{dv} Коннектор к LDAPS_.
+* Автоизация с помощью LDAPS поддерживается в {wc}е {kc-wc-req} при установке модуля {pl} {kc-pl-req}.
+====
+
+.Особенности и рекомендации
+****
+* Расширение LDAPS имеет особенности именования. Расширение плохо поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также прочие стандартные ограничения.
++
+В связи с этим была добавлена настройка сопоставления доменных групп и ролей {dv}. Также для упрощения настройки, *только для данного провайдера* были сделаны новые стандартные имена групп пользователей в нижнем регистре. Т.е. группы пользователей с такими именами будут сопоставятся со штатными ролями {dv} без дополнительных настроек *только в рамках данного коннектора*:
++
+** *docsvision_users*
+** *docsvision_power_users*
+** *docsvision_administrators*
+** *docsvision_security_administrators*
+** *docsvision_archive_operators*
+** *docsvision_search_query_creators*
+** *docsvision_workflow_process_creators*
+** *docsvision_aggregation_users*
+** *docsvision_management_console_administrators*
++
+* Аналогичные ограничения касаются запросов к контроллеру домена -- все составные части следует писать строчными буквами, без лишних пробелов и лишних кавычек. Исключение -- имена пользователей, групп и прочих объектов, которые точно совпадают по регистру, иначе имена будут считаться различными.
+* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=astrald,dc=ru`. В нашем случае она так выглядит, т.к. домен имеет вид `astrald.ru`. Если он будет, например `astrald.example.domain.ru`, то должно быть так: `dc=astrald,dc=example,dc=domain,dc=ru`. +
+Эта настройка указывается в опциях в поле `BaseDN`.
+* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Как уже говорилось ранее, параметр должен быть строчным, допускется использовать *только* следующие варианты:
++
+ user01
+ user01@astrald.ru
+ astrald.ru\user01
++
+Вариант `astrald\user01` недопустим, т.к. просто с `dc=astrald` контроллер не ответит.
++
+* Если мы каким-то образом пытаемся оперировать с пользователем, то обязательно указывать часть `cn=users,cn=accounts` и `BaseDN`. В противном случае контроллер не находит его.
+****
+
+[source,json]
+----
+{
+  "Authentication": {
+	"Extensions": {
+      "ALDPro": {
+		"Name": "ALDPro", <.>
+		"TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+		"Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>kmg01@astrald.ru</UserName><Password>P@ssw0rd</Password></Credential></LdapConnectorOptions>", <.>
+		"Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
+		}
+	},
+	"Tenants": { <.>
+		"docsvision-db": {
+		  "Extensions": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77; 36351525-8FCE-48AB-8AD3-4C1FA575FF77}", <.>
+		  "Name": "CurrentDB" <.>
+		}
+	}
+  }
+}
+----
+<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников, на вкладке "Безопасность".
+<.> `TypeName` -- строка с именем типа, реализующего расширение.
+<.> `Settings` -- строка настроек расширения, для Keycloak. Подробнее см. <<keycloak-settings,ниже>>.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+
+[#ldaps-settings]
+=== Строка настроек LDAPS
+
+include::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<LdapConnectorOptions>
+	<LdapServerAddresses> <.>
+		<string>173.15.17.145</string>
+	</LdapServerAddresses>
+	<Port>389</Port> <.>
+	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
+	<BaseDN>dc=astrald,dc=ru</BaseDN> <.>
+	<Credential>
+		<UserName>admin@astrald.ru</UserName> <.>
+		<Password>Password</Password> <.>
+	</Credential>
+</LdapConnectorOptions>
+----
+<.> `LdapServerAddresses` -- адреса серверов LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `FullyQualifiedDnsHostName` -- указывать ли полное имя домена в формате `user@example.com` учётной записи после `@`.
+<.> `BaseDN` -- обязательная настройка, что-то делает?
+<.> `UserName` -- `UserName` -- имя пользователя (при использовании аутентификации LDAPS).
+<.> `Password` -- `Password` -- пароль (при использовании аутентификации LDAPS).
