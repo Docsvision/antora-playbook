@@ -6,12 +6,13 @@ include::partial$excerpts.adoc[tags=dvweb-win]
 Веб-браузер пользователя подключается к программе _DVWebTool_ по адресу `\http://localhost:5413`. Администратор может изменить стандартный порт подключения.
 
 .Чтобы изменить стандартный порт подключения:
-. Откройте конфигурационный файл `{webconfig}`.
+. Откройте конфигурационный файл `{webconfig-lin}`.
 . Перейдите к секции {cnf-sgrps} > System].
 . Измените значение параметра *_WebServicesPort_*, указав новый номер порта подключения к программе _DVWebTool_.
 +
 [source,json]
 ----
+{
   "Docsvision": {
     "WebClient": {
       "SettingGroups": {
@@ -21,6 +22,7 @@ include::partial$excerpts.adoc[tags=dvweb-win]
       }
     }
   }
+}
 ----
 // end::webconfig[]
 +

@@ -6,13 +6,14 @@ include::partial$excerpts.adoc[tags=ifabsent]
 
 // tag::webconfig[]
 .Чтобы включить протоколирование:
-. Откройте конфигурационный файл `{webconfig}`.
+. Откройте конфигурационный файл `{webconfig-lin}`.
 . Перейдите к секции {cnf-sgrps-wc}.
 . Измените значение параметра `EnableRouterLogging` на *_True_*:
 +
 .Включение протоколирования событий навигации
 [source,json]
 ----
+{
   "Docsvision": {
     "WebClient": {
       "SettingGroups": {
@@ -22,6 +23,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
       }
     }
   }
+}
 ----
 <.> Возможные значения:
 +

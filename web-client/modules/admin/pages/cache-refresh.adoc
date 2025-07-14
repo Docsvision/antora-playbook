@@ -6,12 +6,13 @@
 
 // tag::webconfig[]
 .Чтобы изменить период обновления кэша:
-. Откройте конфигурационный файл `{webconfig}`.
+. Откройте конфигурационный файл `{webconfig-lin}`.
 . Перейдите к секции {cnf-sgrps} > System].
 . Измените значение параметра `MinCheckDirectoryTimestampsInterval`.
 +
 [source,json]
 ----
+{
   "Docsvision": {
     "WebClient": {
       "SettingGroups": {
@@ -21,6 +22,7 @@
       }
     }
   }
+}
 ----
 <.> Время ожидания задаётся в миллисекундах.
 // end::webconfig[]
