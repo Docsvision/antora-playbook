@@ -20,8 +20,8 @@ public interface IBarcodeService
 |`xref:IBarcodeService.ChangeBarcode_MT.adoc[ChangeBarcode(Document, String)]` |Задаёт значение штрих-кода карточки документа.
 |`xref:IBarcodeService.GenerateBarcode_MT.adoc[GenerateBarcode(Document)]` |Формирует штрих-код для заданной карточки документа.
 |`xref:IBarcodeService.GenerateBarcode_1_MT.adoc[GenerateBarcode(Document, DateTime)]` |Формирует штрих-код для заданной карточки документа.
-|`xref:IBarcodeService.GetBarcodePrintSettings_MT.adoc[GetBarcodePrintSettings(StaffEmployee, KindsCardKind)]` |Возвращает системные настройки печати.
-|`xref:IBarcodeService.PrintBarcode_MT.adoc[PrintBarcode(Document, BarcodePrintSettings, PrinterSettings)]` |Отправляет на печать штрих-код документа.
+// |`xref:.IBarcodeService.GetBarcodePrintSettings_MT.adoc[GetBarcodePrintSettings(StaffEmployee, KindsCardKind)]` |Возвращает системные настройки печати.
+// |`xref:.IBarcodeService.PrintBarcode_MT.adoc[PrintBarcode(Document, BarcodePrintSettings, PrinterSettings)]` |Отправляет на печать штрих-код документа.
 |===
 
 == Заметки
@@ -49,4 +49,6 @@ barcodeService.ChangeBarcode(document, barcode); <.>
 
 == Заметки
 
-Метод `GetBarcodePrintSettings` в большинстве случаев в настроенной системе содержит один объект, но возможны ситуации, когда таких настроек больше чем одна, в таком случае необходимо реализовать логику выбора необходимой настройки. Если настроек нет, то следует использовать настройки печати по умолчанию, которые содержатся в `BarcodePrintSettings.DefaultSettings`.
+Методы `GetBarcodePrintSettings` и `PrintBarcode` windows-специфичные и недоступны в Linux.
+
+// в большинстве случаев в настроенной системе содержит один объект, но возможны ситуации, когда таких настроек больше чем одна, в таком случае необходимо реализовать логику выбора необходимой настройки. Если настроек нет, то следует использовать настройки печати по умолчанию, которые содержатся в `BarcodePrintSettings.DefaultSettings`.
