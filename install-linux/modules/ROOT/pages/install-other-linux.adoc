@@ -26,49 +26,7 @@
 +
  $ sudo systemctl start dvwebclient
 
-[#sett-serv]
-== Установка Сервиса настроек
-
-. Установите сервис:
-+
-[tabs]
-====
-{os1}::
-+
- $ sudo apt-get install docsvision-settingsservice
-
-{os2}::
-+
- $ sudo dnf install docsvision-settingsservice
-====
-+
-. Выполните конфигурацию сервиса настроек в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#sett-serv[Установка {of-mc}]".
-+
-. Запустите сервис:
-+
- $ sudo systemctl start dvsettings
-
-[#ext-api]
-== Установка Сервиса внешнего API {of-mc}
-
-. Установите сервис внешнего API:
-+
-[tabs]
-====
-{os1}::
-+
- $ sudo apt-get install docsvision-externalapi
-
-{os2}::
-+
- $ sudo dnf install docsvision-externalapi
-====
-+
-. Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
-+
-. Запустите сервис внешнего API {of-mc}:
-+
- $ sudo systemctl start dvexternalapi
+См. подробнее "xref:dvwebclient.adoc[]".
 
 [#manconsole]
 == Установка {of-mc}
@@ -96,6 +54,56 @@
 +
 NOTE: При авторизации укажите имя в формате `user@domain.com`, вариант `domain\user` не работает.
 
+См. подробнее "xref:dvconsole.adoc#console[Установка {of-mc}]".
+
+[#sett-serv]
+== Установка Сервиса настроек
+
+. Установите сервис:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-settingsservice
+
+{os2}::
++
+ $ sudo dnf install docsvision-settingsservice
+====
++
+. Выполните конфигурацию сервиса настроек в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#sett-serv[Установка {of-mc}]".
++
+. Запустите сервис:
++
+ $ sudo systemctl start dvsettings
+
+См. подробнее "xref:dvconsole.adoc#settings-service[Установка {of-sett-serv}]".
+
+[#ext-api]
+== Установка Сервиса внешнего API {of-mc}
+
+. Установите сервис внешнего API:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-externalapi
+
+{os2}::
++
+ $ sudo dnf install docsvision-externalapi
+====
++
+. Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
++
+. Запустите сервис внешнего API {of-mc}:
++
+ $ sudo systemctl start dvexternalapi
+
+См. подробнее "xref:dvconsole.adoc#external-api[Установка сервиса внешнего API]".
+
 [#worker]
 == Установка Службы {ws}
 
@@ -117,6 +125,8 @@ NOTE: При авторизации укажите имя в формате `use
 . Запустите службу модуля:
 +
  $ sudo systemctl start dvworkerservice
+
+См. подробнее "xref:dvworkerservice.adoc[]".
 
 [#workflow]
 == Установка СУБП
@@ -140,47 +150,4 @@ NOTE: При авторизации укажите имя в формате `use
 +
  $ sudo systemctl start dvworkflow
 
-// [#takeoffice]
-// == Установка приложения {to}
-//
-// . Установите приложение _{to}_ следующей командой:
-// +
-// [tabs]
-// ====
-// Astra Linux::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo apt-get install docsvision-takeoffice-server
-// ----
-//
-// РЕД ОС::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo dnf install docsvision-takeoffice-server
-// ----
-// ====
-//
-// [#docmgt]
-// == Установка приложения {dm}
-//
-// . Установите приложение _{dm}_ следующей командой:
-// +
-// [tabs]
-// ====
-// Astra Linux::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo apt-get install docsvision-documentmanagement-server
-// ----
-//
-// РЕД ОС::
-// +
-// [source,bash,subs=attributes]
-// ----
-// sudo dnf install docsvision-documentmanagement-server
-// ----
-// ====
-// Ознакомьтесь со списком полезных команд в пункте "xref:post-config-section-server.adoc[]".
+См. подробнее "xref:dvworkflow.adoc[]".
