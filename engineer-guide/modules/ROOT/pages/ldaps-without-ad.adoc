@@ -2,6 +2,9 @@
 
 Расширение позволяет серверу приложений и другим компонентам {dv} работать по протоколам LDAP\LDAPS без привязки к конкретной службе каталогов Active Directory. Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
 
+[#ldaps]
+== Расширение аутентификации LDAPS
+
 [NOTE]
 ====
 * Для работы расширения авторизации LDAPS не требуется дополнительных опций лицензии.
@@ -19,7 +22,7 @@
             "LDAP": {
             "Name": "LDAP", <.>
             "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>dv.io</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>kmg02@dv.io</UserName><Password>kmg002</Password></Credential></LdapConnectorOptions>", <.>
+            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user02@example.com</UserName><Password>P@ssword</Password></Credential></LdapConnectorOptions>", <.>
             "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
             }
           }
@@ -31,14 +34,14 @@
   }
 }
 ----
-<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников, на вкладке "Безопасность".
+<.> `Name` -- задаёт название расширения.
 <.> `TypeName` -- строка с именем типа, реализующего расширение, указывается так же, как в примере.
 <.> `Settings` -- строка настроек расширения, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
 <.> `ID` -- строка с идентификатором расширения в виде Guid.
 <.> `Tenants` -- расширение регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
 
 [#ldaps-settings]
-== Строка настроек LDAPS
+=== Строка настроек LDAPS
 
 [source,xml]
 ----
@@ -60,13 +63,13 @@
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
 <.> `FullyQualifiedDnsHostName` -- указывать ли полное имя домена в формате `user@example.com` учётной записи после `@`.
-<.> `UserName` -- `UserName` -- имя пользователя (при использовании аутентификации LDAPS).
-<.> `Password` -- `Password` -- пароль (при использовании аутентификации LDAPS).
+<.> `UserName` -- имя пользователя (при использовании аутентификации LDAPS).
+<.> `Password` -- пароль (при использовании аутентификации LDAPS).
 
 [#ald]
 == Расширение аутентификации ALD Pro
 
-ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначеннолй для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
+ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
 
 [source,json]
 ----
@@ -76,7 +79,7 @@ ALD Pro является альтернативной службой катал�
       "ALDPro": {
 		"Name": "ALDPro", <.>
 		"TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-		"Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>kmg01@astrald.ru</UserName><Password>P@ssw0rd</Password></Credential></LdapConnectorOptions>", <.>
+		"Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user01@domain.ru</UserName><Password>P@ssword</Password></Credential></LdapConnectorOptions>", <.>
 		"Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
 		}
 	},
@@ -86,7 +89,7 @@ ALD Pro является альтернативной службой катал�
   }
 }
 ----
-<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников, на вкладке "Безопасность".
+<.> `Name` -- задаёт название расширения.
 <.> `TypeName` -- строка с именем типа, реализующего расширение.
 <.> `Settings` -- строка настроек расширения, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
 <.> `ID` -- строка с идентификатором расширения в виде Guid.
@@ -102,14 +105,14 @@ include::partial$excerpts.adoc[tags=pretty]
 <?xml version="1.0" encoding="utf-16"?>
 <LdapConnectorOptions>
 	<LdapServerAddresses> <.>
-		<string>173.15.17.145</string>
+		<string>172.14.16.175</string>
 	</LdapServerAddresses>
 	<Port>389</Port> <.>
     <EnableLDAPS>true</EnableLDAPS> <.>
 	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
-	<BaseDN>dc=astrald,dc=ru</BaseDN> <.>
+	<BaseDN>dc=domain,dc=ru</BaseDN> <.>
 	<Credential>
-		<UserName>admin@astrald.ru</UserName> <.>
+		<UserName>admin@domain.ru</UserName> <.>
 		<Password>Password</Password> <.>
 	</Credential>
 </LdapConnectorOptions>
@@ -118,15 +121,15 @@ include::partial$excerpts.adoc[tags=pretty]
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
 <.> `FullyQualifiedDnsHostName` -- указывать ли полное имя домена в формате `user@example.com` учётной записи после `@`.
-<.> `BaseDN` -- обязательная настройка, что-то делает?
-<.> `UserName` -- `UserName` -- имя пользователя (при использовании аутентификации LDAPS).
-<.> `Password` -- `Password` -- пароль (при использовании аутентификации LDAPS).
+<.> `BaseDN` -- обязательная настройка, корневая точка LDAP-дерева, с которой начинаются поисковые запросы. Где: `dc=domain` -- доменный компонент, `dc=ru` -- верхний уровень домена.
+<.> `UserName` -- имя пользователя (при использовании аутентификации LDAPS).
+<.> `Password` -- пароль (при использовании аутентификации LDAPS).
 
 .Особенности и рекомендации при работе с ALD Pro:
 ****
 * Расширение ALD Pro имеет особенности именования. Расширение не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования.
 +
-В связи с этим была добавлена настройка сопоставления доменных групп и ролей {dv}. Также для упрощения настройки, *только для данного провайдера* были сделаны новые стандартные имена групп пользователей в нижнем регистре. Т.е. группы пользователей с такими именами будут сопоставятся со штатными ролями {dv} без дополнительных настроек *только в рамках данного коннектора*:
+В связи с этим была добавлена настройка сопоставления доменных групп и ролей {dv}. Также для упрощения настройки, *только для данного провайдера* были сделаны новые стандартные имена групп пользователей в нижнем регистре. Т.е. группы пользователей с такими именами будут сопоставляться со штатными ролями {dv} без дополнительных настроек *только в рамках данного коннектора*:
 +
 ** *docsvision_users*
 ** *docsvision_power_users*
@@ -138,15 +141,15 @@ include::partial$excerpts.adoc[tags=pretty]
 ** *docsvision_aggregation_users*
 ** *docsvision_management_console_administrators*
 +
-* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=astrald,dc=ru`. В данном случае вид части обусловлен тем, что домен `astrald.ru`. Если он будет, например `astrald.example.domain.ru`, то вид изменится: `dc=astrald,dc=example,dc=domain,dc=ru`. +
+* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=domain,dc=ru`. В данном случае домен `domain.ru`. Если он будет, например `domain.example.ru`, то вид изменится: `dc=domain,dc=example,dc=ru`. +
 Эта настройка указывается в опциях в поле `BaseDN`.
-* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Как уже говорилось ранее, параметр должен быть строчным, допускется использовать *только* следующие варианты:
+* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Параметр должен быть строчным, допускется использовать *только* следующие варианты:
 +
  user01
- user01@astrald.ru
- astrald.ru\user01
+ user01@domain.ru
+ domain.ru\user01
 +
-Вариант `astrald\user01` недопустим, т.к. просто с `dc=astrald` контроллер не ответит.
+Вариант `domain\user01` недопустим, т.к. просто с `dc=domain` контроллер не ответит.
 +
 * Если мы каким-то образом пытаемся оперировать с пользователем, то обязательно указывать часть `cn=users,cn=accounts` и `BaseDN`. В противном случае контроллер не находит его.
 ****
@@ -158,7 +161,7 @@ include::partial$excerpts.adoc[tags=pretty]
 
 . Выполните команду:
 +
- $ sudo nano /usr/share/ca-certificates/astrald.crt
+ $ sudo nano /usr/share/ca-certificates/domain.crt
 +
 . Скопируйте сертификат удостоверяющего центра домена в полученный файл и сохраните его.
 . Выполните команду:
@@ -174,8 +177,8 @@ include::partial$excerpts.adoc[tags=pretty]
 +
  $ sudo nano /etc/hosts
 +
-Добавьте в файл строку `172.16.18.236 dc1.astrald.ru astrald.ru`.
+Добавьте в файл строку `172.16.18.236 dc1.domain.ru domain.ru`.
 +
-. В настройках расширения адрес сервера укажите в виде: `dc1.astrald.ru`. При указании IP работать не будет. Порт `636` указывать необязательно.
+. В настройках расширения адрес сервера укажите в виде: `dc1.domain.ru`. При указании IP авторизация работать не будет. Порт `636` указывать необязательно.
 . На машине с клиентскими компонентами нужно создать аналогичный сертификат и добавить его в доверенные.
 . После выполнения описанных настроек авторизация должна выполняться успешно без введения в домен машин с сервером {dv} и клиентскими приложениями.
