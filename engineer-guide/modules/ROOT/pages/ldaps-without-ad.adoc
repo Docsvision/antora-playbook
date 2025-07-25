@@ -22,7 +22,7 @@
             "LDAP": {
             "Name": "LDAP", <.>
             "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user02@example.com</UserName><Password>P@ssword</Password></Credential></LdapConnectorOptions>", <.>
+            "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
             "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
             }
           }
@@ -79,7 +79,7 @@ ALD Pro является альтернативной службой катал�
       "ALDPro": {
 		"Name": "ALDPro", <.>
 		"TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-		"Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user01@domain.ru</UserName><Password>P@ssword</Password></Credential></LdapConnectorOptions>", <.>
+		"Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
 		"Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
 		}
 	},
@@ -105,23 +105,23 @@ include::partial$excerpts.adoc[tags=pretty]
 <?xml version="1.0" encoding="utf-16"?>
 <LdapConnectorOptions>
 	<LdapServerAddresses> <.>
-		<string>172.14.16.175</string>
+		<string>XXX.XXX.XXX.XXX</string>
 	</LdapServerAddresses>
 	<Port>389</Port> <.>
     <EnableLDAPS>true</EnableLDAPS> <.>
 	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
-	<BaseDN>dc=domain,dc=ru</BaseDN> <.>
+	<BaseDN>dc=example,dc=com</BaseDN> <.>
 	<Credential>
-		<UserName>admin@domain.ru</UserName> <.>
+		<UserName>admin@example.com</UserName> <.>
 		<Password>Password</Password> <.>
 	</Credential>
 </LdapConnectorOptions>
 ----
-<.> `LdapServerAddresses` -- адреса серверов LDAP.
+<.> `LdapServerAddresses` -- IP-адреса серверов LDAP (`XXX.XXX.XXX.XXX`).
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
 <.> `FullyQualifiedDnsHostName` -- указывать ли полное имя домена в формате `user@example.com` учётной записи после `@`.
-<.> `BaseDN` -- обязательная настройка, корневая точка LDAP-дерева, с которой начинаются поисковые запросы. Где: `dc=domain` -- доменный компонент, `dc=ru` -- верхний уровень домена.
+<.> `BaseDN` -- обязательная настройка, корневая точка LDAP-дерева, с которой начинаются поисковые запросы. Где: `dc=example` -- доменный компонент, `dc=com` -- верхний уровень домена.
 <.> `UserName` -- имя пользователя.
 <.> `Password` -- пароль.
 
@@ -140,15 +140,15 @@ include::partial$excerpts.adoc[tags=pretty]
 ** *docsvision_aggregation_users*
 ** *docsvision_management_console_administrators*
 +
-* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=domain,dc=ru`. В данном случае домен `domain.ru`. Если он будет, например `domain.example.ru`, то вид изменится: `dc=domain,dc=example,dc=ru`. +
+* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=example,dc=com`. В данном случае домен `example.com`. Если он будет, например `domain.example.com`, то вид изменится: `dc=domain,dc=example,dc=com`. +
 Эта настройка указывается в опциях в поле `BaseDN`.
-* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Параметр должен быть строчным, допускется использовать *только* следующие варианты:
+* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Параметр должен быть строчным, допускается использовать *только* следующие варианты:
 +
- user01
- user01@domain.ru
- domain.ru\user01
+ user
+ user@example.com
+ example.com\user
 +
-Вариант `domain\user01` недопустим, т.к. просто с `dc=domain` контроллер не ответит.
+Вариант `example\user` недопустим, т.к. просто с `dc=example` контроллер не ответит.
 ****
 
 [#additional-settings]
@@ -158,7 +158,7 @@ include::partial$excerpts.adoc[tags=pretty]
 
 . Выполните команду:
 +
- $ sudo nano /usr/share/ca-certificates/domain.crt
+ $ sudo nano /usr/share/ca-certificates/example.crt
 +
 . Скопируйте сертификат удостоверяющего центра домена в полученный файл и сохраните его.
 . Выполните команду:
@@ -166,7 +166,7 @@ include::partial$excerpts.adoc[tags=pretty]
  $ sudo dpkg-reconfigure ca-certificates
 +
 . В диалоговом окне конфигурации сертификатов выберите "Да", чтобы доверять новым сертификатам.
-. В следующем окне найдите строчку "astrald", выберите её и примените выбор.
+. В следующем окне найдите строчку "example", выберите её и примените выбор.
 +
 На экран будет выведено сообщение об успешном добавлении нового сертификата.
 +
@@ -174,9 +174,9 @@ include::partial$excerpts.adoc[tags=pretty]
 +
  $ sudo nano /etc/hosts
 +
-Добавьте в файл строку `172.16.18.236 dc1.domain.ru domain.ru`.
+Добавьте в файл строку `XXX.XXX.XXX.XXX dc1.example.com example.com`, где `XXX.XXX.XXX.XXX` -- IP.
 +
-. В настройках расширения адрес сервера укажите в виде: `dc1.domain.ru`. При указании IP авторизация работать не будет. Порт `636` указывать необязательно.
+. В настройках расширения адрес сервера укажите в виде: `dc1.example.com`. При указании IP авторизация работать не будет. Порт `636` указывать необязательно.
 . На машине с клиентскими компонентами нужно создать аналогичный сертификат и добавить его в доверенные.
 . После выполнения описанных настроек авторизация должна выполняться успешно без введения в домен машин с сервером {dv} и клиентскими приложениями.
 
