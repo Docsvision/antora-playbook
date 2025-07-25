@@ -42,7 +42,7 @@ sudo nano /etc/yum.repos.d/docsvision.repo
 ----
 sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
 echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
-echo "deb https://packages.docsvision.com/linux/6.2/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "deb https://packages.docsvision.com/linux/6.2/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee -a /etc/apt/sources.list.d/docsvision.list > /dev/null
 sudo apt-get update
 ----
 
