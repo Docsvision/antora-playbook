@@ -127,6 +127,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 [tabs]
 ====
 ОС Windows::
++
 [source,subs=attributes+]
 ----
 "C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install file://%%path-to-ingest-attachment-{es-v}.zip%% <.>
@@ -134,6 +135,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 <.> `%%path-to-ingest-attachment-{es-v}.zip%%` необходимо заменить на путь загрузки компонента.
 
 ОС Linux::
++
 ----
 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch "file://$(realpath ingest-attachment-7.14.0.zip)" <.>
 ----
