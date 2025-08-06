@@ -1,0 +1,58 @@
+= Удаленная отладка
+
+К серверу {dv} на Linux можно подключиться с машины Windows из VisualStudio и отлаживать код удаленно. Для этого нужно соблюсти ряд условий:
+
+. Задайте пароль для пользователя `root` на серверу {dv} (еслпи не был задан ранее):
++
+ $ sudo passwd root
++
+. Разрешите подключение для `root`. Откройте файл `sshd_config` в текстовом редакторе, например, nano:
++
+ $ sudo nano /etc/ssh/sshd_config
++
+Отредактируйте строку, раскомментируйте её и задайте значение `yes`:
++
+ $ PermitRootLogin yes
++
+. Убедитесь, что настройки применены успешно, запустив на Windows командную строку от имени администратора, вместо имени машины можно указать IP.:
++
+ $ ssh root@machinename.digdes.com
++
+. Желательно установить на сервер отладочные сборки с `pdb` файлами, чтобы отлаживаться по коду.
+. Запустите VisualStudio от имени администратора, выберите menu:Меню[Debug > Attach to process] и укажите в `Connection target` адрес машины:
++
+.Указание адреса машины
+image::attach-to-process.png[Указание адреса машины]
++
+* При возникновении ошибки, о том, что не удалось создать папку `Failed to launch debug adapter. Additional information may be available in the output window. Unable to find debugger script at '/root/.vs-debugger'`, необходимо пойти на машину с сервером и создать указанную папку:
++
+ $ sudo mkdir /root/.vs-debugger
++
+. Для отдельных случаев может понадобиться отладка через GDB. Например, для отладки SigSev (Segmentation fault) в неуправляемом коде. Для этого на сервере нужно установить GDB:
++
+ $ sudo apt-get install gdb
++
+После этого в VisualStudio выберите в поле _Attach to_ значение _Native (GDB) code_:
++
+.Выберите значение "Native (GDB) code"
+image::native-gdb.png[Выберите значение "Native (GDB) code"]
+
+[#dump]
+== Сбор и анализ дампа сервиса при ошибке
+
+Если работа сервиса завершается с ошибкой (например SigSev), может понадобиться снять дамп при ошибке. Для этого нужно отредактировать конфигурационный файл сервиса. Далее приведён с *dvsupservice*:
+
+ $ sudo systemctl edit dvsupservice
+
+Запишите в конфигурационный файл следующее значение:
+
+[source]
+----
+[Service]
+Environment=DOTNET_DbgEnableMiniDump=1
+Environment=COMPlus_DbgEnableMiniDump=1
+----
+
+После этого при завершении сервиса с ошибкой будет записываться дамп. В журнале сервиса (journalctl) будет об этом сообщение с указанием пути до файла, в который был записан дамп.
+
+Далее с помощью можно проанализировать дамп (например, посмотреть стеки потоков) с помощью https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump[dotnet-dump], VisualStudio, GDB, либо других инструментов.
