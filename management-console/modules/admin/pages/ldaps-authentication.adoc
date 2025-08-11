@@ -1,0 +1,190 @@
+= Авторизация Консоли управления по протоколу LDAPS без Active Directory
+
+Данный раздел описывает работу {of-mc} по протоколам LDAP/DAPS без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настрйоке системы, см. "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
+
+[#ldaps]
+== Расширение аутентификации LDAPS
+
+[NOTE]
+====
+* Для работы расширения авторизации LDAPS не требуется дополнительных опций лицензии.
+* Авторизация с помощью LDAPS поддерживается в {dv} при установке модуля {pl} {ald-pl-req} и других модулей, входящих в обновление.
+====
+
+[source,json]
+----
+{
+  "Authentication": {
+    "Extensions": {
+      "LDAP": {
+        "Name": "LDAP", <.>
+        "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+        "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
+      }
+    }
+  },
+  "Tenants": { <.>
+  }
+}
+----
+<.> `Name` -- задаёт название расширения.
+<.> `TypeName` -- строка с именем типа, реализующего расширение, указывается так же, как в примере.
+<.> `Settings` -- строка настроек расширения, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Tenants` -- расширение регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
+
+[#ldaps-settings]
+=== Строка настроек LDAPS
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<LdapConnectorOptions>
+	<LdapServerAddresses>
+		<string>example.com</string> <.>
+	</LdapServerAddresses>
+	<Port>389</Port> <.>
+    <EnableLDAPS>true</EnableLDAPS> <.>
+	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
+	<Credential>
+		<UserName>user@example.com</UserName> <.>
+		<Password>user</Password> <.>
+	</Credential>
+</LdapConnectorOptions>
+----
+<.> `LdapServerAddresses` -- адреса серверов LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
+<.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
+<.> `UserName` -- имя пользователя.
+<.> `Password` -- пароль.
+
+[#ald]
+== Расширение аутентификации ALD Pro
+
+ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
+
+[source,json]
+----
+{
+  "Authentication": {
+	"Extensions": {
+      "ALDPro": {
+		"Name": "ALDPro", <.>
+		  "TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+		  "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+		  "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
+		}
+	},
+	"Tenants": { <.>
+		}
+	}
+  }
+}
+----
+<.> `Name` -- задаёт название расширения.
+<.> `TypeName` -- строка с именем типа, реализующего расширение.
+<.> `Settings` -- строка настроек расширения, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Tenants` -- расширение регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
+
+[#ald-settings]
+=== Строка настроек ALD Pro
+
+include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-16"?>
+<LdapConnectorOptions>
+	<LdapServerAddresses> <.>
+		<string>XXX.XXX.XXX.XXX</string>
+	</LdapServerAddresses>
+	<Port>389</Port> <.>
+    <EnableLDAPS>true</EnableLDAPS> <.>
+	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
+	<BaseDN>dc=example,dc=com</BaseDN> <.>
+	<Credential>
+		<UserName>admin@example.com</UserName> <.>
+		<Password>Password</Password> <.>
+	</Credential>
+</LdapConnectorOptions>
+----
+<.> `LdapServerAddresses` -- IP-адреса серверов LDAP (`XXX.XXX.XXX.XXX`).
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
+<.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
+<.> `BaseDN` -- обязательная настройка, корневая точка LDAP-дерева, с которой начинаются поисковые запросы. Где: `dc=example` -- доменный компонент, `dc=com` -- верхний уровень домена.
+<.> `UserName` -- имя пользователя.
+<.> `Password` -- пароль.
+
+.Особенности и рекомендации при работе с ALD Pro:
+****
+* ALD Pro не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования. +
+В связи с этим была добавлена настройка сопоставления доменных групп и ролей {dv}. Также для упрощения настройки, *только для данного провайдера* были сделаны новые стандартные имена групп пользователей в нижнем регистре. Т.е. группы пользователей с именами, указанными ниже, будут сопоставляться со штатными ролями {dv} без дополнительных настроек *только в рамках данного коннектора*:
++
+** *docsvision_users*
+** *docsvision_power_users*
+** *docsvision_administrators*
+** *docsvision_security_administrators*
+** *docsvision_archive_operators*
+** *docsvision_search_query_creators*
+** *docsvision_workflow_process_creators*
+** *docsvision_aggregation_users*
+** *docsvision_management_console_administrators*
++
+* Особенности доступа. Всегда обязательно нужно указывать верные `DistinguishedName`. Это часть `dc=example,dc=com`. В данном случае домен `example.com`. Если он будет, например `domain.example.com`, то вид изменится: `dc=domain,dc=example,dc=com`. +
+Эта настройка указывается в опциях в поле `BaseDN`.
+* Имя пользователя. Расширение работает с так называемым `uid` пользователя. Параметр должен быть строчным, допускается использовать *только* следующие варианты:
++
+ user
+ user@example.com
+ example.com\user
++
+Вариант `example\user` недопустим, т.к. просто с `dc=example` контроллер не ответит.
+****
+
+[#additional-settings]
+== Дополнительные настройки
+
+Если планируется авторизоваться под учётной записью из каталога ALD Pro по протоколу LDAP, данный раздел можно проигнорировать. При использовании протокола LDAPS выполненные настройки будут автоматически приведены в действие только если машины с сервером {dv} и клиентскими приложениями будут введены в домен ALD Pro, указанный в настройках. Иначе потребуются дополнительные настройки, описанные ниже.
+
+. Выполните команду:
++
+ $ sudo nano /usr/share/ca-certificates/example.crt
++
+. Скопируйте сертификат удостоверяющего центра домена в полученный файл и сохраните его.
+. Выполните команду:
++
+ $ sudo dpkg-reconfigure ca-certificates
++
+. В диалоговом окне конфигурации сертификатов выберите "Да", чтобы доверять новым сертификатам.
+. В следующем окне найдите строчку "example", выберите её и примените выбор.
++
+На экран будет выведено сообщение об успешном добавлении нового сертификата.
++
+. Выполните команду
++
+ $ sudo nano /etc/hosts
++
+Добавьте в файл строку `XXX.XXX.XXX.XXX dc1.example.com example.com`, где `XXX.XXX.XXX.XXX` -- IP.
++
+. В настройках расширения адрес сервера укажите в виде: `dc1.example.com`. При указании IP авторизация работать не будет. Порт `636` указывать необязательно.
+. На машине с клиентскими компонентами нужно создать аналогичный сертификат и добавить его в доверенные.
+. После выполнения описанных настроек авторизация должна выполняться успешно без введения в домен машин с сервером {dv} и клиентскими приложениями.
+
+[#limitations]
+== Ограничения при работе с расширениями LDAPS/ALD Pro
+
+. При добавлении сотрудника с учетной записью из LDAP/LDAPS каталога может появиться сообщение о невозможности вычисления SID. Это допустимо, и для продолжения необходимо подтвердить сохранение сотрудника.
++
+.Подтвердите сохранение сотрудника
+image::CU25.3@engineer::sid.png[Подтвердите сохранение сотрудника]
++
+. Если *не* настроены доверительные отношения между Microsoft Active Directory и ALD Pro (или другой службой каталогов) на машине, где запускается {wincl}, назначение прав будет доступно в ограниченном варианте -- только выбор пользователей из справочника сотрудников:
++
+.Выбор учётной записи
+image::CU25.3@engineer::selection.png[Выбор учётной записи]
++
+. На данный момент поддержан сценарий изначальной настройки с альтернативной службой каталогов без перехода с Active Directory
