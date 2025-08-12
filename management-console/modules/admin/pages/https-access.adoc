@@ -1,0 +1,58 @@
+= Доступ к Консоли управления по HTTPS
+
+При необходимости можно настроить доступ к *{wacs-new}* по протоколу HTTPS, для этого потребуется выполнить настройки, описанные далее.
+
+include::platform:console:https-access.adoc[tags=certificate]
++
+ $ sudo nano /usr/lib/docsvision/managementconsole/appsettings.json
++
+* Фрагмент конфигурационного файла с настройкой доступа по HTTPS:
++
+[source,json]
+----
+{
+  "Kestrel": {
+    "Endpoints": {
+      "Https": {
+        "Url": "https://*:5100", <.>
+        "Certificate": {
+          "Path": "/path/to/your.crt", <.>
+          "KeyPath": "/path/to/your.key" <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> URL для подключения по протоколу HTTPS.
+<.> Локальное расположение сертификата, созданного <<before,ранее>>.
+<.> Локальное расположение ключа шифрования для сертификата, созданного <<before,ранее>>.
++
+* Фрагмент конфигурационного файла с одновременной настройкой доступа по HTTP и HTTPS:
++
+[source,json]
+----
+{
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://*:5100" <.>
+      },
+      "Https": {
+        "Url": "https://*:5101", <.>
+        "Certificate": {
+			  "Path": "/usr/lib/docsvision/managementconsole/localhost.crt",  <.>
+			  "KeyPath": "/usr/lib/docsvision/managementconsole/localhost.key"  <.>
+		    }
+      }
+    }
+  }
+}
+----
+<.> URL для подключения по протоколу HTTP.
+<.> URL для подключения по протоколу HTTPS.
+<.> Локальное расположение сертификата, созданного <<before,ранее>>.
+<.> Локальное расположение ключа шифрования для сертификата, созданного <<before,ранее>>.
++
+. Перезапустите службу *{wacs-new}*.
+. Проверьте подключение. Если настройки выполнены корректно, {mc} должна работать без ошибок.
