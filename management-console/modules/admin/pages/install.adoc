@@ -55,46 +55,8 @@ sudo systemctl start dvconsole
 include::install-linux:ROOT:partial$restart-and-db.adoc[]
 --
 
-[#sett-serv]
-== Установка {of-sett-serv}
-
-.Чтобы установить {sett-serv}:
-:of: {of-sett-serv}
-:file: appsettings
-:wt: settingsservice
-include::dev@platform:admin:partial$install.adoc[]
-+
-Основные настройки, которые нужно сделать:
-+
-[source,json]
-----
-{
-  "ApiKey": "SettingsServiceApiKey", <.>
-  "StorageOptions": {
-    "Providers": [
-      {
-        "Alias": "SqlStorage",
-        "Default": true,
-        "StorageType": "DB-type", <.>
-        "StorageOptions": "CONNECTION-STRING", <.>
-        "ProviderType": "Hierarchy"
-      }
-    ]
-  }
-}
-----
-<.> Ключ доступа к Сервису настроек -- "пароль", который также необходимо указать в конфигурационном файле {of-mc}.
-<.> Тип БД: `MsSql` или `PgSql`.
-<.> Строка подключения к БД. См. подробнее <<conn-string,ниже>>.
-+
-. Запустите службу сервиса:
-+
-[source,bash]
-----
-sudo systemctl start dvsettings
-----
-+
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
+[#settings-service]
+include::settings-service:admin:install.adoc[leveloffset=+1]
 
 [#external-api]
 == Установка сервиса внешнего API
@@ -183,7 +145,7 @@ endif::sm-page[]
 //end::mssql[]
 
 //tag::pgsql[]
-Для {pgsql}: `host=Адрес-сервера-баз данных;Port=SQL-порт;database=Название-БД-{of-what};Username=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
+Для {pgsql}/{pgl}: `host=Адрес-сервера-баз данных;Port=SQL-порт;database=Название-БД-{of-what};Username=Имя-пользователя-БД;Password=Пароль-пользователя-БД`.
 
 * `Адрес-сервера-баз данных` -- адрес сервера SQL для подключения к БД.
 * `SQL-порт` -- порт SQL-сервера.
@@ -292,7 +254,7 @@ WARNING: Без выполнения данных настроек аутент�
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
 
-include::platform:admin:config-domains.adoc[tags=chalto]
+include::dev@platform:admin:config-domains.adoc[tags=chalto]
 
 [#register-services]
 == Регистрация модулей системы
