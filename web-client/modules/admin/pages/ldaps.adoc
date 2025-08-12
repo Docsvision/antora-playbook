@@ -1,1 +1,7 @@
-include::CU25.3@platform:admin:ldaps-ad.adoc[]
+= Настройка аутентификации в Active Directory по протоколу LDAPS
+
+При явной аутентификации пользователя в {wc}е, со вводом логина и пароля по умолчанию используется протокол LDAP для подключения к Active Directory и проверки указанных учётных данных. При необходимости можно использовать протокол LDAPS, если его поддержка включена на стороне сервера Active Directory.footnote:[Активация протокола LDAPS на стороне сервера Active Directory выходит за рамки документации {dv}.]
+
+NOTE: Для использования LDAPS с Active Directory требуется модуль {pl} версии {cu253-pl-req} и модуль {wc} версии {cu253-wc-req}.
+
+include::CU25.3@platform:admin:ldaps-ad.adoc[tags=settings]
