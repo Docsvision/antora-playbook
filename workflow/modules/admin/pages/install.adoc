@@ -125,6 +125,13 @@ include::6.1@platform:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `APIKEY` -- Используется для аутентификации в API {wf}. Можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 --
++
+. Запустите службу модуля:
++
+[source,bash]
+----
+sudo systemctl start dvworkflow
+----
 // end::linux[]
 
 [#windows]
@@ -138,6 +145,7 @@ include::6.1@platform:ROOT:partial$excerpts.adoc[tags=system-accounts]
 [#account]
 == Создание учетной записи для сервиса Workflow
 
+// tag::requirements-account[]
 Администратор должен создать учетную запись для СУБП, службы *{wfs-new}*.
 
 .Создайте доменную учетную запись, и настройте её права:
@@ -155,6 +163,7 @@ include::6.1@platform:ROOT:partial$excerpts.adoc[tags=system-accounts]
 . Предоставьте созданной учетной записи *полные* права по дискреционной модели безопасности на все папки и справочники системы {dv}.
 . Для работы с карточками приложения _{dm}_, включите учётную запись в группу *{dv-sys-wf-dir}* в Справочнике сотрудников.
 . Назначьте учетной записи персональную лицензию в {dv} (см. документацию модуля "xref:6.1@platform:console:manage-licenses.adoc#personalLicense[{pl}]".
+// end::requirements-account[]
 
 [#server]
 == Установка серверной части модуля
