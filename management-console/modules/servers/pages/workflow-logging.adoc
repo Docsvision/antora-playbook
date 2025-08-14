@@ -1,0 +1,31 @@
+= Группа настроек "Журналирование"
+
+Журнал сообщений сервиса Workflow предназначен для просмотра данных по обработке функций сервисом.
+
+:module: {wf}
+:parameter: menu:WorkflowServer[LogFile]
+Файл журнала::
+Путь к файлу журнала, в котором регистрируются операции, выполняемые сервисом {wfs-new}footnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+].
+
+:module: {wf}
+:parameter: menu:WorkflowServer[TraceLevel]
+Уровень журналирования::
+Глубина фиксации процессов в журнале сервиса {wfs-new}footnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+].
++
+.Варианты:
+* Отключено
+* Ошибки
+* Предупреждения
+* Информация
+* Подробное журналирование
+
+:module: {wf}
+:parameter: menu:WorkflowServer[LogFileDateTemplate]
+Форматирование даты::
+Формат даты штампа времени в имени файла журнала. Для определения формата используйте стандартные спецификаторы (например, `D`, `d`, `F`, `g`, `s`, `u` и другие) или их комбинацииfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+].
