@@ -1,6 +1,4 @@
 // tag::linux[]
-:of: {wc}а
-:wt: webclient
 :do-what: способа первоначальной конфигурации модуля
 :init-config: yes
 :first: <<mancons,Настройки в {of-mc}>>
@@ -23,9 +21,16 @@ include::partial$mancons.adoc[]
 include::user:partial$excerpts.adoc[tags=noam]
 
 [#linux]
-== Установка на Linux
+== Установка и конфигурация в {of-mc}
 
 --
+:of: {wc}а
+:wt: webclient
+:do-what: способа первоначальной конфигурации модуля
+:init-config: yes
+:first: <<mancons,Настройки в {of-mc}>>
+:second: <<linux,Настройки в конфигурационном файле>>
+:no-config:
 include::new-admin-console@platform:admin:partial$install.adoc[]
 --
 
@@ -93,13 +98,15 @@ sudo systemctl start dvwebclient
 --
 
 [#config]
-== Настройки в конфигурационном файле
+== Установка и конфигурация без {of-mc}
 
 Возможность указать настройки модуля в конфигурационном оставлена для обратной совместимости, первоначальная конфигурация должна выполняться в {of-mc}, существующие настройки также рекомендуется перенести в {mc}.
 
+:of: {wc}а
+:wt: webclient
 include::new-admin-console@platform:admin:partial$install.adoc[]
 +
-. Основные настройки, которые нужно сделать:
+. Убедитесь, что в конфигурационном файле {wc}а по адресу `{webconfig}` указаны описанные ниже настройки. Файл может быть изменён в любом текстовом редакторе, например `nano` (потребуются права суперпользователя). Настройки в конфигурационном файле:
 +
 [source,json]
 ----
@@ -159,7 +166,9 @@ sudo systemctl start dvwebclient
 ----
 
 [#windows]
-== Установка серверного расширения на Windows
+=== Установка серверного расширения на Windows
+
+include::new-admin-console@install-linux::partial$limitation.adoc[]
 
 Пользователь, выполняющий установку, должен обладать правами администратора.
 
@@ -205,7 +214,7 @@ image::install-server-confirm.png[Установка Расширения]
 . Обновите БД через {cns}, подробнее процесс описан в документации модуля {pl}, раздел "xref:6.1@platform:console:db-update.adoc[]".
 
 [#kvr-pu]
-=== Установка программы {kvr}
+== Установка программы {kvr}
 
 [NOTE]
 ====
