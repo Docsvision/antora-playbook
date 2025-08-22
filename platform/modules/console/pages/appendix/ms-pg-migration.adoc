@@ -112,6 +112,10 @@ sudo apt-get install docsvision-сlonedb
 [#prepare]
 == Подготовка исходной БД
 
+. Проверьте собственные поля секций и переименуйте их в соответствие с правилами, описанными в разделе xref:6.1@backoffice:desdirs:layouts/edit-extended-metadata.adoc#add-change-delete[Добавить, изменить или удалить поле].
++
+include::6.1@backoffice:desdirs:layouts/edit-extended-metadata.adoc[tags=length-cyr]
++
 . Если в решении содержатся дополнительные SQL-скрипты, процедуры, представления и работы (jobs), необходимо реализовать их альтернативное поведение для {pg}.
 . xref:db-backup.adoc[Создайте резервную копию] рабочей базы.
 . Оцените размер таблицы `dvsys_binaries`.
