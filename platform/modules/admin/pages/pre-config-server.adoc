@@ -5,6 +5,7 @@
 //
 // include::partial$preconfigure-server.adoc[]
 // partial до сих пор существует
+:os1: Astra Linux
 
 = Предварительная настройка сервера Linux
 
@@ -21,7 +22,7 @@
 [source]
 ----
 sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg lsb-release
+sudo apt-get install ca-certificates curl
 ----
 +
 В {os2} создайте файл для указания адреса репозитория:
@@ -35,7 +36,7 @@ sudo nano /etc/yum.repos.d/docsvision.repo
 . Подключите официальный репозиторий {dv} в качестве источника:
 +
 [tabs]
-====
+=====
 {os1}::
 +
 [source,bash]
@@ -64,7 +65,24 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.docsvision.com/linux/6.2/redos/docsvision.asc
 ----
+
+{os3}::
++
+[sorce,bash]
+----
+curl -fsSL https://packages.docsvision.com/linux/docsvision.asc | sudo gpg --no-default-keyring --keyring /usr/lib/alt-gpgkeys/pubring.gpg --import
+printf 'simple-key "docsvision" {\n\tFingerprint "DFAC99D298A0EC4E98B57238BCF7D31F16E999D6";\n\tName "DocsVision <help@docsvision.com>";\n}\n' | sudo tee /etc/apt/vendors.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.1/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.2/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee -a /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
++
+[WARNING]
 ====
+При обновлении пакета `alt-gpgkeys` ключ подписи репозитория будет удалён. В этом случае его нужно добавить повторно, либо поставить этот пакет на https://www.altlinux.org/Hold[Hold].
+====
+
+=====
 // end::repo[]
 +
 . Подключите репозиторий дополнительного ПО ({asp-bundle}) предпочтительным способом. Для {os2} перейдите сразу к <<kerb,пункту 4>>.
