@@ -22,7 +22,7 @@
 # sudo nano /etc/apt/mirror.list
 
 deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
-deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/linux/6.1/astra 1.7_x86-64 main
 ----
 +
 .Пример содержимого файла:
@@ -45,7 +45,7 @@ set _tilde 0
 ############# end config ##############
 
 deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
-deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/linux/6.1/astra 1.7_x86-64 main
 
 clean https://packages.docsvision.com/astra
 ----
@@ -66,7 +66,7 @@ clean https://packages.docsvision.com/astra
 +
 [source,bash]
 ----
-echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/gpg https://{}/gpg \;' | sudo -u apt-mirror tee -a /var/spool/apt-mirror/var/postmirror.sh > /dev/null
+echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/docsvision.asc https://{}/docsvision.asc \;' | sudo -u apt-mirror tee -a /var/spool/apt-mirror/var/postmirror.sh > /dev/null
 ----
 +
 . После настройки и создания каталога, создание зеркала репозиториев можно выполнить командой:
