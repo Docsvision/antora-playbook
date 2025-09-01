@@ -109,7 +109,7 @@ image::character-limit-enum.png[Ограничение на количество
 [source,sql]
 ----
  select cast(XMLSchema as XML)
- from dvsys_carddefs_extensions where XMLSchema LIKE '%Type="enum";'; <.>
+ from dvsys_carddefs_extensions where XMLSchema LIKE '%Type="enum"%' <.>
 ----
 <.> Данный запрос вернёт XML схемы, расширяющие метаданные карточек, с полями типа Enum. Каждую схему нужно просмотреть на наличие значений перечислений, которые могут вызвать ошибку при обновлении.
 +
