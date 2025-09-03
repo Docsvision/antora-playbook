@@ -2,4 +2,33 @@
 
 {wc} поддерживает подключение к серверу {dv} под системной учётной записью из каталога LDAP\LDAPS, xref:install-server.adoc[указанной] в параметрах `SystemUserAccount` и `SystemUserPassword` конфигурационного файла.
 
-Настройка каталогов LDAP\LDAPS описана в разделе "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]".
+Настройка каталогов LDAP\LDAPS описана в разделе "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]". В конфигурационном файле {wc}а потребуется указать следующие параметры:
+
+[source,json]
+----
+{
+  "SystemUserAccount": "account@domain.com", <.>
+  "SystemUserPassword": "password", <.>
+  "Docsvision": {
+    "WebClient": {
+      "Server": {
+        "SessionManagerConnection": {
+          "ConnectionAddress": "http://dvserver.domain.com:5000", <.>
+          "BaseName": "alias" <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> Учётная запись из каталога LDAP\LDAPS для подключения к серверу {dv}.
+<.> Пароль УЗ из каталога LDAP\LDAPS для подключения к серверу {dv}.
+<.> Адрес сервера {dv}.
+<.> Псевдоним БД, от имени которой будут запускаться программы {pu} и {kvr}.
+
+Для работы укажите УЗ из каталога LDAP\LDAPS на машине с {kvr} и {pu}:
+
+ setx DV_SystemUserAccount account@domain.com
+ setx DV_SystemUserPassword password
+
+Функциональность доступна в {wc} версии {cu253-wc-req} при условии установки версий модулей, входящих в накопительное обновление 25.3.
