@@ -53,6 +53,76 @@
 
 Установка Сервиса внешнего API не требуется в версиях {of-mc} 6.2 и выше.
 
+[#manconsole]
+== Установка {of-mc}
+
+. Следующей командой установите {mc}:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-managementconsole
+
+{os2}::
++
+ $ sudo dnf install docsvision-managementconsole
+====
++
+. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#console[Установка {of-mc}]".
++
+. Запустите службу:
++
+ $ sudo systemctl start dvconsole
++
+. Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
++
+NOTE: При авторизации укажите имя в формате `user@domain.com`, вариант `domain\user` не работает.
+
+[#worker]
+== Установка Службы {ws}
+
+. Установите модуль Служба {ws} следующей командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-workerservice
+
+{os2}::
++
+ $ sudo dnf install docsvision-workerservice
+====
++
+. Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _Служба {ws}_, раздел "xref:dvworkerservice.adoc[]".
++
+. Запустите службу модуля:
++
+ $ sudo systemctl start dvworkerservice
+
+[#workflow]
+== Установка СУБП
+
+. Установите модуль _{wf}_ следующей командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-workflow
+
+{os2}::
++
+ $ sudo dnf install docsvision-workflow
+====
++
+. Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:dvworkflow.adoc[]".
++
+. Запустите службу модуля:
++
+ $ sudo systemctl start dvworkflow
+
 [#ws-ext]
 == Установка расширения Службы {ws} для {of-mc}
 
@@ -148,72 +218,27 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
   $ sudo systemctl start docsvision-ext-workflow-mc
 
-[#manconsole]
-== Установка {of-mc}
+[#fs-ext]
+== Установка расширения {of-fs} для {of-mc}
 
-. Следующей командой установите {mc}:
+Расширение {of-fs} для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки {of-fs} из {of-mc}.
+
+:what-mod: {fs}
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+. Установите серверные компоненты Расширения {of-fs} для {of-mc}:
 +
 [tabs]
 ====
 {os1}::
 +
- $ sudo apt-get install docsvision-managementconsole
+ $ sudo apt-get install docsvision-ext-fileservice-mc
 
 {os2}::
 +
- $ sudo dnf install docsvision-managementconsole
+ $ sudo dnf install docsvision-ext-fileservice-mc
 ====
 +
-. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#console[Установка {of-mc}]".
+. Запустите расширение:
 +
-. Запустите службу:
-+
- $ sudo systemctl start dvconsole
-+
-. Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
-+
-NOTE: При авторизации укажите имя в формате `user@domain.com`, вариант `domain\user` не работает.
-
-[#worker]
-== Установка Службы {ws}
-
-. Установите модуль Служба {ws} следующей командой:
-+
-[tabs]
-====
-{os1}::
-+
- $ sudo apt-get install docsvision-workerservice
-
-{os2}::
-+
- $ sudo dnf install docsvision-workerservice
-====
-+
-. Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _Служба {ws}_, раздел "xref:dvworkerservice.adoc[]".
-+
-. Запустите службу модуля:
-+
- $ sudo systemctl start dvworkerservice
-
-[#workflow]
-== Установка СУБП
-
-. Установите модуль _{wf}_ следующей командой:
-+
-[tabs]
-====
-{os1}::
-+
- $ sudo apt-get install docsvision-workflow
-
-{os2}::
-+
- $ sudo dnf install docsvision-workflow
-====
-+
-. Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:dvworkflow.adoc[]".
-+
-. Запустите службу модуля:
-+
- $ sudo systemctl start dvworkflow
+ $ sudo systemctl start docsvision-ext-fileservice-mc
