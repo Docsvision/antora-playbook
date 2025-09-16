@@ -8,7 +8,7 @@
 [NOTE]
 ====
 * Для работы коннектора авторизации LDAPS не требуется дополнительных опций лицензии.
-* Авторизация с помощью LDAPS поддерживается в {dv} при установке модулей, входящих в накопительное обновление 25.3.
+* Авторизация с помощью LDAPS поддерживается в {of-mc} версии {cu253-mc-req}.
 ====
 
 [source,json]
@@ -68,10 +68,10 @@ ALD Pro является альтернативной службой катал�
   "Authentication": {
     "Connectors": [
       {
-		    "Name": "ALDPro", <.>
-		    "Type": "DocsVision.Auth.Extensions.ALDProConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
-		    "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
-		    "Id": "{DCF3EDA3-2F84-4FD1-8E1D-A06B762AE822}" <.>
+        "Name": "ALDPro", <.>
+        "Type": "DocsVision.Auth.Extensions.ALDProConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
+        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+        "Id": "{DCF3EDA3-2F84-4FD1-8E1D-A06B762AE822}" <.>
 		  }
     ]
   }
