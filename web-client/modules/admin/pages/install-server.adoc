@@ -64,7 +64,6 @@ include::6.1@platform:admin:partial$install.adoc[]
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
 <.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
-// end::linux[]
 +
 . Запустите службу модуля:
 +
@@ -72,6 +71,9 @@ include::6.1@platform:admin:partial$install.adoc[]
 ----
 sudo systemctl start dvwebclient
 ----
++
+Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
+// end::linux[]
 
 [#windows]
 == Установка серверного расширения на Windows
