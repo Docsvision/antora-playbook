@@ -17,11 +17,11 @@ include::6.1@platform:admin:partial$install.adoc[]
 ----
 {
   "Urls": "http://+:5700",
-//   "Logging": { <.>
-//     "LogLevel": {
-//       "Default": "Warning"
-//     }
-//   },
+  "Logging": {
+    "LogLevel": { <.>
+      "Default": "Warning"
+    }
+  },
   "AllowedHosts": "*",
   "SolutionManager": {
     "SettingsService": {
@@ -56,7 +56,7 @@ include::6.1@platform:admin:partial$install.adoc[]
   }
 }
 ----
-<.> `Logging` -- уровень ведения журнала, настройка упразднена, используйте журналирование с помощью Nlog.
+<.> `LogLevel` -- уровень ведения журнала, настройка упразднена, используйте журналирование с помощью Nlog.
 <.> `ConnectionString` -- адрес {of-sett-serv}.
 <.> `ApiKey` -- ключ доступа к Сервису настроек, указанный в xref:6.1@mgmtconsole:admin:install.adoc#sett-serv[конфигурационном файле] {of-sett-serv}.
 <.> `ConnectionString` -- строка подключения базы данных МР, cм. подробнее <<conn-string,ниже>>.
