@@ -1,0 +1,29 @@
+= IUserRolesProviderExtension -- интерфейс
+
+Предоставляет методы для получения пользовательских ролей
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IUserRolesProviderExtension
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetRoles(IPrincipal)`
+a|Получает роли пользователя
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `xref:Platform-StorageServer:UserRoles_EN.adoc[UserRoles]` -- группы пользователей сервера {dv}
+
+|===

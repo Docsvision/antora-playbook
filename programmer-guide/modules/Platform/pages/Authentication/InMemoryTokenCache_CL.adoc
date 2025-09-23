@@ -1,0 +1,38 @@
+= InMemoryTokenCache -- класс
+
+Кэш токена в памяти
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class InMemoryTokenCache : ITokenCache
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetToken(Guid, string)`
+a|Получает токен
+
+.Параметры:
+* `providerInstanceId` -- идентификатор экземпляра провайдера
+* `tokenId` -- идентификатор токена
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- токен расширения аутентификации
+
+|`StoreToken(Guid, string, string)`
+a|Помещает токен в хранилище
+
+.Параметры:
+* `providerInstanceId` -- идентификатор экземпляра провайдера
+* `tokenId` -- идентификатор токена
+* `token` -- токен
+
+|===

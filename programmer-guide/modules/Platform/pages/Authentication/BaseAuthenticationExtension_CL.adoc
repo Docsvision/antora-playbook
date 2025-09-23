@@ -1,0 +1,68 @@
+= BaseAuthenticationExtension -- класс
+
+Базовый класс для расширений аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class BaseAuthenticationExtension : IAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`InstanceId`
+|Идентификатор расширения аутентификации
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+|`Name`
+|Наименование расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Type`
+|Тип расширения аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|`CommonSettings`
+|Общие глобальные настройки аутентификации
+
+*Тип*: `xref:Platform:Authentication/Settings/AuthenticationSettings_CL.adoc[AuthenticationSettings]`
+
+|`ExtensionSettings`
+|Специфичные настройки расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`LocalSettings`
+|Специфичные локальные настройки
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Initialize(Guid, string, string, string)`
+a|Инициализирует расширение аутентификации
+
+.Параметры:
+* `instanceId` -- идентификатор конкретного экземпляра расширения
+* `commonSettings` -- общие глобальные настройки аутентификации
+* `extensionSettings` -- специфичные настройки расширения
+* `localSettings` -- специфичные локальные настройки
+
+|===

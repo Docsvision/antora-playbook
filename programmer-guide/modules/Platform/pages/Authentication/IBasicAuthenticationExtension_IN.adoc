@@ -1,0 +1,54 @@
+= IBasicAuthenticationExtension -- интерфейс
+
+Предоставляет методы для провайдеров базовой аутентификации по логину и паролю
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IBasicAuthenticationExtension
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Login(string, string)`
+a|Выполняет логин пользователя
+
+.Параметры:
+* `accountName` -- имя учётной записи
+* `password` -- пароль учётной записи
+
+*Возвращаемое значение*: `IPrincipal` -- аутентифицированный пользователь
+
+|`UserExists(string)`
+a|Проверяет существование УЗ
+
+.Параметры:
+* `accountName` -- имя учётной записи
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]` -- существует ли пользователь
+
+|`TryGetSID(string)`
+a|Получает идентификатор безопасности пользователя (SID) из LDAP
+
+.Параметры:
+* `accountName` -- имя учётной записи
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- идентификатор безопасности пользователя (SID) из LDAP
+
+|`GetPrincipalName(IPrincipal)`
+a|Получает имя учетной записи
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- имя пользователя из объекта аутентификации
+
+|===

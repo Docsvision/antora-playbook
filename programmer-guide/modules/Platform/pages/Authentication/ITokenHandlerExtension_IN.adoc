@@ -1,0 +1,61 @@
+= ITokenHandlerExtension -- интерфейс
+
+Предоставляет методы для работы с токеном
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ITokenHandlerExtension
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`ValidateToken(string)`
+a|Проверяет действительность токена
+
+.Параметры:
+* `token` -- токен авторизации
+
+*Возвращаемое значение*: `IPrincipal` -- аутентифицированный пользователь
+
+|`GetPrincipalName(IPrincipal)`
+a|Получает имя учетной записи
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- группы пользователей сервера {dv}
+
+|`GetLoginHint(IPrincipal)`
+a|Получает подсказку для логина пользователя, которую можно использовать при следующем входе в систему
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- подсказка для логина пользователя
+
+|`GetPrincipalUniqueID(IPrincipal)`
+a|Получает уникальный идентификатор авторизованного пользователя
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- строковый идентификатор авторизованного пользователя
+
+|`GetPrincipalRoles(IPrincipal)`
+a|Получает роли (группы) пользователей
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `xref:Platform-StorageServer:UserRoles_EN.adoc[UserRoles]` -- группы пользователей сервера {dv}
+
+|===

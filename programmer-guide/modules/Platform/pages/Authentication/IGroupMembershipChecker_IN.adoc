@@ -1,0 +1,29 @@
+= IGroupMembershipChecker -- интерфейс
+
+Предоставляет методы для проверки наличия пользователя в группе
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IGroupMembershipChecker
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`IsInGroup(string)`
+a|Проверяет, состоит ли пользователь в группе
+
+.Параметры:
+* `groupName` -- название группы
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]` -- состоит ли пользователь в группе
+
+|===

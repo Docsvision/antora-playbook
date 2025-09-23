@@ -1,0 +1,46 @@
+= OpenIDConnectUriWithParams -- класс
+
+Адрес получения параметров OpenID Connect
+
+* *Пространство имён:* `xref:Platform:Authentication/OpenIDConnect/OpenIDConnect_NS.adoc[DocsVision.Platform.Authentication.OpenIDConnect]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OpenIDConnectUriWithParams
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Uri`
+|URL для запроса параметров
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`RequestedParams`
+|Запрашиваемые параметры
+
+*Тип*: List<KeyValuePair<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[string], http://msdn.microsoft.com/ru-ru/library/system.string.aspx[string]>> -- список параметров, состоящий из пар "ключ и значение"
+
+|===
+
+== Конструкторы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`OpenIDConnectUriWithParams(string, List<KeyValuePair<string, string>>)`
+a|Создаёт экземпляр класса `xref:Platform:Authentication/OpenIDConnect/OpenIDConnectUriWithParams_CL.adoc[OpenIDConnectUriWithParams]`.
+
+.Параметры:
+* `uri` -- URL для запроса параметров
+* `requestedParams` -- параметры запроса
+
+|===

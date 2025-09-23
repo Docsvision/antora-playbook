@@ -1,0 +1,87 @@
+= GenericLDAPBasicAuthExtension -- класс
+
+Класс для работы с LDAP-сервером для авторизации пользователей
+
+* *Пространство имён:* `xref:Platform:Authentication/LDAP/LDAP_NS.adoc[DocsVision.Platform.Authentication.LDAP]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class GenericLDAPBasicAuthExtension : BaseAuthenticationExtension, IBasicAuthenticationExtension, IUserRolesProviderExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Name`
+|Имя расширения аутентификации
+
+|`Type`
+|Тип расширения аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Initialize(Guid, string, string, string)`
+a|Инициализирует экземпляр расширения аутентификации
+
+.Параметры:
+* `instanceId` -- уникальный идентификатор экземпляра
+* `commonSettings` -- общие глобальные настройки аутентификации
+* `extensionSettings` -- специфичные настройки расширения
+* `localSettings` -- специфичные локальные настройки
+
+|`GetRoles(IPrincipal)`
+a|Получает роли пользователя
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `xref:Platform-StorageServer:UserRoles_EN.adoc[UserRoles]` -- группы пользователей сервера {dv}
+
+|`GetPrincipalName(IPrincipal)`
+a|Получает имя учетной записи
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- группы пользователей сервера {dv}
+
+|`Login(string, string)`
+a|Выполняет авторизацию пользователя через LDAP
+
+.Параметры:
+* `accountName` -- имя УЗ пользователя
+* `password` -- пароль УЗ пользователя
+
+*Возвращаемое значение*: `IPrincipal` -- аутентифицированный пользователь
+
+|`TryGetSID(string)`
+a|Получает идентификатор безопасности пользователя (SID) из LDAP
+
+.Параметры:
+* `accountName` -- имя УЗ пользователя
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- идентификатор безопасности пользователя (SID) из LDAP
+
+|`UserExists(string)`
+a|Проверяет, существует ли пользователь
+
+.Параметры:
+* `accountName` -- имя УЗ пользователя
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]` -- существует ли пользователь
+
+|===
