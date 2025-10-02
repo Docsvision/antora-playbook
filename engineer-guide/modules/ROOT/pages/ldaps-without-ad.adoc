@@ -24,7 +24,7 @@ include::partial$excerpts.adoc[tags=ldaps-conditions]
             "LDAP": {
               "Name": "LDAP", <.>
               "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential><BaseDN>dc=example,dc=com</BaseDN></LdapConnectorOptions>", <.>
+              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
               "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
             }
           }
@@ -62,7 +62,6 @@ include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
 		<UserName>user@example.com</UserName> <.>
 		<Password>user</Password> <.>
 	</Credential>
-  <BaseDN>dc=example,dc=com</BaseDN> <.>
 </LdapConnectorOptions>
 ----
 <.> `LdapServerAddresses` -- адреса серверов LDAP.
@@ -71,7 +70,6 @@ include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
 <.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
 <.> `UserName` -- имя пользователя.
 <.> `Password` -- пароль.
-<.> `BaseDN` -- опциональный параметр, необходимо указывать, если в сертификате LDAPS не указан домен в формате `*.domain.com`.
 // end::ldaps-settings[]
 
 [#ald]
