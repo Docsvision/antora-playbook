@@ -29,31 +29,7 @@ include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 <.> `Settings` -- строка настроек коннектора, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 
-[#ldaps-settings]
-=== Строка настроек LDAPS
-
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-16"?>
-<LdapConnectorOptions>
-	<LdapServerAddresses>
-		<string>example.com</string> <.>
-	</LdapServerAddresses>
-	<Port>389</Port> <.>
-    <EnableLDAPS>true</EnableLDAPS> <.>
-	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
-	<Credential>
-		<UserName>user@example.com</UserName> <.>
-		<Password>user</Password> <.>
-	</Credential>
-</LdapConnectorOptions>
-----
-<.> `LdapServerAddresses` -- адреса серверов LDAP.
-<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
-<.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
-<.> `UserName` -- имя пользователя.
-<.> `Password` -- пароль.
+include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ldaps-settings]
 
 [#ald]
 == Коннектор к ALD Pro
@@ -85,32 +61,7 @@ include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 [#ald-settings]
 === Строка настроек ALD Pro
 
-include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
-
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-16"?>
-<LdapConnectorOptions>
-	<LdapServerAddresses> <.>
-		<string>XXX.XXX.XXX.XXX</string>
-	</LdapServerAddresses>
-	<Port>389</Port> <.>
-    <EnableLDAPS>true</EnableLDAPS> <.>
-	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
-	<BaseDN>dc=example,dc=com</BaseDN> <.>
-	<Credential>
-		<UserName>admin@example.com</UserName> <.>
-		<Password>Password</Password> <.>
-	</Credential>
-</LdapConnectorOptions>
-----
-<.> `LdapServerAddresses` -- IP-адреса серверов LDAP (`XXX.XXX.XXX.XXX`).
-<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
-<.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
-<.> `BaseDN` -- обязательная настройка, корневая точка LDAP-дерева, с которой начинаются поисковые запросы. Где: `dc=example` -- доменный компонент, `dc=com` -- верхний уровень домена.
-<.> `UserName` -- имя пользователя.
-<.> `Password` -- пароль.
+include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
 
 .Особенности и рекомендации при работе с ALD Pro:
 ****
