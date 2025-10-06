@@ -1,15 +1,15 @@
-= ALDProBasicRootAuthExtension -- класс
+= GenericLDAPBasicRootAuthExtension -- класс
 
-Расширение аутентификации и управления ролями для ALD Pro
+Класс предоставляет методы для регистрации расширений аутентификации
 
-* *Пространство имён:* `xref:Platform:Authentication/LDAP/LDAP_NS.adoc[DocsVision.Platform.Authentication.LDAP]`
+* *Пространство имён:* `xref:Platform:Authentication/.LDAP/LDAP_NS.adoc[DocsVision.Platform.Authentication.LDAP]`
 * *Сборка:* `DocsVision.Authentication.dll`
 
 == Синтаксис
 
 [source,csharp]
 ----
-public class ALDProBasicRootAuthExtension : BaseRootAuthenticationExtension
+public class GenericLDAPBasicRootAuthExtension : BaseRootAuthenticationExtension
 ----
 
 == Свойства
@@ -49,7 +49,7 @@ public class ALDProBasicRootAuthExtension : BaseRootAuthenticationExtension
 |Имя |Описание
 
 |`GetExtensionType(AuthenticationExtensionType)`
-|Получает тип расширения аутентификации
+a|Получает тип расширения аутентификации
 
 .Параметры:
 * `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
@@ -60,7 +60,7 @@ public class ALDProBasicRootAuthExtension : BaseRootAuthenticationExtension
 |Получает настройки определённого типа
 
 .Параметры:
-* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+* `extensionType` -- тип расширения аутентификации
 
 *Возвращаемое значение*: `T` -- настройки определённого типа
 
@@ -70,6 +70,6 @@ public class ALDProBasicRootAuthExtension : BaseRootAuthenticationExtension
 .Параметры:
 * `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
 
-*Возвращаемое значение*: `Type`-- тип настроек
+*Возвращаемое значение*: `Type` -- тип настроек
 
 |===
