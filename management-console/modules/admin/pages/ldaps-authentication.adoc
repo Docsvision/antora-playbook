@@ -1,35 +1,35 @@
 = Авторизация в Консоли управления по протоколу LDAPS без Active Directory
 
-Данный раздел описывает работу {of-mc} по протоколам LDAP/DAPS без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настрйоке системы, см. "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
+Данный раздел описывает работу {of-mc} с каталогом ALD Pro без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настрйоке системы, см. "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
 
 include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
-[#ldaps]
-== Коннектор к LDAPS
-
+// [#ldaps]
+// == Коннектор к LDAPS
+//
 include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
-
-[source,json]
-----
-{
-"Authentication": {
-  "Connectors": [
-     {
-        "Name": "LDAP", <.>
-        "Type": "DocsVision.Auth.Extensions.GenericLDAPConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
-        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
-        "Id": "{D5002984-4C2A-4EFB-9B3B-83E142E4DB73}" <.>
-     }
-  ]
-}
-}
-----
-<.> `Name` -- задаёт название коннектора.
-<.> `Type` -- строка с именем типа, реализующего коннектор, указывается так же, как в примере.
-<.> `Settings` -- строка настроек коннектора, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
-<.> `ID` -- строка с идентификатором коннектора в виде Guid.
-
-include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ldaps-settings]
+//
+// [source,json]
+// ----
+// {
+// "Authentication": {
+//   "Connectors": [
+//      {
+//         "Name": "LDAP", <.>
+//         "Type": "DocsVision.Auth.Extensions.GenericLDAPConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
+//         "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+//         "Id": "{D5002984-4C2A-4EFB-9B3B-83E142E4DB73}" <.>
+//      }
+//   ]
+// }
+// }
+// ----
+// <.> `Name` -- задаёт название коннектора.
+// <.> `Type` -- строка с именем типа, реализующего коннектор, указывается так же, как в примере.
+// <.> `Settings` -- строка настроек коннектора, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+// <.> `ID` -- строка с идентификатором коннектора в виде Guid.
+//
+// include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ldaps-settings]
 
 [#ald]
 == Коннектор к ALD Pro
@@ -55,7 +55,7 @@ include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 ----
 <.> `Name` -- задаёт название коннектора.
 <.> `Type` -- строка с именем типа, реализующего коннектор.
-<.> `Settings` -- строка настроек коннектора к LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+<.> `Settings` -- строка настроек коннектора к ALD Pro. Подробнее см. <<ald-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 
 include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
