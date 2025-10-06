@@ -1,76 +1,76 @@
-= Работа в {dv} по протоколу LDAPS без Active Directory
+= Коннектор к каталогу ALD Pro
 
-Описанные в данном разделе настройки позволяют серверу приложений {dv} работать по протоколам LDAP/LDAPS без привязки к конкретной службе каталогов Active Directory. Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
+Описанные в данном разделе настройки позволяют серверу приложений {dv} работать со службой каталогов ALD Pro. Администратор самостоятельно может выбрать хранилище, из которого будут получены данные по доменным учётным записям, включая системные УЗ.
 
 include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
 .См. также:
-* Настройка LDAP/LDAPS для {of-mc} описана в разделе "xref:CU25.3@mgmtconsole:admin:ldaps-authentication.adoc[]".
-* Настройка LDAP/LDAPS для {wc}а описана в разделе "xref:CU25.3@webclient:admin:no-active-dir.adoc[]".
+* Настройка для {of-mc} описана в разделе "xref:CU25.3@mgmtconsole:admin:ldaps-authentication.adoc[]".
+* Настройка для {wc}а описана в разделе "xref:CU25.3@webclient:admin:no-active-dir.adoc[]".
 
-[#ldaps]
-== Коннектор к LDAPS
-
+// [#ldaps]
+// == Коннектор к LDAPS
+//
 include::partial$excerpts.adoc[tags=ldaps-conditions]
-
-[source,json]
-----
-{
-  "Docsvision": {
-    "Platform": {
-      "Server": {
-        "Authentication": {
-          "Extensions": {
-            "LDAP": {
-              "Name": "LDAP", <.>
-              "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
-              "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
-            }
-          }
-	      },
-        "Tenants": { <.>
-		     }
-      }
-	  }
-  }
-}
-----
-<.> `Name` -- название коннектора.
-<.> `TypeName` -- строка с именем типа, реализующего коннектор, указывается так же, как в примере.
-<.> `Settings` -- строка настроек коннектора к LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
-<.> `ID` -- строка с идентификатором коннектора в виде Guid.
-<.> `Tenants` -- коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
-
-// tag::ldaps-settings[]
-[#ldaps-settings]
-=== Строка настроек LDAPS
-
-include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
-
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-16"?>
-<LdapConnectorOptions>
-	<LdapServerAddresses>
-		<string>example.com</string> <.>
-	</LdapServerAddresses>
-	<Port>389</Port> <.>
-    <EnableLDAPS>true</EnableLDAPS> <.>
-	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
-	<Credential>
-		<UserName>user@example.com</UserName> <.>
-		<Password>user</Password> <.>
-	</Credential>
-</LdapConnectorOptions>
-----
-<.> `LdapServerAddresses` -- адреса серверов LDAP.
-<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
-<.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
-<.> `UserName` -- имя пользователя.
-<.> `Password` -- пароль.
-// end::ldaps-settings[]
+//
+// [source,json]
+// ----
+// {
+//   "Docsvision": {
+//     "Platform": {
+//       "Server": {
+//         "Authentication": {
+//           "Extensions": {
+//             "LDAP": {
+//               "Name": "LDAP", <.>
+//               "TypeName": "DocsVision.Platform.Authentication.LDAP.GenericLDAPBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+//               "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>example.com</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+//               "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF78}" <.>
+//             }
+//           }
+// 	      },
+//         "Tenants": { <.>
+// 		     }
+//       }
+// 	  }
+//   }
+// }
+// ----
+// <.> `Name` -- название коннектора.
+// <.> `TypeName` -- строка с именем типа, реализующего коннектор, указывается так же, как в примере.
+// <.> `Settings` -- строка настроек коннектора к LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+// <.> `ID` -- строка с идентификатором коннектора в виде Guid.
+// <.> `Tenants` -- коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
+//
+// // tag::ldaps-settings[]
+// [#ldaps-settings]
+// === Строка настроек LDAPS
+//
+// include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
+//
+// [source,xml]
+// ----
+// <?xml version="1.0" encoding="utf-16"?>
+// <LdapConnectorOptions>
+// 	<LdapServerAddresses>
+// 		<string>example.com</string> <.>
+// 	</LdapServerAddresses>
+// 	<Port>389</Port> <.>
+//     <EnableLDAPS>true</EnableLDAPS> <.>
+// 	<FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName> <.>
+// 	<Credential>
+// 		<UserName>user@example.com</UserName> <.>
+// 		<Password>user</Password> <.>
+// 	</Credential>
+// </LdapConnectorOptions>
+// ----
+// <.> `LdapServerAddresses` -- адреса серверов LDAP.
+// <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+// <.> `EnableLDAPS` -- флаг активации использования протокола LDAPS.
+// <.> `FullyQualifiedDnsHostName` -- укажите `true`, чтобы указывать полное имя домена и учётной записи после `@`, например `user@example.com`. Каждый элемент в списке серверов (`LdapServerAddresses`) должен будет представлять полное DNS-имя хоста. При указании `false` элемент может быть IP-адресом, DNS-доменом или именем хоста.
+// <.> `UserName` -- имя пользователя.
+// <.> `Password` -- пароль.
+// // end::ldaps-settings[]
 
 [#ald]
 == Коннектор к ALD Pro
@@ -98,7 +98,7 @@ include::partial$excerpts.adoc[tags=ald-format]
 ----
 <.> `Name` -- название коннектора.
 <.> `TypeName` -- строка с именем типа, реализующего коннектор.
-<.> `Settings` -- строка настроек коннектора, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
+<.> `Settings` -- строка настроек коннектора, для ALD Pro. Подробнее см. <<ald-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 <.> `Tenants` -- коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
 
@@ -185,16 +185,16 @@ include::CU25.3@engineer::partial$excerpts.adoc[tags=pretty]
 // end::bla-bla[]
 
 [#limitations]
-== Ограничения при работе с коннекторами к LDAPS/ALD Pro
+== Ограничения при работе с коннекторами к ALD Pro
 
-. При добавлении сотрудника с учетной записью из LDAP/LDAPS каталога может появиться сообщение о невозможности вычисления SID. Это допустимо, и для продолжения необходимо подтвердить сохранение сотрудника.
-+
-.Подтвердите сохранение сотрудника
-image::sid.png[Подтвердите сохранение сотрудника]
-+
+// . При добавлении сотрудника с учетной записью из LDAP/LDAPS каталога может появиться сообщение о невозможности вычисления SID. Это допустимо, и для продолжения необходимо подтвердить сохранение сотрудника.
+// +
+// .Подтвердите сохранение сотрудника
+// image::sid.png[Подтвердите сохранение сотрудника]
+// +
 . Если *не* настроены доверительные отношения между Microsoft Active Directory и ALD Pro (или другой службой каталогов) на машине, где запускается {wincl}, назначение прав будет доступно в ограниченном варианте -- только выбор пользователей из справочника сотрудников:
 +
 .Выбор учётной записи
 image::selection.png[Выбор учётной записи]
 +
-. На данный момент поддержан сценарий изначальной настройки с альтернативной службой каталогов без перехода с Active Directory
+. На данный момент поддержан сценарий изначальной настройки с альтернативной службой каталогов без перехода с Active Directory.
