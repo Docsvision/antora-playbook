@@ -1,0 +1,92 @@
+= Использование внешних стилей
+
+Модуль поддерживает возможность использовать стили, описанные в `.css` файлах, которые подключаются при помощи тега "link" либо использовать стили, описанные в теге "style".
+
+.Тег "style":
+====
+Рассмотрим HTML, в котором стили описаны в теге "style". У тега "p" задан класс "test" , для которого определен стиль (цвет шрифта -- бирюзовый):
+
+[source,html]
+----
+<html lang="en">
+  <head>
+    <style type="text/css">
+      .test {
+        color: "aqua";
+    </style>
+  </head>
+  <body>
+    <p class="test" style="color: aqua">
+      Test paragraph with aqua color
+    </p>
+  </body>
+</html>
+----
+
+После того, как {td} обработает данный HTML, стиль, описанный в теге "style", станет "inline" стилем в теге "p":
+
+[source,html]
+----
+<html lang="en">
+  <head>
+    <style type="text/css">
+      .test {
+        color: "aqua";
+    </style>
+  </head>
+  <body>
+    <p class="test">
+      Test paragraph with aqua color
+    </p>
+  </body>
+</html>
+----
+
+.Результирующий текст в офисном редакторе
+image::resulting-text.png[Результирующий текст в офисном редакторе]
+====
+
+.Внешние css-файлы:
+====
+Аналогичный пример, но стили, описанные в теге "style" перенесены во внешний файл `test.css` и подключены при помощи тега "link":
+
+[source,html]
+----
+<html lang="en">
+  <head>
+    <link href="C:\text.css" rel="stylesheet" />
+  </head>
+  <body>
+    <p class="test">
+      Test paragraph with aqua color
+    </p>
+  </body>
+</html>
+----
+
+После того, как {td} обработает данный HTML, стиль, описанный во внешнем css-файле, станет "inline" стилем в теге "p":
+
+[source,html]
+----
+<html lang="en">
+  <head>
+    <link href="C:\text.css" rel="stylesheet" />
+  </head>
+  <body>
+    <p class="test" style="color: aqua">
+      Test paragraph with aqua color
+    </p>
+  </body>
+</html>
+----
+
+Результат в офисном редакторе будет аналогичен прошлому примеру.
+====
+
+[WARNING]
+====
+* При добавлении внешнего css-файла необходимо указывать полный путь до него.
+* Список поддерживаемых схем обращения к ресурсу при подключении внешнего css-файла: `http`, `https`, `ftp`, `file`.
+* В случае использования нескольких источников стилей, например, тег "style" и внешний css-файл, их приоритет может быть вычислен некорректно, поэтому рекомендуется избегать случаев использования нескольких источников стилей.
+* `!important` не поддерживается.
+====
