@@ -1,5 +1,4 @@
 :of: модуля {am}
-:wt: ext-archive-webc
 :no-config:
 
 = Установка модуля
@@ -29,17 +28,23 @@ include::6.1@platform:admin:pre-config-server.adoc[tags=repo]
 --
 :wt: archivemanagement-shared
 include::6.1@platform:admin:partial$install.adoc[]
-
 --
 
 [#lin-ext]
 == Установка расширения модуля "{am}" на Linux
 
 . Если модуль {wc} не установлен, установите серверную и клиентскую части {wc}а версии {wc-req}, а также _Компоненты модуля интеграции с операторами ЭДО_. Инструкция по установке приведена в документации модуля {wc}, раздел "xref:6.1@webclient:admin:install-server.adoc[]".
-include::6.1@platform:admin:partial$install.adoc[]
+
+--
+:wt: ext-archive-webc
+[start=2]
+. Установите расширение модуля "{am}" следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
 Дополнительные настройки выполнять не требуется.
 +
 . <<windows,Установите>> серверные компоненты модуля в ОС Windows.
+--
 
 [#windows]
 == Установка серверного расширения на Windows
@@ -96,6 +101,9 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 . Чтобы удалить модуль в ОС Linux, выполните команду:
 +
+:wt: archivemanagement-shared
+--
 include::6.1@platform:admin:partial$delete.adoc[]
+--
 +
 . В ОС Windows компоненты модуля удаляются стандартными средствами.
