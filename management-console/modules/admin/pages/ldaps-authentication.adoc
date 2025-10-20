@@ -3,14 +3,14 @@
 
 = Авторизация в Консоли управления по протоколу LDAPS без Active Directory
 
-Данный раздел описывает работу {of-mc} с каталогом ALD Pro без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настрйоке системы, см. "xref:CU25.3@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
+Данный раздел описывает работу {of-mc} с каталогом ALD Pro без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настрйоке системы, см. "xref:6.1@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
 
-include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+include::6.1@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
 // [#ldaps]
 // == Коннектор к LDAPS
 //
-include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+include::6.1@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 //
 // [source,json]
 // ----
@@ -32,14 +32,14 @@ include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 // <.> `Settings` -- строка настроек коннектора, для LDAPS. Подробнее см. <<ldaps-settings,ниже>>.
 // <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 //
-// include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ldaps-settings]
+// include::6.1@engineer:ROOT:ldaps-without-ad.adoc[tags=ldaps-settings]
 
 [#ald]
 == Коннектор к ALD Pro
 
 ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
 
-include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+include::6.1@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 
 [source,json]
 ----
@@ -61,11 +61,11 @@ include::CU25.3@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 <.> `Settings` -- строка настроек коннектора к ALD Pro. Подробнее см. <<ald-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 
-include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
+include::6.1@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
 
 .Особенности и рекомендации при работе с ALD Pro:
 ****
 * ALD Pro не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования. +
 В связи с этим *только для данного коннектора* допускается использовать следующий аналог группы *{dv-web-admin-cns-admins-serv}*: *docsvision_management_console_administrators*
 +
-include::CU25.3@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
+include::6.1@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
