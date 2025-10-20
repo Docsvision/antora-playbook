@@ -1,0 +1,75 @@
+= ALDProBasicRootAuthExtension -- класс
+
+Расширение аутентификации и управления ролями для ALD Pro
+
+* *Пространство имён:* `xref:Platform:Authentication/.LDAP/LDAP_NS.adoc[DocsVision.Platform.Authentication.LDAP]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ALDProBasicRootAuthExtension : BaseRootAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Name`
+|Имя: ALD Pro
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Description`
+|Описание: базовое расширение аутентификации ALD Pro
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Logo`
+|Отсутствует
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
+
+|`SupportedTypes`
+|Поддерживаемые типы расширений аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+*Возвращаемое значение*: комбинация типов расширения аутентификации
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetExtensionType(AuthenticationExtensionType)`
+|Получает тип расширения аутентификации
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+*Возвращаемое значение*: `Type` -- тип расширения аутентификации
+
+|`GetSettings<T>(AuthenticationExtensionType)`
+|Получает настройки определённого типа
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+*Возвращаемое значение*: `T` -- настройки определённого типа
+
+|`GetSettingsType<T>(AuthenticationExtensionType)`
+|Получает тип настроек
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+*Возвращаемое значение*: `Type`-- тип настроек
+
+|===

@@ -1,0 +1,27 @@
+= BaseTokenAuthenticator -- класс
+
+Базовый абстрактный аутентификатор по токенам
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class BaseTokenAuthenticator : BaseTokenContainer, ITokenAuthenticator, DocsVision.Platform.Interop.ITokenAuthenticator
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Authenticate()`
+|Выполняет аутентификацию через интерфейс `xref:Platform-StorageServer:Platform/Authentication/ITokenAuthenticator_IN.adoc[ITokenAuthenticator]`
+
+|`DocsVision.Platform.Interop.ITokenAuthenticator.Authenticate()`
+|Выполняет аутентификацию через интерфейс `DocsVision.Platform.Interop.ITokenAuthenticator`
+
+|===

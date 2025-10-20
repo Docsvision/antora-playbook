@@ -1,0 +1,156 @@
+= OpenIDConnectWebAuthenticationExtension -- класс
+
+Представляет web-расширение аутентификации OpenIDConnect
+
+* *Пространство имён:* `xref:Platform:Authentication/OpenIDConnect/OpenIDConnect_NS.adoc[DocsVision.Platform.Authentication.OpenIDConnect]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OpenIDConnectWebAuthenticationExtension : BaseWebAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Name`
+|Расширение аутентификации OpenIDConnect
+
+|`Settings`
+|Настройки OpenIDConnect
+
+*Тип*: `xref:Platform:Authentication/OpenIDConnect/OpenIDConnectSettings_CL.adoc[OpenIDConnectSettings]`
+
+|`Configuration`
+|Конфигурация подключения OpenIDConnect
+
+*Тип*: `xref:Platform:Authentication/OpenIDConnect/OpenIDConnectConnectConfiguration_CL.adoc[OpenIDConnectConnectConfiguration]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetLoginUrl(string, string, string)`
+a|Получает URL страницы входа
+
+.Параметры:
+* `redirectUrl` -- страница, на которую пользователь будет перенаправлен
+* `responseType` -- тип ответа
+* `responseMode` -- режим ответа
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- URL страницы входа
+
+|`GetLogoutUrl(string, string, string)`
+a|Получает URL страницы выхода
+
+.Параметры:
+* `tokenId` -- идентификатор токена
+* `redirectUri` -- страница для переадресации
+* `logoutHint` -- подсказка для для логина пользователя при выходе из системы
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- URL страницы выхода
+
+|`FeatureName()`
+|Получает имя опции лицензии
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- имя опции лицензии
+
+|`FeatureId()`
+|Идентификатор опции лицензии
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]` -- идентификатор опции лицензии
+
+|`FindLoginType(string)`
+a|Определяет тип логина
+
+.Параметры:
+* `value` -- тип логина
+
+*Возвращаемое значение*: `AuthenticationLoginType` -- перечисление:
+
+* `Phone` = `0`
+* `Snils` = `1`
+* `Email` = `2`
+* `Custom` = `3`
+* `Upn` = `4` -- уникальный идентификатор пользователя в домене (УЗ в формате UPN)
+
+|`GetTimeOutForExtension()`
+|Получает таймаут для расширения
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]` -- таймаут для расширения
+
+|`AddLoginHint(string)`
+a|Добавляет подсказку для логина пользователя
+
+.Параметры:
+* `login_hint` -- подсказка для логина пользователя
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- подсказка для логина пользователя
+
+|`AddStateGuid()`
+|Определяет, нужно ли добавлять идентификатор состояния в запрос аутентификации.
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]` -- признак наличия идентификатора
+
+|`GetLogoutHintPart(string)`
+a|Получает часть URL-адреса, содержащую параметр подсказки для логина пользователя при выходе из системы
+
+.Параметры:
+* `logoutHint` -- подсказка для логина пользователя при выходе из системы
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- подсказка для логина
+
+|`GetReturnUrl(string)`
+a|Получает адрес для перенаправления пользователя после успешной аутентификации
+
+.Параметры:
+* `defaultUri` -- адрес для возврата
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- адрес для возврата
+
+|`GetTokenFromCode(string[])`
+a|Асинхронный метод, получающий токен из кода
+
+.Параметры:
+* `args` -- параметры запроса для получения токена
+
+*Возвращаемое значение*: `Task<ExtensionTokenModel>` -- класс, представляющий модель токена расширения:
+
+* `access_token` -- получить токен
+* `refresh_token` -- обновить
+* `id_token` -- идентификатор
+* `state` -- состояние
+* `session_state` -- состояние сессии
+* `token_type` -- тип токена
+* `expires_in` -- когда истекает срок действия
+
+|`GetAccessCodeUrl(string, string)`
+a|Получает URL кода доступа
+
+.Параметры:
+* `redirectUrl` -- адрес для перенаправления пользователя
+* `code` -- код доступа
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- код доступа
+
+|`GetAccessTokenUrl(string, string)`
+a|Получает URL токена доступа
+
+.Параметры:
+* `redirectUrl` -- адрес для перенаправления пользователя
+* `code` -- код доступа
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- URL токена доступа
+
+|===
+
+NOTE: Все методы являются виртуальными и могут быть переопределены в классах-наследниках.
