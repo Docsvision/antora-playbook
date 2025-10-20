@@ -102,16 +102,24 @@ image::name-parameter.png[Редактирование значения для �
 [source,bash]
 ----
 sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-сертификата -pfx -pin пин-код <.>
+
+sudo -u docsvision bash <.>
+/opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-сертификата -pfx -pin пин-код
 ----
 <.> По умолчанию служба *{sss-new}* работает от имени пользователя ROOT, поэтому сертификат необходимо устанавливать с повышением привилегий.
+<.> Переключиться на пользователя _docsvision_ для службы *{wcs-new}*.
 +
-.. Установить сертификат площадки из архива http://esia.gosuslugi.ru/public/esia.zip[esia.zip]. Сертификат тестовой площадки -- `TESIA GOST 2012.cer`/ Например, так:
+.. Установить сертификат площадки из архива http://esia.gosuslugi.ru/public/esia.zip[esia.zip] в хранилище пользователей, под которыми запускаются сервисы *{sss-new}* и *{wcs-new}*. Сертификат тестовой площадки -- `TESIA GOST 2012 new.cer`, например, так:
 +
 [source,bash]
 ----
-sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-GOST-2012.cer <.>
+sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-GOST-2012-new.cer <.>
+
+sudo -u docsvision bash <.>
+/opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-GOST-2012-new.cer
 ----
 <.> С повышением привилегий пользователя.
+<.> Переключиться на пользователя _docsvision_ для службы *{wcs-new}*.
 +
 .. Добавить настройки для аутентификации через ЕСИА в конфигурационный файл модуля {pl}.
 +
