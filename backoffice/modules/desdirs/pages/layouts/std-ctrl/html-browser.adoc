@@ -9,9 +9,7 @@
 .Отображение в области "Панель инструментов"
 image::html-browser-control.png[Отображение в области "Панель инструментов"]
 
-== Общие
-
-xref:layouts/controls-standard.adoc#common-properties[Общие свойства элементов управления].
+include::partial$excerpts.adoc[tags=general]
 
 == Данные
 
@@ -30,7 +28,7 @@ XSLT-преобразование::
 * *_Card Data XML_* -- XML данных карточки: в качестве содержимого будет использован XML-документ, содержащий данные карточки. Для использования элемента требуется написать скрипт.
 +
 .Пример скрипта для события карточки "CardActivated":
-[source,javascript]
+[source,csharp]
 ----
 private void Документ_CardActivated(System.Object sender, Docsvision.Platform.WinForms.CardActivatedEventArgs e)
 {
@@ -52,9 +50,7 @@ private void Документ_CardActivated(System.Object sender, Docsvision.Pla
 * *_Да_* -- отображать;
 * *_Нет_* -- не отображать.
 
-== Настройка локализации
-
-Допускается xref:layouts/layout-localize.adoc#localize-general[локализация общих свойств] элемента. Описание настройки локализации содержится в разделе xref:layouts/controls-standard.adoc#common-properties[Общие свойства элементов управления].
+include::partial$excerpts.adoc[tags=localize]
 
 Для элемента *HTML браузер* может быть локализовано свойство *XSL преобразование*. Добавление локализованных названий выполняется в окне _Локализация отображаемого значения_, открываемом при нажатии на кнопку image:buttons/globe.png[Земной шар] справа от поля.
 
