@@ -14,7 +14,9 @@
 
 . Загрузите систему {es}.
 +
-* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}]
+// или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке]
+и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
 WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
@@ -196,8 +198,9 @@ sudo sysctl --system
 
 [#docker]
 == Установка с помощью Docker
+// Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или
 
-. Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или соберите его самостоятельно:
+. Соберите образ {es}:
 +
 [source,dockerfile]
 ----
@@ -226,7 +229,7 @@ version: "3.8"
 
 services:
   elasticsearch:
-    image: packages.docsvision.com/elasticsearch:7.14.0
+    image: ./elasticsearch7.14.0
     ports:
       - 9200:9200
     environment:
