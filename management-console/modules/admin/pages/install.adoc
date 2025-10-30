@@ -37,6 +37,7 @@ include::6.1@platform:admin:partial$install.adoc[]
   "System": {
     "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
   },
+  "Catalogs": [], <.>
   "Groups": {
     "Docsvision Management Console Administrators": [
       "account@domain.com" <.>
@@ -44,12 +45,13 @@ include::6.1@platform:admin:partial$install.adoc[]
   }
 }
 ----
-<.> Адрес {of-sett-serv}.
-<.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
-<.> Адрес Сервиса внешнего API.
-<.> Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
-<.> Адрес {of-mc}.
-<.> Пользователи, которым разрешен вход в Консоль управления.
+<.> `ConnectionString` -- Адрес {of-sett-serv}.
+<.> `ApiKey` -- Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
+<.> `ConnectionString` -- Адрес Сервиса внешнего API.
+<.> `ApiKey` -- Ключ доступа к Сервису внешнего API -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
+<.> `ManagementConsoleAddress` -- Адрес {of-mc}.
+<.> `Catalogs` -- см. подробнее <<domain,Настройка работы в домене>>.
+<.> `Docsvision Management Console Administrators` -- Пользователи, которым разрешен вход в Консоль управления.
 +
 . Запустите службу Консоли:
 +
