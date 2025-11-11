@@ -6,14 +6,14 @@
 
 [source,json]
 ----
+{
   "Groups": {
     "Docsvision Management Console Administrators": [
       "account@domain.com" <.>
     ]
   }
+}
 ----
 <.> Добавьте пользователей, которые должны иметь доступ к {of-mc}.
 
-// tag::keytab[]
-Сервер {dv}, установленный на Linux, требует дополнительной настройки для использования технологии единого входа (когда пользователь уже аутентифицирован в другом модуле системы). Подробнее настройка описана в Руководстве по настройке системы, см. "xref:dv6@engineer:ROOT:kerberos-authentication.adoc[]".
-// end::keytab[]
+NOTE: При необходимости может быть настроена прозрачная аутентификация Kerberos, необходимые настройки см. в разделе "xref:engineer:ROOT:kerberos-authentication.adoc[]".
