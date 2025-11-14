@@ -12,16 +12,14 @@ include::dv6@install-linux:ROOT:requirements-software.adoc[tags=winlist]
 .Программное обеспечение:
 // * IIS версий {iis}. Должны быть включены компоненты IISfootnote:[Устанавливаются с помощью menu:Диспетчера серверов[Роли и компоненты].]: ASP.NET, HTTP Redirect, Application Initialization.
 * {asp-bundle}.
+// tag::simple[]
+* xref:engineer:ROOT:java-service.adoc[Криптосервис обслуживания ЭП] необходим для проверки всех подписей и формирования CAdES-BES и CAdES-X Long Type 1.
+* Для использования простой ЭП необходим КриптоПро CSP версии {csp-v}.
+// end::simple[]
 
 [#r7office]
 .Для работы функций *предпросмотра* и *автоконсолидации*:
 * https://r7-office.ru/downloadserver_doc[Р7-Офис. Сервер документов]/OnlyOffice, подробнее см. в документации по администрированию модуля "xref:admin:preview-r7.adoc[]".
-
-// tag::simple[]
-.Для использования простой ЭП:
-* КриптоПро CSP версии {csp-v}.
-* xref:engineer:ROOT:java-service.adoc[Криптосервис обслуживания ЭП] для проверки и формирования простой подписи и подписей CAdES-BES и CAdES-X Long Type 1.
-// end::simple[]
 
 [#browser]
 == Требования к клиентским рабочим местам
