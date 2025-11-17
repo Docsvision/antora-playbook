@@ -13,6 +13,13 @@
 * Настройка расширений в конфигурационном файле модуля {pl} описана в разделе "xref:engineer::authorization-extensions.adoc[]".
 ****
 
+--
+:module: модуля {pl}
+:this-action: настройки расширений аутентификации
+
+include::partial$excerpts.adoc[tags=mc-extension]
+--
+
 [#setup]
 == Настройка расширений аутентификации
 
@@ -53,7 +60,7 @@ image::auth-extensions-activation.png[Активация зарегистрир�
 В таблице отображается список расширений, которые были зарегистрированы в системе и <<setup,настроены>>. Над таблицей отображается название базы данных. Для базы, которая назначена по умолчанию, добавляется тэг "БД по умолчанию".
 
 [#azure-settings]
-== Строка настроек Azure
+=== Строка настроек Azure
 
 include::partial$excerpts.adoc[tags=pretty]
 
@@ -87,7 +94,7 @@ include::partial$excerpts.adoc[tags=pretty]
 <.> `ApplicationId` -- идентификатор приложения {dv}, зарегистрированного в тенанте AzureAD, для которого включено и настроено использование OpenID Connect.
 
 [#esia]
-== Регистрация расширения ЕСИА
+=== Регистрация расширения ЕСИА
 
 [#requirements]
 .Требования для расширения ЕСИА:
@@ -118,7 +125,7 @@ sudo /opt/cprocsp/bin/amd64/certmgr -install -file путь-к-файлу-TESIA-
 Расширение аутентификации для ЕСИА настраивается по аналогии с Azure за исключением параметра `Settings` -- строки настроек расширения. Строка настроек для ЕСИА описана ниже.
 
 [#esia-settings]
-=== Строка настроек для ЕСИА
+==== Строка настроек для ЕСИА
 
 include::partial$excerpts.adoc[tags=pretty]
 
@@ -176,7 +183,7 @@ include::partial$excerpts.adoc[tags=pretty]
 <.> `AccountNameClaim` -- параметр, который используется как ключ для авторизации. Возможные значения: `snils`, `phone`, `email`.
 
 [#error]
-=== Ошибки при авторизации ЕСИА
+==== Ошибки при авторизации ЕСИА
 
 При попытке авторизации в системе с использованием расширения ЕСИА может возникать следующая ошибка в журнале модуля:
 
@@ -193,7 +200,7 @@ sudo update-ca-certificates -v -f.
 При возникновении трудностей с получением корневого сертификата, обратитесь в техническую поддержку ЕСИА.
 
 [#adfs-settings]
-== Строка настроек для ADFS
+=== Строка настроек для ADFS
 
 include::partial$excerpts.adoc[tags=pretty]
 
@@ -209,3 +216,31 @@ include::partial$excerpts.adoc[tags=pretty]
 ----
 <.> `WellKnownConfigurationUrl` -- URL публичной конфигурации ADFS.
 <.> `ClientId` -- идентификатор тенанта ADFS в котором производится привязка пользователей.
+
+[#keycloak-settings]
+=== Строка настроек Keycloak
+
+NOTE: Для работы расширения авторизации Keycloak требуется опция лицензии _{dv} Коннектор к Keycloak_.
+
+include::partial$excerpts.adoc[tags=pretty]
+
+[source,xml]
+----
+<?xml version=\"1.0\" encoding=\"utf-16\"?>
+  <KeycloakAuthenticationSettings
+    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
+    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
+    <WellKnownConfigurationUrl>https://vdv-keycloak.digdes.com/realms/testDv/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+    <ClientId>test</ClientId> <.>
+    <Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret> <.>
+    <AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</AccountNameClaim> <.>
+    <UniqueIdClaim>DocsvisionID</UniqueIdClaim> <.>
+    <ScopesSupported>openid email</ScopesSupported> <.>
+</KeycloakAuthenticationSettings>
+----
+<.> `WellKnownConfigurationUrl` -- URL публичной конфигурации OpenID.
+<.> `ClientId` -- идентификатор тенанта Keycloak в котором производится привязка пользователей.
+<.> `Secret` -- секрет приложения, настроенного для аутентификации пользователей.
+<.> `AccountNameClaim` -- имя пользователя в токене (поле в токене, используемое в качестве логина).
+<.> `UniqueIdClaim` -- уникальный идентификатор пользователя в токене.
+<.> `ScopesSupported` -- при загрузке расширения список областей доступа берется из конфигурации KeyCloak, указанной в параметре `WellKnownConfigurationUrl`. Если есть необходимость переопределить список областей доступа, передаваемых в запросе, можно добавить секцию `ScopesSupported` и в неё через пробел указать необходимые области для работы.
