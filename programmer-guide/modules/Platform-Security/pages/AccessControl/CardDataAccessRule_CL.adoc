@@ -1,6 +1,6 @@
 = CardDataAccessRule -- класс
 
-Представляет разрешение на карточку.
+Представляет разрешение на карточку. В текущей версии {dv} отсутствует `System.Security.Principal.NTAccount`, как и API, связанный с дискреционной безопасностью, т.к. это исключительно Windows-специфический код. `GetAccessRules` можно использовать, но третьим параметром нужно передавать тип `DocsVision.Platform.Security.AccessControl.ISecurityIdentifier` (это интерфейс над Windows и Linux-специфичными реализациями дискреционной безопасности). В {page-version} вся дискреционная безопасность стала чуть более абстрактной по сравнению с {dv} 5 из-за необходимости поддержания как Windows-, так и Linux-реализаций.
 
 * *Пространство имён:* `xref:AccessControl/AccessControl_NS.adoc[DocsVision.Platform.Security.AccessControl]`
 * *Сборка:* `DocsVision.Platform.dll`
@@ -9,7 +9,7 @@
 
 [source,csharp]
 ----
-public sealed class CardDataAccessRule : ObjectAccessRule
+internal sealed class CardDataAccessRule : ObjectAccessRule, ICardDataAccessRule
 ----
 
 == Конструкторы

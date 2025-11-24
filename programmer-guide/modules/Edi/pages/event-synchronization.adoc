@@ -1,0 +1,163 @@
+= Разработка компонента загрузки событий в существующей карточке
+
+События отдельных документов {of-em} и коннекторах по умолчанию не синхронизируются, так как исходящие события от оператора ЮЗДО не запрашиваются. Данная возможность может быть реализована с помощью скриптов.
+
+Ниже приведён пример загрузки событий произвольного документа в {wincl}е с помощью скриптов. Можно загрузить как уже существующий, так и отсутствующий в системе документ. Скрипт может быть назначен на кнопку, добавлен в БП (с другим вариантом ILogWriter) или использован иным способом.
+
+[source,csharp]
+----
+	private void LoadDocumentById(Guid boxRowId, string documentId, bool isOutgoing) <.>
+	{
+		try
+		{
+			OperatorsBox operatorsBox = objectContext.GetObject<OperatorsBox>(boxRowId);
+			BoxesService boxesService = new BoxesService(objectContext, false);
+			LogWriter logWriter = new LogWriter();
+			boxesService.LoadDocumentById(operatorsBox, documentId, isOutgoing, logWriter);
+			MessageBox.Show(logWriter.LogText);
+		}
+		catch (Exception ex)
+		{
+			MessageBox.Show(ex.ToString());
+		}
+	}
+
+	internal class LogWriter : ILogWriter
+	{
+		private readonly StringBuilder logBuilder = new StringBuilder();
+
+		public void WriteInformation(string message, params object[] args)
+		{
+			logBuilder.AppendLine(string.Format(message, args));
+		}
+
+		public void WriteError(string message, params object[] args)
+		{
+			logBuilder.AppendLine(string.Format(message, args));
+		}
+
+		public void WriteError(string message, Exception ex, params object[] args)
+		{
+			logBuilder.AppendLine(string.Format(message, args));
+			logBuilder.AppendLine(ex.ToString());
+		}
+
+		public string LogText => logBuilder.ToString();
+	}
+----
+<.> Загрузка документа по ID.
++
+.Параметры:
+* `boxRowId` -- ID строки ящика из справочника операторов ЮЗДО.
+* `documentId` -- ID документа Диадок, то что у них в параметре `letterId` в адресе.
+* `isOutgoing` -- `true` -- загрузить как исходящий, `false` -- как входящий.
+
+Следующий фрагмент кода демонстрирует загрузку недостающих событий в уже существующий документ при помощи скрипта {wincl}а.
+
+[source,csharp]
+----
+ private void RefreshDocumentEvents_ItemClick(System.Object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+  {
+    try
+
+    {
+      var searchQuery = CardControl.Session.CreateSearchQuery();
+      var messageTypeQuery = searchQuery.AttributiveSearch.CardTypeQueries.AddNew(CardEdiMessage.ID);
+      var messageMainInfoQuery = messageTypeQuery.SectionQueries.AddNew(CardEdiMessage.MainInfo.ID);
+      messageMainInfoQuery.ConditionGroup.Operation = ConditionGroupOperation.And;
+      messageMainInfoQuery.ConditionGroup.Conditions.AddNew(CardEdiMessage.MainInfo.CardId, FieldType.UniqueId, ConditionOperation.Equals, CardControl.CardData.Id);
+
+      CardDataCollection foundCards = CardControl.Session.CardManager.FindCards(searchQuery.GetXml());
+      if (foundCards.Count == 0)
+      {
+	    CardControl.ShowMessage("У документа нет связанных карточек сообщений ЭДО.");
+      return;
+	  }
+
+	  EdiMessage ediMessage = CardControl.ObjectContext.GetObject<EdiMessage>(foundCards.Last().Id);
+
+      if (string.IsNullOrEmpty(ediMessage.MainInfo.OperatorMessageId))
+      {
+        CardControl.ShowMessage("Карточка обмена сообщениями не связана с сообщением оператора.");
+        return;
+      }
+
+      LogWriter logWriter = new LogWriter();
+      BoxesService boxesService = new BoxesService(CardControl.ObjectContext);
+      boxesService.LoadDocumentById(ediMessage.MainInfo.OrganizationBox, ediMessage.MainInfo.OperatorMessageId, !ediMessage.MainInfo.IncomingMessage, logWriter);
+      CardControl.ShowMessage(logWriter.LogText);
+      }
+        catch (Exception ex)
+      {
+        CardControl.ShowMessage(ex.Message, "Документ", ex.ToString(), MessageType.Error, MessageButtons.Ok);
+      }
+	}
+
+
+	internal class LogWriter : ILogWriter
+	{
+	  private readonly StringBuilder logBuilder = new StringBuilder();
+
+	  public void WriteInformation(string message, params object[] args)
+	  {
+	    logBuilder.AppendLine(string.Format(message, args));
+	  }
+
+	  public void WriteError(string message, params object[] args)
+	  {
+	    logBuilder.AppendLine(string.Format(message, args));
+	  }
+
+	  public void WriteError(string message, Exception ex, params object[] args)
+	  {
+	    logBuilder.AppendLine(string.Format(message, args));
+		logBuilder.AppendLine(ex.ToString());
+	  }
+
+	  public string LogText
+	  {
+	    get{return logBuilder.ToString();}
+	  }
+  }
+----
+
+Для работы скрипта потребуется указать дополнительные пространства имен:
+
+[source,csharp]
+----
+using DocsVision.Edi.Runtime;
+using DocsVision.Edi.CardLib.CardDefs;
+using DocsVision.Platform.ObjectManager.SearchModel;
+using DocsVision.Platform.ObjectManager.Metadata;
+using DocsVision.Edi.ObjectModel;
+using DocsVision.Edi.Interfaces;
+using System.Linq;
+using System.Text;
+----
+
+Также для компиляции следует подключить дополнительные сборки из папки `C:\Program Files (x86)\Docsvision\Edi\` на Windows-машине с серверными компонентами {dv}:
+
+[source,csharp]
+----
+DocsVision.Edi.ObjectModel.dll
+DocsVision.Edi.Interfaces.dll
+DocsVision.Edi.Runtime.dll
+----
+
+При использовании скрипта для новых видов документов, если в нём не было загрузки библиотек ЭДО и обращений к `EdiScriptHelper`, в инициализацию необходимо добавить следующие строки, например, для `CardActivated`:
+
+[source,csharp]
+----
+EdiMapperFactory.RegisterFactory(cardControl.ObjectContext);
+EdiServiceFactory.RegisterFactory(cardControl.ObjectContext);
+----
+
+А также дополнить сборки:
+
+[source,csharp]
+----
+using DocsVision.Edi.ObjectModel.Mapping;
+using DocsVision.Edi.ObjectModel.Services;
+----
+
+NOTE: При использовании скрипта существует ограничение, связанное с отображением кнопок предыдущего состояния. При смене состояния документа в Диадок, например, подтверждении или отказе от аннулирования, состояние документа в {dv} не изменится, а в карточке останутся доступны кнопки предыдущего состояния (запроса аннулирования).

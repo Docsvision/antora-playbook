@@ -1,0 +1,124 @@
+= IMessagesService -- интерфейс
+
+Сервис для работы с сообщениями и подписками.
+
+* *Пространство имён:* `Docsvision.WorkerService.ObjectModel.Services`
+* *Сборка:* `DocsVision.WorkerService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IMessagesService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`SendMessage(Messages, MessagesOutgoingMessage);`
+a|Отправляет сообщение
+
+.Параметры:
+* `messages` -- сообщения
++
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
++
+Карточка сообщения
++
+* `message` -- сообщение
++
+Тип: `xref:ObjectModel/MessagesOutgoingMessage_CL.adoc[MessagesOutgoingMessage]`
++
+Карточка сообщения
+
+|`CreateSubscription(Messages, MessagesSubscription);`
+a|Создаёт подписку на сообщения
+
+.Параметры:
+* `messages` -- сообщения
++
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
+
+* `subscription` -- подписка
++
+Тип: `xref:ObjectModel/MessagesSubscription_CL.adoc[MessagesSubscription]`
+
+|`RemoveSubscription(Messages, MessagesSubscription);`
+a|Удаляет подписку на сообщения
+
+.Параметры:
+* `messages` -- сообщения
++
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
+
+* `subscription` -- подписка
++
+Тип: `xref:ObjectModel/MessagesSubscription_CL.adoc[MessagesSubscription_CL]`
+
+|`CreateMessagesCard(Guid, Guid);`
+a|Создаёт карточку сообщения
+
+.Параметры:
+* `objectId` -- идентификатор объекта
++
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+* `typeId` -- идентификатор типа
++
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+--
+Возвращаемое значение::
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
++
+Карточка сообщения
+--
+
+|`CreateWaitingLock(MessagesIncomingMessage, MessagesIncomingMessageWaitingLock);`
+a|Создаёт блокировку ожидания
+
+.Параметры:
+* `messagesIncomingMessage` -- входящее сообщение
++
+Тип: `xref:ObjectModel/MessagesIncomingMessage_CL.adoc[MessagesIncomingMessage]`
+
+* `messageWaitingLock` -- блокировка ожидания
++
+Тип: `xref:ObjectModel/MessagesIncomingMessageWaitingLock_CL.adoc[MessagesIncomingMessageWaitingLock]`
+
+|`RemoveWaitingLock(MessagesIncomingMessage, MessagesIncomingMessageWaitingLock);`
+a|Удаляет блокировку ожидания
+
+.Параметры:
+* `messagesIncomingMessage` -- входящее сообщение
++
+Тип: `xref:ObjectModel/MessagesIncomingMessage_CL.adoc[MessagesIncomingMessage]`
+
+* `messageWaitingLock` -- блокировка ожидания
++
+Тип: `xref:ObjectModel/MessagesIncomingMessageWaitingLock_CL.adoc[MessagesIncomingMessageWaitingLock]`
+
+|`ResumePausedMessages(Messages);`
+a|Возобновляет приостановленные сообщения
+
+.Параметры:
+* `messages` -- сообщения
++
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
+
+|`SendMessageImmediate(Messages, MessagesOutgoingMessage);`
+a|Отправляет сообщения немедленно
+
+.Параметры:
+* `messages` -- сообщения
++
+Тип: `xref:ObjectModel/Messages_CL.adoc[Messages]`
+
+* `message` -- сообщение
++
+Тип: `xref:ObjectModel/MessagesOutgoingMessage_CL.adoc[MessagesOutgoingMessage]`
+
+|===

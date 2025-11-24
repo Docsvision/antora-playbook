@@ -1,0 +1,32 @@
+= M4dRegistryCmdResult -- класс
+
+Ответ событий.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class ApprovalStageService : ContextService, IApprovalStageService
+----
+
+== Поля
+
+[cols="34,66",options="header"]
+|===
+|Имя |Описание
+
+|`Result`
+|Результат обработки события, может принимать одно из значений:
+
+* `Success`
+* `Error`
+* `Unknown`
+
+|`Details`
+|Подробности выполнения операции, обычно заполняется в случае ошибки и содержит исключение, возникшее в результате работы менеджера
+
+|===
+
