@@ -10,3 +10,24 @@
 * Настройки {dv} для использования сертификатов при подписании рассмотрены в документации модуля {bo}, раздел xref:backoffice:admin:system-settings.adoc#signature-cypher[Подписи и шифрование].
 * Инструкция по настройке подписания с использованием сертификатов КриптоПро приведена в документации модуля {bo}, раздел xref:backoffice:admin:prepare-cryptopro.adoc[Настройка {dv} для работы с криптопровайдером КриптоПро].
 * Инструкция по разворачиванию и настройке Криптосервиса обслуживания ЭП приведена в разделе "xref:java-service.adoc#cryptoservice[Установка и запуск Криптосервиса]".
+
+[#errors]
+== Частые ошибки при использовании сервиса перештамповки
+
+.Ошибки, вызванные `SignaturePeriodicComponent`
+[cols="34%,33%,33%",options="header"]
+|===
+
+|Текст ошибки
+|Причина ошибки
+|Возможное решение
+
+|`The signer certificate <…> must have OCSP evidence but it doesn’t contain any OCSP reference. OCSP evidence is not created`
+|Ошибка возникает при улучшении подписи, созданной с помощью сертификата без адреса OCSP сервиса.
+|Исправить ситуацию можно, если известен адрес OCSP сервиса, выдавшего сертификат, см. подробнее "xref:java-service.adoc#ocsp[Улучшение подписи с сертификатом без адреса OCSP сервиса]".
+
+|`Message: SignaturePeriodicComponent unable verify and enhance signature. <…> ErrorDetails: DaysOffset is greater that timestampservice certificate expire date`
+|Ошибка возникает при невозможности продлить срок действия подписи из-за истекающего срока действия сертификата сервиса штампа времени (срок истекает менее чем через 120 дней).
+|Использование другого TSP-сервиса, см. подробнее "xref:java-service.adoc#cryptoservice[Установка и запуск Криптосервиса]".
+
+|===
