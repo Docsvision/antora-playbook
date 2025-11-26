@@ -4,7 +4,7 @@
 
 WARNING: В данной версии установка {mc} предусмотрена только в ОС Linux.
 
-Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:dev@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+Без установки и первоначальной настройки {of-mc} не будет функционировать базовый модуль "xref:new-admin-console@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
 
 Требуется установить {mc} и сервис настроек. Установка должна выполняться на одной машине, установка на разные серверы не поддерживается.
 
@@ -21,7 +21,7 @@ WARNING: В данной версии установка {mc} предусмот
 :of: {of-mc}
 :file: appsettings
 :wt: managementconsole
-include::dev@platform:admin:partial$install.adoc[]
+include::new-admin-console@platform:admin:partial$install.adoc[]
 +
 [source,json]
 ----
@@ -33,6 +33,7 @@ include::dev@platform:admin:partial$install.adoc[]
   "System": {
     "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
   },
+  "Catalogs": [], <.>
   "Groups": {
     "Docsvision Management Console Administrators": [
       "account@domain.com" <.>
@@ -43,6 +44,8 @@ include::dev@platform:admin:partial$install.adoc[]
 <.> Адрес {of-sett-serv}.
 <.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
 <.> Адрес {of-mc}.
+<.> `Catalogs` -- см. подробнее <<domain,Настройка работы в домене>>.
+<.> `Docsvision Management Console Administrators` -- Пользователи, которым разрешен вход в Консоль управления.
 <.> Пользователи, которым разрешён вход в Консоль управления.
 +
 . Запустите службу Консоли:
@@ -197,12 +200,9 @@ endif::sm-page[]
 [#cert]
 == Особенности настройки сертификата
 
-Настройка актуальная только для {mssql}, для {pgsql} дополнительных настроек не требуется.
+Настройка актуальная только для {mssql}, для {pgsql} дополнительных настроек не требуется. По умолчанию провайдер считает соединение с БД защищённым.
 // end::cert[]
 
-Поскольку _{mc}_ работает под управлением .NET 6, компонент `System.Data.SqlClient` был заменён на `Microsoft.Data.SqlClient` как более перспективный с точки зрения развития.
-
-В этом компоненте значение `Encrypt` по умолчанию https://learn.microsoft.com/ru-ru/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace?view=sql-server-ver15#encrypt-default-value-set-to-true[изменилось].
 // tag::cert[]
 По умолчанию провайдер считает соединение с БД защищённым.
 
