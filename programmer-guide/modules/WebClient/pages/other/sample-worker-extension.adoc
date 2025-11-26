@@ -1,0 +1,92 @@
+= Пример расширения Службы {ws}
+
+Демонстрационный вариант расширения Службы {ws}, расположенный в https://github.com/Docsvision/WebClient-Samples/tree/master_net45/Others/SampleWorkerExtension[репозитории {dv} на GitHub]. Расширение получает ID карточки документа и конвертирует приложенные файлы в формат PDF/A.
+
+.Перечень необходимых инструментов:
+* Visual Studio {vscode-v} и выше
+* {mc} версии {mc-cu-mc}
+* Пример "xref:server/conversion-sample.adoc[]"
+
+[#assembly]
+== Сборка
+
+. Откройте `/Samples.sln`.
+. [[above]]Соберите проект `Others > SampleWorkerExtension`.
+. Соберите проект `Samples\Others\SampleWorkerExtension\SampleWorkerExtension.WebClientExtension\SampleWorkerExtension.WebExtension`.
+. Выполните `npm i`, `npm run build`.
+. Соберите пример xref:server/conversion-sample.adoc[взаимодействия с сервисом конвертации].
+
+[#install]
+== Установка
+
+. Создайте папку `/usr/lib/docsvision/common/SampleWorker` и поместите в неё файлы:
+* `DocsVision.SampleWorkerExtension.Manager.dll`
+* `DocsVision.SampleWorkerExtension.ObjectModel.dll`
+* `DocsVision.SampleWorkerExtension.WorkerService.dll`
+* `ru\DocsVision.SampleWorkerExtension.WorkerService.resources.dll`
++
+NOTE: Может потребоваться выдать для этой папки права, т.к. сервисы {dv} могут быть запущены под разными пользователями ({wc} запускается от от имени УЗ {dv} и н требует ROOT привилегий). +
+Если {wc}, Служба {ws} или {mc} установлены на разных серверах, этот пункт надо повторить для каждого сервера.
++
+. Создайте папку `/usr/lib/docsvision/managementconsole/Extensions/SampleExtension`. Добавьте сборки `DocsVision.SampleWorkerExtension.Role.dll` вместе с ресурсами `ru\DocsVision.SampleWorkerExtension.Role.resources.dll` и конфигурационный файл `SampleWorkerExtension.json` (находится в проекте `SampleWorkerExtension.Role`) в папку {of-mc}.
+. Создайте папку `/usr/lib/docsvision/workerservice/Extensions` и добавьте в неё сборку `DocsVision.SampleWorkerExtension.WorkerExtension.dll`.
+. Установите серверное и клиентское расширения для {wc} из папки `Others\SampleWorkerExtension\SampleWorkerExtension.WebClientExtension` по <<WebClientExtension,инструкции>>.
+. Отредактируйте конфигурационный файл `/usr/lib/docsvision/managementconsole/config/managementConsoleWorkerExtension.json`, добавьте в секцию `Libraries` параметр `SampleWorkerExtension.WorkerService`:
++
+[source,json]
+----
+	<Libraries>
+    <add Path="DocsVision.BackOffice.ObjectModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519" />
+    <add Path="DocsVision.SampleWorkerExtension.WorkerService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4a2caa47aa5b6b29" />
+  </Libraries>
+----
+
+[#test]
+== Проверка
+
+. В {of-mc} создайте процесс Службы {ws} с типом конфигурации _Расширение для WorkerService_.
+. В разметке документа {wc}а (например, просмотр) создайте кнопку и добавьте обработчик события *При щелчке* элемента управления `sendConversionTask`.
+. Создайте документ в {wc}е, приложите файл. После сохранения документа, нажмите созданную кнопку в разметке. Через некоторое время в секции файлов появится сконвертированный pdf-файл. Чтобы файл отобразился, обновите страницу.
+
+[#WebClientExtension]
+== Проект "SampleWorkerExtension.WebClientExtension"
+
+. Откройте `/Samples.sln`.
+. Соберите проект menu:Others[SampleWorkerExtension > SampleWorkerExtension.WebClientServerExtension].
+. Откройте консоль в папке menu:Others[SampleWorkerExtension > SampleWorkerExtension.WebClientExtension > SampleWorkerExtension.WebExtension] и выполнить команду `npm install`, потом `npm update` и в конце `npm run build:prod`.
+. Скопируйте каталог SamplesOutput\Site\Content\Modules\SampleWorkerWebExtension в каталог `{wcd-lin}\Site\Content\Modules`.
+. Скопируйте каталог `SamplesOutput\Site\Extensions\SampleWorkerExtension.ServerExtension` в каталог `{wcd-lin}\Site\Extensions`.
+. Перезапустите {wcs-new}.
+
+[#development]
+== Разработка
+
+При разработке собственного расширения необходимо дорабатывать или переписывать класс:
+
+[source,csharp]
+----
+public class SampleEventHandlerService : EventHandlerService, ISampleEventHandlerService
+----
+
+При создании собственных событий будет реализовываться управление обработкой событий:
+
+[source,csharp]
+----
+  public static readonly EventDescription ConvertCardFiles = new EventDescription { Id = new Guid("B2C6F070-C7F1-4F07-914F-94652804DD1C"), AutoSendToSelf = true, Concurrent = false };
+
+        private readonly Dictionary<Guid, EventHandlerInfo> handlersInfo = new Dictionary<Guid, EventHandlerInfo>
+        {
+            {
+                ConvertCardFiles.Id,
+                new EventHandlerInfo
+                    { EventId = ConvertCardFiles.Id, EventArgsType = typeof(SampleEventArgs), EventHandlerName = nameof(ProcessCardFiles) }
+            }
+        };
+----
+
+Также при доработке компонента логики будет реализована своя логика обработки этих событий:
+
+[source,csharp]
+----
+private const string SampleComponentTypeName = "SampleWorkerExtension.Manager.SampleApiManager, SampleWorkerExtension.Manager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4a2caa47aa5b6b29";
+----
