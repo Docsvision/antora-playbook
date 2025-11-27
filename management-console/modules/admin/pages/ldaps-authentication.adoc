@@ -1,16 +1,16 @@
 :mo: {mc}
-:cu253-mo-req: {cu253-mc-req}
+:cu253-mo-req: {mc-cu-mc}
 
 = Авторизация в Консоли управления по протоколу LDAPS без Active Directory
 
-Данный раздел описывает работу {of-mc} с каталогом ALD Pro без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настройке системы, см. "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
+Данный раздел описывает работу {of-mc} с каталогом ALD Pro без привязки к конкретной службе каталогов Active Directory. Настройка работы Сервера приложений описана в руководстве по настройке системы, см. "xref:new-admin-console@engineer:ROOT:ldaps-without-ad.adoc[]". Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
 
-include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
 // [#ldaps]
 // == Коннектор к LDAPS
 //
-include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 //
 // [source,json]
 // ----
@@ -39,7 +39,7 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 
 ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
 
-include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 
 [source,json]
 ----
@@ -61,11 +61,11 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 <.> `Settings` -- строка настроек коннектора к ALD Pro. Подробнее см. <<ald-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
 
-include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
+include::new-admin-console@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
 
 .Особенности и рекомендации при работе с ALD Pro:
 ****
 * ALD Pro не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования. +
 В связи с этим *только для данного коннектора* допускается использовать следующий аналог группы *{dv-web-admin-cns-admins-serv}*: *docsvision_management_console_administrators*
 +
-include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
+include::new-admin-console@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
