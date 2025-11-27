@@ -7,7 +7,10 @@
 
 include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 
-Настройка каталога ALD Pro описана в разделе "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]". В конфигурационном файле {wc}а потребуется указать следующие параметры:
+Настройка каталога ALD Pro описана в разделе "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]".
+
+// tag::webconfig[]
+В конфигурационном файле {wc}а потребуется указать следующие параметры:
 
 [source,json]
 ----
@@ -30,10 +33,11 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 <.> Пароль УЗ из каталога ALD Pro для подключения к серверу {dv}.
 <.> Адрес сервера {dv}.
 <.> Псевдоним БД, от имени которой будут запускаться программы {pu} и {kvr}.
+// end::webconfig[]
 
 Для работы укажите УЗ из каталога ALD Pro на машине с {kvr} и {pu}:
 
  setx DV_SystemUserAccount account@domain.com
  setx DV_SystemUserPassword password
 
-Функциональность доступна в {wc} версии {cu253-wc-req} при условии установки версий модулей, входящих в накопительное обновление 25.3.
+Функциональность доступна в {wc} с версии {cu253-wc-req} при условии установки версий модулей, входящих в накопительное обновление 25.3.
