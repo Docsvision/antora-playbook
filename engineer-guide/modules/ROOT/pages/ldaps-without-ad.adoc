@@ -1,15 +1,22 @@
 :mo: {pl}
 :cu253-mo-req: {cu253-pl-req} и других модулей, входящих в обновление
+:with-config: yes
+:link: см. "<<from-console,Настройка из {of-mc}>>" ниже
+:do-what: способа настройки коннектора к каталогу ALD Pro
+:ald:
+:link2: "<<from-config,Настройка из конфигурационного файла>>" ниже
 
 = Коннектор к каталогу ALD Pro
 
 Описанные в данном разделе настройки позволяют серверу приложений {dv} работать со службой каталогов ALD Pro. Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
 
-include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+include::partial$mancons.adoc[]
+
+include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
 .См. также:
-* Настройка для {of-mc} описана в разделе "xref:6.1@mgmtconsole:admin:ldaps-authentication.adoc[]".
-* Настройка для {wc}а описана в разделе "xref:6.1@webclient:admin:no-active-dir.adoc[]".
+* Настройка для {of-mc} описана в разделе "xref:dev@mgmtconsole:admin:ldaps-authentication.adoc[]".
+* Настройка из конфигурационного файла для {wc}а описана в разделе "xref:new-admin-console@webclient:admin:no-active-dir.adoc[]". При настройке через {mc} дополнительной настройки {wc}а не требуется.
 
 // [#ldaps]
 // == Коннектор к LDAPS
@@ -76,11 +83,25 @@ include::partial$excerpts.adoc[tags=ldaps-conditions]
 // // end::ldaps-settings[]
 
 [#ald]
-== Коннектор к ALD Pro
+== Настройка коннектора к ALD Pro
 
 ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
 
 include::partial$excerpts.adoc[tags=ald-format]
+
+[#from-console]
+=== Настройка из {of-mc}
+
+.Чтобы настроить авторизацию через коннектор к ALD Pro:
+include::dev@mgmtconsole:servers:appserver-auth-extensions.adoc[tags=setup]
++
+* Настройки -- строка настроек коннектора ALD Pro в неотформатированном виде. Подробнее см. <<ald-settings,Строка настроек ALD Pro>> ниже.
+* Тип -- строка с именем типа, реализующего коннектор. Параметр `TypeName` в конфигурационном файле коннектора.
++
+. Коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать настройки в таблицах для тенантов не требуется, такие настройки не будут применены.
+
+[#from-config]
+=== Настройка из конфигурационного файла
 
 [source,json]
 ----
@@ -109,7 +130,7 @@ include::partial$excerpts.adoc[tags=ald-format]
 [#ald-settings]
 === Строка настроек ALD Pro
 
-include::dv6@engineer::partial$excerpts.adoc[tags=pretty]
+include::new-admin-console@engineer::partial$excerpts.adoc[tags=pretty]
 
 [source,xml]
 ----
@@ -188,7 +209,7 @@ include::dv6@engineer::partial$excerpts.adoc[tags=pretty]
 // end::bla-bla[]
 
 [#limitations]
-== Ограничения при работе с коннекторами к ALD Pro
+== Ограничения при работе с коннектором к ALD Pro
 
 . При добавлении сотрудника с учетной записью из ALD Pro каталога может появиться сообщение о невозможности вычисления SID. Это допустимо, и для продолжения необходимо подтвердить сохранение сотрудника.
 +
