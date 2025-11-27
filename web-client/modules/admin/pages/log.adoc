@@ -26,7 +26,7 @@
 * Заголовки
 
 // tag::webconfig[]
-Протоколирование запросов сервера {wc}а настраивается в конфигурационном файле модуля по адресу `{webconfig}`, за настройку отвечает параметр `W3CLogging`:
+Протоколирование запросов сервера {wc}а настраивается в конфигурационном файле модуля по адресу `{webconfig-lin}`, за настройку отвечает параметр `W3CLogging`:
 
 [source,json]
 ----
@@ -49,6 +49,8 @@
 <.> Префикс имени файла журнала.
 
 Запросы будут записаны в файл `/var/log/docsvision/webclient/webclient-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt`. Настройка альтернативного расширения поддерживается только при протоколировании с NLog, см. подробнее <<nlog,ниже>>.
+
+WARNING: Не удаляйте папку `/var/log/docsvision/` после установки {wc}а, т.к. у сервиса *{wcs-new}* отсутствуют права на создание новой папки.
 // end::webconfig[]
 
 [#nlog]
@@ -99,8 +101,8 @@
 .Полный список колонок и допустимых значений для журналирования:
 [%collapsible]
 ====
-* `date` -- Дата начала обработки запроса. Значение по умолчанию: `$&#x7b;date:format=yyyy-MM-dd&#x7d;`.
-* `time` -- Время начала обработки запроса. Значение по умолчанию: `$&#x7b;date:format=HH:mm:ss.fff&#x7d;`.
+* `date` -- Дата окончания обработки запроса. Значение по умолчанию: `$&#x7b;date:format=yyyy-MM-dd&#x7d;`.
+* `time` -- Время окончания обработки запроса. Значение по умолчанию: `$&#x7b;date:format=HH:mm:ss.fff&#x7d;`.
 * `webclient-version` -- Версия {wc}а. Например `6.1.725+a4c9b271d7`. Значение по умолчанию: `$&#x7b;webclient-version&#x7d;`. Для протоколирования запросов сервера приложений аналогичная колонка называется `appserver-version`.
 * `c-ip` -- IP-адрес клиента. Значение по умолчанию: `$&#x7b;aspnet-request-ip&#x7d;`.
 * `cs(Auth-Type)` -- Тип используемой аутентификации (например, Cookie). Значение по умолчанию: `$&#x7b;aspnet-user-authtype&#x7d;`.
@@ -119,7 +121,7 @@
 * `cs-method` -- Метод (`get`/`post` и т.п.). Значение по умолчанию: `$&#x7b;aspnet-request-method&#x7d;`.
 * `cs-mvc-action` -- Вызываемое действие. Значение по умолчанию: `$&#x7b;aspnet-mvc-action&#x7d;`.
 * `cs-mvc-controller` -- Вызываемый контроллер. Значение по умолчанию: `$&#x7b;aspnet-mvc-controller&#x7d;`.
-* `cs-posted-body` -- Значение по умолчанию`` $&#x7b;aspnet-request-posted-body&#x7d;``.
+* `cs-posted-body` -- Значение по умолчанию `$&#x7b;aspnet-request-posted-body&#x7d;`.
 +
 .Значения:
 ** `1`, если:
@@ -153,7 +155,7 @@
 * `s-environment` -- Значение `ASPNETCORE_ENVIRONMENT`. Значение по умолчанию: `$&#x7b;aspnet-environment&#x7d;`.
 * `s-ip` -- IP-адрес сервера. Значение по умолчанию: `$&#x7b;aspnet-request-local-ip&#x7d;`.
 * `s-port` -- Порт. Значение по умолчанию: `$&#x7b;aspnet-request-local-port&#x7d;`.
-* `s-sitename` -- Имя сайта. Значение по умолчанию: `$&#x7b;iis-site-name&#x7d;`.
+// * `s-sitename` -- Имя сайта. Значение по умолчанию: `$&#x7b;iis-site-name&#x7d;`.
 * `s-webrootpath` -- `WebRootPath`. Значение по умолчанию: `$&#x7b;aspnet-webrootpath&#x7d;`.
 * `sc(Content-Type)` -- Тип контента ответа. Значение по умолчанию: `$&#x7b;aspnet-response-contenttype&#x7d;`.
 * `sc-bytes` -- Отправлено байт. Значение по умолчанию: `$&#x7b;aspnet-response-contentlength&#x7d;`.

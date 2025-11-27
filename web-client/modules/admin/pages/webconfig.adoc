@@ -1,6 +1,6 @@
 = Параметры конфигурационного файла {wc}а
 
-Конфигурация модуля может выполняться при помощи конфигурационного файла {wc}а, расположенного по адресу `{webconfig}`, однако следует помнить, что настройки конфигурационного файла не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
+Конфигурация модуля может выполняться при помощи конфигурационного файла {wc}а, расположенного по адресу `{webconfig-lin}`, однако следует помнить, что настройки конфигурационного файла не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
 
 include::partial$excerpts.adoc[tags=ifabsent]
 
@@ -128,6 +128,26 @@ include::webservices-port.adoc[tags=webconfig]
 * {mc} -- "xref:webservices-install.adoc[Работа с программой WebToolBuilder]".
 * Конфигурационный файл -- "xref:webservices-port.adoc[]".
 
+[#auth]
+== Настройки аутентификации
+
+[#auth-ad]
+=== {wc} в сети без Active Directory
+
+include::no-active-dir.adoc[tags=webconfig]
+
+* {mc} -- "xref:dev@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширения аутентификации"]".
+* Конфигурационный файл -- "xref:no-active-dir.adoc[]".
+
+[#captcha]
+=== Использовать капчу
+
+include::user-management.adoc[tags=webconfig]
+
+.Подробнее см.:
+// * {mc} -- "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключение"]".
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:user-management.adoc[]".
+
 [#session]
 == Настройки сессии
 
@@ -139,9 +159,6 @@ include::user-session-timeout.adoc[tags=webconfig]
 .Подробнее см.:
 * {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
 * Конфигурационный файл -- "xref:user-session-timeout.adoc[]".
-
-[#session-clear]
-=== Очистка пользовательских сессий
 
 [#session-close]
 === Закрытие неактивных сессии

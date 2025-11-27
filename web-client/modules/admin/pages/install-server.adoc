@@ -164,6 +164,9 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 ----
 sudo systemctl start dvwebclient
 ----
++
+Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
+// end::linux[]
 
 [#windows]
 === Установка серверного расширения на Windows
@@ -228,9 +231,9 @@ image::install-server-confirm.png[Установка Расширения]
 
 .Чтобы установить {kvr}:
 . Добавьте данные системной учётной записи {dv} в переменные окружения (если это не было выполнено ранее). +
-Под этой учётной записью {kvr}
-// и {pu}
-будет подключаться к серверу {dv}.
+Под этой учётной записью
+// {kvr} и
+{pu} будет подключаться к серверу {dv}.
 +
  setx DV_SystemUserAccount account@domain.com
  setx DV_SystemUserPassword password
@@ -258,6 +261,7 @@ WARNING: Обратите внимание, указанный ниже файл
 +
 * `WebLayoutsDesigner.appsettings.json` -- конфигурация программы _{kvr}_.
 +
+[#kvr]
 [source,json]
 ----
 {

@@ -24,8 +24,7 @@ include::ROOT:page$requirements-signature.adoc[tags=macOS]
 * https://docs.cryptopro.ru/cades/plugin/plugin-installation-unix[Linux]
 * https://docs.cryptopro.ru/cades/plugin/plugin-installation-macos[MacOS]
 +
-.. Если расширение плагина имеется в списке установленных, но отключёно, необходимо самостоятельно включить его в браузере.
-.. Если расширение отсутствует в списке или недоступно в магазине приложений, вы можете установить расширение, воспользовавшись https://support.cryptopro.ru/index.php?/Knowledgebase/Article/View/467/0/ustnovk-rsshirenija-dlja-plgin-iz-fjjl[инструкцией] на сайте КриптоПро. Вы также можете продолжить работу с электронной подписью в браузерах https://cryptopro.ru/products/chromium-gost[Chromium-Gost] или https://browser.yandex.ru/b/cryptopro_plugin[Яндекс Браузер] с полной поддержкой необходимой функциональности
+include::ROOT:partial$excerpts.adoc[tags=plugin]
 +
 . Выполните указания в зависимости от типа сертификата:
 +
@@ -40,6 +39,8 @@ ifdef::root-cert[{root-cert}]
 
 [#dvWebTool]
 == Запуск программы DVWebTool
+
+Программа _DVWebTool_ необходима для выполнения сканирования документов и открытия файлов в офисном редакторе в ОС {ms} Windows. Программа _DVWebTool_ работает только в ОС {ms} Windows. Для работы требуется установить {asp-bundle}.
 
 TIP: Сборка и установка _DVWebTool_ делегированы утилите WebToolBuilder, см. подробнее в разделе "xref:admin:webservices-install.adoc[]" для администратора {wc}а.
 
@@ -68,7 +69,7 @@ include::ROOT:partial$excerpts.adoc[tags=dv-web-launch]
 Служба _DVSupService_ необходима для открытия файлов в офисном редакторе в ОС Linux.
 // end::dvsup[]
 
-WARNING: Служба _DVSupService_ работает только в ОС Linux. Для работы требуется установить {net-r}.
+WARNING: Служба _DVSupService_ работает только в ОС Linux. Для работы требуется установить {asp-bundle}.
 
 .Чтобы установить "DVSupService":
 . [[install-dvsup]]Выполните следующую команду:
@@ -174,5 +175,5 @@ sudo apt-get install docsvision-{wt}
  Group=user
 +
 В примере выше `user` -- пользователь, от имени которого необходимо запускать _DVSupService_.
-// end::dvsup[]// end::dvsup[]
+// end::dvsup[]
 ****

@@ -19,34 +19,35 @@ include::user:partial$excerpts.adoc[tags=signature]
 == Использование неквалифицированных сертификатов
 
 .Требования к клиентским рабочим местам:
-. Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
-. Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc[Необходимое программное обеспечение]).
-. КриптоПро ЭЦП Browser plug-in версии {sign-plugin}. (https://www.cryptopro.ru/products/cades/plugin[Ссылка для загрузки]).
-. Неквалифицированный сертификат пользователя. Сертификат должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
-. Опционально, для работы с подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах]. Приложение КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client]. Приложения обладают схожей функциональностью, рекомендуется использовать DSS Client как официальное приложение КриптоПро.
+* Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
+* Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc[Необходимое программное обеспечение]).
+* КриптоПро ЭЦП Browser plug-in версии {sign-plugin}. (https://www.cryptopro.ru/products/cades/plugin[Ссылка для загрузки]).
+* Неквалифицированный сертификат пользователя. Сертификат должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
+* Опционально, для работы с подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах]. Приложение КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client]. Приложения обладают схожей функциональностью, рекомендуется использовать DSS Client как официальное приложение КриптоПро.
 
 [#qualified]
 == Использование квалифицированных сертификатов
 
 .Требования к серверу:
-. КриптоПро CSP версии {csp-v}.
-. https://support.cryptopro.ru/index.php?/Knowledgebase/Article/View/390[КриптоПро CADESCOM версия {cades}]
-. {root-cert} Сертификат должен быть установлен в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
-. xref:engineer:ROOT:java-service.adoc[Криптосервис обслуживания ЭП] для проверки и формирования простой подписи и подписей CAdES-BES и CAdES-X Long Type 1.
-. {root-cert} Должен быть установлен в хранилище _Доверенные корневые центры сертификации_ на уровне _Локальный компьютер_.
+* {root-cert}. Сертификат должен быть установлен в хранилище xref:engineer:ROOT:java-service.adoc[Криптосервиса].
++
+include::./requirements-software.adoc[tags=simple]
 
 .Требования к клиентским рабочим местам:
-. Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
-. Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc#browser[Необходимое программное обеспечение]).
+* Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
+* Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc#browser[Необходимое программное обеспечение]).
 
 [start=3]
 .Компоненты криптопровайдера КриптоПро:
-. КриптоПро CSP версии {csp-v}.
-. xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
-. CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
-. КриптоПро TSPCOM версии {tspcom-v} -- компонент необходим для создания усиленной подписи Cades-X-Long-Type-1.
-. См. также xref:6.1@backoffice::requirements.adoc#crypto-pro[требования для модуля "{bo}"].
-. Квалифицированный сертификат пользователя. Должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
+* КриптоПро CSP версии {csp-v}.
+* xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
+* CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
++
+include::partial$excerpts.adoc[tags=plugin]
++
+* КриптоПро TSPCOM версии {tspcom-v} -- компонент необходим для создания усиленной подписи Cades-X-Long-Type-1.
+* См. также xref:6.1@backoffice::requirements.adoc#crypto-pro[требования для модуля "{bo}"].
+* Квалифицированный сертификат пользователя. Должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
 +
 // tag::macOS[]
 NOTE: Шаги, необходимые для настройки КриптоПро в ОС Mac OS можно найти в https://support.cryptopro.ru/index.php?/Knowledgebase/Article/View/232/0/rbot-s-kriptopro-csp-v-macos[документации КриптоПро].

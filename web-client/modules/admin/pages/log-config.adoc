@@ -10,7 +10,7 @@ include::partial$nlog.adoc[]
 include::partial$excerpts.adoc[tags=ifabsent]
 
 // tag::webconfig[]
-. Откройте конфигурационный файл `{webconfig}`.
+. Откройте конфигурационный файл `{webconfig-lin}`.
 . Измените параметры журналирования в параметрах `targets` и `rules`.
 +
 [source,json]
@@ -72,7 +72,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
  Log/SetLogLevel?minLevel=0
 
 // Данный способ применим для случая, когда есть потребность не перезагружать пул {wc}а.
-После рестарта IIS уровень журналирования будет возвращён в исходное состояние в соответствии с конфигурационным файлом.
+После перезапуска {wcs-new} уровень журналирования будет возвращён в исходное состояние в соответствии с конфигурационным файлом.
 ====
 
 [#advanced-logging]
@@ -119,7 +119,7 @@ include::partial$excerpts.adoc[tags=ifabsent]
 [source,json]
 ----
 {
-"targets": {
+  "targets": {
     "async": true,
     "logFile": {
         "type": "File",
@@ -137,11 +137,24 @@ include::partial$excerpts.adoc[tags=ifabsent]
         "type": "File",
         "fileName": "${gdc:baseLogFolder}/docsvision/webclient/DiagnosticLogStorageServer${event-properties:item=Tenant} PID ${processId} ${shortdate}.tsv" <.>
     }
-}
+  },
+  "rules": [ <.>
+    {
+      "logger": "DiagnosticsLogWebClient",
+      "minLevel": "Trace",
+      "writeTo": "diagnosticsLogWebClient"
+    },
+    {
+      "logger": "DiagnosticLogStorageServer",
+      "minLevel": "Trace",
+      "writeTo": "diagnosticLogStorageServer"
+    },
+  ]
 }
 ----
 <.> Адрес хранения журнала {wc}а. В параметре важно добавить в имя файла `$\{processId}`, например, `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
 <.> Адрес хранения журнала *{sss-new}*. В параметре важно добавить в имя файла `$\{processId}`, например, `WebCDiagnostics PID$\{processId}.log`, а также указать `layout="$\{message}"`.
+<.> Обязательные разделы для работы расширенного журналирования.
 
 Журнал ведётся в формате `.tsv` и в дальнейшем может быть проанализирован через приложение для работы с журналами, например Log Parser Studio. Расширенный журнал по умолчанию сохраняется в стандартный каталог журналов {wc}а, но при помощи параметров конфигурации NLog можно записать в иной каталог.
 
