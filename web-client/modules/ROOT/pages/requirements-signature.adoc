@@ -1,6 +1,7 @@
 = Программное обеспечение для формирования усиленной подписи
 
-{wc} поддерживает два типа подписи: простая и усиленная. Формирование простой подписи доступно без дополнительных настроек, но должно быть предусмотрено сценарием подписания.
+{wc} поддерживает два типа подписи: простая и усиленная.
+// Формирование простой подписи доступно без дополнительных настроек, но должно быть предусмотрено сценарием подписания.
 
 include::user:partial$excerpts.adoc[tags=signature]
 Необходимые компоненты перечислены далее.
@@ -34,20 +35,19 @@ WARNING: Для работы с электронной подписью необ
 * {root-cert} Сертификат должен быть установлен в хранилище xref:engineer:ROOT:java-service.adoc[Криптосервиса].
 +
 include::./requirements-software.adoc[tags=simple]
+* КриптоПро CSP версии {csp-v} для работы простой подписи и расширения аутентификации ЕСИА.
 
 .Требования к клиентским рабочим местам:
 * Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
 * Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc#browser[Необходимое программное обеспечение]).
-
-[start=3]
-.Компоненты криптопровайдера КриптоПро:
-* КриптоПро CSP версии {csp-v}.
-* xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
-* CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
+* Компоненты криптопровайдера КриптоПро:
+** КриптоПро CSP версии {csp-v}.
+** xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
+** CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
 +
 include::partial$excerpts.adoc[tags=plugin]
 +
-* КриптоПро TSP Client и OCSP Client версии {tspcom-v} -- компонент необходим для создания усиленной подписи Cades-X-Long-Type-1.
+** КриптоПро TSP Client и OCSP Client версии {tspcom-v} -- компонент необходим для создания усиленной подписи Cades-X-Long-Type-1.
 * См. также xref:6.1@backoffice::requirements.adoc#crypto-pro[требования для модуля "{bo}"].
 * Квалифицированный сертификат пользователя. Должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
 +
