@@ -9,58 +9,58 @@
 . Откройте страницу menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] и нажмите кнопку *Создать* под таблицей со списком подключенных БД, чтобы запустить Мастер БД {dv}.
 +
 .Таблица БД {dv}
-image::db-master.png[Таблица БД {dv}]
+image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
-include::partial$excerpts.adoc[tags=db-table-legend]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=db-table-legend]
 +
 . Укажите данные для подключения к СУБД. Нажмите *Далее*.
 +
 .Настройка подключения к СУБД
-image::db-create-start.png[Настройка подключения к СУБД]
+image::dev@mgmtconsole:servers:db-create-start.png[Настройка подключения к СУБД]
 +
 --
-include::partial$excerpts.adoc[tags=dbSettings]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=dbSettings]
 --
 +
 . Укажите параметры создания БД и нажмите *Далее*.
 +
 .Настройка создания БД в {mssql} Server
-image::db-create-name.png[Настройка создания БД в {mssql} Server]
+image::dev@mgmtconsole:servers:db-create-name.png[Настройка создания БД в {mssql} Server]
 +
 ****
-include::partial$excerpts.adoc[tags=name]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=name]
 
-include::partial$excerpts.adoc[tags=location]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=location]
 
-include::partial$excerpts.adoc[tags=options]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=options]
 ****
 +
 . Выберите библиотеки карточек для загрузки в новую БД. По умолчанию будут выбраны все библиотеки, которые можно загрузить. Нажмите *Далее*.
 +
 .Выбор модулей для загрузки
-image::db-create-libs.png[Выбор модулей для загрузки]
+image::dev@mgmtconsole:servers:db-create-libs.png[Выбор модулей для загрузки]
 +
-include::partial$excerpts.adoc[tags=lib-flags]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
 +
 . Подтвердите параметры, которые будут использованы при создании базы данных и нажмите *Создать*.
 +
 .Подтверждение параметров создания БД
-image::db-create-check.png[Подтверждение параметров создания БД]
+image::dev@mgmtconsole:servers:db-create-check.png[Подтверждение параметров создания БД]
 +
 ****
-include::partial$excerpts.adoc[tags=atomic]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 ****
 +
-include::partial$excerpts.adoc[tags=break-master]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
 +
 . Дождитесь завершения инициализации БД и загрузки SQL объектов.
 +
-include::partial$excerpts.adoc[tags=and-restart]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
 +
-. Выберите модули {dv}, решения которых должны быть загружены в БД и нажмите *Загрузить*.
+. [[solutions]]Выберите модули {dv}, решения которых должны быть загружены в БД и нажмите *Загрузить*.
 +
 .Выбор модулей, решения которых будут загружены в БД
-image::db-create-solutions.png[Выбор модулей, решения которых будут загружены в БД]
+image::dev@mgmtconsole:servers:db-create-solutions.png[Выбор модулей, решения которых будут загружены в БД]
 +
 [WARNING]
 ====
@@ -92,9 +92,11 @@ image::db-create-solutions.png[Выбор модулей, решения кот�
 // $ sudo systemctl restart dvappserver
 +
 . Дождитесь завершения загрузки решений.
-. Чтобы назначить созданную БД основной, следуйте xref:db-default.adoc[инструкции].
+. Чтобы назначить созданную БД основной, следуйте xref:dev@mgmtconsole:servers:db-default.adoc[инструкции].
 +
-include::partial$excerpts.adoc[tags=maindb]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
 +
-. Предоставьте сервисам {dv} xref:appserver-access.adoc[необходимые] права.
+. Предоставьте сервисам {dv} в настройках сервера приложений, раздел _Управление доступомfootnote:[Подробнее см. в разделе "xref:dev@mgmtconsole:servers:appserver-access.adoc[]"]_.
+
+include::dev@mgmtconsole:servers:appserver-access.adoc[tags=groups]
 
