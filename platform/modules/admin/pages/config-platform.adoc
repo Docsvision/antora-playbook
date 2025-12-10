@@ -1,3 +1,4 @@
+// tag::linux[]
 :do-what: варианта конфигурации модуля
 :with-unique: yes
 :with-config: no
@@ -52,7 +53,7 @@ include::new-admin-console@platform:admin:partial$mancons.adoc[]
 * API-ключ для подключения к Workflow -- используется для подключения серверного расширения {wf}. API-ключ для подключения серверного расширения {wf}. Главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 * Логин системной учётной записи.
 +
-include::ROOT:partial$excerpts.adoc[tags=system-accounts]
+include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 * Пароль системной учетной записи.
 +
@@ -68,6 +69,7 @@ include::ROOT:partial$excerpts.adoc[tags=system-accounts]
 * `{dv}&#95;&#95;Platform&#95;&#95;Server&#95;&#95;TraceLevel&#95;&#95;LogLevel` -- настройка уровня журналирования.
 +
 . Настройка клиентской части {wincl} выполняется при помощи конфигурационного файла `windows-client-part.json`, см. подробнее xref:6.1@platform:console:config-client.adoc[]. Если использовать {wincl} не планируется, пункт можно пропустить.
+// end::linux[]
 
 [#config-file]
 == Конфигурация модуля {pl} без {of-mc}
@@ -150,7 +152,7 @@ sudo nano /usr/lib/docsvision/platform/appsettings.json
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- имя системной учётной записи {dv}.
 +
-include::ROOT:partial$excerpts.adoc[tags=system-accounts]
+include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
 <.> `Logging` -- настройка упразднена, используйте параметр `LogFile` или настройте журналирование с помощью xref:6.1@platform:console:logs.adoc#file[NLog].
@@ -164,6 +166,65 @@ include::ROOT:partial$excerpts.adoc[tags=system-accounts]
 * Также через конфигурационный файл выполняется настройка клиентской части, см. подробнее xref:6.1@platform:console:config-client.adoc[].
 ****
 
+[#fs-mancons]
+== Конфигурация {of-fs} в консоли
+
+include::new-admin-console@install-linux:ROOT:dvfileservice.adoc[tags=console]
+
+[#fs-config]
+== Конфигурация {of-fs} в конфигурационном файле
+
+. Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
+    "SettingsService": {
+      "ConnectionString": "http://localhost:5200/api", <.>
+      "ApiKey": "anything" <.>
+    }
+    "Server": {
+      "Databases": {
+        "alias": "Database-connection-string" <.>
+      }
+    }
+  },
+  "NLog": { <.>
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/fileservice/${shortdate}test1369.log",
+        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
+      }
+    },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Warn",
+        "writeTo": "logFile"
+      }
+    ]
+  },
+  "AllowedHosts": "*",
+  "Kestrel": { <.>
+    "Endpoints": {
+      "Http": {
+        "Url": "http://*:5007"
+      }
+    }
+  }
+}
+----
+<.> `ServiceId` -- уникальный идентификатор Сервера приложений, с базами которого будет работать серверная консоль.
+<.> `ConnectionString` -- адрес {of-sett-serv}.
+<.> `ApiKey` -- API-ключ {of-sett-serv}.
+<.> `alias` -- <<connection-string,строка подключения>> к БД.
+<.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
+<.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:platform:console:https-access.adoc[].
+
+// tag::c-string[]
 [#connection-string]
 === Строка подключения к БД
 
@@ -176,3 +237,4 @@ include::ROOT:partial$excerpts.adoc[tags=system-accounts]
 ****
 `Server=Адрес-сервера-базы-данных; Port=SQL-порт; Database=Название-БД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
 ****
+// end::c-string[]

@@ -1,7 +1,7 @@
 :with-console: no
 :with-config: no
-:do-what: варианта подключения БД
-:link: "xref:dev@mgmtconsole:servers:db-master.adoc[]"
+:do-what: варианта подключения БД для работы Файлового сервиса
+:link: "xref:dev@mgmtconsole:servers:fileservice-database.adoc[]"
 :installn: yes
 
 = Установка модуля {pl}
@@ -58,11 +58,29 @@ sudo ./activation online ВАШ-КЛЮЧ
 :what-mod: {pl}
 include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
+--
 .Чтобы установить "Расширение сервера приложений для {of-mc}":
 :of: Расширения сервера приложений для {of-mc}
 :wt: ext-platform-mc
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+--
+
+[#fs-ext]
+== Установка расширения {of-fs} для {of-mc}
+
+Расширение {of-fs} для {of-mc} необходимо для работы связанных с модулем ресурсов локализации, обработчиков и (при наличии) специализированных редакторов для настройки {of-fs} из {of-mc}.
+
+:what-mod: {fs}
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение {of-fs} для {of-mc}":
+:of: Расширения {of-fs} для {of-mc}
+:wt: ext-fileservice-mc
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+--
 
 [#file-service]
 == Установка файлового сервиса
@@ -72,49 +90,23 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 :wt: fileservice
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
-. Подключите БД:
-+
-include::admin:partial$mancons.adoc[]
-* Используйте существующую БД или создайте новую при помощи {of-mc}, см. xref:dev@mgmtconsole:servers:db-master.adoc[], без необходимости работы с форматом `.json`.
-* Укажите строку подключения к БД в конфигурационном файле:
-+
-[source,json]
-----
-{
-  "DocsVision": {
-    "Platform": {
-      "Server": {
-        "Databases": {
-          "alias": "Database-connection-string" <.>
-        }
-      }
-    }
-  }
-}
-----
-<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
-+
 . Запустите службу Файлового сервиса:
 +
  $ sudo systemctl start dvfileservice
-
-include::console:search-full-text.adoc[tags=install-ft]
 
 [#windows-pl]
 == Установка серверных компонентов на Windows
 
 include::new-admin-console@install-linux::partial$limitation.adoc[]
 
-include::partial$doNotStart.adoc[]
-
 Пользователь, выполняющий установку, должен обладать правами администратора.
+
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=for-wincl]
 
 Включить журналирование процесса установки можно с помощью флага `*/l*v*`:
 
  msiexec /i "Docsvision Platform server.msi" /l*v install.log
 
-include::partial$vars.adoc[]
-+
 . Запустите пакет установки `{dv} Platform server.msi`.
 . Примите условия лицензионного соглашения.
 +
@@ -146,27 +138,3 @@ image::new-admin-console@platform:admin:install-server-components.png[Устан
 image::new-admin-console@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-+
-. **Предпочтительным способом настройки системы является xref:dev@mgmtconsole:servers:index.adoc[{mc}].** В программе _{cns}_, начиная с версии {pl-cu-mc} удалены все разделы, кроме следующих: "xref:new-admin-console@platform:console:db-settings.adoc[Базы данных]" (в сокращённом виде), "xref:new-admin-console@platform:console:section-transformations-generator.adoc[Генератор преобразований]", "xref:new-admin-console@platform:console:security-report.adoc[Отчёт по безопасности]", "xref:new-admin-console@platform:console:folder-rights.adoc[Права папок]", "xref:new-admin-console@platform:console:folder-views.adoc[Представления папок]", "xref:new-admin-console@platform:console:full-text-service.adoc[Сервис полнотекстового поиска]".
-+
-WARNING: {cns} устанавливается вместе с пакетом утилит {rk}.
-+
-. Откройте конфигурационный файл программы {cns} по адресу `C:\Program Files (x86)\Docsvision\Platform\Tools\appsettings.json`:
-+
-[source,json]
-----
-{
-  "DocsVision": {
-    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
-    "SettingsService": {
-      "ConnectionString": "http://dv-server:5200/api", <.>
-      "ApiKey": "anything" <.>
-    }
-  }
-}
-----
-<.> `ServiceId` -- уникальный идентификатор Сервера приложений, с базами которого будет работать серверная консоль.
-<.> `ConnectionString` -- адрес {of-sett-serv}.
-<.> `ApiKey` -- API-ключ {of-sett-serv}.
-+
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
