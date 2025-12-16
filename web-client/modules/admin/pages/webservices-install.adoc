@@ -1,4 +1,9 @@
-= Работа с программой WebToolBuilder
+= Установка DVWebTool и DVSupService
+
+DVWebTool и DVSupService предоставляются пользователям возможность открывать приложенные к карточкам файлы. DVWebTool устанавливается на компьютеры пользователей в ОС Windows при помощи WebToolBuilder, DVSupService устанавливается в ОС Linux стандартными инструментами системы. Данный раздел описывает установку <<,DVWebTool>> и <<,DVSupService>>.
+
+[#wtbldr]
+== Установка DVWebTool при помощи WebToolBuilder
 
 Программа _WebToolBuilder_ предназначается для сборки _DVWebTool_, минуя {pu}.
 
@@ -10,7 +15,7 @@
 
 [#install-method]
 .Программа "WebToolBuilder" устанавливается:
-* Из инсталлятора {wc}а, `{dv} web-client.msi`, компонент _WebToolBuilder_, см. подробнее "xref:install-server.adoc[]".
+* Из инсталлятора {wc}а, `{dv} web-client.msi`, компонент _WebToolBuilder_, см. подробнее "xref:new-admin-console@webclient:admin:install-server.adoc[]".
 ** Файлы утилиты будут расположены по пути: `C:\Program Files (x86)\Docsvision\WebClient\Tools\`
 ** Файлы DVWebTool будут расположены по пути (в манифесте прописан `localhost`): `C:\Program Files (x86)\Docsvision\WebClient\Site\Content\Tools\DVWebTool\`
 * Из инсталлятора утилиты `{dv} WebToolBuilder.msi`. WebToolBuilder запускается в ОС Windows. Программа может быть запущена с минимальным пользовательским интерфейсом или как консольное приложение.
@@ -20,14 +25,14 @@
 Новая версия WebToolBuilder выпускается при каждом исправлении в {wc}е. Для распространения WebToolBuilder могут использоваться групповые политики.
 
 [#ui]
-== Запуск в режиме окна
+=== Запуск в режиме окна
 
 .Окно программы "WebToolBuilder"
-image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
+image::new-admin-console@webclient:admin:webtoolbuilder.png[Окно программы "WebToolBuilder"]
 
 .В окне приложения отображается следующий набор элементов:
 * Путь к манифесту приложения -- поле для выбора файла манифеста `DocsVision.DVWebTool.application`
-* image:layouts:buttons/three-dots.png[Три точки] -- кнопка для выбора манифеста приложения из файловой системы
+* image:new-admin-console@webclient:layouts:buttons/three-dots.png[Три точки] -- кнопка для выбора манифеста приложения из файловой системы
 * Адрес {wc}а -- полный адрес сервера {wc}а
 * Порт -- порт для подключения к DVWebTool
 * Флаг `*Автозапуск*` -- отвечает за автоматический запуск DVWebTool при загрузке системы
@@ -35,7 +40,7 @@ image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
 * Поле _Журнал_, в котором записываются действия при работе с программой
 
 [#noui]
-== Запуск в консольном режиме
+=== Запуск в консольном режиме
 
 . Перейдите в каталог с WebToolBuilder (по умолчанию `C:\Program Files (x86)\Docsvision\WebToolBuilder\WebToolBuilder.exe`) и запустите утилиту командой с указанием пути к файлу манифеста:
 +
@@ -53,7 +58,7 @@ image::webtoolbuilder.png[Окно программы "WebToolBuilder"]
 * `--whatIf` -- Отображает список параметров, которые будут использоваться при пересборке DVWebTool
 
 [#build]
-== Сборка DVWebTool через WebToolBuilder
+=== Сборка DVWebTool через WebToolBuilder
 
 // tag::webtool[]
 Программа _DVWebTool_ необходима для выполнения сканирования документов и открытия файлов в офисном редакторе в ОС {ms} Windows.
@@ -72,7 +77,7 @@ WARNING: Программа _DVWebTool_ работает только в ОС {m
 . Нажмите кнопку *Пересобрать*, чтобы открыть каталог.
 +
 .Успешное завершение сборки
-image::admin:dvweb-final-window.png[Успешное завершение сборки]
+image::new-admin-console@webclient:admin:dvweb-final-window.png[Успешное завершение сборки]
 +
 После завершения сборки появится окно об успешном завершении операции. При нажатии на кнопку *ОК* будет открыта папка в файловой системе с собранными файлами DVWebTool.
 +
@@ -81,9 +86,129 @@ image::admin:dvweb-final-window.png[Успешное завершение сбо
 . Перезапустите службу *{wcs-new}*.
 . _DVWebTool_ будет установлена при первом открытии файла из карточки в ОС Windows. Программу также можно установить вручную из menu:Профиля пользователя[Установки > Установить DVWebTool].
 +
-После завершения установки программа _DVWebTool_ будет запущена автоматически, а в области уведомлений Windows появится значок программы (image:user:buttons/dv-web-ico.png[Две стрелочки в зелёном круге]).
+После завершения установки программа _DVWebTool_ будет запущена автоматически, а в области уведомлений Windows появится значок программы (image:new-admin-console@webclient:user:buttons/dv-web-ico.png[Две стрелочки в зелёном круге]).
 +
 Программа устанавливается только для текущего пользователя. Если на компьютере работает несколько пользователей (несколько профилей Windows), программу нужно установить каждому пользователю.
+
+// tag::inst-dvsup[]
+:wt: dvsupservice
+
+[#dvSupService]
+== Установка и запуск службы DVSupService
+
+// tag::dvsup[]
+Служба _DVSupService_ необходима для открытия файлов в офисном редакторе в ОС Linux.
+// end::dvsup[]
+
+WARNING: Служба _DVSupService_ работает только в ОС Linux. Для работы требуется установить {asp-bundle}.
+
+.Чтобы установить "DVSupService":
+. [[install-dvsup]]Выполните следующую команду:
++
+[tabs]
+====
+{os1}::
++
+[subs=attributes]
+$ sudo apt install docsvision-{wt}
+
+{os2}::
++
+[subs=attributes]
+$ sudo dnf install docsvision-{wt}
+====
++
+Служба будет установлена в каталог `/lib/docsvision/dvsupservice` от имени суперпользователя. Если на компьютере работает несколько пользователей, службу нужно установить один раз.
++
+В конфигурационном файле службы по адресу `/usr/lib/docsvision/dvsupservice/appsettings.json` можно указать настройку `WebClientAddress` (по умолчанию null). Если для этой настройки указать адрес сервера (например `\http://docsvision.server.com:5004`), служба будет принимать запросы на открытие только с указанного адреса. При необходимости можно указать несколько адресов.
++
+. [[launch-dvsup]]Запустите службу следующей командой:
++
+[subs=attributes]
+$ sudo systemctl start {wt}
++
+.Диалог сохранения в Р7-Офис
+image::new-admin-console@webclient:user:r7-notice.png[Диалог сохранения в Р7-Офис]
++
+WARNING: При работе _DVSupService_ с Р7-Офис может появляться диалог сохранения. В таком случае необходимо, не изменяя директорию, нажать menu:Сохранить[Да].
++
+. Посмотреть журнал работы можно по адресу `/var/log/docsvision/dvsupservice/$ДД-ММ-ГГГГ_DvSupService.log`. +
+Путь по умолчанию может быть изменён в конфигурационном файле службы:
++
+[source,json]
+----
+{
+"fileName": "/var/log/docsvision/dvsupservice/${shortdate}_DvSupService.log"
+}
+----
++
+. [[about-dvsup]]Чтобы просмотреть информацию о службе, выполните команду:
++
+[tabs]
+====
+{os1}::
++
+[subs=attributes]
+$ apt list docsvision-{wt}
+
+{os2}::
++
+[subs=attributes]
+$ dnf list docsvision-{wt}
+====
++
+. [[update-dvsup]]Обновить службу можно, выполнив следующие команды:
++
+[tabs]
+====
+{os1}::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install docsvision-{wt}
+----
+
+{os2}::
++
+[subs=attributes]
+$ sudo dnf update docsvision-{wt}
+====
++
+. Удалить службу можно с помощью следующей команды:
++
+[tabs]
+====
+{os1}::
++
+[subs=attributes]
+$ sudo apt-get purge --autoremove docsvision-{wt}
+
+{os2}::
++
+[subs=attributes]
+$ sudo dnf remove package docsvision-{wt}
+====
+
+[#dvsup-user]
+=== Сменить пользователя DVSupService
+
+// tag::dvsup[]
+По умолчанию служба _DVSupService_ запускается от имени пользователя ROOT.
+
+. Чтобы запустить службу от имени другого пользователя, необходимо выполнить следующую команду:
++
+ sudo systemctl edit dvsupservice
++
+. Записать следующее содержимое в появившемся окне:
++
+ [Service]
+ User=user
+ Group=user
++
+В примере выше `user` -- пользователь, от имени которого необходимо запускать _DVSupService_.
+// end::dvsup[]
+// end::inst-dvsup[]
 
 // == Кластер DVWebTool
 
