@@ -180,11 +180,6 @@ include::new-admin-console@install-linux:ROOT:dvfileservice.adoc[tags=console]
 ----
 {
   "DocsVision": {
-    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
-    "SettingsService": {
-      "ConnectionString": "http://localhost:5200/api", <.>
-      "ApiKey": "anything" <.>
-    },
     "Server": {
       "Databases": {
         "alias": "Database-connection-string" <.>
@@ -192,34 +187,12 @@ include::new-admin-console@install-linux:ROOT:dvfileservice.adoc[tags=console]
     }
   },
   "NLog": { <.>
-    "targets": {
-      "logFile": {
-        "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/fileservice/${shortdate}test1369.log",
-        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
-      }
-    },
-    "rules": [
-      {
-        "logger": "*",
-        "minLevel": "Warn",
-        "writeTo": "logFile"
-      }
-    ]
   },
   "AllowedHosts": "*",
   "Kestrel": { <.>
-    "Endpoints": {
-      "Http": {
-        "Url": "http://*:5007"
-      }
-    }
   }
 }
 ----
-<.> `ServiceId` -- уникальный идентификатор Сервера приложений, с базами которого будет работать серверная консоль.
-<.> `ConnectionString` -- адрес {of-sett-serv}.
-<.> `ApiKey` -- API-ключ {of-sett-serv}.
 <.> `alias` -- <<connection-string,строка подключения>> к БД.
 <.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
 <.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:platform:console:https-access.adoc[].
