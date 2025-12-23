@@ -5,7 +5,7 @@
 
 = Установка и настройка Службы {ws}
 
-include::install-linux::partial$limitation.adoc[]
+include::new-admin-console@install-linux::partial$limitation.adoc[]
 
 Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
 
@@ -13,9 +13,9 @@ include::install-linux::partial$limitation.adoc[]
 Служба {ws} данной версии несовместима с модулем {sm}.
 // end::sm-incompat[]
 
-WARNING: Перед установкой ознакомьтесь с разделом "xref:6.1@workerservice:ROOT:requirements.adoc[]".
+WARNING: Перед установкой ознакомьтесь с разделом "xref:new-admin-console@workerservice:ROOT:requirements.adoc[]".
 
-include::6.1@platform:admin:partial$install.adoc[]
+include::new-admin-console@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -43,10 +43,24 @@ include::6.1@platform:admin:partial$install.adoc[]
 ----
 sudo systemctl start dvworkerservice
 ----
+
+[#ws-ext]
+== Установка расширения Службы {ws} для {of-mc}
+
+Расширение Службы {ws} для {of-mc} добавляет функциональность для работы со Службой {ws}: настройка службы в Консоли, просмотр сообщений. Расширение обязательно для установки в версии {of-mc} 6.2 и выше.
+
+:of: Расширение Службы {ws} для {of-mc}
+// :file: appsettings конфига нет?
+:wt: ext-ws-mc
+.Чтобы установить расширение Службы {ws} для {of-mc}:
+. Выполните следующие команды, чтобы установить {of}:
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 // end::linux[]
 
 [#windows]
 == Установка Службы {ws} на Windows
+
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=for-wincl]
 
 Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
 
@@ -107,7 +121,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 .Чтобы установить клиентскую часть модуля вручную:
 . Запустите пакет установки `{dv} Worker service client.msi` вручную.
 +
-Для установки клиентской части модуля используются область и каталог установки, указанные в конфигурационном файле модуля {pl}, см. документацию модуля {pl} xref:6.1@platform:console:config-client.adoc[].
+Для установки клиентской части модуля используются область и каталог установки, указанные в конфигурационном файле модуля {pl}, см. документацию модуля {pl} xref:new-admin-console@platform:console:config-client.adoc[].
 // (указана в приветственном окне мастера установки)  установки, которые были использованы при установке модуля {pl}.
 +
 . Примите условия лицензионного соглашения, чтобы продолжить установку.
@@ -119,7 +133,7 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 . Чтобы удалить модуль в ОС Linux, выполните команду:
 +
-include::6.1@platform:admin:partial$delete.adoc[]
+include::new-admin-console@platform:admin:partial$delete.adoc[]
 +
 Компоненты модуля следует удалять до удаления компонентов модуля _{pl}_.
 +
