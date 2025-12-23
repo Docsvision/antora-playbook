@@ -1,12 +1,14 @@
+= Установка и настройка {of-mc}
+
 // tag::linux[]
 :of-what: {of-sett-serv}
 
-= Установка и настройка {of-mc}
-
-WARNING: В данной версии установка {mc} предусмотрена только в ОС Linux.
-
 {mc} является основным инструментом конфигурации системы, необходимым для первоначальной настройки всех модулей системы, также без {of-mc} не будет функционировать модуль "xref:new-admin-console@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+// end::linux[]
 
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+// tag::linux[]
 [#console]
 == Установка {of-mc}
 
@@ -14,8 +16,10 @@ WARNING: В данной версии установка {mc} предусмот
 ====
 {mc} можно установить на отдельный от {dv} сервер. В таком случае, пользователь, от имени которого запускается {mc}, должен быть добавлен в конфигурационном файле в параметр `{dv-web-admin-cns-admins-serv}` на сервере с Консолью управления. Также должны быть выполнены соответствующие настройки в конфигурационном файле модуля, подробнее см. ниже.
 ====
+// end::linux[]
 
 --
+// tag::linux[]
 .Чтобы установить {mc}:
 :of: {of-mc}
 :file: appsettings
@@ -46,6 +50,7 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 <.> `ManagementConsoleAddress` -- Адрес {of-mc}.
 <.> `Catalogs` -- см. подробнее <<domain,Настройка работы в домене>>.
 <.> `Docsvision Management Console Administrators` -- Пользователи, которым разрешен вход в Консоль управления.
+// end::linux[]
 // end::config[]
 +
 . Запустите службу Консоли:
@@ -57,26 +62,27 @@ sudo systemctl start dvconsole
 +
 include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 --
-// end::linux[]
 
 [#settings-service]
-include::new-admin-console@settings-service:admin:install.adoc[leveloffset=+1]
+include::new-admin-console@settings-service:admin:install.adoc[tags=linux,leveloffset=+1]
 
-// tag::linux[]
 [#external-api]
 == Установка сервиса внешнего API
 
 Установка Сервиса внешнего API не требуется в версиях {of-mc} 6.2 и выше.
 
+// tag::register-services[]
 [#register-services]
 == Регистрация модулей системы
 
 Для возможности настройки модулей системы через интерфейс {of-mc} необходимо, чтобы в конфигурационном файле настраиваемого модуля, {pl} (*{sss-new}*), {fs} (*{fss-new}*), {wc} (*{wcs-new}*), {wf} (*{wfs-new}*), были заданы следующие параметры:
 
+--
 * menu:ServiceId[] -- уникальный идентификатор данного экземпляра модуля. Параметр задаётся автоматически при установке модуля.
 * menu:SettingsService[ConnectionString] -- адрес подключения к хранилищу настроек. Параметр необходимо указать вручную.
 * menu:SettingsService[ApiKey] -- ключ приложения для подключения к хранилищу настроек. Параметр необходимо указать вручную.
-// end::linux[]
+--
+// end::register-services[]
 
 [#ws-ext]
 == Установка расширения Службы {ws} для {of-mc}
@@ -93,9 +99,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 [#webc-ext]
 == Установка расширения {wc}а для {of-mc}
 
-:what-mod: {wc}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
 Расширение {wc}а для {of-mc} необходимо для импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
 
 .Чтобы установить "Расширение {wc}а для {of-mc}":
@@ -106,9 +109,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 
 [#pl-ext]
 == Установка расширения сервера приложений для {of-mc}
-
-:what-mod: {pl}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 Расширение сервера приложений для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки Сервера приложений из {of-mc}.
 
@@ -123,9 +123,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 
 Расширение модуля {wf} для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки модуля {wf} из {of-mc}.
 
-:what-mod: {wf}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
 .Чтобы установить "Расширение модуля {wf} для {of-mc}":
 :of: Расширения модуля {wf} для {of-mc}
 :wt: ext-workflow-mc
@@ -134,9 +131,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 
 [#fs-ext]
 == Установка расширения {of-fs} для {of-mc}
-
-:what-mod: {fs}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 Расширение {of-fs} для {of-mc} включает связанные с модулем ресурсы локализации, обработчики и (при наличии) специализированные редакторы для настройки {of-fs} из {of-mc}.
 
