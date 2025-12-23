@@ -1,1 +1,120 @@
-include::5.5.5@platform:admin:pre-config-db.adoc[]
+= Предварительная настройка СУБД
+
+[#msSql]
+== Настройка СУБД {mssql} Server
+
+Сервер {mssql} Server, на котором будет размещаться база данных {dv}, должен быть настроен специальным образом.
+
+. Переключите режим аутентификации (Authentication) СУБД в положение _SQL Server and Windows_ или _Windows_.
+. Отключите опцию _Case sensitive collation_.
+. Убедитесь, что на компьютере с СУБД и на предназначенном для установки серверной части компьютере, синхронизированы время и часовой пояс.
+. В настройках {mssql} Server установите параметры _remote access_ и _remote admin connections_ в значение `1`.
++
+[NOTE]
+====
+Проверить текущие настройки можно, выполнив процедуру _sp_configure_.
+====
++
+. Включите параметр конфигурации сервера http://msdn.microsoft.com/ru-ru/library/ms190693.aspx[xp_cmdshell], позволяющий системным администраторам контролировать, исполнение расширенной системной процедуры _xp_cmdshell_ (исполнение этой процедуры автоматически разрешается в {dv}, только если явно задан каталог для хранения записей журнала).
++
+NOTE: Если данный параметр отключен, то процедура очистки журнала проводиться не будет.
++
+. Убедитесь, что на сервере с {mssql} Server открыт порт `1433` для подключения к СУБД.
+
+[#pgSql]
+== Настройка СУБД {pgsql}
+
+.Установите часовой пояс в настройках {pgsql}.
+. Откройте конфигурационный файл `C:\Program Files\PostgresPro\12\data\postgresql.conf` (используйте свой путь установки {pgsql}).
+. Измените значение параметров:
++
+* _timezone_ на _Europe/Moscow_,
+* _lc_messages_ на _en_US.UTF-8_.
+* _standard_conforming_strings_ переведите в значение `On`.
+* Значения параметров _shared_buffers_, _temp_buffers_, _work_mem_, _maintenance_work_mem_ увеличьте соразмерно имеющемуся дисковому пространству и размеру доступной оперативной памяти. С документацией по параметрам можно ознакомиться https://www.postgresql.org/docs/9.1/runtime-config-resource.html[на сайте {pgsql}].
+* Аналогичным образом увеличьте значение параметра _effective_cache_size_, см. подробнее https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE[на сайте {pgsql}].
+* Установите параметр _plan_cache_mode_ в значение `force_generic_plan`. Подробнее о параметре см. https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-PLAN-CACHE-MODE[на сайте {pgsql}].
+* Добавьте параметр _checkpoint_completion_target_ со значением `0.9`. Подробнее о параметре см. https://pgpedia.info/c/checkpoint_completion_target.html[в сети интернет].
+* При необходимости выполните `VACUUM FULL` базы данных.
++
+. Сохраните изменения и перезапустите {pgsql}.
+. Установите службу <<pg-agent,PgAgent>>.
++
+include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=pangolinagent]
++
+. Если для подключения к {pgsql} планируется использовать аутентификацию Windows, необходима <<win-auth,дополнительная настройка СУБД>>.
+. Для пользователя, от имени которого будет выполняться инициализация БД {dv} и последующее управление, необходимы права `SUPERUSER`.
+
+[#win-auth]
+=== Настройка {pgsql} для использования аутентификации Windows
+
+. [[users]]Создайте в {pgsql} пользователей и назначьте для пользователей соответствующие права:
+.. Для работы xref:6.1@platform:ROOT:requirements-server-account.adoc[сервера {dv}], сервиса xref:6.1@platform:ROOT:requirements-full-text-account.adoc[полнотекстового поиска] и xref:6.1@platform:ROOT:requirements-file-service-account.adoc[файлового сервиса] может использоваться одна учетная запись.
++
+.. Пользователя, от имени которого будет работать pgAgent.
++
+Если имя доменной учетной записи пользователя или сервисной учетной записи содержит буквы верхнего регистра (например, `company\Sidorov.G`), в {pgsql} необходимо добавить двух пользователей:
++
+- С сохранением оригинального регистра в имени, а именно: `Sidorov.G`.
+- С использованием букв только нижнего регистра, а именно: `sidorov.g`.
++
+. В файл `pg_hba.conf` добавьте строки:
++
+[source]
+----
+host all all all sspi map=mymap
+host all all all md5
+----
++
+. [[register]]В файл `pg_ident.conf` добавьте строки сопоставления пользователей Windows с пользователями СУБД, созданными <<users,ранее>>:
++
+[source]
+----
+mymap service@COMPANY service <.> <.>
+mymap petrov.b@COMPANY petrov.b
+mymap postgres@COMPANY postgres <.>
+----
+<.> имя-пользователя-в-домене@название-домена.
+<.> service -- имя пользователя в СУБД {pgsql}.
+<.> Доменный пользователь, от имени которого будет запущен pgAgent.
++
+. Запустите сервис {pgsql} под учетной записью домена, в котором зарегистрированы пользователи из <<register,предыдущего>> шага.
+. В настройках службы "{pgsql} Scheduling Agent -- pgAgent" измените пользователя на доменного пользователя из шага <<register,ранее>> (в данном примере: `postgres@COMPANY`).
+. Измените строку запуска службы "{pgsql} Scheduling Agent -- pgAgent" в реестре, в ветке `{hklm}\SYSTEM\CurrentControlSet\Services\pgAgent`. В значении `user` нужно указать пользователя {pgsql} из шага <<register,ранее>>. Например:
++
+[source]
+----
+C:\PROGRA~2\pgAgent\bin\pgagent.exe RUN pgAgent host=localhost port=5432 user=postgres dbname=postgres
+----
++
+[NOTE]
+====
+За более детальной информацией по использованию аутентификации Windows в {pgsql} обратитесь к документации {pgsql} или другим ресурсам.
+====
+
+[#pg-agent]
+=== Установка службы PgAgent
+
+. Службу _PgAgent_ предпочтительно устанавливать на сервер с СУБД {pgsql}. https://www.pgadmin.org/docs/pgadmin4/4.x/pgagent_install.html[Отдельная установка] возможна, но не рекомендуется.
+. Чтобы установить службу _PgAgent_, выполните шаги из официальной инструкции на https://www.pgadmin.org/docs/pgadmin4/latest/pgagent.html[данной странице].
++
+include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=pgagent]
++
+. Служба _PgAgent_ может быть установлена на ОС Linux, Windows и macOS, см. инструкцию по загрузке пакетов установки _PgAgent_ на https://www.pgadmin.org/download/[официальном сайте].
+. Далее установите _PgAgent_ на компьютер с ОС Windows согласно https://www.pgadmin.org/docs/pgadmin4/latest/pgagent_install.html[инструкции].
++
+WARNING: Устанавливайте _PgAgent_ после завершения установки {pgsql}.
+
+[start=5]
+.Затем выполните следующие шаги:
+. Откройте файл `C:\Users\Пользователь,-запустивший-службу-pgAgent\AppData\Roaming\postgresql\pgpass.conf`.
+. Добавьте в файл `pgpass.conf` строку:
++
+[source]
+----
+адрес-сервера-PGSQL:порт:имя-базы:имя-пользователя:пароль-пользователя
+----
++
+В строке нужно указать свои значения для адреса сервера {pgsql}, порта подключения, имени БД (`*` будет воспринято как все БД), имени и пароля пользователя, под которым выполняется подключение к серверу {pgsql}.
++
+. Запустите или перезапустите службу "{pgsql} Scheduling Agent -- pgAgent".

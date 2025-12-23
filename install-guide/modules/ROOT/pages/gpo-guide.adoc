@@ -25,19 +25,19 @@ NOTE: Следующие шаги выполняются на машине с к
 . Откройте текстовый редактор (например, Блокнот), чтобы создать новый файл.
 . Скопируйте и вставьте следующий скрипт в окно редактора:
 +
-[source,shell]
+[source,shell,subs=attributes+]
 ----
-msiexec /i "Docsvision 5 Platform client.msi" ALLUSERS=1 /quiet <.> <.>
-msiexec /i "Docsvision 5 Worker service client.msi" ALLUSERS=1 /quiet
-msiexec /i "Docsvision 5 WindowsClient.msi" ALLUSERS=1 /quiet DVURL="http://company.com/docsvision" <.>
-msiexec /i "Docsvision 5 ApprovalDesigner client.msi" ALLUSERS=1 /quiet
-msiexec /i "Docsvision 5 BackOffice client.msi" ALLUSERS=1 /quiet
-msiexec /i "Docsvision 5 DocumentManagement client.msi" ALLUSERS=1 /quiet
-msiexec /i "Docsvision 5 TakeOffice client.msi" ALLUSERS=1 /quiet
-msiexec /i "Docsvision 5 Workflow client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} Platform client.msi" ALLUSERS=1 /quiet <.> <.>
+msiexec /i "{dv} Worker service client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} WindowsClient.msi" ALLUSERS=1 /quiet DVURL="http://company.com/docsvision" <.>
+msiexec /i "{dv} ApprovalDesigner client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} BackOffice client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} DocumentManagement client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} TakeOffice client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} Workflow client.msi" ALLUSERS=1 /quiet
 <.>
 ----
-<.> `Docsvision 5 Platform client.msi` -- полный сетевой путь, скопированный на шаге 3.
+<.> `{dv} Platform client.msi` -- полный сетевой путь, скопированный на шаге 3.
 <.> Флаг `ALLUSERS=1` означает, что установка будет производиться для всех пользователей.
 +
 +
