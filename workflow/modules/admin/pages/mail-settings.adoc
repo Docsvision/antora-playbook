@@ -15,6 +15,13 @@ include::partial$mancons.adoc[]
 include::user:functions/mail-gate/mailgate.adoc[tags=connection-name]
 ====
 
+[NOTE]
+====
+include::user:functions/mail-gate/mailgate.adoc[tags=connection-name]
+
+Возможность доступна в модуле {wf} версии {cu253-wf-req} и выше, см. подробнее "xref:user:functions/mail-gate/mailgate.adoc[]".
+====
+
 * MS Exchange
 +
 WARNING: Не поддерживается в Linux.
@@ -68,7 +75,7 @@ include::dv6@system::partial$excerpts.adoc[tags=pop3]
         "SmtpUseSsl": "0", <.>
 
         "WebAutodiscoverURL": "http://domain.com", <.>
-        "WebUserName": "account@domain.com", <.>
+        "WebUserName": "account@DOMAIN.COM", <.>
         "WebPassword": "password", <.>
         "WebServiceVersion": 0, <.>
         "WebUseDefaultCredentials": 0 <.>
@@ -112,7 +119,7 @@ SSL при работе по SMTP поддерживается только ка
 +
 Workflow использует функцию https://docs.microsoft.com/ru-ru/exchange/client-developer/exchange-web-services/autodiscover-for-exchange[автообнаружения] точки подключения к Exchange Web Services по адресу электронной почты, указанной в поле _Адрес сервера для подключения_. Если указан явный адрес сервера, автообнаружение будет отключено. См. дополнительные настройки автообнаружения <<redirect,ниже>>.
 +
-<.> `WebUserName` -- имя пользователя для аутентификации MS Exchange Web Services, если используется тип аутентификации _Простая_.
+<.> `WebUserName` -- имя пользователя для аутентификации MS Exchange Web Services, если используется тип аутентификации _Простая_. Домен не зависит от регистра.
 <.> `WebPassword` -- пароль пользователя для аутентификации MS Exchange Web Services, если используется тип аутентификации _Простая_.
 <.> `WebServiceVersion` -- версия сервиса: 0 - 2007 SP1, 1 - 2010.
 <.> `WebUseDefaultCredentials` -- тип аутентификации пользователя:
