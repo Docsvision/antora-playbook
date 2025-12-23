@@ -1,16 +1,16 @@
 = Подключить полнотекстовый поиск {mssql} Server
 
 . Если требуется индексировать содержимое файлов PDF и Microsoft Office, выполните инструкцию, приведенную в пункте xref:search-pdf-office.adoc[].
-include::admin:partial$excerpts.adoc[tags=openFullText]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=openFullText]
 . Перед добавлением БД в Консоли управления, необходимо указать адрес сервиса полнотекстового индексирования. По умолчанию сервис прослушивает порт `5006`.
 +
 .Добавление адреса сервиса полнотекстового индексирования
-image::admin:fulltext-add-db.png[Добавление адреса сервиса полнотекстового индексирования]
+image::fulltext-add-db.png[Добавление адреса сервиса полнотекстового индексирования]
 +
 . Нажмите кнопку *Добавить базу данных*, чтобы открыть окно добавления БД к сервису полнотекстового индексирования.
 +
 .Окно добавления БД к сервису полнотекстового индексирования
-image::admin:add-db-to-fulltext.png[Окно добавления БД к сервису полнотекстового индексирования]
+image::add-db-to-fulltext.png[Окно добавления БД к сервису полнотекстового индексирования]
 +
 . В списке _Название базы_ выберите подключаемую БД {mssql} Server. Нажмите *Далее*, чтобы продолжить настройку.
 +
@@ -19,7 +19,7 @@ image::admin:add-db-to-fulltext.png[Окно добавления БД к сер
 . Настройте параметры подключения БД к системе полнотекстового поиска.
 +
 .Окно настройки параметров подключения БД к системе полнотекстового поиска
-image::admin:fulltext-parameters-db.png[Окно настройки параметров подключения БД к системы полнотекстового поиска]
+image::fulltext-parameters-db.png[Окно настройки параметров подключения БД к системы полнотекстового поиска]
 +
 ****
 .. Если требуется, в поле _Полнотекстовое хранилище_ измените путь к каталогу файлов полнотекстовой группы. В поле должен быть указан локальный каталог на сервере баз данных.
@@ -50,29 +50,29 @@ image::admin:fulltext-parameters-db.png[Окно настройки параме
 ****
 +
 . В следующем окне, установите переключатель в значение *Xml индексирование (рекомендуется)*
-include::admin:partial$excerpts.adoc[tags=flagContinue]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=flagContinue]
 +
 .Окно выбора индексируемых типов карточек
-image::admin:index-cards-select.png[Окно выбора индексируемых типов карточек]
+image::index-cards-select.png[Окно выбора индексируемых типов карточек]
 +
 . В следующем окне, установите переключатель в значение *Индексировать оперативные файлы* или *Индексировать оперативные и архивные файлы*
-include::admin:partial$excerpts.adoc[tags=flagContinue]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=flagContinue]
 +
 .Окно выбора индексируемых типов файлов
-image::admin:index-files.png[Окно выбора индексируемых типов файлов]
+image::index-files.png[Окно выбора индексируемых типов файлов]
 +
 . Настройте параметры индексирования и обновления индексов.
 +
 .Окно настройки параметров индексирования
-image::admin:index-parameters.png[Окно настройки параметров индексирования]
+image::index-parameters.png[Окно настройки параметров индексирования]
 +
 ****
 * _Максимальный размер транзакции_ --
-include::admin:partial$excerpts.adoc[tags=maxIndex]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=maxIndex]
 * _Период инициализации индексов_ --
-include::admin:partial$excerpts.adoc[tags=createIndex]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=createIndex]
 * _Обновлять индексы один раз в_ и _Обновлять индексы каждые_ --
-include::admin:partial$excerpts.adoc[tags=updateIndex]
+include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=updateIndex]
 ****
 +
 . Нажмите *Завершить*, чтобы подключить БД к сервису полнотекстового индексирования с текущими настройками.
@@ -81,4 +81,4 @@ include::admin:partial$excerpts.adoc[tags=updateIndex]
 +
 . Включите индексирование добавленной базы данных.
 +
-include::admin:partial$indexingProperties.adoc[]
+include::new-admin-console@resource-kit:console:partial$indexingProperties.adoc[]

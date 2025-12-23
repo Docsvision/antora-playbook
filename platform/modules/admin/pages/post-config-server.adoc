@@ -1,5 +1,3 @@
-:kvr: 'Конструктор Web-разметок'
-:pu: Панель управления Web-клиентом
 :with-console: yes
 :with-config: no
 :do-what: варианта обновления системной БД
@@ -10,32 +8,34 @@
 
 include::admin:partial$mancons.adoc[]
 
-[#webc]
-== Настройка {wc}а
-
-После обновления БД выполните настройку программ {pu} и {kvr}.
-
-include::6.1@webclient:admin:install-server.adoc[tags=kvr-pu]
+// [#webc]
+// == Настройка {wc}а
+//
+// После обновления БД выполните настройку программы {kvr}.
+//
+// include::new-admin-console@webclient:admin:install-server.adoc[tags=kvr-pu]
 
 [#accounts]
 == Настройка учетных записей сервисов {dv}
 
 Администратор должен самостоятельно настроить права учетных записей служб
-xref:6.1@platform::requirements-server-account.adoc[сервера {dv}], сервиса xref:6.1@platform::requirements-full-text-account.adoc[полнотекстового поиска] и xref:6.1@platform::requirements-file-service-account.adoc[файлового сервиса].
+xref:new-admin-console@platform::requirements-server-account.adoc[сервера {dv}], сервиса xref:6.1@platform::requirements-full-text-account.adoc[полнотекстового поиска] и xref:6.1@platform::requirements-file-service-account.adoc[файлового сервиса].
 
 Рекомендуется назначить персональную лицензию учетной записи указанных сервисов. См. подробнее в документации модуля _{pl}_. раздел "xref:6.1@platform:console:manage-licenses.adoc#personalLicense[Назначение персональной лицензии]".
 
+// tag::controller[]
 [#group]
 == Настройка группы пользователей на контроллере домена
 
 Если серверная часть модуля была установлена на компьютер, являющийся контроллером домена, нужно вручную добавить в локальную группу безопасности _{dv-users-serv}_ пользователей, которые будут работать с системой {dv}.
+// end::controller[]
 
-[#console]
-== Настройка {of-mc}
-
-Настройте модуль _Служба {ws}_ при помощи _{of-mc}_ по инструкции, приведённой в документации модуля _{mc}_, раздел "xref:6.1@mgmtconsole:user:initial-configuration.adoc[]".
-
-Без данной настройки:
-
-* Не будут создаваться и отправляться группы заданий.
-* Не будут отправляться почтовые уведомления исполнителям.
+// [#console]
+// == Настройка {of-mc}
+//
+// Настройте модуль _Служба {ws}_ при помощи _{of-mc}_ по инструкции, приведённой в документации модуля _{mc}_, раздел "xref:6.1@mgmtconsole:user:initial-configuration.adoc[]".
+//
+// Без данной настройки:
+//
+// * Не будут создаваться и отправляться группы заданий.
+// * Не будут отправляться почтовые уведомления исполнителям.

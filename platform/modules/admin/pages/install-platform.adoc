@@ -66,6 +66,18 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 --
 
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
++
+. Запустите службу Файлового сервиса:
++
+ $ sudo systemctl start dvfileservice
+
 [#fs-ext]
 == Установка расширения {of-fs} для {of-mc}
 
@@ -81,18 +93,6 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 --
-
-[#file-service]
-== Установка файлового сервиса
-
-. Установите пакеты модуля:
-+
-:wt: fileservice
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
-+
-. Запустите службу Файлового сервиса:
-+
- $ sudo systemctl start dvfileservice
 
 [#windows-pl]
 == Установка серверных компонентов на Windows
