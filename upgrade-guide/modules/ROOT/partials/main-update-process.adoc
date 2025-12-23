@@ -1,0 +1,24 @@
+. В БД {pgsql} остановите pgAgent.
+. Обновите компоненты системы на сервере Linux командами вида:
++
+[tabs]
+====
+{os1}::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install --only-upgrade docsvision-{update}*
+----
+
+{os2}::
++
+[source,subs=attributes]
+----
+sudo dnf update docsvision-{update}*
+----
+====
++
+include::ROOT:partial$update-every-module.adoc[tags=config]
++
+. Перезапустите *{sss-new}* и все сервисы {dv} на Linux.
