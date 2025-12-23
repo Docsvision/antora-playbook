@@ -14,7 +14,9 @@
 
 . Загрузите систему {es}.
 +
-* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}]
+// или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке]
+и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
 WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
@@ -33,7 +35,8 @@ WARNING: Рекомендуемая версия: {es} {es-v}. Работосп�
 +
 При желании можно использовать настроенное зеркало репозитория с пакетами {es}.
 +
-. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es} или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
+. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es}.
+// или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
 +
 . Создайте папку `hunspell` с подпапками `en_US` и `ru_RU` в директории:
 +
@@ -127,6 +130,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 [tabs]
 ====
 ОС Windows::
++
 [source,subs=attributes+]
 ----
 "C:\Program Files\Elastic\Elasticsearch\bin\Elasticsearch-plugin.bat" install file://%%path-to-ingest-attachment-{es-v}.zip%% <.>
@@ -134,6 +138,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 <.> `%%path-to-ingest-attachment-{es-v}.zip%%` необходимо заменить на путь загрузки компонента.
 
 ОС Linux::
++
 ----
 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch "file://$(realpath ingest-attachment-7.14.0.zip)" <.>
 ----
@@ -194,8 +199,9 @@ sudo sysctl --system
 
 [#docker]
 == Установка с помощью Docker
+// Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или
 
-. Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или соберите его самостоятельно:
+. Соберите образ {es}:
 +
 [source,dockerfile]
 ----
@@ -224,7 +230,7 @@ version: "3.8"
 
 services:
   elasticsearch:
-    image: packages.docsvision.com/elasticsearch:7.14.0
+    image: ./elasticsearch7.14.0
     ports:
       - 9200:9200
     environment:
