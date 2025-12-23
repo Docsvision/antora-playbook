@@ -1,0 +1,72 @@
+:page-aliases: install-platform.adoc
+
+= Установка модулей {of-mc} и {pl}
+
+include::dev@mgmtconsole:admin:install.adoc[tags=linux]
+
+include::new-admin-console@workerservice:admin:install.adoc[tags=linux,leveloffset=+1]
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=linux,leveloffset=+1]
+
+include::dev@mgmtconsole:admin:install.adoc[tags=string]
+
+include::dev@mgmtconsole:admin:install.adoc[tags=cert]
+
+[#linux-pl]
+== Установка модуля {pl} на Linux
+
+После завершения xref:pre-config-server.adoc[предварительной настройки сервера] установите серверные компоненты модуля, используя команды ниже.
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
+
+[#pl-ext]
+== Установка расширения сервера приложений для {of-mc}
+
+Расширение сервера приложений для {of-mc} необходимо для работы связанных с модулем ресурсов локализации, обработчиков и (при наличии) специализированных редакторов для настройки Сервера приложений из {of-mc}.
+
+:what-mod: {pl}
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение сервера приложений для {of-mc}":
+:of: Расширения сервера приложений для {of-mc}
+:wt: ext-platform-mc
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+--
+
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
++
+. Подключите БД в настрйках {of-fs} в {of-mc}, см. подробнее xref:dev@mgmtconsole:servers:fileservice-database.adoc[].
+. Запустите службу Файлового сервиса:
++
+ $ sudo systemctl start dvfileservice
+
+[#fs-ext]
+== Установка расширения {of-fs} для {of-mc}
+
+Расширение {of-fs} для {of-mc} необходимо для работы связанных с модулем ресурсов локализации, обработчиков и (при наличии) специализированных редакторов для настройки {of-fs} из {of-mc}.
+
+:what-mod: {fs}
+include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение {of-fs} для {of-mc}":
+:of: Расширения {of-fs} для {of-mc}
+:wt: ext-fileservice-mc
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+--

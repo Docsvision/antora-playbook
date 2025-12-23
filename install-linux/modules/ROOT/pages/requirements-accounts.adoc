@@ -1,0 +1,49 @@
+:page-aliases: requirements-full-text-indexing.adoc
+
+= Требования к учётным записям {dv}
+
+include::partial$excerpts.adoc[tags=system-accounts]
+
+Серверная часть {dv} устанавливает в ОС Windows собственные сервисы:
+
+{mc}::
+Служба *{wacs-new}* реализует функции сервера реализует.
+
+Сервер {dv}::
+Включает службу *{sss-new}* и веб-приложение сервера {dv}. Сервер {dv} обеспечивает возможность подключения клиентских приложений.
+
+Сервис полнотекстового индексирования::
+*{fts-new}*. Сервис полнотекстового индексирования обеспечивает индексацию данных в БД {dv}.
+
+Сервис отложенных операций с файлами::
+*{fss-new}*. Сервис отложенных операций с файлами удаляет файлы из хранилища бинарных данных файлов, а также переносит бинарные данные файлов из одного хранилища в другое.
+
+Сервис управления бизнес-процессами (СУБП)::
+*{wfs-new}*. СУБП обрабатывает бизнес-процессы {dv}.
+
+Служба {ws}::
+Служба *{wss-new}* предназначена для выполнения задач, поступивших от других модулей {dv} в фоновом режиме.
+
+[NOTE]
+====
+Администратор должен самостоятельно настроить права учетных записей указанных выше служб. Учётные записи можно объединить в группу для удобства назначения прав.
+
+Требования учетных записей сервисов {dv} приведены ниже.
+
+Рекомендуется xref:dev@mgmtconsole:servers:appserver-license.adoc#personal-license[назначить] учетным записям сервиса <<fulltext,полнотекстового индексирования>> и <<workflow,СУБП>> персональную лицензию.
+====
+
+[#appserver]
+include::new-admin-console@install-linux:ROOT:partial$requirements-server-account.adoc[leveloffset=1]
+
+[#fileservice]
+include::new-admin-console@install-linux:ROOT:partial$requirements-file-service-account.adoc[leveloffset=1]
+
+[#fulltext]
+include::new-admin-console@install-linux:ROOT:partial$requirements-full-text-account.adoc[leveloffset=1]
+
+[#worker]
+include::new-admin-console@workerservice:ROOT:requirements-account.adoc[leveloffset=1]
+
+[#workflow]
+include::new-admin-console@workflow:ROOT:requirements-account.adoc[leveloffset=1]

@@ -1,0 +1,38 @@
+// tag::SSD[]
+Рекомендуется использовать твердотельный накопитель.
+// end::SSD[]
+
+//tag::utils[]
+которые генерируются автоматически (утилитой _{dvcm}_ или при загрузке в базу данных библиотек карточек.
+//end::utils[]
+
+// tag::system-accounts[]
+WARNING: Не рекомендуется авторизоваться на клиентских рабочих местах под системными учётными записями, т.к. это может привести к ошибкам в работе системы.
+// end::system-accounts[]
+
+// tag::winconfig[]
+Для модуля {pl} версии {pl-cu-mc} настройки из данного раздела выполняются в конфигурационном файле {wincl}а, расположенном по адресу `/usr/lib/docsvision/platform/config/windows-client-part.json`, в секции `"Site"`.
+// end::winconfig[]
+
+// tag::pangolinagent[]
+[NOTE]
+====
+PgAgent для Pangolin отсутствует в стандарных репозиториях.
+
+Служба подходящей версии может быть получена с `postgresql.org`, в случае {l-3} и {pgl-sql-v} это https://download.postgresql.org/pub/repos/yum/15/redhat/rhel-9-x86_64/[Red Hat Enterprise Linux 9 и {pgsql} 15] соответственно. Установите службу вместе с `libpq` из штатного репозитория. После установки необходимо скопировать расширение из `/usr/pgsql-15/share/extension/` в `/usr/pangolin-6.4/share/extension/`.
+
+Пути могут отличаться в зависимости от версии дистрибутива и соответствующего ей релиза {pgsql}.
+====
+// end::pangolinagent[]
+
+// tag::pgagent[]
+[NOTE]
+====
+При использовании Postgres Pro Standard потребуется скопировать расширение в директорию Postgres Pro, с помощью команды:
+
+[source,bash]
+----
+cp /usr/share/postgresql/11/extension/pgagent* /opt/pgpro/std-15/share/extension/
+----
+====
+// end::pgagent[]

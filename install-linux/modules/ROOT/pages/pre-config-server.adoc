@@ -1,1 +1,92 @@
-include::platform:admin:pre-config-server.adoc[]
+// tag::minimum[]
+:os1: Astra Linux
+
+= Предварительная настройка сервера Linux
+
+// Пустая строка нужны, чтобы не слипалось в инклуде upgrade guide 61-mc62 linux
+// end::minimum[]
+
+. В {os1} установите ПО, необходимое для подключения репозитория {dv} следующими командами:
++
+[source]
+----
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg lsb-release
+----
++
+В {os2} создайте файл для указания адреса репозитория:
++
+[source]
+----
+sudo nano /etc/yum.repos.d/docsvision.repo
+----
++
+. Подключите официальный репозиторий {dv} в качестве источника:
++
+[tabs]
+====
+{os1}::
++
+[source,bash]
+----
+sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
+echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
+
+{os2}::
++
+[source,bash]
+----
+[docsvision]
+name=Docsvision for RED OS $releasever
+baseurl=https://packages.docsvision.com/linux/6.1/redos/8.0/$basearch/main
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
+----
+====
++
+// tag::minimum[]
+//Это надо, иначе слипается в инклуде upgrade guide 61-mc62 linux
+. Для {os1} 1.7 подключите репозиторий ПО {ms} ({asp-bundle}) предпочтительным способом, например, как <<astranet,показано>> в инструкции ниже. Для {os2} перейдите сразу к <<kerb,следующему>> пункту.
+. [[kerb]]Чтобы иметь возможность использования сквозной аутентификации в {wc}е, {wincl}е, РМА и {of-mc} в Linux необходимо выполнить специальные настройки Kerberos и используемого браузера.
+
+// tag::astranet[]
+[#astranet]
+== Обновление .NET
+
+Для {os1} версии 1.7 потребуется подключить репозиторий Microsoft (см. ниже), в остальных случаях обновление происходит автоматически при обновлении {dv}, но может также выполняться вручную предпочтительным способом.
+
+.Только для {os1} 1.7:
+. Подключите репозиторий Microsoft:
++
+[source,bash]
+----
+curl -O https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get update
+----
++
+. Откройте файл `microsoft.pref` при помощи любого текстового редактора, например nano:
+
+ $ sudo nano /etc/apt/preferences.d/microsoft.pref
+
+. Добавьте в файл следующие строки:
++
+----
+Package: dotnet* aspnet* netstandard*
+Pin: origin packages.microsoft.com
+Pin-Priority: 1000
+----
++
+. Замените ранее установленную версию .NET из расширенного репозитория {os1} на официальную версию из репозитория Microsoft следующей командой:
++
+ $ sudo apt-get install --only-upgrade "dotnet*" "aspnet*" "netstandard*"
++
+. (Опционально) Пакеты .NET обновятся автоматически при обновлении {dv}, при необходимости их можно установить вручную:
++
+ $ sudo apt-get install aspnetcore-runtime-8.0
+
+// end::astranet[]
+// end::minimum[]
