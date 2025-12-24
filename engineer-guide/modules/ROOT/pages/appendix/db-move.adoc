@@ -1,1 +1,58 @@
-include::new-admin-console@platform:console:db-move.adoc[]
+:with-console: yes
+:with-config: no
+:do-what: варианта повторного подключения БД после переноса между серверами
+:link: "xref:dev@mgmtconsole:servers:db-master.adoc[]"
+:cns-section: menu:"Базы данных"["Мастер БД"]
+
+= Перенести БД между серверами
+
+include::new-admin-console@platform:admin:partial$mancons.adoc[]
+
+Перенос базы данных между серверами {dv} может потребоваться, чтобы подключить БД к другому серверу {dv}. Для переноса БД между серверами требуется опция лицензии _{dv} Concurrent Servers_, которая позволяет работать с одной БД нескольким серверам {dv}.
+
+
+[WARNING]
+====
+Перенесённая БД не будет доступна на сервере {dv}, с которого она была перемещена.
+====
+
+.Перед переносом необходимо определить, является ли БД единственной на сервере {dv}, с которого она перемещается:
+* Если база данных не является единственной на сервере {dv}, xref:dev@mgmtconsole:servers:db-detach.adoc[отключите] БД от сервера {dv}.
+* Если база данных является единственной на сервере {dv}, непосредственное отключение базы данных невозможно.
+
+.Выполните следующие действия, чтобы подготовить БД к переносу:
+. Убедитесь, что пользователи не работают с перемещаемой БД.
+include::system::partial$stop.adoc[]
+. Очистите (в SQL Server Management Studio) сервисные таблицы сессий и серверов Workflow командой:
++
+[source,sql]
+----
+DELETE [dbo].[dvsys_sessions]
+[dbo].[dvtable_{b4a2559b-45fd-4aba-919f-0f170ccddb5d}]
+----
++
+****
+Если команды вызвали ошибку: `The ALTER TABLE statement conflicted with the FOREIGN KEY constraint "fk_SessionID_dvsys_search_results".The conflict occurred in database "ИМЯ-БД", table "dbo.dvsys_sessions", column 'SessionID'`, удалите записи из ссылающихся таблиц, у которых нет внешнего ключа с каскадным удалением.
+
+.Узнать имена ссылающихся таблиц можно с помощью запроса:
+[source,sql]
+----
+select OBJECT_NAME(tColumns.parent_object_id) ReferencingTable, OBJECT_NAME(tColumns.constraint_object_id)
+ReferencingKey, tKeys.delete_referential_action_desc [OnDeleteAction] from sys.foreign_key_columns tColumns
+join sys.foreign_keys tKeys ON tColumns.constraint_object_id = tKeys.[object_id]
+where tColumns.referenced_object_id = OBJECT_ID('[dbo].[dvsys_sessions]')
+----
+****
+
+[NOTE]
+====
+После отключения БД от одного сервера, её можно подключить к другому.
+
+.Обратите внимание:
+include::platform:admin:partial$excerpts.adoc[tags=sat-move]
++
+* Подробнее про сателлитные БД см. в разделе:
++
+** "xref:dev@mgmtconsole:servers:db-satellite.adoc[]" для {of-mc}.
+** "xref:new-admin-console@platform:console:db-satellite.adoc[]" для программы {cns}.
+====
