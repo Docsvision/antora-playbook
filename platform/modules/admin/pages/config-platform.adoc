@@ -1,12 +1,14 @@
-// tag::linux[]
 :do-what: варианта конфигурации модуля
 :with-unique: yes
 :with-config: no
 
+// tag::linux[]
 = Конфигурация модуля {pl}
+// end::linux[]
 
 include::new-admin-console@platform:admin:partial$mancons.adoc[]
 
+// tag::linux[]
 [#mancons]
 == Конфигурация модуля {pl} в {of-mc}
 
@@ -40,7 +42,6 @@ include::new-admin-console@platform:admin:partial$mancons.adoc[]
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {pl} были одинаковые. Адрес и API-ключ требуется указать, если планируется переходить в {mc} из карточек {wc}а и {wincl}а.
 <.> Опционально. Настройка доступа к Storage Server по HTTPS, см. подробнее xref:platform:console:https-access.adoc[].
 +
-. Откройте {mc} на странице menu:Серверы[Имя сервера > Сервер приложений > xref:dev@mgmtconsole:servers:db-settings.adoc[Группа настроек "Базы данных"]], чтобы выбрать БД по умолчанию.
 . В разделе "xref:dev@mgmtconsole:servers:appserver-access.adoc#catalogs[Настройка доменных каталогов]" укажите параметры:
 +
 * Тип аутентификации в LDAP
@@ -48,6 +49,7 @@ include::new-admin-console@platform:admin:partial$mancons.adoc[]
 * Пароль -- пароль учётной записи пользователя для аутентификации LDAP
 * Домен по умолчанию -- полное имя домена для входа по умолчанию в формате FQDN
 +
+. Откройте {mc} на странице menu:Серверы[Имя сервера > Сервер приложений > xref:dev@mgmtconsole:servers:db-settings.adoc[Группа настроек "Базы данных"]], чтобы выбрать БД по умолчанию.
 . В разделе "xref:dev@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]" укажите параметры:
 +
 * API-ключ для подключения к Workflow -- используется для подключения серверного расширения {wf}. API-ключ для подключения серверного расширения {wf}. Главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
