@@ -17,12 +17,12 @@ include::new-admin-console@install-linux:ROOT:requirements-database.adoc[tags=co
 .Выполните следующие шаги, чтобы подготовить систему {dv} к работе:
 include::dev@mgmtconsole:user:first-launch.adoc[tags=start]
 +
-. Убедитесь, что сервисы {dv} зарегистрированы в {sett-serv}, см. инструкцию по установке соответствующего модуля, например "xref:config-platform.adoc[Установка модуля {pl}]".
+. Убедитесь, что сервисы {dv} зарегистрированы в {sett-serv}, см. инструкцию по установке соответствующего модуля, например "xref:./config-platform.adoc[Установка модуля {pl}]".
 . Добавьте пользователя, от имени которого выполняется настройка БД, в группу безопасности *{dv-web-admin-cns-admins-serv}* {of-mc}footnote:[См. подробнее "xref:dev@mgmtconsole:admin:provide-access.adoc[]"].
 +
 include::dev@mgmtconsole:admin:provide-access.adoc[tags=config]
 +
-. Включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений согласно инструкции, приведённой <<groups,ниже>>footnote:[См. подробнее "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[]"].
+. Включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений согласно инструкции, приведённой <<groups,ниже>>footnote:[См. подробнее "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]"].
 +
 . Выполните настройку БД с помощью мастера баз данных, запускаемого из таблицы БД:
 +
@@ -35,7 +35,7 @@ image::dev@mgmtconsole:servers:db-master.png[Таблица "Базы данны
 +
 [NOTE]
 ====
-Перед созданием новой БД ознакомьтесь подробно с требованиями к СУБД в xref:requirements-database.adoc[соответствующем разделе].
+Перед созданием новой БД ознакомьтесь подробно с требованиями к СУБД в xref:./requirements-database.adoc[соответствующем разделе].
 ====
 +
 . В таблице _Базы данных_ нажмите кнопку *Создать* и проследуйте шагам мастера БД. Укажите данные для подключения к СУБД.
@@ -87,9 +87,9 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 // .Загрузка библиотек и настроек дополнительных модулей
 // image::dev@mgmtconsole:servers:db-create-modules.png[Загрузка библиотек и настроек дополнительных модулей]
 // +
-. Создайте учетную запись для СУБП, подробная инструкция приведена в разделе "xref:install-linux:ROOT:create-wf-account.adoc[]" руководства по установке системы.
+. Создайте учетную запись для СУБП, подробная инструкция приведена в разделе "xref:new-admin-console@install-linux:ROOT:create-wf-account.adoc[]" руководства по установке системы.
 +
-include::install-linux::partial$takesTime.adoc[]
+include::new-admin-console@install-linuxinstall-linux::partial$takesTime.adoc[]
 +
 . Нажмите на кнопку *Завершить*.
 

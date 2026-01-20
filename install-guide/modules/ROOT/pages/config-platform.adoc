@@ -54,7 +54,7 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-
 * API-ключ для подключения к Workflow -- используется для подключения серверного расширения {wf}. API-ключ для подключения серверного расширения {wf}. Главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 +
 * Штамп сертификата шифрования паролей -- отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно не указывать.
 +
 . В разделе "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]" выполните настройку сисемных групп.
@@ -136,16 +136,16 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-
 <.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory.
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP, `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
-<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
+<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:account-protection.adoc[]".
 <.> `Domains` -- домен сервера {dv}.
 <.> `DataProtectCertificateThumbprint` -- Отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- имя системной учётной записи {dv}.
 +
 include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
-<.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
+<.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:account-protection.adoc[]".
 <.> `Logging` -- настройка упразднена, используйте параметр `LogFile` или настройте журналирование с помощью xref:6.1@platform:console:logs.adoc#file[NLog].
 
 ****
