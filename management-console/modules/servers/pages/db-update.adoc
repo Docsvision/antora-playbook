@@ -2,10 +2,9 @@
 :process: обновления
 :finished: успешно обновлена
 :about-info: Если мастер был закрыт до подтверждения {process} БД (шаг 2), в таблице такая база будет отображаться с доступными кнопками "Обновить" и "Отключить".
+:mj: update
 
 = Обновление БД
-
-// include::partial$excerpts.adoc[tags=keepgoing]
 
 Версия базы данных {dv} должна соответствовать версии сервера {dv}.
 
@@ -15,20 +14,21 @@
 ====
 
 .Чтобы обновить БД до версии сервера, выполните следующие действия.
+. Создайте резервную копию базы данных на случай возникновения ошибок при обновлении.
 . Откройте страницу настроек сервера приложений menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] xref:db-master.adoc[мастер БД {dv}].
 +
 .Таблица БД {dv}
-image::db-master.png[Таблица БД {dv}]
+image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
-include::partial$excerpts.adoc[tags=db-table-legend]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=db-table-legend]
 +
 . Найдите в списке обновляемую базу данных и нажмите кнопку *Обновить* в правой части строки.
 . Выберите библиотеки карточек, которые должны быть обновлены. Нажмите *Далее*.
 +
-include::partial$excerpts.adoc[tags=lib-flags]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
 +
 .Выбор обновляемых библиотек карточек
-image::db-update-libs.png[Выбор обновляемых библиотек карточек]
+image::dev@mgmtconsole:servers:db-update-libs.png[Выбор обновляемых библиотек карточек]
 // tag::libs-info[]
 +
 .Сведения о библиотеках карточек:
@@ -41,29 +41,32 @@ image::db-update-libs.png[Выбор обновляемых библиотек �
 * В зависимости от изменений в библиотеках карточек может выполняться полное обновление или обновление в лёгком режиме. Подробнее про режимы обновления БД см. "xref:system:ROOT:db-update.adoc[]".
 * {blank}
 +
-include::partial$excerpts.adoc[tags=officework]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=officework]
 ****
 // end::libs-info[]
 +
 . Подтвердите настройки, которые будут использованы для обновления базы данных. Нажмите *Далее*.
 +
 .Мастер БД {dv} в режиме обновления базы данных
-image::db-update-check.png[Мастер БД {dv} в режиме обновления базы данных]
+image::dev@mgmtconsole:servers:db-update-check.png[Мастер БД {dv} в режиме обновления базы данных]
 +
-include::partial$excerpts.adoc[tags=atomic]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 +
 . Подтвердите параметры, которые будут использованы при обновлении БД и нажмите кнопку *Обновить*.
 +
-include::partial$excerpts.adoc[tags=break-master]
+[WARNING]
+====
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+====
 +
-include::partial$excerpts.adoc[tags=and-restart]
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
 +
 Если процесс обновления базы данных был прерван по таймауту, увеличьте значение настройки `Ожидать завершения атомарной операции на SQL Server (сек)` и повторите процедуру обновления.
 +
 . Выберите модули {dv}, решения которых должны быть обновлены в БД, и нажмите кнопку *Загрузить*. При этом существующие в БД стандартные решения выбранных модулей будут перезаписаны.
 +
 .Выбор модулей, решения которых будут загружены в БД
-image::db-update-solutions.png[Выбор модулей, решения которых будут загружены в БД]
+image::dev@mgmtconsole:servers:db-update-solutions.png[Выбор модулей, решения которых будут загружены в БД]
 +
 Возможность выбора модулей, решения которых не нуждаются в обновлении (версия в БД является актуальной), будет заблокирована.
 +
