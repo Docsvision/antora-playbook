@@ -20,8 +20,6 @@
 .Таблица БД {dv}
 image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=db-table-legend]
-+
 . Найдите в списке обновляемую базу данных и нажмите кнопку *Обновить* в правой части строки.
 . Выберите библиотеки карточек, которые должны быть обновлены. Нажмите *Далее*.
 +
@@ -52,11 +50,16 @@ image::dev@mgmtconsole:servers:db-update-check.png[Мастер БД {dv} в р�
 +
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 +
-. Подтвердите параметры, которые будут использованы при обновлении БД и нажмите кнопку *Обновить*.
+. Нажмите кнопку *Обновить*, чтобы начать процедуру обновления БД.
++
+.Подтверждение обновления БД
+image::dev@mgmtconsole:servers:db-update-launch.png[Подтверждение обновления БД]
 +
 [WARNING]
 ====
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+
+Пользователи и сервисы, использующие эту базу данных, будут отключены и не смогут подключиться к ней до окончания процесса обновления.
 ====
 +
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]

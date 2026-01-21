@@ -10,8 +10,6 @@
 .Таблица БД {dv}
 image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=db-table-legend]
-+
 . Укажите данные для подключения к СУБД. Нажмите *Далее*.
 +
 .Настройка подключения к СУБД
@@ -53,6 +51,8 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 [WARNING]
 ====
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+
+Закрытие мастера создания БД кнопокй *Прервать* оставит базу в промежуточном состоянии без возможности продолжения конфигурации.
 ====
 +
 . Дождитесь завершения инициализации БД и загрузки SQL объектов.
@@ -97,8 +97,3 @@ image::dev@mgmtconsole:servers:db-create-solutions.png[Выбор модулей
 . Чтобы назначить созданную БД основной, следуйте xref:dev@mgmtconsole:servers:db-default.adoc[инструкции].
 +
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
-+
-. Предоставьте сервисам {dv} в настройках сервера приложений, раздел _Управление доступомfootnote:[Подробнее см. в разделе "xref:dev@mgmtconsole:servers:appserver-access.adoc[]"]_.
-
-include::dev@mgmtconsole:servers:appserver-access.adoc[tags=groups]
-
