@@ -21,40 +21,8 @@
 ====
 +
 . Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{wc}_, раздел "xref:dvwebclient.adoc[Установка {wc}а]".
-+
-. Запустите службу {wc}а:
-+
- $ sudo systemctl start dvwebclient
 
 См. подробнее "xref:dvwebclient.adoc[]".
-
-[#manconsole]
-== Установка {of-mc}
-
-. Следующей командой установите {mc}:
-+
-[tabs]
-====
-{os1}::
-+
- $ sudo apt-get install docsvision-managementconsole
-
-{os2}::
-+
- $ sudo dnf install docsvision-managementconsole
-====
-+
-. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#console[Установка {of-mc}]".
-+
-. Запустите службу:
-+
- $ sudo systemctl start dvconsole
-+
-. Теперь вы можете открыть Консоль управления из браузера по адресу `\http://console.domain.com:5100`
-+
-NOTE: При авторизации укажите имя в формате `user@domain.com`, вариант `domain\user` не работает.
-
-См. подробнее "xref:dvconsole.adoc#console[Установка {of-mc}]".
 
 [#sett-serv]
 == Установка Сервиса настроек
@@ -73,10 +41,6 @@ NOTE: При авторизации укажите имя в формате `use
 ====
 +
 . Выполните конфигурацию сервиса настроек в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#sett-serv[Установка {of-mc}]".
-+
-. Запустите сервис:
-+
- $ sudo systemctl start dvsettings
 
 См. подробнее "xref:dvconsole.adoc#settings-service[Установка {of-sett-serv}]".
 
@@ -97,10 +61,6 @@ NOTE: При авторизации укажите имя в формате `use
 ====
 +
 . Выполните конфигурацию сервиса внешнего API в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#external-api[Установка {of-mc}]".
-+
-. Запустите сервис внешнего API {of-mc}:
-+
- $ sudo systemctl start dvexternalapi
 
 См. подробнее "xref:dvconsole.adoc#external-api[Установка сервиса внешнего API]".
 
@@ -121,12 +81,28 @@ NOTE: При авторизации укажите имя в формате `use
 ====
 +
 . Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _Служба {ws}_, раздел "xref:dvworkerservice.adoc[]".
-+
-. Запустите службу модуля:
-+
- $ sudo systemctl start dvworkerservice
 
 См. подробнее "xref:dvworkerservice.adoc[]".
+
+[#manconsole]
+== Установка {of-mc}
+
+. Следующей командой установите {mc}:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-managementconsole
+
+{os2}::
++
+ $ sudo dnf install docsvision-managementconsole
+====
++
+. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{mc}_, раздел "xref:dvconsole.adoc#console[Установка {of-mc}]".
+
+См. подробнее "xref:dvconsole.adoc#console[Установка {of-mc}]".
 
 [#workflow]
 == Установка СУБП
@@ -145,9 +121,12 @@ NOTE: При авторизации укажите имя в формате `use
 ====
 +
 . Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:dvworkflow.adoc[]".
-+
-. Запустите службу модуля:
-+
- $ sudo systemctl start dvworkflow
 
 См. подробнее "xref:dvworkflow.adoc[]".
+
+[#start-services]
+== Запуск системных служб
+
+. Запустите системные службы для модулей {dv}:
++
+ $ sudo systemctl restart dvappserver && sudo systemctl restart dvwebclient && sudo systemctl restart dvsettings && sudo systemctl restart dvexternalapi && sudo systemctl restart dvconsole && sudo systemctl restart dvworkerservice && sudo systemctl restart dvworkflow && sudo systemctl restart dvfileservice
