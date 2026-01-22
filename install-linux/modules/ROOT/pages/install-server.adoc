@@ -3,11 +3,11 @@
 // tag::no-alias[]
 = Установка модулей {mc} и {pl}
 
+include::new-admin-console@settings-service:admin:install.adoc[tags=linux,leveloffset=+1]
+
 include::dev@mgmtconsole:admin:install.adoc[tags=linux]
 
 include::new-admin-console@workerservice:admin:install.adoc[tags=linux,leveloffset=+1]
-
-include::new-admin-console@settings-service:admin:install.adoc[tags=linux,leveloffset=+1]
 
 include::dev@mgmtconsole:admin:install.adoc[tags=string]
 
@@ -52,9 +52,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
 . Подключите БД в настрйках {of-fs} в {of-mc}, см. подробнее xref:dev@mgmtconsole:servers:fileservice-database.adoc[].
-. Запустите службу Файлового сервиса:
-+
- $ sudo systemctl start dvfileservice
 
 [#fs-ext]
 == Установка расширения {of-fs} для {of-mc}

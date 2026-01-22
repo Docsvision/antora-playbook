@@ -23,11 +23,7 @@
  $ sudo dnf install docsvision-webclient
 ====
 +
-. Выполните конфигурацию модуля в файле настроек, подробное описание приведено в документации модуля _{wc}_, раздел "xref:./dvwebclient.adoc[Установка {wc}а]".
-+
-. Запустите службу {wc}а:
-+
- $ sudo systemctl start dvwebclient
+. Выполните конфигурацию модуля в файле настроек, подробное описание см. в разделе "xref:./dvwebclient.adoc[Установка {wc}а]".
 
 [#wc-ext]
 == Установка расширения {wc}а для {of-mc}
@@ -49,10 +45,6 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
  $ sudo dnf install docsvision-ext-webc-mc
 ====
-+
-. Запустите расширение:
-+
- $ sudo systemctl start docsvision-ext-webc-mc
 
 [#workflow]
 == Установка СУБП
@@ -71,10 +63,6 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 ====
 +
 . Выполните конфигурацию Службы {ws} в файле настроек, подробное описание приведено в документации модуля _{wf}_, раздел "xref:./dvworkflow.adoc[]".
-+
-. Запустите службу модуля:
-+
- $ sudo systemctl start dvworkflow
 
 [#wf-ext]
 == Установка расширения модуля {wf} для {of-mc}
@@ -96,10 +84,14 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
  $ sudo dnf install docsvision-docsvision-ext-workflow-mc
 ====
-+
-. Запустите расширение:
-+
-  $ sudo systemctl start docsvision-ext-workflow-mc
 
 include::dev@mgmtconsole:admin:install.adoc[tags=register-services]
+
+[#start-services]
+== Запуск системных служб
+
+. Запустите системные службы для модулей {dv}:
++
+ $ sudo systemctl start dvappserver && sudo systemctl start dvwebclient && sudo systemctl start dvsettings && sudo systemctl start dvconsole && sudo systemctl start dvworkerservice && sudo systemctl start dvworkflow && sudo systemctl start dvfileservice
+
 // end::no-alias[]
