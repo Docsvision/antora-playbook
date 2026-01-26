@@ -27,7 +27,7 @@ sudo nano /etc/yum.repos.d/docsvision.repo
 ====
 {os1}::
 +
-[source,bash]
+[source]
 ----
 sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
 echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
@@ -36,7 +36,7 @@ sudo apt-get update
 
 {os2}::
 +
-[source,bash]
+[source]
 ----
 [docsvision]
 name=Docsvision for RED OS $releasever
@@ -61,7 +61,7 @@ gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
 .Только для {os1} 1.7:
 . Подключите репозиторий Microsoft:
 +
-[source,bash]
+[source]
 ----
 curl -O https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
