@@ -39,7 +39,7 @@ sudo nano /etc/yum.repos.d/docsvision.repo
 =====
 {os1}::
 +
-[source,bash]
+[source]
 ----
 sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
 echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
@@ -49,7 +49,7 @@ sudo apt-get update
 
 {os2}::
 +
-[source,bash]
+[source]
 ----
 [docsvision]
 name=Docsvision for RED OS $releasever
@@ -68,7 +68,7 @@ gpgkey=https://packages.docsvision.com/linux/6.2/redos/docsvision.asc
 
 {os3}::
 +
-[sorce,bash]
+[sorce]
 ----
 curl -fsSL https://packages.docsvision.com/linux/docsvision.asc | sudo gpg --no-default-keyring --keyring /usr/lib/alt-gpgkeys/pubring.gpg --import
 printf 'simple-key "docsvision" {\n\tFingerprint "DFAC99D298A0EC4E98B57238BCF7D31F16E999D6";\n\tName "DocsVision <help@docsvision.com>";\n}\n' | sudo tee /etc/apt/vendors.list.d/docsvision.list > /dev/null
