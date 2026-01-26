@@ -45,6 +45,23 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
 ----
+
+{os3}::
++
+[source]
+----
+curl -fsSL https://packages.docsvision.com/linux/docsvision.asc | sudo gpg --no-default-keyring --keyring /usr/lib/alt-gpgkeys/pubring.gpg --import
+printf 'simple-key "docsvision" {\n\tFingerprint "DFAC99D298A0EC4E98B57238BCF7D31F16E999D6";\n\tName "DocsVision <help@docsvision.com>";\n}\n' | sudo tee /etc/apt/vendors.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.1/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.2/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee -a /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
++
+[WARNING]
+=====
+При обновлении пакета `alt-gpgkeys` ключ подписи репозитория будет удалён. В этом случае его нужно добавить повторно, либо поставить этот пакет на https://www.altlinux.org/Hold[Hold].
+=====
+
 ====
 +
 // tag::minimum[]
