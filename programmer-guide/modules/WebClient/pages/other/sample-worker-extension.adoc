@@ -1,9 +1,14 @@
+:link: https://github.com/Docsvision/WebClient-Samples/tree/master/Others/SampleWorkerExtension
+:name: SampleWorkerExtension
+
 = Пример расширения Службы {ws}
 
-Демонстрационный вариант расширения Службы {ws}, расположенный в https://github.com/Docsvision/WebClient-Samples/tree/master_net45/Others/SampleWorkerExtension[репозитории {dv} на GitHub]. Расширение получает ID карточки документа и конвертирует приложенные файлы в формат PDF/A.
+Расширение получает ID карточки документа и конвертирует приложенные файлы в формат PDF/A.
 
-.Перечень необходимых инструментов:
-* Visual Studio {vscode-v} и выше
+include::../client/authorization.adoc[tags=link]
+
+include::6.1@webclient:ROOT:partial$excerpts.adoc[tags=wc-node]
+include::6.1@webclient:ROOT:partial$excerpts.adoc[tags=vscode]
 * {mc} версии {mc-cu-mc}
 * Пример "xref:server/conversion-sample.adoc[]"
 
@@ -19,7 +24,7 @@
 [#install]
 == Установка
 
-. Создайте папку `/usr/lib/docsvision/common/SampleWorker` и поместите в неё файлы:
+. Создайте папку `/usr/lib/docsvision/common/SampleWorker` в Linux и `C:\Program Files\Docsvision\Common\SampleWorker` в Windows и поместите в неё файлы:
 * `DocsVision.SampleWorkerExtension.Manager.dll`
 * `DocsVision.SampleWorkerExtension.ObjectModel.dll`
 * `DocsVision.SampleWorkerExtension.WorkerService.dll`
