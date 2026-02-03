@@ -1,0 +1,115 @@
+= Первичная настройка {of-mc}
+
+[#config-file]
+== Настройка {of-mc} в конфигурационном файле
+
+Для серверов под управлением Linux, как и для серверов под управлением Linux в конфигурационном файле {of-mc} необходимо указать минимально необходимые настройки. Конфигурационный файл {of-mc} располагается по адресу `/usr/lib/docsvision/managementconsole/appsettings.json` в Linux и `C:\Program Files\Docsvision\ManagementConsole\appsettings.json` в Windows.
+
+// tag::config[]
+[source,json]
+----
+{
+  "SettingsService": {
+    "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
+    "ApiKey": "SettingsServiceApiKey" <.>
+  },
+  "System": {
+    "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
+  },
+  "Catalogs": [], <.>
+  "Groups": {
+    "Docsvision Management Console Administrators": [
+      "account@domain.com" <.>
+    ]
+  }
+}
+----
+<.> `ConnectionString` -- Адрес {of-sett-serv}.
+<.> `ApiKey` -- Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
+<.> `ManagementConsoleAddress` -- Адрес {of-mc}.
+<.> `Catalogs` -- см. подробнее "<<domain,Настройка работы в домене>>".
+<.> `Docsvision Management Console Administrators` -- Пользователи, которым разрешен вход в Консоль управления.
+// end::config[]
+
+[#domain]
+== Настройка работы {of-mc} в домене
+
+[WARNING]
+====
+Без выполнения данных настроек аутентификация в {of-mc} будет недоступна!
+====
+
+// tag::config[]
+. {mc} поддерживает работу в одном или нескольких доменах. Для этого в конфигурационном файле модуля необходимо выполнить настройку доменных каталогов, в массиве `"Catalogs": []`. Настройки вступают в работу, если в массиве присутствует хотя бы одно описание каталога.
++
+--
+[source,json]
+----
+{
+ "Catalogs": [
+  {
+   "FullDomainName": "example1.com", <.>
+    "NetBiosDomainName": "example1", <.>
+    "LdapOptions": { <.>
+      "LdapServerAddresses": [ "example1.com" ], <.>
+      "AuthType": "Basic", <.>
+      "Credential": { <.>
+        "UserName": "user@example1.com",
+        "Password": "Password"
+      }
+    }
+ },
+  {
+    "FullDomainName": "example2.com", <.>
+    "ChallengeTo": "example1.com" <.>
+  }
+  ]
+}
+----
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
+<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
+<.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
+--
+// end::config[]
++
+.Раздел `Catalogs` может содержать массив настроек вида:
+[source,json]
+----
+{
+    "FullDomainName": "example.com", <.>
+    "NetBiosDomainName": "EXAMPLE", <.>
+    "LdapOptions": { <.>
+      "LdapServerAddresses": [ "example.com" ], <.>
+      "AuthType": "Basic", <.>
+      "Port": 389, <.>
+      "Credential": { <.>
+        "UserName": "user@example.com",
+        "Password": "Password"
+      }
+    }
+}
+----
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
+<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
+<.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+
+include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
+
+[#configuration]
+== Настройка соединений в {of-mc}
+
+После установки {mc} требуется выполнить первичную настройку Консоли и _Службы {ws}_. Если проигнорировать первичную настройку, дальнейшая работа с системой будет невозможна.
+
+. Ведите в адресной строке браузера адрес {of-mc}, чтобы открыть xref:dev@mgmtconsole:user:user-interface.adoc[главную страницу] {of-mc}.
+. Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:user:connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
+. Перейдите на вкладку _Служба {ws}_ и xref:user:worker-service.adoc[настройте] процесс Службы {ws}.
+. В виджетах на xref:dev@mgmtconsole:user:user-interface.adoc[главной странице] выберите соединение и период статистики.

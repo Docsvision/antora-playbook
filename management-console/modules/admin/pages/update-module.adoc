@@ -1,5 +1,6 @@
 :update: managementconsole* && sudo apt-get install --only-upgrade docsvision-settingsservice* && sudo apt-get install --only-upgrade docsvision-externalapi*
 :mancons:
+:installer: {dv} Management Console.msi
 
 = Обновление модуля
 
@@ -9,13 +10,9 @@ include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
 == Условия обновления
 
 * Установка новой версии должна выполняться в нерабочее время.
-* Создайте резервную копию БД {dv}.
+* Перед установкой создайте резервную копию БД {dv}.
+* Перед обновлением БД {pgsql} остановите pgAgent.
 * База данных {dv} должна быть переведена на работу с расширенными метаданными.
-* При обновлении версия клиентского дистрибутива должна быть равной версии серверного дистрибутива.
-* Если к новой версии модуля приложена инструкция по обновлению, следуйте ей.
-* *Если комплект обновления включает обновление для модуля "{pl}"*, перейдите к инструкции, приведенной xref:new-admin-console@platform:admin:update-module.adoc[в документации] модуля {pl}.
-
-[#update]
-== Порядок обновления
+* При обновлении разных серверов компоненты модуля должны быть одной версии.
 
 include::new-admin-console@platform:admin:partial$update.adoc[]
