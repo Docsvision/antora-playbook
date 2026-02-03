@@ -3,13 +3,27 @@
 // tag::no-alias[]
 = Установка модулей {mc} и {pl}
 
-include::new-admin-console@settings-service:admin:install.adoc[tags=linux,leveloffset=+1]
+[#sett-serv]
+== Установка {of-sett-serv} на сервер под управлением Linux
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=linux]
+
+Выполните необходимые настройки в конфигурационном файле по адресу `/usr/lib/docsvision/platform/appsettings.json`: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
++
+include::new-admin-console@settings-service:admin:install.adoc[tags=config]
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=cluster]
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=string]
+
+[#man-cons]
+== Установка {of-mc} на сервер под управлением Linux
+
+include::dev@mgmtconsole:admin:install.adoc[tags=separate]
 
 include::dev@mgmtconsole:admin:install.adoc[tags=linux]
 
-include::new-admin-console@workerservice:admin:install.adoc[tags=linux,leveloffset=+1]
-
-include::dev@mgmtconsole:admin:install.adoc[tags=string]
+include::new-admin-console@workerservice:admin:install.adoc[tags=linux]
 
 include::dev@mgmtconsole:admin:install.adoc[tags=cert]
 
