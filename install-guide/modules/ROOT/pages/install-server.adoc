@@ -7,122 +7,80 @@
 
 Служба {ws}, а также службы {of-mc} и {of-sett-serv} являются обязательными для выполнения первоначальной настройки модулей системы. {mc} является основным средством конфигурации {dv}.
 
-include::new-admin-console@installguide:ROOT:pre-config-server.adoc[tags=preconfig]
+. Установите {asp-bundle}, если это не было выполнено ранее. ПО доступно на https://dotnet.microsoft.com/en-us/download/dotnet/[сайте Microsoft],
 +
 . Последовательно установите серверные части *всех* модулей {dv}.
++
+include::partial$doNotStart.adoc[]
 
+[#dvworker]
 == Установка Службы {ws}
 
-. Запустите пакет установки `{dv} WorkerService.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.1@workerservice:admin:install.adoc[]"].
+. Запустите пакет установки `{dv} Worker service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:new-admin-console@workerservice:admin:install.adoc[]"].
 . Выберите компоненты, которые требуется установить:
 +
 ****
-Служба {ws}::
-Устанавливает основные файлы Службы {ws}.
-
-Серверные компоненты::
-Компонент устанавливает библиотеку карточек.
-
-Кнопки::
-* *Сброс* -- сбрасывает выбор компонентов на стандартные
-* *Использование диска* -- позволяет посмотреть свободное место на системных дисках.
+include::new-admin-console@workerservice:admin:install.adoc[tags=components]
 ****
 +
-. На следующем шаге заполните настройки Службы {ws}.
-+
-.. Введите _Учётную запись_ в формате `домен\пользователь` в соответствующее поле.
-.. Укажите _Пароль_ учётной записи.
-.. Укажите _Порт_ Службы {ws}.
-. Завершите установку.
-. Укажите необходимые настройки в конфигурационном файле модуля:
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\WorkerService\Configuration.json`:
 +
 include::new-admin-console@workerservice:admin:install.adoc[tags=config]
 +
-. В систему будет добавлена служба *{wss-new}*, запустите службу сервиса.
+. В систему будет добавлена служба *{wss-new}*.
 
+[#dvsettings]
 == Установка {of-sett-serv}
 
-. Запустите пакет установки `{dv} SettingsService.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.1@settings-service:admin:install.adoc[]"].
-. В систему будет добавлена служба *{wacss-new}*. Завершите установку.
-. Укажите необходимые настройки в конфигурационном файле модуля:
+. Запустите пакет установки `{dv} Settings service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:new-admin-console@settings-service:admin:install.adoc[]"].
 +
-include::new-admin-console@settings-service:admin:install.adoc[tags=config]
-+
-. Запустите службу сервиса.
-
-== Установка {of-mc}
-
-. Запустите пакет установки {of-mc}: `{dv} ManagementConsole.msi` и проследуйте указаниям инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:dev@mgmtconsole:admin:install.adoc[]"].
-. Укажите базовые настройки {of-mc}:
+. Выберите компоненты, которые требуется установить:
 +
 ****
-Порт для {of-mc}::
-Порт для доступа к {of-mc} из браузера по HTTP. По умолчанию `5100`.
-
-Порт для Сервиса настроек::
-Порт для подключения Консоли к _{to-sett-serv}_. По умолчанию `5200`.
-
-Выберите тип сервера БД из списка::
-{mssql} Server или {pgsql} в зависимости от используемой базы данных.
-
-Строка подключения к базе данных для хранения настроек::
-Строка подключения содержит адрес подключения к базе данных для хранения настроек. Вид строки подключения зависит от выбранной базы данных.
+include::new-admin-console@settings-service:admin:install.adoc[tags=components]
+****
 +
---
-include::dev@mgmtconsole:admin:install.adoc[tags=mssql]
---
+. В систему будет добавлена служба *{wacss-new}*. Завершите установку.
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\SettingsService\appsettings.json`:
 +
---
-include::dev@mgmtconsole:admin:install.adoc[tags=pgsql]
---
+include::new-admin-console@settings-service:admin:install.adoc[tags=config]
+
+[#dvconsole]
+== Установка {of-mc}
+
+include::dev@mgmtconsole:admin:install.adoc[tags=separate]
+
+. Запустите пакет установки {of-mc}: `{dv} Management Console.msi` и проследуйте указаниям инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:dev@mgmtconsole:admin:install.adoc[]"].
+. Выберите компоненты, которые требуется установить:
++
+****
+include::dev@mgmtconsole:admin:install.adoc[tags=components]
 ****
 +
 . Завершите установку.
-. Укажите необходимые настройки в конфигурационном файле модуля:
-include::dev@mgmtconsole:admin:install.adoc[tags=config]
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\ManagementConsole\appsettings.json`:
 +
-. В систему будет добавлена служба *{wacs-new}*, запустите службу сервиса.
+include::dev@mgmtconsole:admin:initial-configuration.adoc[tags=config]
 
+[#extensions]
 == Установка расширений {of-mc}
 
-Платформа, ВК, ВФ, Воркер, ФайлСервис
+include::dev@mgmtconsole:admin:install.adoc[tags=extensions]
 
-// Но как? Отдельным инсталлером или в составе существующего?
-
+[#dvappserver]
 == Установка модуля {pl}
 
-include::partial$doNotStart.adoc[]
-
-Пользователь, выполняющий установку, должен обладать правами администратора.
-
-Включить журналирование процесса установки можно с помощью флага `*/l*v*`:
-
- msiexec /i "Docsvision Platform server.msi" /l*v install.log
-
-. Запустите пакет установки `{dv} Platform server.msi`.
+. Запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:new-admin-console@platform:admin:install-platform.adoc[]"].
 . Примите условия лицензионного соглашения.
 +
 .Условия лицензионного соглашения
 image::new-admin-console@platform:admin:install-server-license.png[Условия лицензионного соглашения]
 +
-. Если требуется, измените каталог установки модуля.
+. Выберите компоненты, которые требуется установить:
 +
-.Каталог установки серверных компонентов модуля {pl}
-image::new-admin-console@platform:admin:install-server-path.png[Каталог установки серверных компонентов модуля {pl}]
-+
-. Если требуется, измените набор устанавливаемых компонентов.
-+
-.Устанавливаемые компоненты модуля {pl}
-image::new-admin-console@platform:admin:install-server-components.png[Устанавливаемые компоненты модуля {pl}]
-+
-* _Сервер приложений_ -- устанавливает сервер {dv}, предоставляющий точку подключения клиентам {dv}, системные карточки.
-* _Сервис полнотекстового поиска_ -- устанавливает службу и компоненты полнотекстового поиска.
-* _Набор клиентских компонентов сервера_ -- устанавливает библиотеки DLL, которые необходимы базовым и дополнительным модулям и Приложениям для взаимодействия с сервером {dv}.
-+
-[WARNING]
-====
-По умолчанию должны быть включены все компоненты.
-====
+****
+include::new-admin-console@platform:admin:install-platform.adoc[tags=components]
+****
 +
 . Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
 +
@@ -130,4 +88,7 @@ image::new-admin-console@platform:admin:install-server-components.png[Устан
 image::new-admin-console@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\Platform\appsettings.json`:
++
+include::new-admin-console@platform:admin:config-platform.adoc[tags=config]
 // end::no-alias[]
