@@ -2,17 +2,11 @@
 :service:
 :restart: dvappserver
 :update: platform
-:with-console: yes
-:with-config: no
-:do-what: варианты обновления системной БД
-:link: "xref:dev@mgmtconsole:servers:db-update.adoc[]"
-:cns-section: "Базы данных"
+:installer: {dv} Platform server.msi
 
 = Обновление модуля
 
-include::6.1@webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
-
-include::admin:partial$mancons.adoc[]
+include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
 
 [#conditions]
 == Условия обновления
@@ -20,6 +14,8 @@ include::admin:partial$mancons.adoc[]
 * Установка новой версии должна выполняться в нерабочее время.
 * Перед установкой создайте резервную копию БД {dv}.
 * Перед обновлением БД {pgsql} остановите pgAgent.
+* База данных {dv} должна быть переведена на работу с расширенными метаданными.
+* При обновлении разных серверов компоненты модуля должны быть одной версии.
 
 .Обратите внимание!
 ****
@@ -34,30 +30,11 @@ include::admin:partial$mancons.adoc[]
 Перед установкой убедитесь в наличии {net-r}, подробнее см. "xref:ROOT:requirements-software.adoc[]".
 
 include::partial$update.adoc[]
-+
-. Выполните шаги xref:config-master.adoc[мастера настройки] до страницы настройки баз данных.
-+
-.Настройка баз данных {dv}
-image::db-update-select.png[Настройка баз данных {dv}]
-+
-. Выберите основную БД {dv} в списке, установите переключатель в положение *Использовать выбранную в списке базу данных* и нажмите *Далее*.
-+
-. Согласитесь с предложением обновить БД.
-+
-.Запрос на обновление базы данных
-image::db-outdated-update.png[Запрос на обновление базы данных]
-+
-. xref:console:db-update.adoc[Обновите базу данных].
-+
-WARNING: На странице выбора обновляемых библиотек карточек не снимайте выбор с библиотек карточек.
-+
-. Завершите настройку с помощью мастера настройки xref:console:db-master.adoc[в программе {cns}] или с помощью {of-mc}, подробнее см. "xref:dev@mgmtconsole:servers:db-master.adoc[]".
-. Установите новую версию модуля (модулей) без обновления БД:
-+
-* На оставшихся узлах кластера {dv}.
-* На сервере СУБП, {wc}а и других модулей, использующих компоненты модуля {pl}.
-+
-include::6.1@platform:admin:partial$client.adoc[]
+
+[#client]
+== Обновление клиентских компонентов
+
+include::new-admin-console@platform:admin:partial$client.adoc[]
 `{dv} Platform client.msi`.
 +
 [NOTE]
