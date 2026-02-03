@@ -1,14 +1,19 @@
 :update: workflow
+:installer: {dv} Workflow server.msi
 
 = Обновление модуля
 
 include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
 
-* Если к новой версии модуля приложена инструкция по обновлению, следуйте ей.
-* Если комплект обновления включает обновление для модуля _{pl}_, перейдите к инструкции, приведенной в разделе  xref:6.1@platform:admin:update-module.adoc[Обновление модуля {pl}].
+* Установка новой версии должна выполняться в нерабочее время.
+* Перед установкой создайте резервную копию БД {dv}.
+* Перед обновлением БД {pgsql} остановите pgAgent.
+* База данных {dv} должна быть переведена на работу с расширенными метаданными.
+* При обновлении разных серверов компоненты модуля должны быть одной версии.
 
-include::6.1@platform:admin:partial$update.adoc[]
-+
-При выполнении данной операции в БД {dv} будут загружены стандартные настройки модуля _{ad}_.
-+
-include::6.1@platform:admin:partial$client.adoc[]
+include::new-admin-console@platform:admin:partial$update.adoc[]
+
+[#client]
+== Обновление клиентских компонентов
+
+include::new-admin-console@platform:admin:partial$client.adoc[]
