@@ -1,0 +1,18 @@
+:update: settingsservice
+:installer: {dv} Settings service.msi
+
+= Обновление модуля
+
+include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
+
+[#conditions]
+== Условия обновления
+
+* Установка новой версии должна выполняться в нерабочее время.
+* Перед установкой создайте резервную копию БД {dv}.
+* Перед обновлением БД {pgsql} остановите pgAgent.
+* База данных {dv} должна быть переведена на работу с расширенными метаданными.
+* При обновлении разных серверов компоненты модуля должны быть одной версии.
+
+include::new-admin-console@platform:admin:partial$update.adoc[]
+// include::6.1@platform:admin:partial$update.adoc[tag=noimage]
