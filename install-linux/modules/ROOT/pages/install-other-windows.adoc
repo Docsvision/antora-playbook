@@ -1,80 +1,9 @@
 = Установка серверных компонентов на Windows
 
-include::partial$limitation.adoc[]
-
-include::platform:admin:partial$doNotStart.adoc[]
-
-// tag::other-windows[]
-.Для установки компонентов потребуется:
-* {asp-bundle} и выше.
-* {net-r} и выше.
-
-Пользователь, выполняющий установку, должен обладать правами администратора.
-
-. Запустите последовательно пакеты установки серверной части базовых модулей:
-+
-* {pl}.
-* Служба {ws}.
-* {ad}.
-* {bo}.
-* {dm}.
-* {to}.
-* {wincl}.
-* {wf}.
-* {wc}.
-+
-При появлении окна "Мастера настройки {dv}", закройте мастер нажатием кнопки *Отмена*. +
-// После установки {wc}а на Windows возможны ошибки вида: `Unexpected error occurred. System.Management currently is only supported for Windows desktop applications`. Подобные ошибки являются нормальным явлением.
-+
-. В реестре машины укажите фактический адрес Linux-сервера, на котором установлен сервер {dv}:
-+
- reg add HKEY_LOCAL_MACHINE\SOFTWARE\DocsVision\Platform\Site /v ServerURL /t REG_SZ /d http://dvserver.domain.com:5000/api/v1
-
-// end::other-windows[]
-
-[#windows-pl]
-== Установка серверных компонентов на Windows
-
-include::new-admin-console@install-linux::partial$limitation.adoc[]
-
-include::new-admin-console@installguide:ROOT:partial$doNotStart.adoc[]
-
-Пользователь, выполняющий установку, должен обладать правами администратора.
-
-Включить журналирование процесса установки можно с помощью флага `*/l*v*`:
-
- msiexec /i "Docsvision Platform server.msi" /l*v install.log
-
-. Запустите пакет установки `{dv} Platform server.msi`.
-. Примите условия лицензионного соглашения.
-+
-.Условия лицензионного соглашения
-image::new-admin-console@platform:admin:install-server-license.png[Условия лицензионного соглашения]
-+
-. Если требуется, измените каталог установки модуля.
-+
-.Каталог установки серверных компонентов модуля {pl}
-image::new-admin-console@platform:admin:install-server-path.png[Каталог установки серверных компонентов модуля {pl}]
-+
-. Если требуется, измените набор устанавливаемых компонентов.
-+
-.Устанавливаемые компоненты модуля {pl}
-image::new-admin-console@platform:admin:install-server-components.png[Устанавливаемые компоненты модуля {pl}]
-+
-* _Сервер приложений_ -- устанавливает сервер {dv}, предоставляющий точку подключения клиентам {dv}, системные карточки.
-* _Сервис полнотекстового поиска_ -- устанавливает службу и компоненты полнотекстового поиска.
-* _Набор клиентских компонентов сервера_ -- устанавливает библиотеки DLL, которые необходимы базовым и дополнительным модулям и Приложениям для взаимодействия с сервером {dv}.
-+
-[WARNING]
+[TIP]
 ====
-По умолчанию должны быть включены все компоненты.
+.*Начиная с версии модулей, входящей в НО 26.1*:
+* Когда сервер {dv} под управлением Linux настраивается через {mc}, установка серверных компонентов модулей из инсталляторов `.msi` на машину с ОС Windows *не потребуется*.
+* {cns} перенесена в пакет утилит {rk} и используется преимущественно для настройки полнотекстового поиска. Установка пакета утилит описана в разделе "xref:./rk-wctk.adoc[]"
+* Подробнее особенности работы в Linux см. в руководстве по установке системы на сервер под управлением Linux, раздел "xref:install-linux::linux-limitations.adoc[]".
 ====
-+
-. Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
-+
-.Мастер установки серверной части модуля {pl}
-image::new-admin-console@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
-+
-. На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-+
-. **Предпочтительным способом настройки системы является xref:dev@mgmtconsole:servers:index.adoc[{mc}].** В программе _{cns}_, начиная с версии {pl-cu-mc} удалены все разделы, кроме следующих: "xref:new-admin-console@platform:console:db-settings.adoc[Базы данных]" (в сокращённом виде), "xref:new-admin-console@platform:console:section-transformations-generator.adoc[Генератор преобразований]", "xref:new-admin-console@platform:console:security-report.adoc[Отчёт по безопасности]", "xref:new-admin-console@platform:console:folder-rights.adoc[Права папок]", "xref:new-admin-console@platform:console:folder-views.adoc[Представления папок]", "xref:new-admin-console@platform:console:full-text-service.adoc[Сервис полнотекстового поиска]".
