@@ -3,7 +3,7 @@
 :of-what: {of-sett-serv}
 :is-service:
 
-= Установка модулей {mc} и {pl}
+= Установка {of-mc}, Платформы и сопутствующих модулей
 
 Служба {ws}, а также службы {of-mc} и {of-sett-serv} являются обязательными для выполнения первоначальной настройки модулей системы. {mc} является основным средством конфигурации {dv}.
 
@@ -12,22 +12,6 @@
 . Последовательно установите серверные части *всех* модулей {dv}.
 +
 include::partial$doNotStart.adoc[]
-
-[#dvworker]
-== Установка Службы {ws}
-
-. Запустите пакет установки `{dv} Worker service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:new-admin-console@workerservice:admin:install.adoc[]"].
-. Выберите компоненты, которые требуется установить:
-+
-****
-include::new-admin-console@workerservice:admin:install.adoc[tags=components]
-****
-+
-. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\WorkerService\Configuration.json`:
-+
-include::new-admin-console@workerservice:admin:install.adoc[tags=config]
-+
-. В систему будет добавлена служба *{wss-new}*.
 
 [#dvsettings]
 == Установка {of-sett-serv}
@@ -62,11 +46,6 @@ include::dev@mgmtconsole:admin:install.adoc[tags=components]
 +
 include::dev@mgmtconsole:admin:initial-configuration.adoc[tags=config]
 
-[#extensions]
-== Установка расширений {of-mc}
-
-include::dev@mgmtconsole:admin:install.adoc[tags=extensions]
-
 [#dvappserver]
 == Установка модуля {pl}
 
@@ -91,4 +70,19 @@ image::new-admin-console@platform:admin:install-server-confirm.png[Мастер 
 . Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\Platform\appsettings.json`:
 +
 include::new-admin-console@platform:admin:config-platform.adoc[tags=config]
+
+[#dvworker]
+== Установка Службы {ws}
+
+. Запустите пакет установки `{dv} Worker service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:new-admin-console@workerservice:admin:install.adoc[]"].
+. Выберите компоненты, которые требуется установить:
++
+****
+include::new-admin-console@workerservice:admin:install.adoc[tags=components]
+****
++
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\WorkerService\Configuration.json`:
++
+include::new-admin-console@workerservice:admin:install.adoc[tags=config]
+
 // end::no-alias[]
