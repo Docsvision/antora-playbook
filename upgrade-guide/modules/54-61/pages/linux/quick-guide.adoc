@@ -6,6 +6,8 @@
 . Выполните предварительную настройку сервера системы, см. "xref:./pre-config-server.adoc[]".
 . Настройте СУБД {mssql} Server или {pgsql}, см. "xref:./pre-config-db.adoc[]".
 . Установите серверные компоненты модулей, см. "xref:./install-server.adoc[]".
+. Установите другие модули системы, см. "xref:./install-other-server.adoc[]".
+. Активируйте лицензию при помощи утилиты активации, см. "xref:./activation.adoc[]".
 . Настройте {of-mc} и Службу {ws}:
 +
 * "xref:./dvconsole.adoc[]"
@@ -13,28 +15,29 @@
 * "xref:./connections-docsvision.adoc[]"
 * "xref:./connections-mail-server.adoc[]"
 +
-. xref:./activation.adoc[Активируйте] лицензию при помощи утилиты активации.
-. xref:./install-other-server.adoc[Установите] другие модули системы.
-. xref:./create-wf-account.adoc[Создайте] учётную запись для работы с модулем {wf}.
 . xref:./config-platform.adoc[Укажите] настройки модуля {pl} из {of-mc}.
-. xref:./dvfileservice.adoc[Заполните] необходимые параметры {of-fs} из {of-mc}.
 . xref:./config-domains.adoc[Выполните] настройку доменных каталогов для Сервера приложений.
-. xref:./dvwebclient.adoc[Настройте] функции {wc}а, необходимые для работы.
-+
-* xref:./webclient-r7.adoc[Установите Р7 Офис], если планируется работать с режимом консолидации документов при согласовании и использовать предварительный просмотр файлов.
-* xref:./webservices-install.adoc[Установите] DVWebTool в ОС Windows и DVSupService в Linux. DVWebTool и DVSupService позволяют пользователям {wc}а открывать файлы на редактирование и/или просмоотр в офисных редакторах.
-* xref:./webservices-launch.adoc[Настройте] параметры запуска DVWebTool и DVSupService.
-+
-. xref:./dvworkflow.adoc[Заполните] настройки модуля {wf}, необходимые для работы.
 . xref:./config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить БД {dv}:
 +
 * xref:./db-create.adoc[Создайте новую] или
 * xref:./db-connect.adoc[Подключите сущестующую] базу даных,
 * Убедитесь, что необходимая база назначена xref:./db-default.adoc[БД по умолчанию].
 +
+. xref:./dvfileservice.adoc[Заполните] необходимые параметры {of-fs} из {of-mc}.
+. xref:./dvwebclient.adoc[Настройте] функции {wc}а, необходимые для работы.
+. xref:./create-wf-account.adoc[Создайте] учётную запись для работы с модулем {wf}.
+. xref:./dvworkflow.adoc[Заполните] настройки модуля {wf}, необходимые для работы.
 . Если планируется работа в {wincl}е, xref:./install-other-windows.adoc[установите] серверные части других модулей системы в ОС Windows.
 . xref:./install-client.adoc[Установите] клиентские компоненты модулей автоматически или вручную. Клиентские компоненты устанавливаются автоматически при первом запуске {wincl}а.
 . Если планируется использовать {cns}, Полнотекстовый поиск, {kvr} и DVWebTool установите пакет утилит {rk} и {wc} Toolkit на клиентскую машину с {wincl}ом согласно инструкции "xref:./rk-wctk.adoc[]".
++
+* xref:./webclient-r7.adoc[Установите Р7 Офис], если планируется работать с режимом консолидации документов при согласовании и использовать предварительный просмотр файлов.
+* xref:./webservices-install.adoc[Установите] DVWebTool в ОС Windows. DVWebTool предназначается пользователям {wc}а открывать файлы на редактирование и/или просмотр в офисных редакторах.
++
+Когда сервер {dv} работает под управлением Windows, пользователи могут работать с {wc}ом в любой ОС, включая Linux. Для таких случаев предназначена утилита DVSupService, выполняющая в Linux функции аналогичные DVWebTool в ОС Windows.
++
+* xref:./webservices-launch.adoc[Настройте] параметры запуска DVWebTool и DVSupService.
++
 . При необходимости выполните обновление существующего Решения согласно инструкции "xref:./post-config-server.adoc#solutions[]".
 . Если при обновлении БД {dv} была пропущена загрузка конфигурации приложения _{dm}_, выполните действия, описанные в разделе "xref:dm-config.adoc[]".
 . xref:./post-config-server.adoc[Выполните] действия после обновления системы.

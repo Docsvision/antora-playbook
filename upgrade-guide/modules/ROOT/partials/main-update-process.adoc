@@ -1,5 +1,5 @@
-. В БД {pgsql} остановите pgAgent.
-. Обновите компоненты системы на сервере Linux командами вида:
+. Если в БД {pgsql} используется pgAgent, остановите планировщик.
+. Обновите компоненты системы на сервере Linux командами:
 +
 [tabs]
 ====
@@ -8,6 +8,7 @@
 [source,subs=attributes]
 ----
 sudo apt-get update
+sudo apt-get purge docsvision-externalapi
 sudo apt-get install --only-upgrade docsvision-{update}*
 ----
 
@@ -16,6 +17,15 @@ sudo apt-get install --only-upgrade docsvision-{update}*
 [source,subs=attributes]
 ----
 sudo dnf update docsvision-{update}*
+----
+
+{os3}::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get remove docsvision-externalapi
+sudo apt-get install --only-upgrade=true docsvision-{update}*
 ----
 ====
 +
