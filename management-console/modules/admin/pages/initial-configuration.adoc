@@ -3,7 +3,7 @@
 [#config-file]
 == Настройка {of-mc} в конфигурационном файле
 
-Для серверов под управлением Linux, как и для серверов под управлением Linux в конфигурационном файле {of-mc} необходимо указать минимально необходимые настройки. Конфигурационный файл {of-mc} располагается по адресу `/usr/lib/docsvision/managementconsole/appsettings.json` в Linux и `C:\Program Files\Docsvision\ManagementConsole\appsettings.json` в Windows.
+Для серверов под управлением Linux, как и для серверов под управлением Windows в конфигурационном файле {of-mc} необходимо указать минимально необходимые настройки. Конфигурационный файл {of-mc} располагается по адресу `/usr/lib/docsvision/managementconsole/appsettings.json` в Linux и `C:\Program Files\Docsvision\ManagementConsole\appsettings.json` в Windows.
 
 // tag::config[]
 [source,json]
@@ -71,7 +71,7 @@
 <.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
 --
@@ -100,7 +100,7 @@
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее в документации по установке системы, раздел "xref:install-linux:ROOT:appendix/account-protection.adoc[]".
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 
 include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
 
@@ -110,13 +110,13 @@ include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
 После установки {mc} требуется выполнить первичную настройку Консоли и _Службы {ws}_. Если проигнорировать первичную настройку, дальнейшая работа с системой будет невозможна.
 
 ifdef::manacons[]
-. Ведите в адресной строке браузера адрес {of-mc}, чтобы открыть xref:user:user-interface.adoc[главную страницу] {of-mc}.
+. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть xref:user:user-interface.adoc[главную страницу] {of-mc}.
 . Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:user:connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
 . Перейдите на вкладку _Служба {ws}_ и xref:user:worker-service.adoc[настройте] процесс Службы {ws}.
 . В виджетах на xref:user:user-interface.adoc[главной странице] выберите соединение и период статистики.
 endif::manacons[]
 ifndef::manacons[]
-. Ведите в адресной строке браузера адрес {of-mc}, чтобы открыть главную страницуfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] {of-mc}.
+. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть главную страницуfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] {of-mc}.
 . Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:./connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
 . Перейдите на вкладку _Служба {ws}_ и xref:./dvworkerservice.adoc[настройте] процесс Службы {ws}.
 . В виджетах на главной страницеfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] выберите соединение и период статистики.

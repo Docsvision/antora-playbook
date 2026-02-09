@@ -51,7 +51,7 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 == Установка {of-mc} на сервер под управлением Windows
 
 .Чтобы установить {mc}:
-. Откройте пакет установки `{dv} ManagementConsole.msi`.
+. Откройте пакет установки `{dv} Management Console.msi`.
 +
 .Установка {of-mc}
 image::install-hello.png[Установка {of-mc}]
@@ -86,7 +86,7 @@ image::install-components.png[Выбор устанавливаемых комп
 image::install-confirm.png[Мастер установки серверной части модуля {bo}]
 +
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-. Если данный базовый модуль устанавливается последним, запустите {cns} и выполните настройку системы следуя инструкции, данной в документации модуля {pl} xref:6.1@platform:admin:config-master.adoc[здесь] и xref:6.1@platform:admin:post-config-server.adoc[здесь].
+include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#settings-service]
 == Установка {of-sett-serv} на сервер {of-mc}
@@ -110,9 +110,10 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 // end::extensions[]
 
-// tag::linux[]
 [#extensions-linux]
 === Установка расширений модулей для {of-mc} на сервер под управлением Linux
+
+// tag::extensions-linux[]
 
 .Чтобы установить расширения модулей для {of-mc} на сервер под управлением Linux:
 . Выполните следующие команды:
@@ -134,12 +135,13 @@ sudo apt-get install docsvision-ext-ws-mc && sudo apt-get install ext-webc-mc &&
 sudo dnf install docsvision-ext-ws-mc && sudo dnf install ext-webc-mc && sudo dnf install ext-platform-mc && sudo dnf install ext-workflow-mc && sudo dnf install ext-fileservice-mc
 ----
 ====
-// end::linux[]
+
+// end::extensions-linux[]
 
 [#extensions-windows]
 === Установка расширений модулей для {of-mc} на сервер под управлением Windows
 
-// tag::extensions[]
+// tag::extensions-windows[]
 
 .Чтобы установить расширения модулей для {of-mc} на сервер под управлением Windows:
 . На сервере {of-mc} запустите инсталлятор Службы {ws} `Docsvision Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
@@ -161,7 +163,7 @@ image::dev@mgmtconsole:admin:wc-components.png[Выбор компонентов
 +
 .Выбор компонентов модуля {wf} для установки
 image::dev@mgmtconsole:admin:wf-components.png[Выбор компонентов модуля {wf} для установки]
-// end::extensions[]
+// end::extensions-windows[]
 
 // tag::register-services[]
 [#register-services]
