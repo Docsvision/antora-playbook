@@ -49,11 +49,11 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=pangoli
 === Настройка {pgsql} для использования аутентификации Windows
 
 . [[users]]Создайте в {pgsql} пользователей и назначьте для пользователей соответствующие права:
-.. Для работы xref:6.1@platform:ROOT:requirements-server-account.adoc[сервера {dv}], сервиса xref:6.1@platform:ROOT:requirements-full-text-account.adoc[полнотекстового поиска] и xref:6.1@platform:ROOT:requirements-file-service-account.adoc[файлового сервиса] может использоваться одна учетная запись.
+.. Для работы xref:6.1@platform:ROOT:requirements-server-account.adoc[сервера {dv}], сервиса xref:6.1@platform:ROOT:requirements-full-text-account.adoc[полнотекстового поиска] и xref:6.1@platform:ROOT:requirements-file-service-account.adoc[файлового сервиса] может использоваться одна учётная запись.
 +
 .. Пользователя, от имени которого будет работать pgAgent.
 +
-Если имя доменной учетной записи пользователя или сервисной учетной записи содержит буквы верхнего регистра (например, `company\Sidorov.G`), в {pgsql} необходимо добавить двух пользователей:
+Если имя доменной учётной записи пользователя или сервисной учётной записи содержит буквы верхнего регистра (например, `company\Sidorov.G`), в {pgsql} необходимо добавить двух пользователей:
 +
 - С сохранением оригинального регистра в имени, а именно: `Sidorov.G`.
 - С использованием букв только нижнего регистра, а именно: `sidorov.g`.
@@ -78,7 +78,7 @@ mymap postgres@COMPANY postgres <.>
 <.> service -- имя пользователя в СУБД {pgsql}.
 <.> Доменный пользователь, от имени которого будет запущен pgAgent.
 +
-. Запустите сервис {pgsql} под учетной записью домена, в котором зарегистрированы пользователи из <<register,предыдущего>> шага.
+. Запустите сервис {pgsql} под учётной записью домена, в котором зарегистрированы пользователи из <<register,предыдущего>> шага.
 . В настройках службы "{pgsql} Scheduling Agent -- pgAgent" измените пользователя на доменного пользователя из шага <<register,ранее>> (в данном примере: `postgres@COMPANY`).
 . Измените строку запуска службы "{pgsql} Scheduling Agent -- pgAgent" в реестре, в ветке `{hklm}\SYSTEM\CurrentControlSet\Services\pgAgent`. В значении `user` нужно указать пользователя {pgsql} из шага <<register,ранее>>. Например:
 +
