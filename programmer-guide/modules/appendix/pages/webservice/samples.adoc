@@ -36,7 +36,7 @@ response = session.post(url, data=body) <.>
 responseParsed = ElementTree.fromstring(response.content)
 sessionId = responseParsed.findtext('.//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}sessionId') <.>
 ----
-<.> Адрес и учетные данные пользователя для подключения к {dv}.
+<.> Адрес и учётные данные пользователя для подключения к {dv}.
 <.> Устанавливаем цель запроса в заголовке запроса.
 <.> SOAP-сообщение, в котором передаем адрес и сетевое имя клиента.
 <.> Отправляем SOAP-сообщение.

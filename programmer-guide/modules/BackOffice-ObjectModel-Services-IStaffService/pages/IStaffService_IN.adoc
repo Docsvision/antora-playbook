@@ -17,7 +17,7 @@ public interface IStaffService
 [cols=",",options="header"]
 |===
 |Имя |Описание
-|`xref:IStaffService.Impersonated_PR.adoc[Impersonated]` |Возвращает признак того, что при вызове методов сервиса будет использоваться принудительно установленная учетная запись сотрудника.
+|`xref:IStaffService.Impersonated_PR.adoc[Impersonated]` |Возвращает признак того, что при вызове методов сервиса будет использоваться принудительно установленная учётная запись сотрудника.
 |===
 
 == Методы
@@ -74,11 +74,11 @@ public interface IStaffService
 |`xref:IStaffService.FindDeputiesWhereEmployeeIsDeputy_MT.adoc[FindDeputiesWhereEmployeeIsDeputy(StaffEmployee)]` |Возвращает список замещений сотрудников, в которых указанный сотрудник является заместителем.
 |`xref:IStaffService.FindEmployeeGroups_MT.adoc[FindEmployeeGroups(StaffEmployee)]` |Возвращает группы, в которых числится указанный сотрудник.
 |`xref:IStaffService.FindEmployeeGroupsByRole_MT.adoc[FindEmployeeGroupsByRole(StaffEmployee, StaffGroupRole)]` |Возвращает рабочие группы, в которых указанный сотрудник имеет определённую роль.
-|`xref:IStaffService.FindEmpoyeeByAccountName_MT.adoc[FindEmpoyeeByAccountName(String)]` |Выполняет поиск сотрудника по названию учетной записи.
+|`xref:IStaffService.FindEmpoyeeByAccountName_MT.adoc[FindEmpoyeeByAccountName(String)]` |Выполняет поиск сотрудника по названию учётной записи.
 |`xref:IStaffService.FindEmployeeRoles_MT.adoc[FindEmployeeRoles(StaffEmployee)]` |Возвращает список ролей, в которых участвует сотрудник.
-|`xref:IStaffService.FindGroupByAccountName_MT.adoc[FindGroupByAccountName(String)]` |Возвращает группу с определённым названием учетной записи.
+|`xref:IStaffService.FindGroupByAccountName_MT.adoc[FindGroupByAccountName(String)]` |Возвращает группу с определённым названием учётной записи.
 |`xref:IStaffService.FindGroupByName_MT.adoc[FindGroupByName(StaffGroup, String)]` |Возвращает группу с указанным названием.
-|`xref:IStaffService.FindRoleByAccountName_MT.adoc[FindRoleByAccountName(String)]` |Возвращает роль, привязанную к указанной учетной записи.
+|`xref:IStaffService.FindRoleByAccountName_MT.adoc[FindRoleByAccountName(String)]` |Возвращает роль, привязанную к указанной учётной записи.
 |`xref:IStaffService.FindRoleWithSameName_MT.adoc[FindRoleWithSameName(StaffRole, String)]` |Осуществляет поиск роли по названию с исключением указанной роли из результатов.
 |`xref:IStaffService.FindUnitByActiveDirectoryId_MT.adoc[FindUnitByActiveDirectoryId(String)]` |Получает подразделение с указанным идентификатором контейнера в Active Directory.
 |`FindViewField(ViewCardFieldsGroup, IGridViewField)` |Осуществляет поиск отображаемого поля.
@@ -95,7 +95,7 @@ public interface IStaffService
 |`GetEmployeeDisplayString(StaffUnit, StaffEmployee)` |Возвращает отображаемую строку сотрудника, сформированная в соответствии с настройками подразделения.
 |`GetEmployeeFieldDisplayName(Guid, String)` |Возвращает отображаемое название для указанного поля.
 |`xref:IStaffService.GetEmployeeManager_MT.adoc[GetEmployeeManager(StaffEmployee)]` |Возвращает руководителя из карточки подразделения.
-|`GetEmployeesCount(StaffUnit, Boolean, Boolean)` |Возвращает количество сотрудников в заданном подразделении с учетом иерархии.
+|`GetEmployeesCount(StaffUnit, Boolean, Boolean)` |Возвращает количество сотрудников в заданном подразделении с учётом иерархии.
 |`GetEmployeesDisplayFormat(StaffUnit)` |Возвращает формат отображения сотрудников в заданном подразделении.
 |`GetGroup(Guid)` |Возвращает группу с заданным идентификатором.
 |`GetGroupEmployeeRoleDescription` |Возвращает описание к указанной роли сотрудника в группе.
@@ -123,7 +123,7 @@ public interface IStaffService
 |`GetViewFieldsAsObject(ObjectBase, GridViewFieldCollectionType)` |Возвращает отображаемые поля для заданного объекта и типа объекта в справочнике, без приведения к типу.
 |`xref:IStaffService.IsEmployeeInGroup_MT.adoc[IsEmployeeInGroup(StaffEmployee, StaffGroup, Boolean)]` |Определяет принадлежность сотрудника к указанной группе.
 |`xref:IStaffService.LoadEmployeeFromAD_MT.adoc[LoadEmployeeFromAD(StaffEmployee)]` |Загружает данные сотрудника из Active Directory.
-|`LoadEmployeeFromAD(StaffEmployee, String)` |Выполняет загрузку данных из AD в _Справочник сотрудников_. Позволяет указать имя учетной записи, независимо от значения данного поля у сотрудника в _Справочнике сотрудников_.
+|`LoadEmployeeFromAD(StaffEmployee, String)` |Выполняет загрузку данных из AD в _Справочник сотрудников_. Позволяет указать имя учётной записи, независимо от значения данного поля у сотрудника в _Справочнике сотрудников_.
 |`MoveEmployee(StaffEmployee, StaffUnit, Boolean)` |Переносит сотрудника в указанное подразделение.
 |`MoveEmployees(IEnumerable<StaffEmployee>, StaffGroup, StaffGroup)` |Переносит несколько сотрудников в заданную группу.
 |`MoveEmployees(IEnumerable<StaffEmployee>, StaffUnit, Boolean)` |Переносит несколько сотрудников в заданное подразделение.
@@ -134,7 +134,7 @@ public interface IStaffService
 |`OpenOrCreateEmployeeCard(StaffEmployee, Boolean)` |Создаёт или возвращает карточку сотрудника.
 |`xref:IStaffService.OpenOrCreateEmployeeCard_MT.adoc[OpenOrCreateEmployeeCard(StaffEmployee, Boolean, Boolean)]` |Создаёт или возвращает карточку сотрудника.
 |`OtherADMappingWithSameFieldNameExists(StaffADsMapping, String)` |Проверяет наличие коллекции соответствий полей и атрибутов AD с указанным именем атрибута.
-|`xref:IStaffService.OtherEmployeeWithSameAccountExists_MT.adoc[OtherEmployeeWithSameAccountExists(StaffEmployee, String)]` |Определяет наличие сотрудников с указанной учетной записью.
+|`xref:IStaffService.OtherEmployeeWithSameAccountExists_MT.adoc[OtherEmployeeWithSameAccountExists(StaffEmployee, String)]` |Определяет наличие сотрудников с указанной учётной записью.
 |`xref:IStaffService.OtherPositionWithSameNameExists_MT.adoc[OtherPositionWithSameNameExists(StaffPosition, String)]` |Определяет наличие должности с указанным названием.
 |`PrepareAddToWorkGroupMailNotifications(StaffGroup, IEnumerable<StaffGroupItem>, Dictionary<StaffGroupFolder, String>)` |Подготавливает содержимое почтового сообщения для отсылки сотрудникам при добавлении в _рабочую группу_.
 |`PrepareRemoveFromWorkGroupMailNotifications(StaffGroup, IEnumerable<StaffGroupItem>)` |Подготавливает содержимое почтового сообщения для отсылки участникам при исключении из _рабочей группы_.
@@ -143,7 +143,7 @@ public interface IStaffService
 |`xref:IStaffService.RemoveGroupEmployee_MT.adoc[RemoveGroupEmployee(StaffGroup, StaffEmployee)]` |Удаляет сотрудника из группы _справочника сотрудников_.
 |`xref:IStaffService.RemoveGroupItems_MT.adoc[RemoveGroupItems(StaffGroup, IEnumerable<StaffGroupItem>)]` |Удаляет элементы (группы, сотрудники) из группы _справочника сотрудников_.
 |`xref:IStaffService.SetCurrentEmployee_MT.adoc[SetCurrentEmployee(StaffEmployee)]` |Переопределяет текущего сотрудника, возвращаемого методом GetCurrentEmployee.
-|`xref:IStaffService.SetFoldersRights_MT.adoc[SetFoldersRights(FoldersFolder, String)]` |Предоставляет полные права доступа к папке сотруднику с указанной учетной записью.
+|`xref:IStaffService.SetFoldersRights_MT.adoc[SetFoldersRights(FoldersFolder, String)]` |Предоставляет полные права доступа к папке сотруднику с указанной учётной записью.
 |`xref:IStaffService.SynchronizeGroupWithActiveDirectory_MT.adoc[SynchronizeGroupWithActiveDirectory(StaffGroup, IADSynchronizationSettings, ILongProcessManager)]` |Синхронизирует данные группы _справочника сотрудников_ с Active Directory.
 |`xref:IStaffService.SynchronizeRoleWithActiveDirectory_MT.adoc[SynchronizeRoleWithActiveDirectory(StaffRole, IADSynchronizationSettings, ILongProcessManager)]` |Синхронизирует данные роли _справочника сотрудников_ с Active Directory.
 |`xref:IStaffService.SynchronizeUnitWithActiveDirectory_MT.adoc[SynchronizeUnitWithActiveDirectory(StaffUnit, IADSynchronizationSettings, ILongProcessManager)]` |Синхронизирует данные подразделения _справочника сотрудников_ с Active Directory.
