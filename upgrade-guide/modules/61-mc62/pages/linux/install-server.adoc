@@ -11,11 +11,25 @@ WARNING: Начиная с накопительного обновления 25.
 
 . После ознакомления с условиями, описанными в разделе "xref:index.adoc[]" и установки {asp-bundle} на сервера {dv} выполните обновление системными средствами, следуя инструкции ниже. Модуль {mc} будет обновлён до {mc-cu-mc}.
 +
-[WARNING]
+. Сервис внешнего API необходимо удалить в {os1} и {os3}, в {os2} Сервис будет удалён автоматически.
++
+[tabs]
 ====
-Обратите внимание, Сервис внешнего API более не используется, его необходимо удалить.
+{os1}::
++
+[source,subs=attributes]
+----
+sudo apt-get purge docsvision-externalapi
+----
+
+{os3}::
++
+[source,subs=attributes]
+----
+sudo apt-get remove --purge docsvision-externalapi
+----
 ====
 +
 include::new-admin-console@platform:admin:partial$update.adoc[tag=main-update-process]
 +
-. Перезапустите *{sss-new}* и все сервисы {dv} на Linux.
+. Перезапустите службу Сервера {dv} и все сервисы {dv} на Linux.
