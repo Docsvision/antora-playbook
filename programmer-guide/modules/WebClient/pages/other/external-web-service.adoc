@@ -29,12 +29,12 @@ include::6.1@webclient:ROOT:partial$excerpts.adoc[tags=vscode]
 +
 Подробное описание процедуры загрузки пользовательской библиотеки карточек содержится в xref:solutions:cards/scheme/load-scheme.adoc[руководстве разработчика {dv}].
 +
-. Перезапустите *{wcs-new}*.
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 
 == Проверка примера
 
 . Отредактируйте в файле `SamplesOutput\ExternalWebService\WebService\appsettings.json` параметры `ServerAddress` и `BaseName` так, чтобы они указывали на рабочий сервер {dv} и базу.
-. Запустите *{wcs-new}* из папки `SamplesOutput\ExternalWebService\WebService`.
+. Запустите службу Сервера {wc}а из папки `SamplesOutput\ExternalWebService\WebService`.
 .. На Windows запустите `WebService.exe` из под учётной записи {dv} {wc}а.
 .. На Linux запустите командой `dotnet WebService.dll`
 .. Для запуска под нужной учётной записью можно задать параметры `SystemUserAccount` и `SystemUserPassword` в `appsettings.json`.

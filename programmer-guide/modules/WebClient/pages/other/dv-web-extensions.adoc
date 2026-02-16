@@ -478,11 +478,12 @@ npm run build:prod
 
 [start=6]
 .Публикация компонентов на сервере {wc}.
-. Остановите *{wcs-new}*.
+. Остановите службу Сервера {wc}а.
 . Скопируйте папку `SamplesOutput/Content/Modules/WatermarkWebExtension/` в `{wcd-lin}/Content/Modules`.
 . Скопируйте папку `SamplesOutput/Extensions/WatermarkServerExtension` в `{wcd-lin}/Extensions`.
 . Для работы пользователей на Windows скопируйте файлы из папки `SamplesOutput/Site/Content/Tools/DVWebTool/Application Files/` в `C:\Program Files\Docsvision\WebClientToolKit\WebToolBuilder\DVWebTool\`.
-. Запустите *{wcs-new}*.
++
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 
 [start=11]
 .Регистрация расширения _DVWebTool_ на сервере {wc}а.
@@ -490,7 +491,8 @@ npm run build:prod
 . Нажмите кнопку *Собрать DVWebTool*.
 . В диалоге введите адрес публикации {wc}а, при необходимости установите другие опции, и нажмите кнопку *ОК*.
 . Установите собранную утилиту DvWebTool на сервер {wc}а, см. подробнее "xref:new-admin-console@webclient:admin:webservices-install.adoc[]" в документации {wc}а.
-. Перезапустите *{wcs-new}*.
++
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 
 [#dv-sup]
 === Сборка и установка пакета для DvSupService

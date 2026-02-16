@@ -29,8 +29,9 @@ WARNING: Перед выполнением следующего шага, рек
 +
 Сохраните изменения. Подробное описание работы с утилитой _DVExplorer_ содержится xref:resource-kit:dvexplorer:util.adoc[в документации комплекта утилит Resource Kit].
 +
-. Перезапустите *{wcs-new}* на сервере {dv}.
-. Перезапустите *{wcs-new}* на сервере {dv} {wc}.
+include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
++
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 
 == Проверка примера
 
@@ -39,7 +40,9 @@ WARNING: Перед выполнением следующего шага, рек
 . Выбрать условия использования этой разметки.
 . В разметке просмотра на событие `OnCardOpened` элемента `root` указать обработчик с названием `getCustomData`.
 . Сохранить разметку.
-. Перезапустите *{wcs-new}*.
++
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
++
 . Создайте карточку документа.
 . При открытии разметки просмотра появится всплывающее сообщение: `Custom data: 777`.
 
