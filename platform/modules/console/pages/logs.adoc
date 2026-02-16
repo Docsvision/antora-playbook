@@ -22,11 +22,11 @@
 
 include::admin:partial$mancons.adoc[]
 
-По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/appserver/dvappserver.log`. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле модуля {pl}, подробнее работа с конфигурационным файлом описана в разделе "xref:admin:config-platform.adoc[]"
+По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/appserver/dvappserver.log` в Linux и `C:\ProgramData\docsvision\appserver\dvappserver.log` в Windows. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле модуля {pl}, подробнее работа с конфигурационным файлом описана в разделе "xref:admin:config-platform.adoc[]"
 
 Пример настройки уровня журналирования приведён ниже.
 
-.Фрагмент конфигурационного файла {sss-new}:
+.Фрагмент конфигурационного файла Службы сервера {dv}:
 [source,json]
 ----
 {
@@ -41,7 +41,7 @@ include::admin:partial$mancons.adoc[]
 }
 ----
 <.> Уровень журналирования: `0` -- журналирование не ведётся, `1` -- Error, `2` -- Warning, `3` -- Info, `4` -- Verbose. Если значение не задано, по умолчанию используется "Error".
-<.> Путь до файла журнала. По умолчанию `/var/log/docsvision/appserver/dvappserver.log`.
+<.> Путь до файла журнала. По умолчанию `/var/log/docsvision/appserver/dvappserver.log` в Linux и `C:\ProgramData\docsvision\appserver\dvappserver.log` в Windows.
 
 [NOTE]
 ====
@@ -66,7 +66,7 @@ include::admin:partial$mancons.adoc[]
 
 Данный журнал содержит информацию о работе сервиса полнотекстового индексирования {dv}.
 
-По умолчанию журналы сообщений сервиса полнотекстового поиска сохраняется в директории `/var/log/docsvision/fulltextservice.log`.
+По умолчанию журналы сообщений сервиса полнотекстового поиска сохраняется в директории `/var/log/docsvision/fulltextservice.log` в Linux и `C:\ProgramData\docsvision\fulltextservice.log` в Windows.
 
 Подробнее настройка журналирования полнотекстового поиска описана в разделе "xref:search-logging.adoc[]".
 
@@ -87,9 +87,9 @@ include::admin:partial$mancons.adoc[]
 
 В данный журнал сохраняется информация об ошибках работы файлового сервиса {dv}, а также информационные сообщения (если включено).
 
-Журнал сервера является средством диагностики при возникновении нештатных ситуаций и предназначен для передачи в службу технической поддержки {dv}. По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/fileservice`. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле модуля {pl}.
+Журнал сервера является средством диагностики при возникновении нештатных ситуаций и предназначен для передачи в службу технической поддержки {dv}. По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле модуля {pl}.
 
-.Фрагмент конфигурационного файла {fss-new}:
+.Фрагмент конфигурационного файла {of-fs}:
 [source,json]
 ----
 {
@@ -111,10 +111,10 @@ include::admin:partial$mancons.adoc[]
   }
 }
 ----
-<.> Путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/fileservice`.
+<.> Путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows.
 <.> Уровень журналирования, по умолчанию используется `Warn`.
 
-Подробнее настройка журналирования *{fss-new}* описана в разделе "xref:file-service-logging.adoc[Настройка протоколирования работы файлового сервиса {dv}]".
+Подробнее настройка журналирования {of-fs} описана в разделе "xref:file-service-logging.adoc[Настройка протоколирования работы файлового сервиса {dv}]".
 
 [#appserv-requests]
 == Протоколирование запросов сервера приложений
@@ -126,7 +126,7 @@ include::admin:partial$mancons.adoc[]
 * Дата и время запросов и ответов.
 * Заголовки
 
-Протоколирование запросов сервера приложений настраивается в конфигурационном файле модуля по адресу `/usr/lib/docsvision/platform/appsettings.json`, за настройку отвечает параметр `W3CLogging`:
+Протоколирование запросов сервера приложений настраивается в конфигурационном файле модуля по адресу `/usr/lib/docsvision/platform/appsettings.json` в Linux и `C:\ProgramFiles\docsvision\platform\appsettings.json` в Windows, за настройку отвечает параметр `W3CLogging`:
 
 [source,json]
 ----
@@ -148,7 +148,7 @@ include::admin:partial$mancons.adoc[]
 <.> Количество сохраняемых файлов журнала. Допустимые значения от `1` до `10000`, по умолчанию используется `4`.
 <.> Префикс имени файла журнала.
 
-Запросы будут записаны в файл `/var/log/docsvision/appserver/appserver-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt`. Настройка альтернативного расширения поддерживается только при протоколировании с NLog, см. подробнее <<nlog,ниже>>.
+Запросы будут записаны в файл `/var/log/docsvision/appserver/appserver-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt` в Linux и `C:\ProgramData\docsvision\appserver\appserver-w3c-&#x7b;YYYYMMDD.X&#x7d;.txt` в Windows. Настройка альтернативного расширения поддерживается только при протоколировании с NLog, см. подробнее <<nlog,ниже>>.
 
 [#nlog]
 === Протоколирование запросов с помощью NLog
