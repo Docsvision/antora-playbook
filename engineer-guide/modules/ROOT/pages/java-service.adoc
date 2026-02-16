@@ -97,7 +97,7 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 
 include::partial$mancons.adoc[]
 
-. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` и перезапустите службу *{sss-new}*. Пример содержимого файла `.json` приведён ниже:
+. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux и `C:\Program Files\Docsvision\Platform\config` в Windows. Пример содержимого файла `.json` приведён ниже:
 +
 [source,json]
 ----
@@ -114,6 +114,8 @@ include::partial$mancons.adoc[]
 }
 ----
 <.> Адрес Криптосервиса.
++
+include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
 +
 . Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
 +

@@ -19,7 +19,8 @@ EXEC dvsys_setting_set N'RoleModelTrace', @On
 select * from dvsys_setting_set('RoleModelTrace', true);
 ----
 +
-. Перезапустите *{sss-new}*.
+include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
++
 . После завершения исследования удалите настройку `"TraceLevel"` в БД или отключите её, установив в значение `0` для {mssql} или `false` для {pgsql}.
 +
 [source,sql]
@@ -32,4 +33,4 @@ delete from dvsys_settings where [Name] = N'RoleModelTrace
 delete from dvsys_settings where "Name" = 'RoleModelTrace;
 ----
 +
-. Перезапустите *{sss-new}* ещё раз.
+include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
