@@ -12,19 +12,22 @@
 
 // Журнал {of-mc} хранится по адресу: `C:\ProgramData\Docsvision\ManagementConsole\Logs\ГГГГ_ММ_ДД_ManagementConsole_UserEvents.log`. Каждый день создаётся новый журнал.
 
-Журналы консоли управления и сервиса настроек можно посмотреть в каталоге `/var/log/docsvision`.
+Журналы консоли управления и сервиса настроек можно посмотреть в каталоге `/var/log/docsvision` для Linux и `C:\ProgramData\Docsvision` для Windows.
 
-include::install-linux:ROOT:appendix/commands.adoc[tags=log]
+// include::install-linux:ROOT:appendix/commands.adoc[tags=log]
 
 // по адресу: `C:\ProgramData\Docsvision\SettingsService\Logs`.
 
-Чтобы изменить путь хранения файла журнала по умолчанию, нужно добавить в конфигурационный файл модуля (`appsettings.json`) параметр с указанием нужного пути:
+Чтобы изменить путь хранения файла журнала по умолчанию, нужно в конфигурационном файле модуля `appsettings.json` изменить параметр menu:NLog[targets > logFile > fileName] с указанием нужного пути:
 
+.Путь к файлу журнала:
 [source,json]
 ----
-{
-"FileJournal": {
-   "Path": "Здесь указать полный путь к журналу"
- }
-}
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/managementconsole/${shortdate}_ManagementConsole.log",
+      }
+    },
 ----
