@@ -4,7 +4,6 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
-// tag::linux[]
 :do-what: способы первоначальной конфигурации модуля
 :init-config: yes
 :first: <<mancons,Настройки в {of-mc}>>
@@ -22,9 +21,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=install]
 include::install-linux:ROOT:partial$restart-and-db.adoc[]
 --
 
-// end::linux[]
-
-// tag::windows[]
 [#windows-server]
 == Установка модуля {wf} на сервер под управлением Windows
 
@@ -73,16 +69,12 @@ image::install-confirm.png[Начало установки серверной ч
 +
 include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
-// end::windows[]
-
 [#mc-ext]
 == Установка расширения модуля {wf} для {of-mc}
 
 :what-mod: {wf}
 :wt: workflow
 include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
-// tag::linux[]
 
 [#mc-ext-linux]
 == Установка расширения на сервер под управлением Linux
@@ -95,9 +87,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
 Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
 --
-// end::linux[]
-
-// tag::windows[]
 
 [#mc-ext-windows]
 == Установка расширения на сервер под управлением Windows
@@ -107,7 +96,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
 .Выбор компонентов Службы {ws} для установки
 image::install-server-components.png[Выбор компонентов Службы {ws} для установки]
-// end::windows[]
 
 [#config]
 == Настройка модуля {wf}
@@ -115,7 +103,10 @@ image::install-server-components.png[Выбор компонентов Служ�
 [#config-console]
 === Настройка в {of-mc}
 
-. Убедитесь, что в конфигурационном файле модуля {wf} по адресу `/usr/lib/docsvision/{wt}/{config}.json` для Linux или `C:\Program Files\Docsvision\Workflow\appsettings.json` для Windows указаны описанные ниже настройки. Файл может быть изменён в любом текстовом редакторе, например `nano` или блокноте (потребуются права суперпользователя/администратора). Настройки в конфигурационном файле:
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+Убедитесь, что в конфигурационном файле модуля {wf} по адресу {config} указаны описанные ниже настройки. Файл может быть изменён в любом текстовом редакторе, например `nano` или блокноте (потребуются права суперпользователя/администратора). Настройки в конфигурационном файле:
 +
 .Фрагмент конфигурационного файла {wf}:
 [source,json]
@@ -157,12 +148,7 @@ image::install-server-components.png[Выбор компонентов Служ�
 * Обрабатываемые базы данных -- настройка для выбора БД доли обрабатываемых процессов и почтового соединения, с которыми будет работать данный сервер СУБП.
 * API-ключ для подключения к Workflow -- ключ для подключения серверного расширения {wf}, должен быть одинаковым в конфигурации модулей {pl} и {wf}.
 +
-. Запустите службу модуля:
-+
-[source,bash]
-----
-sudo systemctl start dvworkflow
-----
+. Запустите службу модуля {wf}.
 
 [#config-file]
 === Установка и конфигурация без {of-mc}
@@ -213,7 +199,12 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-
 <.> `APIKEY` -- Используется для аутентификации в API {wf}. Можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 --
 +
-. Запустите службу *{wfs-new}*.
+. {blank}
++
+--
+[subs="specialchars,attributes,quotes"]
+Запустите службу {wfs-new}.
+--
 
 [#client]
 === Установка клиентской части модуля
@@ -260,7 +251,8 @@ image::install-confirm-client.png[Начало установки клиентс
 == Создание учётной записи для сервиса Workflow
 
 // tag::requirements-account[]
-Администратор должен создать учётную запись для СУБП, службы *{wfs-new}*.
+[subs="specialchars,attributes,quotes"]
+Администратор должен создать учётную запись для СУБП, службы {wfs-new}.
 
 .Создайте доменную учётную запись, и настройте её права:
 . На сервере Linux включите учётную запись в локальные группы _{dv-power-users-serv}_.
