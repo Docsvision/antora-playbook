@@ -248,7 +248,7 @@ include::partial$mancons.adoc[]
 +
 . При необходимости настройте использование расширенной аутентификации на странице menu:Серверы[Имя сервера > Сервер приложений > "xref:dev@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширенная аутентификация"]].
 +
-. Запустите *{wcs-new}*.
+include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 +
 Служба запускается от имени УЗ {dv} и не требует административных привилегий.
 
@@ -306,11 +306,6 @@ include::partial$mancons.adoc[]
 <.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
 <.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
 +
-. Запустите службу модуля:
-+
-[source,bash]
-----
-sudo systemctl start dvwebclient
-----
+. Запустите службу {wc}а.
 +
 Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
