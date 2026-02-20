@@ -6,14 +6,24 @@
 * Название сертификата должно быть равно полному имени сервера равный DNS имени сервера.
 * В качестве цели использования необходимо указывать "Серверная аутентификация".
 
-[#openssl]
-== Создание сертификата с помощью OpenSSL
-
 Ниже приведён пример создания сертификата с использованием утилиты https://slproweb.com/products/Win32OpenSSL.html[OpenSSL].
 
-. Создайте сертификат следующей командой:
+. Установите пакет `openssl` командой:
 +
- openssl req -x509 -newkey rsa:4096 -sha256 -keyout .\out\authservice.key -out .\out\authservice.crt -subj "/CN=http://docsvision.com" -days 600
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install openssl
+
+{os2}::
++
+ $ sudo dnf install openssl
+====
++
+. Создайте самоподписанный сертификат следующей командой:
++
+ openssl req -x509 -newkey rsa:4096 -sha256 -keyout .\out\authservice.key -out .\out\authservice.crt -subj "/CN=http://example.company.com" -days 600
 +
 Где `.\out\authservice` -- место сохранения сертификата.
 +
