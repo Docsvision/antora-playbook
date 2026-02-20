@@ -44,6 +44,7 @@
 . {mc} поддерживает работу в одном или нескольких доменах. Для этого в конфигурационном файле модуля необходимо выполнить настройку доменных каталогов, в массиве `"Catalogs": []`. Настройки вступают в работу, если в массиве присутствует хотя бы одно описание каталога.
 +
 --
+// tag::catalogs[]
 [source,json]
 ----
 {
@@ -54,6 +55,7 @@
     "LdapOptions": { <.>
       "LdapServerAddresses": [ "example1.com" ], <.>
       "AuthType": "Basic", <.>
+      "Port": 389, <.>
       "Credential": { <.>
         "UserName": "user@example1.com",
         "Password": "Password"
@@ -72,36 +74,13 @@
 <.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
 <.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
+// end::catalogs[]
 --
 // end::config[]
-+
-.Раздел `Catalogs` может содержать массив настроек вида:
-[source,json]
-----
-{
-    "FullDomainName": "example.com", <.>
-    "NetBiosDomainName": "EXAMPLE", <.>
-    "LdapOptions": { <.>
-      "LdapServerAddresses": [ "example.com" ], <.>
-      "AuthType": "Basic", <.>
-      "Port": 389, <.>
-      "Credential": { <.>
-        "UserName": "user@example.com",
-        "Password": "Password"
-      }
-    }
-}
-----
-<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
-<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
-<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
-<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
-<.> `AuthType` -- тип аутентификации в LDAP.
-<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 
 include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
 
