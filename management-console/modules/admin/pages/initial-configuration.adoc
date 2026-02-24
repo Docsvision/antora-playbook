@@ -1,3 +1,6 @@
+:page-aliases: provide-access.adoc
+
+// tag::no-alias[]
 = Первичная настройка {of-mc}
 
 [#config-file]
@@ -30,6 +33,25 @@
 <.> `ManagementConsoleAddress` -- Адрес {of-mc}.
 <.> `Catalogs` -- см. подробнее "<<domain,Настройка работы в домене>>".
 <.> `{dv-web-admin-cns-admins-serv}` -- Пользователи, для которых доступны карточки сообщений данного сервера.
+
+Предоставить пользователям доступ к Консоли или внесению изменений в конфигурацию _{of-sett-serv}_ можно вручную, изменив конфигурационный файл модуля {pl}, расположенный по адресу `/usr/lib/docsvision/platform/appsettings.json` для Linux и `C:\Program Files\Docsvision\Platform\appsettings.json` для Windows':
+
+.Фрагмент конфигурационного файла модуля {pl}:
+[source,json]
+----
+{
+  "DocsVision": {
+  "Groups": {
+    "DocsVision Management Console Administrators": [
+      "domain\\account"
+    ], <.>
+    "DocsVision Security Administrators": [
+      "domain\\account"
+    ]
+  }
+}
+----
+<.> Добавьте пользователей, которые должны иметь доступ к {of-mc}.
 // end::config[]
 
 [#domain]
@@ -101,3 +123,4 @@ ifndef::manacons[]
 . Перейдите на вкладку _Служба {ws}_ и xref:./dvworkerservice.adoc[настройте] процесс Службы {ws}.
 . В виджетах на главной страницеfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] выберите соединение и период статистики.
 endif::manacons[]
+// end::no-alias[]
