@@ -1,9 +1,38 @@
-= Конфигурационный файл Консоли управления
+:page-aliases: provide-access.adoc
+:config-mc: `/usr/lib/docsvision/managementconsole/appsettings.json` для Linux и `C:\Program Files\Docsvision\ManagementConsole\appsettings.json` для Windows
+:config-pl: `/usr/lib/docsvision/platform/appsettings.json` для Linux и `C:\Program Files\Docsvision\Platform\appsettings.json` для Windows
 
+// tag::no-alias[]
+= Первичная настройка {of-mc}
+
+// tag::initial-configuration[]
+. {blank}
++
 [subs="specialchars,attributes,quotes"]
-Конфигурационный файл модуля располагается по адресу {config}. Конфигурационный файл `appsettings.json` содержит базовые настройки модуля.
-
-.Фрагмент конфигурационного файла `appsettings.json`:
+Прежде, чем настраивать {mc}, необходимо предоставить пользователям доступ к ней. Предоставьте доступ, отредактировав конфигурационный файл модуля {pl} по адресу {config-pl}:
++
+.Фрагмент конфигурационного файла модуля {pl}:
+[source,json]
+----
+{
+  "DocsVision": {
+  "Groups": {
+    "DocsVision Management Console Administrators": [
+      "domain\\account"
+    ], <.>
+    "DocsVision Security Administrators": [
+      "domain\\account"
+    ]
+  }
+}
+----
+<.> Добавьте пользователей, которые должны иметь доступ к {of-mc}.
++
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+На сервере {mc}, в конфигурационном файле, необходимо указать минимальные настройки. Файл располагается по адресу {config-mc}:
++
 [source,json]
 ----
 {
@@ -11,6 +40,10 @@
     "ConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
     "ApiKey": "SettingsServiceApiKey" <.>
   },
+  "System": {
+    "ManagementConsoleAddress": "http://console.domain.com:5100" <.>
+  },
+  "Catalogs": [], <.>
   "Groups": {
     "Docsvision Management Console Administrators": [
       "account@domain.com" <.>
@@ -18,18 +51,77 @@
   }
 }
 ----
-<.> Адрес подключения к Сервису настроек.
-<.> Ключ доступа к Сервису настроек (указывается в конфигурационном файле сервиса).
-<.> Пользователи, для которых доступны карточки сообщений данного сервера.
+<.> `ConnectionString` -- Адрес {of-sett-serv}.
+<.> `ApiKey` -- Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса и конфигурационном файле {of-sett-serv}.
+<.> `ManagementConsoleAddress` -- Адрес {of-mc}.
+<.> `Catalogs` -- см. подробнее "<<domain,Настройка работы в домене>>".
+<.> `{dv-web-admin-cns-admins-serv}` -- Пользователи, для которых доступны карточки сообщений данного сервера.
 
-include::initial-configuration.adoc[tags=catalogs]
+// строка-бяка-антиприлипака
+[#domain]
+== Настройка работы {of-mc} в домене
 
-// .Конфигурация модуля включает:
-// * Адрес подключения к _{of-mc}_.
-// * Настройки _Службы {ws}_ (включая очереди, фабрики и прочие).
-// * Адрес подключения к _{to-sett-serv}_.
-// * Настройки конфигурации для обработки заданий модуля _{bo}_.
-// * Роли обработки задач модуля _{bo}_.
-// * Имена типов реализаций подключаемых к _Службе {ws}_.
-// * Настройки сопоставления типов реализаций.
-// * Путь к файлу журнала.
+// tag::config-catalogs[]
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+Выполните настройку для работы {of-mc} в одном или нескольких доменах, обеспечив возможность аутентификации. Заполните настройки доменных каталогов в массиве `"Catalogs": []` конфигурационного файла Консоли по адресу {config-mc}.
++
+WARNING: Настройки вступают в работу, если в массиве присутствует хотя бы одно описание каталога. Если ни одного каталога не указано, аутентификация в {of-mc} будет недоступна!
++
+[source,json]
+----
+{
+ "Catalogs": [
+  {
+   "FullDomainName": "example1.com", <.>
+    "NetBiosDomainName": "example1", <.>
+    "LdapOptions": { <.>
+      "LdapServerAddresses": [ "example1.com" ], <.>
+      "AuthType": "Basic", <.>
+      "Port": 389, <.>
+      "Credential": { <.>
+        "UserName": "user@example1.com",
+        "Password": "Password"
+      }
+    }
+ },
+  {
+    "FullDomainName": "example2.com", <.>
+    "ChallengeTo": "example1.com" <.>
+  }
+  ]
+}
+----
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `NetBiosDomainName` -- `NetBios`-имя домена указывается в формате `domain\\user` перед `\\`.
+<.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
+<.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
+<.> `AuthType` -- тип аутентификации в LDAP.
+<.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
+<.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
+<.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
+// end::config-catalogs[]
+// end::initial-configuration[]
+
+include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
+
+[#configuration]
+== Настройка соединений в {of-mc}
+
+После установки {mc} требуется выполнить первичную настройку Консоли и _Службы {ws}_. Если проигнорировать первичную настройку, дальнейшая работа с системой будет невозможна.
+
+ifdef::manacons[]
+. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть xref:user:user-interface.adoc[главную страницу] {of-mc}.
+. Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:user:connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
+. Перейдите на вкладку _Служба {ws}_ и xref:user:worker-service.adoc[настройте] процесс Службы {ws}.
+. В виджетах на xref:user:user-interface.adoc[главной странице] выберите соединение и период статистики.
+endif::manacons[]
+ifndef::manacons[]
+. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть главную страницуfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] {of-mc}.
+. Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:./connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
+. Перейдите на вкладку _Служба {ws}_ и xref:./dvworkerservice.adoc[настройте] процесс Службы {ws}.
+. В виджетах на главной страницеfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] выберите соединение и период статистики.
+endif::manacons[]
+// end::no-alias[]
