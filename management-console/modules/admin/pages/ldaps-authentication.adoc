@@ -41,6 +41,8 @@ ALD Pro является альтернативной службой катал�
 
 include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 
+Настройте расширение в конфигурационном файле {of-mc} согласно инструкции ниже, чтобы работать с учётными записями из каталога ALDPro:
+
 [source,json]
 ----
 {
@@ -60,6 +62,8 @@ include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 <.> `Type` -- строка с именем типа, реализующего коннектор.
 <.> `Settings` -- строка настроек коннектора к ALD Pro. Подробнее см. <<ald-settings,ниже>>.
 <.> `ID` -- строка с идентификатором коннектора в виде Guid.
+
+WARNING: Перезапустите службу Консоли управления, чтобы изменения вступили в силу.
 
 include::new-admin-console@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
 
