@@ -36,6 +36,37 @@ include::partial$excerpts.adoc[tags=system-accounts]
 Рекомендуется xref:dev@mgmtconsole:servers:appserver-license.adoc#personal-license[назначить] учётным записям сервиса <<fulltext,полнотекстового индексирования>> и <<workflow,СУБП>> персональную лицензию.
 ====
 
+[#db-updater]
+== Требования учётной записи пользователя, обновляющего БД
+
+// tag::group-rights[]
+Пользователь, выполняющий обновление БД, должен быть добавлен в системные группы _{dv-ad-admins-dir}_, _{dv-dm-admins-dir}_, _{dv-sys-wf-dir}_.
+// end::group-rights[]
+Пользователи указанных групп обладают следующими правами на системные папки:
+
+[cols="20%,20%,60",options="header"]
+|===
+
+|Папка |Права |Комментарий
+
+a|menu:Папки[Усовершенствованное согласование]
+|Полный доступ для членов группы _{dv-ad-admins-dir}_
+|При этом важно, чтобы у карточек в папке были следующие права: у админов полные, у всех на чтение
+
+a|menu:Папки[Служебные]
+2+|Полный доступ для членов группы _{dv-dm-admins-dir}_, _{dv-sys-wf-dir}_
+
+a|menu:Папки[Маршрутизация]
+2+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone.
+
+a|menu:Папки[Отчеты]
+2+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone
+
+a|menu:Папки[Служебные]
+2+|Полный доступ для членов группы _{dv-dm-admins-dir}_
+
+|===
+
 [#appserver]
 include::new-admin-console@install-linux:ROOT:partial$requirements-server-account.adoc[leveloffset=1]
 
