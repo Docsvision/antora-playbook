@@ -27,6 +27,7 @@ ifndef::mancons[]
 +
 [source,subs=attributes]
 ----
+sudo dnf makecache
 sudo dnf update docsvision-{update}*
 ----
 
@@ -43,7 +44,8 @@ ifdef::mancons[]
 +
 [source]
 ----
-sudo dnf update docsvision-managementconsole* && sudo dnf update docsvision-settingsservice*
+sudo dnf makecache
+sudo dnf update docsvision-managementconsole* docsvision-settingsservice*
 ----
 endif::[]
 ====
