@@ -16,8 +16,7 @@ include::dev@mgmtconsole:user:first-launch.adoc[tags=start]
 +
 . Убедитесь, что сервисы {dv} зарегистрированы в {sett-serv}, см. подробнее "xref:./install-other-server.adoc#register-services[Регистрация модулей системы]".
 +
-. Включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений согласно инструкции, приведённой <<groups,ниже>>footnote:[См. подробнее "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]"].
-+
+. Если это не было выполнено ранее, при xref:./config-platform.adoc#groups[настройке модуля {pl}]footnote:[См. подробнее "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]"], включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений.
 . Выполните настройку БД с помощью мастера баз данных, запускаемого из таблицы БД:
 +
 .Таблица "Базы данных" Консоли настройки {dv}
@@ -39,10 +38,9 @@ image::dev@mgmtconsole:servers:db-create-start.png[Создание базы д�
 +
 [NOTE]
 ====
-* Для БД {pgsql} адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP адрес.
+* Для БД {pgsql} адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP-адрес.
 * Порт указывается только для {pgsql} (по умолчанию -- `5432`).
-* Особенности работы через SQL- и Windows-аутентификацию см. в документации модуля {pl}, раздел
-// "xref:dev@mgmtconsole:servers:db-authentication.adoc[]".
+* Особенности работы через SQL- и Windows-аутентификацию см. в документации модуля {pl}, раздел "xref:new-admin-console@platform:console:db-authentication.adoc[]".
 ====
 +
 . На странице _База данных_ укажите имя создаваемой БД.
