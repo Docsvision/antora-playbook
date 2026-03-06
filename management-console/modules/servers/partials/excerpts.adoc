@@ -144,9 +144,6 @@ ifdef::db-settings[]
 Сервер SQL:::
 endif::db-settings[]
 Сетевое имя сервера или экземпляра СУБД, например `sql.company.com`.
-ifndef::db-settings[]
-При вводе значения под полем отображается список существующих имён на сервере СУБД.
-endif::db-settings[]
 +
 ifndef::hide-type[]
 Для БД {pgsql} имя сервера следует указывать без домена, например, `postgre`, а не `postgre.company.com`. Не следует использовать IP и имя LOCALHOST.
@@ -189,6 +186,10 @@ endif::hide-type[]
 Имя:::
 Название БД в СУБД.
 // end::dbname-1[]
++
+ifndef::db-settings[]
+При вводе значения под полем отображается список существующих имён на сервере СУБД.
+endif::db-settings[]
 +
 [WARNING]
 ====
