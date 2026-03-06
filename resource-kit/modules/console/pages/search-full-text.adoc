@@ -70,7 +70,11 @@ sudo apt-get install docsvision-fulltextservice
 
 {os2}::
 +
- $ sudo dnf install docsvision-fulltextservice
+[source,bash]
+----
+sudo dnf makecache
+sudo dnf install docsvision-fulltextservice
+----
 ====
 +
 . Все настройки сервиса полнотекстового индексирования хранятся в конфигурационном файле `appsettings.json`. Откройте конфигурационный файл в любом текстовом редакторе, например `nano` или блокноте (потребуются права суперпользователя/администратора):
