@@ -65,7 +65,7 @@ NOTE: Подробный пример создания сертификата п
 +
 [source,powershell]
 ----
-New-SelfSignedCertificate -CertStoreLocation cert:\currentuser\my -DnsName "example.company.com" -FriendlyName "Docsvision Site" -KeyUsage "DigitalSignature", "KeyEncipherment" -KeyAlgorithm RSA  -KeyLength 2048 -NotAfter $([datetime]::now.AddDays(90))
+New-SelfSignedCertificate -CertStoreLocation cert:\localmachine\my -DnsName "example.company.com" -FriendlyName "Docsvision Site" -KeyUsage "DigitalSignature", "KeyEncipherment" -KeyAlgorithm RSA  -KeyLength 2048 -NotAfter $([datetime]::now.AddDays(90))
 ----
 +
 .Расшифровка команды:
@@ -108,11 +108,13 @@ WARNING: После редактирования конфигурационны�
   "AllowedHosts": "*",
   "Kestrel": {
     "Endpoints": {
-      "Https": {
-        "Url": "https://*:5020", <.>
+      "HttpsInlineCertStore": {
+        "Url": "https://my-site.com:443", <.>
         "Certificate": {
-          "Path": "/folder/certificate.crt", <.>
-          "KeyPath": "/folder/docsvision.key" <.>
+          "Subject": "my-site.com", <.>
+          "Store": "My", <.>
+          "Location": "CurrentUser", <.>
+          "AllowInvalid": false <.>
         }
       }
     }
@@ -120,8 +122,10 @@ WARNING: После редактирования конфигурационны�
 }
 ----
 <.> `Url` -- адрес и порт для доступа по HTTPS. При такой конфигурации сервис будет прослшуивать одновременно два порта: стандартный `5000` для HTTP и `5020` для HTTPS. Чтобы использовать стандартный порт `5000` для подключения по HTTPS, измените параметры следующим образом: menu:Http[Url > "https://*:5000"]. Обратите внимание, вместо `Https` в данной конфигурации указывается `Http`.
-<.> `Path` -- локальное расположение сертификата, созданного <<certificate,ранее>>.
-<.> `KeyPath` -- локальное расположение ключа шифрования для сертификата, созданного <<certificate,ранее>>.
+<.> `Subject` -- адрес сайта, переданный в параметре `DnsName` при создании сертификата.
+<.> `Store` -- наименование хранилища, переданное в параметре `CertStoreLocation` при создании сертификата.
+<.> `Location` -- хранилище сертификата, переданное в параметре `CertStoreLocation` при создании сертификата.
+<.> `AllowInvalid` -- стоит ли считать недействительные сертификаты самоподписанными (по умолчанию `false`).
 
 [WARNING]
 ====
