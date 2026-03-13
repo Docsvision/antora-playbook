@@ -146,7 +146,7 @@ image::install-server-components.png[Выбор компонентов Служ�
 +
 Пароль может быть зашифрован, "Штамп сертификата шифрования паролей" указывается в разделе "xref:dev@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]".
 +
-Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
+Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
 +
 * Обрабатываемые базы данных -- настройка для выбора БД доли обрабатываемых процессов и почтового соединения, с которыми будет работать данный сервер СУБП.
 * API-ключ для подключения к Workflow -- ключ для подключения серверного расширения {wf}, должен быть одинаковым в конфигурации модулей {pl} и {wf}.
@@ -192,10 +192,10 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 <.> `ConnectionString` -- Адрес подключения к сервису настроек.
 <.> `ApiKey` -- Ключ приложения для подключения к сервису настроек.
 <.> `DataProtectCertificateThumbprint` -- Отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- Имя системной учётной записи {dv}.
-<.> `SystemUserPassword` -- Пароль системной УЗ, рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:install-linux::appendix/account-protection.adoc[]".
+<.> `SystemUserPassword` -- Пароль системной УЗ, рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
 +
 include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
@@ -285,4 +285,11 @@ image::install-confirm-client.png[Начало установки клиентс
 +
 include::new-admin-console@platform:admin:partial$delete.adoc[]
 +
-Компоненты модуля следует удалять до удаления компонентов модуля _{pl}_.
+** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
++
+--
+:wt: ext-workflow-mc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
++
+Компоненты модуля и расширение следует удалять до удаления компонентов модуля _{pl}_.
