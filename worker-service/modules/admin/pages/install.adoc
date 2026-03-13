@@ -100,7 +100,7 @@ image::install-components.png[Выбор компонентов Службы {ws
 
 Основные настройки, которые нужно сделать в конфигурационном файле: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
 
-Конфигурационный файл располагается по адресу `/usr/lib/docsvision/platform/Configuration.json` в Linux и `C:\Program Files\Docsvision\WorkerService\Configuration.json` в Windows.
+Конфигурационный файл располагается по адресу `/usr/lib/docsvision/workerservice/Configuration.json` в Linux и `C:\Program Files\Docsvision\WorkerService\Configuration.json` в Windows.
 
 // tag::config[]
 --
@@ -141,6 +141,16 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 * Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
 * Чтобы удалить модуль в ОС Linux, выполните команду:
 +
+--
+:wt: workerservice
 include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
 +
-Компоненты модуля следует удалять до удаления компонентов модуля _{pl}_.
+** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
++
+--
+:wt: ext-ws-mc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
++
+Компоненты модуля и расширение следует удалять до удаления компонентов модуля _{pl}_.
