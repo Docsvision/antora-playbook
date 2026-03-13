@@ -11,22 +11,38 @@ WARNING: Компоненты модуля {pl} следует удалять т
 // . _{pl}_. Сервер.
 // . _{pl}_. Клиент.
 
+[#windows]
+== Удаление на Windows
+
+* Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
+
 [#linux]
 == Удаление на Linux
 
-. Чтобы удалить модуль, выполните команду:
+* Чтобы удалить модуль {pl} в ОС Linux, выполните команду:
 +
-[tabs]
-====
-{os1}::
+--
+:wt: platform
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
 +
- $ sudo apt-get purge docsvision-platform
-
-{os2}::
+** Чтобы удалить раширение модуля {pl} для {of-mc} в ОС Linux, выполните:
 +
- $ sudo dnf remove docsvision-platform
-
-{os3}::
+--
+:wt: ext-platform-mc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
 +
- $ sudo apt-get remove --purge docsvision-platform
-====
+* Чтобы удалить модуль {fs} в ОС Linux, выполните команду:
++
+--
+:wt: fileservice
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
++
+** Чтобы удалить раширение модуля {fs} для {of-mc} в ОС Linux, выполните:
++
+--
+:wt: ext-fileservice-mc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
