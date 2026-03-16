@@ -1,3 +1,5 @@
+:ws-log-dir: `/var/log/docsvision/WorkerService.log` для Linux и `C:\ProgramData\docsvision\workerservice` для Windows
+
 = Установка и настройка Службы {ws}
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
@@ -5,7 +7,7 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 // tag::linux[]
-:of: сервиса
+:of: Службы {ws}
 :wt: workerservice
 :config: Configuration
 
@@ -111,13 +113,16 @@ image::install-components.png[Выбор компонентов Службы {ws
   "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
   "ApiKey": "anything", <.>
   "RestApiAddress": "http://worker.domain.com:5900/api", <.>
-  "LogFile": "/var/log/docsvision/WorkerService.log" <.>
+  "LogFile": "путь-к-журналу-службы" <.>
 }
 ----
 <.> Адрес подключения к Сервису настроек.
 <.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
 <.> Адрес подключения к Службе {ws}.
-<.> Путь к файлу журнала Службы {ws}.
+<.> Путь к файлу журнала Службы {ws}:
++
+[subs="specialchars,attributes,quotes"]
+{ws-log-dir}.
 --
 // end::config[]
 
