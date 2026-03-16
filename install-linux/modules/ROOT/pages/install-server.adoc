@@ -31,6 +31,13 @@ include::dev@mgmtconsole:admin:config.adoc[tags=initial-configuration]
 
 include::new-admin-console@workerservice:admin:install.adoc[tags=linux]
 
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+В конфигурационном файле Службы {ws} по адресу {ws-log-dir} укажите необходимые параметры:
++
+include::new-admin-console@workerservice:admin:install.adoc[tags=config]
+
 // антиприлипака
 
 include::dev@mgmtconsole:admin:install.adoc[tags=cert]
@@ -56,15 +63,5 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
 :wt: fileservice
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
-
-[#worker-service]
-== Установка Службы {ws}
-
---
-:of: Службы {ws}
-:wt: workerservice
-:config: Configuration
-include::new-admin-console@platform:admin:partial$install.adoc[]
---
 
 // end::no-alias[]
