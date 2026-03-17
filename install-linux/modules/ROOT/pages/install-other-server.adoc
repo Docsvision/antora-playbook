@@ -5,7 +5,6 @@
 
 Данный раздел описывает установку базовых модулей для ОС Linux. Все описанные ниже команды необходимо выполнять после завершения xref:./install-server.adoc[установки] модуля {pl}.
 
-ifndef::mc62[]
 [#webc]
 == Установка {wc}а
 
@@ -37,7 +36,6 @@ ifndef::mc62[]
 +
  $ sudo dnf install docsvision-workflow
 ====
-endif::mc62[]
 
 [#extensions-linux]
 == Установка расширений модулей для {of-mc} на сервер под управлением Linux
@@ -48,11 +46,14 @@ include::dev@mgmtconsole:admin:install.adoc[tags=extensions-linux]
 
 include::dev@mgmtconsole:admin:install.adoc[tags=register-services]
 
-[#start-services]
-== Запуск системных служб
+[#restart-services]
+== Перезапуск системных служб
 
-. Запустите системные службы для модулей {dv}:
+// tag::mc62[]
+. Перезапустите системные службы для модулей {dv}:
 +
- $ sudo systemctl start dvappserver && sudo systemctl start dvwebclient && sudo systemctl start dvsettings && sudo systemctl start dvconsole && sudo systemctl start dvworkerservice && sudo systemctl start dvworkflow && sudo systemctl start dvfileservice
+ $ sudo systemctl restart dvappserver dvwebclient dvsettings dvconsole dvworkerservice dvworkflow dvfileservice
+
+// end::mc62[]
 
 // end::no-alias[]
