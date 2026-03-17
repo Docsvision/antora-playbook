@@ -97,3 +97,25 @@ image::dev@mgmtconsole:servers:db-create-solutions.png[Выбор модулей
 . Чтобы назначить созданную БД основной, следуйте xref:dev@mgmtconsole:servers:db-default.adoc[инструкции].
 +
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
+
+// tag::db-create-errors[]
+[#errors]
+== Возможные ошибки при создании БД
+
+В исключительных случаях при обновлении БД могут возникать ошибки. Ниже приведены возможные ошибки и способы их решения.
+
+[cols="34%,33%,33%",options="header"]
+|===
+
+|Ошибка
+|Возможные причины
+|Способ решения
+
+|При создании БД на базе {pgl} возникает ошибка.
+|По умолчанию недоступна функция `uuid_generate_v4()`.
+|Установите расширение `uuid-ossp` и убедитесь, что схема присутствует в `search_path`.
+
+Проверить можно запросом `select uuid_generate_v4();`.
+
+|===
+// end::db-create-errors[]
