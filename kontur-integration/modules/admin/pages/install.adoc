@@ -8,24 +8,24 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
-Пользователь, выполняющий установку, должен обладать правами локального администратора и являться _администратором {dv}_ (быть членом группы *{dv-admins-serv}* на компьютере с сервером {dv}).
-
 [#linux-server]
 == Установка {of-mk} на сервер под управлением Linux
 
-:wt: cakontur-shared
+:wt: cakontur*
 include::new-admin-console@platform:admin:partial$install.adoc[]
 . Установите расширение _{of-mk}_ {wc}а следующей командой:
 +
 :wt: cakontur-webc
 include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
-. Получите библиотеку `CryptoPro.Security.Cryptography.dll` (входит в комплект https://cryptopro.ru/products/net/downloads[КриптоПро .Net LibCore]) и поместите её по адресу `/usr/lib/docsvision/common` в Linux и `C:\Program Files\Docsvision\Common` в Windows.
+// include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
++
+. Получите библиотеку `CryptoPro.Security.Cryptography.dll` (входит в комплект https://cryptopro.ru/products/net/downloads[КриптоПро .Net LibCore]) и поместите её по адресу `/usr/lib/docsvision/common` в Linux.
 
 [#windows-server]
 == Установка {of-mk} на сервер под управлением Windows
 
-. Запустите пакет установки `Docsvision ConversionService.msi`.
+. Запустите пакет установки `Docsvision CA Kontur integration.msi`.
 +
 .Мастер установки серверной части модуля
 image::install-server-hello.png[Мастер установки серверной части модуля]
@@ -35,10 +35,12 @@ image::install-server-hello.png[Мастер установки серверно
 .Условия лицензионного соглашения
 image::install-server-license.png[Условия лицензионного соглашения]
 +
-. Выберите компоненты, которые требуется установить и нажмите *Далее*.
+. Выберите компоненты, которые требуется установить, и нажмите *Далее*.
 +
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
++
+include::new-admin-console@platform:admin:partial$install-components.adoc[]
 +
 ****
 Общие компоненты::
@@ -59,21 +61,30 @@ NOTE: Расширение недоступно для установки, ес�
 Позволяет посмотреть свободное место на системных дисках.
 ****
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
-+
 . В следующем окне нажмите *Установить* и дождитесь завершения установки модуля.
 . Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+// include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 +
 . Выполните необходимые настройки модуля, описанные в разделе xref:settings.adoc[].
+. Получите библиотеку `CryptoPro.Security.Cryptography.dll` (входит в комплект https://cryptopro.ru/products/net/downloads[КриптоПро .Net LibCore]) и поместите её по адресу `C:\Program Files\Docsvision\Common` в Windows.
 
 [#uninstall]
 == Удаление модуля
 
-. Чтобы удалить модуль в ОС Linux, выполните команду:
+* В ОС Windows компоненты модуля удаляются стандартными средствами (установка и удаление программ).
+* Чтобы удалить модуль в ОС Linux, выполните команду:
 +
-include::6.1@platform:admin:partial$delete.adoc[]
+--
+:wt: cakontur*
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
 +
-. В ОС Windows компоненты модуля удаляются стандартными средствами (установка и удаление программ).
-. Удалите настройки модуля из _{of-mk}_.
+** Чтобы удалить раширение для {wc}а в ОС Linux, выполните:
++
+--
+:wt: cakontur-webc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
++
+* После удаления модуля удалите настройки модуля из _{of-mk}_.
