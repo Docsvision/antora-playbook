@@ -1,0 +1,44 @@
+:os1: Astra Linux
+:os3: {os3}
+[#ext-linux]
+== Обновление {what-ext} на сервере под управлением Linux
+
+.Чтобы установить новую версию:
+. Обновите компоненты {what-ext} на сервере Linux командой:
++
+[tabs]
+====
+
+{os1}::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install --only-upgrade docsvision-ext-{update}*
+----
+
+{os2}::
++
+[source,subs=attributes]
+----
+sudo dnf makecache
+sudo dnf update docsvision-ext-{update}*
+----
+
+{os3}::
++
+[source,subs=attributes]
+----
+sudo apt-get update
+sudo apt-get install --only-upgrade=true docsvision-ext-{update}*
+----
+
+====
+
+[#ext-windows]
+== Обновление {what-ext} на сервере под управлением Windows
+
+. Обновите необходимые компоненты модуля на сервере Windows из инсталлятора `{installer}`.
+. На шаге выбора компонентов расширения выберите необходимые компоненты и нажмите *Далее*.
+. Нажмите на кнопку *Установить* и дождитесь завершения установки модуля.
+. Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
