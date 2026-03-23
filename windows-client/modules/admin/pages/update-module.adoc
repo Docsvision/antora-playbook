@@ -2,7 +2,7 @@
 
 include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
 
-include::new-admin-console@platform:admin:partial$update-conditions.adoc[]
+include::6.1@platform:admin:partial$update-conditions.adoc[]
 
 [#update]
 == Порядок обновления
@@ -24,7 +24,7 @@ image::install-update-db-flag.png[Мастер установки модуля]
 . Запустите _{mc}_ и перейдите в раздел menu:Серверы[Имя-сервера > Сервер приложений > Базы данных].
 +
 ****
-Пользователь, от имени которого запускается _{mc}_ должен являться администратором {of-mc} -- быть добавленным в группу _{dv-web-admin-cns-admins-serv}_ в конфигурационном файле модуля {of-mc}, см. раздел "xref:dev@mgmtconsole:admin:config.adoc[]".
+Пользователь, от имени которого запускается _{mc}_ должен являться администратором {of-mc} -- быть добавленным в группу _{dv-web-admin-cns-admins-serv}_ в конфигурационном файле модуля {of-mc}, см. раздел "xref:6.2@mgmtconsole:admin:config.adoc[]".
 // * Входить в группы {dv} в Справочнике сотрудников:
 // +
 // - _{dv-dm-admins-dir}_.
@@ -33,18 +33,18 @@ image::install-update-db-flag.png[Мастер установки модуля]
 // - __Системные группы_.
 ****
 +
-. Обновите существующую БД по инструкции, приведённой в документации модуля _{mc}_, раздел "xref:dev@mgmtconsole:servers:db-update.adoc[]".
+. Обновите существующую БД по инструкции, приведённой в документации модуля _{mc}_, раздел "xref:6.2@mgmtconsole:servers:db-update.adoc[]".
 +
 . Дойдите до выбора обновляемых библиотек карточек. Выберите библиотеки и нажмите *Далее*.
 +
 .Обновление библиотек карточек
-image::dev@mgmtconsole:servers:db-update-libs.png[Обновление библиотек карточек]
+image::6.2@mgmtconsole:servers:db-update-libs.png[Обновление библиотек карточек]
 +
 . Перезапустите службу Сервера {dv} и все службы {dv}.
 . Выберите модули {dv}, настройки которых должны быть загружены в БД и нажмите *Завершить*.
 +
 .Шаг загрузки настроек модулей
-image::dev@mgmtconsole:servers:db-update-solutions.png[Шаг загрузки настроек модулей]
+image::6.2@mgmtconsole:servers:db-update-solutions.png[Шаг загрузки настроек модулей]
 +
 . Самостоятельно обновить {wincl} можно из пакета установки `{dv} WindowsClient.msi` или с сайта сервера {dv}.
 +
