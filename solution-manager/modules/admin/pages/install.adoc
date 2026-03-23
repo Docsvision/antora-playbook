@@ -2,7 +2,7 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 [#linux-server]
 == Установка {of-sm} на сервер под управлением Linux
@@ -11,7 +11,7 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 :of-what: {of-sm}
 :wt: solutionmanager*
 
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -78,7 +78,7 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 . Ознакомьтесь с разделом "xref:admin-functions.adoc[]", чтобы предоставить пользователям доступ к модулю, настроить путь к временной папке, изменить подключение к базе данных {of-sm} и выполнить другие действия.
 . Ознакомьтесь с разделом "<<mgmt-console,Настройки в {of-mc}>>", чтобы выполнить необходимые для работы модуля настройки системы.
 
-include::new-admin-console@settings-service:admin:install.adoc[tags=string]
+include::6.1@settings-service:admin:install.adoc[tags=string]
 
 // tag::windows[]
 [#windows-server]
@@ -162,7 +162,7 @@ WARNING: Без выполнения данных настроек аутент�
 <.> `LdapOptions` -- настройки подключения к LDAP каталогу домена.
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 <.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
@@ -190,7 +190,7 @@ WARNING: Без выполнения данных настроек аутент�
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 <.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
 
 include::6.1@platform:admin:config-domains.adoc[tags=chalto]
