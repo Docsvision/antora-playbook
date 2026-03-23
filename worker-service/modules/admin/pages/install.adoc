@@ -100,30 +100,46 @@ image::install-components.png[Выбор компонентов Службы {ws
 [#config]
 == Настройка Службы {ws}
 
-Основные настройки, которые нужно сделать в конфигурационном файле: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
+Служба {ws} имеет два конфигурационных файла, расположенных по адресу `/usr/lib/docsvision/workerservice/` в Linux и `C:\Program Files\Docsvision\WorkerService\` в Windows. Конфигурационный файл `Configuration.json` предназначается для настройки защищённого подключения для Службы {ws}.
 
-Конфигурационный файл располагается по адресу `/usr/lib/docsvision/workerservice/Configuration.json` в Linux и `C:\Program Files\Docsvision\WorkerService\Configuration.json` в Windows.
+Файл `appsettings.json` содержит основные настройки для работы системы {dv}: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
 
 // tag::config[]
+
+В конфигурационном файле `appsettings.json` располагаются настройки защищённого соединения.
+
+.Фрагмент конфигурационного файла "appsettings.json":
+[source,json]
+----
+{
+  "Kestrel": { <.>
+    "Endpoints": {
+      "Http": {
+        "Url": "http://*:5900"
+      }
+    }
+  }
+}
+----
+<.> Настройка защищённого (HTTPS) соединения для Службы {ws} для защиты конфиденциальных данных, см. подробнее "xref:new-admin-console@engineer:ROOT:https-connection.adoc[]". Настройка также позволяет задать порт и адрес подключения к Службе {ws}.
+
 --
-.Фрагмент конфигурационного файла:
+.Фрагмент конфигурационного файла "Configuration.json":
 [source,json]
 ----
 {
   "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
   "ApiKey": "anything", <.>
   "RestApiAddress": "http://worker.domain.com:5900/api", <.>
-  "LogFile": "путь-к-журналу-службы" <.>
+  "LogTraceLevel": "1" <.>
 }
 ----
 <.> Адрес подключения к Сервису настроек.
 <.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
 <.> Адрес подключения к Службе {ws}.
-<.> Путь к файлу журнала Службы {ws}:
-+
-[subs="specialchars,attributes,quotes"]
-{ws-log-dir}.
+<.> Уровень журналирования Службы {ws}, см. подробнее "xref:new-admin-console@workerservice:admin:work-log.adoc[]".
 --
+
 // end::config[]
 
 [#client]
