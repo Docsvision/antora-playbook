@@ -1,3 +1,16 @@
+// tag::reset-passwords[]
+[CAUTION]
+====
+Начиная с версии {edi-cu-mc}, в Модуле интеграции с операторами ЭДО и коннекторах изменён механизм шифрования конфиденциальных настроек.
+
+При обновлении или установке потребуется создать сертификат с приватной и публичной частью, указать параметр _Thumbprint_ в настройках коннектора, заново указать пароли в настройках оператора в Справочнике настроек операторов ЮЗДО и перезагрузить список xref:admin:configure-directory.adoc[операторов ЮЗДО] и xref:admin:configure-partners.adoc[контрагентов].
+
+ifndef::cryption[]
+Подробнее о шифровании см. в разделе "xref:admin:encryption.adoc[]".
+endif::cryption[]
+====
+// end::reset-passwords[]
+
 // tag::maynot[]
 [NOTE]
 ====
@@ -12,5 +25,5 @@
 // end::connector[]
 
 // tag::last-connector[]
-. Если коннектор устанавливается последним, запустите {cns} и выполните настройку системы следуя инструкции, данной в документации модуля {pl} xref:6.1@platform:admin:config-master.adoc[здесь] и xref:6.1@platform:admin:post-config-server.adoc[здесь].
+. Если коннектор устанавливается последним, запустите {cns} и выполните настройку системы следуя инструкции, данной в документации модуля {pl}, раздел "xref:new-admin-console@platform:admin:config-master.adoc[]".
 // end::last-connector[]

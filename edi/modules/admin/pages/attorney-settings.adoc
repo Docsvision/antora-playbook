@@ -52,7 +52,7 @@ include::ROOT:partial$excerpts.adoc[tags=connector]
 * ИНН.
 +
 . Выполните загрузку контрагентов в xref:operators-directory.adoc[Справочнике настроек операторов ЮЗДО].
-. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ выберите `DocsVision.Edi.Runtime.Diadoc` по пути `C:\Program Files (x86)\Docsvision\Edi` в качестве сервиса для работы с МЧД.
+. В _Справочнике настроек операторов ЮЗДО_ на вкладке _Сервисы_ выберите `DocsVision.Edi.Runtime.Diadoc` по пути `C:\Program Files\Docsvision\Edi` в качестве сервиса для работы с МЧД.
 +
 .Сервис для работы с МЧД
 image::attorney-service.png[Сервис для работы с МЧД]
@@ -63,8 +63,8 @@ image::attorney-service.png[Сервис для работы с МЧД]
 . На вкладке _Компоненты_:
 +
 * Для вида карточки для работы с МЧД вида карточек укажите _Имя класса компонента чтения_ `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyDataReader` и _Имя класса компонента изменения_ `DocsVision.Edi.Runtime.BackOffice.PowerOfAttorneyUpdater`.
-* Добавьте вид документа _Доверенность002_ и укажите для него _Имя класса компонента чтения_ библиотеку `DocsVision.Edi.Runtime.BackOffice.dll` по пути `C:\Program Files (x86)\Docsvision\Edi`.
-* В диалоге _Доступные классы в сборке_ выберите `PowerOfAttorneyDataReader`. В строке _Имя класса компонента изменения_ укажите библиотеку `DocsVision.Edi.Runtime.BackOffice.dll` по пути `C:\Program Files (x86)\Docsvision\Edi`.
+* Добавьте вид документа _Доверенность002_ и укажите для него _Имя класса компонента чтения_ библиотеку `DocsVision.Edi.Runtime.BackOffice.dll` по пути `C:\Program Files\Docsvision\Edi`.
+* В диалоге _Доступные классы в сборке_ выберите `PowerOfAttorneyDataReader`. В строке _Имя класса компонента изменения_ укажите библиотеку `DocsVision.Edi.Runtime.BackOffice.dll` по пути `C:\Program Files\Docsvision\Edi`.
 * Затем выберите `PowerOfAttorneyUpdater`. Строка _Имя класса компонента чтения_ будет заполнена автоматически.
 +
 . В карточку доверенности в соответствующем модуле системы добавьте две кнопки:
@@ -109,7 +109,7 @@ image::attorney-service.png[Сервис для работы с МЧД]
 //
 // .Чтобы использовать МЧД без СКД необходимо:
 // . Выполнить пункты 1-10 из <<config,инструкции>> выше.
-// . Используя программу DVExplorer из комплекта утилит {rk}, импортируйте файл `CardDocument_PowerOfAttorney.xml`. Файл хранится в каталоге `C:\Program Files (x86)\Docsvision\Edi\CardPackage`.
+// . Используя программу DVExplorer из комплекта утилит {rk}, импортируйте файл `CardDocument_PowerOfAttorney.xml`. Файл хранится в каталоге `C:\Program Files\Docsvision\Edi\CardPackage`.
 // . С помощью программы {kvr} добавьте два xref:6.1@webclient:layouts:ctrl/standard/textBox.adoc[ЭУ "Строка"] в разметки формализованных и неформализованных исходящих документов со следующими источниками данных:
 // +
 // .ЭУ "Строка" в разметках исходящих документов
