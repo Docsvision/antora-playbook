@@ -78,7 +78,7 @@ using (var stream =
 +
 WARNING: Проверяйте работу компонентов на тестовом сервере {dv}.
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=openStorages]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=openStorages]
 . Добавьте новое хранилище. В окне настройки хранилища в поле _Тип_ выберите вариант *_Собственное хранилище_* и укажите в поле _Имя сборки_ имя сборки `GoogleDriveStorageProvider.dll` из каталога на сервере, затем нажмите кнопку *Получить данные*.
 +
 В появившемся блоке _Свойства_ необходимо указать: путь к файлу `credentials.json` и папке `token.json` (загружены в п. 10), путь к файлу журнала работы провайдера.
@@ -86,8 +86,8 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=openStorages]
 .Пример настройки хранилища в Google Drive
 image::ROOT:connector-google-drive.png[Пример настройки хранилища в Google Drive]
 +
-. В список типов хранилищ будет добавлено хранилище с названием "Хранилище в Google Drive". Настройте для нового хранилища группу и правило, следуя инструкции, приведенной в разделе "xref:dev@mgmtconsole:servers:db-storage-setup.adoc[]" документации модуля {mc}.
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=apply]
+. В список типов хранилищ будет добавлено хранилище с названием "Хранилище в Google Drive". Настройте для нового хранилища группу и правило, следуя инструкции, приведенной в разделе "xref:6.2@mgmtconsole:servers:db-storage-setup.adoc[]" документации модуля {mc}.
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=apply]
 .После перезапуска сервера {dv} (будет выполнен после добавления хранилища) в Google Drive будут созданы две папки:
 * `DV_PrimaryPart` -- представляет раздел для основных файлов.
 * `DV_ArchivePart` -- представляет раздел для архивных файлов.

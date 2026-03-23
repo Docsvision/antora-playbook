@@ -483,16 +483,16 @@ npm run build:prod
 . Скопируйте папку `SamplesOutput/Extensions/WatermarkServerExtension` в `{wcd-lin}/Extensions`.
 . Для работы пользователей на Windows скопируйте файлы из папки `SamplesOutput/Site/Content/Tools/DVWebTool/Application Files/` в `C:\Program Files\Docsvision\WebClientToolKit\WebToolBuilder\DVWebTool\`.
 +
-include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
+include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 
 [start=11]
 .Регистрация расширения _DVWebTool_ на сервере {wc}а.
 . Запустите программу {pu}.
 . Нажмите кнопку *Собрать DVWebTool*.
 . В диалоге введите адрес публикации {wc}а, при необходимости установите другие опции, и нажмите кнопку *ОК*.
-. Установите собранную утилиту DvWebTool на сервер {wc}а, см. подробнее "xref:new-admin-console@webclient:admin:webservices-install.adoc[]" в документации {wc}а.
+. Установите собранную утилиту DvWebTool на сервер {wc}а, см. подробнее "xref:6.1@webclient:admin:webservices-install.adoc[]" в документации {wc}а.
 +
-include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
+include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 
 [#dv-sup]
 === Сборка и установка пакета для DvSupService
@@ -515,7 +515,7 @@ include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 +
  sudo systemctl stop dvsupservice
 +
-. Распространите и установите на машины пользователей собранный пакет. Для этого можно создать репозиторий, чтобы можно было установить расширение с помощью команды `sudo apt-get install dvsupservice-extension`. См. "xref:new-admin-console@install-linux:ROOT:alternative.adoc[Создание простого репозитория]". Либо просто скопируйте файл на клиентскую машину и выполните команду:
+. Распространите и установите на машины пользователей собранный пакет. Для этого можно создать репозиторий, чтобы можно было установить расширение с помощью команды `sudo apt-get install dvsupservice-extension`. См. "xref:dv6@install-linux:ROOT:alternative.adoc[Создание простого репозитория]". Либо просто скопируйте файл на клиентскую машину и выполните команду:
 +
  sudo dpkg -i dvsupservice-extension_1.0_amd64.deb
 +
@@ -530,7 +530,7 @@ include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 . В программе {kvr} добавьте элемент *Кнопка* в любую разметку просмотра карточки _Документ_.
 . Укажите для события `*При щелчке*` обработчик `addWatermark`.
 . Сохраните разметку.
-. Установите или обновите программу _DVWebTool_. Cм. пункт xref:new-admin-console@webclient:admin:webservices-install.adoc#wtbldr[Установка DVWebTool при помощи WebToolBuilder] в руководстве пользователя {wc}.
+. Установите или обновите программу _DVWebTool_. Cм. пункт xref:6.1@webclient:admin:webservices-install.adoc#wtbldr[Установка DVWebTool при помощи WebToolBuilder] в руководстве пользователя {wc}.
 . Запустите программу _DVWebTool_. Убедитесь, что программа _DVWebTool_ и {wc} будут запущены от имени одного пользователя.
 
 [start=8]
