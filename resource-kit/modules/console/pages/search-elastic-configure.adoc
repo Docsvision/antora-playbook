@@ -8,7 +8,7 @@
 ====
 
 . xref:search-elastic.adoc[Установите систему полнотекстового поиска {es}].
-include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=openFullText]
+include::6.1@resource-kit:console:partial$excerpts.adoc[tags=openFullText]
 // . Перед добавлением БД в Консоли управления, необходимо указать адрес сервиса полнотекстового индексирования. По умолчанию сервис прослушивает порт `5006`.
 // +
 // .Добавление адреса сервиса полнотекстового индексирования
@@ -53,7 +53,7 @@ image::index-cards.png[Окно настройки параметров инде
 ****
 .. Установите флаг индексирования у отдельных полей карточек. Типы карточек выбранных полей будут добавлены в список _Индексируемые карточки_.
 +
-include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=cantSelect]
+include::6.1@resource-kit:console:partial$excerpts.adoc[tags=cantSelect]
 +
 .. Если требуется, измените количество https://www.elastic.co/guide/en/elasticsearch/reference/5.5/&#95;basic_concepts.html#getting-started-shards-and-replicas[шардов] (shards) в индексе. Для этого выберите *тип* карточек в списке типов, и измените значение в поле _Количество фрагментов индекса_.
 +
@@ -93,7 +93,7 @@ image::index-directories.png[Окно настройки параметров и
 ****
 .. Установите флаг индексирования у отдельных полей справочников.
 +
-include::new-admin-console@resource-kit:console:partial$excerpts.adoc[tags=cantSelect]
+include::6.1@resource-kit:console:partial$excerpts.adoc[tags=cantSelect]
 +
 Для поля, содержащего данные сложного вида, например, _Номер_ необходимо активировать флаг `*Анализировать поле*`. При установленном флаге используется сложный анализатор со словарями. При снятом флаге используется простой анализатор, который разбивает текст пробелами и переводит в нижний регистр. Если анализатор выключен, будет срабатывать нечёткий поиск.
 +
@@ -111,6 +111,6 @@ image::indexing-elastic.png[Особенности индексирования 
 +
 . Включите индексирование добавленной базы данных.
 +
-include::new-admin-console@resource-kit:console:partial$indexingProperties.adoc[]
+include::6.1@resource-kit:console:partial$indexingProperties.adoc[]
 +
 . Настройте свойства индексирования {es} согласно инструкции в разделе xref:search-elastic-change.adoc[].
