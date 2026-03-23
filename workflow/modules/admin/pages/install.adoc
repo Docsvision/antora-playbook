@@ -2,7 +2,7 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 :do-what: способы первоначальной конфигурации модуля
 :init-config: yes
@@ -16,9 +16,9 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 :of: модуля
 :wt: workflow
 .Чтобы установить модуль {wf} на сервер под управлением Linux:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=install]
+include::6.1@platform:admin:partial$install.adoc[tags=install]
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 --
 
 [#windows-server]
@@ -40,7 +40,7 @@ image::install-server-license.png[Условия лицензионного со
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 Общие компоненты::
@@ -69,14 +69,14 @@ image::install-confirm.png[Начало установки серверной ч
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#mc-ext]
 == Установка расширения модуля {wf} для {of-mc}
 
 :what-mod: {wf}
 :wt: workflow
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 [#mc-ext-linux]
 == Установка расширения на сервер под управлением Linux
@@ -86,7 +86,7 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :wt: ext-workflow-mc
 :wfs-new: dvworkflow
 . [[webc-ext]]Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
 +
@@ -137,18 +137,18 @@ image::install-server-components.png[Выбор компонентов Служ�
 <.> `ServiceId` -- уникальный идентификатор данного экземпляра модуля, генерируется и записывается автоматически.
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {wf} были одинаковые.
-<.> Опционально. Настройка доступа к Storage Server по HTTPS, см. подробнее xref:new-admin-console@platform:console:https-access.adoc[] в документации модуля {pl}.
+<.> Опционально. Настройка доступа к Storage Server по HTTPS, см. подробнее xref:6.1@platform:console:https-access.adoc[] в документации модуля {pl}.
 
-. Дальнейшие настройки {of} выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
+. Дальнейшие настройки {of} выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
 +
 * Сервер приложений -- имя сервера из списка.
 * Почта по умолчанию -- почтовым соединением по умолчанию для данного экземпляра модуля {wf}.
 * Имя пользователя -- имя системной учётной записи {dv}.
 * Пароль -- пароль системной учётной записи.
 +
-Пароль может быть зашифрован, "Штамп сертификата шифрования паролей" указывается в разделе "xref:dev@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]".
+Пароль может быть зашифрован, "Штамп сертификата шифрования паролей" указывается в разделе "xref:6.2@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]".
 +
-Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
+Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
 +
 * Обрабатываемые базы данных -- настройка для выбора БД доли обрабатываемых процессов и почтового соединения, с которыми будет работать данный сервер СУБП.
 * API-ключ для подключения к Workflow -- ключ для подключения серверного расширения {wf}, должен быть одинаковым в конфигурации модулей {pl} и {wf}.
@@ -160,7 +160,7 @@ image::install-server-components.png[Выбор компонентов Служ�
 
 :of: модуля
 :wt: workflow
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 +
 Основные настройки, которые нужно сделать:
 +
@@ -194,12 +194,12 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 <.> `ConnectionString` -- Адрес подключения к сервису настроек.
 <.> `ApiKey` -- Ключ приложения для подключения к сервису настроек.
 <.> `DataProtectCertificateThumbprint` -- Отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- Имя системной учётной записи {dv}.
-<.> `SystemUserPassword` -- Пароль системной УЗ, рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
+<.> `SystemUserPassword` -- Пароль системной УЗ, рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 +
-include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
+include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `APIKEY` -- Используется для аутентификации в API {wf}. Можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 --
@@ -220,7 +220,7 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-
 * Автоматически -- требуемые компоненты будут загружены с сервера {dv} и установлены автоматически.
 * Вручную -- администратор должен самостоятельно установить клиентскую часть модуля _{wf}_.
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 
 [#auto-client]
 === Автоматическая установка клиентской части модуля _{wf}_
@@ -237,7 +237,7 @@ NOTE: Если клиентская часть модуля _{pl}_ устано�
 .Мастер установки клиентской части модуля {wf}
 image::install-hello-client.png[Мастер установки клиентской части модуля {wf}]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
 . Примите условия лицензионного соглашения для продолжения установки.
 +
@@ -264,7 +264,7 @@ image::install-confirm-client.png[Начало установки клиентс
 +
 .Группы настраиваются:
 * В конфигурационном файле модуля {pl}, подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
-* В {of-mc}, разделе "Управление доступом", подробнее см. в документации модуля {mc}, раздел "xref:dev@mgmtconsole:servers:appserver-access.adoc[]".
+* В {of-mc}, разделе "Управление доступом", подробнее см. в документации модуля {mc}, раздел "xref:6.2@mgmtconsole:servers:appserver-access.adoc[]".
 +
 . На компьютере с серверной частью модуля:
 +
@@ -285,13 +285,13 @@ image::install-confirm-client.png[Начало установки клиентс
 * Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
 * Чтобы удалить модуль в ОС Linux, выполните команду:
 +
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 +
 ** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
 +
 --
 :wt: ext-workflow-mc
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 Компоненты модуля и расширение следует удалять до удаления компонентов модуля _{pl}_.
