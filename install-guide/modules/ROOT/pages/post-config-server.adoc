@@ -5,14 +5,14 @@
 
 После обновления БД выполните настройку программ {pu} и {kvr}.
 
-include::new-admin-console@webclient:admin:install-server.adoc[tags=kvr-pu]
+include::6.1@webclient:admin:install-server.adoc[tags=kvr-pu]
 
 [#disable-cache]
 == Отключите клиентское кэширование
 
 Рекомендуется отключить кэширование карточек и файлов на компьютере с сервером {dv}, для избежания переполнения клиентского кэша из-за работы СУБП, следствием чего может стать замедление обработки БП. Настройка выполняется в секции "Site" конфигурационного файла {wincl}а по адресу `/usr/lib/docsvision/platform/config/windows-client-part.json`.
 
-include::new-admin-console@platform:console:section-server.adoc[tags=cl-cache]
+include::6.1@platform:console:section-server.adoc[tags=cl-cache]
 
 [#install-ft]
 == Установка сервиса полнотекстового индексирования
@@ -43,13 +43,13 @@ include::new-admin-console@platform:console:section-server.adoc[tags=cl-cache]
 <.> Путь к файлу журнала полнотекстового поиска.
 <.> Строка подключения к индексируемой БД.
 <.> Отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> Имя системной учётной записи {dv}.
 +
-include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
+include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
-<.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по настройке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
+<.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 --
 +
 . Запустите сервис полнотекстового поиска.

@@ -8,18 +8,18 @@
 
 [NOTE]
 ====
-include::new-admin-console@install-linux:ROOT:requirements-database.adoc[tags=coding]
+include::dv6@install-linux:ROOT:requirements-database.adoc[tags=coding]
 ====
 
 .Выполните следующие шаги, чтобы подготовить систему {dv} к работе:
-include::dev@mgmtconsole:user:first-launch.adoc[tags=start]
+include::6.2@mgmtconsole:user:first-launch.adoc[tags=start]
 +
 . Убедитесь, что сервисы {dv} зарегистрированы в {sett-serv}, см. подробнее "xref:./install-other-server.adoc#register-services[Регистрация модулей системы]".
 +
-. Если это не было выполнено ранее, при xref:./config-platform.adoc#groups[настройке модуля {pl}]footnote:[См. подробнее "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]"], включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений.
+. Если это не было выполнено ранее, при xref:./config-platform.adoc#groups[настройке модуля {pl}]footnote:[См. подробнее "xref:6.2@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]"], включите пользователя, настраивающего БД, в группу *{dv-admins-serv}* Сервера приложений.
 . Выполните настройку БД с помощью мастера баз данных, запускаемого из таблицы БД:
 +
 .Таблица "Базы данных" Консоли настройки {dv}
-image::dev@mgmtconsole:servers:db-master.png[Таблица "Базы данных" Консоли настройки {dv}]
+image::6.2@mgmtconsole:servers:db-master.png[Таблица "Базы данных" Консоли настройки {dv}]
 +
 * Создайте новую базу данных, см. полную инструкцию по созданию новой БД: "xref:./db-create.adoc[]".
