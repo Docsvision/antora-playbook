@@ -1,6 +1,6 @@
 name: install-linux
-version: 'dv6'
-prerelease: false
+version: 'new-admin-console'
+prerelease: true
 title: Установка системы на Linux
 asciidoc:
   attributes:
@@ -17,17 +17,22 @@ asciidoc:
     win-v: '6.1'
     wc-v: '6.1'
     worker-v: '6.1'
-#    l-1: '1.7'
-#    l-2: '22.04 (LTS)'
-#    l-3: '20.04 (LTS)'
-#    l-4: '11 (stable)'
-#    l-5: '10 (oldstable)'
-    w-client-1: '7 SP 1 (Enterprise, Professional, Ultimate)'
-    w-client-2: '8/8.1 (Pro, Enterprise)footnote:[Работа в ОС Windows 8 поддерживается только в режиме "Рабочего стола". Работа в режиме Metro, в том числе в Metro-Internet Explorer, не поддерживается.]'
-    w-client-3: '10 (Pro, Enterprise)'
-    w-client-4: '11 (Pro, Enterprise)'
-
-    iis: 'IIS версий 7.5, 8.0, 8.5 или 10'
+    installation: 'yes'
+    chego: 'установки'
+    config: '`/usr/lib/docsvision/platform/appsettings.json` для Linux@'
+    config-wf: '`/usr/lib/docsvision/workflow/appsettings.json` для Linux@'
+    webconfig: '{webconfig-lin}'
+    sss-new: 'dvappserver@'
+    fts-new: 'dvfulltextservice@'
+    wfs-new: 'dvworkflow@'
+    fss-new: 'dvfileservice@'
+    wss-new: 'dvworkerservice@'
+    wacs-new: 'dvconsole@'
+    wacss-new: 'dvsettings@'
+    wcs-new: 'dvwebclient@'
+    config-mc: '/usr/lib/docsvision/platform/managementconsole/appsettings.json@'
+    config-pl: '/usr/lib/docsvision/platform/appsettings.json@'
+    ws-log-dir: '`/var/log/docsvision/WorkerService.log` для Linux'
 
 nav:
 #- modules/ROOT/install.adoc

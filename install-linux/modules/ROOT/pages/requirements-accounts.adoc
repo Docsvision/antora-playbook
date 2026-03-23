@@ -1,0 +1,97 @@
+:page-aliases: requirements-server-account.adoc \
+requirements-file-service-account.adoc \
+requirements-full-text-account.adoc
+
+// tag::no-alias[]
+= Требования к учётным записям {dv}
+
+include::partial$excerpts.adoc[tags=system-accounts]
+
+Серверная часть {dv} устанавливает в ОС собственные сервисы:
+
+{mc}::
+Служба {of-mc} реализует функции сервера.
+
+Сервер {dv}::
+Сюда относится Служба сервера {dv} и веб-приложение сервера {dv}. Сервер {dv} обеспечивает возможность подключения клиентских приложений.
+
+Сервис полнотекстового индексирования::
+Сервис полнотекстового индексирования обеспечивает индексацию данных в БД {dv}.
+
+Сервис отложенных операций с файлами::
+Сервис отложенных операций с файлами удаляет файлы из хранилища бинарных данных файлов, а также переносит бинарные данные файлов из одного хранилища в другое.
+
+Сервис управления бизнес-процессами (СУБП)::
+СУБП обрабатывает бизнес-процессы {dv}.
+
+Служба {ws}::
+Служба фоновых операций предназначена для выполнения задач, поступивших от других модулей {dv} в фоновом режиме.
+
+[NOTE]
+====
+Администратор должен самостоятельно настроить права учётных записей указанных выше служб. Учётные записи можно объединить в группу для удобства назначения прав.
+
+Требования учётных записей сервисов {dv} приведены ниже.
+
+Рекомендуется xref:dev@mgmtconsole:servers:appserver-license.adoc#personal-license[назначить] учётным записям сервиса <<fulltext,полнотекстового индексирования>> и <<workflow,СУБП>> персональную лицензию.
+====
+
+[#db-updater]
+== Требования учётной записи системного пользователя, обновляющего БД
+
+****
+// tag::group-rights[]
+Перед загрузкой решений убедитесь, что системный пользователь, выполняющий обновление БД:
+
+* Входит в группы {dv} в Справочнике сотрудников, а указанные группы имеют соответствующие права доступа согласно дискреционной безопасности к следующим папкам:
++
+- _{dv-dm-admins-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Служебные]", menu:&quot;Папки&quot;["Служебные" > "Маршрутизация"], menu:&quot;Папки&quot;["Отчёты"], menu:&quot;Папки&quot;["Договоры" > Служебные"].
+- _{dv-ad-admins-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Усовершенствованное согласование"].
+- _{dv-sys-wf-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Служебные]".
++
+* Имеет полный доступ согласно дискреционной безопасности к группе "xref:6.1@backoffice:desdirs:staff/groups/system-groups.adoc#security[_Системные группы]".
+
+Подробнее см. "xref:new-admin-console@upgrade:ROOT:rights.adoc[]" в документации по обновлению {dv}.
+// end::group-rights[]
+****
+
+Пользователи указанных групп должны обладать следующими правами на системные папки:
+
+[cols="20%,20%,60",options="header"]
+|===
+
+|Папка |Права |Комментарий
+
+a|menu:Папки[Усовершенствованное согласование]
+|Полный доступ для членов группы _{dv-ad-admins-dir}_
+|При этом важно, чтобы у карточек в папке были следующие права: у админов полные, у всех на чтение
+
+a|menu:Папки[Служебные]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, _{dv-sys-wf-dir}_
+|
+
+a|menu:Папки[Служебные > Маршрутизация]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone.
+|
+
+a|menu:Папки[Отчеты]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone
+|
+
+|===
+
+[#appserver]
+include::new-admin-console@install-linux:ROOT:partial$requirements-server-account.adoc[leveloffset=1]
+
+[#fileservice]
+include::new-admin-console@install-linux:ROOT:partial$requirements-file-service-account.adoc[leveloffset=1]
+
+[#fulltext]
+include::new-admin-console@install-linux:ROOT:partial$requirements-full-text-account.adoc[leveloffset=1]
+
+[#worker]
+include::new-admin-console@workerservice:ROOT:requirements-account.adoc[leveloffset=1]
+
+[#workflow]
+include::new-admin-console@workflow:ROOT:requirements-account.adoc[leveloffset=1]
+// end::no-alias[]

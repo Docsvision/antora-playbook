@@ -1,0 +1,59 @@
+:page-aliases: install-other-linux.adoc
+
+// tag::no-alias[]
+= Установка базовых модулей и расширений на сервер под управлением Linux
+
+Данный раздел описывает установку базовых модулей для ОС Linux. Все описанные ниже команды необходимо выполнять после завершения xref:./install-server.adoc[установки] модуля {pl}.
+
+[#webc]
+== Установка {wc}а
+
+. Установите пакеты модуля:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-webclient
+
+{os2}::
++
+ $ sudo dnf install docsvision-webclient
+====
+
+[#workflow]
+== Установка СУБП
+
+. Установите модуль _{wf}_ следующей командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-workflow
+
+{os2}::
++
+ $ sudo dnf install docsvision-workflow
+====
+
+[#extensions-linux]
+== Установка расширений модулей для {of-mc} на сервер под управлением Linux
+
+include::dev@mgmtconsole:admin:install.adoc[tags=extensions]
+
+include::dev@mgmtconsole:admin:install.adoc[tags=extensions-linux]
+
+include::dev@mgmtconsole:admin:install.adoc[tags=register-services]
+
+[#restart-services]
+== Перезапуск системных служб
+
+// tag::mc62[]
+. Перезапустите системные службы для модулей {dv}:
++
+ $ sudo systemctl restart dvappserver dvwebclient dvsettings dvconsole dvworkerservice dvworkflow dvfileservice
+
+// end::mc62[]
+
+// end::no-alias[]
