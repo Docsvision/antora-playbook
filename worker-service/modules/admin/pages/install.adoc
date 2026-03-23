@@ -4,7 +4,7 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 // tag::linux[]
 :of: Службы {ws}
@@ -14,10 +14,10 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 [#linux-server]
 == Установка Службы {ws} на сервер под управлением Linux
 
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 // end::linux[]
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 // tag::windows[]
 [#windows-server]
@@ -68,7 +68,7 @@ image::install-check.png[Продолжить установку или верн
 . Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 // end::windows[]
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#ws-ext]
 == Установка расширения Службы {ws} для {of-mc}
@@ -84,7 +84,7 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 :wss-new: dvworkerservice
 .Чтобы установить расширение Службы {ws} для {of-mc}:
 . Выполните следующие команды, чтобы установить {of}:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . Перезапустите службу *{wss-new}*.
 
@@ -121,7 +121,7 @@ image::install-components.png[Выбор компонентов Службы {ws
   }
 }
 ----
-<.> Настройка защищённого (HTTPS) соединения для Службы {ws} для защиты конфиденциальных данных, см. подробнее "xref:new-admin-console@engineer:ROOT:https-connection.adoc[]". Настройка также позволяет задать порт и адрес подключения к Службе {ws}.
+<.> Настройка защищённого (HTTPS) соединения для Службы {ws} для защиты конфиденциальных данных, см. подробнее "xref:dv6@engineer:ROOT:https-connection.adoc[]". Настройка также позволяет задать порт и адрес подключения к Службе {ws}.
 
 --
 .Фрагмент конфигурационного файла "Configuration.json":
@@ -137,7 +137,7 @@ image::install-components.png[Выбор компонентов Службы {ws
 <.> Адрес подключения к Сервису настроек.
 <.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
 <.> Адрес подключения к Службе {ws}.
-<.> Уровень журналирования Службы {ws}, см. подробнее "xref:new-admin-console@workerservice:admin:work-log.adoc[]".
+<.> Уровень журналирования Службы {ws}, см. подробнее "xref:6.1@workerservice:admin:work-log.adoc[]".
 --
 
 // end::config[]
@@ -145,12 +145,12 @@ image::install-components.png[Выбор компонентов Службы {ws
 [#client]
 == Установка клиентской части модуля из установочного пакета
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=for-wincl]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=for-wincl]
 
 .Чтобы установить клиентскую часть модуля вручную:
 . Запустите пакет установки `{dv} Worker service client.msi` вручную.
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
 . Примите условия лицензионного соглашения, чтобы продолжить установку.
 . Нажмите на кнопку *Установить* и дождитесь завершения установки модуля.
@@ -164,14 +164,14 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
 --
 :wt: workerservice
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 ** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
 +
 --
 :wt: ext-ws-mc
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 Компоненты модуля и расширение следует удалять до удаления компонентов модуля _{pl}_.
