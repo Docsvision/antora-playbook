@@ -9,38 +9,38 @@
 [#sett-serv]
 == Установка {of-sett-serv} на сервер под управлением Linux
 
-include::new-admin-console@settings-service:admin:install.adoc[tags=linux]
+include::6.1@settings-service:admin:install.adoc[tags=linux]
 
 [subs="specialchars,attributes,quotes"]
 Выполните необходимые настройки в конфигурационном файле по адресу `/usr/lib/docsvision/settingsservice/appsettings.json`: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
 +
-include::new-admin-console@settings-service:admin:install.adoc[tags=config]
+include::6.1@settings-service:admin:install.adoc[tags=config]
 
-include::new-admin-console@settings-service:admin:install.adoc[tags=cluster]
+include::6.1@settings-service:admin:install.adoc[tags=cluster]
 
-include::new-admin-console@settings-service:admin:install.adoc[tags=string]
+include::6.1@settings-service:admin:install.adoc[tags=string]
 
 [#man-cons]
 == Установка {of-mc} на сервер под управлением Linux
 
-include::dev@mgmtconsole:admin:install.adoc[tags=separate]
+include::6.2@mgmtconsole:admin:install.adoc[tags=separate]
 
-include::dev@mgmtconsole:admin:install.adoc[tags=linux]
+include::6.2@mgmtconsole:admin:install.adoc[tags=linux]
 
-include::dev@mgmtconsole:admin:config.adoc[tags=initial-configuration]
+include::6.2@mgmtconsole:admin:config.adoc[tags=initial-configuration]
 
-include::new-admin-console@workerservice:admin:install.adoc[tags=linux]
+include::6.1@workerservice:admin:install.adoc[tags=linux]
 
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
 В конфигурационном файле Службы {ws} по адресу {ws-log-dir} укажите необходимые параметры:
 +
-include::new-admin-console@workerservice:admin:install.adoc[tags=config]
+include::6.1@workerservice:admin:install.adoc[tags=config]
 
 // антиприлипака
 
-include::dev@mgmtconsole:admin:install.adoc[tags=cert]
+include::6.2@mgmtconsole:admin:install.adoc[tags=cert]
 
 [#linux-pl]
 == Установка модуля {pl} на Linux
@@ -50,7 +50,7 @@ include::dev@mgmtconsole:admin:install.adoc[tags=cert]
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
 :wt: platform
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
 +
@@ -62,6 +62,6 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 . Установите пакеты модуля:
 +
 :wt: fileservice
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 
 // end::no-alias[]
