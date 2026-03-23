@@ -6,7 +6,7 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 Серверные компоненты _{of-mir}_ устанавливаются на компьютер с сервером {dv}.
 
@@ -14,11 +14,11 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 == Установка модуля на сервер под управлением Linux
 
 :wt: m4dregistry*
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 . Установите расширение _{of-mir}_ {wc}а следующей командой:
 +
 :wt: m4dregistry-webc
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 
 [#windows-server]
 == Установка модуля на сервер под управлением Windows
@@ -38,7 +38,7 @@ image::install-server-license.png[Условия лицензионного со
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 Общие компоненты::
@@ -63,7 +63,7 @@ include::new-admin-console@platform:admin:partial$install-components.adoc[]
 . В следующем окне нажмите *Установить* и дождитесь завершения установки модуля.
 . Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#uninstall]
 == Удаление модуля
@@ -71,7 +71,7 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 . Чтобы удалить модуль в ОС Linux, выполните команду:
 +
 :wt: m4dregistry*
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 +
 . В ОС Windows компоненты модуля удаляются стандартными средствами (установка и удаление программ).
 . Удалите настройки модуля из _{of-mc}_.
