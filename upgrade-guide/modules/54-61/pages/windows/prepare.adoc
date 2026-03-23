@@ -1,0 +1,16 @@
+include::ROOT:partial$prepare.adoc[]
+
+[#dvad]
+== Переименование хранимых процедур
+
+Обратите внимание, некоторые хранимые процедуры были переименованы по сравнению с предыдущими версиями системы:
+
+* Хранимая процедура `dvbo_Operand_Reconcile_TasktreeEmployees` в новой версии переименована в `dvad_Operand_Reconcile_TasktreeEmployees`.
++
+// suppress inspection "AsciiDocLinkResolve"
+.Старое и новое название хранимой процедуры
+image::dvad.png[Старое и новое название хранимой процедуры]
++
+Если требуется сохранить стандартных настроек без изменений, в конструкторе ролей вручную замените процедуру `dvbo_Operand_Reconcile_TasktreeEmployees` на `dvad_Operand_Reconcile_TasktreeEmployees`.
++
+* Если в конструкторе ролей использовалась процедура `dvdm_Operand_Document_TasktreeEmployees`, её следует заменить на `dvbo_Operand_Document_TasktreeEmployees` после обновления модулей _{bo}_ и/или _{dm}_.
