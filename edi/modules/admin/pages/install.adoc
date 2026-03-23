@@ -3,16 +3,16 @@
 
 = Установка и настройка
 
-include::new-admin-console@workerservice::partial$excerpts.adoc[tags=before-install]
+include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 [#linux-server]
 == Установка модуля на сервер под управлением Linux
 
 --
 :wt: edi-server
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 +
 . При установке `docsvision-edi-server` предлагается установить также:
 +
@@ -20,7 +20,7 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 * `docsvision-edi-diadoc-server` -- дополнительный компонент модуля, <<connectors,добавляющий>> поддержку работы с оператором Диадок.
 // * `docsvision-edi-sbis-server` --  дополнительный компонент модуля, добавляющий поддержку работы с оператором Saby (СБИС).
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 +
 Дополнительные настройки выполнять не требуется.
 --
@@ -28,11 +28,11 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 [#web-ext-linux]
 === Установка расширения {of-em} на сервер под управлением Linux
 
-. Если планируется работа через web-интерфейс и модуль {wc} не установлен, установите {wc} версии {wc-cu-mc}, инструкция по установке приведена в документации модуля {wc}, раздел "xref:new-admin-console@webclient:admin:install-server.adoc[]".
+. Если планируется работа через web-интерфейс и модуль {wc} не установлен, установите {wc} версии {wc-cu-mc}, инструкция по установке приведена в документации модуля {wc}, раздел "xref:6.1@webclient:admin:install-server.adoc[]".
 . На сервере {wc}а установите _Расширение {of-em} для {wc}а_:
 +
 :wt: ext-edi-webc
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 
 [#windows-server]
 == Установка модуля на сервер под управлением Windows
@@ -72,13 +72,13 @@ image::install-server-components.png[Выбор устанавливаемых �
 Позволяет посмотреть свободное место на системных дисках.
 ****
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 . В следующем окне нажмите *Установить* и дождитесь завершения установки модуля.
 . Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
 . Установите расширение {of-em} на сервер под управлением Windows, подробнее см. <<web-ext-windows,ниже>>.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#web-ext-windows]
 === Установка расширения {of-em} на сервер под управлением Windows
@@ -101,7 +101,7 @@ image::install-server-components.png[Выбор устанавливаемых �
 .Выбор устанавливаемых компонентов
 image::install-ext-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 Серверные компоненты::
@@ -136,7 +136,7 @@ WARNING: Версии коннекторов должны равняться в�
 [#solutions]
 == Импорт решений
 
-. Решения с web-разметками включены в комплект поставки. Для работы с модулем {em} в {of-mc} загрузите стандартные решения {wc}а, см. подробнее "xref:dev@mgmtconsole:servers:webclient-solutions.adoc[]" в документации {of-mc}.
+. Решения с web-разметками включены в комплект поставки. Для работы с модулем {em} в {of-mc} загрузите стандартные решения {wc}а, см. подробнее "xref:6.2@mgmtconsole:servers:webclient-solutions.adoc[]" в документации {of-mc}.
 
 [#client]
 == Установка клиентской части модуля
