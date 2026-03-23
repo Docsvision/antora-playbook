@@ -5,7 +5,7 @@
 
 Установка {of-sett-serv} на отдельный от {of-mc} сервер не поддерживается.
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
@@ -18,7 +18,7 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 :file: appsettings
 :wt: settingsservice
 :no-config: yes
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 // end::linux[]
 +
 . Запустите службу сервиса:
@@ -49,7 +49,7 @@ image::install-server-license.png[Лицензионное соглашение]
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 // tag::components[]
@@ -74,7 +74,7 @@ image::install-server-confirm.png[Мастер установки серверн
 +
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 // end::windows[]
 
@@ -108,7 +108,7 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 ifndef::installation[]
 При наличии БД {of-sett-serv} предыдущей версии, можно использовать её.
 endif::[]
-// <.> Настройки, записываемые в {sett-serv}, рекомендуется защищать при помощи шифрования. Для этой цели используется самоподписанный сертификат, поддерживающий шифрование/дешифрование данных. Создайте сертификат локально, например, по инструкции в разделе "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc#cr-cert[Защита системной учётной записи]", и установите его в хранилище сертификатов "Доверенные корневые центры сертификации" на уровне "Локальный компьютер": на всех серверах, данные которых шифруются, сервере {of-mc} и серверах Сервиса настроек.
+// <.> Настройки, записываемые в {sett-serv}, рекомендуется защищать при помощи шифрования. Для этой цели используется самоподписанный сертификат, поддерживающий шифрование/дешифрование данных. Создайте сертификат локально, например, по инструкции в разделе "xref:dv6@engineer:ROOT:appendix/account-protection.adoc#cr-cert[Защита системной учётной записи]", и установите его в хранилище сертификатов "Доверенные корневые центры сертификации" на уровне "Локальный компьютер": на всех серверах, данные которых шифруются, сервере {of-mc} и серверах Сервиса настроек.
 // <.> Путь к публичной части сертификата для шифрования параметров в Сервисе настроек.
 // end::config[]
 
@@ -170,7 +170,7 @@ endif::sm-page[]
 //end::pgsql[]
 // end::string[]
 
-include::dev@mgmtconsole:admin:install.adoc[tags=cert]
+include::6.2@mgmtconsole:admin:install.adoc[tags=cert]
 
 [#deletion]
 == Удаление {of-sett-serv}
@@ -178,6 +178,6 @@ include::dev@mgmtconsole:admin:install.adoc[tags=cert]
 * Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
 * Чтобы удалить модуль в ОС Linux, выполните команду:
 +
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 
 Созданные группы и службы будут удалены, _{sett-serv}_ станет недоступен.
