@@ -1,7 +1,7 @@
 :with-console: no
 :with-config: yes
 :do-what: варианты включения отладки ролевой модели
-:link: настройка по пути "DocsVision__Platform__Server__TraceLevel__LogLevel": см. раздел "xref:dev@mgmtconsole:servers:appserver-etc.adoc[]"
+:link: настройка по пути "DocsVision__Platform__Server__TraceLevel__LogLevel": см. раздел "xref:6.2@mgmtconsole:servers:appserver-etc.adoc[]"
 
 = Включение отладки ролевой модели
 
@@ -48,7 +48,7 @@ EXEC dvsys_setting_set N'RoleModelTrace', @On
 select * from dvsys_setting_set('RoleModelTrace', true);
 ----
 +
-include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
+include::dv6@system:ROOT:partial$restart-sss.adoc[]
 +
 . После завершения исследования удалите настройку `"TraceLevel"` в БД или отключите её, установив в значение `0` для {mssql} или `false` для {pgsql}.
 +
@@ -62,4 +62,4 @@ delete from dvsys_settings where [Name] = N'RoleModelTrace
 delete from dvsys_settings where "Name" = 'RoleModelTrace;
 ----
 +
-include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
+include::dv6@system:ROOT:partial$restart-sss.adoc[]

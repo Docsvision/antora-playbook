@@ -4,9 +4,9 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 [#linux-pl]
 == Установка модуля {pl} на сервер под управлением Linux
@@ -16,7 +16,7 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
 :wt: platform
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
 +
@@ -57,14 +57,14 @@ sudo ./activation online ВАШ-КЛЮЧ
 . Примите условия лицензионного соглашения.
 +
 .Условия лицензионного соглашения
-image::new-admin-console@platform:admin:install-server-license.png[Условия лицензионного соглашения]
+image::6.1@platform:admin:install-server-license.png[Условия лицензионного соглашения]
 +
 . Выберите компоненты, которые требуется установить, и нажмите *Далее*.
 +
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 // tag::components[]
@@ -103,7 +103,7 @@ include::new-admin-console@platform:admin:partial$install-components.adoc[]
 . Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
 +
 .Мастер установки серверной части модуля {pl}
-image::new-admin-console@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
+image::6.1@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 
@@ -116,7 +116,7 @@ image::new-admin-console@platform:admin:install-server-confirm.png[Мастер 
 === Установка на сервер под управлением Linux
 
 :what-mod: {pl}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 --
 .Чтобы установить "Расширение сервера приложений для {of-mc}" на сервер под управлением Linux:
@@ -124,7 +124,7 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :wt: ext-platform-mc
 :sss-new: dvappserver
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . Перезапустите службу *{sss-new}*.
 --
@@ -144,7 +144,7 @@ image::install-server-mc-pl-extension.png[Выбор компонентов мо
 . Установите пакеты модуля:
 +
 :wt: fileservice
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . Запустите службу Файлового сервиса:
 +
@@ -159,7 +159,7 @@ include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 === Установка на сервер под управлением Linux
 
 :what-mod: {fs}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 --
 .Чтобы установить "Расширение {of-fs} для {of-mc}":
@@ -167,7 +167,7 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :wt: ext-fileservice-mc
 :fss-new: dvfileservice
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . Перезапустите службу *{fss-new}*.
 --
