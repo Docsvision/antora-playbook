@@ -28,13 +28,13 @@ NOTE: Следующие шаги выполняются на машине с к
 [source,shell,subs=attributes+]
 ----
 msiexec /i "{dv} Platform client.msi" ALLUSERS=1 /quiet <.> <.>
-msiexec /i "{dv} Worker service client.msi" ALLUSERS=1 /quiet
-msiexec /i "{dv} WindowsClient.msi" ALLUSERS=1 /quiet DVURL="http://company.com/docsvision" <.>
-msiexec /i "{dv} ApprovalDesigner client.msi" ALLUSERS=1 /quiet
-msiexec /i "{dv} BackOffice client.msi" ALLUSERS=1 /quiet
-msiexec /i "{dv} DocumentManagement client.msi" ALLUSERS=1 /quiet
-msiexec /i "{dv} TakeOffice client.msi" ALLUSERS=1 /quiet
-msiexec /i "{dv} Workflow client.msi" ALLUSERS=1 /quiet
+msiexec /i "{dv} WindowsClient.msi" /quiet DVURL="http://company.com/docsvision" <.>
+msiexec /i "{dv} Worker service client.msi" /quiet
+msiexec /i "{dv} ApprovalDesigner client.msi" /quiet
+msiexec /i "{dv} BackOffice client.msi" /quiet
+msiexec /i "{dv} DocumentManagement client.msi" /quiet
+msiexec /i "{dv} TakeOffice client.msi" /quiet
+msiexec /i "{dv} Workflow client.msi" /quiet
 <.>
 ----
 <.> `{dv} Platform client.msi` -- полный сетевой путь, скопированный на шаге 3.

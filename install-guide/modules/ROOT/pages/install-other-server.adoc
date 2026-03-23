@@ -8,30 +8,28 @@
 .Базовый сценарий установки серверной части модулей:
 . Запустите пакеты установки серверной части:
 +
-* `Docsvision web-client.msi`
-* `Docsvision Workflow server.msi`
-* `Docsvision DocumentManagement server.msi`
-* `Docsvision TakeOffice server.msi`
-* `Docsvision BackOffice server.msi`
-* `Docsvision ApprovalDesigner server.msi`
+* `{dv} web-client.msi`
+* `{dv} Workflow server.msi`
+* `{dv} DocumentManagement server.msi`
+* `{dv} TakeOffice server.msi`
+* `{dv} BackOffice server.msi`
+* `{dv} ApprovalDesigner server.msi`
+* `{dv} WindowsClient server.msi`
 +
 . На странице приветствия нажмите *Далее* и примите условия лицензионного соглашения, чтобы продолжить установку.
-. Модуль может включать дополнительные компонентыfootnote:[Описание дополнительных компонентов приведено в соответствующем руководстве по установке каждого модуля.]. В таком случае на следующем шаге будет предложено выбрать устанавливаемые компоненты.
+. Модуль может включать дополнительные компоненты. В таком случае на следующем шаге будет предложено выбрать устанавливаемые компоненты.
 +
 .Выбор устанавливаемых компонентов для модуля "{wf}"
 image::new-admin-console@workflow:admin:install-server-components.png[Выбор устанавливаемых компонентов для модуля "{wf}"]
++
+include::new-admin-console@platform:admin:partial$install-components.adoc[]
++
+Описание дополнительных компонентов приведено в соответствующем руководстве по установке каждого модуля, например в разделе "xref:workflow:admin:install.adoc[]" для модуля {wf}.
 +
 . Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 . Повторите пункты выше для каждого модуля.
 . Если модуль устанавливается последним, запустите {mc} и выполните настройку системы следуя инструкции, данной в пунктах "xref:./config-master.adoc[]" и "xref:./post-config-server.adoc[]".
-
-[#extensions]
-== Установка расширений {of-mc} на сервер под управлением Windows
-
-include::dev@mgmtconsole:admin:install.adoc[tags=extensions]
-
-include::dev@mgmtconsole:admin:install.adoc[tags=extensions-windows]
 
 include::dev@mgmtconsole:admin:install.adoc[tags=register-services]
 
