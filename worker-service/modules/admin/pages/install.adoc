@@ -1,54 +1,29 @@
-// tag::linux[]
-:of: сервиса
-:wt: workerservice
-:config: Configuration
+:ws-log-dir: `/var/log/docsvision/WorkerService.log` для Linux и `C:\ProgramData\docsvision\workerservice` для Windows
 
 = Установка и настройка Службы {ws}
 
-include::install-linux::partial$limitation.adoc[]
+include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
-// tag::sm-incompat[]
-Служба {ws} данной версии несовместима с модулем {sm}.
-// end::sm-incompat[]
+// tag::linux[]
+:of: Службы {ws}
+:wt: workerservice
+:config: Configuration
 
-WARNING: Перед установкой ознакомьтесь с разделом "xref:6.1@workerservice:ROOT:requirements.adoc[]".
+[#linux-server]
+== Установка Службы {ws} на сервер под управлением Linux
 
-include::6.1@platform:admin:partial$install.adoc[]
-+
-Основные настройки, которые нужно сделать:
-+
-[source,json]
-----
-{
-  "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
-  "ApiKey": "anything", <.>
-  "RestApiAddress": "http://worker.domain.com:5900/api", <.>
-  "LogFile": "/var/log/docsvision/WorkerService.log" <.>
-}
-----
-<.> Адрес подключения к Сервису настроек.
-<.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
-<.> Адрес подключения к Службе {ws}.
-<.> Путь к файлу журнала Службы {ws}
-+
-. Запустите службу модуля:
-+
-[source,bash]
-----
-sudo systemctl start dvworkerservice
-----
+include::new-admin-console@platform:admin:partial$install.adoc[]
 // end::linux[]
++
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 
-[#windows]
-== Установка Службы {ws} на Windows
+// tag::windows[]
+[#windows-server]
+== Установка Службы {ws} на сервер под управлением Windows
 
-Пользователь, выполняющий установку Службы {ws}, должен обладать правами локального администратора.
-
-// WARNING: При первичной установке модуль должен устанавливаться сразу после модуля _{pl}_ и перед модулями _{ad}_ и _{bo}_. В противном случае необходимые расширения Службы {ws} не буду загружены в БД.
-
-. Запустите пакет установки `{dv} WorkerService.msi`.
+. Запустите пакет установки `{dv} Worker service.msi`.
 +
 .Мастер установки Службы {ws}
 image::install-hello.png[Мастер установки Службы {ws}]
@@ -58,53 +33,124 @@ image::install-hello.png[Мастер установки Службы {ws}]
 .Условия лицензионного соглашения
 image::install-license.png[Условия лицензионного соглашения]
 +
-. Выберите компоненты, которые требуется установить.
+. Выберите компоненты, которые требуется установить, и нажмите *Далее*.
 +
-.Выбор устанавливаемых компонентов Службы {ws}
-image::install-components.png[Выбор устанавливаемых компонентов Службы {ws}]
+.Выбор устанавливаемых компонентов
+image::install-components.png[Выбор устанавливаемых компонентов]
 +
 ****
-Служба {ws}::
-Устанавливает основные файлы Службы {ws}.
+// tag::components[]
+Общие компоненты::
+Обеспечивают взаимодействие с сервером {dv}, обязательны для установки на сервер {dv} и сервер Службы {ws}.
 
-Серверные компоненты::
-Когда компонент выбран, устанавливается библиотека карточек. Перед завершением установки будет запущена _{cns}_ для обновления БД.
-+
-[WARNING]
-====
-include::ROOT:partial$excerpts.adoc[tags=the-component-lin]
-====
+Серверные компоненты:::
+Основные серверные компоненты Службы {ws}, обязательны для установки на сервер {dv}.
 
-Кнопки::
-* *Сброс* -- сбрасывает выбор компонентов на стандартные
-* *Использование диска* -- позволяет посмотреть свободное место на системных дисках.
+Служба Windows:::
+Основные компоненты Службы {ws}, предоставляющие базовую функциональность, обязательна для установки на сервер {dv}.
+
+Расширение {of-mc}::
+Расширение {of-mc} необходимо для настройки служб в Консоли и просмотра сообщений.
+// end::components[]
+
+Кнопка Сброс::
+Сбрасывает выбор компонентов на стандартные.
+
+Кнопка Использование диска::
+Позволяет посмотреть свободное место на системных дисках.
 ****
 +
-//tag::confirm[]
 . Нажмите кнопку *Установить*, чтобы начать установку или кнопку *Назад*, чтобы вернуться на предыдущий шаг.
-//end::confirm[]
 +
 .Продолжить установку или вернуться на предыдущий шаг
 image::install-check.png[Продолжить установку или вернуться на предыдущий шаг]
 +
-// . Не устанавливайте флаг `*Обновить базу данных (WorkerService)*`.
-// +
-//tag::finish[]
 . Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-//end::finish[]
+// end::windows[]
 +
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+
+[#ws-ext]
+== Установка расширения Службы {ws} для {of-mc}
+
+Расширение Службы {ws} для {of-mc} добавляет функциональность для работы со Службой {ws}: настройка службы в Консоли, просмотр сообщений, расширение обязательно для установки в версии {of-mc} {mc-cu-mc} и выше.
+
+[#ws-ext-linux]
+=== Установка расширения Службы {ws} на сервер под управлением Linux
+
+:of: Расширение Службы {ws} для {of-mc}
+// :file: appsettings конфига нет?
+:wt: ext-ws-mc
+:wss-new: dvworkerservice
+.Чтобы установить расширение Службы {ws} для {of-mc}:
+. Выполните следующие команды, чтобы установить {of}:
+include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
 +
-. Запустите {wincl}. При подключении к серверу {dv} с установленной серверной частью модуля, клиентская часть модуля будет установлена автоматически.
+. Перезапустите службу *{wss-new}*.
+
+[#ws-ext-windows]
+=== Установка расширения Службы {ws} на сервер под управлением Windows
+
+.Чтобы установить расширение Службы {ws} для {of-mc} на сервер под управлением Windows:
+. Запустите инсталлятор Службы {ws} `{dv} Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
++
+.Выбор компонентов Службы {ws} для установки
+image::install-components.png[Выбор компонентов Службы {ws} для установки]
+
+[#config]
+== Настройка Службы {ws}
+
+Служба {ws} имеет два конфигурационных файла, расположенных по адресу `/usr/lib/docsvision/workerservice/` в Linux и `C:\Program Files\Docsvision\WorkerService\` в Windows. Конфигурационный файл `Configuration.json` предназначается для настройки защищённого подключения для Службы {ws}.
+
+Файл `appsettings.json` содержит основные настройки для работы системы {dv}: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
+
+// tag::config[]
+
+В конфигурационном файле `appsettings.json` располагаются настройки защищённого соединения.
+
+.Фрагмент конфигурационного файла "appsettings.json":
+[source,json]
+----
+{
+  "Kestrel": { <.>
+    "Endpoints": {
+      "Http": {
+        "Url": "http://*:5900"
+      }
+    }
+  }
+}
+----
+<.> Настройка защищённого (HTTPS) соединения для Службы {ws} для защиты конфиденциальных данных, см. подробнее "xref:new-admin-console@engineer:ROOT:https-connection.adoc[]". Настройка также позволяет задать порт и адрес подключения к Службе {ws}.
+
+--
+.Фрагмент конфигурационного файла "Configuration.json":
+[source,json]
+----
+{
+  "SettingsServiceConnectionString": "ConnectAddress=http://settings.domain.com:5200/api", <.>
+  "ApiKey": "anything", <.>
+  "RestApiAddress": "http://worker.domain.com:5900/api", <.>
+  "LogTraceLevel": "1" <.>
+}
+----
+<.> Адрес подключения к Сервису настроек.
+<.> Ключ доступа к Сервису настроек -- "пароль", который также должен быть указан в конфигурационном файле сервиса.
+<.> Адрес подключения к Службе {ws}.
+<.> Уровень журналирования Службы {ws}, см. подробнее "xref:new-admin-console@workerservice:admin:work-log.adoc[]".
+--
+
+// end::config[]
 
 [#client]
 == Установка клиентской части модуля из установочного пакета
 
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=for-wincl]
+
 .Чтобы установить клиентскую часть модуля вручную:
 . Запустите пакет установки `{dv} Worker service client.msi` вручную.
 +
-Для установки клиентской части модуля используются область и каталог установки, указанные в конфигурационном файле модуля {pl}, см. документацию модуля {pl} xref:6.1@platform:console:config-client.adoc[].
-// (указана в приветственном окне мастера установки)  установки, которые были использованы при установке модуля {pl}.
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
 . Примите условия лицензионного соглашения, чтобы продолжить установку.
 . Нажмите на кнопку *Установить* и дождитесь завершения установки модуля.
@@ -113,10 +159,19 @@ include::install-linux:ROOT:partial$restart-and-db.adoc[]
 [#uninstall]
 == Удаление модуля
 
-. Чтобы удалить модуль в ОС Linux, выполните команду:
+* Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
+* Чтобы удалить модуль в ОС Linux, выполните команду:
 +
-include::6.1@platform:admin:partial$delete.adoc[]
+--
+:wt: workerservice
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
 +
-Компоненты модуля следует удалять до удаления компонентов модуля _{pl}_.
+** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
 +
-. В ОС Windows компоненты модуля удаляются стандартными средствами.
+--
+:wt: ext-ws-mc
+include::new-admin-console@platform:admin:partial$delete.adoc[]
+--
++
+Компоненты модуля и расширение следует удалять до удаления компонентов модуля _{pl}_.
