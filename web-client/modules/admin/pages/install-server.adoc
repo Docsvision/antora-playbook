@@ -8,7 +8,7 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 Если в {wc}е планируется работать с xref:archivemgmt:user:directory.adoc[функциями] модуля _{am}_, установите серверные компоненты модуля _{am}_ на компьютер с сервером {dv} *перед* установкой {wc}а.
 
@@ -17,7 +17,7 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 . Установите сначала модуль _{am}_ на сервер {wc}а.
 . Затем xref:webclient:admin:update-module.adoc[обновите {wc}] с установкой компонентов управления архивом.
 
-include::new-admin-console@archivemgmt:admin:install.adoc[tags=noam]
+include::6.1@archivemgmt:admin:install.adoc[tags=noam]
 
 // tag::linux[]
 [#linux-server]
@@ -31,7 +31,7 @@ include::new-admin-console@archivemgmt:admin:install.adoc[tags=noam]
 :first: <<mancons,Настройки в {of-mc}>>
 :second: <<linux,Настройки в конфигурационном файле>>
 :no-config:
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 --
 
 // tag::linux[]
@@ -57,7 +57,7 @@ image::install-server-license.png[Условия лицензионного со
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 // tag::components[]
 +
 ****
@@ -84,11 +84,11 @@ include::new-admin-console@platform:admin:partial$install-components.adoc[]
 . Нажмите на кнопку *Установить* и дождитесь завершения установки.
 +
 .Установка расширения
-image::new-admin-console@webclient:admin:install-server-confirm.png[Установка расширения]
+image::6.1@webclient:admin:install-server-confirm.png[Установка расширения]
 +
 . Нажмите кнопку *Готово* для завершения работы мастера установки.
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 // tag::windows[]
 
 [#mc-ext]
@@ -109,10 +109,10 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
 +
 :what-mod: {wc}
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
 Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . Перезапустите службу *{wcs-new}*. Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
 --
@@ -152,17 +152,17 @@ image::install-server-components.png[Выбор компонентов {wc}а д
 . Запустите пакет установки `Docsvision web-client toolkit.msi`.
 +
 .Мастер установки {dv} {wc} Toolkit
-image::new-admin-console@webclient:admin:toolkit-hello.png[Мастер установки {dv} {wc} Toolkit]
+image::6.1@webclient:admin:toolkit-hello.png[Мастер установки {dv} {wc} Toolkit]
 +
 . Примите условия лицензионного соглашения, чтобы продолжить установку.
 +
 .Условия лицензионного соглашения {dv} {wc} Toolkit
-image::new-admin-console@webclient:admin:toolkit-license.png[Условия лицензионного соглашения {dv} {wc} Toolkit]
+image::6.1@webclient:admin:toolkit-license.png[Условия лицензионного соглашения {dv} {wc} Toolkit]
 +
 . Нажмите кнопку *Установить* и дождитесь завершения установки.
 +
 .Установка {dv} {wc} Toolkit
-image::new-admin-console@webclient:admin:toolkit-confirm.png[Установка {dv} {wc} Toolkit]
+image::6.1@webclient:admin:toolkit-confirm.png[Установка {dv} {wc} Toolkit]
 +
 В меню Пуск, в группу "{dv} {wc}" будут добавлены ярлыки {kvr} и WebToolBuilder.
 +
@@ -192,7 +192,7 @@ WARNING: Обратите внимание, указанный ниже файл
 <.> Псевдоним БД, от имени которой будет запускаться программа {kvr}.
 +
 ifndef::old-connections[]
-. В {mc}, на странице menu:Серверы[Имя сервера > {wc}] откройте группу настроек "xref:dev@mgmtconsole:servers:webclient-solutions.adoc[Решения]" и выполните импорт стандартных решений для просмотра стандартных разметок
+. В {mc}, на странице menu:Серверы[Имя сервера > {wc}] откройте группу настроек "xref:6.2@mgmtconsole:servers:webclient-solutions.adoc[Решения]" и выполните импорт стандартных решений для просмотра стандартных разметок
 ifdef::kvr-pu[]
 {wc}а.
 endif::kvr-pu[]
@@ -233,18 +233,18 @@ include::partial$mancons.adoc[]
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {wc} были одинаковые.
 +
-. Дальнейшие настройки модуля выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
+. Дальнейшие настройки модуля выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
 +
 * Адрес сервера приложений
 * Имя пользователя -- имя системной учётной записи {dv}
 * Пароль -- пароль системной учётной записи
 +
-Пароль может быть зашифрован, штамп сертификата шифрования паролей указывается в разделе "xref:dev@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]".
+Пароль может быть зашифрован, штамп сертификата шифрования паролей указывается в разделе "xref:6.2@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]".
 +
-Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
+Отпечаток сертификата указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". Отпечаток можно не указывать, если шифровать пароль системной учётной записи не планируется.
 +
-. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключение"]].
-. Перейдите к настройкам "xref:dev@mgmtconsole:servers:webclient-connection.adoc#catalogs[Настройка доменных каталогов]" и настройте следующие параметры:
+. Откройте {mc} на странице menu:Серверы[Имя сервера > {wc} > "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключение"]].
+. Перейдите к настройкам "xref:6.2@mgmtconsole:servers:webclient-connection.adoc#catalogs[Настройка доменных каталогов]" и настройте следующие параметры:
 +
 * Тип аутентификации в LDAP
 * Полное имя домена
@@ -252,12 +252,12 @@ include::partial$mancons.adoc[]
 * Пароль -- пароль учётной записи пользователя для аутентификации LDAP
 * Домен по умолчанию -- полное имя домена для входа по умолчанию в формате FQDN
 +
-. При необходимости настройте использование расширенной аутентификации на странице menu:Серверы[Имя сервера > Сервер приложений > "xref:dev@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширенная аутентификация"]].
+. При необходимости настройте использование расширенной аутентификации на странице menu:Серверы[Имя сервера > Сервер приложений > "xref:6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширенная аутентификация"]].
 
 --
 :wcs-new: *dvwebclient* для Linux и *{wcs-win}* для Windows
 [start=6]
-include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
+include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 +
 Служба запускается от имени УЗ {dv} и не требует административных привилегий.
 --
@@ -305,16 +305,16 @@ include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 <.> `ConnectionString` -- адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ {of-sett-serv}.
 <.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory. +
-Пароль можно указывать в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]"
+Пароль можно указывать в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]"
 +
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP (подробнее см. в документации модуля {pl} xref:6.1@platform:admin:config-domains.adoc[]), `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
 <.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP.
 <.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". +
+Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
 <.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
-<.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
+<.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 +
 . Запустите службу {wc}а.
 +
@@ -328,12 +328,12 @@ include::new-admin-console@system:ROOT:partial$restart-wcs.adoc[]
 +
 --
 :wt: webclient
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 ** Чтобы удалить раширение для {of-mc} в ОС Linux, выполните:
 +
 --
 :wt: ext-webc-mc
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
