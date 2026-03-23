@@ -1,13 +1,20 @@
 :mo: {wc}
 :cu253-mo-req: {cu253-wc-req}, {cu253-pl-req} и других модулей, входящих в обновление
+:with-config: yes
+:link: "xref:dev@mgmtconsole:admin:ldaps-authentication.adoc[]"
+:do-what: способы настройки коннектора к каталогу ALD Pro
+:ald: yes
 
 = Настройка {wc}а в сети без Active Directory
 
 {wc} поддерживает подключение к серверу {dv} под системной учётной записью из каталога ALD Pro, xref:install-server.adoc[указанной] в параметрах `SystemUserAccount` и `SystemUserPassword` конфигурационного файла.
 
-include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+include::partial$mancons.adoc[]
 
-Настройка каталога ALD Pro описана в разделе "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]". В конфигурационном файле {wc}а потребуется указать следующие параметры:
+include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+
+// tag::webconfig[]
+В конфигурационном файле {wc}а укажите следующие параметры:
 
 [source,json]
 ----
@@ -29,11 +36,12 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
 <.> Учётная запись из каталога ALD Pro для подключения к серверу {dv}.
 <.> Пароль УЗ из каталога ALD Pro для подключения к серверу {dv}.
 <.> Адрес сервера {dv}.
-<.> Псевдоним БД, от имени которой будут запускаться программы {pu} и {kvr}.
+<.> Псевдоним БД, от имени которой будет запускаться программа {pu}.
+// end::webconfig[]
 
-Для работы укажите УЗ из каталога ALD Pro на машине с {kvr} и {pu}:
+Для работы укажите УЗ из каталога ALD Pro на машине с {pu}:
 
  setx DV_SystemUserAccount account@domain.com
  setx DV_SystemUserPassword password
 
-Функциональность доступна в {wc} версии {cu253-wc-req} при условии установки версий модулей, входящих в накопительное обновление 25.3.
+Функциональность доступна в {wc} с версии {cu253-wc-req} при условии установки версий модулей, входящих в накопительное обновление 25.3.

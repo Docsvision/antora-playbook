@@ -1,72 +1,81 @@
 = Параметры конфигурационного файла {wc}а
 
-Конфигурационный файл {wc}а располагается по адресу `{webconfig-lin}`.
+Конфигурация модуля может выполняться при помощи конфигурационного файла {wc}а, расположенного по адресу `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows, однако следует помнить, что настройки конфигурационного файла не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
 
 include::partial$excerpts.adoc[tags=ifabsent]
 
-[WARNING]
+[TIP]
 ====
-Настройки не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
+Рекомендуемый способ конфигурации {wc}а -- при помощи {of-mc}, дополнительные сведения приведены в разделах соответствующих параметров по ссылкам.
+
+Настройки в конфигурационном файле не сохраняются при xref:update-module.adoc[обновлении версии {wc}а].
 ====
 
 [#general]
 == Общие настройки
-
-// [#general-install]
-// === Настройка сервера после установки {wc}а
-//
-// include::.install-after.adoc[tags=webconfig]
-//
-// Подробнее см. "xref:.install-after.adoc[]".
 
 [#general-create]
 === Параметры меню создания карточек
 
 include::create-menu-config.adoc[tags=webconfig]
 
-Подробнее см. "xref:create-menu-config.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:create-menu-config.adoc[]".
 
 [#general-types]
 === Отключить создание типа карточек
 
 include::disable-child-card.adoc[tags=webconfig]
 
-Подробнее см. "xref:disable-child-card.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc#appearance[Внешний вид]".
+* Конфигурационный файл -- "xref:disable-child-card.adoc[]".
 
 [#general-deletion]
 === Удаление карточек и папок в корзину или навсегда
 
 include::delete-method.adoc[tags=webconfig]
 
-Подробнее см. "xref:delete-method.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc#other[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:delete-method.adoc[]".
 
 [#general-files]
 === Разрешённые для добавления файлы
 
 include::file-extensions.adoc[tags=webconfig]
 
-Подробнее см. "xref:file-extensions.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
+* Конфигурационный файл -- "xref:file-extensions.adoc[]".
 
 [#general-size]
 === Максимальный размер прикладываемых файлов
 
 include::max-file-size.adoc[tags=webconfig]
 
-Подробнее см. "xref:max-file-size.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
+* Конфигурационный файл -- "xref:max-file-size.adoc[]".
 
 [#general-preview]
 === Максимальный размер файлов для предпросмотра
 
 include::max-preview-size.adoc[tags=webconfig]
 
-Подробнее см. "xref:max-preview-size.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
+* Конфигурационный файл -- "xref:max-preview-size.adoc[]".
 
-[#captcha]
-=== Использовать капчу
+[#add-formats]
+=== Открытие файлов на редактирование
 
-include::user-management.adoc[tags=webconfig]
+include::add-edit-formats.adoc[tags=webconfig]
 
-Подробнее см. "xref:user-management.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-files.adoc[Группа настроек "Работа с файлами"]".
+* Конфигурационный файл -- "xref:add-edit-formats.adoc[]".
 
 [#look]
 == Настройки внешнего вида
@@ -76,86 +85,98 @@ include::user-management.adoc[tags=webconfig]
 
 include::default-button-positions.adoc[tags=webconfig]
 
-Подробнее см. "xref:default-button-positions.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:default-button-positions.adoc[]".
 
 [#look-fix]
 === Закрепление основного меню
 
 include::main-menu-fix.adoc[tags=webconfig]
 
-Подробнее см. "xref:main-menu-fix.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:main-menu-fix.adoc[]".
 
 [#look-hide]
 === Скрытие боковой панели в карточках
 
 include::hide-sidebar.adoc[tags=webconfig]
 
-Подробнее см. "xref:hide-sidebar.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:hide-sidebar.adoc[]".
 
 [#dvweb]
-== Настройки DVWebtool
+== Настройки инструментов
 
 [#dvweb-launch]
 === Поведение DVWebtool
 
 include::webservices-launch.adoc[tags=webconfig]
 
-Подробнее см. "xref:webservices-launch.adoc[]".
+.Подробнее см.:
+* WebToolBuilder -- "xref:webservices-install.adoc[]".
+* Конфигурационный файл -- "xref:webservices-launch.adoc[]".
 
 [#dvweb-port]
 === Порт подключения к DVWebTool
 
 include::webservices-port.adoc[tags=webconfig]
 
-Подробнее см. "xref:webservices-port.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:webservices-install.adoc[Работа с программой WebToolBuilder]".
+* Конфигурационный файл -- "xref:webservices-port.adoc[]".
 
-// [#auth]
-// == Настройки аутентификации
+[#auth]
+== Настройки аутентификации
 
-// [#auth-ad]
-// === {wc} в сети без Active Directory
-//
-// include::no-active-dir.adoc[tags=webconfig]
-//
-// Подробнее см. "xref:no-active-dir.adoc[]".
+[#auth-ad]
+=== {wc} в сети без Active Directory
 
-// [#auth-page]
-// === Настройки страницы входа
-//
-// include::login-animation.adoc[tags=webconfig]
-//
-// Подробнее см. "xref:login-animation.adoc[]".
+include::no-active-dir.adoc[tags=webconfig]
+
+* {mc} -- "xref:dev@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширения аутентификации"]".
+* Конфигурационный файл -- "xref:no-active-dir.adoc[]".
+
+[#captcha]
+=== Использовать капчу
+
+include::user-management.adoc[tags=webconfig]
+
+.Подробнее см.:
+// * {mc} -- "xref:dev@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключение"]".
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:user-management.adoc[]".
 
 [#session]
 == Настройки сессии
-
-[#session-aspnet]
-=== Настройки пользовательской сессии
-
-include::aspnet-session.adoc[tags=webconfig]
-
-Подробнее см. "xref:aspnet-session.adoc[]".
 
 [#session-timeout]
 === Таймаут пользовательской сессии
 
 include::user-session-timeout.adoc[tags=webconfig]
 
-Подробнее см. "xref:user-session-timeout.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:user-session-timeout.adoc[]".
 
 [#session-close]
 === Закрытие неактивных сессии
 
 include::close-session-config.adoc[tags=webconfig]
 
-Подробнее см. "xref:close-session-config.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#user-sessions[Пользовательские сессии]".
+* Конфигурационный файл -- "xref:close-session-config.adoc[]".
 
 [#session-ccokie]
 === Время жизни пользовательских cookie
 
 include::cookie-lifetime.adoc[tags=webconfig]
 
-Подробнее см. "xref:cookie-lifetime.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-site.adoc#pechenkies[Пользовательские cookie]".
+* Конфигурационный файл -- "xref:cookie-lifetime.adoc[]".
 
 [#sign]
 == Настройки электронной подписи
@@ -165,21 +186,26 @@ include::cookie-lifetime.adoc[tags=webconfig]
 
 include::digital-sign-stamp.adoc[tags=webconfig]
 
-Подробнее см. "xref:digital-sign-stamp.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-signature.adoc#stamp[Штамп ЭП]".
+* Конфигурационный файл -- "xref:digital-sign-stamp.adoc[]".
 
 [#sign-check]
 === Включение облачной подписи
 
 include::install-cryptopro.adoc[tags=webconfig]
 
-Подробнее см. "xref:install-cryptopro.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-signature.adoc#cloud-sign[Облачная подпись]".
+* Конфигурационный файл -- "xref:install-cryptopro.adoc[]".
 
 [#sign-d-load]
 === Скачивание файла в браузер
 
 include::download-signature.adoc[tags=webconfig]
 
-Подробнее см. "xref:download-signature.adoc[]".
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-signature.adoc#cloud-sign[Облачная подпись]".
+* Конфигурационный файл -- "xref:download-signature.adoc[]".
 
 [#views]
 == Настройки представлений
@@ -189,14 +215,9 @@ include::download-signature.adoc[tags=webconfig]
 
 include::grid-aggregate.adoc[tags=webconfig]
 
-Подробнее см. "xref:grid-aggregate.adoc[]".
-
-// [#views-cards]
-// === Ограничить количество отображаемых карточек в папке
-//
-// include::max-cards-displayed.adoc[tags=webconfig]
-//
-// Подробнее см. "xref:max-cards-displayed.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"]".
+* Конфигурационный файл -- "xref:grid-aggregate.adoc[]".
 
 [#cache]
 == Настройки кэширования
@@ -206,42 +227,54 @@ include::grid-aggregate.adoc[tags=webconfig]
 
 include::caching-params.adoc[tags=webconfig]
 
-Подробнее см. "xref:caching-params.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+* Конфигурационный файл -- "xref:caching-params.adoc[]".
 
 [#cache-views]
 === Время обновления кэша представлений
 
 include::cache-refresh.adoc[tags=webconfig]
 
-Подробнее см. "xref:cache-refresh.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+* Конфигурационный файл -- "xref:cache-refresh.adoc[]".
 
 [#cache-layouts]
 === Кэширование разметок фильтров данных
 
 include::grid-filter-cache.adoc[tags=webconfig]
 
-Подробнее см. "xref:grid-filter-cache.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+* Конфигурационный файл -- "xref:grid-filter-cache.adoc[]".
 
 [#cache-folders]
 === Управление кэшем папок
 
 include::cache-folders.adoc[tags=webconfig]
 
-Подробнее см. "xref:cache-folders.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-interface.adoc[Группа настроек "Интерфейс"].
+* Конфигурационный файл -- "xref:cache-folders.adoc[]".
 
 [#cache-refresh]
 === Кэширование обращений к объектам
 
 include::directory-refresh.adoc[tags=webconfig]
 
-Подробнее см. "xref:directory-refresh.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#caching[Кэширование]".
+* Конфигурационный файл -- "xref:directory-refresh.adoc[]".
 
 [#cache-readonly]
 === Обновление справочников в режиме "только чтение"
 
 include::directory-read-only.adoc[tags=webconfig]
 
-Подробнее см. "xref:directory-read-only.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-performance.adoc#dir-cache[Кэширование]".
+* Конфигурационный файл -- "xref:directory-read-only.adoc[]".
 
 [#log]
 == Настройки журналирования
@@ -251,28 +284,33 @@ include::directory-read-only.adoc[tags=webconfig]
 
 include::log-config.adoc[tags=webconfig]
 
-Подробнее см. "xref:log-config.adoc[]".
+.Подробнее см.:
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:log-config.adoc[]".
 
 [#log-nav]
 === Включить журнал событий навигации
 
 include::log-router.adoc[tags=webconfig]
 
-Подробнее см. "xref:log-router.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-logging.adoc[Группа настроек "Журналирование"]".
+* Конфигурационный файл -- "xref:log-router.adoc[]".
 
 [#webc-log]
 === Включить протоколирование запросов сервера {wc}а
 
 include::log.adoc[tags=webconfig]
 
-Подробнее см. "xref:log.adoc#webc-requests[Протоколирование запросов сервера {wc}а]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-logging.adoc[Группа настроек "Журналирование"]".
+* Конфигурационный файл -- "xref:log.adoc#webc-requests[Протоколирование запросов сервера {wc}а]".
 
 [#nlog-request]
 === Протоколирование запросов с помощью NLog
 
 include::log.adoc[tags=nlo]
 
-Подробнее см. "xref:log.adoc#nlog[Протоколирование запросов с помощью NLog]".
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:log.adoc#nlog[Протоколирование запросов с помощью NLog]".
 
 [#other]
 == Прочие настройки
@@ -282,14 +320,17 @@ include::log.adoc[tags=nlo]
 
 include::cluster-create.adoc[tags=webconfig]
 
-Подробнее см. "xref:cluster-create.adoc[]".
+.Подробнее см.:
+* Настройки не вынесены в {mc} и выполняются только через конфигурационный файл -- "xref:cluster-create.adoc[]".
 
 [#other-agent]
 === Определение типа клиентского устройства
 
 include::user-agent.adoc[tags=webconfig]
 
-Подробнее см. "xref:user-agent.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-site.adoc#devices[Группа настроек "Сайт"]".
+* Конфигурационный файл -- "xref:user-agent.adoc[]".
 
 [#other-r7]
 === Предпросмотр с помощью Р7-Офис/OnlyOffice
@@ -298,11 +339,6 @@ include::user-agent.adoc[tags=webconfig]
 
 include::preview-r7.adoc[tags=webconfig]
 
-Подробнее см. "xref:preview-r7.adoc[]".
-
-[#add-formats]
-=== Открытие файлов на редактирование
-
-include::add-edit-formats.adoc[tags=webconfig]
-
-Подробнее см. "xref:add-edit-formats.adoc[]".
+.Подробнее см.:
+* {mc} -- "xref:dev@mgmtconsole:servers:webclient-r7.adoc[Настройка "Р7-Офис" в {of-mc}]".
+* Конфигурационный файл -- "xref:preview-r7.adoc[]".
