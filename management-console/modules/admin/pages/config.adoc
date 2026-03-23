@@ -57,7 +57,7 @@ _Администратор {of-mc}_ -- пользователь, добавле
 
 // tag::initial-configuration[]
 
-Параметр `Kestrel` в конфигурационном файле {of-mc} указывает URL для доступа к Консоли. В том числе параметр может использоваться при настройке защищённого соединения. Поскольку Консоль версии {mc-cu-mc} является основным инструментом администрирования системы и содержит конфиденциальные данные, для работы рекомендуется использовать защищённое содинение см. подробнее "xref:new-admin-console@engineer:ROOT:https-connection.adoc[]".
+Параметр `Kestrel` в конфигурационном файле {of-mc} указывает URL для доступа к Консоли. В том числе параметр может использоваться при настройке защищённого соединения. Поскольку Консоль версии {mc-cu-mc} является основным инструментом администрирования системы и содержит конфиденциальные данные, для работы рекомендуется использовать защищённое содинение см. подробнее "xref:dv6@engineer:ROOT:https-connection.adoc[]".
 
 .Фрагмент конфигурационного файла `appsettings.json`:
 [source,json]
@@ -115,13 +115,13 @@ WARNING: Настройки вступают в работу, если в мас
 <.> `LdapServerAddresses` -- адреса серверов LDAP данного домена. Если адрес соответствует полному имени домену, параметр можно удалить.
 <.> `AuthType` -- тип аутентификации в LDAP.
 <.> `Port` -- порт подключения к LDAP каталогам, перечисленным в `LdapServerAddresses`.
-<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
+<.> `Credential` -- логин и пароль пользователя для подключения к LDAP-каталогам текущего домена. Пароль для подключения можно зашифровать, см. подробнее раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы.
 <.> `FullDomainName` -- полное имя домена указывается в формате `user@example.com` учётной записи после `@`.
 <.> `ChallengeTo` -- настройка позволяет переадресовывать запросы от выбранного домена к каталогам указанного домена, см. <<challengeto,далее>>.
 // end::config-catalogs[]
 // end::initial-configuration[]
 
-include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
+include::6.1@platform:admin:config-domains.adoc[tags=chalto]
 
 // end::no-alias[]
 
@@ -132,14 +132,14 @@ include::new-admin-console@platform:admin:config-domains.adoc[tags=chalto]
 
 ifdef::manacons[]
 . Введите в адресной строке браузера адрес {of-mc}, чтобы открыть xref:user:user-interface.adoc[главную страницу] {of-mc}.
-. Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:user:connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
+. Перейдите на страницу настроек image:6.2@mgmtconsole:user:buttons/settings.png[Настройки] и xref:user:connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
 . Перейдите на вкладку _Служба {ws}_ и xref:user:worker-service.adoc[настройте] процесс Службы {ws}.
 . В виджетах на xref:user:user-interface.adoc[главной странице] выберите соединение и период статистики.
 endif::manacons[]
 ifndef::manacons[]
-. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть главную страницуfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] {of-mc}.
-. Перейдите на страницу настроек image:dev@mgmtconsole:user:buttons/settings.png[Настройки] и xref:./connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
+. Введите в адресной строке браузера адрес {of-mc}, чтобы открыть главную страницуfootnote:[См. подробнее в документации {of-mc}, раздел "xref:6.2@mgmtconsole:user:user-interface.adoc[]"] {of-mc}.
+. Перейдите на страницу настроек image:6.2@mgmtconsole:user:buttons/settings.png[Настройки] и xref:./connections-docsvision.adoc[добавьте соединение] к {dv} на вкладке _Соединения_.
 . Перейдите на вкладку _Служба {ws}_ и xref:./dvworkerservice.adoc[настройте] процесс Службы {ws}.
-. В виджетах на главной страницеfootnote:[См. подробнее в документации {of-mc}, раздел "xref:dev@mgmtconsole:user:user-interface.adoc[]"] выберите соединение и период статистики.
+. В виджетах на главной страницеfootnote:[См. подробнее в документации {of-mc}, раздел "xref:6.2@mgmtconsole:user:user-interface.adoc[]"] выберите соединение и период статистики.
 endif::manacons[]
 

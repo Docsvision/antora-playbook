@@ -10,7 +10,7 @@
 
 [WARNING]
 ====
-include::new-admin-console@install-linux:ROOT:requirements-accounts.adoc[tags=group-rights]
+include::dv6@install-linux:ROOT:requirements-accounts.adoc[tags=group-rights]
 ====
 
 .Чтобы обновить БД до версии сервера, выполните следующие действия.
@@ -18,15 +18,15 @@ include::new-admin-console@install-linux:ROOT:requirements-accounts.adoc[tags=gr
 . На странице настроек сервера приложений menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] найдите таблицу БД.
 +
 .Таблица БД {dv}
-image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
+image::6.2@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
 . Найдите в списке обновляемую базу данных и нажмите кнопку *Обновить* в правой части строки.
 . Выберите библиотеки карточек, которые должны быть обновлены. Нажмите *Далее*.
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
 +
 .Выбор обновляемых библиотек карточек
-image::dev@mgmtconsole:servers:db-update-libs.png[Выбор обновляемых библиотек карточек]
+image::6.2@mgmtconsole:servers:db-update-libs.png[Выбор обновляемых библиотек карточек]
 // tag::libs-info[]
 +
 .Сведения о библиотеках карточек:
@@ -40,42 +40,42 @@ image::dev@mgmtconsole:servers:db-update-libs.png[Выбор обновляем�
 * В зависимости от изменений в библиотеках карточек может выполняться полное обновление или обновление в лёгком режиме. Подробнее про режимы обновления БД см. "xref:system:ROOT:db-update.adoc[]".
 * {blank}
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=officework]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=officework]
 ****
 // end::libs-info[]
 +
 . Подтвердите параметры, которые будут использованы для обновления базы данных. Нажмите *Далее*.
 +
 .Мастер БД {dv} в режиме обновления базы данных
-image::dev@mgmtconsole:servers:db-update-check.png[Мастер БД {dv} в режиме обновления базы данных]
+image::6.2@mgmtconsole:servers:db-update-check.png[Мастер БД {dv} в режиме обновления базы данных]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 +
 . Нажмите кнопку *Обновить*, чтобы начать процедуру обновления БД.
 +
 .Подтверждение обновления БД
-image::dev@mgmtconsole:servers:db-update-launch.png[Подтверждение обновления БД]
+image::6.2@mgmtconsole:servers:db-update-launch.png[Подтверждение обновления БД]
 +
 [WARNING]
 ====
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
 
 Пользователи и сервисы, использующие эту базу данных, будут отключены и не смогут подключиться к ней до окончания процесса обновления.
 ====
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
 +
 Если процесс обновления базы данных был прерван по таймауту, увеличьте значение настройки `Ожидать завершения атомарной операции на SQL Server (сек)` и повторите процедуру обновления.
 +
 . Выберите модули {dv}, решения которых должны быть обновлены в БД, и нажмите кнопку *Загрузить*. При этом существующие в БД стандартные решения выбранных модулей будут перезаписаны.
 +
 .Выбор модулей, решения которых будут загружены в БД
-image::dev@mgmtconsole:servers:db-update-solutions.png[Выбор модулей, решения которых будут загружены в БД]
+image::6.2@mgmtconsole:servers:db-update-solutions.png[Выбор модулей, решения которых будут загружены в БД]
 +
 Возможность выбора модулей, решения которых не нуждаются в обновлении (версия в БД является актуальной), будет заблокирована.
 +
 . Дождитесь завершения загрузки решений.
-. Перед обновлением поиск автоматически отключается. Приведите базу данных к рабочему состоянию, включив xref:new-admin-console@resource-kit:console:search-full-text.adoc[Систему полнотекстового поиска].
+. Перед обновлением поиск автоматически отключается. Приведите базу данных к рабочему состоянию, включив xref:6.1@resource-kit:console:search-full-text.adoc[Систему полнотекстового поиска].
 // . Повторно создайте все индексы, которые были добавлены при внедрении системы.
 // . Если в базу данных при внедрении системы были добавлены триггеры, после обновления базы данных их потребуется создать повторно.
 

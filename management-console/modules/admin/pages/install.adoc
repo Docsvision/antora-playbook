@@ -5,9 +5,9 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
-Начиная с НО 26.1, {mc} является основным инструментом конфигурации системы, необходимым для первоначальной настройки всех модулей системы, также без {of-mc} не будет функционировать модуль "xref:new-admin-console@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
+Начиная с НО 26.1, {mc} является основным инструментом конфигурации системы, необходимым для первоначальной настройки всех модулей системы, также без {of-mc} не будет функционировать модуль "xref:6.1@workerservice::index.adoc[Служба {ws}]", необходимый для создания групп заданий и отправки почтовых уведомлений.
 
 // tag::separate[]
 [WARNING]
@@ -34,7 +34,7 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 :of: {of-mc}
 :file: appsettings
 :wt: managementconsole
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 
 // end::linux[]
 +
@@ -45,7 +45,7 @@ include::new-admin-console@platform:admin:partial$install.adoc[]
 sudo systemctl start dvconsole
 ----
 +
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 --
 
 [#windows-console]
@@ -87,19 +87,19 @@ image::install-components.png[Выбор устанавливаемых комп
 image::install-confirm.png[Мастер установки серверной части модуля {bo}]
 +
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#settings-service]
 == Установка {of-sett-serv} на сервер {of-mc}
 
-Установите {of-sett-serv} на сервер {of-mc}. Инструкция по установке {of-sett-serv} приведена в разделе "xref:new-admin-console@settings-service:admin:install.adoc[]" документации {of-sett-serv}.
+Установите {of-sett-serv} на сервер {of-mc}. Инструкция по установке {of-sett-serv} приведена в разделе "xref:6.1@settings-service:admin:install.adoc[]" документации {of-sett-serv}.
 
 [#extensions]
 == Установка расширений модулей для {of-mc}
 
 // tag::extensions[]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
 Расширения обязательны для установки в версии {of-mc} {mc-cu-mc} и выше. Для возможности настройки модулей через {mc} необходимо установить их расширения, добавляющие в систему:
 
@@ -160,22 +160,22 @@ sudo dnf install docsvision-ext-fileservice-mc docsvision-ext-platform-mc docsvi
 . На сервере {of-mc} запустите инсталлятор Службы {ws} `Docsvision Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
 +
 .Выбор компонентов Службы {ws} для установки
-image::dev@mgmtconsole:admin:ws-components.png[Выбор компонентов Службы {ws} для установки]
+image::6.2@mgmtconsole:admin:ws-components.png[Выбор компонентов Службы {ws} для установки]
 +
 . Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модулей {pl} и {fs}:
 +
 .Выбор компонентов модуля {pl} для установки
-image::dev@mgmtconsole:admin:pl-components.png[Выбор компонентов модуля {pl} для установки]
+image::6.2@mgmtconsole:admin:pl-components.png[Выбор компонентов модуля {pl} для установки]
 +
 . На сервере {of-mc} запустите инсталлятор {wc}а `Docsvision web-client.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для {wc}а:
 +
 .Выбор компонентов {wc} для установки
-image::dev@mgmtconsole:admin:wc-components.png[Выбор компонентов {wc} для установки]
+image::6.2@mgmtconsole:admin:wc-components.png[Выбор компонентов {wc} для установки]
 +
 . На сервере {of-mc} запустите инсталлятор {wf} `Docsvision Workflow server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {wf}:
 +
 .Выбор компонентов модуля {wf} для установки
-image::dev@mgmtconsole:admin:wf-components.png[Выбор компонентов модуля {wf} для установки]
+image::6.2@mgmtconsole:admin:wf-components.png[Выбор компонентов модуля {wf} для установки]
 // end::extensions-windows[]
 
 // tag::register-services[]
@@ -207,7 +207,7 @@ WARNING: После редактирования конфигурационны�
 
 Если соединение не защищено (т.е. не настроен сертификат на уровне БД, используется самозаверенный или недействительный сертификат), необходимо в строке соединения указывать `TrustServerCertificate = true`, это сообщит провайдеру, что серверу можно доверять.
 
-Настоятельно рекомендуется использовать защищённое соединение, настроив {mssql} сервер в соответствии с инструкцией в руководстве по настройке системы, см. подробнее "xref:new-admin-console@engineer:ROOT:create-cert.adoc[]".
+Настоятельно рекомендуется использовать защищённое соединение, настроив {mssql} сервер в соответствии с инструкцией в руководстве по настройке системы, см. подробнее "xref:dv6@engineer:ROOT:create-cert.adoc[]".
 // end::cert[]
 
 [#deletion]
@@ -218,7 +218,7 @@ WARNING: После редактирования конфигурационны�
 +
 --
 :wt: managementconsole
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 
 Созданные группы и службы будут удалены, _{sett-serv}_ станет недоступен.

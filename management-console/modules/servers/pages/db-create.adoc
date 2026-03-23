@@ -8,61 +8,61 @@
 . Откройте страницу menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] и нажмите кнопку *Создать* под таблицей со списком подключенных БД, чтобы запустить Мастер БД {dv}.
 +
 .Таблица БД {dv}
-image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
+image::6.2@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
 . Укажите данные для подключения к СУБД. Нажмите *Далее*.
 +
 .Настройка подключения к СУБД
-image::dev@mgmtconsole:servers:db-create-start.png[Настройка подключения к СУБД]
+image::6.2@mgmtconsole:servers:db-create-start.png[Настройка подключения к СУБД]
 +
 --
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=dbSettings]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=dbSettings]
 --
 +
 . Укажите параметры создания БД и нажмите *Далее*.
 +
 .Настройка создания БД в {mssql} Server
-image::dev@mgmtconsole:servers:db-create-name.png[Настройка создания БД в {mssql} Server]
+image::6.2@mgmtconsole:servers:db-create-name.png[Настройка создания БД в {mssql} Server]
 +
 ****
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=name]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=name]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=location]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=location]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=options]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=options]
 ****
 +
 . Выберите библиотеки карточек для загрузки в новую БД. По умолчанию будут выбраны все библиотеки, которые можно загрузить. Нажмите *Далее*.
 +
 .Выбор модулей для загрузки
-image::dev@mgmtconsole:servers:db-create-libs.png[Выбор модулей для загрузки]
+image::6.2@mgmtconsole:servers:db-create-libs.png[Выбор модулей для загрузки]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
 +
 . Подтвердите параметры, которые будут использованы при создании базы данных и нажмите *Создать*.
 +
 .Подтверждение параметров создания БД
-image::dev@mgmtconsole:servers:db-create-check.png[Подтверждение параметров создания БД]
+image::6.2@mgmtconsole:servers:db-create-check.png[Подтверждение параметров создания БД]
 +
 ****
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 ****
 +
 [WARNING]
 ====
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
 
 Закрытие мастера создания БД кнопокй *Прервать* оставит базу в промежуточном состоянии без возможности продолжения конфигурации.
 ====
 +
 . Дождитесь завершения инициализации БД и загрузки SQL объектов.
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
 +
 . [[solutions]]Выберите модули {dv}, решения которых должны быть загружены в БД и нажмите *Загрузить*.
 +
 .Выбор модулей, решения которых будут загружены в БД
-image::dev@mgmtconsole:servers:db-create-solutions.png[Выбор модулей, решения которых будут загружены в БД]
+image::6.2@mgmtconsole:servers:db-create-solutions.png[Выбор модулей, решения которых будут загружены в БД]
 +
 [WARNING]
 ====
@@ -94,9 +94,9 @@ image::dev@mgmtconsole:servers:db-create-solutions.png[Выбор модулей
 // $ sudo systemctl restart dvappserver
 +
 . Дождитесь завершения загрузки решений.
-. Чтобы назначить созданную БД основной, следуйте xref:dev@mgmtconsole:servers:db-default.adoc[инструкции].
+. Чтобы назначить созданную БД основной, следуйте xref:6.2@mgmtconsole:servers:db-default.adoc[инструкции].
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
 
 // tag::db-create-errors[]
 [#errors]

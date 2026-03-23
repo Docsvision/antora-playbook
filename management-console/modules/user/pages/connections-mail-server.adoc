@@ -16,12 +16,12 @@ endif::[]
 == Создание соединений с почтовым сервером
 
 .Чтобы создать новое соединение с почтовым сервером:
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=create]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=create]
 +
 NOTE: Перечень требуемых параметров зависит от типа почтового сервера.
 +
 .Добавить соединение с почтовым сервером MS Exchange
-image::dev@mgmtconsole:user:add-mail-ms-ex.png[Добавить соединение с почтовым сервером MS Exchange]
+image::6.2@mgmtconsole:user:add-mail-ms-ex.png[Добавить соединение с почтовым сервером MS Exchange]
 +
 .Почтовый сервер MS Exchange:
 ****
@@ -35,12 +35,12 @@ image::dev@mgmtconsole:user:add-mail-ms-ex.png[Добавить соединен
 
 При использовании почтового сервера на платформе Microsoft Exchange, укажите следующие параметры:
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
 
 Тип сервера::
 MS Exchange
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
 
 Профиль MS Exchange::
 Название профиля для работы с Microsoft Exchange.
@@ -54,18 +54,18 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
 ****
 +
 .Добавить соединение с почтовым сервером SMTP / POP3
-image::dev@mgmtconsole:user:add-mail-pop3.png[Добавить соединение с почтовым сервером SMTP / POP3]
+image::6.2@mgmtconsole:user:add-mail-pop3.png[Добавить соединение с почтовым сервером SMTP / POP3]
 +
 .Почтовый сервер SMTP / POP3:
 ****
 include::dv6@system::partial$excerpts.adoc[tags=pop3]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
 
 Тип сервера::
 SMTP / POP3
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
 
 Отправка::
 Выберите один из двух типов отправки:
@@ -90,11 +90,11 @@ NOTE: При возникновении проблем с аутентифика
 +
 WARNING: NTLM-аутентификация не поддерживается в {dv} версии 6.1.
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=timeout]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=timeout]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ssl]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ssl]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
 
 POP3 сервер::
 Сетевой адрес POP3 сервера.
@@ -111,27 +111,27 @@ POP3 порт::
 +
 WARNING: NTLM-аутентификация не поддерживается в {dv} версии 6.1.
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=timeout]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=timeout]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=ssl-pop3]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ssl-pop3]
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
 
 Отключить проверку отозванности сертификата::
 Настройка позволяет отключить проверку отозванности сертификата на уровне клиента POP3. Когда флаг установлен, проверка выполняется всегда. Сертификат не проверяется, когда флаг снят -- значение по умолчанию.
 ****
 +
 .Добавить соединение с почтовым сервером MS Exchange Web Service
-image::dev@mgmtconsole:user:add-mail-ms-ews.png[Добавить соединение с почтовым сервером MS Exchange Web Service]
+image::6.2@mgmtconsole:user:add-mail-ms-ews.png[Добавить соединение с почтовым сервером MS Exchange Web Service]
 +
 .Почтовый сервер MS Exchange Web Service:
 ****
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=conn-name]
 
 Тип сервера::
 MS Exchange Web Service
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
 
 Адрес сервера для подключения::
 Адрес электронной почты, зарегистрированной в веб-службе Exchange и ассоциированной с учётной записью сервиса, использующего данное соединение.
@@ -152,7 +152,7 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=server-mail]
 +
 WARNING: NTLM-аутентификация не поддерживается в {dv} версии 6.1.
 
-include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
 
 Разрешать перенаправление::
 При подключении почтового шлюза Workflow к серверу Exchange Web Services используется функция автообнаружения конечной точки EWS, подробнее см. на https://docs.microsoft.com/ru-ru/exchange/client-developer/exchange-web-services/autodiscover-for-exchange[сайте Microsoft].
@@ -178,4 +178,4 @@ include::dev@mgmtconsole:user:partial$excerpts.adoc[tags=user-pass]
 +
 . Нажмите *Сохранить*. Соединение будет добавлено в группу соединений Почтовый сервер.
 
-include::dev@mgmtconsole:user:connections-docsvision.adoc[tags=delete]
+include::6.2@mgmtconsole:user:connections-docsvision.adoc[tags=delete]

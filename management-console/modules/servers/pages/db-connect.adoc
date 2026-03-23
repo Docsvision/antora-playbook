@@ -9,41 +9,41 @@
 * Не изменяйте конфигурацию сателлитных БД при подключении существующей БД {dv}!
 * Параметр сортировки (collation) в подключаемой БД должен быть тождественным этому параметру на SQL-сервере.
 
-include::new-admin-console@install-linux:ROOT:requirements-accounts.adoc[tags=group-rights]
+include::dv6@install-linux:ROOT:requirements-accounts.adoc[tags=group-rights]
 ====
 
 . Создайте резервную копию базы данных на случай возникновения ошибок при обновлении.
 . Откройте страницу menu:Серверы[Имя-сервера > Сервер приложений > Базы данных] и нажмите кнопку *Подключить* под таблицей со списком подключенных БД, чтобы запустить Мастер БД {dv}.
 +
 .Таблица БД {dv}
-image::dev@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
+image::6.2@mgmtconsole:servers:db-master.png[Таблица БД {dv}]
 +
 . Укажите данные для подключения к СУБД. Нажмите *Далее*.
 +
 .Мастер БД {dv} в режиме подключения базы данных
-image::dev@mgmtconsole:servers:db-connect-start.png[Мастер БД {dv} в режиме подключения базы данных]
+image::6.2@mgmtconsole:servers:db-connect-start.png[Мастер БД {dv} в режиме подключения базы данных]
 +
 --
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=dbSettings]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=dbSettings]
 --
 +
 . Укажите основные параметры БД:
 +
 .Параметры БД
-image::dev@mgmtconsole:servers:db-connect-name.png[Параметры БД]
+image::6.2@mgmtconsole:servers:db-connect-name.png[Параметры БД]
 +
 ****
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=dbname-1]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=dbname-1]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=dbalias-1]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=dbalias-1]
 ****
 +
 . Подтвердите параметры подключения базы данных.
 +
 .Подтверждение параметров подключения БД
-image::dev@mgmtconsole:servers:db-connect-check.png[Подтверждение параметров подключения БД]
+image::6.2@mgmtconsole:servers:db-connect-check.png[Подтверждение параметров подключения БД]
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 +
 // ****
 // Если выбранная база данных была подключена или подключена сейчас к другому серверу {dv}, и лицензия {dv} не позволяет работать с одной БД одновременно нескольким серверам {dv}, при нажатии кнопки *Далее* появится диалоговое окно. В диалоговом окне будут предложены варианты отключения БД.
@@ -56,28 +56,28 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=atomic]
 +
 . На следующей странице мастера нужно выбрать обновляемые библиотеки карточек модулей. По умолчанию будут выбраны все библиотеки, требующие обновления. Если необходимо, измените выбор и нажмите *Далее*, чтобы продолжить.
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=lib-flags]
 +
 .Выбор модулей для обновления
-image::dev@mgmtconsole:servers:db-connect-libs.png[Выбор модулей для обновления]
-include::dev@mgmtconsole:servers:db-update.adoc[tags=libs-info]
+image::6.2@mgmtconsole:servers:db-connect-libs.png[Выбор модулей для обновления]
+include::6.2@mgmtconsole:servers:db-update.adoc[tags=libs-info]
 +
 . Нажмите кнопку *Обновить*, чтобы подключить БД и дождитесь завершения загрузки SQL объектов.
 +
 .Запуск обновления подключаемой БД
-image::dev@mgmtconsole:servers:db-connect-launch.png[Запуск обновления подключаемой БД]
+image::6.2@mgmtconsole:servers:db-connect-launch.png[Запуск обновления подключаемой БД]
 +
 [WARNING]
 ====
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=break-master]
 ====
 +
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=and-restart]
 +
 . Нажмите *Далее*. Выберите модули {dv}, решения которых должны быть загружены в БД и нажмите кнопку *Загрузить*.
 +
 .Выбор модулей, решения которых будут загружены в БД
-image::dev@mgmtconsole:servers:db-connect-solutions.png[Выбор модулей, решения которых будут загружены в БД]
+image::6.2@mgmtconsole:servers:db-connect-solutions.png[Выбор модулей, решения которых будут загружены в БД]
 +
 Существующие в БД решения загружаемых модулей будут перезаписаны.
 +
