@@ -1,14 +1,19 @@
 :update: workflow
+:installer: {dv} Workflow server.msi
 
 = Обновление модуля
 
 include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
 
-* Если к новой версии модуля приложена инструкция по обновлению, следуйте ей.
-* Если комплект обновления включает обновление для модуля _{pl}_, перейдите к инструкции, приведенной в разделе  xref:6.1@platform:admin:update-module.adoc[Обновление модуля {pl}].
+include::new-admin-console@platform:admin:partial$update-conditions.adoc[]
 
-include::6.1@platform:admin:partial$update.adoc[]
-+
-При выполнении данной операции в БД {dv} будут загружены стандартные настройки модуля _{ad}_.
-+
-include::6.1@platform:admin:partial$client.adoc[]
+include::new-admin-console@platform:admin:partial$update.adoc[]
+
+:what-ext: расширения модуля {wf} для {of-mc}
+:update: workflow-mc
+include::new-admin-console@platform:admin:partial$update-extensions.adoc[]
+
+[#client]
+== Обновление клиентских компонентов
+
+include::new-admin-console@platform:admin:partial$client.adoc[]
