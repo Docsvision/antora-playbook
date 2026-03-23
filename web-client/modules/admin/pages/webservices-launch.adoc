@@ -4,36 +4,38 @@
 
 = Настройки запуска инструментов
 
+ifndef::old-connections[]
 [#dvweb]
 == Настройки запуска программы DVWebTool
 
 Поведение по умолчанию: программа запускается при загрузке системы и не закрывается после выполнения действия. Данное поведение можно изменить.
 
 include::new-admin-console@webclient:admin:partial$mancons.adoc[]
+endif::old-connections[]
 
 include::new-admin-console@webclient:admin:webservices-install.adoc[tags=webtool]
 
+ifndef::old-connections[]
 // tag::webconfig[]
 .В конфигурационном файле {wc}а поведение DVWebTool при запуске настраивается:
 * `DvWebToolAppShutDown` -- закрывать DVWebTool после выполнения действия. Значение по умолчанию: `false` -- не закрывать.
 * `DvWebToolStartUpLaunch` -- отвечает за автоматический запуск DVWebTool. Значение по умолчанию: `true` -- утилита запускается автоматически при загрузке системы.
 // end::webconfig[]
-
-Чтобы настройки вступили в действие после изменения, необходимо повторно собрать инсталлятор DVWebTool по инструкции "xref:./webservices-install.adoc[]".
+endif::old-connections[]
 
 .Программа WebToolBuilder позволяет собрать DVWebTool со следующими параметрами:
 * _Адрес сервера {wc}а_: укажите адрес сервера {wc}а.
 * _Порт DVWebTool_: укажите порт DVWebTool. По умолчанию `5413`.
 * `*Автозапуск*`: параметр имеет приоритет над параметром `DvWebToolStartUpLaunch` в конфигурационном файле {wc}а. Если в конфигурационном файле {wc}а параметр `true`, но утилита собрана со снятым флагом `*Автозапуск*`, автозапуск не сработает.
 
+Чтобы настройки вступили в действие после изменения, необходимо повторно собрать инсталлятор DVWebTool по инструкции "xref:./webservices-install.adoc[]".
+
 [#dvWebTool]
 == Запуск программы DVWebTool
 
-Программа _DVWebTool_ необходима для выполнения сканирования документов и открытия файлов в офисном редакторе в ОС {ms} Windows. Программа _DVWebTool_ работает только в ОС {ms} Windows. Для работы требуется установить {asp-bundle}.
+TIP: Сборка _DVWebTool_ делегирована утилите WebToolBuilder, см. подробнее в разделе "xref:./webservices-install.adoc[]".
 
-TIP: Сборка и установка _DVWebTool_ делегированы утилите WebToolBuilder, см. подробнее в разделе "xref:./webservices-install.adoc[]".
-
-. [[launch-dvweb]]DVWebTool автоматически запускается при входе пользователя в ОС, если при xref:./webservices-install.adoc[сборке] был установлен флаг `*Автозапуск*`. Программу можно запустить вручную из меню menu:Пуск[Программы > {dv} {wc} > {dv} WebToolBuilder].
+. [[launch-dvweb]]DVWebTool автоматически запускается при входе пользователя в ОС, если при xref:./webservices-install.adoc[сборке] был установлен флаг `*Автозапуск*`. Программу можно запустить вручную из меню menu:Пуск[Программы > {dv} {wc} > {dv} WebToolBuilder > DVWebTool].
 +
 [NOTE]
 ====
