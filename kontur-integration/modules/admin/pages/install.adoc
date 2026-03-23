@@ -6,19 +6,19 @@
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 [#linux-server]
 == Установка {of-mk} на сервер под управлением Linux
 
 :wt: cakontur*
-include::new-admin-console@platform:admin:partial$install.adoc[]
+include::6.1@platform:admin:partial$install.adoc[]
 . Установите расширение _{of-mk}_ {wc}а следующей командой:
 +
 :wt: cakontur-webc
-include::new-admin-console@platform:admin:partial$install.adoc[tags=commands]
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-// include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+// include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 +
 . Получите библиотеку `CryptoPro.Security.Cryptography.dll` (входит в комплект https://cryptopro.ru/products/net/downloads[КриптоПро .Net LibCore]) и поместите её по адресу `/usr/lib/docsvision/common` в Linux.
 
@@ -40,7 +40,7 @@ image::install-server-license.png[Условия лицензионного со
 .Выбор устанавливаемых компонентов
 image::install-server-components.png[Выбор устанавливаемых компонентов]
 +
-include::new-admin-console@platform:admin:partial$install-components.adoc[]
+include::6.1@platform:admin:partial$install-components.adoc[]
 +
 ****
 Общие компоненты::
@@ -64,7 +64,7 @@ NOTE: Расширение недоступно для установки, ес�
 . В следующем окне нажмите *Установить* и дождитесь завершения установки модуля.
 . Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
 +
-// include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
+// include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 +
 . Выполните необходимые настройки модуля, описанные в разделе xref:settings.adoc[].
 . Получите библиотеку `CryptoPro.Security.Cryptography.dll` (входит в комплект https://cryptopro.ru/products/net/downloads[КриптоПро .Net LibCore]) и поместите её по адресу `C:\Program Files\Docsvision\Common` в Windows.
@@ -77,14 +77,14 @@ NOTE: Расширение недоступно для установки, ес�
 +
 --
 :wt: cakontur*
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 ** Чтобы удалить раширение для {wc}а в ОС Linux, выполните:
 +
 --
 :wt: cakontur-webc
-include::new-admin-console@platform:admin:partial$delete.adoc[]
+include::6.1@platform:admin:partial$delete.adoc[]
 --
 +
 * После удаления модуля удалите настройки модуля из _{of-mk}_.
