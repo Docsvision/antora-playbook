@@ -120,9 +120,12 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 // tag::auto[]
 . Откройте Microsoft Edge режиме совместимости с IE на компьютере пользователя.
 +
-****
-Если конфигурационном файле {wincl}а (см. подробнее раздел "xref:new-admin-console@platform:console:config-client.adoc[]" в документации модуля {pl}) для установки клиентской части указана область установки _Для всех пользователей_, Microsoft Edge режиме совместимости с IE нужно запустить с правами администратора компьютера.
-****
+[NOTE]
+====
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
+
+Если {wincl} устанавливается _Для всех пользователей_, Microsoft Edge режиме совместимости с IE нужно запустить с правами администратора компьютера.
+====
 +
 . Настройте веб-браузер.
 +
@@ -148,7 +151,10 @@ include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[]
 +
 . Запустите {wincl}. При подключении к серверу {dv} будет выполнена установка клиентских частей других базовых модулей, серверные части которых установлены на сервере {dv}.
 +
-NOTE: Если в программе _{cns}_ выбрана область установки клиентских компонентов _Для всех пользователей_, {wincl} должен быть запущен с правами администратора компьютера.
+[NOTE]
+====
+include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
+====
 // end::auto[]
 
 [#manual]
@@ -158,8 +164,6 @@ NOTE: Если в программе _{cns}_ выбрана область ус�
 +
 .Мастер установки модуля {wincl}
 image::winclient:admin:install-hello-client.png[Мастер установки модуля {wincl}]
-+
-include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
 . Примите условия лицензионного соглашения.
 +
