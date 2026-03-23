@@ -1,3 +1,8 @@
+:with-console: no
+:with-config: yes
+:do-what: варианта настройки криптосервиса
+:link: см. раздел "xref:dev@mgmtconsole:servers:appserver-general.adoc[]"
+
 = Сервис обслуживания ЭП
 
 Сервис обслуживания ЭП -- компонент модуля {bo}. Сервис указывает в журнале подписей {wc}а актуальный статус подписи, тип и дату окончания срока действия сертификата. Сервис обслуживания ЭП может работать в сочетании с Криптосервисом -- Docker-контейнером, выполняющим функции обслуживания ЭП.
@@ -90,7 +95,9 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 [#config]
 == Настройка Криптосервиса в {dv} 6.1
 
-. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` и перезапустите службу *{sss-new}*. Пример содержимого файла `.json` приведён ниже:
+include::partial$mancons.adoc[]
+
+. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux и `C:\Program Files\Docsvision\Platform\config` в Windows. Пример содержимого файла `.json` приведён ниже:
 +
 [source,json]
 ----
@@ -107,6 +114,8 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 }
 ----
 <.> Адрес Криптосервиса.
++
+include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
 +
 . Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
 +
