@@ -1,12 +1,14 @@
 = Краткая справка по обновлению 6.1 до НО 26.1 с переходом на Windows
 
 .При обновлении {dv} 6.1 до НО 26.1 с переходом на Windows необходимо выполнить следующие шаги:
-. Выполните необходимые приготовления к обновлению, см. "xref:./prepare.adoc[]".
-. Удалите существующую версию {dv} 6.1, см. "xref:./uninstall-current.adoc[]".
-. Установите серверные компоненты модулей, см. "xref:./install-server.adoc[]".
-. Установите другие модули системы, см. "xref:./install-other-server.adoc[]".
-. Активируйте лицензию при помощи утилиты активации, см. "xref:./activation.adoc[]".
+. xref:new-admin-console@engineer:ROOT:appendix/db-backup.adoc[Создайте] резервную копию актуальной БД {dv} согласно инструкции в руководстве по настройке системы.
+. xref:./uninstall-current.adoc[Удалите] серверные компоненты {dv} 6.1 с сервера Linux.
+. xref:./pre-config-server.adoc[Выполните] предварительную настройку сервера системы, если этого не было выполнено ранее.
+. xref:./install-server.adoc[Обновите] серверные компоненты модулей на сервере Windows.
+. xref:./install-other-server.adoc[Обновите] другие базовые модули системы на сервере Windows.
+. xref:./activation.adoc[Активируйте] лицензию на сервере Windows при помощи утилиты активации.
 . xref:./dvconsole.adoc[Выполните] первичную настройку {of-mc}.
+. xref:./config-platform.adoc[Укажите] настройки модуля {pl} из {of-mc}.
 . xref:./config-domains.adoc[Выполните] настройку доменных каталогов для Сервера приложений.
 . xref:./config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить БД {dv}:
 +
@@ -17,7 +19,7 @@
 . xref:./connections-docsvision.adoc[Настройте] соединение {dv} в {of-mc}.
 . xref:./dvworkerservice.adoc[Задайте] настройки Службы {ws}.
 . xref:./connections-mail-server.adoc[Настройте] подключение к почтовому серверу.
-. xref:./config-platform.adoc[Укажите] настройки модуля {pl} из {of-mc}.
+
 . xref:./dvfileservice.adoc[Заполните] необходимые параметры {of-fs} из {of-mc}.
 . xref:./dvwebclient.adoc[Настройте] функции {wc}а, необходимые для работы.
 . xref:./dvworkflow.adoc[Заполните] настройки модуля {wf}, необходимые для работы.
