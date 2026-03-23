@@ -4,7 +4,7 @@
 . Распределять нагрузку через группы доступности с целью обеспечения высокой доступности и возможности аварийного восстановления, см. подробнее в разделе "<<db-always-on-distribution,Настройка группы доступности>>".
 . Создавать отказоустойчивый кластер. Функциональность отказоустойчивых кластеров AlwaysOn в {dv} напрямую не поддерживается, подробнее см. подробнее в разделе "<<db-always-on-cluster,Создание отказоустойчивых кластеров с функцией AlwaysOn>>".
 
-TIP: Включение поддержки AlwaysOn в {dv} описано в документации {of-mc}, см. раздел xref:dev@mgmtconsole:servers:db-load-distribution.adoc[].
+TIP: Включение поддержки AlwaysOn в {dv} описано в документации {of-mc}, см. раздел xref:6.2@mgmtconsole:servers:db-load-distribution.adoc[].
 
 [WARNING]
 ====
@@ -52,7 +52,7 @@ include::dev@platform:admin:partial$excerpts.adoc[tags=nofs]
 . В настройках {mssql} Server включите использование протоколов `Shared Memory`, `Named Pipes` и `TCP/IP`.
 +
 .Настройки протоколов в конфигурации {mssql} Server
-image::new-admin-console@platform:admin:sql-server-config-manager.png[Настройки протоколов в конфигурации {mssql} Server]
+image::6.1@platform:admin:sql-server-config-manager.png[Настройки протоколов в конфигурации {mssql} Server]
 +
 . Убедитесь, что в настройках службы SQL Server (в SQL Server Configuration Manager), в т.ч. и на основном сервере, указана одна (рекомендуется) *доменная учётная запись* для запуска службы. Если указана локальная учётная запись -- измените.
 +
@@ -60,34 +60,34 @@ image::new-admin-console@platform:admin:sql-server-config-manager.png[Настр
 * У учётной записи должен быть доступ к SQL Server других узлов (обычно обеспечивается использованием общей доменной записи для всех экземпляров SQL Server).
 +
 .Настройки службы SQL Server
-image::new-admin-console@platform:admin:sql-server-config-manager-properties.png[Настройки службы SQL Server]
+image::6.1@platform:admin:sql-server-config-manager-properties.png[Настройки службы SQL Server]
 +
 . На всех узлах в настройках службы {mssql} Server (в SQL Server Configuration Manager) включите поддержку AlwaysOn.
 +
 .Настройка поддержки AlwaysOn в конфигурации службы {mssql} Server
-image::new-admin-console@platform:admin:always-on-enable.png[Настройка поддержки AlwaysOn в конфигурации службы {mssql} Server]
+image::6.1@platform:admin:always-on-enable.png[Настройка поддержки AlwaysOn в конфигурации службы {mssql} Server]
 +
 . Создайте полную резервную копию БД {dv} (и сателлитных БД, если используются).
 . Выполните шаги 10 -- 17, чтобы создать группу доступности AlwaysOn с помощью {mssql} Server Management Studio на основном сервере {mssql}.
 . Вызовите команду _New Availability Group Wizard_ из контекстного меню узла _Always On High Availability_.
 +
 .Команда создания группы доступности
-image::new-admin-console@platform:admin:always-on-create.png[Команда создания группы доступности]
+image::6.1@platform:admin:always-on-create.png[Команда создания группы доступности]
 +
 Будет запущен мастер.
 +
 .Мастер создания группы доступности, начальная страница
-image::new-admin-console@platform:admin:always-on-start.png[Мастер создания группы доступности, начальная страница]
+image::6.1@platform:admin:always-on-start.png[Мастер создания группы доступности, начальная страница]
 +
 . На странице _Specify Options_ укажите название группы. Например, `{dv}DBs`. Другие параметры изменять не требуется.
 +
 .Мастер создания группы доступности, указать название группы доступности
-image::new-admin-console@platform:admin:always-on-name.png[Мастер создания группы доступности, указать название группы доступности]
+image::6.1@platform:admin:always-on-name.png[Мастер создания группы доступности, указать название группы доступности]
 +
 . На странице _Select Databases_ выберите БД {dv}, которые нужно включить в группу доступности.
 +
 .Мастер создания группы доступности, выбор БД для группы
-image::new-admin-console@platform:admin:always-on-next.png[Мастер создания группы доступности, выбор БД для группы]
+image::6.1@platform:admin:always-on-next.png[Мастер создания группы доступности, выбор БД для группы]
 +
 ****
 Если архивные данные, системные данные и/или журналы вытеснены из базы данных {dv}, рекомендуется данные БД также включить в группу доступности.
@@ -110,19 +110,19 @@ image::new-admin-console@platform:admin:always-on-next.png[Мастер созд
 - _Readable Secondary_ переключите в *_Yes_*.
 +
 .Мастер создания группы доступности, выбор экземпляров серверов
-image::new-admin-console@platform:admin:always-on-replicas.png[Мастер создания группы доступности, выбор экземпляров серверов]
+image::6.1@platform:admin:always-on-replicas.png[Мастер создания группы доступности, выбор экземпляров серверов]
 +
 WARNING: Не изменяйте настройки на вкладке _Listener_.
 +
 . На странице _Select Data Synchronization_ оставьте переключатель в значении *Automatic seeding* (доступность варианта зависит от версии {mssql} Server).
 +
 .Мастер создания группы доступности, выбор настроек синхронизации данных
-image::new-admin-console@platform:admin:always-on-sync-type.png[Мастер создания группы доступности, выбор настроек синхронизации данных]
+image::6.1@platform:admin:always-on-sync-type.png[Мастер создания группы доступности, выбор настроек синхронизации данных]
 +
 . При переходе на страницу _Validation_ будет выполнена проверка создания группы доступности.
 +
 .Мастер создания группы доступности, проверка создания группы
-image::new-admin-console@platform:admin:always-on-validation.png[Мастер создания группы доступности, проверка создания группы]
+image::6.1@platform:admin:always-on-validation.png[Мастер создания группы доступности, проверка создания группы]
 +
 WARNING: Проигнорируйте предупреждение `Checking the listener configuration`.
 +
@@ -132,7 +132,7 @@ WARNING: Проигнорируйте предупреждение `Checking the
 NOTE: Состояние группы доступности можно посмотреть на панели мониторинга.
 +
 .Панель мониторинга группы доступности
-image::new-admin-console@platform:admin:always-on-state.png[Панель мониторинга группы доступности]
+image::6.1@platform:admin:always-on-state.png[Панель мониторинга группы доступности]
 +
 [NOTE]
 ====

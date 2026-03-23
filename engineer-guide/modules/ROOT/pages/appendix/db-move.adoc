@@ -1,12 +1,12 @@
 :with-console: yes
 :with-config: no
 :do-what: варианта повторного подключения БД после переноса между серверами
-:link: "xref:dev@mgmtconsole:servers:db-master.adoc[]"
+:link: "xref:6.2@mgmtconsole:servers:db-master.adoc[]"
 :cns-section: menu:"Базы данных"["Мастер БД"]
 
 = Перенести БД между серверами
 
-include::new-admin-console@platform:admin:partial$mancons.adoc[]
+include::6.1@platform:admin:partial$mancons.adoc[]
 
 Перенос базы данных между серверами {dv} может потребоваться, чтобы подключить БД к другому серверу {dv}. Для переноса БД между серверами требуется опция лицензии _{dv} Concurrent Servers_, которая позволяет работать с одной БД нескольким серверам {dv}.
 
@@ -17,7 +17,7 @@ include::new-admin-console@platform:admin:partial$mancons.adoc[]
 ====
 
 .Перед переносом необходимо определить, является ли БД единственной на сервере {dv}, с которого она перемещается:
-* Если база данных не является единственной на сервере {dv}, xref:dev@mgmtconsole:servers:db-detach.adoc[отключите] БД от сервера {dv}.
+* Если база данных не является единственной на сервере {dv}, xref:6.2@mgmtconsole:servers:db-detach.adoc[отключите] БД от сервера {dv}.
 * Если база данных является единственной на сервере {dv}, непосредственное отключение базы данных невозможно.
 
 .Выполните следующие действия, чтобы подготовить БД к переносу:
@@ -53,6 +53,6 @@ include::platform:admin:partial$excerpts.adoc[tags=sat-move]
 +
 * Подробнее про сателлитные БД см. в разделе:
 +
-** "xref:dev@mgmtconsole:servers:db-satellite.adoc[]" для {of-mc}.
-** "xref:new-admin-console@platform:console:db-satellite.adoc[]" для программы {cns}.
+** "xref:6.2@mgmtconsole:servers:db-satellite.adoc[]" для {of-mc}.
+** "xref:6.1@platform:console:db-satellite.adoc[]" для программы {cns}.
 ====

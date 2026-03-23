@@ -1,10 +1,10 @@
-:page-aliases: new-admin-console@install-linux:ROOT:appendix/account-protection.adoc
+:page-aliases: dv6@install-linux:ROOT:appendix/account-protection.adoc
 
 = Защита системной учётной записи
 
 Системная учётная запись -- учётная запись пользователя, от имени которого сервис ({wc}, СУБП и пр.) должен подключаться к серверу {dv} при выполнении служебных операций.
 
-include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
+include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 
 При необходимости можно защитить шифрованием пароли системной учётной записи и учётной записи для работы с LDAP. Имена учётных записей шифровать не требуется. В данном разделе приведено руководство по шифрованию.
 
@@ -167,8 +167,8 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
 +
 .. Вместо редактирования `appsettings.json` {mc} позволяет изменить нужные параметры через пользовательский интерфейс, настройка переменных среды не потребуется:
 +
-* Укажите данные системной УЗ и штамп сертификата шифрования в разделе "xref:dev@mgmtconsole:servers:appserver-general.adoc[]".
-* Укажите данные УЗ для работы с LDAP для модуля {pl} и/или {wc} в соответствующих разделах xref:dev@mgmtconsole:servers:appserver-access.adoc#catalogs[для модуля "{pl}"] и/или xref:dev@mgmtconsole:servers:webclient-connection.adoc#catalogs[для модуля "{wc}"].
+* Укажите данные системной УЗ и штамп сертификата шифрования в разделе "xref:6.2@mgmtconsole:servers:appserver-general.adoc[]".
+* Укажите данные УЗ для работы с LDAP для модуля {pl} и/или {wc} в соответствующих разделах xref:6.2@mgmtconsole:servers:appserver-access.adoc#catalogs[для модуля "{pl}"] и/или xref:6.2@mgmtconsole:servers:webclient-connection.adoc#catalogs[для модуля "{wc}"].
 +
 . <<earlier,Если этого не было сделано ранее>>, установите сертификат шифрования в хранилище сертификатов текущего пользователя в ОС Windows и в каталог `~/.dotnet/corefx/cryptography/x509stores/my` в ОС Linux.
 +
@@ -191,7 +191,7 @@ NOTE: Сертификат нужно добавлять в домашнюю п�
 +
 . Перейдите в оснастку сертификатов `certmgr.msc`.
 . Добавьте сертификат в личное хранилище пользователя.
-. Отпечаток сертификата укажите в параметре _Штамп сертификата шифрования паролей_ для модулей "xref:dev@mgmtconsole:servers:workflow-connection.adoc#cert-stamp[{wf}]" и "xref:dev@mgmtconsole:servers:appserver-general.adoc#cert-stamp[{pl}]".
+. Отпечаток сертификата укажите в параметре _Штамп сертификата шифрования паролей_ для модулей "xref:6.2@mgmtconsole:servers:workflow-connection.adoc#cert-stamp[{wf}]" и "xref:6.2@mgmtconsole:servers:appserver-general.adoc#cert-stamp[{pl}]".
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]

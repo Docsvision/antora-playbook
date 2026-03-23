@@ -12,11 +12,11 @@
 
 include::partial$mancons.adoc[]
 
-include::new-admin-console@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 
 .См. также:
-* Настройка для {of-mc} описана в разделе "xref:dev@mgmtconsole:admin:ldaps-authentication.adoc[]".
-* Настройка из конфигурационного файла для {wc}а описана в разделе "xref:new-admin-console@webclient:admin:no-active-dir.adoc[]".
+* Настройка для {of-mc} описана в разделе "xref:6.2@mgmtconsole:admin:ldaps-authentication.adoc[]".
+* Настройка из конфигурационного файла для {wc}а описана в разделе "xref:6.1@webclient:admin:no-active-dir.adoc[]".
 
 // [#ldaps]
 // == Коннектор к LDAPS
@@ -93,13 +93,13 @@ include::partial$excerpts.adoc[tags=ald-format]
 === Настройка из {of-mc}
 
 .Чтобы настроить авторизацию через коннектор к ALD Pro:
-include::dev@mgmtconsole:servers:appserver-auth-extensions.adoc[tags=setup]
+include::6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[tags=setup]
 +
 * Настройки -- строка настроек коннектора ALD Pro в неотформатированном виде. Подробнее см. <<ald-settings,Строка настроек ALD Pro>> ниже.
 * Тип -- строка с именем типа, реализующего коннектор. Параметр `TypeName` в конфигурационном файле коннектора.
 +
 . Коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать настройки в таблицах для тенантов не требуется, такие настройки не будут применены.
-. В {of-mc} укажите УЗ из каталога ALD Pro на странице "xref:dev@mgmtconsole:servers:webclient-connection.adoc[]".
+. В {of-mc} укажите УЗ из каталога ALD Pro на странице "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[]".
 
 [#from-config]
 === Настройка из конфигурационного файла
@@ -131,7 +131,7 @@ include::dev@mgmtconsole:servers:appserver-auth-extensions.adoc[tags=setup]
 [#ald-settings]
 === Строка настроек ALD Pro
 
-include::new-admin-console@engineer::partial$excerpts.adoc[tags=pretty]
+include::dv6@engineer::partial$excerpts.adoc[tags=pretty]
 
 [source,xml]
 ----
