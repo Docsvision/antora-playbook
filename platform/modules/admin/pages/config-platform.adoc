@@ -9,7 +9,7 @@
 include::new-admin-console@platform:admin:partial$mancons.adoc[]
 
 [#mancons]
-== Конфигурация Сервера приложений в {of-mc}
+== Конфигурация Сервера приложений из {of-mc}
 
 // tag::settings[]
 
@@ -49,15 +49,19 @@ include::new-admin-console@platform:admin:partial$mancons.adoc[]
 --
 +
 . Перезапустите службу Сервера {dv}, чтобы применить настройки конфигурационного файла.
+// tag::console-only[]
+ifdef::61[]
 . Запустите {mc}, на странице menu:Серверы[Имя-сервера > Сервер приложений] перейдите к группе настроек "xref:dev@mgmtconsole:servers:appserver-access.adoc#catalogs[Настройка доменных каталогов]" и убедитесь, что настройки присутствуют.
 +
-* Если настройки доменных каталогов xref:new-admin-console@platform:admin:config-domains.adoc[указывались в параметре "Catalogs"] они автоматически переносятся в Консоль управления , дополнительных действий не требуется.
+* Если настройки доменных каталогов xref:new-admin-console@platform:admin:config-domains.adoc[указывались в параметре "Catalogs"] они автоматически переносятся в Консоль управления, дополнительных действий не требуется.
 * Если настройки указаны иным способом, их необходимо указать в Консоли вручную согласно инструкции на странице
 "xref:dev@mgmtconsole:servers:appserver-catalogs.adoc[Домен]" в {of-mc}.
 +
 . Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки сервера приложений.
 +
 include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
+endif::61[]
+// end::console-only[]
 +
 . На странице "xref:dev@mgmtconsole:servers:appserver-access.adoc[Управление доступом]" и укажите параметры:
 +
@@ -69,18 +73,20 @@ include::new-admin-console@install-linux:ROOT:partial$excerpts.adoc[tags=system-
 * Имя компьютера в текущем домене Active Directory -- используется для получения списка доступных членов домена при настройке дискреционной безопасности.
 +
 . Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки.
-// tag::console-only[]
-. Откройте {mc} на странице menu:Серверы[Имя-сервера > Сервер приложений], перейдите в раздел "xref:dev@mgmtconsole:servers:appserver-access.adoc#catalogs[Настройка доменных каталогов]" и укажите параметры:
-+
-* Тип аутентификации в LDAP
-* Логин -- имя учётной записи, под которой процесс обращается к ActiveDirectory
-* Пароль -- пароль учётной записи пользователя для аутентификации LDAP
-* Домен по умолчанию -- полное имя домена для входа по умолчанию в формате FQDN
+
+. Откройте {mc} на странице menu:Серверы[Имя-сервера > Сервер приложений], перейдите в раздел "xref:dev@mgmtconsole:servers:appserver-access.adoc#catalogs[Настройка доменных каталогов]" и заполните параметры в таблице согласно указаниям на странице
+ifndef::old-console[]
+"xref:./config-domains.adoc[]".
+endif::old-console[]
+ifdef::old-console[]
+"xref:dev@mgmtconsole:servers:appserver-catalogs.adoc[]".
+endif::old-console[]
 +
 .Настройка доменных каталогов в {of-mc}
 image::dev@mgmtconsole:servers:appserver-catalogs.png[Настройка доменных каталогов в {of-mc}]
 +
 . Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки доменных каталогов и перезапустите службу Сервера {dv}.
+// tag::console-only[]
 . [[groups]]При необходимости в разделе "xref:dev@mgmtconsole:servers:appserver-access.adoc#groups[Группы пользователей]" настройте системные группы пользователей, добавив в каждую группу слева необходимых пользователей из списка справа.
 +
 .Настройка групп пользователей в {of-mc}
@@ -182,7 +188,7 @@ include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP, `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
 <.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
-<.> `Catalogs` -- настройки доменных каталогов сервера {dv}, см. "xref:config-domains.adoc[]".
+<.> `Catalogs` -- настройки доменных каталогов сервера {dv}, см. "xref:./config-domains.adoc[]".
 <.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]". +
 Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
