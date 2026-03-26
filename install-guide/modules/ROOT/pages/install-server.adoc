@@ -2,7 +2,6 @@
 // tag::no-alias[]
 :of-what: {of-sett-serv}
 :is-service:
-:look-where: xref:./dvconsole.adoc#conn-string[Строка подключения к базе данных для хранения настроек]
 
 = Установка {of-mc}, Платформы и сопутствующих модулей
 
@@ -73,7 +72,12 @@ image::6.1@platform:admin:install-server-confirm.png[Мастер установ
 ****
 include::6.1@workerservice:admin:install.adoc[tags=components]
 ****
+. В конфигурационном файле Службы {ws} по адресу `C:\Program Files\Docsvision\WorkerService\` укажите необходимые параметры:
 +
-. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\WorkerService\Configuration.json`:
+include::new-admin-console@workerservice:admin:install.adoc[tags=config]
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=string]
+
+include::new-admin-console@settings-service:admin:install.adoc[tags=cert]
 
 // end::no-alias[]
