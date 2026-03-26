@@ -99,8 +99,11 @@ ifdef::manacons[]
 +
 include::dev@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
 endif::[]
-ifndef::manacons[]
-. Предоставьте учётным записям сервисов {dv} необходимые права, если это не было выполнено ранее. Подробнее см. в разделе "xref:./requirements-accounts.adoc[]".
+ifdef::linux[]
+. Предоставьте учётным записям сервисов {dv} необходимые права, если это не было выполнено ранее. Подробнее см. в разделе "xref:new-admin-console@install-linux:ROOT:requirements-accounts.adoc[]" руководства по установке системы.
+endif::[]
+ifdef::windows[]
+. Предоставьте учётным записям сервисов {dv} необходимые права, если это не было выполнено ранее. Подробнее см. в разделе "xref:new-admin-console@installguide:ROOT:requirements-accounts.adoc[]" руководства по установке системы.
 endif::[]
 
 // tag::db-create-errors[]
