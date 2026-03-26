@@ -2,8 +2,6 @@
 
 // tag::no-alias[]
 
-:look-where: <<conn-string,Строка подключения к базе данных для хранения настроек>>
-
 = Установка {of-mc}, Платформы и сопутствующих модулей
 
 [#sett-serv]
@@ -20,6 +18,8 @@ include::6.1@settings-service:admin:install.adoc[tags=cluster]
 
 include::6.1@settings-service:admin:install.adoc[tags=string]
 
+include::new-admin-console@settings-service:admin:install.adoc[tags=cert]
+
 [#man-cons]
 == Установка {of-mc} на сервер под управлением Linux
 
@@ -31,16 +31,11 @@ include::6.2@mgmtconsole:admin:config.adoc[tags=initial-configuration]
 
 include::6.1@workerservice:admin:install.adoc[tags=linux]
 
-. {blank}
-+
-[subs="specialchars,attributes,quotes"]
-В конфигурационном файле Службы {ws} по адресу {ws-log-dir} укажите необходимые параметры:
+. В конфигурационном файле Службы {ws} по адресу `/usr/lib/docsvision/workerservice/` укажите необходимые параметры:
 +
 include::6.1@workerservice:admin:install.adoc[tags=config]
 
 // антиприлипака
-
-include::6.2@mgmtconsole:admin:install.adoc[tags=cert]
 
 [#linux-pl]
 == Установка модуля {pl} на Linux
