@@ -94,9 +94,17 @@ image::6.2@mgmtconsole:servers:db-create-solutions.png[Выбор модулей
 // $ sudo systemctl restart dvappserver
 +
 . Дождитесь завершения загрузки решений.
-. Чтобы назначить созданную БД основной, следуйте xref:6.2@mgmtconsole:servers:db-default.adoc[инструкции].
+ifdef::manacons[]
+. Чтобы назначить созданную БД основной, следуйте xref:dev@mgmtconsole:servers:db-default.adoc[инструкции].
 +
 include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=maindb]
+endif::[]
+ifdef::linux[]
+. Предоставьте учётным записям сервисов {dv} необходимые права, если это не было выполнено ранее. Подробнее см. в разделе "xref:dv6@install-linux:ROOT:requirements-accounts.adoc[]" руководства по установке системы.
+endif::[]
+ifdef::windows[]
+. Предоставьте учётным записям сервисов {dv} необходимые права, если это не было выполнено ранее. Подробнее см. в разделе "xref:dv6@installguide:ROOT:requirements-accounts.adoc[]" руководства по установке системы.
+endif::[]
 
 // tag::db-create-errors[]
 [#errors]
