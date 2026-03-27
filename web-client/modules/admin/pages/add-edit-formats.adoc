@@ -8,7 +8,7 @@ NOTE: С добавленными форматами функционально�
 
 // tag::webconfig[]
 .Если нужно предоставить возможность открывать файлы определённых форматов в карточки, выполните следующую настройку:
-. Откройте конфигурационный файл {wc}а по адресу `{webconfig-lin}`.
+. Откройте конфигурационный файл {wc}а по адресу `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows.
 . В параметре {cnf-sgrps-wc} > "AcceptableFileExtensionsForEditing"] измените список доступных файлов. Новые расширения файлов нужно добавлять через символ `|` в виде регулярного выражения:
 +
 [source,json]
@@ -27,5 +27,9 @@ NOTE: С добавленными форматами функционально�
 ----
 <.> Перечислите поддерживаемые форматы в значении параметра.
 +
+include::partial$excerpts.adoc[tags=slash]
++
 . Если параметр `"AcceptableFileExtensionsForEditing"` не указан, по умолчанию на редактирование открываются только файлы форматов `.doc`, `.docx`, `.docm`, `.xls`, `.xlsx`, `.xlsm`, `.ppt`, `.pptx`, `.odt` и `.ods`.
 // end::webconfig[]
++
+include::partial$excerpts.adoc[tags=ifabsent]
