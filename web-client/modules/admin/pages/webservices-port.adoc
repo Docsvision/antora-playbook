@@ -1,12 +1,18 @@
+:webtoolbuilder: yes
+:do-what: способы изменения порта подключения к программе DVWebTool
+:link: xref:webservices-install.adoc[Работа с программой WebToolBuilder]
+
 = Изменить порт подключения к DVWebTool
 
 include::partial$excerpts.adoc[tags=dvweb-win]
 
+include::partial$mancons.adoc[]
+
 // tag::webconfig[]
 Веб-браузер пользователя подключается к программе _DVWebTool_ по адресу `\http://localhost:5413`. Администратор может изменить стандартный порт подключения.
 
-.Чтобы изменить стандартный порт подключения:
-. Откройте конфигурационный файл `{webconfig-lin}`.
+.Чтобы изменить стандартный порт подключения из конфигурационного файла:
+. Откройте конфигурационный файл `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows.
 . Перейдите к секции {cnf-sgrps} > System].
 . Измените значение параметра *_WebServicesPort_*, указав новый номер порта подключения к программе _DVWebTool_.
 +
@@ -17,30 +23,17 @@ include::partial$excerpts.adoc[tags=dvweb-win]
     "WebClient": {
       "SettingGroups": {
         "System": {
-          "WebServicesPort": 5413
+          "WebServicesPort": 5413 <.>
         }
       }
     }
   }
 }
 ----
+<.> Порт подключения к утилите DVWebTool, значение в диапазоне от `1` до `65535`.
 // end::webconfig[]
 +
 include::partial$excerpts.adoc[tags=ifabsent]
 +
 . Сохраните изменения конфигурационного файла.
-// +
-// . Укажите аналогичный номер порта в настройках программы _DVWebTool_ на всех компьютерах пользователей.
-// +
-// . Откройте конфигурационный файл `/%DVWebToolInstallDir%/Docsvision.DVWebTool.exe.config`.
-// . Перейдите к секции menu:configuration[appSettings].
-// . В значении параметра *_Port_* укажите новый номер прослушиваемого порта.
-// +
-// [source]
-// ----
-// <appSettings>
-//   <add key="Port" value="5413" />
-// </appSettings>
-// ----
-// . Сохраните изменения конфигурационного файла и перезапустите программу _DVWebTool_.
 . Перезапустите программу _DVWebTool_.

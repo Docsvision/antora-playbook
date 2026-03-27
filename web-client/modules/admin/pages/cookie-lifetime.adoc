@@ -1,6 +1,9 @@
+:do-what: варианты управления временем жизни пользовательских cookie
+:link: webclient-site.adoc#pechenkies[Пользовательские cookie]
+
 = Управление временем жизни пользовательских cookie
 
-Управлять временем действия пользовательской сессии можно с помощью настроек в конфигурационном файле {wc}а:
+include::partial$mancons.adoc[]
 
 // tag::webconfig[]
 [source,json]
@@ -21,6 +24,8 @@
 <.> `AuthCookieLifetime` -- период действия пользовательской сессии.
 <.> `MobileAuthCookieLifetime` -- период действия пользовательской сессии на мобильных устройствах.
 // end::webconfig[]
+
+include::partial$excerpts.adoc[tags=ifabsent]
 
 .Принцип действия настроек:
 . Настройка `AuthCookieAutoRenewalInterval` позволяет продлевать срок уже выданных cookie, если пользователь зашёл до того, как они истекли.
