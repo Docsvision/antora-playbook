@@ -56,13 +56,13 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 ifdef::61[]
 . Запустите {mc}, на странице menu:Серверы[Имя-сервера > Сервер приложений] перейдите к группе настроек "Настройка доменных каталогов" и убедитесь, что настройки присутствуют.
 +
-* Если настройки доменных каталогов xref:new-admin-console@platform:admin:config-domains.adoc[указывались в параметре "Catalogs"] они автоматически переносятся в Консоль управления, дополнительных действий не требуется.
+* Если настройки доменных каталогов xref:6.1@platform:admin:config-domains.adoc[указывались в параметре "Catalogs"] они автоматически переносятся в Консоль управления, дополнительных действий не требуется.
 * Если настройки указаны иным способом, их необходимо указать в Консоли вручную согласно инструкции на странице
 "xref:./config-domains.adoc[Домен]" в {of-mc}.
 endif::61[]
 // end::console-only[]
 +
-. На странице "xref:dev@mgmtconsole:servers:appserver-access.adoc[Управление доступом]" и укажите параметры:
+. На странице "xref:6.2@mgmtconsole:servers:appserver-access.adoc[Управление доступом]" и укажите параметры:
 +
 * Логин системной учётной записи.
 +
@@ -101,7 +101,7 @@ include::6.2@mgmtconsole:servers:appserver-access.adoc[tags=basic-groups]
 +
 . Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки сервера приложений.
 +
-include::new-admin-console@system:ROOT:partial$restart-sss.adoc[]
+include::dv6@system:ROOT:partial$restart-sss.adoc[]
 // end::console-only[]
 +
 . В разделе "xref:6.2@mgmtconsole:servers:appserver-general.adoc[Общие настройки сервера приложений]" укажите параметры:
@@ -192,7 +192,7 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 <.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory.
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP, `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
-<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:new-admin-console@engineer:ROOT:appendix/account-protection.adoc[]".
+<.> `Password` -- пароль учётной записи пользователя для аутентификации LDAP в открытом или в зашифрованном виде, см. подробнее о шифровании в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 <.> `Catalogs` -- настройки доменных каталогов сервера {dv}, см. "xref:./config-domains.adoc[]".
 <.> `DataProtectCertificateThumbprint` -- отпечаток закрытого ключа шифрования SHA1. +
 Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". +
