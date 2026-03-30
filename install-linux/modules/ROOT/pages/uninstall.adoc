@@ -1,3 +1,5 @@
+:os1: Astra Linux
+
 = Удаление системы
 
 == Удаление на Linux
@@ -15,7 +17,11 @@
 
 {os2}::
 +
- $ sudo dnf remove package docsvision-webclient
+ $ sudo dnf remove docsvision-webclient
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-webclient
 ====
 +
 .. Удаление Сервиса настроек:
@@ -28,20 +34,130 @@
 
 {os2}::
 +
- $ sudo dnf remove package docsvision-settingsservice
+ $ sudo dnf remove docsvision-settingsservice
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-settingsservice
 ====
 +
-.. Удаление Сервиса внешнего API {of-mc}:
+.. Удаление {of-mc}:
 +
 [tabs]
 ====
 {os1}::
 +
- $ sudo apt-get purge docsvision-externalapi
+ $ sudo apt-get purge docsvision-managementconsole
 
 {os2}::
 +
- $ sudo dnf remove package docsvision-externalapi
+ $ sudo dnf remove docsvision-managementconsole
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-managementconsole
+====
++
+.. Удаление расширения Службы {ws} для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-ext-ws-mc
+
+{os2}::
++
+ $ sudo dnf remove docsvision-ext-ws-mc
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-ext-ws-mc
+====
++
+.. Удаление расширения Сервера приложений для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-ext-platform-mc
+
+{os2}::
++
+ $ sudo dnf remove docsvision-ext-platform-mc
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-platform-mc
+====
++
+.. Удаление расширения {wc}а для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-ext-webc-mc
+
+{os2}::
++
+ $ sudo dnf remove docsvision-ext-webc-mc
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-ext-webc-mc
+====
++
+.. Удаление расширения модуля {wf} для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-ext-workflow-mc
+
+{os2}::
++
+ $ sudo dnf remove docsvision-ext-workflow-mc
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-ext-workflow-mc
+====
++
+.. Удаление расширения модуля {fs} для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-ext-fileservice-mc
+
+{os2}::
++
+ $ sudo dnf remove docsvision-ext-fileservice-mc
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-ext-fileservice-mc
+====
++
+.. Удаление модуля {fs} для {of-mc}
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-fileservice
+
+{os2}::
++
+ $ sudo dnf remove docsvision-fileservice
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-fileservice
 ====
 +
 .. Удаление Службы {ws}:
@@ -55,9 +171,13 @@
 {os2}::
 +
  $ sudo dnf remove docsvision-workerservice
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-workerservice
 ====
 +
-.. Удаление Платформы:
+.. Удаление модуля {pl}:
 +
 [tabs]
 ====
@@ -67,7 +187,28 @@
 
 {os2}::
 +
- $ sudo dnf remove package docsvision-platform
+ $ sudo dnf remove docsvision-platform
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-platform
+====
++
+.. Удаление модуля {wf}:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-workflow
+
+{os2}::
++
+ $ sudo dnf remove docsvision-workflow
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-workflow
 ====
 +
 .. Удаление ненужных пакетов:

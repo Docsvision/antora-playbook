@@ -1,0 +1,17 @@
+. Если планируется работать с программой {dv} Server Console ({cns}), откройте конфигурационный файл программы по адресу `C:\Program Files (x86)\Docsvision\ResourceKit\ServerConsole.appsettings.json`:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "ServiceId": "00000000-0000-0000-0000-000000000000", <.>
+    "SettingsService": {
+      "ConnectionString": "http://dv-server:5200/api", <.>
+      "ApiKey": "anything" <.>
+    }
+  }
+}
+----
+<.> `ServiceId` -- уникальный идентификатор Сервера приложений, с базами которого будет работать серверная консоль (находится в конфигурационном файле Сервера приложений).
+<.> `ConnectionString` -- адрес {of-sett-serv}.
+<.> `ApiKey` -- API-ключ {of-sett-serv}, один для всех модулей.

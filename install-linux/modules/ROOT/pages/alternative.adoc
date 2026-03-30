@@ -21,8 +21,7 @@
 ----
 # sudo nano /etc/apt/mirror.list
 
-deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
-deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/linux/6.1/astra 1.7_x86-64 main
 ----
 +
 .Пример содержимого файла:
@@ -44,10 +43,9 @@ set _tilde 0
 #
 ############# end config ##############
 
-deb-all https://packages.docsvision.com/astra 1.7_x86-64 6.1
-deb-amd64 https://packages.docsvision.com/astra 1.7_x86-64 6.1
+deb-amd64 https://packages.docsvision.com/linux/6.1/astra 1.7_x86-64 main
 
-clean https://packages.docsvision.com/astra
+clean https://packages.docsvision.com/
 ----
 +
 <.> Копии репозиториев будут загружаться в каталог `/var/spool/apt-mirror`. Чтобы изменить каталог для сохранения копий репозиториев, раскомментируйте параметр `set base_path` и укажите нужный каталог.
@@ -66,7 +64,7 @@ clean https://packages.docsvision.com/astra
 +
 [source,bash]
 ----
-echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/gpg https://{}/gpg \;' | sudo -u apt-mirror tee -a /var/spool/apt-mirror/var/postmirror.sh > /dev/null
+echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/docsvision.asc https://{}/docsvision.asc \;' | sudo -u apt-mirror tee -a /var/spool/apt-mirror/var/postmirror.sh > /dev/null
 ----
 +
 . После настройки и создания каталога, создание зеркала репозиториев можно выполнить командой:
@@ -86,7 +84,7 @@ echo 'find packages.docsvision.com -mindepth 1 -maxdepth 1 -exec curl -fsSLo {}/
 ----
 +
 . После завершения установки локальные копии всех репозиториев, указанных в `mirror.list`, будут сохранены в подкаталогах `mirror_path`, а имя подкаталога будет соответствовать имени репозитория. Так копия интернет-репозитория {dv}, приведенная в примере выше, будет сохранена как `mirror/packages.docsvision.com`. +
-С учетом принятого по умолчанию имени каталога для сохранения полный путь к каталогу репозитория будет `/var/spool/apt-mirror/mirror/packages.docsvision.com`, и именно этот каталог нужно будет подключать как репозиторий пакетов к другим системам.
+С учётом принятого по умолчанию имени каталога для сохранения полный путь к каталогу репозитория будет `/var/spool/apt-mirror/mirror/packages.docsvision.com`, и именно этот каталог нужно будет подключать как репозиторий пакетов к другим системам.
 +
 . Полученный каталог можно передать на другую машину, указав в `sources.list` локальный путь до него:
 +

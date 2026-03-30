@@ -1,35 +1,39 @@
 = Необходимое программное обеспечение
 
 [#server]
-== Требования серверной части модуля
+== Требования серверной части системы
 
 // tag::oslist[]
 [#linux]
 .Система {dv} работает под управлением Linux:
 * Astra Linux Special Edition {l-1}.
 * Astra Linux Special Edition {l-1-1}.
-* {l-2}.
+* {l-2} x86_64.
+* {l-2} aarch64 (Байкал-М).
 * {l-3}.
+* {l-4}.
+* {l-5}.
 // end::oslist[]
 
+.Если планируется работать в {wincl}е, потребуется машина Windows:
 // tag::winlist[]
-.Машина с Windows необходима для работы с Консолью настройки {dv} и {wincl}ом:
 * Microsoft Windows Server {serv-1}.
 * Microsoft Windows Server {serv-2}.
 * Microsoft Windows Server {serv-3}.
 * Microsoft Windows Server {serv-4}.
+* Microsoft Windows Server {serv-5}.
 * Microsoft Windows {win-req-1}.
 * Microsoft Windows {win-req-2}.
 // end::winlist[]
 
 .Обязательное программное обеспечение:
-. https://www.cryptopro.ru/products/csp[КриптоПро CSP {csp-v}]
-для работы xref:engineer:ROOT:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
+* https://www.cryptopro.ru/products/csp[КриптоПро CSP {csp-v}] для работы простой подписи и xref:engineer:ROOT:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
+* https://cryptopro.ru/products/net/downloads[КриптоПро.Net] для работы xref:engineer:ROOT:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
 . {asp-bundle} -- автоматически будет получено из репозитория Microsoft.
 . {net-r} (сервер Windows).
 
 [#client]
-== Требования клиентской части модуля
+== Требования клиентской части системы
 
 .Операционная система:
 * ОС Windows, Linux или любая другая.
