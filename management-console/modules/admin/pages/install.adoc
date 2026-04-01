@@ -20,7 +20,7 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 [#external-api]
 == Установка сервиса внешнего API
 
-Установка Сервиса внешнего API не требуется в версиях {of-mc} {mc-cu-mc}.
+В {of-mc} версии {mc-cu-mc} установка Сервиса внешнего API не требуется.
 
 [#linux-console]
 == Установка {of-mc} на сервер под управлением Linux
@@ -44,8 +44,6 @@ include::6.1@platform:admin:partial$install.adoc[]
 ----
 sudo systemctl start dvconsole
 ----
-+
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 --
 
 [#windows-console]
@@ -71,7 +69,7 @@ image::install-components.png[Выбор устанавливаемых комп
 ****
 // tag::components[]
 Служба Windows::
-Основные компоненты {of-mc}, предоставляющие базовую функциональность, обязательна для установки на сервер {mc}.
+Основные компоненты {of-mc}, предоставляющие базовую функциональность.
 // end::components[]
 
 Кнопка Сброс::
@@ -87,7 +85,6 @@ image::install-components.png[Выбор устанавливаемых комп
 image::install-confirm.png[Мастер установки серверной части модуля {bo}]
 +
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#settings-service]
 == Установка {of-sett-serv} на сервер {of-mc}
@@ -218,5 +215,3 @@ endif::upgrade[]
 :wt: managementconsole
 include::6.1@platform:admin:partial$delete.adoc[]
 --
-
-Созданные группы и службы будут удалены, _{sett-serv}_ станет недоступен.
