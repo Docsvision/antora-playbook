@@ -1,3 +1,6 @@
+:no-config:
+:of-what: {of-sm}
+
 = Установка и настройка
 
 include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
@@ -11,10 +14,11 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 :of-what: {of-sm}
 :wt: solutionmanager*
 
-include::6.1@platform:admin:partial$install.adoc[]
+include::platform:admin:partial$install.adoc[tag]
 +
-Основные настройки, которые нужно сделать:
+. Укажите настройки {of-sm} в конфигурационном файле модуля по адресу `/usr/lib/docsvision/solutionmanager/appsettings.json` для Linux и `C:\Program Files\Docsvision\SolutionManager\appsettings.json` для Windows.
 +
+.Основные настройки, которые нужно сделать:
 [source,json]
 ----
 {
@@ -85,7 +89,7 @@ include::6.1@settings-service:admin:install.adoc[tags=string]
 == Установка {of-sm} на сервер под управлением Windows
 
 .Чтобы установить {sm} на сервер под управлением Windows:
-. Откройте пакет установки `{dv} Settings service.msi`.
+. Откройте пакет установки `{dv} Solution manager.msi`.
 +
 .Установка {of-sm}
 image::install-hello.png[Установка {of-sm}]
@@ -209,6 +213,8 @@ include::6.1@platform:admin:config-domains.adoc[tags=chalto]
 * Использовать x86 -- установите флаг, чтобы переключить обработку заданий на версию {of-ws} с указанной разрядностью. Когда флаг снят, используется разрядность x64.
 +
 WARNING: Несмотря на то, что настройки "Службы {ws}" с типом конфигурации "{sm}" создаются в {of-mc}, на страницах очереди входящих и исходящих сообщений не будут отображаться сообщения от {of-sm}. Очередь задач {of-sm} хранится в БД {of-sm} и Служба {ws} работает с ней напрямую.
+
+include::6.1@settings-service:admin:install.adoc[tags=cert]
 
 [#uninstall]
 == Удаление модуля и расширения для Службы {ws}
