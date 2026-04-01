@@ -18,7 +18,26 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 .Чтобы установить модуль {wf} на сервер под управлением Linux:
 include::6.1@platform:admin:partial$install.adoc[tags=install]
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
+--
+
+[#mc-ext-linux]
+== Установка расширения на сервер под управлением Linux
+
+:what-mod: {wf}
+:wt: workflow
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+:of: Расширения модуля {wf} для {of-mc}
+:wt: ext-workflow-mc
+:wfs-new: dvworkflow
+. [[wf-ext]]Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
++
+. Перезапустите службу службы модуля {wf} и {of-mc}.
 --
 
 [#windows-server]
@@ -69,32 +88,14 @@ image::install-confirm.png[Начало установки серверной ч
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
-[#mc-ext]
-== Установка расширения модуля {wf} для {of-mc}
+[#mc-ext-windows]
+== Установка расширения на сервер под управлением Windows
 
 :what-mod: {wf}
 :wt: workflow
 include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
-[#mc-ext-linux]
-== Установка расширения на сервер под управлением Linux
-
---
-:of: Расширения модуля {wf} для {of-mc}
-:wt: ext-workflow-mc
-:wfs-new: dvworkflow
-. [[webc-ext]]Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
-+
-. Перезапустите службу *{wfs-new}*.
---
-
-[#mc-ext-windows]
-== Установка расширения на сервер под управлением Windows
 
 .Чтобы установить расширение Службы {ws} для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор Службы {ws} `{dv} Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
@@ -138,8 +139,9 @@ image::install-server-components.png[Выбор компонентов Служ�
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {wf} были одинаковые.
 <.> Опционально. Настройка доступа к Storage Server по HTTPS, см. подробнее xref:6.1@platform:console:https-access.adoc[] в документации модуля {pl}.
-
-. Дальнейшие настройки {of} выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
++
+. Перезапустите службу службы модуля {wf} и {of-mc}.
+. Дальнейшие настройки модуля выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:6.2@mgmtconsole:servers:workflow-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
 +
 * Сервер приложений -- имя сервера из списка.
 * Почта по умолчанию -- почтовым соединением по умолчанию для данного экземпляра модуля {wf}.
@@ -153,12 +155,11 @@ image::install-server-components.png[Выбор компонентов Служ�
 * Обрабатываемые базы данных -- настройка для выбора БД доли обрабатываемых процессов и почтового соединения, с которыми будет работать данный сервер СУБП.
 * API-ключ для подключения к Workflow -- ключ для подключения серверного расширения {wf}, должен быть одинаковым в конфигурации модулей {pl} и {wf}.
 +
-. Запустите службу модуля {wf}.
+. Примените настройки модуля {wf} в {of-mc} и перезапустите службу Workflow.
 
-[#config-file]
-=== Установка и конфигурация без {of-mc}
+[#old-method]
+== (Старый метод) Установка и конфигурация без {of-mc}
 
-:of: модуля
 :wt: workflow
 include::6.1@platform:admin:partial$install.adoc[]
 +
@@ -208,7 +209,7 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 --
 [subs="specialchars,attributes,quotes"]
-Запустите службу {wfs-new}.
+Перезапустите службу модуля {wf}.
 --
 
 [#client]
