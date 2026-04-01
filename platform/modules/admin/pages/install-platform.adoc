@@ -8,10 +8,15 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 
 include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 
-[#linux-pl]
-== Установка модуля {pl} на сервер под управлением Linux
+[#linserver]
+== Установка на сервер под управлением Linux
 
-При установке модулей {dv} в ОС Linux необходимо установить модуль описанными далее командами. Установка серверных компонентов на ОС Windows потребуется только для работы с программой {cns}, клиентские компоненты в ОС Windows потребуются только в случае установки {wincl}а.
+Начиная с версии {pl-cu-mc}, установка серверных компонентов в ОС Windows не потребуется, если не планируется работать в {wincl}е.
+
+[#linux-pl]
+=== Установка модуля {pl} на сервер под управлением Linux
+
+При установке модулей {dv} в ОС Linux необходимо установить модуль описанными далее командами.
 
 . Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
 +
@@ -46,8 +51,61 @@ sudo ./activation online ВАШ-КЛЮЧ
 . Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
 . Запустите службу Сервера {dv}.
 
+[#fs-linux]
+=== Установка файлового сервиса на сервер под управлением Linux
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Запустите службу Файлового сервиса:
++
+ $ sudo systemctl start dvfileservice
+
+[#pl-ext-linux]
+=== Установка расширения Сервера приложений на сервер под управлением Linux
+
+include::6.1@platform:admin:partial$excerpts.adoc[tags=extensions]
+
+:what-mod: {pl}
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение сервера приложений для {of-mc}" на сервер под управлением Linux:
+:of: Расширения сервера приложений для {of-mc}
+:wt: ext-platform-mc
+:sss-new: dvappserver
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службы Сервера {dv} и {of-mc}.
+--
+
+[#fs-ext-linux]
+=== Установка расширения {of-fs} на сервер под управлением Linux
+
+:what-mod: {fs}
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение {of-fs} для {of-mc}":
+:of: Расширения {of-fs} для {of-mc}
+:wt: ext-fileservice-mc
+:fss-new: dvfileservice
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службы {of-fs} и {of-mc}.
+--
+
+include::new-admin-console@platform:console:search-full-text.adoc[tags=install-ft-lin]
+
+[#winserver]
+== Установка на сервер под управлением Windows
+
 [#windows-pl]
-== Установка модуля {pl} на сервер под управлением Windows
+=== Установка модуля {pl} на сервер под управлением Windows
 
 Включить журналирование процесса установки можно с помощью флага `*/l*v*`:
 
@@ -106,77 +164,114 @@ include::6.1@platform:admin:partial$install-components.adoc[]
 image::6.1@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
 
-[#pl-ext]
-== Установка расширения сервера приложений для {of-mc}
+[#fs-windows]
+=== Установка {of-fs} на сервер под управлением Windows
 
-Расширение сервера приложений для {of-mc} необходимо для работы связанных с модулем ресурсов локализации, обработчиков и (при наличии) специализированных редакторов для настройки Сервера приложений из {of-mc}.
-
-[#pl-ext-linux]
-=== Установка на сервер под управлением Linux
-
-:what-mod: {pl}
-include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
---
-.Чтобы установить "Расширение сервера приложений для {of-mc}" на сервер под управлением Linux:
-:of: Расширения сервера приложений для {of-mc}
-:wt: ext-platform-mc
-:sss-new: dvappserver
-. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
+.Чтобы установить {of-fs} на сервер под управлением Windows:
+. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "{fs}":
 +
-. Перезапустите службу *{sss-new}*.
---
-
-[#pl-ext-windows]
-=== Установка на сервер под управлением Windows
-
-.Чтобы установить расширение сервера приложений для {of-mc} на сервер под управлением Windows:
-. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {pl}:
-+
-.Выбор компонентов модуля {pl} для установки
-image::install-server-mc-pl-extension.png[Выбор компонентов модуля {pl} для установки]
-
-[#file-service]
-== Установка файлового сервиса на сервер под управлением Linux
-
-. Установите пакеты модуля:
-+
-:wt: fileservice
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-. Запустите службу Файлового сервиса:
-+
- $ sudo systemctl start dvfileservice
-
-[#fs-ext]
-=== Установка расширения {of-fs} для {of-mc}
-
-Расширение {of-fs} для {of-mc} необходимо для работы связанных с модулем ресурсов локализации, обработчиков и (при наличии) специализированных редакторов для настройки {of-fs} из {of-mc}.
-
-[#fs-ext-linux]
-=== Установка на сервер под управлением Linux
-
-:what-mod: {fs}
-include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
---
-.Чтобы установить "Расширение {of-fs} для {of-mc}":
-:of: Расширения {of-fs} для {of-mc}
-:wt: ext-fileservice-mc
-:fss-new: dvfileservice
-. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-. Перезапустите службу *{fss-new}*.
---
+.Выбор {of-fs} для установки
+image::install-server-components-fs.png[Выбор {of-fs} для установки]
 
 [#fs-ext-windows]
-=== Установка на сервер под управлением Windows
+=== Установка расширения {of-fs} на сервер под управлением Windows
+
+include::6.1@platform:admin:partial$excerpts.adoc[tags=extensions]
 
 .Чтобы установить расширение {of-fs} для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {fs}:
 +
 .Выбор компонентов модуля {fs} для установки
 image::install-server-mc-fs-extension.png[Выбор компонентов модуля {fs} для установки]
++
+. Перезапустите службы {of-fs} и {of-mc}.
+
+[#pl-ext-windows]
+=== Установка расширения Сервера приложений на сервер под управлением Windows
+
+.Чтобы установить расширение сервера приложений для {of-mc} на сервер под управлением Windows:
+. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {pl}:
++
+.Выбор компонентов модуля {pl} для установки
+image::install-server-mc-pl-extension.png[Выбор компонентов модуля {pl} для установки]
++
+. Перезапустите службы Сервера {dv} и {of-mc}.
+
+include::new-admin-console@platform:console:search-full-text.adoc[tags=install-ft-win]
+
+[#old-method]
+== (Старый метод) Установка без {of-mc}
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
++
+. Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
++
+[tabs]
+====
+{os1}::
++
+[source]
+----
+sudo apt-get install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+
+{os2}::
++
+[source]
+----
+sudo dnf install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+====
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc#old-method[Конфигурация Сервера приложений]".
+. Установите пакеты {of-fs}:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. В конфигурационном файле укажите строку подключения к БД:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Database-connection-string" <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
++
+. Запустите службу {of-fs}:
++
+ $ sudo systemctl start dvfileservice
++
+. Установите пакеты {of-fs}:
++
+:wt: fulltextservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. На машине Windows запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям мастера установки. На шаге выбора компонентов укажите все компоненты.
+. Откройте конфигурационный файл {config-ft} в любом текстовом редакторе и выполните необходимые настройки сервиса:
++
+include::console:search-full-text.adoc[tags=appsettings]
++
+. Запустите службу Сервиса полнотекстового индексирования.
++
+include::install-linux:ROOT:partial$restart-and-db.adoc[]

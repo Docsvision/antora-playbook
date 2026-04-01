@@ -123,8 +123,44 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки сервера приложений и перезапустите службу {sss-new}.
 // end::settings[]
 
-[#config-file]
-== Конфигурация модуля {pl} без {of-mc}
+[#fs-config]
+== Конфигурация {of-fs} в конфигурационном файле
+
+. Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "Server": {
+      "Databases": {
+        "alias": "Database-connection-string" <.>
+      }
+    }
+  },
+  "NLog": { <.>
+  },
+  "AllowedHosts": "*",
+  "Kestrel": { <.>
+  }
+}
+----
+<.> `alias` -- <<connection-string,строка подключения>> к БД.
+<.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
+<.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
+
+[#fs-mancons]
+== Конфигурация {of-fs} в консоли
+
+include::dv6@install-linux:ROOT:partial$dvfileservice.adoc[tags=console]
+
+[#ft-config]
+== Конфигурация сервиса полнотекстового индексирования
+
+include::new-admin-console@platform:console:search-full-text.adoc[tags=config-ft]
+
+[#old-method]
+== (Старый метод) Конфигурация модуля {pl} без {of-mc}
 
 [subs="specialchars,attributes,quotes"]
 Конфигурационный файл может быть изменён в любом текстовом редакторе, файл располагается по адресу {config}.
@@ -159,7 +195,10 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
     ], <.>
     "DocsVision Security Administrators": [
       "domain\\account"
-    ]
+    ],
+    "Docsvision Management Console Administrators": [
+      "domain\\account"
+    ],
   },
   "Ldap": { <.>
     "AuthType": "Basic", <.>
@@ -189,6 +228,13 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 <.> `ServiceId` -- уникальный идентификатор данного экземпляра модуля, генерируется и записывается автоматически.
 <.> `ApiKey` -- используется для подключения серверного расширения {wf}. API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {pl} были одинаковые. Если модуль {wf} ещё не установлен, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые.
 <.> `Groups` -- эквивалент системных групп. Указанные в группах пользователи будут обладать соответствующими правами. Обратите внимание, что в группах массив строк, а не строка.
++
+.Пользователь, выполняющий установку и настройку системы должен входить в группы:
+* *{dv-admins-serv}* и *{dv-sec-admins-serv}* -- администраторы системы и администраторы безопасности системы.
+* *{dv-web-admin-cns-admins-serv}*. Пользователи, входящие в эту группу, имеют право просматривать карточки сообщений в {of-mc}.
++
+* Также через конфигурационный файл выполняется настройка клиентской части, см. подробнее xref:6.1@platform:console:config-client.adoc[].
++
 <.> `Ldap` -- имя и пароль учётной записи, под которой процесс обращается к ActiveDirectory.
 <.> `AuthType` -- тип аутентификации: `Basic` -- аутентификация через LDAP, `Oauth` -- аутентификация через ЕСИА или Azure.
 <.> `UserName` -- логин пользователя модуля для аутентификации LDAP.
@@ -203,58 +249,3 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 <.> `Logging` -- настройка упразднена, используйте параметр `LogFile` или настройте журналирование с помощью xref:6.1@platform:console:logs.adoc#file[NLog].
-
-****
-* После установки на сервере необходимо настроить группы безопасности. Группы безопасности настраиваются в секции `"Groups"` конфигурационного файла `appsettings.json`.
-+
-.Пользователь, выполняющий установку и настройку системы должен входить в группы *{dv-admins-serv}* и *{dv-sec-admins-serv}* -- администраторы системы и администраторы безопасности системы.
-// * *{dv-web-admin-cns-admins-serv}*. Пользователи, входящие в эту группу, имеют право работать с xref:6.1@mgmtconsole:admin:install-server.adoc[Консолью управления {dv}].
-+
-* Также через конфигурационный файл выполняется настройка клиентской части, см. подробнее xref:6.1@platform:console:config-client.adoc[].
-****
-
-[#fs-mancons]
-== Конфигурация {of-fs} в консоли
-
-include::dv6@install-linux:ROOT:partial$dvfileservice.adoc[tags=console]
-
-[#fs-config]
-== Конфигурация {of-fs} в конфигурационном файле
-
-. Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
-+
-[source,json]
-----
-{
-  "DocsVision": {
-    "Server": {
-      "Databases": {
-        "alias": "Database-connection-string" <.>
-      }
-    }
-  },
-  "NLog": { <.>
-  },
-  "AllowedHosts": "*",
-  "Kestrel": { <.>
-  }
-}
-----
-<.> `alias` -- <<connection-string,строка подключения>> к БД.
-<.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
-<.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
-
-// tag::c-string[]
-[#connection-string]
-=== Строка подключения к БД
-
-.{mssql}
-****
-`Initial Catalog=Имя-БД-{dv}; Data Source=Полное-имя-сервера-СУБД; User ID=Имя-пользователя; Password=Пароль-пользователя; TrustServerCertificate=True;`
-****
-
-.{pgsql}/{pgl}
-****
-`Server=Адрес-сервера-базы-данных; Port=SQL-порт; Database=Название-БД; User ID=Имя-пользователя; Password=Пароль-пользователя;`
-****
-// end::c-string[]
