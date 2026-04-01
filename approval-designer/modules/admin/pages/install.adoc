@@ -6,6 +6,8 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 == Установка модуля на сервер под управлением Linux
 
 include::6.1@platform:admin:partial$install-61.adoc[]
++
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
 // tag::windows[]
 [#windows-server]
@@ -52,7 +54,7 @@ image::install-server-confirm.png[Мастер установки серверн
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 // end::windows[]
 
 [#client]
@@ -67,11 +69,9 @@ include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 
 [#client-auto]
-=== Автоматическая установка клиентской части модуля _{ad}_
+=== Автоматическая установка клиентской части модуля {ad}
 
 Запустите {wincl}. При подключении к серверу {dv}, на котором установлена серверная часть модуля _{ad}_, клиентская часть модуля будет установлена автоматически.
-
-Если клиентская часть модуля _{pl}_ установлена с областью установки"для всех пользователей", *{wincl} нужно запустить с правами локального администратора*.
 
 [#client-manual]
 === Установка клиентской части модуля {ad} из установочного пакета
