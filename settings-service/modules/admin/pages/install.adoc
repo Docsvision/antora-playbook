@@ -17,13 +17,6 @@ include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
 :no-config: yes
 include::6.1@platform:admin:partial$install.adoc[]
 // end::linux[]
-+
-. Запустите службу сервиса:
-+
-[source,bash]
-----
-sudo systemctl start dvsettings
-----
 
 // tag::windows[]
 [#windows-server]
@@ -70,16 +63,15 @@ include::6.1@platform:admin:partial$install-components.adoc[]
 image::install-server-confirm.png[Мастер установки серверной части модуля {bo}]
 +
 . На следующем шаге нажмите кнопку *Готово*, чтобы закрыть мастер установки.
-+
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 
 // end::windows[]
 
 [#config-file]
 == Настройка {of-sett-serv}
 
-В конфигурационном файле по адресу `/usr/lib/docsvision/platform/appsettings.json` в Linux и `C:\Program Files\Docsvision\SettingsService\appsettings.json` в Windows необходимо выполнить минимальные настройки: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
-
+. В конфигурационном файле по адресу `/usr/lib/docsvision/settingsservice/appsettings.json` в Linux и `C:\Program Files\Docsvision\SettingsService\appsettings.json` в Windows необходимо выполнить минимальные настройки: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
++
+--
 // tag::config[]
 .Фрагмент конфигурационного файла:
 [source,json]
@@ -105,6 +97,14 @@ include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
 ifndef::installation[]
 При наличии БД {of-sett-serv} предыдущей версии, можно использовать её.
 endif::[]
+--
++
+. Запустите службу сервиса:
++
+[source,bash]
+----
+sudo systemctl start dvsettings
+----
 // <.> Настройки, записываемые в {sett-serv}, рекомендуется защищать при помощи шифрования. Для этой цели используется самоподписанный сертификат, поддерживающий шифрование/дешифрование данных. Создайте сертификат локально, например, по инструкции в разделе "xref:dv6@engineer:ROOT:appendix/account-protection.adoc#cr-cert[Защита системной учётной записи]", и установите его в хранилище сертификатов "Доверенные корневые центры сертификации" на уровне "Локальный компьютер": на всех серверах, данные которых шифруются, сервере {of-mc} и серверах Сервиса настроек.
 // <.> Путь к публичной части сертификата для шифрования параметров в Сервисе настроек.
 // end::config[]
