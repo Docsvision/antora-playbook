@@ -1,10 +1,5 @@
 = Действия после {chego} сервера
 
-[#webc]
-== Настройка {wc}а
-
-После обновления БД выполните настройку программ {pu} и {kvr}.
-
 include::6.1@webclient:admin:install-server.adoc[tags=kvr-pu]
 
 [#disable-cache]
@@ -14,45 +9,7 @@ include::6.1@webclient:admin:install-server.adoc[tags=kvr-pu]
 
 include::6.1@platform:console:section-server.adoc[tags=cl-cache]
 
-[#install-ft]
-== Установка сервиса полнотекстового индексирования
-
-. Установите сервис полнотекстового индексирования.
-. Все настройки сервиса полнотекстового индексирования хранятся в конфигурационном файле `appsettings.json`. Откройте конфигурационный файл в любом текстовом редакторе.
-. Выполните необходимые настройки сервиса:
-+
---
-[source,json]
-----
-{
-  "DocsVision": {
-    "Platform": {
-      "Server": {
-        "LogFile": "/var/log/docsvision/fulltextservice.log", <.>
-        "Databases": {
-          "alias": "CONNECTION-STRING" <.>
-        }
-      }
-    }
-  },
-  "DataProtectCertificateThumbprint": "thumbprint", <.>
-  "SystemUserAccount": "account@domain.com", <.>
-  "SystemUserPassword": "password" <.>
-}
-----
-<.> Путь к файлу журнала полнотекстового поиска.
-<.> Строка подключения к индексируемой БД.
-<.> Отпечаток закрытого ключа шифрования SHA1. +
-Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]". +
-Если шифровать пароль системной учётной записи не планируется, параметр можно удалить.
-<.> Имя системной учётной записи {dv}.
-+
-include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
-+
-<.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
---
-+
-. Запустите сервис полнотекстового поиска.
+include::6.1@platform:console:search-full-text.adoc[tags=install-ft-lin]
 
 [#group]
 == Настройка группы пользователей на контроллере домена
