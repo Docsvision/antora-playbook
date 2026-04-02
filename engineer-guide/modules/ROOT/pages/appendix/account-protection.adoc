@@ -1,4 +1,5 @@
-:page-aliases: dv6@install-linux:ROOT:appendix/account-protection.adoc
+// tag::linux[]
+// tag::windows[]
 
 = Защита системной учётной записи
 
@@ -11,6 +12,8 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 Для шифрования паролей используется утилита _EncryptionTool_, которая может быть установлена на Linux или Windows.
 
 NOTE: Для шифрования паролей потребуется использовать сертификаты RSA.
+
+// end::windows[]
 
 [#lin]
 == Установка и запуск утилиты на Linux
@@ -42,23 +45,6 @@ NOTE: Для шифрования паролей потребуется испо
 [source,bash]
 ----
 /usr/lib/docsvision/tools/encryption/encryption [command] [options]
-----
-
-[#win]
-== Установка и запуск утилиты на Windows
-
-В ОС Windows утилита будет установлена вместе с серверной частью модуля _{pl}_ и после установки располагается по пути `C:\Program Files\Docsvision\Platform\Tools`.
-
-.Запуск из директории установки:
-[source,shell]
-----
-encryption.exe [command] [options]
-----
-
-.Запуск из любой директории:
-[source,shell]
-----
-"C:\Program Files\Docsvision\Platform\Tools\encryption.exe" [command] [options]
 ----
 
 // tag::certificate[]
@@ -175,6 +161,27 @@ openssl pkcs12 -in docsvision.pfx -nodes | openssl x509 -noout -fingerprint
 NOTE: Сертификат нужно добавлять в домашнюю папку пользователя, от имени которого запускается сервис. Например, для пользователя `root` (от имени пользователя ROOT службы запускаются по умолчанию) полный путь будет: `/root/.dotnet/corefx/cryptography/x509stores/my`. +
 Если папка отсутствует, создайте её самостоятельно.
 
+// end::linux[]
+
+// tag::windows[]
+
+[#win]
+== Установка и запуск утилиты на Windows
+
+В ОС Windows утилита будет установлена вместе с серверной частью модуля _{pl}_ и после установки располагается по пути `C:\Program Files\Docsvision\Platform\Tools`.
+
+.Запуск из директории установки:
+[source,shell]
+----
+encryption.exe [command] [options]
+----
+
+.Запуск из любой директории:
+[source,shell]
+----
+"C:\Program Files\Docsvision\Platform\Tools\encryption.exe" [command] [options]
+----
+
 [#encrypt-windows]
 == Особенности настройки шифрования в Windows
 
@@ -196,3 +203,5 @@ NOTE: Сертификат нужно добавлять в домашнюю п�
 +
 [subs="specialchars,attributes,quotes"]
 Примените настройки и перезапустите службы {wfs-new}, {sss-new}.
+
+// end::windows[]
