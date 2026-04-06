@@ -256,18 +256,18 @@ image::install-confirm-client.png[Начало установки клиентс
 [#account]
 == Создание учётной записи для сервиса Workflow
 
-// tag::requirements-account[]
+// tag::post-config[]
 [subs="specialchars,attributes,quotes"]
 Администратор должен создать учётную запись для СУБП, службы {wfs-new}.
 
 .Создайте доменную учётную запись, и настройте её права:
-. На сервере Linux включите учётную запись в локальные группы _{dv-power-users-serv}_.
+. На сервере {dv} включите учётную запись в локальные группы _{dv-power-users-serv}_.
 +
 .Группы настраиваются:
-* В конфигурационном файле модуля {pl}, подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 * В {of-mc}, разделе "Управление доступом", подробнее см. в документации модуля {mc}, раздел "xref:6.2@mgmtconsole:servers:appserver-access.adoc[]".
+* в конфигурационном файле Сервера приложений (модуля {pl}), подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 +
-. На компьютере с серверной частью модуля:
+. На компьютере с серверными компонентами модуля:
 +
 * Включите учётную запись в локальную группу *Users*.
 // * https://social.technet.microsoft.com/Forums/ie/en-US/a6fcbe72-6f75-4bd2-bb96-440e2c8913c2/how-do-i-configure-a-user-account-to-have-8216logon-as-a-service8217-permissions?forum=winserverGP[Предоставьте] право _Log on as service_ в локальной политике безопасности.
@@ -278,7 +278,7 @@ image::install-confirm-client.png[Начало установки клиентс
 . Предоставьте созданной учётной записи *полные* права по дискреционной модели безопасности на все папки и справочники системы {dv}.
 . Для работы с карточками приложения _{dm}_, включите учётную запись в группу *{dv-sys-wf-dir}* в Справочнике сотрудников.
 . Назначьте учётной записи персональную лицензию в {dv} (см. документацию модуля "xref:6.1@platform:console:manage-licenses.adoc#personalLicense[{pl}]".
-// end::requirements-account[]
+// end::post-config[]
 
 [#uninstall]
 == Удаление модуля
