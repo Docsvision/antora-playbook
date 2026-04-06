@@ -1,6 +1,7 @@
 :do-what: варианты конфигурации модуля
 :with-unique: yes
 :with-config: no
+:config-pl: `/usr/lib/docsvision/platform/appsettings.json` для Linux и `C:\Program Files\Docsvision\Platform\appsettings.json` для Windows
 
 // tag::settings[]
 = Конфигурация Сервера приложений
@@ -15,6 +16,11 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 
 [subs="specialchars,attributes,quotes"]
 Чтобы настраивать Сервер приложений при помощи {of-mc}, необходимо убедиться, что конфигурационном файле {config} указаны минимальные настройки.
+
+[WARNING]
+====
+include::new-admin-console@platform:admin:partial$update.adoc[tags=priority]
+====
 
 . Откройте конфигурационный файл в любом текстовом редакторе (потребуются права суперпользователя/администратора) и убедитесь в корректности следующих параметров: menu:ServiceId[], menu:SettingsService[ConnectionString], menu:Kestrel[].
 +
@@ -168,7 +174,7 @@ include::new-admin-console@platform:console:search-full-text.adoc[tags=config-ft
 == (Старый метод) Конфигурация модуля {pl} без {of-mc}
 
 [subs="specialchars,attributes,quotes"]
-Конфигурационный файл может быть изменён в любом текстовом редакторе, файл располагается по адресу {config}.
+Конфигурационный файл может быть изменён в любом текстовом редакторе, файл располагается по адресу {config-pl}.
 
 .Фрагмент конфигурационного файла `appsettings.json`:
 [source,json]
