@@ -2,7 +2,7 @@
 
 // tag::no-alias[]
 
-= Установка {of-mc}, Платформы и сопутствующих модулей
+= Установка {of-mc} и {of-sett-serv}
 
 [#sett-serv]
 == Установка {of-sett-serv} на сервер под управлением Linux
@@ -11,8 +11,6 @@ include::6.1@settings-service:admin:install.adoc[tags=linux]
 
 [subs="specialchars,attributes,quotes"]
 Выполните необходимые настройки в конфигурационном файле по адресу `/usr/lib/docsvision/settingsservice/appsettings.json`: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
-+
-include::6.1@settings-service:admin:install.adoc[tags=config]
 
 include::6.1@settings-service:admin:install.adoc[tags=cluster]
 
@@ -20,43 +18,13 @@ include::6.1@settings-service:admin:install.adoc[tags=string]
 
 include::6.1@settings-service:admin:install.adoc[tags=cert]
 
-[#man-cons]
-== Установка {of-mc} на сервер под управлением Linux
-
-include::6.2@mgmtconsole:admin:install.adoc[tags=separate]
-
 include::6.2@mgmtconsole:admin:install.adoc[tags=linux]
 
-include::6.2@mgmtconsole:admin:config.adoc[tags=initial-configuration]
+[#dvsettings-config]
+== Конфигурация {of-mc} и {of-sett-serv}
 
-include::6.1@workerservice:admin:install.adoc[tags=linux]
+include::6.1@settings-service:admin:install.adoc[tags=config]
 
-. В конфигурационном файле Службы {ws} по адресу `/usr/lib/docsvision/workerservice/` укажите необходимые параметры:
-+
-include::6.1@workerservice:admin:install.adoc[tags=config]
-
-// антиприлипака
-
-[#linux-pl]
-== Установка модуля {pl} на Linux
-
-После завершения xref:./pre-config-server.adoc[предварительной настройки сервера] установите серверные компоненты модуля, используя команды ниже.
-
-. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
-+
-:wt: platform
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
-+
-. Выполните конфигурацию модуля по инструкции в разделе "xref:./config-platform.adoc[]".
-
-[#file-service]
-== Установка файлового сервиса
-
-. Установите пакеты модуля:
-+
-:wt: fileservice
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
+include::dev@mgmtconsole:admin:config.adoc[tags=initial-configuration]
 
 // end::no-alias[]

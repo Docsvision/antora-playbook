@@ -5,6 +5,34 @@
 
 Данный раздел описывает установку базовых модулей для ОС Linux. Все описанные ниже команды необходимо выполнять после завершения xref:./install-server.adoc[установки] модуля {pl}.
 
+include::6.1@workerservice:admin:install.adoc[tags=linux]
+
+// антиприлипака
+
+[#linux-pl]
+== Установка модуля {pl} на Linux
+
+После завершения xref:./pre-config-server.adoc[предварительной настройки сервера] установите серверные компоненты модуля, используя команды ниже.
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:./config-platform.adoc[]".
+
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
+
+include::new-admin-console@platform:console:search-full-text.adoc[tags=install-ft-lin]
+
 [#webc]
 == Установка {wc}а
 
@@ -43,17 +71,5 @@
 include::6.2@mgmtconsole:admin:install.adoc[tags=extensions]
 
 include::6.2@mgmtconsole:admin:install.adoc[tags=extensions-linux]
-
-include::6.2@mgmtconsole:admin:install.adoc[tags=register-services]
-
-[#restart-services]
-== Перезапуск системных служб
-
-// tag::mc62[]
-. Перезапустите системные службы для модулей {dv}:
-+
- $ sudo systemctl restart dvappserver dvwebclient dvsettings dvconsole dvworkerservice dvworkflow dvfileservice
-
-// end::mc62[]
 
 // end::no-alias[]

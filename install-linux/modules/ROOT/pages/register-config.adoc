@@ -1,0 +1,22 @@
+:register-config:
+:config: `/usr/lib/docsvision/имя-модуля/appsettings.json`
+
+= Регистрация модулей системы и заполнение конфигурационных файлов
+
+. {blank}
++
+include::6.2@mgmtconsole:admin:install.adoc[tags=register-services]
++
+. Настройте конфигурацию Службы {ws} по адресу `/usr/lib/docsvision/workerservice/`, укажите необходимые параметры:
++
+include::6.1@workerservice:admin:install.adoc[tags=config]
+
+[#restart-services]
+== Перезапуск системных служб
+
+// tag::mc62[]
+. Перезапустите системные службы модулей {dv}:
++
+ $ sudo systemctl restart dvappserver dvwebclient dvsettings dvconsole dvworkerservice dvworkflow dvfileservice dvfulltextservice
+
+// end::mc62[]
