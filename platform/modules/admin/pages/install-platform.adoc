@@ -100,6 +100,7 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 --
 
 include::new-admin-console@platform:console:search-full-text.adoc[tags=install-ft-lin]
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
 
 [#winserver]
 == Установка на сервер под управлением Windows
@@ -200,6 +201,16 @@ image::install-server-mc-pl-extension.png[Выбор компонентов мо
 . Перезапустите службы Сервера {dv} и {of-mc}.
 
 include::new-admin-console@platform:console:search-full-text.adoc[tags=install-ft-win]
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
+
+[#config-ft]
+== Настройка сервиса полнотекстового индексирования
+
+include::console:search-full-text.adoc[tags=appsettings]
++
+. Запустите службу Сервиса полнотекстового индексирования.
++
+include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#old-method]
 == (Старый метод) Установка без {of-mc}
@@ -269,9 +280,4 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . На машине Windows запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям мастера установки. На шаге выбора компонентов укажите все компоненты.
 . Откройте конфигурационный файл {config-ft} в любом текстовом редакторе и выполните необходимые настройки сервиса:
-+
-include::console:search-full-text.adoc[tags=appsettings]
-+
-. Запустите службу Сервиса полнотекстового индексирования.
-+
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
