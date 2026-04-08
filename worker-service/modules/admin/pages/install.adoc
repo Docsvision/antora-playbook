@@ -20,6 +20,22 @@ include::6.1@platform:admin:partial$install.adoc[]
 +
 include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
+[#ws-ext-linux]
+=== Установка расширения Службы {ws} на сервер под управлением Linux
+
+include::new-admin-console@workerservice:ROOT:partial$excerpts.adoc[tags=ws-ext]
+
+:of: Расширение Службы {ws} для {of-mc}
+// :file: appsettings конфига нет?
+:wt: ext-ws-mc
+:wss-new: dvworkerservice
+:wacs-new: dvconsole
+.Чтобы установить расширение Службы {ws} для {of-mc}:
+. Выполните следующие команды, чтобы установить {of}:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службу *{wss-new}* и *{wacs-new}*.
+
 // tag::windows[]
 [#windows-server]
 == Установка Службы {ws} на сервер под управлением Windows
@@ -47,10 +63,10 @@ include::6.1@platform:admin:partial$install-components.adoc[]
 Обеспечивают взаимодействие с сервером {dv}, обязательны для установки на сервер {dv} и сервер Службы {ws}.
 
 Серверные компоненты:::
-Основные серверные компоненты Службы {ws}, обязательны для установки на сервер Службы {ws}.
+Основные серверные компоненты Службы {ws}, обязательны для установки на сервер {dv}.
 
 Служба Windows:::
-Основные компоненты Службы {ws}, предоставляющие базовую функциональность, обязательна для установки на сервер {dv}.
+Основные компоненты Службы {ws}, предоставляющие базовую функциональность, обязательна для установки на сервер Службы {ws}.
 
 Расширение {of-mc}::
 Расширение {of-mc} необходимо для настройки служб в Консоли и просмотра сообщений.
@@ -73,27 +89,10 @@ image::install-check.png[Продолжить установку или верн
 +
 include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
-[#ws-ext]
-== Установка расширения Службы {ws} для {of-mc}
-
-Расширение Службы {ws} для {of-mc} добавляет функциональность для работы со Службой {ws}: настройка службы в Консоли, просмотр сообщений, расширение обязательно для установки в версии {of-mc} {mc-cu-mc}.
-
-[#ws-ext-linux]
-=== Установка расширения Службы {ws} на сервер под управлением Linux
-
-:of: Расширение Службы {ws} для {of-mc}
-// :file: appsettings конфига нет?
-:wt: ext-ws-mc
-:wss-new: dvworkerservice
-:wacs-new: dvconsole
-.Чтобы установить расширение Службы {ws} для {of-mc}:
-. Выполните следующие команды, чтобы установить {of}:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-. Перезапустите службу *{wss-new}* и *{wacs-new}*.
-
 [#ws-ext-windows]
 === Установка расширения Службы {ws} на сервер под управлением Windows
+
+include::new-admin-console@workerservice:ROOT:partial$excerpts.adoc[tags=ws-ext]
 
 .Чтобы установить расширение Службы {ws} для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор Службы {ws} `{dv} Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
