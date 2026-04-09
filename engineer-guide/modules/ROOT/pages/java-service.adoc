@@ -45,7 +45,7 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 
 [source]
 ----
-docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice:1.0.85
+docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
  <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
@@ -84,7 +84,7 @@ docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 +
 [source,dockerfile]
 ----
-FROM packages.docsvision.com/cryptoservice:1.0.85
+FROM packages.docsvision.com/cryptoservice
 
 COPY ./java-csp-5.0.45559-A-b34f3a2f/ /app/BOOT-INF/lib/java-csp/ <.>
 ----
