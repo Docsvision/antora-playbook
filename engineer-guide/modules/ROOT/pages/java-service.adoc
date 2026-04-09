@@ -2,13 +2,11 @@
 :with-config: yes
 :do-what: варианта настройки криптосервиса
 :link: см. раздел "xref:6.2@mgmtconsole:servers:appserver-general.adoc[]"
+:csp-v: 5.0
 
 = Сервис обслуживания ЭП
 
 Сервис обслуживания ЭП -- компонент модуля {bo}. Сервис указывает в журнале подписей {wc}а актуальный статус подписи, тип и дату окончания срока действия сертификата. Сервис обслуживания ЭП может работать в сочетании с Криптосервисом -- Docker-контейнером, выполняющим функции обслуживания ЭП.
-
-Для использования криптосервиса ЭП требуется https://www.docker.com/[Docker] актуальной версии и опция лицензии {dv} _Сервис обслуживания электронной подписи_ (только для добавления архивного штампа времени). Криптосервис может быть получен из общего реестра образов Docker Hub -- `docsvision/cryptoservice` или реестра образов {dv} -- `packages.docsvision.com/cryptoservice`.
-// Для формирования подписи лицензия не требуется, см. требования GBL-3116, GBL-3074, GBL-3326 и GBL-2865
 
 [#functions]
 == Функциональные возможности сервиса обслуживания ЭП
@@ -22,26 +20,33 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 * Если срок действия сертификата не истёк, Криптосервис доступен и функционирует, в карточку добавляется новый архивный штамп времени и улучшает подпись до CAdES-A.
 * В {dv} версии 6.1 и выше Криптосервис является обязательным для проверки подписей CAdES-BES и CAdES-X Long Type 1 с нестандартными для .NET алгоритмами в сертификатах. Требуется, например, при использовании сертификатов КриптоПро.
 
-Из-за использования библиотеки tspcom.dll Криптосервис требует быть развернут минимум в 32-битном процессе Службы рабочих процессов.
-
-[#cryptoservice]
-== Установка и запуск Криптосервиса
-
-.Здесь описана работа Криптосервиса с {dv} следующих версий:
+.Ниже описана работа Криптосервиса с {dv} следующих версий:
 * Модуль "{pl}" версии 6.1 и выше + "{wc}" 18 (6.1) и выше.
 +
 Криптосервис является обязательным для проверки подписей с нестандартными для .NET алгоритмами в сертификатах. Требуется, например, при использовании сертификатов КриптоПро.
 +
-// * Модуль "{pl}" версии 5.5.5 + "{wc}" 17. +
 Криптосервис указывает в xref:webclient:user:docs-sign.adoc#advanced-info[журнале подписей {wc}а] актуальный статус подписи, тип и дату окончания срока действия сертификата, делает доступной расширенную информацию о подписи.
-// * Модуль "{pl}" версии 5.5.4 + "{wc}" 16 + "Служба рабочих процессов" версии 5.5.1. +
-// Функциональность аналогична предыдущему пункту.
+
+[#requirements]
+== Требования для использования Криптосервиса
+
+.Для использования криптосервиса ЭП потребуется:
+* https://www.docker.com/[Docker] актуальной версии. Криптосервис может быть получен из общего реестра образов Docker Hub -- `docsvision/cryptoservice` или реестра образов {dv} -- `packages.docsvision.com/cryptoservice`.
+* Опция лицензии {dv} _Сервис обслуживания электронной подписи_ (только для добавления архивного штампа времени).
+* Из-за использования библиотеки tspcom.dll Криптосервис требует быть развернут минимум в 32-битном процессе Службы рабочих процессов.
+* Лицензия на право использования ПО "КриптоПро JavaCSP" на одном сервере.
+* Лицензия на право использования СКЗИ "КриптоПро CSP" версии {csp-v} на сервере.
+// Для формирования подписи лицензия не требуется, см. требования GBL-3116, GBL-3074, GBL-3326 и GBL-2865
+
+[#cryptoservice]
+== Криптосервис в {dv} 6.1 Linux
 
 Криптосервис можно установить и запустить командой:
 
 [source]
 ----
-docker run -d -p 8100:8094 packages.docsvision.com/cryptoservice <.>
+docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice:1.0.85
+ <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 
@@ -69,7 +74,7 @@ docker run -d -p 8100:8094 packages.docsvision.com/cryptoservice <.>
 +
 [source,bash]
 ----
-docker run -d -p 8100:8094 -v ./Cert:/var/cryptoservice/cacerts packages.docsvision.com/cryptoservice <.>
+docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp -v ./Cert:/var/cryptoservice/cacerts packages.docsvision.com/cryptoservice <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 +
@@ -79,8 +84,9 @@ docker run -d -p 8100:8094 -v ./Cert:/var/cryptoservice/cacerts packages.docsvis
 +
 [source,dockerfile]
 ----
-FROM packages.docsvision.com/cryptoservice
-COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
+FROM packages.docsvision.com/cryptoservice:1.0.85
+
+COPY ./java-csp-5.0.45559-A-b34f3a2f/ /app/BOOT-INF/lib/java-csp/ <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`
 +
@@ -93,11 +99,11 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
  $ docker run -d -p 8100:8094 cryptoservice
 
 [#config]
-== Настройка Криптосервиса в {dv} 6.1
+=== Настройка Криптосервиса с Docker в {dv} 6.1 Linux
 
 include::partial$mancons.adoc[]
 
-. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux и `C:\Program Files\Docsvision\Platform\config` в Windows. Пример содержимого файла `.json` приведён ниже:
+. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux. Пример содержимого файла `.json` приведён ниже:
 +
 [source,json]
 ----
@@ -139,6 +145,53 @@ include:::partial$excerpts.adoc[tags=one-ws]
 
 <.> Узнать идентификатор контейнера.
 <.> Посмотреть журнал Криптосервиса.
+
+[#installer]
+== Криптосервис в {dv} 6.1 Windows
+
+Поддерживается как установка на сервер {dv}, так и машину без {dv}.
+
+. Запустите `Docsvision CryptoService.msi` и выполните последовательно шаги мастера установки:
++
+.Запуск мастера установки Криптосервиса
+image::dv5@engineer:ROOT:install-crypto-hello.png[Запуск мастера установки Криптосервиса]
++
+. Примите условия лицензионного соглашения для продолжения установки.
++
+.Условия лицензионного соглашения
+image::dv5@engineer:ROOT:install-crypto-license.png[Условия лицензионного соглашения]
++
+. Если требуется, измените каталог установки Криптосервиса.
++
+.Каталог установки компонентов Криптосервиса
+image::dv5@engineer:ROOT:install-crypto-path.png[Каталог установки компонентов Криптосервиса]
++
+. В следующем окне нажмите *Установить* и дождитесь завершения установки.
++
+.Завершение установки
+image::dv5@engineer:ROOT:install-crypto-finish.png[Завершение установки]
++
+. Дождитесь завершения установки, нажмите *Готово*. Запустите службу *Docsvision CryptoService*.
+. После установки Криптосервиса, его нужно сконфигурировать. Конфигурация после установки с помощью инсталлятора предполагает два альтернативных варианта:
+* Откройте файл `C:\Program Files (x86)\Docsvision\CryptoService\appsettings.json` и укажите следующие параметры:
++
+[source,json]
+----
+{
+  "CryptoService": {
+    "timestampservice.name": "http://cryptopro.ru/tsp/tsp.srf", <.>
+    "logging.file.name": "C:\\ProgramData\\Docsvision\\CryptoService\\CryptoService.log" <.>
+  },
+  "Java": [ <.>
+    "-Dloader.path=C:\\path\\to\\java-csp-5.0.45559-A-b34f3a2f"
+  ]
+}
+----
+<.> `timestampservice.name` -- адрес TSP сервиса.
+<.> `logging.file.name` -- путь к файлу журнала.
+<.> `Java` -- указание локации Java CSP.
++
+* Скопируйте Java CSP в `C:\Program Files (x86)\Docsvision\CryptoService\jar\BOOT-INF\lib`
 
 [#ocsp]
 == Улучшение подписи с сертификатом без адреса OCSP сервиса
