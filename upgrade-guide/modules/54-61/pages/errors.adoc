@@ -1,4 +1,4 @@
-= Возможные ошибки при обновлении
+= Возможные ошибки при обновлении БД
 
 == Ошибка уникальности операций
 
@@ -47,4 +47,49 @@ DELETE [dbo].[dvtable_{a5d22d25-435d-4f08-bf02-b4e9f778709f}] WHERE RowID = '{И
 +
 Похожие ошибки следует исправить аналогичным способом.
 +
-Если в изменённом Решении настроен доступ к элементам управления с использованием встроенных операций обновляемой версии _Управления документами_, необходимо повторно настроить доступ с использованием операций _Управления документами_ новой версии.
+Если в изменённом Решении настроен доступ к элементам управления с использованием встроенных операций обновляемой версии _{dm}_, необходимо повторно настроить доступ с использованием операций _{dm}_ новой версии.
+
+== Ошибка уникальности локализации состояний
+
+При обновлении БД {dv} может возникать ошибка со следующей информацией в журнале сервера:
+
+[source]
+----
+ DocsVision.Platform.StorageServer.StorageServerException: Internal exception, error code: GlobalUniquenessViolated.
+ ---> DocsVision.Platform.StorageServer.StorageServerException: Internal exception, error code: GlobalUniquenessViolated.
+ ---> DocsVision.Platform.StorageServer.StorageServerException: Internal exception, error code: GlobalUniquenessViolated.
+ ---> System.Data.SqlClient.SqlException (0x80131904): Violation of UNIQUE KEY constraint 'dvsys_refstates_statenames_uc_global_localeidparentrowid'. Cannot insert duplicate key in object 'dbo.dvtable_{da37ca71-a977-48e9-a4fd-a2b30479e824}'. The duplicate key value is (1049, 004d97cf-0df2-4611-b76e-f29d766cb74f, <NULL>).
+The statement has been terminated.
+----
+
+Данная ошибка указывает на наличие дубликата локализованного названия состояния приложения {dm}.
+
+.Чтобы исправить ошибку, выполните следующие действия:
+. Определите состояние с ошибкой. Идентификатор состояния указан в тексте ошибки в сообщении:
+
+ The duplicate key value is (1049, 004d97cf-0df2-4611-b76e-f29d766cb74f, <NULL>).
+
+1 и 2 значения в сообщении -- это номер локали (`1049`) и ID состояния(`004d97cf-0df2-4611-b76e-f29d766cb74f`) соответственно.
++
+. Выполните следующий скрипт в БД {dv}:
++
+[source,sql]
+----
+SELECT [RowID] FROM [dbo].[dvtable_{DA37CA71-A977-48E9-A4FD-A2B30479E824}] Operations WHERE [LocaleID] = 1049 and [ParentRowID] = '{ID состояния}'
+----
++
+. Выполните скрипт для удаления дубликата:
++
+[source,sql]
+----
+DELETE [dbo].[dvtable_{DA37CA71-A977-48E9-A4FD-A2B30479E824}] WHERE RowID = '{ИД из поля RowID}'
+----
++
+. Если уверены что у проблемного состояния имеются только стандартные локализованные названия, можно очистить сразу всё при помощи следующего скрипта:
++
+[source,sql]
+----
+DELETE [dbo].[dvtable_{DA37CA71-A977-48E9-A4FD-A2B30479E824}] WHERE ParentRowID = '{ИД состояния}'
+----
++
+. Похожие ошибки следует исправить аналогичным способом.
