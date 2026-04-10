@@ -17,10 +17,12 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 [subs="specialchars,attributes,quotes"]
 Чтобы настраивать Сервер приложений при помощи {of-mc}, необходимо убедиться, что конфигурационном файле {config} указаны минимальные настройки.
 
+ifndef::installation[]
 [WARNING]
 ====
 include::new-admin-console@platform:admin:partial$update.adoc[tags=priority]
 ====
+endif::installation[]
 
 . Откройте конфигурационный файл в любом текстовом редакторе (потребуются права суперпользователя/администратора) и убедитесь в корректности следующих параметров: menu:ServiceId[], menu:SettingsService[ConnectionString], menu:Kestrel[].
 +
@@ -122,10 +124,12 @@ include::dv6@system:ROOT:partial$restart-sss.adoc[]
 Если шифровать пароль системной учётной записи не планируется, параметр можно не указывать.
 +
 . При необходимости в {of-mc}, на странице menu:Серверы[Имя сервера > Сервер приложений > "xref:6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширенная аутентификация"]], настройте использование расширенной аутентификации.
+ifdef::old-console[]
 . {blank}
 +
 include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
+endif::old-console[]
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
