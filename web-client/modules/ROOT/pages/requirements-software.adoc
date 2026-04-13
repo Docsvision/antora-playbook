@@ -13,7 +13,9 @@ include::dv6@install-linux:ROOT:requirements-software.adoc[tags=winlist]
 // * IIS версий {iis}. Должны быть включены компоненты IISfootnote:[Устанавливаются с помощью menu:Диспетчера серверов[Роли и компоненты].]: ASP.NET, HTTP Redirect, Application Initialization.
 * {asp-bundle}.
 // tag::simple[]
-* xref:engineer:ROOT:java-service.adoc[Криптосервис обслуживания ЭП] необходим для проверки всех подписей и формирования CAdES-BES и CAdES-X Long Type 1.
+* Только для сервера под управлением Linux:
+** xref:engineer:ROOT:java-service.adoc[Криптосервис обслуживания ЭП] необходим для проверки всех подписей и формирования CAdES-BES и CAdES-X Long Type 1.
+* Если сервер {dv} работает под управлением Windows, проверка подписи работает без Криптосервиса и лицензии на него, но в таком случае xref:6.1@webclient:user:docs-sign.adoc#advanced-info[отображение штампа времени] будет недоступно.
 // end::simple[]
 
 [#r7office]
