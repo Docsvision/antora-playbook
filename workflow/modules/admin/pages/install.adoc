@@ -18,9 +18,32 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 .Чтобы установить модуль {wf} на сервер под управлением Linux:
 include::6.1@platform:admin:partial$install.adoc[tags=install]
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
+--
+
+[#mc-ext-linux]
+== Установка расширения на сервер под управлением Linux
+
+:what-mod: {wf}
+:wt: workflow
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+:of: Расширения модуля {wf} для {of-mc}
+:wt: ext-workflow-mc
+:wfs-new: dvworkflow
+:wacs-new: dvconsole
+. [[wf-ext]]Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
++
+. Перезапустите службу *{wfs-new}*.
 +
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+. Перезапустите службу *{wacs-new}*.
++
 --
 
 [#windows-server]
@@ -49,7 +72,7 @@ include::6.1@platform:admin:partial$install-components.adoc[]
 Обеспечивают взаимодействие с сервером {dv}, обязательны для установки на сервер {dv} и сервера модуля {wf}.
 
 Серверные компоненты:::
-Основные серверные компоненты Службы {ws}, обязательны для установки на сервер {dv}.
+Основные серверные компоненты модуля {wf}, обязательны для установки на сервер {dv}.
 
 Служба Windows:::
 Основные компоненты модуля {wf}, предоставляющие базовую функциональность, обязательно для установки на сервер модуля {wf}.
@@ -71,40 +94,22 @@ image::install-confirm.png[Начало установки серверной ч
 +
 . На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
-[#mc-ext]
-== Установка расширения модуля {wf} для {of-mc}
+[#mc-ext-windows]
+== Установка расширения на сервер под управлением Windows
 
 :what-mod: {wf}
 :wt: workflow
 include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-
-[#mc-ext-linux]
-== Установка расширения на сервер под управлением Linux
-
---
-:of: Расширения модуля {wf} для {of-mc}
-:wt: ext-workflow-mc
-:wfs-new: dvworkflow
-. [[webc-ext]]Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
-+
-. Перезапустите службу *{wfs-new}*.
-+
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
---
-
-[#mc-ext-windows]
-== Установка расширения на сервер под управлением Windows
 
 .Чтобы установить расширение Службы {ws} для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор Службы {ws} `{dv} Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
 +
 .Выбор компонентов Службы {ws} для установки
 image::install-server-components.png[Выбор компонентов Службы {ws} для установки]
++
+. Перезапустите службу *{wfs-win}* и *{wacs-win}*.
 
 [#config]
 == Настройка модуля {wf}
@@ -142,8 +147,9 @@ image::install-server-components.png[Выбор компонентов Служ�
 <.> `ConnectionString` -- полный адрес {of-sett-serv}.
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {wf} были одинаковые.
 <.> Опционально. Настройка доступа к Storage Server по HTTPS, см. подробнее xref:6.1@platform:console:https-access.adoc[] в документации модуля {pl}.
-
-. Дальнейшие настройки {of} выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:6.2@mgmtconsole:servers:webclient-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
++
+. Перезапустите службу службы модуля {wf} и {of-mc}.
+. Дальнейшие настройки модуля выполняются в {of-mc}. Откройте {mc} на странице menu:Серверы[Имя сервера > {wf} > "xref:6.2@mgmtconsole:servers:workflow-connection.adoc[Группа настроек "Подключения"]] и настройте следующие параметры:
 +
 * Сервер приложений -- имя сервера из списка.
 * Почта по умолчанию -- почтовым соединением по умолчанию для данного экземпляра модуля {wf}.
@@ -157,12 +163,11 @@ image::install-server-components.png[Выбор компонентов Служ�
 * Обрабатываемые базы данных -- настройка для выбора БД доли обрабатываемых процессов и почтового соединения, с которыми будет работать данный сервер СУБП.
 * API-ключ для подключения к Workflow -- ключ для подключения серверного расширения {wf}, должен быть одинаковым в конфигурации модулей {pl} и {wf}.
 +
-. Запустите службу модуля {wf}.
+. Примените настройки модуля {wf} в {of-mc} и перезапустите службу Workflow.
 
-[#config-file]
-=== Установка и конфигурация без {of-mc}
+[#old-method]
+== (Старый метод) Установка и конфигурация без {of-mc}
 
-:of: модуля
 :wt: workflow
 include::6.1@platform:admin:partial$install.adoc[]
 +
@@ -212,7 +217,7 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 --
 [subs="specialchars,attributes,quotes"]
-Запустите службу {wfs-new}.
+Перезапустите службу модуля {wf}.
 --
 
 [#client]
@@ -259,18 +264,18 @@ image::install-confirm-client.png[Начало установки клиентс
 [#account]
 == Создание учётной записи для сервиса Workflow
 
-// tag::requirements-account[]
+// tag::post-config[]
 [subs="specialchars,attributes,quotes"]
 Администратор должен создать учётную запись для СУБП, службы {wfs-new}.
 
 .Создайте доменную учётную запись, и настройте её права:
-. На сервере Linux включите учётную запись в локальные группы _{dv-power-users-serv}_.
+. На сервере {dv} включите учётную запись в локальные группы _{dv-power-users-serv}_.
 +
 .Группы настраиваются:
-* В конфигурационном файле модуля {pl}, подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 * В {of-mc}, разделе "Управление доступом", подробнее см. в документации модуля {mc}, раздел "xref:6.2@mgmtconsole:servers:appserver-access.adoc[]".
+* в конфигурационном файле Сервера приложений (модуля {pl}), подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
 +
-. На компьютере с серверной частью модуля:
+. На компьютере с серверными компонентами модуля:
 +
 * Включите учётную запись в локальную группу *Users*.
 // * https://social.technet.microsoft.com/Forums/ie/en-US/a6fcbe72-6f75-4bd2-bb96-440e2c8913c2/how-do-i-configure-a-user-account-to-have-8216logon-as-a-service8217-permissions?forum=winserverGP[Предоставьте] право _Log on as service_ в локальной политике безопасности.
@@ -281,7 +286,7 @@ image::install-confirm-client.png[Начало установки клиентс
 . Предоставьте созданной учётной записи *полные* права по дискреционной модели безопасности на все папки и справочники системы {dv}.
 . Для работы с карточками приложения _{dm}_, включите учётную запись в группу *{dv-sys-wf-dir}* в Справочнике сотрудников.
 . Назначьте учётной записи персональную лицензию в {dv} (см. документацию модуля "xref:6.1@platform:console:manage-licenses.adoc#personalLicense[{pl}]".
-// end::requirements-account[]
+// end::post-config[]
 
 [#uninstall]
 == Удаление модуля
