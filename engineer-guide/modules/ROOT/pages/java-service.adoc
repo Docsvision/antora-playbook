@@ -27,6 +27,8 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 +
 Криптосервис указывает в xref:webclient:user:docs-sign.adoc#advanced-info[журнале подписей {wc}а] актуальный статус подписи, тип и дату окончания срока действия сертификата, делает доступной расширенную информацию о подписи.
 
+include::RCU@backoffice:ROOT:requirements.adoc[tags=cryptojava]
+
 [#requirements]
 == Требования для использования Криптосервиса
 
@@ -41,18 +43,21 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 [#cryptoservice]
 == Криптосервис в {dv} 6.1 Linux
 
-Криптосервис в {dv} 6.1 Linux требуется для всех операций подписания, включая проверку подписей CAdES-BES и CAdES-X Long Type 1. Криптосервис может быть установлен и запущен командой:
+Криптосервис в {dv} 6.1 Linux требуется для всех операций подписания, включая проверку подписей CAdES-BES и CAdES-X Long Type 1.
 
+. Получите сборки КриптоПро Java CSP версии 5.0.45559 (поставляются вместе с КриптоПро CSP) и поместите их в локальный каталог хоста `./java-csp-5.0.45559-A-b34f3a2f`.
+. Смонтируйте папку со сборками Java CSP в каталог Docker-контейнера `/app/BOOT-INF/lib/java-csp` и запустите контейнер:
++
 [source]
 ----
 docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
  <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
-
-Настройки криптосервиса задаются в командной строке.
-
-При запуске контейнера необходимо связать порт хоста с портом контейнера, например, `-p 8100:8094`. В примере `8100` -- порт хоста, `8094` -- порт контейнера. Для работы функций проверки и формирования подписи сервер {dv} должен подключаться к контейнеру через порт хоста. Адрес Криптосервиса указывается в конфигурационном файле, <<config,см. подробности ниже>>.
++
+При запуске контейнера всё содержимое папки будет импортировано в хранилище.
++
+Настройки криптосервиса задаются в командной строке. При запуске контейнера необходимо связать порт хоста с портом контейнера, например, `-p 8100:8094`. В примере `8100` -- порт хоста, `8094` -- порт контейнера. Для работы функций проверки и формирования подписи сервер {dv} должен подключаться к контейнеру через порт хоста. Адрес Криптосервиса указывается в конфигурационном файле, <<config,см. подробности ниже>>.
 
 По умолчанию Криптосервис использует TSP-службу с адресом `http://cryptopro.ru/tsp/tsp.srf`. При необходимости адрес используемой TSP-службы можно переопределить с помощью переменной окружения `TSP_SERVICE_ADDRESS`. Ниже приведён пример переопределения адреса TSP-сервиса:
 
@@ -68,9 +73,7 @@ docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 При необходимости использования дополнительных сертификатов выполните одну из следующих настроек:
 
 * Укажите путь к папке сертификатов:
-. Необходимые сертификаты сохраните в отдельную папку на диске Docker-хоста.
-. Смонтируйте в каталог `/var/cryptoservice/cacerts` Docker-контейнера и запустите контейнер. +
-При запуске контейнера всё содержимое папки будет импортировано в хранилище.
+. Смонтируйте сертификаты и сборки КриптоПро Java CSP в соответствующие каталоги Docker-контейнера и запустите контейнер:
 +
 [source,bash]
 ----
@@ -78,17 +81,21 @@ docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 +
+При запуске контейнера всё содержимое папки будет импортировано в хранилище.
++
 * Заново соберите образ:
 +
-. Создайте Dockerfile:
+. Создайте Dockerfile. Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`:
 +
 [source,dockerfile]
 ----
 FROM packages.docsvision.com/cryptoservice
 
 COPY ./java-csp-5.0.45559-A-b34f3a2f/ /app/BOOT-INF/lib/java-csp/ <.>
+COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 ----
-<.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`
+<.> Смонтируйте сборки КриптоПро Java CSP.
+<.> Смонтируйте сертификаты.
 +
 . Соберите собственный образ:
 +
@@ -182,14 +189,14 @@ image::dv5@engineer:ROOT:install-crypto-finish.png[Завершение уста
     "timestampservice.name": "http://cryptopro.ru/tsp/tsp.srf", <.>
     "logging.file.name": "C:\\ProgramData\\Docsvision\\CryptoService\\CryptoService.log" <.>
   },
-  "Java": [ <.>
-    "-Dloader.path=C:\\path\\to\\java-csp-5.0.45559-A-b34f3a2f"
+  "Java": [
+    "-Dloader.path=C:\\Program Files (x86)\\Docsvision\\CryptoService\\jar\\BOOT-INF\\lib\\java-csp-5.0.45559-A-b34f3a2f" <.>
   ]
 }
 ----
 <.> `timestampservice.name` -- адрес TSP сервиса.
 <.> `logging.file.name` -- путь к файлу журнала.
-<.> `Java` -- указание локации Java CSP.
+<.> `Java` -- папка, содержащая сборки Java CSP.
 +
 * Скопируйте Java CSP в `C:\Program Files (x86)\Docsvision\CryptoService\jar\BOOT-INF\lib`
 
