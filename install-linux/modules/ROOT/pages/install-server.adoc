@@ -25,8 +25,16 @@ include::dev@mgmtconsole:admin:install.adoc[tags=linux]
 [#dvconsole-config]
 == Конфигурация {of-mc}
 
-WARNING: После сохранения изменений конфигурационного файла обязательно перезапустите службу {of-mc}!
-
 include::dev@mgmtconsole:admin:config.adoc[tags=initial-configuration]
+
+[WARNING]
+====
+После сохранения изменений конфигурационного файла обязательно перезапустите службу {of-mc} командой:
+
+[source,bash]
+----
+sudo systemctl start dvconsole
+----
+====
 
 // end::no-alias[]
