@@ -19,11 +19,18 @@ WARNING: Для работы с электронной подписью необ
 ====
 +
 * КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client] для работы с подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах].
-* Только для сервера под управлением Linux:
-** xref:engineer:ROOT:java-service.adoc[Криптосервис] необходим для проверки всех подписей и формирования CAdES-BES и CAdES-X Long Type 1. Для работы Криптосервиса потребуется лицензия на следующие компоненты КриптоПро:
-** Лицензия на право использования ПО "КриптоПро JavaCSP" на одном сервере.
-** Лицензия на право использования СКЗИ "КриптоПро CSP" версии {csp-v} на сервере.
-include::requirements-software.adoc[tags=ifwinstamp]
+* {blank}
++
+// tag::cryptojava[]
+Криптосервис на сервере {dv} и необходимые для его работы лицензии и компоненты:
++
+WARNING: Функциональные возможности криптосервиса, необходимые для работы компоненты и лицензии см. в руководстве по настройке системы, на странице "xref:dv6@engineer:ROOT:java-service.adoc[]".
++
+** Сервер под управлением Linux требует xref:engineer:ROOT:java-service.adoc[Криптосервис] для проверки и формирования CAdES-BES и CAdES-X Long Type 1.
+** {blank}
++
+include::RCU@webclient:ROOT:requirements-software.adoc[tags=ifwinstamp]
+// end::cryptojava[]
 
 [#non-qualifcated]
 == Использование неквалифицированных сертификатов
