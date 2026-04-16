@@ -28,7 +28,7 @@ objectInstance:::
 
 BaseCard card = objectContext.GetObject<BaseCard>(cardId); <.>
 
-if(objectContext.GetObjectLockInfo(card).Status = ObjectLockStatus.OwnerLocked) <.>
+if(objectContext.GetObjectLockInfo(card).Status == ObjectLockStatus.OwnerLocked) <.>
 {
  objectContext.UnlockObject(card); <.>
 }
