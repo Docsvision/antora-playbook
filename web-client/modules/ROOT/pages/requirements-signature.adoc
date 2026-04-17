@@ -19,6 +19,20 @@ WARNING: Для работы с электронной подписью необ
 ====
 +
 * КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client] для работы с облачной подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах].
+* {blank}
++
+// tag::cryptojava[]
+Криптосервис на сервере {dv} и необходимые для его работы лицензии и компоненты:
+ifndef::engineer[]
++
+WARNING: Функциональные возможности криптосервиса, необходимые для работы компоненты и лицензии см. в руководстве по настройке системы, на странице "xref:dv6@engineer:ROOT:java-service.adoc[]".
++
+endif::engineer[]
+** Сервер под управлением Linux требует xref:engineer:ROOT:java-service.adoc[Криптосервис] для проверки и формирования CAdES-BES и CAdES-X Long Type 1.
+** {blank}
++
+include::RCU@webclient:ROOT:requirements-software.adoc[tags=ifwinstamp]
+// end::cryptojava[]
 
 [#non-qualifcated]
 == Использование неквалифицированных сертификатов
@@ -37,7 +51,10 @@ WARNING: Для работы с электронной подписью необ
 * {root-cert} Сертификат должен быть установлен в хранилище xref:engineer:ROOT:java-service.adoc[Криптосервиса].
 +
 include::./requirements-software.adoc[tags=simple]
-* КриптоПро CSP версии {csp-v} для работы расширения аутентификации ЕСИА.
+* https://cryptopro.ru/products/csp/downloads[КриптоПро CSP] версии {csp-v} с соответствующей лицензией для работы расширения аутентификации ЕСИА.
+* При xref:admin:download-signature.adoc[вычислении хэша подписываемого файла на сервере] {wc}а:
++
+include::dv6_RCU@engineer:ROOT:partial$excerpts.adoc[tags=dll]
 
 .Требования к клиентским рабочим местам:
 * Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
