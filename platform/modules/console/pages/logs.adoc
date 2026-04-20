@@ -62,11 +62,14 @@ include::admin:partial$mancons.adoc[]
 Просмотреть журнал можно, открыв файл в текстовом редакторе.
 
 [#search]
-== Журнал сообщений сервиса полнотекстового поиска
+== Журнал сообщений сервиса полнотекстового индексирования
 
 Данный журнал содержит информацию о работе сервиса полнотекстового индексирования {dv}.
 
 По умолчанию журналы сообщений сервиса полнотекстового поиска сохраняется в директории `/var/log/docsvision/fulltextservice.log` в Linux и `C:\ProgramData\docsvision\fulltextservice.log` в Windows.
+
+:module-service: полнотекстового индексирования
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
 
 Подробнее настройка журналирования полнотекстового поиска описана в разделе "xref:search-logging.adoc[]".
 
@@ -88,6 +91,9 @@ include::admin:partial$mancons.adoc[]
 В данный журнал сохраняется информация об ошибках работы файлового сервиса {dv}, а также информационные сообщения (если включено).
 
 Журнал сервера является средством диагностики при возникновении нештатных ситуаций и предназначен для передачи в службу технической поддержки {dv}. По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле модуля {pl}.
+
+:module-service: {of-fs}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
 
 .Фрагмент конфигурационного файла {of-fs}:
 [source,json]

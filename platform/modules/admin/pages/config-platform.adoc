@@ -128,6 +128,7 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 
 . Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
 +
+--
 [source,json]
 ----
 {
@@ -148,6 +149,10 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 <.> `alias` -- <<connection-string,строка подключения>> к БД.
 <.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
 <.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
+--
++
+. После сохранения изменений в конфигурационном файле перезапустите службу {of-fs}.
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 
 [#fs-mancons]
 == Конфигурация {of-fs} в консоли
