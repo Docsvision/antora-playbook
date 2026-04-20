@@ -1,4 +1,5 @@
 :ws-log-dir: `/var/log/docsvision/WorkerService.log` для Linux и `C:\ProgramData\docsvision\workerservice` для Windows
+:no-config:
 
 = Установка и настройка Службы {ws}
 
@@ -17,7 +18,23 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 include::6.1@platform:admin:partial$install.adoc[]
 // end::linux[]
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
+
+[#ws-ext-linux]
+=== Установка расширения Службы {ws} на сервер под управлением Linux
+
+include::new-admin-console@workerservice:ROOT:partial$excerpts.adoc[tags=ws-ext]
+
+:of: Расширение Службы {ws} для {of-mc}
+// :file: appsettings конфига нет?
+:wt: ext-ws-mc
+:wss-new: dvworkerservice
+:wacs-new: dvconsole
+.Чтобы установить расширение Службы {ws} для {of-mc}:
+. Выполните следующие команды, чтобы установить {of}:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службу *{wss-new}* и *{wacs-new}*.
 
 // tag::windows[]
 [#windows-server]
@@ -38,6 +55,8 @@ image::install-license.png[Условия лицензионного согла�
 .Выбор устанавливаемых компонентов
 image::install-components.png[Выбор устанавливаемых компонентов]
 +
+include::6.1@platform:admin:partial$install-components.adoc[]
++
 ****
 // tag::components[]
 Общие компоненты::
@@ -47,7 +66,7 @@ image::install-components.png[Выбор устанавливаемых комп
 Основные серверные компоненты Службы {ws}, обязательны для установки на сервер {dv}.
 
 Служба Windows:::
-Основные компоненты Службы {ws}, предоставляющие базовую функциональность, обязательна для установки на сервер {dv}.
+Основные компоненты Службы {ws}, предоставляющие базовую функциональность, обязательна для установки на сервер Службы {ws}.
 
 Расширение {of-mc}::
 Расширение {of-mc} необходимо для настройки служб в Консоли и просмотра сообщений.
@@ -68,46 +87,33 @@ image::install-check.png[Продолжить установку или верн
 . Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
 // end::windows[]
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
-
-[#ws-ext]
-== Установка расширения Службы {ws} для {of-mc}
-
-Расширение Службы {ws} для {of-mc} добавляет функциональность для работы со Службой {ws}: настройка службы в Консоли, просмотр сообщений, расширение обязательно для установки в версии {of-mc} {mc-cu-mc}.
-
-[#ws-ext-linux]
-=== Установка расширения Службы {ws} на сервер под управлением Linux
-
-:of: Расширение Службы {ws} для {of-mc}
-// :file: appsettings конфига нет?
-:wt: ext-ws-mc
-:wss-new: dvworkerservice
-.Чтобы установить расширение Службы {ws} для {of-mc}:
-. Выполните следующие команды, чтобы установить {of}:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-. Перезапустите службу *{wss-new}*.
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
 [#ws-ext-windows]
 === Установка расширения Службы {ws} на сервер под управлением Windows
+
+include::new-admin-console@workerservice:ROOT:partial$excerpts.adoc[tags=ws-ext]
 
 .Чтобы установить расширение Службы {ws} для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор Службы {ws} `{dv} Worker service.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для Службы {ws}:
 +
 .Выбор компонентов Службы {ws} для установки
 image::install-components.png[Выбор компонентов Службы {ws} для установки]
++
+. Перезапустите службу *{wss-win}* и *{wacs-win}*.
 
 [#config]
 == Настройка Службы {ws}
 
-Служба {ws} имеет два конфигурационных файла, расположенных по адресу `/usr/lib/docsvision/workerservice/` в Linux и `C:\Program Files\Docsvision\WorkerService\` в Windows. Конфигурационный файл `Configuration.json` предназначается для настройки защищённого подключения для Службы {ws}.
+Служба {ws} имеет два конфигурационных файла, расположенных по адресу `/usr/lib/docsvision/workerservice/` в Linux и `C:\Program Files\Docsvision\WorkerService\` в Windows. Конфигурационный файл `appsettings.json` предназначается для настройки защищённого подключения для Службы {ws}.
 
-Файл `appsettings.json` содержит основные настройки для работы системы {dv}: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
+Файл `Configuration.json` содержит основные настройки для работы системы {dv}: `SettingsServiceConnectionString`, `ApiKey`, `RestApiAddress`, `LogFile`.
 
 // tag::config[]
 
 --
-В конфигурационном файле `appsettings.json` располагаются настройки защищённого соединения.
+[subs="specialchars,attributes,quotes"]
+В конфигурационном файле {config-ws} располагаются настройки защищённого соединения.
 
 .Фрагмент конфигурационного файла "appsettings.json":
 [source,json]
@@ -139,6 +145,11 @@ image::install-components.png[Выбор компонентов Службы {ws
 <.> Адрес подключения к Службе {ws}.
 <.> Уровень журналирования Службы {ws}, см. подробнее "xref:6.1@workerservice:admin:work-log.adoc[]".
 --
+
+[WARNING]
+====
+После сохранения изменений конфигурационного файла обязательно перезапустите Службу {ws}.
+====
 
 // end::config[]
 
