@@ -3,6 +3,7 @@
 :first: <<config-console,Настройки в {of-mc}>>
 :second: <<config-file,Настройки в конфигурационном файле>>
 :no-config:
+:page-aliases: install-client.adoc
 
 = Установка и конфигурация сервера {wc}а
 
@@ -32,9 +33,33 @@ include::6.1@archivemgmt:admin:install.adoc[tags=noam]
 :second: <<linux,Настройки в конфигурационном файле>>
 :no-config:
 include::6.1@platform:admin:partial$install.adoc[]
++
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 --
 
-// tag::linux[]
+[#mc-ext-linux]
+=== Установка расширения для {of-mc} на сервер под управлением Linux
+
+--
+:of: Расширения {wc}а для {of-mc}
+:wt: ext-webc-mc
+:wcs-new: dvwebclient
+:wacs-new: dvconsole
+.Чтобы установить расширение {wc}а для {of-mc} на сервер под управлением Linux:
+. [[webc-ext]]Установите расширение {wc}а для {of-mc}
++
+Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
++
+:what-mod: {wc}
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
++
+Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службs *{wcs-new}* и *{wacs-new}*. Служба {wc}а запускается от имени УЗ {dv} и не требует ROOT-привилегий.
+--
+
+// end::linux[]
 
 // tag::windows[]
 
@@ -88,46 +113,17 @@ image::6.1@webclient:admin:install-server-confirm.png[Установка рас�
 +
 . Нажмите кнопку *Готово* для завершения работы мастера установки.
 +
-include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
-// tag::windows[]
+include::new-admin-console@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
 
-[#mc-ext]
-== Установка расширения {wc}а для {of-mc}
-
-// tag::linux[]
-[#mc-ext-linux]
-=== Установка расширения на сервер под управлением Linux
-
---
-:of: Расширения {wc}а для {of-mc}
-:wt: ext-webc-mc
-:wcs-new: dvwebclient
-
-.Чтобы установить расширение {wc}а для {of-mc} на сервер под управлением Linux:
-. [[webc-ext]]Установите расширение {wc}а для {of-mc}
-+
-Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
-+
-:what-mod: {wc}
-include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
-+
-Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
-+
-. Перезапустите службу *{wcs-new}*.
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
---
-// end::linux[]
-
-// tag::windows[]
 [#mc-ext-windows]
-=== Установка расширения на сервер под управлением Windows
+=== Установка расширения для {of-mc} на сервер под управлением Windows
 
 .Чтобы установить расширение {wc}а для {of-mc} на сервер под управлением Windows:
 . Запустите инсталлятор {wc}а `{dv} web-client.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для {wc}а:
 +
 .Выбор компонентов {wc}а для установки
 image::install-server-components.png[Выбор компонентов {wc}а для установки]
+. Перезапустите службы {wcs-win} и {wacs-win}.
 
 // end::windows[]
 
@@ -169,7 +165,7 @@ image::6.1@webclient:admin:toolkit-confirm.png[Установка {dv} {wc} Tool
 +
 . Укажите адрес подключения к серверу {dv} в файле конфигурации:
 +
-WARNING: Обратите внимание, указанный ниже файл конфигурации расположен в ОС Windows по адресу `C:\Program Files (x86)\Docsvision\WebClientToolKit\WebLayoutsDesigner.appsettings.json`.
+WARNING: Обратите внимание, указанный ниже файл конфигурации расположен в ОС Windows по адресу `C:\Program Files (x86)\Docsvision\WebClientToolkit\WebLayoutsDesigner.appsettings.json`.
 +
 * `WebLayoutsDesigner.appsettings.json` -- конфигурация программы _{kvr}_.
 +
@@ -263,8 +259,8 @@ include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 Служба запускается от имени УЗ {dv} и не требует административных привилегий.
 --
 
-[#config-file]
-== Конфигурация без {of-mc}
+[#old-method]
+== (Старый метод) Конфигурация без {of-mc}
 
 . Убедитесь, что в конфигурационном файле {wc}а по адресу `{webconfig-lin}` в Linux или `{webconfig-cp}` в Windows указаны описанные ниже настройки. Файл может быть изменён в любом текстовом редакторе (потребуются права суперпользователя/администратора). Настройки в конфигурационном файле:
 +
@@ -317,9 +313,11 @@ include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 <.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
 <.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 +
-. Запустите службу {wc}а.
+. Запустите службу {wc}а. Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
 +
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+. Выполните настройку {wc}а, см. "xref:initial-configuration.adoc[]".
 
 [#uninstall]
 == Удаление модуля

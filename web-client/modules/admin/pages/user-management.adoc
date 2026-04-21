@@ -29,16 +29,18 @@ include::partial$mancons.adoc[]
 
 [source,json]
 ----
+{
   "Docsvision": {
     "WebClient": {
         "SettingGroups": {
           "WebClient": {
             "MaxFailedLoginAttempts": 3, <.>
             "FailedLoginAttemptsTTL":  300 <.>
-          },
+          }
         }
-    },
+    }
   }
+}
 ----
 <.> Количество неудачных попыток ввода пароля.
 <.> Время в секундах, после которого счётчик неудачных попыток будет сброшен.
