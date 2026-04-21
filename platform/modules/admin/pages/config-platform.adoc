@@ -14,12 +14,20 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 // tag::settings[]
 
 [subs="specialchars,attributes,quotes"]
-Чтобы выполнить настройку Сервера приложений при помощи {of-mc}, необходимо в конфигурационном файле {config} указать минимальные настройки.
+Чтобы настраивать Сервер приложений при помощи {of-mc}, необходимо убедиться, что конфигурационном файле {config} указаны минимальные настройки.
 
-. Откройте конфигурационный файл в любом текстовом редакторе (потребуются права суперпользователя/администратора) и заполните следующие параметры:
+ifndef::installation[]
+[WARNING]
+====
+include::new-admin-console@platform:admin:partial$update.adoc[tags=priority]
+====
+endif::installation[]
+
+. Откройте конфигурационный файл в любом текстовом редакторе (потребуются права суперпользователя/администратора) и убедитесь в корректности следующих параметров: menu:ServiceId[], menu:SettingsService[ConnectionString], menu:Kestrel[].
 +
 --
 // tag::config[]
+ifndef::installation[]
 .Фрагмент конфигурационного файла `appsettings.json`:
 [source,json]
 ----
@@ -46,6 +54,7 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 <.> `ApiKey` -- API-ключ для подключения к {to-sett-serv}, можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {sett-serv} и {pl} были одинаковые. Адрес и API-ключ требуется указать, если планируется переходить в {mc} из карточек {wc}а и {wincl}а.
 <.> Настройка защищённого (HTTPS) соединения с Сервером приложений для защиты конфиденциальных данных, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
 // end::config[]
+endif::installation[]
 --
 +
 . {blank}
@@ -53,8 +62,9 @@ include::6.1@platform:admin:partial$mancons.adoc[]
 [subs="specialchars,attributes,quotes"]
 Перезапустите службу {sss-new}, чтобы применить настройки конфигурационного файла.
 // tag::console-only[]
+include::6.2@mgmtconsole:user:first-launch.adoc[tags=start]
 ifdef::61[]
-. Запустите {mc}, на странице menu:Серверы[Имя-сервера > Сервер приложений] перейдите к группе настроек "Настройка доменных каталогов" и убедитесь, что настройки присутствуют.
+. На странице menu:Серверы[Имя-сервера > Сервер приложений] перейдите к группе настроек "Настройка доменных каталогов" и убедитесь, что настройки присутствуют либо заполните их.
 +
 * Если настройки доменных каталогов xref:6.1@platform:admin:config-domains.adoc[указывались в параметре "Catalogs"] они автоматически переносятся в Консоль управления, дополнительных действий не требуется.
 * Если настройки указаны иным способом, их необходимо указать в Консоли вручную согласно инструкции на странице
@@ -62,7 +72,7 @@ ifdef::61[]
 endif::61[]
 // end::console-only[]
 +
-. На странице "xref:6.2@mgmtconsole:servers:appserver-access.adoc[Управление доступом]" и укажите параметры:
+. На странице "xref:6.2@mgmtconsole:servers:appserver-access.adoc[Управление доступом]" укажите параметры:
 +
 * Логин системной учётной записи.
 +
@@ -113,10 +123,12 @@ include::dv6@system:ROOT:partial$restart-sss.adoc[]
 Если шифровать пароль системной учётной записи не планируется, параметр можно не указывать.
 +
 . При необходимости в {of-mc}, на странице menu:Серверы[Имя сервера > Сервер приложений > "xref:6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[Группа настроек "Расширенная аутентификация"]], настройте использование расширенной аутентификации.
+ifdef::old-console[]
 . {blank}
 +
 include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 +
+endif::old-console[]
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
@@ -152,6 +164,8 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=client-path]
 [#fs-mancons]
 == Конфигурация {of-fs} в консоли
 
+include::new-admin-console@install-linux:ROOT:partial$dvfileservice.adoc[tags=config]
+
 include::dv6@install-linux:ROOT:partial$dvfileservice.adoc[tags=console]
 
 [#ft-config]
@@ -163,7 +177,7 @@ include::6.1@platform:console:search-full-text.adoc[tags=config-ft]
 == (Старый метод) Конфигурация модуля {pl} без {of-mc}
 
 [subs="specialchars,attributes,quotes"]
-Конфигурационный файл может быть изменён в любом текстовом редакторе, файл располагается по адресу {config}. После сохранения изменений в конфигурационном файле обязяательно перезапустите службу Сервера приложений.
+Конфигурационный файл может быть изменён в любом текстовом редакторе, файл располагается по адресу {config-pl}. После сохранения изменений в конфигурационном файле обязяательно перезапустите службу Сервера приложений.
 
 .Фрагмент конфигурационного файла `appsettings.json`:
 [source,json]
@@ -249,3 +263,5 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 <.> `Logging` -- настройка упразднена, используйте параметр `LogFile` или настройте журналирование с помощью xref:6.1@platform:console:logs.adoc#file[NLog].
+
+include::6.1@settings-service:admin:install.adoc[tags=string]
