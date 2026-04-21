@@ -7,26 +7,22 @@
 
 . xref:requirements.adoc[Ознакомьтесь] со списком требований к системе.
 . xref:requirements-accounts.adoc[Предоставьте] права учётным записям сервисов {dv}, если это не было выполнено ранее.
-. xref:pre-config-server.adoc[Завершите] предварительную настройку сервера {dv} и xref:pre-config-db.adoc[БД].
-. xref:install-server.adoc[Установите] серверные компоненты модулей {mc}, Службы {ws}, {sett-serv} и {pl}.
+. xref:pre-config-server.adoc[Завершите] предварительную настройку сервера {dv} и xref:pre-config-db.adoc[СУБД].
+. xref:install-server.adoc[Установите] серверные компоненты модулей {mc} и {sett-serv}.
 . xref:install-other-server.adoc[Установите] другие модули системы.
 . xref:activation.adoc[Активируйте] лицензию при помощи утилиты активации.
-. xref:dvconsole.adoc[Выполните] первичную настройку {of-mc}.
-. xref:config-platform.adoc[Укажите] настройки модуля {pl} через {mc}.
+. xref:register-config.adoc[Заполните] настройки в конфигурационных файлах модулей и убедитесь в корректной регистрации сервисов.
+. xref:config-platform.adoc[Укажите] настройки Сервера приложений (модуля {pl}) в {mc}.
 . xref:config-domains.adoc[Заполните] настройки на странице "Управление доступом", включая настройку доменных каталогов, для Сервера приложений.
-. xref:config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить БД {dv}:
-+
-* xref:db-create.adoc[Создайте новую] или
-* Убедитесь, что необходимая база назначена xref:db-default.adoc[БД по умолчанию].
-+
+. xref:config-master.adoc[Воспользуйтесь] мастером настройки, чтобы настроить БД {dv} и xref:db-create.adoc[создайте новую БД].
 . xref:connections-docsvision.adoc[Настройте] соединение {dv} в {of-mc}.
 . xref:dvworkerservice.adoc[Задайте] настройки Службы {ws}.
 . xref:connections-mail-server.adoc[Настройте] подключение к почтовому серверу.
 . xref:dvfileservice.adoc[Заполните] необходимые параметры {of-fs} из {of-mc}.
 . xref:dvwebclient.adoc[Настройте] функции {wc}а, необходимые для работы.
-. xref:create-wf-account.adoc[Создайте] учётную запись для работы с модулем {wf}.
 . xref:dvworkflow.adoc[Заполните] настройки модуля {wf}, необходимые для работы.
 . Установите клиентские компоненты модулей при помощи xref:gpo-guide.adoc[групповых политик], или xref:install-client.adoc[вручную]. Клиентские компоненты устанавливаются автоматически при первом запуске {wincl}а.
+. xref:create-wf-account.adoc[Создайте] учётную запись для работы с модулем {wf}.
 . Если планируется работать с Полнотекстовым поиском, установите пакет утилит {rk} на клиентскую машину с {wincl}ом согласно инструкции "xref:rk-wctk.adoc[]".
 . xref:webclient-r7.adoc[Установите] Р7 Офис, если планируется работать с режимом консолидации документов при согласовании и использовать предварительный просмотр файлов.
 . xref:webservices-install.adoc[Установите] DVWebTool в ОС Windows и DVSupService в Linux. DVWebTool и DVSupService позволяют пользователям {wc}а открывать файлы на редактирование и/или просмотр в офисных редакторах.
