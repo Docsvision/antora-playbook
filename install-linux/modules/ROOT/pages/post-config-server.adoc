@@ -1,11 +1,71 @@
 = Действия после {chego} системы
 
 [#webc]
-== Настройка {wc}а
+== Настройка сквозной аутентификации
 
 [NOTE]
 ====
 Чтобы иметь возможность использования сквозной аутентификации в {wc}е, {wincl}е, РМА и {of-mc} в Linux необходимо выполнить специальные настройки Kerberos и используемого браузера, см. подробнее "xref:dv6@engineer:ROOT:kerberos-authentication.adoc[]".
 ====
 
-include::6.1@platform:admin:post-config-server.adoc[tags=controller]
+// include::6.1@platform:admin:post-config-server.adoc[tags=controller]
+
+[#db-updater]
+== Требования учётной записи системного пользователя, обновляющего БД
+
+****
+// tag::group-rights[]
+Перед загрузкой решений убедитесь, что системный пользователь, выполняющий обновление БД:
+
+* Входит в группы {dv} в Справочнике сотрудников, а указанные группы имеют соответствующие права доступа согласно дискреционной безопасности к следующим папкам:
++
+- _{dv-dm-admins-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Служебные]", menu:&quot;Папки&quot;["Служебные" > "Маршрутизация"], menu:&quot;Папки&quot;["Отчёты"], menu:&quot;Папки&quot;["Договоры" > Служебные"].
+- _{dv-ad-admins-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Усовершенствованное согласование"].
+- _{dv-sys-wf-dir}_: полный доступ к папке menu:&quot;Папки&quot;["Служебные]".
++
+* Имеет полный доступ согласно дискреционной безопасности к группе "xref:6.1@backoffice:desdirs:staff/groups/system-groups.adoc#security[_Системные группы]".
+
+Подробнее см. "xref:dv6@upgrade:ROOT:rights.adoc[]" в документации по обновлению {dv}.
+// end::group-rights[]
+****
+
+Пользователи указанных групп должны обладать следующими правами на системные папки:
+
+[cols="20%,20%,60",options="header"]
+|===
+
+|Папка |Права |Комментарий
+
+a|menu:Папки[Усовершенствованное согласование]
+|Полный доступ для членов группы _{dv-ad-admins-dir}_
+|При этом важно, чтобы у карточек в папке были следующие права: у админов полные, у всех на чтение
+
+a|menu:Папки[Служебные]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, _{dv-sys-wf-dir}_
+|
+
+a|menu:Папки[Служебные > Маршрутизация]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone.
+|
+
+a|menu:Папки[Отчеты]
+|Полный доступ для членов группы _{dv-dm-admins-dir}_, права на чтение для Всех/Everyone
+|
+
+|===
+
+[#wf-account]
+== Требования к учётной записи модуля {wf}
+
+include::6.1@workflow:admin:install.adoc[tags=post-config]
+
+[#worker]
+include::6.1@workerservice:ROOT:requirements-account.adoc[leveloffset=1]
+
+[#ft-account]
+=== Требования учётной записи сервиса полнотекстового индексирования
+
+. Принадлежность к группе безопасности *{dv-admins-serv}*.
+
+[#fs-account]
+include::dv6@install-linux:ROOT:partial$requirements-file-service-account.adoc[leveloffset=1]

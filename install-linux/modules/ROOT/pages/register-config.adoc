@@ -1,0 +1,14 @@
+:register-config:
+:config: `/usr/lib/docsvision/имя-модуля/appsettings.json`
+
+= Заполнение конфигурационных файлов и регистрация сервисов
+
+. Настройте конфигурацию Службы {ws} по адресу `/usr/lib/docsvision/workerservice/`, укажите необходимые параметры:
++
+include::6.1@workerservice:admin:install.adoc[tags=config]
++
+. Перезапустите Службу {ws}:
+
+ $ sudo systemctl restart dvworkerservice
+
+include::6.2@mgmtconsole:admin:install.adoc[tags=register-services]
