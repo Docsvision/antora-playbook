@@ -1,0 +1,38 @@
+= Журнал работы
+
+Журнал работы модуля в локальной файловой системе располагается в каталоге `/var/log/docsvision\settingsservice` для Linux и `C:\ProgramData\Docsvision\Logs\SettingsService` для Windows.
+
+// include::install-linux:ROOT:appendix/commands.adoc[tags=log]
+
+:module-service: {ws}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
+
+Пути к журналам и уровень журналирования настраиваются в конфигурационном файле по адресу `/usr/lib/docsvision/settingsservice/appsettings.json` в Linux и `C:\Program Files\Docsvision\SettingsService\appsettings.json` в Windows:
+
+[source,json]
+----
+{
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/settingsservice/${shortdate}_SettingsService.log", <.>
+        "layout": "[${longdate}][${level}][${callsite}] ${message} ${exception:format=tostring,Data}"
+      }
+    },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Warn", <.>
+        "writeTo": "logFile"
+      }
+    ]
+  }
+}
+----
+<.> Путь к файлу журнала указан в параметре `fileName`.
+<.> Уровень журналирования по умолчанию -- "Warn".
+
+Новый журнал создаётся после истечения заданного интервала времени. Каждый день журнал сохраняется в архив. Максимальное число сохраненных архивов 30.
+
+Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.
