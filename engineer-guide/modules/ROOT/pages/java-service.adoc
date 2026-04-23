@@ -56,7 +56,7 @@ docker run -d -p 8094:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 
 По умолчанию Криптосервис использует TSP-службу с адресом `http://cryptopro.ru/tsp/tsp.srf`. При необходимости адрес используемой TSP-службы можно переопределить с помощью переменной окружения `TSP_SERVICE_ADDRESS`. Ниже приведён пример переопределения адреса TSP-сервиса:
 
- $ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf packages.docsvision.com/cryptoservice
+ $ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf packages.docsvision.com/cryptoservice -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp
 
 Контейнер поставляется в комплекте со следующими сертификатами:
 
@@ -238,8 +238,7 @@ image::install-crypto-finish.png[Завершение установки]
 
 Контейнер криптосервиса можно сразу смонтировать вместе с файлом настроек OCSP сервиса следующим образом:
 
- $ docker run -d -p 8100:8094 -v /path/to/settings.json:/etc/cryptoservice/settings.json packages.docsvision.com/cryptoservice
-
+ $ docker run -d -p 8100:8094 -v /path/to/settings.json:/etc/cryptoservice/settings.json -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
 
 [#https]
 == Настройка подключения к криптосервису по HTTPS
