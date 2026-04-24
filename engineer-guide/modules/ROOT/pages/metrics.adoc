@@ -1,8 +1,7 @@
 = Настроить метрики web-сервисов
 
-{dv} позволяет настраивать и просматривать метрики для web-сервисов. Метрики предоставляются в формате Prometheus.
+{dv} позволяет настраивать и просматривать метрики в формате Prometheus для следующих web-сервисов:
 
-.Метрики доступны для следующих сервисов:
 * Сервер приложений
 * Сервер {wc}а
 * Основной процесс {wf}
@@ -20,7 +19,7 @@
 ----
 {
  "Metrics": {
-    "Key": "secret-key-my"
+    "Key": "secret-key"
   },
 }
 ----
@@ -29,15 +28,4 @@ NOTE: Если параметр отсутствуtт в конфигураци�
 +
 * _Только для xref:mgmtconsole:servers:appserver-etc.adoc[Сервера приложений], xref:mgmtconsole:servers:webclient-etc.adoc[{wc}а] и xref:mgmtconsole:servers:workflow-etc.adoc[{wf}]._ На странице дополнительных настроек модуля в {of-mc} укажите настройку `Metrics__ApiKey`.
 +
-. Выполните запрос метрик с помощью curl (или иного rest-клиента):
-+
- curl -v -H "X-Metrics-Key: secret-key-my" http://адрес-сервиса:ПОРТ/metrics
-+
-. В ответе будут данные в формате Prometheus:
-+
-----
-# TYPE process_memory_usage_bytes gauge
-# UNIT process_memory_usage_bytes bytes
-# HELP process_memory_usage_bytes The amount of physical memory in use.
-process_memory_usage_bytes{otel_scope_name="OpenTelemetry.Instrumentation.Process",otel_scope_version="0.5.0-beta.7"} 106971136 1776691371291
-----
+. Метрики в формате Prometheus будут доступны по адресу `\https://адрес-сервиса:ПОРТ/metrics`.
