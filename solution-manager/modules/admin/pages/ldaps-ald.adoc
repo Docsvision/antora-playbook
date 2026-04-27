@@ -1,0 +1,51 @@
+= Настройка работы с каталогом ALD Pro
+
+Данный раздел описывает настройку работы {of-sm} со службой каталогов ALD Pro. Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+
+.См. также:
+* Настройка для {of-mc} описана в разделе "xref:6.2@mgmtconsole:admin:ldaps-authentication.adoc[]".
+* Настройка из конфигурационного файла для {wc}а описана в разделе "xref:6.1@webclient:admin:no-active-dir.adoc[]".
+* Настройка для Сервера приложений описана в руководстве по настройке: "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]".
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+
+[#ald]
+== Настройка коннектора к ALD Pro
+
+ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+
+[#from-config]
+=== Настройка из конфигурационного файла
+
+[source,json]
+----
+{
+  "Authentication": {
+	  "Extensions": {
+      "ALDPro": {
+        "Name": "ALDPro", <.>
+        "TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+        "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
+		  }
+	  },
+	  "Tenants": { <.>
+	  }
+	}
+}
+----
+<.> `Name` -- название коннектора.
+<.> `TypeName` -- строка с именем типа, реализующего коннектор.
+<.> `Settings` -- строка настроек коннектора, для ALD Pro. Подробнее см. <<ald-settings,ниже>>.
+<.> `ID` -- строка с идентификатором коннектора в виде Guid.
+<.> `Tenants` -- коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+
+include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
+
+include::GBL-4266@engineer:ROOT:ldaps-without-ad.adoc[tags=more-about]
