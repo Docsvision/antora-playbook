@@ -1,5 +1,5 @@
-:mo: {pl}
-:cu253-mo-req: {sm} версии
+:mo: "{sm}"
+:cu253-mo-req: версии ???
 
 = Настройка работы с каталогом ALD Pro
 
@@ -28,27 +28,29 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 ----
 {
   "Authentication": {
-	  "Extensions": {
-      "ALDPro": {
-        "Name": "ALDPro", <.>
-        "TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
-        "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
-		  }
-	  },
-	  "Tenants": { <.>
-	  }
+	  "Connectors": [
+      "Name": "ALDPro", <.>
+      "Id": "{DCF3EDA3-2F84-4FD1-8E1D-A06B762AE822}", <.>
+      "Type": "DocsVision.Auth.Extensions.ALDProConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
+      "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><BaseDN>dc=astrald,dc=ru</BaseDN><Credential><UserName>admin@astrald.ru</UserName><Password>P@ssw0rd</Password></Credential></LdapConnectorOptions>" <.>
+	  ]
 	}
 }
 ----
 <.> `Name` -- название коннектора.
+<.> `ID` -- строка с идентификатором коннектора в виде Guid.
 <.> `TypeName` -- строка с именем типа, реализующего коннектор.
 <.> `Settings` -- строка настроек коннектора, для ALD Pro. Подробнее см. <<ald-settings,ниже>>.
-<.> `ID` -- строка с идентификатором коннектора в виде Guid.
-<.> `Tenants` -- коннектор регистрируется сразу для всех БД, подключенных к {dv}, указывать параметр не требуется. Если указать идентификатор для конкретной БД, система будет работать, но такие настройки не будут применены.
+
+WARNING: Перезапустите службу {of-sm}, чтобы изменения вступили в силу.
 
 include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
 
 include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
 
-include::GBL-4266@engineer:ROOT:ldaps-without-ad.adoc[tags=more-about]
+.Особенности и рекомендации при работе с ALD Pro:
+****
+* ALD Pro не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования. +
+В связи с этим *только для данного коннектора* допускается использовать следующий аналог группы *{dv-solution-admins-serv}*: *docsvision_management_console_administrators*
++
+include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
