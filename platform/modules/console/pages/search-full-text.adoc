@@ -131,8 +131,11 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 <.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 
 WARNING: После сохранения изменений в конфигурационном файле обязательно перезапустите службу Сервиса полнотекстового индексирования.
+ifndef::windows[]
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+
+endif::windows[]
 // end::appsettings[]
-В ОС Linux cлужба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
 
 // end::config-ft[]
 
