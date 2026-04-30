@@ -24,7 +24,6 @@ include::6.1@archivemgmt:admin:install.adoc[tags=noam]
 [#linux-server]
 == Установка {wc}а на сервер под управлением Linux
 
---
 :of: {wc}а
 :wt: webclient
 :do-what: способы первоначальной конфигурации модуля
@@ -35,7 +34,6 @@ include::6.1@archivemgmt:admin:install.adoc[tags=noam]
 include::6.1@platform:admin:partial$install.adoc[]
 +
 include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart]
---
 
 [#mc-ext-linux]
 === Установка расширения для {of-mc} на сервер под управлением Linux
@@ -46,17 +44,20 @@ include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart
 :wcs-new: dvwebclient
 :wacs-new: dvconsole
 .Чтобы установить расширение {wc}а для {of-mc} на сервер под управлением Linux:
-. [[webc-ext]]Установите расширение {wc}а для {of-mc}
+. [[webc-ext]]Установите компоненты {of} {wc}а для {of-mc} следующей командой, предварительно обновив индекс пакетов:
++
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 Расширение {wc}а для {of-mc} необходимо для получения списка загруженных решений, импорта решений {wc}а, получения списка локализаций и видов карточек, а также загрузки новых значений в базу данных.
 +
 :what-mod: {wc}
 include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
-Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
-include::6.1@platform:admin:partial$install.adoc[tags=commands]
+. Перезапустите службы *{wcs-new}* и *{wacs-new}*.
+ifndef::windows[]
 +
-. Перезапустите службs *{wcs-new}* и *{wacs-new}*. Служба {wc}а запускается от имени УЗ {dv} и не требует ROOT-привилегий.
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+endif::windows[]
 --
 
 // end::linux[]
@@ -313,10 +314,10 @@ include::dv6@system:ROOT:partial$restart-wcs.adoc[]
 <.> `SystemUserAccount` -- имя системной учётной записи {dv} в формате UPN.
 <.> `SystemUserPassword` -- пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 +
-. Запустите службу {wc}а. Служба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
-+
+. Запустите службу {wc}а.
+ifndef::windows[]
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
-+
+endif::windows[]
 . Выполните настройку {wc}а, см. "xref:initial-configuration.adoc[]".
 
 [#uninstall]
