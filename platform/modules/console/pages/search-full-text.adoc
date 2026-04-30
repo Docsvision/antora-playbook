@@ -96,12 +96,10 @@ image::admin:install-server-components-ft.png[Выбор сервиса полн
 
 // tag::config-ft[]
 
-. {blank}
-+
 [subs="specialchars,attributes,quotes"]
 Все настройки сервиса полнотекстового индексирования хранятся в конфигурационном файле
 {config-ft}. Откройте конфигурационный файл в любом текстовом редакторе и выполните необходимые настройки сервиса:
-+
+
 // tag::appsettings[]
 [source,json]
 ----
@@ -131,9 +129,10 @@ image::admin:install-server-components-ft.png[Выбор сервиса полн
 include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> Пароль системной учётной записи рекомендуется хранить в зашифрованном виде. Подробнее про шифрование см. в документации по настройке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
-+
-. Запустите службу Сервиса полнотекстового индексирования.
+
+WARNING: После сохранения изменений в конфигурационном файле обязательно перезапустите службу Сервиса полнотекстового индексирования.
 // end::appsettings[]
+В ОС Linux cлужба запускается от имени УЗ {dv} и не требует ROOT-привилегий.
 
 // end::config-ft[]
 
