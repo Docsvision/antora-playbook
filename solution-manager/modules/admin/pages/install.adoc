@@ -10,9 +10,11 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 [#linux-server]
 == Установка {of-sm} на сервер под управлением Linux
 
+:of: {of-sm}
+:of-what: {of-sm}
 :wt: solutionmanager*
 include::6.1@platform:admin:partial$install.adoc[tags=install]
-. Скорнфигурируйте {sm} согласно <<config-sm,инструкции>>.
+. Сконфигурируйте {sm} согласно <<config-sm,инструкции>>.
 
 // tag::windows[]
 [#windows-server]
@@ -67,6 +69,7 @@ image::install-confirm.png[Мастер установки серверной ч
 
 . Укажите настройки {of-sm} в конфигурационном файле модуля по адресу `/usr/lib/docsvision/solutionmanager/appsettings.json` для Linux и `C:\Program Files\Docsvision\SolutionManager\appsettings.json` для Windows.
 +
+--
 .Основные настройки, которые нужно сделать:
 [source,json]
 ----
@@ -122,11 +125,14 @@ image::install-confirm.png[Мастер установки серверной ч
 <.> `UserName` -- имя пользователя. Может быть указано в формате user@domain.com или domain\user.
 <.> `fileName` -- путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/solutionmanager`.
 <.> `minLevel` -- уровень журналирования, по умолчанию используется `Warn`.
-// end::linux[]
 +
 Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.
+--
 +
 . Запустите службу {of-sm}.
++
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
 . Выполните настройки для работы в домене, описанные в пункте <<domain,ниже>>. В противном случае аутентификация в модуле не будет доступна.
 . Ознакомьтесь с разделом "xref:admin-functions.adoc[]", чтобы предоставить пользователям доступ к модулю, настроить путь к временной папке, изменить подключение к базе данных {of-sm} и выполнить другие действия.
 . Ознакомьтесь с разделом "<<mgmt-console,Настройки в {of-mc}>>", чтобы выполнить необходимые для работы модуля настройки системы.
