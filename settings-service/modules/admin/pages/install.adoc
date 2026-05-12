@@ -142,7 +142,7 @@ WARNING: Для {of-what} необходимо использовать отде
 
 //tag::mssql[]
 Для {mssql} Server: `Data Source=Адрес-сервера-баз-данных;Initial Catalog=Название-БД-{of-what};Integrated Security=False;User ID=Имя-пользователя-БД;Password=Пароль-пользователя-БД;
-ifndef::installation[]
+ifndef::installation,upgrade[]
 TrustServerCertificate=false`.
 endif::[]
 
@@ -153,7 +153,7 @@ endif::[]
 ** `True` -- при подключении будут использованы учётные данные текущей учётной записи Windows.
 * `Имя-пользователя-БД` -- учётная запись пользователя для подключения к БД.
 * `Пароль-пользователя-БД` -- пароль учётной записи для подключения к БД.
-ifndef::installation[]
+ifndef::installation,upgrade[]
 * `TrustServerCertificate=false` -- подробнее про настройку см. <<cert,особенности настройки сертификата>>.
 endif::[]
 
