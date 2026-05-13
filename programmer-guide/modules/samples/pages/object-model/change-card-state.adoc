@@ -35,9 +35,177 @@ if (taskGroupCard != null)
 <.> Разблокируем карточку.
 
 [#code]
-== Добавление собственного кода при создании задания по группе заданий
+== Изменение методов обработки событий заданий и групп заданий
 
-При создании задания по группе заданий можно добавлять собственный код стандартным способом, по аналогии с другими случаями:
+Разработчик может переопределить процедуру обработки событий запуска и выполнения заданий и групп заданий. Например, изменить механизм создания заданий по группе заданий.
 
-. На уровне логики карточки группы заданий. Унаследовать `TaskGroupEventHandlerService`, в нём дореализовать нужную функциональность, определив свои версии нужных методов. Заменить в справочнике видов (в секции `Services` у нужного вида ГЗ) штатную регистрацию сервиса `TaskGroupEventHandlerService` на собственную.
-. На уровне логики карточки задания. Реализовать `ITaskEventHandlerService` или `IEventHandlerService` (можно унаследовать базовый класс `EventHandlerService`). Реализовать метод-обработчик смены состояния задания в котором при запуске задания выполнять нужную логику. Добавить в справочнике видов (в секции `Services` у нужного вида задания) регистрацию этого нового сервиса обработчика. Другой вариант -- унаследовать `TaskEventHandlerService` и переопределять его логику, но тогда нужно заменять регистрацию стандартного сервиса в справочнике видов, а не добавлять параллельно (иначе одна и та же базовая логика будет отрабатывать 2 раза).
+.Данная возможность обеспечивается двумя специальными компонентами:
+* Обработчик событий заданий
+* Обработчик событий группы заданий
+
+.Чтобы реализовать собственный обработчик группы заданий:
+. Создайте библиотеку с классом, унаследованным от `DocsVision.BackOffice.ObjectModel.Services.TaskGroupEventHandlerService` (содержит стандартную реализацию).
+. Добавьте метод, аналогичный стандартному методу.
++
+--
+.Список стандартных методов:
+* `OnSendToPerformance` -- обрабатывает событие отправки согласования исполнителям группы заданий (ГЗ). В стандартной реализации создаёт события на запуск задания отдельному исполнителю.
+* `OnTaskCreateRequest` -- обрабатывает запрос на создание задания отдельного исполнителя. В стандартной реализации, создаёт задание группы и запускает его.
+* `OnTaskGroupRecallRequested` -- обрабатывает запрос отзыва ГЗ. В стандартной реализации, создаёт события отзыва для заданий данной ГЗ.
+* `OnTaskGroupTaskCompleted` -- обрабатывает завершение ГЗ. В стандартной реализации не используется, работает `OnCardStateChanged`.
+* `OnTaskGroupTaskRecalled` -- обрабатывает отзыв ГЗ. В стандартной реализации не используется, работает `OnCardStateChanged`.
+* `OnCardStateChanged` -- обрабатывает событие изменения состояния ГЗ или одного из заданий ГЗ. В стандартной реализации, данный метод обеспечивает все изменения, связанные с изменением состояния:
+** Завершения ГЗ, если завершились все дочерние задания.
+** Завершение родительского задания при завершении ГЗ, если это предусмотрено
+** Пррочие события изменения состояния.
+--
++
+Добавленный собственный метод должен иметь другое название (например, `OnSendToPerformanceOwn`), но ту же сигнатуру, что оригинальный.
++
+. Переопределите метод `GetHandlersInfo` базового класса `TaskGroupEventHandlerService`, указав список действующих обработчиков в реализованном компоненте:
++
+[source,csharp]
+----
+protected override IDictionary<Guid, EventHandlerInfo> GetHandlersInfo()
+{
+	return new Dictionary<Guid, EventHandlerInfo>
+		  {
+			  {
+				  BaseCard.StateChangedEvent.Id,
+				  new EventHandlerInfo
+					  { EventId = BaseCard.StateChangedEvent.Id, EventArgsType = typeof(OnStateChangedEventArgs), EventHandlerName = nameof(OnCardStateChanged) }
+			  },
+			  {
+				  TaskGroup.SentToPerformanceEvent.Id,
+				  new EventHandlerInfo
+				  {
+					  EventId = TaskGroup.SentToPerformanceEvent.Id, EventArgsType = typeof(OnSendToPerformanceEventArgs),
+					  EventHandlerName = nameof(OnSendToPerformanceOwn)
+				  }
+			  },
+			  {
+				  TaskGroup.TaskCreateRequestedEvent.Id,
+				  new EventHandlerInfo
+				  {
+					  EventId = TaskGroup.TaskCreateRequestedEvent.Id, EventArgsType = typeof(OnTaskCreateEventArgs), EventHandlerName = nameof(OnTaskCreateRequest)
+				  }
+			  },
+			  {
+				  TaskGroup.RecallRequestedEvent.Id,
+				  new EventHandlerInfo
+				  {
+					  EventId = TaskGroup.RecallRequestedEvent.Id, EventArgsType = typeof(EventServiceEventArgs),
+					  EventHandlerName = nameof(OnTaskGroupRecallRequested)
+				  }
+			  },
+			  {
+				  TaskGroup.TaskCompletedEvent.Id,
+				  new EventHandlerInfo
+				  {
+					  EventId = TaskGroup.TaskCompletedEvent.Id, EventArgsType = typeof(ChildCardEventArgs),
+					  EventHandlerName = nameof(OnTaskGroupTaskCompleted)
+				  }
+			  },
+			  {
+				  TaskGroup.TaskRecalledEvent.Id,
+				  new EventHandlerInfo
+				  {
+					  EventId = TaskGroup.TaskRecalledEvent.Id, EventArgsType = typeof(ChildCardEventArgs),
+					  EventHandlerName = nameof(OnTaskGroupTaskRecalled)
+				  }
+			  }
+		  };
+}
+----
++
+NOTE: Для `TaskGroup.SentToPerformanceEvent.Id` был указан собственный обработчик события -- `OnSendToPerformanceOwn`.
++
+Вместо наследования `TaskGroupEventHandlerService` можно наследовать `EventHandlerService` и реализовать `ITaskGroupEventHandlerService`. В таком случае нужно будет обеспечить обработку всех событий самостоятельно.
++
+. Укажите компонент, содержащий собственную реализацию `TaskGroupEventHandlerService` в Справочнике видов (в секции `Services` у нужного вида ГЗ) с помощью программы DVExplorer. Для данного вида нужно установить флаг `UseOwnServices` в значение `True` и добавить все обработчики, которые были бы активны для этого вида в обычном режиме. Добавлять обработчики необходимо от родительского вида ГЗ, за исключением обработчика `TaskGroupEventHandlerService` (теперь реализован собственный).
+
+[#handler]
+=== Реализация собственного обработчика заданий
+
+.Чтобы реализовать собственный обработчик заданий:
+. Создайте библиотеку с классом, унаследованным от `DocsVision.BackOffice.ObjectModel.Services.TaskEventHandlerService` (содержит стандартную реализацию).
+
+. Добавьте метод, аналогичный стандартному методу.
++
+--
+.Список стандартных методов:
+* `OnCardStateChanged` -- обрабатывает событие изменения состояния самого задания или связанной с ним карточки (дочернего задания, группы заданий). В стандартной реализации обеспечивает все изменения, связанные с изменением состояния: уведомляет родительское задание о завершении или отзыве дочернего; завершает задание, если завершилась связанная группа заданий.
+* `OnTaskRecallRequested` -- обрабатывает запрос отзыва задания. В стандартной реализации распространяет событие отзыва на все незавершённые дочерние задания и вызывает процедуру отзыва задания.
+* `OnChildTaskCreated` -- обрабатывает создание дочернего задания. В стандартной реализации устанавливает двустороннюю подписку на событие StateChangedEvent между родительским и дочерним заданиями.
+* `OnChildTaskCopied` -- обрабатывает копирование дочернего задания. В стандартной реализации выполняет ту же подписку, что и `OnChildTaskCreated`.
+* `OnChildTaskRemoved` -- обрабатывает удаление дочернего задания. В стандартной реализации не используется.
+* `OnChildTaskCompleted` -- обрабатывает завершение дочернего задания. В стандартной реализации переустанавливает подписку на события дочернего задания.
+* `OnChildTaskRecalled` -- обрабатывает отзыв дочернего задания. В стандартной реализации не используется.
+* `OnChildTaskGroupCreated` -- обрабатывает создание дочерней группы заданий. В стандартной реализации подписывает родительское задание на событие `StateChangedEvent` дочерней группы.
+* `OnChildTaskGroupRemoved` -- обрабатывает удаление дочерней группы заданий. В стандартной реализации не используется.
+--
++
+Добавленный собственный метод должен иметь другое название (например, `OnTaskRecallRequestedOwn`), но ту же сигнатуру, что и оригинальный.
++
+. Переопределите метод `GetHandlersInfo` базового класса `TaskEventHandlerService`, указав список действующих обработчиков в реализованном компоненте:
++
+[source,csharp]
+----
+protected override IDictionary<Guid, EventHandlerInfo> GetHandlersInfo()
+  {
+      return new Dictionary<Guid, EventHandlerInfo>
+      {
+          {
+              BaseCard.StateChangedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = BaseCard.StateChangedEvent.Id, EventArgsType = typeof(OnStateChangedEventArgs), EventHandlerName = nameof(OnCardStateChanged) }
+          },
+          {
+              Task.RecallRequestedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.RecallRequestedEvent.Id, EventArgsType = typeof(EventServiceEventArgs), EventHandlerName = nameof(OnTaskRecallRequestedOwn) }
+          },
+          {
+              Task.ChildTaskCreatedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskCreatedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskCreated) }
+          },
+          {
+              Task.ChildTaskCopiedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskCopiedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskCopied) }
+          },
+          {
+              Task.ChildTaskRemovedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskRemovedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskRemoved) }
+          },
+          {
+              Task.ChildTaskCompletedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskCompletedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskCompleted) }
+          },
+          {
+              Task.ChildTaskRecalledEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskRecalledEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskRecalled) }
+          },
+          {
+              Task.ChildTaskGroupCreatedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskGroupCreatedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskGroupCreated) }
+          },
+          {
+              Task.ChildTaskGroupRemovedEvent.Id,
+              new EventHandlerInfo
+                  { EventId = Task.ChildTaskGroupRemovedEvent.Id, EventArgsType = typeof(ChildCardEventArgs), EventHandlerName = nameof(OnChildTaskGroupRemoved) }
+          }
+      };
+  }
+----
++
+NOTE: Для `Task.RecallRequestedEvent.Id` был указан собственный обработчик -- `OnTaskRecallRequestedOwn`.
++
+Вместо наследования `TaskEventHandlerService` можно наследовать `EventHandlerService` и реализовать `ITaskEventHandlerService`. В таком случае нужно будет обеспечить обработку всех событий самостоятельно.
++
+. Укажите компонент, содержащий собственную реализацию в Справочнике видов (в секции `Services` у нужного вида задания) с помощью DVExplorer. При этом у данного вида нужно установить флаг `UseOwnServices` в значение True и добавить все обработчики, унаследованные от родительских видов задания (с учётом всей цепочки иерархии), за исключением `TaskEventHandlerService`.
