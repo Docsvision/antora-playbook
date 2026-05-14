@@ -126,7 +126,9 @@ include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[tags=without-restart
 image::install-server-components.png[Выбор компонентов {wc}а для установки]
 . Перезапустите службы {wcs-win} и {wacs-win}.
 +
+ifndef::linux[]
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
+endif::[]
 
 // end::windows[]
 
@@ -321,7 +323,9 @@ ifndef::windows[]
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 endif::windows[]
 +
+ifndef::linux[]
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
+endif::[]
 +
 . Выполните настройку {wc}а, см. "xref:initial-configuration.adoc[]".
 
