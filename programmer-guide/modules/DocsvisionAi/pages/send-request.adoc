@@ -1,0 +1,68 @@
+= Отправка AI запроса
+
+Метод `SendRequestAsync` отправляет текстовый запрос к AI сервису с возможностью передачи файлов и поддержкой истории чата.
+
+.Параметры метода "SendRequestAsync":
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `text` | `string` | Да | Текстовый запрос
+| `files` | `IList<AiFile>` | Да | Файл для передачи в запрос
+| `requestAlias` | `string` | Да | Алиас запроса
+| `serviceAlias` | `string` | Нет a| Алиас LLM сервиса. *Если значение не указано, используется сервис, указанный в конфигурационном файле*
+| `chatId` | `Guid` | Нет | Идентификатор чата, для хранения истории
+| `metadata` | `AiRequestMetadata` | Нет | Метаданные по маскировке
+| `cancellationToken` | `CancellationToken` | Нет | Токен отмены
+|===
+
+.Файл для передачи в запрос, "AiFile":
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `Name` | `string` | Да | Имя файла с расширением
+| `Content` | `Stream` | Да | Поток с содержимым файла
+|===
+
+.Дополнительные метаданные, "AiRequestMetadata":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `NerMaskingValues` | `Array<String>` | Список типов слов
+| `DictionaryMaskingValues` | `Array<String>` | Список слов которые нужно скрыть с учетом лексем
+| `RegexMaskingValues` | `Array<String>` | Список регулярных выражений
+|===
+
+.Тело ответа, "AiResponse":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `Text` | `string` | Текстовый ответ
+| `Data` | `JObject` | JSON из ответа
+|===
+
+.Пример запроса c отправкой файлов и маскировкой данных:
+[source,csharp]
+----
+string[] filePaths = { "C:\\doc1.pdf", "C:\\doc2.pdf" };
+List<AiFile> files = new List<AiFile>();
+
+foreach (var filePath in filePaths)
+{
+    byte[] fileBytes = await File.ReadAllBytesAsync(filePath, cancellationToken);
+    files.Add(new AiFile
+    {
+        Name = Path.GetFileName(filePath),
+        Content = new MemoryStream(fileBytes)
+    });
+}
+
+AiRequestMetadata metadata = new AiRequestMetadata
+{
+    NerMaskingValues = new[] { "PER", "LOC", "ORG" },
+    RegexMaskingValues = new[] { @"\d{4}-\d{4}-\d{4}-\d{4}", @"\+\d{11}" },
+    DictionaryMaskingValues = new[] { "конфиденциально", "секретно" }
+};
+
+AiResponse response = await aiClient.SendRequestAsync("Сравни файлы", files, "FileCompare", "OpenAI", Guid.NewGuid(), metadata, cancellationToken);
+Console.WriteLine("Ответ AI: " + response?.Text);
+----
