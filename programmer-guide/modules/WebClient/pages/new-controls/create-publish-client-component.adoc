@@ -81,8 +81,8 @@ export interface SuperControlState extends SuperControlParams, BaseControlState 
 [source,typescript]
 ----
 export class SuperControlImpl extends BaseControlImpl<SuperControlParams, SuperControlState> {
-    construct() { <.>
-        super.construct();
+    constructor(props: SuperControlParams, state: SuperControlState) { <.>
+        super(props, state);
 
         this.state.firstEvent = SimpleEvent.Create(this.state.wrapper);
     }
@@ -101,14 +101,14 @@ export class SuperControlImpl extends BaseControlImpl<SuperControlParams, SuperC
 Класс реализации является производным от контейнерного класса `BaseControlImpl`, в который передаются `класс параметров` и `интерфейс состояния`. Класс реализации возвращает виртуальный DOM, описывающий пользовательский интерфейс элемента управления.
 
 .Класс реализации содержит два обязательных метода:
-construct::
+constructor::
 В данном методе должны быть выполнены следующие действия:
 +
 * Вызван конструктор базового класса с передачей ему публичных и внутренних свойств ЭУ:
 +
 [source,typescript]
 ----
-super.construct();
+super(props, state);
 ----
 +
 * События, объявленные в классе параметров, должны быть проинициализированы, а внутренние обработчики событий связаны с текущим контекстом. Подробности в пункте xref:new-controls/declare-client-component-events.adoc[Работа с событиями в клиентском компоненте].
