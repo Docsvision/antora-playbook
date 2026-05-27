@@ -15,7 +15,7 @@
 
 . Загрузите систему {es}.
 +
-* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-link}[с сайта {es}] или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
 WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
@@ -25,16 +25,16 @@ WARNING: Рекомендуемая версия: {es} {es-v}. Работосп�
 ====
 {os1}::
 +
- $ sudo dpkg -i elasticsearch-7.14.0-amd64.deb
+ $ sudo dpkg -i elasticsearch-{es-v}-amd64.deb
 
 {os2}::
 +
- $ sudo rpm -i elasticsearch-7.14.0-x86_64.rpm
+ $ sudo rpm -i elasticsearch-{es-v}-x86_64.rpm
 ====
 +
 При желании можно использовать настроенное зеркало репозитория с пакетами {es}.
 +
-. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es} или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
+. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с https://artifacts.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-{es-v}.zip[сайта {es}].
 +
 . Создайте папку `hunspell` с подпапками `en_US` и `ru_RU` в директории:
 +
@@ -43,6 +43,8 @@ WARNING: Рекомендуемая версия: {es} {es-v}. Работосп�
 ОС Windows::
 +
  C:\ProgramData\Elastic\Elasticsearch\config
++
+NOTE: Если {es} распакован из zip-архива, папку `hunspell` необходимо создать в папке `config` в месте размещения эластика. Например, `путь-к-elasticsearch\config\hunspell`.
 
 ОС Linux::
 +
@@ -76,6 +78,8 @@ image::elastic-dictionary-save-as.png[Сохранить как для файл�
 ОС Windows::
 +
  C:\ProgramData\Elastic\Elasticsearch\config\hunspell\ru_RU
++
+NOTE: Если {es} распакован из zip-архива, папку `hunspell` необходимо создать в папке `config` в месте размещения эластика. Например, `путь-к-elasticsearch\config\hunspell`.
 
 ОС Linux::
 +
@@ -89,6 +93,8 @@ image::elastic-dictionary-save-as.png[Сохранить как для файл�
 ОС Windows::
 +
  C:\ProgramData\Elastic\Elasticsearch\config\hunspell\en_US
++
+NOTE: Если {es} распакован из zip-архива, папку `hunspell` необходимо создать в папке `config` в месте размещения эластика. Например, `путь-к-elasticsearch\config\hunspell`.
 
 ОС Linux::
 +
@@ -136,7 +142,7 @@ sudo chown -R root:elasticsearch /etc/elasticsearch/hunspell/
 
 ОС Linux::
 ----
-sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch "file://$(realpath ingest-attachment-7.14.0.zip)" <.>
+sudo /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch "file://$(realpath ingest-attachment-{es-v}.zip)" <.>
 ----
 <.> Если архив с плагином не располагается в текущем рабочем каталоге, можно сменить рабочий каталог или указать абсолютный путь до архива с префиксом `file://`.
 ====
@@ -196,11 +202,11 @@ sudo sysctl --system
 [#docker]
 == Установка с помощью Docker
 
-. Используйте образ `packages.docsvision.com/elasticsearch:7.14.0` или соберите его самостоятельно:
+. Используйте образ `packages.docsvision.com/elasticsearch:{es-v}` или соберите его самостоятельно:
 +
-[source,dockerfile]
+[source,dockerfile,subs=attributes+]
 ----
-FROM elasticsearch:7.14.0
+FROM elasticsearch:{es-v}
 
 RUN elasticsearch-plugin install --batch ingest-attachment
 
@@ -215,17 +221,17 @@ ADD --chown=elasticsearch:root \
     /usr/share/elasticsearch/config/hunspell/ru_RU/
 ----
 +
-. Для загрузки плагина потребуется VPN. Альтернативный вариант -- вместо `ingest-attachment` указать адрес своего веб-сервера с этим архивом, например, `https://example.com/elastic/ingest-attachment-7.14.0.zip`, или использовать локальную копию архива `file://абсолютный-путь-до-архива`, которая может быть добавлена в образ через `COPY`, монтирование, или иным способом.
+. Для загрузки плагина потребуется VPN. Альтернативный вариант -- вместо `ingest-attachment` указать адрес своего веб-сервера с этим архивом, например, `https://example.com/elastic/ingest-attachment-{es-v}.zip`, или использовать локальную копию архива `file://абсолютный-путь-до-архива`, которая может быть добавлена в образ через `COPY`, монтирование, или иным способом.
 +
 . Запустить можно из `docker-compose.yml`, ниже представлен минимальный рабочий вариант:
 +
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 version: "3.8"
 
 services:
   elasticsearch:
-    image: packages.docsvision.com/elasticsearch:7.14.0
+    image: packages.docsvision.com/elasticsearch:{ws-v}
     ports:
       - 9200:9200
     environment:
