@@ -53,9 +53,18 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 :what-mod: {wc}
 include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 +
-. Перезапустите службы *{wcs-new}* и *{wacs-new}*.
+. Перезапустите службы
++
+* Службу *{wcs-new}*.
 ifndef::windows[]
 +
+:no-root-since: {wc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+endif::windows[]
+* Службу *{wacs-new}*.
+ifndef::windows[]
++
+:no-root-since: {mc-no-root-since}
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 endif::windows[]
 --
