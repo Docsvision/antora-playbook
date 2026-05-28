@@ -36,6 +36,17 @@ include::6.2@mgmtconsole:admin:config.adoc[tags=kestrel]
 ----
 <.> URL для доступа к {of-mc}.
 +
-. Сохраните выполненные изменения и перезапустите службы {of-sett-serv} и {of-mc}.
+. Сохраните выполненные изменения и перезапустите службы:
+--
+* Службу {of-sett-serv}.
 +
-Состояние службы должно измениться на "запущена", если конфигурационный файл соответствует эталонному и не содежит ошибок.
+:no-root-since: {ss-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+--
++
+Состояние служб должно измениться на "запущена", если конфигурационный файл соответствует эталонному и не содежит ошибок.
