@@ -11,6 +11,7 @@ include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
 :of: Службы {ws}
 :wt: workerservice
 :config: Configuration
+:no-root-since: модуле {ws} {ws-no-root-since} и в модуле {mc} {mc-no-root-since}
 
 [#linux-server]
 == Установка Службы {ws} на сервер под управлением Linux
@@ -34,7 +35,17 @@ include::6.1@workerservice:ROOT:partial$excerpts.adoc[tags=ws-ext]
 . Выполните следующие команды, чтобы установить {of}:
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Перезапустите службу *{wss-new}* и *{wacs-new}*.
+. Перезапустите службы:
++
+* Службу *{wss-new}*.
++
+:no-root-since: {ws-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу *{wacs-new}*.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 
 // tag::windows[]
 [#windows-server]
