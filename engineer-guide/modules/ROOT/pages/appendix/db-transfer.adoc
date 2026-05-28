@@ -1,7 +1,7 @@
 = Особенности переноса БД
 
 ifeval::[{old-console} == yes]
-include::admin:partial$mancons.adoc[]
+include::6.1@platform:admin:partial$mancons.adoc[]
 endif::[]
 
 == Перенос БД {mssql} Server с понижением редакции
@@ -37,34 +37,3 @@ endif::[]
 ifndef::old-console[]
 . Обновите БД при помощи "xref:6.2@mgmtconsole:servers:db-master.adoc[Мастера баз данных]" из {of-mc}.
 endif::[]
-
-// == Обновление адреса с помощью скрипта
-//
-// . Выполните в БД {dv} один или несколько из следующих скриптов в зависимости от задачи:
-// +
-// [source,pgsql]
-// ----
-// select * from dvsys_setting_set('JOB_HOST_IP'::text, 'IP'::text); <.>
-// select * from dvsys_setting_set('JOB_HOST_NAME'::text, 'host name'::text); <.>
-// select * from dvsys_setting_set('JOB_HOST_PORT'::text, 'port'::text); <.>
-// select * from dvsys_setting_set('JOB_HOST_SSPI'::text, 'true/false'::text); <.>
-// select * from dvsys_setting_set('JOB_HOST_USER'::text, 'UserName'::text); <.>
-// select * from dvsys_setting_set('JOB_HOST_PASSWORD'::text, 'Password'::text); <.>
-// ----
-// <.> Если изменился IP сервера БД.
-// <.> Если изменилось имя сервера БД.
-// <.> Если изменился номер порта.
-// <.> Если изменился способ подключения (`true`/`false` -- `встроенная аутентификация`/`аутентификация по логину и паролю`.
-// <.> Если изменилось имя пользователя.
-// <.> Если изменился пароль.
-// +
-// Измените второй параметр скрипта, передаваемый в функцию `dvsys_setting_set`.
-// +
-// ****
-// Например, для изменения IP-адреса СУБД на 192.168.2.22 выполните скрипт:
-//
-// [source,pgsql]
-// ----
-// select * from dvsys_setting_set('JOB_HOST_IP'::text, '192.168.2.22'::text)
-// ----
-// ****
