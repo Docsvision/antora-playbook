@@ -38,18 +38,21 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 Расширение модуля {wf} для {of-mc} необходимо для получения связанных с модулем ресурсов локализаций, обработчиков и (при наличии) специализированных редакторов для настройки модуля {wf} из {of-mc}.
 +
-. Перезапустите службу *{wfs-new}*.
+. Перезапустите службы:
++
+* Службу *{wfs-new}*.
 ifndef::windows[]
 +
+:no-root-since: {wfs-no-root-since}
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 +
 endif::windows[]
-ifndef::linux[]
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
-endif::[]
+* Службу *{wacs-new}*.
+ifndef::windows[]
 +
-. Перезапустите службу *{wacs-new}*.
-+
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+endif::windows[]
 --
 
 [#windows-server]
@@ -116,6 +119,10 @@ include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 image::install-server-components.png[Выбор компонентов Службы {ws} для установки]
 +
 . Перезапустите службу *{wfs-win}* и *{wacs-win}*.
++
+ifndef::linux[]
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
+endif::[]
 
 [#config]
 == Настройка модуля {wf}
