@@ -76,10 +76,21 @@ include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :of: Расширения сервера приложений для {of-mc}
 :wt: ext-platform-mc
 :sss-new: dvappserver
+:no-root-since: модуле {pl} {pl-no-root-since} и в модуле {mc} {mc-no-root-since}
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Перезапустите службы Сервера {dv} и {of-mc}.
+. Перезапустите службы:
++
+* Службу Сервера {dv}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 --
 
 [#fs-ext-linux]
@@ -96,7 +107,17 @@ include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Перезапустите службы {of-fs} и {of-mc}.
+. Перезапустите службы:
++
+* Службу {of-fs}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 --
 
 include::6.1@platform:console:search-full-text.adoc[tags=install-ft-lin]
