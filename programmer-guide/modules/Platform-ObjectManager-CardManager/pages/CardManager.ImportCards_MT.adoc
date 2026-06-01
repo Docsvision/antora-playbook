@@ -29,9 +29,21 @@ stream:::
 
 == Примеры
 
+Обычно для импорта карточки достаточно передать поток XML-данных в метод `ImportCards`. Инспектор для обработки событий импорта не требуется.
+
+.Импорт карточки из XML-файла (без использования инспектора)
+[source,csharp]
+----
+FileStream file = new FileStream(@"C:\TestCard.xml", FileMode.Open);
+CardDataCollection cards = session.CardManager.ImportCards(file);
+----
+
+Если необходимо управлять процессом импорта (например, заменять ссылки, обрабатывать конфликты или логировать события), используйте перегрузку метода, принимающую инспектор, наследуемый от `ImportCardInspector`.
+
+.Импорт карточки с использованием инспектора
 [source,csharp]
 ----
 FileStream file = new FileStream(@"..\TestCard.xml", FileMode.Open);
 ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session);
-CardDataCollection cards = session.CardManager.ImportCards(file);
+CardDataCollection cards = session.CardManager.ImportCards(file, inspector);
 ----
