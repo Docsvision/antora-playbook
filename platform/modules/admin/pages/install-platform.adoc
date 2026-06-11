@@ -76,10 +76,22 @@ include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :of: Расширения сервера приложений для {of-mc}
 :wt: ext-platform-mc
 :sss-new: dvappserver
+:no-root-since: модуле {pl} {pl-no-root-since} и в модуле {mc} {mc-no-root-since}
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
++
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Перезапустите службы Сервера {dv} и {of-mc}.
+. Перезапустите службы:
++
+* Службу Сервера {dv}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 --
 
 [#fs-ext-linux]
@@ -94,9 +106,20 @@ include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
 :wt: ext-fileservice-mc
 :fss-new: dvfileservice
 . Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
++
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
-. Перезапустите службы {of-fs} и {of-mc}.
+. Перезапустите службы:
++
+* Службу {of-fs}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
 --
 
 include::6.1@platform:console:search-full-text.adoc[tags=install-ft-lin]
@@ -206,11 +229,8 @@ include::6.1@platform:console:search-full-text.adoc[tags=install-ft-win]
 [#config-ft]
 == Настройка сервиса полнотекстового индексирования
 
+:no-root-since: модуле {pl} {pl-no-root-since}
 include::console:search-full-text.adoc[tags=appsettings]
-+
-. Запустите службу Сервиса полнотекстового индексирования.
-+
-include::install-linux:ROOT:partial$restart-and-db.adoc[]
 
 [#old-method]
 == (Старый метод) Установка без {of-mc}
@@ -267,7 +287,7 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
   }
 }
 ----
-<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#conn-string[Конфигурация модуля {pl}]".
 +
 . Запустите службу {of-fs}:
 +
@@ -279,5 +299,8 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 . На машине Windows запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям мастера установки. На шаге выбора компонентов укажите все компоненты.
-. Откройте конфигурационный файл {config-ft} в любом текстовом редакторе и выполните необходимые настройки сервиса:
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+Откройте конфигурационный файл {config-ft} в любом текстовом редакторе и выполните необходимые настройки сервиса:
 . <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
