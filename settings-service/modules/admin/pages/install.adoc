@@ -73,7 +73,7 @@ image::install-server-confirm.png[Мастер установки серверн
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
-В конфигурационном файле по адресу {config-ss} необходимо выполнить минимальные настройки: `ApiKey`, `StorageType`, `StorageOptions`, `EncryptionCertificate`.
+В конфигурационном файле по адресу {config-ss} необходимо выполнить минимальные настройки: `ApiKey`, `StorageType`, `StorageOptions`.
 +
 --
 .Фрагмент конфигурационного файла:
@@ -91,6 +91,11 @@ image::install-server-confirm.png[Мастер установки серверн
         "ProviderType": "Hierarchy"
       }
     ]
+  },
+  "EncryptionCertificate: { <.>
+    "Path": "/folder/certificate.crt", <.>
+  }
+  <.>
   }
 }
 ----
@@ -100,6 +105,7 @@ image::install-server-confirm.png[Мастер установки серверн
 ifndef::installation[]
 При наличии БД {of-sett-serv} предыдущей версии, можно использовать её.
 endif::[]
+<.> Настройки, записываемые в {sett-serv}, рекомендуется защищать при помощи шифрования. См. подробнее "xref:encrypt-service-settings.adoc[]".
 --
 +
 . После сохранения настроек в конфигурационном файле запустите службу {of-sett-serv}.
