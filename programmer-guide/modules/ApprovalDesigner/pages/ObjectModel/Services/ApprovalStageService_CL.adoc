@@ -83,7 +83,14 @@ public class ApprovalStageService : ContextService, IApprovalStageService
 |Копирует согласующих из документа в этап.
 
 |`ComputeApproversForStage(ApprovalStage, Reconcile, ApprovalPath)`
-|Вычисляет согласующих при запуске этапа.
+a|Вычисляет согласующих при запуске этапа.
+
+.Параметры:
+* `approvalStage` -- текущий этап
+* `reconcileCard` -- согласование
+* `approvalPath` -- маршрут
+
+*Возвращаемое значение*: List<`xref:BackOffice-ObjectModel-Staff:StaffEmployee_CL.adoc[StaffEmployee]`> -- список согласующих
 
 |`GetStageApprovers(ApprovalStage, Document)`
 
