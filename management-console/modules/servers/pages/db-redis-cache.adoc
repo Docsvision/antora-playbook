@@ -2,6 +2,8 @@
 
 Важным условием для корректной работы системы, включающей несколько процессов сервера {dv}, является использование всеми процессами общего серверного кэша. Рассинхронизация кэша может стать причиной появления неактуальных данных и других ошибок. В качестве хранилища распределенного кэша в {dv} выступает кэш-сервер Redis.
 
+{dv} поддерживает работу с Redis версии {redis-v}, совместимость с более поздними версиями не гарантируется.
+
 [WARNING]
 ====
 Для работы с Redis лицензия {dv} должна содержать опцию _{dv} кэш-сервер Redis_. Отсутствие лицензии приведёт к ошибке в работе сервера {dv}.
@@ -9,7 +11,13 @@
 Кэш-сервер Redis не поддерживает работу в ОС Microsoft Windows.
 ====
 
-Инструкцию по установке Redis см. в документации к https://redis.io/docs/getting-started/installation/[кэш-серверу]. Системные требования Redis зависят от желаемой производительности, ориентиры представлены в статье https://web.archive.org/web/20241007143629/https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/benchmarks/[How fast is Redis?], и требованиях https://web.archive.org/web/20240318121627/https://docs.redis.com/latest/rs/installing-upgrading/install/plan-deployment/hardware-requirements/[Redislabs].
+Системные требования Redis зависят от желаемой производительности и должны рассчитываться индивидуально для используемой ОС. Описание требований выходит за рамки документации {dv}, как и инструкция по установке.
+
+Официальная документация Redis может быть получена из интернет-архива:
+
+* https://web.archive.org/web/20241007143629/https://redis.io/docs/latest/operate/oss_and_stack/management/optimization/benchmarks/[Ориентиры производительности]
+* https://web.archive.org/web/20240318121627/https://docs.redis.com/latest/rs/installing-upgrading/install/plan-deployment/hardware-requirements/[Технические требования]
+* https://web.archive.org/web/20231216171806/https://redis.io/docs/getting-started/installation/[Инструкция по установке]
 
 [#requirements]
 == Требования к настройке Redis
