@@ -136,7 +136,6 @@ WARNING: После редактирования конфигурационны�
  $ sudo dnf install openssl
 ====
 +
-ifndef::account-protection[]
 . Создайте самоподписанный сертификат SSL.
 +
 --
@@ -144,8 +143,7 @@ ifndef::account-protection[]
 
 <.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
 --
-endif::[]
-ifdef::account-protection[]
++
 . Сгенерируйте и сохраните сертификат `docsvision.pfx`:
 +
 --
@@ -153,7 +151,6 @@ ifdef::account-protection[]
 
 Пароль на сертификат указывать не нужно. Имена файлов ключей и пути можно указывать произвольные.
 --
-endif::[]
 +
 . Добавьте сертификат в доверенные, скопировав его в директорию `/usr/local/share/ca-certificates/`.
 . Обновите список доверенных сертификатов:
