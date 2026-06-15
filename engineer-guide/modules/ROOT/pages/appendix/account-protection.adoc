@@ -48,11 +48,12 @@ NOTE: Для шифрования паролей потребуется испо
 /usr/lib/docsvision/tools/encryption/encryption [command] [options]
 ----
 
+// tag::self-signed[]
 // tag::certificate[]
 [#lin-cr-cert]
 == Создание {chego} в Linux
 
-include::../https-connection.adoc[tag=lin-gen]
+include::../https-connection.adoc[tags=lin-gen]
 +
 [[earlier]]Полученный сертификат в формате `.pfx` необходимо скопировать в каталог `~/.dotnet/corefx/cryptography/x509stores/my`. Если каталог отсутствует, создайте его самостоятельно. Пользователь, выполняющий шифрование, должен обладать правами на чтение и выполнение файлов в каталоге, а также правами на чтение сертификата.
 // end::certificate[]
@@ -73,6 +74,7 @@ encryption.exe [command] [options]
 ----
 "C:\Program Files\Docsvision\Platform\Tools\encryption.exe" [command] [options]
 ----
+// end::self-signed[]
 
 [#win-cr-cert]
 == Создание сертификата в Windows
