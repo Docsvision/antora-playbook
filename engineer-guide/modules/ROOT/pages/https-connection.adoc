@@ -44,7 +44,7 @@
       "Https": {
         "Url": "https://*:5020", <.>
         "Certificate": {
-          "Path": "/folder/certificate.crt", <.>
+          "Path": "/folder/docsvision.crt", <.>
           "KeyPath": "/folder/docsvision.key" <.>
         }
       }
@@ -139,9 +139,9 @@ WARNING: После редактирования конфигурационны�
 . Создайте самоподписанный сертификат SSL.
 +
 --
- $ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out certificate.crt -subj "/CN=example.company.com" -addext subjectAltName=DNS:example.company.com <.>
+ $ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out docsvision.crt -subj "/CN=example.company.com" -addext subjectAltName=DNS:example.company.com <.>
 
-<.> Замените `docsvision.key` и `certificate.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
+<.> Замените `docsvision.key` и `docsvision.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
 --
 +
 . Сгенерируйте и сохраните сертификат `docsvision.pfx`:
@@ -149,7 +149,7 @@ WARNING: После редактирования конфигурационны�
 --
  $ openssl pkcs12 -inkey docsvision.key -in docsvision.crt -export -out docsvision.pfx <.>
 
-Пароль на сертификат указывать не нужно. Имена файлов ключей и пути можно указывать произвольные.
+Пароль на сертификат указывать не нужно.
 --
 +
 . Добавьте сертификат в доверенные, скопировав его в директорию `/usr/local/share/ca-certificates/`.
@@ -224,7 +224,7 @@ image::dv6@engineer:ROOT:certificate-install.png[Сертификат готов
       "Https": {
         "Url": "https://*:ПОРТ-HTTPS", <.>
         "Certificate": {
-			  "Path": "/folder/certificate.crt", <.>
+			  "Path": "/folder/docsvision.crt", <.>
         "KeyPath": "/folder/docsvision.key" <.>
 		    }
       }
@@ -234,8 +234,8 @@ image::dv6@engineer:ROOT:certificate-install.png[Сертификат готов
 ----
 <.> URL для подключения по протоколу HTTP.
 <.> URL для подключения по протоколу HTTPS.
-<.> Локальное расположение сертификата, созданного <<before,ранее>>.
-<.> Локальное расположение ключа шифрования для сертификата, созданного <<before,ранее>>.
+<.> Локальное расположение сертификата, созданного ранее.
+<.> Локальное расположение ключа шифрования для сертификата, созданного ранее.
 +
 . Перезапустите службу web-сервиса.
 . Проверьте подключение. Если настройки выполнены корректно, система должна работать без ошибок.
