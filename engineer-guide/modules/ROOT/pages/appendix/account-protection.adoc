@@ -51,8 +51,13 @@ NOTE: Для шифрования паролей потребуется испо
 // tag::self-signed[]
 
 // tag::certificate[]
+ifndef::encrypt-sserv[]
 [#lin-cr-cert]
 == Создание и установка {chego} в Linux
+endif::encrypt-sserv[]
+ifdef::encrypt-sserv[]
+== Создание {chego} в Linux
+endif::encrypt-sserv[]
 
 include::../https-connection.adoc[tags=lin-gen]
 ifndef::encrypt-sserv[]
