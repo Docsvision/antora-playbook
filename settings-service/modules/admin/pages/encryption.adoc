@@ -52,6 +52,18 @@ include::dv6@engineer:ROOT:appendix/account-protection.adoc[tags=self-signed]
 == Указание отпечатка сертификата
 
 . Сгенерированный самоподписанный сертификат необходимо скопировать в директорию `/usr/local/share/ca-certificates/`.
+. Обновите список доверенных сертификатов:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo update-ca-certificates
+
+{os2}::
++
+ $ sudo update-ca-trust
+====
 +
 . Укажите в конфигурационном файле отпечаток сертификата:
 +
@@ -78,7 +90,10 @@ include::dv6@engineer:ROOT:appendix/account-protection.adoc[tags=self-signed]
 
 Поиск сертификата по отпечатку будет выполняться в хранилище "Мои сертификаты" от имени пользователя, под которым запускается {sett-serv} (по умолчанию -- системный пользователь {dv} в Linux и Network Service в Windows). На случай если первый поиск не даст результатов, для Windows предусмотрен также поиск сертификата в хранилище "Локальный компьютер".
 
+[NOTE]
+====
 include::edi:admin:encryption.adoc[tags=cert-loc]
+====
 
 [#private]
 == Установка сертификата с приватной частью
