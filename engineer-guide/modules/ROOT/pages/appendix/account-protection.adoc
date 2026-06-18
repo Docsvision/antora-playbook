@@ -48,22 +48,14 @@ NOTE: Для шифрования паролей потребуется испо
 /usr/lib/docsvision/tools/encryption/encryption [command] [options]
 ----
 
-// tag::self-signed[]
-
 // tag::certificate[]
-ifndef::encrypt-sserv[]
 [#lin-cr-cert]
 == Создание и установка {chego} в Linux
-endif::encrypt-sserv[]
-ifdef::encrypt-sserv[]
-== Создание {chego} в Linux
-endif::encrypt-sserv[]
 
 include::../https-connection.adoc[tags=lin-gen]
-ifndef::encrypt-sserv[]
 +
+// tag::self-signed[]
 . [[earlier]]Полученный сертификат в формате `.pfx` необходимо скопировать в каталог `~/.dotnet/corefx/cryptography/x509stores/my`. Если каталог отсутствует, создайте его самостоятельно. Пользователь, выполняющий шифрование, должен обладать правами на чтение и выполнение файлов в каталоге, а также правами на чтение сертификата.
-endif::encrypt-sserv[]
 // end::certificate[]
 
 // end::self-signed[]
@@ -85,8 +77,6 @@ encryption.exe [command] [options]
 "C:\Program Files\Docsvision\Platform\Tools\encryption.exe" [command] [options]
 ----
 
-// tag::self-signed[]
-
 :encypt-sserv:
 [#win-cr-cert]
 == Создание и установка {chego} в Windows
@@ -94,8 +84,6 @@ encryption.exe [command] [options]
 Сертификат можно сгенерировать в Windows и экспортировать в формате `.pfx` без пароля, действия аналогичны описанным в разделе "<<lin-cr-cert,Создание {chego} в Linux>>".
 
 В Windows полученный сертификат необходимо установить в хранилище сертификатов текущего пользователя.
-
-// end::self-signed[]
 
 // tag::windows[]
 
