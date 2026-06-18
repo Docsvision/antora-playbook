@@ -58,8 +58,22 @@ include::dv6@engineer:ROOT:https-connection.adoc[tags=lin-gen]
 +
 include::dv6@engineer:ROOT:appendix/account-protection.adoc[tags=self-signed]
 +
+include::dv6@engineer:ROOT:https-connection.adoc[tags=ca-certificates]
++
+[NOTE]
+=====
+include::edi:admin:encryption.adoc[tags=cert-loc-l]
+=====
++
+.Создание и установка {chego} в Windows:
 include::dv6@engineer:ROOT:https-connection.adoc[tags=win-gen]
 +
+[NOTE]
+=====
+include::edi:admin:encryption.adoc[tags=cert-loc-w]
+=====
++
+.Указание отпечатка сертификата:
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
@@ -87,11 +101,6 @@ include::dv6@engineer:ROOT:https-connection.adoc[tags=win-gen]
 . После редактирования конфигурационного файла сохраните изменения и перезапустите службу {sett-serv}.
 +
 Поиск сертификата по отпечатку будет выполняться в хранилище "Мои сертификаты" от имени пользователя, под которым запускается {sett-serv} (по умолчанию -- системный пользователь {dv} в Linux и Network Service в Windows). На случай если первый поиск не даст результатов, для Windows предусмотрен также поиск сертификата в хранилище "Локальный компьютер".
-+
-[NOTE]
-=====
-include::edi:admin:encryption.adoc[tags=cert-loc]
-=====
 
 ======
 
