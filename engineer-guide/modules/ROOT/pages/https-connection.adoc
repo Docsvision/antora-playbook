@@ -138,21 +138,23 @@ WARNING: После редактирования конфигурационны�
 +
 . Создайте самоподписанный сертификат SSL.
 +
---
- $ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out docsvision.crt -subj "/CN=example.company.com" -addext subjectAltName=DNS:example.company.com <.>
-
+[source]
+----
+$ openssl req -x509 -newkey rsa:2048 -keyout docsvision.key -nodes -out docsvision.crt -subj "/CN=example.company.com" -addext subjectAltName=DNS:example.company.com <.>
+----
 <.> Замените `docsvision.key` и `docsvision.crt` на собственные названия для ключа и сертификата, вместо `/CN=example.company.com` укажите адрес сервера {dv} на Linux, например, `/CN=help.docsvision.com`.
---
 +
 . Сгенерируйте и сохраните сертификат `docsvision.pfx`:
 +
---
- $ openssl pkcs12 -inkey docsvision.key -in docsvision.crt -export -out docsvision.pfx <.>
-
+[source]
+----
+$ openssl pkcs12 -inkey docsvision.key -in docsvision.crt -export -out docsvision.pfx <.>
+----
++
 Пароль на сертификат указывать не нужно.
---
 +
 ifndef::encrypt-sserv[]
+// tag::ca-certificates[]
 . Добавьте сертификат в доверенные, скопировав его в директорию `/usr/local/share/ca-certificates/`.
 . Обновите список доверенных сертификатов:
 +
@@ -166,6 +168,7 @@ ifndef::encrypt-sserv[]
 +
  $ sudo update-ca-trust
 ====
+// end::ca-certificates[]
 endif::encrypt-sserv[]
 
 // end::lin-gen[]
