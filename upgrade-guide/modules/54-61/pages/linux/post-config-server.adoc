@@ -84,7 +84,13 @@ endif::engineer[]
 ----
 <.> Вместо `MyOwnCardLib.xml` укажите собственное название файла со схемой библиотеки карточек.
 +
-Данная библиотека карточек станет доступна для загрузки при xref:./db-update.adoc[обновлении БД {dv}].
+Данная библиотека карточек станет доступна для загрузки при
+ifdef::linux,windows[]
+xref:./db-update.adoc[обновлении БД {dv}].
+endif::[]
+ifdef::engineer[]
+xref:6.2@mgmtconsole:servers:db-update.adoc[обновлении БД {dv}].
+endif::engineer[]
 +
 Если дополнительно было разработано собственное решение, его также потребуется адаптировать согласно инструкции, описанной в руководстве по разработке, "xref:programmer:solutions:cards/develop-solution.adoc[]".
 // +
