@@ -8,9 +8,10 @@
 Получить контекст объектов можно используя функции сервиса `ICurrentObjectContextProvider`:
 
 * `GetOrCreateCurrentSessionContext` -- возвращает контекст объектов текущего пользователя.
+* `GetOrCreateExclusivePoolSessionContext` -- возвращает контекст объектов из отдельного пула сессий {wc}а.
 // * `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
 
-WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой.
+WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой. Вместо `GetOrCreateApplicationPoolSessionContext` рекомендуется использовать `GetOrCreateExclusivePoolSessionContext` с освобождением сессий (см. ниже).
 
 Сервис `ICurrentObjectContextProvider` может быть получен следующим способом:
 
@@ -23,6 +24,19 @@ public DocumentRegistrationController(ICurrentObjectContextProvider currentObjec
     _currentObjectContextProvider = currentObjectContextProvider;
 }
 ----
+
+После использования полученный через `GetOrCreateExclusivePoolSessionContext` контекст необходимо освобождать, т.к. он арендует сессию из отдельного пула сессий {wc}а. После завершения работы сессия должна быть возвращена обратно в пул.
+
+Количество одновременно арендованных сессий ограничено пятью. Если полученные контексты не освобождать, новые запросы сессии могут завершиться ошибкой из-за исчерпания лимита.
+
+[source,csharp]
+----
+using (var pooledSessionContext = currentObjectContextProvider.GetOrCreateExclusivePoolSessionContext())
+{
+    var sessionContext = pooledSessionContext.Context; <.>
+}
+----
+<.> Работа с `SessionContext`.
 
 {wc} периодически закрывает неиспользуемые пользовательские сессии, из-за чего контекст объектов, сохранённый в статический объект класса (серверного расширения или контроллера), спустя время станет недействительным. *Всегда получайте контекст объектов заново* (с помощью функции `GetOrCreateCurrentSessionContext`).
 
