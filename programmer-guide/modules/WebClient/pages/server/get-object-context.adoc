@@ -11,7 +11,7 @@
 * `GetOrCreateExclusivePoolSessionContext` -- возвращает контекст объектов из отдельного пула сессий {wc}а.
 // * `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
 
-WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой. Вместо `GetOrCreateApplicationPoolSessionContext` рекомендуется использовать `GetOrCreateExclusivePoolSessionContext` с освобождением сессий (см. ниже).
+WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой.
 
 Сервис `ICurrentObjectContextProvider` может быть получен следующим способом:
 
