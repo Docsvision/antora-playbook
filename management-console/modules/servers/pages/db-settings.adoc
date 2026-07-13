@@ -28,3 +28,10 @@ include::partial$excerpts.adoc[tags=dbversion]
 include::partial$excerpts.adoc[tags=dbupdate]
 include::partial$excerpts.adoc[tags=dbdefault]
 include::partial$excerpts.adoc[tags=actionbuttons]
+
+[WARNING]
+====
+// tag::wf-settings[]
+Настройки БД в компоненте {wf} автоматически не удаляются после отключения БД от Сервера приложений, из-за чего в журналах приложения могут появляться ошибки. Чтобы устранить ошибки, удалите связанные с этой базой записи на странице расширенных настроек компонента {wf}, затем перезапустите службу Workflow.
+// end::wf-settings[]
+====
