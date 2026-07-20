@@ -38,7 +38,7 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
 . TLS-кривые: `X25519`, `prime256v1`, `secp384r1`.
 . Тип сертификата: ECDSA (P-256) (рекомендуется), RSA (`2048` бит).
 . В параметрах Диффи-Хеллмана рекомендуется использовать размер ключа `2048` бит и профиль: `ffdhe2048` (RFC 7919).
-. Для всех HTTPS-соединений должна быть включена политика HSTS с макимальным сроком действия два года: `max-age=63072000`.
+. Для всех HTTPS-соединений должна быть включена политика HSTS с максимальным сроком действия два года: `max-age=63072000`.
 . Срок действия сертификата должен составлять от 90 дней (рекомендуется) до 366 дней (максимально допустимый).
 . Выбор шифра "на усмотрение клиента" (`client chooses`).
 
@@ -98,15 +98,15 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
     "Endpoints": {
       "Https": {
 //      См. выше
-       },
-      "Hsts": {
-		  "Enable": false, <.>
-		  "MaxAge": 31536000, <.>
-		  "IncludeSubDomains": true, <.>
-		  "Preload": true, <.>
-		  "RedirectHttpToHttps": true <.>
-      }
+       }
     }
+  },
+  "Hsts": {
+    "Enable": false, <.>
+    "MaxAge": 31536000, <.>
+    "IncludeSubDomains": true, <.>
+    "Preload": true, <.>
+    "RedirectHttpToHttps": true <.>
   }
 }
 ----
@@ -146,15 +146,15 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
     "Endpoints": {
       "Https": {
 //      См. выше
-       },
-      "Hsts": {
-		  "Enable": false, <.>
-		  "MaxAge": 31536000, <.>
-		  "IncludeSubDomains": true, <.>
-		  "Preload": true, <.>
-		  "RedirectHttpToHttps": true <.>
-      }
+       }
     }
+  },
+  "Hsts": {
+    "Enable": false, <.>
+    "MaxAge": 31536000, <.>
+    "IncludeSubDomains": true, <.>
+    "Preload": true, <.>
+    "RedirectHttpToHttps": true <.>
   }
 }
 ----
