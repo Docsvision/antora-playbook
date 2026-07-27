@@ -121,9 +121,10 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
 [#linux]
 == Настройка TLS в Linux
 
-Во многих дистрибутивах Linux конфигурационный файл OpenSSL располагается по адресу `/etc/ssl/openssl.cnf`, подробнее параметры описаны в https://docs.openssl.org/3.6/man5/config/#ssl-configuration[документации утилиты].
+Во многих дистрибутивах Linux конфигурационный файл OpenSSL располагается по адресу `/etc/ssl/openssl.cnf`, подробнее параметры конфигурации описаны в https://docs.openssl.org/3.6/man5/config/#ssl-configuration[документации OpenSSL].
 
-. В команде запуска OpenSSL поддерживаются две https://docs.openssl.org/master/man3/SSL_CONF_cmd/#supported-configuration-file-commands[опции для задания наборов шифров]:
+.Настройте https://docs.openssl.org/master/man3/SSL_CONF_cmd/#supported-configuration-file-commands[параметры Open SSL]:
+. OpenSSL поддерживает две опции для задания наборов шифров:
 +
 --
 * `Ciphersuites` -- задаёт набор шифров для TLSv1.3.
@@ -133,9 +134,9 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
 Наборы шифров указываются через запятую, наборы для TLSv1.2 добавляются к TLSv1.3 и наоборот.
 +
 . Опция `MinProtocol` задаёт минимальный поддерживаемый протокол, рекомендуется использовать TLSv1.2 или TLSv1.3.
-. ECC-кривые настраиваются при помощи опции `Curves`, синонимичной `https://docs.openssl.org/master/man3/SSL_CONF_cmd/#supported-command-line-commands:~:text=be%20used%20instead.-,%2Dgroups,-groups[Groups]`.
+. ECC-кривые настраиваются при помощи опции `Curves`, синонимичной `Groups`.
 . Алгоритм подписи и тип ключа выбираются в момент выпуска сертификата.
-. Набор параметров Диффи-Хеллмана задаётся опцией `https://docs.openssl.org/master/man3/SSL_CONF_cmd/#supported-configuration-file-commands:~:text=the%20function%20SSL_CTX_use_serverinfo_file.-,DHParameters,-Attempts%20to%20use[DHParameters]`. Опция поддерживается, только если разрешены операции с сертификатом.
+. Набор параметров Диффи-Хеллмана задаётся опцией `DHParameters`. Опция поддерживается, только если разрешены операции с сертификатом.
 . Укажите настройки HSTS в конфигурационных файлах модулей системы:
 +
 [source,json]
@@ -165,4 +166,4 @@ NOTE: Протоколы TLS 1.0, TLS 1.1, SSLv2, SSLv3 являются уст�
 * `RedirectHttpToHttps` -- автоматически перенаправлять HTTP to HTTPS (по умолчанию true)
 +
 . Срок действия сертификата выбирается в момент выпуска.
-. По умолчанию используется политика "на усмотрение клиента" (`client chooses`). Убедитесь, что параметр `ServerPreference` не включён, иначе выбор останется за сервером.
+. Убедитесь, что в параметре `Options` не указано `ServerPreference`, чтобы выбор оставался за клиентом. По умолчанию используется политика "на усмотрение клиента" (`client chooses`).
