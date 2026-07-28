@@ -59,6 +59,8 @@ API-ключ для подключения к серверу::
 Используется для аутентификации в API данного сервиса {wf} Сервера приложенийfootnote:[
 include::partial$excerpts.adoc[tags=analog-param]
 ]. Можно оставить значение по умолчанию или изменить, главное условие, чтобы значения в конфигурации модулей {pl} и {wf} были одинаковые. Обязательная настройка.
++
+include::partial$excerpts.adoc[tags=use-cryption]
 
 :parameter: SystemUserAccount
 Имя системного пользователя::
@@ -70,15 +72,21 @@ include::partial$excerpts.adoc[tags=analog-param]
 Пароль системного пользователя::
 Парольfootnote:[
 include::partial$excerpts.adoc[tags=analog-param]
-] системной УЗ для взаимодействия с Сервером приложений, рекомендуется хранить в зашифрованном виде, см. подробнее раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы. Обязательная настройка.
+] системной УЗ для взаимодействия с Сервером приложений.
++
+include::partial$excerpts.adoc[tags=use-cryption]
 
 [#cert-stamp]
+:module: {wf}
 :parameter: DataProtectCertificateThumbprint
+:mdl-encr-req: {wf-encr-req}
 Штамп сертификата шифрования паролей::
 Отпечаток закрытого ключа шифрования SHA1footnote:[
 include::partial$excerpts.adoc[tags=analog-param]
 ]. Указывается без двоеточия, например, `D8602179888DC8402B393F11DCA16A3376DDF879`, см. подробнее раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]" в руководстве по настройке системы. +
 Если шифровать пароль системной учётной записи не планируется, параметр можно не указывать.
++
+include::partial$excerpts.adoc[tags=setting-removed]
 
 :parameter: MemorySize
 Лимит памяти, Мбайт::
