@@ -17,6 +17,7 @@ include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
 .См. также:
 * Настройка для {of-mc} описана в разделе "xref:6.2@mgmtconsole:admin:ldaps-authentication.adoc[]".
 * Настройка из конфигурационного файла для {wc}а описана в разделе "xref:6.1@webclient:admin:no-active-dir.adoc[]".
+* Настройка для {of-sm} описана в разделе "xref:GBL-4266@solutionmngr:admin:ldaps-ald.adoc[]".
 
 // [#ldaps]
 // == Коннектор к LDAPS
@@ -107,18 +108,24 @@ include::6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[tags=setup]
 [source,json]
 ----
 {
-  "Authentication": {
-	  "Extensions": {
-      "ALDPro": {
-        "Name": "ALDPro", <.>
-        "TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
-        "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
-        "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
-		  }
-	  },
-	  "Tenants": { <.>
-	  }
-	}
+  "Docsvision": {
+    "Platform": {
+      "Server": {
+        "Authentication": {
+	        "Extensions": {
+            "ALDPro": {
+              "Name": "ALDPro", <.>
+              "TypeName": "DocsVision.Platform.Authentication.LDAP.ALDProBasicRootAuthExtension, DocsVision.Platform.Authentication, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519", <.>
+              "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>XXX.XXX.XXX.XXX</string></LdapServerAddresses><Port>389</Port><EnableLDAPS>true</EnableLDAPS><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><Credential><UserName>user@example.com</UserName><Password>Password</Password></Credential></LdapConnectorOptions>", <.>
+              "Id": "{36351525-8FCE-48AB-8AD3-4C1FA575FF77}" <.>
+		        }
+	        },
+	        "Tenants": { <.>
+	        }
+	      }
+      }
+    }
+  }
 }
 ----
 <.> `Name` -- название коннектора.
@@ -215,11 +222,11 @@ include::dv6@engineer::partial$excerpts.adoc[tags=pretty]
 . При добавлении сотрудника с учётной записью из ALD Pro каталога может появиться сообщение о невозможности вычисления SID. Это допустимо, и для продолжения необходимо подтвердить сохранение сотрудника.
 +
 .Подтвердите сохранение сотрудника
-image::sid.png[Подтвердите сохранение сотрудника]
+image::dv6@engineer:ROOT:sid.png[Подтвердите сохранение сотрудника]
 +
 . Если *не* настроены доверительные отношения между Microsoft Active Directory и ALD Pro (или другой службой каталогов) на машине, где запускается {wincl}, назначение прав будет доступно в ограниченном варианте -- только выбор пользователей из справочника сотрудников:
 +
 .Выбор учётной записи
-image::selection.png[Выбор учётной записи]
+image::dv6@engineer:ROOT:selection.png[Выбор учётной записи]
 +
 . На данный момент поддержан сценарий изначальной настройки с альтернативной службой каталогов без перехода с Active Directory.
