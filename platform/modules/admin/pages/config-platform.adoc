@@ -1,6 +1,8 @@
 :do-what: варианты конфигурации модуля
 :with-unique: yes
 :with-config: no
+:platform-config: true
+:of-what: {of-fs}
 
 // tag::settings[]
 = Конфигурация Сервера приложений
@@ -135,42 +137,6 @@ endif::old-console[]
 Нажмите кнопку *Применить* в правом верхнем углу окна Консоли, чтобы применить настройки сервера приложений и перезапустите службу {sss-new}.
 // end::settings[]
 
-[#fs-config]
-== Конфигурация {of-fs} в конфигурационном файле
-
-. Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
-+
---
-[source,json]
-----
-{
-  "DocsVision": {
-    "Server": {
-      "Databases": {
-        "alias": "Database-connection-string" <.>
-      }
-    }
-  },
-  "NLog": { <.>
-  },
-  "AllowedHosts": "*",
-  "Kestrel": { <.>
-  }
-}
-----
-<.> `alias` -- <<connection-string,строка подключения>> к БД.
-<.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
-<.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
---
-+
-. После сохранения изменений в конфигурационном файле перезапустите службу {of-fs}.
-ifndef::windows[]
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
-endif::windows[]
-ifndef::linux[]
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
-endif::[]
-
 [#fs-mancons]
 == Конфигурация {of-fs} в консоли
 
@@ -274,6 +240,42 @@ include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=system-accounts]
 +
 <.> `SystemUserPassword` -- пароль системной УЗ рекомендуется хранить в зашифрованном виде, см. подробнее в документации по установке системы, раздел "xref:dv6@engineer:ROOT:appendix/account-protection.adoc[]".
 <.> `Logging` -- настройка упразднена, используйте параметр `LogFile` или настройте журналирование с помощью xref:6.1@platform:console:logs.adoc#file[NLog].
+
+[#fs-config]
+== (Старый метод) Конфигурация {of-fs} в конфигурационном файле
+
+. Укажите существующую БД, заполнив строку подключения к БД в конфигурационном файле:
++
+--
+[source,json]
+----
+{
+  "DocsVision": {
+    "Server": {
+      "Databases": {
+        "alias": "Database-connection-string" <.>
+      }
+    }
+  },
+  "NLog": { <.>
+  },
+  "AllowedHosts": "*",
+  "Kestrel": { <.>
+  }
+}
+----
+<.> `alias` -- <<connection-string,строка подключения>> к БД.
+<.> `NLog` -- настройки жерналирования, см. "xref:console:logs.adoc#file[Журнал работы файлового сервиса]"
+<.> `Kestrel` -- настройка доступа к Storage Server по HTTPS, см. подробнее xref:dv6@engineer:ROOT:https-connection.adoc[].
+--
++
+. После сохранения изменений в конфигурационном файле перезапустите службу {of-fs}.
+ifndef::windows[]
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+endif::windows[]
+ifndef::linux[]
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=nt-service]
+endif::[]
 
 include::6.1@settings-service:admin:install.adoc[tags=string]
 
