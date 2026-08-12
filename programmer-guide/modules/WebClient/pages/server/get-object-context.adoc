@@ -5,14 +5,7 @@
 Разработчику доступен пользовательский контекст объектов. Пользовательский контекст создаётся для каждого пользователя при его входе в {wc}. Права на работу с объектами соответствуют правам данного пользователя в системе {dv}.
 // . Серверный -- создаётся для сервера {dv}. Права на работу с объектами соответствуют правам учётной записи пула приложений с {wc}ом в системе {dv}.
 
-Получить контекст объектов можно используя функции сервиса `ICurrentObjectContextProvider`:
-
-* `GetOrCreateCurrentSessionContext` -- возвращает контекст объектов текущего пользователя.
-// * `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
-
-WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой.
-
-Сервис `ICurrentObjectContextProvider` может быть получен следующим способом:
+Сервис `ICurrentObjectContextProvider` предоставляет методы для получения контекста объектов. `ICurrentObjectContextProvider` может быть получен следующим способом:
 
 [source,csharp]
 ----
@@ -24,6 +17,12 @@ public DocumentRegistrationController(ICurrentObjectContextProvider currentObjec
 }
 ----
 
+Получить контекст объектов можно используя следующие функции сервиса `ICurrentObjectContextProvider`.
+
+* `GetOrCreateCurrentSessionContext` -- возвращает контекст объектов текущего пользователя.
+* `GetOrCreateExclusivePoolSessionContext` -- возвращает контекст объектов из отдельного пула сессий {wc}а.
+// * `GetOrCreateApplicationPoolSessionContext` -- возвращает серверный контекст объектов.
+
 {wc} периодически закрывает неиспользуемые пользовательские сессии, из-за чего контекст объектов, сохранённый в статический объект класса (серверного расширения или контроллера), спустя время станет недействительным. *Всегда получайте контекст объектов заново* (с помощью функции `GetOrCreateCurrentSessionContext`).
 
 Примеры работы с контекстом объектов рассмотрены в xref:ROOT:index.adoc[Руководстве разработчика]. Следующий код демонстрирует пример получения объектной модели карточки _Документ_.
@@ -33,3 +32,18 @@ public DocumentRegistrationController(ICurrentObjectContextProvider currentObjec
 Document document = objectContext.GetObject<Document>(Guid.Parse("9E11083F-D0EC-4F9F-8981-285498280BD9")); <.>
 ----
 <.> В метод GetObject передаются тип объекта (Document) и идентификатор объекта (ID карточки).
+
+WARNING: Не используйте метод `GetOrCreateApplicationPoolSessionContext`, это приведет к блокировкам потоков под нагрузкой.
+
+После использования полученный через `GetOrCreateExclusivePoolSessionContext` контекст необходимо освобождать, т.к. он арендует сессию из отдельного пула сессий {wc}а. После завершения работы сессия должна быть возвращена обратно в пул.
+
+Количество одновременно арендованных сессий ограничено пятью. Если полученные контексты не освобождать, новые запросы сессии могут завершиться ошибкой из-за исчерпания лимита.
+
+[source,csharp]
+----
+using (var pooledSessionContext = currentObjectContextProvider.GetOrCreateExclusivePoolSessionContext())
+{
+    var sessionContext = pooledSessionContext.Context; <.>
+}
+----
+<.> Работа с `SessionContext`.
