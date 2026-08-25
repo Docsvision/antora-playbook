@@ -20,37 +20,17 @@
 
 [source,csharp]
 ----
-using DocsVision.BackOffice.WinForms;
-using DocsVision.Platform.CardHost;
-using System;
-using System.Runtime.InteropServices;
-
-namespace NetstatSolutionCard
+[ComVisible(true)]
+[Customizable(true)]
+[Guid("053B0CA1-95FD-4DDA-95FA-6043AFACCC1F")]
+[ClassInterface(ClassInterfaceType.None)]
+public partial class MainControl : BaseCardControl
 {
- [ComVisible(true)]
- [Customizable(true)]
- [Guid("053B0CA1-95FD-4DDA-95FA-6043AFACCC1F")]
- [ClassInterface(ClassInterfaceType.None)]
- public partial class MainControl : DocsVision.BackOffice.WinForms.BaseCardControl
- {
-  public MainControl()
-  {
-   if (!CheckLicense())
-   {
-    throw new Exception("Отсутствует лицензия для Модуля учёта сетевых устройств"); <.>
-   }
-
-   InitializeComponent();
-  }
-
-  private bool CheckLicense() <.>
-  {
-   bool result = false;
-  
-   return result; <.>
-  }
- }
-} 
+    public MainControl()
+    {
+        InitializeComponent();
+    }
+}
 ----
 <.> В случае отсутствия лицензии, при открытии карточки будет выдано сообщение об ошибке.
 <.> Алгоритм проверки лицензии.
