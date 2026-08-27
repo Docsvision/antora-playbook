@@ -63,20 +63,3 @@ class LocalizedDisplayNameAttribute : DisplayNameAttribute
 [LocalizedDisplayName("ExternalStorageName")]
 public class ExternalStorage : IBinaryStorage, IExtensionInitialize
 ----
-
-Чтобы предоставить возможность настройки провайдера с помощью {of-mc}, должна быть разработана графическая форма. Информация о данном компоненте приведена в разделе xref:provider-gui.adoc[Графический интерфейс настройки]. Название компонента графической формы должно быть указано в атрибуте `Editor` класса провайдера:
-
-[source,csharp]
-----
-[DisplayNameAttribute("ExternalStorageName")]
-[Editor("ExternalStorageProvider.ProviderConfigurationPropertyControl, ExternalStorageProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e955275a11279434, processorArchitecture=MSIL", 
-        "DocsVision.Platform.WinForms.Controls.IExtensionPropertiesControl, DocsVision.Platform.WinForms"
-)]
-public class ExternalStorage : IBinaryStorage, IExtensionInitialize
-----
-
-.В атрибуте `Editor` указываются:
-. Полное название класса, в котором реализована графическая форма.
-. Название и сборка класса `IExtensionPropertiesControl`, как в примере.
-
-Если возможность настройки не требуется, то атрибут `Editor` не указывается.
