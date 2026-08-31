@@ -18,5 +18,9 @@
 * `Value` -- строковое значение,
 * `DisplayInSelectedValue` -- отображать ли значение поля в режиме просмотра значения ЭУ.
 +
-. В реализации в свойстве `Name` укажите уникальное имя плагина. Это же имя укажите в свойстве ЭУ "xref:webclient:layouts:ctrl/directories/directoryItemsCollection.adoc#plugin-name[Имя плагина для доп. полей]".
+. В реализации в свойстве `Name` укажите уникальное имя плагина. Это же имя укажите в свойстве ЭУ "xref:6.1@webclient:layouts:ctrl/directories/directoryItemsCollection.adoc#plugin-name[Имя плагина для доп. полей]".
+. Зарегистрируйте новый класс в `Extension.cs`:
++
+ services.AddSingleton<IDirectoryItemsCollectionAdditionalFieldsPlugin, ProjectAdditionalFieldsPlugin>();
++
 . Добавьте созданное серверное расширение на сервер {wc}а.
