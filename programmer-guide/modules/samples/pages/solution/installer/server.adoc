@@ -10,33 +10,64 @@
 .Далее перечислены основные шаги, которые должен выполнить пакет установки серверной части решения:
 . Создать подкаталог решения в папке {dv}.
 // (по умолчанию `C:\Program Files\Docsvision`).
-. Выгрузить в созданный подкаталог компонент _SnapIn_ и пакет установки клиентской части решения.
-. Создать в каталоге решения подкаталог `CardPackage` и выгрузить в него `xref:solution/card-sql-package.adoc[CardPackage]`, а также связанные с ним XML-файлы.
-. Создать в каталоге решения подкаталог `Database` и выгрузить в него `xref:solution/card-sql-package.adoc[SqlPackage]`, а также схемы карточек и библиотека карточек, а также их ресурсы.
-. В ветке реестра `{hklm}\SOFTWARE\DocsVision\Platform\Console\SnapIns` создать раздел с названием решения.
-. В созданный раздел добавить два строковых параметра:
-* `Path` -- путь к сборке _SnapIn_.
-* `TypeName` -- название класса _SnapIn_, который реализует интерфейс `ISnapIn`.
+. Скопировать расширение {wc}а и его ресурсы в папку {wc}а:
 +
 [source,xml]
 ----
-<Component Id="RegistryEntries" Guid="75B4E976-5771-423C-AB7D-DC583114F893" Win64="yes">
- <RegistryKey Root="HKLM" Key="SOFTWARE\DocsVision\Platform\Console\SnapIns\NetstatSolution" ForceDeleteOnUninstall="yes" ForceCreateOnInstall="yes">
-  <RegistryValue Type="string" Name="Path" Value="C:\Program Files\Docsvision\NetstatSolution\NetstatSolution.Snapin.dll"/>
-  <RegistryValue Type="string" Name="TypeName" Value="NetstatSolution.Snapin.SnapIn"/>
- </RegistryKey>
-</Component>
+<Directory Id="WEBCLIENTFOLDER" Name="WebClient">
+						<Directory Id="EXTENSIONSFOLDER" Name="Extensions">
+							<Directory Id="SERVEREXTENSIONFOLDER" Name="NetStatSolutionServerExtension">
+								<Component Id="ServerExtension" Guid="31970895-1578-4055-88C3-9E574D22EE47" Win64="yes">
+									<File Id="NetStatSolutionServerExtension.dll" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionServerExtension\NetStatSolutionServerExtension.dll"/>
+								</Component>
+							</Directory>
+						</Directory>
+						<Directory Id="RU" Name="ru">
+							<Component Id="ResourceFiles" Guid="B7816555-3ED9-4A52-B5C4-CBF6CF716CEC" Win64="yes">
+								<File Id="NetStatSolutionServerExtension.resources.dll" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionServerExtension\ru\NetStatSolutionServerExtension.resources.dll"/>
+							</Component>
+						</Directory>
+</Directory>
 ----
 +
-. Вызвать {cns} с параметрами: `"C:\Program Files (x86)\Docsvision\ResourceKit\ServerConsole.exe" /c /n \{Название решения}`. В проекте пакета установки серверной части за это отвечает сценарий:
+. Создать в каталоге решения подкаталог `CardPackage` и выгрузить в него `xref:solution/card-sql-package.adoc[CardPackage]`, а также связанные с ним XML-файлы.
+. Создать в каталоге решения подкаталог `Database` и выгрузить в него `xref:solution/card-sql-package.adoc[SqlPackage]`, а также схемы карточек и библиотека карточек, а также их ресурсы.
+. Скопировать `NetstatSolution.ObjectModel.dll` в папку `\Docsvision\Common` на сервере.
 +
-[source,csharp]
+[source,xml]
 ----
-<CustomAction Id="RegisterSnapIn" Directory='INSTALLFOLDER' Return="check" Execute='deferred' 
- ExeCommand='"C:\Program Files (x86)\Docsvision\ResourceKit\ServerConsole.exe" /c /n NetstatSolution' />
-<InstallExecuteSequence>
- <Custom Action='RegisterSnapIn' Before='InstallFinalize'>NOT Installed</Custom>
-</InstallExecuteSequence>
+<Directory Id="PlatformFolder" Name="Platform">
+						<Directory Id="WwwRootFolder" Name="wwwroot">
+							<Directory Id="SetupFolder" Name="Setup">
+								<Directory Id="NetstatSolutionSetupFolder" Name="NetstatSolutionClient">
+									<Component Id="ClientMsiComponent" Guid="8674D202-CB1D-4407-A427-842729905E1E" Win64="yes">
+										<File Id="NetstatSolutionClient.msi" Source="$(var.SolutionDir)Others\NetStatSolution\Installers\ru-ru\NetstatSolutionClient.msi"/>
+									</Component>
+								</Directory>
+							</Directory>
+						</Directory
+</Directory>
+----
++
+. Скопировать клиентский инсталлятор в соответствующую папку `\Docsvision\Platform\wwwroot\Setup`.
+. Скопировать файлы web-расширения {wc}а в папку `\Docsvision\WebClient\Content\Modules`:
++
+[source,xml]
+----
+<Directory Id="CONTENTFOLDER" Name="Content">
+							<Directory Id="MODULESFOLDER" Name="Modules">
+								<Directory Id="WEBEXTENSIONFOLDER" Name="NetStatSolutionWebExtension">
+									<Component Id="WebExtension" Guid="EA1F2B92-7F95-4990-9CE5-54C31BDDE148" Win64="yes">
+										<File Id="extension.css" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionWebExtension\extension.css"/>
+										<File Id="extension.css.map" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionWebExtension\extension.css.map"/>
+										<File Id="extension.js" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionWebExtension\extension.js"/>
+										<File Id="extension.js.map" Source="$(var.SolutionDir)Others\NetStatSolution\Binaries\NetStatSolutionWebExtension\extension.js.map"/>
+									</Component>
+								</Directory>
+							</Directory>
+						</Directory>
+					</Directory>
+</Directory>
 ----
 
 При удалении решения, необходимо вызвать _Консоль настройки_ {dv} с параметрами: `"C:\Program Files (x86)\Docsvision\ResourceKit\ServerConsole.exe" /rs /n Название-решения`.
