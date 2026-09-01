@@ -28,7 +28,16 @@ endif::upgrade[]
 
 * <<shared,Установить>> _Общие компоненты_ модулей {ad}, {bo}, {dm}, {pl}, Служба {ws}, {wf}, {sett-serv}.
 * <<extensions,Установить>> "Расширение консоли управления" для следующих модулей: {pl}, {fs}, {wc}, {wf}.
-* xref:admin:config.adoc[Добавить] пользователя, от имени которого запускается {mc}, в параметр `{dv-web-admin-cns-admins-serv}` в конфигурационном файле {of-mc}.
+* {blank}
++
+ifdef::manacons[]
+xref:admin:config.adoc[Добавить]
+endif::manacons[]
+ifndef::manacons[]
+<<access,Добавить>>
+endif::manacons[]
+пользователя, от имени которого запускается {mc}, в параметр `{dv-web-admin-cns-admins-serv}` в конфигурационном файле {of-mc}.
++
 * <<register-services,Выполнить>> настройки для регистрации модулей в конфигурационном файле {of-mc}.
 ====
 // end::separate[]
