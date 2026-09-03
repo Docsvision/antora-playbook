@@ -38,7 +38,7 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 // Для формирования подписи лицензия не требуется, см. требования GBL-3116, GBL-3074, GBL-3326 и GBL-2865
 
 [#cryptoservice]
-== Криптосервис в {dv} 6.1 Linux
+== Установка криптосервиса в {dv} 6.1 Linux с помощью Docker
 
 . Получите сборки КриптоПро Java CSP <<jcsp,необходимой версии>> и поместите их в локальный каталог хоста `./java-csp-5.0.45559-A-b34f3a2f`.
 . Смонтируйте эту папку в каталог Docker-контейнера `/app/BOOT-INF/lib/java-csp` и запустите контейнер:
@@ -147,6 +147,124 @@ include:::partial$excerpts.adoc[tags=one-ws]
 
 <.> Узнать идентификатор контейнера.
 <.> Посмотреть журнал Криптосервиса.
+
+[#package]
+== Установка криптосервиса в {dv} 6.1 Linux из пакета
+
+. Установите Криптосервис из пакета командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt install docsvision-cryptoservice
+
+{os2}::
++
+ $ sudo dnf install docsvision-cryptoservice
+====
++
+. Получите сборки КриптоПро Java CSP <<jcsp,необходимой версии>> и выполните любое из действий:
++
+--
+* Поместите сборки в каталог
+`/usr/lib/docsvision/cryptoservice/BOOT-INF/lib`
+* Укажите путь к сборкам в `/etc/default/dvcryptoservice`:
++
+ OPTIONS=-Dloader.path=/home/docsvision/java-csp-5.0.45559-A-b34f3a2f
+--
++
+. Криптосервис поставляется в комплекте со следующими сертификатами:
++
+--
+* https://www.gosuslugi.ru/crt[Защищённые сертификаты Минцифры].
+* https://ca.kontur.ru/about/certificates[Сертификаты УЦ "Контур"].
+* https://tlsca.cryptopro.ru/UI/CaCerts.aspx[Сертификаты "Крипто-Про УЦ 2.0" (TLS CA)].
+* http://cpca20.cryptopro.ru/[Сертификаты УЦ ООО "Крипто-Про"].
+--
++
+При необходимости использования дополнительных сертификатов выполните следующие настройки в зависимости от дистрибутива:
++
+:os1: Astra Linux / Ubuntu
+:os2: РЕД ОС / Альт Сервер
+[tabs]
+====
+{os1}::
+. Поместите сертификаты по пути:
++
+ /usr/local/share/ca-certificates
++
+. Обновите список доступных системе сертификатов командой:
++
+ update-ca-certificates
+
+{os2}::
+. Поместите сертификаты по пути:
++
+ /etc/pki/ca-trust/source/anchors
++
+. Обновите список доступных системе сертификатов командой:
++
+ update-ca-trust
+====
++
+. Откройте конфигурационный файл по адресу: `/usr/lib/docsvision/cryptoservice/application.properties` и отредактируйте следующие параметры:
++
+--
+[source]
+----
+server.servlet.contextPath=/cryptoservice
+server.port=8094
+logging.level.root=ERROR
+ru.CryptoPro.JCP.tools.JCPLogger.level=FINE
+timestampservice.name=http://cryptopro.ru/tsp/tsp.srf <.>
+----
+<.> Адрес Криптосервиса.
+--
++
+.При необходимости настроить защищённое подключение:
+[%collapsible]
+====
+. Укажите следующие настройки (см. подробнее <<https,ниже>>):
++
+[source,bash]
+----
+cat > application.properties <<EOF
+server.ssl.key-store=/keystore.p12 <.>
+server.ssl.key-store-password=MyP@ssw0rd <.>
+server.ssl.keyStoreType=PKCS12
+EOF
+----
+<.> Путь до PKCS12-файла
+<.> Пароль от PKCS12-файла
+====
++
+include::dv6@system:ROOT:partial$restart-sss.adoc[]
++
+. Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
++
+[WARNING]
+====
+* {blank}
++
+include::workerservice:admin:launch.adoc[tags=cpus]
++
+* {blank}
++
+include:::partial$excerpts.adoc[tags=one-ws]
+====
++
+. В соединении {dv} выберите сервер, на котором указан адрес Криптосервиса в конфигурационном файле из примера выше.
++
+. Выполните скрипт `configure.sh` из каталога размещённых сборок Java CSP, чтобы проверка подписей в {wc}е проходила без ошибок:
++
+ sudo путь-до-сборок-java-csp/configure.sh
++
+. Запустите службу Криптосервиса командой:
++
+ sudo systemctl start dvcryptoservice
++
+Служба запускается от имени УЗ Docsvision и не требует root-привилегий.
 
 [#installer]
 == Криптосервис в {dv} 6.1 Windows
