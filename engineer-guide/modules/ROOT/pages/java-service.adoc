@@ -174,16 +174,11 @@ include:::partial$excerpts.adoc[tags=one-ws]
  OPTIONS=-Dloader.path=/home/docsvision/java-csp-5.0.45559-A-b34f3a2f
 --
 +
-. Криптосервис поставляется в комплекте со следующими сертификатами:
+. Выполните скрипт `configure.sh` из каталога размещённых сборок Java CSP, чтобы проверка подписей в {wc}е проходила без ошибок:
 +
---
-* https://www.gosuslugi.ru/crt[Защищённые сертификаты Минцифры].
-* https://ca.kontur.ru/about/certificates[Сертификаты УЦ "Контур"].
-* https://tlsca.cryptopro.ru/UI/CaCerts.aspx[Сертификаты "Крипто-Про УЦ 2.0" (TLS CA)].
-* http://cpca20.cryptopro.ru/[Сертификаты УЦ ООО "Крипто-Про"].
---
+ sudo путь-до-сборок-java-csp/configure.sh
 +
-При необходимости использования дополнительных сертификатов выполните следующие настройки в зависимости от дистрибутива:
+. Сертификаты для Криптосервиса необходимо поместить в каталог в зависимости от дистрибутива:
 +
 :os1: Astra Linux / Ubuntu
 :os2: РЕД ОС / Альт Сервер
@@ -239,7 +234,7 @@ EOF
 <.> Пароль от PKCS12-файла
 ====
 +
-include::dv6@system:ROOT:partial$restart-sss.adoc[]
+. Перезапустите службу *dvcryptoservice* для Linux.
 +
 . Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
 +
@@ -255,11 +250,6 @@ include:::partial$excerpts.adoc[tags=one-ws]
 ====
 +
 . В соединении {dv} выберите сервер, на котором указан адрес Криптосервиса в конфигурационном файле из примера выше.
-+
-. Выполните скрипт `configure.sh` из каталога размещённых сборок Java CSP, чтобы проверка подписей в {wc}е проходила без ошибок:
-+
- sudo путь-до-сборок-java-csp/configure.sh
-+
 . Запустите службу Криптосервиса командой:
 +
  sudo systemctl start dvcryptoservice
