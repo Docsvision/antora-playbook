@@ -138,7 +138,7 @@ include::workerservice:admin:launch.adoc[tags=cpus]
 include:::partial$excerpts.adoc[tags=one-ws]
 ====
 +
-. В соединении {dv} выберите сервер, на котором указан адрес Криптосервиса в конфигурационном файле из примера выше.
+. Укажите адрес криптосервиса, для сервера настроек в {of-mc}, в параметре "Криптосервис", см. подробнее "xref:mgmtconsole:servers:appserver-general.adoc[]".
 
 События работы сервиса записываются в журнал Криптосервиса. Ознакомиться с журналом можно, имея идентификатор контейнера:
 
@@ -209,12 +209,15 @@ include:::partial$excerpts.adoc[tags=one-ws]
 [source]
 ----
 server.servlet.contextPath=/cryptoservice
-server.port=8094
-logging.level.root=ERROR
+server.port=8094 <.>
+logging.level.root=ERROR <.>
 ru.CryptoPro.JCP.tools.JCPLogger.level=FINE
 timestampservice.name=http://cryptopro.ru/tsp/tsp.srf <.>
 ----
-<.> Адрес Криптосервиса.
+<.> `Java` -- папка, содержащая сборки Java CSP <<jcsp,необходимой версии>>.
+<.> `server.port` -- порт Криптосервиса.
+<.> `logging.level.root` -- уровень журналирования.
+<.> `timestampservice.name` -- адрес TSP сервиса.
 --
 +
 .При необходимости настроить защищённое подключение:
@@ -249,7 +252,7 @@ include::workerservice:admin:launch.adoc[tags=cpus]
 include:::partial$excerpts.adoc[tags=one-ws]
 ====
 +
-. В соединении {dv} выберите сервер, на котором указан адрес Криптосервиса в конфигурационном файле из примера выше.
+. Укажите адрес криптосервиса, для сервера настроек в {of-mc}, в параметре "Криптосервис", см. подробнее "xref:mgmtconsole:servers:appserver-general.adoc[]".
 . Запустите службу Криптосервиса командой:
 +
  sudo systemctl start dvcryptoservice
