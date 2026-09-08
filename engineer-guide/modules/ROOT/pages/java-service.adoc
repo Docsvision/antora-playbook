@@ -38,7 +38,7 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 // Для формирования подписи лицензия не требуется, см. требования GBL-3116, GBL-3074, GBL-3326 и GBL-2865
 
 [#cryptoservice]
-== Установка криптосервиса в {dv} 6.1 Linux с помощью Docker
+== Установка Криптосервиса в {dv} 6.1 с помощью Docker
 
 . Получите сборки КриптоПро Java CSP <<jcsp,необходимой версии>> и поместите их в локальный каталог хоста `./java-csp-5.0.45559-A-b34f3a2f`.
 . Смонтируйте эту папку в каталог Docker-контейнера `/app/BOOT-INF/lib/java-csp` и запустите контейнер:
@@ -100,53 +100,7 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 +
  $ docker run -d -p 8100:8094 cryptoservice
 
-[#config]
-=== Настройка Криптосервиса с Docker в {dv} 6.1 Linux
-
-include::partial$mancons.adoc[]
-
-. После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux. Пример содержимого файла `.json` приведён ниже:
-+
-[source,json]
-----
-{
-  "DocsVision": {
-    "BackOffice": {
-      "Server": {
-        "Extension": {
-          "ComplexSignatureServiceAddress": "ConnectAddress=http://server.domain.com:8100/cryptoservice/api/v1" <.>
-        }
-      }
-    }
-  }
-}
-----
-<.> Адрес Криптосервиса.
-+
-include::dv6@system:ROOT:partial$restart-sss.adoc[]
-+
-. Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
-+
-[WARNING]
-====
-* {blank}
-+
-include::workerservice:admin:launch.adoc[tags=cpus]
-+
-* {blank}
-+
-include:::partial$excerpts.adoc[tags=one-ws]
-====
-+
-. Укажите адрес криптосервиса, для сервера настроек в {of-mc}, в параметре "Криптосервис", см. подробнее "xref:mgmtconsole:servers:appserver-general.adoc[]".
-
-События работы сервиса записываются в журнал Криптосервиса. Ознакомиться с журналом можно, имея идентификатор контейнера:
-
- sudo docker ps <.>
- sudo docker logs идентификатор-контейнера <.>
-
-<.> Узнать идентификатор контейнера.
-<.> Посмотреть журнал Криптосервиса.
+// антиприлипака
 
 [#package]
 == Установка криптосервиса в {dv} 6.1 Linux из пакета
@@ -211,53 +165,17 @@ include:::partial$excerpts.adoc[tags=one-ws]
 server.servlet.contextPath=/cryptoservice
 server.port=8094 <.>
 logging.level.root=ERROR <.>
-ru.CryptoPro.JCP.tools.JCPLogger.level=FINE
+ru.CryptoPro.JCP.tools.JCPLogger.level=FINE <.>
 timestampservice.name=http://cryptopro.ru/tsp/tsp.srf <.>
 ----
-<.> `Java` -- папка, содержащая сборки Java CSP <<jcsp,необходимой версии>>.
 <.> `server.port` -- порт Криптосервиса.
-<.> `logging.level.root` -- уровень журналирования.
+<.> `logging.level.root` -- уровень журналирования Криптосервиса.
+<.> Уровень журналирования JCP.
 <.> `timestampservice.name` -- адрес TSP сервиса.
 --
 +
-.При необходимости настроить защищённое подключение:
-[%collapsible]
-====
-. Укажите следующие настройки (см. подробнее <<https,ниже>>):
-+
-[source,bash]
-----
-cat > application.properties <<EOF
-server.ssl.key-store=/keystore.p12 <.>
-server.ssl.key-store-password=MyP@ssw0rd <.>
-server.ssl.keyStoreType=PKCS12
-EOF
-----
-<.> Путь до PKCS12-файла
-<.> Пароль от PKCS12-файла
-====
-+
-. Перезапустите службу *dvcryptoservice* для Linux.
-+
-. Зайдите в Консоль управления и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
-+
-[WARNING]
-====
-* {blank}
-+
-include::workerservice:admin:launch.adoc[tags=cpus]
-+
-* {blank}
-+
-include:::partial$excerpts.adoc[tags=one-ws]
-====
-+
-. Укажите адрес криптосервиса, для сервера настроек в {of-mc}, в параметре "Криптосервис", см. подробнее "xref:mgmtconsole:servers:appserver-general.adoc[]".
-. Запустите службу Криптосервиса командой:
-+
- sudo systemctl start dvcryptoservice
-+
-Служба запускается от имени УЗ Docsvision и не требует root-привилегий.
+. Выполните настройки в {of-mc}, см. подробнее в разделе <<config,Настройка Криптосервиса>>.
+. При необходимости настроить защищённое подключение проследуйте инструкции в разделе <<https,Настройка подключения к криптосервису по HTTPS>>.
 
 [#installer]
 == Криптосервис в {dv} 6.1 Windows
@@ -351,6 +269,54 @@ image::install-crypto-finish.png[Завершение установки]
 
  $ docker run -d -p 8100:8094 -v /path/to/settings.json:/etc/cryptoservice/settings.json -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
 
+[#config]
+== Настройка Криптосервиса в {dv} 6.1
+
+include::partial$mancons.adoc[]
+
+. Если Криптосервис развёрнут в контейнере Docker, после установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux. Пример содержимого файла `.json` приведён ниже:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "BackOffice": {
+      "Server": {
+        "Extension": {
+          "ComplexSignatureServiceAddress": "ConnectAddress=http://server.domain.com:8100/cryptoservice/api/v1" <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> Адрес Криптосервиса.
++
+include::dv6@system:ROOT:partial$restart-sss.adoc[]
++
+. Зайдите в {mc} и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
++
+[WARNING]
+====
+* {blank}
++
+include::workerservice:admin:launch.adoc[tags=cpus]
++
+* {blank}
++
+include:::partial$excerpts.adoc[tags=one-ws]
+====
++
+. Укажите адрес Криптосервиса, для сервера настроек в {of-mc}, в параметре "Криптосервис", см. подробнее "xref:mgmtconsole:servers:appserver-general.adoc[]".
+
+События работы сервиса записываются в журнал Криптосервиса. Ознакомиться с журналом можно, имея идентификатор контейнера:
+
+ sudo docker ps <.>
+ sudo docker logs идентификатор-контейнера <.>
+
+<.> Узнать идентификатор контейнера.
+<.> Посмотреть журнал Криптосервиса.
+
 [#https]
 == Настройка подключения к криптосервису по HTTPS
 
@@ -385,6 +351,17 @@ EOF
 ----
 <.> Путь до PKCS12-файла в контейнере
 <.> Пароль от PKCS12-файла
++
+* Если Криптосервис установлен в Linux из пакета, откройте конфигурационный файл по адресу `/usr/lib/docsvision/cryptoservice/application.properties` и укажите следующие параметры:
++
+[source]
+----
+server.ssl.key-store=/keystore.p12 <.>
+server.ssl.key-store-password=MyP@ssw0rd <.>
+server.ssl.keyStoreType=PKCS12
+----
+<.> Путь до PKCS12-файла.
+<.> Пароль от PKCS12-файла.
 +
 * В Windows откройте файл конфигурации по адресу `C:\Program Files (x86)\Docsvision\CryptoService\appsettings.json` и укажите следующие параметры:
 +
