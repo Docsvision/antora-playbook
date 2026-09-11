@@ -243,7 +243,7 @@ image::install-crypto-finish.png[Завершение установки]
 include::partial$mancons.adoc[]
 
 .Выберите приоритетный вариант настройки (настройки в конфигурационном файле считываются первыми и преобладают над настройками в {of-mc}):
-.. Если Криптосервис развёрнут в контейнере Docker:
+.. Укажите адрес Криптосервиса в конфигурационном файле:
 +
 ... После установки Криптосервиса создайте файл с расширением `.json` и любым именем, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config` в Linux. Пример содержимого файла `.json` приведён ниже:
 +
@@ -263,9 +263,14 @@ include::partial$mancons.adoc[]
 ----
 <.> Адрес Криптосервиса.
 +
-... Перезапустите службу dvappserver для Linux и {sss-win} для Windows.
+--
+[leveloffset=+2,subs="specialchars,attributes,quotes"]
+include::dv6@system:ROOT:partial$restart-sss.adoc[]
+--
 +
-.. Если Криптосервис развёрнут иным образом (не в Docker):
+... Перезапустите службу *dvappserver* для Linux и *{sss-win}* для Windows.
++
+.. Задайте настройки Криптосервиса в {of-mc}:
 ... Зайдите в {mc} и xref:mgmtconsole:user:worker-service.adoc[создайте процесс] Службы {ws} с типом конфигурации _Обслуживание ЭП_.
 +
 [WARNING]
