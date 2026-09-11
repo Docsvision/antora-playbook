@@ -308,16 +308,16 @@ include:::partial$excerpts.adoc[tags=one-ws]
 [source,json]
 ----
 {
-    "ocspSettings": [
-        {
-            "ocspUrl": "http://ocsp-service.ru/ocspn/ocsp.srf", <.>
-            "serial": "17192b01038046a1649b8a076964699c4" <.>
-        },
-        {
-            "ocspUrl": "http://ocsp-service.example.ru/ocspn1000000/ocsp.srf",
-            "serial": "1f409aa452fd10ee11500ea83ca0f3ce2"
-        }
-    ]
+  "ocspSettings": [
+    {
+      "ocspUrl": "http://ocsp-service.ru/ocspn/ocsp.srf", <.>
+      "serial": "17192b01038046a1649b8a076964699c4" <.>
+    },
+    {
+      "ocspUrl": "http://ocsp-service.example.ru/ocspn1000000/ocsp.srf",
+      "serial": "1f409aa452fd10ee11500ea83ca0f3ce2"
+    }
+  ]
 }
 ----
 <.> `"ocspUrl"` -- адрес OCSP сервиса.
@@ -325,7 +325,7 @@ include:::partial$excerpts.adoc[tags=one-ws]
 
 Если в файле задана хотя бы одна группа настроек `ocspSettings`, то при улучшении подписи криптосервис будет проверять цепочку родительских сертификатов сертификата улучшаемой подписи.
 
-Серийные номера сертификатов сопоставляются с номером, указанным в конфигурационном файле, при совпадении заданный адрес OCSP будет использоваться для самого близкого родительского сертификата. Чтобы сертификат считывался успешно, поместите его:
+Серийные номера сертификатов сопоставляются с номером, указанным в конфигурационном файле, при совпадении заданный адрес OCSP будет использоваться для самого близкого родительского сертификата. Чтобы конфигурационный файл считывался успешно, поместите его:
 
 * В каталог корневых сертификатов `/var/cryptoservice/cacerts` в Linux.
 * В каталог `C:\Program Files (x86)\Docsvision\CryptoService\` в Windows.
