@@ -1,0 +1,10 @@
+= Определение шаблонных карточек
+
+{wc} позволяет определить, является ли карточка шаблоном, при помощи сервиса `$CardInfo` Web-расширений. Шаблонность определяет свойство `isTemplate`:
+
+[source,typescript]
+----
+export function onSomeEvent(sender: LayoutControl) {
+    const isTemplate = sender.getService($CardInfo).isTemplate;
+}
+----
