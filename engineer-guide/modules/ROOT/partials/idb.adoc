@@ -1,0 +1,120 @@
+// tag::idb[]
+[#idb]
+== Регистрация расширения IdentityBlitz
+
+NOTE: Для работы расширения авторизации IdentityBlitz требуется опция лицензии _{dv} Коннектор к Blitz Identity Provider_.
+
+{dv} версии {idb-req} позволяет активировать сопоставление групп пользователей {dv} и групп внешнего провайдера IdentityBlitz. Коннектор к IdentityBlitz требует выполнить описанные ниже настройки, чтобы обеспечить автоматическое сопоставление прав доступа в {dv} и внешних групп пользователей IdentityBlitz.
+
+.Ограничения коннектора к IdentityBlitz:
+* Для IdentityBlitz учитываются только группы, которые расширение получило для пользователя.
+* Вложенные группы и членство через родительские или дочерние группы не учитываются, так как в IdentityBlitz не поддерживаются вложенные группы.
+* Одну группу {dv} одновременно сопоставить с группой Active Directory и группой IdentityBlitz.
+
+[#config-idb]
+=== Конфигурация Коннектора к IdentityBlitz
+
+. Запустите сервис IdentityBlitz, создайте приложение и укажите необходимые настройки приложения. Конфигурация IdentityBlitz выходит за рамки документации {dv}.
+. Укажите настройки коннектора IdentityBlitz предпочитаемым способом:
++
+* Откройте {mc} на странице menu:Серверы[Имя сервера > Сервер приложений], перейдите к группе настроек _Расширенная аутентификация_ и нажмите кнопку *Добавить расширение* и  заполните необходимые поля, описание полей приведено в документации {of-mc}, раздел "xref:6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[Настройка расширений аутентификации]". В поле _Настройки_ укажите <<idb-string,строку настроек IdentityBlitz>>.
+* Укажите настройки в <<idb-settings,конфигурационном файле Сервера приложений>>.
++
+. Перезапустите службы Сервера приложений и {wc}а.
+. Запустите {wc} от имени УЗ администратора.
+. В Справочнике сотрудников для пользователей, которые будут входить через коннектор, на вкладке _Безопасность_ укажите уникальный идентификатор пользователей из IdentityBlitz.
++
+После изменения состава группы в IdentityBlitz пользователи должны выйти из {dv} и войти повторно. Изменения применяются при создании новой сессии.
++
+. Пользователи смогут входить в {wc} с использованием IdentityBlitz после перезапуска службы {wc}а.
+. Чтобы работало сопоставление групп IdentityBlitz и {dv}, создайте группу в IdentityBlitz и в {dv} либо используйте существующие.
+. В {dv} перейдите к настройкам групп. В поле _Учётная запись_ (поле доступно в справочнике сотрудников в {wincl}е) укажите идентификаторы групп из IdentityBlitz.
++
+CAUTION: Указывайте только идентификаторы, не используйте имена групп.
++
+. Также для работы внешних групп необходимо в БД включить настройку *RoleModel_ExternalGroupsSupportEnabled*:
++
+[source,mssql]
+----
+declare @on bit =1
+exec dvsys_setting_set N'RoleModel_ExternalGroupsSupportEnabled', @on
+----
++
+[source,pgsql]
+----
+select * from dvsys_setting_set('RoleModel_ExternalGroupsSupportEnabled', true::sql_variant);
+----
++
+Пользователь получает права сопоставленной группы {dv} без ручного добавления в её состав. Фактический состав группы в Справочнике сотрудников не изменяется. При проверке прав учитывается как обычное членство пользователя, так и членство, полученное из IdentityBlitz.
++
+. Назначьте группе {dv} роль или право, войдите через IdentityBlitz и убедитесь, что доступ настроен корректно.
++
+NOTE: Настройки ролевой модели безопасности выполняются в {dv}.
+
+[#idb-settings]
+=== Строка настроек IdentityBlitz
+
+[source,json]
+----
+{
+  "Docsvision": {
+    "Platform": {
+      "Server": {
+        "Authentication": {
+          "Extensions": {
+		    "IdentityBlitz": {
+			  "Id": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
+			  "Name": "IdentityBlitz", <.>
+			  "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><IdentityBlitzAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://vdv-blitz.digdes.com/blitz/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>test</ClientId><Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret><AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</AccountNameClaim><UniqueIdClaim>DocsvisionID</UniqueIdClaim><ScopesSupported>openid profile</ScopesSupported><ResponseType>code</ResponseType><GroupsProfile>dvio</GroupsProfile><GroupsApiBaseUrl>https://vdv-blitz.digdes.com/blitz/api/v3</GroupsApiBaseUrl></IdentityBlitzAuthenticationSettings>", <.>
+			  "TypeName": "DocsVision.Platform.Authentication.IdentityBlitz.IdentityBlitzRootAuthenticationExtension, DocsVision.Platform.Authentication.IdentityBlitz, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519" <.>
+			}
+          },
+          "Tenants": { <.>
+            "CurrentDB": {
+              "Extensions": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
+              "Name": "CurrentDB" <.>
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+<.> `ID` -- строка с идентификатором расширения в виде Guid.
+<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
+<.> `Settings` -- строка настроек расширения, для IdentityBlitz. Подробнее см. <<idb-string,ниже>>.
+<.> `TypeName` -- строка с именем типа, реализующего расширение.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `Extensions` -- строка, содержащая идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- строка, содержащая псевдоним БД, например: `CurrentDB`.
+
+[#idb-string]
+[source,xml]
+----
+<?xml version=\"1.0\" encoding=\"utf-16\"?>
+<IdentityBlitzAuthenticationSettings
+	xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
+	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
+	<WellKnownConfigurationUrl>https://vdv-blitz.digdes.com/blitz/.well-known/openid-configuration</WellKnownConfigurationUrl> <.>
+	<ClientId>test</ClientId> <.>
+	<Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret> <.>
+	<AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</AccountNameClaim> <.>
+	<UniqueIdClaim>DocsvisionID</UniqueIdClaim> <.>
+	<ScopesSupported>openid profile</ScopesSupported> <.>
+	<ResponseType>code</ResponseType> <.>
+	<GroupsProfile>dvio</GroupsProfile> <.>
+	<GroupsApiBaseUrl>https://vdv-blitz.digdes.com/blitz/api/v3</GroupsApiBaseUrl> <.>
+</IdentityBlitzAuthenticationSettings>
+----
+<.> `WellKnownConfigurationUrl` -- URL публичной конфигурации OpenID.
+<.> `ClientId` -- идентификатор приложения IdentityBlitz в котором производится привязка пользователей.
+<.> `Secret` -- секрет приложения, настроенного для аутентификации пользователей.
+<.> `AccountNameClaim` -- имя пользователя в токене (поле в токене, используемое в качестве логина).
+<.> `UniqueIdClaim` -- уникальный идентификатор пользователя в токене.
+<.> `ScopesSupported` -- при загрузке расширения список областей доступа берется из конфигурации IdentityBlitz, указанной в параметре `WellKnownConfigurationUrl`. Если есть необходимость переопределить список областей доступа, передаваемых в запросе, можно добавить секцию `ScopesSupported` и в неё через пробел указать необходимые области для работы.
+<.> `ResponseType` -- определяет способ получения токенов при входе. Значение code включает Authorization Code Flow: после входа провайдер возвращает код авторизации, который приложение обменивает на токены.
+<.> `GroupsProfile` -- имя профиля групп в IdentityBlitz. Профиль объединяет группы, с которыми нужно работать.
+<.> `GroupsApiBaseUrl` -- базовый адрес REST API IdentityBlitz, через который расширение получает сведения о группах.
+
+// end::idb[]
