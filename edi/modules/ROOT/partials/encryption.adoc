@@ -6,34 +6,34 @@ WARNING: Пароль для сертификата указывать не тр
 . Добавьте:
 +
 * Публичный и приватный ключ на клиентскую и серверную машины модуля {wf}
-ifdef::linux[]
+ifdef::encr-lin[]
 по пути `/root/.dotnet/corefx/cryptography/x509stores/my`.
-endif::linux[]
-ifdef::windows[]
+endif::encr-lin[]
+ifdef::encr-win[]
 в хранилище _Сертификаты -- Локальный компьютер_.
-endif::windows[]
+endif::encr-win[]
 +
 TIP: На клиентской машине приватный ключ требуется, т.к. xref:edi:admin:configure-directory.adoc[при загрузке операторов] необходимы пароли к УЗ.
 +
 * Приватный ключ на машину, где планируется настраивать/редактировать справочник ЮЗДО
-ifdef::linux[]
+ifdef::encr-lin[]
 по пути `/root/.dotnet/corefx/cryptography/x509stores/my`.
-endif::linux[]
-ifdef::windows[]
+endif::encr-lin[]
+ifdef::encr-win[]
 в хранилище _Сертификаты -- Локальный компьютер_.
-endif::windows[]
+endif::encr-win[]
 для пользователя, который будет настраивать и редактировать справочник ЮЗДО.
 +
 [NOTE]
 ====
 // tag::cert-loc[]
-ifdef::linux[]
+ifdef::encr-lin[]
 Если {mdl} запущен от имени пользователя иного, чем ROOT, например от имени учётной записи {dv}, сертификат требуется размещать по пути `/home/docsvision/.dotnet/corefx/cryptography/x509stores/my`.
-endif::linux[]
-ifdef::windows[]
+endif::encr-lin[]
+ifdef::encr-win[]
 В ОС Windows сертификат необходимо установить в хранилище "Личное" на уровне "Локальный компьютер".
 Затем необходимо предоставить права на приватную часть сертификата для УЗ, от имени которой запускается {mdl} (по умолчанию Network Service) в программе "Сертификаты", через управление закрытыми ключами (вызывается нажатием правой кнопки на сертификате).
-endif::windows[]
+endif::encr-win[]
 // end::cert-loc[]
 ====
 +
