@@ -11,6 +11,41 @@ NOTE: Для работы расширения авторизации IdentityBl
 * Вложенные группы и членство через родительские или дочерние группы не учитываются, так как в IdentityBlitz не поддерживаются вложенные группы.
 * Одну группу {dv} нельзя одновременно сопоставить с группой Active Directory и группой IdentityBlitz.
 
+[source,json]
+----
+{
+  "Docsvision": {
+    "Platform": {
+      "Server": {
+        "Authentication": {
+          "Extensions": {
+		    "IdentityBlitz": {
+			  "Id": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
+			  "Name": "IdentityBlitz", <.>
+			  "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><IdentityBlitzAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://vdv-blitz.digdes.com/blitz/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>test</ClientId><Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret><AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</AccountNameClaim><UniqueIdClaim>DocsvisionID</UniqueIdClaim><ScopesSupported>openid profile</ScopesSupported><ResponseType>code</ResponseType><GroupsProfile>dvio</GroupsProfile><GroupsApiBaseUrl>https://vdv-blitz.digdes.com/blitz/api/v3</GroupsApiBaseUrl></IdentityBlitzAuthenticationSettings>", <.>
+			  "TypeName": "DocsVision.Platform.Authentication.IdentityBlitz.IdentityBlitzRootAuthenticationExtension, DocsVision.Platform.Authentication.IdentityBlitz, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519" <.>
+			}
+          },
+          "Tenants": { <.>
+            "CurrentDB": {
+              "Extensions": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
+              "Name": "CurrentDB" <.>
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+<.> `ID` -- идентификатор расширения в виде Guid.
+<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
+<.> `Settings` -- строка настроек расширения, для IdentityBlitz. Подробнее см. <<idb-string,ниже>>.
+<.> `TypeName` -- имя типа, реализующего расширение.
+<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
+<.> `Extensions` -- в параметре указывается идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
+<.> `Name` -- в параметре указывается псевдоним БД, например: `CurrentDB`.
+
 [#config-idb]
 === Настройка аутентификации с использованием коннектора к IdentityBlitz
 
@@ -55,44 +90,6 @@ select * from dvsys_setting_set('RoleModel_ExternalGroupsSupportEnabled', true::
 . Назначьте группе {dv} роль или право, войдите через IdentityBlitz и убедитесь, что доступ настроен корректно.
 +
 NOTE: Настройки ролевой модели безопасности выполняются в {dv}.
-
-[#idb-settings]
-=== Строка настроек IdentityBlitz
-
-[source,json]
-----
-{
-  "Docsvision": {
-    "Platform": {
-      "Server": {
-        "Authentication": {
-          "Extensions": {
-		    "IdentityBlitz": {
-			  "Id": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
-			  "Name": "IdentityBlitz", <.>
-			  "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><IdentityBlitzAuthenticationSettings xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><WellKnownConfigurationUrl>https://vdv-blitz.digdes.com/blitz/.well-known/openid-configuration</WellKnownConfigurationUrl><ClientId>test</ClientId><Secret>JwIcDLOLEATB2R69bZac9BMHpzC8Px0P</Secret><AccountNameClaim>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier</AccountNameClaim><UniqueIdClaim>DocsvisionID</UniqueIdClaim><ScopesSupported>openid profile</ScopesSupported><ResponseType>code</ResponseType><GroupsProfile>dvio</GroupsProfile><GroupsApiBaseUrl>https://vdv-blitz.digdes.com/blitz/api/v3</GroupsApiBaseUrl></IdentityBlitzAuthenticationSettings>", <.>
-			  "TypeName": "DocsVision.Platform.Authentication.IdentityBlitz.IdentityBlitzRootAuthenticationExtension, DocsVision.Platform.Authentication.IdentityBlitz, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148AFE997F90519" <.>
-			}
-          },
-          "Tenants": { <.>
-            "CurrentDB": {
-              "Extensions": "{A2EF8179-4501-469C-A0A4-76D928CCA50A}", <.>
-              "Name": "CurrentDB" <.>
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-<.> `ID` -- идентификатор расширения в виде Guid.
-<.> `Name` -- задаёт отображаемое имя сервиса аутентификации в справочнике сотрудников.
-<.> `Settings` -- строка настроек расширения, для IdentityBlitz. Подробнее см. <<idb-string,ниже>>.
-<.> `TypeName` -- имя типа, реализующего расширение.
-<.> `Tenants` -- в параметре указываются расширения аутентификации для конкретных БД {dv}.
-<.> `Extensions` -- в параметре указывается идентификаторы расширений аутентификации для конкретной БД в виде списка Guid через `;` (точка с запятой).
-<.> `Name` -- в параметре указывается псевдоним БД, например: `CurrentDB`.
 
 [#idb-string]
 [source,xml]
