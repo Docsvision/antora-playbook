@@ -28,67 +28,275 @@ content:
 #  branches: [6.1, main]
   edit_url: ~
   sources:
-    - url: https://github.com/Docsvision/antora-start-page.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-web-client.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-worker-service.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-platform.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-management-console.git
-      branches: [6.1, 6.2]
-    - url: https://github.com/Docsvision/antora-install-guide.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-designers-and-directories.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-system-description.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-approval-designer.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-back-office.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-upgrade-guide.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-engineer-guide.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-programmer-guide.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-windows-client.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-document-management.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-schemas-description.git
-      branches: [dv6]
-    - url: https://github.com/Docsvision/antora-solution-manager.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-workflow.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-archive-management.git
-      branches: [6.1, 6.2]
-    - url: https://github.com/Docsvision/antora-edi.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-resource-kit.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-install-linux.git
-      branches: [dv6]
-#    - url: https://github.com/Docsvision/antora-take-office.git
-#      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-m4d-registry-integration.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-conversion-service.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-kontur-integration.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-settings-service.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-teamwork.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-module-ai.git
-      branches: [6.1]
-    - url: https://github.com/Docsvision/antora-template-designer.git
-      branches: [6.1]
-#    - url: https://github.com/Docsvision/antora-product-changes.git
+    # Local worktrees: versions are selected by folders, not Git branches.
+    - url: ../00-test-global-docs/Approval-Designer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.3
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Archive-Management-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/5.5.2
+        - versions/6.1
+        - versions/6.2
+        - versions/dev
+    - url: ../00-test-global-docs/Back-Office-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.5
+        - versions/6.1
+        - versions/6.1_GBL-162_card-kinds-localization
+        - versions/6.1_GBL-3253_no-ad-dependency
+        - versions/6.1_GBL-4615_user-status
+        - versions/6.1_GBL-4806_parallel-msgs
+        - versions/dev
+    - url: ../00-test-global-docs/Branch-Exchange-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/Conversion-Service-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Designers-And-Directories-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+        - versions/dv5
+        - versions/dv6
+        - versions/main
+    - url: ../00-test-global-docs/Directory-Replication-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/Document-Management-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.4
+        - versions/5.5.4_GBL-3828_webclient
+        - versions/6.1
+        - versions/6.1_GBL-3828_webclient
+        - versions/dev
+    - url: ../00-test-global-docs/EDI-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.4
+        - versions/5.5.5
+        - versions/5.5.5_GBL-3583_SBIS-m4d
+        - versions/6.1
+        - versions/6.1_GBL-3537_SBIS
+        - versions/GBL-3538_6.1_Taxcom
+        - versions/dev
+    - url: ../00-test-global-docs/Engineer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dv5
+        - versions/dv6
+        - versions/dv6_GBL-162_kinds-localization
+        - versions/dv6_GBL-3610_new-logs
+        - versions/dv6_GBL-4732_IdentityBlitz
+    - url: ../00-test-global-docs/Install-Guide-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+        - versions/dv5
+        - versions/dv6
+        - versions/dv6_GBL-4070_console-license-activation
+    - url: ../00-test-global-docs/Install-Linux-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+        - versions/dv6
+        - versions/dv6_GBL-4070_console-license-activation
+    - url: ../00-test-global-docs/Kontur-Integration-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/5.5.1_GBL-3995_api-auth
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/M4D-Registry-Integration-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Management-Console-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+        - versions/6.2
+        - versions/6.2_CU-new-admin-console
+        - versions/6.2_GBL-3610_new-logs
+        - versions/6.2_GBL-4070_console-license-activation
+        - versions/6.2_GBL-4732_IdentityBlitz
+        - versions/6.2_GBL-4957_remove-takeoffice-flag
+        - versions/dev
+    - url: ../00-test-global-docs/Module-AI-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Notification-Service-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/dev
+    - url: ../00-test-global-docs/Platform-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.5
+        - versions/6.1
+        - versions/6.1_GBL-3610_new-logs
+        - versions/6.1_GBL-4070_console-license-activation
+        - versions/dev
+    - url: ../00-test-global-docs/Programmer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dv5
+        - versions/dv6
+        - versions/dv6_CU-new-admin-console
+        - versions/dv6_GBL-3568_file-preview-sample
+    - url: ../00-test-global-docs/Report-Designer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/dev
+    - url: ../00-test-global-docs/Resource-Kit-Antora
+      branches: HEAD
+      start_paths:
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/S3-Storage-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/Schemas-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dv5
+        - versions/dv6
+    - url: ../00-test-global-docs/Settings-Center-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/Settings-Service-Antora
+      branches: HEAD
+      start_paths:
+        - versions/6.1
+        - versions/6.1_GBL-3610_new-logs
+        - versions/dev
+    - url: ../00-test-global-docs/Solution-Manager-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.2
+        - versions/5.5.2_GBL-2806_criticality
+        - versions/5.5.2_GBL-2821_ownercardid
+        - versions/5.5.2_GBL-2822_conflicts
+        - versions/6.1
+        - versions/6.1_GBL-3090_download
+        - versions/6.1_GBL-3610_new-logs
+        - versions/6.1_GBL-4181_SberLinux-Pangolin
+        - versions/dev
+    - url: ../00-test-global-docs/Start-Page-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dv6
+    - url: ../00-test-global-docs/System-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dv5
+        - versions/dv6
+    - url: ../00-test-global-docs/Take-Office-Antora
+      branches: HEAD
+      start_paths:
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Teamwork-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+        - versions/dev
+    - url: ../00-test-global-docs/Template-Designer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.1
+        - versions/6.1
+    - url: ../00-test-global-docs/Upgrade-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+        - versions/dv5
+        - versions/dv6
+        - versions/dv6_GBL-3610_new-logs
+        - versions/main
+    - url: ../00-test-global-docs/User-Type-Common-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/User-Type-Engineer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/User-Type-Programmer-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+    - url: ../00-test-global-docs/User-Type-User-Antora
+      branches: HEAD
+      start_paths:
+        - versions/dev
+        - versions/main
+    - url: ../00-test-global-docs/WebC-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.17
+        - versions/5.5.17_GBL-3067_perf-logging
+        - versions/5.5.17_GBL-3505_edi-extension
+        - versions/5.5.17_GBL-3828_document-management
+        - versions/6.1
+        - versions/6.1_GBL-166_localized-attributes
+        - versions/6.1_GBL-3259_file-ctrl-lock
+        - versions/6.1_GBL-3360_all-filter-flag
+        - versions/6.1_GBL-3528_tasktable-rendering
+        - versions/6.1_GBL-3535_webc-cluster
+        - versions/6.1_GBL-3828_document-management
+        - versions/6.1_GBL-3884_partners-dir
+        - versions/6.1_GBL-4501_audit-log
+        - versions/6.1_GBL-4506_Chromium-gost
+        - versions/6.1_GBL-4560_react
+        - versions/6.1_GBL-4805_task-change-deadline
+        - versions/dev
+    - url: ../00-test-global-docs/Windows-Client-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.4
+        - versions/6.1
+        - versions/6.1_GBL-4615_user-status
+        - versions/dev
+    - url: ../00-test-global-docs/Worker-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.2
+        - versions/6.1
+        - versions/6.1_CU-new-admin-console
+        - versions/6.1_GBL-4806_parallel-msgs
+        - versions/dev
+    - url: ../00-test-global-docs/Workflow-Antora
+      branches: HEAD
+      start_paths:
+        - versions/5.5.3
+        - versions/6.1
+        - versions/6.1_ERR-11059_cluster
+        - versions/dev
 ui:
 #  supplemental_files:
 #    - path: js/nav.js
@@ -358,4 +566,4 @@ asciidoc:
 output:
   dir: wwwroot
 runtime:
-  fetch: true
+  fetch: false
