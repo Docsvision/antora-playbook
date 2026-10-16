@@ -41,12 +41,30 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 == Установка Криптосервиса в {dv} 6.1 с помощью Docker
 
 . Получите сборки КриптоПро Java CSP <<jcsp,необходимой версии>> и поместите их в локальный каталог хоста `./java-csp-5.0.45559-A-b34f3a2f`.
-. Смонтируйте эту папку в каталог Docker-контейнера `/app/BOOT-INF/lib/java-csp` и запустите контейнер:
+. Смонтируйте каталог со сборками КриптоПро Java CSP и каталог для сохранения данных лицензии. Активируйте лицензию:
 +
-[source]
+[source,bash]
 ----
-docker run -d -p 8100:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
- <.>
+docker run \
+  -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
+  -v ./data:/root/.java/.userPrefs \
+  packages.docsvision.com/cryptoservice \
+  java -cp "/app/BOOT-INF/lib/java-csp/*" ru.CryptoPro.JCSP.JCSPLicense -serial "serial_number" -company "company_name" -store
+----
++
+Замените `serial_number` на серийный номер лицензии, а `company_name` -- на название организации.
++
+В примере название организации передаётся обычным текстом через параметр `-company`. Для передачи названия в Base64 используйте вместо него параметр `-combase "company_name_in_base64"`.
++
+Данные лицензии сохраняются в каталоге `./data` на хосте. Для последующего запуска Криптосервиса используйте следующую команду, подключив тот же каталог:
++
+[source,bash]
+----
+docker run \
+  -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
+  -v ./data:/root/.java/.userPrefs \
+  -p 8100:8094 -d \
+  packages.docsvision.com/cryptoservice <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 +
@@ -59,7 +77,18 @@ docker run -d -p 8100:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 +
 . По умолчанию Криптосервис использует TSP-службу с адресом `http://cryptopro.ru/tsp/tsp.srf`. При необходимости адрес используемой TSP-службы можно переопределить с помощью переменной окружения `TSP_SERVICE_ADDRESS`. Ниже приведён пример переопределения адреса TSP-сервиса:
 
- $ docker run -d -p 8100:8094 -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf packages.docsvision.com/cryptoservice -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp
++
+При запуске с другим адресом TSP-службы также подключайте каталог `./data` с данными лицензии, сохранёнными при активации.
++
+[source,bash]
+----
+docker run \
+  -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
+  -v ./data:/root/.java/.userPrefs \
+  -e TSP_SERVICE_ADDRESS=http://testca2012.cryptopro.ru/tsp/tsp.srf \
+  -p 8100:8094 -d \
+  packages.docsvision.com/cryptoservice
+----
 +
 . Контейнер поставляется с набором сертификатов, перечисленных далее:
 +
@@ -72,12 +101,19 @@ docker run -d -p 8100:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/
 +
 Если требуется использовать дополнительные сертификаты, выполните одну из следующих настроек:
 +
+В обоих вариантах при запуске контейнера подключайте каталог `./data` с данными лицензии КриптоПро Java CSP, сохранёнными при активации по инструкции выше.
++
 .. Укажите путь к папке сертификатов:
 ... Смонтируйте сертификаты и сборки КриптоПро Java CSP <<jcsp,необходимой версии>> в соответствующие каталоги Docker-контейнера и запустите контейнер:
 +
 [source,bash]
 ----
-docker run -d -p 8100:8094 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp -v ./Cert:/var/cryptoservice/cacerts packages.docsvision.com/cryptoservice <.>
+docker run \
+  -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
+  -v ./data:/root/.java/.userPrefs \
+  -v ./Cert:/var/cryptoservice/cacerts \
+  -p 8100:8094 -d \
+  packages.docsvision.com/cryptoservice <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
 +
@@ -103,7 +139,13 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 +
 ... Запустите контейнер:
 +
- $ docker run -d -p 8100:8094 cryptoservice
+[source,bash]
+----
+docker run \
+  -v ./data:/root/.java/.userPrefs \
+  -p 8100:8094 -d \
+  cryptoservice
+----
 +
 . При необходимости ознакомьтесь с журналом Криптосервиса, развёрнутого в контейнере:
 
@@ -333,9 +375,17 @@ include:::partial$excerpts.adoc[tags=one-ws]
 
 Чтобы серийный номер сертификата считывался успешно, поместите его в каталог корневых сертификатов.
 
-Контейнер криптосервиса можно сразу смонтировать вместе с файлом настроек OCSP сервиса следующим образом:
+Для запуска Криптосервиса с файлом настроек OCSP используйте следующую команду. Подключите каталог `./data` с данными лицензии, сохранёнными при активации по <<cryptoservice,инструкции установки с помощью Docker>>.
 
- $ docker run -d -p 8100:8094 -v /path/to/settings.json:/etc/cryptoservice/settings.json -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp packages.docsvision.com/cryptoservice
+[source,bash]
+----
+docker run \
+  -v /path/to/settings.json:/etc/cryptoservice/settings.json \
+  -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
+  -v ./data:/root/.java/.userPrefs \
+  -p 8100:8094 -d \
+  packages.docsvision.com/cryptoservice
+----
 
 [#https]
 == Настройка подключения к криптосервису по HTTPS
@@ -409,12 +459,15 @@ server.ssl.keyStoreType=PKCS12
 .. Перезапустите службу *dvcryptoservice*, если установка была выполнена из пакета в Linux.
 .. Если криптосеврис работает с использованием Docker, выполните:
 +
+При запуске контейнера подключите каталог `./data` с данными лицензии, сохранёнными при активации по <<cryptoservice,инструкции установки с помощью Docker>>.
++
 [source,bash]
 ----
 docker run -d -p 8100:8094 \
 -v $(realpath application.properties):/application.properties \ <.>
 -v $(realpath keystore.p12):/keystore.p12 \ <.>
 -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \ <.>
+-v ./data:/root/.java/.userPrefs \
 packages.docsvision.com/cryptoservice \
 java org.springframework.boot.loader.JarLauncher \
 --spring.config.additional-location=/application.properties <.>
