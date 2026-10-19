@@ -43,21 +43,23 @@ WARNING: Сервис обслуживания ЭП -- расширение, в�
 . Получите сборки КриптоПро Java CSP <<jcsp,необходимой версии>> и поместите их в локальный каталог хоста `./java-csp-5.0.45559-A-b34f3a2f`.
 . Смонтируйте каталог со сборками КриптоПро Java CSP и каталог для сохранения данных лицензии. Активируйте лицензию:
 +
+--
 [source,bash]
 ----
 docker run \
   -v ./java-csp-5.0.45559-A-b34f3a2f:/app/BOOT-INF/lib/java-csp \
   -v ./data:/root/.java/.userPrefs \
   packages.docsvision.com/cryptoservice \
-  java -cp "/app/BOOT-INF/lib/java-csp/*" ru.CryptoPro.JCSP.JCSPLicense -serial "serial_number" -company "company_name" -store
+  java -cp "/app/BOOT-INF/lib/java-csp/*" ru.CryptoPro.JCSP.JCSPLicense -serial "serial_number" -company "company_name" -store <.>
 ----
-+
-Замените `serial_number` на серийный номер лицензии, а `company_name` -- на название организации.
+<.> Замените `serial_number` на серийный номер лицензии, а `company_name` -- на название организации.
+--
 +
 В примере название организации передаётся обычным текстом через параметр `-company`. Для передачи названия в Base64 используйте вместо него параметр `-combase "company_name_in_base64"`.
 +
 Данные лицензии сохраняются в каталоге `./data` на хосте. Для последующего запуска Криптосервиса используйте следующую команду, подключив тот же каталог:
 +
+--
 [source,bash]
 ----
 docker run \
@@ -67,6 +69,7 @@ docker run \
   packages.docsvision.com/cryptoservice <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
+--
 +
 При запуске контейнера всё содержимое папки будет импортировано в хранилище.
 +
@@ -106,6 +109,7 @@ docker run \
 .. Укажите путь к папке сертификатов:
 ... Смонтируйте сертификаты и сборки КриптоПро Java CSP <<jcsp,необходимой версии>> в соответствующие каталоги Docker-контейнера и запустите контейнер:
 +
+--
 [source,bash]
 ----
 docker run \
@@ -116,6 +120,7 @@ docker run \
   packages.docsvision.com/cryptoservice <.>
 ----
 <.> Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`.
+--
 +
 При запуске контейнера всё содержимое папки будет импортировано в хранилище.
 +
@@ -123,6 +128,7 @@ docker run \
 +
 ... Создайте Dockerfile. Если используется Docker Hub, замените `packages.docsvision.com/cryptoservice` на `docsvision/cryptoservice`:
 +
+--
 [source,dockerfile]
 ----
 FROM packages.docsvision.com/cryptoservice
@@ -132,6 +138,7 @@ COPY ./your/cacerts/ /var/cryptoservice/cacerts/ <.>
 ----
 <.> Смонтируйте сборки КриптоПро Java CSP <<jcsp,необходимой версии>>.
 <.> Смонтируйте сертификаты.
+--
 +
 ... Соберите собственный образ:
 +
@@ -261,6 +268,7 @@ image::install-crypto-finish.png[Завершение установки]
 . По завершению установки нажмите *Готово*. После установки Криптосервиса его нужно сконфигурировать. Конфигурация после установки с помощью инсталлятора предполагает два альтернативных варианта:
 .. *ЛИБО:* Откройте файл `C:\Program Files (x86)\Docsvision\CryptoService\appsettings.json` и укажите следующие параметры:
 +
+--
 [source,json]
 ----
 {
@@ -276,6 +284,7 @@ image::install-crypto-finish.png[Завершение установки]
 <.> `timestampservice.name` -- адрес TSP сервиса.
 <.> `logging.file.name` -- путь к файлу журнала.
 <.> `Java` -- папка, содержащая сборки Java CSP <<jcsp,необходимой версии>>.
+--
 +
 .. *ЛИБО:* Скопируйте Java CSP <<jcsp,необходимой версии>> в `C:\Program Files (x86)\Docsvision\CryptoService\jar\BOOT-INF\lib`
 +
@@ -307,6 +316,7 @@ include:::partial$excerpts.adoc[tags=one-ws]
 +
 ... Создайте файл `settings.json`, скопируйте созданный конфигурационный файл по пути `/usr/lib/docsvision/platform/config/settings.json` в Linux. Пример содержимого файла приведён ниже:
 +
+--
 [source,json]
 ----
 {
@@ -322,6 +332,7 @@ include:::partial$excerpts.adoc[tags=one-ws]
 }
 ----
 <.> Адрес Криптосервиса.
+--
 +
 ... Перезапустите службу *dvappserver* для Linux и *{sss-win}* для Windows.
 +
@@ -411,6 +422,7 @@ openssl pkcs12 -export \
 +
 * При работе через Docker создайте файл конфигурации.
 +
+--
 [source,bash]
 ----
 cat > application.properties <<EOF
@@ -421,9 +433,11 @@ EOF
 ----
 <.> Путь до PKCS12-файла в контейнере
 <.> Пароль от PKCS12-файла
+--
 +
 * Если Криптосервис установлен в Linux из пакета, откройте конфигурационный файл по адресу `/usr/lib/docsvision/cryptoservice/application.properties` и укажите следующие параметры:
 +
+--
 [source]
 ----
 server.ssl.key-store=/keystore.p12 <.>
@@ -432,9 +446,11 @@ server.ssl.keyStoreType=PKCS12
 ----
 <.> Путь до PKCS12-файла.
 <.> Пароль от PKCS12-файла.
+--
 +
 * В Windows откройте файл конфигурации по адресу `C:\Program Files (x86)\Docsvision\CryptoService\appsettings.json` и укажите следующие параметры:
 +
+--
 [source,json]
 ----
 {
@@ -443,7 +459,7 @@ server.ssl.keyStoreType=PKCS12
     "logging.file.name": "C:\\ProgramData\\Docsvision\\CryptoService\\CryptoService.log",
     "server.ssl.key-store": "C:\\Program Files (x86)\\Docsvision\\CryptoService\\keystore.p12",  <.>
     "server.ssl.key-store-password": "MyP@ssw0rd", <.>
-    "server.ssl.keyStoreType": "PKCS12",
+    "server.ssl.keyStoreType": "PKCS12"
   "Java": [
     "-Dloader.path=C:\\Program Files (x86)\\Docsvision\\CryptoService\\jar\\BOOT-INF\\lib\\java-csp-5.0.45559-A-b34f3a2f" <.>
   ]
@@ -453,6 +469,7 @@ server.ssl.keyStoreType=PKCS12
 <.> Путь до PKCS12-файла
 <.> Пароль от PKCS12-файла
 <.> `Java` -- папка, содержащая сборки Java CSP <<jcsp,необходимой версии>>.
+--
 +
 . Запустите криптосервис.
 .. Запустите службу *{dv} CryptoService*, если установка была выполнена при помощи инсталлятора.
@@ -461,6 +478,7 @@ server.ssl.keyStoreType=PKCS12
 +
 При запуске контейнера подключите каталог `./data` с данными лицензии, сохранёнными при активации по <<cryptoservice,инструкции установки с помощью Docker>>.
 +
+--
 [source,bash]
 ----
 docker run -d -p 8100:8094 \
@@ -476,3 +494,4 @@ java org.springframework.boot.loader.JarLauncher \
 <.> Монтирование PKCS12-файла `хост:контейнер`
 <.> Монтирование сборки КриптоПро Java CSP <<jcsp,необходимой версии>>.
 <.> Путь до файла конфигурации в контейнере
+--
