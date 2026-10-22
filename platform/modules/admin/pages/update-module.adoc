@@ -1,0 +1,27 @@
+:platform:
+:service:
+:restart: dvappserver
+:update: platform
+:installer: {dv} Platform server.msi
+
+= Обновление модуля
+
+include::webclient:ROOT:partial$excerpts.adoc[tags=what-changed]
+
+include::partial$update-conditions.adoc[]
+
+include::partial$update.adoc[]
+
+:what-ext: расширений модуля {pl} и {of-fs} для {of-mc}
+:update: fileservice-mc docsvision-ext-platform-mc
+include::6.1@platform:admin:partial$update-extensions.adoc[]
+
+[#client]
+== Обновление клиентских компонентов
+
+include::6.1@platform:admin:partial$client.adoc[]
+`{dv} Platform client.msi`.
++
+. При необходимости после установки модуля {pl} установите клиентские компоненты других модулей.
++
+Клиентские компоненты других модулей будут установлены с областью установки _для всех пользователей_.

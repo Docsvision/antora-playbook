@@ -1,0 +1,308 @@
+= Установка модуля {pl}
+
+Все описанные действия по установке необходимо выполнять после завершения xref:pre-config-server.adoc[предварительной настройки сервера].
+
+include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
+
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+include::partial$excerpts.adoc[tags=to-not-supported]
+
+[#linserver]
+== Установка на сервер под управлением Linux
+
+Начиная с версии {pl-cu-mc}, установка серверных компонентов в ОС Windows не потребуется, если не планируется работать в {wincl}е.
+
+[#linux-pl]
+=== Установка модуля {pl} на сервер под управлением Linux
+
+При установке модулей {dv} в ОС Linux необходимо установить модуль описанными далее командами.
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
++
+. Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
++
+[tabs]
+====
+{os1}::
++
+[source]
+----
+sudo apt-get install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+
+{os2}::
++
+[source]
+----
+sudo dnf install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+====
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
+. Запустите службу Сервера {dv}.
+
+[#fs-linux]
+=== Установка файлового сервиса на сервер под управлением Linux
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Запустите службу Файлового сервиса:
++
+ $ sudo systemctl start dvfileservice
+
+[#pl-ext-linux]
+=== Установка расширения Сервера приложений на сервер под управлением Linux
+
+include::6.1@platform:admin:partial$excerpts.adoc[tags=extensions]
+
+:what-mod: {pl}
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение сервера приложений для {of-mc}" на сервер под управлением Linux:
+:of: Расширения сервера приложений для {of-mc}
+:wt: ext-platform-mc
+:sss-new: dvappserver
+:no-root-since: модуле {pl} {pl-no-root-since} и в модуле {mc} {mc-no-root-since}
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
++
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службы:
++
+* Службу Сервера {dv}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+--
+
+[#fs-ext-linux]
+=== Установка расширения {of-fs} на сервер под управлением Linux
+
+:what-mod: {fs}
+include::6.2@mgmtconsole:user:partial$excerpts.adoc[tags=ext-ver]
+
+--
+.Чтобы установить "Расширение {of-fs} для {of-mc}":
+:of: Расширения {of-fs} для {of-mc}
+:wt: ext-fileservice-mc
+:fss-new: dvfileservice
+. Установите компоненты {of} следующей командой, предварительно обновив индекс пакетов:
++
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. Перезапустите службы:
++
+* Службу {of-fs}.
++
+:no-root-since: {pl-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
++
+* Службу {of-mc}.
++
+:no-root-since: {mc-no-root-since}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-root]
+--
+
+include::6.1@platform:console:search-full-text.adoc[tags=install-ft-lin]
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
+
+[#winserver]
+== Установка на сервер под управлением Windows
+
+[#windows-pl]
+=== Установка модуля {pl} на сервер под управлением Windows
+
+Включить журналирование процесса установки можно с помощью флага `*/l*v*`:
+
+ msiexec /i "Docsvision Platform server.msi" /l*v install.log
+
+. Запустите пакет установки `{dv} Platform server.msi`.
+. Примите условия лицензионного соглашения.
++
+.Условия лицензионного соглашения
+image::6.1@platform:admin:install-server-license.png[Условия лицензионного соглашения]
++
+. Выберите компоненты, которые требуется установить, и нажмите *Далее*.
++
+.Выбор устанавливаемых компонентов
+image::install-server-components.png[Выбор устанавливаемых компонентов]
++
+include::6.1@platform:admin:partial$install-components.adoc[]
++
+****
+// tag::components[]
+Платформа::
+Предоставляет функции сервера {dv}, обязательна для установки на сервер {dv}.
+
+Служба Windows:::
+Компоненты системы, предоставляющие службу Сервера {dv}, обязательна для установки на сервер {dv}.
+
+Расширение консоли управления:::
+Расширение добавляет связанные с модулем ресурсы локализации, обработчики, специализированные редакторы для настройки сервера приложений и БД из {of-mc}, обязательно для установки на сервер {of-mc}.
+
+{fs}::
+Выполняет отложенные операции удаления бинарных данных файлов из внешних хранилищ и перемещает данные между хранилищами, обязателен для установки на сервер {dv}.
+
+Служба Windows:::
+Компоненты {of-fs}, предоставляющие службу Файлового сервиса, обязательна для установки на сервер {dv}.
+
+Расширение консоли управления:::
+Расширение добавляет связанные с модулем ресурсы локализации, обработчики, специализированные редакторы (при наличии) для настройки сервера приложений и БД из {of-mc}, обязательно для установки на сервер {of-mc}.
+
+Сервис полнотекстового поиска::
+Передает в {mssql} Server или во внешнюю систему полнотекстового поиска {es} данные, требующие построения полнотекстовых индексов, обязателен для установки на сервер {dv}.
+
+Служба Windows:::
+Компоненты {of-fs}, предоставляющие службу полнотекстового поиска, обязательна для установки на сервер {dv}.
+// end::components[]
+
+Кнопка Сброс::
+Сбрасывает выбор компонентов на стандартные.
+
+Кнопка Использование диска::
+Позволяет посмотреть свободное место на системных дисках.
+****
++
+. Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
++
+.Мастер установки серверной части модуля {pl}
+image::6.1@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
++
+. На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
+
+[#fs-windows]
+=== Установка {of-fs} на сервер под управлением Windows
+
+.Чтобы установить {of-fs} на сервер под управлением Windows:
+. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "{fs}":
++
+.Выбор {of-fs} для установки
+image::install-server-components-fs.png[Выбор {of-fs} для установки]
+
+[#fs-ext-windows]
+=== Установка расширения {of-fs} на сервер под управлением Windows
+
+include::6.1@platform:admin:partial$excerpts.adoc[tags=extensions]
+
+.Чтобы установить расширение {of-fs} для {of-mc} на сервер под управлением Windows:
+. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {fs}:
++
+.Выбор компонентов модуля {fs} для установки
+image::install-server-mc-fs-extension.png[Выбор компонентов модуля {fs} для установки]
++
+. Перезапустите службы {of-fs} и {of-mc}.
+
+[#pl-ext-windows]
+=== Установка расширения Сервера приложений на сервер под управлением Windows
+
+.Чтобы установить расширение сервера приложений для {of-mc} на сервер под управлением Windows:
+. Запустите инсталлятор модуля {pl} `Docsvision Platform server.msi`, на шаге выбора компонентов выберите компонент "Расширение консоли управления" для модуля {pl}:
++
+.Выбор компонентов модуля {pl} для установки
+image::install-server-mc-pl-extension.png[Выбор компонентов модуля {pl} для установки]
++
+. Перезапустите службы Сервера {dv} и {of-mc}.
+
+include::6.1@platform:console:search-full-text.adoc[tags=install-ft-win]
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
+
+[#config-ft]
+== Настройка сервиса полнотекстового индексирования
+
+:no-root-since: модуле {pl} {pl-no-root-since}
+include::console:search-full-text.adoc[tags=appsettings]
+
+[#old-method]
+== (Старый метод) Установка без {of-mc}
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит модули _{bo}_ и _{ad}_.
++
+. Активируйте лицензию при помощи xref:activation.adoc[утилиты активации]:
++
+[tabs]
+====
+{os1}::
++
+[source]
+----
+sudo apt-get install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+
+{os2}::
++
+[source]
+----
+sudo dnf install docsvision-activation
+cd /usr/lib/docsvision/tools/activation
+sudo ./activation online ВАШ-КЛЮЧ
+----
+====
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc#old-method[Конфигурация Сервера приложений]".
+. Установите пакеты {of-fs}:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. В конфигурационном файле укажите строку подключения к БД:
++
+[source,json]
+----
+{
+  "DocsVision": {
+    "Platform": {
+      "Server": {
+        "Databases": {
+          "alias": "Database-connection-string" <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#conn-string[Конфигурация модуля {pl}]".
++
+. Запустите службу {of-fs}:
++
+ $ sudo systemctl start dvfileservice
++
+. Установите пакеты {of-fs}:
++
+:wt: fulltextservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+. На машине Windows запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям мастера установки. На шаге выбора компонентов укажите все компоненты.
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+Откройте конфигурационный файл {config-ft} в любом текстовом редакторе и выполните необходимые настройки сервиса:
+. <<config-ft,Выполните настройку>> сервиса полнотекстового индексирования.
