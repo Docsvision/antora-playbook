@@ -1,0 +1,20 @@
+= Журнал работы приложения
+
+Технические журналы Консоли управления и {of-sett-serv} можно посмотреть в каталоге `/var/log/docsvision` для Linux и `C:\ProgramData\Docsvision` для Windows.
+
+Чтобы изменить путь хранения файла журнала по умолчанию, нужно в конфигурационном файле модуля `appsettings.json` изменить параметр menu:NLog[targets > logFile > fileName] с указанием нужного пути:
+
+.Путь к файлу журнала:
+[source,json]
+----
+{
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/managementconsole/${shortdate}_ManagementConsole.log"
+      }
+    }
+  }
+}
+----

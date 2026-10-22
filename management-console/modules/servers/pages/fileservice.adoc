@@ -1,0 +1,31 @@
+:what-service: {fss-new}
+:name-service: {of-fs}
+:this-action: настройки {of-fs}
+:anchor: fs
+:module: {of-fs}
+
+= Страница "{fs}"
+
+Настройки {of-fs} в {of-mc}.
+
+include::partial$excerpts.adoc[tags=mc-or-config]
+
+include::partial$excerpts.adoc[tags=address]
+
+include::partial$excerpts.adoc[tags=mc-extension]
+
+При запуске службы {of-fs} в сервисе настроек регистрируются или обновляются следующие данные:
+
+* Имя сервера
+* Операционная система
+* Версия ОС
+* Данные об установленном компоненте {of-fs}:
+** Системное название модуля
+** Продуктовая версия модуля
+** Номер сборки модуля
+
+WARNING: Перед запуском службы убедитесь, что в конфигурационном файле модуля {fs} указаны параметры, необходимые для работы {of-sett-serv}: menu:ServiceId[], menu:SettingsService[ConnectionString] и menu:SettingsService[ApiKey].
+
+Интерфейс страницы настроек {of-fs} представлен в виде списка. Настройки представлены универсальными компонентами редактирования.
+
+include::partial$excerpts.adoc[tags=restart-service]

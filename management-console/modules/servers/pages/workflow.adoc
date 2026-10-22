@@ -1,0 +1,26 @@
+:what-service: {wfs-new}
+:name-service: модуля {wf}
+
+= Страница "{wf}"
+
+Настройки {wf} в {of-mc}.
+
+include::partial$excerpts.adoc[tags=mc-or-config]
+
+include::partial$excerpts.adoc[tags=address]
+
+При запуске службы модуля {wf} в сервисе настроек регистрируются или обновляются следующие данные:
+
+* Имя сервера
+* Операционная система
+* Версия ОС
+* Данные об установленном компоненте СУБП:
+** Системное название модуля
+** Продуктовая версия модуля
+** Номер сборки модуля
+
+WARNING: Перед запуском службы убедитесь, что в конфигурационном файле модуля {wf} указаны параметры menu:ServiceId[], menu:SettingsService[ConnectionString] и menu:SettingsService[ApiKey], подробнее см. в разделе "xref:workflow:admin:install.adoc[]".
+
+Интерфейс страницы настроек модуля {wf} представлен в виде списка. Настройки представлены универсальными компонентами редактирования.
+
+include::partial$excerpts.adoc[tags=restart-service]

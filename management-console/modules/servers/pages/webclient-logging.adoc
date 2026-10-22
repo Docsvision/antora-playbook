@@ -1,0 +1,96 @@
+= Группа настроек "Журналирование"
+
+Некоторые настройки журналирования {wc}а перенесены в интерфейс консоли.
+
+.Группа настроек "Журналирование"
+image::webclient-logging.png[Группа настроек "Журналирование"]
+
+:module: {wc}
+:parameter: EnableRouterLogging
+Включить журнал событий навигации::
+По умолчанию протоколирование событий навигации отключено. Администратор может включитьfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+] ведение журнала для записи информации о событиях и последующего анализа ошибок при помощи данного флага. В лог браузера записывается информация о специальных навигационных обработчиках, передаваемым им параметрах и результатах их работы.
+
+:module: {wc}
+:parameter: ApplyAggregatesButton
+Логирование сообщений браузера::
+Отправлять сообщения браузера в журнал операций {wc}а. По умолчанию отправка сообщения браузера в журнал операций отключенаfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. Администратор может включить отправку при помощи данного флага.
+
+[#query-logging]
+== Логирование запросов
+
+:module: {wc}
+:parameter: menu:W3CLogging[IsEnabled]
+Включить журналирование запросов::
+Включение/отключение протоколирования событий сервера {wc}аfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. Значение по умолчанию: неопределено. В стандартной конфигурации остальные настройки группы отсутствуют.
+
+:module: {wc}
+:parameter: menu:W3CLogging[LogDirectory]
+Путь к журналу запросов::
+Расположение папки с файлами журнала запросовfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+].
+
+:module: {wc}
+:parameter: menu:W3CLogging[LoggingFields]
+Журналируемые поля::
+По умолчанию указываются запросы, ответы, заголовки, дата/время (записывается в формате UTC) и имя сервераfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. Значения разделяются запятой. Со всеми допустимыми значениями можно ознакомиться в https://github.com/dotnet/aspnetcore/blob/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Middleware/HttpLogging/src/W3CLoggingFields.cs[документации Microsoft].
+
+:module: {wc}
+:parameter: menu:W3CLogging[FileSizeLimit]
+Размер файла журнала, байт::
+Максимальный размер файла журнала, после которого будет создаваться новыйfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. Значение в байтах, по умолчанию 10485760 байт (10 Мб). Цифра `0` означает отсутствие ограничения по размеру.
+
+:module: {wc}
+:parameter: menu:W3CLogging[RetainedFileCountLimit]
+Количество файлов журнала::
+Количество сохраняемых файлов журнала, старые файлы будут удалены после появления новыхfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. Допустимые значения от `1` до `10000`, по умолчанию используется `4`.
+
+:module: {wc}
+:parameter: menu:W3CLogging[FileName]
+Префикс имени файла журнала::
+Префикс имени файла журналаfootnote:[
+include::partial$excerpts.adoc[tags=analog-param]
+]. К префиксу прибавляется дата и номер файла в формате `ГГГММДД.X`, где `X` -- порядковый номер журнала. Файл располагается по пути `/var/log/docsvision/webclient/`, например `/var/log/docsvision/webclient/webclient-w3c-20350226.1.txt`.
+
+[#config]
+== Настройка в конфигурационном файле
+
+Возможность настроить журналирование NLog (см. подробнее "xref:6.1@webclient:admin:log.adoc#nlog[Протоколирование запросов с помощью NLog]") с помощью конфигурационного файла поддерживается в качестве обратной совместимости.
+
+[source,json]
+----
+{
+  "NLog": {
+    "targets": {
+      "logFile": {
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/webclient/webclient.log",
+        "layout": "[${longdate}][${level}][${callsite}] ${message} ${onexception:${newline}${exception:maxInnerExceptionLevel=10:format=shortType,message,stacktrace:separator=*:innerExceptionSeparator=&#xD;&#xA;&#x9;}}"
+      },
+    "rules": [
+      {
+        "logger": "*",
+        "minLevel": "Error",
+        "writeTo": "logFile"
+      },
+      {
+        "logger": "*",
+        "minLevel": "Trace",
+        "writeTo": "logConsole"
+      }
+    ]
+  }
+}
+----

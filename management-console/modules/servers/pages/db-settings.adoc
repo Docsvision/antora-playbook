@@ -1,0 +1,37 @@
+:db-settings:
+:module: модуля {pl}
+:this-action: работы с БД
+:anchor: pl
+:process: создания или обновления
+
+= Группа настроек "Базы данных"
+
+В группе "Базы данных" представлены инструменты управления и настройки баз данных {dv}, включая создание, обновление и подключение.
+
+include::partial$excerpts.adoc[tags=mc-extension]
+
+.Таблица "Базы данных" в {of-mc}
+image::db-master.png[Таблица "Базы данных" в {of-mc}]
+
+.Следующие элементы используются для работы с БД в {of-mc}:
+Таблица подключенных баз данных {dv}::
++
+.В таблице отображаются:
+
+Индикатор состояния БД:::
+include::partial$excerpts.adoc[tags=db-table-legend]
+include::partial$excerpts.adoc[tags=dbalias]
+include::partial$excerpts.adoc[tags=servername]
+include::partial$excerpts.adoc[tags=servertype]
+include::partial$excerpts.adoc[tags=dbindex]
+include::partial$excerpts.adoc[tags=dbversion]
+include::partial$excerpts.adoc[tags=dbupdate]
+include::partial$excerpts.adoc[tags=dbdefault]
+include::partial$excerpts.adoc[tags=actionbuttons]
+
+[WARNING]
+====
+// tag::wf-settings[]
+Настройки БД в компоненте {wf} автоматически не удаляются после отключения БД от Сервера приложений, из-за чего в журналах приложения могут появляться ошибки. Чтобы устранить ошибки, удалите связанные с этой базой записи на странице расширенных настроек компонента {wf}, затем перезапустите службу Workflow.
+// end::wf-settings[]
+====
