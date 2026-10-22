@@ -1,0 +1,24 @@
+:with-config: yes
+:link: "xref:6.2@mgmtconsole:servers:appserver-auth-extensions.adoc[]"
+:do-what: настройки расширений авторизации
+
+= Регистрация расширений авторизации
+
+{dv} {wc} поддерживает авторизацию с помощью сторонних расширений. Необходимые ресурсы для работы расширений авторизации в {wc}е поставляются с модулем {pl}.
+
+include::partial$mancons.adoc[]
+
+[subs="specialchars,attributes,quotes"]
+Настроить расширения можно путём изменения записей в секции menu:&quot;Docsvision&quot;["Platform" > "Server" > "Authentication" > "Extensions"] конфигурационного файла по адресу {config-pl}. Также можно создать отдельный файл формата `.json` с произвольным названием, указать в нём настройки расширений и поместить файл в `каталог-установки-модуля-платформа/config`.
+
+Данный раздел посвящён регистрации расширений авторизации в Linux версии системы 6.1 из конфигурационного файла. Создание собственных расширений {dv} описывается в разделе "xref:dv6@programmer:solutions:extensions/extensions.adoc[]" руководства по разработке.
+
+include::partial$azure.adoc[]
+
+include::partial$esia.adoc[]
+
+include::partial$adfs.adoc[]
+
+include::partial$keycloak.adoc[]
+
+include::partial$idb.adoc[]
