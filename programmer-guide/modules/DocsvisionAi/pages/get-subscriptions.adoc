@@ -1,0 +1,51 @@
+= Получение подписок организации
+
+Метод `GetSubscriptionsAsync` позволяет получить все подписки организации по API ключу, указанному в `ai.config`.
+
+.Параметры метода "GetSubscriptionsAsync"
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `cancellationToken` | `CancellationToken` | Нет | Токен отмены
+|===
+
+.Тело ответа, "AiSubscriptionsResponse"
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `Subscriptions` | `IList<AiSubscription>` | Список тарифов
+|===
+
+.Список тарифов, "AiSubscription"
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `Status` | `string` | Статус подписки
+| `Organization` | `string` | Организация
+| `UpdatePeriod` | `string` | Период сброса токенов
+| `UpdatePeriodDuration` | `int` | Атомарное значение периода, день, минута и т.д.
+| `Tariff` | `string` | Название тарифа
+| `TariffPriority` | `int` | Приоритет тарифа
+| `StartDate` | `DateTime` | Дата начала действия
+| `EndDate` | `DateTime` | Дата окончания действия
+| `RefreshTokenDate` | `DateTime` | Дата сброса токенов
+| `UsedTokens` | `int` | Количество использованных токенов за все время
+| `UsedTokensForPeriod` | `int` | Количество использованных токенов за период
+| `BalanceTokensForPeriod` | `int` | Остаток токенов за период
+| `Services` | `IList<AiTariffService>` | Доступные AI сервисы по данной подписке
+|===
+
+.Доступные AI сервисы по данной подписке, "AiTariffService":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `Name` | `string` | Название AI сервиса
+| `Alias` | `string` | Алиас AI сервиса
+|===
+
+.Пример запроса:
+[source,csharp]
+----
+AiSubscriptionsResponse response = await aiClient.GetSubscriptionsAsync();
+Console.WriteLine("Подписки: " + response?.ToString());
+----

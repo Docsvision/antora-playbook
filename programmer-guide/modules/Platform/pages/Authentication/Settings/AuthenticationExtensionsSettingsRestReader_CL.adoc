@@ -1,0 +1,68 @@
+= AuthenticationExtensionsSettingsRestReader -- класс
+
+Предоставляет методы чтения и записи для настроек аутентификации, всех экземпляров расширений для всех тенантов, работает через REST API
+
+* *Пространство имён:* `xref:Platform:Authentication/Settings/Settings_NS.adoc[DocsVision.Platform.Authentication.Settings]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class AuthenticationExtensionsSettingsRestReader : IAuthenticationExtensionsSettingsReader
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetAuthenticationExtensionSettings(Guid)`
+a|Получает настройки конкретного расширения аутентификации по его GUID
+
+.Параметры:
+* `id` -- идентификатор расширения аутентификации
+
+*Возвращаемое значение*: `xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]` -- настройки расширения аутентификации
+
+|`GetSettings()`
+a|Получает глобальные настройки всех расширений аутентификации
+
+*Возвращаемое значение*: `xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]` -- настройки расширения аутентификации
+
+|`IEnumerable<AuthenticationExtensionSettings> GetTenantAuthenticationExtensionSettings(string tenant)`
+a|Получает настройки расширения аутентификации для конкретного тенанта
+
+.Параметры:
+* `tenant` -- тенант
+
+*Возвращаемое значение*: `IEnumerable<xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]>` -- список настроек расширения аутентификации
+
+|`SetAuthenticationExtensionSettings(AuthenticationExtensionSettings)`
+a|Задаёт настройки для конкретного экземпляра расширения аутентификации
+
+.Параметры:
+* `settings` -- настройки аутентификации
+
+|`SetTenantAuthenticationExtensions(TenantAuthenticationSettings)`
+a|Задаёт расширения аутентификации для тенанта
+
+.Параметры:
+* `settings` -- настройки аутентификации
+
+|===
+
+== Конструкторы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`AuthenticationExtensionsSettingsRestReader(string)`
+|Создаёт новый экземпляр класса `xref:Platform:Authentication/Settings/AuthenticationExtensionsSettingsRestReader_CL.adoc[AuthenticationExtensionsSettingsRestReader]`
+
+.Параметры:
+* `serverUrl` -- URL сервера
+
+|===

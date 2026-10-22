@@ -1,0 +1,51 @@
+= Транскрибирование аудио/видео файлов
+
+Для получения файла транскрибации реализован метод `SendTranscribeRequestAsync`.
+
+.Параметры метода "SendTranscribeRequestAsync":
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `file` | `AiFile` | Да | Аудио/видео файл
+| `transcriptOutputMode` | `AiTranscriptOutputMode` | Да | Формат выходного файла
+| `transcriptOutputFormat` | `AiTranscriptOutputFormat` | Нет | Тип выходного JSON файла транскрибирования
+| `pollingIntervalSeconds` | `double` | Нет | Интервал опроса статуса операции в секундах
+| `cancellationToken` | `CancellationToken` | Нет | Токен отмены
+|===
+
+.Перечисление форматов выходного JSON файла, "AiTranscriptOutputMode":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `Text` | `enum` | Только текст
+| `TextSpeakers` | `enum` | Текст разделенный на спикеров
+| `Full` | `enum` | Полная транскрибация: текст, спикеры и временные отрезки
+|===
+
+.Формат файла транскрибирования, "AiTranscriptOutputFormat":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `JSON` | `enum` | Исходный JSON из ECM.WhisperX
+| `SRT` | `enum` | SubRip Subtitle
+| `VTT` | `enum` | WebVTT Subtitle
+|===
+
+.Пример запроса:
+[source,csharp]
+----
+string filePath = "C:\\аудио.mp3";
+byte[] fileBytes = await File.ReadAllBytesAsync(filePath, cancellationToken);
+
+AiFile file = new AiFile
+{
+    Name = Path.GetFileName(filePath),
+    Content = new MemoryStream(fileBytes)
+};
+
+using (Stream stream = await aiClient.SendTranscribeRequestAsync(file, AiTranscriptOutputMode.Full, AiTranscriptOutputFormat.JSON, 30, cancellationToken))
+using (FileStream output = new FileStream("C:\\transcription.json", FileMode.Create, FileAccess.Write))
+{
+    await stream.CopyToAsync(output);
+}
+----

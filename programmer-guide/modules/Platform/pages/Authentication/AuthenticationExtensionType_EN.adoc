@@ -1,0 +1,45 @@
+= AuthenticationExtensionType -- перечисление
+
+Типы расширений аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public enum AuthenticationExtensionType
+----
+
+== Члены
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Root = 0`
+|Базовое расширение
+
+|`DesktopClient = 1`
+|Расширение для интерактивных десктопных клиентов
+
+|`WebClient = 2`
+|Расширение для интерактивных web-клиентов
+
+|`ServiceClient = 4`
+|Расширение для сервисных неинтерактивных приложений
+
+|`TokenHandler = 8`
+|Расширение для пользовательской логики проверки токена
+
+|`WebApplicationInitialize = 16`
+|Расширение для инициализации web-приложения
+
+|`BasicAuthentication = 32`
+|Расширение для базовой аутентификации
+
+|`UserRolesProvider = 64`
+|Расширение, предоставляющее пользовательские роли
+
+|===

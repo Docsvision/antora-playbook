@@ -1,0 +1,35 @@
+= MailNotificationInfo -- класс
+
+Предоставляет данные электронного сообщения для сервиса отправки электронной почты.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class MailNotificationInfo
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:Entities/MailNotificationInfo_CT.adoc[MailNotificationInfo(String, String, String)]` |Инициализирует новый экземпляр класса `MailNotificationInfo` с помощью указанного значения.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Body` |Возвращает содержимое письма.
+|`Email` |Возвращает адрес электронной почты получателя.
+|`Theme` |Возвращает тему письма.
+|===
+
+== Заметки
+
+Объект типа `MailNotificationInfo` используется для формирования данных перед отправкой электронного сообщения с использованием сервиса для работы с базовыми объектами `xref:BackOffice-ObjectModel-Services-IBaseCardService:IBaseCardService.SendMailNotification_MT.adoc[IBaseCardService.SendMailNotification(IEnumerable<MailNotificationInfo>)]`.

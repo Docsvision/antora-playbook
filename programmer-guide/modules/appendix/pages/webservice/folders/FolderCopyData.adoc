@@ -1,0 +1,96 @@
+= FolderCopyData
+
+Копирует папку вместе с ярлыками с возможностью копирования подчиненных папок.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderCopyData"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <folderId>guid</folderId>
+      <newParentFolderId>guid</newParentFolderId>
+      <folderOptions>string</folderOptions>
+    </FolderCopyData>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+folderId:::
+Идентификатор копируемой папки
+newParentFolderId:::
+Папка, в которую выполняется копирование
+folderOptions:::
+Параметры копирование
+
+Строка `folderOptions` должна соответствовать формату элемента `FolderOptions`, приведенному в схеме `ServerRequests.xsd`:
+
+[source,xml]
+----
+<xsd:element name="FolderOptions">
+  <xsd:complexType>
+    <xsd:attribute name="NewFolderName" type ="xsd:string" use="optional"/>
+    <xsd:attribute name="IncludeChildFolders" type ="xsd:boolean" use="optional"/>
+  </xsd:complexType>
+</xsd:element>
+----
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyDataResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <newFolderId>guid</newFolderId>
+    </FolderCopyDataResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит идентификатор копии папки.
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/FolderCopyData" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <FolderCopyData xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <folderId>E3768B6E-CDD2-47E7-BF26-F86C9EEC2840</folderId>
+      <newParentFolderId>B89B3747-4245-4AEF-94BA-7EB096A734E1</newParentFolderId>
+      <folderOptions>&lt;FolderOptions IncludeChildFolders=&quot;1&quot; NewFolderName=&quot;Copy-Folder&quot;/&gt;</folderOptions>
+    </FolderCopyData>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+
+responseParsed = ElementTree.fromstring(response.content)
+print(responseParsed.findtext(".//{http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/}newFolderId")) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Разбираем ответ и выводим идентификатор созданной папки.

@@ -1,0 +1,106 @@
+= AuthenticationExtensionFactory -- класс
+
+Фабрика расширений аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class AuthenticationExtensionFactory
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`ServerAddress`
+|Адрес сервера
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- URL
+
+|`LicenseData`
+|Данные лицензии
+
+*Тип*: `SignedLicense` -- подписанная лицензия
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`CreateAuthenticationExtension<T>(Guid, AuthenticationExtensionType, string)`
+a|Создаёт расширение аутентификации конкретного типа
+
+.Параметры:
+* `extensionInstanceId` -- идентификатор экземпляра расширения
+* `extensionType` -- тип расширения аутентификации
+* `extensionLocalSettings` -- локальные настройки расширения
+
+*Возвращаемое значение*: `xref:Platform:Authentication/IAuthenticationExtension_IN.adoc[T]` -- расширение аутентификации
+
+|`CreateAuthenticationExtension(Guid, AuthenticationExtensionType, string)`
+a|Создаёт расширение аутентификации
+
+.Параметры:
+* `extensionInstanceId` -- идентификатор экземпляра расширения
+* `extensionType` -- тип расширения аутентификации
+* `extensionLocalSettings` -- локальные настройки расширения
+
+*Возвращаемое значение*: `xref:Platform:Authentication/IAuthenticationExtension_IN.adoc[IAuthenticationExtension]` -- расширение аутентификации
+
+|`GetAuthenticationExtensionsSettings(string)`
+a|Получает настройки расширения аутентификации
+
+.Параметры:
+* `tenantName` -- имя тенанта
+
+*Возвращаемое значение*: `IEnumerable<xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]>` --
+
+|`CreateRootAuthenticationExtensions(string, AuthenticationExtensionType)`
+a|Создаёт базовое расширение аутентификации
+
+.Параметры:
+* `tenantName` -- имя тенанта
+* `supportedExtensionType` -- тип поддерживаемого расширения аутентификации
+
+*Возвращаемое значение*: `IEnumerable<xref:Platform:Authentication/IRootAuthenticationExtension_IN.adoc[IRootAuthenticationExtension]>` -- базовое расширение аутентификации
+
+|`CreateAuthenticationExtensions<T>(AuthenticationExtensionType)`
+a|Тип расширения аутентификации
+
+.Параметры:
+* `supportedExtensionType` -- тип поддерживаемого расширения аутентификации
+
+*Возвращаемое значение*: `IEnumerable<T>` -- список расширений аутентификации типа `T`
+
+|===
+
+== Конструкторы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`AuthenticationExtensionFactory(IConfiguration)`
+a|Создаёт экземпляр класса `xref:Platform:Authentication/AuthenticationExtensionFactory_CL.adoc[AuthenticationExtensionFactory]`
+
+.Параметры:
+* `configuration` -- конфигурация расширения аутентификации
+
+|`AuthenticationExtensionFactory(IConfiguration, string, string)`
+a|Создаёт экземпляр класса `xref:Platform:Authentication/AuthenticationExtensionFactory_CL.adoc[AuthenticationExtensionFactory]`
+
+.Параметры:
+* `configuration` -- конфигурация расширения аутентификации
+* `serverAddress` -- адрес сервера
+* `licenseData` -- данные лицензии
+
+|===

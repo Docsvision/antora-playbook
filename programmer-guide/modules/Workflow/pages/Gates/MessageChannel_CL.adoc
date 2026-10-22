@@ -1,0 +1,43 @@
+= MessageChannel -- класс
+
+Предоставляет методы для работы с сообщениями шлюза.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Objects.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class MessageChannel : IMessageChannel
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`MessageChannel(UserSession)` |Инициализирует новый экземпляр класса MessageChannel.
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Session` |Возвращает пользовательскую сессию канала сообщений.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`RemoveMessages(Guid, DateTime)` |Удаляет все сообщения указанного процесса, отправленные до определённого времени.
+|`RemoveMessages(Guid, Guid, DateTime)` |Удаляет все сообщения указанной функции процесса, отправленные до определённого времени.
+|`SendMessage(Int32, Guid)` |Отправляет сообщение указанному процессу.
+|`SendMessage(Int32, Guid, Guid)` |Отправляет сообщение указанной функции процесса.
+|`SendMessage(Int32, Guid, Guid, String)` |Отправляет сообщение указанной функции процесса.
+|`SendMessage(Int32, Guid, Guid, String, Guid, MessageSourceType)` |Отправляет сообщение указанной функции процесса.
+|`SendMessage(Guid, Int32, String, Guid)` |Отправляет сообщение указанной функции процесса.
+|===

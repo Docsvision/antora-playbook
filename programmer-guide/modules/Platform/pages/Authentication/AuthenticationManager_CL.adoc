@@ -1,0 +1,46 @@
+= AuthenticationManager -- класс
+
+Класс управления аутентификацией
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class AuthenticationManager
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`CreateAuthenticationExtensions<T>(AuthenticationExtensionType)`
+a|Создаёт расширения аутентификации заданных типов
+
+.Параметры:
+* `supportedExtensionType` -- тип поддерживаемого расширения аутентификации
+
+*Возвращаемое значение*: `IEnumerable<T>` -- тип расширения аутентификации
+
+|`GetAuthenticationExtensions<T>(AuthenticationExtensionType)`
+a|Получает расширения аутентификации заданных типов
+
+.Параметры:
+* `supportedExtensionType` -- тип поддерживаемого расширения аутентификации
+
+*Возвращаемое значение*: `IEnumerable<T>` -- тип расширения аутентификации
+
+|`TryGetPrincipal(Guid, string)`
+a|Пытается получить объект с информацией об авторизованном пользователе
+
+.Параметры:
+* `authProviderId` -- идентификатор провайдера аутентификации
+* `token` -- токен
+
+*Возвращаемое значение*: `IPrincipal` -- объект с информацией об авторизованном пользователе
+
+|===

@@ -1,0 +1,28 @@
+= ILockService.LockObjectBase<T> -- метод (T)
+
+Устанавливает временную блокировку на объект.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+bool LockObjectBase<T>(T obj) where T : DocsVision.Platform.ObjectModel.ObjectBase
+----
+
+Параметры типа::
+T:::
+Тип блокируемого объекта
+
+Параметры::
+obj:::
+Тип: `T`
++
+Блокируемый объект
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Если блокировка установлена успешно, то возвращает -- `true`, иначе -- `false`

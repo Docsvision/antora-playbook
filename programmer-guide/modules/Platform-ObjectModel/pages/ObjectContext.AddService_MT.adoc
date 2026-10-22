@@ -1,0 +1,36 @@
+= ObjectContext.AddService<T> -- метод (T)
+
+Добавляет указанный сервис в контекст объектов.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public void AddService<T>(T service)
+----
+
+Параметры типа
+
+T::
+Интерфейс, реализуемый сервисом
+
+Параметры::
+service:::
+Тип: `T`
++
+Экземпляр сервиса
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`https://msdn.microsoft.com/ru-ru/library/system.notsupportedexception.aspx[System.NotSupportedException]` |Ошибка возвращается, если интерфейс `T` не входит в список допустимых интерфейсов: `IMetadataProvider`, `IMetadataManager` или `IPersistentStore`.
+|===
+
+== Заметки
+
+Данный метод предназначен для первоначальной инициализации контекста объектов (см. xref:samples:object-model/init-context.adoc[Инициализация контекста объектов]).

@@ -1,0 +1,45 @@
+= IPowersService -- интерфейс
+
+Сервис справочника полномочий
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IPowersService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`FindPowerOfAttorneyCardsWithPowerCodes(IEnumerable<PowersCode>)`
+a|Выполняет поиск системных карточек доверенностей, использующих указанные коды полномочий.
+
+.Параметры:
+* `codes` -- коды полномочий
+
+Возвращаемое значение: `xref:Entities/FindPowerOfAttorneyCardsResults_CL.adoc[FindPowerOfAttorneyCardsResults]` -- системные карточки доверенностей, использующие указанные коды полномочий.
+
+|`ImportESNSIPowers(Stream)`
+a|Импортирует полномочия из ЕСНСИ
+
+.Параметры:
+* `stream` -- поток данных.
+
+Возвращаемое значение: `ImportESNSIResults`
+
+|`ImportESNSIPowers(string)`
+a|Импортирует полномочия из ЕСНСИ
+
+.Параметры:
+* `filePath` -- путь к файлу.
+
+Возвращаемое значение: `ImportESNSIResults`
+
+|===

@@ -1,0 +1,33 @@
+= DVGate.ImportCardIntoFolder -- метод (String, DVFolder, ProcessVariable)
+
+Импортирует карточку из XML и создаёт ярлык.
+
+* *Пространство имён:* `xref:Gates/Gates_NS.adoc[DocsVision.Workflow.Gates]`
+* *Сборка:* `DocsVision.Workflow.Gates.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public DVCard ImportCardIntoFolder(string cardXml, DVFolder folder, ProcessVariable outShortcut) 
+----
+
+cardXml:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+XML-документ с данными импортируемой карточки
+
+folder:::
+Тип: `DVFolder`
++
+Папка для создания ярлыка
+
+outShortcut:::
+Тип: `xref:Runtime/ProcessVariable_CL.adoc[ProcessVariable]`
++
+Переменная процесса, в которую будет сохранен ярлык. Ярлык (тип DVShortcut) сохраняется в `outShortcut.Value`.
+
+Возвращаемое значение::
+Тип: `DVCard`
++
+Импортированная карточка

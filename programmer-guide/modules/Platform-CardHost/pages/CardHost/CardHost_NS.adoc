@@ -1,0 +1,62 @@
+= DocsVision.Platform.CardHost -- пространство имён
+
+В пространстве имён `DocsVision.Platform.CardHost` содержаться классы и интерфейсы, относящиеся к взаимодействию с контейнером карточек.
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Класс |Описание
+|`xref:CardHost/CardEventArgs_CL.adoc[CardEventArgs]` |Предоставляет данные для различных событий карточек.
+|`CardFrame` |Содержит методы доступа к параметрам окна карточки и методы управления этим окном.
+|`xref:CardHost/CardHost_CL.adoc[CardHost]` |Реализует механизм доступа к контейнеру карточек.
+|`xref:CardHost/NavFolderType_CL.adoc[NavFolderType]` |Представляет тип папки для {wincl}а.
+|`xref:CardHost/ParameterCollection_CL.adoc[ParameterCollection]` |Представляет хранилище коллекции параметров с возможностью выбора элемента по псевдониму.
+|`xref:CardHost/RefreshEventArgs_CL.adoc[RefreshEventArgs]` |Предоставляет данные для события обновления.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header"]
+|===
+|Интерфейс |Описание
+|`ICard` |Добавляет к производному классу метод обновления карточки и её идентификатор.
+|`ICardContainer` |Описывает механизм загрузки карточки в контейнер.
+|`xref:CardHost/ICardFrame_IN.adoc[ICardFrame]` |Описывает методы взаимодействия с окном карточки.
+|`xref:CardHost/ICardHost_IN.adoc[ICardHost]` |Описывает механизм организации взаимодействия с контейнером карточки.
+|`ICardInitialize` |Определяет возможность загрузки данных карточки и сессии в контейнер.
+|`ICardUI` |Описывает низкоуровневое взаимодействие с окном карточки.
+|`ICardUIAction` |Предоставляет возможность вызова определённого действия карточки.
+|`IEditSecurityDialog` |Компонент реализующий окно настроек безопасности.
+|`IExtensionManager` |Предоставляет механизм доступа к расширениям {wincl}а.
+|`IMessageService` |Сервис `IMessageService` предоставляется методы для отображения сообщений в {wincl}е.
+|`INavigator` |Предоставляет возможность хранения идентификатора папки.
+|`xref:CardHost/IPropertyPageFrame_IN.adoc[IPropertyPageFrame]` |Определяет механизм доступа к странице свойств карточки или папки
+|`IPropertyPageUI` |Предоставляет доступ к механизму взаимодействия с окном карточки.
+|`xref:CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]` |Определяет возможность повторного использования компонента карточки.
+|===
+
+== Делегаты
+
+[cols=",",options="header"]
+|===
+|Делегат |Описание
+|`CardEventHandler(object, CardEventArgs)` |Представляет метод, который будет обрабатывать события от карточек.
+|`RefreshEventHandler(object, RefreshEventArgs)` |Представляет метод, который будет обрабатывать событие обновления данных карточки.
+|===
+
+== Перечисления
+
+[cols=",",options="header"]
+|===
+|Перечисление |Описание
+|`xref:CardHost/ActionFlags_EN.adoc[ActionFlags]` |Действия, которые должен выполнить {wincl} после обработки события.
+|`xref:CardHost/ActivateFlags_EN.adoc[ActivateFlags]` |Дополнительные флаги активации карточки.
+|`xref:CardHost/ActivateMode_EN.adoc[ActivateMode]` |Режим активации карточки.
+|`xref:CardHost/EditSecurityFlags_EN.adoc[EditSecurityFlags]` |Режим открытия редактора политики безопасности.
+|`xref:CardHost/MessageButtons_EN.adoc[MessageButtons]` |Определяет наборы кнопок, отображаемых в окне сообщения, формируемого методом `xref:Platform-WinForms:CardControl.ShowMessage_MT.adoc[ShowMessage]`.
+|`xref:CardHost/MessageResult_EN.adoc[MessageResult]` |Определяет возможные результаты выбора пользователя в окне сообщения. Возвращается методом `xref:Platform-WinForms:CardControl.ShowMessage_MT.adoc[ShowMessage]`.
+|`xref:CardHost/MessageType_EN.adoc[MessageType]` |Определяет возможные типы сообщений, формируемых методом `xref:Platform-WinForms:CardControl.ShowMessage_MT.adoc[ShowMessage]`.
+|`xref:CardHost/ReusageMode_EN.adoc[ReusageMode]` |Определяет возможные режимы повторного использования компонента карточки.
+|`xref:CardHost/SystemDialogType_EN.adoc[SystemDialogType]` |Тип модального окна системного назначения.
+|===

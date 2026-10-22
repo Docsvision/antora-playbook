@@ -1,0 +1,27 @@
+= StoragePartitionType -- перечисление
+
+Определяет возможные типы разделов во внешнем хранилище.
+
+Это перечисление имеет атрибут `FlagsAttribute`, поддерживающий побитовое соединение составляющих его значений.
+
+* *Пространство имён:* `xref:StorageServer_NS.adoc[DocsVision.Platform.StorageServer]`
+* *Сборка:* `DocsVision.Platform.StorageServer.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[Flags]
+public enum StoragePartitionType
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`Default` |Раздел без назначения. Значение `0x0`.
+|`Primary` |Раздел для хранения основных файлов. Значение `0x1`.
+|`Archive` |Раздел для хранения архивных файлов. Значение `0x2`.
+|`Temp` |Раздел для хранения временных файлов. Значение `0x4`.
+|===

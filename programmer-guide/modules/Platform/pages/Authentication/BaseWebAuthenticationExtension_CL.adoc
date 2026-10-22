@@ -1,0 +1,60 @@
+= BaseWebAuthenticationExtension -- класс
+
+Базовый абстрактный класс web-расширения аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class BaseWebAuthenticationExtension : BaseAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Type`
+|Тип расширения аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|`SupportsAccountCheck`
+|Поддерживается ли проверка существования учётной записи
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`CheckAccount(string)`
+a|Проверяет существование учётной записи
+
+.Параметры:
+* `accountName` -- имя учётной записи
+
+|`GetTokenContainer(string)`
+a|Получает контейнер токена
+
+.Параметры:
+* `token` -- токен
+
+*Возвращаемое значение*: `xref:Platform-StorageServer:Platform/Authentication/ITokenContainer_IN.adoc[ITokenContainer]` -- контейнер токена
+
+|`UpdateTokenContainer(ITokenContainer, string)`
+a|Обновляет контейнер токена
+
+.Параметры:
+* `container` -- контейнер токена
+* `token` -- токен
+
+|===

@@ -1,0 +1,73 @@
+= BaseRootAuthenticationExtension -- класс
+
+Базовый класс для фабрики расширений аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class BaseRootAuthenticationExtension : BaseAuthenticationExtension, IRootAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Type`
+|Тип расширения аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|`Description`
+|Описание расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Logo`
+|Логотип расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
+
+|`SupportedTypes`
+|Поддерживаемые типы расширений
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetExtensionType(AuthenticationExtensionType)`
+a|Получает тип расширения аутентификации
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `Type` -- тип расширения аутентификации
+
+|`GetSettings<T>(AuthenticationExtensionType)`
+a|Получает настройки конкретного типа
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `T` -- настройки конкретного типа
+
+|`GetSettingsType<T>(AuthenticationExtensionType)`
+a|Получает тип настроек
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `Type` -- определённый тип настроек
+
+|===

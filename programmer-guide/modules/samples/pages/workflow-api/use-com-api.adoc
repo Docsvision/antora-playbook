@@ -1,0 +1,19 @@
+= Использование COM API ObjectManager
+
+Ниже приведён пример запуска экземпляра бизнес процесса из кода Visual Basic с использованием используя COM API ObjectManager.
+
+[source,vbnet]
+----
+Public Sub StartProcess(ByVal oUserSession As DVObjectManager.UserSession, ByVal sProcessID As String)
+ Dim oWorkflowManager As DVObjectManager.IWorkflowManager2
+ Set oWorkflowManager = oUserSession.WorkflowManager <.>
+   
+ Dim oProcessInfo As DVObjectManager.ProcessInfo
+ Set oProcessInfo = oWorkflowManager.GetProcess(sProcessID) <.>
+   
+ oProcessInfo.Start <.>
+End Sub
+----
+<.> Получаем менеджер бизнес-процессов.
+<.> Получаем объект для управления бизнес-процессом.
+<.> Запускаем бизнес-процесс.

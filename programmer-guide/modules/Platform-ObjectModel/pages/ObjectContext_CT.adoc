@@ -1,0 +1,23 @@
+= ObjectContext -- конструктор (IServiceProvider)
+
+Инициализирует новый экземпляр класса ObjectContext с помощью указанного значения.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public ObjectContext(IServiceProvider parentProvider)
+----
+
+Параметры::
+parentProvider:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.iserviceprovider.aspx[System.IServiceProvider]`
++
+В качестве сервис-провайдера parentProvider может выступать компонент карточки, унаследованный от `xref:Platform-WinForms:CardControl_CL.adoc[DocsVision.Platform.WinForms.CardControl]`.
+
+== Заметки
+
+Контекст объектов использует тип `http://msdn.microsoft.com/ru-ru/library/system.componentmodel.design.servicecontainer.aspx[System.ComponentModel.Design.ServiceContainer]` для хранения сервисов. При инициализации контекста, в него будут добавлены несколько базовых сервисов.

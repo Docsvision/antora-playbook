@@ -1,0 +1,30 @@
+= Получение данных представления
+
+Другой важной задачей при работе с представлениями является получение конкретной выборки данных на основании предварительно подготовленного (программно или через пользовательский интерфейс) описания представления.
+
+Чтобы получить данные представления, необходимо воспользоваться методом `xref:Platform-ObjectManager-CardManager:CardManager.GetViewData_1_MT.adoc[CardManager.GetViewData]`.
+
+.Пример получения данных системного представления Дайджест, примененного к конкретной папке:
+[source,csharp]
+----
+var viewReadRequest = session.CardManager.GetViewRequestFromSearch(string);
+viewReadRequest.CursorType = CursorType.Keyset;
+viewReadRequest.ViewId = viewId;
+
+/*что-либо ещё*/
+
+InfoRowCollection infoRows = session.CardManager.GetViewData(viewReadRequest);
+----
+
+.Пример получения данных представления по XML-описанию на основании результатов сформированного поискового запроса:
+[source,csharp]
+----
+SearchQuery query = session.CreateSearchQuery(); <.>
+
+ViewSource source = ViewSource.FromSearch(query.GetXml(true, null));
+InfoRowCollection viewData = session.CardManager.GetViewData(source, view.GetXml()); <.>
+----
+<.> Формирование поискового запроса.
+<.> Получение данных представления.
+
+Метод возвращает `InfoRowCollection` -- набор строк, соответствующий результатам запроса. Возможность его сортировки в объектной модели не предусмотрена, то есть сортировать его можно только внешними средствами.

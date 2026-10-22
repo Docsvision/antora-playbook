@@ -1,0 +1,54 @@
+= IAuthenticationExtensionsSettingsReader -- интерфейс
+
+Интерфейс для чтения настроек расширений аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Settings/Settings_NS.adoc[DocsVision.Platform.Authentication.Settings]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IAuthenticationExtensionsSettingsReader
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetSettings()`
+a|Получает все настройки расширения по GUID
+
+*Возвращаемое значение*: `xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]` -- настройки расширения аутентификации
+
+|`GetAuthenticationExtensionSettings(Guid)`
+a|Получает настройки расширения аутентификации
+
+.Параметры:
+* `id` -- идентификатор расширения аутентификации
+
+*Возвращаемое значение*: `xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]` -- настройки расширения аутентификации
+
+|`SetAuthenticationExtensionSettings(AuthenticationExtensionSettings)`
+a|Задаёт настройки расширения аутентификации
+
+.Параметры:
+* `settings` -- настройки расширения аутентификации
+
+|`GetTenantAuthenticationExtensionSettings(string)`
+a|Получает настройки расширения аутентификации для конкретного тенанта
+
+.Параметры:
+* `tenant` -- тенант
+
+*Возвращаемое значение*: `IEnumerable<xref:Platform:Authentication/Settings/AuthenticationExtensionSettings_CL.adoc[AuthenticationExtensionSettings]>` -- список настроек расширения аутентификации
+
+|`SetTenantAuthenticationExtensions(TenantAuthenticationSettings)`
+a|Задаёт расширения аутентификации для тенанта
+
+.Параметры:
+* `settings` -- настройки расширения аутентификации
+
+|===

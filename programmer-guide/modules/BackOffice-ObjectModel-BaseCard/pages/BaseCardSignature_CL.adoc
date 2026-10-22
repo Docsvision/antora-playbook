@@ -1,0 +1,58 @@
+= BaseCardSignature -- класс
+
+Содержит данные ЭП, установленной на карточку.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class BaseCardSignature : BaseCardSectionRow
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`SignatureType` |Задаёт или возвращает идентификатор типа подписи.
+|`Signer` |Задаёт или возвращает сотрудника непосредственно поставившего подпись.
+|`State` |Задаёт или возвращает подписываемый статус.
+|`TimeStamp` |Задаёт или возвращает время установки подписи.
+|`Certificate` |Задаёт или возвращает отпечаток сертификата.
+|`Operation` |Задаёт или возвращает подписываемую операцию.
+|`Imported` |Возвращает `true` в случае, если тип подписи эквивалентен значению `BaseCardSignature.ImportedSignatureType`.
+|`Label` |Задаёт или возвращает метку подписи (согласовано, не согласовано).
+|`PowerOfAttorneyID` |Идентификатор МЧД.
+|`SignedFromConfirmation` |Задаёт или возвращает текст подтверждения.
+|`SignedFrom` |Задаёт или возвращает сотрудника за которого была поставлена подпись, в случае подписания от имени другого сотрудника.
+|`Parts` |Возвращает коллекцию частей подписи.
+|`Version` |Получает или устанавливает версию подписи.
+|`ExternalPowerOfAttorney` |Сторонняя доверенность.
+|`SupportOrderedAttachments` |Отображает, поддерживает ли подпись упорядоченные приложения для простой подписи.
+|`SupportOrderedAttachmentsForAnySignature` |Отображает, поддерживает ли подпись упорядоченные приложения для любой подписи.
+|===
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`SignatureTypeProperty` |Описывает свойство "Тип подписи".
+|`SignerProperty` |Описывает свойство "Подписант".
+|`StateProperty` |Описывает свойство "Состояние".
+|`TimeStampProperty` |Описывает свойство "Время нанесения".
+|`CertificateProperty` |Описывает свойство "Сертификат".
+|`OperationProperty` |Описывает свойство "Операция".
+|`LabelProperty` |Описывает свойство "Метка".
+|`PowerOfAttorneyIDProperty` |Описывает свойство "Идентификатор МЧД".
+|`SignedFromProperty` |Описывает свойство "Подписано от имени".
+|`SignedFromConfirmationProperty` |Описывает свойство "Текст подтверждения".
+|`PartsProperty` |Описывает свойство "Части подписи".
+|`VersionProperty` |Описывает версию подписи.
+|`ExternalPowerOfAttorneyProperty` |Описывает свойство "Сторонняя доверенность".
+|`SupportOrderedAttachmentsProperty` |Описывает свойство "Поддержка упорядоченных приложений для простой подписи".
+|`SupportOrderedAttachmentsForAnySignatureProperty` |Описывает свойство "Поддержка упорядоченных приложений для любой подписи".
+|===

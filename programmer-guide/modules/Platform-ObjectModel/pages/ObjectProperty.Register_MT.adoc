@@ -1,0 +1,34 @@
+= ObjectProperty.Register -- метод (String, Type, Type)
+
+Статический метод регистрации свойств.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public static ObjectProperty Register(string name, Type propertyType, Type ownerType)
+----
+
+Параметры::
+name:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Псевдоним свойства
+
+propertyType:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.type.aspx[System.Type]`
++
+Тип регистрируемого свойства. Может быть как стандартным, например `System.Guid`, так и типом объектной модели секции карточки.
+
+ownerType:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.type.aspx[System.Type]`
++
+Тип владельца свойства. Как правило, класс, в котором осуществляется регистрация свойства.
+
+Возвращаемое значение::
+Тип: `xref:ObjectProperty_CL.adoc[ObjectProperty]`
++
+Зарегистрированное свойство

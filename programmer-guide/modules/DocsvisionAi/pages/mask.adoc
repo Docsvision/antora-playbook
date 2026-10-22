@@ -1,0 +1,35 @@
+= Маскировка текста
+
+Метод `SendTextMaskingRequestAsync` выполняет маскировку персональных данных.
+
+.Параметры метода "SendTextMaskingRequestAsync":
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `text` | `string` | Да | Текст для маскировки
+| `metadata` | `AiRequestMetadata` | Да | Метаданные маскировки
+| `cancellationToken` | `CancellationToken` | Нет | Токен отмены
+|===
+
+.Тело ответа, "AiMaskingResponse":
+[cols="2,2,5", options="header"]
+|===
+| Название | Тип | Описание
+| `MaskedText` | `string` | Текст замаскированный плейсхолдерами
+| `IsTextMasked` | `bool` | Признак, что была произведена маскировка
+| `Map` | `Dictionary<string, string>` | Словарь замаскированных значений, где ключ — плейсхолдер, значение — скрытый текст
+|===
+
+.Пример запроса:
+[source,csharp]
+----
+AiRequestMetadata metadata = new AiRequestMetadata
+{
+    NerMaskingValues = new[] { "PER", "LOC", "ORG" },
+    RegexMaskingValues = new[] { @"\d{4}-\d{4}-\d{4}-\d{4}", @"\+\d{11}" },
+    DictionaryMaskingValues = new[] { "конфиденциально", "секретно" }
+};
+
+AiMaskingResponse response = await aiClient.SendTextMaskingRequestAsync("ИНН: 7727563778", metadata, cancellationToken);
+Console.WriteLine("Ответ AI: " + response?.MaskedText);
+----

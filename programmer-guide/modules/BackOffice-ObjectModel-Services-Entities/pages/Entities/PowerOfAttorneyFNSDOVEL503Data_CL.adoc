@@ -1,0 +1,156 @@
+= PowerOfAttorneyFNSDOVEL503Data.PowerOfAttorneyFNSDOVEL503Data -- класс
+
+Данные доверенности в формате, подтверждающем полномочия представителя налогоплательщика, версия 5.03.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyFNSDOVEL503Data : PowerOfAttorneyFNSData
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[FormatId]`
+|Идентификатор формата доверенности
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PowerOfAttorneyDocument_CL.adoc[Document]`
+|Состав и структура документа (Обязательный)
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[RecipientID]`
+|Идентификатор получателя файла доверенности (Обязательный)
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[FinalRecipientID]`
+|Идентификатор конечного получателя файла доверенности (Обязательный)
+
+В случае передачи файла от отправителя к конечному получателю при отсутствии налоговых органов, осуществляющих передачу на промежуточных этапах, значения `RecipientID` и `FinalRecipientID` совпадают
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[SenderID]`
+a|Идентификатор отправителя информации (Обязательный)
+
+.Значение:
+* Для организаций -- 19-разрядный код (ИНН и КПП организации).
+* Для физических лиц -- 12-разрядный код (ИНН физического лица, при наличии. При отсутствии ИНН – последовательность из двенадцати нулей).
+
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`override DateTime GetPowerOfAttorneyStartDate()` |Заполняет дату выдачи доверенности
+|`override DateTime? GetPowerOfAttorneyEndDate()` |Заполняет дату окончания срок действия доверенности
+|`override string GetPowerOfAttorneyMachineReadableFileID()` |Заполняет идентификатор файла МЧД
+|`override Guid GetPowerOfAttorneyNumber()` |Возвращает номер доверенности
+|`override string GetPrincipal()` |Заполняет сведения о доверителе
+|`override string GetRepresentative()` |Заполняет сведения о лице, получившем полномочия
+|`override List<Powers> GetRepresentativesPowers()` |Заполняет сведения о полномочиях представителя
+|`override PowerOfAttorneyRetrustType GetRetrustType()` |Заполняет тип передоверия
+|`override string GetSigner()` |Заполняет сведения о подписанте
+
+|===
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PowerOfAttorneyDocument_CL.adoc[PowerOfAttorneyDocument]`
+|Состав и структура документа (Документ).
+
+Код формы по КНД принимает значение 1110310 в соответствии с форматом и не может быть изменён.
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyDocumentData]`
+|Доверенность (Довер) -- Таблица 4.3
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]`
+|Сведения доверенности (СвДов) -- Таблица 4.4
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PrincipalInfo_CL.adoc[PrincipalInfo]`
+|Сведения о доверителе (СвДоверит) -- Таблица 4.5
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RussianCompanyInfo_CL.adoc[RussianCompanyInfo]`
+|Сведения о российской организации (НПЮЛ) -- Таблица 4.6
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]`
+|Сведения о лице, действующем от имени юридического лица без доверенности (ЛицоБезДов) -- Таблица 4.7
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.IndividualInfo_CL.adoc[IndividualInfo]`
+|Сведения по физическому лицу (СвФЛ) -- Таблица 4.8
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.ForeignCompanyInfo_CL.adoc[ForeignCompanyInfo]`
+|Сведения об иностранной организации (ИО) -- Таблица 4.9
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.SeparateSubdivisionManagerInfo_CL.adoc[SeparateSubdivisionManagerInfo]`
+|Сведения о руководителе обособленного подразделения (СвРукОП) -- Таблица 4.10
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RetrustPowerOfAttorneyDocumentData_CL.adoc[RetrustPowerOfAttorneyDocumentData]`
+|Передоверие (Передов) -- Таблица 4.11
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RetrustPowerOfAttorneyInfo_CL.adoc[RetrustPowerOfAttorneyInfo]`
+|Сведения доверенности, совершённой (выданной) в рамках передоверия (СвДовП) -- Таблица 4.12
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PrimaryPowerOfAttorneyInfo_CL.adoc[PrimaryPowerOfAttorneyInfo]`
+|Сведения об основной доверенности (СвОснДов) -- Таблица 4.13
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.PrimaryPrincipalInfo_CL.adoc[PrimaryPrincipalInfo]`
+|Сведения о доверителе основной доверенности (СвДоверитОсн) -- Таблица 4.14
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.ForeignCompanyInfo1_CL.adoc[ForeignCompanyInfo1]`
+|Сведения о доверителе – иностранном юридическом лице (ДоверитИО) -- Таблица 4.15
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.ParentPrincipalInfo_CL.adoc[ParentPrincipalInfo]`
+|Сведения о доверителе из доверенности, на основании которой осуществляется передоверие (СвДоверщП) -- Таблица 4.16
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RetrustPrincipalInfo_CL.adoc[RetrustPrincipalInfo]`
+|Сведения о доверителе в порядке передоверия (СвДоверщ) -- Таблица 4.17
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.OrganizationInfo_CL.adoc[OrganizationInfo]`
+|Сведения об организации (СвОргТип) -- Таблица 4.18
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RussianCompanyInfo1_CL.adoc[RussianCompanyInfo1]`
+|Сведения о российском юридическом лице (СведЮЛТип) -- Таблица 4.19
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RepresentativeInfo_CL.adoc[RepresentativeInfo]`
+|Сведения об уполномоченном представителе (уполномоченных представителях) (СвПредТип) -- Таблица 4.20
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.IndividualInfo2_CL.adoc[IndividualInfo2]`
+|Сведения о физическом лице, в том числе индивидуальном предпринимателе (СвФизЛицТип) -- Таблица 4.21
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.IndividualInfo3_CL.adoc[IndividualInfo3]`
+|Сведения по физическому лицу (СведФЛТип) -- Таблица 4.22
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.AddressInfo_CL.adoc[AddressInfo]`
+|Адрес доверителя в доверенности (АдрДовТип) -- Таблица 4.23
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.IdentityCardInfo_CL.adoc[IdentityCardInfo]`
+|Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип) -- Таблица 4.24
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.FIO_CL.adoc[FIO]`
+|Фамилия, имя, отчество (ФИОТип) -- Таблица 4.25
+
+|===
+
+== Перечисления
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyFNSDOVEL503Data.RetrustType_EN.adoc[RetrustType]`
+a|Признак возможности оформления передоверия:
+
+* `Followed` = `1` -- передоверие возможно.
+* `None` = `2` -- без права передоверия.
+
+|===

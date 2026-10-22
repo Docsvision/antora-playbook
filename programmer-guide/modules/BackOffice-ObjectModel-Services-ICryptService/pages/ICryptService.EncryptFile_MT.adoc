@@ -1,0 +1,39 @@
+= ICryptService.EncryptFile -- метод (X509Certificate2, Guid)
+
+Выполняет шифрование файла с помощью переданного сертификата.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void EncryptFile(X509Certificate2 certificate, Guid fileId)
+----
+
+Параметры::
+certificate:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.security.cryptography.x509certificates.x509certificate2.aspx[System.Security.Cryptography.X509Certificates.X509Certificate2]`
++
+Сертификат сотрудника, выполняющего шифрование
+
+fileId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор шифруемого файла
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `certificate`.
+|`http://msdn.microsoft.com/ru-ru/library/system.invalidoperationexception.aspx[System.InvalidOperationException]` |Ошибка возвращается в случае, если файл с указанным идентификатором не существует.
+|===
+
+== Заметки
+
+В том случае, если указанный файл уже зашифрован, шифрование будет отменено.
+
+Параметры шифрования должны быть определены в системных настройках {dv}.

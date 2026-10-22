@@ -1,0 +1,23 @@
+= CardData.PlaceLock -- метод (Boolean)
+
+Установка постоянной или временной блокировки.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void PlaceLock(bool permanently)
+----
+
+Параметры::
+permanently:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- постоянная блокировка; `false` -- временная блокировка;
+
+== Заметки
+
+Временная блокировка ограничена существованием сессии, из которой эта блокировка установлена. Постоянная блокировка должна быть снята тем, кто её установил, либо администратором системы.

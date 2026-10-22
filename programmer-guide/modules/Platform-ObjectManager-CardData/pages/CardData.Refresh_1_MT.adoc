@@ -1,0 +1,23 @@
+= CardData.Refresh -- метод (Boolean)
+
+Принудительное обновление данных карточки с сервера, независимо от наличия или отсутствия изменений
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract void Refresh(bool ignoreTimestamp)
+----
+
+Параметры::
+ignoreTimestamp:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- игнорировать отсутствие изменений; `false` -- учитывать отсутствие изменений
+
+== Заметки
+
+При установке ignoreTimestamp в значение true, данные объектов будут получены с сервера в любом случае.

@@ -1,0 +1,38 @@
+= IExtensionPropertiesControl -- интерфейс
+
+Определяет методы и свойства страницы настройки.
+
+* *Пространство имён:* `xref:Controls/Controls_NS.adoc[DocsVision.Platform.WinForms.Controls]`
+* *Сборка:* `DocsVision.Platform.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IExtensionPropertiesControl
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Settings` |Возвращает настройки, сериализованные в строку.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Initialize(String)` |Загружает сериализованные настройки в компонент.
+|`Save` |Сохраняет настройки в `Settings`. При наличии ошибок должен вернуть false, иначе -- `true`.
+|===
+
+== События
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`OnPropertiesChanged` |Вызывается при изменении настроек с помощью графического интерфейса.
+|===

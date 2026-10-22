@@ -1,0 +1,39 @@
+= ViewDataSortingCollection -- класс
+
+Содержит методы для работы с коллекцией `ViewDataSorting`.
+
+* *Пространство имён:* `xref:ViewModel_NS.adoc[DocsVision.Platform.ObjectManager.ViewModel]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class ViewDataSortingCollection : IEnumerable<ViewDataSorting>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество элементов коллекции.
+|`Item` |Возвращает элемент коллекции с указанным названием.
+|`Item` |Возвращает элемент коллекции с заданным индексом.
+|`View` |Возвращает представление к которому привязана коллекция правил сортировки.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddNew(String)` |Добавляет элемент коллекции с заданным названием и возвращает на него ссылку.
+|`Clear` |Удаляет все элементы коллекции.
+|`Contains(String)` |Проверяет вхождение в коллекцию элемента с заданным названием.
+|`GetEnumerator` |Возвращает перечислитель.
+|`GetXMl` |Возвращает коллекцию правил в формате XML.
+|`ParseXML(String)` |Загружает правила из XML-строки.
+|`Remove(Int32)` |Удаляет элемент коллекции с заданным индексом.
+|`Remove(String)` |Удаляет элемент коллекции с указанным псевдонимом.
+|===

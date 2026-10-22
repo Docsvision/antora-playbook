@@ -1,0 +1,84 @@
+= CardLibGetInfo
+
+Возвращает информацию о библиотеки карточек.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardLibGetInfo"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardLibGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <cardLibId>guid</cardLibId>
+      <infoType>CARD_TYPE_SCHEMA or CARD_TYPE_ICON or CARD_TYPE_XSD</infoType>
+    </CardLibGetInfo>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+cardLibId:::
+Идентификатор библиотеки карточек
+infoType:::
+Тип запрашиваемых данных:
++
+* `CARD_TYPE_SCHEMA` -- возвращает схему.
+* `CARD_TYPE_ICON` -- возвращает иконку библиотеки.
+* `CARD_TYPE_XSD`.
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardLibGetInfoResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <cardLibInfo>string</cardLibInfo>
+      <usingCompression>boolean</usingCompression>
+    </CardLibGetInfoResponse>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Ответ содержит запрашиваемые данные (`cardLibInfo`), которые зависят от переданного `infoType`, а также признак сжатия (`usingCompression`) возвращенных данных.
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/CardLibGetInfo" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CardLibGetInfo xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>1d29bba9-6c8c-e511-9417-90e6ba57b9f8</sessionId>
+      <cardLibId>DE9C2809-3207-42EF-BC32-B9AB2D1B5608</cardLibId>
+      <infoType>CARD_TYPE_SCHEMA</infoType>
+    </CardLibGetInfo>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+
+print(response.content) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.
+<.> Ответ SOAP.

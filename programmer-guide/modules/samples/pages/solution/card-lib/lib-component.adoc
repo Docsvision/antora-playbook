@@ -1,0 +1,59 @@
+= Разработка компонента библиотеки карточек
+
+[NOTE]
+====
+Исходный код компонента библиотеки карточек расположен в подкаталоге `CardLib` https://github.com/Docsvision/WebClient-Samples/tree/master/Others/NetStatSolution[репозитория].
+====
+
+Компонент библиотеки карточек является обязательной частью решения, он определяет корректность установки решения в целом, а его отсутствие является сигналом {wincl}у о необходимости установки клиентской части.
+
+При большом размере и количестве схем карточек, зарегистрированных в библиотеке, а также большом числе клиентов {dv}, компонент библиотеки карточек выполняет роль статического кэша на стороне клиента со схемами и ресурсами карточек, что предполагает выигрыш в части снижения нагрузки на сервер {dv}.
+
+[NOTE]
+====
+Пример разработки компонента библиотеки карточек на C# приведён в Руководстве разработчика в разделе xref:solutions:cards/card-component/library.adoc[].
+====
+
+[WARNING]
+====
+В версии модуля {pl} 5.5.2 требования к компоненту библиотеки карточек были изменены.
+====
+
+Компонент библиотеки карточек проще всего создать на основе готового шаблона с заменой отдельных частей кода на собственные значения. Например, использовать в основе код компонента данной библиотеки и заменить идентификаторы библиотеки карточек и карточек.
+
+[NOTE]
+====
+При разработке компонента без использования шаблона, требования к реализации остаются стандартными:
+
+* Должны быть реализованы интерфейсы `ICardLibraryInfo` и `ICardLibraryInfo2`.
+* Либо унаследованы от класса `DocsVision.Platform.ObjectManager.Metadata.CardLibraryInfo`.
+====
+
+.Полный алгоритм создания готового компонента на основе шаблона можно разбить на следующие шаги:
+. В переопределяемом методе `GetLibraryDefinition` следует вернуть XML описание библиотеки карточек.
++
+Описание указывается в файле ресурсов в формате пути к XML.
++
+. В методе `GetCardDefinition` следует вернуть описание карточек.
++
+. Методы `GetIconData` и `GetCardIconData` возвращают, соответственно, иконку библиотеки и иконки карточек.
++
+[source,csharp]
+----
+  <data name="NetstatSolutionCardLib" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardDefs\NetstatSolutionCardLib.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="NetstatSolutionCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardDefs\NetstatSolutionCard.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="NetstatSolutionCardIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardDefs\Icons\NetstatSolutionCard.ico;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NetstatSolutionCardLibIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CardDefs\Icons\NetstatSolutionCardLib.ico;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+----
++
+NOTE: Компонент библиотеки карточек должен быть зарегистрирован командой: `regsvr32.exe Полный-путь-к-сборке`, например, `regsvr32.exe NetstatSolutionCardLib.dll`.
++
+Если устанавливать клиентское решение с помощью инсталлятора, то ручной регистрации компонентов не требуется.

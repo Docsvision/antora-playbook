@@ -1,0 +1,87 @@
+= OpenIDConnectTokenHandlerExtension -- класс
+
+Класс для работы с токеном и пользователями OpenIDConnect
+
+* *Пространство имён:* `xref:Platform:Authentication/OpenIDConnect/OpenIDConnect_NS.adoc[DocsVision.Platform.Authentication.OpenIDConnect]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OpenIDConnectTokenHandlerExtension : BaseAuthenticationExtension, ITokenHandlerExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Name`
+|Расширение валидации токена OpenIDConnect
+
+|`Type`
+|Тип расширения аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|`Settings`
+|Настройки OpenIDConnect
+
+*Тип*: `xref:Platform:Authentication/OpenIDConnect/OpenIDConnectSettings_CL.adoc[OpenIDConnectSettings]`
+
+|`Configuration`
+|Конфигурация подключения OpenIDConnect
+
+*Тип*: `xref:Platform:Authentication/OpenIDConnect/OpenIDConnectConnectConfiguration_CL.adoc[OpenIDConnectConnectConfiguration]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`ValidateToken(string)`
+a|Проверяет действительность токена
+
+.Параметры:
+* `token` -- токен авторизации
+
+*Возвращаемое значение*: `IPrincipal` -- аутентифицированный пользователь
+
+|`GetPrincipalName(IPrincipal)`
+a|Получает информацию об авторизованном пользователе
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- имя пользователя из объекта аутентификации
+
+|`GetLoginHint(IPrincipal)`
+a|Получает подсказку для логина пользователя, которую можно использовать при следующем входе в систему
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- подсказка для логина пользователя
+
+|`GetPrincipalUniqueID(IPrincipal)`
+a|Получает уникальный идентификатор авторизованного пользователя
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]` -- строковый идентификатор авторизованного пользователя
+
+|`GetPrincipalRoles(IPrincipal)`
+a|Получает роли (группы) пользователей
+
+.Параметры:
+* `principal` -- объект с информацией об авторизованном пользователе
+
+*Возвращаемое значение*: `xref:Platform-StorageServer:UserRoles_EN.adoc[UserRoles]` -- группы пользователей сервера {dv}
+
+|===

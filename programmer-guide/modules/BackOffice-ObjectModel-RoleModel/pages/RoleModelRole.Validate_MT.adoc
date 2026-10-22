@@ -1,0 +1,33 @@
+= RoleModelRole.Validate -- метод (Boolean, List&lt;String>)
+
+Осуществляет проверку группы условий роли.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public bool Validate(bool isRoleCommon, out List<string> reasons)
+----
+
+Параметры::
+isRoleCommon:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+Роль является общей
+
+reasons:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/6sh2ey19.aspx[System.Collections.Generic.List]<String>`
++
+Результат проверки
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- ошибок не обнаружено, иначе -- `false`
+
+== Заметки
+
+Метод проверяет на ошибки условия заданные в роли.

@@ -1,0 +1,22 @@
+= BaseCardControl.AvailableBranches -- свойство
+
+Возвращает список доступных переходов состояний карточки.
+
+* *Пространство имён:* `xref:WinForms_NS.adoc[DocsVision.BackOffice.WinForms]`
+* *Сборка:* `DocsVision.BackOffice.WinForms.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public IEnumerable<StatesStateMachineBranch> AvailableBranches { get; }
+----
+
+Значение свойства::
+Тип: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<StatesStateMachineBranch>`
++
+Коллекция переходов автомата состояний `xref:BackOffice-ObjectModel-States:StatesStateMachineBranch_CL.adoc[StatesStateMachineBranch]`
+
+== Заметки
+
+Коллекция формируется на основе элементов выпадающего меню {wincl}а `stateMachinePopupMenu` (*Действие/Выполнить*).

@@ -1,0 +1,46 @@
+= Создание дочерней карточки задания
+
+.Пример создания дочернего задания связанного с карточкой документа:
+[source,csharp]
+----
+ObjectContext context = GetContext(); <.>
+
+Guid kindId = GetTaskKindId(); <.>
+            
+KindsCardKind taskKind = context.GetObject<KindsCardKind>(kindId); <.>
+
+Guid parentCardId = GetParentCardId(); <.>
+
+Document document = context.GetObject<Document>(parentCardId); <.>
+
+TaskList taskList = document.MainInfo.Tasks; <.>
+
+if (taskList = null) <.>
+{
+    ObjectModel.Services.ITaskListService taskListService = context.GetService<ObjectModel.Services.ITaskListService>();
+    taskList = taskListService.CreateTaskList(); <.>
+
+    document.MainInfo.Tasks = taskList; <.>
+}
+
+Task parentTask = GetParentTask(); <.>
+
+ObjectModel.Services.ITaskService taskService = context.GetService<ObjectModel.Services.ITaskService>(); <.>
+
+Task task = TaskService.CreateChildTask(parentTask, taskKind, document, taskList); <.>
+
+context.AcceptChanges(); <.>
+----
+<.> Получаем контекст.
+<.> Получаем идентификатор вида задания.
+<.> Получаем вид задания.
+<.> Получаем идентификатор родительской карточки.
+<.> Получаем документ.
+<.> Получаем список заданий документа.
+<.> Если список заданий в документе отсутствует -- его необходимо создать.
+<.> Получаем сервис списков заданий.
+<.> Сохраняем список заданий в документ.
+<.> Получаем родительское задание, предполагается, что функция GetParentTask вернет задание, дочерним для которого будет является созданное.
+<.> Получаем сервис для работы с заданиями.
+<.> Создаем задание.
+<.> Сохраняем изменения.

@@ -1,0 +1,17 @@
+= IAccessCheckingService.ResetRolesCache -- метод
+
+Сбрасывает локальный кэш сервиса.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ResetRolesCache()
+----
+
+== Заметки
+
+Реализованный сервис имеет два кэша, которые пополняются и используются по мере вызова методов GetUserRoles и IsOperationAllowed. В ряде случаев (например, изменение ролевой модели) кэш может быть заполнен неверными данными. Сброс кэша принуждает методы обращаться за данными к серверу.

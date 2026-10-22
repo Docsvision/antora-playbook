@@ -1,0 +1,69 @@
+= Реализация компонента карточки с обработчиками событий
+
+В данном примере, предполагается реализовать для компонента карточки обработчики событий инициализации и закрытия карточки. Предполагается, что интерфейс пользователя был или будет реализован.
+
+[source,csharp]
+----
+using System;
+using System.Windows.Forms;
+using DocsVision.Platform.ObjectManager;
+using DocsVision.Platform.WinForms;
+using DocsVision.Platform.WinForms.DataSource;
+using DocsVision.Platform.CardHost;
+
+namespace DocsVision.Test
+{
+    public sealed partial class TestCard : CardControl
+    {
+        private bool isReadOnly;
+        private bool isChanged;
+
+        public TestCard() { }
+
+        protected override void OnCardInitialized(EventArgs e) <.>
+        {
+            base.OnCardInitialized(e);
+            InitializeComponent();
+        }
+
+        protected override void OnCardActivated(CardActivatedEventArgs e) <.>
+        {
+            base.OnCardActivated(e);
+            
+            isReadOnly = (e.ActivateMode != ActivateMode.Edit);
+            isChanged = ((e.ActivateFlags & ActivateFlags.New) = ActivateFlags.New); <.>
+        }
+
+        protected override void OnCardClosing(CardClosingEventArgs e) <.>
+        {
+            base.OnCardClosing(e);
+
+            if (!isReadOnly && isChanged) <.>
+            {
+                e.ActionFlags = ActionFlags.None;
+                MessageResult result = ShowMessage("Сохранить изменения?", "Карточка", null,
+                    MessageType.Question, MessageButtons.YesNoCancel);
+
+                switch (result)
+                {
+                    case MessageResult.Yes:
+                        e.ActionFlags = ActionFlags.ContinueAction | ActionFlags.CommittedData;
+                        break;
+
+                    case MessageResult.No:
+                        e.ActionFlags = ActionFlags.ContinueAction;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+}
+----
+<.> Инициируется после создания компонента карточки, и передачи ей актуальных данных..
+<.> Инициируется после активации компонента карточки {wincl}ом.
+<.> Проверка режим редактирования, либо чтения.
+<.> Возникает до закрытия пользовательского интерфейса карточки.
+<.> Карточка будет сохранять данные только при `ActivateMode.Edit` и наличии изменений.

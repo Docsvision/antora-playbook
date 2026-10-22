@@ -1,0 +1,23 @@
+= Staff.AddGroup -- метод (StaffGroup)
+
+Добавляет существующую группу в _Справочник сотрудников_.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public void AddGroup(StaffGroup group)
+----
+
+Параметры::
+group:::
+Тип: `xref:StaffGroup_CL.adoc[StaffGroup]`
++
+Группа пользователей
+
+== Заметки
+
+Данный метод используется при нестандартном добавлении группы, объектная модель которой уже сформирована, в Справочник сотрудников. В остальных ситуациях рекомендуется использовать стандартный метод добавления `xref:BackOffice-ObjectModel-Services-IStaffService:IStaffService.AddNewGroup_MT.adoc[IStaffService.AddNewGroup]`.

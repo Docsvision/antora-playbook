@@ -1,0 +1,84 @@
+= NumAllocateNumbers
+
+Занимает диапазон номеров в зоне нумератора.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/NumAllocateNumbers"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <NumAllocateNumbers xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <numeratorId>guid</numeratorId>
+      <userId>guid</userId>
+      <zoneName>string</zoneName>
+      <firstNumber>int</firstNumber>
+      <lastNumber>int</lastNumber>
+    </NumAllocateNumbers>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+numeratorId:::
+Идентификатор карточки нумератора
+userId:::
+Идентификатор сотрудника (_справочник сотрудников_), занимающего номер
+zoneName:::
+Название зоны, которой принадлежит занимаемый
+firstNumber:::
+Начальный занимаемый номер
+lastNumber:::
+Конечный занимаемый номер
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <NumAllocateNumbersResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/" />
+  </soap:Body>
+</soap:Envelope>
+----
+
+== Пример запроса
+
+[source,python]
+----
+session.headers['SOAPAction'] = "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/NumAllocateNumbers" <.>
+
+body = """<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <NumAllocateNumbers xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>6565c75b-298d-e511-9417-90e6ba57b9f8</sessionId>
+      <numeratorId>A16E9792-5B88-E511-9417-90E6BA57B9F8</numeratorId>
+      <userId>C9449204-39AD-4DD8-B212-7C38580BD2BB</userId>
+      <zoneName>Test</zoneName>
+      <firstNumber>6</firstNumber>
+      <lastNumber>8</lastNumber>
+    </NumAllocateNumbers>
+  </soap:Body>
+</soap:Envelope>""" <.>
+
+response = session.post(url, data=body) <.>
+----
+<.> Изменяем цель запроса в заголовке запроса.
+<.> SOAP-сообщение.
+<.> Отправляем SOAP-сообщение.

@@ -1,0 +1,123 @@
+= DocsVision.Platform.ObjectModel -- пространство имён
+
+Пространство имён `DocsVision.Platform.ObjectModel` содержит классы определяющие фабрики сервисов и преобразователей данных, сущности хранящие данные контекста объектов, а также вспомогательные классы и интерфейсы. Эти классы составляют объектную модель уровня бизнес-логики.
+
+== Пространства имён
+
+[cols=",",options="header"]
+|===
+|Пространство имён |Описание
+|`xref:Mapping/Mapping_NS.adoc[DocsVision.Platform.ObjectModel.Mapping]` |Пространство имён `DocsVision.Platform.ObjectModel.Mapping` содержит преобразователи данных.
+|`xref:Search/Search_NS.adoc[DocsVision.Platform.ObjectModel.Search]` |Пространство имён `DocsVision.Platform.ObjectModel.Search` предоставляет типы, используемые для организации поиска.
+|===
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Класс |Описание
+|`xref:ContextService_CL.adoc[ContextService]` |Базовый класс сервисов использующих контекст объектов.
+|`xref:ObjectBase_CL.adoc[ObjectBase]` |Базовый класс объектов модели уровня бизнес-логики.
+|`xref:ObjectBaseSecurity_CL.adoc[ObjectBaseSecurity]` |Представляет объект безопасности. Предоставляет методы установки и получения прав доступа.
+|`xref:ObjectCollection_CL.adoc[ObjectCollection<T>]` |Основной класс коллекции объектов ObjectBase, поддерживающий функцию оповещения об изменении.
+|`xref:ObjectContext_CL.adoc[ObjectContext]` |Класс ObjectContext предоставляет методы доступа к сущностям объектной модели уровня бизнес-логики.
+|`xref:ObjectHelper_CL.adoc[ObjectHelper]` |Содержит метод получения родительского объекта.
+|`xref:ObjectLockInfo_CL.adoc[ObjectLockInfo]` |Содержит информацию о блокировке объекта.
+|`xref:ObjectModelException_CL.adoc[ObjectModelException]` |Представляет общее исключение объектной модели.
+|`xref:ObjectProperty_CL.adoc[ObjectProperty]` |Предоставляет методы для работы со свойствами объектной модели.
+|`xref:ObjectPropertyValue_CL.adoc[ObjectPropertyValue]` |Предоставляет значение для коллекции `ObjectPropertyValueCollection`.
+|`xref:ObjectPropertyValueCollection_CL.adoc[ObjectPropertyValueCollection]` |Используется некоторыми преобразователями данных для хранения значений.
+|`xref:ObjectRef_CL.adoc[ObjectRef<T>]` |Содержит ссылку на объект в _контексте объектов_.
+|`xref:ObjectState_CL.adoc[ObjectState]` |Позволяет получать флаги состояния объекта.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorney_CL.adoc[PowerOfAttorney]`
+|Системная карточка доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyMainInfo_CL.adoc[PowerOfAttorneyMainInfo]`
+|Представляет секцию "Основная информация" системной карточки доверенности.
+
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData_CL.adoc[PowerOfAttorneyFNSDOVEL502RevocationData]`
+|Данные отзыва доверенности версии 5.02 для взаимодействия с ФНС.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.FIO_CL.adoc[FIO]`
+|Фамилия, имя, отчество (ФИОТип). Таблица 4.16.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.ForeignCompanyInfo_CL.adoc[ForeignCompanyInfo]`
+|Сведения об иностранной организации (при отзыве основной доверенности) (ИО). Таблица 4.8.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.IdentityCardInfo_CL.adoc[IdentityCardInfo]`
+|Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип). Таблица 4.15.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.IndividualInfo1_CL.adoc[IndividualInfo1]`
+|Сведения о физическом лице (СведФЛТип). Таблица 4.12.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.IndividualInfo_CL.adoc[IndividualInfo]`
+|Сведения о физическом лице, в том числе индивидуальном предпринимателе (СвФизЛицТип). Таблица 4.14.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.OrganizationInfo_CL.adoc[OrganizationInfo]`
+|Сведения об организации (СвОргТип). Таблица 4.13.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]`
+|Сведения для доверенности, подтверждающей полномочия нескольких уполномоченных представителей (СвПдтвУП). Таблица 4.4.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.PrincipalInfo_CL.adoc[PrincipalInfo]`
+|Сведения о доверителе (СвДоверит). Таблица 4.5.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]`
+|Сведения о лице, действующем от имени юридического лица без доверенности (СвРукОрг). Таблица 4.7.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RetrustPrincipalInfo_CL.adoc[RetrustPrincipalInfo]`
+|Сведения о доверителе при отзыве доверенности, совершенной (выданной) в порядке передоверия (СвДоверщП).
+Таблица 4.10.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationDocument_CL.adoc[RevocationDocument]`
+|Состав и структура документа (Документ). Таблица 4.2.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RevocationInfo_CL.adoc[RevocationInfo]`
+|Сведения заявления об отзыве доверенности (СвЗаяв). Таблица 4.3.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.RussianCompanyInfo_CL.adoc[RussianCompanyInfo]`
+|Сведения о российской организации (при отзыве основной доверенности) (НПЮЛ). Таблица 4.6.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.SeparateSubdivisionManagerInfo_CL.adoc[SeparateSubdivisionManagerInfo]`
+|Сведения о руководителе обособленного подразделения (СвРукОП). Таблица 4.9.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyFNSDOVEL502RevocationData.SignerInfo_CL.adoc[SignerInfo]`
+|Сведения о физическом лице, подписывающем заявление об отзыве доверенности от имени доверителя (российской организации / иностранной организации) без доверенности, или сведения о физическом лице, подписывающем заявление об отзыве доверенности от своего имени, в том числе при передаче полномочий другому лицу в порядке передоверия (Подписант). Таблица 4.11.
+
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRepresentative_CL.adoc[PowerOfAttorneyRepresentative]`
+|Представляет секцию "Представитель" системной карточки доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRepresentativesPowers_CL.adoc[PowerOfAttorneyRepresentativesPowers]`
+|Представляет секцию "Полномочия" системной карточки доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationApplicantInfo_CL.adoc[PowerOfAttorneyRevocationApplicantInfo]`
+|Информация о лице, отзывающем доверенность.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationData_CL.adoc[PowerOfAttorneyRevocationData]`
+|Данные отзыва доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationInfo_CL.adoc[PowerOfAttorneyRevocationInfo]`
+|Содержит информацию об отзыве доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneySubsidiaryPowersOfAttorney_CL.adoc[PowerOfAttorneySubsidiaryPowersOfAttorney]`
+|Представляет cекции "Системные карточки" дочерних доверенностей.
+|`xref:BackOffice-ObjectModel-Powers:Powers_CL.adoc[Powers]`
+|Представляет полномочия для справочника полномочий МЧД.
+|`xref:BackOffice-ObjectModel-Powers:PowersCode_CL.adoc[PowersCode]`
+|Представляет коды полномочий для справочника полномочий МЧД.
+|`xref:BackOffice-ObjectModel-Powers:PowersGroup_CL.adoc[PowersGroup]`
+|Представляет группы полномочий для справочника полномочий МЧД.
+|`xref:BackOffice-ObjectModel-Powers:PowersPowerOfAttorneyFormat_CL.adoc[PowersPowerOfAttorneyFormat]`
+|Представляет типы доверенности карточки справочник полномочий МЧД.
+|`xref:ServiceFactory_CL.adoc[ServiceFactory]` |Управляет получением сервиса из фабрики сервисов.
+|`xref:StaticObjectContext_CL.adoc[StaticObjectContext]` |Управляет получением сервиса из фабрики сервисов.
+|===
+
+== Интерфейсы
+
+[cols=",",options="header"]
+|===
+|Интерфейс |Описание
+|`IContextService` |Определяет возможность передачи контекста объектов в класс.
+|`IInitializable` |Обозначает в классе признак того, что объект был инициализирован.
+|`xref:ILockManager_IN.adoc[ILockManager]` |Представляет менеджер блокировки.
+|`xref:IObjectContext_IN.adoc[IObjectContext]` |Описывает ключевую функциональность класса `xref:ObjectContext_CL.adoc[ObjectContext]` по осуществлению наиболее общих действий над объектами системы.
+|`xref:IObjectRef_IN.adoc[IObjectRef]` |Определяет наличие у объекта уникального идентификатора и типа.
+|`xref:IObjectStateService_IN.adoc[IObjectStateService]` |Представляет интерфейс сервиса состояний объектов.
+|`xref:IServiceFactoryRegistry_IN.adoc[IServiceFactoryRegistry]` |Интерфейс реестра фабрик сервисов.
+|===
+
+== Перечисления
+
+[cols=",",options="header"]
+|===
+|Перечисление |Описание
+|`xref:ObjectAccessControlType_EN.adoc[ObjectAccessControlType]` |Определяет тип объекта доступа.
+|`xref:ObjectLockStatus_EN.adoc[ObjectLockStatus]` |Определяет статус блокировки объекта.
+|`xref:ObjectPropertyOptions_EN.adoc[ObjectPropertyOptions]` |Определяет список флагов, используемых свойствами объектной модели.
+|`xref:ObjectStateFlags_EN.adoc[ObjectStateFlags]` |Определяет состояние объекта.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRegTransferStatuses_EN.adoc[PowerOfAttorneyRegTransferStatuses]` |Статус передачи доверенности в распределённый реестр ФНС.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRetrustType_EN.adoc[PowerOfAttorneyRetrustType]` |Признак возможности оформления передоверия.
+
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationApplicantType_EN.adoc[PowerOfAttorneyRevocationApplicantType]` |Тип заявителя отзыва доверенности.
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRevocationType_EN.adoc[PowerOfAttorneyRevocationType]` |Тип заявления на отзыв.
+|===

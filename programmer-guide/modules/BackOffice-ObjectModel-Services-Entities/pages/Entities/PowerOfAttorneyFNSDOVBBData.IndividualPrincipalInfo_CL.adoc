@@ -1,0 +1,35 @@
+= PowerOfAttorneyFNSDOVBBData.IndividualPrincipalInfo -- класс
+
+Сведения о доверителе – физическом лице (ФЛДоверТип)
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class IndividualPrincipalInfo : IndividualDelegatedAuthorityInfo
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`IndividualPrincipalInfo(bool, string, IndividualInfo,
+string, string, FIO, LegalRepresentativeInfo)
+: base()`
+a|Заполняет Сведения о лице, передавшем полномочия – физическом лице (ФЛПрдПолн)
+
+.Параметры:
+* `hasFullCapacity` -- Признак наличия полной гражданской дееспособности доверителя – физического лица
+* `inn` -- ИНН физического лица
+* `snils` -- СНИЛС
+* `documentOfIncapacity` -- Наименование и реквизиты документа, подтверждающего недееспособность доверителя физического лица
+* `fio` -- ФИО физического лица
+* `individualInfo` -- Сведения о физическом лице
+* `representativeInfo` -- Сведения о законном представителе физического лица
+
+|===

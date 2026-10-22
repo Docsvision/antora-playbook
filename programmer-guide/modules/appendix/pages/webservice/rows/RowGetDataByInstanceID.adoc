@@ -1,0 +1,54 @@
+= RowGetDataByInstanceID
+
+Возвращает содержимое строки плоской секции карточки.
+
+Метод возвращает данные только последней строки секции, поэтому не подходит для иерархических или коллекционных секций.
+
+== Запрос
+
+[source,python]
+----
+POST /DocsVision/StorageServer/StorageServerService.asmx HTTP/1.1
+Host: DOCSVISION_SERVER.COM
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+SOAPAction: "http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/RowGetDataByInstanceID"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowGetDataByInstanceID xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <sessionId>guid</sessionId>
+      <instanceID>guid</instanceID>
+      <sectionId>guid</sectionId>
+    </RowGetDataByInstanceID>
+  </soap:Body>
+</soap:Envelope>
+----
+
+Параметры::
+sessionId:::
+Идентификатор пользовательской сессии
+instanceID:::
+Идентификатор карточки
+sectionId:::
+Идентификатор секции
+
+== Ответ
+
+[source,python]
+----
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: length
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <RowGetDataByInstanceIDResponse xmlns="http://schemas.docsvision.com/Platform/2009-02-03/StorageServer/">
+      <rowData>string</rowData>
+      <usingCompression>boolean</usingCompression>
+    </RowGetDataByInstanceIDResponse>
+  </soap:Body>
+</soap:Envelope>
+----

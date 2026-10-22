@@ -1,0 +1,42 @@
+= CardFieldSetting -- класс
+
+Предоставляет параметры атрибута, включаемого в подпись и определённого в Справочнике видов карточек.
+
+* *Пространство имён:* `xref:Entities/KindSetting/KindSetting_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities.KindSetting]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class CardFieldSetting : PropertyObject
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`FieldAlias` |Задаёт или возвращает псевдоним поля.
+|`FieldId` |Задаёт или возвращает уникальный идентификатор поля.
+|`FieldName` |Задаёт или возвращает локализованное название поля.
+|`Order` |Задаёт или возвращает порядковый номер.
+|`SectionName` |Задаёт или возвращает локализованное название секции.
+|`SectionPath` |Задаёт или возвращает последовательность строку, содержащую последовательность секций, полученную из идентификаторов `Sections`.
+|`Sections` |Задаёт или возвращает список идентификаторов секций, представляющую дерево от родительской секции до секции, содержащей поле.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`BuildSectionPath` |Создаёт из `Sections` строку для `SectionPath`.
+|`BuildSectionPath(Stack<Guid>)` |Создаёт из заданной последовательности строку для `SectionPath`.
+|`GetSectionField(IMetadataProvider, Guid)` |Получает из `CardFieldSetting` поле типа `SectionField`.
+|`RebuildSectionPath(String)` |Создаёт из строки последовательность для `Sections`.
+|===
+
+== Заметки
+
+Параметры `SectionPath` и `Sections`, как правило, содержат единственный идентификатор секции, содержащей поле.

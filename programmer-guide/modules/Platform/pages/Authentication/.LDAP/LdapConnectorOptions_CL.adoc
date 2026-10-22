@@ -1,0 +1,95 @@
+= LdapConnectorOptions -- класс
+
+Опции конфигурации для соединения LDAP
+
+* *Пространство имён:* `xref:Platform:Authentication/.LDAP/LDAP_NS.adoc[DocsVision.Platform.Authentication.LDAP]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class LdapConnectorOptions
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`LdapServerAddresses`
+|Адрес сервера каталогов (в общем случае совпадает с именем домена, необязательный)
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`BaseDN`
+|Объект каталога, начиная с которого производится поиск
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Port`
+|Порт LDAP для запроса информации из каталога. По умолчанию -- `389`
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
+
+|`FullyQualifiedDnsHostName`
+|Имя сервера является полным именем узла DNS
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`LookupTimeout`
+|Время  ожидания ответа от LDAP при запросах в миллисекундах. По умолчанию -- `2000` мс
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
+
+|`LdapConnectionTimeout`
+|Время  ожидания ответа от LDAP при подключении в миллисекундах. По умолчанию -- `5000` мс
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
+
+|`EnableLDAPS`
+|Определяет, использовать ли LDAP с SSL/TLS (LDAPS) для безопасного обмена данными
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`Credential`
+|Учётная запись для выполнения запросов к LDAP
+
+*Тип*: `<<classes,UserPasswordPair>>`
+
+|`ConnectionAttemptSettings`
+|Настройки ограничений попыток подключений к LDAP
+
+*Тип*: `<<classes,LdapConnectionAttemptOptions>>`
+
+|`GroupMembershipCheckerSettings`
+|Настройки членства в группе
+
+*Тип*: `xref:Platform:Authentication/.LDAP/LDAPGroupMembershipCheckerSettings_CL.adoc[LDAPGroupMembershipCheckerSettings]`
+
+|===
+
+[#classes]
+== Внутренние классы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`UserPasswordPair`
+a|Данные для входа пользовтаеля
+
+.Свойства:
+* `UserName` -- имя пользователя
+* `Password` -- пароль пользователя
+
+|`LdapConnectionAttemptOptions`
+a|Опции попыток подключения к LDAP
+
+.Свойства:
+* `TimeToResetAttemptsInSeconds` -- время от предыдущего неудачного входа, после которого сбрасывается счётчик неуспешных подключений к LDAP. По умолчанию -- `60` секунд
+* `BlockAttemptsTimeInSeconds` -- время, на которое блокируется пользователь после превышения количества неуспешных подключений к LDAP. По умолчанию -- `120` секунд
+* `MaxCountAttemptsToBlock` -- Ммаксимальное количество неуспешных подключений к LDAP до блокировки. По умолчанию -- `3`
+
+|===

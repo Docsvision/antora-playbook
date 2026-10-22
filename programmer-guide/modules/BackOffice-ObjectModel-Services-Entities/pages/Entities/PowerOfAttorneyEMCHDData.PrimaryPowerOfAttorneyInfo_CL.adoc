@@ -1,0 +1,51 @@
+= PowerOfAttorneyEMCHDData.PrimaryPowerOfAttorneyInfo -- класс
+
+Сведения о первоначальной доверенности (или доверенности, на основании которой осуществляется передоверие) (СвПервДоверТип)
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class PrimaryPowerOfAttorneyInfo
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`PrimaryPowerOfAttorneyInfo()`
+|Инициализирует экземпляр `PrimaryPowerOfAttorneyInfo`. Обязательные данные должны быть заполнены.
+
+|`PrimaryPowerOfAttorneyInfo(PowerOfAttorney)`
+a|Инициализирует экземпляр `PrimaryPowerOfAttorneyInfo` данными переданной СКД.
+
+.Параметры:
+* `primaryPowerOfAttorney` -- СКД первоначальной доверенности или доверенности, на основании которой осуществляется передоверие. Инициализация является отложенной и будет выполнена на этапе формирования МЧД. Заполнять самостоятельно информацию в данной секции доверенности при этом не требуется.
+
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.PowerOfAttorneyOption_EN.adoc[PowerOfAttorneyOption]` |Признак доверенности
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.PowerOfAttorneyForm_EN.adoc[PowerOfAttorneyForm]` |Форма доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[PowerOfAttorneyStartDate]` |Дата совершения (выдачи) доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[PowerOfAttorneyEndDate]` |Срок действия доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[PrimaryPowerOfAttorneyInternalNumber]` |Внутренний номер первоначальной доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[ParentPowerOfAttorneyInternalNumber]` |Внутренний номер доверенности, на основании которой осуществляется передоверие
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[PrimaryPowerOfAttorneyNumber]` |Единый регистрационный номер первоначальной доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[ParentPowerOfAttorneyNumber]` |Единый регистрационный номер доверенности, на основании которой осуществляется передоверие
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[PrimaryPowerOfAttorneyNotaryNumber]` |Регистрационный номер первоначальной доверенности в реестре нотариальных действий
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[ParentPowerOfAttorneyNotaryNumber]` |Регистрационный номер доверенности в реестре нотариальных действий, на основании которой осуществляется передоверие
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.PrimaryPowerOfAttorneyPrincipalInfo_CL.adoc[PrimaryPowerOfAttorneyPrincipals]` |Сведения о доверителе (доверителях) первоначальной доверенности
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.NotaryInfo_CL.adoc[NotaryInfo]` |Сведения о нотариусе, совершившем нотариальное действие
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyEMCHDData.NotaryDeputyInfo_CL.adoc[NotaryDeputyInfo]` |ВРИО нотариуса
+
+|===

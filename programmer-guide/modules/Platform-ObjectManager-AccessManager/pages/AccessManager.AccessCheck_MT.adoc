@@ -1,0 +1,39 @@
+= AccessManager.AccessCheck -- метод (SecureObjectType, Guid, Guid, Int32)
+
+Проверка наличия заданных прав на объект у пользователя. Метод проверяет права для пользователя, от имени которого создана пользовательская сессия.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract bool AccessCheck(SecureObjectType objectType, Guid objectId, Guid parentId, int desiredAccess)
+----
+
+Параметры::
+objectType:::
+Тип: `xref:Platform-Security:AccessControl/SecureObjectType_EN.adoc[SecureObjectType]`
++
+Тип объекта безопасности
+
+objectId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор проверяемого объекта
+
+parentId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
++
+Идентификатор родительского объекта для случаев, когда это уместно. Если неуместно использовать `parentID`, можно передавать `Guid.Empty`. `parentId` необходим при проверке прав на строке (`SecureObjectType.Row`), в таком случае в `parentId` передается идентификатор секции, в `objectId` -- идентификатор строки. Такой подход используется ещё в ряде методов модуля {pl}.
+
+desiredAccess:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.int32.aspx[System.Int32]`
++
+Запрашиваемая маска проверяемого уровня доступа.  Т.к. {dv} поддерживает различные схемы прав безопасности и нет универсального перечисления с масками доступа, для разных классов объектов эти флаги\перечисления будут разными. В различных случаях могут использоваться `read`, `write`, `delete`, `own` в generic\specific вариантах, в других -- `Read`, `Use`.
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- пользователь владеет заданными правами, иначе -- `false`

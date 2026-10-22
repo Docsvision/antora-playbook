@@ -1,0 +1,31 @@
+= ICryptService -- интерфейс
+
+Сервис для работы с шифрованием базовых объектов.
+
+* *Пространство имён:* `xref:BackOffice-ObjectModel-Services-Entities:Services_NS.adoc[DocsVision.BackOffice.ObjectModel.Services]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ICryptService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`xref:ICryptService.AddCryptAccount_MT.adoc[AddCryptAccount(X509Certificate2, Guid, String)]` |Предоставляет доступ указанному сотруднику к зашифрованному файлу.
+|`xref:ICryptService.DecryptFile_MT.adoc[DecryptFile(X509Certificate2, Guid, Stream)]` |Расшифровывает файл в переданный поток.
+|`xref:ICryptService.EncryptFile_MT.adoc[EncryptFile(X509Certificate2, Guid)]` |Выполняет шифрование файла с помощью переданного сертификата.
+|`xref:ICryptService.RemoveCryptAccount_MT.adoc[RemoveCryptAccount(X509Certificate2, Guid, String)]` |Отменяет доступ указанного сотрудника к зашифрованному файлу.
+|`xref:ICryptService.RemoveEncryption_MT.adoc[RemoveEncryption(X509Certificate2, Guid)]` |Расшифровывает файл и удаляет связанные с ним крипто-объекты.
+|===
+
+== Заметки
+
+Сервис шифрования базовых объектов доступен для вызова исключительно из скрипта карточки, унаследованной от класса `xref:BackOffice-WinForms:BaseCardControl_CL.adoc[BaseCardControl]`.
+
+Шифрование файлов и сервис шифрования доступны начиная с версии 5.4 платформы.

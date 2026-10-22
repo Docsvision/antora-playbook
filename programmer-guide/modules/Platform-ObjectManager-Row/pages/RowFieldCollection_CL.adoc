@@ -1,0 +1,36 @@
+= RowFieldCollection -- класс
+
+Содержит методы для работы с коллекцией `RowField`.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class RowFieldCollection : IEnumerable<RowField>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество элементов коллекции.
+|`Item` |Возвращает элемент коллекции с заданным индексом.
+|`Item` |Возвращает элемент коллекции с указанным псевдонимом.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Contains(String)` |Определяет вхождение в коллекции поля с указанным псевдонимом.
+|`GetEnumerator` |Возвращает перечислитель.
+|===
+
+== Заметки
+
+В отличие от описаний полей в схеме карточки, доступных через объекты метаданных (`CardType.Sections.Fields`) -- коллекция `RowFieldCollection` содержит описания реальных полей секции, включая связанные поля других карточек и системные поля (например, поле дайджеста -- `Description`).

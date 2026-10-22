@@ -1,0 +1,62 @@
+= BaseTokenContainer -- класс
+
+Базовый контейнер для токенов
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class BaseTokenContainer : ITokenContainer, DocsVision.Platform.Interop.ITokenContainer
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`AuthenticationProviderId`
+|Идентификатор провайдера расширения аутентификации для интерфейса `xref:Platform-StorageServer:Platform/Authentication/ITokenContainer_IN.adoc[ITokenContainer]`
+
+|`AuthenticationToken`
+|Токен аутентификации для интерфейса `xref:Platform-StorageServer:Platform/Authentication/ITokenContainer_IN.adoc[ITokenContainer]`
+
+|`Interop.ITokenContainer.AuthenticationToken`
+|Токен аутентификации для интерфейса `DocsVision.Platform.Interop.ITokenContainer`
+
+|`Interop.ITokenContainer.AuthenticationProviderID`
+|Идентификатор провайдера расширения аутентификации для интерфейса `DocsVision.Platform.Interop.ITokenContainer`
+
+|===
+
+== Конструкторы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`BaseTokenContainer(Guid, string)`
+a|Инициализирует новый экземпляр класса `xref:Platform:Authentication/BaseTokenContainer_CL.adoc[BaseTokenContainer]`
+
+.Параметры:
+* `providerInstanceId` -- идентификатор экземпляра провайдера
+* `token` -- токен
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`UpdateToken(string token)`
+a|Обновляет токен
+
+.Параметры:
+* `token` -- токен
+
+|===

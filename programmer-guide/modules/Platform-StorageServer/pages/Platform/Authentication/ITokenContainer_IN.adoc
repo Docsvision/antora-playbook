@@ -1,0 +1,45 @@
+= ITokenContainer -- интерфейс
+
+Представляет контейнер для токена аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface ITokenContainer
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`AuthenticationToken`
+|Токен аутентификации
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`AuthenticationProviderId`
+|Идентификатор провайдера аутентификации
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`UpdateToken(string)`
+a|Обновляет токен
+
+.Параметры:
+* `token` -- токен
+
+|===

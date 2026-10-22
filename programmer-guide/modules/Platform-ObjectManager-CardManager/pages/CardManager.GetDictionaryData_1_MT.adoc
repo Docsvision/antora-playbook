@@ -1,0 +1,29 @@
+= CardManager.GetDictionaryData -- метод (Guid, Boolean)
+
+Возвращает данные справочника указанного типа с обновлением кэша.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract CardData GetDictionaryData(Guid cardTypeId, bool refresh)
+----
+
+Параметры::
+cardTypeId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор типа справочника
+
+refresh:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- обновить кэш карточек; `false` -- не обновлять
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-CardData:CardData_CL.adoc[CardData]`
++
+Справочник

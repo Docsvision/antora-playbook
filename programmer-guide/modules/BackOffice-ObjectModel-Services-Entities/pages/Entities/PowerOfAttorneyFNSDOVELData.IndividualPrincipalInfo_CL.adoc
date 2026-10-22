@@ -1,0 +1,49 @@
+= PowerOfAttorneyFNSDOVELData.IndividualPrincipalInfo -- класс
+
+Сведения о доверителе -- физическом лице (ФЛДоверТип)
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class IndividualPrincipalInfo : IndividualDelegatedAuthorityInfo
+----
+
+== Поля
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[inn]` |ИНН
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Ogrnip]` |ОГРНИП.
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Snils]` |СНИЛС
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Citizenship]` |Гражданство
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[birthDate]` |Дата рождения
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IdentityDocumentInfo_CL.adoc[identityDocument]` |Документ, удостоверяющий личность
+
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`IndividualPrincipalInfo(bool, string, IndividualInfo,
+string, string, FIO, LegalRepresentativeInfo)
+: base()` |Заполняет Сведения о лице, передавшем полномочия -- физическом лице (ФЛПрдПолн)
+
+.Параметры:
+* `hasFullCapacity` -- Признак наличия полной гражданской дееспособности доверителя -- физического лица
+* `inn` -- ИНН физического лица
+* `snils` -- СНИЛС
+* `documentOfIncapacity` -- Наименование и реквизиты документа, подтверждающего недееспособность доверителя физического лица
+* `fio` -- ФИО физического лица
+* `individualInfo` -- Сведения о физическом лице
+* `representativeInfo` -- Сведения о законном представителе физического лица
+
+|===

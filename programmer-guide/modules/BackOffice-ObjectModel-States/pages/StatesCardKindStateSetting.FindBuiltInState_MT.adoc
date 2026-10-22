@@ -1,0 +1,32 @@
+= StatesCardKindStateSetting.FindBuiltInState -- метод (BuiltInState)
+
+Возвращает состояние (_конструктора состояний_), соответствующую переданному встроенному состоянию.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public StatesState FindBuiltInState(BuiltInState builtInState)
+----
+
+Параметры::
+builtInState:::
+Тип: `xref:BackOffice-ObjectModel-BuiltIn:BuiltInState_CL.adoc[BuiltInState]`
++
+Встроенное состояние
+
+Возвращаемое значение::
+Тип: `xref:StatesState_CL.adoc[StatesState]`
++
+Состояние (_конструктора состояний_)
+
+== Исключения
+
+[cols=",",options="header"]
+|===
+|Исключение |Условие
+|`http://msdn.microsoft.com/ru-ru/library/system.argumentnullexception.aspx[System.ArgumentNullException]` |Ошибка возвращается в случае, если не задан параметр `builtInState`.
+|===

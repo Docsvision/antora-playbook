@@ -1,0 +1,31 @@
+= ArchiveOptions -- перечисление
+
+Режим архивации объекта.
+
+Это перечисление имеет атрибут `FlagsAttribute`, поддерживающий побитовое соединение составляющих его значений.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+[Flags]
+public enum ArchiveOptions
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`None` |Не задан. Значение `0x0`
+|`Delay` |Использовать режим отложенной архивации. Значение `0x1`
+|`IncludeLinkedCards` |Архивируются также другие карточки, связанные с данной по ссылке. Значение `0x2`
+|`IncludeLinkedFiles` |Архивируются также связанные с карточкой файлы. Значение `0x4`
+|===
+
+== Заметки
+
+Отложенная архивация происходит по расписанию.

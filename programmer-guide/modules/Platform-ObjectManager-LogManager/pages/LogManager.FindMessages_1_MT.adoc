@@ -1,0 +1,38 @@
+= LogManager.FindMessages -- метод (String)
+
+Получение данных из журнала согласно заданному поисковому запросу.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract InfoRowCollection FindMessages(string queryXml)
+----
+
+Параметры::
+queryXml:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Поисковый запрос
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-IUpdatable:InfoRowCollection_CL.adoc[InfoRowCollection]`
++
+Коллекция нетипизированных данных
+
+== Заметки
+
+Так как журнал часто содержит большое количество записей, получение данных из него может занять длительное время. Поэтому рекомендуется максимально специфицировать параметры фильтра, чтобы минимизировать число получаемых сообщений.
+
+.Состав полей в возвращаемой коллекции:
+* *ID* -- идентификатор сообщения в журнале.
+* *ResourceID* -- идентификатор объекта.
+* *TypeID* -- тип объекта.
+* *ParentID* -- идентификатор родительского объекта.
+* *Date* -- дата операции.
+* *Type* -- тип операции.
+* *Operation* -- код операции.
+* *Data* -- дополнительная информация.

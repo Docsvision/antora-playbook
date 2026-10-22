@@ -1,0 +1,49 @@
+= Изменения состояния бизнес-процесса из сценария
+
+Скрипт, приведенный в примере, осуществляет запуск существующего экземпляра _бизнес-процесса_.
+
+.Сценарий работает со следующими переменными процесса:
+* `ProcessID` -- идентификатор экземпляра _бизнес-процесса_. Тип "Строка".
+
+[source,csharp]
+----
+using System;
+using System.Xml; <.>
+
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI; <.>
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    ProcessVariable varProcessID = process.GetVariableByName("ProcessID"); <.>
+
+    string processID = (string) varProcessID.Value; <.>
+
+    Process processObject = process.Library.GetProcess(new Guid(processID)); <.>
+
+    processObject.Start(string.Empty, process.Library.Dictionary, ExecutionModeEnum.Automatic); <.>
+   } catch (Exception ex)
+   {
+  
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message); <.>
+   }
+  }
+ }
+}
+----
+<.> Подключение системных библиотек.
+<.> Подключение библиотек СУБП.
+<.> Получение переменных процесса.
+<.> Приведение к строковому типу.
+<.> Получение бизнес-процесса.
+<.> Запуск процесса.
+<.> Добавление сообщения об ошибке в журнал процесса.

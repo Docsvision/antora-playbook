@@ -1,0 +1,93 @@
+= PowerOfAttorneyMachineReadableInfo -- класс
+
+Содержит информацию о МЧД.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyMachineReadableInfo
+----
+
+== Конструкторы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyMachineReadableInfo(Guid,
+DateTime,
+DateTime?,
+PowerOfAttorneyRetrustType,
+string,
+string,
+string,
+string,
+Encoding,
+List<string>)` |Создаёт новый экземпляр класса
+|===
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[PowerOfAttorneyNumber]` |Номер доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[PowerOfAttorneyStartDate]` |Дата совершения доверенности
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[PowerOfAttorneyEndDate]` |Срок действия доверенности
+|`xref:BackOffice-ObjectModel-Powers:PowerOfAttorneyRetrustType_EN.adoc[RetrustType]` |Признак возможности оформления передоверия
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Principal]` |Доверитель
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[PowerOfAttorneyMachineReadableFileID]` |Идентификатор файла МЧД
+|`Encoding PowerOfAttorneyMachineReadableFileEncoding` |Кодировка файла МЧД
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[RepresentativesSnils]` |СНИЛСы представителей
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[PrincipalsSnils]` |СНИЛСы доверителей
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Representative]` |Строковое представление представителя в формате ФИО (или ФИ) -- для физлица, или названия организации -- для юридического лица
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[Signer]` |Строковое представление подписанта в формате ФИО (или ФИ)
+|`RepresentativePowers` |Полномочия представителя
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyMachineReadableInfo(Guid,
+DateTime,
+DateTime?,
+PowerOfAttorneyRetrustType,
+string,
+string,
+string,
+string,
+Encoding,
+List<string>,
+List<string>,
+List<string>)`
+a|Создаёт новый экземпляр класса `PowerOfAttorneyMachineReadableInfo`.
+
+.Параметры:
+* `powerOfAttorneyNumber` -- Номер доверенности
+* `powerOfAttorneyStartDate` -- Дата совершения доверенности
+* `powerOfAttorneyEndDate` -- Срок действия доверенности
+* `retrustType` -- Признак возможности передоверия
+* `representative` -- Представитель
+* `signer` -- Подписант
+* `principal` -- Доверитель
+* `powerOfAttorneyMachineReadableFileID` -- Идентификатор файла доверенности
+* `powerOfAttorneyMachineReadableFileEncoding` -- Кодировка файла МЧД
+* `representativesSnils` -- СНИЛСы представителей
+* `principalsSnils` -- СНИЛСы поручителей
+* `principalsInn` -- ИННы доверителей
+
+|`AddRepresentativePowers(string, bool)`
+a|Добавить полномочие.
+
+.Параметры:
+* `power` -- код или текстовое описание полномочия
+* `isTextPower` -- содержит текстовое описание полномочия
+|===

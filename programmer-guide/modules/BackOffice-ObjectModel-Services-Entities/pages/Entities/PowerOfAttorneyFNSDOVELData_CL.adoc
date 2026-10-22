@@ -1,0 +1,57 @@
+= PowerOfAttorneyFNSDOVELData -- класс
+
+Сведения о доверенности ФНС в формате DOVEL.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class PowerOfAttorneyFNSDOVELData : PowerOfAttorneyFNSData
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`PowerOfAttorneyFNSDOVELData(Guid, string, string, string, PowerOfAttorneyDocumentData)`
+a|Инициализация данных доверенности
+
+.Параметры:
+* `powerOfAttorneyId` -- Идентификатор доверенности
+* `recipientID` -- Идентификатор получателя, которому направляется файл обмена
+* `finalRecipientID` -- Идентификатор конечного получателя, для которого предназначена информация из данного файла обмена
+* `senderID` -- Идентификатор отправителя информации
+* `document` -- Состав и структура документа
+
+|===
+
+== Классы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PowerOfAttorneyDocumentData_CL.adoc[PowerOfAttorneyDocumentData]` |Доверенность (Довер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PowerOfAttorneyInfo_CL.adoc[PowerOfAttorneyInfo]` |Сведения доверенности (СвДовТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PrincipalInfo_CL.adoc[PrincipalInfo]` |Сведения о доверителе (СвДоверит)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RussianEntityPrincipalInfo_CL.adoc[RussianEntityPrincipalInfo]` |Сведения о российской организации (НПЮЛ)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.PrincipalWithoutPowerOfAttorneyInfo_CL.adoc[PrincipalWithoutPowerOfAttorneyInfo]` |Сведения о лице, действующем от имени юридического лица без доверенности (ЛицоБезДов)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualPrincipalInfo_CL.adoc[IndividualPrincipalInfo]` |Сведения о доверителе -- физическом лице (ФЛДоверТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.ForeignLegalEntityPrincipalInfo_CL.adoc[ForeignLegalEntityPrincipalInfo]` |Сведения о доверителе -- иностранном юридическом лице (ИнОргДовер)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.HeadOfSeparateDivisionInfo_CL.adoc[PowerOfAttorneyFNSDOVELData.HeadOfSeparateDivisionInfo_CL.adoc]` |Сведения о руководителе обособленного подразделения (СвРукОП)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualPrincipalInfo_CL.adoc[IndividualPrincipalInfo]` |Сведения о доверителе -- физическом лице (ФЛДоверТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RepresentativeAndAuthorityInfo_CL.adoc[RepresentativeAndAuthorityInfo]` |Сведения о доверителе -- физическом лице (ФЛДоверТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.RepresentativeInfo_CL.adoc[RepresentativeInfo]` |Сведения об уполномоченном представителе (уполномоченных представителях) (СвУпПредТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IndividualInfo_CL.adoc[IndividualInfo]` |Сведения о физическом лице (СведФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.OrganizationInfo_CL.adoc[OrganizationInfo]` |Сведения об организации (СвОрг)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.AddressInfo_CL.adoc[AddressInfo]` |Сведения об адресе (АдрТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.IdentityDocumentInfo_CL.adoc[IdentityDocumentInfo]` |Сведения о документе, удостоверяющем личность физического лица (УдЛичнФЛТип)
+|`xref:Entities/PowerOfAttorneyFNSDOVELData.FIO_CL.adoc[FIO]` |Фамилия, имя, отчество (при наличии) (ФИОТип)
+
+|===
+

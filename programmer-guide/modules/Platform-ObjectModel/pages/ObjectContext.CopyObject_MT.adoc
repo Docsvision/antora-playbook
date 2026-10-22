@@ -1,0 +1,43 @@
+= ObjectContext.CopyObject<T> -- метод (T, ObjectCollection<T>, Action<T>)
+
+Копирует указанный объект в нового владельца.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public T CopyObject<T>(T objectInstance, ObjectCollection<T> newParentCollection, Action<T> initAction) where T : ObjectBase
+----
+
+Параметры типа
+
+T::
+Тип копируемого объекта, ограничен классом унаследованным от базового типа `xref:ObjectBase_CL.adoc[ObjectBase]`
+
+Параметры::
+objectInstance:::
+Тип: `T`
++
+Экземпляр копируемого объекта
+
+newParentCollection:::
+Тип: `xref:ObjectCollection_CL.adoc[ObjectCollection]<T>`
++
+Коллекция потомков объекта в который производится копирование. В данную коллекцию будет добавлен копируемый `objectInstance`
+
+initAction:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/018hxwa8.aspx[System.Action]<T>`
++
+Делегат на метод, который будет вызван после создания копии в целевом объекте `newParentCollection`, но до сохранения изменений методом `xref:ObjectContext.AcceptChanges_MT.adoc[ObjectContext.AcceptChanges]`
+
+Возвращаемое значение::
+Тип: `T`
++
+Созданная копия объекта `objectInstance`
+
+== Заметки
+
+Данный метод применим исключительно при копировании объектов, имеющих родителей: строки справочников. В остальных случаях используйте метод `xref:Platform-ObjectManager-CardData:CardData.Copy_MT.adoc[CardData.Copy]` базового API.

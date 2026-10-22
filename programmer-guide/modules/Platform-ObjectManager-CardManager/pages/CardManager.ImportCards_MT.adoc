@@ -1,0 +1,49 @@
+= CardManager.ImportCards -- метод (Stream)
+
+Импортирует карточку из потока XML данных.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public CardDataCollection ImportCards(Stream stream)
+----
+
+Параметры::
+stream:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.io.stream.aspx[Stream]`
++
+Поток данных
+
+Возвращаемое значение::
+Тип: `xref:Platform-ObjectManager-CardData:CardDataCollection_CL.adoc[CardDataCollection]`
++
+Коллекция карточек
+
+== Заметки
+
+Входящие данные должны иметь XML-формат. В потоке может быть несколько карточек.
+
+== Примеры
+
+Обычно для импорта карточки достаточно передать поток XML-данных в метод `ImportCards`. Инспектор для обработки событий импорта не требуется.
+
+.Импорт карточки из XML-файла (без использования инспектора)
+[source,csharp]
+----
+FileStream file = new FileStream(@"C:\TestCard.xml", FileMode.Open);
+CardDataCollection cards = session.CardManager.ImportCards(file);
+----
+
+Если необходимо управлять процессом импорта (например, заменять ссылки, обрабатывать конфликты или логировать события), используйте перегрузку метода, принимающую инспектор, наследуемый от `ImportCardInspector`.
+
+.Импорт карточки с использованием инспектора
+[source,csharp]
+----
+FileStream file = new FileStream(@"..\TestCard.xml", FileMode.Open);
+ImportCardInspectorReplacer inspector = new ImportCardInspectorReplacer(session);
+CardDataCollection cards = session.CardManager.ImportCards(file, inspector);
+----

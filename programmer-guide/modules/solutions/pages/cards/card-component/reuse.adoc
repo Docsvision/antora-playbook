@@ -1,0 +1,50 @@
+= Повторное использование компонента карточки
+
+Компонент карточки может сообщить {wincl}у о поддержке им механизма повторного использования (кэширования), при активации которого компонент карточки не выгружается из памяти при закрытии карточки, а кэшируется в специальном хранилище и используется повторно, при обращении к карточкам данного типа.
+
+.Чтобы задействовать данный режим, необходимо:
+* Для карточек, унаследованных от типа `CardControl`, нужно реализовать в классе компонента карточки интерфейс `xref:Platform-CardHost:CardHost/IReusableCardComponent_IN.adoc[IReusableCardComponent]`:
++
+[source,csharp]
+----
+public sealed partial class TestCard : CardControl, IReusableCardComponent
+{
+
+
+ public bool CanBeReused
+ {
+  get { return true; } <.>
+ }
+
+ public ReusageMode Mode
+ {
+  get { return ReusageMode.OwnLogic; } <.>
+ }
+}
+----
+<.> Определяем необходимость повторного использования компонента: `true` -- используется, `false` -- не используется.
+<.> Указываем режим повторного использования.
++
+* Для карточек, унаследованных от типа `BaseCardControl`, нужно переопределить методы `GetCanBeReused` и `GetReusageMode`:
++
+[source,csharp]
+----
+public sealed partial class TestCard : BaseCardControl
+{
+
+
+ protected override bool GetCanBeReused() <.>
+ {
+  return true;
+ }
+
+ protected override ReusageMode GetReusageMode() <.>
+ {
+  return ReusageMode.OwnLogic;
+ }
+}
+----
+<.> Определятся необходимость повторного использования компонента.
+<.> Определяется собственный режим повторного использования.
++
+В режиме `ReusageMode.OwnLogic` необходимость повторного использования определяется по значению переменной `CanBeReused`. В режиме `ReusageMode.NoReusage` компонент карточки кэшироваться не будет. В режиме `ReusageMode.CardHostLogic` необходимость кэширования компонента определяется внутренней логикой контейнера карточек.

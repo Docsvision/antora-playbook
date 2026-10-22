@@ -1,0 +1,23 @@
+= IApprovalStageService.ReorderSelectedApprovers -- метод (ObjectCollection<ApprovalStageApprover>)
+
+Сортирует список, содержащий согласующих, по порядковому номеру согласующего.
+
+* *Пространство имён:* `xref:ObjectModel/Services/Services_NS.adoc[DocsVision.ApprovalDesigner.ObjectModel.Services]`
+* *Сборка:* `DocsVision.ApprovalDesigner.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+void ReorderSelectedApprovers(ObjectCollection<ApprovalStageApprover> selectedApprovers)
+----
+
+Параметры::
+selectedApprovers:::
+Тип: `xref:Platform-ObjectModel:ObjectCollection_CL.adoc[ObjectCollection]<ApprovalStageApprover>`
++
+Согласующие. Тип элемента -- `xref:ObjectModel/ApprovalStageApprover_CL.adoc[ApprovalStageApprover]`
+
+== Заметки
+
+Метод `ReorderSelectedApprovers` просто сортирует коллекцию `selectedApprovers` по значению `Order` элементов коллекции.

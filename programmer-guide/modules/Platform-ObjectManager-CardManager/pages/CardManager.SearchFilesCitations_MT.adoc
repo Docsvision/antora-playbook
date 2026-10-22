@@ -1,0 +1,25 @@
+= CardManager.SearchFilesCitations -- метод (SearchFilesCitationsRequest)
+
+Метод осуществляет непосредственно получение данных.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public virtual IEnumerable<FilesCitationInfo> SearchFilesCitations(SearchFilesCitationsRequest request)
+----
+
+Параметры::
+request:::
+Тип: `xref:SearchFilesCitationsRequest_CL.adoc[SearchFilesCitationsRequest]`
++
+Запрос цитируемых данных из файла.
+
+Возвращаемое значение::
+
+Тип:`xref:FilesCitationInfo_CL.adoc[FilesCitationInfo]`
++
+Результат поиска -- список цитат, сгруппированных сначала по карточкам -- xref:FilesCitationInfo_CL.adoc[FilesCitationInfo], потом по файлам -- xref:CitationFileItem_CL.adoc[CitationFileItem].

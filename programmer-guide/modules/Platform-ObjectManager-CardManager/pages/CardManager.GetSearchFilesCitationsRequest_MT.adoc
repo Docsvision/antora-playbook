@@ -1,0 +1,31 @@
+= CardManager.GetSearchFilesCitationsRequest -- метод (SearchFilesCitationParentObjectsType, string)
+
+Метод создаёт класс запроса, включающий параметры поиска и формирования цитат.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public virtual SearchFilesCitationsRequest GetSearchFilesCitationsRequest(SearchFilesCitationParentObjectsType objectsType, string fullTextQuery)
+----
+
+Параметры::
+objectsType:::
+Тип: `SearchFilesCitationParentObjectsType`
++
+Тип родительского объекта, по которому будет осуществляться фильтрация. Это либо `Cards` -- карточки, либо `Files` -- файлы.
+
+fullTextQuery:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
++
+Строка, по которой будет осуществляться полнотекстовый поиск. Именно фраза для поиска, а не весь XML поиска.
+
+Возвращаемое значение::
+`SearchFilesCitationsRequest`
++
+Тип: `xref:SearchFilesCitationsRequest_CL.adoc[SearchFilesCitationsRequest]`
++
+Запрос цитируемых данных из файла.

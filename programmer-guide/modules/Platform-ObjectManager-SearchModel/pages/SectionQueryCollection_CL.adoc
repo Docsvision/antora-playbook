@@ -1,0 +1,37 @@
+= SectionQueryCollection -- класс
+
+Предоставляет методы для работы с коллекцией `SectionQuery`.
+
+* *Пространство имён:* `xref:SearchModel_NS.adoc[DocsVision.Platform.ObjectManager.SearchModel]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract class SectionQueryCollection : IEnumerable<SectionQuery>, IEnumerable
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Count` |Возвращает количество элементов коллекции.
+|`Item` |Возвращает элемент коллекции с заданным идентификатором.
+|`Item` |Возвращает элемент коллекции с заданным индексом.
+|`SearchQuery` |Возвращает объект типа `SearchQuery`.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`AddNew(Guid)` |Добавляет к поисковому запросу секцию с заданным идентификатором.
+|`Clear` |Удаляет все элементы коллекции.
+|`Contains(Guid)` |Проверяет вхождение в коллекцию заданной секции.
+|`GetEnumerator` |Возвращает перечислитель.
+|`Remove(Guid)` |Удаляет из коллекции заданную секцию.
+|`Remove(Int32)` |Удаляет из элемента с указанным индексом.
+|===

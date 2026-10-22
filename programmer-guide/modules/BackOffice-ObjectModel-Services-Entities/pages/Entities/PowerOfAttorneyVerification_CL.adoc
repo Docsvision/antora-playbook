@@ -1,0 +1,33 @@
+= PowerOfAttorneyVerification -- класс
+
+Содержит результат проверки действительности доверенности.
+
+* *Пространство имён:* `xref:Entities/Entities_NS.adoc[DocsVision.BackOffice.ObjectModel.Services.Entities]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class PowerOfAttorneyVerification
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`xref:BackOffice-ObjectModel-Services-Entities:Entities/PowerOfAttorneyVerificationResult_EN.adoc[PowerOfAttorneyVerificationResult]`
+|Результат проверки
+
+.Доверенность действительна при выполнении условий:
+- СНИЛС в МЧД соответствует СНИЛС в подписи МЧД
+- Доверенность подписана действующим сертификатом (по дате)
+- Дата подписания соответствует дате формирования подписи
+- Дата выдачи доверенности попадает в срок действия сертификата подписи
+- Если доверенность является дочерней -- все полномочия (ссылающиеся на Справочник полномочий) есть в родительской
+
+|`Messages`
+|Сообщения об ошибках проверки действительности доверенности
+|===

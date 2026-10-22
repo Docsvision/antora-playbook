@@ -1,0 +1,40 @@
+= BackOffice -- класс
+
+Предоставляет статические методы для получения ссылок на основные справочники `BackOffice`.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public static class BackOffice
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Categories` |Возвращает _Справочник категорий_.
+|`Kinds` |Возвращает _Справочник видов карточек_.
+|`Layouts` |Возвращает _Конструктор разметок_.
+|`Links` |Возвращает _Справочник ссылок_.
+|`NumerationRules` |Возвращает _Конструктор правил нумерации_.
+|`RoleModel` |Возвращает _Конструктор ролей_.
+|`Scripting` |Возвращает _Конструктор скриптов_.
+|`States` |Возвращает _Конструктор состояний_.
+|===
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+|`Register(ObjectContext)` |Регистрирует стандартные (SystemCardsMapperFactory, BackOfficeMapperFactory) _фабрики преобразователей данных_ в переданном контексте объектов.
+|===
+
+== Заметки
+
+Для получения справочников должен быть проинициализирован статический контекст объектов `xref:Platform-ObjectModel:StaticObjectContext_CL.adoc[StaticObjectContext]`.

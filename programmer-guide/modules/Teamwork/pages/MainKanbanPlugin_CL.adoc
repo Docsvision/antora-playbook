@@ -1,0 +1,43 @@
+= MainKanbanPlugin -- класс
+
+Класс реализует интерфейс `IKanbanPlugin` и, следовательно, содержит в себе всю логику работы канбан-доски по умолчанию. Помимо методов интерфейса, которые помечены как виртуальные, класс содержит и другие виртуальные методы с `protected internal` модификаторами доступа, переопределение которых может быть более полезным в некоторых случаях, когда не требуется переделывать логику метода интерфейса полностью.
+
+В общем случае, лучше наследовать класс своего плагина от `MainKanbanPlugin` и не реализовывать интерфейс с нуля, чтобы все работало корректно.
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`void AddLayoutToCardModel(SessionContext sessionContext, CardModel card, KanbanDataSettingsCollectionItem setting)`
+|Метод добавляет в модель карточки модель разметки из конструктора web-разметок. Можно переопределить и получать модели разметок по своим условиям. Если же в настройке не предполагается использовать разметки из конструктора и настройка содержит много карточек, то лучше переопределить его, чтобы просто возвращал null, благодаря чему ускорится загрузка.
+
+|`CardModel GetCardModelByCardID(SessionContext sessionContext, Guid cardId, KanbanDataSettingsCollectionItem setting)`
+|Метод формирования модели карточки для отображения на доске. Возвращает модель карточки. Как вариант, можно переопределить  для добавления цвета и его пояснения в модель карточки. По умолчанию данный метод используется везде, где требуется получить модель карточки для отображения на доске. Если в результате взаимодействия с карточкой изменяемое поле карточки каким-то образом перестало соответствовать хоть одному из столбцов, то необходимо это проверить и вернуть null, чтобы карточка была убрана с доски.
+
+|`string GetCardCustomHTMLContainer(SessionContext sessionContext, CardData cardData, KanbanDataSettingsCollectionItem setting)`
+|Метод возвращает кастомное HTML наполнение контейнера для конкретной карточки на доске. Для того чтобы кастомное HTML наполнение отображалось, необходимо чтобы у соответствующей карточки в модели  модель разметки была равна null. По умолчанию возвращает пустую строку и вызывается в методе GetCardModelByCardID.
+
+|`List<CardModel> GetCardsModelByCardsIDs(SessionContext sessionContext, List<Guid> cardsIDs, KanbanDataSettingsCollectionItem setting)`
+|Метод формирует список моделей карточек путем вызова в цикле GetCardModelByCardID и отсеивания моделей равных null.
+
+|`void SortCards(SessionContext sessionContext, List<CardModel> cards, KanbanDataSettingsCollectionItem setting)`
+|Метод сортировки карточек.
+
+|`List<Guid> GetCardsIDsSuitableForSetting(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting)`
+|Метод возвращает идентификаторы карточек, которые будут отображаться на канбан-доске, из которых будут формироваться модели. На момент вызова в идеале не должен содержать идентификаторов тех карточек, у которых модель будет `null` из-за того, что изменяемое поле в карточке не соответствует ни одному из столбцов.
+
+|`List<CardIndicatorModel> GetCardIndicators(SessionContext sessionContext, CardData card, List<KanbanIndicatorsCollectionItem> indicatorsInfo)`
+|Метод для получения значений показателей карточки, соответствующих данной настройке. При переопределении нужно не забывать указывать в модели показателя соответствующий индекс из переданной настройки (`IndicatorIndex = indicatorInfo.Index`), чтобы на клиенте все корректно отображалось.
+
+|`void ProcessingSettingColumns(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting)`
+|Вызывается в методе `ProcessingCollectionOfSettingsItemForBinding`. В базовой реализации исключает из набора столбцов те столбцы, значения которых невозможно привести к типу изменяемого поля карточки, создает набор столбцов, если используются предопределенные столбцы, а также задает заголовки для столбцов, в которых установлен флаг "Устанавливать заголовок исходя из значения поля".
+
+|`void FillPredifinedWeekColumns(SessionContext sessionContext, KanbanDataSettingsCollectionItem setting)`
+|Метод формирует в текущей настройке предопределенные столбцы "Неделя" (значения столбцов = даты текущей недели).
+
+|`bool ColumnValueIsCorrect(SessionContext sessionContext, FieldModel field, string value)`
+|Метод вызывается в `ProcessingSettingColumns` и проверяет, можно ли привести указанное значение столбца к типу изменяемого поля.
+
+|===

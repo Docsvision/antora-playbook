@@ -1,0 +1,27 @@
+= RevocationInfo -- класс
+
+Сведения заявления об отзыве доверенности (СвЗаяв). Таблица 4.3.
+
+* *Пространство имён:* `xref:Platform-ObjectModel:ObjectModel_NS.adoc[DocsVision.BackOffice.ObjectModel]`
+* *Сборка:* `DocsVision.BackOffice.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class RevocationInfo
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[PowerOfAttorneyNumber]` |Единый регистрационный номер доверенности (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[InternalPowerOfAttorneyNumber]` |Номер доверенности (Обязательный). Внутренний номер доверенности.
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[PowerOfAttorneyStartDate]` |Дата совершения (выдачи) доверенности (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[RevocationDate]` |Дата отзыва доверенности (Обязательный).
+|`http://msdn.microsoft.com/ru-ru/library/system.string.aspx[IRevocationReason]` |Причина отзыва доверенности. При отзыве доверенности в отношении всех уполномоченных представителей не заполняется.
+
+|===

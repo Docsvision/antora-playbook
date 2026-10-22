@@ -1,0 +1,60 @@
+= Получение заместителя сотрудника
+
+Приведенный далее скрипт используется для получения первого активного постоянного заместителя с правом исполнения.
+
+.Сценарий работает со следующими переменными процесса:
+* `UserDV` -- сотрудник, для которого определяется заместитель.
+* `Deputy` -- переменная будет использована для сохранения заместителя.
+
+[source,csharp]
+----
+using System;
+using System.Xml; <.>
+
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI; <.>
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo)
+  {
+   try
+   {
+
+    ProcessVariable oUserDV = process.GetVariableByName("UserDV");
+    ProcessVariable oDeputy = process.GetVariableByName("Deputy"); <.>
+
+    DVPrincipal dvUser = oUserDV.Value as DVPrincipal; <.>
+   
+    DVPrincipal dvDeputy = dvUser.ActiveDeputy; <.>
+   
+    oDeputy.Value = dvDeputy; <.>
+   } catch (Exception ex)
+   {
+
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message); <.>
+   }
+  }
+ }
+}
+----
+<.> Подключение системных библиотек.
+<.> Подключение библиотек СУБП.
+<.> Получение переменных процесса.
+<.> Приведение к типу "Сотрудник DV".
+<.> Получение первого (по списку) активного постоянного заместителя с правом исполнения.
+<.> Сохранение найденного значения в переменную.
+<.> Добавление сообщения об ошибке в журнал процесса.
+
+Свойство `ActiveDeputy` сущности типа `DVPrincipal` возвращает первого активного постоянного заместителя с правом исполнения, которого также можно получить вызвав метод `GetActiveDeputy(true, false,false,true)` объекта типа `DVPrincipal`. Установив значение соответствующего параметра метода `GetActiveDeputy(bool Performing, bool Control, bool Signature, bool PermanentDeputy)` в `true` можно получить заместителя, обладающего необходимым набором прав:
+
+* `Performing` -- с правом исполнения.
+* `Control` -- с правом ответственного исполнения.
+* `Signature` -- с правом подписи.
+* `PermanentDeputy` -- постоянный заместитель.
+
+Если все параметры в значении `false`, будет возвращен первый активный заместитель с любыми правами.

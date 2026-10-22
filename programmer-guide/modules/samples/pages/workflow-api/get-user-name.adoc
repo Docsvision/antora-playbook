@@ -1,0 +1,64 @@
+= Получение ФИО пользователя
+
+В приведенном далее примере _сценарий_ _бизнес-процесса_ формирует строку, содержащую ФИО сотрудника, из объекта `Сотрудник DV`.
+
+.Сценарий работает со следующими переменными процесса:
+* `UserDV` -- сотрудник, для которого будет получена ФИО. Тип "Сотрудник DV".
+* `User` -- переменная будет использована для сохранения строки с ФИО. Тип "Строка".
+
+[source,csharp]
+----
+using System;
+using System.Xml; <.>
+
+using DocsVision.Workflow.Objects;
+using DocsVision.Workflow.Runtime;
+using DocsVision.Workflow.Gates;
+using DocsVision.Platform.HelperAPI; <.>
+
+namespace DVScriptHost
+{
+ class DVScript
+ {
+  public void Execute(DocsVision.Workflow.Runtime.ProcessInfo process, PassState passInfo) <.>
+  {
+   try
+   {
+
+    ProcessVariable oEmployeeID = process.GetVariableByName("UserDV");
+    ProcessVariable oUserFIO = process.GetVariableByName("User"); <.>
+                
+    DVPrincipal oEmployee = oEmployeeID.Value as DVPrincipal; <.>
+
+    string sTempFIO = "";
+    if (oEmployee.LastName.Length > 0) <.>
+    { 
+     sTempFIO = oEmployee.LastName; 
+    }
+    if (oEmployee.FirstName.Length > 0) 
+    { 
+     sTempFIO += " " + oEmployee.FirstName.Substring(0, 1) + "."; 
+    }
+    if (oEmployee.MiddleName.Length > 0) 
+    { 
+     sTempFIO += oEmployee.MiddleName.Substring(0, 1) + "."; 
+    }
+   
+    oUserFIO.Value = sTempFIO; <.>
+   } catch (Exception ex)
+   {
+
+    process.LogMessage("Ошибка выполнения скрипта:" + ex.Message); <.>
+   }
+  }
+ }
+}
+----
+<.> подключение системных библиотек.
+<.> подключение библиотек СУБП.
+<.> Получение ФИО пользователя DV.
+<.> Получение переменных процесса.
+<.> Приведение к типу Сотрудник DV.
+<.> Получение строки вида Фамилия И.О..
+<.> Сохранение найденного значения в переменную.
+<.> Добавление сообщения об ошибке в журнал процесса.

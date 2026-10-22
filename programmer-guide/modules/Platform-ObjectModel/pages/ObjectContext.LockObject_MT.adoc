@@ -1,0 +1,29 @@
+= ObjectContext.LockObject -- метод (IObjectRef, Boolean)
+
+Блокирует объект по переданной ссылке.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public bool LockObject(IObjectRef objectRef, bool permanently)
+----
+
+Параметры::
+objectRef:::
+Тип: `xref:IObjectRef_IN.adoc[IObjectRef]`
++
+Ссылка на объект
+
+permanently:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- постоянная блокировка; `false` -- временная блокировка
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
++
+`true` -- блокировка выполнена, иначе -- `false`

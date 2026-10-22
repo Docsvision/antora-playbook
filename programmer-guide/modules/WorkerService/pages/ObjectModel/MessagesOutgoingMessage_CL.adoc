@@ -1,0 +1,66 @@
+= MessagesOutgoingMessage -- класс
+
+Исходящее сообщение
+
+* *Пространство имён:* `Docsvision.WorkerService.ObjectModel`
+* *Сборка:* `DocsVision.WorkerService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public sealed class MessagesOutgoingMessage : ObjectBase
+----
+
+== Свойства
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`TargetId`
+|Идентификатор цели сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+|`TypeId`
+|Идентификатор типа сервиса сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+|`SubTypeId`
+|Дополнительный идентификатор, уточняющий тип сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[System.Guid]`
+
+|`Data`
+|Дата сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
+
+|`Concurrent`
+|Определяет, может ли сообщение обрабатываться одновременно с другими сообщениями для целевого объекта\службы
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`AutoSendToSelf`
+|Автоматически послать сообщение себе без явной подписки
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`Delayed`
+|Отправка сообщения может быть отложена
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`DelayedTill`
+|Отправка сообщения отложена до указанной даты
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
+
+|`CreateDate`
+|Дата создания сообщения
+
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.datetime.aspx[System.DateTime]`
+
+|===

@@ -1,0 +1,68 @@
+= IRootAuthenticationExtension -- интерфейс
+
+Предоставляет свойства и методы для регистрации базового расширения аутентификации
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IRootAuthenticationExtension : IAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Description`
+|Описание расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Logo`
+|Логотип расширения
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
+
+|`SupportedTypes`
+|Поддерживаемые типы расширений аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetSettingsType<T>(AuthenticationExtensionType)`
+a|Получает тип настроек
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `Type`-- тип настроек
+
+|`GetSettings<T>(AuthenticationExtensionType)`
+a|Получает настройки определённого типа
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `T` -- настройки определённого типа
+
+|`GetExtensionType(AuthenticationExtensionType)`
+a|Получает тип расширения
+
+.Параметры:
+* `extensionType` -- тип расширения аутентификации
+
+*Возвращаемое значение*: `Type`-- тип расширения
+
+|===

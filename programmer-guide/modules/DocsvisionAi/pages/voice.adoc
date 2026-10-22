@@ -1,0 +1,24 @@
+= Озвучивание текста (TTS)
+
+Метод `SendSpeechRequestAsync` позволяет озвучить текст через внешний TTS провайдер.
+
+.Параметры метода "SendSpeechRequestAsync":
+[cols="2,2,1,5", options="header"]
+|===
+| Название | Тип | Обязательность | Описание
+| `text` | `string` | Да | Текст для озвучивания
+| `serviceAlias` | `string` | Да | Алиас сервиса озвучивания
+| `voice` | `string` | Нет | Вариант голоса
+| `speedRatio` | `float` | Нет | Скорость воспроизведения
+| `cancellationToken` | `CancellationToken` | Нет | Токен отмены
+|===
+
+.Пример запроса:
+[source,csharp]
+----
+using (Stream stream = await aiClient.SendSpeechRequestAsync("Привет мир", "OpenAI", "alloy", 1.1f, cancellationToken))
+using (FileStream output = new FileStream("C:\\voice.mp3", FileMode.Create, FileAccess.Write))
+{
+    await stream.CopyToAsync(output);
+}
+----

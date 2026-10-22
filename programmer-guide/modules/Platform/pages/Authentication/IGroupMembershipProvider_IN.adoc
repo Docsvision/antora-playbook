@@ -1,0 +1,30 @@
+= IGroupMembershipProvider -- интерфейс
+
+Предоставляет методы для получения групп пользователей
+
+* *Пространство имён:* `xref:Platform:Authentication/Authentication_NS.adoc[DocsVision.Platform.Authentication]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IGroupMembershipProvider
+----
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetGroups(string, string)`
+a|Получает группы
+
+.Параметры:
+* `token` -- токен
+* `upn` -- уникальный идентификатор пользователя в домене (УЗ в формате UPN)
+
+*Возвращаемое значение*: `IEnumerable<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>` -- список групп пользователя
+
+|===

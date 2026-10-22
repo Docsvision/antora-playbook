@@ -1,0 +1,25 @@
+= ObjectLockStatus -- перечисление
+
+Определяет статус блокировки объекта.
+
+* *Пространство имён:* `xref:ObjectModel_NS.adoc[DocsVision.Platform.ObjectModel]`
+* *Сборка:* `DocsVision.Platform.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public enum ObjectLockStatus
+----
+
+== Члены
+
+[cols=",",options="header"]
+|===
+|Имя члена |Описание
+|`Free` |Объект не заблокирован.
+|`Locked` |Объект заблокирован на время сессии.
+|`CheckedOut` |Объект заблокирован (редактируется).
+|`OwnerLocked` |Объект временно заблокирован текущим пользователем.
+|`OwnerCheckedOut` |Объект заблокирован текущим пользователем (редактируется).
+|===

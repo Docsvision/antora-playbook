@@ -1,0 +1,75 @@
+= OpenIDConnectRootAuthenticationExtension -- класс
+
+Расширение аутентификации и управления ролями для OpenID
+
+* *Пространство имён:* `xref:Platform:Authentication/OpenIDConnect/OpenIDConnect_NS.adoc[DocsVision.Platform.Authentication.OpenIDConnect]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OpenIDConnectRootAuthenticationExtension : BaseRootAuthenticationExtension
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Name`
+|Базовое расширение аутентификации OpenID
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`Description`
+|Описание: базовое расширение аутентификации OpenID
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`SupportedTypes`
+|Поддерживаемые типы расширений аутентификации
+
+*Тип*: `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[AuthenticationExtensionType]`
+
+*Возвращаемое значение*: комбинация типов расширения аутентификации
+
+|===
+
+== Методы
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`GetLogo()`
+|Получает логотип
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.byte.aspx[System.Byte][]`
+
+*Возвращаемое значение*: `Logo` -- логотип
+
+|`GetExtensionType(AuthenticationExtensionType)`
+a|Получает тип расширения
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+|`GetSettings<T>(AuthenticationExtensionType)`
+a|Получает настройки определённого типа
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+*Возвращаемое значение*: `T` -- настройки определённого типа
+
+|`GetSettingsType<T>(AuthenticationExtensionType)`
+a|Получает тип настроек
+
+.Параметры:
+* `xref:Platform:Authentication/AuthenticationExtensionType_EN.adoc[extensionType]` -- тип расширения
+
+*Возвращаемое значение*: `Type` -- тип настроек
+
+|===

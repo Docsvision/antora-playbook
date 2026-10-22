@@ -1,0 +1,32 @@
+= Разработка компонента карточки
+
+[NOTE]
+====
+Исходный код компонента карточки расположен в подкаталоге `NetstatSolutionCard` https://github.com/Docsvision/WebClient-Samples/tree/master/Others/NetStatSolution[репозитория].
+====
+
+Поскольку пример разработки компонента карточки приведён в разделе xref:solutions:cards/card-component/component.adoc[Разработка компонента карточки], здесь отмечены только ключевые моменты его реализации для _Модуля учёта сетевых устройств_.
+
+Реализация интерфейса карточки в компоненте не планируется, вместо этого в _Конструкторе разметок_ будет настроена её разметка, с последующей выгрузкой этих настроек (рассмотрено в разделе xref:solution/card-sql-package.adoc[Формирование "CardPackage" и "SqlPackage"]) для размещения в пакете установки. Чтобы разметка карточки могла быть настроена в конструкторах, класс компонента карточки отмечен специальным атрибутом `Customizable`.
+
+Класс компонента должен быть отмечен атрибутом `Guid`, значение которого соответствует _Идентификатору COM-компонента карточки_ (см. xref:solution/card-lib/card-metadata-scheme.adoc[Создание схемы метаданных карточки]).
+
+[source,csharp]
+----
+[ComVisible(true)]
+[Customizable(true)]
+[Guid("053B0CA1-95FD-4DDA-95FA-6043AFACCC1F")]
+[ClassInterface(ClassInterfaceType.None)]
+public partial class MainControl : BaseCardControl
+{
+    public MainControl()
+    {
+        InitializeComponent();
+    }
+}
+----
+
+[NOTE]
+====
+Если вы работаете с исходными кодами проекта, то компонент карточки собирается первым.
+====

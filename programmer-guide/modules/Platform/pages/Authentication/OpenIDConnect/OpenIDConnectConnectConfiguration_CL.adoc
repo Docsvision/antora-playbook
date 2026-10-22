@@ -1,0 +1,141 @@
+= OpenIDConnectConnectConfiguration-- класс
+
+Конфигурация коннектора к OpenID
+
+* *Пространство имён:* `xref:Platform:Authentication/OpenIDConnect/OpenIDConnect_NS.adoc[DocsVision.Platform.Authentication.OpenIDConnect]`
+* *Сборка:* `DocsVision.Authentication.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public class OpenIDConnectConnectConfiguration
+----
+
+== Свойства
+
+[cols="60,40",options="header"]
+|===
+|Имя |Описание
+
+|`Issuer`
+|Идентификатор стороны, генерирующей токен
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`AuthorizationEndpoint`
+|URL для получения авторизационного кода
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`TokenEndpoint`
+|URL для получения маркера доступа
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`UserInfoEndpoint`
+|URL для получения данных пользователя (по токену)
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`RevocationEndpoint`
+|URL для отзыва токенов
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`JwksUri`
+|URL для получения публичных ключей провайдера (JSON Web Key Set URI)
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`DeviceAuthorizationEndpoint`
+|URL страницы авторизации для устройств
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`EndSessionEndpoint`
+|URL для выхода из учётной записи
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`CertificateThumbprint`
+|Отпечаток сертификата для работы коннектора
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`CertificatePassword`
+|Пароль сертификата для работы коннектора. Пароль обычно устанавливается при импорте файла `.pfx` в Linux. Если пароль на сертификат не установлен, этот параметр можно удалить.
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`CertificateHash`
+|Хэш сертификата получаемый через утилиту cpverify
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`ExtCertificateThumbprint`
+|Отпечаток сертификата площадки. Можно посмотреть при выполнении `sudo /opt/cprocsp/bin/amd64/certmgr -list`
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]`
+
+|`RequestUriParameterSupported`
+|Поддерживается ли параметр запроса URI
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`HttpLogoutSupported`
+|Поддерживается ли выход из системы напрямую по HTTP (бэк)
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`FrontChannelLogoutSupported`
+|Поддерживается ли выход из системы по фронтовому каналу (через браузер пользователя)
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[System.Boolean]`
+
+|`ResponseTypeSupported`
+|Поддерживаемые типы ответа
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]`
+
+|`SubjectTypesSupported`
+|Поддерживаемые типы субъектов
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`ScopesSupported`
+|Список поддерживаемых областей доступа, т.е. запрашиваемых прав
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`TokenEndpointAuthMethodsSupported`
+|Список поддерживаемых методов аутентификации при запросе токенов
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`ClaimsSupported`
+|Список поддерживаемых данных пользователя для запроса при авторизации
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`GrantTypesSupported`
+|Список поддерживаемых типов авторизации
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`CodeChallengeMethodsSupported`
+|Список поддерживаемых методов защиты PKCE
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`IdTokenSigningAlgValuesSupported`
+|Список поддерживаемых алгоритмов подписи токена
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|`ResponseModesSupported`
+|Список поддерживаемых режимов ответа
+
+*Тип*: `http://msdn.microsoft.com/ru-ru/library/9eekhta0.aspx[System.Collections.Generic.IEnumerable]<http://msdn.microsoft.com/ru-ru/library/system.string.aspx[System.String]>`
+
+|===

@@ -1,0 +1,38 @@
+= CreateLogTransferCard -- метод (Guid, Guid, string)
+
+Создает карточку журнала обмена сообщениями.
+
+* *Пространство имён:* `DocsVision.M4dRegistry.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+Guid CreateLogTransferCard(Guid attorneyId, Guid documentId, string inn)
+----
+
+Параметры::
+Guid:::
+Тип: `attorneyId`
++
+ID доверенности (СКД).
+
+Guid:::
+Тип: `documentId`
++
+ID документа.
+
+string:::
+Тип: `inn`
++
+ИНН организации, выдавшей доверенность.
+
+Возвращаемое значение::
+Тип: `Guid`
++
+ID созданной карточки.
+
+== Примечания
+
+Параметры `attorneyId` и `documentId` взаимоисключающие, если указан один то другой должен быть `Guid.Empty`.

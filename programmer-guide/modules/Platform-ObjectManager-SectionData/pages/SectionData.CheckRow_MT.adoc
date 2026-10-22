@@ -1,0 +1,29 @@
+= SectionData.CheckRow -- метод (Guid, Boolean)
+
+Проверяет наличие в секции строки с заданным идентификатором.
+
+* *Пространство имён:* `xref:Platform-ObjectManager-Metadata:ObjectManager_NS.adoc[DocsVision.Platform.ObjectManager]`
+* *Сборка:* `DocsVision.Platform.ObjectManager.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public abstract bool CheckRow(Guid rowId, bool checkCache)
+----
+
+Параметры::
+rowId:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.guid.aspx[Guid]`
++
+Идентификатор строки в секции
+
+checkCache:::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- поиск должен вестись в кэше, иначе -- `false`
+
+Возвращаемое значение::
+Тип: `http://msdn.microsoft.com/ru-ru/library/system.boolean.aspx[Boolean]`
++
+`true` -- строка существует, иначе -- `false`
