@@ -1,0 +1,73 @@
+:page-aliases: install-other-linux.adoc
+
+// tag::no-alias[]
+= Установка базовых модулей и расширений на сервер под управлением Linux
+
+Данный раздел описывает установку базовых модулей для ОС Linux. Все описанные ниже команды необходимо выполнять после завершения действий, описанных в разделе "xref:./install-server.adoc[]".
+
+include::6.1@workerservice:admin:install.adoc[tags=linux]
+
+// антиприлипака
+
+[#linux-pl]
+== Установка модуля {pl} на Linux
+
+После завершения xref:./pre-config-server.adoc[предварительной настройки сервера] установите серверные компоненты модуля, используя команды ниже.
+
+. Установите пакеты модуля {pl} следующей командой, предварительно обновив индекс пакетов:
++
+:wt: platform
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Вместе с модулем _{pl}_ команда установит серверные компоненты базовых модулей.
++
+. Выполните конфигурацию модуля по инструкции в разделе "xref:./config-platform.adoc[]".
+
+[#file-service]
+== Установка файлового сервиса
+
+. Установите пакеты модуля:
++
+:wt: fileservice
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
+
+[#webc]
+== Установка {wc}а
+
+. Установите пакеты модуля:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-webclient
+
+{os2}::
++
+ $ sudo dnf install docsvision-webclient
+====
+
+[#workflow]
+== Установка СУБП
+
+. Установите модуль _{wf}_ следующей командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-workflow
+
+{os2}::
++
+ $ sudo dnf install docsvision-workflow
+====
+
+[#extensions-linux]
+== Установка расширений модулей для {of-mc} на сервер под управлением Linux
+
+include::6.2@mgmtconsole:admin:install.adoc[tags=extensions]
+
+include::6.2@mgmtconsole:admin:install.adoc[tags=extensions-linux]
+
+// end::no-alias[]

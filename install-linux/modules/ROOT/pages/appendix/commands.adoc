@@ -1,0 +1,93 @@
+:page-aliases: ROOT:commands.adoc
+// tag::no-alias[]
+:serv: {sss-new}
+:os1: Astra Linux
+
+= Полезные команды
+
+Ниже перечислены команды, которые могут быть полезны при установке и после неё. Команды приведены на примере модуля {pl}. Чтобы применить команду для другого модуля, замените `platform` на название модуля.
+
+. Посмотреть состояние сервиса:
++
+ $ sudo systemctl status dvappserver
++
+. Запустить сервис:
++
+ $ sudo systemctl start dvappserver
++
+. Остановить сервис:
++
+ $ sudo systemctl stop dvappserver
++
+. Перезапустить сервис:
++
+ $ sudo systemctl restart dvappserver
++
+// tag::log[]
+. Посмотреть журнал службы (только записи в `stdout/stderr`):
++
+[subs=attributes]
+ $ sudo journalctl -u {serv}
++
+. Посмотреть только самые последние записи в журнале и выводить новые записи по мере их появления:
++
+ $ sudo journalctl -f -u {serv}
++
+// end::log[]
++
+. Установить пакет:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-platform
+
+{os2}::
++
+ $ sudo dnf install docsvision-platform
+====
++
+. Установить пакет определенной версии:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get install docsvision-platform=6.0.1
+
+{os2}::
++
+ $ sudo dnf install docsvision-platform=6.0.1
+====
++
+. Удалить пакет:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get purge docsvision-platform
+
+{os2}::
++
+ $ sudo dnf remove docsvision-platform
+
+{os3}::
++
+ $ sudo apt-get remove docsvision-platform
+====
++
+. Удалить ненужные системе пакеты (зависимости, которые принесли за собой другие пакеты при установке) командой:
++
+[tabs]
+====
+{os1}::
++
+ $ sudo apt-get autoremove
+
+{os2}::
++
+ $ sudo dnf autoremove
+====
+// end::no-alias[]

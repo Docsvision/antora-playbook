@@ -1,0 +1,59 @@
+// tag::winlist[]
+* Microsoft Windows Server {serv-1}.
+* Microsoft Windows Server {serv-2}.
+* Microsoft Windows Server {serv-3}.
+* Microsoft Windows Server {serv-4}.
+* Microsoft Windows Server {serv-5}.
+* Microsoft Windows {win-req-1}.
+* Microsoft Windows {win-req-2}.
+// end::winlist[]
+
+// tag::linlist[]
+* Astra Linux Special Edition {l-1}.
+* Astra Linux Special Edition {l-1-1}.
+* {l-2} x86_64.
+* {l-2} aarch64 (Байкал-М).
+* {l-4}.
+* {l-5}.
+* {l-6}.
+// end::linlist[]
+
+// tag::SSD[]
+Рекомендуется использовать твердотельный накопитель.
+// end::SSD[]
+
+//tag::utils[]
+[subs="specialchars,attributes,quotes"]
+которые генерируются автоматически (утилитой _{dvcm}_ или при загрузке в базу данных библиотек карточек.
+//end::utils[]
+
+// tag::system-accounts[]
+WARNING: Не рекомендуется использовать учётные записи системных пользователей для авторизации на клиентских рабочих местах, т.к. это может привести к ошибкам в работе системы.
+// end::system-accounts[]
+
+// tag::winconfig[]
+Для модуля {pl} версии {pl-cu-mc} настройки из данного раздела выполняются в конфигурационном файле {wincl}а, расположенном по адресу `/usr/lib/docsvision/platform/config/windows-client-part.json` для Linux или `C:\Program Files\Docsvision\Platform\config\windows-client-part.json` для Windows, в секции `"Site"`.
+// end::winconfig[]
+
+// tag::pangolinagent[]
+[NOTE]
+====
+PgAgent для Pangolin отсутствует в стандартных репозиториях.
+
+Служба подходящей версии может быть получена с `postgresql.org`. Установите службу вместе с `libpq` из штатного репозитория. После установки необходимо скопировать расширение из `/usr/pgsql-15/share/extension/` в `/usr/pangolin-6.4/share/extension/`.
+
+Пути могут отличаться в зависимости от версии дистрибутива и соответствующего ей релиза {pgsql}.
+====
+// end::pangolinagent[]
+
+// tag::pgagent[]
+[NOTE]
+====
+При использовании Postgres Pro Standard потребуется скопировать расширение в директорию Postgres Pro, с помощью команды:
+
+[source,bash]
+----
+cp /usr/share/postgresql/11/extension/pgagent* /opt/pgpro/std-15/share/extension/
+----
+====
+// end::pgagent[]
