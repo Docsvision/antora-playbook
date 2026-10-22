@@ -1,0 +1,34 @@
+= ConvertToURL -- метод (ObjectContext, Guid, ConversionFormat)
+
+Преобразует файл с указанным идентификатором в целевом формате в URL-адрес для последующего скачивания.
+
+* *Пространство имён:* `DocsVision.ConversionService.Services`
+* *Сборка:* `DocsVision.ConversionService.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+OperationResult<string> ConvertToURL(ObjectContext context, Guid fileId, ConversionFormat conversionFormat = ConversionFormat.pdfa)
+----
+
+Параметры::
+ObjectContext:::
+Тип: `context`
++
+Контекст объекта.
+
+Guid:::
+Тип: `fileId`
++
+Идентификатор файла.
+
+ConversionFormat:::
+Тип: `xref:ConversionFormat_EN.adoc[conversionFormat]`
++
+Целевой формат (по умолчанию используется формат `PDF/A`).
+
+Возвращаемое значение::
+Тип: `xref:OperationResult_CL.adoc[OperationResult<string>]`
++
+Результат выполнения операции в виде строки.
