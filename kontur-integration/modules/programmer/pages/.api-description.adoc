@@ -1,0 +1,752 @@
+= Описание API
+
+== IKonturIssuesService -- сервис выпуска сертификатов Контур
+
+[source,csharp]
+----
+public interface IKonturIssuesService <.>
+{
+
+ OperationResult<KonturIssuesResponse> CreateCertificateIssue(StaffEmployee employee, string inn); <.>
+
+ OperationResult AddDocumentRequisites(Guid issueId, IdentityDocument passData); <.>
+
+ OperationResult SendDocumentScan(Guid issueId, SendingFileInfo fileInfo, DocumentTypes documentType); <.>
+
+ OperationResult<string> SendReleaseStatement(Guid issueId); <.>
+
+ OperationResult<string> SendReleaseStatementWithEsia(Guid issueId, StaffEmployee employee, string snils); <.>
+
+ OperationResult SignReleaseStatement(Guid issueId, string smsCode); <.>
+
+ OperationResult SignReleaseStatement(Guid issueId); <.>
+
+ OperationResult SendRequestForValidation(Guid issueId); <.>
+
+ OperationResult DeleteCertificateIssueRequest(Guid issueId); <.>
+
+ OperationResult<byte[]> DownloadCertificate(Guid issueId); <.>
+
+ OperationResult DownloadCertificateAndAssignToEmployee(Guid issueId, StaffEmployee employee); <.>
+
+ OperationResult<KonturIssuesResponse> GetIssue(Guid issueId); <.>
+
+ OperationResult<byte[]> GenerateRequestTemplate(Guid issueId, TemplateType templateType); <.>
+
+ OperationResult EditCertificateIssueRequest(Guid issueId, StaffEmployee employee); <.>
+
+ OperationResult<IssueEvents> GetEventList(int limit); <.>
+
+ OperationResult<IssueEvents> GetEventList(int limit, string lastId); <.>
+
+ OperationResult<string> SubjectIdentification(Guid issueId, StaffEmployee identifiedBy); <.>
+
+ OperationResult ForwardToCabinet(Guid issueId); <.>
+}
+----
+<.> `IKonturIssuesService` -- сервис выпуска сертификатов Контур.
+<.> `CreateCertificateIssue` -- создание заявки на выпуск сертификата.
++
+.Параметры:
+* `employee` -- сотрудник, для которого формируется сертификат.
+* `inn` -- ИНН сотрудника.
++
+<.> `AddDocumentRequisites` -- добавляет документы в заявку.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `passData` -- паспортные данные.
++
+<.> `SendDocumentScan` -- отправка скана документа.
++
+.Параметры:
+* `issueId` -- идентификатор запроса.
+* `fileInfo` -- данные скана документа.
+* `documentType` -- тип документа.
++
+<.> `SendReleaseStatement` -- запрос на подтверждение операции.
++
+.Параметры:
+* `issueId` -- ID заявки.
++
+<.> `SendReleaseStatementWithEsia` -- создает запрос на подтверждение через госуслуги.
++
+.Параметры:
+* `issueId` -- ID документа.
+* `employee` -- сотрудник.
+* `snils` -- СНИЛС сотрудника.
++
+<.> `SignReleaseStatement` -- подпись заявления на выпуск сертификата НЭП.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `smsCode` -- смс-код подтверждения.
++
+<.> `SignReleaseStatement` -- подпись заявления на выпуск сертификата НЭП через госуслуги.
++
+.Параметры:
+* `issueId` -- ID заявки.
++
+<.> `SendRequestForValidation` -- отправляет заявку на проверку.
++
+.Параметры:
+* `issueId` -- ID заявки.
++
+<.> `DeleteCertificateIssueRequest` -- удаление заявки на сертификат.
++
+.Параметры:
+* `issueId` -- ID заявки.
++
+<.> `DownloadCertificate` -- запрос файла сертификата УНЭП и загрузка его в карточку сотрудника.
++
+.Параметры:
+* `issueId` -- ID заявки
+* `employee` -- сотрудник, в карточку которого загружается сертификат {uc}.
++
+<.> `DownloadCertificateAndAssignToEmployee` -- запрос файла сертификата УНЭП и загрузка его в карточку сотрудника.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `employee` -- сотрудник, в карточку которого загружается сертификат.
+Контур
++
+<.> `GetIssue` -- запрос заявки на сертификат, проверка актуализации.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `issueId` -- ID заявки.
++
+<.> `GenerateRequestTemplate` -- генерация шаблона документа для заявления на выпуск сертификата.
++
+.Параметры:
+* `templateType` -- тип документа, получаемый от Контура.
++
+<.> `EditCertificateIssueRequest` -- изменение заявки на сертификат.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `employee` -- сотрудник, для которого формируется сертификат.
++
+<.> `GetEventList` -- запрос ленты событий заявок.
++
+.Параметры:
+* `limit` -- максимальное количество событий, которое нужно вернуть.
++
+<.> `GetEventList` -- запрос ленты событий заявок.
++
+.Параметры:
+* `limit` -- максимальное количество событий, которое нужно вернуть.
+* `lastId` -- идентификатор события, после которого нужно вернуть события.
++
+<.> `SubjectIdentification` -- добавить или изменить удостоверение личности.
++
+.Параметры:
+* `issueId` -- ID заявки.
+* `identifiedBy` -- сотрудник, который удостоверил личность.
++
+<.> `ForwardToCabinet` -- перенаправить заявку в личный кабинет.
++
+.Параметры:
+* `issueId` -- ID заявки.
+
+== SendingFileInfo -- информация по файлу, отправляемому в УЦ Контур
+
+Информация по файлу, отправляемому в УЦ Контур:
+
+[source,csharp]
+----
+public class SendingFileInfo
+    {
+        public Guid FileId { get; set; } <.>
+        public string Name { get; set; } <.>
+        public long LongSize { get; set; } <.>
+        public byte[] Data { get; set; } <.>
+
+        public SendingFileInfo FromFileData(FileData fileData) <.>
+        {
+            return new SendingFileInfo
+            {
+                FileId = fileData.Id,
+                Name = fileData.Name,
+                LongSize = fileData.LongSize,
+                Data = GetData(fileData)
+            };
+        }
+----
+<.> Идентификатор файла.
+<.> Имя файла.
+<.> Размер файла.
+<.> Данные файла.
+<.> Создаёт экземпляр `SendingFileInfo` по данным файла {dv}.
+
+== DocumentTypes -- тип документа
+
+[source,csharp]
+----
+	public enum DocumentTypes
+    {
+        Unknown, <.>
+        Passport, <.>
+        OtherIdentity, <.>
+        Snils, <.>
+        Egrul, <.>
+        ManagementCompanyEgrul, <.>
+        Egrip, <.>
+        NaturalPersonInn, <.>
+        SigningAuthority, <.>
+        WarrantWithUseAreas, <.>
+        ReleaseStatement, <.>
+        ApplicantWarrant, <.>
+        ApplicantPhoto, <.>
+    }
+----
+<.> Может быть только возвращаемым типом.
+<.> Паспорт РФ.
+<.> Другой документ удостоверяющий личность.
+<.> СНИЛС.
+<.> Выписка из ЕГРЮЛ.
+<.> Выписка из ЕГРЮЛ управляющей компании.
+<.> Выписка из ЕГРИП.
+<.> ИНН физического лица.
+<.> Подтверждение права подписи.
+<.> Доверенность с областями применения.
+<.> Заявление на выпуск сертификата.
+<.> Доверенность на получение.
+<.> Фото обратившегося.
+
+== IdentityDocument -- данные подтверждающего документа
+
+[source,csharp]
+----
+    public class IdentityDocument
+    {
+        public DocumentType DocumentType { get; set; } <.>
+		public string Series { get; set; } <.>
+        public string Number { get; set; } <.>
+        public string IssuerName { get; set; } <.>
+        public string IssuerCode { get; set; } <.>
+        public DateTime IssueDate { get; set; } <.>
+    }
+----
+<.> Тип документа.
+<.> Серия.
+<.> Номер.
+<.> Кем выдан.
+<.> Код подразделения.
+<.> Дата выдачи.
+
+== TemplateType -- тип документа, получаемого от Контура
+
+Предоставляет тип документа получаемого от Контура:
+
+[source,csharp]
+----
+    public enum TemplateType
+    {
+        ReleaseStatement, <.>
+        Receipt <.>
+    }
+}
+----
+<.> Заявление на выпуск сертификата.
+<.> Расписка о том, что сертификат выпущен.
+
+== KonturIssuesResponse -- ответ на запрос создания заявки
+
+Модель для ответа на запрос создания заявки.
+
+[source,csharp]
+----
+    public class KonturIssuesResponse
+    {
+      [JsonProperty("id")]
+      public Guid Id { get; set; } <.>
+
+      [JsonProperty("baseIssueId")]
+      public Guid BaseIssueId { get; set; } <.>
+
+      [JsonProperty("version")]
+      public int Version { get; set; } <.>
+
+      [JsonProperty("actualized")]
+      public bool Actualized { get; set; } <.>
+
+      [JsonProperty("status")]
+      public KonturIssuesResponseStatus Status { get; set; } <.>
+
+      public string StatusDescription => Status.GetDescription(); <.>
+
+      [JsonProperty("forwardedStatus")]
+      public KonturIssuesResponseForwardedStatus ForwardedStatus { get; set; } <.>
+
+      public string ForwardedStatusDescription => ForwardedStatus.GetDescription(); <.>
+
+      [JsonProperty("certificateTemplateInfo")]
+      public CertificateTemplateInfo CertificateTemplateInfo { get; set; } <.>
+
+      [JsonProperty("subjectInfo")]
+      public ResponseSubjectInfo SubjectInfo { get; set; } <.>
+
+      [JsonProperty("cspInfo")]
+      public CspInfo CspInfo { get; set; } <.>
+
+      [JsonProperty("certificateReleasedInfo")]
+      public CertificateReleasedInfo CertificateReleasedInfo { get; set; } <.>
+
+      [JsonProperty("documents")]
+      public IssuesResponseDocument[] Documents { get; set; } <.>
+
+      [JsonProperty("correctionInfo")]
+      public CorrectionInfo CorrectionInfo { get; set; } <.>
+
+      [JsonProperty("subjectIdentification")]
+      public SubjectIdentification SubjectIdentification { get; set; } <.>
+
+      [JsonProperty("innerErrors")]
+      public InnerError[] InnerErrors { get; set; } <.>
+
+      [JsonProperty("smevValidations")]
+      public SmevValidation[] SmevValidations { get; set; } <.>
+
+      [JsonProperty("createdAt")]
+      public DateTime CreatedAt { get; set; } <.>
+
+      [JsonProperty("updatedAt")]
+      public DateTime UpdatedAt { get; set; } <.>
+    }
+----
+<.> `Id` -- идентификатор заявки.
+<.> `BaseIssueId` -- идентификатор заявки, на основе которой происходит перевыпуск.
+<.> `Version` -- версия заявки.
+<.> `Actualized` -- актуализирована ли заявка после изменения.
+<.> `Status` -- статус заявки.
+<.> `GetDescription` -- текстовое описание для статуса заявки.
+<.> `ForwardedStatus` -- статус перенаправления заявки.
+<.> `GetDescription` -- текстовое описание для статуса перенаправления заявки.
+<.> `CertificateTemplateInfo` -- информация о шаблоне сертификата.
+<.> `SubjectInfo` -- информация о субъекте сертификата.
+<.> `CspInfo` -- информация о криптопровайдере.
+<.> `CertificateReleasedInfo` -- информация о выпущенном сертификате.
+<.> `Documents` -- список документов заявки.
+<.> `CorrectionInfo` -- информация о том, что нужно исправить в заявке.
+<.> `SubjectIdentification` -- информация об удостоверении личности.
+<.> `InnerErrors` -- список внутренних ошибок заявки.
+<.> `SmevValidations` -- список валидаций документов в СМЭВ.
+<.> `CreatedAt` -- дата и время создания заявки.
+<.> `UpdatedAt` -- дата и время последнего изменения заявки.
+
+== KonturIssuesResponseStatus -- статус заявки
+
+[source,csharp]
+----
+    public enum KonturIssuesResponseStatus
+    {
+      [LocalizedDescription(nameof(Resource.KonturResponseEnum_Unknown))]
+      Unknown, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Preparing))]
+      Preparing, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Validating))]
+      Validating, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Correction))]
+      Correction, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Approved))]
+      Approved, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Releasing))]
+      Releasing, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_Released))]
+      Released <.>
+    }
+----
+<.> `Unknown` -- может быть только возвращаемым типом.
+<.> `Preparing` -- заявку создали и готовят к проверке.
+<.> `Validating` -- заявку проверяет оператор УЦ. В этом статусе нельзя менять заявку.
+<.> `Correction` -- при проверке заявки были выявлены замечания. Нужно их исправить и повторно отправить заявку на проверку. Замечания можно найти в поле `correctionInfo`.
+<.> `Approved` -- заявка проверена, замечаний не выявлено. Нужно удостоверить личность и перенаправить заявку в личный кабинет. В этом статусе нельзя менять реквизиты и документы заявки (кроме документов для удостоверения личности).
+<.> `Releasing` -- субъект сертификата отправил запрос на выпуск в личном кабинете. В этом статусе  нельзя менять заявку.
+<.> `Released` -- сертификат выпущен. В этом статусе нельзя менять заявку.
+
+== KonturIssuesResponseForwardedStatus -- статус перенаправления заявки
+
+[source,csharp]
+----
+    public enum KonturIssuesResponseForwardedStatus
+    {
+      [LocalizedDescription(nameof(Resource.KonturResponseEnum_Unknown))]
+      Unknown, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_None))]
+      None, <.>
+      [LocalizedDescription(nameof(Resource.KonturIssuesResponseStatus_ForwardedToCabinet))]
+      ForwardedToCabinet <.>
+    }
+----
+<.> Может быть только возвращаемым типом.
+<.> Нет.
+<.> Отправлена в личный кабинет.
+
+== CorrectionInfo -- информация о том, что нужно исправить в заявке
+
+[source,csharp]
+----
+    public class CorrectionInfo
+    {
+      [JsonProperty("comment")]
+      public string Comment { get; set; } <.>
+
+      [JsonProperty("remarks")]
+      public Remark[] Remarks { get; set; } <.>
+    }
+----
+<.> Комментарий оператора Удостоверяющего Центра.
+<.> Комментарий оператора Удостоверяющего Центра.
+
+== Remark - замечание по исправлению
+
+[source,csharp]
+----
+    public class Remark
+    {
+      [JsonProperty("code")]
+      public string Code { get; set; } <.>
+
+      [JsonProperty("target")]
+      public RemarkTargets Target { get; set; } <.>
+
+      public string TargetDescription => Target.GetDescription(); <.>
+
+      [JsonProperty("message")]
+      public string Message { get; set; } <.>
+    }
+----
+<.> Код замечания.
+<.> Тип сущности замечания.
+<.> Текстовое описание типа сущности замечания.
+<.> Описание замечания. Включает неразрывные пробелы в виде HTML-кода: `\&nbsp;`, может
+меняться.
+
+== RemarkTargets - тип сущности замечания
+
+[source,csharp]
+----
+    public enum RemarkTargets
+    {
+
+      Unknown, <.>
+
+      [LocalizedDescription(nameof(Resource.RemarkCommon))]
+      Common, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentPassport))]
+      Passport, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentOtherIdentity))]
+      OtherIdentity, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentSnils))]
+      Snils, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentEgrul))]
+      Egrul, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentManagementCompanyEgrul))]
+      ManagementCompanyEgrul, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentEgrip))]
+      Egrip, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentNaturalPersonInn))]
+      NaturalPersonInn, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentSigningAuthority))]
+      SigningAuthority, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentWarrantWithUseAreas))]
+      WarrantWithUseAreas, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentReleaseStatement))]
+      ReleaseStatement, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentApplicantWarrant))]
+      ApplicantWarrant, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentApplicantPhoto))]
+      ApplicantPhoto, <.>
+
+      [LocalizedDescription(nameof(Resource.DocumentEsiaConfirmation))]
+      EsiaConfirmation <.>
+    }
+----
+<.> Может быть только возвращаемым типом.
+<.> Общие замечания.
+<.> Паспорт РФ.
+<.> Другой документ удостоверяющий личность.
+<.> СНИЛС.
+<.> Выписка из ЕГРЮЛ.
+<.> Выписка из ЕГРЮЛ управляющей компании.
+<.> Выписка из ЕГРИП.
+<.> ИНН физического лица.
+<.> Подтверждение права подписи.
+<.> Доверенность с областями применения.
+<.> Заявление на выпуск сертификата.
+<.> Доверенность на получение.
+<.> Фото обратившегося.
+<.> Подтверждение выпуска НЭП через Госуслуги.
+
+== SmevValidation -- валидация документа в СМЭВ
+
+[source,csharp]
+----
+    public class SmevValidation
+    {
+
+      [JsonProperty("documentType")]
+      public DocumentTypes DocumentType { get; set; } <.>
+
+      public string DocumentTypeDescription => DocumentType.GetDescription(); <.>
+
+      [JsonProperty("state")]
+      public IssueSmevValidationState State { get; set; } <.>
+
+      public string StateDescription => State.GetDescription(); <.>
+
+      [JsonProperty("errors")]
+      public List<SmevValidationError> Errors { get; set; } <.>
+    }
+----
+<.> Тип документа.
+<.> Текстовое значение типа документа.
+<.> Состояние.
+<.> Текстовое значение состояния.
+<.> Список ошибок от СМЭВ.
+
+== IssueSmevValidationState -- состояние проверки
+
+[source,csharp]
+----
+    public enum IssueSmevValidationState
+    {
+
+      Unknown, <.>
+
+      [Description("Идёт проверка документа в СМЭВ")]
+      InProgress, <.>
+
+      [Description("Документ проверен в СМЭВ, ошибки не выявлены")]
+      Valid, <.>
+
+      [Description("Документ проверен в СМЭВ, выявлены ошибки")]
+      Invalid <.>
+    }
+----
+<.> Может быть только возвращаемым типом.
+<.> Идёт проверка документа в СМЭВ.
+<.> Документ проверен в СМЭВ, ошибки не выявлены.
+<.> Документ проверен в СМЭВ, выявлены ошибки.
+
+== SmevValidationError -- информация об ошибке проверки в СМЭВ
+
+[source,csharp]
+----
+    public class SmevValidationError
+    {
+
+      [JsonProperty("code")]
+      public SmevValidationErrorCode Code { get; set; } <.>
+
+
+      public string CodeDescription => Code.GetDescription(); <.>
+
+
+      [JsonProperty("level")]
+      public SmevValidationErrorLevel Level { get; set; } <.>
+
+
+      public string LevelDescription => Level.GetDescription(); <.>
+    }
+----
+<.> Код ошибки проверки СМЭВ.
+<.> Текстовое описание кода ошибки проверки СМЭВ.
+<.> Уровень ошибки проверки в СМЭВ.
+<.> Текстовое описание уровня ошибки проверки в СМЭВ.
+
+== SmevValidationErrorCode -- код ошибки проверки СМЭВ
+
+[source,csharp]
+----
+    public enum SmevValidationErrorCode
+    {
+
+      Unknown, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportExpired))]
+      PassportExpired, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportReplaced))]
+      PassportReplaced, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportIssuedWithViolation))]
+      PassportIssuedWithViolation, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportIsSearched))]
+      PassportIsSearched, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportDestroyed))]
+      PassportDestroyed, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportOwnerDied))]
+      PassportOwnerDied, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportDefect))]
+      PassportDefect, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPassportLost))]
+      PassportLost, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorSnilsNotMatchWithPfr))]
+      SnilsNotMatchWithPfr, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorInnNotMatchWithFns))]
+      InnNotMatchWithFns, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorNotValidSnilsChecksum))]
+      NotValidSnilsChecksum, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorPfrNotAvailable))]
+      PfrNotAvailable, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorFnsNotAvailable))]
+      FnsNotAvailable, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorFmsNotAvailable))]
+      FmsNotAvailable, <.>
+
+      [LocalizedDescription(nameof(Resource.ErrorOrganizationNotFoundInFns))]
+      OrganizationNotFoundInFns <.>
+    }
+----
+<.> Неизвестная ошибка, напишите о ней в тех. поддержку.
+<.> Срок действия паспорта истек.
+<.> Паспорт заменен на новый.
+<.> Паспорт выдан с нарушением.
+<.> Паспорт числится в розыске.
+<.> Паспорт числится как изъятый или уничтоженный.
+<.> Паспорт недействителен в связи со смертью владельца.
+<.> У паспорта стоит отметка о техническом браке, его использование запрещено.
+<.> Паспорт утрачен.
+<.> По предоставленному номеру СНИЛС, ФИО и дате рождения нет данных в ПФР или данные не совпадают.
+<.> Паспортные данные, указанные в ФНС для этого ИНН, не совпадают с предоставленными.
+<.> Неверное контрольное число у номера СНИЛС.
+<.> Не удалось проверить документ в ПФР.
+<.> Не удалось проверить документ в ФНС.
+<.> Не удалось проверить документ в ФМС.
+<.> Организация не найдена в ФНС.
+
+== SmevValidationErrorLevel -- уровень ошибки проверки в СМЭВ
+
+[source,csharp]
+----
+    public enum SmevValidationErrorLevel
+    {
+
+      Unknown, <.>
+
+      [LocalizedDescription(nameof(Resource.SmevValidationErrorLevel_Warning))]
+      Warning, <.>
+
+      [LocalizedDescription(nameof(Resource.SmevValidationErrorLevel_Fatal))]
+      Fatal <.>
+    }
+----
+<.> Может быть только возвращаемым типом. Однако, если не исправить такую ошибку, то заявка может быть отклонена оператором УЦ. Можно загрузить скан-копию документа, чтобы подтвердить, что ошибка ложная.
+<.> Предупреждение, можно игнорировать.
+<.> Фатальная ошибка. Заявку с такой ошибкой нельзя отправить на проверку.
+
+== IKonturDssService -- сервис подписания Контур
+
+[source,csharp]
+----
+    public interface IKonturDssService
+    {
+        OperationResult<KonturSignResponse> SignDocument(SignRequest request, StaffEmployee employee); <.>
+        OperationResult<DssSignStatusResponse> GetStatus(Guid operationId); <.>
+        OperationResult<DssConfirmationResponse> ConfirmSignOperation(Guid operationId, string confirmationCode); <.>
+        OperationResult<byte[]> GetResult(Guid resultId); <.>
+    }
+----
+<.> Подписывает файлы документа.
+<.> Возвращает статус подписания.
+<.> Подтверждает операцию подписания.
+<.> Возвращает сформированную подпись.
+
+== SignRequest -- данные для подписания
+
+[source,csharp]
+----
+    public class SignRequest
+    {
+        public Guid DocumentId { get; set; }
+        public DocumentSignaturePartInfo[] Parts { get; set; }
+        public DssSignRequestSignature Signature { get; set; }
+    }
+----
+
+== DocumentSignaturePartInfo -- подписываемая часть документа
+
+[source,csharp]
+----
+    public class DocumentSignaturePartInfo
+    {
+        public SignatureItemType PartType { get; set; }
+        public Guid? FileId { get; set; }
+    }
+----
+
+== KonturSignResponse -- ответ на запрос регистрации
+
+Ответ на запрос регистрации операции подписания
+
+[source,csharp]
+----
+    public class KonturSignResponse
+    {
+        public Guid OperationId { get; set; } <.>
+        public ConfirmType ConfirmType { get; set; } <.>
+        public string PhoneLastNumbers { get; set; } <.>
+        public AdditionalDssInfo AdditionalDssInfo { get; set; } <.>
+    }
+----
+<.> Идентификатор операции.
+<.> Способ подтверждения операции.
+<.> Последние 4 цифры номера телефона пользователя. Передаётся при подтверждении операции через СМС или с помощью Applet на SIM-карте.
+<.> Дополнительная информация для DSS-сертификата.
+
+== DssSignStatusResponse -- статус выполнения операции подписания
+
+[source,csharp]
+----
+    public class DssSignStatusResponse
+    {
+        public DssSignStatus SignStatus { get; set; } <.>
+        public List<FileStatus> FileStatuses { get; set; } = new List<FileStatus>(); <.>
+    }
+----
+<.> Статус подписания.
+<.> Статусы подписания частей запроса на подписание.
+
+== DssSignStatus -- статус подписания
+
+[source,csharp]
+----
+    public enum DssSignStatus
+    {
+        Unknown = 0, <.>
+        WaitingUser = 1, <.>
+        InProgress = 2, <.>
+        Complete = 3, <.>
+        Error = 4 <.>
+    }
+----
+<.> Неизвестно.
+<.> Ожидает действия (подтверждения) пользователя.
+<.> В процессе подписания.
+<.> Завершено.
+<.> Завершено с ошибкой.

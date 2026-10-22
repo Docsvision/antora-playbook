@@ -1,0 +1,94 @@
+:of: модуля
+:config: appsettings
+:no-config: ''
+
+= Установка и удаление модуля
+
+include::6.1@workerservice::partial$excerpts.adoc[tags=before-install]
+
+include::6.2@mgmtconsole:servers:partial$excerpts.adoc[tags=must-admin]
+
+[#linux-server]
+== Установка {of-mk} на сервер под управлением Linux
+
+:wt: cakontur*
+include::6.1@platform:admin:partial$install.adoc[]
+. Установите расширение _{of-mk}_ {wc}а следующей командой:
++
+:wt: ext-cakontur-webc
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+// include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
++
+. {blank}
++
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=dll]
+
+[#windows-server]
+== Установка {of-mk} на сервер под управлением Windows
+
+. Запустите пакет установки `Docsvision CA Kontur integration.msi`.
++
+.Мастер установки серверной части модуля
+image::install-server-hello.png[Мастер установки серверной части модуля]
++
+. Примите условия лицензионного соглашения для продолжения установки. Нажмите *Далее*.
++
+.Условия лицензионного соглашения
+image::install-server-license.png[Условия лицензионного соглашения]
++
+. Выберите компоненты, которые требуется установить, и нажмите *Далее*.
++
+.Выбор устанавливаемых компонентов
+image::install-server-components.png[Выбор устанавливаемых компонентов]
++
+include::6.1@platform:admin:partial$install-components.adoc[]
++
+****
+Общие компоненты::
+Обеспечивают взаимодействие с другими сервисами {dv}, обязательны для установки на сервер {dv}.
+
+Серверные компоненты:::
+Основные серверные компоненты модуля _{mk}_, обязательны для установки на сервер {dv}.
+
+Расширение {wc}а:::
+Компоненты, необходимые для работы {wc}а, обязательно к установке на сервер {wc}а.
++
+NOTE: Расширение недоступно для установки, если не установлен модуль {wc} xref:ROOT:requirements.adoc#docsvision[требуемой версии].
+
+Кнопка Сброс::
+Сбрасывает выбор компонентов на стандартные.
+
+Кнопка Использование диска::
+Позволяет посмотреть свободное место на системных дисках.
+****
++
+. В следующем окне нажмите *Установить* и дождитесь завершения установки модуля.
+. Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
++
+// include::dv6@install-linux:ROOT:partial$restart-and-db.adoc[]
++
+. Выполните необходимые настройки модуля, описанные в разделе xref:settings.adoc[].
+. {blank}
++
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=dll]
+
+[#uninstall]
+== Удаление модуля
+
+* В ОС Windows компоненты модуля удаляются стандартными средствами (установка и удаление программ).
+* Чтобы удалить модуль в ОС Linux, выполните команду:
++
+--
+:wt: cakontur*
+include::6.1@platform:admin:partial$delete.adoc[]
+--
++
+** Чтобы удалить раширение для {wc}а в ОС Linux, выполните:
++
+--
+:wt: cakontur-webc
+include::6.1@platform:admin:partial$delete.adoc[]
+--
++
+* После удаления модуля удалите настройки модуля из _{of-mk}_.

@@ -1,0 +1,33 @@
+= IKonturDssService -- интерфейс
+
+Сервис подписания Контур.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `DocsVision.M4dRegistry.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+public interface IKonturDssService
+----
+
+== Методы
+
+[cols=",",options="header"]
+|===
+|Имя |Описание
+
+|`SignDocument(SignRequest, StaffEmployee);`
+|Подписывает файлы документа.
+
+|`GetStatus(Guid);`
+|Возвращает статус подписания.
+
+|`ConfirmSignOperation(Guid, string);`
+|Подтверждает операцию подписания.
+
+|`OperationResult<byte[]> GetResult(Guid);`
+|Возвращает сформированную подпись.
+
+|===

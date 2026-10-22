@@ -1,0 +1,29 @@
+= SendReleaseStatementWithEsia -- метод (Guid, CertificateConfirmationApplicantInfo)
+
+Создает запрос на подтверждение через госуслуги.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+OperationResult<string> SendReleaseStatementWithEsia(Guid issueId, CertificateConfirmationApplicantInfo applicantInfo);
+----
+
+Параметры::
+issueId::
+Тип: `Guid`
++
+Идентификатор документа.
+
+applicantInfo::
+Тип: `CertificateConfirmationApplicantInfo`
++
+Данные сотрудника, для запроса подтверждения выпуска сертификата.
+
+Возвращаемое значение::
+Тип: `OperationResult`
++
+Результат выполнения операции.

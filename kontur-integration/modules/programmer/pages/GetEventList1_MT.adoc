@@ -1,0 +1,29 @@
+= GetEventList -- метод (int, string)
+
+Запрос ленты событий заявок.
+
+* *Пространство имён:* `DocsVision.Kontur.DssService.ObjectModel.Services`
+* *Сборка:* `Kontur.DssService.ObjectModel.dll`
+
+== Синтаксис
+
+[source,csharp]
+----
+OperationResult<IssueEvents> GetEventList(int limit, string lastId);
+----
+
+Параметры::
+limit:::
+Тип: `int`
++
+Максимальное количество событий, которое нужно вернуть.
+
+lastId:::
+Тип: `string`
++
+Идентификатор события, после которого нужно вернуть события.
+
+Возвращаемое значение::
+Тип: `OperationResult`
++
+Результат выполнения операции.
