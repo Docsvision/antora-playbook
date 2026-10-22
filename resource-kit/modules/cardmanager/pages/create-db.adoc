@@ -1,0 +1,59 @@
+= Создание базы данных
+
+CardManager может использоваться для создания БД {dv} и загрузки в неё необходимых библиотек карточек.
+
+[WARNING]
+====
+При создании БД с помощью CardManager, в ней будут созданы таблицы для хранения данных карточек, а также некоторые хранимые процедуры, загружаемые с библиотеками карточек.
+
+Полученная БД не является полноценной базой системы {dv} из-за отсутствия данных, загружаемых Консолью администратора {dv}, например, заданий SQL, данных приложения "Управление документами" и других данных.
+====
+
+.Чтобы создать базу данных:
+. xref:cardmanager:import-library-metadata.adoc[Загрузите в программу библиотеки карточек] базовых модулей {dv}:
++
+.Расположение библиотек карточек в Windows:
+****
+* `C:\Program Files\Docsvision\Database\ApprovalDesigner\ApprovalDesignerCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\BackOffice\BackOfficeCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\Core\SystemCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\DocumentManagement\DocumentManagementCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\TakeOffice\TakeOfficeCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\WindowsClient\WindowsClientCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\Workflow\WorkflowCardLib.xml`.
+* `C:\Program Files\Docsvision\Database\WorkerService\WorkerServiceCardLib.xml`.
+
+Здесь `C:\Program Files\Docsvision\` -- каталог установки сервера {dv}.
+****
++
+.Расположение библиотек карточек в Linux:
+****
+* `/usr/lib/docsvision/database/ApprovalDesigner/ApprovalDesignerCardLib.xml`.
+* `/usr/lib/docsvision/database/BackOffice/BackOfficeCardLib.xml`.
+* `/usr/lib/docsvision/database/Core/SystemCardLib.xml`.
+* `/usr/lib/docsvision/database/DocumentManagement/DocumentManagementCardLib.xml`.
+* `/usr/lib/docsvision/database/TakeOffice/TakeOfficeCardLib.xml`.
+* `/usr/lib/docsvision/database/WindowsClient/WindowsClientCardLib.xml`.
+* `/usr/lib/docsvision/database/Workflow/WorkflowCardLib.xml`.
+* `/usr/lib/docsvision/database/WorkerService/WorkerServiceCardLib.xml`.
++
+Здесь `/usr/lib/docsvision/database/` -- каталог установки сервера {dv}.
+****
++
+Также можно добавить другие библиотеки карточек, которые нужно загрузить при создании БД, или их можно xref:cardmanager:load-library.adoc[загрузить] после создания БД.
++
+. В дереве объектов выберете узел _Databases_.
+. Вызовите команду _New Database_ из контекстного меню выбранного узла. Будет открыта форма:
++
+.CardManager -- Регистрация базы данных в утилите
+image::user:new-db.png[CardManager -- Регистрация базы данных в утилите]
++
+. Выберите тип СУБД: {pgsql} или {mssql} Server.
+. Укажите данные для подключения к СУБД (адрес сервера, данные пользователя, имя базы данных).
++
+У пользователя должны быть права, достаточные для создания БД.
++
+. Введите имя базы данных.
+. Нажмите кнопку *ОК*.
++
+На указанном сервере будет создана новая БД, она же будет добавлена в список подключенных БД. Если данные для подключения указаны не верно, будет показана ошибка.
