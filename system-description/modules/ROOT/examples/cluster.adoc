@@ -1,0 +1,32 @@
+.Кластер сервисов {dv}
+[plantuml, svg]
+....
+@startuml
+hide empty members
+
+
+package "Сервер" as server #DDFFFF {
+
+    class "Кластер серверов" as platform ##[dashed] {
+        +Сервер 1
+        +Сервер 2...
+}
+    class "Кластер СУБП" as workflow ##[dashed] {
+        +Сервис 1
+        +Сервис 2...
+}
+    class "Кластер cервисов полнотекстового \nиндексирования" as fulltext ##[dashed] {
+        +СУБП 1
+        +СУБП 2...
+}
+}
+
+platform -[hidden]> workflow
+platform -[hidden]> fulltext
+
+platform << С,#DD9955 >>
+workflow << С,#DD9955 >>
+fulltext << С,#DD9955 >>
+
+@enduml
+....

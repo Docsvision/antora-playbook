@@ -1,0 +1,27 @@
+.Плоская секция
+[plantuml, svg]
+....
+@startuml
+hide empty members
+hide circles
+
+package "Строка1" as l1 {
+class "Поле 1" as f1 {
+ +Значение 1
+}
+class "Поле 2" as f2 {
+ +Значение 2
+}
+class "Поле 3" as f3 {
+ +Значение 3
+}
+class "Поле 4" as f4 {
+ +Значение 4
+}
+}
+
+f1 -[hidden]> f2
+f2 -[hidden]> f3
+f3 -[hidden]> f4
+@enduml
+....

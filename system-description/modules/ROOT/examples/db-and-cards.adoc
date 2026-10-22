@@ -1,0 +1,127 @@
+//tag::class[]
+.База данных и карточки
+[plantuml, svg]
+....
+@startuml
+hide circles
+
+package "Карточки" <<rectangle>> {
+namespace "Карточка 1" as c1 <<rectangle>> #lightgreen {
+class "Секция А" as c1sa {
+  + Поле 1
+  ..
+  + Поле 2
+}
+
+class "Секция B" as c1sb {
+  + Поле 1
+  ..
+  + Поле 2
+}
+}
+
+namespace "Карточка 2" as c2 <<rectangle>> #lightblue {
+
+class "Секция А" as c2sa {
+  Поле 1
+  ..
+  Поле 2
+}
+
+class "Секция B" as c2sb {
+  Поле 1
+  ..
+  Поле 2
+}
+}
+c1.c1sa --> c2.c2sa : foo
+}
+
+
+c1 -[hidden]-> c2
+
+
+package "БД Docsvision" as db <<rectangle>> {
+
+package "Таблица \ndvtable_ID-секции-A" as t1 <<rectangle>> {
+
+class "Поле 1" as t1f1  {
+  Запись 1
+  ..
+  Запись 2
+}
+
+class "Поле 2" as t1f2  {
+  Запись 1
+  ..
+  Запись 2
+}
+}
+
+package "Таблица \ndvtable_ID-секции-B" as t2 <<rectangle>> {
+
+class "Поле 1" as t2f1  {
+  Запись 1
+  ..
+  Запись 2
+}
+
+class "Поле 2" as t2f2  {
+  Запись 1
+  ..
+  Запись 2
+}
+}
+
+t1 -[hidden]-> t2
+}
+
+@enduml
+....
+//end::class[]
+
+//tag::component[]
+.База данных и карточки
+[plantuml, svg]
+....
+@startuml
+skinparam componentStyle rectangle
+
+component "Карточки" {
+component "Карточка 1" as c1 #lightGreen {
+[Поле 1 \nПоле 2] <<Секция А>> as c1f1
+[Поле 1 \nПоле 2] <<Секция B>> as c1f2
+}
+
+c1f1 -[hidden]-> c1f2
+
+component "Карточка 2" as c2 #lightblue {
+[Поле 1 \nПоле 2] <<Секция А>> as c2f1
+[Поле 1 \nПоле 2] <<Секция B>> as c2f2
+}
+
+c2f1 -[hidden]-> c2f2
+}
+
+c1 -[hidden]--> c2
+
+component "БД Docsvision" {
+component "Таблица" <<dvtable_ID-секции-A>> as t1 #lightGreen {
+[Запись 1 \nЗапись 2] <<Поле 1>> as t1f1
+[Запись 1 \nЗапись 2] <<Поле 2>> as t1f2
+}
+
+t1f1 -[hidden]-> t1f2
+
+component "Таблица" <<dvtable_ID-секции-B>> as t2 #lightblue {
+[Запись 1 \nЗапись 2] <<Поле 1>> as t2f1
+[Запись 1 \nЗапись 2] <<Поле 2>> as t2f2
+}
+
+t2f1 -[hidden]-> t2f2
+
+}
+
+@enduml
+....
+//end::component[]
