@@ -1,0 +1,56 @@
+:mo: "{sm}"
+:cu253-mo-req: версии ???
+
+= Настройка работы с каталогом ALD Pro
+
+Данный раздел описывает настройку работы {of-sm} со службой каталогов ALD Pro. Администратор самостоятельно может настроить получение данных по доменным учётным записям, включая системные УЗ из каталога ALD Pro.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=domain-format]
+
+.См. также:
+* Настройка для {of-mc} описана в разделе "xref:6.2@mgmtconsole:admin:ldaps-authentication.adoc[]".
+* Настройка из конфигурационного файла для {wc}а описана в разделе "xref:6.1@webclient:admin:no-active-dir.adoc[]".
+* Настройка для Сервера приложений описана в руководстве по настройке: "xref:dv6@engineer:ROOT:ldaps-without-ad.adoc[]".
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ldaps-conditions]
+
+[#ald]
+== Настройка коннектора к ALD Pro
+
+ALD Pro является альтернативной службой каталогов с групповыми политиками, предназначенной для управления устройствами в сети. ALD Pro работает по протоколу LDAPS.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+
+[#from-config]
+=== Настройка из конфигурационного файла
+
+[source,json]
+----
+{
+  "Authentication": {
+	  "Connectors": [
+      "Name": "ALDPro", <.>
+      "Id": "{DCF3EDA3-2F84-4FD1-8E1D-A06B762AE822}", <.>
+      "Type": "DocsVision.Auth.Extensions.ALDProConnector, DocsVision.Auth.Extensions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7148afe997f90519", <.>
+      "Settings": "<?xml version=\"1.0\" encoding=\"utf-16\"?><LdapConnectorOptions><LdapServerAddresses><string>172.16.18.236</string></LdapServerAddresses><Port>389</Port><FullyQualifiedDnsHostName>false</FullyQualifiedDnsHostName><BaseDN>dc=astrald,dc=ru</BaseDN><Credential><UserName>admin@astrald.ru</UserName><Password>P@ssw0rd</Password></Credential></LdapConnectorOptions>" <.>
+	  ]
+	}
+}
+----
+<.> `Name` -- название коннектора.
+<.> `ID` -- строка с идентификатором коннектора в виде Guid.
+<.> `TypeName` -- строка с именем типа, реализующего коннектор.
+<.> `Settings` -- строка настроек коннектора, для ALD Pro. Подробнее см. <<ald-settings,ниже>>.
+
+WARNING: Перезапустите службу {of-sm}, чтобы изменения вступили в силу.
+
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=ald-format]
+
+include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=ald-settings]
+
+.Особенности и рекомендации при работе с ALD Pro:
+****
+* ALD Pro не поддерживает пробелы и заглавные буквы в именах пользователей и групп, а также имеет прочие ограничения наименования. +
+В связи с этим *только для данного коннектора* допускается использовать следующий аналог группы *{dv-solution-admins-serv}*: *docsvision_solutionmanager_administrators*
++
+include::dv6@engineer:ROOT:ldaps-without-ad.adoc[tags=bla-bla]
