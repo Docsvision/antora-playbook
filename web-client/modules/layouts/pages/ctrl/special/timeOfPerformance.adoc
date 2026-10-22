@@ -1,0 +1,69 @@
+:page-aliases: timeOfPerformance.adoc
+
+= Срок исполнения
+
+Элемент управления `_Срок исполнения_` предназначен для установки дат начала и завершения, и длительности исполнения задания или группы заданий.
+
+.Элемент управления "Срок исполнения"
+image::time-of-performance.png[Элемент управления "Срок исполнения"]
+
+ЭУ является контейнером, в котором размещены три ЭУ:
+
+* `_startDate_timeOfPerformance_` -- дата и время начало задания; тип "xref:ctrl/standard/dateTimePicker.adoc[Дата/время]";
+* `_endDate_timeOfPerformance_` -- дата и время завершения задания; тип "xref:ctrl/standard/dateTimePicker.adoc[Дата/время]";
+* `_duration_timeOfPerformance_` -- длительность исполнения задания; тип "xref:ctrl/standard/number.adoc[Число]".
+
+Для задания расчет длительности выполняется с учётом бизнес-календаря исполнителя, если это предусмотрено настройками вида карточки _Задание_.
+
+ЭУ предназначен только для ввода значения.
+
+Особенности настройки:
+
+* Элемент управления предназначен для совместной работы с ЭУ "xref:ctrl/special/groupTaskCardPerformersPanel.adoc[Панель выбора исполнителей]", который должен быть добавлен на разметку.
+* В настройках ЭУ `_startDate_periodOfExecution_`, `_endDate_timeOfPerformance_` и `_duration_timeOfPerformance_` нужно указать обработчик *_timeOfPerformanceToPerformersSync_* для события `*После смены данных*`. Обработчик предназначен только для синхронизации данных ЭУ "xref:layouts:ctrl/special/groupTaskCardPerformersPanel.adoc[Панель выбора исполнителей]" и "Срок исполнения", поэтому описанное актуально только для групп заданий. Обработчик установлен для событий `*После получения даты завершения*`, `*После получения длительности*`.
+* *Необходимо самостоятельно настроить* вложенные ЭУ (`_startDate_timeOfPerformance_`, `_endDate_timeOfPerformance_`, `_duration_timeOfPerformance_`) для работы: как минимум, связать элементы управления с полями карточки _Задания_ или _Группы заданий_ (_дата начала_, _дата завершения_, _длительность_).
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+==== Ориентация
+
+Определяет способ отображения составляющих элемент управления.
+
+* *_Вертикальная_*. Входящие в ЭУ элементы будут размещаться параллельно.
+* *_Горизонтальная_*. Входящие в ЭУ элементы будут размещаться последовательно.
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+==== После получения даты завершения
+
+Вызывается после изменения значения даты завершения.
+
+==== После получения длительности
+
+Вызывается после изменения значения длительности.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+==== При получении даты завершения
+
+Вызывается при изменении значения даты завершения.
+
+==== При получении длительности
+
+Вызывается при изменении значения длительности.
+
+include::partial$properties.adoc[tags=onClick]

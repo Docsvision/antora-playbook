@@ -1,0 +1,80 @@
+= Программное обеспечение для работы с электронной подписью
+
+{wc} поддерживает два типа подписи: простая и усиленная.
+Формирование простой подписи доступно без дополнительных настроек, но должно быть предусмотрено сценарием подписания.
+
+include::user:partial$excerpts.adoc[tags=signature]
+Необходимые компоненты перечислены далее.
+
+WARNING: Для работы с электронной подписью необходимы компоненты Криптопро. По вопросам их приобретения и лицензирования обращайтесь в компанию ООО "КРИПТО-ПРО".
+
+[#requirements]
+== Общие требования
+
+* В справочнике _Системные настройки_, в разделе menu:{bo}[Подписи и шифрование] должен быть выбран криптопровайдер и алгоритм подписи, соответствующие используемому сертификату ЭП. В частности, для работы с сертификатами КриптоПро должен быть выбран провайдер КриптоПро (_Crypto-Pro GOST R 34.10-2012 Cryptographic Service Provider_).
++
+[NOTE]
+====
+Дополнительная информация по настройке подписания и шифрования приведена в документации по администрированию модуля {bo}, раздел "xref:6.1@backoffice:admin:system-settings.adoc#signature-cypher[Подписи и шифрование]".
+====
++
+* КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client] для работы с облачной подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах].
+* {blank}
++
+// tag::cryptojava[]
+Криптосервис на сервере {dv} и необходимые для его работы лицензии и компоненты:
+ifndef::engineer[]
++
+WARNING: Функциональные возможности криптосервиса, необходимые для работы компоненты и лицензии см. в руководстве по настройке системы, на странице "xref:dv6@engineer:ROOT:java-service.adoc[]".
++
+endif::engineer[]
+** Сервер под управлением Linux требует xref:engineer:ROOT:java-service.adoc[Криптосервис] для проверки и формирования CAdES-BES и CAdES-X Long Type 1.
+** {blank}
++
+include::6.1@webclient:ROOT:requirements-software.adoc[tags=ifwinstamp]
+// end::cryptojava[]
+
+[#non-qualifcated]
+== Использование неквалифицированных сертификатов
+
+.Требования к клиентским рабочим местам:
+* Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
+* Веб-браузер из списка поддерживаемых, см. в пункте "xref:requirements-software.adoc#browser[Необходимое программное обеспечение]").
+* КриптоПро ЭЦП Browser plug-in версии {sign-plugin}. (https://www.cryptopro.ru/products/cades/plugin[Ссылка для загрузки]).
+* Неквалифицированный сертификат пользователя. Сертификат должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
+* Опционально, для работы с подписью xref:user:docs-sign.adoc#mobile[на мобильных устройствах]. Приложение КриптоПро https://www.cryptopro.ru/products/mydss2#law[myDSS 2.0] или https://www.cryptopro.ru/products/dss/mobile/dssclient[DSS Client]. Приложения обладают схожей функциональностью, рекомендуется использовать DSS Client как официальное приложение КриптоПро.
+
+[#qualified]
+== Использование квалифицированных сертификатов
+
+.Требования к серверу:
+* {root-cert} Сертификат должен быть установлен в хранилище xref:engineer:ROOT:java-service.adoc[Криптосервиса].
++
+include::./requirements-software.adoc[tags=simple]
+* На сервере {dv} требуется наличие библиотеки `libcapi20.so`, входящей в состав https://cryptopro.ru/products/csp/downloads[КриптоПро CSP] версии {csp-v} с соответствующей лицензией для работы расширения аутентификации ЕСИА и корректного отображения меток усиленной подписи.
+* При xref:admin:download-signature.adoc[вычислении хэша подписываемого файла на сервере] {wc}а:
++
+include::dv6@engineer:ROOT:partial$excerpts.adoc[tags=dll]
+
+.Требования к клиентским рабочим местам:
+* Операционная система: Windows или Mac OS, Linux (версии см. в требованиях https://www.cryptopro.ru/products/csp/compare[КриптоПро CSP]).
+* Веб-браузер: Google Chrome, Яндекс.Браузер или Microsoft Edge на Chromium (поддерживаемые версии см. в пункте xref:requirements-software.adoc#browser[Необходимое программное обеспечение]).
+* Компоненты криптопровайдера КриптоПро:
+** КриптоПро CSP версии {csp-v}.
+** xref:user:prepare-add-components.adoc#cryptoPro[КриптоПро ЭЦП Browser plug-in] версии {sign-plugin}.
+** CryptoPro Extension for CAdES Browser Plug-in версии {chrome-ext} (https://chrome.google.com/webstore/detail/cryptopro-extension-for-c/iifchhfnnmpdbibifmljnfjhpififfog[ссылка для загрузки]).
++
+include::partial$excerpts.adoc[tags=plugin]
++
+** Для создания усовершенствованной подписи Cades-X-Long-Type-1 могут потребоваться дополнительные компоненты Криптопро (TSP Client и OCSP Client).
+* См. также xref:6.1@backoffice::requirements.adoc#crypto-pro[требования для модуля "{bo}"].
+* Квалифицированный сертификат пользователя. Должен быть установлен в хранилище _Личное_ на уровне _Текущий пользователь_.
++
+// tag::macOS[]
+NOTE: Шаги, необходимые для настройки КриптоПро в ОС Mac OS можно найти в https://support.cryptopro.ru/index.php?/Knowledgebase/Article/View/232/0/rbot-s-kriptopro-csp-v-macos[документации КриптоПро].
+// end::macOS[]
++
+****
+
+По вопросам получения компонентов криптопровайдера КриптоПро следует обращаться в компанию ООО "КРИПТО-ПРО".
+****

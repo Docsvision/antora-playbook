@@ -1,0 +1,55 @@
+= Необходимое программное обеспечение
+
+== Требования к серверу
+
+.В кросс-платформенной версии {dv} сервер может работать под управлением следующих ОС:
+include::dv6@install-linux:ROOT:requirements-software.adoc[tags=oslist]
+
+include::partial$excerpts.adoc[tags=preview]
+
+[#windows]
+include::dv6@install-linux:ROOT:partial$excerpts.adoc[tags=winlist]
+
+.Программное обеспечение:
+// * IIS версий {iis}. Должны быть включены компоненты IISfootnote:[Устанавливаются с помощью menu:Диспетчера серверов[Роли и компоненты].]: ASP.NET, HTTP Redirect, Application Initialization.
+* {asp-bundle} -- можно загрузить с https://dotnet.microsoft.com/en-us/download/dotnet/[сайта Microsoft].
+// tag::simple[]
+* Только для сервера под управлением Linux:
+** xref:engineer:ROOT:java-service.adoc[Криптосервис] необходим для проверки всех подписей и формирования CAdES-BES и CAdES-X Long Type 1.
+* {blank}
++
+// tag::ifwinstamp[]
+Если сервер {dv} работает под управлением Windows, проверка и формирование подписи работает без криптосервиса и лицензии на него, но в таком случае xref:6.1@webclient:user:docs-sign.adoc#advanced-info[отображение штампа времени] будет недоступно.
+// end::ifwinstamp[]
+// end::simple[]
+
+[#r7office]
+.Для работы функций *предпросмотра* и *автоконсолидации*:
+* https://r7-office.ru/downloadserver_doc[Р7-Офис. Сервер документов]/OnlyOffice с соответствующей лицензией, подробнее см. в документации по администрированию модуля "xref:admin:preview-r7.adoc[]".
+
+[#browser]
+== Требования к клиентским рабочим местам
+
+.Веб-браузер:
+* {edge-c} (на базе Chromium).
+* {chrome-v} (для OC Windows и для OC Android).
+* Google Chromium {chromium-v} (для ОС Linux).
+* {yandex} (для ОС Windows).
+* {safari}.
+* {chromium-gost}.
+
+[#files]
+.Для открытия файлов, приложенных к карточкам:
+* Любой иной офисный пакет -- для использования функции автоконсолидации.
+* DVWebTool или DVSupService.
+
+* {asp-bundle} и выше -- для работы DVWebTool и DVSupService. Можно загрузить с https://dotnet.microsoft.com/en-us/download/dotnet/[сайта Microsoft].
+* {net-r} и выше -- для работы DVWebTool. Можно загрузить с https://dotnet.microsoft.com/en-us/download/dotnet/[сайта Microsoft].
+// . Microsoft .NET Framework {net-v1}.
+// . Операционная система Microsoft Windows {win}.
+// . xref:requirements-signature.adoc[Программное обеспечение для формирования усиленной подписи].
+
+.Для работы с ЭП:
+// . Microsoft .NET Framework {net-v1}.
+// . Операционная система Microsoft Windows {win}.
+* xref:requirements-signature.adoc[Программное обеспечение для формирования усиленной подписи].

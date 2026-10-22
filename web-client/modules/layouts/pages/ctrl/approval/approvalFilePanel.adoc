@@ -1,0 +1,43 @@
+= Файловая панель согласования
+
+Элемент управления `_Файловая панель согласования_` предназначен для работы с файлами согласования.
+
+include::partial$excerpts.adoc[tags=you-should-not-be-doing-that]
+
+.Элемент управления "Файловая панель согласования"
+image::approval-file-panel.png[Элемент управления "Файловая панель согласования"]
+
+.ЭУ предоставляет возможность:
+* Работать с версиями файлов в режимах xref:user:approval-files.adoc[согласования] и xref:user:approval-users-consolidator.adoc[консолидации].
+* Просматривать содержимое файла в окне предварительного просмотра: собственная реализация или с использованием компонента xref:ctrl/special/filePreview.adoc[Предпросмотр файла].
+* Комментировать версии файлов.
+
+NOTE: Данный ЭУ может быть добавлен только в разметку карточек Задание.
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+==== Загружать синхронно (шт)
+
+Определяет максимальное количество элементов списка, при котором должна использоваться синхронная загрузка данных. Если количество элементов больше указанного, то все данные будут загружаться асинхронно.
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]
+
+include::partial$properties.adoc[tags=onWebDAVSave]

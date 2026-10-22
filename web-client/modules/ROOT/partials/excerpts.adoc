@@ -1,0 +1,48 @@
+// tag::https-advice[]
+Рекомендуется настроить защищённое соединение по протоколу HTTPS, см. подробнее "xref:dv6@engineer:ROOT:https-connection.adoc[]" в руководстве по настройке системы.
+// end::https-advice[]
+
+// tag::address-in-win[]
+Убедитесь, что в {wincl}е указан _Адрес сервера {wc}а_, см. подробнее в разделе "xref:6.1@winclient:admin:system-settings.adoc#additional[Системные настройки модуля {wincl}]".
+// end::address-in-win[]
+
+// tag::plugin[]
+.. Если расширение плагина имеется в списке установленных, но отключёно, необходимо самостоятельно включить его в браузере.
+.. Если расширение отсутствует в списке или недоступно в магазине приложений, вы можете установить расширение, воспользовавшись https://support.cryptopro.ru/index.php?/Knowledgebase/Article/View/467/0/ustnovk-rsshirenija-dlja-plgin-iz-fjjl[инструкцией] на сайте КриптоПро. Вы также можете продолжить работу с электронной подписью в браузерах https://cryptopro.ru/products/chromium-gost[Chromium-Gost] или https://browser.yandex.ru/b/cryptopro_plugin[Яндекс Браузер] с полной поддержкой необходимой функциональности.
+// end::plugin[]
+
+// tag::vscode[]
+* Microsoft https://www.visualstudio.com/[Visual Studio] {vscode-v}.
+// end::vscode[]
+
+// tag::wc-node[]
+Пример рассчитан на версию {wc}а {page-version} или выше.
+
+.Перечень необходимых инструментов:
+* https://nodejs.org/en/[NodeJS {node-v}]
+// end::wc-node[]
+
+// tag::preview[]
+WARNING: При установке Р7-сервер для использования xref:admin:preview-r7.adoc[функции предварительного просмотра] на Astra Linux требуется минимальная версия 1.7.3.
+// end::preview[]
+
+//tag::dv-web-launch[]
+В одной ОС утилита _DVWebTool_ может быть запущена одновременно только от одного пользователя.
+//end::dv-web-launch[]
+
+// tag::what-changed[]
+Список изменений в текущей версии см. здесь: xref:common:change-log.adoc[].
+// end::what-changed[]
+
+// tag::versions[]
+После крупного обновления версии {dv}, необходимо повторно скомпилировать расширение с новыми версиями компонентов. В остальных случаях такой необходимости нет.
+
+Это необходимо, чтобы версии подключаемых компонентов соответствовали версиям компонентов, используемых сервером {wc}а, для которого разрабатывается расширение.
+// end::versions[]
+
+// tag::n-6[]
+Начиная с версии {cu253-mc-req}, {wc} работает на .NET 8.0, поэтому при переходе с {wc}, использующего .NET предыдущих версий, необходимо перевести на .NET 8.0 собственные решения.
+ifndef::proger[]
+Подробнее см. "xref:dv6@programmer:WebClient:net6.adoc[]".
+endif::proger[]
+// end::n-6[]

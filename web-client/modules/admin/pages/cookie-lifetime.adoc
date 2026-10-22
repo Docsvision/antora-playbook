@@ -1,0 +1,34 @@
+:do-what: варианты управления временем жизни пользовательских cookie
+:link: webclient-site.adoc#pechenkies[Пользовательские cookie]
+
+= Управление временем жизни пользовательских cookie
+
+include::partial$mancons.adoc[]
+
+// tag::webconfig[]
+[source,json]
+----
+{
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "AuthCookieLifetime": 120, <.>
+          "MobileAuthCookieLifetime": 120 <.>
+        }
+      }
+    }
+  }
+}
+----
+<.> `AuthCookieLifetime` -- период действия пользовательской сессии.
+<.> `MobileAuthCookieLifetime` -- период действия пользовательской сессии на мобильных устройствах.
+// end::webconfig[]
+
+include::partial$excerpts.adoc[tags=ifabsent]
+
+.Принцип действия настроек:
+. Настройка `AuthCookieLifetime` устанавливает период действия пользовательской сессии. Значение по умолчанию: `120` часов (5 дней).
+. Настройка `MobileAuthCookieLifetime` отдельно задаёт период действия пользовательской сессии на мобильных устройствах. Значение по умолчанию: `120` часов (5 дней).
+
+Настройки можно комбинировать. Например, задать для `AuthCookieLifetime` значение `240` часов, чтобы все пользователи получали cookie на 10 дней. Для настройки `MobileAuthCookieLifetime` можно указать период в `720` часов (30 дней). Когда пользователь откроет {wc} по прошествии трёх дней с предыдущей авторизации, cookie автоматически будут продлены.

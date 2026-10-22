@@ -1,0 +1,47 @@
+= Контрол табличных данных
+
+Элемент управления отображает данные в виде таблицы на основании модели, полученной с сервера. Модель формируется программно при помощи плагина.
+
+Таблицу можно использовать как в карточке, так и в любой разметке, например в разметке дашборд.
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Данные
+
+==== Название плагина
+
+Обязательный параметр, на основании которого происходит поиск плагина для формирования таблицы. Например, плагин `EDIMessagesLog`, входящий в комплект поставки модуля "{em}", подробнее см. в разделе "xref:6.1@edi::module-structure.adoc#grid-plugins[Плагины для грида]".
+
+NOTE: Создание плагина подробнее описано в xref:dv6@programmer:WebClient:server/data-grid-control.adoc[руководстве разработчика].
+
+==== Параметры формирования таблицы
+
+Набор дополнительных атрибутов, которые можно указать в Конструкторе Web-разметок. Указанные атрибуты попадут в плагин.
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+==== После загрузки таблицы
+
+Вызывается после загрузки таблицы данных.
+
+==== При загрузке таблицы
+
+Вызывается при загрузке таблицы данных.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]

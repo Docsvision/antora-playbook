@@ -1,0 +1,68 @@
+:do-what: способы настройки порта подключения к DVSupService
+:link: webclient-interface.adoc[Группа настроек "Интерфейс"]
+
+= Настройки сканирования с помощью DVSupService
+
+По умолчанию сканирование с помощью ЭУ "xref:layouts:ctrl/special/scanButton.adoc[]" работает только в ОС Windows с помощью программы DVWebtool, чтобы иметь возможность сканировать файлы в ОС Linux, необходимо выполнить дополнительные действия по настройке DVSupService для работы со сканерами с поддержкой SANE. Установка DVSupService описана в разделе "xref:webservices-install.adoc#dvSupService[Установка и запуск службы DVSupService]".
+
+[#scan-provider]
+== Выбор провайдера сканирования
+
+// tag::webconfig-1[]
+Параметр `ScanProviders` позволяет задать провайдеры сканирования. Настройка выполняется в конфигурационном файле утилиты по адресу `/usr/lib/docsvision/dvsupservice/appsettings.json` для ОС Linux `C:\Program Files\Docsvision\DvSupService\appsettings.json` для ОС Windows.
+
+[source,json]
+----
+{
+"ScanProviders": [
+    "Naps2Provider" <.>
+  ],
+}
+----
+<.> Провайдер сканирования. Возможные значения: `"Naps2Provider"`, `"ScanImageProvider"`.
+
+Если подключено несколько провайдеров, рядом с именем сканера в интерфейсе сканирования карточки будет отображаться название провайдера, чтобы избежать дублирования пунктов.
+// end::webconfig-1[]
+
+[#sane]
+== Настройка сканирования
+
+include::partial$mancons.adoc[]
+
+// tag::webconfig-2[]
+В конфигурационном файле утилиты по адресу `/usr/lib/docsvision/dvsupservice/appsettings.json` для ОС Linux `C:\Program Files\Docsvision\DvSupService\appsettings.json` для ОС Windows параметр `ServicesPort` позволяет задать порт подключения к DVSupService для сканирования:
+
+[source,json]
+----
+{
+"ServicesPort": 5413, <.>
+}
+----
+<.> Порт для подключения к DVSupService. Значение должно быть в диапазоне от `1` до `65535`, по умолчанию `5413`.
+// end::webconfig-2[]
+
+На машине с Linux и подключенным сканером необходимо установить компоненты SANE, выполнив в командной строке:
+
+[tabs]
+====
+{os1}::
++
+ $ sudo apt install sane
+
+{os2}::
++
+ $ sudo dnf install sane
+====
+
+Если планируется использовать только провайдер `Naps2Provider`, дополнительные компоненты устанавливать не требуется. Если планируется использовать провайдер `ScanImageProvider`, необходимо установить пакет `sane-utils` командой:
+
+[tabs]
+====
+{os1}::
++
+ $ sudo apt install sane sane-utils
+
+{os2}::
++
+ $ sudo dnf install sane sane-utils
+====

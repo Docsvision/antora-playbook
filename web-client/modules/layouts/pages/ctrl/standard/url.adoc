@@ -1,0 +1,55 @@
+= Url
+
+Элемент управления `_Url_` предназначен для отображения гиперссылки на страницу или почтовый адрес.
+
+В настройках ЭУ может быть указан фиксированный адрес или поле карточки, из которого может быть получен адрес. Если указано поле карточки с адресом, то фиксированный адрес игнорируется.
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+==== Текст
+
+Текст, замещающий адрес ссылки при отображении.
+
+=== Данные
+
+include::partial$properties.adoc[tags=extendedDataSource]
+
+include::partial$properties.adoc[tags=dataSource]
+
+==== Поле данных
+
+Поле карточки, содержащее адрес ссылки. Возможный тип поля: *_Text_*, *_Unitext_*, *_Unistring_* или *_String_*.
+
+==== Адрес
+
+Фиксированный адрес ссылки. Если указано `*Поле данных*`, свойство `*Адрес*` игнорируется.
+
+==== Протокол
+
+Протокол адреса: `http://`, `https://`, `mailto:`. Свойство добавляет указанный префикс к адресу ссылки.
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=byTab]
+
+include::partial$properties.adoc[tags=openMode]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]

@@ -1,0 +1,54 @@
+= Кнопка Печати
+
+Элемент управления `_Кнопка Печати_` добавляет возможность печати карточки с использованием XSLT-преобразования. Доступные шаблоны передаются модулем _{pl}_ для каждого типа и вида карточки.
+
+.Пример отображения кнопки Печати в разметке
+image::print-button.png[Пример отображения кнопки Печати в разметке]
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=btn-txt]
+
+:thing: btn
+include::partial$properties.adoc[tags=icon-css]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=stdCss]
+
+include::partial$properties.adoc[tags=addCss]
+
+[#printTemplates]
+==== Доступные шаблоны печати
+
+.Выбор доступных шаблонов печати
+image::print-templates.png[Выбор доступных шаблонов печати]
+
+.Свойство позволяет выполнить следующие действия:
+. Установить количество доступных шаблонов (все или только выбранные).
++
+. Выбрать шаблон, который будет применяться по умолчанию.
++
+[NOTE]
+====
+Если из модуля _{pl}_ передаётся два шаблона по умолчанию -- один шаблон для типа, и один для вида карточки, по умолчанию будет использован шаблон для вида.
+====
++
+. Добавить локализуемое имя шаблона в колонке _Отображаемое имя_.
+. Узнать, к какому типу и виду принадлежит шаблон, если навести на него курсор.
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+=== События
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]

@@ -1,0 +1,129 @@
+= Особенности настройки кластера {wc}
+
+С целью повышения отказоустойчивости и распределения нагрузки, администратор может объединить несколько экземпляров модуля {wc} в кластер.
+
+[#conditions]
+== Обязательные условия для работы кластера
+
+* Каждый экземпляр {wc}а должен иметь уникальный адрес подключения.
+* Балансировщик нагрузки должен передавать заголовок X-Forwarded-Proto.
+
+[#preparation]
+=== Подготовка узлов кластера
+
+.Чтобы подготовить узлы кластера {wc}а к работе:
+// . xref:install-server.adoc#windows[Установите] серверное расширение {wc} на машине с Windows.
+. xref:install-server.adoc#linux[Установите и настройте] модуль {wc} на первом компьютере кластера Linux.
+. xref:install-server.adoc#linux[Установите и настройте] {wc} на последующих узлах кластера Linux.
+. Настройте балансировщик нагрузки.
+// . Найдите в конфигурационном файле {wc}а *УЗЛА 1* отпечаток используемого {wc}ом сертификата, он потребуется при настройке второго и последующих узлов кластера.
+
+// [#find-cert]
+// === Найдите отпечаток
+//
+// .Чтобы найти отпечаток:
+// . Откройте конфигурационный файл `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows на *УЗЛЕ 1*.
+// . Перейдите к настройке menu:microsoft.identityModel[service > serviceCertificate > certificateReference].
+// . Найдите номер сертификата в значении атрибута `findValue`.
+// +
+// // tag::webconfig[]
+// .Отпечаток сертификата в конфигурационном файле web.config
+// [source,json]
+// ----
+//   "microsoft.identityModel": {
+//     "service": {
+//       "serviceCertificate": {
+//         "certificateReference": {
+//           "x509FindType": "FindByThumbprint"
+//           "findValue": "B4369FA8D1B0A1B502CB916509317E9C6077CC69" <.>
+//         }
+//       }
+//     }
+//   }
+// ----
+// <.> Отпечаток сертификата
+// // end::webconfig[]
+
+[#create-cert]
+=== Сгенерируйте отпечаток
+
+// tag::webconfig[]
+. Если {wc} использует HTTPS, создайте сертификат с помощью OpenSSL. Пример использования утилиты приведён в разделе администрирования модуля {mc}: "xref:engineer:ROOT:create-cert.adoc[]".
+. Установите и настройте {wc} на втором компьютере кластера (далее -- *УЗЕЛ 2*).
++
+WARNING: Экземпляр {wc}а, установленный на втором и последующих узлах кластера, должен быть настроен на работу с теми же сервером и базой данных {dv}, что и УЗЕЛ 1.
++
+// tag::webconfig[]
+. В конфигурационном файле `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows на УЗЛЕ 1 укажите путь к полученному сертификату в элементе `"Https":` (`"Http":`, если используется незащищённое соединение). Фрагмент конфигурационного файла приведён ниже:
++
+[source,json]
+----
+{
+"Https": {
+  "Url": "https://*:5005",
+  "Certificate": {
+    "Path": "/home/user/certificate.pfx", <.>
+    "Password": "password" <.>
+    }
+  }
+}
+----
+<.> Путь к сертификату
+<.> Пароль от сертификата
+// end::webconfig[]
++
+include::partial$excerpts.adoc[tags=ifabsent]
++
+. Сгенерируйте сертификат на втором узле.
+. Откройте конфигурационный файл `{webconfig-lin}` в Linux и `{webconfig-cp}` в Windows на УЗЛЕ 2 и укажите путь к полученному сертификату.
+. Повторите шаги инструкции для третьего и последующих узлов кластера {wc}а.
+// end::webconfig[]
+
+[#nginx]
+== Настройка nginx
+
+При использовании прокси-сервиса nginx, установленного на отдельной машине от {wc}а необходимо в корень конфигурационного файла {wc} добавить настройку `ForwardedHeaders/KnownProxies`, разрешающую принимать от прокси-сервиса заголовки. Если {wc} и прокси установлены на одном ПК, ничего добавлять не нужно.
+
+[source,json]
+----
+{
+  "ForwardedHeaders":
+  {
+    "KnownProxies": {
+      "proxy1": "{123.456.789}" <.>
+    }
+  }
+}
+----
+<.> Укажите IP-адрес сервера nginx. Вместо `proxy1` можно использовать любое уникальное название. В значении параметра указывается только IP-адрес. При необходимости можно указывать несколько прокси-сервисов.
+
+На стороне прокси-сервиса должна быть настроена передача заголовков: `X-Forwarded-Proto`, `X-Forwarded-Host`, `X-Forwarded-Port` (если порт не соответствует схеме), `X-Forwarded-For`.
+
+.Пример для nginx:
+[source]
+----
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Host $host;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-Port $server_port;
+----
+
+Если за прокси-сервисом скрыто несколько экземпляров {wc}а, нужно установить настройку `Docsvision/WebClient/SettingGroups/WebClient/ServerR7JwtAccessToWebClientEnable` в значение `true`. Если настройка отсутствует, добавьте её самостоятельно.
+
+.Пример конфигурации:
+[source,json]
+----
+{
+  "Docsvision": {
+    "WebClient": {
+      "SettingGroups": {
+        "WebClient": {
+          "ServerR7JwtAccessToWebClientEnable": true
+        }
+      }
+    }
+  }
+}
+----
+
+См. также *xref:dvweb-cluster.adoc[Настройка утилиты DVWebTool для работы в кластере]*.

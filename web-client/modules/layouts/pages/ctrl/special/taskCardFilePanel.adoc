@@ -1,0 +1,48 @@
+= Файловая панель
+
+Элемент управления `_Файловая панель_` предназначен для работы с файлами задания и группы заданий.
+
+include::partial$excerpts.adoc[tags=you-should-not-be-doing-that]
+
+.Элемент управления "Файловая панель"
+image::task-file-panel.png[Элемент управления "Файловая панель"]
+
+.ЭУ предоставляет следующие возможности:
+* Добавлять новые файлы и новые версии файлов.
+* Просматривать файлы родительского документа.
+* Открывать файлы офисного формата во внешнем приложении.
+* Просматривать содержимое файла в окне предварительного просмотра: собственная реализация или с использованием компонента xref:ctrl/special/filePreview.adoc[Предпросмотр файла].
+
+Возможности ЭУ зависят от типа/вида карточки, её состояния и роли пользователя.
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+==== Загружать синхронно (шт)
+
+Определяет максимальное количество элементов списка, при котором должна использоваться синхронная загрузка данных. Если количество элементов больше указанного, то все данные будут загружаться асинхронно.
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=stdCss]
+
+=== События
+
+==== При загрузке версии файла
+
+Вызывается при загрузке версии файла.
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=onClick]
+
+include::partial$properties.adoc[tags=onWebDAVSave]

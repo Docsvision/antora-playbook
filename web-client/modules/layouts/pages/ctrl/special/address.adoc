@@ -1,0 +1,101 @@
+= Адрес
+
+Элемент управления `_Адрес_` предназначен для отображения и редактирования секции, содержащей поля с данными адреса: индекс, город, адрес и страна.
+
+Значение элемента управления отображается в специальном формате, соответствующем формату отображения адресных данных.
+
+.Элемент управления "Адрес"
+image::address-view.png[Элемент управления "Адрес"]
+
+Изменения значения элемента управления выполняется в отдельном окне с отдельными полями ввода индекса, города, адреса и страны.
+
+.Редактирование значения в элементе управления "Адрес"
+image::address-edit.png[Редактирование значения в элементе управления "Адрес"]
+
+`_Адрес_` является специализированным элементом управления для редактирования адреса в справочниках (сотрудника, контрагентов).
+
+== Свойства
+
+include::partial$properties.adoc[tags=general]
+
+=== Внешний вид
+
+include::partial$properties.adoc[tags=filler]
+
+include::partial$properties.adoc[tags=displayLabelWithoutDefinition]
+
+include::partial$properties.adoc[tags=hint]
+
+include::partial$properties.adoc[tags=labelText]
+
+=== Данные
+
+==== Источник данных
+
+Открывает окно выбора секции и полей карточки с данными элемента управления.
+
+.Окно с настройками источника данных
+image::address-source.png[Окно с настройками источника данных]
+
+Последовательно выберите:
+
+. Секцию, содержащую поля с составляющими адреса.
+. Поле с типом адреса (контактный, юридический или почтовый).
+. Поле с индексом.
+. Поле с названием города.
+. Поле с адресом.
+. Поле с названием страны.
+
+include::partial$properties.adoc[tags=editOperation]
+
+=== Поведение
+
+include::partial$properties.adoc[tags=visibility]
+
+include::partial$properties.adoc[tags=addCss]
+
+include::partial$properties.adoc[tags=mandatory]
+
+include::partial$properties.adoc[tags=editOperationForVisibility]
+
+include::partial$properties.adoc[tags=disabled]
+
+include::partial$properties.adoc[tags=byTab]
+
+==== Режим редактирования
+
+Определяет вариант отображения элемента управления и возможность изменения его значения:
+
+* *_По месту_* -- значение изменяется в отдельном окне, которое открывается нажатием на элемент управления. Данный вариант подходит как для разметки режима редактирования, так и для разметки режима просмотра карточки.
+* *_Редактирование_* -- значение изменяется непосредственно в элементе управления. Данный вариант может быть выбран в разметке режима редактирования и просмотра.
++
+Если элемент с режимом *_Редактирование_* добавлен в разметку просмотра, необходимо самостоятельно обеспечить сохранение его значения. Например, с использованием скриптов карточек.
+* *_Без редактирования_* -- значение изменить нельзя.
+
+include::partial$properties.adoc[tags=stdCss]
+
+==== Тип адреса
+
+Определяет тип адреса, устанавливаемого в элементе управления: Контактный, Почтовый или Юридический.
+
+=== События
+
+include::partial$properties.adoc[tags=beforeEditWindowClosed]
+
+include::partial$properties.adoc[tags=beforeEditWindowOpened]
+
+include::partial$properties.adoc[tags=afterEditWindowClosed]
+
+include::partial$properties.adoc[tags=afterEditWindowOpened]
+
+include::partial$properties.adoc[tags=mouseOver]
+
+include::partial$properties.adoc[tags=mouseAway]
+
+include::partial$properties.adoc[tags=focusGet]
+
+include::partial$properties.adoc[tags=focusLoose]
+
+include::partial$properties.adoc[tags=dataChanged]
+
+include::partial$properties.adoc[tags=onClick]
