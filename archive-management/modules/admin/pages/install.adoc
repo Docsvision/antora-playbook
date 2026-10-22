@@ -1,0 +1,167 @@
+:of: модуля {am}
+:no-config:
+
+= Установка модуля
+
+// tag::noam[]
+[WARNING]
+====
+Используйте только совместимые версии модулей {am} и {wc}. Версия 6.2 и несовместима с версией 5.5.
+
+По вопросам совместимости {am} версий 6.1 и 6.2 с {wc}ом версии 6.1 и выше проконсультируйтесь со специалистом {dv}.
+====
+// end::noam[]
+
+[#quick]
+== Краткая справка по установке
+
+. <<repo,Подключите>> дополнительный репозиторий {dv}.
+. <<linux,Установите>> серверную часть модуля _{am}_ в ОС Linux согласно инструкции ниже.
+. <<windows,Установите>> серверную часть модуля _{am}_ в ОС Windows.
+. <<web-ext,Установите>> серверную и клиентскую части модуля _{wc}_ версии {wc-req} или выше.
+. <<libs,Выполните>> загрузку библиотек карточек и настроек модуля _{am}_ в базу данных.
+. <<solution,Импортируйте>> решение модуля, используя панель управления {wc}ом.
+
+[#repo]
+== Подключение репозитория
+
+Модуль {am} требует подключить дополнительный репозиторий {dv}:
+
+. Подключите официальный репозиторий {dv} в качестве источника:
++
+[tabs]
+=====
+{os1}::
++
+[source]
+----
+sudo curl -fsSLo /etc/apt/trusted.gpg.d/docsvision.asc https://packages.docsvision.com/linux/docsvision.asc
+echo "deb https://packages.docsvision.com/linux/6.1/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "deb https://packages.docsvision.com/linux/6.2/$(. /etc/os-release && echo $ID $VERSION_CODENAME) main" | sudo tee -a /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
+
+{os2}::
++
+[source]
+----
+[docsvision]
+name=Docsvision for RED OS $releasever
+baseurl=https://packages.docsvision.com/linux/6.1/redos/8.0/$basearch/main
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.docsvision.com/linux/6.1/redos/docsvision.asc
+
+[docsvision62]
+name=Docsvision for RED OS $releasever
+baseurl=https://packages.docsvision.com/linux/6.2/redos/8.0/$basearch/main
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.docsvision.com/linux/6.2/redos/docsvision.asc
+----
+
+{os3}::
++
+[source]
+----
+curl -fsSL https://packages.docsvision.com/linux/docsvision.asc | sudo gpg --no-default-keyring --keyring /usr/lib/alt-gpgkeys/pubring.gpg --import
+printf 'simple-key "docsvision" {\n\tFingerprint "DFAC99D298A0EC4E98B57238BCF7D31F16E999D6";\n\tName "DocsVision <help@docsvision.com>";\n}\n' | sudo tee /etc/apt/vendors.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.1/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee /etc/apt/sources.list.d/docsvision.list > /dev/null
+echo "rpm [docsvision] https://packages.docsvision.com/linux/6.2/altlinux $(. /etc/os-release && echo p$VERSION | cut -d . -f 1)/branch/noarch main" | sudo tee -a /etc/apt/sources.list.d/docsvision.list > /dev/null
+sudo apt-get update
+----
++
+[WARNING]
+====
+При обновлении пакета `alt-gpgkeys` ключ подписи репозитория будет удалён. В этом случае его нужно добавить повторно, либо поставить этот пакет на https://www.altlinux.org/Hold[Hold].
+====
+
+=====
+
+[#linux]
+== Установка серверной части модуля на Linux
+
+Серверная часть модуля _{am}_ устанавливается на компьютер с сервером {dv}, а также *на все компьютеры* с отдельной установкой СУБП (модуль _Управление процессами_), на которых обрабатываются БП данного сервера {dv}.
+
+--
+:wt: archivemanagement-shared
+include::6.1@platform:admin:partial$install.adoc[]
+--
+
+[#lin-ext]
+== Установка расширения модуля "{am}" на Linux
+
+. Если модуль {wc} не установлен, установите серверную и клиентскую части {wc}а версии {wc-req}, а также _Компоненты модуля интеграции с операторами ЭДО_. Инструкция по установке приведена в документации модуля {wc}, раздел "xref:6.1@webclient:admin:install-server.adoc[]".
+
+--
+:wt: ext-archive-webc
+[start=2]
+. Установите расширение модуля "{am}" следующей командой, предварительно обновив индекс пакетов:
+include::6.1@platform:admin:partial$install.adoc[tags=commands]
++
+Дополнительные настройки выполнять не требуется.
++
+. <<windows,Установите>> серверные компоненты модуля в ОС Windows.
+--
+
+[#windows]
+== Установка серверного расширения на Windows
+
+. Запустите пакет установки `{dv} ArchiveManagement.msi`.
+. Выберите язык пользовательского интерфейса мастера установки.
+. В приветственном окне мастера установки нажмите *Далее*.
++
+.Мастер установки модуля "{am}"
+image::install-server-hello.png[Мастер установки модуля "{am}"]
++
+. Примите условия лицензионного соглашения для продолжения установки и нажмите *Установить*.
++
+.Условия лицензионного соглашения
+image::install-server-license.png[Условия лицензионного соглашения]
++
+. Нажмите кнопку *Готово*, чтобы закрыть мастер установки.
+
+[#web-ext]
+=== Установка расширения {am} {wc}а
+
+.Чтобы установить расширение {am} {wc}а:
+. Запустите пакет установки `{dv} ArchiveManagement for web-client.msi`.
+// +
+// .Мастер установки расширения {am} {wc}а
+// image::install-client-hello.png[Мастер установки расширения {am} {wc}а]
+// +
+. Примите условия лицензионного соглашения, чтобы продолжить установку.
+// +
+// .Условия лицензионного соглашения
+// image::install-client-license.png[Условия лицензионного соглашения]
+// +
+. Нажмите на кнопку *Установить* и дождитесь завершения установки модуля.
+// +
+// .Мастер установки расширения {am} {wc}а
+// image::install-client-confirm.png[Мастер установки расширения {am} {wc}а]
+// +
+. Нажмите на кнопку *Готово*, чтобы закрыть мастер установки.
+
+[#libs]
+=== Обновление базы данных
+
+include::install-linux:ROOT:partial$restart-and-db.adoc[]
+
+[#solution]
+== Импорт решений
+
+. Импортируйте решения с помощью панели управления {wc}ом, подробнее см. в разделе "xref:6.1@webclient:admin:control-panel-solutions.adoc[]".
+. После импорта стандартных решений перезапустите сервис *{wcs-new}*. В противном случае при создании карточки с ЭУ `_Дело_` блок, в который ЭУ добавлен, может быть скрыт.
+. Для работы с модулем {am} в программе {kvr} выберите разметку меню _DocumentManagement_Nomenclature_.
+
+[#uninstall]
+== Удаление модуля
+
+. Чтобы удалить модуль в ОС Linux, выполните команду:
++
+:wt: archivemanagement-shared
+--
+include::6.1@platform:admin:partial$delete.adoc[]
+--
++
+. В ОС Windows компоненты модуля удаляются стандартными средствами.
