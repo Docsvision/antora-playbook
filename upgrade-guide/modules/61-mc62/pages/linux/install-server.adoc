@@ -1,0 +1,41 @@
+:update:
+:os1: Astra Linux
+:mc-cu-mc: версии 6.2
+:sss-new: dvappserver
+:wacs-new: dvconsole
+:wacss-new: dvsettings
+:linux:
+
+= Установка обновлений
+
+WARNING: Начиная с накопительного обновления 25.3 все модули {dv} были переведены на .NET 8. Если ранее не выполнялось обновление до НО 25.3, необходимо обновить всю систему целиком. На серверах системы потребуется дополнительное ПО {asp-bundle}.
+
+[#modules]
+== Обновление модулей
+
+. После ознакомления с условиями, описанными в разделе "xref:index.adoc[]" и установки {asp-bundle} на сервере {dv} выполните обновление системными средствами, следуя инструкции ниже. Модуль {mc} будет обновлён до {mc-cu-mc}.
++
+. Сервис внешнего API необходимо удалить в {os1} и {os3}, в {os2} Сервис будет удалён автоматически.
++
+[tabs]
+====
+{os1}::
++
+[source,subs=attributes]
+----
+sudo apt-get purge docsvision-externalapi
+----
+
+{os3}::
++
+[source,subs=attributes]
+----
+sudo apt-get remove docsvision-externalapi
+----
+====
++
+include::6.1@platform:admin:partial$update.adoc[tags=main-update-process]
++
+. Перезапустите службу Сервера {dv} и все сервисы {dv} на Linux. Рекомендуемый порядок перезапуска: *{wacss-new}*, *{sss-new}*, *{wacs-new}*, оставшиеся сервисы.
++
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=all-no-root]
