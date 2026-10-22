@@ -1,0 +1,92 @@
+:page-aliases: install-platform-server.adoc
+// tag::no-alias[]
+:of-what: {of-sett-serv}
+:is-service:
+
+= Установка {of-mc}, Платформы и сопутствующих модулей
+
+Служба {ws}, а также службы {of-mc} и {of-sett-serv} являются обязательными для выполнения первоначальной настройки модулей системы. {mc} является основным средством конфигурации {dv}.
+
+. Установите {asp-bundle}, если это не было выполнено ранее. ПО доступно на https://dotnet.microsoft.com/en-us/download/dotnet/[сайте Microsoft],
++
+include::partial$doNotStart.adoc[]
+
+[#dvsettings]
+== Установка {of-sett-serv} на сервер под управлением Windows
+
+. Запустите пакет установки `{dv} Settings service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.1@settings-service:admin:install.adoc[]"].
++
+. Выберите компоненты, которые требуется установить:
++
+****
+include::6.1@settings-service:admin:install.adoc[tags=components]
+****
++
+. В систему будет добавлена служба *{wacss-win}*. Завершите установку.
+. Укажите необходимые настройки в конфигурационном файле модуля по адресу `C:\Program Files\Docsvision\SettingsService\appsettings.json`:
++
+include::6.1@settings-service:admin:install.adoc[tags=config]
+
+[#dvconsole]
+== Установка {of-mc} на сервер под управлением Windows
+
+include::6.2@mgmtconsole:admin:install.adoc[tags=separate]
+
+. Запустите пакет установки {of-mc}: `{dv} Management Console.msi` и проследуйте указаниям инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.2@mgmtconsole:admin:install.adoc[]"].
+. Выберите компоненты, которые требуется установить:
++
+****
+include::6.2@mgmtconsole:admin:install.adoc[tags=components]
+****
++
+. Сконфигурируйте {mc}, см. <<dvconsole-config,ниже>>.
+
+[#dvconsole-config]
+== Конфигурация {of-mc}
+
+include::6.2@mgmtconsole:admin:config.adoc[tags=initial-configuration]
+
+[WARNING]
+====
+После сохранения изменений конфигурационного файла обязательно перезапустите службу {of-mc}.
+====
+
+[#dvappserver]
+== Установка модуля {pl} на сервер под управлением Windows
+
+. Запустите пакет установки `{dv} Platform server.msi` и проследуйте инструкциям инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.1@platform:admin:install-platform.adoc[]"].
+. Примите условия лицензионного соглашения.
++
+.Условия лицензионного соглашения
+image::6.1@platform:admin:install-server-license.png[Условия лицензионного соглашения]
++
+. Выберите компоненты, которые требуется установить:
++
+****
+include::6.1@platform:admin:install-platform.adoc[tags=components]
+****
++
+. Нажмите кнопку *Установить* и дождитесь завершения установки модуля.
++
+.Мастер установки серверной части модуля {pl}
+image::6.1@platform:admin:install-server-confirm.png[Мастер установки серверной части модуля {pl}]
++
+. На следующем экране нажмите кнопку *Готово*, чтобы закрыть мастер установки.
+
+[#dvworker]
+== Установка Службы {ws} на сервер под управлением Windows
+
+. Запустите пакет установки `{dv} Worker service.msi` и проследуйте инструкциям в окне инсталлятораfootnote:[Подробно процесс установки описан в разделе "xref:6.1@workerservice:admin:install.adoc[]"].
+. Выберите компоненты, которые требуется установить:
++
+****
+include::6.1@workerservice:admin:install.adoc[tags=components]
+****
++
+. В конфигурационном файле Службы {ws} по адресу `C:\Program Files\Docsvision\WorkerService\` укажите необходимые параметры:
++
+include::6.1@workerservice:admin:install.adoc[tags=config]
+
+include::6.1@settings-service:admin:install.adoc[tags=string]
+
+// end::no-alias[]
