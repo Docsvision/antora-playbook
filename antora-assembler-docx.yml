@@ -4,6 +4,12 @@ asciidoc:
     docx: ''
     allow-uri-read: ''
 build:
+  intermediate_format: docbook
+  # Optional FODT route (requires external templates, slim, and LibreOffice):
+  # intermediate_format: fodt
+  # command: asciidoctor -T /opt/asciidoctor-packt/slim -b packt
+  # libreoffice_command: soffice
+  # For the default DocBook route, styles can be set using reference_doc: ./styles.docx
   dir: ./assembler/docx
   publish: true
   keep_source: true
